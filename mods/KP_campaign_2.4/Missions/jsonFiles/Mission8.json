@@ -1,0 +1,177 @@
+{
+"armies" :
+	[
+		{
+		"faction" : "PLAYER",
+		"units" : 
+			[
+			{"id":"playerBit1","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit2","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit3","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit4","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit5","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit6","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit7","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte1","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte2","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte3","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"n"},
+			{"id":"playerAssembler","visibleAtStart":"yes","type":"assembler","position":{"positionId":"positionArmyPlayer","validZone":"130"},"orientation" :"s"}		
+			]
+		},
+		{
+		"faction" : "ALLY",
+		"units" : 
+			[
+			{"id":"Allysocket","visibleAtStart":"yes","type":"socket","position":{"positionId":"positionAllySocket","validZone":"no"},"orientation" :"n"}	
+			]
+		},
+		{
+		"faction" : "ENNEMY",
+		"units" : 
+			[
+			{"id":"ennemyBit1","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit2","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit3","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit4","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit5","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit6","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit7","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit8","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit9","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit10","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit11","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit12","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit13","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit14","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit15","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyBit16","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyByte1","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyByte2","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyByte3","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"},
+			{"id":"ennemyByte4","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmyEnnemy","validZone":"130"},"orientation" :"s"}	
+			]
+		}
+	],
+"settings":
+	{
+		"mouse":"disabled",
+		"health":{
+			"relativeValue":"1",
+			"autoHeal":"enabled"
+		},
+		"camera":
+		{
+			"auto":"enabled"
+		}	
+	},
+"messages":
+	[
+		{
+		"id":"BRIEFING",
+		"content":
+			{
+			"fr":"Mission 8\n \n \nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\n \nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\n \nBonne chance.\n \n..gray..Appuyez sur Echap pour continuer"
+			,
+			"en": "Mission 8\n \n \nAll units are repaired. Now it is time to fight back. The ennemy headquarters is near from your position. Launch your assault on position (1792, 256).\n \nDon't forget that the ASSEMBLER can provide a precious help...\n \nGood luck.\n \n..gray..Press Escape to continue"
+			}
+		},
+		{
+		"id":"headQuarters",
+		"content":
+			{
+			"fr":"Position du poste\nde commandement (1792, 256)"
+			,
+			"en": "Headquarters position\n(1792, 256)"
+			}
+		}
+	],
+"positions":
+	[
+		{
+		"id":"positionAllySocket",
+		"coordinates":"absolute",
+		"x":"1792",
+		"z":"256"
+		},
+		{
+		"id":"positionArmyPlayer",
+		"coordinates":"absolute",
+		"x":"256",
+		"z":"1024"
+		},
+		{
+		"id":"positionArmyEnnemy",
+		"coordinates":"absolute",
+		"x":"1700",
+		"z":"256"
+		}
+	],
+"conditions":
+	[
+		{
+		"id":"deadPlayer",
+		"object":"PLAYER",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all",
+			}
+		},
+		{
+		"id":"deadEnnemy",
+		"object":"ENNEMY",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all",
+			}
+		}
+	],
+"actions":
+	[
+		{
+		"id":"transfertAllAllies",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"transfert",
+		"object":"ALLY",
+		"factionReceiving":"PLAYER"
+		},
+		{
+		"id":"defeat",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"end",
+		"outputState":"1111",
+		"result":"defeat"
+		},
+		{
+		"id":"victory",
+		"toBeRepeated":"no",
+		"delay":"10",
+		"type":"end",
+		"outputState":"1111",
+		"result":"success"
+		}
+	],
+"events":
+	[
+		{
+		"idEvent":"deadEnnemyEvent",
+		"trigger":"deadEnnemy",
+		"actions":
+			[
+			{"actionId":"transfertAllAllies"},
+			{"actionId":"victory"}
+			]
+		},
+		{
+		"idEvent":"deadPlayerEvent",
+		"trigger":"deadPlayer",
+		"actions":
+			[
+			{"actionId":"defeat"}
+			]
+		}
+	]
+}

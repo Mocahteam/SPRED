@@ -1,0 +1,276 @@
+{
+"armies" :
+	[
+		{
+		"faction" : "PLAYER",
+		"units" : 
+			[
+				{
+				"id":"playerBit",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"start",
+					"validZone":"100"
+					},
+				"orientation" :"n"
+				},
+				{
+				"id":"playerByte",
+				"visibleAtStart":"yes",
+				"type":"byte",
+				"position":
+					{
+					"positionId":"start",
+					"validZone":"100"
+					},
+				"orientation" :"w"
+				}
+			]
+		},
+		{
+		"faction" : "ALLY",
+		"units" : 
+			[
+				{
+				"id":"allyByte1",
+				"visibleAtStart":"yes",
+				"type":"byte",
+				"position":
+					{
+					"positionId":"arrivalByte",
+					"validZone":"20"
+					},
+				"orientation" :"s"
+				},
+				{
+				"id":"allyByte2",
+				"visibleAtStart":"yes",
+				"type":"byte",
+				"position":
+					{
+					"positionId":"arrivalByte",
+					"validZone":"20"
+					},
+				"orientation" :"s"
+				},
+				{
+				"id":"allyBit1",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"arrivalBit",
+					"validZone":"50"
+					},
+				"orientation" :"s"
+				},
+				{
+				"id":"allyBit2",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"arrivalBit",
+					"validZone":"50"
+					},
+				"orientation" :"s"
+				},
+				{
+				"id":"allyBit3",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"arrivalBit",
+					"validZone":"50"
+					},
+				"orientation" :"s"
+				},
+				{
+				"id":"allyBit4",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"arrivalBit",
+					"validZone":"50"
+					},
+				"orientation" :"s"
+				}
+			]
+		}
+	],
+"settings":
+	{
+		"mouse":"disabled",
+		"globalAutoHeal":"disabled",
+		"health":{
+			"relativeValue":"0.25",
+			"autoHeal":"disabled"
+		},
+		"camera":
+		{
+			"auto":"enabled",
+			"specialPositions":
+			[
+				{"positionId":"arrivalBit"},
+				{"positionId":"arrivalByte"}
+			]
+		}	
+	},
+"messages":
+	[
+		{
+		"id":"rallyingBytes",
+		"content":
+			{
+			"fr":"Point de ralliement\ndes bytes (479, 1825)",
+			"en":"Bytes rallying point\n(479, 1825)"
+			}
+		},
+		{
+		"id":"rallyingBits",
+		"content":
+			{
+			"fr":"Point de ralliement\ndes bits (1400, 1371)",
+			"en":"Bits rallying point\n(1400, 1371)"
+			}
+		},
+		{
+		"id":"BRIEFING",
+		"content":
+			{
+			"fr":"Mission 4\n \n \nPour vous remercier de votre aide, l'OCTET (BYTE) se rallie à notre cause et vous informe que d'autres entités partisanes se sont regroupées non loin de là. Il vous communique les coordonnées de la formation d'OCTETS qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400, 1371).\n \nAfin de récupérer ces nouvelles forces, ordonnez à vos deux entités de rejoindre leurs compatriotes respectifs.\n \n..gray..Appuyez sur Echap pour continuer"
+			,
+			"en":"Mission 4\n \n \nIn order to thank you for your help, the BYTE is won over and tells you that other partisan units are reassembled not far. It gives you the position (479, 1825) of a BYTE group that it tries to rally. Moreover, it warns you that a group of BITS is forming at position (1400, 1371).\n \nTo retrieve these units, command your two units to meet up with their respective groups.\n \n..gray..Press Escape to continue"
+			}
+		}
+	],
+"positions":
+	[
+		{
+		"id":"arrivalBit",
+		"coordinates":"absolute",
+		"x":"1400",
+		"z":"1371"
+		},
+		{
+		"id":"arrivalByte",
+		"coordinates":"absolute",
+		"x":"479",
+		"z":"1825"
+		},
+		{
+		"id":"start",
+		"coordinates":"absolute",
+		"x":"1120",
+		"z":"1760"
+		}
+	],
+"conditions":
+	[
+		{
+		"id":"deadPlayer",
+		"object":"PLAYER",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all",
+			}
+		},
+		{
+		"id":"bitWellPlaced",
+		"object":"playerBit",
+		"attribute":"position",
+		"value":
+			{
+			"positionId":"arrivalBit",
+			"validZone":"100"
+			}
+		},
+		{
+		"id":"byteWellPlaced",
+		"object":"playerByte",
+		"attribute":"position",
+		"value":
+			{
+			"positionId":"arrivalByte",
+			"validZone":"100"
+			}
+		}
+	],
+"actions":
+	[
+		{
+		"id":"transfertAllAllies",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"transfert",
+		"object":"ALLY",
+		"factionReceiving":"PLAYER"
+		},
+		{
+		"id":"victory",
+		"toBeRepeated":"no",
+		"delay":"10",
+		"type":"end",
+		"outputState":"1111",
+		"result":"success"
+		},
+		{
+		"id":"arrivalMarkerBit",
+		"toBeRepeated":"no",
+		"delay":"20",
+		"type":"marker",
+		"position":
+			{
+			"positionId":"arrivalBit",
+			"validZone":"no"
+			},
+		"messageId":"rallyingBits"
+		},
+		{
+		"id":"arrivalMarkerByte",
+		"toBeRepeated":"no",
+		"delay":"20",
+		"type":"marker",
+		"position":
+			{
+			"positionId":"arrivalByte",
+			"validZone":"no"
+			},
+		"messageId":"rallyingBytes"
+		}
+	]
+"events":
+	[
+		{
+		"idEvent":"WellPlacedEvent",
+		"trigger":"bitWellPlaced and byteWellPlaced",
+		"actions":
+			[
+			{"actionId":"transfertAllAllies"},
+			{"actionId":"victory"}
+			]
+		},
+		{
+		"idEvent":"STARTEvent",
+		"trigger":"START",
+		"actions":
+			[
+			{"actionId":"arrivalMarkerByte"},
+			{"actionId":"arrivalMarkerBit"}
+			]
+		},
+		{
+		"idEvent":"deadPlayerEvent",
+		"trigger":"deadPlayer",
+		"actions":
+			[
+			{"actionId":"defeat"}
+			]
+		}
+	]
+}
