@@ -748,7 +748,7 @@ local function Start (jsonFile)
    -------START------------------
    -------------------------------   
   
-  Spring.DestroyUnit(armySpring["ahah"],false,false)
+  --Spring.DestroyUnit(armySpring["ahah"],false,false)
   
   conditions["START"]={}
   for idEvent,event in pairs(events) do
