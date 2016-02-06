@@ -4,12 +4,13 @@
 {
 	Mapname=Marble_Madness_Map; //with .smf extension
 	
-	Gametype=Kernel Panic Campaign 2.3; //the primary mod NAME (archive works too, but name is prefered)
+	Gametype=Kernel Panic Campaign 2.4; //the primary mod NAME (archive works too, but name is prefered)
 	
 	StartPosType=3;     // 0 fixed, 1 random, 2 choose in game, 3 choose before game (see StartPosX)
 	
 	[MODOPTIONS]
 	{
+		hardcoded=yes;
 		GameMode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
 								// 2 lineage, 3 openend
 		FixedAllies=0;			// enable in game alliance
