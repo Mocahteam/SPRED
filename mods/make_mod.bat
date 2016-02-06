@@ -3,10 +3,10 @@ taskkill /im spring.exe
 REM creation de la nouvelle archive
 DEL KP_campaign_%VERSION%.sdz
 CD KP_campaign_%VERSION%
-SET zip=..\mingwlibs\bin\7za.exe
-%zip% a -r -tzip -y -xr!.svn ..\KP_campaign_%VERSION%.sdz *
+SET zip=..\..\..\mods\mingwlibs\bin\7za.exe
+%zip% a -r -tzip -y -xr!.svn ..\..\..\mods\KP_campaign_%VERSION%.sdz *
 
 REM execution
-cd ..\..
+cd ..\..\..
 spring.exe
 
