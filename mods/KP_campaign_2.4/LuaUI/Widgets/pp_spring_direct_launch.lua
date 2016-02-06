@@ -1,4 +1,3 @@
-
 function widget:GetInfo()
 	return {
 		name = "Spring Direct Launch 2 for Prog&Play",
@@ -20,9 +19,16 @@ VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/WriteScript.lua",nil)
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain DoTheRestart function
+VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
 -- load Appliq XML
-local AppliqManager = VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
+VFS.Include("LuaUI/Widgets/libs/context.lua")
+contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
+Spring.Echo(contx.springIsAvailable)
+VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
+local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
+AppliqManager:parse()
+--AppliqManager:fullTest()
 
 local IsActive = false
 local HideView = false
@@ -63,6 +69,42 @@ function AddFrame(Text,Pos,FontSize,Color,FramePosition,TextPosition,Function,Pa
 	table.insert(FramesList,{Text=Text,Pos=Pos,FontSize=FontSize,Color=Color,FramePosition=FramePosition,TextPosition=TextPosition,Function=Function,Param1=Param1,Param2=Param2,Param3=Param3})
 end
 
+
+local function NoRestart()
+  RemoveAllFrames()
+  AddFrame("Kernel Panic!\nIntegrated Launcher",{x=vsx*0.5,y=vsy*0.8},vsy/24,{0,0,1,0.5},"cc","c",nil)
+  AddFrame("Sorry! \"Spring.Restart\" Not available!",
+    {x=vsx*0.5,y=vsy*0.6},vsy/24,{0.88,0.40,0,0.5},"cc","c",nil)
+  AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
+  AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+end
+
+local function RunScenario(i)
+  if Spring.Restart then
+    AppliqManager:selectScenario(i)
+    AppliqManager:startRoute()
+    AppliqManager:setProgression({"1630","1638"})
+    --AppliqManager:next("1630")
+    local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
+    local currentInput=AppliqManager:getCurrentInputName()
+    Spring.Echo(currentInput)
+    local options={
+    ["MODOPTIONS"]=
+      {
+      ["scenariomode"]="appliq",
+      ["language"]=lang,
+      ["scenario"]=i, --Todo: Should be an id instead
+      ["missionname"]=mission,
+      ["currentinput"]=currentInput,
+      ["progression"]=pickle(AppliqManager.progressionOutputs)
+      }
+    }
+    DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
+  else
+    NoRestart()
+  end
+end
+
 local function MainMenu()
 	RemoveAllFrames()
 	AddFrame("Prog&Play!",{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
@@ -93,14 +135,16 @@ end
 
 local function RunScript(ScriptFileName, scenario)
 	if Spring.Restart then
-		DoTheRestart(ScriptFileName, lang, scenario)
+	local operations={
+  ["MODOPTIONS"]=
+    {
+    ["language"]=lang,
+    ["scenario"]=scenario
+    }
+  }
+		DoTheRestart(ScriptFileName, operations)
 	else
-		RemoveAllFrames()
-		AddFrame("Kernel Panic!\nIntegrated Launcher",{x=vsx*0.5,y=vsy*0.8},vsy/24,{0,0,1,0.5},"cc","c",nil)
-		AddFrame("Sorry! \"Spring.Restart\" Not available!",
-			{x=vsx*0.5,y=vsy*0.6},vsy/24,{0.88,0.40,0,0.5},"cc","c",nil)
-		AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-		AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+    NoRestart()
 	end
 end
 
@@ -136,26 +180,45 @@ local function NewGameOrContinue()
 end
 
 local function SelectScenario()
-	-- Look for scenario for this Mod
-	if AppliqManager.scenarioGetN() <= 0 then
-		-- Load default Game
-		RunScript("Missions/"..Game.modShortName.."/Tutorial.txt")
-	else
-		-- store number of scenario
-		local numScenario = AppliqManager.scenarioGetN()
-		-- Display available scenario
-		RemoveAllFrames()
-		AddFrame("Prog&Play! "..TextLocale[lang].whichScenario,{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
-		-- compute maximum size of button (depending on scenario number + 1)
-		local ItemSize=math.min((vsy*(1-1/6))/(2*(numScenario+2))-2,vsy/24)
-		-- create button for the default scenario
-		AddFrame("Digital War",{x=vsx*0.5,y=vsy*(1-1/6)-2*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScript,"Missions/"..Game.modShortName.."/Tutorial.txt")
-		-- create all buttons (one for each scenario)
-		for i = 1,numScenario do
-			AddFrame(AppliqManager.scenarioGetTitle(i),{x=vsx*0.5,y=vsy*(1-1/6)-2*(i+1)*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScript,"Missions/"..Game.modShortName.."/"..AppliqManager.scenarioGetFirstActivity(i)..".txt", AppliqManager.scenarioGetTitle(i))
-		end
-		AddFrame(TextLocale[lang].back,{x=vsx*0.5,y=vsy*0.0},vsy/18,{0,0,1,0.5},"cb","c",FunctionsList.NewGameOrContinue)
+    local numScenario
+    if(AppliqManager~=nil) then
+      numScenario = AppliqManager:scenarioGetN()
+    else
+      numScenario=0
+    end  
+    
+    -- NORMAL PART
+     
+    RemoveAllFrames()
+    AddFrame("Prog&Play! "..TextLocale[lang].whichScenario,{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
+    -- compute maximum size of button (depending on scenario number + 1)
+    
+    -- create button for the default scenario
+    local ItemSize=math.min((vsy*(1-1/6))/(2*(numScenario+2))-2,vsy/24)
+    AddFrame("Digital War",{x=vsx*0.5,y=vsy*(1-1/6)-2*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScript,"Missions/"..Game.modShortName.."/Tutorial.txt")
+    
+-- APPLIQ PART 
+  if(AppliqManager~=nil)then   
+  	-- Look for scenario for this Mod
+  	contx:Echo("we pick a scenario")
+  	if AppliqManager:scenarioGetN() <= 0 then
+    		-- Load default Game
+    		RunScript("Missions/"..Game.modShortName.."/Tutorial.txt")
+  	else
+  		-- store number of scenario
+  		-- Display available scenario
+  
+  		-- create all buttons (one for each scenario)
+  		for i = 1,numScenario do
+  			AddFrame(AppliqManager:scenarioGetName(i),{x=vsx*0.5,y=vsy*(1-1/6)-2*(i+1)*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScenario,i)
+  			--function AddFrame(Text,Pos,FontSize,Color,FramePosition,TextPosition,Function,Param1,Param2,Param3)
+  			--AddFrame(AppliqManager.scenarioGetTitle(i),{x=vsx*0.5,y=vsy*(1-1/6)-2*(i+1)*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScript,"Missions/"..Game.modShortName.."/"..AppliqManager.
+		  end
+  	end
 	end
+
+-- NORMAL PART 
+  AddFrame(TextLocale[lang].back,{x=vsx*0.5,y=vsy*0.0},vsy/18,{0,0,1,0.5},"cb","c",FunctionsList.NewGameOrContinue)
 end
 
 local function LoadPreviousGame()
@@ -516,7 +579,6 @@ function widget:Initialize()
 	FramesList={}
 	FillModSpecific()
 	SDLG=GenerateSkirmish()
-	AppliqManager.init()-- Init Appliq manager
 	if tonumber(Spring.GetConfigInt("snd_volmaster"))==1 then
 		Spring.SetConfigInt("snd_volmaster",100)
 	end
