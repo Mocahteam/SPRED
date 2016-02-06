@@ -366,7 +366,7 @@ function widget:Initialize()
 	
 	-- open ppTraces file
 	ppTraces = io.open("ppTraces.txt", "a")
-	if ppTraces ~= nil then
+	if ppTraces ~= nil and missionName~=nil then
 		ppTraces:write(missionName.." start\n")
 		ppTraces:flush()
 	end
