@@ -20,13 +20,38 @@ end
 include('keysym.h.lua')
 
 VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart function
+VFS.Include("LuaUI/Widgets/libs/context.lua")
+contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
+VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
+
+local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
+AppliqManager:parse()
+VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
 local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
 local lang = Spring.GetModOptions()["language"] -- get the language
-local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario
+local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
+local jsonPath="Missions/jsonFiles/"
+local jsonFile
+if(missionName~=nil)and(Spring.GetModOptions()["hardcoded"]~="yes") then --TODO: Should be placed elsewhere than in pp_mission_gui
+  local jsonName=missionName..".json"
+  if(missionName~=nil)and(Spring.GetModOptions()["jsonlocation"]~="internal") then
+    Spring.Echo("external")
+    local file = assert(io.open(jsonPath..jsonName))
+    local jsonFile = file:read'*a'
+    Spring.SendLuaRulesMsg("mission"..jsonFile)
+    file:close()
+  else 
+    jsonFile=VFS.LoadFile(jsonPath..jsonName)
+    Spring.SendLuaRulesMsg("mission"..jsonFile)
+  end
+end
 
-local rooms = WG.rooms -- availabe in all widgets
+
+local mode = Spring.GetModOptions()["scenariomode"]
+
+local rooms = WG.rooms -- available in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
 
@@ -43,7 +68,9 @@ local showBriefing = "Show briefing"
 local victory = "You won the mission"
 local victoryCampaign = "Congratulations !!! You complete the campaign"
 local loss = "You lost the mission"
+local continue = "continue"
 if lang == "fr" then
+  continue= "continuer"
 	previousMission = "Mission précédente"
 	replayMission = "Rejouer mission"
 	nextMission = "Mission suivante"
@@ -78,7 +105,7 @@ local template_endMission = {
 	tabs = {
 		-- The previousMission tab
 		{preset = function(tab)
-				-- By default this tab is disable, activation depend on mission events (see MissionEvent function)
+				-- By default this tab is disabled, activation depend on mission events (see MissionEvent function)
 				tab.title = "\255\50\50\50"..previousMission.."\255\255\255\255"
 				tab.isAboveColors = {
 										bottomLeft  = {0.3, 0.3, 0.3, 0.3},
@@ -99,7 +126,14 @@ local template_endMission = {
 				tab.position = "bottom"
 				tab.OnClick = function()
 					tab.parent:Close()
-					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", lang, scenarioType)
+					 local operations={
+  ["MODOPTIONS"]=
+    {
+    ["language"]=lang,
+    ["scenario"]=scenarioType
+    }
+  }
+					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", operations)
 				end
 			end
 		},
@@ -209,10 +243,9 @@ function MissionEvent(e)
 		-- update window
 		if e.state ~= "menu" then
 			if e.state == "won" then
+			  popup.lineArray = {victory}
 				if scenarioType == "default" then
-					if campaign[missionName].nextMission ~= nil then
-						popup.lineArray = {victory}
-					else
+					if campaign[missionName].nextMission == nil then
 						popup.lineArray = {victoryCampaign}
 					end
 				elseif scenarioType == "noScenario" then
@@ -237,17 +270,25 @@ function MissionEvent(e)
 			local activatePreviousMission = (scenarioType == "default" and campaign[missionName] and campaign[missionName].previousMission ~= nil)
 			if activatePreviousMission then
 				popup.tabs[1].preset = function(tab)
-						tab.title = previousMission
-						tab.position = "bottom"
-						tab.OnClick = function()
-							tab.parent:Close()
-							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", lang, scenarioType)
+				tab.title = previousMission
+				tab.position = "bottom"
+				tab.OnClick = function()
+				tab.parent:Close()
+				local operations={
+          ["MODOPTIONS"]=
+            {
+            ["language"]=lang,
+            ["scenario"]=scenarioType
+            }
+          }
+							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", operations)
 						end
 					end
 			end
 			-- Next tab is activated if we are on the default scenario and a next mission is defined OR if we interpret an Appliq scenario (TODO: use appliq manager to define next mission)
-			local activateNextMission = (scenarioType == "default" and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
+			local activateNextMission = ( ((scenarioType == "default")or( AppliqManager==nil)) and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
 			-- Of course, we can pass to the next mission if current mission is won
+			-- If AppliqManager is nil (mostly because xml is not found) then  scenarioType is considered to default even if appliq mode is activated
 			if e.state == "won" and activateNextMission then
 				popup.tabs[3].preset = function(tab)
 						tab.title = nextMission
@@ -265,6 +306,54 @@ function MissionEvent(e)
 						end
 					end
 			end
+			
+    -- Of course, we can pass to the next mission if current mission is won
+      if mode=="appliq" and AppliqManager~=nil then     
+        Spring.Echo("APPLIQ MODE")
+        popup.tabs[2].preset = function(tab)
+          tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
+          tab.OnClick = function()
+          end
+        end
+        -- enable continue
+        popup.tabs[3].preset = function(tab)
+            tab.title = continue
+            tab.position = "bottom"
+            tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
+              tab.parent:Close()            
+              local currentoptions=Spring.GetModOptions()       
+              AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
+              AppliqManager:startRoute()
+              Spring.Echo(e.outputstate)
+              local progression=unpickleProgression(currentoptions["progression"])
+              --AppliqManager:setProgression(unpickle(currentoptions["progression"]))
+              --Spring.Echo(e.outputstate)
+              AppliqManager:setProgression(progression)
+              local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()       
+              if(AppliqManager:next(e.outputstate)==nil) then
+              -- mildly useless echo as a Spring Restart will tend to happen      
+                Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
+                local selectedOutput=outputs[math.random(#outputs)]
+                AppliqManager:next(selectedOutput)
+              end
+              
+              local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
+              local currentInput=AppliqManager:getCurrentInputName()
+              --Spring.Echo(currentoptions["progression"])
+             -- Spring.Echo(currentInput)
+              --Spring.Echo(e.outputstate)         
+              Spring.Echo(mission)           
+              currentoptions["currentinput"]=currentInput  
+              currentoptions["missionname"]=mission
+              currentoptions["currentinput"]=currentInput
+              currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
+              local options={["MODOPTIONS"]=currentoptions}    
+              --Spring.Echo("test")
+              --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
+              DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+            end
+          end
+      end
 			
 			-- disable "Close tab" and "Show briefing"
 			popup.tabs[6] = nil
