@@ -112,7 +112,7 @@
 --@returns Returns a string representation of table
 
 local M = {}
-local stack = VFS.Include ("LuaUI/Widgets/libs/LuaXML/luaxml-stack.lua") -- require("luaxml-stack")
+local stack = contx:Include("LuaXML/luaxml-stack.lua") -- require("luaxml-stack")
 
 local function showTable(t)
     local sep = ''
