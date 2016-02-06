@@ -1,0 +1,59 @@
+// Launcher for Mission 7
+
+[GAME]
+{
+	Mapname=Marble_Madness_Map; //with .smf extension
+	
+	Gametype=Kernel Panic Campaign 2.3; //the primary mod NAME (archive works too, but name is prefered)
+	
+	StartPosType=3;     // 0 fixed, 1 random, 2 choose in game, 3 choose before game (see StartPosX)
+	
+	[MODOPTIONS]
+	{
+		GameMode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
+								// 2 lineage, 3 openend
+		FixedAllies=0;			// enable in game alliance
+		HideMenu=1;				// set a value to avoid starting menu
+		language=en;			// en english, fr français
+		missionName=Mission7;	// mission name used to define script file and launcher file
+		scenario=default;		// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
+	}
+	
+	HostIP=localhost;
+	HostPort=0;
+	IsHost=1; 					// 0: no server will be started in this instance
+	                    // 1: start a server
+	
+	MyPlayerName=Player; // our ingame-name (needs to match one players Name= field)
+	
+	// A player (controlls a team, player 0 is the host only if IsHost is not set)
+	[PLAYER0]
+	{
+		Name=Player;		// pure info
+		Spectator=0;
+		Team=0; 				// the team this player controlls
+	}
+	// more players ...
+	
+	// players in this will share the same units (start with one commander etc.)
+	[TEAM0]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=0;
+		RGBColor=0.500000 0.500000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=256; // Use these in combination with StartPosType=3
+		StartPosZ=811; // Use these in combination with StartPosType=3
+	}
+	
+	// teams in ally team share los etc and cant break alliance, every team must
+	// be in exactly one ally team
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	// more ally teams ...
+}
