@@ -1449,7 +1449,7 @@ end
 -- Rooms
 --
 
-
+-- Very Important freaking chunk of code
 local roomList = VFS.DirList(ROOM_DIRNAME, "room_*.lua", VFSMODE)
 for _, file in ipairs(roomList) do
   local s = assert(VFS.LoadFile(file, VFSMODE))
