@@ -32,15 +32,25 @@ local gameOver = 0
 -- used to show briefing
 local showBriefing = false
 local missionScript=nil
+local errors=""
 
+function appendError(status,error,context,writeOnlyIfError)
+  if( (status==false)or(writeOnlyIfError==f) ) then
+    errors=errors.."context : "..context.." ||"
+    if(status==true)then
+      errors=errors.."passed"
+    else 
+      errors=errors.."ERROR : "..error
+    end
+    errors=errors.."\r\n"
+  end
+end
 
 function startTheGame(jsonfile)
+  errors=errors.."testing"..missionName.."\r\n"
   local status1, err1 = pcall(function() missionScript.Start(jsonfile) end) 
-  local status2, err2 = pcall(function() missionScript.ShowBriefing() end) 
-  Spring.Echo(status1)
-  Spring.Echo(status2)
-  Spring.Echo(err1)
-  Spring.Echo(err2)
+  missionScript.ShowBriefing()
+  appendError(status1,err1,"starting game",false)
   gameOver = 0
 end   
 -- message sent by mission_gui (Widget)
@@ -101,12 +111,18 @@ function gadget:GameFrame( frameNumber )
   -- update mission
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
-    updateTheGame()
-    end 
+    local status1, err1 = pcall(function() updateTheGame() end) 
+    appendError(status1,err1,"update_no_test",true)   
+  end 
   -- if required, show briefing
   if showBriefing then
     missionScript.ShowBriefing()
     showBriefing = false
+  end
+  if(frameNumber==20) then
+    _G.event = {stringToWrite = errors, fileName = "errors.txt",mode="w"}
+    SendToUnsynced("WriteMessageInFile")
+    _G.event= nil
   end
 end
 
@@ -173,6 +189,12 @@ function gadget:RecvFromSynced(...)
         end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
+  elseif arg1 == "WriteMessageInFile" then
+      local e = {}
+        for k, v in spairs(SYNCED.event) do
+        e[k] = v
+        end
+      Script.LuaUI.WriteMessageInFile(e) -- function defined and registered in mission_gui widget
   end
 end
 
