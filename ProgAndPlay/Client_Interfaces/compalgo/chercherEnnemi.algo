@@ -1,0 +1,39 @@
+importer jeu, listeConstantesKP41, entréeSortie;
+
+programme chercherEnnemi
+glossaire
+    taille <Position>;
+    pos <Position>;
+    trouvé <Booléen>;
+    cpt <Entier>;
+    unité <Unité>;
+début
+    trouvé <- FAUX;
+    ouvrirJeu;
+    taille <- dimensionsCarte;
+    tantque non trouvé faire
+        si nombreUnités(ENNEMI) > 0 alors
+            cpt <- 1;
+            tantque cpt <= nombreUnités(MOI) faire
+                unité <- ièmeUnité (MOI, cpt);
+                si unité.sorte = BIT alors
+                    réaliserActionNonCiblée (unité, 0, 0.0);
+                fin si;
+                cpt <- cpt + 1;
+            fin tantque;
+            trouvé <- VRAI;
+        sinon
+            cpt <- 1;
+            tantque cpt <= nombreUnités(MOI) faire
+                unité <- ièmeUnité(MOI, cpt);
+                si unité.nbCommandeATraiter = 0 et unité.sorte = BIT alors
+                    pos.x <- hasard (taille.x);
+                    pos.y <- hasard (taille.y);
+                    réaliserActionSurPosition (unité, MOVE, pos);
+                fin si;
+                cpt <- cpt + 1;
+            fin tantque;
+        fin si;
+    fin tantque;
+    fermerJeu;
+fin

@@ -1,0 +1,9 @@
+#include "../PP_ALGO.h"
+
+// Mission 2
+Debut
+	OUVRIR_JEU;
+	PREMIERE_UNITE;
+	DEPLACER_VERS(POS_X-927, POS_Y+513);
+	FERMER_JEU;
+Fin

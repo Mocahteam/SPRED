@@ -1,0 +1,82 @@
+// Launcher for Project
+
+[GAME]
+{
+	Mapname=ByteBattleMap; //with .smf extension
+	
+	// Use Gametype and not GameType otherwise it is overwritten by KP directLaunch
+	Gametype=Byte Battle 1.0; //the primary mod NAME (archive works too, but name is prefered)
+	
+	StartPosType=1;     // 0 fixed, 1 random, 2 choose in game, 3 choose before game (see StartPosX)
+	
+	[MODOPTIONS]
+	{
+		MissionTitle="Byte Battle!"; // set project title
+		MissionBriefing="Program your Bytes in order to destroy ennemy..."; // set project objectives
+		GameMode=0;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
+											// 2 lineage, 3 openend
+		FixedAllies=0;		// enable in game alliance
+		ons=0;							// set to 0 to avoid starting menu of KP
+	}
+	
+	HostIP=127.0.0.1;
+	Hostport=8451;			// Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
+	IsHost=1; 					// 0: no server will be started in this instance
+	                    // 1: start a server
+	
+	MyPlayerName=Player1; // our ingame-name (needs to match one players Name= field)
+	
+	// A player (controlls a team, player 0 is the host only if IsHost is not set)
+	[PLAYER0]
+	{
+		Name=Player1;		// pure info
+		Spectator=0;
+		Team=0; 				// the team this player controlls
+	}
+	[PLAYER1]
+	{
+		Name=Player2;		// pure info
+		Spectator=0;
+		Team=1; 				// the team this player controlls
+	}
+	// more players ...
+	
+	// players in this will share the same units (start with one commander etc.)
+	[TEAM0]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=0;
+		RGBColor=0.000000 0.000000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=200; // Use these in combination with StartPosType=3
+		StartPosZ=1024; // Use these in combination with StartPosType=3
+	}
+	[TEAM1]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=0.000000 1.000000 0.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=3896; // Use these in combination with StartPosType=3
+		StartPosZ=1024; // Use these in combination with StartPosType=3
+	}
+	// more teams ...
+	
+	// teams in ally team share los etc and cant break alliance, every team must
+	// be in exactly one ally team
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	[ALLYTEAM1]
+	{
+		NumAllies=0;
+	}
+	// more ally teams ...
+}

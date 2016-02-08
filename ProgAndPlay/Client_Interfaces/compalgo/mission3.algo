@@ -1,0 +1,19 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission3
+glossaire
+    unité <Unité>;
+    ennemie <Unité>;
+début
+    ouvrirJeu;
+    unité <- ièmeUnité(MOI, 1);
+    -- attendre l'unité ennemie
+    tantque nombreUnités(ENNEMI) = 0 faire
+        écrirenl("En attente de l'arrivée de l'ennemi");
+    fin tantque;
+    -- récupérer l'unité ennemie
+    ennemie <- ièmeUnité(ENNEMI, 1);
+    -- attaquer
+    réaliserActionSurUnité (unité, ATTACK, ennemie);
+    fermerJeu;
+fin

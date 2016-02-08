@@ -1,0 +1,92 @@
+// Launcher for Project
+
+[GAME]
+{
+	Mapname=ByteBattleMap; //with .smf extension
+	
+	// Use Gametype and not GameType otherwise it is overwritten by KP directLaunch
+	Gametype=Byte Battle V2 1.0; //the primary mod NAME (archive works too, but name is prefered)
+	
+	StartPosType=3;     // 0 fixed, 1 random, 2 choose in game, 3 choose before game (see StartPosX)
+	
+	[MODOPTIONS]
+	{
+		MissionTitle="Byte Battle!"; // set project title
+		MissionBriefing="Program your Bytes in order to destroy ennemy..."; // set project objectives
+		GameMode=0;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
+											// 2 lineage, 3 openend
+		FixedAllies=0;		// enable in game alliance
+		HideMenu=1;			// set a value to avoid starting menu
+		level=2;
+	}
+	
+	HostIP=localhost;
+	HostPort=0;
+	IsHost=1; 					// 0: no server will be started in this instance
+	                    // 1: start a server
+	
+	MyPlayerName=Player; // our ingame-name (needs to match one players Name= field)
+	
+	// A player (controlls a team, player 0 is the host only if IsHost is not set)
+	[PLAYER0]
+	{
+		Name=Player;		// pure info
+		Spectator=0;
+		Team=0; 				// the team this player controlls
+	}
+	// more players ...
+		
+	// A skirmish AI (controlls a team)
+	[AI0]
+	{
+		Name=Enemy Bot; 	// [optional] pure info, eg. the name set in the lobby
+										// the name actually used in game will be:
+										// "${Name} (owner: ${player.Name})"
+		ShortName=Byte Battle: level 0; // shortName of the Skirmish AI library or name of the
+											// LUA AI that controlls this team.
+											// see spring.exe --list-skirmish-ais for possible values
+		Team=1;					// the team this AI controlls
+		Host=0;					// the player whichs computer this AI runs on
+										// eg. for [PLAYER0] above, this would be 0
+	}
+	// more skirmish AIs...
+	
+	// players in this will share the same units (start with one commander etc.)
+	[TEAM0]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=0;
+		RGBColor=0.500000 0.500000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=2448; // Use these in combination with StartPosType=3
+		StartPosZ=1024; // Use these in combination with StartPosType=3
+	}
+	[TEAM1]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=1.000000 0.000000 0.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=1024; // Use these in combination with StartPosType=3
+	}
+	// more teams ...
+	
+	// teams in ally team share los etc and cant break alliance, every team must
+	// be in exactly one ally team
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	[ALLYTEAM1]
+	{
+		NumAllies=0;
+	}
+	// more ally teams ...
+}

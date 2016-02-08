@@ -1,0 +1,71 @@
+V "GNAT Lib v4.4"
+M P W=b
+P SS
+R nnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U mission3%b		mission3.adb		02368201 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W constantlistkp41%s	constantlistkp41.ads	constantlistkp41.ali
+W pp%s			pp.adb			pp.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-textio.ads		20090409232308 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D i-cstrea.ads		20090409232308 e1e064a9
+D mission3.adb		20121121162250 b725db9a
+D pp.ads		20121201101146 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-crtl.ads		20090409232308 997234a1
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-ficobl.ads		20090409232308 8bb681e5
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+D s-wchcon.ads		20090409232308 ab028799
+X 1 ada.ads
+16K9*Ada 19e8 17|3r6 3r23
+X 10 a-textio.ads
+48K13*Text_IO 506e16 17|3w10 3r27
+263U14*Put_Line 17|15r17
+X 12 constantlistkp41.ads
+7K9*ConstantListKP41 100e21 17|2w6 2r28
+54i9*Attack{18|16I17} 17|20r28
+X 17 mission3.adb
+6U11*mission3 6b11 22l5 22t13
+7i9 u{18|37I17} 12m9 20r25
+8i9 e{18|37I17} 18m9 20r36
+X 18 pp.ads
+4K9*PP 17|1w6 1r14 18|188e7
+7n18*MyCoalition{6E14} 17|12r24
+9n17*EnemyCoalition{6E14} 17|14r27 18r24
+12I17*CommandCode{integer}
+16I17*Action{12I17}
+37I17*Unit{integer} 17|7r13 8r13
+44U19*Open 17|10r9
+48U19*Close 17|21r9
+76V18*GetNumUnits{integer} 17|14r15
+82V18*GetUnitAt{37I17} 17|12r14 18r14
+128U19*CarryOutCommand 17|20r9
+

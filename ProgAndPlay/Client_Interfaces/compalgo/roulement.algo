@@ -1,0 +1,180 @@
+importer entréeSortie, jeu, listeConstantesKP41;
+
+type TabU : tableau [0 à 499] de <Unité>;
+type TabB : tableau [0 à 499] de <Booléen>;
+
+constante ATTAQUANT <Booléen> = VRAI;
+constante RESERVISTE <Booléen> = FAUX;
+
+constante GROUPE <Entier> = 1; -- identifie le groupe dans le jeu qui suivra cet algorithme
+
+programme roulement
+glossaire
+    nbUnités <Entier>; -- nombre d'unités enregistrées
+    unités <TabU>; -- liste des unités
+    ordre <TabB>; -- ordre déjà donné à l'unité
+    états <TabB>; -- état de chaque unité (ATTAQUANT ou RESERVISTE)
+    cpt <Entier>;
+    cpt2 <Entier>;
+    trouvée <Booléen>;
+    libre <Entier>;
+    bar <Position>;
+    tmp <Position>;
+    carte <Position>;
+    distance <Réel>;
+    ennemie <Unité>;
+    unité <Unité>;
+    vieCourante <Réel>;
+    ennemieTmp <Unité>;
+    ennemieCible <Unité>;
+    distanceTmp <Réel>;
+début
+    ouvrirJeu;
+    -- initialisation
+    ennemieCible.id <- -1;
+    nbUnités <- 0;
+    cpt <- 0;
+    tantque cpt < 500 faire
+        ordre[cpt] <- FAUX;
+        états[cpt] <- RESERVISTE;
+        cpt <- cpt + 1;
+    fin tantque;
+    -- corps du programme
+    tantque non jeuEstTerminé faire
+        -- Est ce qu'on voit l'ennemie
+        si nombreUnités(ENNEMI) > 0 alors
+            -- Gestion des unités en moins et réajustement du nombre d'unités
+            cpt <- 0;
+            cpt2 <- 0;
+            tantque cpt < nbUnités faire
+                si cpt2 /= cpt alors
+                    unités[cpt2] <- unités[cpt];
+                    ordre[cpt2] <- ordre[cpt];
+                    états[cpt2] <- états[cpt];
+                fin si;
+                si unités[cpt].groupe = GROUPE alors
+                    cpt2 <- cpt2 + 1;
+                fin si;
+                cpt <- cpt + 1;
+            fin tantque;
+            nbUnités <- cpt2;
+
+            -- Gestion des nouvelles unités
+            bar.x <- 0;
+            bar.y <- 0;
+            cpt <- 1;
+            tantque cpt <= nombreUnités(MOI) faire
+                unité <- ièmeUnité(MOI, cpt);
+                si unité.groupe = GROUPE alors
+                    -- recherche de cette unité
+                    cpt2 <- 0;
+                    trouvée <- FAUX;
+                    tantque cpt2 < nbUnités et non trouvée faire
+                        si unités[cpt2].id = unité.id alors
+                            trouvée <- VRAI;
+                        sinon
+                            cpt2 <- cpt2 + 1;
+                        fin si;
+                    fin tantque;
+
+                    si non trouvée alors
+                        -- ajouter cette unité s'il reste de la place
+                        si nbUnités < 500 alors
+                            unités[nbUnités] <- unité;
+                            ordre[nbUnités] <- FAUX;
+                            états[nbUnités] <- ATTAQUANT;
+                            nbUnités <- nbUnités + 1;
+                        fin si;
+                    sinon
+                        -- vérifier s'il faut effectuer un changement d'état
+                        vieCourante <- unité.santé;
+                        si unités[cpt2].santé /= vieCourante alors
+                            si vieCourante < unités[cpt2].santé et états[cpt2] = ATTAQUANT alors
+                                ordre[cpt2] <- FAUX;
+                                états[cpt2] <- RESERVISTE;
+                            sinon
+                                si vieCourante > unités[cpt2].santé et états[cpt2] = RESERVISTE alors
+                                    ordre[cpt2] <- FAUX;
+                                    états[cpt2] <- ATTAQUANT;
+                                fin si;
+                            fin si;
+                            unités[cpt2].santé <- vieCourante;
+                        fin si;
+                    fin si;
+                    -- calcul du barycentre des unités
+                    si cpt2 < 500 alors
+                        bar.x <- bar.x + unités[cpt2].position.x;
+                        bar.y <- bar.y + unités[cpt2].position.y;
+                    fin si;
+                fin si;
+                cpt <- cpt + 1;
+            fin tantque;
+            -- fin du calcul du barycentre
+            si nbUnités /= 0 alors
+                bar.x <- bar.x / nbUnités;
+                bar.y <- bar.y / nbUnités;
+
+                -- calcul de la distance maximale (longueur de la diagonale de le carte
+                carte <- dimensionsCarte;
+                distance <- (carte.x * carte.x) + (carte.y + carte.y);
+                -- recherche de l'ennemie le plus proche de notre barycentre
+                ennemieTmp.id <- -1;
+                cpt <- 1;
+                tantque cpt <= nombreUnités(ENNEMI) faire
+                    unité <- ièmeUnité(ENNEMI, cpt);
+                    distanceTmp <- ((unité.position.x - bar.x) * (unité.position.x - bar.x)) + ((unité.position.y - bar.y) * (unité.position.y - bar.y));
+                    si distanceTmp < distance alors
+                        distance <- distanceTmp;
+                        ennemieTmp <- unité;
+                    fin si;
+                    cpt <- cpt + 1;
+                fin tantque;
+            
+                -- calcul du point de retraite
+                bar.x <- bar.x + (bar.x - ennemieTmp.position.x);
+                bar.y <- bar.y + (bar.y - ennemieTmp.position.y);
+                -- faire attention à ne pas dépasser le bord de la carte
+                si bar.x < 0 alors
+                    bar.x <- 0;
+                fin si;
+                si bar.x > carte.x alors
+                    bar.x <- carte.x;
+                fin si;
+                si bar.y < 0 alors
+                    bar.y <- 0;
+                fin si;
+                si bar.y > carte.y alors
+                    bar.y <- carte.y;
+                fin si;
+
+                -- distribution des ordres
+                cpt <- 0;
+                tantque cpt < nbUnités faire
+                    si états[cpt] = ATTAQUANT alors
+                        si unités[cpt].nbCommandeATraiter = 0 alors
+                           -- diriger l'ordre sur la nouvelle cible
+                            réaliserActionSurUnité(unités[cpt], ATTACK, ennemieTmp);
+                            ordre[cpt] <- VRAI;
+                        sinon
+                            si non ordre[cpt] alors
+                                -- ordonner d'attaquer que si l'ordre n'est pas positionné
+                                réaliserActionSurUnité(unités[cpt], ATTACK, ennemieTmp);
+                                ordre[cpt] <- VRAI;
+                            fin si;
+                        fin si;
+                    sinon
+                        si non ordre[cpt] alors
+                            -- ordonner le retrait aux réservistes si l'ordre n'est pas positionné
+                            réaliserActionSurPosition(unités[cpt], MOVE, bar);
+                            ordre[cpt] <- VRAI;
+                        fin si;
+                    fin si;
+                    cpt <- cpt + 1;
+                fin tantque;
+                -- enregistrement de la dernière unité attaquée
+                ennemieCible <- ennemieTmp;
+            fin si;
+        fin si;
+    fin tantque;
+    fermerJeu;
+fin

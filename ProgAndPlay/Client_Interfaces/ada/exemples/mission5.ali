@@ -1,0 +1,61 @@
+V "GNAT Lib v4.4"
+M P W=b
+P SS
+R nnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U mission5%b		mission5.adb		a80e7eff NE OO SU IL
+W constantlistkp41%s	constantlistkp41.ads	constantlistkp41.ali
+W pp%s			pp.adb			pp.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D mission5.adb		20121121162250 e397d30a
+D pp.ads		20121201101146 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+X 10 constantlistkp41.ads
+7K9*ConstantListKP41 100e21 14|2w6 2r28
+39i9*Move{15|16I17} 14|19r36
+X 14 mission5.adb
+5U11*mission5 5b11 23l5 23t13
+6r9 p{15|21R14} 11m9 12m9 19r42
+7i9 u{15|37I17} 17m17 19r33
+8i9 cpt{integer} 14m9 15r15 17r45 20m17 20r24
+X 15 pp.ads
+4K9*PP 14|1w6 1r14 15|188e7
+7n18*MyCoalition{6E14} 14|15r33 17r32
+12I17*CommandCode{integer}
+16I17*Action{12I17}
+21R14*Position 14|6r13 15|25e27
+23f25*x{float} 14|11m11
+24f25*y{float} 14|12m11
+37I17*Unit{integer} 14|7r13
+44U19*Open 14|10r9
+48U19*Close 14|22r9
+76V18*GetNumUnits{integer} 14|15r21
+82V18*GetUnitAt{37I17} 14|17r22
+134U19*CarryOutCommand 14|19r17
+

@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr libgml.a  CMakeFiles\gml.dir\ThreadSafeContainers.cpp.obj CMakeFiles\gml.dir\gml.cpp.obj CMakeFiles\gml.dir\speedy-tls.cpp.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe libgml.a

@@ -1,0 +1,113 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+-- cacule la distance au carrée entre deux positions
+fonction distanceCarrée (entrée p1 <Position>, entrée p2 <Position>) retourne <Réel>
+début
+    retourner (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+fin
+
+-- cherche la zone constructible la plus proche de l'assembleur
+fonction chercheZC (entrée assembleur <Unité>) retourne <Entier>
+glossaire
+    i <Entier>;
+    zc <Entier>;
+    d <Réel>;
+    dMin <Réel>;
+début
+    i <- 1;
+    zc <- 1;
+    dMin <- distanceCarrée (assembleur.position, positionZoneSpéciale(i));
+    tantque i <= nombreZonesSpéciales faire
+        d <- distanceCarrée (assembleur.position, positionZoneSpéciale(i));
+        si d < dMin alors
+            dMin <- d;
+            zc <- i;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+    retourner zc;
+fin
+
+-- construit le bâtiment idBât
+fonction construireBâtiment (entrée constructeur <Unité>, entrée idBât <Entier>, entrée ordreConstruction <Entier>) retourne <Unité>
+glossaire
+    pos <Position>;
+    trouvé <Booléen>;
+    i <Entier>;
+    unité <Unité>;
+    bâtiment <Unité>;
+    constructeurLocal <Unité>;
+début
+    -- recopie du constructeur en local
+    constructeurLocal <- constructeur;
+    -- chercher la position de la zone constructible adéquate
+    pos <- positionZoneSpéciale(chercheZC(constructeurLocal));
+    -- Donner l'ordre de construction
+    réaliserActionSurPosition(constructeurLocal, ordreConstruction, pos);
+    -- Attendre la fin de constuction du bâtiment
+    trouvé <- FAUX;
+    tantque non trouvé faire
+        i <- 1;
+        tantque i <= nombreUnités(MOI) et non trouvé faire
+            unité <- ièmeUnité(MOI, i);
+            si unité.sorte = idBât alors
+                bâtiment <- unité;
+                trouvé <- VRAI;
+            fin si;
+            i <- i + 1;
+        fin tantque;
+    fin tantque;
+    -- attendre fin de construction, i.e. lorsque le constructeur est inactif
+    synchroniserUnité(constructeurLocal);
+    tantque constructeurLocal.nbCommandeATraiter > 0 faire
+        synchroniserUnité(constructeurLocal);
+    fin tantque;
+    retourner bâtiment;
+fin
+
+-- chercher l'assembleur
+fonction chercherAssembleur retourne <Unité>
+glossaire
+    i <Entier>;
+    unité <Unité>;
+début
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte = ASSEMBLER alors
+            retourner unité;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+fin
+
+programme mission8
+glossaire
+    assembleur <Unité>;
+    terminal <Unité>;
+    pos <Position>;
+    i <Entier>;
+début
+    ouvrirJeu;
+
+    -- recherche l'assembleur
+    assembleur <- chercherAssembleur;
+    -- construire socket
+    terminal <- construireBâtiment (assembleur, TERMINAL, BUILDTERMINAL);
+    -- attendre la construction du SIGTERM
+    i <- 1;
+    tantque i < 6 faire
+        délai (10000);
+        écrire (i);
+        écrirenl ("0 secondes ...");
+        i <- i + 1;
+    fin tantque;
+
+    -- lancement de l'attaque
+    pos.x <- 1792.0;
+    pos.y <- 256.0;
+    réaliserActionSurPosition(terminal, SIGTERM, pos);
+    écrirenl ("Bombe lancee ...");
+
+    fermerJeu;
+fin

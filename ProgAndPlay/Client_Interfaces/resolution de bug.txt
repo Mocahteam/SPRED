@@ -1,0 +1,1 @@
+pour utiliser des caractère accentués dans un script batch (Windows), utiliser l'éditeur "edit" fournit avec windows.
