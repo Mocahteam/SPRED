@@ -34,9 +34,13 @@ local showBriefing = false
 local missionScript=nil
 
 
-function startTheGame(jsonfile) 
-  missionScript.Start(jsonfile)
-  missionScript.ShowBriefing()
+function startTheGame(jsonfile)
+  local status1, err1 = pcall(function() missionScript.Start(jsonfile) end) 
+  local status2, err2 = pcall(function() missionScript.ShowBriefing() end) 
+  Spring.Echo(status1)
+  Spring.Echo(status2)
+  Spring.Echo(err1)
+  Spring.Echo(err2)
   gameOver = 0
 end   
 -- message sent by mission_gui (Widget)
@@ -76,32 +80,37 @@ function gadget:GamePreload()
   end
 end
 
+function updateTheGame()
+  local outputState
+  gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
+  -- if required, show GuiMission
+  if gameOver == -1 or gameOver == 1 then
+    _G.event = {logicType = "ShowMissionMenu",
+      state = "", outputstate=outputState}
+    if gameOver == -1 then
+      _G.event.state = "lost"
+    else
+      _G.event.state = "won"
+    end
+    SendToUnsynced("MissionEvent")
+    _G.event = nil
+ end
+end
+
 function gadget:GameFrame( frameNumber )
   -- update mission
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
-    local outputState
-    gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
-    -- if required, show GuiMission
-    if gameOver == -1 or gameOver == 1 then
-      _G.event = {logicType = "ShowMissionMenu",
-        state = "", outputstate=outputState}
-      if gameOver == -1 then
-        _G.event.state = "lost"
-      else
-        _G.event.state = "won"
-      end
-      SendToUnsynced("MissionEvent")
-      _G.event = nil
-    end
-  end
-  
+    updateTheGame()
+    end 
   -- if required, show briefing
   if showBriefing then
     missionScript.ShowBriefing()
     showBriefing = false
   end
 end
+
+
 
 
 -- used to show briefings (called by mission lua script)
