@@ -6,7 +6,8 @@ function widget:GetInfo()
 		date = "02/05/2016",
 		license = "GNU GPL v2",
 		layer = 0,
-		enabled = true
+		enabled = true,
+		handler = true
 	}
 end
 
@@ -15,7 +16,7 @@ end
 -------------------------------------
 function hideInRegularMission()
 	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
-		widgetHandler:DisableWidget(self)
+		widgetHandler:DisableWidget("Editor User Interface")
 	end
 end
 
@@ -106,7 +107,6 @@ end
 -------------------------------------
 -- Select button
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
--- BUGGED
 -------------------------------------
 function selectBit()
 	Script.LuaUI.stateBit()
@@ -147,6 +147,9 @@ end
 function widget:Initialize()
 	hideInRegularMission()
 	initChili()
+	
+	-- Top bar
+	addWindow(Screen0, '0%', '0%', '100%', '5%', 'topBar')
 	
 	-- Left Panel
 	addWindow(Screen0, '0%', '5%', '15%', '80%', 'mainWindow')

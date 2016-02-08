@@ -6,7 +6,8 @@ function widget:GetInfo()
 		date = "02/05/2016",
 		license = "GNU GPL v2",
 		layer = 0,
-		enabled = true
+		enabled = true,
+		handler = true
 	}
 end
 
@@ -15,7 +16,7 @@ end
 -------------------------------------
 function hideInRegularMission()
 	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
-		widgetHandler:DisableWidget(self)
+		widgetHandler:DisableWidget("Editor State Machine")
 	end
 end
 
