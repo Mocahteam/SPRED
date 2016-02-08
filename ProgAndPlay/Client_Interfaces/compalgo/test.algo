@@ -1,0 +1,92 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission3
+glossaire
+    unité <Unité>;
+    pos <Position>;
+    i <Entier>;
+    j <Entier>;
+    k <Entier>;
+    l <Entier>;
+début
+    ouvrirJeu;
+
+    écrirenl(jeuEstTerminé);
+
+    pos <- dimensionsCarte;
+    écrire (pos.x);
+    écrire (", ");
+    écrirenl(pos.y);
+
+    pos <- positionDeDépart;
+    écrire (pos.x);
+    écrire (", ");
+    écrirenl(pos.y);
+
+    écrirenl (nombreZonesSpéciales);
+
+    i <- 1;
+    tantque i < nombreZonesSpéciales faire
+        pos <- positionZoneSpéciale(i);
+        écrire (pos.x);
+        écrire (", ");
+        écrire (pos.y);
+        écrire (" | ");
+        i <- i + 1;
+    fin tantque;
+    écrirenl(" ");
+
+    i <- 0;
+    tantque i < 3 faire
+        écrire (nombreUnités(i));
+        écrire (" : ");
+        j <- 1;
+        tantque j <= nombreUnités(i) faire
+            unité <- ièmeUnité(i, j);
+            écrire (unité.id);
+            écrire (" ");
+            écrire (unité.sorte);
+            écrire (" | ");
+            si unité.sorte = BYTE alors
+                k <- 0;
+                écrire ("nb commandes : ");
+                écrire (unité.nbCommandeATraiter);
+                tantque k < unité.nbCommandeATraiter faire
+                    écrire (". commande ");
+                    écrire (k);
+                    écrire (" : ");
+                    écrire (unité.commandeATraiter[k].code);
+                    écrire(" - ");
+                    l <- 0;
+                    tantque l < unité.commandeATraiter[k].nbParamètres faire
+                        écrire(unité.commandeATraiter[k].paramètres[l]);
+                        écrire(" ");
+                        l <- l + 1;
+                    fin tantque ;
+                    k <- k + 1;
+                fin tantque;
+            fin si;
+            j <- j + 1;
+        fin tantque;
+        écrirenl (" ");
+        i <- i + 1;
+    fin tantque;
+
+    écrirenl (estVisible(unité));
+
+    écrirenl (estSynchronisée(unité));
+
+    synchroniserUnité (unité) ;
+
+    affecterGroupe(unité, 1);
+
+    retirerGroupe(unité);
+
+    réaliserActionSurUnité(unité, BUILDBIT, unité);
+
+    réaliserActionSurPosition(unité, BUILDBIT, pos);
+
+    --réaliserActionNonCiblée(unité, STOP, -1.0);
+
+    fermerJeu;
+fin

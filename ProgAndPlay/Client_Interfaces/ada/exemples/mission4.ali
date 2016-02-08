@@ -1,0 +1,63 @@
+V "GNAT Lib v4.4"
+M P W=b
+P SS
+R nnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U mission4%b		mission4.adb		b26e31ee NE OO SU IL
+W constantlistkp41%s	constantlistkp41.ads	constantlistkp41.ali
+W pp%s			pp.adb			pp.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D mission4.adb		20121121162250 f9f79c1b
+D pp.ads		20121201101146 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+X 10 constantlistkp41.ads
+7K9*ConstantListKP41 100e21 14|2w6 2r28
+13i9*Bit{15|14I17} 14|17r25
+39i9*Move{15|16I17} 14|19r36 23r36 26r36 30r36
+X 14 mission4.adb
+5U11*mission4 5b11 33l5 33t13
+6r9 pBits{15|21R14} 11m9 12m9 19r42 30r42
+6r16 pBytes{15|21R14} 13m9 14m9 23r42 26r42
+7i9 u{15|37I17} 16m9 17r20 19r33 21m17 23r33 26r33 28m17 30r33
+X 15 pp.ads
+4K9*PP 14|1w6 1r14 15|188e7
+7n18*MyCoalition{6E14} 14|16r24 21r32 28r32
+12I17*CommandCode{integer}
+14I17*Kind{12I17}
+16I17*Action{12I17}
+21R14*Position 14|6r25 15|25e27
+23f25*x{float} 14|11m15 13m16
+24f25*y{float} 14|12m15 14m16
+37I17*Unit{integer} 14|7r13
+44U19*Open 14|9r9
+48U19*Close 14|32r9
+82V18*GetUnitAt{37I17} 14|16r14 21r22 28r22
+93V18*GetType{14I17} 14|17r12
+134U19*CarryOutCommand 14|19r17 23r17 26r17 30r17
+

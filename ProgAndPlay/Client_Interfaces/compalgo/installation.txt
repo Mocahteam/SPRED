@@ -1,0 +1,19 @@
+# Permet d'installer les modification dans compalgo
+
+# Copie du package utilisé par la gei de Compalgo
+mkdir ../../Spring_outils/Compalgo/gei
+cp ./gei_pour_Compalgo/bin/gei/Gei.class ../../Spring_outils/Compalgo/gei/Gei.class
+# Copie de la gei de Complago
+cp ./gei_pour_Compalgo/bin/fr/irit/sig/compalgo/interpréteur/bibliothèque/gei.class ../../Spring_outils/Compalgo/fr/irit/sig/compalgo/interpréteur/bibliothèque/gei.class
+
+# copie de la bibliothèque
+# pour Linux
+cp ./libGEI.so ../../Spring_outils/Compalgo/libGEI.so
+# pour Windows
+cp ./GEI.dll ../../Spring_outils/Compalgo/GEI.dll
+
+# pour intégrer la gei à l'archive
+# ce positionner dans le répertoire bin
+# saisir jar uf emplacement_du_jar/nom_du_jar.jar fr/
+# ce positionner dans le répertoire "../../../gei_pour_Java/"
+# sasir jar uf emplacement_du_jar/nom_du_jar.jar gei/GeiNative.class

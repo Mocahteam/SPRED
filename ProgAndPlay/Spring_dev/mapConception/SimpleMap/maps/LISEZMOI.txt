@@ -1,0 +1,23 @@
+Pour réaliser cette carte :
+ 1 - Décompresser la carte officielle Dual_Core.sd7
+ 2 - Ouvrir le fichier Dual_Core.smf avec un éditeur hexadécimal (hexedit par exemple)
+ 3 - Avec "hexedit"
+   3.1 - Passer en mode ascii avec la touche "Tab"
+   3.2 - Recherche la chaine de caractère Dual_Core.smt : saisir "/" puis "Dual" puis Entrer
+   3.3 - Passer en mode édition avec la touche F12
+   3.4 - Saisir le nouveau nom (Attention à la longueur, elle doit être égale au nom original soit 22 caractères (.sd7) inclus)
+   3.5 - Quiter avec la touche F10
+ 4 - Renommer les cinq fichiers ".smd", ".smf", ".smt", ".png" et ".dds" avec le nouveau nom de carte tel qu'il a été défini précédemment
+ 5 - Editer le fichier ".smd" avec un éditeur classique (kate par exemple)
+   5.1 - modifier la description
+   5.2 - Ajouter les balises suivante pour éliminer tout relief
+           [SMF]
+           {
+              MinHeight = 10;
+              MaxHeight = 10;
+           }
+   5.3 - Modifier les entrées "DetailTex=" et "Skybox=" avec le nom des fichiers renommés
+   5.4 - Changer les [TERRAINTYPEX] pour les mettre tous à la même vitesse
+ 6 - Générer l'archive à l'aide de 7zip
+ 7 - Renommer l'archive avec l'extension ".sd7"
+ 8 - Placer cette archive dans le remertoire "maps" du jeu

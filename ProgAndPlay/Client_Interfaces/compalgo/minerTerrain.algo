@@ -1,0 +1,103 @@
+importer entréeSortie, jeu, listeConstantesKP41 ;
+
+constante EPS <Entier> = 10 ;
+
+fonction fAbs (entrée f1 <Réel>) retourne <Réel>
+début
+    si f1 < 0 alors
+        retourner -f1 ;
+    sinon
+        retourner f1 ;
+    fin si ;
+fin
+
+-- recherche la zone de construction non minée la plus proche du point de
+-- départ
+fonction chercherZC retourne <Entier>
+glossaire
+    start <Position> ;
+    zc <Position> ;
+    cpt <Entier> ;
+    cptBis <Entier> ;
+    i <Entier> ;
+    dist <Réel> ;
+    distTmp <Réel> ;
+    trouvée <Booléen> ;
+    zcRetour <Entier> ;
+    u <Unité> ;
+début
+    zcRetour <- -1 ;
+    -- initialisation de la distance max
+    start <- dimensionsCarte ;
+    dist <- start.x * start.x + start.y * start.y ;
+    -- recherche de la zone la plus proche et non minée
+    start <- positionDeDépart ;
+    cpt <- 1 ;
+    tantque cpt <= nombreZonesSpéciales faire
+        zc <- positionZoneSpéciale(cpt) ;
+
+        -- vérifier s'il n'y a pas quelque chose dessus
+        i <- 0 ;
+        trouvée <- FAUX ;
+        -- pour chaque coalition
+        tantque i < 3 et non trouvée faire
+            -- parcourir toutes les unités
+            cptBis <- 1 ;
+            tantque cptBis <= nombreUnités(i) et non trouvée faire
+                -- pour chaque unité
+                u <- ièmeUnité(i, cptBis) ;
+                -- si c'est un batiment
+                si u.sorte = KERNEL ou u.sorte = SOCKET ou u.sorte = BADBLOCK
+                        ou u.sorte = LOGICBOMB ou u.sorte = TERMINAL alors
+                    -- vérifier sa position
+                    si fAbs(u.position.x-zc.x) < EPS et
+                            fAbs(u.position.y-zc.y) < EPS alors
+                        trouvée <- VRAI ;
+                    fin si ;
+                fin si ;
+                cptBis <- cptBis + 1 ;
+            fin tantque ;
+            i <- i + 1 ;
+        fin tantque ;
+        -- si la zone n'est pas occupée
+        si non trouvée alors
+            -- calcul de la distance
+            distTmp <- (start.x-zc.x) * (start.x-zc.x) +
+                (start.y-zc.y) * (start.y-zc.y) ;
+            si distTmp < dist alors
+                dist <- distTmp ;
+                zcRetour <- cpt ;
+            fin si ;
+        fin si ;
+        cpt <- cpt + 1 ;
+    fin tantque ;
+    retourner zcRetour ;
+fin
+
+programme main
+glossaire
+    pos <Position> ;
+    cpt <Entier> ;
+    unité <Unité> ;
+    zc <Entier> ;
+début
+    ouvrirJeu ;
+    tantque non jeuEstTerminé faire
+        cpt <- 1 ;
+        tantque cpt <= nombreUnités(MOI) faire
+            unité <- ièmeUnité(MOI, cpt) ;
+            si unité.sorte = ASSEMBLER et unité.groupe = 1 et
+                    unité.nbCommandeATraiter = 0 alors
+                -- chercher une zone à miner
+                zc <- chercherZC ;
+                si zc /= -1 alors
+                    pos <- positionZoneSpéciale(zc) ;
+                    -- miner le terrain
+                    réaliserActionSurPosition(unité, BUILDLOGICBOMB, pos) ;
+                fin si ;
+            fin si ;
+            cpt <- cpt + 1 ;
+        fin tantque ;
+    fin tantque ;
+    fermerJeu ;
+fin

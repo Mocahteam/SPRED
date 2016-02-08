@@ -1,0 +1,3 @@
+Pour créer cette carte, lancer sur Windows le script "makemap.bat" pour générer les fichiers utiles à la création de la carte.
+
+pour générer la carte (.sdz) ce positionner dans le répertoire "FinalMap" puis lancer l'un des deux scripts : "make_map.bat" ou "make_map.sh"

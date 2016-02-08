@@ -1,0 +1,25 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission4
+glossaire
+    unité1 <Unité>;
+    unité2 <Unité>;
+    posBytes <Position>;
+    posBits <Position>;
+début
+    ouvrirJeu;
+    posBytes.x <- 479.0;
+    posBytes.y <- 1825.0;
+    posBits.x <- 1400.0;
+    posBits.y <- 1371.0;
+    unité1 <- ièmeUnité(MOI, 1);
+    unité2 <- ièmeUnité(MOI, 2);
+    si unité1.sorte = BIT alors
+        réaliserActionSurPosition (unité1, MOVE, posBits);
+        réaliserActionSurPosition (unité2, MOVE, posBytes);
+    sinon
+        réaliserActionSurPosition (unité1, MOVE, posBytes);
+        réaliserActionSurPosition (unité2, MOVE, posBits);
+    fin si;        
+    fermerJeu;
+fin

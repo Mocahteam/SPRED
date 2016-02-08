@@ -1,0 +1,39 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission7
+glossaire
+    unité <Unité>;
+    assembleur <Unité>;
+    i <Entier>;
+début
+    ouvrirJeu;
+    -- Recherche de l'assembleur
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte = ASSEMBLER alors
+            assembleur <- unité;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+
+    -- Réparation des unités
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.santé < unité.santéMax alors
+            réaliserActionSurUnité (assembleur, REPAIR, unité);
+            tantque unité.santé < unité.santéMax faire
+                écrire("Sante de l'unite ");
+                écrire(unité.id);
+                écrire(" : ");
+                écrire(unité.santé);
+                écrire("/");
+                écrirenl(unité.santéMax);
+                synchroniserUnité (unité);
+            fin tantque;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+    fermerJeu;
+fin

@@ -1,0 +1,141 @@
+E323AI changelog
+----------------
+v3.22.3 [2010-09-05]
+* changed filename generation for log file: now includes short mod name and contains only safe path characters
+* fixed filename generation for pathfinder graph cached data: no more semi-qualified filenames like "-graph.bin" 
+* fixed possible temporary stall before the very first factory build (introduced in v3.22.2)
+* fixed commander walking into enemy base on metall stall detection (probably)
+* aircraft builders can always assist factories now, replacing ground assisters when limit per factory is reached; this is done to free factory exit in late game
+* better metall stall and energy stall resolving; previous versions heavily depend on commander and also do not consider it can be dead
+* fixed the problem when aircraft builders could not build some economy units (introduced in v3.21.2)
+* partial tech 2 support for NOTA mod
+
+v3.22.2 [2010-09-02]
+* added difficulty option (hard by default)
+* added logging level option (log nothing by default)
+
+v3.22.1 [2010-09-01]
+* fixed issuing assist commands for builders which can't assist
+* added parital support for Conflict Terra mod (you must start the game with Flasgship Base commander unit only)
+* added Conflict Terra config files
+
+v3.22.0 [2010-08-23]
+* changed the way resource stall threshold values are calculated
+* fixed the bug the more metal commander produces the more mmakers/mextractors it builds in the beginning of the game (due to fix above)
+* added CA config files
+* fixed & tweaked BA, BOTA & XTA config files
+* added basic compatibility with NOTA mod
+* added NOTA config files (suitable for ARM side currently)
+
+v3.21.2 [2010-08-06]
+* implemented http://github.com/Error323/E323AI/issues#issue/26
+* tasks refactoring (no changes for end-user)
+* no more unlimited number of tasks being executed per update
+* possible number of tech levels increased from 3 to 5
+* fixed improper area threat calculation near map edges
+* fixed rare selecting the edge metal spot instead of the closest one (due to the fix above)
+* fixed invalid handling with techlevel flags when selecting next factory to build
+
+v3.21.1 [2010-05-19]
+* fixed protential crash in UnitIdle callback
+* somewhat fixed chasing after aircraft with non-aircraft groups
+* fixed continuous assigning unreachable target to military group which leads to serious performance hit
+* tech-up strategy occurred not perfect so it is selected randomly on game start (temporary step)
+* fixed enemy scan procedure where ENGAGE groups preferred unarmed units
+* fixed moveRandom() procedure which always returned results in lower-right corner relative to basic position in 2D plane
+* anti-air aricraft will be set to guard factory when it is built
+* when AIs are in coop among itself they will vary the first factory to build
+
+v3.21.0 [2010-05-16]
+* refactored target selection
+* fixed most issues with attack stalling
+* avoid continuous issuing of MOVE command in Merge task when group is already in-place
+* changed Merge task algorithm: groups try to merge in safe places and closer to enemy at the same time
+* changed factory building strategy to tech-up faster
+* detection and resolving of factory stall
+* WIND & TIDAL tags removed
+* fixed multiple AI info printing in chat
+* added support for chat command "!e323ai" to visualize debug info (available for spectators only)
+* added support of separate categorization files per AI; you have to copy & rename original categorization file to the following template: <modname>-categorization-<team_id>.cfg
+
+v3.20.0 [2010-05-05]
+* aircraft support
+* brand new military group behaviour for bombers
+* universal algorithm of factory selection to be built
+* fixed situation when untis with SCOUTER tag can never be added to attack groups
+* new scout units won't be requested if there are idle scouts already
+* scout units won't be merged without real need
+* ability to build defense for single building in a cluster (more defense)
+* tweaks to build second (etc.) factory earlier
+* tweaks in target selection
+* optimization in units regrouping
+* support of geothermal energy makers
+* added config files for Supreme Annihilation (credits to MisterBenn)
+
+v3.19.1 [2010-04-03]
+* fixed couple of crashes
+
+v3.19.0 [2010-04-02]
+* builders can now repair damaged units
+* prevented useless expansion on metal maps
+* fixed a crash when factory with moving assisters was destroyed
+* fixed a crash when unit was captured
+* fixed a crash connected with economy units with weapons
+* completely fixed building MExes near allied MExes
+* implemented factory pattern
+* better profiler, outputs to "timings.dat" file (edit: replaced with realtime graph in later versions)
+
+v3.18.1 [2010-02-22]
+* builders are more aggressive now and will reclaim nearby enemy structures even when metal is nowhere to store
+* fixed too narrow builder reclaiming area
+* great speedup in loading metal spots data
+* fixed categorization file for BA mod for Core side
+
+v3.18.0 [2010-02-20]
+* categorization file is generated now along with config file on new mod
+* faster loading on speed metal maps
+* intelligently enabling of hovercraft (on maps with 20% of water)
+* much better economy handling on non-metal maps
+* scout groups became stronger, merge faster on idle
+* number of scout groups will not increase eternally now after merging
+* increased number of possible targets for scouts, so less idle
+* attack/harass unarmed buildings being under construction also
+* builders will reclaim unarmed enemy building nearby
+* fixed numerous (potential) crashes
+* eternal memory consumption fixed
+* slight optimization in pathfinding
+* other minor fixes
+
+v3.17.0 [2010-02-08]
+* fixed zero sized cache files under Windows
+* more stable on loading graph cache data
+* compatible with /aikill and /aicontrol commands
+* fixed a crash when unit was given to AI
+* graph calculation correction
+* comm sharing support
+* other minor fixes
+
+v3.16.0 [2010-02-02]
+* graph caching, much faster loading times
+* hovercraft support for BA
+* BOTA support
+* failing more gracefully
+* bugfixes & cleanups
+
+v3.14.5 [2010-01-24]
+* group merging re-enabled
+* watermap support
+
+v3.13.1 [2010-01-11]
+* group merging
+* generation of config files on new mod
+* config updates in BA and XTA
+* epic target selection
+* more defensive on close units
+* removed state debuggin info
+* auto vehicle/kbot selection
+* commander walking reduced
+* no watermaps support yet
+
+For the rest changelog please visit our forum thread:
+http://springrts.com/phpbb/viewtopic.php?f=15&t=19450

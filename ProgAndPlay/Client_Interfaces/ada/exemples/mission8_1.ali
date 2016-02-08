@@ -1,0 +1,130 @@
+V "GNAT Lib v4.4"
+M P W=b
+P SS
+R nnnnnnnvnnnnnnnnnnnnnvvnnnnnnnnnnnnnnnvnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U mission8_1%b		mission8_1.adb		c7ed331e NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W constantlistkp41%s	constantlistkp41.ads	constantlistkp41.ali
+W pp%s			pp.adb			pp.ali
+W system%s		system.ads		system.ali
+W system.finalization_implementation%s  s-finimp.adb  s-finimp.ali
+W system.finalization_root%s  s-finroo.adb	s-finroo.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-textio.ads		20090409232308 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D i-cstrea.ads		20090409232308 e1e064a9
+D mission8_1.adb	20121121162250 72fe6a85
+D pp.ads		20121201101146 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-crtl.ads		20090409232308 997234a1
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-ficobl.ads		20090409232308 8bb681e5
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+D s-wchcon.ads		20090409232308 ab028799
+X 1 ada.ads
+16K9*Ada 19e8 17|3r6 3r23
+X 2 a-contai.ads
+20I9*Count_Type<integer>
+X 3 a-convec.ads
+53R9*Vector
+85V13*Length{2|20I9} 17|35r66[18|34] 55r66[18|34] 149r114[18|34]
+X 10 a-textio.ads
+48K13*Text_IO 506e16 17|3w10 3r27
+263U14*Put_Line 17|99r25
+X 12 constantlistkp41.ads
+7K9*ConstantListKP41 100e21 17|2w6 2r28
+11i9*Assembler{18|14I17} 17|76r62 105r46
+14i9*Byte{18|14I17} 17|15r42 80r68 90r45
+39i9*Move{18|16I17} 17|16r52 18r52
+43i9*Fight{18|16I17} 17|91r56 106r56
+45i9*Guard{18|16I17} 17|93r56
+59i9*Repair{18|16I17} 17|150r77
+X 17 mission8_1.adb
+6U11*mission8_1 6b11 179l5 179t15
+8U19 trierUnites 8b19 8>32 8>62 22l13 22t24 170r9
+8r32 raliementBytes{18|21R14} 18r58
+8r62 raliementBits{18|21R14} 16r58
+9i17 cpt{integer} 12m17 13r23 14r53 20m25 20r32
+10i17 u{18|37I17} 14m25 15r36 16r49 18r49
+25U19 attendreDepart 25b19 41l13 41t27 172r9
+26i17 u{18|37I17} 34m33 35r63
+27i17 cpt{integer} 32m25 33r31 34r61 38m33 38r40
+28b17 fini{boolean} 30m17 31r27 33r70 36m41
+44U19 attendreRassemblement 44b19 61l13 61t34 174r9
+45i17 u{18|37I17} 54m33 55r63
+46i17 cpt{integer} 52m25 53r31 54r61 58m33 58r40
+47b17 fini{boolean} 49m17 50r27 51m25 53r66 56m41
+64U19 lancerAttaque 64b19 64>34 156l13 156t26 176r9
+64r34 pos{18|21R14} 91r63 106r63
+65i17 i{integer} 71m17 74r23 75r57 84m25 84r30 87m17 88r23 89r57 95m25 95r30
+. 102m17 103r23 104r57 108m25 108r30 118m33 119r39 120r58 122r54 129m49 129r54
+. 133m33 135r39 139r59 141r54 142r68 143r67 146m41 146r46
+65i20 j{integer} 122m49 123r55 124r63 124r75 125m57 125r62
+65i23 urgent{integer} 134m33 138r44 139m49 141r44 142r90 143m57 148r36 149r44
+. 150r91 151r70
+65i31 urgencePrecedente{integer} 111m17 149r54 151m49
+65i50 cpt{integer} 72m17 80r28 81r39 82m33 82r40 119r43 123r61 127m49 127r56
+. 135r43
+66i17 unite{18|37I17} 75m25 76r53 78r47 80r59 81r47 89m25 90r36 91r49 93r49
+. 104m25 105r36 106r49
+66i24 assembleur{18|37I17} 78m33 112r42 115r50 149r102 150r65
+67a17 bytes(integer) 80r34 81m33 93r63 120r52 124m57 124r69 142r62 142r84
+. 150r85
+68b17 asmTjrsVivant{boolean} 112m17 113r42 115m25 116r28
+68b32 asmNonTrouve{boolean} 73m17 76r28 77m33
+158r9 attaque{18|21R14} 163m9 164m9 176r24
+158r18 bytes{18|21R14} 165m9 166m9 170r21
+158r25 bits{18|21R14} 167m9 168m9 170r28
+X 18 pp.ads
+4K9*PP 17|1w6 1r14 18|188e7
+7n18*MyCoalition{6E14} 17|13r41 14r40 33r49 34r48 53r49 54r48 74r39 75r44
+. 88r39 89r44 103r39 104r44
+9n17*EnemyCoalition{6E14} 17|98r35
+12I17*CommandCode{integer}
+14I17*Kind{12I17}
+16I17*Action{12I17}
+21R14*Position 17|8r52 8r81 64r43 158r32 18|25e27
+23f25*x{float} 17|163m17 165m15 167m14
+24f25*y{float} 17|164m17 166m15 168m14
+37I17*Unit{integer} 17|10r21 26r21 45r21 66r37
+44U19*Open 17|161r9
+48U19*Close 17|178r9
+54V18*IsGameOver{boolean} 17|113r27
+76V18*GetNumUnits{integer} 17|13r29 33r37 53r37 74r27 88r27 98r23 103r27
+82V18*GetUnitAt{37I17} 17|14r30 34r38 54r38 75r34 89r34 104r34
+93V18*GetType{14I17} 17|15r28 76r45 80r51 90r28 105r28 112r34 115r42 120r44
+101V18*GetHealth{float} 17|142r52 142r74
+121V18*GetPendingCommands{3|53R9[34]} 17|35r44 55r44 149r83
+128U19*CarryOutCommand 17|93r33 150r49
+134U19*CarryOutCommand 17|16r33 18r33 91r33 106r33
+

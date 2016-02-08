@@ -1,0 +1,19 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission5
+glossaire
+    unité <Unité>;
+    pos <Position>;
+    i <Entier>;
+début
+    ouvrirJeu;
+    pos.x <- 256.0;
+    pos.y <- 1024.0;
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        réaliserActionSurPosition (unité, MOVE, pos);
+        i <- i + 1;
+    fin tantque;
+    fermerJeu;
+fin

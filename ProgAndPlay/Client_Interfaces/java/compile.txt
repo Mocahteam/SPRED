@@ -1,0 +1,17 @@
+# Compilation du package pp
+javac pp/PPNative.java
+
+# génération du .h à partir du .class
+# Pour Linux
+javah -o PP_jni.h pp.PPNative
+# Pour Windows
+"c:\Program Files\Java\jdk1.6.0_17\bin\javah" -o PP_jni.h pp.PPNative
+
+# Pour compiler les exemples
+javac exemple\*.java
+
+# Pour lancer l'exemple en utilisation le jar
+# pour Ubuntu-Miro
+java -cp .:pp.jar exemple.Exemple
+# Pour Windows
+java -cp .;pp.jar exemple.Exemple

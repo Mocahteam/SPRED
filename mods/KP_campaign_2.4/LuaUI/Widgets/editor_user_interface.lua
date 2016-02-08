@@ -6,24 +6,15 @@ function widget:GetInfo()
 		date = "02/05/2016",
 		license = "GNU GPL v2",
 		layer = 0,
-		enabled = true,
-		handler = true
+		enabled = true
 	}
 end
 
--------------------------------------
--- Use this widget only in the editor
--------------------------------------
-function hideInRegularMission()
-	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
-		widgetHandler:DisableWidget("Editor User Interface")
-	end
-end
-
----------------------------------------------------------------------------------------------------------------
+VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
+VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, labels, images = {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, labels, images = {}, {}, {}, {}, {}, {}
 
 -------------------------------------
 -- Initialize ChiliUI
@@ -42,7 +33,7 @@ end
 -------------------------------------
 -- Add a window to a specific parent
 -------------------------------------
-function addWindow(_parent, _x, _y, _w, _h, name)
+function addWindow(_parent, _x, _y, _w, _h)
 	local window = Chili.Window:New{
 		parent = _parent,
 		x = _x,
@@ -52,14 +43,14 @@ function addWindow(_parent, _x, _y, _w, _h, name)
 		draggable = false,
 		resizable = false
 	}
-	windows[name] = window
+	return window
 end
 
 -------------------------------------
 -- Add an ImageButton to a specific parent
 -------------------------------------
-function addButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction, name)
-	local button = Chili.Image:New {
+function addImageButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction)
+	local imageButton = Chili.Image:New {
 		parent = _parent,
 		x = _x,
 		y = _y,
@@ -69,13 +60,29 @@ function addButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction, name)
 		keepAspect = false,
 		OnClick = {onClickFunction}
 	}
-	buttons[name] = button
+	return imageButton
+end
+
+-------------------------------------
+-- Add an Button to a specific parent
+-------------------------------------
+function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
+	local button = Chili.Button:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		caption = text,
+		OnClick = {onClickFunction}
+	}
+	return button
 end
 
 -------------------------------------
 -- Add a label to a specific parent
 -------------------------------------
-function addLabel(_parent, _x, _y, _w, _h, text, name)
+function addLabel(_parent, _x, _y, _w, _h, text)
 	local label = Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -85,13 +92,13 @@ function addLabel(_parent, _x, _y, _w, _h, text, name)
 		caption = text,
 		fontsize = 20
 	}
-	labels[name] = label
+	return label
 end
 
 -------------------------------------
 -- Add an Image to a specific parent
 -------------------------------------
-function addImage(_parent, _x, _y, _w, _h, imagePath, name)
+function addImage(_parent, _x, _y, _w, _h, imagePath)
 	local image = Chili.Image:New {
 		parent = _parent,
 		x = _x,
@@ -101,71 +108,119 @@ function addImage(_parent, _x, _y, _w, _h, imagePath, name)
 		file = imagePath,
 		keepAspect = false
 	}
-	images[name] = image
+	return image
 end
 
 -------------------------------------
 -- Select button
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
+-- WAY TOO HARDCODED
 -------------------------------------
 function selectBit()
-	Script.LuaUI.stateBit()
-	buttons["byte"]:RemoveChild(images["selectionType"])
-	addImage(buttons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
+	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
+	for key, button in pairs(unitButtons) do
+		button:RemoveChild(images["selectionType"])
+	end
+	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectByte()
-	Script.LuaUI.stateByte()
-	buttons["bit"]:RemoveChild(images["selectionType"])
-	addImage(buttons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
+	stateMachine:setCurrentUnitState(stateMachine.states.BYTE)
+	for key, button in pairs(unitButtons) do
+		button:RemoveChild(images["selectionType"])
+	end
+	images['selectionType'] = addImage(unitButtons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectPlayer()
-	Script.LuaUI.statePlayer()
-	buttons["ally"]:RemoveChild(images["selectionTeam"])
-	buttons["enemy"]:RemoveChild(images["selectionTeam"])
-	addImage(buttons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
+	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectAlly()
-	Script.LuaUI.stateAlly()
-	buttons["player"]:RemoveChild(images["selectionTeam"])
-	buttons["enemy"]:RemoveChild(images["selectionTeam"])
-	addImage(buttons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+	stateMachine:setCurrentTeamState(stateMachine.states.ALLY)
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
+	images['selectionTeam'] = addImage(teamButtons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectEnemy()
-	Script.LuaUI.stateEnemy()
-	buttons["ally"]:RemoveChild(images["selectionTeam"])
-	buttons["player"]:RemoveChild(images["selectionTeam"])
-	addImage(buttons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+	stateMachine:setCurrentTeamState(stateMachine.states.ENEMY)
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
+	images['selectionTeam'] = addImage(teamButtons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+end
+
+-------------------------------------
+-- Top bar functions (show/hide panels)
+-------------------------------------
+function removeWindows()
+	for key, w in pairs(windows) do
+		if (key ~= "topBar") then
+			Screen0:RemoveChild(w)
+		end
+	end
+end
+
+function fileFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.FILE)
+end
+
+function unitFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.UNIT)
+	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
+	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
+	
+	windows['mainWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	
+	-- Unit buttons
+	labels['unitLabel'] = addLabel(windows["mainWindow"], '5%', '5%', '90%', '5%', "Units")
+	unitButtons['bit'] = addImageButton(windows["mainWindow"], '5%', '10%', '42.5%', '15%', "bitmaps/editor/bit.png", selectBit)
+	unitButtons['byte'] = addImageButton(windows["mainWindow"], '52.5%', '10%', '42.5%', '15%', "bitmaps/editor/byte.png", selectByte)
+	
+	-- Team buttons
+	labels['teamLabel'] = addLabel(windows["mainWindow"], '5%', '87%', '90%', '5%', "Team")
+	teamButtons['player'] = addImageButton(windows["mainWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
+	teamButtons['ally'] = addImageButton(windows["mainWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
+	teamButtons['enemy'] = addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
+	
+	-- Selection image
+	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+end
+
+function selectionFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.SELECTION)
 end
 
 -------------------------------------
 -- Initialize the widget
 -------------------------------------
 function widget:Initialize()
-	hideInRegularMission()
+	-- get rid of engine UI
+	Spring.SendCommands("resbar 0", "tooltip 0","fps 0","console 0","info 0")
+	-- leaves rendering duty to widget (we won't)
+	gl.SlaveMiniMap(true)
+	-- a hitbox remains for the minimap, unless you do this
+	gl.ConfigMiniMap(0,0,0,0)
+  
 	initChili()
 	
+	-----------------
 	-- Top bar
-	addWindow(Screen0, '0%', '0%', '100%', '5%', 'topBar')
+	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
 	
-	-- Left Panel
-	addWindow(Screen0, '0%', '5%', '15%', '80%', 'mainWindow')
-	
-	-- Unit buttons
-	addLabel(windows["mainWindow"], '5%', '5%', '90%', '5%', "Units", 'unitLabel')
-	addButton(windows["mainWindow"], '5%', '10%', '42.5%', '15%', "bitmaps/editor/bit.png", selectBit, 'bit')
-	addButton(windows["mainWindow"], '52.5%', '10%', '42.5%', '15%', "bitmaps/editor/byte.png", selectByte, 'byte')
-	
-	-- Team buttons
-	addLabel(windows["mainWindow"], '5%', '87%', '90%', '5%', "Team", 'teamLabel')
-	addButton(windows["mainWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer, 'player')
-	addButton(windows["mainWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly, 'ally')
-	addButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy, 'enemy')
-	
-	-- Selection image
-	addImage(buttons["bit"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionType')
-	addImage(buttons["player"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionTeam')
+	-- Menu buttons
+	buttons['file'] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
+	buttons['units'] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
+	buttons['selection'] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Selection', selectionFrame)
+	-----------------
 end

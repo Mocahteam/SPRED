@@ -1,0 +1,187 @@
+Modification de Scratch
+
+AJOUT D'UNE NOUVELLE CATEGORIE :
+	Dans la fenêtre "System Browser" :
+		Pour créer la nouvelle catégorie et réorganiser les boutons dans l'interface :
+		"Scratch-UI-Panes"->"ScratchViewerMorph" et choisir le mode "instance" puis "initialization"->"rebuildCategoryselectors" et modification par :
+			"Muratet ---"
+			"motion		control"
+			"looks		sensing"
+			"sound		operators"
+			"pen			variables)."
+			looks	sound	pen
+			motion			sensing
+			control			operators
+			progandplay	variables).
+			"Muratet ---"
+			...
+			"Muratet ---"
+			"1 to: buttons size do: [:i |"
+			"	b _ buttons at: i."
+			"	b extent: maxExtent."
+			"	self addMorph: (b position: x@y)."
+			"	i even"
+			"		ifTrue: [x _ leftColumnX. y _ y + b height + 6]"
+			"		ifFalse: [x _ rightColumnX]]."
+			1 to: 4 do: [:j |
+				b _ buttons at: j.
+				b extent: (((maxExtent x * 2) - pad) // 3) @ maxExtent y.
+				self addMorph: (b position: x@y).
+				x _ x + b width + pad
+			].
+			x _ leftColumnX.
+			y _ y + b height + 6.
+			4 to: buttons size do: [:i |
+				b _ buttons at: i.
+				b extent: maxExtent.
+				self addMorph: (b position: x@y).
+				i even
+					ifTrue: [x _ rightColumnX]
+					ifFalse: [x _ leftColumnX. y _ y + b height + 6]].
+			"Muratet ---"
+			
+		Pour déterminer la couleur des blocks de cette catégorie :
+		"Scratch-Objects"->"ScriptableScratchMorph" et choisir le mode "class" puis "block specs"->"blockColorFor:" et ajout de :
+			"Muratet ---"
+			'progandplay' = aCategory ifTrue: [^ (Color h: 350 s: 0.85 v: 0.9)].
+			"Muratet ---"
+			
+		Pour créer l'image du bouton de la catégorie avec la bonne couleur, créer trois images dans le répertoire "ScratchSkin" en prenant comme exemple "motion.gif", "motionOver.gif" et "motionPressed.gif"
+		
+		Pour construire les blocks de cette catégorie :
+		"Scratch-Objects"->"ScriptableScratchMorph" et choisir le mode "class" puis "block specs"->"blocks specs" et ajout de :
+			"Muratet ---"
+			'progandplay'
+				('open Prog&Play'							-	PPopen)
+				...
+				('does unit id %n belong to %p coalition?'			b	PPdoes:belongTo: - MY)
+				...
+				('is pending cmd %n of unit id %n a %p action?'	b	PPisPendingCommand:of:a: 0 - ATTACK)
+				...
+				('command unit id %n to %p to x: %n y: %n'			-	PPcommand:to:x:y: - ATTACK 0 0)
+				...
+			"Muratet ---"
+			
+			Ajout d'une nouvelle catégorie pour traiter les fonctions liées à Prog&Play
+			"Scratch-Objects"->"ScriptableScratchMorph" et choisir "instance" puis ajouter la catégorie "progandplay ops" et ajout des fonctions suivantes
+				PPopen
+					ProgAndPlayPlugin open
+				
+				PPdoes: idU belongTo: coalition
+					| idC |
+					idC _ self PPgetIdCst: coalition.
+					^ ProgAndPlayPlugin does: idU belongTo: idC
+					
+				PPisPendingCommand: idPC of: idU a: command
+					| idC |
+					idC _ self PPgetIdCst: command.
+					^ ProgAndPlayPlugin isPendingCommand: idPC of: idU a: idC
+					
+				PPcommand: idU to: action x: xPos y: yPos
+					| idA |
+					idA _ self PPgetIdCst: action.
+					^ ProgAndPlayPlugin command: idU to: idA x: xPos y: yPos
+				
+				PPgetIdCst: constant
+					| id |
+					id <- -1.
+					"constants for coalitions"
+					constant = 'MY' ifTrue: [id <- 0].
+					constant = 'ALLY' ifTrue: [id <- 1].
+					constant = 'ENEMY' ifTrue: [id <- 2].
+					...
+			
+			Pour traiter les "%p" dédiés à Prog&Play :
+				1 - Ajout d'un "argument morph" dédié à Prog&Play pour treter les "%p" :
+				"Scratch-Blocks"->"CommandBlockMorph" et choisir "instance" puis "private"->"uncoloredArgMorphFor:" et ajout de :
+					"Muratet ---"
+					$p = code ifTrue: [^ ProgAndPlayArgMorph new].
+					"Muratet ---"
+				
+				2 - Ajout d'une nouvelle classe pour pouvoir faire le "ProgAndPlayArgMorph new". Dans "Scratch-Blocks" ajouter "ProgAndPlayArgMorph" puis choisir "instance" et ajouter une nouvelle catégorie "accessing" et y ajouter la méthode "options" avec le corps suivant :
+						options
+						"Muratet ---"
+							"Answer my set of attributes."
+							(owner isKindOf: CommandBlockMorph) ifFalse: [^ #()].
+
+							(owner selector = #PPis:a:) ifTrue: [^ #('ASSEMBLER' 'BADBLOCK' 'BIT' 'BYTE' 'KERNEL' 'LOGIC BOMB' 'POINTER' 'SIGNAL' 'SOCKET' 'TERMINAL') collect: [:s | s]].
+
+							(owner selector = #PPresource:) ifTrue: [^ #('METAL' 'ENERGY') collect: [:s | s]].
+
+							((owner selector = #PPnumUnits:) or: [(owner selector = #PPunit:of:) or: [owner selector = #PPdoes:belongTo:]]) ifTrue: [^ #('MY' 'ALLY' 'ENEMY') collect: [:s | s]].
+
+							(owner selector = #PPisPendingCommand:of:a:) ifTrue: [^ #('ATTACK' 'FIGHT' 'GUARD' 'LAUNCH MINE' 'MOVE' 'NX FLAG' 'PATROL' 'RECLAIM' 'REPAIR' 'RESTORE' 'SELF DESTRUCTION' 'SIGTERM' 'WAIT' 'BUILD ASSEMBLER' 'BUILD BADBLOCK' 'BUILD BIT' 'BUILD BYTE' 'BUILD KERNEL' 'BUILD LOGIC BOMB' 'BUILD POINTER' 'BUILD SIGNAL' 'BUILD SOCKET' 'BUILD TERMINAL') collect: [:s | s]].
+
+							(owner selector = #PPcommand:to:x:y:) ifTrue: [^ #('ATTACK' 'FIGHT' 'MOVE' 'NX FLAG' 'PATROL' 'RECLAIM' 'RESTORE' 'SIGTERM' 'BUILD ASSEMBLER' 'BUILD BADBLOCK' 'BUILD BIT' 'BUILD BYTE' 'BUILD KERNEL' 'BUILD LOGIC BOMB' 'BUILD POINTER' 'BUILD SIGNAL' 'BUILD SOCKET' 'BUILD TERMINAL') collect: [:s | s]].
+
+							(owner selector = #PPcommand:to:on:) ifTrue: [^ #('ATTACK' 'FIGHT' 'GUARD' 'MOVE' 'NX FLAG' 'PATROL' 'RECLAIM' 'REPAIR' 'SIGTERM') collect: [:s | s]].
+
+							(owner selector = #PPcommand:toset:to:) ifTrue: [^ #('FIRE STATE' 'MOVE STATE' 'REPEAT') collect: [:s | s]].
+
+							(owner selector = #PPcommand:to:) ifTrue: [^ #('LAUNCH MINE' 'SELF DESTRUCTION' 'STOP' 'STOP BUILDING' 'WAIT') collect: [:s | s]].
+
+							[^ #()]
+						"Muratet ---"
+					
+			Implémenter les fonctions de la classe "ProgAndPlayPlugin" :
+				1 - "Primitives-Plugins", créer la classe "ProgAndPlayPlugin", choisir "class", créer la catégory "primitive" et créer les fonctions de cette classe :
+					open
+						Smalltalk unloadPlugin: 'ProgAndPlayPlugin'.  "unloads old version of plugin, if any"
+						^ self primOpen
+						
+					does: idU belongTo: idC
+						^ (self primUnitGetCoalition: idU asInteger) = idC
+						
+					isPendingCommand: idPC of: idU a: idC
+						^ (self primGetPendingCommand: idPC asInteger of: idU asInteger) = idC
+						
+					command: idU to: idA x: xPos y: yPos
+						^ self primCommand: idU asInteger to: idA x: xPos asFloat y: yPos asFloat
+				2 - Créer les fonction faisant appel à la bibliothèque C
+					primOpen
+						<primitive: 'primitiveOpen' module: 'ProgAndPlayPlugin'>
+						self primitiveFailed
+				
+					primUnitGetCoalition: idU
+						<primitive: 'primitiveUnitGetCoalition' module: 'ProgAndPlayPlugin'>
+						self primitiveFailed
+					
+					primGetPendingCommand: idPC of: idU
+						<primitive: 'primitiveUnitGetPendingCommandAt' module: 'ProgAndPlayPlugin'>
+						self primitiveFailed
+						
+					primCommand: idU to: idA x: xPos y: yPos
+						<primitive: 'primitiveActionOnPosition' module: 'ProgAndPlayPlugin'>
+						self primitiveFailed
+					
+		Bug : Lors du changement de langue, les blocks Prog&Play passent en "obsolete!" dans l'onglet "Scripts" => Cause : après avoir créé/modifié la ctégorie "Progandplay" et/ou ses blocks, il fat reconstruire le dictionnaire de spécification des blocks : "BlockSpecDict". Cette classe est définie dans "Scratch-Objects" -> "ScriptableScratchMorph" -> "class" -> "block specs" -> "blockSpecDict" qui appelle "buildBlockSpecDictionary", mais ceci n'est pas fait à chaque démarrage de Scratch (mise en cache?) du coup il faut forcer la reconstruction du dictionnaire 1 SEULE FOIS. Voir code à décommenter et instructions dans "Scratch-Objects" -> "ScriptableScratchMorph" -> "instance" -> "blocks" -> "blockFromTuple:receiver:".
+		
+PRISE EN COMPTE DES MODIFICATIONS :
+	Faire un "Clic-droit" dans une zone libre puis "open..."->"Scratch"
+	
+MODIFICATION DU TEXTE DE PROG&PLAY
+	1 - Clic-Molette jusqu'au texte
+	2 - Utilisation du "Debug me"->"inspect morph"->"contents"
+	3 - Modification du texte avec "Prog&Play"
+	
+MODIFICATION DE "About Scratch"
+	"Scratch-UI-Panes"->ScratchframeMorph" et choisir "instance" puis "menu/button actions"->"aboutScratch" et ajout de :
+		Updated by Mathieu Muratet to be compatible with Prog&Play system.
+
+POUR AFFICHER DES TRACES
+	Transcript show: 'texte à afficher'.
+	Pour visualiser ces traces il faut ouvrir le "transcript" : Faire un "Clic-droit" dans une zone libre puis "open..."->"transcript".
+	
+CARACTERES SPECIAUX ET RACCOURCI CLAVIER
+	Tous les Ctrl-X/C/V/Z sont remplacés par Alt-X/C/V/Z.
+	Pour afficher une flèche d'affectation "<-" il faut saisir le caractère '_'.
+	Pour afficher une flèche verticale vers le haut (équivalent du "return") il faut saisir le caractère '^'.
+		
+POUR CREER L'IMAGE DEFINITIVE
+	Shift+Clic sur le menu "File" de la fenêtre de Scratch et choisir "Save Image in User Mode"
+	
+TRADUCTION DE L'INTERFACE EN FRANCAIS
+	modification du fichier ./locale/fr.po
+
+AJOUT DES IMAGES D'AIDE
+	ajouter dans le répertoire ./Help/en les fichiers images. Le nom de ces fichiers doit correspondre au non des méthodes définies dans "Scratch-Objects" -> "ScriptableScratchMorph" -> "instance" -> "progandplay ops". A noter que les paramètres des méthodes sont remplacés par des "_" dans le nom du fichier image (Ex : PPdoes: idU belongTo: coalition => PPdoes_belongTo_.gif)

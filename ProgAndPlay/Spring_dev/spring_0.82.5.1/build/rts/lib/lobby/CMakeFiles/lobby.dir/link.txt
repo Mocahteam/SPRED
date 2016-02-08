@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr liblobby.a  CMakeFiles\lobby.dir\RawTextMessage.cpp.obj CMakeFiles\lobby.dir\Connection.cpp.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe liblobby.a

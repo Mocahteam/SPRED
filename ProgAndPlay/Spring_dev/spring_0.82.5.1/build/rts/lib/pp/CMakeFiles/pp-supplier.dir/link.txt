@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr libpp-supplier.a  CMakeFiles\pp-supplier.dir\PP_Error.c.obj CMakeFiles\pp-supplier.dir\PP_Supplier.cpp.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe libpp-supplier.a

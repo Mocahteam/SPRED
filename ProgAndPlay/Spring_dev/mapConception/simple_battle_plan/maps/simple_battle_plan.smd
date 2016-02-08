@@ -1,0 +1,70 @@
+[MAP]
+{
+	Description=Simple battle plan for Kernel Panic.;
+	TidalStrength=0;
+	Gravity=50;				        //in units/sec^2
+	MaxMetal=1.2;				        //how much metal a map square with the maximum metal value gives
+	ExtractorRadius=100;				//radius that a single extractor(mine) extracts from
+	MapHardness=800;                                // how hard it is to create craters in map, default 100
+
+	[SMF]
+	{
+		MinHeight = 10;
+		MaxHeight = 10;
+	}
+
+	[ATMOSPHERE]
+	{
+		FogColor=0 0 0;
+		FogStart=0.001;
+
+		CloudColor=0 0 0;
+		SkyColor=0.01 0.01 0.01;
+
+		SunColor=1 1 1;
+		CloudDensity=0;
+
+		MinWind=0;
+		MaxWind=1;
+		
+	}
+	[WATER]
+	{
+		WaterBaseColor=0.01 0.01 0.01;  //color at water surface
+		WaterAbsorb=10 10 10;  //how fast different colors are absorbed by the water
+		WaterMinColor=0.01 0.01 0.01;  //the min value the water colors will go down to
+		WaterPlaneColor=0 0 0;
+	}
+	[LIGHT]
+	{
+		SunDir=0 1 1;						//direction of sun (spring will normalize it later)(y component is upward)
+		
+		GroundAmbientColor=0.5 0.5 0.5;		//ambient (non sun lit) color of ground (and grass etc)
+		GroundSunColor=0.5 0.5 0.5;			//color of ground where fully sun lit (added to ambient)
+		GroundShadowDensity=1.0;			//how far from the non shadowed to the ambient color stuff in shadow will go
+
+		UnitAmbientColor=0.5 0.5 0.5;		//ambient (non sun lit) color of units (and wreckage etc)
+		UnitSunColor=0.5 0.5 0.5;			//color of units where fully sun lit (added to ambient)
+		UnitShadowDensity=0.7;				//how far from the non shadowed to the ambient color stuff in shadow will go
+	}
+	[TEAM0]
+	{
+		StartPosX=1792;
+		StartPosZ=1792;
+	}
+	[TEAM1]
+	{
+		StartPosX=256;
+		StartPosZ=256;
+	}
+	[TEAM2]
+	{
+		StartPosX=1792;
+		StartPosZ=256;
+	}
+	[TEAM3]
+	{
+		StartPosX=256;
+		StartPosZ=1792;
+	}
+}

@@ -1,0 +1,35 @@
+Compilation de Spring à l'aide de CMake et du make de MinGW
+
+Si dans le répertoire contenant les sources de Spring il n'y a pas le répertoire "tools/ArchiveMover", commenter les 3 lignes suivantes du fichier "CMakeLists.txt" :
+#if (WIN32)
+#	Add_Subdirectory(tools/ArchiveMover)
+#endif (WIN32)
+
+Installation de MinGW avec Official GCC 4.4.0
+	* MinGW Runtime - mingwrt (dev & dll)
+    * MinGW API for MS-Windows - w32api (dev)
+    * GNU Binutils - binutils (bin)
+    * GCC 4 - gcc-core (bin & dll)
+    * GCC 4 - gcc-c++ (bin & dll)
+    * GCC 4 - pthreads (dll)
+    * GCC 4 - mpfr (dll)
+    * GCC 4 - gmp (dll)
+    Avec en plus
+    * GNU Make - mingw32-make
+    * GNU Source-Level Debugger - gdb (version 6.8-3 or later)
+    Ne pas oublier de mettre à jour les variables d'environnement
+    * MINGDIR=C:/MinGW (si C:/MinGW est le répertoire où toutes les archives précédentes ont été décompressées)
+    * PATH=%PATH%;%MINGDIR%\bin
+
+Ajout des bibliothèques dans le répertoire de Spring
+	* Télécharger "mingwlibs" depuis le site de Spring (en tester plusieurs, leur compatibilité dépend de la version du compilateur)
+
+Installation de CMake
+	* CMake 2.6 installer
+	
+Compilation avec CMake
+    * lancer cmake-gui et sélectionner le répertoire source et le répertoire de génération
+    * Cliquer sur "configure" et suivre les instruction (choisir "MinGW Makefiles". Rq : pour utiliser cette version de make, si "msys" est installé son "bin" ne doit pas être dans le "path")
+    * Cliquer une deuxième fois sur "configure" (il ne devrait plus y avoir d'erreurs)
+    * Cliquer sur "generate"
+    * Ouvrir une console, se placer dans le répertoire de génération, et saisir "mingw32-make"

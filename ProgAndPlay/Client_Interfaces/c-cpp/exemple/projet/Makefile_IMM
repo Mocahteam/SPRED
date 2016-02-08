@@ -1,0 +1,29 @@
+
+.PHONY: all clean
+
+ifeq ($(OS),Windows_NT)
+PATH := C:\msys\1.0\bin;$(PATH)
+BIN = .exe
+ENTETELIB = 
+LIB = .dll
+else
+BIN = 
+ENTETELIB = lib
+LIB = .so
+endif
+
+C_FILES = $(wildcard ./imm_*.c)
+O_FILES = $(C_FILES:.c=.o)
+BIN_FILES = $(C_FILES:.c=$(BIN))
+
+REP_PP = ../../../../pp
+
+all: $(O_FILES)
+
+%.o: %.c ../../PP_IMM.h ../../$(ENTETELIB)ppimm$(LIB) $(REP_PP)/PP.h \
+$(REP_PP)/$(ENTETELIB)pp-client$(LIB)
+	gcc -Wall -ansi -o $@ -c $< -I../.. -I$(REP_PP)
+	gcc -o $*$(BIN) $@ -L$(REP_PP) -lpp-client -L../.. -lppimm
+
+clean:
+	rm $(BIN_FILES) $(O_FILES)

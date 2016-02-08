@@ -1,0 +1,69 @@
+//
+// 	SimpleMap
+//
+//	Map for Kernel Panic
+//	by FireStorm,[Sultans of Spring]
+//  updated by Mathieu Muratet
+//
+//
+
+
+[MAP]
+{
+	Description=SimpleMap. Map for Kernel Panic. Intended for 2-6 players. Made by FireStorm [Sultans of Spring], january 2010, updated by Mathieu Muratet october 2010.;
+	TidalStrength=20;
+	Gravity=50;// Low grav for Kernel Panic maps
+	MaxMetal=0.15;
+	ExtractorRadius=80;
+	MapHardness=800;// in %
+	NotDeformable=0;// Deformable on request -fs
+
+	DetailTex=SimpleMapCircuitry.png;
+	
+	[ATMOSPHERE]
+	{
+		Skybox=SimpleMapSkybox.dds;
+		FogColor=0 0 0;
+		FogStart=0.001;
+
+		CloudColor=0 0 0;
+		SkyColor=0.01 0.01 0.01;
+
+		SunColor=0.12 0.025 0.33;
+		CloudDensity=0;
+
+		MinWind=0;
+		MaxWind=30;
+
+	}
+	[WATER]
+	{
+		WaterBaseColor=0.01 0.01 0.01;// at surface
+		WaterAbsorb=10 10 10;// absorbtion
+		WaterMinColor=0.01 0.01 0.01; // won't go lower than
+	}
+	[LIGHT]
+	{
+		SunDir=-2 7 -4;// Will be normalised, Y is upward
+		
+		GroundAmbientColor=0.6 0.6 0.6;// Non lit ground
+		GroundSunColor=1 1 1;// Lit ground
+		GroundShadowDensity=1.0;// How far light go into shadow
+
+		UnitAmbientColor=0.7 0.7 0.7;// Non lit ground
+		UnitSunColor=0.9 0.9 0.9;// Lit ground
+		UnitShadowDensity=0.7;// How far light go into shadow
+	}
+
+	[TEAM0]
+	{
+		StartPosX=200;
+		StartPosZ=1024;
+	}
+	[TEAM1]
+	{
+		StartPosX=3896;
+		StartPosZ=1024;
+	}
+}
+

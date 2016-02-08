@@ -1,0 +1,89 @@
+V "GNAT Lib v4.4"
+P SS
+R nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U constantlistkp41%s	constantlistkp41.ads	4b99adf5 NE OO PK
+W pp%s			pp.adb			pp.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D pp.ads		20121121162250 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+X 10 constantlistkp41.ads
+7K9*ConstantListKP41 100l5 100e21
+11i9*Assembler{14|14I17}
+12i9*BadBlock{14|14I17}
+13i9*Bit{14|14I17}
+14i9*Byte{14|14I17}
+15i9*Kernel{14|14I17}
+16i9*LogicBomb{14|14I17}
+17i9*Pointer{14|14I17}
+18i9*Signal{14|14I17}
+19i9*Socket{14|14I17}
+20i9*Terminal{14|14I17}
+26i9*Stop{14|16I17}
+27i9*Wait{14|16I17}
+28i9*FireState{14|16I17}
+32i9*SelfDestruction{14|16I17}
+33i9*Repeat{14|16I17}
+39i9*Move{14|16I17}
+41i9*Patrol{14|16I17}
+43i9*Fight{14|16I17}
+45i9*Guard{14|16I17}
+47i9*MoveState{14|16I17}
+54i9*Attack{14|16I17}
+59i9*Repair{14|16I17}
+60i9*Reclaim{14|16I17}
+61i9*Restore{14|16I17}
+62i9*BuildBadBlock{14|16I17}
+63i9*BuildLogicBomb{14|16I17}
+64i9*BuildSocket{14|16I17}
+65i9*Buildterminal{14|16I17}
+66i9*Debug{14|16I17}
+71i9*BuildAssembler{14|16I17}
+72i9*BuildByte{14|16I17}
+73i9*BuildPointer{14|16I17}
+78i9*BuildBit{14|16I17}
+79i9*StopBuiding{14|16I17}
+84i9*LaunchMine{14|16I17}
+88i9*NxFlafg{14|16I17}
+92i9*Sigterm{14|16I17}
+97i9*Metal{14|18I17}
+98i9*Energy{14|18I17}
+X 14 pp.ads
+4K9*PP 10|5w6 5r14 11r30 12r29 13r24 14r25 15r27 16r30 17r28 18r27 19r27
+. 20r29 26r25 27r25 28r30 32r36 33r27 39r25 41r27 43r26 45r26 47r30 54r27
+. 59r27 60r28 61r28 62r34 63r35 64r32 65r34 66r26 71r35 72r30 73r33 78r29
+. 79r32 84r31 88r28 92r28 97r26 98r27 14|188e7
+12I17*CommandCode{integer}
+14I17*Kind{12I17} 10|11r33 12r32 13r27 14r28 15r30 16r33 17r31 18r30 19r30
+. 20r32
+16I17*Action{12I17} 10|26r28 27r28 28r33 32r39 33r30 39r28 41r30 43r29 45r29
+. 47r33 54r30 59r30 60r31 61r31 62r37 63r38 64r35 65r37 66r29 71r38 72r33
+. 73r36 78r32 79r35 84r34 88r31 92r31
+18I17*Resource{integer} 10|97r29 98r30
+

@@ -1,0 +1,7 @@
+tank
+armstump 151 -> Medium assault tank
+armflash 70 -> Fast assault tank
+
+avion
+armfig 68 -> Freedom fighter
+armsfig 137 -> Tornado - Seaplane Swarmer

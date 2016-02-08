@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr libheadlessStubs.a  CMakeFiles\headlessStubs.dir\glewstub.c.obj CMakeFiles\headlessStubs.dir\glstub.c.obj CMakeFiles\headlessStubs.dir\glustub.c.obj CMakeFiles\headlessStubs.dir\glxextstub.c.obj CMakeFiles\headlessStubs.dir\sdlstub.c.obj CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.obj CMakeFiles\headlessStubs.dir\wglstub.cpp.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe libheadlessStubs.a
