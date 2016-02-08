@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr libminizip.a  CMakeFiles\minizip.dir\unzip.c.obj CMakeFiles\minizip.dir\zip.c.obj CMakeFiles\minizip.dir\ioapi.c.obj CMakeFiles\minizip.dir\iowin32.c.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe libminizip.a

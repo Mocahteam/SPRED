@@ -1,0 +1,84 @@
+V "GNAT Lib v4.4"
+M P W=b
+P SS
+R nnnnnnnnnnnnnnnvnnvnnvvnnnnnvnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U mission1%b		mission1.adb		6ea0a70d NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.float_aux%s  a-tiflau.adb		a-tiflau.ali
+W constantlistkp41%s	constantlistkp41.ads	constantlistkp41.ali
+W pp%s			pp.adb			pp.ali
+W system.fat_flt%s	s-fatflt.ads		s-fatflt.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W text_io%s		text_io.ads		text_io.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-convec.ads		20090409232308 317e4a8c
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-textio.ads		20090409232308 fe8af46e
+D a-tiflau.ads		20090409232308 ce2abdd4
+D a-tiflio.ads		20090409232308 5d91823c
+D a-tiflio.adb		20090409232308 e2036cd2
+D a-unccon.ads		20070406091342 51e09df2
+D constantlistkp41.ads	20121123145138 6060efe7
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D i-cstrea.ads		20090409232308 e1e064a9
+D mission1.adb		20121121162250 590ec207
+D pp.ads		20121201101146 2bf94212
+D system.ads		20090409232308 2e24a5ff
+D s-crtl.ads		20090409232308 997234a1
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-fatflt.ads		20090409232308 f2e0c28f
+D s-fatgen.ads		20090409232308 87841279
+D s-ficobl.ads		20090409232308 8bb681e5
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+D s-wchcon.ads		20090409232308 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+X 12 a-tiflio.ads
+45k21*Float_IO 88e25 20|7r33
+X 15 constantlistkp41.ads
+7K9*ConstantListKP41 100e21 20|2w6 2r28
+39i9*Move{21|16I17} 20|18r28
+X 20 mission1.adb
+6U11*mission1 6b11 20l5 20t13
+7K17 Es_Reels[12|45]
+8r9 p{21|21R14} 13m9 14m9 18r34
+9i9 u{21|37I17} 16m9 18r25
+X 21 pp.ads
+4K9*PP 20|1w6 1r14 21|188e7
+7n18*MyCoalition{6E14} 20|16r24
+12I17*CommandCode{integer}
+16I17*Action{12I17}
+21R14*Position 20|8r13 21|25e27
+23f25*x{float} 20|13m11
+24f25*y{float} 20|14m11
+37I17*Unit{integer} 20|9r13
+44U19*Open 20|11r9
+48U19*Close 20|19r9
+82V18*GetUnitAt{37I17} 20|16r14
+134U19*CarryOutCommand 20|18r9
+X 41 text_io.ads
+24K9*Text_IO=24:29 20|3w6 3r19
+

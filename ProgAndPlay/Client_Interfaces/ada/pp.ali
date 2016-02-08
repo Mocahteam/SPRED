@@ -1,0 +1,205 @@
+V "GNAT Lib v4.4"
+P SS
+R nnnnnnnvnnnnnnnnnnnnnvvvnnnnvnnvnnnnnnvnnvnnnnnnnnnnnnnvnnnnvnnnnnnnnnnnnnnnn
+
+U pp%b			pp.adb			0442a377 NE OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.c%s	i-c.adb			i-c.ali
+W interfaces.c.strings%s  i-cstrin.adb		i-cstrin.ali
+
+U pp%s			pp.ads			9e9a82af EE OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.containers%s	a-contai.ads		a-contai.ali
+W ada.containers.generic_array_sort%s
+W ada.containers.vectors%s
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.finalization%s	a-finali.adb		a-finali.ali
+W ada.finalization.list_controller%s  a-filico.adb  a-filico.ali
+W ada.streams%s		a-stream.ads		a-stream.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.unchecked_deallocation%s
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.c%s	i-c.adb			i-c.ali
+W interfaces.c.strings%s  i-cstrin.adb		i-cstrin.ali
+W system%s		system.ads		system.ali
+W system.finalization_implementation%s  s-finimp.adb  s-finimp.ali
+W system.finalization_root%s  s-finroo.adb	s-finroo.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+W system.stream_attributes%s  s-stratt.adb	s-stratt.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-contai.ads		20070406091342 7b35f559
+D a-cgarso.ads		20070406091342 943b3aae
+D a-convec.ads		20090409232308 317e4a8c
+D a-convec.adb		20090409232308 5aeb8a2b
+D a-except.ads		20090409232308 b54b55de
+D a-finali.ads		20090409232308 9eaacebd
+D a-filico.ads		20090409232308 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232308 34aca5be
+D a-tags.ads		20090409232308 bfa07446
+D a-textio.ads		20090409232308 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D a-uncdea.ads		20070406091342 dc667e6d
+D interfac.ads		20090409232308 a69cad5c
+D i-c.ads		20070406091342 bc3ef662
+D i-cstrin.ads		20090409232308 841d8a31
+D i-cstrea.ads		20090409232308 e1e064a9
+D pp.ads		20121201101146 2bf94212
+D pp.adb		20121121162250 552c9f3a
+D system.ads		20090409232308 2e24a5ff
+D s-crtl.ads		20090409232308 997234a1
+D s-exctab.ads		20090409232308 5c1c61ae
+D s-ficobl.ads		20090409232308 8bb681e5
+D s-finimp.ads		20090409232308 9449f4cb
+D s-finroo.ads		20090409232308 1408f9d1
+D s-parame.ads		20090409232308 f32e56e9
+D s-secsta.ads		20090409232308 7bae3621
+D s-soflin.ads		20090409232308 0c6fd39d
+D s-stache.ads		20090409232308 257b3be8
+D s-stalib.ads		20090409232308 52b793d5
+D s-stoele.ads		20090409232308 ed966df3
+D s-stoele.adb		20090409232308 e9998c78
+D s-stratt.ads		20090409232308 fef7c1da
+D s-strops.ads		20090409232308 845f72d2
+D s-sopco3.ads		20090409232308 72ce1063
+D s-sopco4.ads		20090409232308 bc112723
+D s-sopco5.ads		20090409232308 191315e8
+D s-traent.ads		20090409232308 bd5f2753
+D s-unstyp.ads		20090409232308 c0f9fae5
+D s-wchcon.ads		20090409232308 ab028799
+X 1 ada.ads
+16K9*Ada 19e8 19|2r6 2r38 20|1r6 1r24 56r17
+X 2 a-contai.ads
+16K13*Containers 22e19 19|2r10 2r42
+X 4 a-convec.ads
+43k24*Vectors 379e27 19|2w21 28r40 34r38
+53R9*Vector 19|32r49[28] 121r71[34] 20|5r72[19|34] 9r44[19|34]
+93U14*Clear 20|12r36[19|34] 19r51[19|28]
+197U14*Append 20|25r67[19|28] 31r52[19|34]
+X 12 a-textio.ads
+48K13*Text_IO 506e16 20|1w10 1r28 56r21
+242U14*Put 20|56r29
+X 15 interfac.ads
+36K9*Interfaces 171e15 19|1r6 184r34 20|2r6 56r33
+X 16 i-c.ads
+18K20*C 230e17 19|1r17 184r45 20|2r17 56r44
+X 17 i-cstrin.ads
+36K22*Strings 106e25 19|1w19 184r47 20|2w19 56r46
+50P9*chars_ptr(character) 19|184r55
+74V13*Value{string} 20|56r54
+X 19 pp.ads
+4K9*PP 188l5 188e7 20|4b14 59l5 59t7
+6E14*Coalition 9e32 76r38 82r36 90r52
+7n18*MyCoalition{6E14}
+8n17*AllyCoalition{6E14}
+9n17*EnemyCoalition{6E14}
+12I17*CommandCode{integer} 14r25 16r27 128r56 134r56 140r56 178r53 180r57
+. 182r57 20|39r56 44r56 49r56
+14I17*Kind{12I17} 93r47
+16I17*Action{12I17}
+18I17*Resource{integer} 70r39
+21R14*Position 25e27 57r36 60r42 67r67 97r51 134r76 20|44r76
+23f25*x{float} 20|46r43
+24f25*y{float} 20|46r48
+28K17*Float_Container[4|43] 32r33
+29R14*Command 33e27 34r56 20|8r23
+31i25*code{integer} 20|18m45
+32r25*param{4|53R9[28]} 20|19m45 25m61
+34K17*Cmd_Container[4|43] 121r57 20|5r58 9r30
+37I17*Unit{integer} 82r74 90r39 93r34 97r38 101r36 105r39 110r35 116r36 121r44
+. 128r43 128r76 134r43 140r43 169r40 171r40 173r45 175r41 178r40 178r73 180r44
+. 182r44 20|5r45 39r43 39r76 44r43 49r43
+44U19*Open 145b<c,PP_Open>27
+48U19*Close 146b<c,PP_Close>27
+54V18*IsGameOver{boolean} 148b<c,PP_IsGameOver>27
+57V18*GetMapSize{21R14} 149b<c,PP_GetMapSize>27
+60V18*GetStartPosition{21R14} 150b<c,PP_GetStartPosition>27
+62V18*GetNumSpecialAreas{integer} 151b<c,PP_GetNumSpecialAreas>27
+67V18*GetSpecialAreaPosition{21R14} 67>42 152b<c,PP_GetSpecialAreaPosition>27
+67i42 num{integer}
+70V18*GetResource{integer} 70>31 153b<c,PP_GetResource>27
+70i31 id{18I17}
+76V18*GetNumUnits{integer} 76>31 154b<c,PP_GetNumUnits>27
+76e31 c{6E14}
+82V18*GetUnitAt{37I17} 82>29 82>47 155b<c,PP_GetUnitAt>27
+82e29 c{6E14}
+82i47 index{integer}
+90V18*GetCoalition{6E14} 90>32 157b<c,PP_Unit_GetCoalition>27
+90i32 u{37I17}
+93V18*GetType{14I17} 93>27 158b<c,PP_Unit_GetType>27
+93i27 u{37I17}
+97V18*GetPosition{21R14} 97>31 159b<c,PP_Unit_GetPosition>27
+97i31 u{37I17}
+101V18*GetHealth{float} 101>29 160b<c,PP_Unit_GetHealth>27
+101i29 u{37I17}
+105V18*GetMaxHealth{float} 105>32 161b<c,PP_Unit_GetMaxHealth>27
+105i32 u{37I17}
+110V18*GetGroup{integer} 110>28 162b<c,PP_Unit_GetGroup>27
+110i28 u{37I17}
+116U19*SetGroup 116>29 116>42 163b<c,PP_Unit_SetGroup>27
+116i29 u{37I17}
+116i42 group{integer}
+121V18*GetPendingCommands{4|53R9[34]} 121>37 20|5b18 37t12
+121i37 u{37I17} 20|5b38 14r46 15r49 16r55 21r68 22r71 23r73
+128U19*CarryOutCommand 128>36 128>49 128>69 20|39b19 42t12
+128i36 u{37I17} 20|39b36 41r30
+128i49 c{12I17} 20|39b49 41r33
+128i69 t{37I17} 20|39b69 41r36
+134U19*CarryOutCommand 134>36 134>49 134>69 20|44b19 47t12
+134i36 u{37I17} 20|44b36 46r35
+134i49 c{12I17} 20|44b49 46r38
+134r69 t{21R14} 20|44b69 46r41 46r46
+140U19*CarryOutCommand 140>36 140>49 140>69 20|49b19 52t12
+140i36 u{37I17} 20|49b36 51r35
+140i49 c{12I17} 20|49b49 51r38
+140f69 p{float} 20|49b69 51r41
+143U19*PrintError 20|54b19 58t12
+165U19 enterCriticalSection 166b<c,enterCriticalSection>27 20|11r17
+167U19 exitCriticalSection 168b<c,exitCriticalSection>27 20|35r17
+169V18 GetNumPdgCmds{integer} 169>33 170b<c,PP_Unit_GetNumPdgCmds>27 20|14r32
+. 15r35
+169i33 u{37I17}
+171V18 PdgCmd_GetCode{integer} 171>33 171>46 172b<c,PP_Unit_PdgCmd_GetCode>27
+. 20|16r40
+171i33 u{37I17}
+171i46 idCmd{integer}
+173V18 PdgCmd_GetNumParams{integer} 173>38 173>51 174b<c,PP_Unit_PdgCmd_GetNumParams>27
+. 20|21r48 22r51
+173i38 u{37I17}
+173i51 idCmd{integer}
+175V18 PdgCmd_GetParam{float} 175>34 175>47 175>67 176b<c,PP_Unit_PdgCmd_GetParam>27
+. 20|23r57
+175i34 u{37I17}
+175i47 idCmd{integer}
+175i67 idParam{integer}
+178U19 ActionOnUnit 178>33 178>46 178>66 179b<c,PP_Unit_ActionOnUnit>27 20|41r17
+178i33 u{37I17}
+178i46 a{12I17}
+178i66 t{37I17}
+180U19 ActionOnPosition 180>37 180>50 180>70 180>84 181b<c,Ada_ActionOnPosition>27
+. 20|46r17
+180i37 u{37I17}
+180i50 a{12I17}
+180f70 x{float}
+180f84 y{float}
+182U19 UntargetedAction 182>37 182>50 182>70 183b<c,PP_Unit_UntargetedAction>27
+. 20|51r17
+182i37 u{37I17}
+182i50 a{12I17}
+182f70 param{float}
+184V18 GetError{17|50P9} 185b<c,PP_GetError>27 20|56r60
+186U19 ClearError 187b<c,PP_ClearError>27 20|57r17
+X 20 pp.adb
+6i17 i{integer} 13m25 15r31 16r58 21r71 22r74 23r76 33m33 33r38
+6i20 j{integer} 20m41 22r47 23r79 29m49 29r54
+6i23 ret{integer} 14m25 15r56 16m33 17r36 18r53 21m41 22r81 27m57
+7f17 retF{float} 23m49 24r52 25r74
+8r17 cmd{19|29R14} 18m41 19m41 25m57 31r59
+9r17 pendingCmd{4|53R9[19|34]} 12m25 31m41 36r24
+

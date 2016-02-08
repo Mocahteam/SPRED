@@ -1,0 +1,7 @@
+Description de la dernière version :
+ - Le jeu Spring fonctionne sur Linux et Windows. Pour jouer au jeu suivre les instructions du fichier "Installation de Spring.txt"
+ - Deux jeux sont conçu pour exploiter le système Prog&Play :
+    + une campagne : KP_campaign_2 qui fonctionne sur la carte Marble_Madness_Map
+    + un jeu pour deux joueurs : Bytes_Battle qui fonctionne sur la carte ByteBattleMap
+ - Le système Prog&Play est compatible avec les langages : Ada, C, C++, Compalgo, Java, OCaml et Scratch
+ - Le système Prog&Play fonctinone également en mode multijoueur

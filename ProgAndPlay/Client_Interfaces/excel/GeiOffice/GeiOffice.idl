@@ -1,0 +1,53 @@
+// GeiOffice.idl : source de la bibliothèque de types pour le projet de contrôle ActiveX.
+
+// Ce fichier sera traité par l'outil Compilateur MIDL pour
+// produire la bibliothèque de types (GeiOffice.tlb) qui deviendra une ressource dans
+// GeiOffice.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(F643F63A-704E-4424-B370-0EA9C975D3DD), version(1.0),
+  helpfile("GeiOffice.hlp"),
+  helpstring("Module de contrôle ActiveX GeiOffice"),
+  control ]
+library GeiOfficeLib
+{
+	importlib(STDOLE_TLB);
+
+	//  Dispinterface principale pour CGeiOfficeCtrl
+
+	[ uuid(868D285D-30C0-4BEB-8C7F-4FFF515AE06B),
+	  helpstring("Dispinterface pour GeiOffice Control")]
+	dispinterface _DGeiOffice
+	{
+		properties:
+		methods:
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+			[id(1), helpstring("method Ouvrir")] LONG Ouvrir(void);
+	};
+
+	//  Dispinterface d'événement pour CGeiOfficeCtrl
+
+	[ uuid(9D467E95-6238-4111-9861-DFAD1E4900C8),
+	  helpstring("Interface d'événement pour GeiOffice Control") ]
+	dispinterface _DGeiOfficeEvents
+	{
+		properties:
+			//  L'interface d'événement n'a pas de propriété
+
+		methods:
+	};
+
+	//  Informations de classe pour CGeiOfficeCtrl
+
+	[ uuid(5E5F0085-DD52-4BC5-BC1E-27C8D32EA074),
+	  helpstring("GeiOffice Control"), control ]
+	coclass GeiOffice
+	{
+		[default] dispinterface _DGeiOffice;
+		[default, source] dispinterface _DGeiOfficeEvents;
+	};
+
+};

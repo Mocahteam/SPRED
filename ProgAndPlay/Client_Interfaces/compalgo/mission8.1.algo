@@ -1,0 +1,197 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+constante NBBYTES <Entier> = 3 ;      -- nombre de bytes de départ
+
+type TabBytes : tableau [1 à NBBYTES] de <Unité>;
+
+-- trie l'ensemble des unités du joueur et retourne l'assembleur
+procédure trierUnités (entrée raliementBits <Position>, entrée raliementBytes <Position>, sortie assembleur <Unité>, sortie bytes <TabBytes>)
+glossaire
+    unité <Unité>;
+    i <Entier>;
+    cpt <Entier>;
+début
+    i <- 1;
+    cpt <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte = ASSEMBLER alors
+            assembleur <- unité;
+            réaliserActionSurPosition(unité, MOVE, raliementBits);
+        sinon
+            si unité.sorte = BIT alors
+                réaliserActionSurPosition(unité, MOVE, raliementBits);
+            sinon
+                réaliserActionSurPosition(unité, MOVE, raliementBytes);
+                bytes[cpt] <- unité;
+                cpt <- cpt + 1;
+            fin si;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+fin
+
+-- attendre le départ des unités
+procédure attendreDépart
+glossaire
+    unité <Unité>;
+    i <Entier>;
+    fini <Booléen>;
+début
+    fini <- FAUX;
+    tantque non fini faire
+        i <- 1;
+        tantque i <= nombreUnités(MOI) et non fini faire
+            unité <- ièmeUnité(MOI, i);
+            si unité.nbCommandeATraiter > 0 alors
+                fini <- VRAI;
+            fin si;
+            i <- i + 1;
+        fin tantque;
+    fin tantque;
+fin
+
+-- attendre la fin du rassemblement
+procédure attendreRassemblement
+glossaire
+    unité <Unité>;
+    i <Entier>;
+    fini <Booléen>;
+début
+    fini <- FAUX;
+    tantque non fini faire
+        fini <- VRAI;
+        i <- 1;
+        tantque i <= nombreUnités(MOI) et fini faire
+            unité <- ièmeUnité(MOI, i);
+            si unité.nbCommandeATraiter > 0 alors
+                fini <- FAUX;
+            fin si;
+            i <- i + 1;
+        fin tantque;
+    fin tantque;
+fin
+
+-- lance l'attaque sur la position pos
+procédure lancerAttaque (entrée pos <Position>, màj assembleur <Unité>, màj bytes <TabBytes>)
+glossaire
+    i <Entier>;
+    j <Entier>;
+    urgent <Entier>;
+    cpt <Entier>;
+    unité <Unité>;
+    assembleurToujoursVivant <Booléen>;
+    urgencePrecedente <Entier>;
+début
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte /= BYTE alors
+            réaliserActionSurUnité (unité, GUARD, bytes[1]);
+        sinon
+            réaliserActionSurPosition (unité, FIGHT, pos);
+        fin si;
+        i <- i + 1;
+    fin tantque;
+
+    -- avancer jusqu'à trouver l'ennemie
+    tantque nombreUnités(ENNEMI) = 0 faire
+        écrirenl("Avancer jusqu'a trouver l'ennemi");
+    fin tantque;
+    écrirenl("Ennemi trouve");
+
+    -- tout lacher
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte /= ASSEMBLER alors
+            réaliserActionSurPosition (unité, FIGHT, pos);
+        fin si;
+        i <- i + 1;
+    fin tantque;
+
+    -- vérifier la présence de l'assembleur
+    assembleurToujoursVivant <- estVisible(assembleur);
+    -- réparer les bytes endommagés
+    urgencePrecedente <- 0;
+    cpt <- NBBYTES;
+    tantque non jeuEstTerminé et assembleurToujoursVivant faire
+        si estVisible(assembleur) alors
+            si non estSynchronisée(assembleur) alors
+                synchroniserUnité(assembleur);
+            fin si;
+            -- supprimer les octets détruit et synchroniser les vivants
+            i <- 1;
+            tantque i <= cpt faire
+                si estVisible(bytes[i]) alors 
+                    si non estSynchronisée(bytes[i]) alors
+                        synchroniserUnité(bytes[i]);
+                    fin si;
+                    i <- i + 1;
+                sinon
+                    j <- i;
+                    tantque j + 1 <= cpt faire
+                        bytes[j] <- bytes[j + 1];
+                        j <- j + 1;
+                    fin tantque;
+                    cpt <- cpt - 1;
+                fin si;
+            fin tantque;
+            -- rechercher le byte le plus endommagé
+            i <- 1;
+            urgent <- 0;
+            tantque i <= cpt faire
+                si urgent = 0 alors
+                    urgent <- i;
+                fin si;
+                si i /= urgent alors
+                    si bytes[i].santé < bytes[urgent].santé alors
+                        urgent <- i;
+                    fin si;
+                fin si;
+                i <- i + 1;
+            fin tantque;
+            si urgent /= 0 alors
+                si urgent /= urgencePrecedente ou assembleur.nbCommandeATraiter = 0 alors
+                    réaliserActionSurUnité (assembleur, REPAIR, bytes[urgent]);
+                    urgencePrecedente <- urgent;
+                fin si;
+            fin si;
+        sinon
+            assembleurToujoursVivant <- FAUX;
+        fin si;
+    fin tantque;
+fin
+
+programme mission8
+glossaire
+    assembleur <Unité>;
+    bytes <TabBytes>;
+    pos <Position>;
+    raliementBits <Position>;
+    raliementBytes <Position>;
+début
+    ouvrirJeu;
+
+    -- Définition des points de raliement
+    raliementBytes.x <- 478;
+    raliementBytes.y <- 255;
+    raliementBits.x <- 255;
+    raliementBits.y <- 255;
+
+    -- trier les unités et récupérer l'assembleur et les bytes
+    trierUnités (raliementBits, raliementBytes, assembleur, bytes);
+
+    -- attendre le départ des unités
+    attendreDépart;
+
+    -- attendre fin de rassemblement
+    attendreRassemblement;
+
+    -- lancement de l'attaque
+    pos.x <- 1792.0;
+    pos.y <- 256.0;
+    lancerAttaque (pos, assembleur, bytes);
+
+    fermerJeu;
+fin

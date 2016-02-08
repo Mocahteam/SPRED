@@ -1,0 +1,11 @@
+Procédure à suivre (en utilisant le logiciel SVNTortoise (Windows))pour effectuer un merge d'une nouvelle version de spring avec Prog&Play :
+
+1 : Copier/coller le code de la nouvelle version dans le répertoire .../Spring_dev/
+2 : Faire un svn add de ce nouveau repertoire
+3 : Clic droit sur ce répertoire et sélectionner choix 1 "Merge a range of revisions"
+4 : Choisir la dernière version contenant Prog&Play du dépot
+5 : S'assurer que la version modifiée est bien la nouvelle version en local
+6 : Cliquer sur Merge
+7 : Lors d'un conflit, cliquer sur "Edit conflict"
+    7.1 : Si que du jaune cliquer sur "Mark as resolved" puis sur fermer et Resolved
+		7.2 : Si du rouge résoudre le conflit à la main puis suivre 7.1

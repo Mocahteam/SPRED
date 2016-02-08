@@ -1,0 +1,176 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+-- trie l'ensemble des unités du joueur et retourne l'assembleur
+procédure trierUnités (entrée raliementBits <Position>, entrée raliementBytes <Position>, sortie assembleur <Unité>)
+glossaire
+    unité <Unité>;
+    i <Entier>;
+début
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte = ASSEMBLER alors
+            assembleur <- unité;
+        sinon
+            si unité.sorte = BIT alors
+                réaliserActionSurPosition(unité, MOVE, raliementBits);
+            sinon
+                réaliserActionSurPosition(unité, MOVE, raliementBytes);
+            fin si;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+fin
+
+-- cacule la distance au carrée entre deux positions
+fonction distanceCarrée (entrée p1 <Position>, entrée p2 <Position>) retourne <Réel>
+début
+    retourner (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+fin
+
+-- cherche la zone constructible la plus proche de l'assembleur
+fonction chercheZC (entrée assembleur <Unité>) retourne <Entier>
+glossaire
+    i <Entier>;
+    zc <Entier>;
+    d <Réel>;
+    dMin <Réel>;
+début
+    i <- 1;
+    zc <- 1;
+    dMin <- distanceCarrée (assembleur.position, positionZoneSpéciale(i));
+    tantque i <= nombreZonesSpéciales faire
+        d <- distanceCarrée (assembleur.position, positionZoneSpéciale(i));
+        si d < dMin alors
+            dMin <- d;
+            zc <- i;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+    retourner zc;
+fin
+
+-- construit le bâtiment idBât
+fonction construireBâtiment (entrée constructeur <Unité>, entrée idBât <Entier>, entrée ordreConstruction <Entier>) retourne <Unité>
+glossaire
+    pos <Position>;
+    trouvé <Booléen>;
+    i <Entier>;
+    unité <Unité>;
+    bâtiment <Unité>;
+    constructeurLocal <Unité>;
+début
+    -- recopie du constructeur en local
+    constructeurLocal <- constructeur;
+    -- chercher la position de la zone constructible adéquate
+    pos <- positionZoneSpéciale(chercheZC(constructeurLocal));
+    -- Donner l'ordre de construction
+    réaliserActionSurPosition(constructeurLocal, ordreConstruction, pos);
+    -- Attendre la fin de constuction du bâtiment
+    trouvé <- FAUX;
+    tantque non trouvé faire
+        i <- 1;
+        tantque i <= nombreUnités(MOI) et non trouvé faire
+            unité <- ièmeUnité(MOI, i);
+            si unité.sorte = idBât alors
+                bâtiment <- unité;
+                trouvé <- VRAI;
+            fin si;
+            i <- i + 1;
+        fin tantque;
+    fin tantque;
+    -- attendre fin de construction, i.e. lorsque le constructeur est inactif
+    synchroniserUnité(constructeurLocal);
+    tantque constructeurLocal.nbCommandeATraiter > 0 faire
+        synchroniserUnité(constructeurLocal);
+    fin tantque;
+    retourner bâtiment;
+fin
+
+-- construction de l'armée
+procédure construireArmée (entrée nbBits <Entier>)
+début
+    tantque nombreUnités(MOI) < nbBits faire
+        écrire("Nombre d'unité actuel : ");
+        écrirenl(nombreUnités(MOI));
+    fin tantque;
+fin
+
+-- lance l'attaque sur la position pos
+procédure lancerAttaque (entrée pos <Position>)
+glossaire
+    i <Entier>;
+    unité <Unité>;
+    chef <Unité>;
+    trouvé <Booléen>;
+début
+    -- recherche d'un byte chef
+    trouvé <- FAUX;
+    i <- 1;
+    tantque i <= nombreUnités(MOI) et trouvé = FAUX faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte = BYTE alors
+            chef <- unité;
+            trouvé <- VRAI;
+        fin si;
+        i <- i + 1;
+    fin tantque;
+
+    -- lancer la marche au rythme des plus lent
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        si unité.sorte /= BYTE alors
+            réaliserActionSurUnité (unité, GUARD, chef);
+        sinon
+            réaliserActionSurPosition (unité, FIGHT, pos);
+        fin si;
+        i <- i + 1;
+    fin tantque;
+
+    -- avancer jusqu'à trouver l'ennemie
+    tantque nombreUnités(ENNEMI) = 0 faire
+        écrirenl("Avancer vers l'ennemi");
+    fin tantque;
+    écrirenl("Ennemi trouve");
+
+    -- tout lacher
+    i <- 1;
+    tantque i <= nombreUnités(MOI) faire
+        unité <- ièmeUnité(MOI, i);
+        réaliserActionSurPosition (unité, FIGHT, pos);
+        i <- i + 1;
+    fin tantque;
+fin
+
+programme mission8
+glossaire
+    assembleur <Unité>;
+    socket <Unité>;
+    pos <Position>;
+    raliementBits <Position>;
+    raliementBytes <Position>;
+début
+    ouvrirJeu;
+
+    -- Définition des points de raliement
+    raliementBytes.x <- 478;
+    raliementBytes.y <- 255;
+    raliementBits.x <- 255;
+    raliementBits.y <- 255;
+
+    -- trier les unités et récupérer l'assembleur et les bytes
+    trierUnités (raliementBits, raliementBytes, assembleur);
+    -- construire socket
+    socket <- construireBâtiment (assembleur, SOCKET, BUILDSOCKET);
+    -- affecter le point de raliement
+    réaliserActionSurPosition(socket, MOVE, raliementBits);
+    -- construction de l'armée
+    construireArmée (30);
+    -- lancement de l'attaque
+    pos.x <- 1792.0;
+    pos.y <- 256.0;
+    lancerAttaque (pos);
+
+    fermerJeu;
+fin

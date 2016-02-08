@@ -1,0 +1,25 @@
+
+	TODO :
+OK		compiler le client
+
+OK		tester l'affichage des erreurs
+
+OK		tester tout les fonctions en particulier la gestion des groupes et la nouvelle fonction "PP_Unit_UntargetedAction" pour tester le Stop, le FIRE_STATE, etc.
+
+			=> Adapter les fichiers constantList_KP... à cette nouvelle fonction
+
+OK		tester l'envoie de deux commandes d'affilée sur la même entité. Vérifier si la dernière commande écrase bien les paramètres de la commande définis pour la première.
+			
+OK		enlever les constantes CMD_GROUPADD et CMD_STOP de "PP_Client.cpp"
+
+			changer le "typedef int PP_Unit" en "typedef struct _PP_Unit *PP_Unit" pour cacher le type de PP_Unit. Attention problème pour interfacer avec les autres langages (comment faire remonter le type inconnue ???)
+
+OK		utiliser PP_Unit dans "PP_Supplier.cpp"
+
+OK		revoir tous les commentaires en anglais
+
+OK		code de retour -1 en cas d'erreur, utiliser PP_Error pour connaitre l'erreur
+
+OK		modifier les Geothermal en SpecialArea
+
+			mettre les commentaires en forme pour doxygen

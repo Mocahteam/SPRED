@@ -1,0 +1,45 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission3
+glossaire
+    unité <Unité>;
+    pos <Position>;
+    i <Entier>;
+    j <Entier>;
+    k <Entier>;
+    l <Entier>;
+début
+    ouvrirJeu;
+
+    tantque non jeuEstTerminé faire
+        i <- 1;
+        tantque i <= nombreUnités(MOI) faire
+            unité <- ièmeUnité(MOI, i);
+            écrire (unité.id);
+            écrire ("(");
+            écrire (unité.nbCommandeATraiter);
+            écrire (") - ");
+            j <- 1;
+            tantque j <= unité.nbCommandeATraiter faire
+                écrire (unité.commandeATraiter[j].code);
+                écrire (" (");
+                k <- 1;
+                tantque k <= unité.commandeATraiter[j].nbParamètres faire
+                    écrire (" ");
+                    écrire (unité.commandeATraiter[j].paramètres[k]);
+                    k <- k + 1;
+                fin tantque ;
+                j <- j + 1 ;
+            fin tantque;
+            écrirenl;
+
+--            si unité.nbCommandeATraiter > 8 alors
+--                réaliserActionNonCiblée(unité, STOPBUILDING, -1.0);
+--            fin si ;
+
+            i <- i + 1 ;
+        fin tantque ;
+    fin tantque ;
+
+    fermerJeu;
+fin

@@ -1,0 +1,15 @@
+importer jeu, entréeSortie, listeConstantesKP41;
+
+programme mission2
+glossaire
+    unité <Unité>;
+    pos <Position>;
+début
+    ouvrirJeu;
+    unité <- ièmeUnité(MOI, 1);
+    -- caculer la position
+    pos.x <- unité.position.x - 927;
+    pos.y <- unité.position.y + 513;
+    réaliserActionSurPosition (unité, MOVE, pos);
+    fermerJeu;
+fin

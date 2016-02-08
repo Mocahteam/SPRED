@@ -1,0 +1,14 @@
+Procédure à suivre pour l'installation de Spring :
+====================================================
+
+Pour Linux :
+------------
+1 - compiler et installer le jeu depuis les sources
+2 - copier le fichier "datadir" dans le répertoire "/etc/spring/"
+3 - ajouter au moins le jeu Kernel_Panic_4.1 et les mods KP_campaign_2 et Bytes_Battle
+4 - ajouter au moins les cartes Marble_Madness_Map et ByteBattleMap
+3 - utiliser le langage souhaité pour coder (Compalgo, Java, C...)
+
+Pour Windows :
+1 - Télécharger et décompresser l'archive préconstruite
+2 - utiliser l'outil souhaité pour coder (Compalgo, Java, Excel...)

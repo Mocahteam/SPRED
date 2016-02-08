@@ -1,0 +1,21 @@
+[MOD]
+{
+	// The name is shown in the selection interface
+	Name=Campaign: recover the mouse controler;
+	
+	// These can be shown by the selection interface
+	Description=A Campaing for Kernel Panic.;
+	
+	// What kind of mod this is 
+	//  0 - Hidden (support mod that can't be selected, such as OTA_textures) 
+	//  1 - Normal, only one can be selected at a time 
+	//  2 - Addon, any number of these can be selected. Could be used 
+	//      for single units for example. 
+	//  others - perhaps mutators and addon races that can be 
+	//           enabled in addition to xta for example?
+	ModType=1;
+	
+	// Number of other archives this one depends on
+	NumDependencies=1;
+	Depend0=Kernel Panic 3.8;
+}

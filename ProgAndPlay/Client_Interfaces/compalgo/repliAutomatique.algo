@@ -1,0 +1,90 @@
+importer entréeSortie, jeu, listeConstantesKP41;
+
+type TabU : tableau [0 à 499] de <Unité>;
+
+procédure calcBar (entrée unitées <TabU>, entrée nb <Entier>, sortie bar <Position>)
+glossaire
+    i <Entier>;
+début
+    bar.x <- 0;
+    bar.y <- 0;
+    i <- 0;
+    tantque i < nb faire
+        bar.x <- bar.x + unitées[i].position.x;
+        bar.y <- bar.y + unitées[i].position.y;
+        i <- i + 1;
+    fin tantque;
+    bar.x <- bar.x / nb;
+    bar.y <- bar.y / nb;
+fin
+
+programme repliAutomatique
+glossaire
+    mesUnités <TabU>;
+    fuite <Position>;
+    carte <Position>;
+    ennemi <TabU>;
+    pos <Position>;
+    uneUnité <Unité>;
+    cpt <Entier>;
+    i <Entier>;
+début
+    ouvrirJeu;
+    carte <- dimensionsCarte;
+    tantque non jeuEstTerminé faire
+        -- est-ce qu'on voit l'ennemi
+        si nombreUnités(ENNEMI) > 0 alors
+            -- récupération de mes unités interressante
+            cpt <- 1;
+            i <- 0;
+            tantque cpt <= nombreUnités(MOI) faire
+                uneUnité <- ièmeUnité(MOI, cpt);
+                si uneUnité.sorte = BIT et uneUnité.groupe = 1 alors
+                    mesUnités[i] <- uneUnité;
+                    i <- i + 1;
+                fin si;
+                cpt <- cpt + 1;
+            fin tantque;
+écrire (i);
+écrire ("/");
+écrirenl( nombreUnités(ENNEMI));
+            -- est ce que mes unités interressantes sont en sous-nombre
+            si i /= 0 et i < nombreUnités(ENNEMI) alors
+                -- récupération des unité ennemie...
+                cpt <- 0;
+                tantque cpt < nombreUnités(ENNEMI) faire
+                    ennemi[cpt] <- ièmeUnité(ENNEMI, cpt + 1);
+                    cpt <- cpt + 1;
+                fin tantque;
+                -- ... et calcul de leur barycentre
+                calcBar (ennemi, nombreUnités(ENNEMI), pos);
+                -- calcul de notre barycentre
+                calcBar (mesUnités, i, fuite);
+                -- calcul de la position de fuite
+                fuite.x <- fuite.x + (fuite.x - pos.x);
+                fuite.y <- fuite.y + (fuite.y - pos.y);
+                -- faire attention à ne pas dépasser le bord de la carte
+                si fuite.x < 0 alors
+                    fuite.x <- 0;
+                fin si;
+                si fuite.x > carte.x alors
+                    fuite.x <- carte.x;
+                fin si;
+                si fuite.y < 0 alors
+                    fuite.y <- 0;
+                fin si;
+                si fuite.y > carte.y alors
+                    fuite.y <- carte.y;
+                fin si;
+                -- déplacer tout le monde
+écrirenl ("fuillez pauvre foue...");
+                cpt <- 0;
+                tantque cpt < i faire
+                    réaliserActionSurPosition (mesUnités[cpt], MOVE, fuite);
+                    cpt <- cpt + 1;
+                fin tantque;
+            fin si;
+        fin si;
+    fin tantque;
+    fermerJeu;
+fin

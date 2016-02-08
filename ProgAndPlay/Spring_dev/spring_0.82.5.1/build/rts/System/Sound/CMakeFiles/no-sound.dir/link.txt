@@ -1,0 +1,2 @@
+C:\MinGW-gcc4.4\bin\ar.exe cr libno-sound.a  CMakeFiles\no-sound.dir\IAudioChannel.cpp.obj CMakeFiles\no-sound.dir\IEffectChannel.cpp.obj CMakeFiles\no-sound.dir\IMusicChannel.cpp.obj CMakeFiles\no-sound.dir\ISound.cpp.obj CMakeFiles\no-sound.dir\NullSound.cpp.obj CMakeFiles\no-sound.dir\SoundLog.cpp.obj
+C:\MinGW-gcc4.4\bin\ranlib.exe libno-sound.a
