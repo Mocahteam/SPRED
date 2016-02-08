@@ -1,6 +1,6 @@
-------------------------------
+------------------------
 -- Class StateMachine --
-------------------------------
+------------------------
 StateMachine = {}
 StateMachine.__index = StateMachine
 
@@ -25,10 +25,11 @@ function StateMachine.getCurrentTeamState(self) return self.currentTeamState end
 function StateMachine.getCurrentGlobalState(self) return self.currentGlobalState end
 
 ------------------------------
---   Widget functions   --
+-- Initialisation of the state machine
+-- TODO : generation of the table using constant list
 ------------------------------
 local states = {	-- Global
-						FILE = "file", UNITS = "units", SELECTION = "selection",
+						FILE = "file", UNIT = "unit", SELECTION = "selection",
 						-- Units
 						BIT = "bit", BYTE = "byte",
 						-- Teams
