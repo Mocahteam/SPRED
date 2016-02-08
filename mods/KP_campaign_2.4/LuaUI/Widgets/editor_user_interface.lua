@@ -114,37 +114,45 @@ end
 -------------------------------------
 -- Select button
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
+-- WAY TOO HARDCODED
 -------------------------------------
 function selectBit()
 	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
-	unitButtons["byte"]:RemoveChild(images["selectionType"])
+	for key, button in pairs(unitButtons) do
+		button:RemoveChild(images["selectionType"])
+	end
 	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectByte()
 	stateMachine:setCurrentUnitState(stateMachine.states.BYTE)
-	unitButtons["bit"]:RemoveChild(images["selectionType"])
+	for key, button in pairs(unitButtons) do
+		button:RemoveChild(images["selectionType"])
+	end
 	images['selectionType'] = addImage(unitButtons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectPlayer()
 	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
-	teamButtons["ally"]:RemoveChild(images["selectionTeam"])
-	teamButtons["enemy"]:RemoveChild(images["selectionTeam"])
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
 	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectAlly()
 	stateMachine:setCurrentTeamState(stateMachine.states.ALLY)
-	teamButtons["player"]:RemoveChild(images["selectionTeam"])
-	teamButtons["enemy"]:RemoveChild(images["selectionTeam"])
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
 	images['selectionTeam'] = addImage(teamButtons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectEnemy()
 	stateMachine:setCurrentTeamState(stateMachine.states.ENEMY)
-	teamButtons["ally"]:RemoveChild(images["selectionTeam"])
-	teamButtons["player"]:RemoveChild(images["selectionTeam"])
+	for key, button in pairs(teamButtons) do
+		button:RemoveChild(images["selectionTeam"])
+	end
 	images['selectionTeam'] = addImage(teamButtons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
