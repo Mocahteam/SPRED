@@ -10,6 +10,12 @@ function widget:GetInfo()
 	}
 end
 
+VFS.Include("StateMachine.lua")
+
+---------------------------------------------------------------------------------------------------------------
+--
+-- USER INTERFACE PART
+--
 ---------------------------------------------------------------------------------------------------------------
 
 local Chili, Screen0
@@ -115,33 +121,35 @@ end
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
 -------------------------------------
 function selectBit()
-	Script.LuaUI.stateBit()
+	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
+	Spring.Echo("SELECTBIT:"..stateMachine:getCurrentUnitState())
 	buttons["byte"]:RemoveChild(images["selectionType"])
 	addImage(buttons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
 end
 
 function selectByte()
-	Script.LuaUI.stateByte()
+	stateMachine:setCurrentUnitState(stateMachine.states.BYTE)
+	Spring.Echo("SELECTBYTE:"..stateMachine:getCurrentUnitState())
 	buttons["bit"]:RemoveChild(images["selectionType"])
 	addImage(buttons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
 end
 
 function selectPlayer()
-	Script.LuaUI.statePlayer()
+	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
 	buttons["ally"]:RemoveChild(images["selectionTeam"])
 	buttons["enemy"]:RemoveChild(images["selectionTeam"])
 	addImage(buttons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
 end
 
 function selectAlly()
-	Script.LuaUI.stateAlly()
+	stateMachine:setCurrentTeamState(stateMachine.states.ALLY)
 	buttons["player"]:RemoveChild(images["selectionTeam"])
 	buttons["enemy"]:RemoveChild(images["selectionTeam"])
 	addImage(buttons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
 end
 
 function selectEnemy()
-	Script.LuaUI.stateEnemy()
+	stateMachine:setCurrentTeamState(stateMachine.states.ENEMY)
 	buttons["ally"]:RemoveChild(images["selectionTeam"])
 	buttons["player"]:RemoveChild(images["selectionTeam"])
 	addImage(buttons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
@@ -208,4 +216,66 @@ function widget:Initialize()
 	addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame, 'units')
 	addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Selection', selectionFrame, 'units')
 	-----------------
+end
+
+---------------------------------------------------------------------------------------------------------------
+--
+-- MOUSE PART
+--
+---------------------------------------------------------------------------------------------------------------
+
+local mouseMove = false
+
+-------------------------------------
+-- Handle mouse button pressures
+-- TODO : don't handle pressures when they occur on an UI element
+-- TOFIX : problem with interacting with briefing message
+-------------------------------------
+function widget:MousePress(mx, my, button)
+	Spring.Echo("MOUSEPRESS:"..stateMachine:getCurrentUnitState())
+	-- Raycasts
+	local kind,var = Spring.TraceScreenRay(mx,my)
+	local kind2, var2 = Spring.TraceScreenRay(mx,my,true)
+	-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
+	if kind == "ground" and stateMachine:getCurrentUnitState() ~= "idle" then
+		local xUnit, yUnit, zUnit = unpack(var)
+		local msg = "Create Unit".."++"..stateMachine:getCurrentUnitState().."++"..stateMachine:getCurrentTeamState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
+		Spring.SendLuaRulesMsg(msg)
+	-- If unit is selected, send a message to the gadget to store the unit and its position
+	elseif kind == "unit" then
+		local newX, newY, newZ = unpack(var2)
+		local msg = "Select Unit".."++"..var.."++"..newX.."++"..newY.."++"..newZ
+		Spring.SendLuaRulesMsg(msg)
+		mouseMove = true
+		return true
+	end
+end
+
+-------------------------------------
+-- Handle mouse button releases
+-------------------------------------
+function widget:MouseRelease(mx, my, button)
+	-- Raycast
+	local kind,var = Spring.TraceScreenRay(mx,my)
+	-- Deselect selected unit
+	if kind == "unit" then
+		local msg = "Deselect Unit"
+		Spring.SendLuaRulesMsg(msg)
+		mouseMove = false
+	end
+	return true
+end
+
+-------------------------------------
+-- Handle mouse movements
+-------------------------------------
+function widget:MouseMove(mx, my, dmx, dmy, button)
+	-- Raycast
+	local kind, var = Spring.TraceScreenRay(mx,my,true)
+	-- If a unit is selected, send a message to the gadget to move it
+	if mouseMove and var ~= nil then
+		local newX, newY, newZ = unpack(var)
+		local msg = "Move Unit".."++"..newX.."++"..newY.."++"..newZ
+		Spring.SendLuaRulesMsg(msg)
+	end
 end
