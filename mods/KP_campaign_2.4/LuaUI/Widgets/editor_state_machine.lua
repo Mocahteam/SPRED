@@ -6,18 +6,8 @@ function widget:GetInfo()
 		date = "02/05/2016",
 		license = "GNU GPL v2",
 		layer = 0,
-		enabled = true,
-		handler = true
+		enabled = true
 	}
-end
-
--------------------------------------
--- Use this widget only in the editor
--------------------------------------
-function hideInRegularMission()
-	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
-		widgetHandler:DisableWidget("Editor State Machine")
-	end
 end
 
 ---------------------------------------------------------------------------------------------------------------
@@ -76,7 +66,6 @@ function getCurrentTeamState() 	return stateMachine:getCurrentTeamState() 		end
 -- Initialize the widget
 -------------------------------------
 function widget:Initialize()
-	hideInRegularMission()
 	
 	stateMachine = StateMachine.new(states, states.BIT, states.PLAYER)
 	

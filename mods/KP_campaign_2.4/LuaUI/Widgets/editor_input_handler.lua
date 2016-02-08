@@ -6,25 +6,15 @@ function widget:GetInfo()
 		date = "02/05/2016",
 		license = "GNU GPL v2",
 		layer = 0,
-		enabled = true,
-		handler = true
+		enabled = true
 	}
-end
-
--------------------------------------
--- Use this widget only in the editor
--------------------------------------
-function hideInRegularMission()
-	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
-		widgetHandler:DisableWidget("Editor Input Handler")
-	end
 end
 
 -------------------------------------
 -- Initialize the widget
 -------------------------------------
 function widget:Initialize()
-	hideInRegularMission()
+
 end
 
 ---------------------------------------------------------------------------------------------------------------
@@ -51,8 +41,8 @@ function widget:MousePress(mx, my, button)
 		local msg = "Select Unit".."++"..var.."++"..newX.."++"..newY.."++"..newZ
 		Spring.SendLuaRulesMsg(msg)
 		mouseMove = true
+		return true
 	end
-	return true
 end
 
 -------------------------------------
