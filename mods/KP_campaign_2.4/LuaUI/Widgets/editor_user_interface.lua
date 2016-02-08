@@ -48,7 +48,7 @@ end
 -------------------------------------
 -- Add an ImageButton to a specific parent
 -------------------------------------
-function addButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction, name)
+function addImageButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction, name)
 	local button = Chili.Image:New {
 		parent = _parent,
 		x = _x,
@@ -57,6 +57,22 @@ function addButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction, name)
 		height = _h,
 		file = imagePath,
 		keepAspect = false,
+		OnClick = {onClickFunction}
+	}
+	buttons[name] = button
+end
+
+-------------------------------------
+-- Add an Button to a specific parent
+-------------------------------------
+function addButton(_parent, _x, _y, _w, _h, text, onClickFunction, name)
+	local button = Chili.Button:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		caption = text,
 		OnClick = {onClickFunction}
 	}
 	buttons[name] = button
@@ -132,29 +148,64 @@ function selectEnemy()
 end
 
 -------------------------------------
--- Initialize the widget
+-- Show/Hide panels
 -------------------------------------
-function widget:Initialize()
-	initChili()
-	
-	-- Top bar
-	addWindow(Screen0, '0%', '0%', '100%', '5%', 'topBar')
-	
-	-- Left Panel
+function removeWindows()
+	for key, w in pairs(windows) do
+		if (key ~= "topBar") then
+			Screen0:RemoveChild(w)
+		end
+	end
+end
+
+function fileFrame()
+	removeWindows()
+end
+
+function unitFrame()
+	removeWindows()
 	addWindow(Screen0, '0%', '5%', '15%', '80%', 'mainWindow')
 	
 	-- Unit buttons
 	addLabel(windows["mainWindow"], '5%', '5%', '90%', '5%', "Units", 'unitLabel')
-	addButton(windows["mainWindow"], '5%', '10%', '42.5%', '15%', "bitmaps/editor/bit.png", selectBit, 'bit')
-	addButton(windows["mainWindow"], '52.5%', '10%', '42.5%', '15%', "bitmaps/editor/byte.png", selectByte, 'byte')
+	addImageButton(windows["mainWindow"], '5%', '10%', '42.5%', '15%', "bitmaps/editor/bit.png", selectBit, 'bit')
+	addImageButton(windows["mainWindow"], '52.5%', '10%', '42.5%', '15%', "bitmaps/editor/byte.png", selectByte, 'byte')
 	
 	-- Team buttons
 	addLabel(windows["mainWindow"], '5%', '87%', '90%', '5%', "Team", 'teamLabel')
-	addButton(windows["mainWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer, 'player')
-	addButton(windows["mainWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly, 'ally')
-	addButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy, 'enemy')
+	addImageButton(windows["mainWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer, 'player')
+	addImageButton(windows["mainWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly, 'ally')
+	addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy, 'enemy')
 	
 	-- Selection image
 	addImage(buttons["bit"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionType')
 	addImage(buttons["player"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionTeam')
+end
+
+function selectionFrame()
+	removeWindows()
+end
+
+-------------------------------------
+-- Initialize the widget
+-------------------------------------
+function widget:Initialize()
+	-- get rid of engine UI
+	Spring.SendCommands("resbar 0", "tooltip 0","fps 0","console 0","info 0")
+	-- leaves rendering duty to widget (we won't)
+	gl.SlaveMiniMap(true)
+	-- a hitbox remains for the minimap, unless you do this
+	gl.ConfigMiniMap(0,0,0,0)
+  
+	initChili()
+	
+	-----------------
+	-- Top bar
+	addWindow(Screen0, '0%', '0%', '100%', '5%', 'topBar')
+	
+	-- Menu buttons
+	addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame, 'file')
+	addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame, 'units')
+	addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Selection', selectionFrame, 'units')
+	-----------------
 end
