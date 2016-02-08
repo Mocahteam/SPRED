@@ -88,7 +88,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, name)
 end
 
 -------------------------------------
--- Add an ImageButton to a specific parent
+-- Add an Image to a specific parent
 -------------------------------------
 function addImage(_parent, _x, _y, _w, _h, imagePath, name)
 	local image = Chili.Image:New {
@@ -108,12 +108,38 @@ end
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
 -- BUGGED
 -------------------------------------
-function selectBit() 		Script.LuaUI.stateBit() 	buttons["byte"]:RemoveChild(images["selectionType"]) 		addImage(buttons["bit"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionType') 	end
-function selectByte()	Script.LuaUI.stateByte() 	buttons["bit"]:RemoveChild(images["selectionType"])			addImage(buttons["byte"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionType') 	end
+function selectBit()
+	Script.LuaUI.stateBit()
+	buttons["byte"]:RemoveChild(images["selectionType"])
+	addImage(buttons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
+end
 
-function selectPlayer() Script.LuaUI.statePlayer() buttons["ally"]:RemoveChild(images["selectionTeam"]) buttons["enemy"]:RemoveChild(images["selectionTeam"]) addImage(buttons["player"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionTeam') end
-function selectAlly() Script.LuaUI.stateAlly() buttons["player"]:RemoveChild(images["selectionTeam"]) buttons["enemy"]:RemoveChild(images["selectionTeam"]) addImage(buttons["ally"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionTeam') end
-function selectPlayer() Script.LuaUI.stateEnemy() buttons["ally"]:RemoveChild(images["selectionTeam"]) buttons["player"]:RemoveChild(images["selectionTeam"]) addImage(buttons["enemy"], '-10', '-10', '101%', '101%', "bitmaps/editor/selection.png", 'selectionTeam') end
+function selectByte()
+	Script.LuaUI.stateByte()
+	buttons["bit"]:RemoveChild(images["selectionType"])
+	addImage(buttons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionType')
+end
+
+function selectPlayer()
+	Script.LuaUI.statePlayer()
+	buttons["ally"]:RemoveChild(images["selectionTeam"])
+	buttons["enemy"]:RemoveChild(images["selectionTeam"])
+	addImage(buttons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+end
+
+function selectAlly()
+	Script.LuaUI.stateAlly()
+	buttons["player"]:RemoveChild(images["selectionTeam"])
+	buttons["enemy"]:RemoveChild(images["selectionTeam"])
+	addImage(buttons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+end
+
+function selectEnemy()
+	Script.LuaUI.stateEnemy()
+	buttons["ally"]:RemoveChild(images["selectionTeam"])
+	buttons["player"]:RemoveChild(images["selectionTeam"])
+	addImage(buttons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png", 'selectionTeam')
+end
 
 -------------------------------------
 -- Initialize the widget
