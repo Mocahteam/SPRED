@@ -9,3 +9,7 @@ mods/KP_campaign_2.4/LuaUI/Widgets/libs/LuaXML/luaxml.pdf
 mods/KP_campaign_2.4/LuaUI/Widgets/libs/LuaXML/luaxml.tex
 mods/KP_campaign_2.4/bitmaps/loadpictures/Loadscreen1.jpg
 *.tmp
+mods/.metadata/
+mods/KP_campaign_2.4/.buildpath
+mods/KP_campaign_2.4/.project
+mods/KP_campaign_2.4/.settings/
