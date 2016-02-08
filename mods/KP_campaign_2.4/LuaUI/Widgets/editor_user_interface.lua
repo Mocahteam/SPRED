@@ -14,7 +14,7 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, labels, images = {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}
 
 -------------------------------------
 -- Initialize ChiliUI
@@ -112,6 +112,20 @@ function addImage(_parent, _x, _y, _w, _h, imagePath)
 end
 
 -------------------------------------
+-- Add a ScrollPanel to a specific parent
+-------------------------------------
+function addScrollPanel(_parent, _x, _y, _w, _h)
+	local scrollPanel = Chili.ScrollPanel:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h
+	}
+	return scrollPanel
+end
+
+-------------------------------------
 -- Select button
 -- TODO : CODE INFAME, a changer au plus vite sinon se pendre
 -- WAY TOO HARDCODED
@@ -158,6 +172,7 @@ end
 
 -------------------------------------
 -- Top bar functions (show/hide panels)
+-- TODO : Visual feedback for topBar buttons
 -------------------------------------
 function removeWindows()
 	for key, w in pairs(windows) do
@@ -179,11 +194,17 @@ function unitFrame()
 	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
 	
 	windows['mainWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['mainWindow'], '0%', '5%', '100%', '80%')
 	
 	-- Unit buttons
-	labels['unitLabel'] = addLabel(windows["mainWindow"], '5%', '5%', '90%', '5%', "Units")
-	unitButtons['bit'] = addImageButton(windows["mainWindow"], '5%', '10%', '42.5%', '15%', "bitmaps/editor/bit.png", selectBit)
-	unitButtons['byte'] = addImageButton(windows["mainWindow"], '52.5%', '10%', '42.5%', '15%', "bitmaps/editor/byte.png", selectByte)
+	labels['unitLabel'] = addLabel(windows['mainWindow'], '0%', '1%', '90%', '5%', "Units")
+	unitButtons['bit'] = addButton(scrollPanels['unitScrollPanel'], 0, 0, '100%', 40, "Bit", selectBit)
+	unitButtons['byte'] = addButton(scrollPanels['unitScrollPanel'], 0, 40, '100%', 40, "Byte", selectByte)
+	
+	--[[ OLD BUTTONS
+	unitButtons['bit'] = addImageButton(scrollPanels['unitScrollPanel'], '5%', 0, '42.5%', '15%', "bitmaps/editor/bit.png", selectBit)
+	unitButtons['byte'] = addImageButton(scrollPanels['unitScrollPanel'], '52.5%', 0, '42.5%', '15%', "bitmaps/editor/byte.png", selectByte)
+	]]
 	
 	-- Team buttons
 	labels['teamLabel'] = addLabel(windows["mainWindow"], '5%', '87%', '90%', '5%', "Team")
