@@ -604,6 +604,17 @@ function widget:Initialize()
 	Spring.SendCommands("console 0")
 	-- minimize minimap
 	Spring.SendCommands("minimap min")
+	
+	-- enable editor widgets only in editor
+	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
+		widgetHandler:DisableWidget("Editor User Interface")
+		widgetHandler:DisableWidget("Editor Input Handler")
+		widgetHandler:DisableWidget("Editor State Machine")
+	else
+		widgetHandler:EnableWidget("Editor User Interface")
+		widgetHandler:EnableWidget("Editor Input Handler")
+		widgetHandler:EnableWidget("Editor State Machine")
+	end
 end
 
 function widget:Shutdown()
