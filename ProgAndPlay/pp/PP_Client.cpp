@@ -31,6 +31,11 @@
 #include <boost/thread.hpp>
 
 #include <stdio.h>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+//std::ofstream logFile("logClient.txt", std::ios::out | std::ofstream::trunc);
 
 /******************************************************************************/
 /* Definition of global variables                                             */
@@ -229,6 +234,7 @@ int PP_Open(){
 			// Finds elements in the shared memory
 			shd.mutex = segment->find<ShMutex>("mutex").first;
 			shd.gameOver = segment->find<bool>("gameOver").first;
+			shd.gamePaused = segment->find<bool>("gamePaused").first;
 			shd.units = segment->find<ShMapUnits>("units").first;
 			shd.coalitions = segment->find<ShIntVector>("coalitions").first;
 			shd.pendingCommand =
@@ -288,6 +294,7 @@ int PP_Close (){
 //			"PP_SharedMemory") << std::endl;
 //#endif
 	}
+	//logFile.close();
 	return ret;
 }
 
@@ -300,6 +307,20 @@ int PP_IsGameOver(){
 			ret = *(shd.gameOver);
 			// notify function call to Spring
 			PP_PushMessage("PP_IsGameOver");
+		exitCriticalSection();
+	}
+	return ret;
+}
+
+int PP_IsGamePaused() {
+	int ret;
+	// Checks initialisation
+	ret = isInitialized("PP_IsGamePaused");
+	if (ret == 0) {
+		enterCriticalSection();
+			ret = *(shd.gamePaused);
+			// notify function call to Spring
+			//PP_PushMessage("PP_IsGamePaused");
 		exitCriticalSection();
 	}
 	return ret;
@@ -968,7 +989,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 }
 
 
-int PP_PushMessage(const char * msg){
+int PP_PushMessage(const char * msg) {
 	//Create allocators
 	const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
 	const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());

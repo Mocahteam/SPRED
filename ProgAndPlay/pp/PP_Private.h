@@ -170,6 +170,8 @@ typedef struct {
 	ShMutex *mutex;
 	/* Indicates if the game is over */
 	bool *gameOver;
+	/* Indicates if the game is paused */
+	bool *gamePaused;
 	/* Contains all units visible by the player */
 	ShMapUnits *units;
 	/* Contains units which are dispatched according to their coalition */

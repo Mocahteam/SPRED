@@ -32,7 +32,7 @@
 #include <sstream>
 #include <iostream>
 
-std::ofstream logFile("log.txt");
+std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces("ppTraces.txt", std::ios::out | std::ios::app | std::ios::ate);
 
 void log(std::string msg){
@@ -72,18 +72,19 @@ log("ProgAndPLay constructor begin");
 log("ProgAndPLay constructor end");
 }
 
-CProgAndPlay::~CProgAndPlay()
-{
-log("ProgAndPLay destructor begin");
+CProgAndPlay::~CProgAndPlay() {
+  log("ProgAndPLay destructor begin");
   if (loaded){
-    if (PP_Quit() == -1){
+	if (PP_Quit() == -1){
 		std::string tmp(PP_GetError());
 		log(tmp.c_str());
 	}
 	else
 		log("Prog&Play shut down and cleaned up");
   }
-log("ProgAndPLay destructor end");
+  logFile.close();
+  ppTraces.close();
+  log("ProgAndPLay destructor end");
 }
 
 void CProgAndPlay::Update(void) {
@@ -285,7 +286,7 @@ log("ProgAndPLay::updatePP begin");
 		PP_Pos mapSize;
 		mapSize.x = gs->mapx*SQUARE_SIZE;
 		mapSize.y = gs->mapy*SQUARE_SIZE;
-		// store strating position
+		// store starting position
 		PP_Pos startPos;
 		startPos.x = teamHandler->Team(gu->myTeam)->startPos.x;
 		startPos.y = teamHandler->Team(gu->myTeam)->startPos.z;
@@ -352,6 +353,9 @@ log("ProgAndPLay::updatePP begin");
 	delete tmpFile;
 	if (ret == -1)
 		return -1;
+	// A finir
+	ret = PP_SetGamePaused();
+	// ***
 
 log("ProgAndPLay::updatePP end");
 	return 0;

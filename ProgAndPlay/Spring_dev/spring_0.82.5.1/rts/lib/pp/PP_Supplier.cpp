@@ -467,6 +467,7 @@ char * PP_PopMessage(){
 	}
 	// takes mutex
 	boost::interprocess::scoped_lock<ShMutex> lock(*(shd.mutex));
+	
 	// extract first message from the shared memory
 	if (shd.history->size() > 0){
 		// We get message from shared memory ...
