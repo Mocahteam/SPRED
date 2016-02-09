@@ -14,7 +14,7 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, unitFunctions, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}, {}
 
 -------------------------------------
 -- Initialize ChiliUI
@@ -126,26 +126,8 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
--- Select button
--- TODO : CODE INFAME, a changer au plus vite sinon se pendre
--- WAY TOO HARDCODED
+-- Select button functions
 -------------------------------------
-function selectBit()
-	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
-	for key, button in pairs(unitButtons) do
-		button:RemoveChild(images["selectionType"])
-	end
-	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectByte()
-	stateMachine:setCurrentUnitState(stateMachine.states.BYTE)
-	for key, button in pairs(unitButtons) do
-		button:RemoveChild(images["selectionType"])
-	end
-	images['selectionType'] = addImage(unitButtons["byte"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
 function selectPlayer()
 	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
 	for key, button in pairs(teamButtons) do
@@ -190,7 +172,7 @@ end
 function unitFrame()
 	removeWindows()
 	stateMachine:setCurrentGlobalState(stateMachine.states.UNIT)
-	stateMachine:setCurrentUnitState(stateMachine.states.BIT)
+	stateMachine:setCurrentUnitState(stateMachine.unitStates.DEFAULT)
 	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
 	
 	windows['mainWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -198,8 +180,14 @@ function unitFrame()
 	
 	-- Unit buttons
 	labels['unitLabel'] = addLabel(windows['mainWindow'], '0%', '1%', '90%', '5%', "Units")
-	unitButtons['bit'] = addButton(scrollPanels['unitScrollPanel'], 0, 0, '100%', 40, "Bit", selectBit)
-	unitButtons['byte'] = addButton(scrollPanels['unitScrollPanel'], 0, 40, '100%', 40, "Byte", selectByte)
+	local button_size = 40
+	local y = 0
+	for k,u in pairs(stateMachine.unitStates) do
+		if (k ~= "DEFAULT") then
+			unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, u, unitFunctions[u])
+			y = y + button_size
+		end
+	end
 	
 	--[[ OLD BUTTONS
 	unitButtons['bit'] = addImageButton(scrollPanels['unitScrollPanel'], '5%', 0, '42.5%', '15%', "bitmaps/editor/bit.png", selectBit)
@@ -213,7 +201,7 @@ function unitFrame()
 	teamButtons['enemy'] = addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
 	
 	-- Selection image
-	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionType'] = addImage(unitButtons[stateMachine.unitStates.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
@@ -222,20 +210,37 @@ function selectionFrame()
 	stateMachine:setCurrentGlobalState(stateMachine.states.SELECTION)
 end
 
+function eventFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.EVENT)
+end
+
+function actionFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.ACTION)
+end
+
+function linkFrame()
+	removeWindows()
+	stateMachine:setCurrentGlobalState(stateMachine.states.LINK)
+end
+
 -------------------------------------
--- Initialize the widget
+-- Hide default GUI
 -------------------------------------
-function widget:Initialize()
+function hideDefaultGUI()
 	-- get rid of engine UI
 	Spring.SendCommands("resbar 0", "tooltip 0","fps 0","console 0","info 0")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
 	gl.ConfigMiniMap(0,0,0,0)
-  
-	initChili()
-	
-	-----------------
+end
+
+-------------------------------------
+-- Top bar generation
+-------------------------------------
+function initTopBar()
 	-- Top bar
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
 	
@@ -243,5 +248,33 @@ function widget:Initialize()
 	buttons['file'] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
 	buttons['units'] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
 	buttons['selection'] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Selection', selectionFrame)
-	-----------------
+	buttons['events'] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Events', eventFrame)
+	buttons['actions'] = addButton(windows["topBar"], '20%', '0%', '5%', '100%', 'Actions', actionFrame)
+	buttons['links'] = addButton(windows["topBar"], '25%', '0%', '5%', '100%', 'Links', linkFrame)
+end
+
+-------------------------------------
+-- Generate functions for every units
+-- Creates a function for every unitState to change state and handle selection feedback
+-------------------------------------
+function initUnitFunctions()
+	for k, u in pairs(stateMachine.unitStates) do
+		unitFunctions[u] = function()
+			stateMachine:setCurrentUnitState(stateMachine.unitStates[u])
+			for key, ub in pairs(unitButtons) do
+				ub:RemoveChild(images["selectionType"])
+			end
+			images['selectionType'] = addImage(unitButtons[u], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+		end
+	end
+end
+
+-------------------------------------
+-- Initialize the widget
+-------------------------------------
+function widget:Initialize()
+	hideDefaultGUI()
+	initChili()
+	initTopBar()
+	initUnitFunctions()
 end
