@@ -43,13 +43,15 @@ globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 ------------------------------
 -- Initialize unit state machine
 ------------------------------
-local unitList = splitString(VFS.LoadFile("LuaUI/Widgets/editor/UnitList.txt"), "\r\n") -- List of all the units of the game
--- states to select the unit to place on the field
 local unitStates = {}
-for i, u in ipairs(unitList) do
-	unitStates[u] = u
-	if i == 1 then
-		unitStates.DEFAULT = u
+for id,unitDef in pairs(UnitDefs) do
+	for name,param in unitDef:pairs() do
+		if name == "name" then
+			unitStates[param] = param
+			if i == 1 then
+				unitStates.DEFAULT = param
+			end
+		end
 	end
 end
 unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)

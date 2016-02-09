@@ -62,7 +62,7 @@ end
 function gadget:GameFrame( frameNumber )
 	if (missionName == "LevelEditor" and createUnit) then
 		local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
-		--Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
+		Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
 		createUnit = false
 	elseif (missionName == "LevelEditor" and selectedUnit ~= nil) then
 		Spring.SetUnitPosition(selectedUnit, newX, Spring.GetGroundHeight(newX, newZ), newZ)

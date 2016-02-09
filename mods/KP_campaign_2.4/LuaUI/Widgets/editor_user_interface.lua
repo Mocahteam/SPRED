@@ -14,7 +14,7 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
@@ -127,6 +127,20 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
+-- Add an EditBox to a specific parent
+-------------------------------------
+function addEditBox(_parent, _x, _y, _w, _h)
+	local editBox = Chili.EditBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h
+	}
+	return editBox
+end
+
+-------------------------------------
 -- Select button functions
 -------------------------------------
 function selectPlayer()
@@ -214,6 +228,10 @@ end
 function eventFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
+	
+	windows['editBoxWindow'] = addWindow(Screen0, '30%', '30%', '30%', '30%')
+	labels['editBoxLabel'] = addLabel(windows['editBoxWindow'], '5%', '1%', '90%', '5%', "Units")
+	editBoxes["editBox"] = addEditBox(windows['editBoxWindow'], '0%', '10%', '100%', 20)
 end
 
 function actionFrame()
@@ -278,5 +296,4 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
-	Spring.Echo("STATE:"..teamStateMachine.states.PLAYER)
 end
