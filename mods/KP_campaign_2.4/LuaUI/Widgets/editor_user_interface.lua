@@ -201,7 +201,7 @@ function unitFrame()
 	teamButtons['enemy'] = addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
 	
 	-- Selection image
-	images['selectionType'] = addImage(unitButtons["bit"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionType'] = addImage(unitButtons[stateMachine.unitStates.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 

@@ -25,11 +25,26 @@ function StateMachine.getCurrentUnitState(self) return self.currentUnitState end
 function StateMachine.getCurrentTeamState(self) return self.currentTeamState end
 function StateMachine.getCurrentGlobalState(self) return self.currentGlobalState end
 
+-------------------------------------
+-- Useful function to split messages into tokens
+-------------------------------------
+function splitString(inputstr, sep)
+	if sep == nil then
+		sep = "%s"
+	end
+	local t = {}
+	local i = 1
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+		t[i] = str
+		i = i + 1
+	end
+	return t
+end
+
 ------------------------------
 -- List of all the units of the game
--- TODO : generation of the table using constant list
 ------------------------------
-unitList = {"bit", "byte", "assembler", "alice"}
+local unitList = splitString(VFS.LoadFile("LuaUI/Widgets/editor/UnitList.txt"), "\r\n")
 
 ------------------------------
 -- Initialisation of the state machine
