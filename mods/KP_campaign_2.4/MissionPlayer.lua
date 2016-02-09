@@ -24,6 +24,7 @@ local actionStack={} -- action to be applied on game state, allows to handle tab
 local success=nil -- when this global variable change (with event of type "end"), the game ends (= victory or defeat)
 local outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 local canUpdate=false
+local mission
 -------------------------------------
 -- Simple faction to get spring code given its string representation
 -- @return faction code, related to factions described in txt files (such as Mission1.txt)
@@ -582,27 +583,42 @@ local function writeCompassOnUnit(springUnitId)
     writeSign(x+18, y, z+48, "+")
 end
 
+local function parseJson(jsonFile)
+  if(jsonFile==nil) then
+    return nil
+  end
+  canUpdate=true
+  --Spring.Echo(jsonName)
+  --Spring.Echo("we try to decode"..jsonFile)
+  mission=json.decode(jsonFile)
+  
+  return true
+end
+
+local function returnTestsToPlay()
+  return mission.tests
+end
+
 -------------------------------------
 -- Initialize the mission by parsing informations from the json
 -- and process some datas
 -- @todo This function does too many things
 -------------------------------------
-local function Start (jsonFile)
-  if(jsonFile==nil) then
-    return
-  end
-  canUpdate=true
-  --Spring.Echo(jsonName)
-  --Spring.Echo("we try to decode"..jsonFile)
-  local mission=json.decode(jsonFile)
-  --Spring.Echo(json.encode(mission))
+local function StartAfterJson ()
   
   -- Delete all the stuff (required as team kernel are placed by spring since the beginnning)
+  
+
+  
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
     Spring.Echo("I am Totally Deleting Stuff")
     Spring.DestroyUnit(units[i], false, true)
   end
+  
+
+  -- COMMENTED OUT for the moment, avoid unsage attempt to modify gamestate
+  
   
    -------------------------------
    -------POSITIONS---------------
@@ -744,6 +760,7 @@ local function Start (jsonFile)
     end
    end
   end
+  
    -------------------------------
    -------START------------------
    -------------------------------   
@@ -769,6 +786,12 @@ end
 -- Called externally by the gadget mission_runner.lua 
 -- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
 -------------------------------------
+
+local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
+  parseJson(jsonFile)
+  StartAfterJson ()
+end
+
 local function Update (frameNumber) 
   if(not canUpdate)then
     return 0
@@ -808,6 +831,9 @@ end
 
 local Mission = {}
 
+Mission.returnTestsToPlay=returnTestsToPlay
+Mission.parseJson=parseJson
+Mission.StartAfterJson=StartAfterJson
 Mission.Start = Start
 Mission.ShowBriefing = ShowBriefing
 Mission.Update = Update

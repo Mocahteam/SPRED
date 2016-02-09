@@ -33,9 +33,10 @@ local gameOver = 0
 local showBriefing = false
 local missionScript=nil
 local errors=""
+local tests
 
 function appendError(status,error,context,writeOnlyIfError)
-  if( (status==false)or(writeOnlyIfError==f) ) then
+  if( (status==false)or(writeOnlyIfError==false) ) then
     errors=errors.."context : "..context.." ||"
     if(status==true)then
       errors=errors.."passed"
@@ -47,10 +48,12 @@ function appendError(status,error,context,writeOnlyIfError)
 end
 
 function startTheGame(jsonfile)
+  Spring.Echo("at least we try to start")
   errors=errors.."testing"..missionName.."\r\n"
-  local status1, err1 = pcall(function() missionScript.Start(jsonfile) end) 
-  missionScript.ShowBriefing()
+  local status1, err1 = pcall(function() missionScript.parseJson(jsonfile);missionScript.StartAfterJson()  end) 
   appendError(status1,err1,"starting game",false)
+  missionScript.ShowBriefing()
+
   gameOver = 0
 end   
 -- message sent by mission_gui (Widget)

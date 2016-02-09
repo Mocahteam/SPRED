@@ -328,5 +328,17 @@
 			{"actionId":"deletingMarker"}
 			]
 		}
+	],
+"tests":
+	[
+	{
+	"script":"doNothing",
+	"timeout":"1000",
+	"expectedEvents":
+		[
+		{"idEvent":"death"}
+		],
+	"unexpectedEvents":[]
+	}
 	]
 }
