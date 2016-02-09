@@ -990,17 +990,19 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 
 
 int PP_PushMessage(const char * msg) {
-	//Create allocators
-	const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
-	const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
+	if (PP_IsGamePaused() == 0) {
+		//Create allocators
+		const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
+		const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
 	
-	//This string is only in this process (the pointer pointing to the
-	//buffer that will hold the text is not in shared memory).
-	//But the buffer that will hold "msg" parameter is allocated from
-	//shared memory
-	ShString sharedMessage(charAlloc_inst);
-	sharedMessage.append(msg);
+		//This string is only in this process (the pointer pointing to the
+		//buffer that will hold the text is not in shared memory).
+		//But the buffer that will hold "msg" parameter is allocated from
+		//shared memory
+		ShString sharedMessage(charAlloc_inst);
+		sharedMessage.append(msg);
 	
-	//Store the pointer pointing to the buffer into the shared memory
-	shd.history->push_back(sharedMessage);
+		//Store the pointer pointing to the buffer into the shared memory
+		shd.history->push_back(sharedMessage);
+	}
 }

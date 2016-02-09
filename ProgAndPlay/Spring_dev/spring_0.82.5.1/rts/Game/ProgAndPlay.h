@@ -14,6 +14,7 @@ public:
 	~CProgAndPlay();
 	
 	void Update(void);
+	void GamePaused(bool paused);
 	
 	void AddUnit(CUnit* unit);
 	void UpdateUnit(CUnit* unit);

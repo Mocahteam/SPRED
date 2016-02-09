@@ -46,9 +46,9 @@ void log(std::string msg){
 
 CProgAndPlay* pp;
 
-CProgAndPlay::CProgAndPlay()
-{
-log("ProgAndPLay constructor begin");
+CProgAndPlay::CProgAndPlay() {
+	log("ProgAndPLay constructor begin");
+	
 	loaded = false;
 	updated = false;
 	// initialisation of Prog&Play
@@ -69,7 +69,14 @@ log("ProgAndPLay constructor begin");
 	delete tmpFile;
 	if (del)
 		FileSystemHandler::DeleteFile(filesystem.LocateFile("mission_ended.conf"));
-log("ProgAndPLay constructor end");
+	
+	//Création du répertoire 'traces' qui contiendra les fichiers traces spécifiques à chaque mission
+	if (!FileSystemHandler::mkdir("traces")) {
+		PP_SetError("Spring : creation of directory failed");
+		log(PP_GetError());
+	}
+	
+	log("ProgAndPLay constructor end");
 }
 
 CProgAndPlay::~CProgAndPlay() {
@@ -105,6 +112,12 @@ void CProgAndPlay::Update(void) {
 	logMessages();
 		
 	log("ProgAndPLay::Update end");
+}
+
+void CProgAndPlay::GamePaused(bool paused) {
+	int ret = PP_SetGamePaused(paused);
+	if (ret == -1)
+		return;
 }
 
 PP_ShortUnit buildShortUnit(CUnit *unit, PP_Coalition c){
@@ -353,9 +366,6 @@ log("ProgAndPLay::updatePP begin");
 	delete tmpFile;
 	if (ret == -1)
 		return -1;
-	// A finir
-	ret = PP_SetGamePaused();
-	// ***
 
 log("ProgAndPLay::updatePP end");
 	return 0;

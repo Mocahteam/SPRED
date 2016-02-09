@@ -136,6 +136,17 @@ int PP_Quit(void);
 int PP_SetGameOver(const bool gameOver);
 
 /*
+ * Updates gamePaused state for the client
+ *
+ * gamePaused : the new game paused state.
+ *            If gamePaused != 0, the game is paused.
+ *            If gamePaused = 0, the game is not paused.
+ * 
+ * Returns : 0 on success. -1 is returned on errors.
+ */
+int PP_SetGamePaused(const bool gamePaused);
+
+/*
  * Updates static data. In theory, these data should not be updates during
  * simulation. All parameters you pass in must have consistent data.
  * All these data are copied, you are in charge to free them.

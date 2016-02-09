@@ -3795,6 +3795,9 @@ void CGame::ClientReadNet()
 					} else {
 						logOutput.Print("%s unpaused the game",playerHandler->Player(player)->name.c_str());
 					}
+					// Meresse (Prog&Play update)
+					pp->GamePaused(gs->paused);
+					//
 					lastframe = SDL_GetTicks();
 				}
 				AddTraffic(player, packetCode, dataLength);

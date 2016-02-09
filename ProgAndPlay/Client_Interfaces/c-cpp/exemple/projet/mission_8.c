@@ -10,19 +10,18 @@ int main (){
 	p.y = 256.0;
 	p_1.x = 1000.0;
 	p_1.y = 256.0;
-	PP_Unit assembler = -1, u, minUnit;
+	PP_Unit assembler, u, minUnit;
 	PP_Open(); /* open the Prog&Play API */
 	/* iterate all units */
 	int cpt = 0;
 	while (PP_IsGameOver() == 0) {
-		int minHealth = 100000;
-		cpt++;
-		for (i = 0 ; i < PP_GetNumUnits(MY_COALITION) ; i++) {
+		int minHealth = PP_Unit_GetHealth(PP_GetUnitAt(MY_COALITION,0));
+		for (i = 0; i < PP_GetNumUnits(MY_COALITION); i++) {
 			u = PP_GetUnitAt(MY_COALITION,i);
-			if (assembler == -1 && PP_Unit_GetType(u) == ASSEMBLER)
+			if (PP_Unit_GetType(u) == ASSEMBLER)
 				assembler = u;
 			else if (PP_Unit_GetType(u) == BYTE) {
-				if (cpt > 100 && PP_Unit_GetHealth(u) < minHealth) {
+				if (PP_Unit_GetHealth(u) < minHealth) {
 					minHealth = PP_Unit_GetHealth(u);
 					minUnit = u;
 				}
@@ -32,12 +31,19 @@ int main (){
 					PP_Unit_ActionOnUnit(u, ATTACK, PP_GetUnitAt(ENEMY_COALITION, 0));
 			}
 		}
-		if (cpt > 100 & PP_Unit_GetHealth(minUnit) < PP_Unit_GetMaxHealth(minUnit)) {
-			PP_Unit_ActionOnUnit(assembler, REPAIR, minUnit);
-			cpt = 0;
-		}
-		else if (PP_Unit_GetHealth(minUnit) == PP_Unit_GetMaxHealth(minUnit))
+		PP_Pos assemblerPos = PP_Unit_GetPosition(assembler);
+		if (assemblerPos.x < p_1.x-100 || assemblerPos.x > p_1.x+100 || assemblerPos.y < p_1.y-100 || assemblerPos.y < p_1.y+100)
 			PP_Unit_ActionOnPosition(assembler, MOVE, p_1);
+		else if (cpt == 0) {
+			if (PP_Unit_GetHealth(minUnit) < PP_Unit_GetMaxHealth(minUnit)) {
+				PP_Unit_ActionOnUnit(assembler, REPAIR, minUnit);
+				cpt++;
+			}
+		}
+		else if (cpt > 100)
+			cpt = 0;
+		else
+			cpt++;
 	}
 	/* close the Prog&Play API */
 	PP_Close();
