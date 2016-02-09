@@ -14,7 +14,8 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, unitFunctions, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels = {}, {}, {}, {}, {}, {}, {}
+local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
 -- Initialize ChiliUI
@@ -129,7 +130,7 @@ end
 -- Select button functions
 -------------------------------------
 function selectPlayer()
-	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
+	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
@@ -137,7 +138,7 @@ function selectPlayer()
 end
 
 function selectAlly()
-	stateMachine:setCurrentTeamState(stateMachine.states.ALLY)
+	teamStateMachine:setCurrentState(teamStateMachine.states.ALLY)
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
@@ -145,7 +146,7 @@ function selectAlly()
 end
 
 function selectEnemy()
-	stateMachine:setCurrentTeamState(stateMachine.states.ENEMY)
+	teamStateMachine:setCurrentState(teamStateMachine.states.ENEMY)
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
@@ -166,14 +167,14 @@ end
 
 function fileFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.FILE)
+	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
 end
 
 function unitFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.UNIT)
-	stateMachine:setCurrentUnitState(stateMachine.unitStates.DEFAULT)
-	stateMachine:setCurrentTeamState(stateMachine.states.PLAYER)
+	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
+	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
+	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
 	
 	windows['mainWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['mainWindow'], '0%', '5%', '100%', '80%')
@@ -182,7 +183,7 @@ function unitFrame()
 	labels['unitLabel'] = addLabel(windows['mainWindow'], '0%', '1%', '90%', '5%', "Units")
 	local button_size = 40
 	local y = 0
-	for k,u in pairs(stateMachine.unitStates) do
+	for k,u in pairs(unitStateMachine.states) do
 		if (k ~= "DEFAULT") then
 			unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, u, unitFunctions[u])
 			y = y + button_size
@@ -201,28 +202,28 @@ function unitFrame()
 	teamButtons['enemy'] = addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
 	
 	-- Selection image
-	images['selectionType'] = addImage(unitButtons[stateMachine.unitStates.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectionFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.SELECTION)
+	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 end
 
 function eventFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.EVENT)
+	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
 end
 
 function actionFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.ACTION)
+	globalStateMachine:setCurrentState(globalStateMachine.states.ACTION)
 end
 
 function linkFrame()
 	removeWindows()
-	stateMachine:setCurrentGlobalState(stateMachine.states.LINK)
+	globalStateMachine:setCurrentState(globalStateMachine.states.LINK)
 end
 
 -------------------------------------
@@ -258,9 +259,9 @@ end
 -- Creates a function for every unitState to change state and handle selection feedback
 -------------------------------------
 function initUnitFunctions()
-	for k, u in pairs(stateMachine.unitStates) do
+	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
-			stateMachine:setCurrentUnitState(stateMachine.unitStates[u])
+			unitStateMachine:setCurrentState(unitStateMachine.states[u])
 			for key, ub in pairs(unitButtons) do
 				ub:RemoveChild(images["selectionType"])
 			end
@@ -277,4 +278,5 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
+	Spring.Echo("STATE:"..teamStateMachine.states.PLAYER)
 end
