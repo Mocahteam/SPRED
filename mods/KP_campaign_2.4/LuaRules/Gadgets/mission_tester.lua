@@ -49,11 +49,12 @@ function appendError(status,error,context,writeEvenIfNoError)
 end
 
 function playNewTest()
-  missionScript.Start()
   if(indexCurrentTest<table.getn(tests))then
     indexCurrentTest=indexCurrentTest+1
+    missionScript.Start()
   else
     Spring.Echo("time to stop testing")
+    -- envoyer l'info à IO pour relancer une mission
   end
 end
 
@@ -179,7 +180,6 @@ function gadget:GameFrame( frameNumber )
   ]
 }--]]
   if(frameNumber>tonumber(ct.timeout)) then
-    Spring.Echo("timeout")
     appendError(false,ct.title.."has timed out","update",true)
     playNewTest()
   end
