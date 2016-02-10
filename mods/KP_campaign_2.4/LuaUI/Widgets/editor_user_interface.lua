@@ -11,7 +11,7 @@ function widget:GetInfo()
 end
 
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
-VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
+--VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
 local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}
@@ -111,6 +111,23 @@ function addImage(_parent, _x, _y, _w, _h, imagePath)
 		keepAspect = false
 	}
 	return image
+end
+
+-------------------------------------
+-- Add a colored Rectangle to a specific parent
+-------------------------------------
+function addRect(_parent, x1, y1, x2, y2, _color)
+	local rect = Chili.Image:New {
+		parent = _parent,
+		x = x1,
+		y = y1,
+		width = x2 - x1,
+		height = y2 - y1,
+		file = "bitmaps/editor/blank.png",
+		color = _color,
+		keepAspect = false
+	}
+	return rect
 end
 
 -------------------------------------
@@ -295,4 +312,158 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
+end
+
+-------------------------------------
+-- Draw selection tools
+-------------------------------------
+local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
+local plotSelection = false
+function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
+
+-------------------------------------
+-- Update function
+-------------------------------------
+function widget:Update(delta)
+	if images["selectionRect"] ~= nil then
+		Screen0:RemoveChild(images["selectionRect"])
+	end
+	if plotSelection then
+		-- compute good values for x1, x2, y1, y2
+		local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY
+		if (selectionStartX <= selectionEndX and selectionStartY <= selectionEndY) then
+			x1 = selectionStartX
+			y1 = gameSizeY - selectionEndY
+			x2 = selectionEndX
+			y2 = gameSizeY - selectionStartY
+		elseif (selectionStartX <= selectionEndX and selectionStartY >= selectionEndY) then
+			x1 = selectionStartX
+			y1 = gameSizeY - selectionStartY
+			x2 = selectionEndX
+			y2 = gameSizeY - selectionEndY
+		elseif (selectionStartX >= selectionEndX and selectionStartY <= selectionEndY) then
+			x1 = selectionEndX
+			y1 = gameSizeY - selectionEndY
+			x2 = selectionStartX
+			y2 = gameSizeY - selectionStartY
+		elseif (selectionStartX >= selectionEndX and selectionStartY >= selectionEndY) then
+			x1 = selectionEndX
+			y1 = gameSizeY - selectionStartY
+			x2 = selectionStartX
+			y2 = gameSizeY - selectionEndY
+		end
+		-- draw the rectangle
+		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
+		
+		--images["selectionRect"] = addRect(Screen0, selectionStartX, vsy - selectionStartY, selectionEndX - selectionStartX, - selectionEndY + selectionStartY, {0, 1, 1, 0.3})
+	end
+end
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+local mouseMove = false
+-------------------------------------
+-- Handle mouse button pressures
+-- TODO : don't handle pressures when they occur on an UI element
+-------------------------------------
+function widget:MousePress(mx, my, button)
+	-- Left click
+	if (button == 1) then
+		-- STATE UNIT : place units on the field
+		if globalStateMachine:getCurrentState() == "unit" then
+			-- raycast
+			local kind,var = Spring.TraceScreenRay(mx,my)
+			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
+			if kind == "ground" then
+				local xUnit, yUnit, zUnit = unpack(var)
+				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
+				Spring.SendLuaRulesMsg(msg)
+			end
+		-- STATE SELECTION : select and move units on the field
+		elseif globalStateMachine:getCurrentState() == "selection" then
+			-- raycasts
+			local kind,var = Spring.TraceScreenRay(mx,my)
+			local kind2, var2 = Spring.TraceScreenRay(mx,my,true)
+			-- If unit is selected, send a message to the gadget to store the unit and its position
+			if kind == "unit" then
+				local newX, newY, newZ = unpack(var2)
+				local msg = "Select Unit".."++"..var.."++"..newX.."++"..newY.."++"..newZ
+				Spring.SendLuaRulesMsg(msg)
+				mouseMove = true -- proceed movement
+				return true -- required to use MouseRelease and MouseMove
+			elseif kind == "ground" then
+				plotSelection = true
+				selectionStartX = mx
+				selectionStartY = my
+				selectionEndX = mx
+				selectionEndY = my
+				return true
+			end
+		end
+	-- Right click
+	elseif (button == 3) then
+		for key, ub in pairs(unitButtons) do
+			ub:RemoveChild(images["selectionType"])
+		end
+		globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
+	end
+end
+
+-------------------------------------
+-- Handle mouse button releases
+-------------------------------------
+function widget:MouseRelease(mx, my, button)
+	if globalStateMachine:getCurrentState() == "selection" then
+		-- Raycast
+		local kind,var = Spring.TraceScreenRay(mx,my)
+		-- Deselect selected unit
+		if kind == "unit" then
+			local msg = "Deselect Unit"
+			Spring.SendLuaRulesMsg(msg)
+			mouseMove = false
+		end
+		if plotSelection then
+			plotSelection = false
+			selectionStartX = 0
+			selectionStartY = 0
+			selectionEndX = 0
+			selectionEndY = 0
+		end
+		return true
+	end
+end
+
+-------------------------------------
+-- Handle mouse movements
+-------------------------------------
+function widget:MouseMove(mx, my, dmx, dmy, button)
+	if globalStateMachine:getCurrentState() == "selection" then
+		-- Raycast
+		local kind, var = Spring.TraceScreenRay(mx,my,true)
+		-- If a unit is selected, send a message to the gadget to move it
+		if mouseMove and var ~= nil then
+			local newX, newY, newZ = unpack(var)
+			local msg = "Move Unit".."++"..newX.."++"..newY.."++"..newZ
+			Spring.SendLuaRulesMsg(msg)
+		end
+		if plotSelection then
+			selectionEndX = mx
+			selectionEndY = my
+			Spring.Echo(mx.." "..my)
+		end
+	end
 end
