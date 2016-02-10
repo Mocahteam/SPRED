@@ -386,6 +386,7 @@ end
 
 
 local mouseMove = false
+local unitClickSelect = false
 -------------------------------------
 -- Handle mouse button pressures
 -- TODO : don't handle pressures when they occur on an UI element
@@ -409,12 +410,14 @@ function widget:MousePress(mx, my, button)
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
+				unitClickSelect = true
 				for i, u in ipairs(Spring.GetSelectedUnits()) do
 					if var == u then
 						mouseMove = true -- proceed movement
 						return true -- required to use MouseRelease and MouseMove
 					end
 				end
+				return true
 			-- start a box selection
 			elseif kind == "ground" then
 				Spring.SelectUnitArray({})
@@ -439,17 +442,17 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
-	if globalStateMachine:getCurrentState() == "selection" then
+	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		-- Raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
-		-- Deselect selected unit
-		if kind == "unit" then
-			mouseMove = false
+		
+		if kind == "unit" and unitClickSelect then
+			Spring.SelectUnitArray({var})
+			unitClickSelect = false
 		end
-		-- hide selection box
-		if plotSelection then
-			plotSelection = false
-		end
+		
+		plotSelection = false
+		mouseMove = false
 		return true
 	end
 end
@@ -458,9 +461,10 @@ end
 -- Handle mouse movements
 -------------------------------------
 function widget:MouseMove(mx, my, dmx, dmy, button)
-	if globalStateMachine:getCurrentState() == "selection" then
+	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
+			unitClickSelect = false
 			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
 			Spring.SendLuaRulesMsg(msg)
 		end
