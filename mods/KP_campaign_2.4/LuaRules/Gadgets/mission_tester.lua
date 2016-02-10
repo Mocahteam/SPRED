@@ -33,27 +33,59 @@ local gameOver = 0
 local showBriefing = false
 local missionScript=nil
 local errors=""
+local indexCurrentTest=0
 local tests
 
-function appendError(status,error,context,writeOnlyIfError)
-  if( (status==false)or(writeOnlyIfError==false) ) then
-    errors=errors.."context : "..context.." ||"
+function appendError(status,error,context,writeEvenIfNoError)
+  if( (status==false)or(writeEvenIfNoError==true) ) then
+    errors=errors.."context : "..context.." || "
     if(status==true)then
       errors=errors.."passed"
     else 
       errors=errors.."ERROR : "..error
     end
-    errors=errors.."\r\n"
+    errors=errors.."\n"
+  end
+end
+
+function playNewTest()
+  if(indexCurrentTest<table.getn(tests))then
+    indexCurrentTest=indexCurrentTest+1
+    missionScript.Start()
+  else
+    Spring.Echo("time to stop testing")
+    -- envoyer l'info à IO pour relancer une mission
   end
 end
 
 function startTheGame(jsonfile)
   Spring.Echo("at least we try to start")
-  errors=errors.."testing"..missionName.."\r\n"
-  local status1, err1 = pcall(function() missionScript.parseJson(jsonfile);missionScript.StartAfterJson()  end) 
-  appendError(status1,err1,"starting game",false)
-  missionScript.ShowBriefing()
-
+  errors=errors.."testing"..missionName.."\n"
+  local status1, err1 = pcall(function() missionScript.parseJson(jsonfile) end) 
+  appendError(status1,err1,"parsing Json",true)
+  tests=missionScript.returnTestsToPlay()
+  if(tests~=nil)then
+    playNewTest()
+  else
+    Spring.Echo("this must be taken care of")
+  end
+  --[["tests":
+  [
+    {
+    "script":"nil",
+    "timeout":"1000",
+    "expectedEvents":
+      [
+      {"idEvent":"death" ,"stopTest":"yes"}
+      ],
+    "unexpectedEvents":[]
+    }
+  ]
+}
+  local status1, err1 = pcall(function() missionScript.StartAfterJson()  end) 
+  appendError(status1,err1,"start mission",true)
+  local status1, err1 = pcall(function() missionScript.ShowBriefing()  end) 
+  appendError(status1,err1,"showBriefing",true)]]--
   gameOver = 0
 end   
 -- message sent by mission_gui (Widget)
@@ -107,6 +139,8 @@ function updateTheGame()
     end
     SendToUnsynced("MissionEvent")
     _G.event = nil
+
+    
  end
 end
 
@@ -115,22 +149,41 @@ function gadget:GameFrame( frameNumber )
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local status1, err1 = pcall(function() updateTheGame() end) 
-    appendError(status1,err1,"update_no_test",true)   
+    appendError(status1,err1,"update",false)   
   end 
   -- if required, show briefing
   if showBriefing then
     missionScript.ShowBriefing()
     showBriefing = false
   end
-  if(frameNumber==20) then
-    _G.event = {stringToWrite = errors, fileName = "errors.txt",mode="w"}
-    SendToUnsynced("WriteMessageInFile")
-    _G.event= nil
+      --currentTest
+  Spring.Echo("dadada")
+  Spring.Echo(tests)
+  Spring.Echo(indexCurrentTest)
+  local ct=tests[indexCurrentTest]
+  local eventsTriggered=missionScript.returnEventsTriggered
+  
+  -- LOOOP
+  --for currenttest.expectedEvents
+--[["tests":
+  [
+    {
+    "title":"shouldDieWithTime",
+    "script":"nil",
+    "timeout":"1000",
+    "expectedEvents":
+      [
+      {"idEvent":"death" ,"stopTest":"yes"}
+      ],
+    "unexpectedEvents":[]
+    }
+  ]
+}--]]
+  if(frameNumber>tonumber(ct.timeout)) then
+    appendError(false,ct.title.."has timed out","update",true)
+    playNewTest()
   end
 end
-
-
-
 
 -- used to show briefings (called by mission lua script)
 function showMessage (msg, p, w)

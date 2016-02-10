@@ -595,7 +595,18 @@ local function parseJson(jsonFile)
   return true
 end
 
+local function returnEventsTriggered()
+  local eventsTriggered={}
+  for idEv,ev in pairs(events) do   
+    if(ev.hasTakenPlace) then
+      table.insert(eventsTriggered,idEv)
+    end
+  end
+  return eventsTriggered
+end
+
 local function returnTestsToPlay()
+  --Spring.Echo(json.encode(mission.tests))
   return mission.tests
 end
 
@@ -831,6 +842,7 @@ end
 
 local Mission = {}
 
+Mission.returnEventsTriggered=returnEventsTriggered
 Mission.returnTestsToPlay=returnTestsToPlay
 Mission.parseJson=parseJson
 Mission.StartAfterJson=StartAfterJson
