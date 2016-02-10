@@ -156,7 +156,7 @@
 		"attribute":"dead",
 		"value":
 			{
-			"group":"all",
+			"group":"all"
 			}
 		},
 		{
@@ -331,14 +331,15 @@
 	],
 "tests":
 	[
-	{
-	"script":"doNothing",
-	"timeout":"1000",
-	"expectedEvents":
-		[
-		{"idEvent":"death"}
-		],
-	"unexpectedEvents":[]
-	}
+		{
+		"title":"shouldDieWithTime",
+		"script":"nil",
+		"timeout":"40",
+		"expectedEvents":
+			[
+			{"idEvent":"death" ,"stopTest":"yes"}
+			],
+		"unexpectedEvents":[]
+		}
 	]
 }
