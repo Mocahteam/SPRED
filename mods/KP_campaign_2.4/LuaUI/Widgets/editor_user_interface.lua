@@ -91,7 +91,8 @@ function addLabel(_parent, _x, _y, _w, _h, text)
 		width = _w,
 		height = _h,
 		caption = text,
-		fontsize = 20
+		fontsize = 20,
+		align = "center"
 	}
 	return label
 end
@@ -182,6 +183,9 @@ end
 function fileFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
+	
+	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '90%', '5%', "File")
 end
 
 function unitFrame()
@@ -190,16 +194,16 @@ function unitFrame()
 	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
 	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
 	
-	windows['mainWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['mainWindow'], '0%', '5%', '100%', '80%')
+	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
 	
 	-- Unit buttons
-	labels['unitLabel'] = addLabel(windows['mainWindow'], '0%', '1%', '90%', '5%', "Units")
+	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
 	local button_size = 40
 	local y = 0
 	for k,u in pairs(unitStateMachine.states) do
 		if (k ~= "DEFAULT") then
-			unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, u, unitFunctions[u])
+			unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
 			y = y + button_size
 		end
 	end
@@ -210,10 +214,10 @@ function unitFrame()
 	]]
 	
 	-- Team buttons
-	labels['teamLabel'] = addLabel(windows["mainWindow"], '5%', '87%', '90%', '5%', "Team")
-	teamButtons['player'] = addImageButton(windows["mainWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
-	teamButtons['ally'] = addImageButton(windows["mainWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
-	teamButtons['enemy'] = addImageButton(windows["mainWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
+	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
+	teamButtons['player'] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
+	teamButtons['ally'] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
+	teamButtons['enemy'] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
 	
 	-- Selection image
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
@@ -230,7 +234,7 @@ function eventFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
 	
 	windows['editBoxWindow'] = addWindow(Screen0, '30%', '30%', '30%', '30%')
-	labels['editBoxLabel'] = addLabel(windows['editBoxWindow'], '5%', '1%', '90%', '5%', "Units")
+	labels['editBoxLabel'] = addLabel(windows['editBoxWindow'], '5%', '1%', '90%', '5%', "EditBox")
 	editBoxes["editBox"] = addEditBox(windows['editBoxWindow'], '0%', '10%', '100%', 20)
 end
 
