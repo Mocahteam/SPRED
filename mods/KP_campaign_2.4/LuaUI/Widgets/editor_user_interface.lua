@@ -142,6 +142,12 @@ function addEditBox(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
+-- Getters for MouseHandler
+-------------------------------------
+function getUnitButtons() return unitButtons end
+function getImages() return images end
+
+-------------------------------------
 -- Select button functions
 -------------------------------------
 function selectPlayer()
@@ -190,7 +196,7 @@ end
 
 function unitFrame()
 	removeWindows()
-	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
+	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
 	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
 	
@@ -208,11 +214,6 @@ function unitFrame()
 		end
 	end
 	
-	--[[ OLD BUTTONS
-	unitButtons['bit'] = addImageButton(scrollPanels['unitScrollPanel'], '5%', 0, '42.5%', '15%', "bitmaps/editor/bit.png", selectBit)
-	unitButtons['byte'] = addImageButton(scrollPanels['unitScrollPanel'], '52.5%', 0, '42.5%', '15%', "bitmaps/editor/byte.png", selectByte)
-	]]
-	
 	-- Team buttons
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
 	teamButtons['player'] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
@@ -221,12 +222,6 @@ function unitFrame()
 	
 	-- Selection image
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectionFrame()
-	removeWindows()
-	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 end
 
 function eventFrame()
@@ -270,7 +265,6 @@ function initTopBar()
 	-- Menu buttons
 	buttons['file'] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
 	buttons['units'] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
-	buttons['selection'] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Selection', selectionFrame)
 	buttons['events'] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Events', eventFrame)
 	buttons['actions'] = addButton(windows["topBar"], '20%', '0%', '5%', '100%', 'Actions', actionFrame)
 	buttons['links'] = addButton(windows["topBar"], '25%', '0%', '5%', '100%', 'Links', linkFrame)
@@ -283,6 +277,7 @@ end
 function initUnitFunctions()
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
+			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			unitStateMachine:setCurrentState(unitStateMachine.states[u])
 			for key, ub in pairs(unitButtons) do
 				ub:RemoveChild(images["selectionType"])
