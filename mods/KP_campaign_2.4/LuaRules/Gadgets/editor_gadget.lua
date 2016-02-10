@@ -40,6 +40,7 @@ local missionName = Spring.GetModOptions()["missionname"] -- get the name of the
 local createUnit = false
 local unitType, team = "bit", 0
 local selectedUnit = nil
+local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local newX, newY, newZ = 0, 0, 0
 
@@ -50,6 +51,7 @@ function gadget:RecvLuaMsg(msg, player)
 		unitType, team = msgContents[2], tonumber(msgContents[3])
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
 	elseif (msgContents[1] == "Select Unit") then
+		selectedUnits = {}
 		selectedUnit = msgContents[2]
 		newX, newY, newZ = tonumber(msgContents[3]), tonumber(msgContents[4]), tonumber(msgContents[5])
 	elseif (msgContents[1] == "Deselect Unit") then

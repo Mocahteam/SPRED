@@ -312,6 +312,7 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
+	--Spring.SendCommands("GodMode 1")
 end
 
 -------------------------------------
@@ -324,6 +325,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_v
 -------------------------------------
 -- Update function
 -------------------------------------
+local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
 function widget:Update(delta)
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
@@ -401,10 +403,12 @@ function widget:MousePress(mx, my, button)
 			-- If unit is selected, send a message to the gadget to store the unit and its position
 			if kind == "unit" then
 				local newX, newY, newZ = unpack(var2)
+				Spring.SelectUnitArray({var})
 				local msg = "Select Unit".."++"..var.."++"..newX.."++"..newY.."++"..newZ
 				Spring.SendLuaRulesMsg(msg)
 				mouseMove = true -- proceed movement
 				return true -- required to use MouseRelease and MouseMove
+			-- start a box selection
 			elseif kind == "ground" then
 				plotSelection = true
 				selectionStartX = mx
@@ -414,7 +418,7 @@ function widget:MousePress(mx, my, button)
 				return true
 			end
 		end
-	-- Right click
+	-- Right click : enable selection / disable unit placement
 	elseif (button == 3) then
 		for key, ub in pairs(unitButtons) do
 			ub:RemoveChild(images["selectionType"])
@@ -436,6 +440,7 @@ function widget:MouseRelease(mx, my, button)
 			Spring.SendLuaRulesMsg(msg)
 			mouseMove = false
 		end
+		-- reset selection box position
 		if plotSelection then
 			plotSelection = false
 			selectionStartX = 0
@@ -455,15 +460,15 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		-- Raycast
 		local kind, var = Spring.TraceScreenRay(mx,my,true)
 		-- If a unit is selected, send a message to the gadget to move it
-		if mouseMove and var ~= nil then
+		if mouseMove and var ~= nil and plotSelection == false then
 			local newX, newY, newZ = unpack(var)
 			local msg = "Move Unit".."++"..newX.."++"..newY.."++"..newZ
 			Spring.SendLuaRulesMsg(msg)
 		end
+		-- update selection box
 		if plotSelection then
 			selectionEndX = mx
 			selectionEndY = my
-			Spring.Echo(mx.." "..my)
 		end
 	end
 end
