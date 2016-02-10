@@ -5,25 +5,18 @@ StateMachine = {}
 StateMachine.__index = StateMachine
 
 -- Constructor
-function StateMachine.new(_states, _unitStates, _currentGlobalState, _currentUnitState, _currentTeamState)
+function StateMachine.new(_states, _currentState)
 	local self = setmetatable({}, StateMachine)
 	self.states = _states
-	self.unitStates = _unitStates
-	self.currentGlobalState = _currentGlobalState
-	self.currentUnitState = _currentUnitState
-	self.currentTeamState = _currentTeamState
+	self.currentState = _currentState
 	return self
 end
 
 -- Setter
-function StateMachine.setCurrentUnitState(self, _currentUnitState) self.currentUnitState = _currentUnitState end
-function StateMachine.setCurrentTeamState(self, _currentTeamState) self.currentTeamState = _currentTeamState end
-function StateMachine.setCurrentGlobalState(self, _currentGlobalState) self.currentGlobalState = _currentGlobalState end
+function StateMachine.setCurrentState(self, _currentState) self.currentState = _currentState end
 
 -- Getter
-function StateMachine.getCurrentUnitState(self) return self.currentUnitState end
-function StateMachine.getCurrentTeamState(self) return self.currentTeamState end
-function StateMachine.getCurrentGlobalState(self) return self.currentGlobalState end
+function StateMachine.getCurrentState(self) return self.currentState end
 
 -------------------------------------
 -- Useful function to split messages into tokens
@@ -42,29 +35,29 @@ function splitString(inputstr, sep)
 end
 
 ------------------------------
--- List of all the units of the game
+-- Initialize global state machine
 ------------------------------
-local unitList = splitString(VFS.LoadFile("LuaUI/Widgets/editor/UnitList.txt"), "\r\n")
+local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link" }
+globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
--- Initialisation of the state machine
+-- Initialize unit state machine
 ------------------------------
-
--- states to select the unit to place on the field
 local unitStates = {}
-for i, u in ipairs(unitList) do
-	unitStates[u] = u
-	if i == 1 then
-		unitStates.DEFAULT = u
+for id,unitDef in pairs(UnitDefs) do
+	for name,param in unitDef:pairs() do
+		if name == "name" then
+			unitStates[param] = param
+			if i == 1 then
+				unitStates.DEFAULT = param
+			end
+		end
 	end
 end
+unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
 
--- other states
-local states = {	-- Global
-						FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link",
-						-- Teams
-						PLAYER = "0", ALLY = "1", ENEMY = "2"
-					}
-
--- init
-stateMachine = StateMachine.new(states, unitStates, states.FILE, unitStates.DEFAULT, states.PLAYER)
+------------------------------
+-- Initialize team state machine
+------------------------------
+local teamStates = { PLAYER = "0", ALLY = "1", ENEMY = "2" }
+teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)

@@ -6,17 +6,17 @@ local mouseMove = false
 -------------------------------------
 function widget:MousePress(mx, my, button)
 	-- STATE UNIT : place units on the field
-	if stateMachine:getCurrentGlobalState() == "unit" then
+	if globalStateMachine:getCurrentState() == "unit" then
 		-- raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
-		if kind == "ground" and stateMachine:getCurrentGlobalState() == "unit" then
+		if kind == "ground" then
 			local xUnit, yUnit, zUnit = unpack(var)
-			local msg = "Create Unit".."++"..stateMachine:getCurrentUnitState().."++"..stateMachine:getCurrentTeamState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
+			local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 			Spring.SendLuaRulesMsg(msg)
 		end
 	-- STATE SELECTION : select and move units on the field
-	elseif stateMachine:getCurrentGlobalState() == "selection" then
+	elseif globalStateMachine:getCurrentState() == "selection" then
 		-- raycasts
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		local kind2, var2 = Spring.TraceScreenRay(mx,my,true)
@@ -35,7 +35,7 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
-	if stateMachine:getCurrentGlobalState() == "selection" then
+	if globalStateMachine:getCurrentState() == "selection" then
 		-- Raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		-- Deselect selected unit
@@ -52,7 +52,7 @@ end
 -- Handle mouse movements
 -------------------------------------
 function widget:MouseMove(mx, my, dmx, dmy, button)
-	if stateMachine:getCurrentGlobalState() == "selection" then
+	if globalStateMachine:getCurrentState() == "selection" then
 		-- Raycast
 		local kind, var = Spring.TraceScreenRay(mx,my,true)
 		-- If a unit is selected, send a message to the gadget to move it
