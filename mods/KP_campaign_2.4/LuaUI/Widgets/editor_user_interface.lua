@@ -327,6 +327,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_v
 -- Update function
 -------------------------------------
 local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
+
 function widget:Update(delta)
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
@@ -358,6 +359,14 @@ function widget:Update(delta)
 		-- draw the rectangle
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
+	
+	
+	-- Tell the gadget which units are selected
+	local msg = "Select Units"
+	for i, u in ipairs(Spring.GetSelectedUnits()) do
+		msg = msg.."++"..u
+	end
+	Spring.SendLuaRulesMsg(msg)
 end
 
 
@@ -398,17 +407,17 @@ function widget:MousePress(mx, my, button)
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 			-- raycasts
 			local kind,var = Spring.TraceScreenRay(mx,my)
-			local kind2, var2 = Spring.TraceScreenRay(mx,my,true)
-			-- If unit is selected, send a message to the gadget to store the unit and its position
+			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
-				local newX, newY, newZ = unpack(var2)
-				Spring.SelectUnitArray({var})
-				local msg = "Select Unit".."++"..var.."++"..newX.."++"..newY.."++"..newZ
-				Spring.SendLuaRulesMsg(msg)
-				mouseMove = true -- proceed movement
-				return true -- required to use MouseRelease and MouseMove
+				for i, u in ipairs(Spring.GetSelectedUnits()) do
+					if var == u then
+						mouseMove = true -- proceed movement
+						return true -- required to use MouseRelease and MouseMove
+					end
+				end
 			-- start a box selection
 			elseif kind == "ground" then
+				Spring.SelectUnitArray({})
 				plotSelection = true
 				selectionStartX = mx
 				selectionStartY = my
@@ -435,8 +444,6 @@ function widget:MouseRelease(mx, my, button)
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		-- Deselect selected unit
 		if kind == "unit" then
-			local msg = "Deselect Unit"
-			Spring.SendLuaRulesMsg(msg)
 			mouseMove = false
 		end
 		-- hide selection box
@@ -452,18 +459,16 @@ end
 -------------------------------------
 function widget:MouseMove(mx, my, dmx, dmy, button)
 	if globalStateMachine:getCurrentState() == "selection" then
-		-- Raycast
-		local kind, var = Spring.TraceScreenRay(mx,my,true)
 		-- If a unit is selected, send a message to the gadget to move it
-		if mouseMove and var ~= nil and plotSelection == false then
-			local newX, newY, newZ = unpack(var)
-			local msg = "Move Unit".."++"..newX.."++"..newY.."++"..newZ
+		if mouseMove and not plotSelection then
+			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
 			Spring.SendLuaRulesMsg(msg)
 		end
 		-- update selection box
 		if plotSelection then
 			selectionEndX = mx
 			selectionEndY = my
+			-- Select all units in the rectangle
 			local unitSelection = GetUnitsInScreenRectangle(selectionStartX, selectionStartY, selectionEndX, selectionEndY)
 			Spring.SelectUnitArray(unitSelection)
 		end
