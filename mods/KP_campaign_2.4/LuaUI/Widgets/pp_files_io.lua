@@ -37,15 +37,12 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal("WriteMessageInFile", WriteMessageInFile)
   if(missionName~=nil)and(Spring.GetModOptions()["hardcoded"]~="yes") then --TODO: Should be placed elsewhere than in pp_mission_gui
     local jsonName=missionName..".json"
-    if(missionName~=nil)and(Spring.GetModOptions()["jsonlocation"]~="internal") then
-      local file = assert(io.open(jsonPath..jsonName))
-      local jsonFile = file:read'*a'
-      Spring.SendLuaRulesMsg("mission"..jsonFile)
-      file:close()
-    else 
-      jsonFile=VFS.LoadFile(jsonPath..jsonName)
-      Spring.SendLuaRulesMsg("mission"..jsonFile)
+    local mode=VFS.ZIP_FIRST
+    if(Spring.GetModOptions()["jsonlocation"]~="internal") then
+      mode=VFS.RAW_FIRST
     end
+    jsonFile= VFS.LoadFile(jsonPath..jsonName,mode)
+    Spring.SendLuaRulesMsg("mission"..jsonFile)
   end
 end
 
