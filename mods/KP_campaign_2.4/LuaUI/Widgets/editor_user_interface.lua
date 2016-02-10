@@ -11,6 +11,7 @@ function widget:GetInfo()
 end
 
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
+VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 --VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
@@ -356,8 +357,6 @@ function widget:Update(delta)
 		end
 		-- draw the rectangle
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
-		
-		--images["selectionRect"] = addRect(Screen0, selectionStartX, vsy - selectionStartY, selectionEndX - selectionStartX, - selectionEndY + selectionStartY, {0, 1, 1, 0.3})
 	end
 end
 
@@ -386,7 +385,7 @@ function widget:MousePress(mx, my, button)
 	-- Left click
 	if (button == 1) then
 		-- STATE UNIT : place units on the field
-		if globalStateMachine:getCurrentState() == "unit" then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 			-- raycast
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
@@ -396,7 +395,7 @@ function widget:MousePress(mx, my, button)
 				Spring.SendLuaRulesMsg(msg)
 			end
 		-- STATE SELECTION : select and move units on the field
-		elseif globalStateMachine:getCurrentState() == "selection" then
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 			-- raycasts
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			local kind2, var2 = Spring.TraceScreenRay(mx,my,true)
@@ -413,13 +412,13 @@ function widget:MousePress(mx, my, button)
 				plotSelection = true
 				selectionStartX = mx
 				selectionStartY = my
-				selectionEndX = mx
-				selectionEndY = my
+				selectionEndX = mx + 10
+				selectionEndY = my + 10
 				return true
 			end
 		end
 	-- Right click : enable selection / disable unit placement
-	elseif (button == 3) then
+	elseif (button == 3 and globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT) then
 		for key, ub in pairs(unitButtons) do
 			ub:RemoveChild(images["selectionType"])
 		end
@@ -440,13 +439,9 @@ function widget:MouseRelease(mx, my, button)
 			Spring.SendLuaRulesMsg(msg)
 			mouseMove = false
 		end
-		-- reset selection box position
+		-- hide selection box
 		if plotSelection then
 			plotSelection = false
-			selectionStartX = 0
-			selectionStartY = 0
-			selectionEndX = 0
-			selectionEndY = 0
 		end
 		return true
 	end
@@ -469,6 +464,8 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		if plotSelection then
 			selectionEndX = mx
 			selectionEndY = my
+			local unitSelection = GetUnitsInScreenRectangle(selectionStartX, selectionStartY, selectionEndX, selectionEndY)
+			Spring.SelectUnitArray(unitSelection)
 		end
 	end
 end
