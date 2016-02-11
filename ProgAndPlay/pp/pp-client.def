@@ -1904,4 +1904,5 @@ EXPORTS
     on_process_exit @1903
     on_thread_enter @1904
     on_thread_exit @1905
-    tss_cleanup_implemented @1906
+    tracePlayer @1906 DATA
+    tss_cleanup_implemented @1907

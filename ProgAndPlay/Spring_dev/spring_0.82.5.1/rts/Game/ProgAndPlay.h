@@ -27,6 +27,7 @@ private:
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play
 	void logMessages(); // log messages from Prog&Play
+	void openTracesFile(); // open the appropriate traces file based on the current mission
 	
 };
 

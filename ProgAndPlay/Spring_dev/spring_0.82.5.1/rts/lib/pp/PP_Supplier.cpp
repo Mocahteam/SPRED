@@ -101,7 +101,7 @@ static void removeUnitFromItsCoalition(ShUnit unit){
 /* Functions to communicate with the client                                  */
 /*****************************************************************************/
 
-int PP_Init(void){
+int PP_Init(const bool tracePlayer){
 	if (!initialized){
 		// creates the shared memory
 		try{
@@ -116,6 +116,8 @@ int PP_Init(void){
 			shd.mutex = segment->find_or_construct<ShMutex>("mutex")();
 			shd.gameOver = segment->find_or_construct<bool>("gameOver")();
 			shd.gamePaused = segment->find_or_construct<bool>("gamePaused")();
+			shd.tracePlayer = segment->find_or_construct<bool>("tracePlayer")();
+			*(shd.tracePlayer) = tracePlayer;
 			const ShMapDataAllocator mapDataAlloc_inst
 				(segment->get_segment_manager());
 			shd.units = segment->find_or_construct<ShMapUnits>("units")

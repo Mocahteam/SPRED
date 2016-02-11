@@ -15,7 +15,9 @@ int main (){
 	/* iterate all units */
 	int cpt = 0;
 	while (PP_IsGameOver() == 0) {
-		int minHealth = PP_Unit_GetHealth(PP_GetUnitAt(MY_COALITION,0));
+	    u = PP_GetUnitAt(MY_COALITION,0);
+		int minHealth = PP_Unit_GetHealth(u);
+		minUnit = u;
 		for (i = 0; i < PP_GetNumUnits(MY_COALITION); i++) {
 			u = PP_GetUnitAt(MY_COALITION,i);
 			if (PP_Unit_GetType(u) == ASSEMBLER)
@@ -34,13 +36,13 @@ int main (){
 		PP_Pos assemblerPos = PP_Unit_GetPosition(assembler);
 		if (assemblerPos.x < p_1.x-100 || assemblerPos.x > p_1.x+100 || assemblerPos.y < p_1.y-100 || assemblerPos.y < p_1.y+100)
 			PP_Unit_ActionOnPosition(assembler, MOVE, p_1);
-		else if (cpt == 0) {
+		if (cpt == 0) {
 			if (PP_Unit_GetHealth(minUnit) < PP_Unit_GetMaxHealth(minUnit)) {
 				PP_Unit_ActionOnUnit(assembler, REPAIR, minUnit);
 				cpt++;
 			}
 		}
-		else if (cpt > 100)
+		else if (cpt > 10)
 			cpt = 0;
 		else
 			cpt++;

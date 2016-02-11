@@ -113,7 +113,7 @@ typedef struct{
  * 
  * Returns : 0 on success. -1 is returned on errors.
  */
-int PP_Init(void);
+int PP_Init(const bool tracePlayer);
 
 /*
  * Shutdown and cleanup Prog&Play API.

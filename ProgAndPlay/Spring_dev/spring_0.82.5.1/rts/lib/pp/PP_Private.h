@@ -172,6 +172,8 @@ typedef struct {
 	bool *gameOver;
 	/* Indicates if the game is paused */
 	bool *gamePaused;
+	/* Indicates if traces will be generated */
+	bool *tracePlayer;
 	/* Contains all units visible by the player */
 	ShMapUnits *units;
 	/* Contains units which are dispatched according to their coalition */

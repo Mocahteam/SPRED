@@ -47,7 +47,7 @@ static PP_sharedData shd;
 /* The shared memory segment */
 static boost::interprocess::managed_shared_memory *segment = NULL;
 
-/* Indicates if PP has been openned */
+/* Indicates if PP has been opened */
 static bool opened = false;
 /* Manages Ctrl-C signal in critical sections */
 static bool ctrlC = false;
@@ -235,6 +235,8 @@ int PP_Open(){
 			shd.mutex = segment->find<ShMutex>("mutex").first;
 			shd.gameOver = segment->find<bool>("gameOver").first;
 			shd.gamePaused = segment->find<bool>("gamePaused").first;
+			shd.tracePlayer = segment->find<bool>("tracePlayer").first;
+			tracePlayer = *(shd.tracePlayer);
 			shd.units = segment->find<ShMapUnits>("units").first;
 			shd.coalitions = segment->find<ShIntVector>("coalitions").first;
 			shd.pendingCommand =
@@ -244,13 +246,6 @@ int PP_Open(){
 			shd.specialAreas = segment->find<ShVectPos>("specialAreas").first;
 			shd.resources = segment->find<ShIntVector>("resources").first;
 			shd.history = segment->find<ShStringList>("history").first;
-			
-			// notify function call to Spring
-			enterCriticalSection();
-				PP_PushMessage("PP_Open");
-			exitCriticalSection();
-			
-			nbCriticalCall = 0;
 		} catch (...){
 			PP_SetError("PP_Open : open shared memory error\n");
 			delete segment;
@@ -264,6 +259,14 @@ int PP_Open(){
 		}
 		/* validation of the opening */
 		opened = true;
+		
+		// notify function call to Spring
+		enterCriticalSection();
+			PP_PushMessage("PP_Open");
+		exitCriticalSection();
+			
+		nbCriticalCall = 0;
+		
 		return 0;
 	}
 	else{
@@ -280,11 +283,11 @@ reload it\n");
 int PP_Close (){
 	int ret = isInitialized("PP_Close");
 	if (ret == 0){
-		opened = false;
 		// notify function call to Spring
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
 		exitCriticalSection();
+		opened = false;
 		/* deletes "segment" that enables access of data */
 		delete segment;
 		segment = NULL;
@@ -990,7 +993,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 
 
 int PP_PushMessage(const char * msg) {
-	if (PP_IsGamePaused() == 0) {
+	if (tracePlayer > 0 && PP_IsGamePaused() == 0) {
 		//Create allocators
 		const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
 		const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
