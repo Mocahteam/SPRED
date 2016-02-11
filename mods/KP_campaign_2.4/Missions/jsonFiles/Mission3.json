@@ -156,7 +156,7 @@
 		"attribute":"dead",
 		"value":
 			{
-			"group":"all",
+			"group":"all"
 			}
 		},
 		{
@@ -327,6 +327,19 @@
 			{"actionId":"AllyCryingForHelp"},
 			{"actionId":"deletingMarker"}
 			]
+		}
+	],
+"tests":
+	[
+		{
+		"title":"shouldDieWithTime",
+		"script":"nil",
+		"timeout":"40",
+		"expectedEvents":
+			[
+			{"idEvent":"death" ,"stopTest":"yes"}
+			],
+		"unexpectedEvents":[]
 		}
 	]
 }

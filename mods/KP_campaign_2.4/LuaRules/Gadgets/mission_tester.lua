@@ -32,11 +32,60 @@ local gameOver = 0
 -- used to show briefing
 local showBriefing = false
 local missionScript=nil
+local errors=""
+local indexCurrentTest=0
+local tests
 
+function appendError(status,error,context,writeEvenIfNoError)
+  if( (status==false)or(writeEvenIfNoError==true) ) then
+    errors=errors.."context : "..context.." || "
+    if(status==true)then
+      errors=errors.."passed"
+    else 
+      errors=errors.."ERROR : "..error
+    end
+    errors=errors.."\n"
+  end
+end
 
-function startTheGame(jsonfile) 
-  missionScript.Start(jsonfile)
-  missionScript.ShowBriefing()
+function playNewTest()
+  if(indexCurrentTest<table.getn(tests))then
+    indexCurrentTest=indexCurrentTest+1
+    missionScript.Start()
+  else
+    Spring.Echo("time to stop testing")
+    -- envoyer l'info à IO pour relancer une mission
+  end
+end
+
+function startTheGame(jsonfile)
+  Spring.Echo("at least we try to start")
+  errors=errors.."testing"..missionName.."\n"
+  local status1, err1 = pcall(function() missionScript.parseJson(jsonfile) end) 
+  appendError(status1,err1,"parsing Json",true)
+  tests=missionScript.returnTestsToPlay()
+  if(tests~=nil)then
+    playNewTest()
+  else
+    Spring.Echo("this must be taken care of")
+  end
+  --[["tests":
+  [
+    {
+    "script":"nil",
+    "timeout":"1000",
+    "expectedEvents":
+      [
+      {"idEvent":"death" ,"stopTest":"yes"}
+      ],
+    "unexpectedEvents":[]
+    }
+  ]
+}
+  local status1, err1 = pcall(function() missionScript.StartAfterJson()  end) 
+  appendError(status1,err1,"start mission",true)
+  local status1, err1 = pcall(function() missionScript.ShowBriefing()  end) 
+  appendError(status1,err1,"showBriefing",true)]]--
   gameOver = 0
 end   
 -- message sent by mission_gui (Widget)
@@ -76,33 +125,65 @@ function gadget:GamePreload()
   end
 end
 
+function updateTheGame()
+  local outputState
+  gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
+  -- if required, show GuiMission
+  if gameOver == -1 or gameOver == 1 then
+    _G.event = {logicType = "ShowMissionMenu",
+      state = "", outputstate=outputState}
+    if gameOver == -1 then
+      _G.event.state = "lost"
+    else
+      _G.event.state = "won"
+    end
+    SendToUnsynced("MissionEvent")
+    _G.event = nil
+
+    
+ end
+end
+
 function gadget:GameFrame( frameNumber )
   -- update mission
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
-    local outputState
-    gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
-    -- if required, show GuiMission
-    if gameOver == -1 or gameOver == 1 then
-      _G.event = {logicType = "ShowMissionMenu",
-        state = "", outputstate=outputState}
-      if gameOver == -1 then
-        _G.event.state = "lost"
-      else
-        _G.event.state = "won"
-      end
-      SendToUnsynced("MissionEvent")
-      _G.event = nil
-    end
-  end
-  
+    local status1, err1 = pcall(function() updateTheGame() end) 
+    appendError(status1,err1,"update",false)   
+  end 
   -- if required, show briefing
   if showBriefing then
     missionScript.ShowBriefing()
     showBriefing = false
   end
+      --currentTest
+  Spring.Echo("dadada")
+  Spring.Echo(tests)
+  Spring.Echo(indexCurrentTest)
+  local ct=tests[indexCurrentTest]
+  local eventsTriggered=missionScript.returnEventsTriggered
+  
+  -- LOOOP
+  --for currenttest.expectedEvents
+--[["tests":
+  [
+    {
+    "title":"shouldDieWithTime",
+    "script":"nil",
+    "timeout":"1000",
+    "expectedEvents":
+      [
+      {"idEvent":"death" ,"stopTest":"yes"}
+      ],
+    "unexpectedEvents":[]
+    }
+  ]
+}--]]
+  if(frameNumber>tonumber(ct.timeout)) then
+    appendError(false,ct.title.."has timed out","update",true)
+    playNewTest()
+  end
 end
-
 
 -- used to show briefings (called by mission lua script)
 function showMessage (msg, p, w)
@@ -164,6 +245,12 @@ function gadget:RecvFromSynced(...)
         end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
+  elseif arg1 == "WriteMessageInFile" then
+      local e = {}
+        for k, v in spairs(SYNCED.event) do
+        e[k] = v
+        end
+      Script.LuaUI.WriteMessageInFile(e) -- function defined and registered in mission_gui widget
   end
 end
 

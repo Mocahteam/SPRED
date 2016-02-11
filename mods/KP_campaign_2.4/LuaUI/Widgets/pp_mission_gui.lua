@@ -32,22 +32,6 @@ local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Pl
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
-local jsonPath="Missions/jsonFiles/"
-local jsonFile
-if(missionName~=nil)and(Spring.GetModOptions()["hardcoded"]~="yes") then --TODO: Should be placed elsewhere than in pp_mission_gui
-  local jsonName=missionName..".json"
-  if(missionName~=nil)and(Spring.GetModOptions()["jsonlocation"]~="internal") then
-    Spring.Echo("external")
-    local file = assert(io.open(jsonPath..jsonName))
-    local jsonFile = file:read'*a'
-    Spring.SendLuaRulesMsg("mission"..jsonFile)
-    file:close()
-  else 
-    jsonFile=VFS.LoadFile(jsonPath..jsonName)
-    Spring.SendLuaRulesMsg("mission"..jsonFile)
-  end
-end
-
 
 local mode = Spring.GetModOptions()["scenariomode"]
 

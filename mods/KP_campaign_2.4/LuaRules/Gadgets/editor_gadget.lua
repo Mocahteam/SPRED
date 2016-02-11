@@ -26,6 +26,7 @@ function splitString(inputstr, sep)
 	return t
 end
 
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -39,33 +40,44 @@ local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local createUnit = false
 local unitType, team = "bit", 0
-local selectedUnit = nil
+local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
-local newX, newY, newZ = 0, 0, 0
+local dX, dZ = 0, 0
+local moveUnits = false
 
 function gadget:RecvLuaMsg(msg, player)
+	moveUnit = false
 	msgContents = splitString(msg, "++")
 	if (msgContents[1] == "Create Unit") then
 		createUnit = true
 		unitType, team = msgContents[2], tonumber(msgContents[3])
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
-	elseif (msgContents[1] == "Select Unit") then
-		selectedUnit = msgContents[2]
-		newX, newY, newZ = tonumber(msgContents[3]), tonumber(msgContents[4]), tonumber(msgContents[5])
-	elseif (msgContents[1] == "Deselect Unit") then
-		selectedUnit = nil
-	elseif (msgContents[1] == "Move Unit") then
-		newX, newY, newZ = tonumber(msgContents[2]), tonumber(msgContents[3]), tonumber(msgContents[4])
+	elseif (msgContents[1] == "Move Units") then
+		moveUnits = true
+		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+	elseif (msgContents[1] == "Select Units") then
+		local tmptable = {}
+		for i, u in ipairs(msgContents) do
+			if i ~= 1 then
+				table.insert(tmptable, u)
+			end
+		end
+		selectedUnits = tmptable
 	end
 end
 
 function gadget:GameFrame( frameNumber )
 	if (missionName == "LevelEditor" and createUnit) then
 		local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
-		--Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
+		Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
 		createUnit = false
-	elseif (missionName == "LevelEditor" and selectedUnit ~= nil) then
-		Spring.SetUnitPosition(selectedUnit, newX, Spring.GetGroundHeight(newX, newZ), newZ)
+	elseif (missionName == "LevelEditor" and selectedUnits ~= {} and moveUnits) then
+		for i, u in ipairs(selectedUnits) do
+			curX, _, curZ = Spring.GetUnitPosition(u)
+			Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
+			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+		end
+		moveUnits = false
 	end
 end
 --------------------------------------------------------------------------------

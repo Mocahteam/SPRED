@@ -21,7 +21,9 @@ return
 	-- other archives this one depends on
 	depend= {
 		"Kernel Panic 4.1",
+		--"Balanced Annihilation V7.50",
 		"Marble_Madness_Map",
+		--"SmallDivide"
 		--do not used filenames, use the internal name, or downloader programs will fail to download the dependencies automatically
 		},
 }

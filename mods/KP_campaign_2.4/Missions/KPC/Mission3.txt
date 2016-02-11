@@ -12,7 +12,7 @@
 	
 	[MODOPTIONS]
 	{
-		jsonlocation=external; // choose internal to avoid the necessity of manually adding a folder containing json files. 
+		jsonlocation=internal; // choose internal to avoid the necessity of manually adding a folder containing json files. 
 								// choose external to let the user or most probably the developper to change json files 
 		gamemode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
 		fixedallies=0;			// enable in game alliance

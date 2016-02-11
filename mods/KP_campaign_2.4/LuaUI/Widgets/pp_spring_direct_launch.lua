@@ -608,11 +608,9 @@ function widget:Initialize()
 	-- enable editor widgets only in editor
 	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
 		widgetHandler:DisableWidget("Editor User Interface")
-		widgetHandler:DisableWidget("Editor Input Handler")
 		widgetHandler:DisableWidget("Editor State Machine")
 	else
 		widgetHandler:EnableWidget("Editor User Interface")
-		widgetHandler:EnableWidget("Editor Input Handler")
 		widgetHandler:EnableWidget("Editor State Machine")
 	end
 end

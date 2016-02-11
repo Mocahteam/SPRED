@@ -295,7 +295,7 @@ L'utilisation de *RegisterGlobal* permet aux gadgets d'appeler ces fonctions (en
 * Dans la partie non synchronisée, par *Script.LuaUI.MissionEvent(e)*
 * Dans la partie synchronisée, par *SendToUnsynced("MissionEvent")*
 
-Dans le deuxième cas, un argument est par le biais de l'enregistrement d'une variable globale : 
+Dans le deuxième cas, un argument est envoyé par le biais de l'enregistrement d'une variable globale : 
 ```lua
 if missionScript ~= nil and gameOver == 0 then
 -- update gameOver
@@ -312,6 +312,35 @@ if gameOver == -1 or gameOver == 1 then
   end
   SendToUnsynced("MissionEvent")
   _G.event = nil
+end
+```
+L'envoi est recupéré dans *gadget:RecvFromSynced(...)* qui retransmet l'information aux widgets par l'emploi de *Script.LuaUI*. 
+```lua
+function gadget:RecvFromSynced(...)
+  local arg1, arg2 = ...
+  if arg1 == "mouseDisabled" then
+    mouseDisabled = arg2
+  elseif arg1 == "enableCameraAuto" then
+    if Script.LuaUI("CameraAuto") then
+      local specialPositions = {}
+      for k, v in spairs(SYNCED.cameraAuto["specialPositions"]) do
+        specialPositions[k] = {v[1], v[2]}
+      end
+      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
+    end
+  elseif arg1 == "TutorialEvent" then
+    if Script.LuaUI("TutorialEvent") then
+      Script.LuaUI.TutorialEvent() -- function defined and registered in mission_gui widget
+    end
+  elseif arg1 == "MissionEvent" then
+    if Script.LuaUI("MissionEvent") then
+      local e = {}
+        for k, v in spairs(SYNCED.event) do
+        e[k] = v
+        end
+      Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
+    end
+  end
 end
 ```
 Le code étudié correspond au menu affiché lorsque que missionScript (module MissionPlayer.lua) renvoi 1 ou -1 lors de son update signifiant respectivement réussite ou échec. Mais il est imaginable qu'on souhaite afficher un message en cours de jeu selon un évènement particulier, ou tout simplement au démarrage. Ainsi, mission_runner.lua enregistre aussi des fonctions destinées à être utilisées de l'exterieur : 
