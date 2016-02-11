@@ -75,6 +75,7 @@ function gadget:GameFrame( frameNumber )
 		for i, u in ipairs(selectedUnits) do
 			curX, _, curZ = Spring.GetUnitPosition(u)
 			Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
+			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 		end
 		moveUnits = false
 	end

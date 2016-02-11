@@ -386,7 +386,6 @@ end
 
 
 local mouseMove = false
-local unitClickSelect = false
 -------------------------------------
 -- Handle mouse button pressures
 -- TODO : don't handle pressures when they occur on an UI element
@@ -410,22 +409,21 @@ function widget:MousePress(mx, my, button)
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
-				unitClickSelect = true
 				for i, u in ipairs(Spring.GetSelectedUnits()) do
 					if var == u then
 						mouseMove = true -- proceed movement
 						return true -- required to use MouseRelease and MouseMove
 					end
 				end
+				Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
+				mouseMove = true
 				return true
 			-- start a box selection
 			elseif kind == "ground" then
 				Spring.SelectUnitArray({})
 				plotSelection = true
-				selectionStartX = mx
-				selectionStartY = my
-				selectionEndX = mx + 10
-				selectionEndY = my + 10
+				selectionStartX, selectionEndX = mx, mx
+				selectionStartY, selectionEndY = my, my
 				return true
 			end
 		end
@@ -443,14 +441,6 @@ end
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
 	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
-		-- Raycast
-		local kind,var = Spring.TraceScreenRay(mx,my)
-		
-		if kind == "unit" and unitClickSelect then
-			Spring.SelectUnitArray({var})
-			unitClickSelect = false
-		end
-		
 		plotSelection = false
 		mouseMove = false
 		return true
@@ -464,7 +454,14 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
-			unitClickSelect = false
+			--[[
+			local kind, var = Spring.TraceScreenRay(mx - dmx, my - dmy, true)
+			local kind2, var2 = Spring.TraceScreenRay(mx, my, true)
+			local Ax1, Ay1, Az1 = unpack(var)
+			local Bx1, By1, Bz1 = unpack(var2)
+			local dX, dZ = Bx1-Ax1, By1-Ay1
+			local msg = "Move Units".."++"..dX.."++"..dZ
+			]]
 			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
 			Spring.SendLuaRulesMsg(msg)
 		end
