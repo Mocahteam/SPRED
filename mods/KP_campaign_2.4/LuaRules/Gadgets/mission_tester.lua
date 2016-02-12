@@ -32,42 +32,48 @@ local gameOver = 0
 -- used to show briefing
 local showBriefing = false
 local missionScript=nil
-local errors=""
 local indexCurrentTest=0
 local tests
 
 function appendError(status,error,context,writeEvenIfNoError)
   if( (status==false)or(writeEvenIfNoError==true) ) then
-    errors=errors.."context : "..context.." || "
+    local errorTowrite="context : "..context.." -- "
     if(status==true)then
-      errors=errors.."passed"
+      errorTowrite=errorTowrite.."passed"
     else 
-      errors=errors.."ERROR : "..error
+      errorTowrite=errorTowrite.."ERROR : "..error
     end
-    errors=errors.."\n"
+    _G.event = {stringToWrite = errorTowrite,fileName = "errors.txt", mode="a"}
+    SendToUnsynced("WriteMessageInFile")
+    _G.event=nil
   end
 end
 
 function playNewTest()
-  if(indexCurrentTest<table.getn(tests))then
+  if(tests~=nil)and(indexCurrentTest<table.getn(tests))then
     indexCurrentTest=indexCurrentTest+1
-    missionScript.Start()
+    local status1, err1 = pcall(function() missionScript.Start() end) 
+    appendError(status1,err1,"init game",true)
   else
-    Spring.Echo("time to stop testing")
-    -- envoyer l'info à IO pour relancer une mission
+   missionScript.Stop()
+
+   Spring.SendCommands("luarules reload")
+
+
   end
 end
 
 function startTheGame(jsonfile)
   Spring.Echo("at least we try to start")
-  errors=errors.."testing"..missionName.."\n"
   local status1, err1 = pcall(function() missionScript.parseJson(jsonfile) end) 
   appendError(status1,err1,"parsing Json",true)
   tests=missionScript.returnTestsToPlay()
   if(tests~=nil)then
     playNewTest()
   else
-    Spring.Echo("this must be taken care of")
+    -- WE only test the start and we will leave at frame 20 (cf update)
+    local status1, err1 = pcall(function() missionScript.Start() end) 
+    appendError(status1,err1,"init game",true) -- mildly redundant with playTest, beware
   end
   --[["tests":
   [
@@ -138,14 +144,14 @@ function updateTheGame()
       _G.event.state = "won"
     end
     SendToUnsynced("MissionEvent")
-    _G.event = nil
-
-    
+    _G.event = nil  
  end
 end
 
 function gadget:GameFrame( frameNumber )
   -- update mission
+  Spring.Echo(frameNumber)
+  if(frameNumber<15) then Spring.SendCommands("SpeedUp") end -- no need to increment speed more than 15 times
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local status1, err1 = pcall(function() updateTheGame() end) 
@@ -157,31 +163,34 @@ function gadget:GameFrame( frameNumber )
     showBriefing = false
   end
       --currentTest
-  Spring.Echo("dadada")
-  Spring.Echo(tests)
-  Spring.Echo(indexCurrentTest)
-  local ct=tests[indexCurrentTest]
-  local eventsTriggered=missionScript.returnEventsTriggered
-  
-  -- LOOOP
-  --for currenttest.expectedEvents
---[["tests":
-  [
-    {
-    "title":"shouldDieWithTime",
-    "script":"nil",
-    "timeout":"1000",
-    "expectedEvents":
-      [
-      {"idEvent":"death" ,"stopTest":"yes"}
-      ],
-    "unexpectedEvents":[]
-    }
-  ]
-}--]]
-  if(frameNumber>tonumber(ct.timeout)) then
-    appendError(false,ct.title.."has timed out","update",true)
-    playNewTest()
+  if(tests~=nil) then
+    local ct=tests[indexCurrentTest]
+    local eventsTriggered=missionScript.returnEventsTriggered
+    
+    -- LOOOP
+    --for currenttest.expectedEvents
+  --[["tests":
+    [
+      {
+      "title":"shouldDieWithTime",
+      "script":"nil",
+      "timeout":"1000",
+      "expectedEvents":
+        [
+        {"idEvent":"death" ,"stopTest":"yes"}
+        ],
+      "unexpectedEvents":[]
+      }
+    ]
+  }--]]
+    if(frameNumber>tonumber(ct.timeout)) then
+      appendError(false,ct.title.." has timed out","update",true)
+      playNewTest()
+    end
+  else
+     if(frameNumber>tonumber(30)) then
+        playNewTest()
+     end
   end
 end
 
@@ -203,6 +212,8 @@ end
 function gadget:Initialize()
   gadgetHandler:RegisterGlobal("showMessage", showMessage)
   gadgetHandler:RegisterGlobal("showTuto", showTuto)
+  Spring.SendCommands("Cheat")
+  SendToUnsynced("loadProperJson") -- FAIL
 end
 
 
@@ -250,7 +261,9 @@ function gadget:RecvFromSynced(...)
         for k, v in spairs(SYNCED.event) do
         e[k] = v
         end
-      Script.LuaUI.WriteMessageInFile(e) -- function defined and registered in mission_gui widget
+      Script.LuaUI.WriteMessageInFile(e) -- function defined and registered in pp_file_io widget
+  elseif arg1 == "loadProperJson" then
+    Script.LuaUI.loadProperJson() -- function defined and registered in pp_file_io widget
   end
 end
 
