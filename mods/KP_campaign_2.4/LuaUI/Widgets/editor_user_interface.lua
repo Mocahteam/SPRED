@@ -15,7 +15,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 --VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
@@ -209,7 +209,9 @@ function fileFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
 	
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '90%', '5%', "File")
+	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 
 function unitFrame()

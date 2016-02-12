@@ -26,7 +26,6 @@ function splitString(inputstr, sep)
 	return t
 end
 
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -44,6 +43,8 @@ local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local dX, dZ = 0, 0
 local moveUnits = false
+local resetMap = false
+local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
 function gadget:Initialize()
 	if (Spring.GetModOptions()["editor"] == "yes") then
@@ -71,6 +72,10 @@ function gadget:RecvLuaMsg(msg, player)
 			end
 		end
 		selectedUnits = tmptable
+	elseif (msgContents[1] == "New Map") then
+		resetMap = true
+	elseif (msgContents[1] == "Load Map") then
+		missionScript.Start(msgContents[2])
 	end
 end
 
@@ -86,6 +91,14 @@ function gadget:GameFrame( frameNumber )
 			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 		end
 		moveUnits = false
+	end
+	
+	if (resetMap) then
+		local units = Spring.GetAllUnits()
+		for i = 1,table.getn(units) do
+			Spring.DestroyUnit(units[i], false, true)
+		end
+		resetMap = false
 	end
 end
 --------------------------------------------------------------------------------
