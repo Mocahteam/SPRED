@@ -173,7 +173,7 @@ function selectPlayer()
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
-	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.PLAYER], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectAlly()
@@ -181,7 +181,7 @@ function selectAlly()
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
-	images['selectionTeam'] = addImage(teamButtons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.ALLY], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function selectEnemy()
@@ -189,7 +189,7 @@ function selectEnemy()
 	for key, button in pairs(teamButtons) do
 		button:RemoveChild(images["selectionTeam"])
 	end
-	images['selectionTeam'] = addImage(teamButtons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.ENEMY], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 -------------------------------------
@@ -216,7 +216,7 @@ function unitFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
-	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
+	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
 	
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
@@ -234,12 +234,13 @@ function unitFrame()
 	
 	-- Team buttons
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	teamButtons['player'] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
-	teamButtons['ally'] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
-	teamButtons['enemy'] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
+	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
+	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
+	teamButtons[teamStateMachine.states.ENEMY] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
 	
 	-- Selection image
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons[teamStateMachine:getCurrentState()], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function eventFrame()
@@ -454,14 +455,6 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
-			--[[
-			local kind, var = Spring.TraceScreenRay(mx - dmx, my - dmy, true)
-			local kind2, var2 = Spring.TraceScreenRay(mx, my, true)
-			local Ax1, Ay1, Az1 = unpack(var)
-			local Bx1, By1, Bz1 = unpack(var2)
-			local dX, dZ = Bx1-Ax1, By1-Ay1
-			local msg = "Move Units".."++"..dX.."++"..dZ
-			]]
 			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
 			Spring.SendLuaRulesMsg(msg)
 		end

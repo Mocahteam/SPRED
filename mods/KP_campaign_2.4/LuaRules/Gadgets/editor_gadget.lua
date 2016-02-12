@@ -45,6 +45,14 @@ local xUnit, yUnit, zUnit = 0, 0, 0
 local dX, dZ = 0, 0
 local moveUnits = false
 
+function gadget:Initialize()
+	if (Spring.GetModOptions()["editor"] == "yes") then
+		Spring.SendCommands("cheat")
+		Spring.SendCommands("godmode")
+		Spring.SendCommands("globallos")
+	end
+end
+
 function gadget:RecvLuaMsg(msg, player)
 	moveUnit = false
 	msgContents = splitString(msg, "++")
