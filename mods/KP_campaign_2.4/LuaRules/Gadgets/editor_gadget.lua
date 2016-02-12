@@ -39,23 +39,43 @@ local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local createUnit = false
 local unitType, team = "bit", 0
-local selectedUnit = nil
+local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
-local newX, newY, newZ = 0, 0, 0
+local dX, dZ = 0, 0
+local moveUnits = false
+local resetMap = false
+local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
+
+function gadget:Initialize()
+	if (Spring.GetModOptions()["editor"] == "yes") then
+		Spring.SendCommands("cheat")
+		Spring.SendCommands("godmode")
+		Spring.SendCommands("globallos")
+	end
+end
 
 function gadget:RecvLuaMsg(msg, player)
+	moveUnit = false
 	msgContents = splitString(msg, "++")
 	if (msgContents[1] == "Create Unit") then
 		createUnit = true
 		unitType, team = msgContents[2], tonumber(msgContents[3])
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
-	elseif (msgContents[1] == "Select Unit") then
-		selectedUnit = msgContents[2]
-		newX, newY, newZ = tonumber(msgContents[3]), tonumber(msgContents[4]), tonumber(msgContents[5])
-	elseif (msgContents[1] == "Deselect Unit") then
-		selectedUnit = nil
-	elseif (msgContents[1] == "Move Unit") then
-		newX, newY, newZ = tonumber(msgContents[2]), tonumber(msgContents[3]), tonumber(msgContents[4])
+	elseif (msgContents[1] == "Move Units") then
+		moveUnits = true
+		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+	elseif (msgContents[1] == "Select Units") then
+		local tmptable = {}
+		for i, u in ipairs(msgContents) do
+			if i ~= 1 then
+				table.insert(tmptable, u)
+			end
+		end
+		selectedUnits = tmptable
+	elseif (msgContents[1] == "New Map") then
+		resetMap = true
+	elseif (msgContents[1] == "Load Map") then
+		missionScript.Start(msgContents[2])
 	end
 end
 
@@ -64,8 +84,21 @@ function gadget:GameFrame( frameNumber )
 		local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
 		Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
 		createUnit = false
-	elseif (missionName == "LevelEditor" and selectedUnit ~= nil) then
-		Spring.SetUnitPosition(selectedUnit, newX, Spring.GetGroundHeight(newX, newZ), newZ)
+	elseif (missionName == "LevelEditor" and selectedUnits ~= {} and moveUnits) then
+		for i, u in ipairs(selectedUnits) do
+			curX, _, curZ = Spring.GetUnitPosition(u)
+			Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
+			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+		end
+		moveUnits = false
+	end
+	
+	if (resetMap) then
+		local units = Spring.GetAllUnits()
+		for i = 1,table.getn(units) do
+			Spring.DestroyUnit(units[i], false, true)
+		end
+		resetMap = false
 	end
 end
 --------------------------------------------------------------------------------

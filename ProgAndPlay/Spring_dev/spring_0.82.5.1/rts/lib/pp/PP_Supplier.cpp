@@ -101,7 +101,7 @@ static void removeUnitFromItsCoalition(ShUnit unit){
 /* Functions to communicate with the client                                  */
 /*****************************************************************************/
 
-int PP_Init(void){
+int PP_Init(const bool tracePlayer){
 	if (!initialized){
 		// creates the shared memory
 		try{
@@ -115,6 +115,9 @@ int PP_Init(void){
 			// constructs elements of the shared memory
 			shd.mutex = segment->find_or_construct<ShMutex>("mutex")();
 			shd.gameOver = segment->find_or_construct<bool>("gameOver")();
+			shd.gamePaused = segment->find_or_construct<bool>("gamePaused")();
+			shd.tracePlayer = segment->find_or_construct<bool>("tracePlayer")();
+			*(shd.tracePlayer) = tracePlayer;
 			const ShMapDataAllocator mapDataAlloc_inst
 				(segment->get_segment_manager());
 			shd.units = segment->find_or_construct<ShMapUnits>("units")
@@ -182,6 +185,19 @@ int PP_SetGameOver(bool gameOver){
 	boost::interprocess::scoped_lock<ShMutex> lock(*(shd.mutex));
 	// update gameOver in shared memory
 	*(shd.gameOver) = gameOver;
+	// mutex is automatically freed when the bloc ended (thanks "scoped_lock") usefull if exception thrown
+	return 0;
+}
+
+int PP_SetGamePaused(bool gamePaused) {
+	if (!initialized) {
+		PP_SetError("PP_SetGamePaused : Prog&Play is not initialized");
+		return -1;
+	}
+	// takes mutex
+	boost::interprocess::scoped_lock<ShMutex> lock(*(shd.mutex));
+	// update gamePaused in shared memory
+	*(shd.gamePaused) = gamePaused;
 	// mutex is automatically freed when the bloc ended (thanks "scoped_lock") usefull if exception thrown
 	return 0;
 }
@@ -467,6 +483,7 @@ char * PP_PopMessage(){
 	}
 	// takes mutex
 	boost::interprocess::scoped_lock<ShMutex> lock(*(shd.mutex));
+	
 	// extract first message from the shared memory
 	if (shd.history->size() > 0){
 		// We get message from shared memory ...

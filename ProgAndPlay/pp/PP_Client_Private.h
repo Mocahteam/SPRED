@@ -29,6 +29,10 @@
 extern "C" {
 #endif
 
+/*
+ * If the value is strictly positive, traces will be generated.
+ */
+int tracePlayer;
 
 /*
  * This function has to be called before entering in critical section.

@@ -31,6 +31,11 @@
 #include <boost/thread.hpp>
 
 #include <stdio.h>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+//std::ofstream logFile("logClient.txt", std::ios::out | std::ofstream::trunc);
 
 /******************************************************************************/
 /* Definition of global variables                                             */
@@ -42,7 +47,7 @@ static PP_sharedData shd;
 /* The shared memory segment */
 static boost::interprocess::managed_shared_memory *segment = NULL;
 
-/* Indicates if PP has been openned */
+/* Indicates if PP has been opened */
 static bool opened = false;
 /* Manages Ctrl-C signal in critical sections */
 static bool ctrlC = false;
@@ -229,6 +234,9 @@ int PP_Open(){
 			// Finds elements in the shared memory
 			shd.mutex = segment->find<ShMutex>("mutex").first;
 			shd.gameOver = segment->find<bool>("gameOver").first;
+			shd.gamePaused = segment->find<bool>("gamePaused").first;
+			shd.tracePlayer = segment->find<bool>("tracePlayer").first;
+			tracePlayer = *(shd.tracePlayer);
 			shd.units = segment->find<ShMapUnits>("units").first;
 			shd.coalitions = segment->find<ShIntVector>("coalitions").first;
 			shd.pendingCommand =
@@ -238,13 +246,6 @@ int PP_Open(){
 			shd.specialAreas = segment->find<ShVectPos>("specialAreas").first;
 			shd.resources = segment->find<ShIntVector>("resources").first;
 			shd.history = segment->find<ShStringList>("history").first;
-			
-			// notify function call to Spring
-			enterCriticalSection();
-				PP_PushMessage("PP_Open");
-			exitCriticalSection();
-			
-			nbCriticalCall = 0;
 		} catch (...){
 			PP_SetError("PP_Open : open shared memory error\n");
 			delete segment;
@@ -258,6 +259,14 @@ int PP_Open(){
 		}
 		/* validation of the opening */
 		opened = true;
+		
+		// notify function call to Spring
+		enterCriticalSection();
+			PP_PushMessage("PP_Open");
+		exitCriticalSection();
+			
+		nbCriticalCall = 0;
+		
 		return 0;
 	}
 	else{
@@ -274,11 +283,11 @@ reload it\n");
 int PP_Close (){
 	int ret = isInitialized("PP_Close");
 	if (ret == 0){
-		opened = false;
 		// notify function call to Spring
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
 		exitCriticalSection();
+		opened = false;
 		/* deletes "segment" that enables access of data */
 		delete segment;
 		segment = NULL;
@@ -288,6 +297,7 @@ int PP_Close (){
 //			"PP_SharedMemory") << std::endl;
 //#endif
 	}
+	//logFile.close();
 	return ret;
 }
 
@@ -300,6 +310,20 @@ int PP_IsGameOver(){
 			ret = *(shd.gameOver);
 			// notify function call to Spring
 			PP_PushMessage("PP_IsGameOver");
+		exitCriticalSection();
+	}
+	return ret;
+}
+
+int PP_IsGamePaused() {
+	int ret;
+	// Checks initialisation
+	ret = isInitialized("PP_IsGamePaused");
+	if (ret == 0) {
+		enterCriticalSection();
+			ret = *(shd.gamePaused);
+			// notify function call to Spring
+			//PP_PushMessage("PP_IsGamePaused");
 		exitCriticalSection();
 	}
 	return ret;
@@ -968,18 +992,20 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 }
 
 
-int PP_PushMessage(const char * msg){
-	//Create allocators
-	const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
-	const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
+int PP_PushMessage(const char * msg) {
+	if (tracePlayer > 0 && PP_IsGamePaused() == 0) {
+		//Create allocators
+		const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
+		const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
 	
-	//This string is only in this process (the pointer pointing to the
-	//buffer that will hold the text is not in shared memory).
-	//But the buffer that will hold "msg" parameter is allocated from
-	//shared memory
-	ShString sharedMessage(charAlloc_inst);
-	sharedMessage.append(msg);
+		//This string is only in this process (the pointer pointing to the
+		//buffer that will hold the text is not in shared memory).
+		//But the buffer that will hold "msg" parameter is allocated from
+		//shared memory
+		ShString sharedMessage(charAlloc_inst);
+		sharedMessage.append(msg);
 	
-	//Store the pointer pointing to the buffer into the shared memory
-	shd.history->push_back(sharedMessage);
+		//Store the pointer pointing to the buffer into the shared memory
+		shd.history->push_back(sharedMessage);
+	}
 }

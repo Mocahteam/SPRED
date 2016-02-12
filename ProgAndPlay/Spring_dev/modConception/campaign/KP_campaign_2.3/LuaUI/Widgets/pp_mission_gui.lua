@@ -30,6 +30,7 @@ local rooms = WG.rooms -- availabe in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
 
+local tracesDir = "traces"
 local ppTraces = nil -- File handler to store traces
 
 -- Set label
@@ -220,6 +221,7 @@ function MissionEvent(e)
 				else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
+				ppTraces = io.open(tracesDir..'\\'..missionName..".log", "a")
 				if ppTraces ~= nil then
 					ppTraces:write(missionName.." won\n")
 					ppTraces:flush()
@@ -363,15 +365,18 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
 	widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
 	widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
-	
+
+	if not VFS.FileExists(tracesDir) then
+		Spring.CreateDir(tracesDir)
+	end
 	-- open ppTraces file
-	ppTraces = io.open("ppTraces.txt", "a")
+	ppTraces = io.open(tracesDir..'\\'..missionName..".log", "w+")
 	if ppTraces ~= nil then
 		ppTraces:write(missionName.." start\n")
 		ppTraces:flush()
+		ppTraces:close()
 	end
 end
-
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("EmulateEscapeKey")

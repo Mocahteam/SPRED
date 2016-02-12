@@ -12,6 +12,7 @@
 
 #include "System/NetProtocol.h"
 #include "Game/Game.h"
+#include "Game/GameSetup.h"
 #include "Sim/Misc/GlobalConstants.h" // needed for MAX_UNITS
 #include "Sim/Misc/TeamHandler.h"
 #include "Sim/Misc/LosHandler.h"
@@ -28,12 +29,19 @@
 #include "GlobalUnsynced.h"
 #include "LogOutput.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <dirent.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
-std::ofstream logFile("log.txt");
-std::ofstream ppTraces("ppTraces.txt", std::ios::out | std::ios::app | std::ios::ate);
+std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
+std::ofstream ppTraces;
+
+const std::string tracesDirName = "traces";
+const bool tracePlayer = true;
 
 void log(std::string msg){
 	logFile << msg << std::endl;
@@ -46,13 +54,13 @@ void log(std::string msg){
 
 CProgAndPlay* pp;
 
-CProgAndPlay::CProgAndPlay()
-{
-log("ProgAndPLay constructor begin");
+CProgAndPlay::CProgAndPlay() {
+	log("ProgAndPLay constructor begin");
+	
 	loaded = false;
 	updated = false;
 	// initialisation of Prog&Play
-	if (PP_Init() == -1){
+	if (PP_Init(tracePlayer) == -1) {
 		std::string tmp(PP_GetError());
 		log(tmp.c_str());
 	}
@@ -69,25 +77,33 @@ log("ProgAndPLay constructor begin");
 	delete tmpFile;
 	if (del)
 		FileSystemHandler::DeleteFile(filesystem.LocateFile("mission_ended.conf"));
-log("ProgAndPLay constructor end");
+	
+	log("ProgAndPLay constructor end");
 }
 
-CProgAndPlay::~CProgAndPlay()
-{
-log("ProgAndPLay destructor begin");
+CProgAndPlay::~CProgAndPlay() {
+  log("ProgAndPLay destructor begin");
   if (loaded){
-    if (PP_Quit() == -1){
+	if (PP_Quit() == -1){
 		std::string tmp(PP_GetError());
 		log(tmp.c_str());
 	}
 	else
 		log("Prog&Play shut down and cleaned up");
   }
-log("ProgAndPLay destructor end");
+  logFile.close();
+  if (ppTraces.is_open())
+	ppTraces.close();
+  log("ProgAndPLay destructor end");
 }
 
 void CProgAndPlay::Update(void) {
 	log("ProgAndPLay::Update begin");
+	
+	if (!ppTraces.is_open())
+		openTracesFile();
+	// Store log messages
+	logMessages();
 	
 	// Execute pending commands
 	int nbCmd = execPendingCommands();
@@ -100,10 +116,14 @@ void CProgAndPlay::Update(void) {
 		std::string tmp(PP_GetError());
 		log(tmp.c_str());
 	}
-	// Store log messages
-	logMessages();
 		
 	log("ProgAndPLay::Update end");
+}
+
+void CProgAndPlay::GamePaused(bool paused) {
+	int ret = PP_SetGamePaused(paused);
+	if (ret == -1)
+		return;
 }
 
 PP_ShortUnit buildShortUnit(CUnit *unit, PP_Coalition c){
@@ -285,7 +305,7 @@ log("ProgAndPLay::updatePP begin");
 		PP_Pos mapSize;
 		mapSize.x = gs->mapx*SQUARE_SIZE;
 		mapSize.y = gs->mapy*SQUARE_SIZE;
-		// store strating position
+		// store starting position
 		PP_Pos startPos;
 		startPos.x = teamHandler->Team(gu->myTeam)->startPos.x;
 		startPos.y = teamHandler->Team(gu->myTeam)->startPos.z;
@@ -486,7 +506,7 @@ log("ProgAndPLay::execPendingCommands end");
 	return nbCmd;
 }
 
-void CProgAndPlay::logMessages(){
+void CProgAndPlay::logMessages() {
 	log("ProgAndPLay::logMessages begin");
 	int i = 0;
 	// Get next message
@@ -500,9 +520,29 @@ void CProgAndPlay::logMessages(){
 		msg = PP_PopMessage();
 		i++;
 	}
-	std::stringstream ss;
-	ss << "ProgAndPLay::logMessages end ("  << i << " messages logged)";
-	log(ss.str());
+	if (i > 0) {
+		std::stringstream ss;
+		ss << "ProgAndPLay::logMessages end ("  << i << " messages logged)";
+		log(ss.str());
+	}
+	else
+		log("ProgAndPLay::logMessages end");
+}
+
+void CProgAndPlay::openTracesFile() {
+	struct stat info;
+	if(stat(tracesDirName.c_str(), &info) != 0) {
+		PP_SetError("ProgAndPlay::traces directory does not exist");
+		log(PP_GetError());
+	}
+	else {
+		const std::map<std::string, std::string>& modOpts = gameSetup->modOptions;
+		std::string missionName = modOpts.at("missionname");
+		std::stringstream ss;
+		ss << tracesDirName << "\\" << missionName << ".log";
+		log(ss.str());
+		ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);
+	}
 }
 
 // ---

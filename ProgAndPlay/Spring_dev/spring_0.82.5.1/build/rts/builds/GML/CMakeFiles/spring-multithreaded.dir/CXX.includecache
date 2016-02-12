@@ -21841,6 +21841,8 @@ System/NetProtocol.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/NetProtocol.h
 Game/Game.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Game/Game.h
+Game/GameServer.h
+C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Game/GameServer.h
 Sim/Misc/GlobalConstants.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Sim/Misc/GlobalConstants.h
 Sim/Misc/TeamHandler.h
