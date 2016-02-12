@@ -50,7 +50,7 @@ function gadget:Initialize()
 	if (Spring.GetModOptions()["editor"] == "yes") then
 		Spring.SendCommands("cheat")
 		Spring.SendCommands("godmode")
-		Spring.SendCommands("globallos")
+		Spring.SendCommands("spectator")
 	end
 end
 
