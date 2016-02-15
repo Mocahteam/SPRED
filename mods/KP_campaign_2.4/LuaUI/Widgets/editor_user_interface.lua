@@ -159,33 +159,6 @@ function addEditBox(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
--- Select button functions
--------------------------------------
-function selectPlayer()
-	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.PLAYER], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectAlly()
-	teamStateMachine:setCurrentState(teamStateMachine.states.ALLY)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.ALLY], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectEnemy()
-	teamStateMachine:setCurrentState(teamStateMachine.states.ENEMY)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons[teamStateMachine.states.ENEMY], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
--------------------------------------
 -- Top bar functions (show/hide panels)
 -- TODO : Visual feedback for topBar buttons
 -------------------------------------
@@ -228,10 +201,11 @@ function unitFrame()
 	end
 	
 	-- Team buttons
+	-- TODO : may require refactor (TBD)
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
-	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
-	teamButtons[teamStateMachine.states.ENEMY] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
+	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", teamFunctions[teamStateMachine.states.PLAYER])
+	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", teamFunctions[teamStateMachine.states.ALLY])
+	teamButtons[teamStateMachine.states.ENEMY] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", teamFunctions[teamStateMachine.states.ENEMY])
 	
 	-- Selection image
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
@@ -292,11 +266,27 @@ function initUnitFunctions()
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
-			unitStateMachine:setCurrentState(unitStateMachine.states[u])
+			unitStateMachine:setCurrentState(u)
 			for key, ub in pairs(unitButtons) do
 				ub:RemoveChild(images["selectionType"])
 			end
 			images['selectionType'] = addImage(unitButtons[u], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+		end
+	end
+end
+
+-------------------------------------
+-- Generate functions for every teams
+-- Creates a function for every teamState to change state and handle selection feedback
+-------------------------------------
+function initTeamFunctions()
+	for k, t in pairs(teamStateMachine.states) do
+		teamFunctions[t] = function()
+			teamStateMachine:setCurrentState(t)
+			for _, tb in pairs(teamButtons) do
+				tb:RemoveChild(images["selectionTeam"])
+			end
+			images['selectionTeam'] = addImage(teamButtons[t], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 		end
 	end
 end
@@ -309,6 +299,7 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
+	initTeamFunctions()
 end
 
 -------------------------------------
