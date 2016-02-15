@@ -21877,15 +21877,13 @@ sys/types.h
 -
 sys/stat.h
 -
-stdio.h
--
-dirent.h
--
 fstream
 -
 sstream
 -
 iostream
+-
+map
 -
 
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/ProgAndPlay.h

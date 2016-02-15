@@ -26,6 +26,7 @@
 #include "PP_Error_Private.h"
 
 #include <signal.h>
+#include <math.h>
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/thread.hpp>
@@ -34,6 +35,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <ctime>
 
 //std::ofstream logFile("logClient.txt", std::ios::out | std::ofstream::trunc);
 
@@ -55,6 +57,8 @@ static bool ctrlC = false;
 static int locked = 0;
 /* Stores the number of critical section call */
 static int nbCriticalCall = 0;
+/* Used to indicate the elapsed time between PP_Open() and PP_Close() calls */
+clock_t start_time;
 
 /******************************************************************************/
 /* Internal Functions                                                         */
@@ -266,6 +270,7 @@ int PP_Open(){
 		exitCriticalSection();
 			
 		nbCriticalCall = 0;
+		start_time = std::clock();
 		
 		return 0;
 	}
@@ -286,6 +291,9 @@ int PP_Close (){
 		// notify function call to Spring
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
+			std::stringstream ss;
+			ss << "elapsed " << floor((float(std::clock() - start_time) / CLOCKS_PER_SEC) * 1000);
+			PP_PushMessage(ss.str().c_str());
 		exitCriticalSection();
 		opened = false;
 		/* deletes "segment" that enables access of data */
