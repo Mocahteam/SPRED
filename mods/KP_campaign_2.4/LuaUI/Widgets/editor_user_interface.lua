@@ -12,7 +12,6 @@ end
 
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
---VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
 local windows, buttons, teamButtons, unitButtons, fileButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}
@@ -363,7 +362,6 @@ function widget:Update(delta)
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 	
-	
 	-- Tell the gadget which units are selected
 	local msg = "Select Units"
 	for i, u in ipairs(Spring.GetSelectedUnits()) do
@@ -373,19 +371,11 @@ function widget:Update(delta)
 end
 
 
-
-
-
-
-
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
 
 
 local mouseMove = false
@@ -469,4 +459,33 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			Spring.SelectUnitArray(unitSelection)
 		end
 	end
+end
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------
+-- Shortcuts
+-------------------------------------
+function widget:KeyPress(key, mods)
+	-- Global 
+	-- CTRL + S : save the current level
+	if key == Spring.GetKeyCode("S") and mods.ctrl then
+		saveMap()
+	end
+	-- Selection state
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		-- CTRL + A : select all units
+		if key == Spring.GetKeyCode("a") and mods.ctrl then
+			Spring.SelectUnitArray(Spring.GetAllUnits())
+		-- DELETE : delete selected units
+		elseif key == Spring.GetKeyCode("delete") then
+			Spring.SendLuaRulesMsg("Delete Selected Units")
+		end
+	end
+	return true
 end

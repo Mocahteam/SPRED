@@ -43,6 +43,7 @@ local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local dX, dZ = 0, 0
 local moveUnits = false
+local deleteUnits = false
 local resetMap = false
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
@@ -72,6 +73,8 @@ function gadget:RecvLuaMsg(msg, player)
 			end
 		end
 		selectedUnits = tmptable
+	elseif (msgContents[1] == "Delete Selected Units") then
+		deleteUnits = true
 	elseif (msgContents[1] == "New Map") then
 		resetMap = true
 	elseif (msgContents[1] == "Load Map") then
@@ -80,25 +83,34 @@ function gadget:RecvLuaMsg(msg, player)
 end
 
 function gadget:GameFrame( frameNumber )
-	if (missionName == "LevelEditor" and createUnit) then
-		local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
-		Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
-		createUnit = false
-	elseif (missionName == "LevelEditor" and selectedUnits ~= {} and moveUnits) then
-		for i, u in ipairs(selectedUnits) do
-			curX, _, curZ = Spring.GetUnitPosition(u)
-			Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
-			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+	if missionName == "LevelEditor" then
+		if createUnit then
+			local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
+			Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
+			createUnit = false
+		elseif moveUnits then
+			if selectedUnits ~= {} then
+				for i, u in ipairs(selectedUnits) do
+					curX, _, curZ = Spring.GetUnitPosition(u)
+					Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
+					Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+				end
+			end
+			moveUnits = false
+		elseif deleteUnits then
+			if selectedUnits ~= {} then
+				for i, u in ipairs(selectedUnits) do
+					Spring.DestroyUnit(u)
+				end
+			end
+			deleteUnits = false
+		elseif (resetMap) then
+			local units = Spring.GetAllUnits()
+			for i = 1,table.getn(units) do
+				Spring.DestroyUnit(units[i], false, true)
+			end
+			resetMap = false
 		end
-		moveUnits = false
-	end
-	
-	if (resetMap) then
-		local units = Spring.GetAllUnits()
-		for i = 1,table.getn(units) do
-			Spring.DestroyUnit(units[i], false, true)
-		end
-		resetMap = false
 	end
 end
 --------------------------------------------------------------------------------
