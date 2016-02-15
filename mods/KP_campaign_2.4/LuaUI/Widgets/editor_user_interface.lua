@@ -383,50 +383,35 @@ end
 function widget:MousePress(mx, my, button)
 	-- Left click
 	if (button == 1) then
+		-- raycast
+		local kind,var = Spring.TraceScreenRay(mx,my)
+		
 		-- STATE UNIT : place units on the field
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-			-- raycast
-			local kind,var = Spring.TraceScreenRay(mx,my)
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then			
 			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
 			if kind == "ground" then
 				local xUnit, yUnit, zUnit = unpack(var)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
 			end
+			
 		-- STATE SELECTION : select and move units on the field
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-			-- raycasts
-			local kind,var = Spring.TraceScreenRay(mx,my)
-			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
-			if kind == "unit" then
-				-- multiple selection of units of same type using double click
-				-- TODO : same team
-				if doubleClick < 0.3 then
-					local unitType = Spring.GetUnitDefID(var)
-					local units = Spring.GetAllUnits()
-					local unitArray = {}
-					for i, u in ipairs(units) do
-						if Spring.GetUnitDefID(u) == unitType then
-							table.insert(unitArray, u)
-						end
-					end
+			if kind == "unit" then -- handle movement / selection
+				if doubleClick < 0.3 then -- multiple selection of units of same type using double click
+					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
 					proceedSelection(unitArray)
 					return true
 				else
-					for i, u in ipairs(Spring.GetSelectedUnits()) do
-						if var == u then
-							mouseMove = true -- proceed movement
-							clickToSelect = true
-							return true -- required to use MouseRelease and MouseMove
-						end
+					if Spring.IsUnitSelected(var) then
+						clickToSelect = true -- if the unit is already selected, allow isolation
+					else
+						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
 					end
-					-- if the unit was not selected, select it and proceed movement
-					proceedSelection({var})
 					mouseMove = true
 					return true
 				end
-			-- start a box selection
-			else
+			else -- start a box selection
 				proceedSelection({})
 				plotSelection = true
 				selectionStartX, selectionEndX = mx, mx
@@ -434,6 +419,7 @@ function widget:MousePress(mx, my, button)
 				return true
 			end
 		end
+		
 	-- Right click : enable selection / disable unit placement
 	elseif (button == 3 and globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT) then
 		for key, ub in pairs(unitButtons) do
@@ -450,19 +436,19 @@ function widget:MouseRelease(mx, my, button)
 	-- raycast
 	local kind, var = Spring.TraceScreenRay(mx, my)
 	
-	-- select one unit among selected units if the mouse did not move during the process
-	if kind == "unit" and clickToSelect and doubleClick > 0.3 then
-		proceedSelection({var})
-	end
 	if kind == "unit" then
-		-- reset double click timer
-		doubleClick = 0
+		if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
+			proceedSelection({var})
+		end
 	end
-	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+
+	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then -- return in idle state
 		plotSelection = false
 		mouseMove = false
-		return true
 	end
+	
+	doubleClick = 0 -- reset double click timer
+	return true
 end
 
 -------------------------------------
