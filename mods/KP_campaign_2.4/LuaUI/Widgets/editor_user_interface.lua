@@ -319,11 +319,18 @@ local plotSelection = false
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
 
 -------------------------------------
+-- Mouse tools
+-------------------------------------
+local mouseMove = false
+local doubleClick = 0
+
+-------------------------------------
 -- Update function
 -------------------------------------
 local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
 
 function widget:Update(delta)
+	-- Selection rectangle part
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
 	end
@@ -361,17 +368,13 @@ function widget:Update(delta)
 		msg = msg.."++"..u
 	end
 	Spring.SendLuaRulesMsg(msg)
+	
+	-- Double click timer
+	if doubleClick < 0.3 then
+		doubleClick = doubleClick + delta
+	end
 end
 
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-local mouseMove = false
 -------------------------------------
 -- Handle mouse button pressures
 -- TODO : don't handle pressures when they occur on an UI element
@@ -397,10 +400,24 @@ function widget:MousePress(mx, my, button)
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
+				-- multiple selection using shift
 				if shiftPressed then
 					local selectedUnits = Spring.GetSelectedUnits()
 					table.insert(selectedUnits, var)
 					Spring.SelectUnitArray(selectedUnits)
+					return true
+				-- multiple selection of units of same type using double click
+				elseif doubleClick < 0.3 then
+					local unitType = Spring.GetUnitDefID(var)
+					local units = Spring.GetAllUnits()
+					local unitArray = {}
+					for i, u in ipairs(units) do
+						if Spring.GetUnitDefID(u) == unitType then
+							table.insert(unitArray, u)
+						end
+					end
+					Spring.SelectUnitArray(unitArray)
+					return true
 				else
 					for i, u in ipairs(Spring.GetSelectedUnits()) do
 						if var == u then
@@ -434,6 +451,11 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
+	local kind, var = Spring.TraceScreenRay(mx, my)
+	if kind == "unit" then
+		-- reset double click timer
+		doubleClick = 0
+	end
 	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		plotSelection = false
 		mouseMove = false
@@ -461,14 +483,6 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		end
 	end
 end
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 -------------------------------------
 -- Shortcuts
