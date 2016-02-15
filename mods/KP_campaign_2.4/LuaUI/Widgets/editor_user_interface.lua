@@ -322,6 +322,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_v
 -- Mouse tools
 -------------------------------------
 local mouseMove = false
+local clickToSelect = false
 local doubleClick = 0
 
 -------------------------------------
@@ -423,6 +424,7 @@ function widget:MousePress(mx, my, button)
 					for i, u in ipairs(Spring.GetSelectedUnits()) do
 						if var == u then
 							mouseMove = true -- proceed movement
+							clickToSelect = true
 							return true -- required to use MouseRelease and MouseMove
 						end
 					end
@@ -461,7 +463,23 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
+	-- get mods
+	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
+	
+	-- raycast
 	local kind, var = Spring.TraceScreenRay(mx, my)
+	
+	-- select one unit among selected units if the mouse did not move during the process
+	if kind == "unit" and clickToSelect and doubleClick > 0.3 then
+		-- multiple selection using shift
+		if shiftPressed then
+			local selectedUnits = Spring.GetSelectedUnits()
+			table.insert(selectedUnits, var)
+			Spring.SelectUnitArray(selectedUnits)
+		else
+			Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
+		end
+	end
 	if kind == "unit" then
 		-- reset double click timer
 		doubleClick = 0
@@ -479,6 +497,9 @@ end
 function widget:MouseMove(mx, my, dmx, dmy, button)
 	-- get mods
 	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
+	
+	-- disable click to select if mousemove
+	clickToSelect = false
 	
 	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
 		-- If a unit is selected, send a message to the gadget to move it
