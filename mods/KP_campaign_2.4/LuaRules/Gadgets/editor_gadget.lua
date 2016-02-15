@@ -48,6 +48,7 @@ local resetMap = false
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
 function gadget:Initialize()
+	-- Allow to see everything and select any unit
 	if (Spring.GetModOptions()["editor"] == "yes") then
 		Spring.SendCommands("cheat")
 		Spring.SendCommands("godmode")
@@ -56,7 +57,7 @@ function gadget:Initialize()
 end
 
 function gadget:RecvLuaMsg(msg, player)
-	moveUnit = false
+	-- Split message into tokens
 	msgContents = splitString(msg, "++")
 	if (msgContents[1] == "Create Unit") then
 		createUnit = true

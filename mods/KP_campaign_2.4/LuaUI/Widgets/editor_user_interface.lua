@@ -159,12 +159,6 @@ function addEditBox(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
--- Getters for MouseHandler
--------------------------------------
-function getUnitButtons() return unitButtons end
-function getImages() return images end
-
--------------------------------------
 -- Select button functions
 -------------------------------------
 function selectPlayer()
@@ -315,7 +309,6 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
-	--Spring.SendCommands("GodMode 1")
 end
 
 -------------------------------------
@@ -384,6 +377,8 @@ local mouseMove = false
 -- TODO : don't handle pressures when they occur on an UI element
 -------------------------------------
 function widget:MousePress(mx, my, button)
+	-- get mods
+	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
 	-- Left click
 	if (button == 1) then
 		-- STATE UNIT : place units on the field
@@ -402,17 +397,23 @@ function widget:MousePress(mx, my, button)
 			local kind,var = Spring.TraceScreenRay(mx,my)
 			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
-				for i, u in ipairs(Spring.GetSelectedUnits()) do
-					if var == u then
-						mouseMove = true -- proceed movement
-						return true -- required to use MouseRelease and MouseMove
+				if shiftPressed then
+					local selectedUnits = Spring.GetSelectedUnits()
+					table.insert(selectedUnits, var)
+					Spring.SelectUnitArray(selectedUnits)
+				else
+					for i, u in ipairs(Spring.GetSelectedUnits()) do
+						if var == u then
+							mouseMove = true -- proceed movement
+							return true -- required to use MouseRelease and MouseMove
+						end
 					end
+					Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
+					mouseMove = true
+					return true
 				end
-				Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
-				mouseMove = true
-				return true
 			-- start a box selection
-			elseif kind == "ground" then
+			else
 				Spring.SelectUnitArray({})
 				plotSelection = true
 				selectionStartX, selectionEndX = mx, mx
@@ -468,14 +469,21 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 -------------------------------------
 -- Shortcuts
 -------------------------------------
 function widget:KeyPress(key, mods)
 	-- Global 
-	-- CTRL + S : save the current level
-	if key == Spring.GetKeyCode("S") and mods.ctrl then
+	-- CTRL + S : save the current map
+	if key == Spring.GetKeyCode("s") and mods.ctrl then
 		saveMap()
+	-- CTRL + O : load a map
+	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
+		loadMap("Missions/jsonFiles/Mission3.json")
+	-- CTRL + N : new map
+	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
+		newMap()
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
