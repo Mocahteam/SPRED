@@ -12,10 +12,9 @@ end
 
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
---VFS.Include("LuaUI/Widgets/editor/MouseHandler.lua")
 
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
@@ -160,39 +159,6 @@ function addEditBox(_parent, _x, _y, _w, _h)
 end
 
 -------------------------------------
--- Getters for MouseHandler
--------------------------------------
-function getUnitButtons() return unitButtons end
-function getImages() return images end
-
--------------------------------------
--- Select button functions
--------------------------------------
-function selectPlayer()
-	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons["player"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectAlly()
-	teamStateMachine:setCurrentState(teamStateMachine.states.ALLY)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons["ally"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
-function selectEnemy()
-	teamStateMachine:setCurrentState(teamStateMachine.states.ENEMY)
-	for key, button in pairs(teamButtons) do
-		button:RemoveChild(images["selectionTeam"])
-	end
-	images['selectionTeam'] = addImage(teamButtons["enemy"], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-end
-
--------------------------------------
 -- Top bar functions (show/hide panels)
 -- TODO : Visual feedback for topBar buttons
 -------------------------------------
@@ -209,14 +175,16 @@ function fileFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
 	
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '90%', '5%', "File")
+	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 
 function unitFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
-	teamStateMachine:setCurrentState(teamStateMachine.states.PLAYER)
+	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
 	
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
@@ -233,13 +201,15 @@ function unitFrame()
 	end
 	
 	-- Team buttons
+	-- TODO : may require refactor (TBD)
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	teamButtons['player'] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", selectPlayer)
-	teamButtons['ally'] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", selectAlly)
-	teamButtons['enemy'] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", selectEnemy)
+	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", teamFunctions[teamStateMachine.states.PLAYER])
+	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", teamFunctions[teamStateMachine.states.ALLY])
+	teamButtons[teamStateMachine.states.ENEMY] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", teamFunctions[teamStateMachine.states.ENEMY])
 	
 	-- Selection image
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	images['selectionTeam'] = addImage(teamButtons[teamStateMachine:getCurrentState()], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 
 function eventFrame()
@@ -296,11 +266,27 @@ function initUnitFunctions()
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
-			unitStateMachine:setCurrentState(unitStateMachine.states[u])
+			unitStateMachine:setCurrentState(u)
 			for key, ub in pairs(unitButtons) do
 				ub:RemoveChild(images["selectionType"])
 			end
 			images['selectionType'] = addImage(unitButtons[u], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+		end
+	end
+end
+
+-------------------------------------
+-- Generate functions for every teams
+-- Creates a function for every teamState to change state and handle selection feedback
+-------------------------------------
+function initTeamFunctions()
+	for k, t in pairs(teamStateMachine.states) do
+		teamFunctions[t] = function()
+			teamStateMachine:setCurrentState(t)
+			for _, tb in pairs(teamButtons) do
+				tb:RemoveChild(images["selectionTeam"])
+			end
+			images['selectionTeam'] = addImage(teamButtons[t], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 		end
 	end
 end
@@ -313,7 +299,7 @@ function widget:Initialize()
 	initChili()
 	initTopBar()
 	initUnitFunctions()
-	--Spring.SendCommands("GodMode 1")
+	initTeamFunctions()
 end
 
 -------------------------------------
@@ -324,11 +310,19 @@ local plotSelection = false
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
 
 -------------------------------------
+-- Mouse tools
+-------------------------------------
+local mouseMove = false
+local clickToSelect = false
+local doubleClick = 0
+
+-------------------------------------
 -- Update function
 -------------------------------------
 local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
 
 function widget:Update(delta)
+	-- Selection rectangle part
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
 	end
@@ -360,32 +354,19 @@ function widget:Update(delta)
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 	
-	
 	-- Tell the gadget which units are selected
 	local msg = "Select Units"
 	for i, u in ipairs(Spring.GetSelectedUnits()) do
 		msg = msg.."++"..u
 	end
 	Spring.SendLuaRulesMsg(msg)
+	
+	-- Double click timer
+	if doubleClick < 0.3 then
+		doubleClick = doubleClick + delta
+	end
 end
 
-
-
-
-
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-local mouseMove = false
 -------------------------------------
 -- Handle mouse button pressures
 -- TODO : don't handle pressures when they occur on an UI element
@@ -393,40 +374,50 @@ local mouseMove = false
 function widget:MousePress(mx, my, button)
 	-- Left click
 	if (button == 1) then
+		-- raycast
+		local kind,var = Spring.TraceScreenRay(mx,my)
+		
 		-- STATE UNIT : place units on the field
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-			-- raycast
-			local kind,var = Spring.TraceScreenRay(mx,my)
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then			
 			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
 			if kind == "ground" then
 				local xUnit, yUnit, zUnit = unpack(var)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
-			end
-		-- STATE SELECTION : select and move units on the field
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-			-- raycasts
-			local kind,var = Spring.TraceScreenRay(mx,my)
-			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
-			if kind == "unit" then
-				for i, u in ipairs(Spring.GetSelectedUnits()) do
-					if var == u then
-						mouseMove = true -- proceed movement
-						return true -- required to use MouseRelease and MouseMove
-					end
+			elseif kind == "unit" then
+				for key, ub in pairs(unitButtons) do
+					ub:RemoveChild(images["selectionType"])
 				end
-				Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
-				mouseMove = true
-				return true
-			-- start a box selection
-			elseif kind == "ground" then
-				Spring.SelectUnitArray({})
+				globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
+			end
+		end
+		
+		-- STATE SELECTION : select and move units on the field
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+			if kind == "unit" then -- handle movement / selection
+				if doubleClick < 0.3 then -- multiple selection of units of same type using double click
+					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
+					proceedSelection(unitArray)
+					return true
+				else
+					if Spring.IsUnitSelected(var) then
+						clickToSelect = true -- if the unit is already selected, allow isolation
+					else
+						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
+					end
+					mouseMove = true
+					Spring.SendLuaRulesMsg("Anchor".."++"..var)
+					return true
+				end
+			else -- start a box selection
+				proceedSelection({})
 				plotSelection = true
 				selectionStartX, selectionEndX = mx, mx
 				selectionStartY, selectionEndY = my, my
 				return true
 			end
 		end
+		
 	-- Right click : enable selection / disable unit placement
 	elseif (button == 3 and globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT) then
 		for key, ub in pairs(unitButtons) do
@@ -440,30 +431,41 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
-	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
+	-- raycast
+	local kind, var = Spring.TraceScreenRay(mx, my)
+	
+	if kind == "unit" then
+		if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
+			proceedSelection({var})
+		end
+	end
+
+	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then -- return in idle state
 		plotSelection = false
 		mouseMove = false
-		return true
 	end
+	
+	doubleClick = 0 -- reset double click timer
+	return true
 end
 
 -------------------------------------
 -- Handle mouse movements
 -------------------------------------
-function widget:MouseMove(mx, my, dmx, dmy, button)
-	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
+function widget:MouseMove(mx, my, dmx, dmy, button)	
+	-- disable click to select and double click if mousemove
+	clickToSelect = false
+	doubleClick = 0.3
+	
+	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
-			--[[
-			local kind, var = Spring.TraceScreenRay(mx - dmx, my - dmy, true)
-			local kind2, var2 = Spring.TraceScreenRay(mx, my, true)
-			local Ax1, Ay1, Az1 = unpack(var)
-			local Bx1, By1, Bz1 = unpack(var2)
-			local dX, dZ = Bx1-Ax1, By1-Ay1
-			local msg = "Move Units".."++"..dX.."++"..dZ
-			]]
-			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
-			Spring.SendLuaRulesMsg(msg)
+			local _, pos = Spring.TraceScreenRay(mx, my, true)
+			if pos ~=nil then
+				local x, _, z = unpack(pos)
+				local msg = "Move Units".."++"..x.."++"..z
+				Spring.SendLuaRulesMsg(msg)
+			end
 		end
 		-- update selection box
 		if plotSelection then
@@ -471,7 +473,35 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			selectionEndY = my
 			-- Select all units in the rectangle
 			local unitSelection = GetUnitsInScreenRectangle(selectionStartX, selectionStartY, selectionEndX, selectionEndY)
-			Spring.SelectUnitArray(unitSelection)
+			proceedSelection(unitSelection)
 		end
 	end
+end
+
+-------------------------------------
+-- Shortcuts
+-------------------------------------
+function widget:KeyPress(key, mods)
+	-- Global 
+	-- CTRL + S : save the current map
+	if key == Spring.GetKeyCode("s") and mods.ctrl then
+		saveMap()
+	-- CTRL + O : load a map
+	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
+		loadMap("Missions/jsonFiles/Mission3.json")
+	-- CTRL + N : new map
+	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
+		newMap()
+	end
+	-- Selection state
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		-- CTRL + A : select all units
+		if key == Spring.GetKeyCode("a") and mods.ctrl then
+			Spring.SelectUnitArray(Spring.GetAllUnits())
+		-- DELETE : delete selected units
+		elseif key == Spring.GetKeyCode("delete") then
+			Spring.SendLuaRulesMsg("Delete Selected Units")
+		end
+	end
+	return true
 end
