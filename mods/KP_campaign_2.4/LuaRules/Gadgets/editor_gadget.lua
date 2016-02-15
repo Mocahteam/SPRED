@@ -45,6 +45,7 @@ local dX, dZ = 0, 0
 local moveUnits = false
 local deleteUnits = false
 local resetMap = false
+local moveUnitsAnchor = nil
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
 function gadget:Initialize()
@@ -63,9 +64,13 @@ function gadget:RecvLuaMsg(msg, player)
 		createUnit = true
 		unitType, team = msgContents[2], tonumber(msgContents[3])
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
+	elseif (msgContents[1] == "Anchor") then
+		moveUnitsAnchor = tonumber(msgContents[2])
 	elseif (msgContents[1] == "Move Units") then
 		moveUnits = true
-		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+		local x, z = tonumber(msgContents[2]), tonumber(msgContents[3])
+		local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		dX, dZ = x-refX, z-refZ
 	elseif (msgContents[1] == "Select Units") then
 		local tmptable = {}
 		for i, u in ipairs(msgContents) do
@@ -92,8 +97,8 @@ function gadget:GameFrame( frameNumber )
 		elseif moveUnits then
 			if selectedUnits ~= {} then
 				for i, u in ipairs(selectedUnits) do
-					curX, _, curZ = Spring.GetUnitPosition(u)
-					Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
+					local curX, _, curZ = Spring.GetUnitPosition(u)
+					Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ + dZ), curZ + dZ)
 					Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 				end
 			end

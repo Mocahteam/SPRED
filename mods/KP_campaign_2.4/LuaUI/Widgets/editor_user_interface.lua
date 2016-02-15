@@ -384,10 +384,16 @@ function widget:MousePress(mx, my, button)
 				local xUnit, yUnit, zUnit = unpack(var)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
+			elseif kind == "unit" then
+				for key, ub in pairs(unitButtons) do
+					ub:RemoveChild(images["selectionType"])
+				end
+				globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 			end
-			
+		end
+		
 		-- STATE SELECTION : select and move units on the field
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 			if kind == "unit" then -- handle movement / selection
 				if doubleClick < 0.3 then -- multiple selection of units of same type using double click
 					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
@@ -400,6 +406,7 @@ function widget:MousePress(mx, my, button)
 						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
 					end
 					mouseMove = true
+					Spring.SendLuaRulesMsg("Anchor".."++"..var)
 					return true
 				end
 			else -- start a box selection
@@ -453,8 +460,12 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
-			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
-			Spring.SendLuaRulesMsg(msg)
+			local _, pos = Spring.TraceScreenRay(mx, my, true)
+			if pos ~=nil then
+				local x, _, z = unpack(pos)
+				local msg = "Move Units".."++"..x.."++"..z
+				Spring.SendLuaRulesMsg(msg)
+			end
 		end
 		-- update selection box
 		if plotSelection then
