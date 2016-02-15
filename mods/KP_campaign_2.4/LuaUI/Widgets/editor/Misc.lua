@@ -2,7 +2,9 @@
 
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
+-----------------------
 -- Sort two values
+-----------------------
 function sort(v1, v2)
 	if v1 > v2 then
 		return v2, v1
@@ -11,7 +13,9 @@ function sort(v1, v2)
 	end
 end
 
+-----------------------
 -- Select every units in a rectangle
+-----------------------
 function GetUnitsInScreenRectangle(x1, y1, x2, y2)
 	local units = Spring.GetAllUnits()
 	
@@ -50,4 +54,24 @@ end
 
 function saveMap()
 
+end
+
+-----------------------
+-- Select units or add/remove them to the current selection if shift is pressed
+-----------------------
+function proceedSelection(units)
+	-- get mods
+	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
+	-- multiple selection if shift is pressed
+	if shiftPressed then
+		-- get selected units
+		local selectedUnits = Spring.GetSelectedUnits()
+		-- add units to selection
+		for i, u in ipairs(units) do
+			table.insert(selectedUnits, u)
+		end
+		Spring.SelectUnitArray(selectedUnits)
+	else
+		Spring.SelectUnitArray(units)
+	end
 end

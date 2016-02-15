@@ -381,8 +381,6 @@ end
 -- TODO : don't handle pressures when they occur on an UI element
 -------------------------------------
 function widget:MousePress(mx, my, button)
-	-- get mods
-	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
 	-- Left click
 	if (button == 1) then
 		-- STATE UNIT : place units on the field
@@ -402,6 +400,7 @@ function widget:MousePress(mx, my, button)
 			-- If unit is pointed, check if it is selected and in that case, send a message to move all selected units
 			if kind == "unit" then
 				-- multiple selection of units of same type using double click
+				-- TODO : same team
 				if doubleClick < 0.3 then
 					local unitType = Spring.GetUnitDefID(var)
 					local units = Spring.GetAllUnits()
@@ -411,14 +410,7 @@ function widget:MousePress(mx, my, button)
 							table.insert(unitArray, u)
 						end
 					end
-					-- multiple selection using shift
-					if shiftPressed then
-						local selectedUnits = Spring.GetSelectedUnits()
-						for i, u in ipairs(selectedUnits) do
-							table.insert(unitArray, u)
-						end
-					end
-					Spring.SelectUnitArray(unitArray)
+					proceedSelection(unitArray)
 					return true
 				else
 					for i, u in ipairs(Spring.GetSelectedUnits()) do
@@ -428,22 +420,14 @@ function widget:MousePress(mx, my, button)
 							return true -- required to use MouseRelease and MouseMove
 						end
 					end
-					-- multiple selection using shift
-					if shiftPressed then
-						local selectedUnits = Spring.GetSelectedUnits()
-						table.insert(selectedUnits, var)
-						Spring.SelectUnitArray(selectedUnits)
-					else
-						Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
-					end
+					-- if the unit was not selected, select it and proceed movement
+					proceedSelection({var})
 					mouseMove = true
 					return true
 				end
 			-- start a box selection
 			else
-				if not shiftPressed then
-					Spring.SelectUnitArray({})
-				end
+				proceedSelection({})
 				plotSelection = true
 				selectionStartX, selectionEndX = mx, mx
 				selectionStartY, selectionEndY = my, my
@@ -463,28 +447,18 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
-	-- get mods
-	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
-	
 	-- raycast
 	local kind, var = Spring.TraceScreenRay(mx, my)
 	
 	-- select one unit among selected units if the mouse did not move during the process
 	if kind == "unit" and clickToSelect and doubleClick > 0.3 then
-		-- multiple selection using shift
-		if shiftPressed then
-			local selectedUnits = Spring.GetSelectedUnits()
-			table.insert(selectedUnits, var)
-			Spring.SelectUnitArray(selectedUnits)
-		else
-			Spring.SelectUnitArray({var}) -- if the unit was not selected, select it and proceed movement
-		end
+		proceedSelection({var})
 	end
 	if kind == "unit" then
 		-- reset double click timer
 		doubleClick = 0
 	end
-	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
+	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		plotSelection = false
 		mouseMove = false
 		return true
@@ -494,14 +468,12 @@ end
 -------------------------------------
 -- Handle mouse movements
 -------------------------------------
-function widget:MouseMove(mx, my, dmx, dmy, button)
-	-- get mods
-	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
-	
-	-- disable click to select if mousemove
+function widget:MouseMove(mx, my, dmx, dmy, button)	
+	-- disable click to select and double click if mousemove
 	clickToSelect = false
+	doubleClick = 0.3
 	
-	if button == 1 and globalStateMachine:getCurrentState() == "selection" then
+	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		-- If a unit is selected, send a message to the gadget to move it
 		if mouseMove and not plotSelection then
 			local msg = "Move Units".."++"..dmx.."++"..dmy -- TODO : compute world's dx and dz
@@ -513,14 +485,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			selectionEndY = my
 			-- Select all units in the rectangle
 			local unitSelection = GetUnitsInScreenRectangle(selectionStartX, selectionStartY, selectionEndX, selectionEndY)
-			-- multiple selection using shift
-			if shiftPressed then
-				local selectedUnits = Spring.GetSelectedUnits()
-				for i, u in ipairs(selectedUnits) do
-					table.insert(unitSelection, u)
-				end
-			end
-			Spring.SelectUnitArray(unitSelection)
+			proceedSelection(unitSelection)
 		end
 	end
 end
