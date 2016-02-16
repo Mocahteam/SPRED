@@ -32,6 +32,7 @@ local Tab = rooms.Tab
 
 local tracesDir = "traces"
 local ppTraces = nil -- File handler to store traces
+local startTime = os.clock()
 
 -- Set label
 local previousMission = "Previous mission"
@@ -59,10 +60,11 @@ end
 
 
 -- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
-local function createTmpFile()
+local function createTmpFile(victoryState,endTime)
 	if not VFS.FileExists("mission_ended.conf") then
 		local f = io.open("mission_ended.conf", "w")
 		if f ~= nil then
+			f:write(victoryState.." "..endTime.."\n")
 			f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
 			f:flush()
 			f:close()
@@ -207,6 +209,8 @@ function MissionEvent(e)
 		WG.Message:DeleteAll()
 		-- load templated mission
 		local popup = deepcopy(template_endMission)
+		local victoryState = ""
+		local endTime = math.floor((os.clock()-startTime) * 1000)
 		-- update window
 		if e.state ~= "menu" then
 			if e.state == "won" then
@@ -221,17 +225,10 @@ function MissionEvent(e)
 				else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
-				ppTraces = io.open(tracesDir..'\\'..missionName..".log", "a")
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." won\n")
-					ppTraces:flush()
-				end
+				victoryState = "won"
 			else
 				popup.lineArray = {loss}
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." loss\n")
-					ppTraces:flush()
-				end
+				victoryState = "loss"
 			end
 			
 			-- Enable PreviousMission and NextMission tabs
@@ -271,7 +268,7 @@ function MissionEvent(e)
 			-- disable "Close tab" and "Show briefing"
 			popup.tabs[6] = nil
 			-- inform the game that mission is over with a temporary file
-			createTmpFile()
+			createTmpFile(victoryState,endTime)
 		else
 			popup.lineArray = {"Menu"}
 		end
