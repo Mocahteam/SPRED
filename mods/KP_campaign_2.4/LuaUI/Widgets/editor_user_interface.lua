@@ -401,7 +401,11 @@ function widget:MousePress(mx, my, button)
 					return true
 				else
 					if Spring.IsUnitSelected(var) then
-						clickToSelect = true -- if the unit is already selected, allow isolation
+						if proceedDeselection(var) then -- deselect the unit if shift is pressed
+							return false
+						else
+							clickToSelect = true -- if the unit is already selected and shift is not pressed, allow isolation
+						end
 					else
 						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
 					end

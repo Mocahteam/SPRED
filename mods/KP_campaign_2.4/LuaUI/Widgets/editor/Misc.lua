@@ -57,7 +57,7 @@ function saveMap()
 end
 
 -----------------------
--- Select units or add/remove them to the current selection if shift is pressed
+-- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
 	-- get mods
@@ -74,4 +74,26 @@ function proceedSelection(units)
 	else
 		Spring.SelectUnitArray(units)
 	end
+end
+
+-----------------------
+-- Remove a unit from the current selection if shift is pressed
+-- @return returns shiftPressed to disable click to select
+-----------------------
+function proceedDeselection(unit)
+	-- get mods
+	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
+	-- multiple selection if shift is pressed
+	if shiftPressed then
+		-- get selected units
+		local selectedUnits = Spring.GetSelectedUnits()
+		-- add units to selection
+		for i, u in ipairs(selectedUnits) do
+			if u == unit then
+				table.remove(selectedUnits, i)
+			end
+		end
+		Spring.SelectUnitArray(selectedUnits)
+	end
+	return shiftPressed
 end
