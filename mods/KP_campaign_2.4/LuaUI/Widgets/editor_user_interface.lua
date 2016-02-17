@@ -188,16 +188,23 @@ function unitFrame()
 	
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
+
+	-- Put unit states in an array to sort them alphabetically
+	local unitStates = {}
+	for k, u in pairs(unitStateMachine.states) do
+		if k ~= "DEFAULT" then
+			table.insert(unitStates, u)
+		end
+	end
+	table.sort(unitStates)
 	
 	-- Unit buttons
 	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
 	local button_size = 40
 	local y = 0
-	for k,u in pairs(unitStateMachine.states) do
-		if (k ~= "DEFAULT") then
-			unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
-			y = y + button_size
-		end
+	for i,u in ipairs(unitStates) do
+		unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+		y = y + button_size
 	end
 	
 	-- Team buttons
@@ -317,7 +324,7 @@ function widget:DrawScreen()
 		local text1 = "ID:"..tostring(u)
 		local w1 = gl.GetTextWidth(text1)
 		gl.Text(text1, x - (15*w1/2), y, 15, "s")
-		local text2 = "x:"..tostring(xU).." z:"..tostring(zU)
+		local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
 		local w2 = gl.GetTextWidth(text2)
 		gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
 	end
