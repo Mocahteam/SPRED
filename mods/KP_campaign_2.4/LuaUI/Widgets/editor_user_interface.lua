@@ -305,6 +305,26 @@ function widget:Initialize()
 end
 
 -------------------------------------
+-- Draw informations about selected units (id, position)
+-- May be useful to replace markers in mission 3
+-------------------------------------
+function widget:DrawScreen()
+	local unitSelection = Spring.GetSelectedUnits()
+	gl.BeginText()
+	for i, u in ipairs(unitSelection) do
+		local xU, yU, zU = Spring.GetUnitPosition(u)
+		local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+		local text1 = "ID:"..tostring(u)
+		local w1 = gl.GetTextWidth(text1)
+		gl.Text(text1, x - (15*w1/2), y, 15, "s")
+		local text2 = "x:"..tostring(xU).." z:"..tostring(zU)
+		local w2 = gl.GetTextWidth(text2)
+		gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
+	end
+	gl.EndText()
+end
+
+-------------------------------------
 -- Draw selection tools
 -------------------------------------
 local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
@@ -383,6 +403,7 @@ function widget:MousePress(mx, my, button)
 			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
 			if kind == "ground" then
 				local xUnit, yUnit, zUnit = unpack(var)
+				xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
 			elseif kind == "unit" then
@@ -468,6 +489,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			local _, pos = Spring.TraceScreenRay(mx, my, true)
 			if pos ~=nil then
 				local x, _, z = unpack(pos)
+				x, z = round(x), round(z)
 				local msg = "Move Units".."++"..x.."++"..z
 				Spring.SendLuaRulesMsg(msg)
 			end

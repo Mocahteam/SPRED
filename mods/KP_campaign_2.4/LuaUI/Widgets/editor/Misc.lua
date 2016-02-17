@@ -14,6 +14,14 @@ function sort(v1, v2)
 end
 
 -----------------------
+-- Round a value
+-----------------------
+function round(num, idp)
+	local mult = 10^(idp or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
+
+-----------------------
 -- Select every units in a rectangle
 -----------------------
 function GetUnitsInScreenRectangle(x1, y1, x2, y2)
