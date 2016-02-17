@@ -74,6 +74,9 @@ function gadget:RecvLuaMsg(msg, player)
 		local x, z = tonumber(msgContents[2]), tonumber(msgContents[3])
 		local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
 		dX, dZ = x-refX, z-refZ
+	elseif (msgContents[1] == "Translate Units") then
+		moveUnits = true
+		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
 	elseif (msgContents[1] == "Select Units") then
 		local tmptable = {}
 		for i, u in ipairs(msgContents) do

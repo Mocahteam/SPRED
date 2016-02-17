@@ -528,6 +528,19 @@ function widget:KeyPress(key, mods)
 		-- DELETE : delete selected units
 		elseif key == Spring.GetKeyCode("delete") then
 			Spring.SendLuaRulesMsg("Delete Selected Units")
+		-- ARROWS : move selected units
+		elseif key == Spring.GetKeyCode("up") then
+			local msg = "Translate Units".."++".."0".."++".."-1"
+			Spring.SendLuaRulesMsg(msg)
+		elseif key == Spring.GetKeyCode("down") then
+			local msg = "Translate Units".."++".."0".."++".."1"
+			Spring.SendLuaRulesMsg(msg)
+		elseif key == Spring.GetKeyCode("left") then
+			local msg = "Translate Units".."++".."-1".."++".."0"
+			Spring.SendLuaRulesMsg(msg)
+		elseif key == Spring.GetKeyCode("right") then
+			local msg = "Translate Units".."++".."1".."++".."0"
+			Spring.SendLuaRulesMsg(msg)
 		end
 	end
 	return true
