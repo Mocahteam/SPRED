@@ -332,6 +332,27 @@ function widget:DrawScreen()
 end
 
 -------------------------------------
+-- Draw units before placing them
+-------------------------------------
+function widget:DrawWorld()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		local mx, my = Spring.GetMouseState()
+		local kind, coords = Spring.TraceScreenRay(mx, my)
+		if kind == "ground" then
+			local x, _, z = unpack(coords)
+			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
+			gl.DepthTest(GL.LEQUAL)
+			gl.DepthMask(true)
+			gl.PushMatrix()
+			gl.Color(1, 1, 1, 1)
+			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
+			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
+			gl.PopMatrix()
+		end
+	end
+end
+
+-------------------------------------
 -- Draw selection tools
 -------------------------------------
 local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
