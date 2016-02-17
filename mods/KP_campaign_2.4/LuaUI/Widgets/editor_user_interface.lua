@@ -34,14 +34,14 @@ end
 -------------------------------------
 -- Add a window to a specific parent
 -------------------------------------
-function addWindow(_parent, _x, _y, _w, _h)
+function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	local window = Chili.Window:New{
 		parent = _parent,
 		x = _x,
 		y = _y,
 		width  = _w,
 		height = _h,
-		draggable = false,
+		draggable = _draggable or false,
 		resizable = false
 	}
 	return window
@@ -287,6 +287,8 @@ function initTeamFunctions()
 				tb:RemoveChild(images["selectionTeam"])
 			end
 			images['selectionTeam'] = addImage(teamButtons[t], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+			local msg = "Transfer Units".."++"..t
+			Spring.SendLuaRulesMsg(msg)
 		end
 	end
 end
@@ -308,6 +310,7 @@ end
 local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
+local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
 
 -------------------------------------
 -- Mouse tools
@@ -319,8 +322,6 @@ local doubleClick = 0
 -------------------------------------
 -- Update function
 -------------------------------------
-local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
-
 function widget:Update(delta)
 	-- Selection rectangle part
 	if images["selectionRect"] ~= nil then
@@ -354,7 +355,7 @@ function widget:Update(delta)
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 	
-	-- Tell the gadget which units are selected
+	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local msg = "Select Units"
 	for i, u in ipairs(Spring.GetSelectedUnits()) do
 		msg = msg.."++"..u

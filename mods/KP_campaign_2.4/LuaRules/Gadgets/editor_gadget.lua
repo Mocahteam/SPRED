@@ -39,11 +39,13 @@ local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local createUnit = false
 local unitType, team = "bit", 0
+local newTeam = 0
 local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local dX, dZ = 0, 0
 local moveUnits = false
 local deleteUnits = false
+local transferUnits = false
 local resetMap = false
 local moveUnitsAnchor = nil
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
@@ -58,6 +60,7 @@ function gadget:Initialize()
 end
 
 function gadget:RecvLuaMsg(msg, player)
+	--Spring.Echo(msg)
 	-- Split message into tokens
 	msgContents = splitString(msg, "++")
 	if (msgContents[1] == "Create Unit") then
@@ -81,6 +84,9 @@ function gadget:RecvLuaMsg(msg, player)
 		selectedUnits = tmptable
 	elseif (msgContents[1] == "Delete Selected Units") then
 		deleteUnits = true
+	elseif (msgContents[1] == "Transfer Units") then
+		newTeam = msgContents[2]
+		transferUnits = true
 	elseif (msgContents[1] == "New Map") then
 		resetMap = true
 	elseif (msgContents[1] == "Load Map") then
@@ -110,7 +116,12 @@ function gadget:GameFrame( frameNumber )
 				end
 			end
 			deleteUnits = false
-		elseif (resetMap) then
+		elseif transferUnits then
+			for i, u in ipairs(selectedUnits) do
+				--Spring.TransferUnit(u, newTeam) --BUGGED
+			end
+			transfertUnits = false
+		elseif resetMap then
 			local units = Spring.GetAllUnits()
 			for i = 1,table.getn(units) do
 				Spring.DestroyUnit(units[i], false, true)
