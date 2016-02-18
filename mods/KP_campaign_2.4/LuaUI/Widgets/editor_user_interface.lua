@@ -13,9 +13,27 @@ end
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
+-------------------------------------
+-- UI Variables
+-------------------------------------
 local Chili, Screen0
 local windows, buttons, teamButtons, unitButtons, fileButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
+
+-------------------------------------
+-- Draw selection tools
+-------------------------------------
+local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
+local plotSelection = false
+function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
+local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
+
+-------------------------------------
+-- Mouse tools
+-------------------------------------
+local mouseMove = false
+local clickToSelect = false
+local doubleClick = 0
 
 -------------------------------------
 -- Initialize ChiliUI
@@ -315,7 +333,7 @@ end
 -- Draw things on the screen
 -------------------------------------
 function widget:DrawScreen()
-	-- Draw informations about selected units (id, position)
+	-- Draw information about selected units (id, position)
 	-- May be useful to replace markers in mission 3
 	local unitSelection = Spring.GetSelectedUnits()
 	gl.BeginText()
@@ -331,9 +349,36 @@ function widget:DrawScreen()
 	end
 	gl.EndText()
 	
+	-- Draw information above hovered unit
+	local mx, my = Spring.GetMouseState()
+	local kind, var = Spring.TraceScreenRay(mx, my)
+	if kind == "unit" then
+		local isUnitSelected = false
+		for _, u in ipairs(unitSelection) do
+			if var == u then
+				isUnitSelected = true
+				break
+			end
+		end
+		if not isUnitSelected then
+			gl.BeginText()
+			local xU, yU, zU = Spring.GetUnitPosition(var)
+			local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+			local text1 = "ID:"..tostring(var)
+			local w1 = gl.GetTextWidth(text1)
+			gl.Text(text1, x - (15*w1/2), y, 15, "s")
+			local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
+			local w2 = gl.GetTextWidth(text2)
+			gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
+			gl.EndText()
+		end
+	end
+	
 	-- Hide mouse cursor in unit state and show another cursor in other states
 	local mouseCursor = Spring.GetMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and mouseCursor ~= "none" and Screen0.hoveredControl == false then
+		Spring.SetMouseCursor("none")
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION and mouseCursor ~= "none" and mouseMove then
 		Spring.SetMouseCursor("none")
 	elseif mouseCursor ~= "cursornormal" then
 		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move
@@ -362,20 +407,6 @@ function widget:DrawWorld()
 	end
 end
 
--------------------------------------
--- Draw selection tools
--------------------------------------
-local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
-local plotSelection = false
-function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
-local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
-
--------------------------------------
--- Mouse tools
--------------------------------------
-local mouseMove = false
-local clickToSelect = false
-local doubleClick = 0
 
 -------------------------------------
 -- Update function
