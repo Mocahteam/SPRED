@@ -18,22 +18,6 @@ function StateMachine.setCurrentState(self, _currentState) self.currentState = _
 -- Getter
 function StateMachine.getCurrentState(self) return self.currentState end
 
--------------------------------------
--- Useful function to split messages into tokens
--------------------------------------
-function splitString(inputstr, sep)
-	if sep == nil then
-		sep = "%s"
-	end
-	local t = {}
-	local i = 1
-	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-		t[i] = str
-		i = i + 1
-	end
-	return t
-end
-
 ------------------------------
 -- Initialize global state machine
 ------------------------------

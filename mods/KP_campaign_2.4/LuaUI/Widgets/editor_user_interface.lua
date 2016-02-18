@@ -319,100 +319,9 @@ function initTeamFunctions()
 end
 
 -------------------------------------
--- Initialize the widget
+-- Draw the selection feedback rectangle
 -------------------------------------
-function widget:Initialize()
-	hideDefaultGUI()
-	initChili()
-	initTopBar()
-	initUnitFunctions()
-	initTeamFunctions()
-end
-
--------------------------------------
--- Draw things on the screen
--------------------------------------
-function widget:DrawScreen()
-	-- Draw information about selected units (id, position)
-	-- May be useful to replace markers in mission 3
-	local unitSelection = Spring.GetSelectedUnits()
-	gl.BeginText()
-	for i, u in ipairs(unitSelection) do
-		local xU, yU, zU = Spring.GetUnitPosition(u)
-		local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
-		local text1 = "ID:"..tostring(u)
-		local w1 = gl.GetTextWidth(text1)
-		gl.Text(text1, x - (15*w1/2), y, 15, "s")
-		local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
-		local w2 = gl.GetTextWidth(text2)
-		gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
-	end
-	gl.EndText()
-	
-	-- Draw information above hovered unit
-	local mx, my = Spring.GetMouseState()
-	local kind, var = Spring.TraceScreenRay(mx, my)
-	if kind == "unit" then
-		local isUnitSelected = false
-		for _, u in ipairs(unitSelection) do
-			if var == u then
-				isUnitSelected = true
-				break
-			end
-		end
-		if not isUnitSelected then
-			gl.BeginText()
-			local xU, yU, zU = Spring.GetUnitPosition(var)
-			local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
-			local text1 = "ID:"..tostring(var)
-			local w1 = gl.GetTextWidth(text1)
-			gl.Text(text1, x - (15*w1/2), y, 15, "s")
-			local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
-			local w2 = gl.GetTextWidth(text2)
-			gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
-			gl.EndText()
-		end
-	end
-	
-	-- Hide mouse cursor in unit state and show another cursor in other states
-	local mouseCursor = Spring.GetMouseCursor()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and mouseCursor ~= "none" and Screen0.hoveredControl == false then
-		Spring.SetMouseCursor("none")
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION and mouseCursor ~= "none" and mouseMove then
-		Spring.SetMouseCursor("none")
-	elseif mouseCursor ~= "cursornormal" then
-		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move
-	end
-end
-
--------------------------------------
--- Draw things in the world
--------------------------------------
-function widget:DrawWorld()
-	-- Draw units before placing them
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
-		local mx, my = Spring.GetMouseState()
-		local kind, coords = Spring.TraceScreenRay(mx, my)
-		if kind == "ground" then
-			local x, _, z = unpack(coords)
-			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
-			gl.DepthTest(GL.LEQUAL)
-			gl.DepthMask(true)
-			gl.PushMatrix()
-			gl.Color(1, 1, 1, 0.7)
-			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
-			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
-			gl.PopMatrix()
-		end
-	end
-end
-
-
--------------------------------------
--- Update function
--------------------------------------
-function widget:Update(delta)
-	-- Selection rectangle part
+function drawSelectionRect()
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
 	end
@@ -443,6 +352,109 @@ function widget:Update(delta)
 		-- draw the rectangle
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
+end
+
+-------------------------------------
+-- Show information about specific units
+-------------------------------------
+function showInformation()
+	-- Draw information about selected units (id, position)
+	-- May be useful to replace markers in mission 3
+	local unitSelection = Spring.GetSelectedUnits()
+	gl.BeginText()
+	for i, u in ipairs(unitSelection) do
+		showUnitInformation(u)
+	end
+	gl.EndText()
+	
+	-- Draw information above hovered unit
+	local mx, my = Spring.GetMouseState()
+	local kind, var = Spring.TraceScreenRay(mx, my)
+	if kind == "unit" then
+		local isUnitSelected = false
+		for _, u in ipairs(unitSelection) do
+			if var == u then
+				isUnitSelected = true
+				break
+			end
+		end
+		if not isUnitSelected then
+			gl.BeginText()
+			showUnitInformation(var)
+			gl.EndText()
+		end
+	end
+end
+
+-------------------------------------
+-- Hide mouse cursor in unit state and during movement, show another cursor in other states
+-------------------------------------
+function hideMouseCursor()
+	local mouseCursor = Spring.GetMouseCursor()
+	if mouseCursor ~= "none" then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
+			Spring.SetMouseCursor("none")
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION and mouseMove then
+			Spring.SetMouseCursor("none")
+		end
+	elseif mouseCursor ~= "cursornormal" then
+		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move
+	end
+end
+
+-------------------------------------
+-- Draw units before placing them
+-------------------------------------
+function previewUnit()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
+		local mx, my = Spring.GetMouseState()
+		local kind, coords = Spring.TraceScreenRay(mx, my)
+		if kind == "ground" then
+			local x, _, z = unpack(coords)
+			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
+			gl.DepthTest(GL.LEQUAL)
+			gl.DepthMask(true)
+			gl.PushMatrix()
+			gl.Color(1, 1, 1, 0.7)
+			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
+			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
+			gl.PopMatrix()
+		end
+	end
+end
+
+-------------------------------------
+-- Initialize the widget
+-------------------------------------
+function widget:Initialize()
+	hideDefaultGUI()
+	initChili()
+	initTopBar()
+	initUnitFunctions()
+	initTeamFunctions()
+end
+
+-------------------------------------
+-- Draw things on the screen
+-------------------------------------
+function widget:DrawScreen()
+	showInformation()
+	hideMouseCursor()
+end
+
+-------------------------------------
+-- Draw things in the world
+-------------------------------------
+function widget:DrawWorld()
+	previewUnit()
+end
+
+
+-------------------------------------
+-- Update function
+-------------------------------------
+function widget:Update(delta)
+	drawSelectionRect()
 	
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local msg = "Select Units"

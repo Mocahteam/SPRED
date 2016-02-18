@@ -22,6 +22,20 @@ function round(num, idp)
 end
 
 -----------------------
+-- Shows units information above unit
+-----------------------
+function showUnitInformation(u)
+	local xU, yU, zU = Spring.GetUnitPosition(u)
+	local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+	local text1 = "ID:"..tostring(u)
+	local w1 = gl.GetTextWidth(text1)
+	gl.Text(text1, x - (15*w1/2), y, 15, "s")
+	local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
+	local w2 = gl.GetTextWidth(text2)
+	gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
+end
+
+-----------------------
 -- Select every units in a rectangle
 -----------------------
 function GetUnitsInScreenRectangle(x1, y1, x2, y2)
