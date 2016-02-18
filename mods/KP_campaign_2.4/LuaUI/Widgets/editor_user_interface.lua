@@ -312,10 +312,11 @@ function widget:Initialize()
 end
 
 -------------------------------------
--- Draw informations about selected units (id, position)
--- May be useful to replace markers in mission 3
+-- Draw things on the screen
 -------------------------------------
 function widget:DrawScreen()
+	-- Draw informations about selected units (id, position)
+	-- May be useful to replace markers in mission 3
 	local unitSelection = Spring.GetSelectedUnits()
 	gl.BeginText()
 	for i, u in ipairs(unitSelection) do
@@ -329,12 +330,21 @@ function widget:DrawScreen()
 		gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
 	end
 	gl.EndText()
+	
+	-- Hide mouse cursor in unit state and show another cursor in other states
+	local mouseCursor = Spring.GetMouseCursor()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and mouseCursor ~= "none" then
+		Spring.SetMouseCursor("none")
+	elseif mouseCursor ~= "Guard" then
+		Spring.SetMouseCursor("Guard")
+	end
 end
 
 -------------------------------------
--- Draw units before placing them
+-- Draw things in the world
 -------------------------------------
 function widget:DrawWorld()
+	-- Draw units before placing them
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		local mx, my = Spring.GetMouseState()
 		local kind, coords = Spring.TraceScreenRay(mx, my)
@@ -344,7 +354,7 @@ function widget:DrawWorld()
 			gl.DepthTest(GL.LEQUAL)
 			gl.DepthMask(true)
 			gl.PushMatrix()
-			gl.Color(1, 1, 1, 1)
+			gl.Color(1, 1, 1, 0.7)
 			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
 			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
 			gl.PopMatrix()
