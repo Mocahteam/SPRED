@@ -333,10 +333,10 @@ function widget:DrawScreen()
 	
 	-- Hide mouse cursor in unit state and show another cursor in other states
 	local mouseCursor = Spring.GetMouseCursor()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and mouseCursor ~= "none" then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and mouseCursor ~= "none" and Screen0.hoveredControl == false then
 		Spring.SetMouseCursor("none")
-	elseif mouseCursor ~= "Guard" then
-		Spring.SetMouseCursor("Guard")
+	elseif mouseCursor ~= "cursornormal" then
+		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move
 	end
 end
 
@@ -345,7 +345,7 @@ end
 -------------------------------------
 function widget:DrawWorld()
 	-- Draw units before placing them
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
 		local mx, my = Spring.GetMouseState()
 		local kind, coords = Spring.TraceScreenRay(mx, my)
 		if kind == "ground" then
