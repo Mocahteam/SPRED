@@ -48,6 +48,7 @@ local deleteUnits = false
 local transferUnits = false
 local resetMap = false
 local moveUnitsAnchor = nil
+local hpPercent = -1
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
 function gadget:Initialize()
@@ -102,6 +103,9 @@ function gadget:RecvLuaMsg(msg, player)
 	-- LOAD MAP : gets the file to load
 	elseif (msgContents[1] == "Load Map") then
 		missionScript.Start(msgContents[2])
+	-- CHANGE HP : change hp of selected units
+	elseif (msgContents[1] == "Change HP") then
+		hpPercent = tonumber(msgContents[2])/100
 	end
 end
 
@@ -144,6 +148,13 @@ function gadget:GameFrame( frameNumber )
 				Spring.DestroyUnit(units[i], false, true)
 			end
 			resetMap = false
+		-- CHANGE HP OF SELECTED UNITS
+		elseif hpPercent > 0 and hpPercent <= 1 then
+			for i, u in ipairs(selectedUnits) do
+				local _, mh = Spring.GetUnitHealth(u)
+				Spring.SetUnitHealth(u, hpPercent * mh)
+			end
+			hpPercent = -1
 		end
 	end
 end

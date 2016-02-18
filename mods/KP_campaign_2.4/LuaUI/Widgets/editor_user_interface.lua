@@ -101,7 +101,7 @@ end
 -------------------------------------
 -- Add a label to a specific parent
 -------------------------------------
-function addLabel(_parent, _x, _y, _w, _h, text)
+function addLabel(_parent, _x, _y, _w, _h, text, size)
 	local label = Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -109,7 +109,7 @@ function addLabel(_parent, _x, _y, _w, _h, text)
 		width = _w,
 		height = _h,
 		caption = text,
-		fontsize = 20,
+		fontsize = size or 20,
 		align = "center"
 	}
 	return label
@@ -165,13 +165,15 @@ end
 -------------------------------------
 -- Add an EditBox to a specific parent
 -------------------------------------
-function addEditBox(_parent, _x, _y, _w, _h)
+function addEditBox(_parent, _x, _y, _w, _h, _align, _text)
 	local editBox = Chili.EditBox:New {
 		parent = _parent,
 		x = _x,
 		y = _y,
 		width = _w,
-		height = _h
+		height = _h,
+		align = _align or "left",
+		text = _text or ""
 	}
 	return editBox
 end
@@ -184,6 +186,7 @@ function removeWindows()
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
 			Screen0:RemoveChild(w)
+			windows.key = nil
 		end
 	end
 end
@@ -254,6 +257,14 @@ end
 function linkFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.LINK)
+end
+
+-----------------------
+-- Tell the gadget to apply changes to units attributes
+-----------------------
+function applyChanges()
+	local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
+	Spring.SendLuaRulesMsg(msg)
 end
 
 -------------------------------------
@@ -457,8 +468,9 @@ function widget:Update(delta)
 	drawSelectionRect()
 	
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
+	local unitSelection = Spring.GetSelectedUnits()
 	local msg = "Select Units"
-	for i, u in ipairs(Spring.GetSelectedUnits()) do
+	for i, u in ipairs(unitSelection) do
 		msg = msg.."++"..u
 	end
 	Spring.SendLuaRulesMsg(msg)
@@ -466,6 +478,23 @@ function widget:Update(delta)
 	-- Double click timer
 	if doubleClick < 0.3 then
 		doubleClick = doubleClick + delta
+	end
+	
+	-- Show small window to change some attributes
+	if #unitSelection > 0	and windows["unitAttributes"] == nil then
+		windows["unitAttributes"] = addWindow(Screen0, gameSizeX - 200, "50%", 200, 200, true)
+		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
+		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], "70%", 50, "30%", 20, "%HP", 20)
+		if #unitSelection == 1 then
+			local h, mh = Spring.GetUnitHealth(unitSelection[1])
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right", tostring(100*round(h/mh)))
+		else
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right")
+		end
+		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChanges)
+	elseif #unitSelection == 0 then
+		Screen0:RemoveChild(windows["unitAttributes"])
+		windows["unitAttributes"] = nil
 	end
 end
 

@@ -119,4 +119,3 @@ function proceedDeselection(unit)
 	end
 	return shiftPressed
 end
-
