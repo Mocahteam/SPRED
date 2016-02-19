@@ -443,6 +443,7 @@ function widget:Initialize()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
+	fileFrame()
 end
 
 -------------------------------------

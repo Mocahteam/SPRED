@@ -605,11 +605,15 @@ function widget:Initialize()
 	-- minimize minimap
 	Spring.SendCommands("minimap min")
 	
-	-- enable editor widgets only in editor
+	-- enable editor widgets only in editor, too hardcoded
 	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
 		widgetHandler:DisableWidget("Editor User Interface")
+		widgetHandler:DisableWidget("Kernel Panic Build Bar")
+		widgetHandler:DisableWidget("Kernel Panic Tooltip")
 	else
 		widgetHandler:EnableWidget("Editor User Interface")
+		widgetHandler:DisableWidget("Kernel Panic Build Bar")
+		widgetHandler:DisableWidget("Kernel Panic Tooltip")
 	end
 end
 
