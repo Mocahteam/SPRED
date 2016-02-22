@@ -26,7 +26,6 @@ local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
-local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY -- coordinates of the selection box
 
 -------------------------------------
 -- Zone tools
@@ -35,6 +34,7 @@ local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
 local xA, xB, zA, zB = 0, 0, 0, 0
 local zoneList = {}
+local selectedZone = nil
 
 -------------------------------------
 -- Mouse tools
@@ -407,6 +407,10 @@ function drawZoneRect()
 		gl.Color(z.red, z.green, z.blue, 0.5)
 		gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 	end
+	if selectedZone ~= nil then
+		gl.Color(1, 1, 1, 1)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z2)
+	end
 end
 
 -------------------------------------
@@ -554,7 +558,7 @@ end
 -------------------------------------
 function widget:MousePress(mx, my, button)
 	-- Left click
-	if (button == 1) then
+	if button == 1 then
 		-- raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		
@@ -580,6 +584,7 @@ function widget:MousePress(mx, my, button)
 				if doubleClick < 0.3 then -- multiple selection of units of same type using double click
 					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
 					proceedSelection(unitArray)
+					doubleClick = 0.3
 					return true
 				else
 					if Spring.IsUnitSelected(var) then
@@ -606,21 +611,22 @@ function widget:MousePress(mx, my, button)
 		
 		-- STATE ZONE : draw, move and rename logical zones
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if kind ~= "unit" then
-				rValue, gValue, bValue = math.random(), math.random(), math.random()
-				plotZone = true
-				selectionStartX, selectionEndX = mx, mx
-				selectionStartY, selectionEndY = my, my
-				return true
-			end
+			rValue, gValue, bValue = math.random(), math.random(), math.random()
+			plotZone = true
+			selectionStartX, selectionEndX = mx, mx
+			selectionStartY, selectionEndY = my, my
+			clickToSelect = true
+			return true
 		end
 		
 	-- Right click : enable selection / disable unit placement
-	elseif (button == 3 and globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT) then
-		for key, ub in pairs(unitButtons) do
-			ub:RemoveChild(images["selectionType"])
+	elseif button == 3 then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+			for key, ub in pairs(unitButtons) do
+				ub:RemoveChild(images["selectionType"])
+			end
+			globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 		end
-		globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 	end
 end
 
@@ -628,26 +634,38 @@ end
 -- Handle mouse button releases
 -------------------------------------
 function widget:MouseRelease(mx, my, button)
-	-- raycast
-	local kind, var = Spring.TraceScreenRay(mx, my)
-	
-	if kind == "unit" then
-		if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
-			proceedSelection({var})
+	if button == 1 then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+			-- raycast
+			local kind, var = Spring.TraceScreenRay(mx, my)
+			if kind == "unit" then
+				if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
+					proceedSelection({var})
+					clickToSelect = false
+				end
+			end
+			-- return in idle state
+			plotSelection = false
+			mouseMove = false
+		end
+		
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			-- raycast
+			local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+			if clickToSelect then
+				local x, _, z = unpack(var)
+				for i, zone in ipairs(zoneList) do
+					if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
+						selectedZone = zone
+					end
+				end
+			else
+				local zone = { red = rValue, green = gValue, blue = bValue, x1 = xA, x2 = xB, z1 = zA, z2 = zB }
+				table.insert(zoneList, zone)
+				plotZone = false
+			end
 		end
 	end
-
-	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then -- return in idle state
-		plotSelection = false
-		mouseMove = false
-	end
-	
-	if button == 1 and globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		local zone = { red = rValue, green = gValue, blue = bValue, x1 = xA, x2 = xB, z1 = zA, z2 = zB }
-		table.insert(zoneList, zone)
-		plotZone = false
-	end
-	
 	doubleClick = 0 -- reset double click timer
 	return true
 end
