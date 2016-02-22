@@ -21,7 +21,7 @@ function StateMachine.getCurrentState(self) return self.currentState end
 ------------------------------
 -- Initialize global state machine
 ------------------------------
-local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link" }
+local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link", ZONE = "zone" }
 globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
