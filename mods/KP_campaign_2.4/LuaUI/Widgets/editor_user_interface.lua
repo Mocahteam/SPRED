@@ -33,6 +33,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_v
 local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
 local xA, xB, zA, zB = 0, 0, 0, 0
+local zoneAnchorX, zoneAnchorZ = 0, 0
 local zoneList = {}
 local selectedZone = nil
 
@@ -212,10 +213,11 @@ end
 function zoneFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
+	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW)
 	
-	--windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	--labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	--fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '10%', '100%', '10%', "New Zone", function() newMap() end)
+	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
+	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '10%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) end)
 end
 
 function unitFrame()
@@ -387,19 +389,21 @@ end
 -- Draw the zone feedback rectangle
 -------------------------------------
 function drawZoneRect()
-	local _, _, leftPressed = Spring.GetMouseState()
-	if leftPressed then
-		local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true)
-		local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true)
-		if varA ~= nil and varB ~= nil then
-			xA, _, zA = unpack(varA)
-			xB, _, zB = unpack(varB)
-		end
-		xA, xB = sort(xA, xB)
-		zA, zB = sort(zA, zB)
-		if plotZone then
-			gl.Color(rValue, gValue, bValue, 0.5)
-			gl.DrawGroundQuad(xA, zA, xB, zB)
+	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+		local _, _, leftPressed = Spring.GetMouseState()
+		if leftPressed then
+			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true)
+			local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true)
+			if varA ~= nil and varB ~= nil then
+				xA, _, zA = unpack(varA)
+				xB, _, zB = unpack(varB)
+			end
+			xA, xB = sort(xA, xB)
+			zA, zB = sort(zA, zB)
+			if plotZone then
+				gl.Color(rValue, gValue, bValue, 0.5)
+				gl.DrawGroundQuad(xA, zA, xB, zB)
+			end
 		end
 	end
 	
@@ -411,6 +415,21 @@ function drawZoneRect()
 		gl.Color(1, 1, 1, 1)
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z2)
 	end
+end
+
+-------------------------------------
+-- Returns the clicked zone if it exists, else nil
+-------------------------------------
+function clickedZone(mx, my)
+	local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+	local clickedZone = nil
+	local x, _, z = unpack(var)
+	for i, zone in ipairs(zoneList) do
+		if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
+			clickedZone = zone
+		end
+	end
+	return clickedZone
 end
 
 -------------------------------------
@@ -611,10 +630,19 @@ function widget:MousePress(mx, my, button)
 		
 		-- STATE ZONE : draw, move and rename logical zones
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			rValue, gValue, bValue = math.random(), math.random(), math.random()
-			plotZone = true
-			selectionStartX, selectionEndX = mx, mx
-			selectionStartY, selectionEndY = my, my
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+				rValue, gValue, bValue = math.random(), math.random(), math.random()
+				plotZone = true
+				selectionStartX, selectionEndX = mx, mx
+				selectionStartY, selectionEndY = my, my
+			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
+				if selectedZone == clickedZone(mx, my) then
+					local _, var = Spring.TraceScreenRay(mx, my, true, true)
+					local x, _, z = unpack(var)
+					zoneAnchorX, zoneAnchorZ = x, z
+					mouseMove = true
+				end
+			end
 			clickToSelect = true
 			return true
 		end
@@ -626,6 +654,8 @@ function widget:MousePress(mx, my, button)
 				ub:RemoveChild(images["selectionType"])
 			end
 			globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
 	end
 end
@@ -650,20 +680,15 @@ function widget:MouseRelease(mx, my, button)
 		end
 		
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			-- raycast
-			local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 			if clickToSelect then
-				local x, _, z = unpack(var)
-				for i, zone in ipairs(zoneList) do
-					if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
-						selectedZone = zone
-					end
-				end
+				selectedZone = clickedZone(mx, my)
+				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			else
 				local zone = { red = rValue, green = gValue, blue = bValue, x1 = xA, x2 = xB, z1 = zA, z2 = zB }
 				table.insert(zoneList, zone)
-				plotZone = false
 			end
+			plotZone = false
+			mouseMove = false
 		end
 	end
 	doubleClick = 0 -- reset double click timer
@@ -703,10 +728,26 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		
 		-- STATE ZONE
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			-- update selection box
-			if plotZone then
-				selectionEndX = mx
-				selectionEndY = my
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+				-- update zone
+				if plotZone then
+					selectionEndX = mx
+					selectionEndY = my
+				end
+			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
+				if mouseMove and selectedZone ~= nil then
+					local _, var = Spring.TraceScreenRay(mx, my, true, true)
+					if var ~= nil then
+						local x, _, z = unpack(var)
+						x, z = round(x), round(z)
+						local dx, dz = x - zoneAnchorX, z - zoneAnchorZ
+						selectedZone.x1 = selectedZone.x1 + dx
+						selectedZone.x2 = selectedZone.x2 + dx
+						selectedZone.z1 = selectedZone.z1 + dz
+						selectedZone.z2 = selectedZone.z2 + dz
+						zoneAnchorX, zoneAnchorZ = x, z
+					end
+				end
 			end
 		end
 	end

@@ -45,3 +45,9 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
 ------------------------------
 local teamStates = { PLAYER = "0", ALLY = "1", ENEMY = "2" }
 teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)
+
+------------------------------
+-- Initialize zone state machine
+------------------------------
+local zoneStates = { DRAW = "draw", SELECTION = "selection" }
+zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAW)
