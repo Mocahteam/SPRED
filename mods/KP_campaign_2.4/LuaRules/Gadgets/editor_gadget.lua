@@ -138,7 +138,7 @@ function gadget:GameFrame( frameNumber )
 		-- TRANSFER UNITS
 		elseif transferUnits then
 			for i, u in ipairs(selectedUnits) do
-				--Spring.TransferUnit(u, newTeam) --BUGGED
+				-- Spring.TransferUnit(u, newTeam) --BUGGED
 			end
 			transfertUnits = false
 		-- RESET MAP
