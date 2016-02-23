@@ -36,6 +36,7 @@ local xA, xB, zA, zB = 0, 0, 0, 0
 local zoneAnchorX, zoneAnchorZ = 0, 0
 local zoneList = {}
 local selectedZone = nil
+local zoneSide = ""
 
 -------------------------------------
 -- Mouse tools
@@ -412,11 +413,11 @@ function drawZoneRect()
 		gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 	end
 	if selectedZone ~= nil then
-		gl.Color(0.8, 0.8, 0.8, 1)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+16, selectedZone.z2)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+16)
-		gl.DrawGroundQuad(selectedZone.x2-16, selectedZone.z1, selectedZone.x2, selectedZone.z2)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-16, selectedZone.x2, selectedZone.z2)
+		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+8)
+		gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 	end
 end
 
@@ -462,28 +463,67 @@ function getSide(x, z)
 	local top = z - selectedZone.z1
 	local bottom = selectedZone.z2 - z
 	local side = ""
-	if left >= 0 and left <= 16 then
-		if top >= 0 and top <= 16 then
+	if left >= 0 and left <= 8 then
+		if top >= 0 and top <= 8 then
 			side = "TOPLEFT"
-		elseif bottom >= 0 and bottom <= 16 then
+		elseif bottom >= 0 and bottom <= 8 then
 			side = "BOTLEFT"
 		else
 			side = "LEFT"
 		end
-	elseif right >= 0 and right <= 16 then
-		if top >= 0 and top <= 16 then
+	elseif right >= 0 and right <= 8 then
+		if top >= 0 and top <= 8 then
 			side = "TOPRIGHT"
-		elseif bottom >= 0 and bottom <= 16 then
+		elseif bottom >= 0 and bottom <= 8 then
 			side = "BOTRIGHT"
 		else
 			side = "RIGHT"
 		end
-	elseif top >= 0 and top <= 16 then
+	elseif top >= 0 and top <= 8 then
 		side = "TOP"
-	elseif bottom >= 0 and bottom <= 16 then
+	elseif bottom >= 0 and bottom <= 8 then
 		side = "BOT"
 	end
 	return side
+end
+
+-------------------------------------
+-- Move or resize the selected zone
+-------------------------------------
+function moveSelectedZone(dx, dz)
+	local updateAnchor = true
+	if zoneSide == "" then
+		selectedZone.x1 = selectedZone.x1 + dx
+		selectedZone.x2 = selectedZone.x2 + dx
+		selectedZone.z1 = selectedZone.z1 + dz
+		selectedZone.z2 = selectedZone.z2 + dz
+	elseif zoneSide == "LEFT" and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+		selectedZone.x1 = selectedZone.x1 + dx
+	elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+		selectedZone.x2 = selectedZone.x2 + dx
+	elseif zoneSide == "TOP" and selectedZone.z1 + dz + 32 <= selectedZone.z2 then
+		selectedZone.z1 = selectedZone.z1 + dz
+	elseif zoneSide == "BOT" and selectedZone.z1 - dz+ 32 <= selectedZone.z2 then
+		selectedZone.z2 = selectedZone.z2 + dz
+	elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + 32 <= selectedZone.z2 and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+		selectedZone.z1 = selectedZone.z1 + dz
+		selectedZone.x1 = selectedZone.x1 + dx
+	elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + 32 <= selectedZone.z2 and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+		selectedZone.z2 = selectedZone.z2 + dz
+		selectedZone.x1 = selectedZone.x1 + dx
+	elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + 32 <= selectedZone.z2 and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+		selectedZone.z1 = selectedZone.z1 + dz
+		selectedZone.x2 = selectedZone.x2 + dx
+	elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + 32 <= selectedZone.z2 and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+		selectedZone.z2 = selectedZone.z2 + dz
+		selectedZone.x2 = selectedZone.x2 + dx
+	else
+		updateAnchor = false
+	end
+	if updateAnchor then
+		zoneAnchorX = zoneAnchorX + dx
+		zoneAnchorZ = zoneAnchorZ + dz
+	end
 end
 
 -------------------------------------
@@ -704,11 +744,11 @@ function widget:MousePress(mx, my, button)
 					-- selected new zone
 					if selectedZone ~= clickedZone(mx, my) then
 						selectedZone = clickedZone(mx, my)
-					else
-						-- proceed resize
-						getSide(x, z)
 					end
-					mouseMove = true
+					if selectedZone ~= nil then
+						zoneSide = getSide(x, z)
+						mouseMove = true
+					end
 				end
 			end
 			clickToSelect = true
@@ -823,12 +863,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 						else
 							dz = dz - dz % 8
 						end
-						selectedZone.x1 = selectedZone.x1 + dx
-						selectedZone.x2 = selectedZone.x2 + dx
-						selectedZone.z1 = selectedZone.z1 + dz
-						selectedZone.z2 = selectedZone.z2 + dz
-						zoneAnchorX = zoneAnchorX + dx
-						zoneAnchorZ = zoneAnchorZ + dz
+						moveSelectedZone(dx, dz)
 					end
 				end
 			end
