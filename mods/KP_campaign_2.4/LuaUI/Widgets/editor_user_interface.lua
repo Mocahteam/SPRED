@@ -412,8 +412,24 @@ function drawZoneRect()
 		gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 	end
 	if selectedZone ~= nil then
-		gl.Color(1, 1, 1, 1)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z2)
+		--gl.Color(0, 1, 0, 1)
+		--gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+1, selectedZone.z2)
+	end
+end
+
+-------------------------------------
+-- Show zone position
+-------------------------------------
+function showZonePosition()
+	if selectedZone ~= nil then
+		gl.BeginText()
+		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1) + 10, selectedZone.z1)
+		local text =  "x:"..tostring(selectedZone.x1).." z:"..tostring(selectedZone.z1)
+		gl.Text(text, x, y, 15, "s")
+		x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2) - 10, selectedZone.z2)
+		text =  "x:"..tostring(selectedZone.x2).." z:"..tostring(selectedZone.z2)
+		gl.Text(text, x, y, 15, "s")
+		gl.EndText()
 	end
 end
 
@@ -423,10 +439,12 @@ end
 function clickedZone(mx, my)
 	local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 	local clickedZone = nil
-	local x, _, z = unpack(var)
-	for i, zone in ipairs(zoneList) do
-		if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
-			clickedZone = zone
+	if var ~= nil then
+		local x, _, z = unpack(var)
+		for i, zone in ipairs(zoneList) do
+			if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
+				clickedZone = zone
+			end
 		end
 	end
 	return clickedZone
@@ -502,58 +520,9 @@ function previewUnit()
 end
 
 -------------------------------------
--- Initialize the widget
+-- Show a window to edit unit's instance attributes
 -------------------------------------
-function widget:Initialize()
-	hideDefaultGUI()
-	initChili()
-	initTopBar()
-	initUnitFunctions()
-	initTeamFunctions()
-	fileFrame()
-end
-
--------------------------------------
--- Draw things on the screen
--------------------------------------
-function widget:DrawScreen()
-	showInformation()
-	hideMouseCursor()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-		drawSelectionRect()
-	end
-end
-
--------------------------------------
--- Draw things in the world
--------------------------------------
-function widget:DrawWorld()
-	previewUnit()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		drawZoneRect()
-	end
-end
-
-
--------------------------------------
--- Update function
--------------------------------------
-function widget:Update(delta)
-	
-	-- Tell the gadget which units are selected (might be improved in terms of performance)
-	local unitSelection = Spring.GetSelectedUnits()
-	local msg = "Select Units"
-	for i, u in ipairs(unitSelection) do
-		msg = msg.."++"..u
-	end
-	Spring.SendLuaRulesMsg(msg)
-	
-	-- Double click timer
-	if doubleClick < 0.3 then
-		doubleClick = doubleClick + delta
-	end
-	
-	-- Show small window to change some attributes
+function showUnitAttributes(unitSelection)
 	if #unitSelection > 0	and windows["unitAttributes"] == nil then
 		windows["unitAttributes"] = addWindow(Screen0, gameSizeX - 200, "50%", 200, 200, true)
 		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
@@ -569,6 +538,62 @@ function widget:Update(delta)
 		Screen0:RemoveChild(windows["unitAttributes"])
 		windows["unitAttributes"] = nil
 	end
+end
+
+-------------------------------------
+-- Initialize the widget
+-------------------------------------
+function widget:Initialize()
+	hideDefaultGUI()
+	initChili()
+	initTopBar()
+	initUnitFunctions()
+	initTeamFunctions()
+	fileFrame()
+end
+
+-------------------------------------
+-- Draw things on the screen
+-------------------------------------
+function widget:DrawScreen()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		showInformation()
+		hideMouseCursor()
+		drawSelectionRect()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		showZonePosition()
+	end
+end
+
+-------------------------------------
+-- Draw things in the world
+-------------------------------------
+function widget:DrawWorld()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		previewUnit()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		drawZoneRect()
+	end
+end
+
+-------------------------------------
+-- Update function
+-------------------------------------
+function widget:Update(delta)
+	-- Tell the gadget which units are selected (might be improved in terms of performance)
+	local unitSelection = Spring.GetSelectedUnits()
+	local msg = "Select Units"
+	for i, u in ipairs(unitSelection) do
+		msg = msg.."++"..u
+	end
+	Spring.SendLuaRulesMsg(msg)
+	
+	-- Double click timer
+	if doubleClick < 0.3 then
+		doubleClick = doubleClick + delta
+	end
+	
+	showUnitAttributes(unitSelection)
 end
 
 -------------------------------------
@@ -636,12 +661,13 @@ function widget:MousePress(mx, my, button)
 				selectionStartX, selectionEndX = mx, mx
 				selectionStartY, selectionEndY = my, my
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
-				if selectedZone == clickedZone(mx, my) then
-					local _, var = Spring.TraceScreenRay(mx, my, true, true)
-					local x, _, z = unpack(var)
-					zoneAnchorX, zoneAnchorZ = x, z
-					mouseMove = true
+				if selectedZone ~= clickedZone(mx, my) then
+					selectedZone = clickedZone(mx, my)
 				end
+				local _, var = Spring.TraceScreenRay(mx, my, true, true)
+				local x, _, z = unpack(var)
+				zoneAnchorX, zoneAnchorZ = x, z
+				mouseMove = true
 			end
 			clickToSelect = true
 			return true
@@ -683,8 +709,8 @@ function widget:MouseRelease(mx, my, button)
 			if clickToSelect then
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-			else
-				local zone = { red = rValue, green = gValue, blue = bValue, x1 = xA, x2 = xB, z1 = zA, z2 = zB }
+			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA), x2 = round(xB), z1 = round(zA), z2 = round(zB) }
 				table.insert(zoneList, zone)
 			end
 			plotZone = false
@@ -740,12 +766,13 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 					if var ~= nil then
 						local x, _, z = unpack(var)
 						x, z = round(x), round(z)
-						local dx, dz = x - zoneAnchorX, z - zoneAnchorZ
+						local dx, dz = round(x - zoneAnchorX), round(z - zoneAnchorZ)
 						selectedZone.x1 = selectedZone.x1 + dx
 						selectedZone.x2 = selectedZone.x2 + dx
 						selectedZone.z1 = selectedZone.z1 + dz
 						selectedZone.z2 = selectedZone.z2 + dz
-						zoneAnchorX, zoneAnchorZ = x, z
+						if dx ~= 0 then zoneAnchorX = x end
+						if dz ~= 0 then zoneAnchorZ = z end
 					end
 				end
 			end
@@ -789,6 +816,24 @@ function widget:KeyPress(key, mods)
 		elseif key == Spring.GetKeyCode("right") then
 			local msg = "Translate Units".."++".."1".."++".."0"
 			Spring.SendLuaRulesMsg(msg)
+		end
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		if selectedZone ~= nil then
+			if key == Spring.GetKeyCode("delete") then
+				-- TODO
+			elseif key == Spring.GetKeyCode("up") then
+				selectedZone.z1 = selectedZone.z1 - 1
+				selectedZone.z2 = selectedZone.z2 - 1
+			elseif key == Spring.GetKeyCode("down") then
+				selectedZone.z1 = selectedZone.z1 + 1
+				selectedZone.z2 = selectedZone.z2 + 1
+			elseif key == Spring.GetKeyCode("left") then
+				selectedZone.x1 = selectedZone.x1 - 1
+				selectedZone.x2 = selectedZone.x2 - 1
+			elseif key == Spring.GetKeyCode("right") then
+				selectedZone.x1 = selectedZone.x1 + 1
+				selectedZone.x2 = selectedZone.x2 + 1
+			end
 		end
 	end
 	return true
