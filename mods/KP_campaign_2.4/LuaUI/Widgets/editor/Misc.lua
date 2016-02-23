@@ -22,6 +22,17 @@ function round(num, idp)
 end
 
 -----------------------
+-- Get the sign of a number
+-----------------------
+function sign(x)
+	if x >= 0 then
+		return 1
+	else
+		return -1
+	end
+end
+
+-----------------------
 -- Shows units information above unit
 -----------------------
 function showUnitInformation(u)

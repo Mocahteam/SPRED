@@ -710,7 +710,7 @@ function widget:MouseRelease(mx, my, button)
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
-				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA), x2 = round(xB), z1 = round(zA), z2 = round(zB) }
+				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8 }
 				table.insert(zoneList, zone)
 			end
 			plotZone = false
@@ -767,12 +767,26 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 						local x, _, z = unpack(var)
 						x, z = round(x), round(z)
 						local dx, dz = round(x - zoneAnchorX), round(z - zoneAnchorZ)
+						if dx < 0 then
+							dx = - dx
+							dx = dx - dx % 8
+							dx = - dx
+						else
+							dx = dx - dx % 8
+						end
+						if dz < 0 then
+							dz = - dz
+							dz = dz - dz % 8
+							dz = - dz
+						else
+							dz = dz - dz % 8
+						end
 						selectedZone.x1 = selectedZone.x1 + dx
 						selectedZone.x2 = selectedZone.x2 + dx
 						selectedZone.z1 = selectedZone.z1 + dz
 						selectedZone.z2 = selectedZone.z2 + dz
-						if dx ~= 0 then zoneAnchorX = x end
-						if dz ~= 0 then zoneAnchorZ = z end
+						zoneAnchorX = zoneAnchorX + dx
+						zoneAnchorZ = zoneAnchorZ + dz
 					end
 				end
 			end
@@ -822,17 +836,17 @@ function widget:KeyPress(key, mods)
 			if key == Spring.GetKeyCode("delete") then
 				-- TODO
 			elseif key == Spring.GetKeyCode("up") then
-				selectedZone.z1 = selectedZone.z1 - 1
-				selectedZone.z2 = selectedZone.z2 - 1
+				selectedZone.z1 = selectedZone.z1 - 8
+				selectedZone.z2 = selectedZone.z2 - 8
 			elseif key == Spring.GetKeyCode("down") then
-				selectedZone.z1 = selectedZone.z1 + 1
-				selectedZone.z2 = selectedZone.z2 + 1
+				selectedZone.z1 = selectedZone.z1 + 8
+				selectedZone.z2 = selectedZone.z2 + 8
 			elseif key == Spring.GetKeyCode("left") then
-				selectedZone.x1 = selectedZone.x1 - 1
-				selectedZone.x2 = selectedZone.x2 - 1
+				selectedZone.x1 = selectedZone.x1 - 8
+				selectedZone.x2 = selectedZone.x2 - 8
 			elseif key == Spring.GetKeyCode("right") then
-				selectedZone.x1 = selectedZone.x1 + 1
-				selectedZone.x2 = selectedZone.x2 + 1
+				selectedZone.x1 = selectedZone.x1 + 8
+				selectedZone.x2 = selectedZone.x2 + 8
 			end
 		end
 	end
