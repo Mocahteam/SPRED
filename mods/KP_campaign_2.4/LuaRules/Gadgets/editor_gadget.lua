@@ -42,12 +42,13 @@ local unitType, team = "bit", 0
 local newTeam = 0
 local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
-local dX, dZ = 0, 0
+local newX, newZ = 0, 0
 local moveUnits = false
 local deleteUnits = false
 local transferUnits = false
 local resetMap = false
 local moveUnitsAnchor = nil
+local relativepos = {}
 local hpPercent = -1
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
@@ -70,13 +71,18 @@ function gadget:RecvLuaMsg(msg, player)
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
 	-- ANCHOR : gets information about the anchor of the drag movement
 	elseif (msgContents[1] == "Anchor") then
+		relativepos = {}
 		moveUnitsAnchor = tonumber(msgContents[2])
+		newX, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		for i, u in ipairs(selectedUnits) do
+			local curX, _, curZ = Spring.GetUnitPosition(u)
+			local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
+			relativepos[u] = { dx = curX - refX, dz = curZ - refZ }
+		end
 	-- MOVE UNITS : gets the translation vector for drag movement
 	elseif (msgContents[1] == "Move Units") then
 		moveUnits = true
-		local x, z = tonumber(msgContents[2]), tonumber(msgContents[3])
-		local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
-		dX, dZ = x-refX, z-refZ
+		newX, newZ = tonumber(msgContents[2]), tonumber(msgContents[3])
 	-- TRANSLATE UNITS : gets the pressed arrow
 	elseif (msgContents[1] == "Translate Units") then
 		moveUnits = true
@@ -120,10 +126,14 @@ function gadget:GameFrame( frameNumber )
 		-- MOVE UNITS
 		elseif moveUnits then
 			if selectedUnits ~= {} then
+				Spring.SetUnitPosition(moveUnitsAnchor, newX, Spring.GetGroundHeight(newX, newZ), newZ)
+				Spring.GiveOrderToUnit(moveUnitsAnchor, CMD.STOP, {}, {})
 				for i, u in ipairs(selectedUnits) do
-					local curX, _, curZ = Spring.GetUnitPosition(u)
-					Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ + dZ), curZ + dZ)
-					Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+					if relativepos[u] ~= nil then
+						local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
+						Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
+						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+					end
 				end
 			end
 			moveUnits = false
