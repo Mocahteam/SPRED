@@ -492,7 +492,7 @@ end
 -------------------------------------
 function moveSelectedZone(dx, dz)
 	local updateAnchor = true
-	if zoneSide == "" then
+	if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
 		selectedZone.x1 = selectedZone.x1 + dx
 		selectedZone.x2 = selectedZone.x2 + dx
 		selectedZone.z1 = selectedZone.z1 + dz
@@ -561,7 +561,7 @@ end
 -------------------------------------
 -- Hide mouse cursor in unit state and during movement, show another cursor in other states
 -------------------------------------
-function hideMouseCursor()
+function changeMouseCursor()
 	local mouseCursor = Spring.GetMouseCursor()
 	if mouseCursor ~= "none" then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
@@ -632,9 +632,9 @@ end
 -- Draw things on the screen
 -------------------------------------
 function widget:DrawScreen()
+	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		showInformation()
-		hideMouseCursor()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		showZonePosition()
@@ -663,7 +663,7 @@ function widget:Update(delta)
 		msg = msg.."++"..u
 	end
 	Spring.SendLuaRulesMsg(msg)
-	
+
 	-- Double click timer
 	if doubleClick < 0.3 then
 		doubleClick = doubleClick + delta
@@ -793,7 +793,9 @@ function widget:MouseRelease(mx, my, button)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
 				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8 }
-				table.insert(zoneList, zone)
+				if zone.x2 - zone.x1 >= 32 and zone.z2 - zone.z1 >= 32 then
+					table.insert(zoneList, zone)
+				end
 			end
 			plotZone = false
 			mouseMove = false
