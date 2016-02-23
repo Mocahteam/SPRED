@@ -412,8 +412,11 @@ function drawZoneRect()
 		gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 	end
 	if selectedZone ~= nil then
-		--gl.Color(0, 1, 0, 1)
-		--gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+1, selectedZone.z2)
+		gl.Color(0.8, 0.8, 0.8, 1)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+16, selectedZone.z2)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+16)
+		gl.DrawGroundQuad(selectedZone.x2-16, selectedZone.z1, selectedZone.x2, selectedZone.z2)
+		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-16, selectedZone.x2, selectedZone.z2)
 	end
 end
 
@@ -448,6 +451,39 @@ function clickedZone(mx, my)
 		end
 	end
 	return clickedZone
+end
+
+-------------------------------------
+-- Returns the clicked side of the selected zone
+-------------------------------------
+function getSide(x, z)
+	local left = x - selectedZone.x1
+	local right = selectedZone.x2 - x
+	local top = z - selectedZone.z1
+	local bottom = selectedZone.z2 - z
+	local side = ""
+	if left >= 0 and left <= 16 then
+		if top >= 0 and top <= 16 then
+			side = "TOPLEFT"
+		elseif bottom >= 0 and bottom <= 16 then
+			side = "BOTLEFT"
+		else
+			side = "LEFT"
+		end
+	elseif right >= 0 and right <= 16 then
+		if top >= 0 and top <= 16 then
+			side = "TOPRIGHT"
+		elseif bottom >= 0 and bottom <= 16 then
+			side = "BOTRIGHT"
+		else
+			side = "RIGHT"
+		end
+	elseif top >= 0 and top <= 16 then
+		side = "TOP"
+	elseif bottom >= 0 and bottom <= 16 then
+		side = "BOT"
+	end
+	return side
 end
 
 -------------------------------------
@@ -661,13 +697,19 @@ function widget:MousePress(mx, my, button)
 				selectionStartX, selectionEndX = mx, mx
 				selectionStartY, selectionEndY = my, my
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
-				if selectedZone ~= clickedZone(mx, my) then
-					selectedZone = clickedZone(mx, my)
-				end
 				local _, var = Spring.TraceScreenRay(mx, my, true, true)
-				local x, _, z = unpack(var)
-				zoneAnchorX, zoneAnchorZ = x, z
-				mouseMove = true
+				if var ~= nil then
+					local x, _, z = unpack(var)
+					zoneAnchorX, zoneAnchorZ = x, z
+					-- selected new zone
+					if selectedZone ~= clickedZone(mx, my) then
+						selectedZone = clickedZone(mx, my)
+					else
+						-- proceed resize
+						getSide(x, z)
+					end
+					mouseMove = true
+				end
 			end
 			clickToSelect = true
 			return true
