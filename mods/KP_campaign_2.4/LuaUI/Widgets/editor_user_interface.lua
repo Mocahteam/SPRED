@@ -17,7 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 -- UI Variables
 -------------------------------------
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneLabels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
@@ -177,7 +177,7 @@ end
 -------------------------------------
 -- Add an EditBox to a specific parent
 -------------------------------------
-function addEditBox(_parent, _x, _y, _w, _h, _align, _text)
+function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	local editBox = Chili.EditBox:New {
 		parent = _parent,
 		x = _x,
@@ -187,19 +187,21 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text)
 		align = _align or "left",
 		text = _text or ""
 	}
+	editBox.font.color = _color or {1, 1, 1, 1}
+	editBox.font.size = _h
 	return editBox
 end
 
-function addCheckbox(_parent, _x, _y, _w, _h, _text, _textColor, _size, _checked)
+function addCheckbox(_parent, _x, _y, _w, _h, _text, _textColor, _checked)
 	local checkBox = Chili.Checkbox:New {
 		parent = _parent,
 		x = _x,
 		y = _y,
 		width = _w,
 		height = _h,
-		caption = _text,
+		caption = _text or "",
 		textColor = _textColor or {1, 1, 1, 1},
-		boxsize = _size or 10,
+		boxsize = _h or 10,
 		checked = _checked or false
 	}
 	return checkBox
@@ -310,7 +312,7 @@ end
 -------------------------------------
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0", "tooltip 0","fps 0","console 0","info 0")
+	Spring.SendCommands("resbar 0","fps 0","console 0","info 0")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -443,8 +445,8 @@ end
 -- Show zone position
 -------------------------------------
 function showZoneInformation()
+	gl.BeginText()
 	if selectedZone ~= nil then
-		gl.BeginText()
 		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
 		local text =  "x:"..tostring(selectedZone.x1).." z:"..tostring(selectedZone.z1)
 		gl.Text(text, x, y, 15, "s")
@@ -452,7 +454,23 @@ function showZoneInformation()
 		text =  "x:"..tostring(selectedZone.x2).." z:"..tostring(selectedZone.z2)
 		x = x - gl.GetTextWidth(text)*15
 		gl.Text(text, x, y, 15, "s")
-		gl.EndText()
+	end
+	for i, z in ipairs(zoneList) do
+		local x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
+		x, y = Spring.WorldToScreenCoords(x, Spring.GetGroundHeight(x, y), y)
+		local text = z.name
+		local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
+		x, y = x - w/2, y - h/2
+		gl.Text(text, x, y, 15, "s")
+	end
+	gl.EndText()
+end
+
+function updateZoneInformation()
+	for i, z in ipairs(zoneList) do
+		if z.name ~= zoneBoxes[z.id].editBox.text then
+			z.name = zoneBoxes[z.id].editBox.text
+		end
 	end
 end
 
@@ -546,13 +564,14 @@ function moveSelectedZone(dx, dz)
 end
 
 function updateZonePanel()
-	for k, zl in pairs(zoneLabels) do
-		scrollPanels["zonePanel"]:RemoveChild(zl)
+	for k, zb in pairs(zoneBoxes) do
+		scrollPanels["zonePanel"]:RemoveChild(zb)
 	end
 	local size = 20
 	for i, z in ipairs(zoneList) do
-		zoneLabels[z.id] = addCheckbox(scrollPanels["zonePanel"], 0, (i-1) * size, "100%", size, z.id, {z.red, z.green, z.blue, 1}, size, false)
-		zoneLabels[z.id].font.size = size
+		local checkBox = addCheckbox(scrollPanels["zonePanel"], "80%", (i-1) * 3/2 * size, "20%", size)
+		local editBox = addEditBox(scrollPanels["zonePanel"], 0, (i-1) * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
+		zoneBoxes[z.id] = { editBox = editBox, checkBox = checkBox }
 	end
 end
 
@@ -667,6 +686,7 @@ function widget:DrawScreen()
 		showInformation()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		updateZoneInformation()
 		showZoneInformation()
 	end
 end
@@ -701,7 +721,7 @@ function widget:Update(delta)
 	
 	showUnitAttributes(unitSelection)
 	
-	if totalZones ~= #zoneList then
+	if totalZones ~= #zoneList and globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZonePanel()
 		totalZones = #zoneList
 	end
@@ -827,7 +847,7 @@ function widget:MouseRelease(mx, my, button)
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
-				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8, id = "Zone "..zoneNumber }
+				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8, id = "Zone "..zoneNumber, name = "Zone "..zoneNumber }
 				if zone.x2 - zone.x1 >= 32 and zone.z2 - zone.z1 >= 32 then
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1

@@ -609,11 +609,10 @@ function widget:Initialize()
 	if (Spring.GetModOptions()["editor"] ~= "yes" or Spring.GetModOptions()["editor"]  == nil) then
 		widgetHandler:DisableWidget("Editor User Interface")
 		widgetHandler:DisableWidget("Kernel Panic Build Bar")
-		widgetHandler:DisableWidget("Kernel Panic Tooltip")
 	else
 		widgetHandler:EnableWidget("Editor User Interface")
 		widgetHandler:DisableWidget("Kernel Panic Build Bar")
-		widgetHandler:DisableWidget("Kernel Panic Tooltip")
+		widgetHandler:EnableWidget("Kernel Panic Tooltip")
 	end
 end
 
