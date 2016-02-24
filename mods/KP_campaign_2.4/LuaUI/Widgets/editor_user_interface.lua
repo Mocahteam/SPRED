@@ -17,7 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 -- UI Variables
 -------------------------------------
 local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, fileButtons, labels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneLabels, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
 
 -------------------------------------
@@ -37,6 +37,8 @@ local zoneAnchorX, zoneAnchorZ = 0, 0
 local zoneList = {}
 local selectedZone = nil
 local zoneSide = ""
+local zoneNumber = 0
+local totalZones = 0
 
 -------------------------------------
 -- Mouse tools
@@ -111,7 +113,7 @@ end
 -------------------------------------
 -- Add a label to a specific parent
 -------------------------------------
-function addLabel(_parent, _x, _y, _w, _h, text, size)
+function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 	local label = Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -120,7 +122,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size)
 		height = _h,
 		caption = text,
 		fontsize = size or 20,
-		align = "center"
+		align = _align or "center"
 	}
 	return label
 end
@@ -188,6 +190,20 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text)
 	return editBox
 end
 
+function addCheckbox(_parent, _x, _y, _w, _h, _text, _textColor, _size, _checked)
+	local checkBox = Chili.Checkbox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		caption = _text,
+		textColor = _textColor or {1, 1, 1, 1},
+		boxsize = _size or 10,
+		checked = _checked or false
+	}
+	return checkBox
+end
 -------------------------------------
 -- Top bar functions (show/hide panels)
 -- TODO : Visual feedback for topBar buttons
@@ -217,8 +233,10 @@ function zoneFrame()
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW)
 	
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '10%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) end)
+	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '0%', '100%', '5%', "Zone")
+	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '5%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) end)
+	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
+	updateZonePanel()
 end
 
 function unitFrame()
@@ -424,14 +442,15 @@ end
 -------------------------------------
 -- Show zone position
 -------------------------------------
-function showZonePosition()
+function showZoneInformation()
 	if selectedZone ~= nil then
 		gl.BeginText()
-		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1) + 10, selectedZone.z1)
+		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
 		local text =  "x:"..tostring(selectedZone.x1).." z:"..tostring(selectedZone.z1)
 		gl.Text(text, x, y, 15, "s")
-		x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2) - 10, selectedZone.z2)
+		x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2), selectedZone.z2)
 		text =  "x:"..tostring(selectedZone.x2).." z:"..tostring(selectedZone.z2)
+		x = x - gl.GetTextWidth(text)*15
 		gl.Text(text, x, y, 15, "s")
 		gl.EndText()
 	end
@@ -523,6 +542,17 @@ function moveSelectedZone(dx, dz)
 	if updateAnchor then
 		zoneAnchorX = zoneAnchorX + dx
 		zoneAnchorZ = zoneAnchorZ + dz
+	end
+end
+
+function updateZonePanel()
+	for k, zl in pairs(zoneLabels) do
+		scrollPanels["zonePanel"]:RemoveChild(zl)
+	end
+	local size = 20
+	for i, z in ipairs(zoneList) do
+		zoneLabels[z.id] = addCheckbox(scrollPanels["zonePanel"], 0, (i-1) * size, "100%", size, z.id, {z.red, z.green, z.blue, 1}, size, false)
+		zoneLabels[z.id].font.size = size
 	end
 end
 
@@ -637,7 +667,7 @@ function widget:DrawScreen()
 		showInformation()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		showZonePosition()
+		showZoneInformation()
 	end
 end
 
@@ -670,6 +700,11 @@ function widget:Update(delta)
 	end
 	
 	showUnitAttributes(unitSelection)
+	
+	if totalZones ~= #zoneList then
+		updateZonePanel()
+		totalZones = #zoneList
+	end
 end
 
 -------------------------------------
@@ -792,9 +827,10 @@ function widget:MouseRelease(mx, my, button)
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
-				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8 }
+				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8, id = "Zone "..zoneNumber }
 				if zone.x2 - zone.x1 >= 32 and zone.z2 - zone.z1 >= 32 then
 					table.insert(zoneList, zone)
+					zoneNumber = zoneNumber + 1
 				end
 			end
 			plotZone = false
