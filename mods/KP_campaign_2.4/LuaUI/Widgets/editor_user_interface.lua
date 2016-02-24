@@ -439,6 +439,8 @@ function drawZoneRect()
 			if varA ~= nil and varB ~= nil then
 				xA, _, zA = unpack(varA)
 				xB, _, zB = unpack(varB)
+			elseif varA == nil or varB == nil then
+				xA, zA, xB, zB = 0, 0, 0, 0
 			end
 			xA, xB = sort(xA, xB)
 			zA, zB = sort(zA, zB)

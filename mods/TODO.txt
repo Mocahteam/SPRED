@@ -1,5 +1,4 @@
 Zones circulaires
 Rotation des unités
 Mettre le focus sur la zone sélectionnée
-Fix le bug drag depuis l'ext de la map vers l'interieur = dupliquer la zone
 problem selectedZone
