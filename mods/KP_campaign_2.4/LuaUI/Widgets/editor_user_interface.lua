@@ -217,6 +217,8 @@ function removeWindows()
 			windows.key = nil
 		end
 	end
+	selectedZone = nil
+	Spring.SelectUnitArray({})
 end
 
 function fileFrame()
@@ -236,11 +238,27 @@ function zoneFrame()
 	
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '0%', '100%', '5%', "Zone")
-	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '5%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) end)
+	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '5%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) selectedZone = nil end)
 	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
-	local globalLabel = addLabel(scrollPanels["zonePanel"], 0, 0, "80%", 20, "Show zones", 20, "left")
-	local globalCheckbox = addCheckbox(scrollPanels["zonePanel"], "80%", 0, "20%", 20, true)
-	zoneBoxes[0] = { label = globalLabel, checkbox = globalCheckbox }
+	
+	buttons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all",
+														function()
+															for k, zb in pairs(zoneBoxes) do
+																if not zb.checkbox.checked then
+																	zb.checkbox:Toggle()
+																end
+															end
+														end
+														)
+	buttons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all",
+														function()
+															for k, zb in pairs(zoneBoxes) do
+																if zb.checkbox.checked then
+																	zb.checkbox:Toggle()
+																end
+															end
+														end
+														)
 	updateZonePanel()
 end
 
@@ -435,8 +453,11 @@ function drawZoneRect()
 		if z.shown then
 			gl.Color(z.red, z.green, z.blue, 0.5)
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
+		elseif not z.shown and z == selectedZone then
+			selectedZone = nil
 		end
 	end
+	
 	if selectedZone ~= nil then
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
@@ -461,12 +482,14 @@ function showZoneInformation()
 		gl.Text(text, x, y, 15, "s")
 	end
 	for i, z in ipairs(zoneList) do
-		local x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
-		x, y = Spring.WorldToScreenCoords(x, Spring.GetGroundHeight(x, y), y)
-		local text = z.name
-		local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
-		x, y = x - w/2, y - h/2
-		gl.Text(text, x, y, 15, "s")
+		if z.shown then
+			local x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
+			x, y = Spring.WorldToScreenCoords(x, Spring.GetGroundHeight(x, y), y)
+			local text = z.name
+			local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
+			x, y = x - w/2, y - h/2
+			gl.Text(text, x, y, 15, "s")
+		end
 	end
 	gl.EndText()
 end
@@ -571,14 +594,14 @@ end
 
 function updateZonePanel()
 	for k, zb in pairs(zoneBoxes) do
-		if k ~= 0 then
+		if k ~= "global" then
 			scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
 			scrollPanels["zonePanel"]:RemoveChild(zb.checkbox)
 		end
 	end
 	local size = 20
 	for i, z in ipairs(zoneList) do
-		local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, true)
+		local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, z.shown)
 		local editBox = addEditBox(scrollPanels["zonePanel"], 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
 		zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
 	end
@@ -696,8 +719,8 @@ function widget:DrawScreen()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZoneInformation()
-		showZoneInformation()
 	end
+	showZoneInformation()
 end
 
 -------------------------------------
@@ -706,9 +729,8 @@ end
 function widget:DrawWorld()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		previewUnit()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		drawZoneRect()
 	end
+	drawZoneRect()
 end
 
 -------------------------------------
@@ -729,8 +751,7 @@ function widget:Update(delta)
 	end
 	
 	showUnitAttributes(unitSelection)
-	
-	if totalZones ~= #zoneList and globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
 		updateZonePanel()
 		totalZones = #zoneList
 	end
