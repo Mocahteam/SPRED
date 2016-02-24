@@ -192,7 +192,7 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	return editBox
 end
 
-function addCheckbox(_parent, _x, _y, _w, _h, _text, _textColor, _checked)
+function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 	local checkBox = Chili.Checkbox:New {
 		parent = _parent,
 		x = _x,
@@ -238,6 +238,9 @@ function zoneFrame()
 	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '0%', '100%', '5%', "Zone")
 	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '5%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) end)
 	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
+	local globalLabel = addLabel(scrollPanels["zonePanel"], 0, 0, "80%", 20, "Show zones", 20, "left")
+	local globalCheckbox = addCheckbox(scrollPanels["zonePanel"], "80%", 0, "20%", 20, true)
+	zoneBoxes[0] = { label = globalLabel, checkbox = globalCheckbox }
 	updateZonePanel()
 end
 
@@ -429,8 +432,10 @@ function drawZoneRect()
 	end
 	
 	for i, z in ipairs(zoneList) do
-		gl.Color(z.red, z.green, z.blue, 0.5)
-		gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
+		if z.shown then
+			gl.Color(z.red, z.green, z.blue, 0.5)
+			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
+		end
 	end
 	if selectedZone ~= nil then
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
@@ -471,6 +476,7 @@ function updateZoneInformation()
 		if z.name ~= zoneBoxes[z.id].editBox.text then
 			z.name = zoneBoxes[z.id].editBox.text
 		end
+		z.shown = zoneBoxes[z.id].checkbox.checked
 	end
 end
 
@@ -565,13 +571,16 @@ end
 
 function updateZonePanel()
 	for k, zb in pairs(zoneBoxes) do
-		scrollPanels["zonePanel"]:RemoveChild(zb)
+		if k ~= 0 then
+			scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
+			scrollPanels["zonePanel"]:RemoveChild(zb.checkbox)
+		end
 	end
 	local size = 20
 	for i, z in ipairs(zoneList) do
-		local checkBox = addCheckbox(scrollPanels["zonePanel"], "80%", (i-1) * 3/2 * size, "20%", size)
-		local editBox = addEditBox(scrollPanels["zonePanel"], 0, (i-1) * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
-		zoneBoxes[z.id] = { editBox = editBox, checkBox = checkBox }
+		local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, true)
+		local editBox = addEditBox(scrollPanels["zonePanel"], 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
+		zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
 	end
 end
 
@@ -847,7 +856,15 @@ function widget:MouseRelease(mx, my, button)
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
-				local zone = { red = rValue, green = gValue, blue = bValue, x1 = round(xA) - round(xA)%8, x2 = round(xB) - round(xB)%8, z1 = round(zA) - round(zA)%8, z2 = round(zB) - round(zB)%8, id = "Zone "..zoneNumber, name = "Zone "..zoneNumber }
+				local zone = 	{ 	
+										red = rValue, green = gValue, blue = bValue,
+										x1 = round(xA) - round(xA)%8,
+										x2 = round(xB) - round(xB)%8,
+										z1 = round(zA) - round(zA)%8,
+										z2 = round(zB) - round(zB)%8,
+										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
+										shown = true
+									}
 				if zone.x2 - zone.x1 >= 32 and zone.z2 - zone.z1 >= 32 then
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
@@ -969,7 +986,13 @@ function widget:KeyPress(key, mods)
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		if selectedZone ~= nil then
 			if key == Spring.GetKeyCode("delete") then
-				-- TODO
+				for i, z in ipairs(zoneList) do
+					if z == selectedZone then
+						table.remove(zoneList, i)
+						selectedZone = nil
+						break
+					end
+				end
 			elseif key == Spring.GetKeyCode("up") then
 				selectedZone.z1 = selectedZone.z1 - 8
 				selectedZone.z2 = selectedZone.z2 - 8

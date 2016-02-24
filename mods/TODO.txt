@@ -1,0 +1,4 @@
+Zones circulaires
+Rotation des unités
+Zones affichées de partout à cocher
+Mettre le focus sur la zone sélectionnée
