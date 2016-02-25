@@ -621,6 +621,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function changeMouseCursor() -- Hide mouse cursor in unit state and during movement, show another cursor in other states
+	--[[
 	local mouseCursor = Spring.GetMouseCursor()
 	if mouseCursor ~= "none" then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
@@ -631,6 +632,7 @@ function changeMouseCursor() -- Hide mouse cursor in unit state and during movem
 	elseif mouseCursor ~= "cursornormal" then
 		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move ...
 	end
+	]]
 end
 function widget:DrawScreen()
 	changeMouseCursor()
