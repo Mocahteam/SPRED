@@ -417,12 +417,11 @@ function showUnitAttributes(unitSelection) -- Show a window to edit unit's insta
 	end
 end
 function showUnitsInformation() -- Show information about selected and hovered units
-	local unitSelection = Spring.GetSelectedUnits()
 	gl.BeginText()
+	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
 		showUnitInformation(u)
 	end
-	gl.EndText()
 	
 	-- Draw information above hovered unit
 	local mx, my = Spring.GetMouseState()
@@ -436,11 +435,10 @@ function showUnitsInformation() -- Show information about selected and hovered u
 			end
 		end
 		if not isUnitSelected then
-			gl.BeginText()
 			showUnitInformation(var)
-			gl.EndText()
 		end
 	end
+	gl.EndText()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -452,25 +450,25 @@ end
 function drawZoneRect() -- Draw the zone feedback rectangle
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 		local _, _, leftPressed = Spring.GetMouseState()
-		if leftPressed then
-			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true)
-			local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true)
+		if leftPressed then -- if draw has to begin
+			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true) -- compute world's coords of the beginning of the draw
+			local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true) -- compute world's coords of the end of the draw
 			if varA ~= nil and varB ~= nil then
 				zoneX1, _, zoneZ1 = unpack(varA)
 				zoneX2, _, zoneZ2 = unpack(varB)
-			elseif varA == nil or varB == nil then
+			else
 				zoneX1, zoneZ1, zoneX2, zoneZ2 = 0, 0, 0, 0
 			end
-			zoneX1, zoneX2 = sort(zoneX1, zoneX2)
+			zoneX1, zoneX2 = sort(zoneX1, zoneX2) -- sort values to prevent errors
 			zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
 			if plotZone then
 				gl.Color(rValue, gValue, bValue, 0.5)
-				gl.DrawGroundQuad(zoneX1, zoneZ1, zoneX2, zoneZ2)
+				gl.DrawGroundQuad(zoneX1, zoneZ1, zoneX2, zoneZ2) -- draw the zone
 			end
 		end
 	end
 	
-	for i, z in ipairs(zoneList) do
+	for i, z in ipairs(zoneList) do -- render every other zones that are displayed
 		if z.shown then
 			gl.Color(z.red, z.green, z.blue, 0.5)
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
@@ -479,7 +477,7 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 		end
 	end
 	
-	if selectedZone ~= nil then
+	if selectedZone ~= nil then -- if a zone is selected, render its border
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+8)
