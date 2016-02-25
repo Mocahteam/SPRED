@@ -29,10 +29,17 @@
 extern "C" {
 #endif
 
+char const *errorsArr[] = {"out_of_range ", "wrong_coalition ", "wrong_unit ", "wrong_target ", "wrong_position ", "undefined "};
+
 /*
- * If the value is strictly positive, traces will be generated.
+ * If the value is strictly positive, traces will be generated. This value can be changed in the file 'ProgAndPlay.cpp'.
  */
 int tracePlayer;
+
+/* 
+ * If true, traces will be added in shared memory. Used to avoid logging calls not made by the player's program.
+ */
+bool activeTrace = true;
 
 /*
  * This function has to be called before entering in critical section.

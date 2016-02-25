@@ -25,14 +25,14 @@ local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Pl
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
+local tracesFilename = Spring.GetModOptions()["tracesfilename"] -- get the name of the file where traces will be logged (specific to the mission launched)
 
 local rooms = WG.rooms -- availabe in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
 
-local tracesDir = "traces"
+local tracesDirname = "traces"
 local ppTraces = nil -- File handler to store traces
-local startTime = os.clock()
 
 -- Set label
 local previousMission = "Previous mission"
@@ -60,11 +60,12 @@ end
 
 
 -- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
-local function createTmpFile(victoryState,endTime)
+local function createTmpFile(victoryState)
 	if not VFS.FileExists("mission_ended.conf") then
+		traceAction("end "..victoryState.." "..missionName.."\n")
 		local f = io.open("mission_ended.conf", "w")
 		if f ~= nil then
-			f:write(victoryState.." "..endTime.."\n")
+			f:write(victoryState.."\n")
 			f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
 			f:flush()
 			f:close()
@@ -102,6 +103,7 @@ local template_endMission = {
 				tab.position = "bottom"
 				tab.OnClick = function()
 					tab.parent:Close()
+					traceAction("replay "..missionName.."\n")
 					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", lang, scenarioType)
 				end
 			end
@@ -129,6 +131,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					traceAction("quit_game\n")
 					Spring.SendCommands("quitforce")
 				end
 			end
@@ -139,6 +142,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					traceAction("quit "..missionName.."\n")
 					WG.switchOnMenu()
 				end
 			end
@@ -161,6 +165,7 @@ local template_endMission = {
 				tab.position = "top"
 				tab.OnClick = function()
 					tab.parent:Close()
+					traceAction("show_briefing\n")
 					if tab.parent.launchTuto ~= nil then
 						tab.parent.launchTuto()
 					else
@@ -210,7 +215,6 @@ function MissionEvent(e)
 		-- load templated mission
 		local popup = deepcopy(template_endMission)
 		local victoryState = ""
-		local endTime = math.floor((os.clock()-startTime) * 1000)
 		-- update window
 		if e.state ~= "menu" then
 			if e.state == "won" then
@@ -240,6 +244,7 @@ function MissionEvent(e)
 						tab.position = "bottom"
 						tab.OnClick = function()
 							tab.parent:Close()
+							traceAction("previous "..campaign[missionName].previousMission.."\n")
 							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", lang, scenarioType)
 						end
 					end
@@ -253,6 +258,7 @@ function MissionEvent(e)
 						tab.position = "bottom"
 						tab.OnClick = function()
 							tab.parent:Close()
+							traceAction("next "..campaign[missionName].nextMission.."\n")
 							-- set nextLauncher depending on type of scenario
 							local nextLauncher = ""
 							if scenarioType == "default" then
@@ -268,7 +274,7 @@ function MissionEvent(e)
 			-- disable "Close tab" and "Show briefing"
 			popup.tabs[6] = nil
 			-- inform the game that mission is over with a temporary file
-			createTmpFile(victoryState,endTime)
+			createTmpFile(victoryState)
 		else
 			popup.lineArray = {"Menu"}
 		end
@@ -363,15 +369,13 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
 	widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
 
-	if not VFS.FileExists(tracesDir) then
-		Spring.CreateDir(tracesDir)
+	if not VFS.FileExists(tracesDirname) then
+		Spring.CreateDir(tracesDirname)
 	end
-	-- open ppTraces file
-	ppTraces = io.open(tracesDir..'\\'..missionName..".log", "w+")
-	if ppTraces ~= nil then
-		ppTraces:write(missionName.." start\n")
-		ppTraces:flush()
-		ppTraces:close()
+	
+	ppTraces = io.open(tracesDirname..'\\'.."meta.log", "a+")
+	if missionName ~= nil then
+		traceAction("start "..missionName.."\n")
 	end
 end
 
@@ -382,6 +386,13 @@ function widget:Shutdown()
 	
 	if ppTraces ~= nil then
 		ppTraces:close()
+	end
+end
+
+function traceAction(msg)
+	if ppTraces ~= nil then
+		ppTraces:write(msg)
+		ppTraces:flush()
 	end
 end
 

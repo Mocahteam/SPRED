@@ -6,7 +6,7 @@ SET zip=..\..\..\spring_0.82.5.1\mingwlibs\bin\7za.exe
 
 REM copie et execution
 SET repSpring="C:\Program Files (x86)\Spring"
-REM MKDIR %repSpring%\mods\
+MKDIR %repSpring%\mods\
 COPY KP_campaign_2.3.sdz %repSpring%\mods
 CD /D %repSpring%
 spring.exe

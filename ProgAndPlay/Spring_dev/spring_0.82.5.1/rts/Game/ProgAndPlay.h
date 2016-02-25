@@ -10,6 +10,9 @@
 class CProgAndPlay
 {
 public:
+
+	static const bool tracePlayer = true;
+	
 	CProgAndPlay();
 	~CProgAndPlay();
 	
@@ -21,10 +24,11 @@ public:
 	void RemoveUnit(CUnit* unit);
 
 private:
+
 	bool loaded;
 	bool updated;
 	bool missionEnded;
-	int counter;
+	std::string missionName;
 		
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play

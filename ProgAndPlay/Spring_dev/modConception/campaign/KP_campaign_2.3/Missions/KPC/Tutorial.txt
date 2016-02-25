@@ -10,13 +10,14 @@
 	
 	[MODOPTIONS]
 	{
-		GameMode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
-								// 2 lineage, 3 openend
-		FixedAllies=0;			// enable in game alliance
-		HideMenu=1;				// set a value to avoid starting menu
-		language=en;			// en english, fr français
-		missionName=Tutorial;	// mission name used to define script file and launcher file
-		scenario=default;		// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
+		GameMode=3;					// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
+									// 2 lineage, 3 openend
+		FixedAllies=0;				// enable in game alliance
+		HideMenu=1;					// set a value to avoid starting menu
+		language=en;				// en english, fr français
+		missionName=Tutorial;		// mission name used to define script file and launcher file
+		scenario=default;			// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
+		tracesFilename=Tutorial; 	// name of the file where the traces will be logged
 	}
 	
 	HostIP=localhost;

@@ -593,7 +593,7 @@ end
 
 function widget:GameOver()
 	-- Turn on menu
-	FunctionsList.SwitchOn(GameOverMenu)
+	FunctionsList.SwitchOn()
 end
 
 function widget:Initialize()

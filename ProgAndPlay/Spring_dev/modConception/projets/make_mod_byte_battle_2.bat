@@ -8,8 +8,8 @@ REM copie et execution
 SET repSpring="C:\Program Files (x86)\Spring"
 MKDIR %repSpring%\mods\
 COPY Byte_Battle_2.sdz %repSpring%\mods\
-REM CD /D %repSpring%
-REM spring
+CD /D %repSpring%
+spring.exe
 
 REM retour au repertoire
 REM CD /D F:\Mathieu\These\ProgAndPlay\Spring_dev\modConception\projets
