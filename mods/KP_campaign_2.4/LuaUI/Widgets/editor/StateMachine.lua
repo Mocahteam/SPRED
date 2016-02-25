@@ -18,26 +18,10 @@ function StateMachine.setCurrentState(self, _currentState) self.currentState = _
 -- Getter
 function StateMachine.getCurrentState(self) return self.currentState end
 
--------------------------------------
--- Useful function to split messages into tokens
--------------------------------------
-function splitString(inputstr, sep)
-	if sep == nil then
-		sep = "%s"
-	end
-	local t = {}
-	local i = 1
-	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-		t[i] = str
-		i = i + 1
-	end
-	return t
-end
-
 ------------------------------
 -- Initialize global state machine
 ------------------------------
-local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link" }
+local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link", ZONE = "zone" }
 globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
@@ -61,3 +45,9 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
 ------------------------------
 local teamStates = { PLAYER = "0", ALLY = "1", ENEMY = "2" }
 teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)
+
+------------------------------
+-- Initialize zone state machine
+------------------------------
+local zoneStates = { DRAW = "draw", SELECTION = "selection" }
+zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAW)

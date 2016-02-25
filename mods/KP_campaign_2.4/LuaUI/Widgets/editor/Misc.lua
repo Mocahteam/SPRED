@@ -14,6 +14,39 @@ function sort(v1, v2)
 end
 
 -----------------------
+-- Round a value
+-----------------------
+function round(num, idp)
+	local mult = 10^(idp or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
+
+-----------------------
+-- Get the sign of a number
+-----------------------
+function sign(x)
+	if x >= 0 then
+		return 1
+	else
+		return -1
+	end
+end
+
+-----------------------
+-- Shows units information above unit
+-----------------------
+function showUnitInformation(u)
+	local xU, yU, zU = Spring.GetUnitPosition(u)
+	local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+	local text1 = "ID:"..tostring(u)
+	local w1 = gl.GetTextWidth(text1)
+	gl.Text(text1, x - (15*w1/2), y, 15, "s")
+	local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
+	local w2 = gl.GetTextWidth(text2)
+	gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
+end
+
+-----------------------
 -- Select every units in a rectangle
 -----------------------
 function GetUnitsInScreenRectangle(x1, y1, x2, y2)
@@ -57,7 +90,7 @@ function saveMap()
 end
 
 -----------------------
--- Select units or add/remove them to the current selection if shift is pressed
+-- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
 	-- get mods
@@ -74,4 +107,26 @@ function proceedSelection(units)
 	else
 		Spring.SelectUnitArray(units)
 	end
+end
+
+-----------------------
+-- Remove a unit from the current selection if shift is pressed
+-- @return returns shiftPressed to disable click to select
+-----------------------
+function proceedDeselection(unit)
+	-- get mods
+	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
+	-- multiple selection if shift is pressed
+	if shiftPressed then
+		-- get selected units
+		local selectedUnits = Spring.GetSelectedUnits()
+		-- add units to selection
+		for i, u in ipairs(selectedUnits) do
+			if u == unit then
+				table.remove(selectedUnits, i)
+			end
+		end
+		Spring.SelectUnitArray(selectedUnits)
+	end
+	return shiftPressed
 end
