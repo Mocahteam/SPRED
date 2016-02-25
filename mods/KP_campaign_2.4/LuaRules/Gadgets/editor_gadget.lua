@@ -131,6 +131,7 @@ function gadget:GameFrame( frameNumber )
 				for i, u in ipairs(selectedUnits) do
 					if relativepos[u] ~= nil then
 						local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
+						Spring.MoveCtrl.Enable(u)
 						Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
 						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 					end

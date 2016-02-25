@@ -34,6 +34,7 @@ local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
 local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
 local zoneAnchorX, zoneAnchorZ = 0, 0
+local minZoneSize = 32
 local zoneList = {}
 local selectedZone = nil
 local zoneSide = ""
@@ -399,7 +400,8 @@ function previewUnit()-- Draw units before placing them
 		end
 	end
 end
-function showUnitAttributes(unitSelection) -- Show a window to edit unit's instance attributes
+function showUnitAttributes() -- Show a window to edit unit's instance attributes
+	local unitSelection = Spring.GetSelectedUnits()
 	if #unitSelection > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
 		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
 		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
@@ -485,7 +487,7 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 	end
 end
-function showZoneInformation() -- Show zone name, top-left and bottom-right positions
+function showZoneInformation() -- Show each displayed zone name and top-left/bottom-right positions of selected zone
 	gl.BeginText()
 	if selectedZone ~= nil then
 		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
@@ -522,8 +524,11 @@ function clickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	if var ~= nil then
 		local x, _, z = unpack(var)
 		for i, zone in ipairs(zoneList) do
-			if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then
+			if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then -- check if we clicked in a zone
 				clickedZone = zone
+				if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
+					return selectedZone
+				end
 			end
 		end
 	end
@@ -533,9 +538,9 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	local left = x - selectedZone.x1
 	local right = selectedZone.x2 - x
 	local top = z - selectedZone.z1
-	local bottom = selectedZone.z2 - z
+	local bottom = selectedZone.z2 - z -- these variable represent the distance between where the user clicked and the borders of the selected zone
 	local side = ""
-	if left >= 0 and left <= 8 then
+	if left >= 0 and left <= 8 then -- if this distance is less than 8, return the clicked border
 		if top >= 0 and top <= 8 then
 			side = "TOPLEFT"
 		elseif bottom >= 0 and bottom <= 8 then
@@ -560,33 +565,34 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 end
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	local updateAnchor = true
+	-- depending on the side clicked, apply modifications
 	if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
 		selectedZone.x1 = selectedZone.x1 + dx
 		selectedZone.x2 = selectedZone.x2 + dx
 		selectedZone.z1 = selectedZone.z1 + dz
 		selectedZone.z2 = selectedZone.z2 + dz
-	elseif zoneSide == "LEFT" and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "LEFT" and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.x2 = selectedZone.x2 + dx
-	elseif zoneSide == "TOP" and selectedZone.z1 + dz + 32 <= selectedZone.z2 then
+	elseif zoneSide == "TOP" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
 		selectedZone.z1 = selectedZone.z1 + dz
-	elseif zoneSide == "BOT" and selectedZone.z1 - dz+ 32 <= selectedZone.z2 then
+	elseif zoneSide == "BOT" and selectedZone.z1 - dz+ minZoneSize <= selectedZone.z2 then
 		selectedZone.z2 = selectedZone.z2 + dz
-	elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + 32 <= selectedZone.z2 and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.z1 = selectedZone.z1 + dz
 		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + 32 <= selectedZone.z2 and selectedZone.x1 + dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.z2 = selectedZone.z2 + dz
 		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + 32 <= selectedZone.z2 and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.z1 = selectedZone.z1 + dz
 		selectedZone.x2 = selectedZone.x2 + dx
-	elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + 32 <= selectedZone.z2 and selectedZone.x1 - dx + 32 <= selectedZone.x2 then
+	elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
 		selectedZone.z2 = selectedZone.z2 + dz
 		selectedZone.x2 = selectedZone.x2 + dx
 	else
-		updateAnchor = false
+		updateAnchor = false -- if no modifications have been applied (mouse out of map for instance), do not update the anchor of the transformation
 	end
 	if updateAnchor then
 		zoneAnchorX = zoneAnchorX + dx
@@ -630,6 +636,7 @@ function widget:DrawScreen()
 	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 		showUnitsInformation()
+		showUnitAttributes()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZoneInformation()
@@ -671,7 +678,6 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	showUnitAttributes(unitSelection)
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
 		updateZonePanel()
 		totalZones = #zoneList
@@ -804,7 +810,7 @@ function widget:MouseRelease(mx, my, button)
 										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
 										shown = true
 									}
-				if zone.x2 - zone.x1 >= 32 and zone.z2 - zone.z1 >= 32 then
+				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 				end

@@ -1,5 +1,3 @@
 Zones circulaires
 Rotation des unités
-Mettre le focus sur la zone sélectionnée
-problem selectedZone
 feedback visuel sur la topbar
