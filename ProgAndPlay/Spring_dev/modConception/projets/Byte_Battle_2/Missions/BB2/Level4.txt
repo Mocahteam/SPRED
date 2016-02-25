@@ -18,6 +18,7 @@
 		FixedAllies=0;		// enable in game alliance
 		HideMenu=1;			// set a value to avoid starting menu
 		level=3;
+		tracesFilename=Level4; // name of the file where the traces will be logged
 	}
 	
 	HostIP=localhost;
