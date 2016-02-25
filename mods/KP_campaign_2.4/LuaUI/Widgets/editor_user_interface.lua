@@ -832,23 +832,32 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	if button == 1 then
 		-- STATE SELECTION
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-			-- If a unit is selected, send a message to the gadget to move it
-			if mouseMove and not plotSelection then
-				local _, pos = Spring.TraceScreenRay(mx, my, true)
-				if pos ~=nil then
-					local x, _, z = unpack(pos)
-					x, z = round(x), round(z)
-					local msg = "Move Units".."++"..x.."++"..z
+			local altPressed = Spring.GetModKeyState()
+			if altPressed then -- Send a message to the gadget to rotate selectedUnits
+				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+				if var ~= nil then
+					local x, _, z = unpack(var)
+					local msg = "Rotate Units".."++"..x.."++"..z
 					Spring.SendLuaRulesMsg(msg)
 				end
-			end
-			-- update selection box
-			if plotSelection then
-				drawEndX = mx
-				drawEndY = my
-				-- Select all units in the rectangle
-				local unitSelection = GetUnitsInScreenRectangle(drawStartX, drawStartY, drawEndX, drawEndY)
-				proceedSelection(unitSelection)
+			else -- Send a message to the gadget to move selected units
+				if mouseMove and not plotSelection then
+					local _, pos = Spring.TraceScreenRay(mx, my, true)
+					if pos ~=nil then
+						local x, _, z = unpack(pos)
+						x, z = round(x), round(z)
+						local msg = "Move Units".."++"..x.."++"..z
+						Spring.SendLuaRulesMsg(msg)
+					end
+				end
+				-- update selection box
+				if plotSelection then
+					drawEndX = mx
+					drawEndY = my
+					-- Select all units in the rectangle
+					local unitSelection = GetUnitsInScreenRectangle(drawStartX, drawStartY, drawEndX, drawEndY)
+					proceedSelection(unitSelection)
+				end
 			end
 		end
 		

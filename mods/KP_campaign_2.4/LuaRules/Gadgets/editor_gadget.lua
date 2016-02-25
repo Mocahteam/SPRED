@@ -43,9 +43,11 @@ local newTeam = 0
 local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local newX, newZ = 0, 0
+local angle = 0
 local moveUnits = false
 local deleteUnits = false
 local transferUnits = false
+local rotateUnits = false
 local resetMap = false
 local moveUnitsAnchor = nil
 local relativepos = {}
@@ -87,6 +89,16 @@ function gadget:RecvLuaMsg(msg, player)
 	elseif (msgContents[1] == "Translate Units") then
 		moveUnits = true
 		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+	-- ROTATE UNITS : computes the angle of rotation
+	elseif (msgContents[1] == "Rotate Units") then
+		rotateUnits = true
+		local x, z = msgContents[2], msgContents[3]
+		local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		local vectX, vectZ = x - refX, z - refZ
+		local length = math.sqrt(vectX*vectX + vectZ*vectZ)
+		if length > 0 then
+			angle = math.atan2(vectX/length, vectZ/length)
+		end
 	-- SELECT UNITS : gets the current unit selection
 	elseif (msgContents[1] == "Select Units") then
 		local tmptable = {}
@@ -131,7 +143,6 @@ function gadget:GameFrame( frameNumber )
 				for i, u in ipairs(selectedUnits) do
 					if relativepos[u] ~= nil then
 						local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
-						Spring.MoveCtrl.Enable(u)
 						Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
 						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 					end
@@ -152,6 +163,12 @@ function gadget:GameFrame( frameNumber )
 				-- Spring.TransferUnit(u, newTeam) --BUGGED
 			end
 			transfertUnits = false
+		-- ROTATE UNITS
+		elseif rotateUnits then
+			for i, u in ipairs(selectedUnits) do
+				Spring.SetUnitRotation(u, 0, -angle, 0)
+			end
+			rotateUnits = false
 		-- RESET MAP
 		elseif resetMap then
 			local units = Spring.GetAllUnits()
