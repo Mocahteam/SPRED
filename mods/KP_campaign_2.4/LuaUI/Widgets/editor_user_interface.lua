@@ -400,17 +400,17 @@ function previewUnit()-- Draw units before placing them
 	end
 end
 function showUnitAttributes(unitSelection) -- Show a window to edit unit's instance attributes
-	if #unitSelection > 0	and windows["unitAttributes"] == nil then
+	if #unitSelection > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
 		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
 		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
-		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], "70%", 50, "30%", 20, "%HP", 20)
-		if #unitSelection == 1 then
+		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], 0, 50, "30%", 20, "HP%", 20, "right")
+		if #unitSelection == 1 then -- if unit is alone, show its hp percentage in the editbox
 			local h, mh = Spring.GetUnitHealth(unitSelection[1])
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right", tostring(100*round(h/mh)))
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], "35%", 50, "65%", 20, "left", tostring(round(100*(h/mh))))
 		else
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right")
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], "35%", 50, "65%", 20, "left")
 		end
-		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChanges)
+		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChangesToSelectedUnits)
 	elseif #unitSelection == 0 then
 		Screen0:RemoveChild(windows["unitAttributes"])
 		windows["unitAttributes"] = nil
