@@ -207,7 +207,7 @@ function zoneFrame()
 	
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	fileButtons['zoneRect'] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "Rectangle", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
+	fileButtons['zoneRect'] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
 	images['zoneRect'] = addImage(fileButtons['zoneRect'], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
 	fileButtons['zoneDisk'] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
 	images['zoneDisk'] = addImage(fileButtons['zoneDisk'], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
@@ -352,7 +352,7 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
 	end
-	if plotSelection then
+	if plotSelection then -- only draw it when mouse button 1 is down and global state is selection
 		-- compute good values for x1, x2, y1, y2, regarding respective anchors
 		local x1, x2, y1, y2 = 0, 0, screenSizeY, screenSizeY
 		if (selectionStartX <= selectionEndX and selectionStartY <= selectionEndY) then
@@ -381,19 +381,21 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 	end
 end
 function previewUnit()-- Draw units before placing them
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and not Screen0.hoveredControl then
 		local mx, my = Spring.GetMouseState()
 		local kind, coords = Spring.TraceScreenRay(mx, my)
-		if kind == "ground" then
+		if kind == "ground" then -- only draw if unit is placeable
 			local x, _, z = unpack(coords)
 			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
-			gl.DepthTest(GL.LEQUAL)
-			gl.DepthMask(true)
+			gl.DepthTest(GL.LEQUAL) -- prevents depth bug (~ reverted normals)
+			gl.DepthMask(true) -- same
 			gl.PushMatrix()
-			gl.Color(1, 1, 1, 0.7)
+			gl.Color(1, 1, 1, 0.7) -- a bit of transparency
 			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
 			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
 			gl.PopMatrix()
+			gl.DepthTest(false) -- return to normal state
+			gl.DepthMask(false)
 		end
 	end
 end
