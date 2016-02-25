@@ -111,7 +111,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 	}
 	return label
 end
-function addImage(_parent, _x, _y, _w, _h, imagePath)
+function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect)
 	local image = Chili.Image:New {
 		parent = _parent,
 		x = _x,
@@ -119,7 +119,7 @@ function addImage(_parent, _x, _y, _w, _h, imagePath)
 		width = _w,
 		height = _h,
 		file = imagePath,
-		keepAspect = false
+		keepAspect = _keepAspect or false
 	}
 	return image
 end
@@ -181,7 +181,7 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function removeWindows()
+function clearUI() -- remove every windows except topbar and clear current selection
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
 			Screen0:RemoveChild(w)
@@ -192,7 +192,7 @@ function removeWindows()
 	Spring.SelectUnitArray({})
 end
 function fileFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
 	
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -201,37 +201,38 @@ function fileFrame()
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 function zoneFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
-	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW)
+	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
 	
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '0%', '100%', '5%', "Zone")
-	fileButtons['newZone'] = addButton(windows['zoneWindow'], '0%', '5%', '100%', '10%', "Draw new Zone", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAW) selectedZone = nil end)
+	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
+	fileButtons['zoneRect'] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "Rectangle", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
+	images['zoneRect'] = addImage(fileButtons['zoneRect'], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
+	fileButtons['zoneDisk'] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
+	images['zoneDisk'] = addImage(fileButtons['zoneDisk'], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
 	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
 	
-	buttons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all",
-														function()
-															for k, zb in pairs(zoneBoxes) do
-																if not zb.checkbox.checked then
-																	zb.checkbox:Toggle()
-																end
-															end
-														end
-														)
-	buttons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all",
-														function()
-															for k, zb in pairs(zoneBoxes) do
-																if zb.checkbox.checked then
-																	zb.checkbox:Toggle()
-																end
-															end
-														end
-														)
-	updateZonePanel()
+	local toggleAllOn = 	function() -- show all zones
+									for k, zb in pairs(zoneBoxes) do
+										if not zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	local toggleAllOff = 	function() -- hide all zones
+									for k, zb in pairs(zoneBoxes) do
+										if zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	buttons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
+	buttons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
+	updateZonePanel() -- initialize zone list when coming back to this menu
 end
 function unitFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
 	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
@@ -258,7 +259,7 @@ function unitFrame()
 	end
 	
 	-- Team buttons
-	-- TODO : may require refactor (TBD)
+	-- TODO : require refactor
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
 	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", teamFunctions[teamStateMachine.states.PLAYER])
 	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", teamFunctions[teamStateMachine.states.ALLY])
@@ -269,7 +270,7 @@ function unitFrame()
 	images['selectionTeam'] = addImage(teamButtons[teamStateMachine:getCurrentState()], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
 function eventFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
 	
 	windows['editBoxWindow'] = addWindow(Screen0, '30%', '30%', '30%', '30%')
@@ -277,11 +278,11 @@ function eventFrame()
 	editBoxes["editBox"] = addEditBox(windows['editBoxWindow'], '0%', '10%', '100%', 20)
 end
 function actionFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ACTION)
 end
 function linkFrame()
-	removeWindows()
+	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.LINK)
 end
 
@@ -447,7 +448,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function drawZoneRect() -- Draw the zone feedback rectangle
-	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 		local _, _, leftPressed = Spring.GetMouseState()
 		if leftPressed then
 			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true)
@@ -737,7 +738,7 @@ function widget:MousePress(mx, my, button)
 		
 		-- STATE ZONE : draw, move and rename logical zones
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				rValue, gValue, bValue = math.random(), math.random(), math.random()
 				plotZone = true
 				selectionStartX, selectionEndX = mx, mx
@@ -793,7 +794,7 @@ function widget:MouseRelease(mx, my, button)
 			if clickToSelect then
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				local zone = 	{ 	
 										red = rValue, green = gValue, blue = bValue,
 										x1 = round(zoneX1) - round(zoneX1)%8,
@@ -845,7 +846,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		
 		-- STATE ZONE
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				-- update zone
 				if plotZone then
 					selectionEndX = mx
