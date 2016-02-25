@@ -10,46 +10,47 @@ function widget:GetInfo()
 	}
 end
 
-VFS.Include("LuaUI/Widgets/editor/StateMachine.lua")
-VFS.Include("LuaUI/Widgets/editor/Misc.lua")
+VFS.Include("LuaUI/Widgets/editor/StateMachine.lua") -- State machines definitions (class and instances)
+VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
--------------------------------------
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Variables
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 -- UI Variables
--------------------------------------
-local Chili, Screen0
-local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
-local globalFunctions, unitFunctions, teamFunctions = {}, {}, {}
+local Chili, Screen0 -- Chili framework, main screen
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
--------------------------------------
--- Draw selection tools
--------------------------------------
-local selectionStartX, selectionStartY, selectionEndX, selectionEndY, gameSizeX, gameSizeY = 0, 0, 0, 0, 0, 0
+-- Draw selection variables
+local selectionStartX, selectionStartY, selectionEndX, selectionEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
-function widget:DrawScreenEffects(dse_vsx, dse_vsy) gameSizeX, gameSizeY = dse_vsx, dse_vsy end
+function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
--------------------------------------
--- Zone tools
--------------------------------------
+-- Zone variables
 local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
-local xA, xB, zA, zB = 0, 0, 0, 0
+local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
 local zoneAnchorX, zoneAnchorZ = 0, 0
 local zoneList = {}
 local selectedZone = nil
 local zoneSide = ""
-local zoneNumber = 0
-local totalZones = 0
+local totalZones = #zoneList
+local zoneNumber = totalZones+1
 
--------------------------------------
--- Mouse tools
--------------------------------------
+-- Mouse variables
 local mouseMove = false
 local clickToSelect = false
 local doubleClick = 0
 
--------------------------------------
--- Initialize ChiliUI
--------------------------------------
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Chili UI functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 function initChili()
 	if (not WG.Chili) then
 		widgetHandler:RemoveWidget()
@@ -60,10 +61,6 @@ function initChili()
 	Chili = WG.Chili
 	Screen0 = Chili.Screen0
 end
-
--------------------------------------
--- Add a window to a specific parent
--------------------------------------
 function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	local window = Chili.Window:New{
 		parent = _parent,
@@ -76,10 +73,6 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	}
 	return window
 end
-
--------------------------------------
--- Add an ImageButton to a specific parent
--------------------------------------
 function addImageButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction)
 	local imageButton = Chili.Image:New {
 		parent = _parent,
@@ -93,10 +86,6 @@ function addImageButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction)
 	}
 	return imageButton
 end
-
--------------------------------------
--- Add an Button to a specific parent
--------------------------------------
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	local button = Chili.Button:New {
 		parent = _parent,
@@ -109,10 +98,6 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	}
 	return button
 end
-
--------------------------------------
--- Add a label to a specific parent
--------------------------------------
 function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 	local label = Chili.Label:New {
 		parent = _parent,
@@ -126,10 +111,6 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 	}
 	return label
 end
-
--------------------------------------
--- Add an Image to a specific parent
--------------------------------------
 function addImage(_parent, _x, _y, _w, _h, imagePath)
 	local image = Chili.Image:New {
 		parent = _parent,
@@ -142,10 +123,6 @@ function addImage(_parent, _x, _y, _w, _h, imagePath)
 	}
 	return image
 end
-
--------------------------------------
--- Add a colored Rectangle to a specific parent
--------------------------------------
 function addRect(_parent, x1, y1, x2, y2, _color)
 	local rect = Chili.Image:New {
 		parent = _parent,
@@ -159,10 +136,6 @@ function addRect(_parent, x1, y1, x2, y2, _color)
 	}
 	return rect
 end
-
--------------------------------------
--- Add a ScrollPanel to a specific parent
--------------------------------------
 function addScrollPanel(_parent, _x, _y, _w, _h)
 	local scrollPanel = Chili.ScrollPanel:New {
 		parent = _parent,
@@ -173,10 +146,6 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 	}
 	return scrollPanel
 end
-
--------------------------------------
--- Add an EditBox to a specific parent
--------------------------------------
 function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	local editBox = Chili.EditBox:New {
 		parent = _parent,
@@ -191,7 +160,6 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	editBox.font.size = _h
 	return editBox
 end
-
 function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 	local checkBox = Chili.Checkbox:New {
 		parent = _parent,
@@ -206,10 +174,13 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 	}
 	return checkBox
 end
--------------------------------------
--- Top bar functions (show/hide panels)
--- TODO : Visual feedback for topBar buttons
--------------------------------------
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Top bar functions (show/hide panels)
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 function removeWindows()
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
@@ -220,7 +191,6 @@ function removeWindows()
 	selectedZone = nil
 	Spring.SelectUnitArray({})
 end
-
 function fileFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
@@ -230,7 +200,6 @@ function fileFrame()
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
-
 function zoneFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
@@ -261,7 +230,6 @@ function zoneFrame()
 														)
 	updateZonePanel()
 end
-
 function unitFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
@@ -300,7 +268,6 @@ function unitFrame()
 	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 	images['selectionTeam'] = addImage(teamButtons[teamStateMachine:getCurrentState()], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 end
-
 function eventFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
@@ -309,28 +276,21 @@ function eventFrame()
 	labels['editBoxLabel'] = addLabel(windows['editBoxWindow'], '5%', '1%', '90%', '5%', "EditBox")
 	editBoxes["editBox"] = addEditBox(windows['editBoxWindow'], '0%', '10%', '100%', 20)
 end
-
 function actionFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ACTION)
 end
-
 function linkFrame()
 	removeWindows()
 	globalStateMachine:setCurrentState(globalStateMachine.states.LINK)
 end
 
------------------------
--- Tell the gadget to apply changes to units attributes
------------------------
-function applyChanges()
-	local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
-	Spring.SendLuaRulesMsg(msg)
-end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Initialisation functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--------------------------------------
--- Hide default GUI
--------------------------------------
 function hideDefaultGUI()
 	-- get rid of engine UI
 	Spring.SendCommands("resbar 0","fps 0","console 0","info 0")
@@ -339,10 +299,6 @@ function hideDefaultGUI()
 	-- a hitbox remains for the minimap, unless you do this
 	gl.ConfigMiniMap(0,0,0,0)
 end
-
--------------------------------------
--- Top bar generation
--------------------------------------
 function initTopBar()
 	-- Top bar
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
@@ -355,12 +311,7 @@ function initTopBar()
 	buttons['actions'] = addButton(windows["topBar"], '20%', '0%', '5%', '100%', 'Actions', actionFrame)
 	buttons['links'] = addButton(windows["topBar"], '25%', '0%', '5%', '100%', 'Links', linkFrame)
 end
-
--------------------------------------
--- Generate functions for every units
--- Creates a function for every unitState to change state and handle selection feedback
--------------------------------------
-function initUnitFunctions()
+function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
@@ -372,12 +323,7 @@ function initUnitFunctions()
 		end
 	end
 end
-
--------------------------------------
--- Generate functions for every teams
--- Creates a function for every teamState to change state and handle selection feedback
--------------------------------------
-function initTeamFunctions()
+function initTeamFunctions() -- Creates a function for every teamState to change state and handle selection feedback
 	for k, t in pairs(teamStateMachine.states) do
 		teamFunctions[t] = function()
 			teamStateMachine:setCurrentState(t)
@@ -391,62 +337,132 @@ function initTeamFunctions()
 	end
 end
 
--------------------------------------
--- Draw the selection feedback rectangle
--------------------------------------
-function drawSelectionRect()
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Unit/Selection state functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
+	local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
+	Spring.SendLuaRulesMsg(msg)
+end
+function drawSelectionRect() -- Draw the selection feedback rectangle
 	if images["selectionRect"] ~= nil then
 		Screen0:RemoveChild(images["selectionRect"])
 	end
 	if plotSelection then
-		-- compute good values for x1, x2, y1, y2
-		local x1, x2, y1, y2 = 0, 0, gameSizeY, gameSizeY
+		-- compute good values for x1, x2, y1, y2, regarding respective anchors
+		local x1, x2, y1, y2 = 0, 0, screenSizeY, screenSizeY
 		if (selectionStartX <= selectionEndX and selectionStartY <= selectionEndY) then
 			x1 = selectionStartX
-			y1 = gameSizeY - selectionEndY
+			y1 = screenSizeY - selectionEndY
 			x2 = selectionEndX
-			y2 = gameSizeY - selectionStartY
+			y2 = screenSizeY - selectionStartY
 		elseif (selectionStartX <= selectionEndX and selectionStartY >= selectionEndY) then
 			x1 = selectionStartX
-			y1 = gameSizeY - selectionStartY
+			y1 = screenSizeY - selectionStartY
 			x2 = selectionEndX
-			y2 = gameSizeY - selectionEndY
+			y2 = screenSizeY - selectionEndY
 		elseif (selectionStartX >= selectionEndX and selectionStartY <= selectionEndY) then
 			x1 = selectionEndX
-			y1 = gameSizeY - selectionEndY
+			y1 = screenSizeY - selectionEndY
 			x2 = selectionStartX
-			y2 = gameSizeY - selectionStartY
+			y2 = screenSizeY - selectionStartY
 		elseif (selectionStartX >= selectionEndX and selectionStartY >= selectionEndY) then
 			x1 = selectionEndX
-			y1 = gameSizeY - selectionStartY
+			y1 = screenSizeY - selectionStartY
 			x2 = selectionStartX
-			y2 = gameSizeY - selectionEndY
+			y2 = screenSizeY - selectionEndY
 		end
 		-- draw the rectangle
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 end
+function previewUnit()-- Draw units before placing them
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
+		local mx, my = Spring.GetMouseState()
+		local kind, coords = Spring.TraceScreenRay(mx, my)
+		if kind == "ground" then
+			local x, _, z = unpack(coords)
+			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
+			gl.DepthTest(GL.LEQUAL)
+			gl.DepthMask(true)
+			gl.PushMatrix()
+			gl.Color(1, 1, 1, 0.7)
+			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
+			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
+			gl.PopMatrix()
+		end
+	end
+end
+function showUnitAttributes(unitSelection) -- Show a window to edit unit's instance attributes
+	if #unitSelection > 0	and windows["unitAttributes"] == nil then
+		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
+		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
+		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], "70%", 50, "30%", 20, "%HP", 20)
+		if #unitSelection == 1 then
+			local h, mh = Spring.GetUnitHealth(unitSelection[1])
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right", tostring(100*round(h/mh)))
+		else
+			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right")
+		end
+		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChanges)
+	elseif #unitSelection == 0 then
+		Screen0:RemoveChild(windows["unitAttributes"])
+		windows["unitAttributes"] = nil
+	end
+end
+function showUnitsInformation() -- Show information about selected and hovered units
+	local unitSelection = Spring.GetSelectedUnits()
+	gl.BeginText()
+	for i, u in ipairs(unitSelection) do
+		showUnitInformation(u)
+	end
+	gl.EndText()
+	
+	-- Draw information above hovered unit
+	local mx, my = Spring.GetMouseState()
+	local kind, var = Spring.TraceScreenRay(mx, my)
+	if kind == "unit" then
+		local isUnitSelected = false
+		for _, u in ipairs(unitSelection) do
+			if var == u then
+				isUnitSelected = true
+				break
+			end
+		end
+		if not isUnitSelected then
+			gl.BeginText()
+			showUnitInformation(var)
+			gl.EndText()
+		end
+	end
+end
 
--------------------------------------
--- Draw the zone feedback rectangle
--------------------------------------
-function drawZoneRect()
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Zone state functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function drawZoneRect() -- Draw the zone feedback rectangle
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
 		local _, _, leftPressed = Spring.GetMouseState()
 		if leftPressed then
 			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true)
 			local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true)
 			if varA ~= nil and varB ~= nil then
-				xA, _, zA = unpack(varA)
-				xB, _, zB = unpack(varB)
+				zoneX1, _, zoneZ1 = unpack(varA)
+				zoneX2, _, zoneZ2 = unpack(varB)
 			elseif varA == nil or varB == nil then
-				xA, zA, xB, zB = 0, 0, 0, 0
+				zoneX1, zoneZ1, zoneX2, zoneZ2 = 0, 0, 0, 0
 			end
-			xA, xB = sort(xA, xB)
-			zA, zB = sort(zA, zB)
+			zoneX1, zoneX2 = sort(zoneX1, zoneX2)
+			zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
 			if plotZone then
 				gl.Color(rValue, gValue, bValue, 0.5)
-				gl.DrawGroundQuad(xA, zA, xB, zB)
+				gl.DrawGroundQuad(zoneX1, zoneZ1, zoneX2, zoneZ2)
 			end
 		end
 	end
@@ -468,11 +484,7 @@ function drawZoneRect()
 		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 	end
 end
-
--------------------------------------
--- Show zone position
--------------------------------------
-function showZoneInformation()
+function showZoneInformation() -- Show zone name, top-left and bottom-right positions
 	gl.BeginText()
 	if selectedZone ~= nil then
 		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
@@ -495,8 +507,7 @@ function showZoneInformation()
 	end
 	gl.EndText()
 end
-
-function updateZoneInformation()
+function updateZoneInformation() -- Change the name and the shown state of a zone
 	for i, z in ipairs(zoneList) do
 		if z.name ~= zoneBoxes[z.id].editBox.text then
 			z.name = zoneBoxes[z.id].editBox.text
@@ -504,11 +515,7 @@ function updateZoneInformation()
 		z.shown = zoneBoxes[z.id].checkbox.checked
 	end
 end
-
--------------------------------------
--- Returns the clicked zone if it exists, else nil
--------------------------------------
-function clickedZone(mx, my)
+function clickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 	local clickedZone = nil
 	if var ~= nil then
@@ -521,11 +528,7 @@ function clickedZone(mx, my)
 	end
 	return clickedZone
 end
-
--------------------------------------
--- Returns the clicked side of the selected zone
--------------------------------------
-function getSide(x, z)
+function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	local left = x - selectedZone.x1
 	local right = selectedZone.x2 - x
 	local top = z - selectedZone.z1
@@ -554,11 +557,7 @@ function getSide(x, z)
 	end
 	return side
 end
-
--------------------------------------
--- Move or resize the selected zone
--------------------------------------
-function moveSelectedZone(dx, dz)
+function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	local updateAnchor = true
 	if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
 		selectedZone.x1 = selectedZone.x1 + dx
@@ -593,8 +592,7 @@ function moveSelectedZone(dx, dz)
 		zoneAnchorZ = zoneAnchorZ + dz
 	end
 end
-
-function updateZonePanel()
+function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
 	for k, zb in pairs(zoneBoxes) do
 		if k ~= "global" then
 			scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
@@ -609,42 +607,13 @@ function updateZonePanel()
 	end
 end
 
--------------------------------------
--- Show information about specific units
--------------------------------------
-function showInformation()
-	-- Draw information about selected units (id, position)
-	-- May be useful to replace markers in mission 3
-	local unitSelection = Spring.GetSelectedUnits()
-	gl.BeginText()
-	for i, u in ipairs(unitSelection) do
-		showUnitInformation(u)
-	end
-	gl.EndText()
-	
-	-- Draw information above hovered unit
-	local mx, my = Spring.GetMouseState()
-	local kind, var = Spring.TraceScreenRay(mx, my)
-	if kind == "unit" then
-		local isUnitSelected = false
-		for _, u in ipairs(unitSelection) do
-			if var == u then
-				isUnitSelected = true
-				break
-			end
-		end
-		if not isUnitSelected then
-			gl.BeginText()
-			showUnitInformation(var)
-			gl.EndText()
-		end
-	end
-end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Draw functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--------------------------------------
--- Hide mouse cursor in unit state and during movement, show another cursor in other states
--------------------------------------
-function changeMouseCursor()
+function changeMouseCursor() -- Hide mouse cursor in unit state and during movement, show another cursor in other states
 	local mouseCursor = Spring.GetMouseCursor()
 	if mouseCursor ~= "none" then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
@@ -653,55 +622,32 @@ function changeMouseCursor()
 			Spring.SetMouseCursor("none")
 		end
 	elseif mouseCursor ~= "cursornormal" then
-		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move
+		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move ...
 	end
 end
-
--------------------------------------
--- Draw units before placing them
--------------------------------------
-function previewUnit()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
-		local mx, my = Spring.GetMouseState()
-		local kind, coords = Spring.TraceScreenRay(mx, my)
-		if kind == "ground" then
-			local x, _, z = unpack(coords)
-			local unitDefID = UnitDefNames[unitStateMachine:getCurrentState()].id
-			gl.DepthTest(GL.LEQUAL)
-			gl.DepthMask(true)
-			gl.PushMatrix()
-			gl.Color(1, 1, 1, 0.7)
-			gl.Translate(x, Spring.GetGroundHeight(x,z), z)
-			gl.UnitShape(unitDefID, teamStateMachine:getCurrentState())
-			gl.PopMatrix()
-		end
+function widget:DrawScreen()
+	changeMouseCursor()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		showUnitsInformation()
+		drawSelectionRect()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		updateZoneInformation()
 	end
+	showZoneInformation()
+end
+function widget:DrawWorld()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		previewUnit()
+	end
+	drawZoneRect()
 end
 
--------------------------------------
--- Show a window to edit unit's instance attributes
--------------------------------------
-function showUnitAttributes(unitSelection)
-	if #unitSelection > 0	and windows["unitAttributes"] == nil then
-		windows["unitAttributes"] = addWindow(Screen0, gameSizeX - 200, "50%", 200, 200, true)
-		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
-		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], "70%", 50, "30%", 20, "%HP", 20)
-		if #unitSelection == 1 then
-			local h, mh = Spring.GetUnitHealth(unitSelection[1])
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right", tostring(100*round(h/mh)))
-		else
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], 0, 50, "65%", 20, "right")
-		end
-		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChanges)
-	elseif #unitSelection == 0 then
-		Screen0:RemoveChild(windows["unitAttributes"])
-		windows["unitAttributes"] = nil
-	end
-end
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Widget basic functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--------------------------------------
--- Initialize the widget
--------------------------------------
 function widget:Initialize()
 	hideDefaultGUI()
 	initChili()
@@ -710,34 +656,6 @@ function widget:Initialize()
 	initTeamFunctions()
 	fileFrame()
 end
-
--------------------------------------
--- Draw things on the screen
--------------------------------------
-function widget:DrawScreen()
-	changeMouseCursor()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-		showInformation()
-		drawSelectionRect()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		updateZoneInformation()
-	end
-	showZoneInformation()
-end
-
--------------------------------------
--- Draw things in the world
--------------------------------------
-function widget:DrawWorld()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		previewUnit()
-	end
-	drawZoneRect()
-end
-
--------------------------------------
--- Update function
--------------------------------------
 function widget:Update(delta)
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local unitSelection = Spring.GetSelectedUnits()
@@ -759,10 +677,11 @@ function widget:Update(delta)
 	end
 end
 
--------------------------------------
--- Handle mouse button pressures
--- TODO : don't handle pressures when they occur on an UI element
--------------------------------------
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Input functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 function widget:MousePress(mx, my, button)
 	-- Left click
 	if button == 1 then
@@ -833,7 +752,7 @@ function widget:MousePress(mx, my, button)
 						selectedZone = clickedZone(mx, my)
 					end
 					if selectedZone ~= nil then
-						zoneSide = getSide(x, z)
+						zoneSide = getZoneSide(x, z)
 						mouseMove = true
 					end
 				end
@@ -854,10 +773,6 @@ function widget:MousePress(mx, my, button)
 		end
 	end
 end
-
--------------------------------------
--- Handle mouse button releases
--------------------------------------
 function widget:MouseRelease(mx, my, button)
 	if button == 1 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
@@ -881,10 +796,10 @@ function widget:MouseRelease(mx, my, button)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAW then
 				local zone = 	{ 	
 										red = rValue, green = gValue, blue = bValue,
-										x1 = round(xA) - round(xA)%8,
-										x2 = round(xB) - round(xB)%8,
-										z1 = round(zA) - round(zA)%8,
-										z2 = round(zB) - round(zB)%8,
+										x1 = round(zoneX1) - round(zoneX1)%8,
+										x2 = round(zoneX2) - round(zoneX2)%8,
+										z1 = round(zoneZ1) - round(zoneZ1)%8,
+										z2 = round(zoneZ2) - round(zoneZ2)%8,
 										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
 										shown = true
 									}
@@ -900,10 +815,6 @@ function widget:MouseRelease(mx, my, button)
 	doubleClick = 0 -- reset double click timer
 	return true
 end
-
--------------------------------------
--- Handle mouse movements
--------------------------------------
 function widget:MouseMove(mx, my, dmx, dmy, button)	
 	-- disable click to select and double click if mousemove
 	clickToSelect = false
@@ -961,17 +872,13 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 						else
 							dz = dz - dz % 8
 						end
-						moveSelectedZone(dx, dz)
+						applyChangesToSelectedZone(dx, dz)
 					end
 				end
 			end
 		end
 	end
 end
-
--------------------------------------
--- Shortcuts
--------------------------------------
 function widget:KeyPress(key, mods)
 	-- Global 
 	-- CTRL + S : save the current map

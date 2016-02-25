@@ -85,6 +85,10 @@ function loadMap(jsonPath)
 	Spring.SendLuaRulesMsg("Load Map".."++"..jsonFile)
 end
 
+-----------------------
+-- Save a map to .json and .txt files
+-- TODO
+-----------------------
 function saveMap()
 
 end
@@ -93,15 +97,11 @@ end
 -- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
-	-- get mods
-	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
-	-- multiple selection if shift is pressed
+	local _, _, _, shiftPressed = Spring.GetModKeyState()
 	if shiftPressed then
-		-- get selected units
 		local selectedUnits = Spring.GetSelectedUnits()
-		-- add units to selection
 		for i, u in ipairs(units) do
-			table.insert(selectedUnits, u)
+			table.insert(selectedUnits, u) -- add units to selection
 		end
 		Spring.SelectUnitArray(selectedUnits)
 	else
@@ -111,19 +111,15 @@ end
 
 -----------------------
 -- Remove a unit from the current selection if shift is pressed
--- @return returns shiftPressed to disable click to select
+-- @return shiftPressed to disable click to select
 -----------------------
 function proceedDeselection(unit)
-	-- get mods
-	local altPressed, ctrlPressed, metaPressed, shiftPressed = Spring.GetModKeyState()
-	-- multiple selection if shift is pressed
+	local _, _, _, shiftPressed = Spring.GetModKeyState()
 	if shiftPressed then
-		-- get selected units
 		local selectedUnits = Spring.GetSelectedUnits()
-		-- add units to selection
 		for i, u in ipairs(selectedUnits) do
 			if u == unit then
-				table.remove(selectedUnits, i)
+				table.remove(selectedUnits, i) -- remove unit from selection
 			end
 		end
 		Spring.SelectUnitArray(selectedUnits)
