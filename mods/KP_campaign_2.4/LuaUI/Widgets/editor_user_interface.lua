@@ -25,7 +25,7 @@ local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- Draw selection variables
-local selectionStartX, selectionStartY, selectionEndX, selectionEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
+local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
@@ -356,26 +356,26 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 	if plotSelection then -- only draw it when mouse button 1 is down and global state is selection
 		-- compute good values for x1, x2, y1, y2, regarding respective anchors
 		local x1, x2, y1, y2 = 0, 0, screenSizeY, screenSizeY
-		if (selectionStartX <= selectionEndX and selectionStartY <= selectionEndY) then
-			x1 = selectionStartX
-			y1 = screenSizeY - selectionEndY
-			x2 = selectionEndX
-			y2 = screenSizeY - selectionStartY
-		elseif (selectionStartX <= selectionEndX and selectionStartY >= selectionEndY) then
-			x1 = selectionStartX
-			y1 = screenSizeY - selectionStartY
-			x2 = selectionEndX
-			y2 = screenSizeY - selectionEndY
-		elseif (selectionStartX >= selectionEndX and selectionStartY <= selectionEndY) then
-			x1 = selectionEndX
-			y1 = screenSizeY - selectionEndY
-			x2 = selectionStartX
-			y2 = screenSizeY - selectionStartY
-		elseif (selectionStartX >= selectionEndX and selectionStartY >= selectionEndY) then
-			x1 = selectionEndX
-			y1 = screenSizeY - selectionStartY
-			x2 = selectionStartX
-			y2 = screenSizeY - selectionEndY
+		if (drawStartX <= drawEndX and drawStartY <= drawEndY) then
+			x1 = drawStartX
+			y1 = screenSizeY - drawEndY
+			x2 = drawEndX
+			y2 = screenSizeY - drawStartY
+		elseif (drawStartX <= drawEndX and drawStartY >= drawEndY) then
+			x1 = drawStartX
+			y1 = screenSizeY - drawStartY
+			x2 = drawEndX
+			y2 = screenSizeY - drawEndY
+		elseif (drawStartX >= drawEndX and drawStartY <= drawEndY) then
+			x1 = drawEndX
+			y1 = screenSizeY - drawEndY
+			x2 = drawStartX
+			y2 = screenSizeY - drawStartY
+		elseif (drawStartX >= drawEndX and drawStartY >= drawEndY) then
+			x1 = drawEndX
+			y1 = screenSizeY - drawStartY
+			x2 = drawStartX
+			y2 = screenSizeY - drawEndY
 		end
 		-- draw the rectangle
 		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
@@ -453,8 +453,8 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 		local _, _, leftPressed = Spring.GetMouseState()
 		if leftPressed then -- if draw has to begin
-			local _,varA = Spring.TraceScreenRay(selectionStartX, selectionStartY, true, true) -- compute world's coords of the beginning of the draw
-			local _, varB = Spring.TraceScreenRay(selectionEndX, selectionEndY, true, true) -- compute world's coords of the end of the draw
+			local _,varA = Spring.TraceScreenRay(drawStartX, drawStartY, true, true) -- compute world's coords of the beginning of the draw
+			local _, varB = Spring.TraceScreenRay(drawEndX, drawEndY, true, true) -- compute world's coords of the end of the draw
 			if varA ~= nil and varB ~= nil then
 				zoneX1, _, zoneZ1 = unpack(varA)
 				zoneX2, _, zoneZ2 = unpack(varB)
@@ -689,6 +689,7 @@ end
 --			Input functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 function widget:MousePress(mx, my, button)
 	-- Left click
 	if button == 1 then
@@ -696,14 +697,13 @@ function widget:MousePress(mx, my, button)
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		
 		-- STATE UNIT : place units on the field
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then			
-			-- If ground is selected and we can place a unit, send a message to the gadget to create the unit
-			if kind == "ground" then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+			if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
 				local xUnit, yUnit, zUnit = unpack(var)
 				xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
-			elseif kind == "unit" then
+			elseif kind == "unit" then -- If unit is selected, go to selection state
 				for key, ub in pairs(unitButtons) do
 					ub:RemoveChild(images["selectionType"])
 				end
@@ -714,7 +714,7 @@ function widget:MousePress(mx, my, button)
 		-- STATE SELECTION : select and move units on the field
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
 			if kind == "unit" then -- handle movement / selection
-				if doubleClick < 0.3 then -- multiple selection of units of same type using double click
+				if doubleClick < 0.3 then -- multiple selection of units of same type and same team using double click
 					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
 					proceedSelection(unitArray)
 					doubleClick = 0.3
@@ -730,36 +730,36 @@ function widget:MousePress(mx, my, button)
 						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
 					end
 					mouseMove = true
-					Spring.SendLuaRulesMsg("Anchor".."++"..var)
+					Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
 					return true
 				end
 			else -- start a box selection
-				proceedSelection({})
+				proceedSelection({}) -- deselect all units
 				plotSelection = true
-				selectionStartX, selectionEndX = mx, mx
-				selectionStartY, selectionEndY = my, my
+				drawStartX, drawEndX = mx, mx
+				drawStartY, drawEndY = my, my
 				return true
 			end
 		end
 		
 		-- STATE ZONE : draw, move and rename logical zones
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
-				rValue, gValue, bValue = math.random(), math.random(), math.random()
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
+				rValue, gValue, bValue = math.random(), math.random(), math.random() -- define new zone color
 				plotZone = true
-				selectionStartX, selectionEndX = mx, mx
-				selectionStartY, selectionEndY = my, my
+				drawStartX, drawEndX = mx, mx
+				drawStartY, drawEndY = my, my
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
 				local _, var = Spring.TraceScreenRay(mx, my, true, true)
 				if var ~= nil then
 					local x, _, z = unpack(var)
 					zoneAnchorX, zoneAnchorZ = x, z
-					-- selected new zone
+					-- select new zone
 					if selectedZone ~= clickedZone(mx, my) then
 						selectedZone = clickedZone(mx, my)
 					end
 					if selectedZone ~= nil then
-						zoneSide = getZoneSide(x, z)
+						zoneSide = getZoneSide(x, z) -- get side to proceed movement/resizing
 						mouseMove = true
 					end
 				end
@@ -768,14 +768,14 @@ function widget:MousePress(mx, my, button)
 			return true
 		end
 		
-	-- Right click : enable selection / disable unit placement
+	-- Right click
 	elseif button == 3 then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
 			for key, ub in pairs(unitButtons) do
 				ub:RemoveChild(images["selectionType"])
 			end
 			globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
 	end
@@ -797,7 +797,7 @@ function widget:MouseRelease(mx, my, button)
 		end
 		
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if clickToSelect then
+			if clickToSelect then -- select clicked zone and go to selection state
 				selectedZone = clickedZone(mx, my)
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
@@ -810,10 +810,12 @@ function widget:MouseRelease(mx, my, button)
 										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
 										shown = true
 									}
-				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then
+				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 				end
+			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
+				-- TODO
 			end
 			plotZone = false
 			mouseMove = false
@@ -842,10 +844,10 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			end
 			-- update selection box
 			if plotSelection then
-				selectionEndX = mx
-				selectionEndY = my
+				drawEndX = mx
+				drawEndY = my
 				-- Select all units in the rectangle
-				local unitSelection = GetUnitsInScreenRectangle(selectionStartX, selectionStartY, selectionEndX, selectionEndY)
+				local unitSelection = GetUnitsInScreenRectangle(drawStartX, drawStartY, drawEndX, drawEndY)
 				proceedSelection(unitSelection)
 			end
 		end
@@ -855,8 +857,8 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				-- update zone
 				if plotZone then
-					selectionEndX = mx
-					selectionEndY = my
+					drawEndX = mx
+					drawEndY = my
 				end
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
 				if mouseMove and selectedZone ~= nil then
@@ -865,20 +867,8 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 						local x, _, z = unpack(var)
 						x, z = round(x), round(z)
 						local dx, dz = round(x - zoneAnchorX), round(z - zoneAnchorZ)
-						if dx < 0 then
-							dx = - dx
-							dx = dx - dx % 8
-							dx = - dx
-						else
-							dx = dx - dx % 8
-						end
-						if dz < 0 then
-							dz = - dz
-							dz = dz - dz % 8
-							dz = - dz
-						else
-							dz = dz - dz % 8
-						end
+						dx = dx - sign(dx) * ( (sign(dx)*dx)%8 ) -- compute variations modulo 8 (complex because operator % only accepts positive numbers)
+						dz = dz - sign(dz) * ( (sign(dz)*dz)%8 )
 						applyChangesToSelectedZone(dx, dz)
 					end
 				end
@@ -922,6 +912,7 @@ function widget:KeyPress(key, mods)
 		end
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		if selectedZone ~= nil then
+			-- DELETE : delete selected zone
 			if key == Spring.GetKeyCode("delete") then
 				for i, z in ipairs(zoneList) do
 					if z == selectedZone then
@@ -930,6 +921,7 @@ function widget:KeyPress(key, mods)
 						break
 					end
 				end
+			-- ARROWS : move selected zone
 			elseif key == Spring.GetKeyCode("up") then
 				selectedZone.z1 = selectedZone.z1 - 8
 				selectedZone.z2 = selectedZone.z2 - 8
