@@ -37,6 +37,15 @@ public:
 	 * (modified with game's speed factor)
 	 */
 	float modGameTime;
+	
+	// Meresse
+	/**
+	 * @brief modified mod game time
+	 *
+	 * Same as modGameTime but includes times when the game is paused
+	 */
+	float PP_modGameTime;
+	//
 
 	/**
 	 * @brief game time

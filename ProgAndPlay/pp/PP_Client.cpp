@@ -244,6 +244,7 @@ int PP_Open(){
 			shd.gamePaused = segment->find<bool>("gamePaused").first;
 			shd.tracePlayer = segment->find<bool>("tracePlayer").first;
 			tracePlayer = *(shd.tracePlayer);
+			shd.timestamp = segment->find<int>("timestamp").first;
 			shd.units = segment->find<ShMapUnits>("units").first;
 			shd.coalitions = segment->find<ShIntVector>("coalitions").first;
 			shd.pendingCommand =
@@ -270,8 +271,7 @@ int PP_Open(){
 		// notify function call to Spring
 		enterCriticalSection();
 			std::stringstream ss;
-			std::time_t result = std::time(NULL);
-			ss << "execution_start_time " << result;
+			ss << "execution_start_time " << PP_GetTimestamp();
 			PP_PushMessage(ss.str().c_str());
 			PP_PushMessage("PP_Open");
 		exitCriticalSection();
@@ -298,8 +298,7 @@ int PP_Close (){
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
 			std::stringstream ss;
-			std::time_t result = std::time(NULL);
-			ss << "execution_end_time " << result;
+			ss << "execution_end_time " << PP_GetTimestamp();
 			PP_PushMessage(ss.str().c_str());
 		exitCriticalSection();
 		opened = false;
@@ -338,6 +337,18 @@ int PP_IsGamePaused() {
 			ret = *(shd.gamePaused);
 			// notify function call to Spring
 			PP_PushMessage("PP_IsGamePaused");
+		exitCriticalSection();
+	}
+	return ret;
+}
+
+int PP_GetTimestamp() {
+	int ret;
+	// Checks initialisation
+	ret = isInitialized("PP_GetTimestamp");
+	if (ret == 0) {
+		enterCriticalSection();
+			ret = *(shd.timestamp);
 		exitCriticalSection();
 	}
 	return ret;
@@ -523,7 +534,6 @@ int PP_Unit_GetType(PP_Unit unit){
 				if (u->second.type == -1) {
 					PP_SetError("PP_Unit_GetType : type not found\n");
 					ret = -1;
-					oss << "error PP_Unit_GetType " << unit; // A prendre en compte ?
 				}
 				else {
 					ret = u->second.type;
@@ -643,6 +653,7 @@ int PP_Unit_GetPendingCommands(PP_Unit unit, PP_PendingCommands * pdgCmd) {
 					}
 				}
 				activeTrace = true;
+				oss << "PP_Unit_GetPendingCommands " << unit << "_" << u->second.type;
 			}
 			else
 				oss << errorsArr[2] << "PP_Unit_GetPendingCommands " << unit;
@@ -887,7 +898,6 @@ int PP_Unit_GetNumPdgCmds(PP_Unit unit){
 				else {
 					PP_SetError("PP_Unit_GetNumPdgCmds : commandQueue undefined\n");
 					ret = -1;
-					oss << errorsArr[5] << "PP_Unit_GetNumPdgCmds " << unit;
 				}
 			}
 			else
@@ -934,10 +944,9 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetCode " << idCmd;
 					}
 				}
-				else{
+				else {
 					PP_SetError("PP_Unit_PdgCmd_GetCode : commandQueue undefined\n");
 					ret = -1;
-					oss << errorsArr[5] << "PP_Unit_PdgCmd_GetCode " << unit;
 				}
 			}
 			else
@@ -958,28 +967,51 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 	}
 	else{
 		ret = isInitialized("PP_Unit_PdgCmd_GetNumParams");
-		if (ret == 0){
+		if (ret == 0) {
 			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_PdgCmd_GetNumParams", &u, true);
-			if (ret == 0){
-				// Find vector of params for pendingCommands found in shared
-				// memory (do not use directly the pointer
-				// u->second.commandQueue->at(idCmd).param because it is only
-				// significant in process that initialized it (i.e. the 
+			if (ret == 0) {
+				// Find vector of pendingCommands in shared memory (do not use
+				// directly the pointer u->second.commandQueue because it is
+				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream ossParams(std::ostringstream::out);
-				ossParams << "commandQueue" << unit << "Params" << idCmd;
-				ShFloatVector *params = segment->find<ShFloatVector>
-					(ossParams.str().c_str()).first;
-				if (params) {
-					ret = params->size();
-					oss << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
+				oss << "commandQueue" << unit;
+				ShCommandVector *commandQueue = segment->find<ShCommandVector>
+					(oss.str().c_str()).first;
+				oss.str("");
+				oss.clear();
+				if (commandQueue) {
+					try {
+						// Returns directly data. If idCmd is inaccurate, an
+						// exception will be thrown
+						commandQueue->at(idCmd);
+						// Find vector of params for pendingCommands found in shared
+						// memory (do not use directly the pointer
+						// u->second.commandQueue->at(idCmd).param because it is only
+						// significant in process that initialized it (i.e. the 
+						// supplier))
+						std::ostringstream ossParams(std::ostringstream::out);
+						ossParams << "commandQueue" << unit << "Params" << idCmd;
+						ShFloatVector *params = segment->find<ShFloatVector>
+							(ossParams.str().c_str()).first;
+						if (params) {
+							ret = params->size();
+							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
+						}
+						else {
+							PP_SetError("PP_Unit_PdgCmd_GetNumParams : param undefined\n");
+							ret = -1;
+						}
+					} catch (std::out_of_range e) {
+						PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
+						ret = -1;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParams " << idCmd;
+					}
 				}
 				else {
-					PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
+					PP_SetError("PP_Unit_PdgCmd_GetNumParams : commandQueue undefined\n");
 					ret = -1;
-					oss << errorsArr[0] << "PP_Unit_PdgCmd_GetNumParams " << idCmd;
 				}
 			}
 			else
@@ -1005,29 +1037,53 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_PdgCmd_GetParam", &u, true);
 			if ((int)ret == 0){
-				// Find vector of params for pendingCommands found in shared
-				// memory (do not use directly the pointer 
-				// u->second.commandQueue->at(idCmd).param because it is only
-				// significant in process that initialized it (i.e. the 
+				// Find vector of pendingCommands in shared memory (do not use
+				// directly the pointer u->second.commandQueue because it is
+				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream ossParams(std::ostringstream::out);
-				ossParams << "commandQueue" << unit << "Params" << idCmd;
-				ShFloatVector * params = segment->find<ShFloatVector>
-					(ossParams.str().c_str()).first;
-				if (params){
+				oss << "commandQueue" << unit;
+				ShCommandVector *commandQueue = segment->find<ShCommandVector>
+					(oss.str().c_str()).first;
+				oss.str("");
+				oss.clear();
+				if (commandQueue) {
 					try{
-						// Returns directly data. If idParam is inaccurate, an
+						// Returns directly data. If idCmd is inaccurate, an
 						// exception will be thrown
-						ret = params->at(idParam);
-						oss << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
+						commandQueue->at(idCmd);
+						// Find vector of params for pendingCommands found in shared
+						// memory (do not use directly the pointer 
+						// u->second.commandQueue->at(idCmd).param because it is only
+						// significant in process that initialized it (i.e. the 
+						// supplier))
+						std::ostringstream ossParams(std::ostringstream::out);
+						ossParams << "commandQueue" << unit << "Params" << idCmd;
+						ShFloatVector * params = segment->find<ShFloatVector>
+							(ossParams.str().c_str()).first;
+						if (params){
+							try{
+								// Returns directly data. If idParam is inaccurate, an
+								// exception will be thrown
+								ret = params->at(idParam);
+								oss << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
+							} catch (std::out_of_range e) {
+								PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
+								ret = -1;
+								oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idParam;
+							}
+						}
+						else {
+							PP_SetError("PP_Unit_PdgCmd_GetParam : param undefined\n");
+							ret = -1;
+						}
 					} catch (std::out_of_range e) {
-						PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
+						PP_SetError("PP_Unit_PdgCmd_GetParam : idCmd out of range\n");
 						ret = -1;
-						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idParam;
+						//oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idCmd;
 					}
 				}
 				else {
-					PP_SetError("PP_Unit_PdgCmd_GetParam : idCmd out of range\n");
+					PP_SetError("PP_Unit_PdgCmd_GetParam : commandQueue undefined\n");
 					ret = -1;
 				}
 			}
@@ -1039,7 +1095,6 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 	}
 	return ret;
 }
-
 
 int PP_PushMessage(const char * msg) {
 	if (tracePlayer > 0 && activeTrace) {

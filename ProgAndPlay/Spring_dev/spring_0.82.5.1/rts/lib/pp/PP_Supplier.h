@@ -113,7 +113,7 @@ typedef struct{
  * 
  * Returns : 0 on success. -1 is returned on errors.
  */
-int PP_Init(const bool tracePlayer);
+int PP_Init();
 
 /*
  * Shutdown and cleanup Prog&Play API.
@@ -145,6 +145,20 @@ int PP_SetGameOver(const bool gameOver);
  * Returns : 0 on success. -1 is returned on errors.
  */
 int PP_SetGamePaused(const bool gamePaused);
+
+/*
+ * Set tracePlayer state to true for the client
+ *
+ * Returns : 0 on success. -1 is returned on errors.
+ */
+int PP_SetTracePlayer();
+
+/*
+ * Updates the timestamp for the client
+ *
+ * Returns : 0 on success. -1 is returned on errors.
+ */
+int PP_UpdateTimestamp(int timestamp);
 
 /*
  * Updates static data. In theory, these data should not be updates during
