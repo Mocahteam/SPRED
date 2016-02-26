@@ -49,7 +49,7 @@ local teamStates = {}
 for _, t in pairs(getTeamsInformation()) do
 	teamStates[t.id] = t.id
 end
-teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)
+teamStateMachine = StateMachine.new(teamStates, teamStates[1])
 
 ------------------------------
 -- Initialize zone state machine

@@ -253,8 +253,14 @@ function unitFrame()
 	local count = 0
 	local teams = getTeamsInformation()
 	for k, team in pairs(teamStateMachine.states) do
-		teamButtons[team] = addButton(windows["unitWindow"], tostring(count * 100 / teamCount).."%", "90%", tostring(100 / teamCount).."%", "5%", "", teamFunctions[team])
-		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, {teams[team].red, teams[team].green, teams[team].blue, 1})
+		local x = tostring(count * 100 / math.ceil(teamCount/2) - 100 * math.floor(count/math.ceil(teamCount/2))).."%"
+		local y = tostring(90 + 5 * math.floor(count/math.ceil(teamCount/2))).."%"
+		local w = tostring(100 / math.ceil(teamCount/2)).."%"
+		local h = "5%"
+		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
+		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
+		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
 		count = count + 1
 	end
 	
