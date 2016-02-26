@@ -21,7 +21,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- Draw selection variables
@@ -74,19 +74,6 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	}
 	return window
 end
-function addImageButton(_parent, _x, _y, _w, _h, imagePath, onClickFunction)
-	local imageButton = Chili.Image:New {
-		parent = _parent,
-		x = _x,
-		y = _y,
-		width = _w,
-		height = _h,
-		file = imagePath,
-		keepAspect = false,
-		OnClick = {onClickFunction}
-	}
-	return imageButton
-end
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	local button = Chili.Button:New {
 		parent = _parent,
@@ -112,7 +99,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 	}
 	return label
 end
-function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect)
+function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 	local image = Chili.Image:New {
 		parent = _parent,
 		x = _x,
@@ -120,7 +107,8 @@ function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect)
 		width = _w,
 		height = _h,
 		file = imagePath,
-		keepAspect = _keepAspect or false
+		keepAspect = _keepAspect or false,
+		color = _color or {1, 1, 1, 1}
 	}
 	return image
 end
@@ -260,15 +248,18 @@ function unitFrame()
 	end
 	
 	-- Team buttons
-	-- TODO : require refactor
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	teamButtons[teamStateMachine.states.PLAYER] = addImageButton(windows["unitWindow"], '5%', '92%', '30%', '5%', "bitmaps/editor/player.png", teamFunctions[teamStateMachine.states.PLAYER])
-	teamButtons[teamStateMachine.states.ALLY] = addImageButton(windows["unitWindow"], '35%', '92%', '30%', '5%', "bitmaps/editor/ally.png", teamFunctions[teamStateMachine.states.ALLY])
-	teamButtons[teamStateMachine.states.ENEMY] = addImageButton(windows["unitWindow"], '65%', '92%', '30%', '5%', "bitmaps/editor/enemy.png", teamFunctions[teamStateMachine.states.ENEMY])
+	local teamCount = tableLength(teamStateMachine.states)
+	local count = 0
+	local teams = getTeamsInformation()
+	for k, team in pairs(teamStateMachine.states) do
+		teamButtons[team] = addButton(windows["unitWindow"], tostring(count * 100 / teamCount).."%", "90%", tostring(100 / teamCount).."%", "5%", "", teamFunctions[team])
+		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, {teams[team].red, teams[team].green, teams[team].blue, 1})
+		count = count + 1
+	end
 	
 	-- Selection image
-	images['selectionType'] = addImage(unitButtons[unitStateMachine.states.DEFAULT], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
-	images['selectionTeam'] = addImage(teamButtons[teamStateMachine:getCurrentState()], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
+	-- TODO : need to be reworked
 end
 function eventFrame()
 	clearUI()
@@ -318,10 +309,6 @@ function initUnitFunctions() -- Creates a function for every unitState to change
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			unitStateMachine:setCurrentState(u)
-			for key, ub in pairs(unitButtons) do
-				ub:RemoveChild(images["selectionType"])
-			end
-			images['selectionType'] = addImage(unitButtons[u], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 		end
 	end
 end
@@ -329,10 +316,6 @@ function initTeamFunctions() -- Creates a function for every teamState to change
 	for k, t in pairs(teamStateMachine.states) do
 		teamFunctions[t] = function()
 			teamStateMachine:setCurrentState(t)
-			for _, tb in pairs(teamButtons) do
-				tb:RemoveChild(images["selectionTeam"])
-			end
-			images['selectionTeam'] = addImage(teamButtons[t], '-1%', '-1%', '102%', '102%', "bitmaps/editor/selection.png")
 			local msg = "Transfer Units".."++"..t
 			Spring.SendLuaRulesMsg(msg)
 		end
@@ -848,9 +831,6 @@ function widget:MousePress(mx, my, button)
 				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
 				Spring.SendLuaRulesMsg(msg)
 			elseif kind == "unit" then -- If unit is selected, go to selection state
-				for key, ub in pairs(unitButtons) do
-					ub:RemoveChild(images["selectionType"])
-				end
 				globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 			end
 		end
@@ -915,9 +895,6 @@ function widget:MousePress(mx, my, button)
 	-- Right click
 	elseif button == 3 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
-			for key, ub in pairs(unitButtons) do
-				ub:RemoveChild(images["selectionType"])
-			end
 			globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)

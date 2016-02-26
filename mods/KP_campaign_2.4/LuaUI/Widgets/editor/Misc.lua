@@ -33,6 +33,33 @@ function sign(x)
 end
 
 -----------------------
+-- Returns the length of a table
+-----------------------
+function tableLength(t)
+	count = 0
+	for _, _ in pairs(t) do
+		count = count + 1
+	end
+	return count
+end
+
+-------------------------------------
+-- Useful function to split messages into tokens
+-------------------------------------
+function splitString(inputstr, sep)
+	if sep == nil then
+		sep = "%s"
+	end
+	local t = {}
+	local i = 1
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+		t[i] = str
+		i = i + 1
+	end
+	return t
+end
+
+-----------------------
 -- Shows units information above unit
 -----------------------
 function showUnitInformation(u)
@@ -126,4 +153,27 @@ function proceedDeselection(unit)
 		return true
 	end
 	return false
+end
+
+-----------------------
+-- Returns a table containing the team color for each team as described in the .txt file
+-----------------------
+function getTeamsInformation()
+	local txtFile = VFS.LoadFile("Missions/"..Game.modShortName.."/LevelEditor.txt")
+	local i = 0
+	local teams = {}
+	while true do
+		local regexSection="%[".."TEAM"..tostring(i).."%]%s*%{([^%}]*)%}"
+		local contentSection = string.match(txtFile, regexSection)
+		if contentSection == nil then
+			break
+		end
+		local rgbRegex = "RGBColor%=%d.%d+ %d.%d+ %d.%d+"
+		local rgbSection = string.match(contentSection, rgbRegex)
+		local msgContents = splitString(rgbSection, "=")
+		local colors = splitString(msgContents[2], " ")
+		teams[i] = { id = i, red = colors[1], green = colors[2], blue = colors[3] }
+		i = i + 1
+	end
+	return teams
 end

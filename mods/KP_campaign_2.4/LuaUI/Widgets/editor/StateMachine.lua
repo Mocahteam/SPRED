@@ -1,3 +1,5 @@
+VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
+
 ------------------------
 -- Class StateMachine --
 ------------------------
@@ -43,7 +45,10 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
 ------------------------------
 -- Initialize team state machine
 ------------------------------
-local teamStates = { PLAYER = "0", ALLY = "1", ENEMY = "2" }
+local teamStates = {}
+for _, t in pairs(getTeamsInformation()) do
+	teamStates[t.id] = t.id
+end
 teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)
 
 ------------------------------

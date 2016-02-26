@@ -1,2 +1,3 @@
-Zones circulaires
 feedback visuel sur la topbar
+groupes d'unités
+rework feedback
