@@ -463,6 +463,22 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 			end
 			zoneX1, zoneX2 = sort(zoneX1, zoneX2) -- sort values to prevent errors
 			zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
+			
+			local altPressed = Spring.GetModKeyState() -- force square if alt is pressed
+			if altPressed then
+				local length = math.min(zoneX2 - zoneX1, zoneZ2 - zoneZ1)
+				if drawStartX > drawEndX then
+					zoneX1 = zoneX2 - length
+				else
+					zoneX2 = zoneX1 + length
+				end
+				if drawStartY > drawEndY then
+					zoneZ2 = zoneZ1 + length
+				else
+					zoneZ1 = zoneZ2 - length
+				end
+			end
+			
 			if plotZone then
 				gl.Color(rValue, gValue, bValue, 0.5)
 				gl.DrawGroundQuad(zoneX1, zoneZ1, zoneX2, zoneZ2) -- draw the zone
