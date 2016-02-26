@@ -499,7 +499,7 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 				local a, b = (zoneX2 - zoneX1) / 2, (zoneZ2 - zoneZ1) /2
 				local centerX, centerZ = (zoneX1 + zoneX2) / 2, (zoneZ1 + zoneZ2) / 2
 				gl.Color(rValue, gValue, bValue, 0.5)
-				drawGroundEllipsis(centerX, centerZ, a, b, 50)
+				drawGroundFilledEllipsis(centerX, centerZ, a, b, 50)
 			end
 		end
 	end
@@ -511,7 +511,7 @@ function displayZones()
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 		elseif z.shown and z.type == "Disk" then
 			gl.Color(z.red, z.green, z.blue, 0.5)
-			drawGroundEllipsis(z.x, z.z, z.a, z.b, 50)
+			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 50)
 		elseif not z.shown and z == selectedZone then
 			selectedZone = nil
 		end
@@ -526,10 +526,7 @@ function displaySelectedZoneAnchors()
 			gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
 			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 		elseif selectedZone.type == "Disk" then
-			gl.DrawGroundQuad(selectedZone.x - selectedZone.a, selectedZone.z - 8, selectedZone.x - selectedZone.a + 16, selectedZone.z + 8)
-			gl.DrawGroundQuad(selectedZone.x + selectedZone.a - 16, selectedZone.z - 8, selectedZone.x + selectedZone.a, selectedZone.z + 8)
-			gl.DrawGroundQuad(selectedZone.x - 8, selectedZone.z - selectedZone.b, selectedZone.x + 8, selectedZone.z - selectedZone.b + 16)
-			gl.DrawGroundQuad(selectedZone.x - 8, selectedZone.z + selectedZone.b - 16, selectedZone.x + 8, selectedZone.z + selectedZone.b)
+			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 8, 50)
 		end
 	end
 end
@@ -641,18 +638,18 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 			side = "BOT"
 		end
 	elseif selectedZone.type == "Disk" then
-		local left = x - (selectedZone.x - selectedZone.a)
-		local right = selectedZone.x + selectedZone.a - x
-		local top = z - (selectedZone.z - selectedZone.b)
-		local bottom = selectedZone.z + selectedZone.b - z
-		if left >= 0 and left <= 16 then
-			side = "LEFT"
-		elseif right >= 0 and right <= 16 then
-			side = "RIGHT"
-		elseif top >= 0 and top <= 16 then
-			side = "TOP"
-		elseif bottom >= 0 and bottom <= 16 then
-			side = "BOT"
+		local toto1 = (x-selectedZone.x)*(x-selectedZone.x)/(selectedZone.a*selectedZone.a) + (x-selectedZone.x)*(z-selectedZone.z)/(selectedZone.b*selectedZone.b)
+		local toto2 = (x-selectedZone.x)*(x-selectedZone.x)/((selectedZone.a-8)*(selectedZone.a-8)) + (z-selectedZone.z)*(z-selectedZone.z)/((selectedZone.b-8)*(selectedZone.b-8))
+		if toto1 <= 1 and toto2 >= 1 then
+			if x > selectedZone.x and z > selectedZone.z then
+				side = "BOTRIGHT"
+			elseif x < selectedZone.x and z > selectedZone.z then
+				side = "BOTLEFT"
+			elseif x > selectedZone.x and z < selectedZone.z then
+				side = "TOPRIGHT"
+			elseif x < selectedZone.x and z < selectedZone.z then
+				side = "TOPLEFT"
+			end
 		end
 	end
 	return side
@@ -698,13 +695,17 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 		if zoneSide == "" and selectedZone.x - selectedZone.a + dx > 0 and selectedZone.x + selectedZone.a + dx < Game.mapSizeX and selectedZone.z - selectedZone.b + dz > 0 and selectedZone.z + selectedZone.b + dz < Game.mapSizeZ then
 			selectedZone.x = selectedZone.x + dx
 			selectedZone.z = selectedZone.z + dz
-		elseif zoneSide == "RIGHT" and 2 * (selectedZone.a + dx) > minZoneSize then
-			selectedZone.a = selectedZone.a + dx
-		elseif zoneSide == "LEFT" and 2 * (selectedZone.a - dx) > minZoneSize then
+		elseif zoneSide == "TOPLEFT" and 2*selectedZone.a - dx > minZoneSize and 2*selectedZone.b - dz > minZoneSize then
 			selectedZone.a = selectedZone.a - dx
-		elseif zoneSide == "TOP" and 2 * (selectedZone.b - dz) > minZoneSize then
 			selectedZone.b = selectedZone.b - dz
-		elseif zoneSide == "BOT" and 2 * (selectedZone.b + dz) > minZoneSize then
+		elseif zoneSide == "TOPRIGHT" and 2*selectedZone.a + dx > minZoneSize and 2*selectedZone.b - dz > minZoneSize then
+			selectedZone.a = selectedZone.a + dx
+			selectedZone.b = selectedZone.b - dz
+		elseif zoneSide == "BOTLEFT" and 2*selectedZone.a - dx > minZoneSize and 2*selectedZone.b + dz > minZoneSize then
+			selectedZone.a = selectedZone.a - dx
+			selectedZone.b = selectedZone.b + dz
+		elseif zoneSide == "BOTRIGHT" and 2*selectedZone.a + dx > minZoneSize and 2*selectedZone.b + dz > minZoneSize then
+			selectedZone.a = selectedZone.a + dx
 			selectedZone.b = selectedZone.b + dz
 		else
 			updateAnchor = false
@@ -736,13 +737,24 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function drawGroundEllipsis(centerX, centerZ, a, b, d)
+function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
 	local divs = d or 25
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
 		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
+		end
+	end)
+end
+function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
+	local divs = d or 25
+	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
+		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
+			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
+			local xbis, zbis = centerX + (a-w) * math.cos(angle), centerZ + (b-w) * math.sin(angle)
+			gl.Vertex(xbis, Spring.GetGroundHeight(xbis, zbis), zbis)
 		end
 	end)
 end
