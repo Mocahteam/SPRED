@@ -449,35 +449,38 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+function computeZoneWorldCoords()
+	local _,varA = Spring.TraceScreenRay(drawStartX, drawStartY, true, true) -- compute world's coords of the beginning of the draw
+	local _, varB = Spring.TraceScreenRay(drawEndX, drawEndY, true, true) -- compute world's coords of the end of the draw
+	if varA ~= nil and varB ~= nil then
+		zoneX1, _, zoneZ1 = unpack(varA)
+		zoneX2, _, zoneZ2 = unpack(varB)
+	else
+		zoneX1, zoneZ1, zoneX2, zoneZ2 = 0, 0, 0, 0
+	end
+	zoneX1, zoneX2 = sort(zoneX1, zoneX2) -- sort values to prevent errors
+	zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
+	
+	local altPressed = Spring.GetModKeyState() -- force square if alt is pressed
+	if altPressed then
+		local length = math.min(zoneX2 - zoneX1, zoneZ2 - zoneZ1)
+		if drawStartX > drawEndX then
+			zoneX1 = zoneX2 - length
+		else
+			zoneX2 = zoneX1 + length
+		end
+		if drawStartY > drawEndY then
+			zoneZ2 = zoneZ1 + length
+		else
+			zoneZ1 = zoneZ2 - length
+		end
+	end
+end
 function drawZoneRect() -- Draw the zone feedback rectangle
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 		local _, _, leftPressed = Spring.GetMouseState()
 		if leftPressed then -- if draw has to begin
-			local _,varA = Spring.TraceScreenRay(drawStartX, drawStartY, true, true) -- compute world's coords of the beginning of the draw
-			local _, varB = Spring.TraceScreenRay(drawEndX, drawEndY, true, true) -- compute world's coords of the end of the draw
-			if varA ~= nil and varB ~= nil then
-				zoneX1, _, zoneZ1 = unpack(varA)
-				zoneX2, _, zoneZ2 = unpack(varB)
-			else
-				zoneX1, zoneZ1, zoneX2, zoneZ2 = 0, 0, 0, 0
-			end
-			zoneX1, zoneX2 = sort(zoneX1, zoneX2) -- sort values to prevent errors
-			zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
-			
-			local altPressed = Spring.GetModKeyState() -- force square if alt is pressed
-			if altPressed then
-				local length = math.min(zoneX2 - zoneX1, zoneZ2 - zoneZ1)
-				if drawStartX > drawEndX then
-					zoneX1 = zoneX2 - length
-				else
-					zoneX2 = zoneX1 + length
-				end
-				if drawStartY > drawEndY then
-					zoneZ2 = zoneZ1 + length
-				else
-					zoneZ1 = zoneZ2 - length
-				end
-			end
+			computeZoneWorldCoords()
 			
 			if plotZone then
 				gl.Color(rValue, gValue, bValue, 0.5)
@@ -485,39 +488,89 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 			end
 		end
 	end
-	
+end
+function drawZoneDisk() -- Draw the zone feedback ellipsis
+	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
+		local _, _, leftPressed = Spring.GetMouseState()
+		if leftPressed then -- if draw has to begin
+			computeZoneWorldCoords()
+			
+			if plotZone then
+				local a, b = (zoneX2 - zoneX1) / 2, (zoneZ2 - zoneZ1) /2
+				local centerX, centerZ = (zoneX1 + zoneX2) / 2, (zoneZ1 + zoneZ2) / 2
+				gl.Color(rValue, gValue, bValue, 0.5)
+				drawGroundEllipsis(centerX, centerZ, a, b, 50)
+			end
+		end
+	end
+end
+function displayZones()
 	for i, z in ipairs(zoneList) do -- render every other zones that are displayed
-		if z.shown then
+		if z.shown and z.type == "Rectangle" then
 			gl.Color(z.red, z.green, z.blue, 0.5)
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
+		elseif z.shown and z.type == "Disk" then
+			gl.Color(z.red, z.green, z.blue, 0.5)
+			drawGroundEllipsis(z.x, z.z, z.a, z.b, 50)
 		elseif not z.shown and z == selectedZone then
 			selectedZone = nil
 		end
 	end
-	
+end
+function displaySelectedZoneAnchors()
 	if selectedZone ~= nil then -- if a zone is selected, render its border
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+8)
-		gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
-		gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
+		if selectedZone.type == "Rectangle" then
+			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
+			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x2, selectedZone.z1+8)
+			gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
+			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
+		elseif selectedZone.type == "Disk" then
+			gl.DrawGroundQuad(selectedZone.x - selectedZone.a, selectedZone.z - 8, selectedZone.x - selectedZone.a + 16, selectedZone.z + 8)
+			gl.DrawGroundQuad(selectedZone.x + selectedZone.a - 16, selectedZone.z - 8, selectedZone.x + selectedZone.a, selectedZone.z + 8)
+			gl.DrawGroundQuad(selectedZone.x - 8, selectedZone.z - selectedZone.b, selectedZone.x + 8, selectedZone.z - selectedZone.b + 16)
+			gl.DrawGroundQuad(selectedZone.x - 8, selectedZone.z + selectedZone.b - 16, selectedZone.x + 8, selectedZone.z + selectedZone.b)
+		end
 	end
 end
 function showZoneInformation() -- Show each displayed zone name and top-left/bottom-right positions of selected zone
 	gl.BeginText()
 	if selectedZone ~= nil then
-		local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
-		local text =  "x:"..tostring(selectedZone.x1).." z:"..tostring(selectedZone.z1)
-		gl.Text(text, x, y, 15, "s")
-		x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2), selectedZone.z2)
-		text =  "x:"..tostring(selectedZone.x2).." z:"..tostring(selectedZone.z2)
-		x = x - gl.GetTextWidth(text)*15
-		gl.Text(text, x, y, 15, "s")
+		if selectedZone.type == "Rectangle" then
+			local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
+			local text =  "("..tostring(selectedZone.x1)..", "..tostring(selectedZone.z1)..")"
+			gl.Text(text, x, y, 15, "s")
+			
+			x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2), selectedZone.z2)
+			text =  "("..tostring(selectedZone.x2)..", "..tostring(selectedZone.z2)..")"
+			gl.Text(text, x, y, 15, "s")
+		elseif selectedZone.type == "Disk" then
+			local x, y = Spring.WorldToScreenCoords(selectedZone.x - selectedZone.a, Spring.GetGroundHeight(selectedZone.x - selectedZone.a, selectedZone.z), selectedZone.z)
+			local text =  tostring(selectedZone.x - selectedZone.a)
+			gl.Text(text, x, y, 15, "s")
+			
+			x, y = Spring.WorldToScreenCoords(selectedZone.x + selectedZone.a, Spring.GetGroundHeight(selectedZone.x + selectedZone.a, selectedZone.z), selectedZone.z)
+			text =  tostring(selectedZone.x + selectedZone.a)
+			gl.Text(text, x, y, 15, "s")
+			
+			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z + selectedZone.b), selectedZone.z + selectedZone.b)
+			text =  tostring(selectedZone.z + selectedZone.b)
+			gl.Text(text, x, y, 15, "s")
+			
+			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z - selectedZone.b), selectedZone.z - selectedZone.b)
+			text =  tostring(selectedZone.z - selectedZone.b)
+			gl.Text(text, x, y, 15, "s")
+		end
 	end
 	for i, z in ipairs(zoneList) do
 		if z.shown then
-			local x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
-			x, y = Spring.WorldToScreenCoords(x, Spring.GetGroundHeight(x, y), y)
+			local x, y
+			if z.type == "Rectangle" then
+				x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
+				x, y = Spring.WorldToScreenCoords(x, Spring.GetGroundHeight(x, y), y)
+			elseif z.type == "Disk" then
+				x, y = Spring.WorldToScreenCoords(z.x, Spring.GetGroundHeight(z.x, z.z), z.z)
+			end
 			local text = z.name
 			local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
 			x, y = x - w/2, y - h/2
@@ -540,10 +593,19 @@ function clickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	if var ~= nil then
 		local x, _, z = unpack(var)
 		for i, zone in ipairs(zoneList) do
-			if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then -- check if we clicked in a zone
-				clickedZone = zone
-				if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
-					return selectedZone
+			if zone.type == "Rectangle" then
+				if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then -- check if we clicked in a zone
+					clickedZone = zone
+					if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
+						return selectedZone
+					end
+				end
+			elseif zone.type == "Disk" then
+				if ((x - zone.x)*(x - zone.x)) / (zone.a*zone.a) + ((z - zone.z)*(z - zone.z)) / (zone.b*zone.b) <= 1 then -- check if we clicked in a zone
+					clickedZone = zone
+					if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
+						return selectedZone
+					end
 				end
 			end
 		end
@@ -551,68 +613,106 @@ function clickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	return clickedZone
 end
 function getZoneSide(x, z) -- Returns the clicked side of the selected zone
-	local left = x - selectedZone.x1
-	local right = selectedZone.x2 - x
-	local top = z - selectedZone.z1
-	local bottom = selectedZone.z2 - z -- these variable represent the distance between where the user clicked and the borders of the selected zone
 	local side = ""
-	if left >= 0 and left <= 8 then -- if this distance is less than 8, return the clicked border
-		if top >= 0 and top <= 8 then
-			side = "TOPLEFT"
+	if selectedZone.type == "Rectangle" then
+		local left = x - selectedZone.x1
+		local right = selectedZone.x2 - x
+		local top = z - selectedZone.z1
+		local bottom = selectedZone.z2 - z -- these variable represent the distance between where the user clicked and the borders of the selected zone
+		if left >= 0 and left <= 8 then -- if this distance is less than 8, return the clicked border
+			if top >= 0 and top <= 8 then
+				side = "TOPLEFT"
+			elseif bottom >= 0 and bottom <= 8 then
+				side = "BOTLEFT"
+			else
+				side = "LEFT"
+			end
+		elseif right >= 0 and right <= 8 then
+			if top >= 0 and top <= 8 then
+				side = "TOPRIGHT"
+			elseif bottom >= 0 and bottom <= 8 then
+				side = "BOTRIGHT"
+			else
+				side = "RIGHT"
+			end
+		elseif top >= 0 and top <= 8 then
+			side = "TOP"
 		elseif bottom >= 0 and bottom <= 8 then
-			side = "BOTLEFT"
-		else
+			side = "BOT"
+		end
+	elseif selectedZone.type == "Disk" then
+		local left = x - (selectedZone.x - selectedZone.a)
+		local right = selectedZone.x + selectedZone.a - x
+		local top = z - (selectedZone.z - selectedZone.b)
+		local bottom = selectedZone.z + selectedZone.b - z
+		if left >= 0 and left <= 16 then
 			side = "LEFT"
-		end
-	elseif right >= 0 and right <= 8 then
-		if top >= 0 and top <= 8 then
-			side = "TOPRIGHT"
-		elseif bottom >= 0 and bottom <= 8 then
-			side = "BOTRIGHT"
-		else
+		elseif right >= 0 and right <= 16 then
 			side = "RIGHT"
+		elseif top >= 0 and top <= 16 then
+			side = "TOP"
+		elseif bottom >= 0 and bottom <= 16 then
+			side = "BOT"
 		end
-	elseif top >= 0 and top <= 8 then
-		side = "TOP"
-	elseif bottom >= 0 and bottom <= 8 then
-		side = "BOT"
 	end
 	return side
 end
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
-	local updateAnchor = true
-	-- depending on the side clicked, apply modifications
-	if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
-		selectedZone.x1 = selectedZone.x1 + dx
-		selectedZone.x2 = selectedZone.x2 + dx
-		selectedZone.z1 = selectedZone.z1 + dz
-		selectedZone.z2 = selectedZone.z2 + dz
-	elseif zoneSide == "LEFT" and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.x2 = selectedZone.x2 + dx
-	elseif zoneSide == "TOP" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
-		selectedZone.z1 = selectedZone.z1 + dz
-	elseif zoneSide == "BOT" and selectedZone.z1 - dz+ minZoneSize <= selectedZone.z2 then
-		selectedZone.z2 = selectedZone.z2 + dz
-	elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.z1 = selectedZone.z1 + dz
-		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.z2 = selectedZone.z2 + dz
-		selectedZone.x1 = selectedZone.x1 + dx
-	elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.z1 = selectedZone.z1 + dz
-		selectedZone.x2 = selectedZone.x2 + dx
-	elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-		selectedZone.z2 = selectedZone.z2 + dz
-		selectedZone.x2 = selectedZone.x2 + dx
-	else
-		updateAnchor = false -- if no modifications have been applied (mouse out of map for instance), do not update the anchor of the transformation
-	end
-	if updateAnchor then
-		zoneAnchorX = zoneAnchorX + dx
-		zoneAnchorZ = zoneAnchorZ + dz
+	if selectedZone.type == "Rectangle" then
+		local updateAnchor = true
+		-- depending on the side clicked, apply modifications
+		if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
+			selectedZone.x1 = selectedZone.x1 + dx
+			selectedZone.x2 = selectedZone.x2 + dx
+			selectedZone.z1 = selectedZone.z1 + dz
+			selectedZone.z2 = selectedZone.z2 + dz
+		elseif zoneSide == "LEFT" and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.x1 = selectedZone.x1 + dx
+		elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.x2 = selectedZone.x2 + dx
+		elseif zoneSide == "TOP" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
+			selectedZone.z1 = selectedZone.z1 + dz
+		elseif zoneSide == "BOT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 then
+			selectedZone.z2 = selectedZone.z2 + dz
+		elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.z1 = selectedZone.z1 + dz
+			selectedZone.x1 = selectedZone.x1 + dx
+		elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.z2 = selectedZone.z2 + dz
+			selectedZone.x1 = selectedZone.x1 + dx
+		elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.z1 = selectedZone.z1 + dz
+			selectedZone.x2 = selectedZone.x2 + dx
+		elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+			selectedZone.z2 = selectedZone.z2 + dz
+			selectedZone.x2 = selectedZone.x2 + dx
+		else
+			updateAnchor = false -- if no modifications have been applied (mouse out of map for instance), do not update the anchor of the transformation
+		end
+		if updateAnchor then
+			zoneAnchorX = zoneAnchorX + dx
+			zoneAnchorZ = zoneAnchorZ + dz
+		end
+	elseif selectedZone.type == "Disk" then
+		local updateAnchor = true
+		if zoneSide == "" and selectedZone.x - selectedZone.a + dx > 0 and selectedZone.x + selectedZone.a + dx < Game.mapSizeX and selectedZone.z - selectedZone.b + dz > 0 and selectedZone.z + selectedZone.b + dz < Game.mapSizeZ then
+			selectedZone.x = selectedZone.x + dx
+			selectedZone.z = selectedZone.z + dz
+		elseif zoneSide == "RIGHT" and 2 * (selectedZone.a + dx) > minZoneSize then
+			selectedZone.a = selectedZone.a + dx
+		elseif zoneSide == "LEFT" and 2 * (selectedZone.a - dx) > minZoneSize then
+			selectedZone.a = selectedZone.a - dx
+		elseif zoneSide == "TOP" and 2 * (selectedZone.b - dz) > minZoneSize then
+			selectedZone.b = selectedZone.b - dz
+		elseif zoneSide == "BOT" and 2 * (selectedZone.b + dz) > minZoneSize then
+			selectedZone.b = selectedZone.b + dz
+		else
+			updateAnchor = false
+		end
+		if updateAnchor then
+			zoneAnchorX = zoneAnchorX + dx
+			zoneAnchorZ = zoneAnchorZ + dz
+		end
 	end
 end
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
@@ -636,6 +736,16 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+function drawGroundEllipsis(centerX, centerZ, a, b, d)
+	local divs = d or 25
+	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
+		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
+			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
+			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
+		end
+	end)
+end
 function changeMouseCursor() -- Hide mouse cursor in unit state and during movement, show another cursor in other states
 	--[[
 	local mouseCursor = Spring.GetMouseCursor()
@@ -664,8 +774,12 @@ end
 function widget:DrawWorld()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		previewUnit()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		drawZoneRect()
+		drawZoneDisk()
+		displaySelectedZoneAnchors()
 	end
-	drawZoneRect()
+	displayZones()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -762,7 +876,7 @@ function widget:MousePress(mx, my, button)
 		
 		-- STATE ZONE : draw, move and rename logical zones
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
 				rValue, gValue, bValue = math.random(), math.random(), math.random() -- define new zone color
 				plotZone = true
 				drawStartX, drawEndX = mx, mx
@@ -826,6 +940,7 @@ function widget:MouseRelease(mx, my, button)
 										z1 = round(zoneZ1) - round(zoneZ1)%8,
 										z2 = round(zoneZ2) - round(zoneZ2)%8,
 										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
+										type = "Rectangle",
 										shown = true
 									}
 				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
@@ -833,7 +948,20 @@ function widget:MouseRelease(mx, my, button)
 					zoneNumber = zoneNumber + 1
 				end
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
-				-- TODO
+				local zone = 	{ 	
+										red = rValue, green = gValue, blue = bValue,
+										a = round((zoneX2 - zoneX1) / 2) - round((zoneX2 - zoneX1) / 2)%8,
+										b = round((zoneZ2 - zoneZ1) / 2) - round((zoneZ2 - zoneZ1) / 2)%8,
+										x = round((zoneX1 + zoneX2) / 2) - round((zoneX1 + zoneX2) / 2)%8,
+										z = round((zoneZ1 + zoneZ2) / 2) - round((zoneZ1 + zoneZ2) / 2)%8,
+										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
+										type = "Disk",
+										shown = true
+									}
+				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drew zone is large enough, store it
+					table.insert(zoneList, zone)
+					zoneNumber = zoneNumber + 1
+				end
 			end
 			plotZone = false
 			mouseMove = false
@@ -881,7 +1009,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		
 		-- STATE ZONE
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
+			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
 				-- update zone
 				if plotZone then
 					drawEndX = mx
