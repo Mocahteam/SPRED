@@ -1,4 +1,3 @@
 Zones circulaires
-Rotation des unités
-Mettre le focus sur la zone sélectionnée
-problem selectedZone
+Forcer zone carrée avec alt
+feedback visuel sur la topbar
