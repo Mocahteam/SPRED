@@ -648,8 +648,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     local externalUnitId=c["object"]
     if(externalUnitId=="frameNumber") then
       local bool=true
-      bool=bool and ((c.value.superiorTo==nil)or(tonumber(c.value.superiorTo)<frameNumber))
-      bool=bool and ((c.value.inferiorTo==nil)or(tonumber(c.value.inferiorTo)>frameNumber))
+      bool=bool and ((c.value.superiorTo==nil)or(secondesToFrames(tonumber(c.value.superiorTo))<frameNumber))
+      bool=bool and ((c.value.inferiorTo==nil)or(secondesToFrames(tonumber(c.value.inferiorTo))>frameNumber))
       conditions[idCond]["currentlyValid"]=bool          
     elseif(groupOfUnits[externalUnitId]==nil) then 
       -- means that the condition is on only one unit
