@@ -29,10 +29,17 @@
 extern "C" {
 #endif
 
+char const *errorsArr[] = {"out_of_range ", "wrong_coalition ", "wrong_unit ", "wrong_target ", "wrong_position "};
+
 /*
- * If the value is strictly positive, traces will be generated.
+ * If the value is strictly positive, traces will be generated. This value can be changed in the file 'ProgAndPlay.cpp'.
  */
 int tracePlayer;
+
+/* 
+ * If true, traces will be added in shared memory. Used to avoid logging calls not made by the player's program.
+ */
+bool activeTrace = true;
 
 /*
  * This function has to be called before entering in critical section.
@@ -103,6 +110,14 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam);
  *           -1 is returned on errors.
  */
 int PP_PushMessage(const char * msg);
+
+/*
+ * Retrieve the timestamp updated by the game engine in the shared memory
+ *
+ * Returns : the timestamp value on success.
+ *			 -1 is returned on errors.
+ */
+int PP_GetTimestamp();
 
 #ifdef __cplusplus
 }

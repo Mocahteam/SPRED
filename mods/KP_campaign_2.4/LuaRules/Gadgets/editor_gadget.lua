@@ -10,21 +10,7 @@ function gadget:GetInfo()
 	}
 end
 
--------------------------------------
--- Useful function to split messages into tokens
--------------------------------------
-function splitString(inputstr, sep)
-	if sep == nil then
-		sep = "%s"
-	end
-	local t = {}
-	local i = 1
-	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-		t[i] = str
-		i = i + 1
-	end
-	return t
-end
+VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -39,31 +25,67 @@ local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local createUnit = false
 local unitType, team = "bit", 0
+local newTeam = 0
 local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
-local dX, dZ = 0, 0
+local newX, newZ = 0, 0
+local angle = 0
 local moveUnits = false
+local deleteUnits = false
+local transferUnits = false
+local rotateUnits = false
 local resetMap = false
+local moveUnitsAnchor = nil
+local relativepos = {}
+local hpPercent = -1
 local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
 
 function gadget:Initialize()
+	-- Allow to see everything and select any unit
 	if (Spring.GetModOptions()["editor"] == "yes") then
 		Spring.SendCommands("cheat")
 		Spring.SendCommands("godmode")
-		Spring.SendCommands("globallos")
+		Spring.SendCommands("spectator")
 	end
 end
 
 function gadget:RecvLuaMsg(msg, player)
-	moveUnit = false
+	-- Split message into tokens
 	msgContents = splitString(msg, "++")
+	-- CREATE UNIT : gets informations about type, team and position
 	if (msgContents[1] == "Create Unit") then
 		createUnit = true
 		unitType, team = msgContents[2], tonumber(msgContents[3])
 		xUnit, yUnit, zUnit = tonumber(msgContents[4]), tonumber(msgContents[5]), tonumber(msgContents[6])
+	-- ANCHOR : gets information about the anchor of the drag movement
+	elseif (msgContents[1] == "Anchor") then
+		relativepos = {}
+		moveUnitsAnchor = tonumber(msgContents[2])
+		newX, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		for i, u in ipairs(selectedUnits) do
+			local curX, _, curZ = Spring.GetUnitPosition(u)
+			local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
+			relativepos[u] = { dx = curX - refX, dz = curZ - refZ }
+		end
+	-- MOVE UNITS : gets the translation vector for drag movement
 	elseif (msgContents[1] == "Move Units") then
 		moveUnits = true
+		newX, newZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+	-- TRANSLATE UNITS : gets the pressed arrow
+	elseif (msgContents[1] == "Translate Units") then
+		moveUnits = true
 		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+	-- ROTATE UNITS : computes the angle of rotation
+	elseif (msgContents[1] == "Rotate Units") then
+		rotateUnits = true
+		local x, z = msgContents[2], msgContents[3]
+		local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		local vectX, vectZ = x - refX, z - refZ
+		local length = math.sqrt(vectX*vectX + vectZ*vectZ)
+		if length > 0 then
+			angle = math.atan2(vectX/length, vectZ/length)
+		end
+	-- SELECT UNITS : gets the current unit selection
 	elseif (msgContents[1] == "Select Units") then
 		local tmptable = {}
 		for i, u in ipairs(msgContents) do
@@ -72,33 +94,82 @@ function gadget:RecvLuaMsg(msg, player)
 			end
 		end
 		selectedUnits = tmptable
+	-- DELETE SELECTED UNITS : allows unit destruction
+	elseif (msgContents[1] == "Delete Selected Units") then
+		deleteUnits = true
+	-- TRANSFER UNITS : gets the new team of selected units
+	elseif (msgContents[1] == "Transfer Units") then
+		newTeam = msgContents[2]
+		transferUnits = true
+	-- NEW MAP : allows reset of the map
 	elseif (msgContents[1] == "New Map") then
 		resetMap = true
+	-- LOAD MAP : gets the file to load
 	elseif (msgContents[1] == "Load Map") then
 		missionScript.Start(msgContents[2])
+	-- CHANGE HP : change hp of selected units
+	elseif (msgContents[1] == "Change HP") then
+		hpPercent = tonumber(msgContents[2])/100
 	end
 end
 
 function gadget:GameFrame( frameNumber )
-	if (missionName == "LevelEditor" and createUnit) then
-		local unitID = Spring.CreateUnit(unitType, xUnit, yUnit, zUnit, "n", team)
-		Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
-		createUnit = false
-	elseif (missionName == "LevelEditor" and selectedUnits ~= {} and moveUnits) then
-		for i, u in ipairs(selectedUnits) do
-			curX, _, curZ = Spring.GetUnitPosition(u)
-			Spring.SetUnitPosition(u, curX + dX, Spring.GetGroundHeight(curX + dX, curZ - dZ), curZ - dZ)
-			Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+	-- EDITOR ONLY
+	if missionName == "LevelEditor" then
+		-- CREATE UNIT
+		if createUnit then
+			local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
+			Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
+			createUnit = false
+		-- MOVE UNITS
+		elseif moveUnits then
+			if selectedUnits ~= {} then
+				Spring.SetUnitPosition(moveUnitsAnchor, newX, Spring.GetGroundHeight(newX, newZ), newZ)
+				Spring.GiveOrderToUnit(moveUnitsAnchor, CMD.STOP, {}, {})
+				for i, u in ipairs(selectedUnits) do
+					if relativepos[u] ~= nil then
+						local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
+						Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
+						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+					end
+				end
+			end
+			moveUnits = false
+		-- DELETE UNITS
+		elseif deleteUnits then
+			if selectedUnits ~= {} then
+				for i, u in ipairs(selectedUnits) do
+					Spring.DestroyUnit(u)
+				end
+			end
+			deleteUnits = false
+		-- TRANSFER UNITS
+		elseif transferUnits then
+			for i, u in ipairs(selectedUnits) do
+				-- Spring.TransferUnit(u, newTeam) --BUGGED
+			end
+			transfertUnits = false
+		-- ROTATE UNITS
+		elseif rotateUnits then
+			for i, u in ipairs(selectedUnits) do
+				Spring.SetUnitRotation(u, 0, -angle, 0)
+			end
+			rotateUnits = false
+		-- RESET MAP
+		elseif resetMap then
+			local units = Spring.GetAllUnits()
+			for i = 1,table.getn(units) do
+				Spring.DestroyUnit(units[i], false, true)
+			end
+			resetMap = false
+		-- CHANGE HP OF SELECTED UNITS
+		elseif hpPercent > 0 and hpPercent <= 1 then
+			for i, u in ipairs(selectedUnits) do
+				local _, mh = Spring.GetUnitHealth(u)
+				Spring.SetUnitHealth(u, hpPercent * mh)
+			end
+			hpPercent = -1
 		end
-		moveUnits = false
-	end
-	
-	if (resetMap) then
-		local units = Spring.GetAllUnits()
-		for i = 1,table.getn(units) do
-			Spring.DestroyUnit(units[i], false, true)
-		end
-		resetMap = false
 	end
 end
 --------------------------------------------------------------------------------

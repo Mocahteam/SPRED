@@ -2786,6 +2786,11 @@ bool CGame::Update()
 
 	const unsigned difTime = (timeNow - lastModGameTimeMeasure);
 	const float dif = skipping ? 0.010f : (float)difTime * 0.001f;
+	
+	// Meresse
+	gu->PP_modGameTime += dif * gs->speedFactor;
+	pp->UpdateTimestamp();
+	//
 
 	if (!gs->paused) {
 		gu->modGameTime += dif * gs->speedFactor;
@@ -3559,6 +3564,10 @@ void CGame::StartPlaying()
 		logOutput.Print("Safe to use: Autoquit, ImmobileBuilder, MetalMakers, MiniMap Start Boxes\n");
 	}
 #endif
+
+	// Meresse (Prog&Play)
+	pp->TracePlayer();
+	//
 }
 
 
@@ -3795,7 +3804,7 @@ void CGame::ClientReadNet()
 					} else {
 						logOutput.Print("%s unpaused the game",playerHandler->Player(player)->name.c_str());
 					}
-					// Meresse (Prog&Play update)
+					// Meresse (Prog&Play)
 					pp->GamePaused(gs->paused);
 					//
 					lastframe = SDL_GetTicks();
@@ -4997,6 +5006,9 @@ void CGame::EndSkip() {
 
 	gu->gameTime    += skipSeconds;
 	gu->modGameTime += skipSeconds;
+	// Meresse
+	gu->PP_modGameTime += skipSeconds;
+	//
 
 	gs->speedFactor     = skipOldSpeed;
 	gs->userSpeedFactor = skipOldUserSpeed;

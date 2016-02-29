@@ -6,30 +6,41 @@
 // Muratet (Define Class CProgAndPlay) ---
 
 #include "Sim/Units/Unit.h"
+#include <ctime>
 
 class CProgAndPlay
 {
 public:
+	
 	CProgAndPlay();
 	~CProgAndPlay();
 	
 	void Update(void);
 	void GamePaused(bool paused);
+	void TracePlayer();
+	void UpdateTimestamp();
 	
 	void AddUnit(CUnit* unit);
 	void UpdateUnit(CUnit* unit);
 	void RemoveUnit(CUnit* unit);
 
 private:
+
 	bool loaded;
 	bool updated;
-	
+	bool missionEnded;
+	bool tracePlayer;
+	std::string missionName;
+	std::time_t startTime;
+		
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play
 	void logMessages(); // log messages from Prog&Play
 	void openTracesFile(); // open the appropriate traces file based on the current mission
 	
 };
+
+std::vector<std::string> splitLine(std::string val);
 
 extern CProgAndPlay* pp;
 

@@ -2,6 +2,12 @@
 
 // Muratet (Implement class CProgAndPlay) ---
 
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <map>
+#include <cmath>
+
 #include "StdAfx.h"
 #include "mmgr.h"
 
@@ -29,23 +35,13 @@
 #include "GlobalUnsynced.h"
 #include "LogOutput.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <dirent.h>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-
+const std::string tracesDirname = "traces";
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
 
-const std::string tracesDirName = "traces";
-const bool tracePlayer = true;
-
-void log(std::string msg){
+void log(std::string msg) {
 	logFile << msg << std::endl;
-	logOutput.Print(msg.c_str());
+	//logOutput.Print(msg.c_str());
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -59,8 +55,11 @@ CProgAndPlay::CProgAndPlay() {
 	
 	loaded = false;
 	updated = false;
+	missionEnded = false;
+	tracePlayer = false;
+	
 	// initialisation of Prog&Play
-	if (PP_Init(tracePlayer) == -1) {
+	if (PP_Init() == -1) {
 		std::string tmp(PP_GetError());
 		log(tmp.c_str());
 	}
@@ -77,6 +76,8 @@ CProgAndPlay::CProgAndPlay() {
 	delete tmpFile;
 	if (del)
 		FileSystemHandler::DeleteFile(filesystem.LocateFile("mission_ended.conf"));
+		
+	openTracesFile();
 	
 	log("ProgAndPLay constructor end");
 }
@@ -99,11 +100,10 @@ CProgAndPlay::~CProgAndPlay() {
 
 void CProgAndPlay::Update(void) {
 	log("ProgAndPLay::Update begin");
-	
-	if (!ppTraces.is_open())
-		openTracesFile();
+		
 	// Store log messages
-	logMessages();
+	if (ppTraces.is_open())
+		logMessages();
 	
 	// Execute pending commands
 	int nbCmd = execPendingCommands();
@@ -124,6 +124,21 @@ void CProgAndPlay::GamePaused(bool paused) {
 	int ret = PP_SetGamePaused(paused);
 	if (ret == -1)
 		return;
+	if (ppTraces.is_open()) {
+		if (paused)
+			ppTraces << "game_paused" << std::endl;
+		else
+			ppTraces << "game_unpaused" << std::endl;
+	}
+}
+
+void CProgAndPlay::TracePlayer() {
+	if (tracePlayer)
+		PP_SetTracePlayer();
+}
+
+void CProgAndPlay::UpdateTimestamp() {
+	PP_UpdateTimestamp(startTime + (int)std::floor(gu->PP_modGameTime));
 }
 
 PP_ShortUnit buildShortUnit(CUnit *unit, PP_Coalition c){
@@ -509,9 +524,30 @@ log("ProgAndPLay::execPendingCommands end");
 void CProgAndPlay::logMessages() {
 	log("ProgAndPLay::logMessages begin");
 	int i = 0;
+	if (!missionEnded) {
+		CFileHandler *tmpFile = new CFileHandler("mission_ended.conf");
+		bool res = tmpFile->FileExists();
+		// free CFileHandler before deleting the file, otherwise it is blocking on Windows
+		delete tmpFile;
+		if (res) {
+			//mission ended
+			std::ifstream ifs("mission_ended.conf");
+			std::string val;
+			getline(ifs, val);
+			std::vector<std::string> elems = splitLine(val);
+			if (elems.at(0).compare("won") == 0 || elems.at(0).compare("loss") == 0) {
+				ppTraces << "mission_end_time " << startTime + (int)std::floor(gu->PP_modGameTime) << std::endl;
+				ppTraces << "end " << elems.at(0) << " " << missionName << std::endl;
+				i += 2;
+				missionEnded = true;
+			}
+		}
+	}
 	// Get next message
 	char * msg = PP_PopMessage();
-	while (msg != NULL){
+	while (msg != NULL) {
+		if (missionEnded)
+			ppTraces << "delayed ";
 		// Write this message on traces file
 		ppTraces << msg << std::endl;
 		// free memory storing this message
@@ -530,19 +566,42 @@ void CProgAndPlay::logMessages() {
 }
 
 void CProgAndPlay::openTracesFile() {
-	struct stat info;
-	if(stat(tracesDirName.c_str(), &info) != 0) {
-		PP_SetError("ProgAndPlay::traces directory does not exist");
-		log(PP_GetError());
+	log("ProgAndPLay::openTracesFile begin");
+	const std::map<std::string, std::string>& modOpts = gameSetup->modOptions;
+	std::map<std::string,std::string>::const_iterator it;
+	it = modOpts.find("tracesfilename");
+	if (it != modOpts.end()) {
+		bool dirExists = FileSystemHandler::mkdir(tracesDirname);
+		if (dirExists) {
+			missionName = modOpts.at("tracesfilename");
+			std::stringstream ss;
+			ss << tracesDirname << "\\" << missionName << ".log";
+			ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);
+			if (ppTraces.is_open()) {
+				tracePlayer = true;
+				startTime = std::time(NULL);
+				ppTraces << "start " << missionName << std::endl;
+				ppTraces << "mission_start_time " << startTime << std::endl;
+			}
+		}
+		else {
+			PP_SetError("ProgAndPlay::cannot create traces directory");
+			log(PP_GetError());
+		}
 	}
-	else {
-		const std::map<std::string, std::string>& modOpts = gameSetup->modOptions;
-		std::string missionName = modOpts.at("missionname");
-		std::stringstream ss;
-		ss << tracesDirName << "\\" << missionName << ".log";
-		log(ss.str());
-		ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);
-	}
+	log("ProgAndPLay::openTracesFile end");
+}
+
+/**
+* Renvoie un vecteur de string contenant les tokens de val, le delimiteur etant l'espace
+*/
+std::vector<std::string> splitLine(std::string val) {
+	std::string buf;
+	std::vector<std::string> elems;
+    std::stringstream ss(val);
+    while (ss >> buf)
+        elems.push_back(buf);
+   	return elems;
 }
 
 // ---

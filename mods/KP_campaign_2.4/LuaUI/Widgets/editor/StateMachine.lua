@@ -1,3 +1,5 @@
+VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
+
 ------------------------
 -- Class StateMachine --
 ------------------------
@@ -18,26 +20,10 @@ function StateMachine.setCurrentState(self, _currentState) self.currentState = _
 -- Getter
 function StateMachine.getCurrentState(self) return self.currentState end
 
--------------------------------------
--- Useful function to split messages into tokens
--------------------------------------
-function splitString(inputstr, sep)
-	if sep == nil then
-		sep = "%s"
-	end
-	local t = {}
-	local i = 1
-	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-		t[i] = str
-		i = i + 1
-	end
-	return t
-end
-
 ------------------------------
 -- Initialize global state machine
 ------------------------------
-local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link" }
+local globalStates = { FILE = "file", UNIT = "unit", EVENT = "event", ACTION = "action", LINK = "link", ZONE = "zone" }
 globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
@@ -48,16 +34,23 @@ for id,unitDef in pairs(UnitDefs) do
 	for name,param in unitDef:pairs() do
 		if name == "name" then
 			unitStates[param] = param
-			if i == 1 then
-				unitStates.DEFAULT = param
-			end
 		end
 	end
 end
-unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
+unitStates.SELECTION = "selection"
+unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 
 ------------------------------
 -- Initialize team state machine
 ------------------------------
-local teamStates = { PLAYER = "0", ALLY = "1", ENEMY = "2" }
-teamStateMachine = StateMachine.new(teamStates, teamStates.PLAYER)
+local teamStates = {}
+for _, t in pairs(getTeamsInformation()) do
+	teamStates[t.id] = t.id
+end
+teamStateMachine = StateMachine.new(teamStates, teamStates[0])
+
+------------------------------
+-- Initialize zone state machine
+------------------------------
+local zoneStates = { DRAWRECT = "drawrect", DRAWDISK = "drawdisk", SELECTION = "selection" }
+zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)

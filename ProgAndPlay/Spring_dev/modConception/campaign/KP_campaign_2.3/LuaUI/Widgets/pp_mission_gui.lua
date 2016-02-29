@@ -30,9 +30,6 @@ local rooms = WG.rooms -- availabe in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
 
-local tracesDir = "traces"
-local ppTraces = nil -- File handler to store traces
-
 -- Set label
 local previousMission = "Previous mission"
 local replayMission = "Replay mission"
@@ -55,19 +52,6 @@ if lang == "fr" then
 	victory = "Vous avez gagné la mission"
 	victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
 	loss = "Vous avez perdu la mission"
-end
-
-
--- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
-local function createTmpFile()
-	if not VFS.FileExists("mission_ended.conf") then
-		local f = io.open("mission_ended.conf", "w")
-		if f ~= nil then
-			f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
-			f:flush()
-			f:close()
-		end
-	end
 end
 
 -- Defines a template window for the end mission menu
@@ -100,6 +84,7 @@ local template_endMission = {
 				tab.position = "bottom"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("replay "..missionName.."\n")
 					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", lang, scenarioType)
 				end
 			end
@@ -127,6 +112,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("quit_game\n")
 					Spring.SendCommands("quitforce")
 				end
 			end
@@ -137,6 +123,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("quit "..missionName.."\n")
 					WG.switchOnMenu()
 				end
 			end
@@ -159,6 +146,7 @@ local template_endMission = {
 				tab.position = "top"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("show_briefing\n")
 					if tab.parent.launchTuto ~= nil then
 						tab.parent.launchTuto()
 					else
@@ -207,6 +195,7 @@ function MissionEvent(e)
 		WG.Message:DeleteAll()
 		-- load templated mission
 		local popup = deepcopy(template_endMission)
+		local victoryState = ""
 		-- update window
 		if e.state ~= "menu" then
 			if e.state == "won" then
@@ -221,17 +210,10 @@ function MissionEvent(e)
 				else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
-				ppTraces = io.open(tracesDir..'\\'..missionName..".log", "a")
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." won\n")
-					ppTraces:flush()
-				end
+				victoryState = "won"
 			else
 				popup.lineArray = {loss}
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." loss\n")
-					ppTraces:flush()
-				end
+				victoryState = "loss"
 			end
 			
 			-- Enable PreviousMission and NextMission tabs
@@ -243,6 +225,7 @@ function MissionEvent(e)
 						tab.position = "bottom"
 						tab.OnClick = function()
 							tab.parent:Close()
+							Script.LuaUI.TraceAction("previous "..campaign[missionName].previousMission.."\n")
 							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", lang, scenarioType)
 						end
 					end
@@ -256,6 +239,7 @@ function MissionEvent(e)
 						tab.position = "bottom"
 						tab.OnClick = function()
 							tab.parent:Close()
+							Script.LuaUI.TraceAction("next "..campaign[missionName].nextMission.."\n")
 							-- set nextLauncher depending on type of scenario
 							local nextLauncher = ""
 							if scenarioType == "default" then
@@ -271,7 +255,7 @@ function MissionEvent(e)
 			-- disable "Close tab" and "Show briefing"
 			popup.tabs[6] = nil
 			-- inform the game that mission is over with a temporary file
-			createTmpFile()
+			Script.LuaUI.CreateMissionEndedFile(victoryState)
 		else
 			popup.lineArray = {"Menu"}
 		end
@@ -365,27 +349,12 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
 	widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
 	widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
-
-	if not VFS.FileExists(tracesDir) then
-		Spring.CreateDir(tracesDir)
-	end
-	-- open ppTraces file
-	ppTraces = io.open(tracesDir..'\\'..missionName..".log", "w+")
-	if ppTraces ~= nil then
-		ppTraces:write(missionName.." start\n")
-		ppTraces:flush()
-		ppTraces:close()
-	end
 end
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("EmulateEscapeKey")
 	widgetHandler:DeregisterGlobal("MissionEvent")
 	widgetHandler:DeregisterGlobal("TutorialEvent")
-	
-	if ppTraces ~= nil then
-		ppTraces:close()
-	end
 end
 
 --------------------------------------------------------------------------------

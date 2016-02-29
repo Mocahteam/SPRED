@@ -26,6 +26,7 @@
 #include "PP_Error_Private.h"
 
 #include <signal.h>
+#include <math.h>
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/thread.hpp>
@@ -34,8 +35,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
-//std::ofstream logFile("logClient.txt", std::ios::out | std::ofstream::trunc);
+#include <ctime>
 
 /******************************************************************************/
 /* Definition of global variables                                             */
@@ -203,6 +203,13 @@ void exitCriticalSection(){
 	locked--;
 }
 
+int getUnitType(PP_Unit unit) {
+	activeTrace = false;
+	int type = PP_Unit_GetType(unit);
+	activeTrace = true;
+	return type;
+}
+
 /*
  * Check if position a position is between two others.
  * Returns : true if "p" position is between "b1" and "b2" and false otherwhise
@@ -237,6 +244,7 @@ int PP_Open(){
 			shd.gamePaused = segment->find<bool>("gamePaused").first;
 			shd.tracePlayer = segment->find<bool>("tracePlayer").first;
 			tracePlayer = *(shd.tracePlayer);
+			shd.timestamp = segment->find<int>("timestamp").first;
 			shd.units = segment->find<ShMapUnits>("units").first;
 			shd.coalitions = segment->find<ShIntVector>("coalitions").first;
 			shd.pendingCommand =
@@ -262,6 +270,9 @@ int PP_Open(){
 		
 		// notify function call to Spring
 		enterCriticalSection();
+			std::stringstream ss;
+			ss << "execution_start_time " << PP_GetTimestamp();
+			PP_PushMessage(ss.str().c_str());
 			PP_PushMessage("PP_Open");
 		exitCriticalSection();
 			
@@ -286,6 +297,9 @@ int PP_Close (){
 		// notify function call to Spring
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
+			std::stringstream ss;
+			ss << "execution_end_time " << PP_GetTimestamp();
+			PP_PushMessage(ss.str().c_str());
 		exitCriticalSection();
 		opened = false;
 		/* deletes "segment" that enables access of data */
@@ -297,7 +311,6 @@ int PP_Close (){
 //			"PP_SharedMemory") << std::endl;
 //#endif
 	}
-	//logFile.close();
 	return ret;
 }
 
@@ -323,7 +336,19 @@ int PP_IsGamePaused() {
 		enterCriticalSection();
 			ret = *(shd.gamePaused);
 			// notify function call to Spring
-			//PP_PushMessage("PP_IsGamePaused");
+			PP_PushMessage("PP_IsGamePaused");
+		exitCriticalSection();
+	}
+	return ret;
+}
+
+int PP_GetTimestamp() {
+	int ret;
+	// Checks initialisation
+	ret = isInitialized("PP_GetTimestamp");
+	if (ret == 0) {
+		enterCriticalSection();
+			ret = *(shd.timestamp);
 		exitCriticalSection();
 	}
 	return ret;
@@ -384,17 +409,18 @@ PP_Pos PP_GetSpecialAreaPosition(int g){
 	int ret = isInitialized("PP_GetSpecialAreaPosition");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			try {
 				tmp = shd.specialAreas->at(g);
 			} catch (std::out_of_range e){
 				PP_SetError("PP_GetSpecialAreaPosition : special area not \
 found\n");
+				oss << errorsArr[0];
 				tmp.x = -1;
 				tmp.y = -1;
 			}
-			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
 			oss << "PP_GetSpecialAreaPosition " << g;
+			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -410,15 +436,16 @@ int PP_GetResource(PP_Resource id){
 	ret = isInitialized("PP_GetResource");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			try{
 				ret = shd.resources->at(id);
 			} catch (std::out_of_range e) {
 				PP_SetError("PP_GetResource : ressource out of range\n");
+				oss << errorsArr[0];
 				ret = -1;
 			}
-			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
 			oss << "PP_GetResource " << id;
+			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -427,13 +454,17 @@ int PP_GetResource(PP_Resource id){
 
 int PP_GetNumUnits(PP_Coalition c){
 	int ret;
-	ret = checkParams("PP_GetNumUnits", NULL, false, (int*)&c);
-	if (ret == 0){
+	ret = isInitialized("PP_GetNumUnits");
+	if (ret == 0) {
+		ret = checkParams("PP_GetNumUnits", NULL, false, (int*)&c);
 		enterCriticalSection();
-			ret = shd.coalitions[c].size();
-			// notify function call to Spring
 			std::ostringstream oss(std::ostringstream::out);
+			if (ret != 0)
+				oss << errorsArr[1];
+			else
+				ret = shd.coalitions[c].size();
 			oss << "PP_GetNumUnits " << c;
+			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -442,20 +473,26 @@ int PP_GetNumUnits(PP_Coalition c){
 
 PP_Unit PP_GetUnitAt(PP_Coalition c, int index){
 	int ret;
-	ret = checkParams("PP_GetUnitAt", NULL, false, (int*)&c);
-	if (ret == 0){
+	ret = isInitialized("PP_GetUnitAt");
+	if (ret == 0) {
+		ret = checkParams("PP_GetUnitAt", NULL, false, (int*)&c);
 		enterCriticalSection();
-			try{
-				// Returns directly data. If index is inaccurate, an exception
-				// will be thrown
-				ret = shd.coalitions[c].at(index);
-			} catch (std::out_of_range e) {
-				PP_SetError("PP_GetUnitAt : index out of range\n");
-				ret = -1;
+			std::ostringstream oss(std::ostringstream::out);
+			if (ret != 0)
+				oss << errorsArr[1] << "PP_GetUnitAt " << c;
+			else {
+				try{
+					// Returns directly data. If index is inaccurate, an exception
+					// will be thrown
+					ret = shd.coalitions[c].at(index);
+					oss << "PP_GetUnitAt " << c << " " << index;
+				} catch (std::out_of_range e) {
+					PP_SetError("PP_GetUnitAt : index out of range\n");
+					oss << errorsArr[0] << "PP_GetUnitAt " << c << " " << index;
+					ret = -1;
+				}
 			}
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_GetUnitAt " << c << " " << index;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -467,14 +504,17 @@ PP_Coalition PP_Unit_GetCoalition(PP_Unit unit){
 	ret = isInitialized("PP_Unit_GetCoalition");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			// Store the unit
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetCoalition", &u);
-			if (ret == 0)
+			if (ret == 0) {
 				ret = u->second.coalition;
+				oss << "PP_Unit_GetCoalition " << unit << "_" << u->second.type;
+			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetCoalition " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetCoalition " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -486,20 +526,23 @@ int PP_Unit_GetType(PP_Unit unit){
 	ret = isInitialized("PP_Unit_GetType");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			// Store the unit
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetType", &u);
 			if (ret == 0){
-				if (u->second.type == -1){
+				if (u->second.type == -1) {
 					PP_SetError("PP_Unit_GetType : type not found\n");
 					ret = -1;
 				}
-				else
+				else {
 					ret = u->second.type;
+					oss << "PP_Unit_GetType " << unit << "_" << ret;
+				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetType " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetType " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -511,18 +554,20 @@ PP_Pos PP_Unit_GetPosition(PP_Unit unit){
 	int ret = isInitialized("PP_Unit_GetPosition");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			// Store the unit
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetPosition", &u);
-			if (ret == 0)
+			if (ret == 0) {
 				tmp = u->second.pos;
-			else{
+				oss << "PP_Unit_GetPosition " << unit << "_" << u->second.type;
+			}
+			else {
 				tmp.x = ret;
 				tmp.y = ret;
+				oss << errorsArr[2] << "PP_Unit_GetPosition " << unit;
 			}
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetPosition " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -538,13 +583,16 @@ float PP_Unit_GetHealth(PP_Unit unit){
 	ret = isInitialized("PP_Unit_GetHealth");
 	if ((int)ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetHealth", &u);
-			if ((int)ret == 0)
+			if ((int)ret == 0) {
 				ret = u->second.health;
+				oss << "PP_Unit_GetHealth " << unit << "_" << u->second.type;
+			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetHealth " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetHealth " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -556,20 +604,23 @@ float PP_Unit_GetMaxHealth(PP_Unit unit){
 	ret = isInitialized("PP_Unit_GetMaxHealth");
 	if ((int)ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetMaxHealth", &u);
-			if ((int)ret == 0)
+			if ((int)ret == 0) {
 				ret = u->second.maxHealth;
+				oss << "PP_Unit_GetMaxHealth " << unit << "_" << u->second.type;
+			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetMaxHealth " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetMaxHealth " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	return ret;
 }
 
-int PP_Unit_GetPendingCommands(PP_Unit unit, PP_PendingCommands * pdgCmd){
+int PP_Unit_GetPendingCommands(PP_Unit unit, PP_PendingCommands * pdgCmd) {
 	int ret;
 	if (pdgCmd == NULL)
 		return -1;
@@ -584,58 +635,29 @@ int PP_Unit_GetPendingCommands(PP_Unit unit, PP_PendingCommands * pdgCmd){
 	}
 	// store new pending commands
 	ret = isInitialized("PP_Unit_GetPendingCommands");
-	if (ret == 0){
+	if (ret == 0) {
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetPendingCommands", &u, true);
-			if (ret == 0){
-				// Find vector of pendingCommands in shared memory (do not use
-				// directly the pointer u->second.commandQueue because it is
-				// only significant in process that initialized it (i.e. the
-				// supplier))
-				std::ostringstream oss(std::ostringstream::out);
-				oss << "commandQueue" << unit;
-				ShCommandVector *commandQueue = segment->find<ShCommandVector>
-					(oss.str().c_str()).first;
-				if (commandQueue){
-					pdgCmd->nbCmds = commandQueue->size() > MAX_PDG_CMD ? MAX_PDG_CMD : commandQueue->size();
-					for (int i = 0 ; i < pdgCmd->nbCmds ; i++){
-						pdgCmd->cmd[i].code = commandQueue->at(i).code;
-						// Find vector of params for pendingCommands found in
-						// shared memory (do not use directly the pointer
-						// commandQueue->at(idCmd).param because it is only
-						// significant in process that initialized it (i.e. the
-						// supplier))
-						std::ostringstream ossParams(std::ostringstream::out);
-						ossParams << "commandQueue" << unit << "Params" << i;
-						ShFloatVector *params = segment->find<ShFloatVector>
-							(ossParams.str().c_str()).first;
-						if (params){
-							pdgCmd->cmd[i].nbParams = params->size() > MAX_PARAMS ? MAX_PARAMS : params->size();
-							for (int j = 0 ; j < pdgCmd->cmd[i].nbParams ; j++){
-								pdgCmd->cmd[i].param[j] = params->at(j);
-							}
-							// set others params to -1
-							for (int j = pdgCmd->cmd[i].nbParams ; j < MAX_PARAMS ; j++){
-								pdgCmd->cmd[i].param[j] = -1.0;
-							}
-						}
-						else{
-							PP_SetError("PP_Unit_GetPendingCommands : \
-parameters undefined\n");
-							ret = -1;
-						}
+			if (ret == 0) {
+				activeTrace = false;
+				int numPdgCmds = PP_Unit_GetNumPdgCmds(unit);
+				pdgCmd->nbCmds = numPdgCmds > MAX_PDG_CMD ? MAX_PDG_CMD : numPdgCmds;
+				for (int i = 0 ; i < pdgCmd->nbCmds ; i++) {	
+					pdgCmd->cmd[i].code = PP_Unit_PdgCmd_GetCode(unit,i);
+					int numParams = PP_Unit_PdgCmd_GetNumParams(unit,i);
+					pdgCmd->cmd[i].nbParams = numParams > MAX_PARAMS ? MAX_PARAMS : numParams;
+					for (int j = 0 ; j < pdgCmd->cmd[i].nbParams ; j++) {
+						pdgCmd->cmd[i].param[j] = PP_Unit_PdgCmd_GetParam(unit,i,j);
 					}
 				}
-				else{
-					PP_SetError("PP_Unit_GetPendingCommands : commandQueue \
-undefined\n");
-					ret = -1;
-				}
+				activeTrace = true;
+				oss << "PP_Unit_GetPendingCommands " << unit << "_" << u->second.type;
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetPendingCommands " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetPendingCommands " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -647,17 +669,19 @@ int PP_Unit_GetGroup(PP_Unit unit){
 	ret = isInitialized("PP_Unit_GetGroup");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetGroup", &u);
-			if (ret == 0){
+			if (ret == 0) {
 				if (u->second.group == -1)
 					ret = -2;
 				else
 					ret = u->second.group;
+				oss << "PP_Unit_GetGroup " << unit << "_" << u->second.type;
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetGroup " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetGroup " << unit;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -669,22 +693,25 @@ int PP_Unit_SetGroup(PP_Unit unit, int group){
 	ret = isInitialized("PP_Unit_SetGroup");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_SetGroup", &u, true);
-			if (ret == 0){
+			if (ret == 0) {
 				if (group < -1){
 					PP_SetError("PP_Unit_SetGroup : invalid group, must be \
 greater than or equal -1\n");
 					ret = -1;
+					oss << errorsArr[0] << "PP_Unit_SetGroup " << group;
 				}
-				else{
+				else {
 					std::vector<float> unused; // only to pass a parameter
 					addCommand(unit, -1, unused, -1, group);
+					oss << "PP_Unit_SetGroup " << unit << "_" << u->second.type << " " << group;
 				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_SetGroup " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_SetGroup " << unit << " " << group;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -696,18 +723,25 @@ int PP_Unit_ActionOnUnit(PP_Unit unit, int action, PP_Unit target){
 	ret = isInitialized("PP_Unit_ActionOnUnit");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ShMapUnits::iterator t = shd.units->find(target);
-			ret = checkParams("PP_Unit_ActionOnUnit", &u, true, NULL, &t);
-			if (ret == 0){
-				// stores command
-				std::vector<float> params (1, 0);
-				params[0] = target;
-				addCommand(unit, action, params, 1);
+			ret = checkParams("PP_Unit_ActionOnUnit", &u, true);
+			if (ret != 0)
+				oss << errorsArr[2] << "PP_Unit_ActionOnUnit " << unit;
+			else {
+				ret = checkParams("PP_Unit_ActionOnUnit", &t);
+				if (ret == 0){
+					// stores command
+					std::vector<float> params (1, 0);
+					params[0] = target;
+					addCommand(unit, action, params, 1);
+					oss << "PP_Unit_ActionOnUnit " << unit << "_" << u->second.type << " " << action << " " << target << "_" << t->second.type;
+				}
+				else
+					oss << errorsArr[3] << "PP_Unit_ActionOnUnit " << target;
 			}
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_ActionOnUnit " << unit << " " << action << " " << target;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -719,18 +753,24 @@ int PP_Unit_ActionOnPosition(PP_Unit unit, int action, PP_Pos pos){
 	ret = isInitialized("PP_Unit_ActionOnPosition");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_ActionOnPosition", &u, true);
 			if (ret == 0){
 				// check if pos is inside map
+				activeTrace = false;
 				PP_Pos max = PP_GetMapSize();
+				activeTrace = true;
 				if (pos.x < 0 || pos.x >= max.x || pos.y < 0 || pos.y >= max.y){
 					PP_SetError("PP_Unit_ActionOnPosition : position is out of \
 bounds\n");
 					ret = -1;
+					oss << errorsArr[4] << "PP_Unit_ActionOnPosition " << pos.x << " " << pos.y;
 					
 					// compute target position on map border
+					activeTrace = false;
 					PP_Pos p1 = PP_Unit_GetPosition(unit);
+					activeTrace = true;
 					PP_Pos p2 = pos;
 					if (p1.x == p2.x){
 						// move verticaly
@@ -781,6 +821,8 @@ bounds\n");
 					if (pos.x == max.x) pos.x -= 1.0; 
 					if (pos.y == max.y) pos.y -= 1.0;
 				}
+				else
+					oss << "PP_Unit_ActionOnPosition " << unit << "_" << u->second.type << " " << action << " " << pos.x << " " << pos.y;
 				// stores command
 				std::vector<float> params (3, 0);
 				params[0] = pos.x;
@@ -790,9 +832,9 @@ bounds\n");
 				params[2] = pos.y;
 				addCommand(unit, action, params, 0);
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_ActionOnPosition " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_ActionOnPosition " << unit << " " << action << " " << pos.x << " " << pos.y;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -804,16 +846,18 @@ int PP_Unit_UntargetedAction(PP_Unit unit, int action, float param){
 	ret = isInitialized("PP_Unit_UntargetedAction");
 	if (ret == 0){
 		enterCriticalSection();
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_UntargetedAction", &u, true);
 			if (ret == 0){
 				// stores command
 				std::vector<float> params (1, param);
 				addCommand(unit, action, params, 2);
+				oss << "PP_Unit_UntargetedAction " << unit << "_" << u->second.type << " " << action << " " << param;
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_UntargetedAction " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_UntargetedAction " << unit << " " << action << " " << param;
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
@@ -834,6 +878,7 @@ int PP_Unit_GetNumPdgCmds(PP_Unit unit){
 	else{
 		ret = isInitialized("PP_Unit_GetNumPdgCmds");
 		if (ret == 0){
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_GetNumPdgCmds", &u, true);
 			if (ret == 0){
@@ -841,20 +886,23 @@ int PP_Unit_GetNumPdgCmds(PP_Unit unit){
 				// directly the pointer u->second.commandQueue because it is
 				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream oss(std::ostringstream::out);
 				oss << "commandQueue" << unit;
 				ShCommandVector *commandQueue = segment->find<ShCommandVector>
 					(oss.str().c_str()).first;
-				if (commandQueue)
+				oss.str("");
+				oss.clear();
+				if (commandQueue) {
 					ret = commandQueue->size();
-				else{
+					oss << "PP_Unit_GetNumPdgCmds " << unit << "_" << u->second.type;
+				}
+				else {
 					PP_SetError("PP_Unit_GetNumPdgCmds : commandQueue undefined\n");
 					ret = -1;
 				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_GetNumPdgCmds " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_GetNumPdgCmds " << unit;
 			PP_PushMessage(oss.str().c_str());
 		}
 	}
@@ -871,6 +919,7 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 	else{
 		ret = isInitialized("PP_Unit_PdgCmd_GetCode");
 		if (ret == 0){
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_PdgCmd_GetCode", &u, true);
 			if (ret == 0){
@@ -878,29 +927,31 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 				// directly the pointer u->second.commandQueue because it is
 				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream oss(std::ostringstream::out);
 				oss << "commandQueue" << unit;
 				ShCommandVector *commandQueue = segment->find<ShCommandVector>
 					(oss.str().c_str()).first;
-				
+				oss.str("");
+				oss.clear();
 				if (commandQueue){
 					try{
 						// Returns directly data. If idCmd is inaccurate, an
 						// exception will be thrown
 						ret = commandQueue->at(idCmd).code;
+						oss << "PP_Unit_PdgCmd_GetCode " << unit << " " << idCmd;
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetCode : idCmd out of range\n");
 						ret = -1;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetCode " << idCmd;
 					}
 				}
-				else{
+				else {
 					PP_SetError("PP_Unit_PdgCmd_GetCode : commandQueue undefined\n");
 					ret = -1;
 				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetCode " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_PdgCmd_GetCode " << unit << " " << idCmd;
 			PP_PushMessage(oss.str().c_str());
 		}
 	}
@@ -916,29 +967,56 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 	}
 	else{
 		ret = isInitialized("PP_Unit_PdgCmd_GetNumParams");
-		if (ret == 0){
+		if (ret == 0) {
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_PdgCmd_GetNumParams", &u, true);
-			if (ret == 0){
-				// Find vector of params for pendingCommands found in shared
-				// memory (do not use directly the pointer
-				// u->second.commandQueue->at(idCmd).param because it is only
-				// significant in process that initialized it (i.e. the 
+			if (ret == 0) {
+				// Find vector of pendingCommands in shared memory (do not use
+				// directly the pointer u->second.commandQueue because it is
+				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream ossParams(std::ostringstream::out);
-				ossParams << "commandQueue" << unit << "Params" << idCmd;
-				ShFloatVector *params = segment->find<ShFloatVector>
-					(ossParams.str().c_str()).first;
-				if (params)
-					ret = params->size();
-				else{
-					PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
+				oss << "commandQueue" << unit;
+				ShCommandVector *commandQueue = segment->find<ShCommandVector>
+					(oss.str().c_str()).first;
+				oss.str("");
+				oss.clear();
+				if (commandQueue) {
+					try {
+						// Returns directly data. If idCmd is inaccurate, an
+						// exception will be thrown
+						commandQueue->at(idCmd);
+						// Find vector of params for pendingCommands found in shared
+						// memory (do not use directly the pointer
+						// u->second.commandQueue->at(idCmd).param because it is only
+						// significant in process that initialized it (i.e. the 
+						// supplier))
+						std::ostringstream ossParams(std::ostringstream::out);
+						ossParams << "commandQueue" << unit << "Params" << idCmd;
+						ShFloatVector *params = segment->find<ShFloatVector>
+							(ossParams.str().c_str()).first;
+						if (params) {
+							ret = params->size();
+							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
+						}
+						else {
+							PP_SetError("PP_Unit_PdgCmd_GetNumParams : param undefined\n");
+							ret = -1;
+						}
+					} catch (std::out_of_range e) {
+						PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
+						ret = -1;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParams " << idCmd;
+					}
+				}
+				else {
+					PP_SetError("PP_Unit_PdgCmd_GetNumParams : commandQueue undefined\n");
 					ret = -1;
 				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetNumParams " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
 			PP_PushMessage(oss.str().c_str());
 		}
 	}
@@ -955,57 +1033,88 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 	else{
 		ret = isInitialized("PP_Unit_PdgCmd_GetParam");
 		if ((int)ret == 0){
+			std::ostringstream oss(std::ostringstream::out);
 			ShMapUnits::iterator u = shd.units->find(unit);
 			ret = checkParams("PP_Unit_PdgCmd_GetParam", &u, true);
 			if ((int)ret == 0){
-				// Find vector of params for pendingCommands found in shared
-				// memory (do not use directly the pointer 
-				// u->second.commandQueue->at(idCmd).param because it is only
-				// significant in process that initialized it (i.e. the 
+				// Find vector of pendingCommands in shared memory (do not use
+				// directly the pointer u->second.commandQueue because it is
+				// only significant in process that initialized it (i.e. the
 				// supplier))
-				std::ostringstream ossParams(std::ostringstream::out);
-				ossParams << "commandQueue" << unit << "Params" << idCmd;
-				ShFloatVector * params = segment->find<ShFloatVector>
-					(ossParams.str().c_str()).first;
-				if (params){
+				oss << "commandQueue" << unit;
+				ShCommandVector *commandQueue = segment->find<ShCommandVector>
+					(oss.str().c_str()).first;
+				oss.str("");
+				oss.clear();
+				if (commandQueue) {
 					try{
-						// Returns directly data. If idParam is inaccurate, an
+						// Returns directly data. If idCmd is inaccurate, an
 						// exception will be thrown
-						ret = params->at(idParam);
+						commandQueue->at(idCmd);
+						// Find vector of params for pendingCommands found in shared
+						// memory (do not use directly the pointer 
+						// u->second.commandQueue->at(idCmd).param because it is only
+						// significant in process that initialized it (i.e. the 
+						// supplier))
+						std::ostringstream ossParams(std::ostringstream::out);
+						ossParams << "commandQueue" << unit << "Params" << idCmd;
+						ShFloatVector * params = segment->find<ShFloatVector>
+							(ossParams.str().c_str()).first;
+						if (params){
+							try{
+								// Returns directly data. If idParam is inaccurate, an
+								// exception will be thrown
+								ret = params->at(idParam);
+								oss << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
+							} catch (std::out_of_range e) {
+								PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
+								ret = -1;
+								oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idParam;
+							}
+						}
+						else {
+							PP_SetError("PP_Unit_PdgCmd_GetParam : param undefined\n");
+							ret = -1;
+						}
 					} catch (std::out_of_range e) {
-						PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
+						PP_SetError("PP_Unit_PdgCmd_GetParam : idCmd out of range\n");
 						ret = -1;
+						//oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idCmd;
 					}
 				}
 				else {
-					PP_SetError("PP_Unit_PdgCmd_GetParam : idCmd out of range\n");
+					PP_SetError("PP_Unit_PdgCmd_GetParam : commandQueue undefined\n");
 					ret = -1;
 				}
 			}
+			else
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetParam " << unit;
 			// notify function call to Spring
-			std::ostringstream oss(std::ostringstream::out);
-			oss << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
 			PP_PushMessage(oss.str().c_str());
 		}
 	}
 	return ret;
 }
 
-
 int PP_PushMessage(const char * msg) {
-	if (tracePlayer > 0 && PP_IsGamePaused() == 0) {
-		//Create allocators
-		const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
-		const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
+	if (tracePlayer > 0 && activeTrace) {
+		activeTrace = false;
+		int res = PP_IsGamePaused();
+		activeTrace = true;
+		if (res == 0) {
+			//Create allocators
+			const ShCharAllocator charAlloc_inst(segment->get_segment_manager());
+			const ShStringAllocator stringAlloc_inst(segment->get_segment_manager());
 	
-		//This string is only in this process (the pointer pointing to the
-		//buffer that will hold the text is not in shared memory).
-		//But the buffer that will hold "msg" parameter is allocated from
-		//shared memory
-		ShString sharedMessage(charAlloc_inst);
-		sharedMessage.append(msg);
+			//This string is only in this process (the pointer pointing to the
+			//buffer that will hold the text is not in shared memory).
+			//But the buffer that will hold "msg" parameter is allocated from
+			//shared memory
+			ShString sharedMessage(charAlloc_inst);
+			sharedMessage.append(msg);
 	
-		//Store the pointer pointing to the buffer into the shared memory
-		shd.history->push_back(sharedMessage);
+			//Store the pointer pointing to the buffer into the shared memory
+			shd.history->push_back(sharedMessage);
+		}
 	}
 }

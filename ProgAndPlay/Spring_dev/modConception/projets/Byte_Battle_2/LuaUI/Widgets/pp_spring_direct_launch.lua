@@ -593,7 +593,17 @@ end
 
 function widget:GameOver()
 	-- Turn on menu
-	FunctionsList.SwitchOn(GameOverMenu)
+	FunctionsList.SwitchOn()
+end
+
+function widget:TeamDied(teamID)
+	local victoryState = ""
+	if teamID ~= Spring.GetMyTeamID() and teamID ~= Spring.GetMyAllyTeamID() then
+		victoryState = "won"
+	else
+		victoryState = "loss"
+	end
+	Script.LuaUI.CreateMissionEndedFile(victoryState)
 end
 
 function widget:Initialize()

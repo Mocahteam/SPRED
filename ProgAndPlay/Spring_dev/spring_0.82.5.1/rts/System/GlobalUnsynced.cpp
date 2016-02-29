@@ -55,6 +55,9 @@ CGlobalUnsynced::CGlobalUnsynced()
 	usRandSeed = randnum & 0xffffffff;
 
 	modGameTime = 0;
+	// Meresse
+	PP_modGameTime = 0;
+	//
 	gameTime = 0;
 	startTime = 0;
 

@@ -16525,6 +16525,8 @@ GameController.h
 ../rts/Game/ProgAndPlay.h
 Sim/Units/Unit.h
 ../rts/Game/Sim/Units/Unit.h
+ctime
+-
 
 ../rts/Game/SelectedUnits.h
 Object.h
@@ -21825,6 +21827,16 @@ GameController.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameController.h
 
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/ProgAndPlay.cpp
+fstream
+-
+sstream
+-
+iostream
+-
+map
+-
+cmath
+-
 StdAfx.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/StdAfx.h
 mmgr.h
@@ -21873,24 +21885,12 @@ GlobalUnsynced.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GlobalUnsynced.h
 LogOutput.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/LogOutput.h
-sys/types.h
--
-sys/stat.h
--
-stdio.h
--
-dirent.h
--
-fstream
--
-sstream
--
-iostream
--
 
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/ProgAndPlay.h
 Sim/Units/Unit.h
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Sim/Units/Unit.h
+ctime
+-
 
 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/SelectedUnits.cpp
 StdAfx.h
