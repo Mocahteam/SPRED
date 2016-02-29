@@ -69,6 +69,7 @@ function startTheGame(jsonfile)
   appendError(status1,err1,"parsing Json",true)
   tests=missionScript.returnTestsToPlay()
   if(tests~=nil)then
+    Spring.Echo("this call5")
     playNewTest()
   else
     -- WE only test the start and we will leave at frame 20 (cf update)
@@ -185,10 +186,12 @@ function gadget:GameFrame( frameNumber )
   }--]]
     if(frameNumber>tonumber(ct.timeout)) then
       appendError(false,ct.title.." has timed out","update",true)
+      Spring.Echo("this call")
       playNewTest()
     end
   else
      if(frameNumber>tonumber(30)) then
+        Spring.Echo("this call2")
         playNewTest()
      end
   end
