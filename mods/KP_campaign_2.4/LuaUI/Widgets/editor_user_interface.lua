@@ -261,9 +261,20 @@ function unitFrame()
 		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
 		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
 	end
+end
+function forcesFrame()
+	clearUI()
+	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
 	
-	-- Selection image
-	-- TODO : need to be reworked
+	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
+	Chili.TabBar:New{
+		parent = windows['forceWindow'],
+		x = 0,
+		y = 0,
+		height = 20,
+		width = 500,
+		tabs = { "Tab1", "Tab2"	}
+	}
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -288,6 +299,7 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
 	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
 	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Forces', forcesFrame)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1205,5 +1217,5 @@ function widget:KeyPress(key, mods)
 			end
 		end
 	end
-	return true
+	return false
 end

@@ -1,3 +1,2 @@
-feedback visuel sur la topbar
 groupes d'unités
-rework feedback
+MEGA REFACTORING pour grouper les fenêtres
