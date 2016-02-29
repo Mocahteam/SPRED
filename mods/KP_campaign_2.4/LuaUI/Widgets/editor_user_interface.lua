@@ -494,7 +494,7 @@ function displaySelectedZoneAnchors()
 			gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
 			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 		elseif selectedZone.type == "Disk" then
-			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 8, 50)
+			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 12, 50)
 		end
 	end
 end
@@ -606,9 +606,9 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 			side = "BOT"
 		end
 	elseif selectedZone.type == "Disk" then
-		local toto1 = (x-selectedZone.x)*(x-selectedZone.x)/(selectedZone.a*selectedZone.a) + (x-selectedZone.x)*(z-selectedZone.z)/(selectedZone.b*selectedZone.b)
-		local toto2 = (x-selectedZone.x)*(x-selectedZone.x)/((selectedZone.a-8)*(selectedZone.a-8)) + (z-selectedZone.z)*(z-selectedZone.z)/((selectedZone.b-8)*(selectedZone.b-8))
-		if toto1 <= 1 and toto2 >= 1 then
+		local outer = (x-selectedZone.x)*(x-selectedZone.x)/(selectedZone.a*selectedZone.a) + (z-selectedZone.z)*(z-selectedZone.z)/(selectedZone.b*selectedZone.b)
+		local inner = (x-selectedZone.x)*(x-selectedZone.x)/((selectedZone.a-12)*(selectedZone.a-12)) + (z-selectedZone.z)*(z-selectedZone.z)/((selectedZone.b-12)*(selectedZone.b-12))
+		if outer <= 1 and inner >= 1 then -- in outer ellipsis and out of inner ellipsis (= in the border)
 			if x > selectedZone.x and z > selectedZone.z then
 				side = "BOTRIGHT"
 			elseif x < selectedZone.x and z > selectedZone.z then
@@ -740,7 +740,7 @@ function changeMouseCursor() -- Hide mouse cursor in unit state and during movem
 	end
 	]]
 end
-function updateButtonVisualFeedback()
+function updateButtonVisualFeedback() -- Show current states on GUI
 	for _, b in pairs(topBarButtons) do
 		b.state.hovered = false
 	end
@@ -758,7 +758,7 @@ function updateButtonVisualFeedback()
 	for _, b in pairs (teamButtons) do
 		b.state.hovered = false
 	end
-	if teamButtons[teamStateMachine:getCurrentState()] ~= nil then
+	if teamButtons[teamStateMachine:getCurrentState()] ~= nil and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
 		teamButtons[teamStateMachine:getCurrentState()].state.hovered = true
 	end
 	
