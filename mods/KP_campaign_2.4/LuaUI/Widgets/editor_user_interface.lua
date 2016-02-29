@@ -624,63 +624,169 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 end
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	if selectedZone.type == "Rectangle" then
-		local updateAnchor = true
 		-- depending on the side clicked, apply modifications
-		if zoneSide == "" and selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX and selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
-			selectedZone.x1 = selectedZone.x1 + dx
-			selectedZone.x2 = selectedZone.x2 + dx
-			selectedZone.z1 = selectedZone.z1 + dz
-			selectedZone.z2 = selectedZone.z2 + dz
-		elseif zoneSide == "LEFT" and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.x1 = selectedZone.x1 + dx
-		elseif zoneSide == "RIGHT" and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.x2 = selectedZone.x2 + dx
-		elseif zoneSide == "TOP" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
-			selectedZone.z1 = selectedZone.z1 + dz
-		elseif zoneSide == "BOT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 then
-			selectedZone.z2 = selectedZone.z2 + dz
-		elseif zoneSide == "TOPLEFT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.z1 = selectedZone.z1 + dz
-			selectedZone.x1 = selectedZone.x1 + dx
-		elseif zoneSide == "BOTLEFT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.z2 = selectedZone.z2 + dz
-			selectedZone.x1 = selectedZone.x1 + dx
-		elseif zoneSide == "TOPRIGHT" and selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.z1 = selectedZone.z1 + dz
-			selectedZone.x2 = selectedZone.x2 + dx
-		elseif zoneSide == "BOTRIGHT" and selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 and selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
-			selectedZone.z2 = selectedZone.z2 + dz
-			selectedZone.x2 = selectedZone.x2 + dx
-		else
-			updateAnchor = false -- if no modifications have been applied (mouse out of map for instance), do not update the anchor of the transformation
-		end
-		if updateAnchor then
-			zoneAnchorX = zoneAnchorX + dx
-			zoneAnchorZ = zoneAnchorZ + dz
+		if zoneSide == "" then
+			if selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX then
+				selectedZone.x1 = selectedZone.x1 + dx
+				selectedZone.x2 = selectedZone.x2 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
+				selectedZone.z1 = selectedZone.z1 + dz
+				selectedZone.z2 = selectedZone.z2 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "LEFT" then
+			if selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x1 = selectedZone.x1 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+		elseif zoneSide == "RIGHT" then
+			if selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x2 = selectedZone.x2 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+		elseif zoneSide == "TOP" then
+			if selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z1 = selectedZone.z1 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "BOT" then
+			if selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z2 = selectedZone.z2 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "TOPLEFT" then
+			if selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z1 = selectedZone.z1 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+			if selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x1 = selectedZone.x1 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+		elseif zoneSide == "BOTLEFT" then
+			if selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z2 = selectedZone.z2 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+			if selectedZone.x1 + dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x1 = selectedZone.x1 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+		elseif zoneSide == "TOPRIGHT" then
+			if selectedZone.z1 + dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z1 = selectedZone.z1 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+			if selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x2 = selectedZone.x2 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+		elseif zoneSide == "BOTRIGHT" then
+			if selectedZone.z1 - dz + minZoneSize <= selectedZone.z2 then
+				selectedZone.z2 = selectedZone.z2 + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+			if selectedZone.x1 - dx + minZoneSize <= selectedZone.x2 then
+				selectedZone.x2 = selectedZone.x2 + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
 		end
 	elseif selectedZone.type == "Disk" then
-		local updateAnchor = true
-		if zoneSide == "" and selectedZone.x - selectedZone.a + dx > 0 and selectedZone.x + selectedZone.a + dx < Game.mapSizeX and selectedZone.z - selectedZone.b + dz > 0 and selectedZone.z + selectedZone.b + dz < Game.mapSizeZ then
-			selectedZone.x = selectedZone.x + dx
-			selectedZone.z = selectedZone.z + dz
-		elseif zoneSide == "TOPLEFT" and 2*selectedZone.a - dx > minZoneSize and 2*selectedZone.b - dz > minZoneSize then
-			selectedZone.a = selectedZone.a - dx
-			selectedZone.b = selectedZone.b - dz
-		elseif zoneSide == "TOPRIGHT" and 2*selectedZone.a + dx > minZoneSize and 2*selectedZone.b - dz > minZoneSize then
-			selectedZone.a = selectedZone.a + dx
-			selectedZone.b = selectedZone.b - dz
-		elseif zoneSide == "BOTLEFT" and 2*selectedZone.a - dx > minZoneSize and 2*selectedZone.b + dz > minZoneSize then
-			selectedZone.a = selectedZone.a - dx
-			selectedZone.b = selectedZone.b + dz
-		elseif zoneSide == "BOTRIGHT" and 2*selectedZone.a + dx > minZoneSize and 2*selectedZone.b + dz > minZoneSize then
-			selectedZone.a = selectedZone.a + dx
-			selectedZone.b = selectedZone.b + dz
-		else
-			updateAnchor = false
-		end
-		if updateAnchor then
-			zoneAnchorX = zoneAnchorX + dx
-			zoneAnchorZ = zoneAnchorZ + dz
+		if zoneSide == "" then
+			if selectedZone.x - selectedZone.a + dx > 0 and selectedZone.x + selectedZone.a + dx < Game.mapSizeX then
+				selectedZone.x = selectedZone.x + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if selectedZone.z - selectedZone.b + dz > 0 and selectedZone.z + selectedZone.b + dz < Game.mapSizeZ then
+				selectedZone.z = selectedZone.z + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "TOPLEFT" then
+			if 2*(selectedZone.a - dx) > minZoneSize and selectedZone.x - (selectedZone.a - dx) > 0 and selectedZone.x + (selectedZone.a - dx) < Game.mapSizeX then
+				selectedZone.a = selectedZone.a - dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if 2*(selectedZone.b - dz) > minZoneSize and selectedZone.z - (selectedZone.b - dz) > 0 and selectedZone.z + (selectedZone.b - dz) < Game.mapSizeZ then
+				selectedZone.b = selectedZone.b - dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "TOPRIGHT" then
+			if 2*(selectedZone.a + dx) > minZoneSize and selectedZone.x - (selectedZone.a + dx) > 0 and selectedZone.x + (selectedZone.a + dx) < Game.mapSizeX then
+				selectedZone.a = selectedZone.a + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if 2*(selectedZone.b - dz) > minZoneSize and selectedZone.z - (selectedZone.b - dz) > 0 and selectedZone.z + (selectedZone.b - dz) < Game.mapSizeZ then
+				selectedZone.b = selectedZone.b - dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "BOTLEFT" then
+			if 2*(selectedZone.a - dx) > minZoneSize and selectedZone.x - (selectedZone.a - dx) > 0 and selectedZone.x + (selectedZone.a - dx) < Game.mapSizeX then
+				selectedZone.a = selectedZone.a - dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if 2*(selectedZone.b + dz) > minZoneSize and selectedZone.z - (selectedZone.b + dz) > 0 and selectedZone.z + (selectedZone.b + dz) < Game.mapSizeZ then
+				selectedZone.b = selectedZone.b + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
+		elseif zoneSide == "BOTRIGHT" then
+			if 2*(selectedZone.a + dx) > minZoneSize and selectedZone.x - (selectedZone.a + dx) > 0 and selectedZone.x + (selectedZone.a + dx) < Game.mapSizeX then
+				selectedZone.a = selectedZone.a + dx
+				zoneAnchorX = zoneAnchorX + dx
+			else
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+			end
+			if 2*(selectedZone.b + dz) > minZoneSize and selectedZone.z - (selectedZone.b + dz) > 0 and selectedZone.z + (selectedZone.b + dz) < Game.mapSizeZ then
+				selectedZone.b = selectedZone.b + dz
+				zoneAnchorZ = zoneAnchorZ + dz
+			else
+				applyChangesToSelectedZone(0, dz-sign(dz)*8)
+			end
 		end
 	end
 end
