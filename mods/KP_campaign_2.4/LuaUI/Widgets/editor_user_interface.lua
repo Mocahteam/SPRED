@@ -222,8 +222,8 @@ function zoneFrame()
 end
 function unitFrame()
 	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
-	unitStateMachine:setCurrentState(unitStateMachine.states.DEFAULT)
+	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
+	unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
 	
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -232,7 +232,7 @@ function unitFrame()
 	-- Put unit states in an array to sort them alphabetically
 	local unitStates = {}
 	for k, u in pairs(unitStateMachine.states) do
-		if k ~= "DEFAULT" then
+		if k ~= "SELECTION" then
 			table.insert(unitStates, u)
 		end
 	end
@@ -287,7 +287,6 @@ function initTopBar()
 	-- Menu buttons
 	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
 	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
-	topBarButtons[globalStateMachine.states.SELECTION] = topBarButtons[globalStateMachine.states.UNIT]
 	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -351,7 +350,7 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 	end
 end
 function previewUnit()-- Draw units before placing them
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and not Screen0.hoveredControl then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and not Screen0.hoveredControl then
 		local mx, my = Spring.GetMouseState()
 		local kind, coords = Spring.TraceScreenRay(mx, my)
 		if kind == "ground" then -- only draw if unit is placeable
@@ -772,7 +771,7 @@ function updateButtonVisualFeedback()
 end
 function widget:DrawScreen()
 	changeMouseCursor()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		showUnitsInformation()
 		showUnitAttributes()
 		drawSelectionRect()
@@ -840,46 +839,48 @@ function widget:MousePress(mx, my, button)
 		-- raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		
-		-- STATE UNIT : place units on the field
+		-- STATE UNIT : place units on the field and select/move/rotate them
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-			if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
-				local xUnit, yUnit, zUnit = unpack(var)
-				xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
-				local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
-				Spring.SendLuaRulesMsg(msg)
-			elseif kind == "unit" then -- If unit is selected, go to selection state
-				globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
+			-- STATE UNIT : place units on the field
+			if unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
+				if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
+					local xUnit, yUnit, zUnit = unpack(var)
+					xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
+					local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
+					Spring.SendLuaRulesMsg(msg)
+				elseif kind == "unit" then -- If unit is selected, go to selection state
+					unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+				end
 			end
-		end
-		
-		-- STATE SELECTION : select and move units on the field
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
-			if kind == "unit" then -- handle movement / selection
-				if doubleClick < 0.3 then -- multiple selection of units of same type and same team using double click
-					local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
-					proceedSelection(unitArray)
-					doubleClick = 0.3
-					return true
-				else
-					if Spring.IsUnitSelected(var) then
-						if proceedDeselection(var) then -- deselect the unit if shift is pressed
-							return false
-						else
-							clickToSelect = true -- if the unit is already selected and shift is not pressed, allow isolation
-						end
+			-- STATE SELECTION : select and move units on the field
+			if unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+				if kind == "unit" then -- handle movement / selection
+					if doubleClick < 0.3 then -- multiple selection of units of same type and same team using double click
+						local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
+						proceedSelection(unitArray)
+						doubleClick = 0.3
+						return true
 					else
-						proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
+						if Spring.IsUnitSelected(var) then
+							if proceedDeselection(var) then -- deselect the unit if shift is pressed
+								return false
+							else
+								clickToSelect = true -- if the unit is already selected and shift is not pressed, allow isolation
+							end
+						else
+							proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
+						end
+						mouseMove = true
+						Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
+						return true
 					end
-					mouseMove = true
-					Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
+				else -- start a box selection
+					proceedSelection({}) -- deselect all units
+					plotSelection = true
+					drawStartX, drawEndX = mx, mx
+					drawStartY, drawEndY = my, my
 					return true
 				end
-			else -- start a box selection
-				proceedSelection({}) -- deselect all units
-				plotSelection = true
-				drawStartX, drawEndX = mx, mx
-				drawStartY, drawEndY = my, my
-				return true
 			end
 		end
 		
@@ -912,7 +913,7 @@ function widget:MousePress(mx, my, button)
 	-- Right click
 	elseif button == 3 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
-			globalStateMachine:setCurrentState(globalStateMachine.states.SELECTION)
+			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
@@ -920,7 +921,7 @@ function widget:MousePress(mx, my, button)
 end
 function widget:MouseRelease(mx, my, button)
 	if button == 1 then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 			-- raycast
 			local kind, var = Spring.TraceScreenRay(mx, my)
 			if kind == "unit" then
@@ -983,7 +984,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	
 	if button == 1 then
 		-- STATE SELECTION
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 			local altPressed = Spring.GetModKeyState()
 			if altPressed then -- Send a message to the gadget to rotate selectedUnits
 				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
@@ -1050,7 +1051,7 @@ function widget:KeyPress(key, mods)
 		newMap()
 	end
 	-- Selection state
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		-- CTRL + A : select all units
 		if key == Spring.GetKeyCode("a") and mods.ctrl then
 			Spring.SelectUnitArray(Spring.GetAllUnits())

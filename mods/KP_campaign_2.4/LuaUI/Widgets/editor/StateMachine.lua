@@ -23,7 +23,7 @@ function StateMachine.getCurrentState(self) return self.currentState end
 ------------------------------
 -- Initialize global state machine
 ------------------------------
-local globalStates = { FILE = "file", UNIT = "unit", SELECTION = "selection", EVENT = "event", ACTION = "action", LINK = "link", ZONE = "zone" }
+local globalStates = { FILE = "file", UNIT = "unit", EVENT = "event", ACTION = "action", LINK = "link", ZONE = "zone" }
 globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
@@ -34,13 +34,11 @@ for id,unitDef in pairs(UnitDefs) do
 	for name,param in unitDef:pairs() do
 		if name == "name" then
 			unitStates[param] = param
-			if i == 1 then
-				unitStates.DEFAULT = param
-			end
 		end
 	end
 end
-unitStateMachine = StateMachine.new(unitStates, unitStates.DEFAULT)
+unitStates.SELECTION = "selection"
+unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 
 ------------------------------
 -- Initialize team state machine
@@ -49,7 +47,7 @@ local teamStates = {}
 for _, t in pairs(getTeamsInformation()) do
 	teamStates[t.id] = t.id
 end
-teamStateMachine = StateMachine.new(teamStates, teamStates[1])
+teamStateMachine = StateMachine.new(teamStates, teamStates[0])
 
 ------------------------------
 -- Initialize zone state machine
