@@ -255,7 +255,7 @@
 		{
 		"id":"AllyCryingForHelp",
 		"toBeRepeated":"yes",
-		"delay":"100",
+		"delay":"6",
 		"type":"marker",
 		"position":
 			{
@@ -267,7 +267,7 @@
 		{
 		"id":"deletingMarker",
 		"toBeRepeated":"yes",
-		"delay":"160",
+		"delay":"10",
 		"type":"erasemarker",
 		"position":
 			{
