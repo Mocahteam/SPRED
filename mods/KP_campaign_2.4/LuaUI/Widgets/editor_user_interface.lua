@@ -21,7 +21,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, teamButtons, unitButtons, fileButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- Draw selection variables
@@ -196,10 +196,10 @@ function zoneFrame()
 	
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	fileButtons['zoneRect'] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
-	images['zoneRect'] = addImage(fileButtons['zoneRect'], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
-	fileButtons['zoneDisk'] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
-	images['zoneDisk'] = addImage(fileButtons['zoneDisk'], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
+	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
+	images['zoneRect'] = addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
+	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
+	images['zoneDisk'] = addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
 	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
 	
 	local toggleAllOn = 	function() -- show all zones
@@ -216,8 +216,8 @@ function zoneFrame()
 										end
 									end
 								end
-	buttons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
-	buttons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
+	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
+	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
 	updateZonePanel() -- initialize zone list when coming back to this menu
 end
 function unitFrame()
@@ -250,38 +250,20 @@ function unitFrame()
 	-- Team buttons
 	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
 	local teamCount = tableLength(teamStateMachine.states)
-	local count = 0
 	local teams = getTeamsInformation()
 	for k, team in pairs(teamStateMachine.states) do
-		local x = tostring(count * 100 / math.ceil(teamCount/2) - 100 * math.floor(count/math.ceil(teamCount/2))).."%"
-		local y = tostring(90 + 5 * math.floor(count/math.ceil(teamCount/2))).."%"
+		local x = tostring(team * 100 / math.ceil(teamCount/2) - 100 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local y = tostring(90 + 5 * math.floor(team/math.ceil(teamCount/2))).."%"
 		local w = tostring(100 / math.ceil(teamCount/2)).."%"
 		local h = "5%"
 		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
 		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
 		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
-		count = count + 1
 	end
 	
 	-- Selection image
 	-- TODO : need to be reworked
-end
-function eventFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.EVENT)
-	
-	windows['editBoxWindow'] = addWindow(Screen0, '30%', '30%', '30%', '30%')
-	labels['editBoxLabel'] = addLabel(windows['editBoxWindow'], '5%', '1%', '90%', '5%', "EditBox")
-	editBoxes["editBox"] = addEditBox(windows['editBoxWindow'], '0%', '10%', '100%', 20)
-end
-function actionFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.ACTION)
-end
-function linkFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.LINK)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -303,12 +285,10 @@ function initTopBar()
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
 	
 	-- Menu buttons
-	buttons['file'] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
-	buttons['units'] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
-	buttons['zones'] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
-	buttons['events'] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Events', eventFrame)
-	buttons['actions'] = addButton(windows["topBar"], '20%', '0%', '5%', '100%', 'Actions', actionFrame)
-	buttons['links'] = addButton(windows["topBar"], '25%', '0%', '5%', '100%', 'Links', linkFrame)
+	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
+	topBarButtons[globalStateMachine.states.SELECTION] = topBarButtons[globalStateMachine.states.UNIT]
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -761,6 +741,35 @@ function changeMouseCursor() -- Hide mouse cursor in unit state and during movem
 	end
 	]]
 end
+function updateButtonVisualFeedback()
+	for _, b in pairs(topBarButtons) do
+		b.state.hovered = false
+	end
+	if topBarButtons[globalStateMachine:getCurrentState()] ~= nil then
+		topBarButtons[globalStateMachine:getCurrentState()].state.hovered = true
+	end
+	
+	for _, b in pairs (unitButtons) do
+		b.state.hovered = false
+	end
+	if unitButtons[unitStateMachine:getCurrentState()] ~= nil then
+		unitButtons[unitStateMachine:getCurrentState()].state.hovered = true
+	end
+	
+	for _, b in pairs (teamButtons) do
+		b.state.hovered = false
+	end
+	if teamButtons[teamStateMachine:getCurrentState()] ~= nil then
+		teamButtons[teamStateMachine:getCurrentState()].state.hovered = true
+	end
+	
+	for _, b in pairs (zoneButtons) do
+		b.state.hovered = false
+	end
+	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
+		zoneButtons[zoneStateMachine:getCurrentState()].state.hovered = true
+	end
+end
 function widget:DrawScreen()
 	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION then
@@ -815,6 +824,8 @@ function widget:Update(delta)
 		updateZonePanel()
 		totalZones = #zoneList
 	end
+	
+	updateButtonVisualFeedback()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
