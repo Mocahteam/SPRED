@@ -1,2 +1,2 @@
 groupes d'unités
-MEGA REFACTORING pour grouper les fenêtres
+better visual feedback

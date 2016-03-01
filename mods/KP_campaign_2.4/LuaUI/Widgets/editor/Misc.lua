@@ -43,6 +43,18 @@ function tableLength(t)
 	return count
 end
 
+-----------------------
+-- Returns true if element is in table
+-----------------------
+function findInTable(tab, e)
+	for k, el in pairs(tab) do
+		if e == el then
+			return true
+		end
+	end
+	return false
+end
+
 -------------------------------------
 -- Useful function to split messages into tokens
 -------------------------------------

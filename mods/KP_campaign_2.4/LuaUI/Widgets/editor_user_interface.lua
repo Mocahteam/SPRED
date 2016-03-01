@@ -21,7 +21,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, forcesButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes, panels, allyTeamUI = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- Draw selection variables
@@ -40,6 +40,11 @@ local selectedZone = nil
 local zoneSide = ""
 local totalZones = #zoneList
 local zoneNumber = totalZones+1
+
+-- Forces variables
+local allyTeams = {}
+local allyTeamsSize = {}
+local selectedAllyTeam = nil
 
 -- Mouse variables
 local mouseMove = false
@@ -74,6 +79,18 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	}
 	return window
 end
+function addPanel(_parent, _x, _y, _w, _h)
+	local panel = Chili.Panel:New{
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width  = _w,
+		height = _h,
+		draggable = false,
+		resizable = false
+	}
+	return panel
+end
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	local button = Chili.Button:New {
 		parent = _parent,
@@ -86,7 +103,7 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	}
 	return button
 end
-function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
+function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 	local label = Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -95,8 +112,10 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 		height = _h,
 		caption = text,
 		fontsize = size or 20,
-		align = _align or "center"
+		align = _align or "center",
+		valign = _valign or "linecenter"
 	}
+	label.font.color = _color or {1, 1, 1, 1}
 	return label
 end
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
@@ -201,6 +220,33 @@ function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
 	Screen0:AddChild(windows["forceWindow"])
+	windows["forceWindow"].x = 100
+	windows["forceWindow"].y = 100
+	teamConfig()
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Forces window buttons functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function clearForceWindow()
+	windows['forceWindow']:RemoveChild(windows['teamConfigWindow'])
+	windows['forceWindow']:RemoveChild(windows['allyTeamWindow'])
+	windows['forceWindow']:RemoveChild(windows['unitGroupsWindow'])
+end
+function teamConfig()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(windows['teamConfigWindow'])
+end
+function allyTeam()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(windows['allyTeamWindow'])
+end
+function unitGroups()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(windows['unitGroupsWindow'])
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -301,36 +347,47 @@ function initZoneWindow()
 								end
 	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
 	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
-	updateZonePanel() -- initialize zone list when coming back to this menu
+	--updateZonePanel() -- initialize zone list when coming back to this menu
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	--[[Chili.TabBar:New{
-		parent = windows['forceWindow'],
-		x = 0,
-		y = 0,
-		height = 20,
-		width = 500,
-		tabs = { "Tab1", "Tab2"	}
-	}]]
-	local grid = Chili.LayoutPanel:New{
-		parent = windows['forceWindow'],
-		x = 0,
-		y = 0,
-		height = '100%',
-		width = '100%',
-		rows = 2,
-		resizeItems = true,
-		itemPadding = {50, 50, 50, 5},
-		itemMargin = {5, 5, 5, 5}
-	}
-	for i=1,16,1 do
-		Chili.Button:New{
-			parent = grid,
-			caption = i,
-			OnClick = { function() Spring.Echo("Clicked : "..tostring(i)) end }
-		}
+	forcesButtons['teamConfig'] = addButton(windows['forceWindow'], 0, 0, '33.333%', '5%', "Teams Configuration", teamConfig)
+	forcesButtons['allyTeam'] = addButton(windows['forceWindow'], '33.333%', 0, '33.333%', '5%', "Ally Teams", allyTeam)
+	forcesButtons['unitGroups'] = addButton(windows['forceWindow'], '66.666%', 0, '33.333%', '5%', "Unit Groups", unitGroups)
+	
+	-- Useful variables
+	local teamCount = tableLength(teamStateMachine.states)
+	local teams = getTeamsInformation()
+	
+	-- Team Config Window
+	windows['teamConfigWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	
+	-- Ally Team Window
+	windows['allyTeamWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	addLabel(windows['allyTeamWindow'], '0%', '0%', '20%', '10%', "Team List", 30, "center", nil, "center")
+	allyTeamUI['teamList'] = addScrollPanel(windows['allyTeamWindow'], '0%', '10%', '20%', '100%')
+	for k, team in pairs(teamStateMachine.states) do
+		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
+		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local w = tostring(80 / math.ceil(teamCount/2)).."%"
+		local h = "50%"
+		local panel = addPanel(windows['allyTeamWindow'], x, y, w, h)
+		local but = addButton(panel, '0%', '0%', '100%', '10%', "Team "..tostring(team), function() selectedAllyTeam = team end)
+		but.font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		but.font.size = 20
+		scrollPanels["team"..tostring(team)] = addScrollPanel(panel, '2%', '10%', '96%', '89%')
+		
+		buttons["team"..tostring(team)] = addButton(allyTeamUI["teamList"], '0%', 40*team, '100%', 40, "Team "..tostring(team), function() addTeamToSelectedAllyTeam(team) end )
+		buttons["team"..tostring(team)].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		buttons["team"..tostring(team)].font.size = 20
+		
+		allyTeams[team] = {}
+		allyTeamsSize[team] = 0
 	end
+	
+	-- Unit Groups Window
+	windows['unitGroupsWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -834,18 +891,61 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	end
 end
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
-	for k, zb in pairs(zoneBoxes) do
-		if k ~= "global" then
-			scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
-			scrollPanels["zonePanel"]:RemoveChild(zb.checkbox)
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
+		for k, zb in pairs(zoneBoxes) do
+			if k ~= "global" then
+				scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
+				scrollPanels["zonePanel"]:RemoveChild(zb.checkbox)
+			end
+		end
+		local size = 20
+		for i, z in ipairs(zoneList) do
+			local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, z.shown)
+			local editBox = addEditBox(scrollPanels["zonePanel"], 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
+			zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
+		end
+		totalZones = #zoneList
+	end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Forces state functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function updateAllyTeamPanels()
+	for k, at in pairs(allyTeams) do
+		if tableLength(at) ~= allyTeamsSize[k] then
+			for _, c in pairs(scrollPanels["team"..k].children) do
+				scrollPanels["team"..k]:RemoveChild(c)
+			end
+			local count = 0
+			local teams = getTeamsInformation()
+			for i, t in ipairs(at) do
+				local but = addButton(scrollPanels["team"..k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(at, t) end)
+				but.font.color = {teams[t].red, teams[t].green, teams[t].blue, 1}
+				but.font.size = 20
+				count = count + 1
+			end
+			allyTeamsSize[k] = tableLength(at)
 		end
 	end
-	local size = 20
-	for i, z in ipairs(zoneList) do
-		local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, z.shown)
-		local editBox = addEditBox(scrollPanels["zonePanel"], 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
-		zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
+end
+function addTeamToSelectedAllyTeam(team)
+	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
+		table.insert(allyTeams[selectedAllyTeam], team)
+		table.sort(allyTeams[selectedAllyTeam])
 	end
+end
+function removeTeamFromAllyTeam(allyTeam, team)
+	for i, t in ipairs(allyTeam) do
+		if t == team then
+			table.remove(allyTeam, i)
+			break
+		end
+	end
+	table.sort(allyTeam)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -969,9 +1069,10 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
-		updateZonePanel()
-		totalZones = #zoneList
+	updateZonePanel()
+	
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		updateAllyTeamPanels()
 	end
 	
 	updateButtonVisualFeedback()
