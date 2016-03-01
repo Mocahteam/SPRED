@@ -174,7 +174,6 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
 			Screen0:RemoveChild(w)
-			windows.key = nil
 		end
 	end
 	selectedZone = nil
@@ -183,98 +182,25 @@ end
 function fileFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
-	
-	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	Screen0:AddChild(windows["fileWindow"])
 end
 function zoneFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
-	
-	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
-	images['zoneRect'] = addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
-	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
-	images['zoneDisk'] = addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
-	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
-	
-	local toggleAllOn = 	function() -- show all zones
-									for k, zb in pairs(zoneBoxes) do
-										if not zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
-	local toggleAllOff = 	function() -- hide all zones
-									for k, zb in pairs(zoneBoxes) do
-										if zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
-	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
-	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
-	updateZonePanel() -- initialize zone list when coming back to this menu
+	Screen0:AddChild(windows["zoneWindow"])
 end
 function unitFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 	unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
-	
-	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
-
-	-- Put unit states in an array to sort them alphabetically
-	local unitStates = {}
-	for k, u in pairs(unitStateMachine.states) do
-		if k ~= "SELECTION" then
-			table.insert(unitStates, u)
-		end
-	end
-	table.sort(unitStates)
-	
-	-- Unit buttons
-	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
-	local button_size = 40
-	local y = 0
-	for i,u in ipairs(unitStates) do
-		unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
-		y = y + button_size
-	end
-	
-	-- Team buttons
-	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	local teamCount = tableLength(teamStateMachine.states)
-	local teams = getTeamsInformation()
-	for k, team in pairs(teamStateMachine.states) do
-		local x = tostring(team * 100 / math.ceil(teamCount/2) - 100 * math.floor(team/math.ceil(teamCount/2))).."%"
-		local y = tostring(90 + 5 * math.floor(team/math.ceil(teamCount/2))).."%"
-		local w = tostring(100 / math.ceil(teamCount/2)).."%"
-		local h = "5%"
-		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
-		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
-		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
-	end
+	Screen0:AddChild(windows["unitWindow"])
 end
 function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
-	
-	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	Chili.TabBar:New{
-		parent = windows['forceWindow'],
-		x = 0,
-		y = 0,
-		height = 20,
-		width = 500,
-		tabs = { "Tab1", "Tab2"	}
-	}
+	Screen0:AddChild(windows["forceWindow"])
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -300,6 +226,82 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
 	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Forces', forcesFrame)
+end
+function initWindows()
+	-- File Window
+	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	
+	-- Unit Window
+	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
+	local unitStates = {} -- Put unit states in an array to sort them alphabetically
+	for k, u in pairs(unitStateMachine.states) do
+		if k ~= "SELECTION" then
+			table.insert(unitStates, u)
+		end
+	end
+	table.sort(unitStates)
+	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units") -- Unit buttons
+	local button_size = 40
+	local y = 0
+	for i,u in ipairs(unitStates) do
+		unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+		y = y + button_size
+	end
+	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team") -- Team buttons
+	local teamCount = tableLength(teamStateMachine.states)
+	local teams = getTeamsInformation()
+	for k, team in pairs(teamStateMachine.states) do
+		local x = tostring(team * 100 / math.ceil(teamCount/2) - 100 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local y = tostring(90 + 5 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local w = tostring(100 / math.ceil(teamCount/2)).."%"
+		local h = "5%"
+		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
+		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
+		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
+	end
+	
+	-- Zone Window
+	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
+	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
+	images['zoneRect'] = addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
+	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
+	images['zoneDisk'] = addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
+	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
+	
+	local toggleAllOn = 	function() -- show all zones
+									for k, zb in pairs(zoneBoxes) do
+										if not zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	local toggleAllOff = 	function() -- hide all zones
+									for k, zb in pairs(zoneBoxes) do
+										if zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
+	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
+	updateZonePanel() -- initialize zone list when coming back to this menu
+	
+	-- Forces Window
+	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
+	Chili.TabBar:New{
+		parent = windows['forceWindow'],
+		x = 0,
+		y = 0,
+		height = 20,
+		width = 500,
+		tabs = { "Tab1", "Tab2"	}
+	}
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -921,6 +923,7 @@ function widget:Initialize()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
+	initWindows()
 	fileFrame()
 end
 function widget:Update(delta)
