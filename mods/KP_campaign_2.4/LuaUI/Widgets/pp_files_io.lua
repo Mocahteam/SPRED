@@ -42,7 +42,7 @@ function loadJson(e)
   if(e.missionName~=nil)and(Spring.GetModOptions()["hardcoded"]~="yes") then --TODO: Should be placed elsewhere than in pp_mission_gui
     local jsonName=e.missionName..".json"
     local mode=VFS.ZIP_FIRST
-    if(Spring.GetModOptions()["jsonlocation"]~="internal") then
+    if(Spring.GetModOptions()["jsonlocation"]=="external") then
       mode=VFS.RAW_FIRST
     end
     jsonFile= VFS.LoadFile(jsonPath..jsonName,mode)
