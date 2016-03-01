@@ -768,32 +768,36 @@ local function StartAfterJson ()
    -------------------------------
    -------VARIABLES---------------
    -------------------------------
-  for i=1,table.getn(mission.variables) do
-    local missionVar=mission.variables[i]
-    local initValue=missionVar.initValue
-    local name=missionVar.name
-    if(missionVar.type=="number") then
-      initValue=tonumber(initValue)
+  if(mission.variables~=nil)then
+    for i=1,table.getn(mission.variables) do
+      local missionVar=mission.variables[i]
+      local initValue=missionVar.initValue
+      local name=missionVar.name
+      if(missionVar.type=="number") then
+        initValue=tonumber(initValue)
+      end
+      variables[name]=initValue
     end
-    variables[name]=initValue
   end  
   --Spring.Echo(json.encode(variables))
   
    -------------------------------
    -------POSITIONS---------------
    -------------------------------
-  for i=1,table.getn(mission.positions) do
-    local position=mission.positions[i]
-    positions[position.id]=position
-  end  
-  
-   for p,pos in pairs(positions) do
-    if(pos.coordinates=="relative") then
-      local orig=positions[pos.origin]
-      positions[p].x=tonumber(orig.x)+tonumber(pos.dx)
-      positions[p].z=tonumber(orig.z)+tonumber(pos.dz)
-    end
-   end   
+  if(mission.positions~=nil)then
+    for i=1,table.getn(mission.positions) do
+      local position=mission.positions[i]
+      positions[position.id]=position
+    end  
+    
+     for p,pos in pairs(positions) do
+      if(pos.coordinates=="relative") then
+        local orig=positions[pos.origin]
+        positions[p].x=tonumber(orig.x)+tonumber(pos.dx)
+        positions[p].z=tonumber(orig.z)+tonumber(pos.dz)
+      end
+     end
+  end   
    -------------------------------
    -------SETTINGS----------------
    -------------------------------
@@ -822,17 +826,19 @@ local function StartAfterJson ()
  ----------ARMIES---------------
  -------------------------------
   local unitHealthSettings
-  for i=1,table.getn(mission.armies) do
-    local factionArmies=mission.armies[i]
-    local factionType=factionArmies.faction
-    groupOfUnits[factionType]={}
-    local factionTypeCode=getFactionCode(factionType)
-    for j=1,table.getn(factionArmies.units) do
-      local unitTable=factionArmies.units[j]
-      if(unitTable.visibleAtStart~="no") then
-        createUnit(unitTable,factionTypeCode)
+  if(mission.armies~=nil)then
+    for i=1,table.getn(mission.armies) do
+      local factionArmies=mission.armies[i]
+      local factionType=factionArmies.faction
+      groupOfUnits[factionType]={}
+      local factionTypeCode=getFactionCode(factionType)
+      for j=1,table.getn(factionArmies.units) do
+        local unitTable=factionArmies.units[j]
+        if(unitTable.visibleAtStart~="no") then
+          createUnit(unitTable,factionTypeCode)
+        end
+        table.insert(groupOfUnits[factionType],unitTable.id)
       end
-      table.insert(groupOfUnits[factionType],unitTable.id)
     end
   end
   
@@ -854,35 +860,43 @@ local function StartAfterJson ()
  -------------------------------
  -------MESSAGES----------------
  -------------------------------
-  for i=1, table.getn(mission.messages) do
-   local id=mission.messages[i].id
-   messages[id]=mission.messages[i].content
-  end 
+ if(mission.messages~=nil) then
+    for i=1, table.getn(mission.messages) do
+     local id=mission.messages[i].id
+     messages[id]=mission.messages[i].content
+    end 
+ end
   --Spring.Echo(json.encode(messages))
+  
  -------------------------------
  -------CONDITIONS--------------
  -------------------------------
-  for i=1, table.getn(mission.conditions) do
-   local id=mission.conditions[i].id
-   conditions[id]={}
-   conditions[id]["object"]=mission.conditions[i].object
-   conditions[id]["attribute"]=mission.conditions[i].attribute
-   conditions[id]["value"]=mission.conditions[i].value
-   conditions[id]["currentlyValid"]=false
-  end 
+ if(mission.conditions~=nil)then
+    for i=1, table.getn(mission.conditions) do
+     local id=mission.conditions[i].id
+     conditions[id]={}
+     conditions[id]["object"]=mission.conditions[i].object
+     conditions[id]["attribute"]=mission.conditions[i].attribute
+     conditions[id]["value"]=mission.conditions[i].value
+     conditions[id]["currentlyValid"]=false
+    end 
+  end
   
  -------------------------------
  -------ACTIONS-----------------
- -------------------------------   
+ -------------------------------
+ if(mission.actions~=nil)then   
   for i=1, table.getn(mission.actions) do
    local id=mission.actions[i].id
    actions[id]=mission.actions[i]
    actions[id]["alreadyDone"]=false
-  end    
+  end
+end    
    
  -------------------------------
  -------EVENTS------------------
  -------------------------------
+ if(mission.events~=nil)then   
   for i=1, table.getn(mission.events) do
    local trigger=mission.events[i].trigger
    local actions=mission.events[i].actions
@@ -900,6 +914,7 @@ local function StartAfterJson ()
     end
    end
   end
+end
   
    -------------------------------
    -------START------------------
