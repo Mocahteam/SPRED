@@ -214,7 +214,7 @@
 		{
 		"id":"victory",
 		"toBeRepeated":"no",
-		"delay":"10",
+		"delay":"1",
 		"type":"end",
 		"outputState":"1111",
 		"result":"success"
@@ -222,7 +222,7 @@
 		{
 		"id":"arrivalMarkerBit",
 		"toBeRepeated":"no",
-		"delay":"20",
+		"delay":"1.5",
 		"type":"marker",
 		"position":
 			{
@@ -234,7 +234,7 @@
 		{
 		"id":"arrivalMarkerByte",
 		"toBeRepeated":"no",
-		"delay":"20",
+		"delay":"1.5",
 		"type":"marker",
 		"position":
 			{

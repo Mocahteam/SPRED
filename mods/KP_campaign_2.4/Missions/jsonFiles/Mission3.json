@@ -205,7 +205,7 @@
 		{
 		"id":"victory",
 		"toBeRepeated":"no",
-		"delay":"10",
+		"delay":"1",
 		"type":"end",
 		"outputState":"1111",
 		"result":"success"
@@ -213,7 +213,7 @@
 		{
 		"id":"defeat",
 		"toBeRepeated":"no",
-		"delay":"10",
+		"delay":"1",
 		"type":"end",
 		"outputState":"1111",
 		"result":"defeat"
