@@ -228,30 +228,41 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Forces', forcesFrame)
 end
 function initWindows()
-	-- File Window
+	initFileWindow()
+	initUnitWindow()
+	initZoneWindow()
+	initForcesWindow()
+end
+function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
-	
-	-- Unit Window
+end
+function initUnitWindow()
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
-	local unitStates = {} -- Put unit states in an array to sort them alphabetically
+	
+	-- Put unit states in an array to sort them alphabetically
+	local unitStates = {}
 	for k, u in pairs(unitStateMachine.states) do
 		if k ~= "SELECTION" then
 			table.insert(unitStates, u)
 		end
 	end
 	table.sort(unitStates)
-	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units") -- Unit buttons
+	
+	-- Unit buttons
+	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
 	local button_size = 40
 	local y = 0
 	for i,u in ipairs(unitStates) do
 		unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
 		y = y + button_size
 	end
-	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team") -- Team buttons
+	
+	-- Team buttons
+	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
 	local teamCount = tableLength(teamStateMachine.states)
 	local teams = getTeamsInformation()
 	for k, team in pairs(teamStateMachine.states) do
@@ -264,8 +275,8 @@ function initWindows()
 		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
 		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
 	end
-	
-	-- Zone Window
+end
+function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
 	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
@@ -291,17 +302,35 @@ function initWindows()
 	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
 	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
 	updateZonePanel() -- initialize zone list when coming back to this menu
-	
-	-- Forces Window
+end
+function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	Chili.TabBar:New{
+	--[[Chili.TabBar:New{
 		parent = windows['forceWindow'],
 		x = 0,
 		y = 0,
 		height = 20,
 		width = 500,
 		tabs = { "Tab1", "Tab2"	}
+	}]]
+	local grid = Chili.LayoutPanel:New{
+		parent = windows['forceWindow'],
+		x = 0,
+		y = 0,
+		height = '100%',
+		width = '100%',
+		rows = 2,
+		resizeItems = true,
+		itemPadding = {50, 50, 50, 5},
+		itemMargin = {5, 5, 5, 5}
 	}
+	for i=1,16,1 do
+		Chili.Button:New{
+			parent = grid,
+			caption = i,
+			OnClick = { function() Spring.Echo("Clicked : "..tostring(i)) end }
+		}
+	end
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
