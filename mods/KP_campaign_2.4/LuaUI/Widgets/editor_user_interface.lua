@@ -52,6 +52,7 @@ local unitNumber = 0
 local groupNumber = 0
 local groupTotal = nil
 local selectedGroup = 0
+local groupSizes = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -1008,6 +1009,10 @@ function updateUnitGroupPanels()
 		local count = 0
 		for k, group in pairs(unitGroups) do
 			panels["group"..tostring(k)] = addPanel(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400)
+			buttons["group"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', "Group "..tostring(k), function() selectedGroup = k end)
+			buttons["group"..tostring(k)].font.size = 20
+			panels["unitGroup"..tostring(k)] = addPanel(panels["group"..tostring(k)], '0%', '10%', '100%', '80%')
+			buttons["deleteGroup"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '90%', '100%', '10%', "Delete Group", function() deleteUnitGroup(k) end)
 			count = count + 1
 		end
 		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", addUnitGroup)
@@ -1016,8 +1021,29 @@ function updateUnitGroupPanels()
 	end
 	
 	for i, group in pairs(unitGroups) do
-		if updatePanels then
-		
+		if tableLength(group.units) ~= groupSizes[i] or updatePanels then
+			for k, b in pairs(buttons) do
+				if string.find(k, "unitGroup") ~= nil then
+					panels["unitGroup"..tostring(i)]:RemoveChild(b)
+				end
+			end
+			local count = 0
+			for k, u in pairs(group.units) do
+				local uDefID = Spring.GetUnitDefID(u)
+				local unitDef = UnitDefs[uDefID]
+				local uName = ""
+				if unitDef ~= nil then
+					for name,param in unitDef:pairs() do
+						if name == "humanName" then
+							uName = param
+							break
+						end
+					end
+				end
+				buttons["unitGroup"..tostring(i)..tostring(k)] = addButton(panels["unitGroup"..tostring(i)], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() removeUnitFromGroup(group, u) end)
+				count = count + 1
+			end
+			groupSizes[i] = tableLength(group.units)
 		end
 	end
 end
@@ -1029,12 +1055,24 @@ function addUnitToSelectedGroup(u)
 		end
 	end
 end
+function removeUnitFromGroup(group, unit)
+	local units = group.units
+	for i, u in ipairs(units) do
+		if u == unit then
+			table.remove(units, i)
+			break
+		end
+	end
+end
 function addUnitGroup()
 	unitGroups[groupNumber] = {}
 	unitGroups[groupNumber].name = "Group "..tostring(groupNumber)
 	unitGroups[groupNumber].units = {}
-	Spring.Echo(groupNumber)
+	groupSizes[groupNumber] = 0
 	groupNumber = groupNumber + 1
+end
+function deleteUnitGroup(i)
+	unitGroups[i] = nil
 end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
