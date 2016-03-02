@@ -50,6 +50,7 @@ local selectedAllyTeam = 0
 local unitGroups = {}
 local unitNumber = 0
 local groupNumber = 0
+local groupTotal = nil
 local selectedGroup = 0
 
 -- Mouse variables
@@ -250,7 +251,7 @@ function allyTeam()
 	clearForceWindow()
 	windows['forceWindow']:AddChild(windows['allyTeamWindow'])
 end
-function unitGroups()
+function unitGroupsPanel()
 	clearForceWindow()
 	windows['forceWindow']:AddChild(windows['unitGroupsWindow'])
 end
@@ -359,7 +360,7 @@ function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
 	forcesButtons['teamConfig'] = addButton(windows['forceWindow'], 0, 0, '33.333%', '5%', "Teams Configuration", teamConfig)
 	forcesButtons['allyTeam'] = addButton(windows['forceWindow'], '33.333%', 0, '33.333%', '5%', "Ally Teams", allyTeam)
-	forcesButtons['unitGroups'] = addButton(windows['forceWindow'], '66.666%', 0, '33.333%', '5%', "Unit Groups", unitGroups)
+	forcesButtons['unitGroups'] = addButton(windows['forceWindow'], '66.666%', 0, '33.333%', '5%', "Unit Groups", unitGroupsPanel)
 	
 	-- Useful variables
 	local teamCount = tableLength(teamStateMachine.states)
@@ -988,18 +989,52 @@ function updateUnitGroupPanels()
 						end
 					end
 				end
-				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 20 * count, '100%', 20, uName.." ("..tostring(u)..")", function() addUnitToSelectedGroup(u) end)
+				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() addUnitToSelectedGroup(u) end)
 				count = count + 1
 			end
 		end
 		unitNumber = tableLength(units)
 	end
+	
+	local updatePanels = false
+	if tableLength(unitGroups) ~= groupTotal then
+		for k, p in pairs(panels) do
+			if string.find(k, "group") then
+				scrollPanels["groupList"]:RemoveChild(p)
+			end
+		end
+		scrollPanels["groupList"]:RemoveChild(buttons["addGroup"])
+		
+		local count = 0
+		for k, group in pairs(unitGroups) do
+			panels["group"..tostring(k)] = addPanel(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400)
+			count = count + 1
+		end
+		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", addUnitGroup)
+		groupTotal = tableLength(unitGroups)
+		updatePanels = true
+	end
+	
+	for i, group in pairs(unitGroups) do
+		if updatePanels then
+		
+		end
+	end
 end
 function addUnitToSelectedGroup(u)
-	if not findInTable(unitGroups[selectedGroup], u) then
-		table.insert(unitGroups[selectedGroup], u)
-		table.sort(unitGroups[selectedGroup])
+	if unitGroups[selectedGroup] ~= nil then
+		if not findInTable(unitGroups[selectedGroup].units, u) then
+			table.insert(unitGroups[selectedGroup].units, u)
+			table.sort(unitGroups[selectedGroup].units)
+		end
 	end
+end
+function addUnitGroup()
+	unitGroups[groupNumber] = {}
+	unitGroups[groupNumber].name = "Group "..tostring(groupNumber)
+	unitGroups[groupNumber].units = {}
+	Spring.Echo(groupNumber)
+	groupNumber = groupNumber + 1
 end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
