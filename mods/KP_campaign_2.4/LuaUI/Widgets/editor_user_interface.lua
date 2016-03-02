@@ -53,6 +53,7 @@ local groupNumber = 0
 local groupTotal = nil
 local selectedGroup = 0
 local groupSizes = {}
+local selectUnitGroupBut = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -1009,8 +1010,8 @@ function updateUnitGroupPanels()
 		local count = 0
 		for k, group in pairs(unitGroups) do
 			panels["group"..tostring(k)] = addPanel(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400)
-			buttons["group"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', "Group "..tostring(k), function() selectedGroup = k end)
-			buttons["group"..tostring(k)].font.size = 20
+			selectUnitGroupBut[k] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', "Group "..tostring(k), function() selectedGroup = k end)
+			selectUnitGroupBut[k].font.size = 20
 			panels["unitGroup"..tostring(k)] = addPanel(panels["group"..tostring(k)], '0%', '10%', '100%', '80%')
 			buttons["deleteGroup"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '90%', '100%', '10%', "Delete Group", function() deleteUnitGroup(k) end)
 			count = count + 1
@@ -1149,6 +1150,13 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	end
 	if selectedAllyTeam ~= nil then
 		selectAllyTeamsBut["team"..tostring(selectedAllyTeam)].state.hovered = true
+	end
+	
+	for _, b in pairs(selectUnitGroupBut) do
+		b.state.hovered = false
+	end
+	if selectedGroup ~= nil and selectUnitGroupBut[selectedGroup] ~= nil then
+		selectUnitGroupBut[selectedGroup].state.hovered = true
 	end
 end
 function widget:DrawScreen()
