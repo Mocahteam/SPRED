@@ -21,7 +21,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, forcesButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes, panels, allyTeamUI = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, forcesButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes, panels = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- Draw selection variables
@@ -46,7 +46,11 @@ local allyTeams = {}
 local allyTeamsSize = {}
 local allyTeamsBut = {}
 local selectAllyTeamsBut = {}
-local selectedAllyTeam = nil
+local selectedAllyTeam = 0
+local unitGroups = {}
+local unitNumber = 0
+local groupNumber = 0
+local selectedGroup = 0
 
 -- Mouse variables
 local mouseMove = false
@@ -245,9 +249,6 @@ end
 function allyTeam()
 	clearForceWindow()
 	windows['forceWindow']:AddChild(windows['allyTeamWindow'])
-	if selectedAllyTeam == nil then
-		selectedAllyTeam = 0
-	end
 end
 function unitGroups()
 	clearForceWindow()
@@ -375,7 +376,7 @@ function initForcesWindow()
 	-- Ally Team Window
 	windows['allyTeamWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
 	addLabel(windows['allyTeamWindow'], '0%', '0%', '20%', '10%', "Team List", 30, "center", nil, "center")
-	allyTeamUI['teamList'] = addScrollPanel(windows['allyTeamWindow'], '0%', '10%', '20%', '100%')
+	local teamList = addScrollPanel(windows['allyTeamWindow'], '0%', '10%', '20%', '90%')
 	for k, team in pairs(teamStateMachine.states) do
 		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
 		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
@@ -388,7 +389,7 @@ function initForcesWindow()
 		but.font.size = 20
 		scrollPanels["team"..tostring(team)] = addScrollPanel(panel, '2%', '10%', '96%', '89%')
 		
-		buttons["team"..tostring(team)] = addButton(allyTeamUI["teamList"], '0%', 40*team, '100%', 40, "Team "..tostring(team), function() addTeamToSelectedAllyTeam(team) end )
+		buttons["team"..tostring(team)] = addButton(teamList, '0%', 40*team, '100%', 40, "Team "..tostring(team), function() addTeamToSelectedAllyTeam(team) end )
 		buttons["team"..tostring(team)].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		buttons["team"..tostring(team)].font.size = 20
 		
@@ -399,7 +400,10 @@ function initForcesWindow()
 	
 	-- Unit Groups Window
 	windows['unitGroupsWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	
+	addLabel(windows['unitGroupsWindow'], '0%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
+	scrollPanels["unitList"] = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '20%', '90%')
+	addLabel(windows['unitGroupsWindow'], '20%', '0%', '80%', '10%', "Group List", 30, "center", nil, "center")
+	scrollPanels["groupList"] = addScrollPanel(windows["unitGroupsWindow"], '20%', '10%', '80%', '90%')
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -962,7 +966,41 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	end
 	table.sort(at)
 end
-
+function updateUnitGroupPanels()
+	local units = Spring.GetAllUnits()
+	if tableLength(units) ~= unitNumber then
+		for k, b in pairs(buttons) do
+			if string.find(k, "unit") ~= nil then
+				scrollPanels["unitList"]:RemoveChild(b)
+			end
+		end
+		local count = 0
+		for k, u in pairs(units) do
+			if u ~= 0 then
+				local uDefID = Spring.GetUnitDefID(u)
+				local unitDef = UnitDefs[uDefID]
+				local uName = ""
+				if unitDef ~= nil then
+					for name,param in unitDef:pairs() do
+						if name == "humanName" then
+							uName = param
+							break
+						end
+					end
+				end
+				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 20 * count, '100%', 20, uName.." ("..tostring(u)..")", function() addUnitToSelectedGroup(u) end)
+				count = count + 1
+			end
+		end
+		unitNumber = tableLength(units)
+	end
+end
+function addUnitToSelectedGroup(u)
+	if not findInTable(unitGroups[selectedGroup], u) then
+		table.insert(unitGroups[selectedGroup], u)
+		table.sort(unitGroups[selectedGroup])
+	end
+end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Draw functions
@@ -1095,6 +1133,7 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
+		updateUnitGroupPanels()
 	end
 	
 	updateButtonVisualFeedback()
