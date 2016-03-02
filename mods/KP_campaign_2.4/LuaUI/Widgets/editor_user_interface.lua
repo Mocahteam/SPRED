@@ -45,6 +45,7 @@ local zoneNumber = totalZones+1
 local allyTeams = {}
 local allyTeamsSize = {}
 local allyTeamsBut = {}
+local selectAllyTeamsBut = {}
 local selectedAllyTeam = nil
 
 -- Mouse variables
@@ -244,6 +245,9 @@ end
 function allyTeam()
 	clearForceWindow()
 	windows['forceWindow']:AddChild(windows['allyTeamWindow'])
+	if selectedAllyTeam == nil then
+		selectedAllyTeam = 0
+	end
 end
 function unitGroups()
 	clearForceWindow()
@@ -374,6 +378,7 @@ function initForcesWindow()
 		local h = "50%"
 		local panel = addPanel(windows['allyTeamWindow'], x, y, w, h)
 		local but = addButton(panel, '0%', '0%', '100%', '10%', "Team "..tostring(team), function() selectedAllyTeam = team end)
+		selectAllyTeamsBut["team"..tostring(team)] = but
 		but.font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		but.font.size = 20
 		scrollPanels["team"..tostring(team)] = addScrollPanel(panel, '2%', '10%', '96%', '89%')
@@ -1021,6 +1026,13 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	end
 	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
 		zoneButtons[zoneStateMachine:getCurrentState()].state.hovered = true
+	end
+	
+	for _, b in pairs (selectAllyTeamsBut) do
+		b.state.hovered = false
+	end
+	if selectedAllyTeam ~= nil then
+		selectAllyTeamsBut["team"..tostring(selectedAllyTeam)].state.hovered = true
 	end
 end
 function widget:DrawScreen()
