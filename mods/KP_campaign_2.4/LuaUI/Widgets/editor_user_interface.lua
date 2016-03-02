@@ -44,6 +44,7 @@ local zoneNumber = totalZones+1
 -- Forces variables
 local allyTeams = {}
 local allyTeamsSize = {}
+local allyTeamsBut = {}
 local selectedAllyTeam = nil
 
 -- Mouse variables
@@ -383,6 +384,7 @@ function initForcesWindow()
 		
 		allyTeams[team] = {}
 		allyTeamsSize[team] = 0
+		allyTeamsBut[team] = {}
 	end
 	
 	-- Unit Groups Window
@@ -917,15 +919,16 @@ end
 function updateAllyTeamPanels()
 	for k, at in pairs(allyTeams) do
 		if tableLength(at) ~= allyTeamsSize[k] then
-			for _, c in pairs(scrollPanels["team"..k].children) do
+			for _, c in ipairs(allyTeamsBut[k]) do
 				scrollPanels["team"..k]:RemoveChild(c)
 			end
 			local count = 0
 			local teams = getTeamsInformation()
 			for i, t in ipairs(at) do
-				local but = addButton(scrollPanels["team"..k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(at, t) end)
+				local but = addButton(scrollPanels["team"..k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(k, t) end)
 				but.font.color = {teams[t].red, teams[t].green, teams[t].blue, 1}
 				but.font.size = 20
+				table.insert(allyTeamsBut[k], but)
 				count = count + 1
 			end
 			allyTeamsSize[k] = tableLength(at)
@@ -939,13 +942,15 @@ function addTeamToSelectedAllyTeam(team)
 	end
 end
 function removeTeamFromAllyTeam(allyTeam, team)
-	for i, t in ipairs(allyTeam) do
+	local at = allyTeams[allyTeam]
+	for i, t in ipairs(at) do
 		if t == team then
-			table.remove(allyTeam, i)
+			table.remove(at, i)
+			Spring.Echo("removed "..tostring(team).." at indice "..tostring(i).." from AllyTeam "..tostring(allyTeam))
 			break
 		end
 	end
-	table.sort(allyTeam)
+	table.sort(at)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
