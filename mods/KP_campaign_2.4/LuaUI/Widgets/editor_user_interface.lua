@@ -366,6 +366,11 @@ function initForcesWindow()
 	
 	-- Team Config Window
 	windows['teamConfigWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	local spanel = addScrollPanel(windows['teamConfigWindow'], '0%', '0%', '100%', '100%')
+	for k, team in pairs(teamStateMachine.states) do
+		local panel = addPanel(spanel, '0%', team * 100, '100%', 100)
+		addLabel (panel, '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+	end
 	
 	-- Ally Team Window
 	windows['allyTeamWindow'] = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
