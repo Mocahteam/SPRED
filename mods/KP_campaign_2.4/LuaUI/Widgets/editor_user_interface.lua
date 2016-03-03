@@ -21,7 +21,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, topBarButtons, zoneButtons, labels, zoneBoxes, images, scrollPanels, editBoxes, panels = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}--refereces to UI elements
+local windows, buttons, topBarButtons, zoneButtons, labels, images, scrollPanels, editBoxes, panels = {}, {}, {}, {}, {}, {}, {}, {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- File Variables
@@ -35,6 +35,7 @@ local unitButtons = {}
 local teamLabels = {}
 local teamButtons = {}
 local teamImages = {}
+local unitContextualMenu
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
@@ -44,6 +45,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = d
 
 -- Zone variables
 local zoneScrollPanel
+local zoneBoxes = {}
 local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
 local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
@@ -302,6 +304,7 @@ end
 function initWindows()
 	initFileWindow()
 	initUnitWindow()
+	initUnitContextualMenu()
 	initZoneWindow()
 	initForcesWindow()
 end
@@ -346,6 +349,11 @@ function initUnitWindow()
 		teamLabels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15, "center", nil, "center")
 	end
 end
+function initUnitContextualMenu()
+	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
+	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
+	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Add to group", nil)
+end
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
@@ -374,9 +382,9 @@ function initZoneWindow()
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	addButton(windows['forceWindow'], 0, 0, '33.333%', '5%', "Teams Configuration", teamConfig)
-	addButton(windows['forceWindow'], '33.333%', 0, '33.333%', '5%', "Ally Teams", allyTeam)
-	addButton(windows['forceWindow'], '66.666%', 0, '33.333%', '5%', "Unit Groups", unitGroupsPanel)
+	addButton(windows['forceWindow'], 0, 0, tostring(100/3).."%", '5%', "Teams Configuration", teamConfig)
+	addButton(windows['forceWindow'], tostring(100/3).."%", 0, tostring(100/3).."%", '5%', "Ally Teams", allyTeam)
+	addButton(windows['forceWindow'], tostring(200/3).."%", 0, tostring(100/3).."%", '5%', "Unit Groups", unitGroupsPanel)
 	
 	-- Team Config Window
 	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
@@ -423,15 +431,16 @@ function initUnitFunctions() -- Creates a function for every unitState to change
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			unitStateMachine:setCurrentState(u)
+			Spring.SelectUnitArray({})
 		end
 	end
 end
 function initTeamFunctions() -- Creates a function for every teamState to change state and handle selection feedback
 	for k, t in pairs(teamStateMachine.states) do
 		teamFunctions[t] = function()
+			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			teamStateMachine:setCurrentState(t)
-			local msg = "Transfer Units".."++"..t
-			Spring.SendLuaRulesMsg(msg)
+			Spring.SelectUnitArray({})
 		end
 	end
 end
@@ -1220,13 +1229,15 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	updateZonePanel()
+	if tableLength(unitSelection) <= 1 then
+		Screen0:RemoveChild(unitContextualMenu)
+	end
 	
+	updateZonePanel()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
 		updateUnitGroupPanels()
 	end
-	
 	updateButtonVisualFeedback()
 end
 
@@ -1237,6 +1248,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
+	Screen0:RemoveChild(unitContextualMenu)
 	-- Left click
 	if button == 1 then
 		-- raycast
@@ -1317,6 +1329,18 @@ function widget:MousePress(mx, my, button)
 	elseif button == 3 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+			local kind, var = Spring.TraceScreenRay(mx, my)
+			if kind == "unit" then
+				local selectedUnits = Spring.GetSelectedUnits()
+				if tableLength(selectedUnits) <= 1 or not Spring.IsUnitSelected(var) then
+					proceedSelection({var})
+				end
+				if Spring.IsUnitSelected(var) then
+					Screen0:AddChild(unitContextualMenu)
+					unitContextualMenu.x = mx
+					unitContextualMenu.y = screenSizeY - my
+				end
+			end
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
