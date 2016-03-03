@@ -1000,7 +1000,7 @@ function updateUnitGroupPanels()
 						end
 					end
 				end
-				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() addUnitToSelectedGroup(u) end)
+				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() addUnitToGroup(unitGroups[selectedGroup], u) end)
 				count = count + 1
 			end
 		end
@@ -1025,7 +1025,7 @@ function updateUnitGroupPanels()
 			buttons["deleteGroup"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '90%', '100%', '10%', "Delete Group", function() deleteUnitGroup(k) end)
 			count = count + 1
 		end
-		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", addUnitGroup)
+		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", function() addUnitGroup("Group "..tostring(groupNumber), {}) end)
 		groupTotal = tableLength(unitGroups)
 		updatePanels = true
 	end
@@ -1057,11 +1057,11 @@ function updateUnitGroupPanels()
 		end
 	end
 end
-function addUnitToSelectedGroup(u)
-	if unitGroups[selectedGroup] ~= nil then
-		if not findInTable(unitGroups[selectedGroup].units, u) then
-			table.insert(unitGroups[selectedGroup].units, u)
-			table.sort(unitGroups[selectedGroup].units)
+function addUnitToGroup(group, unit)
+	if group ~= nil then
+		if not findInTable(group.units, unit) then
+			table.insert(group.units, unit)
+			table.sort(group.units)
 		end
 	end
 end
@@ -1074,16 +1074,17 @@ function removeUnitFromGroup(group, unit)
 		end
 	end
 end
-function addUnitGroup()
+function addUnitGroup(name, units)
 	unitGroups[groupNumber] = {}
-	unitGroups[groupNumber].name = "Group "..tostring(groupNumber)
-	unitGroups[groupNumber].units = {}
+	unitGroups[groupNumber].name = name
+	unitGroups[groupNumber].units = units or {}
 	groupSizes[groupNumber] = 0
 	groupNumber = groupNumber + 1
 end
-function deleteUnitGroup(i)
-	unitGroups[i] = nil
+function deleteUnitGroup(id)
+	unitGroups[id] = nil
 end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Draw functions
