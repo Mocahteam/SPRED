@@ -73,6 +73,7 @@ local groupTotal = nil
 local selectedGroup = 0
 local groupSizes = {}
 local selectUnitGroupBut = {}
+local unitGroupsAttributionWindow
 
 -- Mouse variables
 local mouseMove = false
@@ -226,6 +227,10 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	selectedZone = nil
 	Spring.SelectUnitArray({})
 end
+function clearTemporaryWindows()
+	Screen0:RemoveChild(unitContextualMenu)
+	Screen0:RemoveChild(unitGroupsAttributionWindow)
+end
 function fileFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
@@ -352,7 +357,7 @@ end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
 	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
-	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Add to group", nil)
+	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Add to group", showUnitGroupsAttributionWindow)
 end
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -548,6 +553,21 @@ function showUnitsInformation() -- Show information about selected and hovered u
 		end
 	end
 	gl.EndText()
+end
+function showUnitGroupsAttributionWindow()
+	clearTemporaryWindows()
+	unitGroupsAttributionWindow = addWindow(Screen0, '90%', '30%', '10%', '40%', true)
+	local attributionWindowScrollPanel = addScrollPanel(unitGroupsAttributionWindow, '0%', '0%', '100%', '100%')
+	
+	local count = 0
+	for k, group in pairs(unitGroups) do
+		addButton(attributionWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() addSelectedUnitsToGroup(group) clearTemporaryWindows() end)
+		count = count + 1
+	end
+	
+	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "New Group")
+	newUnitGroupEditBox.font.size = 14
+	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -996,7 +1016,7 @@ function updateUnitGroupPanels()
 			end
 		end
 		local count = 0
-		for k, u in pairs(units) do
+		for k, u in ipairs(units) do
 			if u ~= 0 then
 				local uDefID = Spring.GetUnitDefID(u)
 				local unitDef = UnitDefs[uDefID]
@@ -1028,13 +1048,13 @@ function updateUnitGroupPanels()
 		local count = 0
 		for k, group in pairs(unitGroups) do
 			panels["group"..tostring(k)] = addPanel(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400)
-			selectUnitGroupBut[k] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', "Group "..tostring(k), function() selectedGroup = k end)
+			selectUnitGroupBut[k] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', group.name, function() selectedGroup = k end)
 			selectUnitGroupBut[k].font.size = 20
 			panels["unitGroup"..tostring(k)] = addPanel(panels["group"..tostring(k)], '0%', '10%', '100%', '80%')
 			buttons["deleteGroup"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '90%', '100%', '10%', "Delete Group", function() deleteUnitGroup(k) end)
 			count = count + 1
 		end
-		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", function() addUnitGroup("Group "..tostring(groupNumber), {}) end)
+		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", function() addUnitGroup("Group "..tostring(groupNumber)) end)
 		groupTotal = tableLength(unitGroups)
 		updatePanels = true
 	end
@@ -1074,6 +1094,12 @@ function addUnitToGroup(group, unit)
 		end
 	end
 end
+function addSelectedUnitsToGroup(group)
+	local unitSelection = Spring.GetSelectedUnits()
+	for i, u in ipairs(unitSelection) do
+		addUnitToGroup(group, u)
+	end
+end
 function removeUnitFromGroup(group, unit)
 	local units = group.units
 	for i, u in ipairs(units) do
@@ -1083,10 +1109,14 @@ function removeUnitFromGroup(group, unit)
 		end
 	end
 end
-function addUnitGroup(name, units)
+function addUnitGroup(name)
+	local unitSelection = Spring.GetSelectedUnits()
 	unitGroups[groupNumber] = {}
 	unitGroups[groupNumber].name = name
-	unitGroups[groupNumber].units = units or {}
+	unitGroups[groupNumber].units = {}
+	for i, u in ipairs(unitSelection) do
+		addUnitToGroup(unitGroups[groupNumber], u)
+	end
 	groupSizes[groupNumber] = 0
 	groupNumber = groupNumber + 1
 end
@@ -1182,7 +1212,7 @@ function widget:DrawScreen()
 	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		showUnitsInformation()
-		showUnitAttributes()
+		--showUnitAttributes()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZoneInformation()
@@ -1230,7 +1260,7 @@ function widget:Update(delta)
 	end
 	
 	if tableLength(unitSelection) <= 1 then
-		Screen0:RemoveChild(unitContextualMenu)
+		clearTemporaryWindows()
 	end
 	
 	updateZonePanel()
@@ -1248,7 +1278,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
-	Screen0:RemoveChild(unitContextualMenu)
+	clearTemporaryWindows()
 	-- Left click
 	if button == 1 then
 		-- raycast
