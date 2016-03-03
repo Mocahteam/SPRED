@@ -19,17 +19,33 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- UI Variables
+-- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, topBarButtons, teamButtons, unitButtons, fileButtons, zoneButtons, labels, zoneBoxes, images, teamImages, scrollPanels, editBoxes = {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} --refereces to UI elements
+local windows, buttons, topBarButtons, zoneButtons, labels, images, scrollPanels, editBoxes, panels = {}, {}, {}, {}, {}, {}, {}, {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
+
+-- File Variables
+local fileButtons = {}
+
+-- Unit Variables
+local teams = getTeamsInformation()
+local teamCount = tableLength(teamStateMachine.states)
+local unitScrollPanel
+local unitButtons = {}
+local teamLabels = {}
+local teamButtons = {}
+local teamImages = {}
+local unitContextualMenu
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
+local selectionRect
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
 -- Zone variables
+local zoneScrollPanel
+local zoneBoxes = {}
 local plotZone = false
 local rValue, gValue, bValue = 0, 0, 0
 local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
@@ -40,6 +56,23 @@ local selectedZone = nil
 local zoneSide = ""
 local totalZones = #zoneList
 local zoneNumber = totalZones+1
+
+-- Forces variables
+local teamConfigWindow, allyTeamsWindow, unitGroupsWindow
+local allyTeams = {}
+local allyTeamsSize = {}
+local allyTeamsRemoveTeamButtons = {}
+local selectAllyTeamsButtons = {}
+local allyTeamsListButtons = {}
+local allyTeamsScrollPanels = {}
+local selectedAllyTeam = 0
+local unitGroups = {}
+local unitNumber = 0
+local groupNumber = 0
+local groupTotal = nil
+local selectedGroup = 0
+local groupSizes = {}
+local selectUnitGroupBut = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -74,6 +107,18 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	}
 	return window
 end
+function addPanel(_parent, _x, _y, _w, _h)
+	local panel = Chili.Panel:New{
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width  = _w,
+		height = _h,
+		draggable = false,
+		resizable = false
+	}
+	return panel
+end
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	local button = Chili.Button:New {
 		parent = _parent,
@@ -86,7 +131,7 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	}
 	return button
 end
-function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
+function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 	local label = Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -95,8 +140,10 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align)
 		height = _h,
 		caption = text,
 		fontsize = size or 20,
-		align = _align or "center"
+		align = _align or "center",
+		valign = _valign or "linecenter"
 	}
+	label.font.color = _color or {1, 1, 1, 1}
 	return label
 end
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
@@ -174,7 +221,6 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
 			Screen0:RemoveChild(w)
-			windows.key = nil
 		end
 	end
 	selectedZone = nil
@@ -183,98 +229,52 @@ end
 function fileFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
-	
-	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['fileLabel'] = addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
-end
-function zoneFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
-	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
-	
-	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	labels['zoneLabel'] = addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
-	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
-	images['zoneRect'] = addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
-	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
-	images['zoneDisk'] = addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
-	scrollPanels['zonePanel'] = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
-	
-	local toggleAllOn = 	function() -- show all zones
-									for k, zb in pairs(zoneBoxes) do
-										if not zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
-	local toggleAllOff = 	function() -- hide all zones
-									for k, zb in pairs(zoneBoxes) do
-										if zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
-	zoneButtons["checkAllZones"] = addButton(scrollPanels["zonePanel"], 0, 0, "50%", 30, "Show all", toggleAllOn)
-	zoneButtons["hideAllZones"] = addButton(scrollPanels["zonePanel"], "50%", 0, "50%", 30, "Hide all", toggleAllOff)
-	updateZonePanel() -- initialize zone list when coming back to this menu
+	Screen0:AddChild(windows["fileWindow"])
 end
 function unitFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 	unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
-	
-	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	scrollPanels['unitScrollPanel'] = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
-
-	-- Put unit states in an array to sort them alphabetically
-	local unitStates = {}
-	for k, u in pairs(unitStateMachine.states) do
-		if k ~= "SELECTION" then
-			table.insert(unitStates, u)
-		end
-	end
-	table.sort(unitStates)
-	
-	-- Unit buttons
-	labels['unitLabel'] = addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
-	local button_size = 40
-	local y = 0
-	for i,u in ipairs(unitStates) do
-		unitButtons[u] = addButton(scrollPanels['unitScrollPanel'], 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
-		y = y + button_size
-	end
-	
-	-- Team buttons
-	labels['teamLabel'] = addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
-	local teamCount = tableLength(teamStateMachine.states)
-	local teams = getTeamsInformation()
-	for k, team in pairs(teamStateMachine.states) do
-		local x = tostring(team * 100 / math.ceil(teamCount/2) - 100 * math.floor(team/math.ceil(teamCount/2))).."%"
-		local y = tostring(90 + 5 * math.floor(team/math.ceil(teamCount/2))).."%"
-		local w = tostring(100 / math.ceil(teamCount/2)).."%"
-		local h = "5%"
-		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
-		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
-		labels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15)
-	end
+	Screen0:AddChild(windows["unitWindow"])
+end
+function zoneFrame()
+	clearUI()
+	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
+	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
+	Screen0:AddChild(windows["zoneWindow"])
 end
 function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
-	
-	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	Chili.TabBar:New{
-		parent = windows['forceWindow'],
-		x = 0,
-		y = 0,
-		height = 20,
-		width = 500,
-		tabs = { "Tab1", "Tab2"	}
-	}
+	Screen0:AddChild(windows["forceWindow"])
+	windows["forceWindow"].x = 100
+	windows["forceWindow"].y = 100
+	teamConfig()
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Forces window buttons functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function clearForceWindow()
+	windows['forceWindow']:RemoveChild(teamConfigWindow)
+	windows['forceWindow']:RemoveChild(allyTeamsWindow)
+	windows['forceWindow']:RemoveChild(unitGroupsWindow)
+end
+function teamConfig()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(teamConfigWindow)
+end
+function allyTeam()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(allyTeamsWindow)
+end
+function unitGroupsPanel()
+	clearForceWindow()
+	windows['forceWindow']:AddChild(unitGroupsWindow)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -301,20 +301,146 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Forces', forcesFrame)
 end
+function initWindows()
+	initFileWindow()
+	initUnitWindow()
+	initUnitContextualMenu()
+	initZoneWindow()
+	initForcesWindow()
+end
+function initFileWindow()
+	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
+end
+function initUnitWindow()
+	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	unitScrollPanel = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
+	
+	-- Put unit states in an array to sort them alphabetically
+	local unitStates = {}
+	for k, u in pairs(unitStateMachine.states) do
+		if k ~= "SELECTION" then
+			table.insert(unitStates, u)
+		end
+	end
+	table.sort(unitStates)
+	
+	-- Unit buttons
+	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
+	local button_size = 40
+	local y = 0
+	for i,u in ipairs(unitStates) do
+		unitButtons[u] = addButton(unitScrollPanel, 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+		y = y + button_size
+	end
+	
+	-- Team buttons
+	addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
+	for k, team in pairs(teamStateMachine.states) do
+		local x = tostring(team * 100 / math.ceil(teamCount/2) - 100 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local y = tostring(90 + 5 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local w = tostring(100 / math.ceil(teamCount/2)).."%"
+		local h = "5%"
+		local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
+		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
+		teamLabels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15, "center", nil, "center")
+	end
+end
+function initUnitContextualMenu()
+	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
+	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
+	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Add to group", nil)
+end
+function initZoneWindow()
+	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
+	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
+	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
+	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
+	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
+	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
+	
+	local toggleAllOn = 	function() -- show all zones
+									for k, zb in pairs(zoneBoxes) do
+										if not zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	local toggleAllOff = 	function() -- hide all zones
+									for k, zb in pairs(zoneBoxes) do
+										if zb.checkbox.checked then
+											zb.checkbox:Toggle()
+										end
+									end
+								end
+	addButton(zoneScrollPanel, 0, 0, "50%", 30, "Show all", toggleAllOn)
+	addButton(zoneScrollPanel, "50%", 0, "50%", 30, "Hide all", toggleAllOff)
+end
+function initForcesWindow()
+	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
+	addButton(windows['forceWindow'], 0, 0, tostring(100/3).."%", '5%', "Teams Configuration", teamConfig)
+	addButton(windows['forceWindow'], tostring(100/3).."%", 0, tostring(100/3).."%", '5%', "Ally Teams", allyTeam)
+	addButton(windows['forceWindow'], tostring(200/3).."%", 0, tostring(100/3).."%", '5%', "Unit Groups", unitGroupsPanel)
+	
+	-- Team Config Window
+	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	local teamConfigScrollPanel = addScrollPanel(teamConfigWindow, '0%', '0%', '100%', '100%')
+	for k, team in pairs(teamStateMachine.states) do
+		local panel = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
+		addLabel(panel, '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		-- TODO : add configurable parameters
+	end
+	
+	-- Ally Team Window
+	allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	addLabel(allyTeamsWindow, '0%', '0%', '20%', '10%', "Team List", 30, "center", nil, "center")
+	local teamListScrollPanel = addScrollPanel(allyTeamsWindow, '0%', '10%', '20%', '90%') -- List of all the teams
+	for k, team in pairs(teamStateMachine.states) do
+		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
+		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
+		local w = tostring(80 / math.ceil(teamCount/2)).."%"
+		local h = "50%"
+		local panel = addPanel(allyTeamsWindow, x, y, w, h)
+		selectAllyTeamsButtons[team] = addButton(panel, '0%', '0%', '100%', '10%', "Team "..tostring(team), function() selectedAllyTeam = team end)
+		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		selectAllyTeamsButtons[team].font.size = 20
+		allyTeamsScrollPanels[team] = addScrollPanel(panel, '2%', '10%', '96%', '89%')
+		
+		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '0%', 40*team, '100%', 40, "Team "..tostring(team), function() addTeamToSelectedAllyTeam(team) end)
+		allyTeamsListButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		allyTeamsListButtons[team].font.size = 20
+		
+		allyTeams[team] = {}
+		allyTeamsSize[team] = 0
+		allyTeamsRemoveTeamButtons[team] = {}
+	end
+	
+	-- Unit Groups Window
+	unitGroupsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	addLabel(unitGroupsWindow, '0%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
+	scrollPanels["unitList"] = addScrollPanel(unitGroupsWindow, '0%', '10%', '20%', '90%')
+	addLabel(unitGroupsWindow, '20%', '0%', '80%', '10%', "Group List", 30, "center", nil, "center")
+	scrollPanels["groupList"] = addScrollPanel(unitGroupsWindow, '20%', '10%', '80%', '90%')
+end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
 			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			unitStateMachine:setCurrentState(u)
+			Spring.SelectUnitArray({})
 		end
 	end
 end
 function initTeamFunctions() -- Creates a function for every teamState to change state and handle selection feedback
 	for k, t in pairs(teamStateMachine.states) do
 		teamFunctions[t] = function()
+			globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
 			teamStateMachine:setCurrentState(t)
-			local msg = "Transfer Units".."++"..t
-			Spring.SendLuaRulesMsg(msg)
+			Spring.SelectUnitArray({})
 		end
 	end
 end
@@ -330,8 +456,8 @@ function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to uni
 	Spring.SendLuaRulesMsg(msg)
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
-	if images["selectionRect"] ~= nil then
-		Screen0:RemoveChild(images["selectionRect"])
+	if selectionRect ~= nil then
+		Screen0:RemoveChild(selectionRect)
 	end
 	if plotSelection then -- only draw it when mouse button 1 is down and global state is selection
 		-- compute good values for x1, x2, y1, y2, regarding respective anchors
@@ -358,7 +484,7 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 			y2 = screenSizeY - drawEndY
 		end
 		-- draw the rectangle
-		images["selectionRect"] = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
+		selectionRect = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 end
 function previewUnit()-- Draw units before placing them
@@ -381,6 +507,7 @@ function previewUnit()-- Draw units before placing them
 	end
 end
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
+	-- TODO : requires rework
 	local unitSelection = Spring.GetSelectedUnits()
 	if #unitSelection > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
 		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
@@ -803,18 +930,168 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	end
 end
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
-	for k, zb in pairs(zoneBoxes) do
-		if k ~= "global" then
-			scrollPanels["zonePanel"]:RemoveChild(zb.editBox)
-			scrollPanels["zonePanel"]:RemoveChild(zb.checkbox)
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
+		for k, zb in pairs(zoneBoxes) do
+			if k ~= "global" then
+				zoneScrollPanel:RemoveChild(zb.editBox)
+				zoneScrollPanel:RemoveChild(zb.checkbox)
+			end
+		end
+		local size = 20
+		for i, z in ipairs(zoneList) do
+			local checkbox = addCheckbox(zoneScrollPanel, "80%", i * 3/2 * size, "20%", size, z.shown)
+			local editBox = addEditBox(zoneScrollPanel, 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
+			zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
+		end
+		totalZones = #zoneList
+	end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Forces state functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function updateAllyTeamPanels()
+	for k, at in pairs(allyTeams) do
+		if tableLength(at) ~= allyTeamsSize[k] then
+			for _, c in ipairs(allyTeamsRemoveTeamButtons[k]) do
+				allyTeamsScrollPanels[k]:RemoveChild(c)
+			end
+			local count = 0
+			for i, t in ipairs(at) do
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(k, t) end)
+				but.font.color = {teams[t].red, teams[t].green, teams[t].blue, 1}
+				but.font.size = 20
+				table.insert(allyTeamsRemoveTeamButtons[k], but)
+				count = count + 1
+			end
+			allyTeamsSize[k] = tableLength(at)
 		end
 	end
-	local size = 20
-	for i, z in ipairs(zoneList) do
-		local checkbox = addCheckbox(scrollPanels["zonePanel"], "80%", i * 3/2 * size, "20%", size, z.shown)
-		local editBox = addEditBox(scrollPanels["zonePanel"], 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
-		zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
+end
+function addTeamToSelectedAllyTeam(team)
+	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
+		table.insert(allyTeams[selectedAllyTeam], team)
+		table.sort(allyTeams[selectedAllyTeam])
 	end
+end
+function removeTeamFromAllyTeam(allyTeam, team)
+	local at = allyTeams[allyTeam]
+	for i, t in ipairs(at) do
+		if t == team then
+			table.remove(at, i)
+			break
+		end
+	end
+	table.sort(at)
+end
+function updateUnitGroupPanels()
+	local units = Spring.GetAllUnits()
+	if tableLength(units) ~= unitNumber then
+		for k, b in pairs(buttons) do
+			if string.find(k, "unit") ~= nil then
+				scrollPanels["unitList"]:RemoveChild(b)
+			end
+		end
+		local count = 0
+		for k, u in pairs(units) do
+			if u ~= 0 then
+				local uDefID = Spring.GetUnitDefID(u)
+				local unitDef = UnitDefs[uDefID]
+				local uName = ""
+				if unitDef ~= nil then
+					for name,param in unitDef:pairs() do
+						if name == "humanName" then
+							uName = param
+							break
+						end
+					end
+				end
+				buttons["unit"..u] = addButton(scrollPanels["unitList"], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() addUnitToGroup(unitGroups[selectedGroup], u) end)
+				count = count + 1
+			end
+		end
+		unitNumber = tableLength(units)
+	end
+	
+	local updatePanels = false
+	if tableLength(unitGroups) ~= groupTotal then
+		for k, p in pairs(panels) do
+			if string.find(k, "group") then
+				scrollPanels["groupList"]:RemoveChild(p)
+			end
+		end
+		scrollPanels["groupList"]:RemoveChild(buttons["addGroup"])
+		
+		local count = 0
+		for k, group in pairs(unitGroups) do
+			panels["group"..tostring(k)] = addPanel(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400)
+			selectUnitGroupBut[k] = addButton(panels["group"..tostring(k)], '0%', '0%', '100%', '10%', "Group "..tostring(k), function() selectedGroup = k end)
+			selectUnitGroupBut[k].font.size = 20
+			panels["unitGroup"..tostring(k)] = addPanel(panels["group"..tostring(k)], '0%', '10%', '100%', '80%')
+			buttons["deleteGroup"..tostring(k)] = addButton(panels["group"..tostring(k)], '0%', '90%', '100%', '10%', "Delete Group", function() deleteUnitGroup(k) end)
+			count = count + 1
+		end
+		buttons["addGroup"] = addButton(scrollPanels["groupList"], tostring(25 * (count%4))..'%', 400*math.floor(count/4), '25%', 400, "Add Group", function() addUnitGroup("Group "..tostring(groupNumber), {}) end)
+		groupTotal = tableLength(unitGroups)
+		updatePanels = true
+	end
+	
+	for i, group in pairs(unitGroups) do
+		if tableLength(group.units) ~= groupSizes[i] or updatePanels then
+			for k, b in pairs(buttons) do
+				if string.find(k, "unitGroup") ~= nil then
+					panels["unitGroup"..tostring(i)]:RemoveChild(b)
+				end
+			end
+			local count = 0
+			for k, u in pairs(group.units) do
+				local uDefID = Spring.GetUnitDefID(u)
+				local unitDef = UnitDefs[uDefID]
+				local uName = ""
+				if unitDef ~= nil then
+					for name,param in unitDef:pairs() do
+						if name == "humanName" then
+							uName = param
+							break
+						end
+					end
+				end
+				buttons["unitGroup"..tostring(i)..tostring(k)] = addButton(panels["unitGroup"..tostring(i)], '0%', 30 * count, '100%', 30, uName.." (ID:"..tostring(u)..")", function() removeUnitFromGroup(group, u) end)
+				count = count + 1
+			end
+			groupSizes[i] = tableLength(group.units)
+		end
+	end
+end
+function addUnitToGroup(group, unit)
+	if group ~= nil then
+		if not findInTable(group.units, unit) then
+			table.insert(group.units, unit)
+			table.sort(group.units)
+		end
+	end
+end
+function removeUnitFromGroup(group, unit)
+	local units = group.units
+	for i, u in ipairs(units) do
+		if u == unit then
+			table.remove(units, i)
+			break
+		end
+	end
+end
+function addUnitGroup(name, units)
+	unitGroups[groupNumber] = {}
+	unitGroups[groupNumber].name = name
+	unitGroups[groupNumber].units = units or {}
+	groupSizes[groupNumber] = 0
+	groupNumber = groupNumber + 1
+end
+function deleteUnitGroup(id)
+	unitGroups[id] = nil
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -886,6 +1163,20 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
 		zoneButtons[zoneStateMachine:getCurrentState()].state.hovered = true
 	end
+	
+	for _, b in pairs (selectAllyTeamsButtons) do
+		b.state.hovered = false
+	end
+	if selectedAllyTeam ~= nil then
+		selectAllyTeamsButtons[selectedAllyTeam].state.hovered = true
+	end
+	
+	for _, b in pairs(selectUnitGroupBut) do
+		b.state.hovered = false
+	end
+	if selectedGroup ~= nil and selectUnitGroupBut[selectedGroup] ~= nil then
+		selectUnitGroupBut[selectedGroup].state.hovered = true
+	end
 end
 function widget:DrawScreen()
 	changeMouseCursor()
@@ -921,6 +1212,7 @@ function widget:Initialize()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
+	initWindows()
 	fileFrame()
 end
 function widget:Update(delta)
@@ -937,11 +1229,15 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
-		updateZonePanel()
-		totalZones = #zoneList
+	if tableLength(unitSelection) <= 1 then
+		Screen0:RemoveChild(unitContextualMenu)
 	end
 	
+	updateZonePanel()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		updateAllyTeamPanels()
+		updateUnitGroupPanels()
+	end
 	updateButtonVisualFeedback()
 end
 
@@ -952,6 +1248,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
+	Screen0:RemoveChild(unitContextualMenu)
 	-- Left click
 	if button == 1 then
 		-- raycast
@@ -1032,6 +1329,18 @@ function widget:MousePress(mx, my, button)
 	elseif button == 3 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+			local kind, var = Spring.TraceScreenRay(mx, my)
+			if kind == "unit" then
+				local selectedUnits = Spring.GetSelectedUnits()
+				if tableLength(selectedUnits) <= 1 or not Spring.IsUnitSelected(var) then
+					proceedSelection({var})
+				end
+				if Spring.IsUnitSelected(var) then
+					Screen0:AddChild(unitContextualMenu)
+					unitContextualMenu.x = mx
+					unitContextualMenu.y = screenSizeY - my
+				end
+			end
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
