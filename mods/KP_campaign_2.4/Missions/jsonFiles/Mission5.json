@@ -112,7 +112,7 @@
 		{
 		"id":"arrivalAssemblerMarker",
 		"toBeRepeated":"no",
-		"delay":"20",
+		"delay":"1.5",
 		"type":"marker",
 		"position":
 			{

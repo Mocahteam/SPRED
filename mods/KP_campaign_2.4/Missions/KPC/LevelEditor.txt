@@ -98,6 +98,90 @@
 		StartPosX=1648; // Use these in combination with StartPosType=3
 		StartPosZ=320; // Use these in combination with StartPosType=3
 	}
+	[TEAM3]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=0.500000 0.000000 0.500000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM4]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=1.000000 0.500000 0.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM5]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=1.000000 1.000000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM6]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=1.000000 0.500000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM7]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=0.000000 0.500000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM8]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=0.000000 1.000000 0.500000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
+	[TEAM9]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=1;
+		RGBColor=0.500000 0.500000 0.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1648; // Use these in combination with StartPosType=3
+		StartPosZ=320; // Use these in combination with StartPosType=3
+	}
 	// more teams ...
 	
 	// teams in ally team share los etc and cant break alliance, every team must

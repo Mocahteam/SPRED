@@ -205,7 +205,7 @@
 		{
 		"id":"victory",
 		"toBeRepeated":"no",
-		"delay":"10",
+		"delay":"1",
 		"type":"end",
 		"outputState":"1111",
 		"result":"success"
@@ -213,7 +213,7 @@
 		{
 		"id":"defeat",
 		"toBeRepeated":"no",
-		"delay":"10",
+		"delay":"1",
 		"type":"end",
 		"outputState":"1111",
 		"result":"defeat"
@@ -255,7 +255,7 @@
 		{
 		"id":"AllyCryingForHelp",
 		"toBeRepeated":"yes",
-		"delay":"100",
+		"delay":"6",
 		"type":"marker",
 		"position":
 			{
@@ -267,7 +267,7 @@
 		{
 		"id":"deletingMarker",
 		"toBeRepeated":"yes",
-		"delay":"160",
+		"delay":"10",
 		"type":"erasemarker",
 		"position":
 			{

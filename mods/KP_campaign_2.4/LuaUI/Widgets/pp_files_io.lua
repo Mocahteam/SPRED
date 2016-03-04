@@ -21,8 +21,8 @@ local missionName = Spring.GetModOptions()["missionname"] -- get the name of the
 
 --[[local testmode = Spring.GetModOptions()["testmode"] -- if yes => we test a bunch of missions, containing tests or not
 local listMissionToTest = unpickle(Spring.GetModOptions()["listmissionstotest"]) --list of missions to test--]]
---local testmode="yes"
---local listMissionToTest = {"mission1","mission2","mission3","mission4","mission5","mission6","mission7","mission8"} --TEMP TO TEST
+local testmode="no"
+local listMissionToTest = {"mission1","mission2","mission3","mission4","mission5","mission6","mission7","mission8"} --TEMP TO TEST
 
 local currentMissionToTest_index=1 -- starting index
 local jsonPath="Missions/jsonFiles/"
@@ -42,7 +42,7 @@ function loadJson(e)
   if(e.missionName~=nil)and(Spring.GetModOptions()["hardcoded"]~="yes") then --TODO: Should be placed elsewhere than in pp_mission_gui
     local jsonName=e.missionName..".json"
     local mode=VFS.ZIP_FIRST
-    if(Spring.GetModOptions()["jsonlocation"]~="internal") then
+    if(Spring.GetModOptions()["jsonlocation"]=="external") then
       mode=VFS.RAW_FIRST
     end
     jsonFile= VFS.LoadFile(jsonPath..jsonName,mode)

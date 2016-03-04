@@ -1,3 +1,2 @@
-Zones circulaires
-Forcer zone carrée avec alt
-feedback visuel sur la topbar
+groupes d'unités
+better visual feedback

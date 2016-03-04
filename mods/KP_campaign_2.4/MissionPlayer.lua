@@ -18,6 +18,8 @@ local messages={}--associative array messageId->message type
 local conditions={}--associative array idCond->condition
 local actions={}--associative array idActions->actions
 local events={}--associative array idCond->event
+variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
+
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
 local actionStack={} -- action to be applied on game state, allows to handle table composed by the indexes delay and actId
@@ -25,6 +27,32 @@ local success=nil -- when this global variable change (with event of type "end")
 local outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 local canUpdate=false
 local mission
+
+
+local function deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+-------------------------------------
+-- Convert delay in seconds into delay in number of frames
+-- @return delay in number of frames
+-------------------------------------
+local function secondesToFrames(delaySec)
+  return delaySec*16 -- As Sync code is updated 16 times by seconds
+end
+
+
 -------------------------------------
 -- Simple faction to get spring code given its string representation
 -- @return faction code, related to factions described in txt files (such as Mission1.txt)
@@ -173,11 +201,77 @@ local function isTriggerable(trigger)
     -- first step : conditions are replaced to their boolean values.
     trigger=string.gsub(trigger, idCond, boolAsString(valueCond["currentlyValid"]))
   end
-  -- second step : turn the string in return statement
+  
+  for name,value in pairs(variables) do
+  -- second step : conditions are replaced to their boolean values.
+    trigger=string.gsub(trigger, name, 'variables.'..name)
+  end
+  
+  -- third step : turn the string in return statement
   local executableStatement="return("..trigger..")"
   local f = loadstring(executableStatement)
-   -- third step : loadstring is used to create the function.
+   -- fourth step : loadstring is used to create the function.
   return(f())
+end
+
+
+local function getUnitTableFromId(idUnit)
+  for i=1,table.getn(mission.armies) do
+    local factionArmies=mission.armies[i]
+    for j=1,table.getn(factionArmies.units) do
+      local unitTable=factionArmies.units[j]
+      if(unitTable.id==idUnit)then
+        return unitTable
+      end
+    end
+  end
+  --Spring.Echo("impossible to find the table of "..idUnit.." in mission.armies")
+  --Spring.Echo(json.encode(mission.armies))
+  return nil
+end
+
+local function getUnitFactionTypeFromId(idUnit)
+  for i=1,table.getn(mission.armies) do
+    local factionArmies=mission.armies[i]
+    local factionType=factionArmies.faction
+    local factionTypeCode=getFactionCode(factionType)
+    for j=1,table.getn(factionArmies.units) do
+      local unitTable=factionArmies.units[j]
+      if(unitTable.id==idUnit)then
+        return factionType
+      end
+    end
+  end
+  return nil
+end
+
+local function createUnit(unitTable,factionTypeCode)
+    if(unitTable.id~="ennemyBit_0") then
+      local posit=getAPosition(unitTable.position)
+      armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, Spring.GetGroundHeight(posit.x, posit.z),posit.z, "n", factionTypeCode)
+      if(unitTable["extras"]~=nil)and(unitTable["extras"]["compass"]=="yes") then
+        writeCompassOnUnit(armySpring[unitTable.id])
+      end
+      --Spring.Echo(unitTable.id)
+      --Spring.Echo(armySpring[unitTable.id])
+      armyInformations[unitTable.id]={}
+      local springUnit=armySpring[unitTable.id]
+      if(unitTable["health"]~=nil) then
+        unitHealthSettings=unitTable["health"] 
+      else
+        unitHealthSettings=mission.settings.health
+      end 
+      
+      armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*tonumber(unitHealthSettings.relativeValue)
+      Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
+      armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
+      armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
+      armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
+      armyInformations[unitTable.id].autoHealStatus=unitHealthSettings.autoHeal
+      armyInformations[unitTable.id].isUnderAttack=false
+      --Spring.Echo("try to create unit with these informations")
+      --Spring.Echo(json.encode(armyInformations))
+   end
 end
 
 -------------------------------------
@@ -239,13 +333,34 @@ local function ApplyNonGroupableAction(act)
     Spring.MarkerErasePosition(tonumber(posit.x), Spring.GetGroundHeight(tonumber(posit.x), tonumber(posit.z)),tonumber(posit.z))
   
   elseif(act.type=="end") then -- Change global variable success, and outputstate
-    Spring.Echo("applyingVictory")
+    --Spring.Echo("applyingVictory")
+    --Spring.Echo(json.encode(conditions))
     outputstate=act.outputState
     if(act.result=="success")then
       success=1
     else
       success=-1
-    end   
+    end 
+    
+  elseif(act.type=="unitCreation") then
+    local oldId=act.unitId
+    local tableUnit=getUnitTableFromId(oldId)
+    local factionType=getUnitFactionTypeFromId(oldId)
+    local factionTypeCode=getFactionCode(factionType)
+    local newId=oldId -- by default
+    if(armyInformations[oldId]~=nil)then -- if an ennemy with the same id has already been created, then create another id 
+      local index=0   
+      while (armyInformations[oldId.."_"..tostring(index)]~=nil) do
+        index=index+1
+      end
+      newId=oldId.."_"..tostring(index) 
+    end 
+    local newtableUnit=deepcopy(tableUnit)
+    newtableUnit.id=newId
+    createUnit(newtableUnit,factionTypeCode)
+    if(act.actionId~=nil)then
+      ApplyAction (act.actionId,newId)
+    end
   end
 end
 
@@ -254,8 +369,8 @@ end
 -- according to its type, will be applied within another function
 -- Handle group of units
 -------------------------------------
-local function ApplyAction (actionId)
-  Spring.Echo("try to apply "..actionId)
+function ApplyAction (actionId,overridingId)
+  --Spring.Echo("try to apply "..actionId)
   --Spring.Echo(json.encode(actions))
   if (not actions[actionId]["alreadyDone"])or(actions[actionId].toBeRepeated=="yes") then
     actions[actionId]["alreadyDone"]=true
@@ -263,11 +378,14 @@ local function ApplyAction (actionId)
     if(isAGroupableTypeOfAction(act.type)) then 
     -- All actions have a type attribute, allowing us to know what they deal about
       local externalUnitId=act.object
+      if(overridingId~=nil) then
+        externalUnitId=overridingId
+      end
       if(groupOfUnits[externalUnitId]==nil) then 
       -- the first thing we check is wether the id is related to a group or not
       -- if we pass this condition, it means that the condition is on only one unit
         local unit=armySpring[externalUnitId]
-        Spring.Echo(externalUnitId.." is asked to "..act.type)
+        --Spring.Echo(externalUnitId.." is asked to "..act.type)
         ApplyGroupableAction(unit,act)
       else
         -- we apply the condition the whole group
@@ -288,7 +406,7 @@ end
 -------------------------------------
 local function printMyStack()
   for i,el in pairs(actionStack) do
-    Spring.Echo("action "..el.actId.." is planned with delay : "..el.delay)
+    --Spring.Echo("action "..el.actId.." is planned with delay : "..el.delay)
   end
 end 
 
@@ -310,11 +428,12 @@ end
 -- At the beginning of table if the quickest action to be applied
 -- At the end if the action with the biggest delay
 -------------------------------------
-local function AddActionInStack(actId, delay)
+local function AddActionInStack(actId, delSeconds)
+  local delay=secondesToFrames(delSeconds)
   local element={}
   element["delay"]=delay
   element["actId"]=actId
-  Spring.Echo(actId.." is added with delay : "..delay)
+  --Spring.Echo(actId.." is added with delay : "..delay)
   for index,el in pairs(actionStack) do
     local del=el.delay
     local act=el.actId
@@ -327,7 +446,7 @@ local function AddActionInStack(actId, delay)
 end 
 
 -------------------------------------
--- Update the stack by considering the time elapsed.
+-- Update the stack by considering the time elapsed (in frames)
 -- Actions get closer to be applied when time passes
 -------------------------------------
 local function updateStack(timeLapse)
@@ -346,7 +465,7 @@ end
 local function applyCurrentActions()
   for index,el in pairs(actionStack) do
     if(el.delay<0)then
-      ApplyAction(el.actId)
+      ApplyAction(el.actId, nil)
       table.remove(actionStack,index)
     end
   end
@@ -386,14 +505,29 @@ end
 local function processEvents()
   for idEvent,event in pairs(events) do
     if isTriggerable(event.trigger) then
+      if(event.script~=nil)then
+        --Spring.Echo("before")
+        --Spring.Echo(json.encode(variables))
+        local script=event.script
+        --Spring.Echo()
+        for name,value in pairs(variables) do
+          -- first step : conditions are replaced to their boolean values.
+          script=string.gsub(script, name, 'variables.'..name)
+        end
+        -- second step : turn the string in return statement
+        local f = loadstring(script)
+        f()
+      end
+      --Spring.Echo("after")
+      --Spring.Echo(json.encode(variables))          
       for j=1,table.getn(event.actions) do
         local actId=event.actions[j].actionId
         local allowMultipleInStack=actions[actId].allowMultipleInStack   
         if ((allowMultipleInStack==nil or allowMultipleInStack=="yes"))or(not(alreadyInStack(actId))) then
           AddActionInStack(actId,tonumber(actions[actId].delay))
         end
-      end
-    end    
+      end 
+    end
   end
 end
 
@@ -514,8 +648,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     local externalUnitId=c["object"]
     if(externalUnitId=="frameNumber") then
       local bool=true
-      bool=bool and ((c.value.superiorTo==nil)or(tonumber(c.value.superiorTo)<frameNumber))
-      bool=bool and ((c.value.inferiorTo==nil)or(tonumber(c.value.inferiorTo)>frameNumber))
+      bool=bool and ((c.value.superiorTo==nil)or(secondesToFrames(tonumber(c.value.superiorTo))<frameNumber))
+      bool=bool and ((c.value.inferiorTo==nil)or(secondesToFrames(tonumber(c.value.inferiorTo))>frameNumber))
       conditions[idCond]["currentlyValid"]=bool          
     elseif(groupOfUnits[externalUnitId]==nil) then 
       -- means that the condition is on only one unit
@@ -623,7 +757,7 @@ local function StartAfterJson ()
   
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
-    Spring.Echo("I am Totally Deleting Stuff")
+    --Spring.Echo("I am Totally Deleting Stuff")
     Spring.DestroyUnit(units[i], false, true)
   end
   
@@ -632,20 +766,38 @@ local function StartAfterJson ()
   
   
    -------------------------------
+   -------VARIABLES---------------
+   -------------------------------
+  if(mission.variables~=nil)then
+    for i=1,table.getn(mission.variables) do
+      local missionVar=mission.variables[i]
+      local initValue=missionVar.initValue
+      local name=missionVar.name
+      if(missionVar.type=="number") then
+        initValue=tonumber(initValue)
+      end
+      variables[name]=initValue
+    end
+  end  
+  --Spring.Echo(json.encode(variables))
+  
+   -------------------------------
    -------POSITIONS---------------
    -------------------------------
-  for i=1,table.getn(mission.positions) do
-    local position=mission.positions[i]
-    positions[position.id]=position
-  end  
-  
-   for p,pos in pairs(positions) do
-    if(pos.coordinates=="relative") then
-      local orig=positions[pos.origin]
-      positions[p].x=tonumber(orig.x)+tonumber(pos.dx)
-      positions[p].z=tonumber(orig.z)+tonumber(pos.dz)
-    end
-   end   
+  if(mission.positions~=nil)then
+    for i=1,table.getn(mission.positions) do
+      local position=mission.positions[i]
+      positions[position.id]=position
+    end  
+    
+     for p,pos in pairs(positions) do
+      if(pos.coordinates=="relative") then
+        local orig=positions[pos.origin]
+        positions[p].x=tonumber(orig.x)+tonumber(pos.dx)
+        positions[p].z=tonumber(orig.z)+tonumber(pos.dz)
+      end
+     end
+  end   
    -------------------------------
    -------SETTINGS----------------
    -------------------------------
@@ -674,38 +826,19 @@ local function StartAfterJson ()
  ----------ARMIES---------------
  -------------------------------
   local unitHealthSettings
-  for i=1,table.getn(mission.armies) do
-    local factionArmies=mission.armies[i]
-    local factionType=factionArmies.faction
-    groupOfUnits[factionType]={}
-    local factionTypeCode=getFactionCode(factionType)
-    for j=1,table.getn(factionArmies.units) do
-      local unitTable=factionArmies.units[j]
-      table.insert(groupOfUnits[factionType],unitTable.id)
-      local posit=getAPosition(unitTable.position)
-      if(unitTable.visibleAtStart=="yes") then
-        armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, Spring.GetGroundHeight(posit.x, posit.z),posit.z, "n", factionTypeCode)
-        if(unitTable["extras"]~=nil)and(unitTable["extras"]["compass"]=="yes") then
-          writeCompassOnUnit(armySpring[unitTable.id])
+  if(mission.armies~=nil)then
+    for i=1,table.getn(mission.armies) do
+      local factionArmies=mission.armies[i]
+      local factionType=factionArmies.faction
+      groupOfUnits[factionType]={}
+      local factionTypeCode=getFactionCode(factionType)
+      for j=1,table.getn(factionArmies.units) do
+        local unitTable=factionArmies.units[j]
+        if(unitTable.visibleAtStart~="no") then
+          createUnit(unitTable,factionTypeCode)
         end
+        table.insert(groupOfUnits[factionType],unitTable.id)
       end
-      Spring.Echo(unitTable.id)
-      Spring.Echo(armySpring[unitTable.id])
-      armyInformations[unitTable.id]={}
-      local springUnit=armySpring[unitTable.id]
-      if(unitTable["health"]~=nil) then
-        unitHealthSettings=unitTable["health"] 
-      else
-        unitHealthSettings=mission.settings.health
-      end 
-      
-      armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*tonumber(unitHealthSettings.relativeValue)
-      Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
-      armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
-      armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
-      armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
-      armyInformations[unitTable.id].autoHealStatus=unitHealthSettings.autoHeal
-      armyInformations[unitTable.id].isUnderAttack=false
     end
   end
   
@@ -718,49 +851,59 @@ local function StartAfterJson ()
       local groupId=mission.groupOfUnits[i].id
       groupOfUnits[groupId]={}
       for i,unit in ipairs(mission.groupOfUnits[i].units) do
-        Spring.Echo(unit)
+        --Spring.Echo(unit)
         table.insert(groupOfUnits[groupId],unit)
       end
     end
   end 
-  Spring.Echo(json.encode(groupOfUnits))
+  --Spring.Echo(json.encode(groupOfUnits))
  -------------------------------
  -------MESSAGES----------------
  -------------------------------
-  for i=1, table.getn(mission.messages) do
-   local id=mission.messages[i].id
-   messages[id]=mission.messages[i].content
-  end 
+ if(mission.messages~=nil) then
+    for i=1, table.getn(mission.messages) do
+     local id=mission.messages[i].id
+     messages[id]=mission.messages[i].content
+    end 
+ end
   --Spring.Echo(json.encode(messages))
+  
  -------------------------------
  -------CONDITIONS--------------
  -------------------------------
-  for i=1, table.getn(mission.conditions) do
-   local id=mission.conditions[i].id
-   conditions[id]={}
-   conditions[id]["object"]=mission.conditions[i].object
-   conditions[id]["attribute"]=mission.conditions[i].attribute
-   conditions[id]["value"]=mission.conditions[i].value
-   conditions[id]["currentlyValid"]=false
-  end 
+ if(mission.conditions~=nil)then
+    for i=1, table.getn(mission.conditions) do
+     local id=mission.conditions[i].id
+     conditions[id]={}
+     conditions[id]["object"]=mission.conditions[i].object
+     conditions[id]["attribute"]=mission.conditions[i].attribute
+     conditions[id]["value"]=mission.conditions[i].value
+     conditions[id]["currentlyValid"]=false
+    end 
+  end
   
  -------------------------------
  -------ACTIONS-----------------
- -------------------------------   
+ -------------------------------
+ if(mission.actions~=nil)then   
   for i=1, table.getn(mission.actions) do
    local id=mission.actions[i].id
    actions[id]=mission.actions[i]
    actions[id]["alreadyDone"]=false
-  end    
+  end
+end    
    
  -------------------------------
  -------EVENTS------------------
  -------------------------------
+ if(mission.events~=nil)then   
   for i=1, table.getn(mission.events) do
    local trigger=mission.events[i].trigger
    local actions=mission.events[i].actions
    local idEvent=mission.events[i].idEvent
+   local script=mission.events[i].script
    events[idEvent]={}
+   events[idEvent].script=script
    events[idEvent].actions=actions
    events[idEvent].trigger=trigger
    events[idEvent].hasTakenPlace=false
@@ -771,6 +914,7 @@ local function StartAfterJson ()
     end
    end
   end
+end
   
    -------------------------------
    -------START------------------
