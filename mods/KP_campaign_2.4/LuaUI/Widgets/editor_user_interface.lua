@@ -73,6 +73,7 @@ local groupTotal = nil
 local selectedGroup = 0
 local groupSizes = {}
 local unitGroupsAttributionWindow
+local unitGroupsRemovalWindow
 local unitListScrollPanel
 local unitListLabels = {}
 local groupListScrollPanel
@@ -152,6 +153,19 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 	}
 	label.font.color = _color or {1, 1, 1, 1}
 	return label
+end
+function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
+	local textBox = Chili.TextBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		text = _text,
+		fontsize = size or 20
+	}
+	textBox.font.color = _color or {1, 1, 1, 1}
+	return textBox
 end
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 	local image = Chili.Image:New {
@@ -236,6 +250,7 @@ end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
 	Screen0:RemoveChild(unitGroupsAttributionWindow)
+	Screen0:RemoveChild(unitGroupsRemovalWindow)
 end
 function fileFrame()
 	clearUI()
@@ -362,8 +377,9 @@ function initUnitWindow()
 end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
-	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
-	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Add to group", showUnitGroupsAttributionWindow)
+	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
+	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Add to group", showUnitGroupsAttributionWindow)
+	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Remove from group", showUnitGroupsRemovalWindow)
 end
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -581,6 +597,36 @@ function showUnitGroupsAttributionWindow()
 		end
 	end
 	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", newGroup)
+end
+function showUnitGroupsRemovalWindow()
+	clearTemporaryWindows()
+	unitGroupsRemovalWindow = addWindow(Screen0, '90%', '30%', '10%', '40%', true)
+	local removalWindowScrollPanel = addScrollPanel(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%')
+	
+	local noGroupsInCommon = true
+	local unitSelection = Spring.GetSelectedUnits()
+	
+	local count = 0
+	for k, group in pairs(unitGroups) do
+		local addUnitGroupButton = true
+		for i, u in ipairs(unitSelection) do
+			if not findInTable(group.units, u) then
+				addUnitGroupButton = false
+				break
+			end
+		end
+		if addUnitGroupButton then
+			addButton(removalWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() removeSelectedUnitsFromGroup(group) clearTemporaryWindows() end)
+			count = count + 1
+			noGroupsInCommon = false
+		end
+	end
+	
+	if noGroupsInCommon then
+		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
+		Spring.Echo("before")
+		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', "No groups in common", 20, {1, 0, 0, 1})
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1102,6 +1148,12 @@ function addSelectedUnitsToGroup(group)
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
 		addUnitToGroup(group, u)
+	end
+end
+function removeSelectedUnitsFromGroup(group)
+	local unitSelection = Spring.GetSelectedUnits()
+	for i, u in ipairs(unitSelection) do
+		removeUnitFromGroup(group, u)
 	end
 end
 function removeUnitFromGroup(group, unit)
