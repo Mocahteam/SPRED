@@ -87,7 +87,7 @@ $(REP_SUPPLIER)/PP_Supplier.h: PP_Supplier.h
 
 # Windows => copy new dll
 # Linux, it is better that using symbolic links. Then, it is not necessary to make a copy of library
-install_client: $(REP_CLIENT)/ada/exemples/$(CIBLE_CLIENT) $(REP_CLIENT)/c-cpp/exemple/$(CIBLE_CLIENT) $(REP_CLIENT)/compalgo/$(CIBLE_CLIENT) $(REP_CLIENT)/java/$(CIBLE_CLIENT) $(REP_CLIENT)/ocaml/$(CIBLE_CLIENT) $(REP_CLIENT)/scratch/$(CIBLE_CLIENT) ./test/$(CIBLE_CLIENT)
+install_client: $(REP_CLIENT)/ada/exemples/$(CIBLE_CLIENT) $(REP_CLIENT)/c-cpp/exemple/$(CIBLE_CLIENT) $(REP_CLIENT)/compalgo/$(CIBLE_CLIENT) $(REP_CLIENT)/java/$(CIBLE_CLIENT) $(REP_CLIENT)/ocaml/$(CIBLE_CLIENT) $(REP_CLIENT)/scratch/$(CIBLE_CLIENT) $(REP_CLIENT)/python/$(CIBLE_CLIENT) ./test/$(CIBLE_CLIENT)
 
 $(REP_CLIENT)/ada/exemples/$(CIBLE_CLIENT): $(CIBLE_CLIENT)
 	cp $(CIBLE_CLIENT) ../Client_Interfaces/ada/exemples/
@@ -107,6 +107,9 @@ $(REP_CLIENT)/ocaml/$(CIBLE_CLIENT): $(CIBLE_CLIENT)
 
 $(REP_CLIENT)/scratch/$(CIBLE_CLIENT): $(CIBLE_CLIENT)
 	cp $(CIBLE_CLIENT) $(REP_CLIENT)/scratch
+	
+$(REP_CLIENT)/python/$(CIBLE_CLIENT): $(CIBLE_CLIENT)
+	cp $(CIBLE_CLIENT) $(REP_CLIENT)/python
 	
 ./test/$(CIBLE_CLIENT): $(CIBLE_CLIENT)
 	cp $(CIBLE_CLIENT) ./test
