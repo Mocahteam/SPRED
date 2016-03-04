@@ -1033,6 +1033,16 @@ function updateUnitGroupPanels()
 	
 	local updatePanels = false
 	if tableLength(unitGroups) ~= groupTotal then
+		updatePanels = true
+	end
+	for k, group in pairs(unitGroups) do
+		if tableLength(group.units) ~= groupSizes[k] then
+			updatePanels = true
+			break
+		end
+	end
+	
+	if updatePanels then
 		for k, p in pairs(groupPanels) do
 			groupListScrollPanel:RemoveChild(p)
 		end
@@ -1047,11 +1057,9 @@ function updateUnitGroupPanels()
 			count = count + 1
 		end
 		groupTotal = tableLength(unitGroups)
-		updatePanels = true
-	end
-	
-	for k, group in pairs(unitGroups) do
-		if tableLength(group.units) ~= groupSizes[k] or updatePanels then
+		
+		
+		for k, group in pairs(unitGroups) do
 			for key, l in pairs(unitGroupLabels[k]) do
 				groupPanels[k]:RemoveChild(l)
 			end
@@ -1067,6 +1075,12 @@ function updateUnitGroupPanels()
 				count = count + 1
 			end
 			groupSizes[k] = tableLength(group.units)
+		end
+	end
+	
+	for k, group in pairs(unitGroups) do
+		if group.name ~= groupEditBoxes[k].text then
+			group.name = groupEditBoxes[k].text
 		end
 	end
 end
