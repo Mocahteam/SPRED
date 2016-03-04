@@ -72,7 +72,6 @@ local groupNumber = 0
 local groupTotal = nil
 local selectedGroup = 0
 local groupSizes = {}
-local selectUnitGroupBut = {}
 local unitGroupsAttributionWindow
 local unitListScrollPanel
 local unitListLabels = {}
@@ -572,9 +571,16 @@ function showUnitGroupsAttributionWindow()
 		count = count + 1
 	end
 	
-	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "New Group")
+	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "")
 	newUnitGroupEditBox.font.size = 14
-	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end)
+	newUnitGroupEditBox.hint = "New Group"
+	local function newGroup()
+		if newUnitGroupEditBox.text ~= "" then
+			addUnitGroup(newUnitGroupEditBox.text)
+			clearTemporaryWindows()
+		end
+	end
+	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", newGroup)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1079,7 +1085,7 @@ function updateUnitGroupPanels()
 	end
 	
 	for k, group in pairs(unitGroups) do
-		if group.name ~= groupEditBoxes[k].text then
+		if group.name ~= groupEditBoxes[k].text and groupEditBoxes[k].text ~= "" then
 			group.name = groupEditBoxes[k].text
 		end
 	end
@@ -1198,13 +1204,6 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	end
 	if selectedAllyTeam ~= nil then
 		selectAllyTeamsButtons[selectedAllyTeam].state.hovered = true
-	end
-	
-	for _, b in pairs(selectUnitGroupBut) do
-		b.state.hovered = false
-	end
-	if selectedGroup ~= nil and selectUnitGroupBut[selectedGroup] ~= nil then
-		selectUnitGroupBut[selectedGroup].state.hovered = true
 	end
 end
 function widget:DrawScreen()
