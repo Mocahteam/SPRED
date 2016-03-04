@@ -40,8 +40,6 @@ private:
 	
 };
 
-std::vector<std::string> splitLine(std::string val);
-
 extern CProgAndPlay* pp;
 
 // ---
