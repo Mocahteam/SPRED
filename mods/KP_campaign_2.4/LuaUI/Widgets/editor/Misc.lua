@@ -44,6 +44,21 @@ function tableLength(t)
 end
 
 -----------------------
+-- Returns the index of the minimum element of a table
+-----------------------
+function minOfTable(t)
+	local index = 0
+	local value = 0
+	for i, e in ipairs(t) do
+		if e < value or index == 0 then
+			value = e
+			index = i
+		end
+	end
+	return index
+end
+
+-----------------------
 -- Returns true if element is in table
 -----------------------
 function findInTable(tab, e)

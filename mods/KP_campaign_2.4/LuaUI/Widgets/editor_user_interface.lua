@@ -68,7 +68,7 @@ local allyTeamsScrollPanels = {}
 local selectedAllyTeam = 0
 local unitGroups = {}
 local unitTotal = 0
-local groupNumber = 0
+local groupNumber = 1
 local groupTotal = nil
 local selectedGroup = 0
 local groupSizes = {}
@@ -1100,13 +1100,27 @@ function updateUnitGroupPanels()
 		end
 		
 		local count = 0
+		local heights = {0, 0, 0, 0, 0}
+		local widths = {0, 0, 0, 0, 0}
 		for k, group in pairs(unitGroups) do
-			groupPanels[k] = addPanel(groupListScrollPanel, 200 * count, 0, 200, 60 + 20 * tableLength(group.units))
-			groupEditBoxes[k] = addEditBox(groupPanels[k], 5, 5, 150, 20, "left", group.name)
+			local x, y
+			if count < 5 then
+				x = 230 * count
+				y = 0
+				count = count + 1
+				heights[count] = 65 + 20 * tableLength(group.units)
+				widths[count] = 230 * (count - 1)
+			else
+				local column = minOfTable(heights)
+				x = widths[column]
+				y = heights[column]
+				heights[column] = heights[column] + 65 + 20 * tableLength(group.units)
+			end
+			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 230, 60 + 20 * tableLength(group.units))
+			groupEditBoxes[k] = addEditBox(groupPanels[k], 5, 5, 180, 20, "left", group.name)
 			groupEditBoxes[k].font.size = 14
-			local deleteButton = addButton(groupPanels[k], 160, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
+			local deleteButton = addButton(groupPanels[k], 190, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
 			deleteButton.font.color = {1, 0, 0, 1}
-			count = count + 1
 		end
 		groupTotal = tableLength(unitGroups)
 		
