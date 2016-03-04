@@ -937,7 +937,7 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 						// Returns directly data. If idCmd is inaccurate, an
 						// exception will be thrown
 						ret = commandQueue->at(idCmd).code;
-						oss << "PP_Unit_PdgCmd_GetCode " << unit << " " << idCmd;
+						oss << "PP_Unit_PdgCmd_GetCode " << unit << "_" << u->second.type << " " << idCmd;
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetCode : idCmd out of range\n");
 						ret = -1;
@@ -997,7 +997,7 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 							(ossParams.str().c_str()).first;
 						if (params) {
 							ret = params->size();
-							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
+							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << "_" << u->second.type << " " << idCmd;
 						}
 						else {
 							PP_SetError("PP_Unit_PdgCmd_GetNumParams : param undefined\n");
@@ -1065,7 +1065,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 								// Returns directly data. If idParam is inaccurate, an
 								// exception will be thrown
 								ret = params->at(idParam);
-								oss << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
+								oss << "PP_Unit_PdgCmd_GetParam " << unit << "_" << u->second.type << " " << idCmd << " " << idParam;
 							} catch (std::out_of_range e) {
 								PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
 								ret = -1;

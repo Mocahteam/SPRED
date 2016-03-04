@@ -534,10 +534,9 @@ void CProgAndPlay::logMessages() {
 			std::ifstream ifs("mission_ended.conf");
 			std::string val;
 			getline(ifs, val);
-			std::vector<std::string> elems = splitLine(val);
-			if (elems.at(0).compare("won") == 0 || elems.at(0).compare("loss") == 0) {
+			if (val.compare("won") == 0 || val.compare("loss") == 0) {
 				ppTraces << "mission_end_time " << startTime + (int)std::floor(gu->PP_modGameTime) << std::endl;
-				ppTraces << "end " << elems.at(0) << " " << missionName << std::endl;
+				ppTraces << "end " << val << " " << missionName << std::endl;
 				i += 2;
 				missionEnded = true;
 			}
@@ -590,18 +589,6 @@ void CProgAndPlay::openTracesFile() {
 		}
 	}
 	log("ProgAndPLay::openTracesFile end");
-}
-
-/**
-* Renvoie un vecteur de string contenant les tokens de val, le delimiteur etant l'espace
-*/
-std::vector<std::string> splitLine(std::string val) {
-	std::string buf;
-	std::vector<std::string> elems;
-    std::stringstream ss(val);
-    while (ss >> buf)
-        elems.push_back(buf);
-   	return elems;
 }
 
 // ---
