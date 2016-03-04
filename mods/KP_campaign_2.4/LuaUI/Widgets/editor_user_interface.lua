@@ -514,7 +514,7 @@ end
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
 	-- TODO : requires rework
 	local unitSelection = Spring.GetSelectedUnits()
-	if #unitSelection > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
+	if unitSelection.n > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
 		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
 		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
 		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], 0, 50, "30%", 20, "HP%", 20, "right")
@@ -1259,7 +1259,7 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	if tableLength(unitSelection) <= 1 then
+	if unitSelection.n == 0 then
 		clearTemporaryWindows()
 	end
 	
@@ -1361,8 +1361,8 @@ function widget:MousePress(mx, my, button)
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 			local kind, var = Spring.TraceScreenRay(mx, my)
 			if kind == "unit" then
-				local selectedUnits = Spring.GetSelectedUnits()
-				if tableLength(selectedUnits) <= 1 or not Spring.IsUnitSelected(var) then
+				local unitSelection = Spring.GetSelectedUnits()
+				if unitSelection.n == 0 or not Spring.IsUnitSelected(var) then
 					proceedSelection({var})
 				end
 				if Spring.IsUnitSelected(var) then
