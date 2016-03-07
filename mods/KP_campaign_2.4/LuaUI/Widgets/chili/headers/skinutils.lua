@@ -313,6 +313,8 @@ function DrawButton(obj)
   elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
     bgcolor = obj.focusColor
     --bgcolor = mixColors(bgcolor, obj.focusColor, 0.5)
+  elseif (obj.state.chosen and obj.chosenColor ~= nil) then
+	bgcolor = obj.chosenColor
   end
   gl.Color(bgcolor)
 
@@ -328,6 +330,8 @@ function DrawButton(obj)
     fgcolor = mulColor(fgcolor, 0.4)
   elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
     fgcolor = obj.focusColor
+  elseif (obj.state.chosen and obj.chosenColor ~= nil) then
+	fgcolor = obj.chosenColor
   end
   gl.Color(fgcolor)
 

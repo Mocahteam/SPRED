@@ -1069,7 +1069,6 @@ end
 function updateUnitGroupPanels()
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal then
-		Spring.Echo(units.n.." "..unitTotal)
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
 		end
@@ -1239,38 +1238,38 @@ function changeMouseCursor() -- Hide mouse cursor in unit state and during movem
 end
 function updateButtonVisualFeedback() -- Show current states on GUI
 	for _, b in pairs(topBarButtons) do
-		b.state.hovered = false
+		b.state.chosen = false
 	end
 	if topBarButtons[globalStateMachine:getCurrentState()] ~= nil then
-		topBarButtons[globalStateMachine:getCurrentState()].state.hovered = true
+		topBarButtons[globalStateMachine:getCurrentState()].state.chosen = true
 	end
 	
 	for _, b in pairs (unitButtons) do
-		b.state.hovered = false
+		b.state.chosen = false
 	end
 	if unitButtons[unitStateMachine:getCurrentState()] ~= nil then
-		unitButtons[unitStateMachine:getCurrentState()].state.hovered = true
+		unitButtons[unitStateMachine:getCurrentState()].state.chosen = true
 	end
 	
 	for _, b in pairs (teamButtons) do
-		b.state.hovered = false
+		b.state.chosen = false
 	end
 	if teamButtons[teamStateMachine:getCurrentState()] ~= nil and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
-		teamButtons[teamStateMachine:getCurrentState()].state.hovered = true
+		teamButtons[teamStateMachine:getCurrentState()].state.chosen = true
 	end
 	
 	for _, b in pairs (zoneButtons) do
-		b.state.hovered = false
+		b.state.chosen = false
 	end
 	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
-		zoneButtons[zoneStateMachine:getCurrentState()].state.hovered = true
+		zoneButtons[zoneStateMachine:getCurrentState()].state.chosen = true
 	end
 	
 	for _, b in pairs (selectAllyTeamsButtons) do
-		b.state.hovered = false
+		b.state.chosen = false
 	end
 	if selectedAllyTeam ~= nil then
-		selectAllyTeamsButtons[selectedAllyTeam].state.hovered = true
+		selectAllyTeamsButtons[selectedAllyTeam].state.chosen = true
 	end
 end
 function widget:DrawScreen()
@@ -1620,6 +1619,11 @@ function widget:KeyPress(key, mods)
 				selectedZone.x2 = selectedZone.x2 + 8
 			end
 		end
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		-- ESCAPE : back to file menu
+		if key == Spring.GetKeyCode("esc") then
+			fileFrame()
+		end
 	end
-	return false
+	return true
 end

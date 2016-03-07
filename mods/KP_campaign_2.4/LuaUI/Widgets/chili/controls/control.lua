@@ -68,6 +68,7 @@ Control = Object:Inherit{
     selected = false, --FIXME implement
     pressed  = false,
     enabled  = true, --FIXME implement
+	chosen = false,
   },
 
   skin            = nil,
