@@ -54,3 +54,9 @@ teamStateMachine = StateMachine.new(teamStates, teamStates[0])
 ------------------------------
 local zoneStates = { DRAWRECT = "drawrect", DRAWDISK = "drawdisk", SELECTION = "selection" }
 zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)
+
+------------------------------
+-- Initialize forces state machine
+------------------------------
+local forcesStates = { TEAMCONFIG = "teamConfig", ALLYTEAMS = "allyTeams", UNITGROUPS = "unitGroups" }
+forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)

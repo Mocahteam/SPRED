@@ -58,6 +58,7 @@ local totalZones = #zoneList
 local zoneNumber = totalZones+1
 
 -- Forces variables
+local forcesTabs = {}
 local teamConfigWindow, allyTeamsWindow, unitGroupsWindow
 local allyTeams = {}
 local allyTeamsSize = {}
@@ -273,6 +274,7 @@ end
 function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
+	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
 	Screen0:AddChild(windows["forceWindow"])
 	windows["forceWindow"].x = 100
 	windows["forceWindow"].y = 100
@@ -292,14 +294,17 @@ function clearForceWindow()
 end
 function teamConfig()
 	clearForceWindow()
+	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
 	windows['forceWindow']:AddChild(teamConfigWindow)
 end
 function allyTeam()
 	clearForceWindow()
+	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
 	windows['forceWindow']:AddChild(allyTeamsWindow)
 end
 function unitGroupsPanel()
 	clearForceWindow()
+	forcesStateMachine:setCurrentState(forcesStateMachine.states.UNITGROUPS)
 	windows['forceWindow']:AddChild(unitGroupsWindow)
 end
 
@@ -409,9 +414,9 @@ function initZoneWindow()
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	addButton(windows['forceWindow'], 0, 0, tostring(100/3).."%", '5%', "Teams Configuration", teamConfig)
-	addButton(windows['forceWindow'], tostring(100/3).."%", 0, tostring(100/3).."%", '5%', "Ally Teams", allyTeam)
-	addButton(windows['forceWindow'], tostring(200/3).."%", 0, tostring(100/3).."%", '5%', "Unit Groups", unitGroupsPanel)
+	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], 0, 0, tostring(100/3).."%", '5%', "Teams Configuration", teamConfig)
+	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(100/3).."%", 0, tostring(100/3).."%", '5%', "Ally Teams", allyTeam)
+	forcesTabs[forcesStateMachine.states.UNITGROUPS] = addButton(windows['forceWindow'], tostring(200/3).."%", 0, tostring(100/3).."%", '5%', "Unit Groups", unitGroupsPanel)
 	
 	-- Team Config Window
 	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
@@ -441,9 +446,10 @@ function initForcesWindow()
 		allyTeamsListButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		allyTeamsListButtons[team].font.size = 20
 		
+		allyTeamsRemoveTeamButtons[team] = {}
+		
 		allyTeams[team] = {}
 		allyTeamsSize[team] = 0
-		allyTeamsRemoveTeamButtons[team] = {}
 	end
 	
 	-- Unit Groups Window
@@ -1244,32 +1250,39 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 		topBarButtons[globalStateMachine:getCurrentState()].state.chosen = true
 	end
 	
-	for _, b in pairs (unitButtons) do
+	for _, b in pairs(unitButtons) do
 		b.state.chosen = false
 	end
 	if unitButtons[unitStateMachine:getCurrentState()] ~= nil then
 		unitButtons[unitStateMachine:getCurrentState()].state.chosen = true
 	end
 	
-	for _, b in pairs (teamButtons) do
+	for _, b in pairs(teamButtons) do
 		b.state.chosen = false
 	end
 	if teamButtons[teamStateMachine:getCurrentState()] ~= nil and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
 		teamButtons[teamStateMachine:getCurrentState()].state.chosen = true
 	end
 	
-	for _, b in pairs (zoneButtons) do
+	for _, b in pairs(zoneButtons) do
 		b.state.chosen = false
 	end
 	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
 		zoneButtons[zoneStateMachine:getCurrentState()].state.chosen = true
 	end
 	
-	for _, b in pairs (selectAllyTeamsButtons) do
+	for _, b in pairs(selectAllyTeamsButtons) do
 		b.state.chosen = false
 	end
 	if selectedAllyTeam ~= nil then
 		selectAllyTeamsButtons[selectedAllyTeam].state.chosen = true
+	end
+	
+	for _, b in pairs(forcesTabs) do
+		b.state.chosen = false
+	end
+	if forcesTabs[forcesStateMachine:getCurrentState()] ~= nil then
+		forcesTabs[forcesStateMachine:getCurrentState()].state.chosen = true
 	end
 end
 function widget:DrawScreen()
@@ -1279,9 +1292,14 @@ function widget:DrawScreen()
 		--showUnitAttributes()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		updateZonePanel()
 		updateZoneInformation()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		updateAllyTeamPanels()
+		updateUnitGroupPanels()
 	end
 	showZoneInformation()
+	updateButtonVisualFeedback()
 end
 function widget:DrawWorld()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
@@ -1326,13 +1344,6 @@ function widget:Update(delta)
 	if unitSelection.n == 0 then
 		clearTemporaryWindows()
 	end
-	
-	updateZonePanel()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		updateAllyTeamPanels()
-		updateUnitGroupPanels()
-	end
-	updateButtonVisualFeedback()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
