@@ -441,15 +441,14 @@ function initForcesWindow()
 		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
 		local w = tostring(80 / math.ceil(teamCount/2)).."%"
 		local h = "50%"
-		local panel = addPanel(allyTeamsWindow, x, y, w, h)
+		local panel = addWindow(allyTeamsWindow, x, y, w, h)
 		selectAllyTeamsButtons[team] = addButton(panel, '0%', '0%', '100%', '10%', "Team "..tostring(team), function() selectedAllyTeam = team end)
 		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		selectAllyTeamsButtons[team].font.size = 20
 		allyTeamsScrollPanels[team] = addScrollPanel(panel, '2%', '10%', '96%', '89%')
 		
-		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '0%', 40*team, '100%', 40, "Team "..tostring(team), function() addTeamToSelectedAllyTeam(team) end)
-		allyTeamsListButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-		allyTeamsListButtons[team].font.size = 20
+		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*team, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
+		addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		
 		allyTeamsRemoveTeamButtons[team] = {}
 		
