@@ -311,7 +311,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 0","console 0","info 0")
+	Spring.SendCommands("resbar 0","fps 1","console 0","info 0")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -1040,7 +1040,7 @@ function updateAllyTeamPanels()
 			end
 			local count = 0
 			for i, t in ipairs(at) do
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(k, t) end)
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
 				but.font.color = {teams[t].red, teams[t].green, teams[t].blue, 1}
 				but.font.size = 20
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
@@ -1069,6 +1069,7 @@ end
 function updateUnitGroupPanels()
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal then
+		Spring.Echo(units.n.." "..unitTotal)
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
 		end
@@ -1080,7 +1081,7 @@ function updateUnitGroupPanels()
 			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 20 * count, '100%', 20, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
 			count = count + 1
 		end
-		unitsTotal = units.n
+		unitTotal = units.n
 	end
 	
 	local updatePanels = false
