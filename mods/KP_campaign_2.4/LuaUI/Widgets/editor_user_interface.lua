@@ -247,6 +247,8 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	end
 	selectedZone = nil
 	Spring.SelectUnitArray({})
+	clearTemporaryWindows()
+	globalStateMachine:setCurrentState(globalStateMachine.states.NONE)
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -415,9 +417,11 @@ function initZoneWindow()
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], 0, 0, tostring(100/3).."%", '5%', "Teams Configuration", teamConfig)
-	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(100/3).."%", 0, tostring(100/3).."%", '5%', "Ally Teams", allyTeam)
-	forcesTabs[forcesStateMachine.states.UNITGROUPS] = addButton(windows['forceWindow'], tostring(200/3).."%", 0, tostring(100/3).."%", '5%', "Unit Groups", unitGroupsPanel)
+	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/3).."%", '5%', "Teams Configuration", teamConfig)
+	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/3).."%", "0%", tostring(95/3).."%", '5%', "Ally Teams", allyTeam)
+	forcesTabs[forcesStateMachine.states.UNITGROUPS] = addButton(windows['forceWindow'], tostring(2*95/3).."%", "0%", tostring(95/3).."%", '5%', "Unit Groups", unitGroupsPanel)
+	local closeButton = addButton(windows['forceWindow'], "95%", "0%", "5%", "5%", "X", clearUI)
+	closeButton.font.color = {1, 0, 0, 1}
 	
 	-- Team Config Window
 	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
@@ -1087,7 +1091,7 @@ function updateUnitGroupPanels()
 			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 20 * count, '100%', 20, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
 			count = count + 1
 		end
-		unitTotal = units.n
+		-- unitTotal = units.n -- TODO : find a way to use it anyway, quick fix for a bug
 	end
 	
 	local updatePanels = false
@@ -1586,6 +1590,10 @@ function widget:KeyPress(key, mods)
 	-- CTRL + N : new map
 	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
 		newMap()
+	-- ESCAPE : back to file menu
+	elseif key == Spring.GetKeyCode("esc") then
+		clearUI()
+		return true
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
@@ -1634,11 +1642,6 @@ function widget:KeyPress(key, mods)
 				selectedZone.x1 = selectedZone.x1 + 8
 				selectedZone.x2 = selectedZone.x2 + 8
 			end
-		end
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		-- ESCAPE : back to file menu
-		if key == Spring.GetKeyCode("esc") then
-			fileFrame()
 		end
 	end
 	return false
