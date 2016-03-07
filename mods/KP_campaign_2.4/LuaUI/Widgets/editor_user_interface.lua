@@ -327,10 +327,11 @@ function initTopBar()
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
 	
 	-- Menu buttons
-	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '5%', '100%', 'File', fileFrame)
-	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '5%', '0%', '5%', '100%', 'Units', unitFrame)
-	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '10%', '0%', '5%', '100%', 'Zones', zoneFrame)
-	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '15%', '0%', '5%', '100%', 'Forces', forcesFrame)
+	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', 'File', fileFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', 'Units', unitFrame)
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', 'Zones', zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', 'Forces', forcesFrame)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', 'Triggers', nil)
 end
 function initWindows()
 	initFileWindow()
@@ -1292,14 +1293,9 @@ function widget:DrawScreen()
 		--showUnitAttributes()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		updateZonePanel()
 		updateZoneInformation()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		updateAllyTeamPanels()
-		updateUnitGroupPanels()
 	end
 	showZoneInformation()
-	updateButtonVisualFeedback()
 end
 function widget:DrawWorld()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
@@ -1341,9 +1337,18 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
+	updateZonePanel()
+	
 	if unitSelection.n == 0 then
 		clearTemporaryWindows()
 	end
+	
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		updateAllyTeamPanels()
+		updateUnitGroupPanels()
+	end
+	
+	updateButtonVisualFeedback()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
