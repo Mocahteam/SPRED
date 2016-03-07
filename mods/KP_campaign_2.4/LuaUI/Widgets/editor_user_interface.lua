@@ -1337,11 +1337,11 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	updateZonePanel()
-	
 	if unitSelection.n == 0 then
 		clearTemporaryWindows()
 	end
+	
+	updateZonePanel()
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
@@ -1641,5 +1641,5 @@ function widget:KeyPress(key, mods)
 			fileFrame()
 		end
 	end
-	return true
+	return false
 end
