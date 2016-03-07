@@ -1368,6 +1368,14 @@ function widget:MousePress(mx, my, button)
 		-- raycast
 		local kind,var = Spring.TraceScreenRay(mx,my)
 		
+		-- Change state depending on the clicked element
+		if kind == "unit" then
+			unitFrame()
+		elseif clickedZone(mx, my) ~= nil then
+			zoneFrame()
+			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+		end
+		
 		-- STATE UNIT : place units on the field and select/move/rotate them
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 			-- STATE UNIT : place units on the field

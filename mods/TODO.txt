@@ -1,3 +1,2 @@
 flèches allyteams
-selectionner unité change state
 remonter l'arbre de construction
