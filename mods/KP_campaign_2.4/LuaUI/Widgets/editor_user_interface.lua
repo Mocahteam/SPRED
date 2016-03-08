@@ -78,6 +78,8 @@ local unitGroupsAttributionWindow
 local unitGroupsRemovalWindow
 local unitListScrollPanel
 local unitListLabels = {}
+local unitListButtons = {}
+local unitListViewButtons = {}
 local groupListScrollPanel
 local groupPanels = {}
 local groupEditBoxes = {}
@@ -277,11 +279,16 @@ end
 function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
-	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
 	Screen0:AddChild(windows["forceWindow"])
 	windows["forceWindow"].x = 100
 	windows["forceWindow"].y = 100
-	teamConfig()
+	if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+		teamConfig()
+	elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
+		allyTeam()
+	elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.UNITGROUPS then
+		unitGroupsPanel()
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -436,7 +443,7 @@ function initForcesWindow()
 	-- Ally Team Window
 	allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
 	addLabel(allyTeamsWindow, '0%', '0%', '20%', '10%', "Team List", 30, "center", nil, "center")
-	local teamListScrollPanel = addScrollPanel(allyTeamsWindow, '0%', '10%', '20%', '90%') -- List of all the teams
+	local teamListScrollPanel = addScrollPanel(allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
 	for k, team in pairs(teamStateMachine.states) do
 		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
 		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
@@ -460,10 +467,10 @@ function initForcesWindow()
 	
 	-- Unit Groups Window
 	unitGroupsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	addLabel(unitGroupsWindow, '0%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
-	unitListScrollPanel = addScrollPanel(unitGroupsWindow, '0%', '10%', '20%', '90%')
-	addLabel(unitGroupsWindow, '20%', '0%', '80%', '10%', "Group List", 30, "center", nil, "center")
-	groupListScrollPanel = addScrollPanel(unitGroupsWindow, '20%', '10%', '80%', '90%')
+	addLabel(unitGroupsWindow, '1%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
+	unitListScrollPanel = addScrollPanel(unitGroupsWindow, '1%', '10%', '20%', '85%')
+	addLabel(unitGroupsWindow, '23%', '0%', '76%', '10%', "Group List", 30, "center", nil, "center")
+	groupListScrollPanel = addScrollPanel(unitGroupsWindow, '23%', '10%', '76%', '85%')
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1088,15 +1095,38 @@ function updateUnitGroupPanels()
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
 		end
+		for k, b in pairs(unitListButtons) do
+			unitListScrollPanel:RemoveChild(b)
+		end
+		for k, i in pairs(unitListViewButtons) do
+			unitListScrollPanel:RemoveChild(i)
+		end
 		local count = 0
 		for i, u in ipairs(units) do
+			-- Unit label (type, team and id)
 			local uDefID = Spring.GetUnitDefID(u)
 			local name = UnitDefs[uDefID].humanName
 			local team = Spring.GetUnitTeam(u)
-			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 20 * count, '100%', 20, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
+			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '65%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+			
+			-- Eye button to focus a specific unit
+			local function viewUnit()
+				local state = Spring.GetCameraState()
+				local x, y, z = Spring.GetUnitPosition(u)
+				state.px, state.py, state.pz = x, y, z
+				state.height = 500
+				Spring.SetCameraState(state, 2)
+				Spring.SelectUnitArray({u})
+			end
+			unitListViewButtons[u] = addButton(unitListScrollPanel, '65%', 30 * count, '15%', 30, "", viewUnit)
+			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			
+			-- Arrow button to add the unit to a unit group
+			unitListButtons[u] = addButton(unitListScrollPanel, '80%', 30 * count, '20%', 30, ">>", nil)
+			
 			count = count + 1
 		end
-		-- unitTotal = units.n -- TODO : find a way to use it anyway, quick fix for a bug
+		unitTotal = units.n -- TODO : find a way to use it anyway, quick fix for a bug
 	end
 	
 	local updatePanels = false
@@ -1583,12 +1613,15 @@ function widget:KeyPress(key, mods)
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then
 		saveMap()
+		return true
 	-- CTRL + O : load a map
 	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
 		loadMap("Missions/jsonFiles/Mission3.json")
+		return true
 	-- CTRL + N : new map
 	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
 		newMap()
+		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
 		clearUI()
@@ -1641,19 +1674,24 @@ function widget:KeyPress(key, mods)
 						break
 					end
 				end
+				return true
 			-- ARROWS : move selected zone
 			elseif key == Spring.GetKeyCode("up") then
 				selectedZone.z1 = selectedZone.z1 - 8
 				selectedZone.z2 = selectedZone.z2 - 8
+				return true
 			elseif key == Spring.GetKeyCode("down") then
 				selectedZone.z1 = selectedZone.z1 + 8
 				selectedZone.z2 = selectedZone.z2 + 8
+				return true
 			elseif key == Spring.GetKeyCode("left") then
 				selectedZone.x1 = selectedZone.x1 - 8
 				selectedZone.x2 = selectedZone.x2 - 8
+				return true
 			elseif key == Spring.GetKeyCode("right") then
 				selectedZone.x1 = selectedZone.x1 + 8
 				selectedZone.x2 = selectedZone.x2 + 8
+				return true
 			end
 		end
 	end
