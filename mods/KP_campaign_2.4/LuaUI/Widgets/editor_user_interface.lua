@@ -269,6 +269,7 @@ function unitFrame()
 	unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
 	Screen0:AddChild(windows["unitWindow"])
+	Screen0:AddChild(windows["unitListWindow"])
 end
 function zoneFrame()
 	clearUI()
@@ -357,6 +358,7 @@ function initFileWindow()
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 function initUnitWindow()
+	-- Left Panel
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	unitScrollPanel = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
 	
@@ -390,6 +392,12 @@ function initUnitWindow()
 		teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
 		teamLabels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15, "center", nil, "center")
 	end
+	
+	-- Unit List
+	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
+	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', "Unit List")
+	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
+	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", nil)
 end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
@@ -467,8 +475,8 @@ function initForcesWindow()
 	
 	-- Unit Groups Window
 	unitGroupsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	addLabel(unitGroupsWindow, '1%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
-	unitListScrollPanel = addScrollPanel(unitGroupsWindow, '1%', '10%', '20%', '85%')
+	--addLabel(unitGroupsWindow, '1%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
+	--unitListScrollPanel = addScrollPanel(unitGroupsWindow, '1%', '10%', '20%', '85%')
 	addLabel(unitGroupsWindow, '23%', '0%', '76%', '10%', "Group List", 30, "center", nil, "center")
 	groupListScrollPanel = addScrollPanel(unitGroupsWindow, '23%', '10%', '76%', '85%')
 end
@@ -597,7 +605,7 @@ function showUnitsInformation() -- Show information about selected and hovered u
 end
 function showUnitGroupsAttributionWindow()
 	clearTemporaryWindows()
-	unitGroupsAttributionWindow = addWindow(Screen0, '90%', '30%', '10%', '40%', true)
+	unitGroupsAttributionWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
 	local attributionWindowScrollPanel = addScrollPanel(unitGroupsAttributionWindow, '0%', '0%', '100%', '100%')
 	
 	local count = 0
@@ -645,6 +653,44 @@ function showUnitGroupsRemovalWindow()
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
 		Spring.Echo("before")
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', "No groups in common", 20, {1, 0, 0, 1})
+	end
+end
+function updateUnitList()
+	local units = Spring.GetAllUnits()
+	if units.n ~= unitTotal then
+		for k, l in pairs(unitListLabels) do
+			unitListScrollPanel:RemoveChild(l)
+		end
+		for k, b in pairs(unitListButtons) do
+			unitListScrollPanel:RemoveChild(b)
+		end
+		for k, i in pairs(unitListViewButtons) do
+			unitListScrollPanel:RemoveChild(i)
+		end
+		local count = 0
+		for i, u in ipairs(units) do
+			-- Unit label (type, team and id)
+			local uDefID = Spring.GetUnitDefID(u)
+			local name = UnitDefs[uDefID].humanName
+			local team = Spring.GetUnitTeam(u)
+			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+			
+			-- Eye button to focus a specific unit
+			local function viewUnit()
+				local state = Spring.GetCameraState()
+				local x, y, z = Spring.GetUnitPosition(u)
+				state.px, state.py, state.pz = x, y, z
+				state.height = 500
+				Spring.SetCameraState(state, 2)
+				Spring.SelectUnitArray({u})
+				unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+			end
+			unitListViewButtons[u] = addButton(unitListScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
+			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			
+			count = count + 1
+		end
+		unitTotal = units.n
 	end
 end
 
@@ -1090,45 +1136,6 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	table.sort(at)
 end
 function updateUnitGroupPanels()
-	local units = Spring.GetAllUnits()
-	if units.n ~= unitTotal then
-		for k, l in pairs(unitListLabels) do
-			unitListScrollPanel:RemoveChild(l)
-		end
-		for k, b in pairs(unitListButtons) do
-			unitListScrollPanel:RemoveChild(b)
-		end
-		for k, i in pairs(unitListViewButtons) do
-			unitListScrollPanel:RemoveChild(i)
-		end
-		local count = 0
-		for i, u in ipairs(units) do
-			-- Unit label (type, team and id)
-			local uDefID = Spring.GetUnitDefID(u)
-			local name = UnitDefs[uDefID].humanName
-			local team = Spring.GetUnitTeam(u)
-			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '65%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
-			
-			-- Eye button to focus a specific unit
-			local function viewUnit()
-				local state = Spring.GetCameraState()
-				local x, y, z = Spring.GetUnitPosition(u)
-				state.px, state.py, state.pz = x, y, z
-				state.height = 500
-				Spring.SetCameraState(state, 2)
-				Spring.SelectUnitArray({u})
-			end
-			unitListViewButtons[u] = addButton(unitListScrollPanel, '65%', 30 * count, '15%', 30, "", viewUnit)
-			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-			
-			-- Arrow button to add the unit to a unit group
-			unitListButtons[u] = addButton(unitListScrollPanel, '80%', 30 * count, '20%', 30, ">>", nil)
-			
-			count = count + 1
-		end
-		unitTotal = units.n -- TODO : find a way to use it anyway, quick fix for a bug
-	end
-	
 	local updatePanels = false
 	if tableLength(unitGroups) ~= groupTotal then
 		updatePanels = true
@@ -1366,6 +1373,10 @@ function widget:Update(delta)
 		clearTemporaryWindows()
 	end
 	
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		updateUnitList()
+	end
+	
 	updateZonePanel()
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
@@ -1384,19 +1395,19 @@ end
 
 function widget:MousePress(mx, my, button)
 	clearTemporaryWindows()
+	-- raycast
+	local kind,var = Spring.TraceScreenRay(mx,my)
+	
+	-- Change state depending on the clicked element
+	if kind == "unit" then
+		unitFrame()
+	elseif clickedZone(mx, my) ~= nil then
+		zoneFrame()
+		zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+	end
+	
 	-- Left click
 	if button == 1 then
-		-- raycast
-		local kind,var = Spring.TraceScreenRay(mx,my)
-		
-		-- Change state depending on the clicked element
-		if kind == "unit" then
-			unitFrame()
-		elseif clickedZone(mx, my) ~= nil then
-			zoneFrame()
-			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-		end
-		
 		-- STATE UNIT : place units on the field and select/move/rotate them
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 			-- STATE UNIT : place units on the field
@@ -1472,7 +1483,6 @@ function widget:MousePress(mx, my, button)
 	elseif button == 3 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
-			local kind, var = Spring.TraceScreenRay(mx, my)
 			if kind == "unit" then
 				local unitSelection = Spring.GetSelectedUnits()
 				if unitSelection.n == 0 or not Spring.IsUnitSelected(var) then
