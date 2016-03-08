@@ -1247,46 +1247,32 @@ function changeMouseCursor() -- Hide mouse cursor in unit state and during movem
 	]]
 end
 function updateButtonVisualFeedback() -- Show current states on GUI
-	for _, b in pairs(topBarButtons) do
-		b.state.chosen = false
-	end
-	if topBarButtons[globalStateMachine:getCurrentState()] ~= nil then
-		topBarButtons[globalStateMachine:getCurrentState()].state.chosen = true
-	end
-	
-	for _, b in pairs(unitButtons) do
-		b.state.chosen = false
-	end
-	if unitButtons[unitStateMachine:getCurrentState()] ~= nil then
-		unitButtons[unitStateMachine:getCurrentState()].state.chosen = true
-	end
-	
-	for _, b in pairs(teamButtons) do
-		b.state.chosen = false
-	end
-	if teamButtons[teamStateMachine:getCurrentState()] ~= nil and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
-		teamButtons[teamStateMachine:getCurrentState()].state.chosen = true
+	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
+	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
+	markButtonWithinSet(teamButtons, teamStateMachine:getCurrentState(), unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION)
+	markButtonWithinSet(zoneButtons, zoneStateMachine:getCurrentState())
+	markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
+	markButtonWithinSet(forcesTabs, forcesStateMachine:getCurrentState())
+end
+function markButtonWithinSet(buttonTable, markedButton, condition)
+	local specificCondition = true
+	if condition ~= nil then
+		specificCondition = condition
 	end
 	
-	for _, b in pairs(zoneButtons) do
-		b.state.chosen = false
-	end
-	if zoneButtons[zoneStateMachine:getCurrentState()] ~= nil then
-		zoneButtons[zoneStateMachine:getCurrentState()].state.chosen = true
-	end
-	
-	for _, b in pairs(selectAllyTeamsButtons) do
-		b.state.chosen = false
-	end
-	if selectedAllyTeam ~= nil then
-		selectAllyTeamsButtons[selectedAllyTeam].state.chosen = true
-	end
-	
-	for _, b in pairs(forcesTabs) do
-		b.state.chosen = false
-	end
-	if forcesTabs[forcesStateMachine:getCurrentState()] ~= nil then
-		forcesTabs[forcesStateMachine:getCurrentState()].state.chosen = true
+	for k, b in pairs(buttonTable) do
+		local requestUpdate = false
+		if b.state.chosen then
+			b.state.chosen = false
+			requestUpdate = not requestUpdate
+		end
+		if markedButton == k and not buttonTable[markedButton].state.chosen and specificCondition then
+			buttonTable[markedButton].state.chosen = true
+			requestUpdate = not requestUpdate
+		end
+		if requestUpdate then
+			b:InvalidateSelf()
+		end
 	end
 end
 function widget:DrawScreen()
