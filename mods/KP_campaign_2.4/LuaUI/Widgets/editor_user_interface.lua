@@ -36,6 +36,23 @@ local teamLabels = {}
 local teamButtons = {}
 local teamImages = {}
 local unitContextualMenu
+local unitGroups = {}
+local unitTotal = 0
+local groupNumber = 1
+local groupTotal = nil
+local selectedGroup = 0
+local groupSizes = {}
+local unitGroupsAttributionWindow
+local unitGroupsRemovalWindow
+local unitListScrollPanel
+local unitListLabels = {}
+local unitListButtons = {}
+local unitListViewButtons = {}
+local groupListScrollPanel
+local groupPanels = {}
+local groupEditBoxes = {}
+local unitGroupLabels = {}
+local unitGroupViewButtons = {}
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
@@ -59,7 +76,7 @@ local zoneNumber = totalZones+1
 
 -- Forces variables
 local forcesTabs = {}
-local teamConfigWindow, allyTeamsWindow, unitGroupsWindow
+local teamConfigWindow, allyTeamsWindow
 local allyTeams = {}
 local allyTeamsSize = {}
 local allyTeamsRemoveTeamButtons = {}
@@ -68,23 +85,6 @@ local selectAllyTeamsButtons = {}
 local allyTeamsListButtons = {}
 local allyTeamsScrollPanels = {}
 local selectedAllyTeam = 0
-local unitGroups = {}
-local unitTotal = 0
-local groupNumber = 1
-local groupTotal = nil
-local selectedGroup = 0
-local groupSizes = {}
-local unitGroupsAttributionWindow
-local unitGroupsRemovalWindow
-local unitListScrollPanel
-local unitListLabels = {}
-local unitListButtons = {}
-local unitListViewButtons = {}
-local groupListScrollPanel
-local groupPanels = {}
-local groupEditBoxes = {}
-local unitGroupLabels = {}
-
 
 -- Mouse variables
 local mouseMove = false
@@ -301,7 +301,6 @@ end
 function clearForceWindow()
 	windows['forceWindow']:RemoveChild(teamConfigWindow)
 	windows['forceWindow']:RemoveChild(allyTeamsWindow)
-	windows['forceWindow']:RemoveChild(unitGroupsWindow)
 end
 function teamConfig()
 	clearForceWindow()
@@ -312,11 +311,6 @@ function allyTeam()
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
 	windows['forceWindow']:AddChild(allyTeamsWindow)
-end
-function unitGroupsPanel()
-	clearForceWindow()
-	forcesStateMachine:setCurrentState(forcesStateMachine.states.UNITGROUPS)
-	windows['forceWindow']:AddChild(unitGroupsWindow)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -397,7 +391,14 @@ function initUnitWindow()
 	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
 	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', "Unit List")
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
-	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", nil)
+	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", function() Screen0:AddChild(windows["unitGroupsWindow"]) end)
+	
+	-- Unit Groups Window
+	windows["unitGroupsWindow"] = addWindow(Screen0, "15%", "15%", '62%', '60%', true)
+	addLabel(windows["unitGroupsWindow"], '0%', '0%', '100%', '10%', "Group List", 30, "center", nil, "center")
+	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '100%', '90%')
+	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", function() Screen0:RemoveChild(windows["unitGroupsWindow"]) end)
+	closeButton.font.color = {1, 0, 0, 1}
 end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
@@ -472,13 +473,6 @@ function initForcesWindow()
 		allyTeams[team] = {}
 		allyTeamsSize[team] = 0
 	end
-	
-	-- Unit Groups Window
-	unitGroupsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	--addLabel(unitGroupsWindow, '1%', '0%', '20%', '10%', "Unit List", 30, "center", nil, "center")
-	--unitListScrollPanel = addScrollPanel(unitGroupsWindow, '1%', '10%', '20%', '85%')
-	addLabel(unitGroupsWindow, '23%', '0%', '76%', '10%', "Group List", 30, "center", nil, "center")
-	groupListScrollPanel = addScrollPanel(unitGroupsWindow, '23%', '10%', '76%', '85%')
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -692,6 +686,138 @@ function updateUnitList()
 		end
 		unitTotal = units.n
 	end
+end
+function updateUnitGroupPanels()
+	local updatePanels = false
+	if tableLength(unitGroups) ~= groupTotal then
+		updatePanels = true
+	end
+	for k, group in pairs(unitGroups) do
+		if tableLength(group.units) ~= groupSizes[k] then
+			updatePanels = true
+			break
+		end
+	end
+	
+	if updatePanels then
+		for k, p in pairs(groupPanels) do
+			groupListScrollPanel:RemoveChild(p)
+		end
+		
+		local count = 0
+		local heights = {0, 0, 0, 0, 0}
+		local widths = {0, 0, 0, 0, 0}
+		for k, group in pairs(unitGroups) do
+			local x, y
+			if count < 5 then
+				x = 230 * count
+				y = 0
+				count = count + 1
+				heights[count] = 65 + 30 * tableLength(group.units)
+				widths[count] = 230 * (count - 1)
+			else
+				local column = minOfTable(heights)
+				x = widths[column]
+				y = heights[column]
+				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
+			end
+			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 230, 60 + 30 * tableLength(group.units))
+			groupEditBoxes[k] = addEditBox(groupPanels[k], 5, 5, 180, 20, "left", group.name)
+			groupEditBoxes[k].font.size = 14
+			local deleteButton = addButton(groupPanels[k], 190, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
+			deleteButton.font.color = {1, 0, 0, 1}
+		end
+		groupTotal = tableLength(unitGroups)
+		
+		
+		for k, group in pairs(unitGroups) do
+			for key, l in pairs(unitGroupLabels[k]) do
+				groupPanels[k]:RemoveChild(l)
+			end
+			for key, b in pairs(unitGroupViewButtons[k]) do
+				groupPanels[k]:RemoveChild(b)
+			end
+			
+			local count = 0
+			unitGroupLabels[k] = {}
+			unitGroupViewButtons[k] = {}
+			for key, u in pairs(group.units) do
+				local uDefID = Spring.GetUnitDefID(u)
+				local name = UnitDefs[uDefID].humanName
+				local team = Spring.GetUnitTeam(u)
+				local label = addLabel(groupPanels[k], '2%', 40 + 30 * count, '83%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				table.insert(unitGroupLabels[k], label)
+				
+				-- Eye button to focus a specific unit
+				local function viewUnit()
+					local state = Spring.GetCameraState()
+					local x, y, z = Spring.GetUnitPosition(u)
+					state.px, state.py, state.pz = x, y, z
+					state.height = 500
+					Spring.SetCameraState(state, 2)
+					Spring.SelectUnitArray({u})
+					unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+				end
+				local but = addButton(groupPanels[k], '85%', 40 + 30 * count, '15%', 30, "", viewUnit)
+				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(unitGroupViewButtons[k], but)
+				
+				count = count + 1
+			end
+			groupSizes[k] = tableLength(group.units)
+		end
+	end
+	
+	for k, group in pairs(unitGroups) do
+		if group.name ~= groupEditBoxes[k].text and groupEditBoxes[k].text ~= "" then
+			group.name = groupEditBoxes[k].text
+		end
+	end
+end
+function addUnitToGroup(group, unit)
+	if group ~= nil then
+		if not findInTable(group.units, unit) then
+			table.insert(group.units, unit)
+			table.sort(group.units)
+		end
+	end
+end
+function addSelectedUnitsToGroup(group)
+	local unitSelection = Spring.GetSelectedUnits()
+	for i, u in ipairs(unitSelection) do
+		addUnitToGroup(group, u)
+	end
+end
+function removeSelectedUnitsFromGroup(group)
+	local unitSelection = Spring.GetSelectedUnits()
+	for i, u in ipairs(unitSelection) do
+		removeUnitFromGroup(group, u)
+	end
+end
+function removeUnitFromGroup(group, unit)
+	local units = group.units
+	for i, u in ipairs(units) do
+		if u == unit then
+			table.remove(units, i)
+			break
+		end
+	end
+end
+function addUnitGroup(name)
+	local unitSelection = Spring.GetSelectedUnits()
+	unitGroups[groupNumber] = {}
+	unitGroups[groupNumber].name = name
+	unitGroups[groupNumber].units = {}
+	for i, u in ipairs(unitSelection) do
+		addUnitToGroup(unitGroups[groupNumber], u)
+	end
+	groupSizes[groupNumber] = 0
+	unitGroupLabels[groupNumber] = {}
+	unitGroupViewButtons[groupNumber] = {}
+	groupNumber = groupNumber + 1
+end
+function deleteUnitGroup(id)
+	unitGroups[id] = nil
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1135,118 +1261,6 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	end
 	table.sort(at)
 end
-function updateUnitGroupPanels()
-	local updatePanels = false
-	if tableLength(unitGroups) ~= groupTotal then
-		updatePanels = true
-	end
-	for k, group in pairs(unitGroups) do
-		if tableLength(group.units) ~= groupSizes[k] then
-			updatePanels = true
-			break
-		end
-	end
-	
-	if updatePanels then
-		for k, p in pairs(groupPanels) do
-			groupListScrollPanel:RemoveChild(p)
-		end
-		
-		local count = 0
-		local heights = {0, 0, 0, 0, 0}
-		local widths = {0, 0, 0, 0, 0}
-		for k, group in pairs(unitGroups) do
-			local x, y
-			if count < 5 then
-				x = 230 * count
-				y = 0
-				count = count + 1
-				heights[count] = 65 + 20 * tableLength(group.units)
-				widths[count] = 230 * (count - 1)
-			else
-				local column = minOfTable(heights)
-				x = widths[column]
-				y = heights[column]
-				heights[column] = heights[column] + 65 + 20 * tableLength(group.units)
-			end
-			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 230, 60 + 20 * tableLength(group.units))
-			groupEditBoxes[k] = addEditBox(groupPanels[k], 5, 5, 180, 20, "left", group.name)
-			groupEditBoxes[k].font.size = 14
-			local deleteButton = addButton(groupPanels[k], 190, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
-			deleteButton.font.color = {1, 0, 0, 1}
-		end
-		groupTotal = tableLength(unitGroups)
-		
-		
-		for k, group in pairs(unitGroups) do
-			for key, l in pairs(unitGroupLabels[k]) do
-				groupPanels[k]:RemoveChild(l)
-			end
-			
-			local count = 0
-			unitGroupLabels[k] = {}
-			for key, u in pairs(group.units) do
-				local uDefID = Spring.GetUnitDefID(u)
-				local name = UnitDefs[uDefID].humanName
-				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[k], '5%', 40 + 20 * count, '95%', 20, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
-				table.insert(unitGroupLabels[k], label)
-				count = count + 1
-			end
-			groupSizes[k] = tableLength(group.units)
-		end
-	end
-	
-	for k, group in pairs(unitGroups) do
-		if group.name ~= groupEditBoxes[k].text and groupEditBoxes[k].text ~= "" then
-			group.name = groupEditBoxes[k].text
-		end
-	end
-end
-function addUnitToGroup(group, unit)
-	if group ~= nil then
-		if not findInTable(group.units, unit) then
-			table.insert(group.units, unit)
-			table.sort(group.units)
-		end
-	end
-end
-function addSelectedUnitsToGroup(group)
-	local unitSelection = Spring.GetSelectedUnits()
-	for i, u in ipairs(unitSelection) do
-		addUnitToGroup(group, u)
-	end
-end
-function removeSelectedUnitsFromGroup(group)
-	local unitSelection = Spring.GetSelectedUnits()
-	for i, u in ipairs(unitSelection) do
-		removeUnitFromGroup(group, u)
-	end
-end
-function removeUnitFromGroup(group, unit)
-	local units = group.units
-	for i, u in ipairs(units) do
-		if u == unit then
-			table.remove(units, i)
-			break
-		end
-	end
-end
-function addUnitGroup(name)
-	local unitSelection = Spring.GetSelectedUnits()
-	unitGroups[groupNumber] = {}
-	unitGroups[groupNumber].name = name
-	unitGroups[groupNumber].units = {}
-	for i, u in ipairs(unitSelection) do
-		addUnitToGroup(unitGroups[groupNumber], u)
-	end
-	groupSizes[groupNumber] = 0
-	unitGroupLabels[groupNumber] = {}
-	groupNumber = groupNumber + 1
-end
-function deleteUnitGroup(id)
-	unitGroups[id] = nil
-end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -1375,13 +1389,13 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		updateUnitList()
+		updateUnitGroupPanels()
 	end
 	
 	updateZonePanel()
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
-		updateUnitGroupPanels()
 	end
 	
 	updateButtonVisualFeedback()
@@ -1400,7 +1414,9 @@ function widget:MousePress(mx, my, button)
 	
 	-- Change state depending on the clicked element
 	if kind == "unit" then
-		unitFrame()
+		if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
+			unitFrame()
+		end
 	elseif clickedZone(mx, my) ~= nil then
 		zoneFrame()
 		zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
