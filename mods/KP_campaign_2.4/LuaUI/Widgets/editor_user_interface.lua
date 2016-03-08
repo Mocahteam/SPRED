@@ -48,6 +48,7 @@ local unitListScrollPanel
 local unitListLabels = {}
 local unitListButtons = {}
 local unitListViewButtons = {}
+local unitListHighlight = {}
 local groupListScrollPanel
 local groupPanels = {}
 local groupEditBoxes = {}
@@ -621,7 +622,7 @@ function showUnitGroupsAttributionWindow()
 end
 function showUnitGroupsRemovalWindow()
 	clearTemporaryWindows()
-	unitGroupsRemovalWindow = addWindow(Screen0, '90%', '30%', '10%', '40%', true)
+	unitGroupsRemovalWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
 	local removalWindowScrollPanel = addScrollPanel(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%')
 	
 	local noGroupsInCommon = true
@@ -645,8 +646,11 @@ function showUnitGroupsRemovalWindow()
 	
 	if noGroupsInCommon then
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
-		Spring.Echo("before")
-		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', "No groups in common", 20, {1, 0, 0, 1})
+		local text = "Selected units have no groups in common."
+		if unitSelection.n == 1 then
+			text = "This unit does not belong to any group."
+		end
+		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
 	end
 end
 function updateUnitList()
@@ -682,9 +686,24 @@ function updateUnitList()
 			unitListViewButtons[u] = addButton(unitListScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
 			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 			
+			-- Highlight
+			unitListHighlight[u] = addImage(unitListScrollPanel, '0%', 30 * count, '100%', 30, "bitmaps/editor/blank.png", false, {1, 1, 0.4, 0})
+			
 			count = count + 1
 		end
 		unitTotal = units.n
+	end
+end
+function updateUnitHighlights()
+	local units = Spring.GetAllUnits()
+	for i, u in ipairs(units) do
+		if Spring.IsUnitSelected(u) then
+			unitListHighlight[u].color = {1, 1, 0.4, 0.2}
+			unitListHighlight[u]:InvalidateSelf()
+		else
+			unitListHighlight[u].color = {1, 1, 0.4, 0}
+			unitListHighlight[u]:InvalidateSelf()
+		end
 	end
 end
 function updateUnitGroupPanels()
@@ -745,7 +764,7 @@ function updateUnitGroupPanels()
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[k], '2%', 40 + 30 * count, '83%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				local label = addLabel(groupPanels[k], '5%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				table.insert(unitGroupLabels[k], label)
 				
 				-- Eye button to focus a specific unit
@@ -758,7 +777,7 @@ function updateUnitGroupPanels()
 					Spring.SelectUnitArray({u})
 					unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 				end
-				local but = addButton(groupPanels[k], '85%', 40 + 30 * count, '15%', 30, "", viewUnit)
+				local but = addButton(groupPanels[k], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
 				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 				table.insert(unitGroupViewButtons[k], but)
 				
@@ -1389,6 +1408,7 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		updateUnitList()
+		updateUnitHighlights()
 		updateUnitGroupPanels()
 	end
 	
@@ -1506,8 +1526,16 @@ function widget:MousePress(mx, my, button)
 				end
 				if Spring.IsUnitSelected(var) then
 					Screen0:AddChild(unitContextualMenu)
-					unitContextualMenu.x = mx
-					unitContextualMenu.y = screenSizeY - my
+					if mx + unitContextualMenu.width > screenSizeX then
+						unitContextualMenu.x = mx - unitContextualMenu.width
+					else
+						unitContextualMenu.x = mx
+					end
+					if screenSizeY - my + unitContextualMenu.height > screenSizeY then
+						unitContextualMenu.y = screenSizeY - my - unitContextualMenu.height
+					else
+						unitContextualMenu.y = screenSizeY - my
+					end
 				end
 			end
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
