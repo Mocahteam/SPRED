@@ -61,7 +61,7 @@ function gadget:RecvLuaMsg(msg, player)
 	elseif (msgContents[1] == "Anchor") then
 		relativepos = {}
 		moveUnitsAnchor = tonumber(msgContents[2])
-		newX, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		newX, _, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
 		for i, u in ipairs(selectedUnits) do
 			local curX, _, curZ = Spring.GetUnitPosition(u)
 			local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
@@ -74,7 +74,10 @@ function gadget:RecvLuaMsg(msg, player)
 	-- TRANSLATE UNITS : gets the pressed arrow
 	elseif (msgContents[1] == "Translate Units") then
 		moveUnits = true
-		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+		newX, _, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		local dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+		newX = newX + dX
+		newZ = newZ + dZ
 	-- ROTATE UNITS : computes the angle of rotation
 	elseif (msgContents[1] == "Rotate Units") then
 		rotateUnits = true

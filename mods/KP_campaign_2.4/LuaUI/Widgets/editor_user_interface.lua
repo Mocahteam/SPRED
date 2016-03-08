@@ -63,6 +63,7 @@ local teamConfigWindow, allyTeamsWindow, unitGroupsWindow
 local allyTeams = {}
 local allyTeamsSize = {}
 local allyTeamsRemoveTeamButtons = {}
+local allyTeamsRemoveTeamLabels = {}
 local selectAllyTeamsButtons = {}
 local allyTeamsListButtons = {}
 local allyTeamsScrollPanels = {}
@@ -451,6 +452,7 @@ function initForcesWindow()
 		addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		
 		allyTeamsRemoveTeamButtons[team] = {}
+		allyTeamsRemoveTeamLabels[team] = {}
 		
 		allyTeams[team] = {}
 		allyTeamsSize[team] = 0
@@ -1048,11 +1050,15 @@ function updateAllyTeamPanels()
 			for _, c in ipairs(allyTeamsRemoveTeamButtons[k]) do
 				allyTeamsScrollPanels[k]:RemoveChild(c)
 			end
+			for _, c in ipairs(allyTeamsRemoveTeamLabels[k]) do
+				allyTeamsScrollPanels[k]:RemoveChild(c)
+			end
 			local count = 0
 			for i, t in ipairs(at) do
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '100%', 40, "Team "..tostring(t), function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
-				but.font.color = {teams[t].red, teams[t].green, teams[t].blue, 1}
-				but.font.size = 20
+				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, "Team "..tostring(t), 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
+				table.insert(allyTeamsRemoveTeamLabels[k], lab)
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, "X", function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
+				but.font.color = {1, 0, 0, 1}
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
 				count = count + 1
 			end
@@ -1590,25 +1596,39 @@ function widget:KeyPress(key, mods)
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+		local unitSelection = Spring.GetSelectedUnits()
 		-- CTRL + A : select all units
 		if key == Spring.GetKeyCode("a") and mods.ctrl then
 			Spring.SelectUnitArray(Spring.GetAllUnits())
+			return true
 		-- DELETE : delete selected units
 		elseif key == Spring.GetKeyCode("delete") then
 			Spring.SendLuaRulesMsg("Delete Selected Units")
+			return true
+		end
 		-- ARROWS : move selected units
-		elseif key == Spring.GetKeyCode("up") then
-			local msg = "Translate Units".."++".."0".."++".."-1"
-			Spring.SendLuaRulesMsg(msg)
-		elseif key == Spring.GetKeyCode("down") then
-			local msg = "Translate Units".."++".."0".."++".."1"
-			Spring.SendLuaRulesMsg(msg)
-		elseif key == Spring.GetKeyCode("left") then
-			local msg = "Translate Units".."++".."-1".."++".."0"
-			Spring.SendLuaRulesMsg(msg)
-		elseif key == Spring.GetKeyCode("right") then
-			local msg = "Translate Units".."++".."1".."++".."0"
-			Spring.SendLuaRulesMsg(msg)
+		if unitSelection.n > 0 then
+			if key == Spring.GetKeyCode("up") then
+				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+				local msg = "Translate Units".."++".."0".."++".."-1"
+				Spring.SendLuaRulesMsg(msg)
+				return true
+			elseif key == Spring.GetKeyCode("down") then
+				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+				local msg = "Translate Units".."++".."0".."++".."1"
+				Spring.SendLuaRulesMsg(msg)
+				return true
+			elseif key == Spring.GetKeyCode("left") then
+				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+				local msg = "Translate Units".."++".."-1".."++".."0"
+				Spring.SendLuaRulesMsg(msg)
+				return true
+			elseif key == Spring.GetKeyCode("right") then
+				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+				local msg = "Translate Units".."++".."1".."++".."0"
+				Spring.SendLuaRulesMsg(msg)
+				return true
+			end
 		end
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		if selectedZone ~= nil then
