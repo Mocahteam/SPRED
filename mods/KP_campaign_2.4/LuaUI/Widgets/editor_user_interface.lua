@@ -1775,6 +1775,13 @@ function widget:KeyPress(key, mods)
 			return true
 		-- DELETE : delete selected units
 		elseif key == Spring.GetKeyCode("delete") then
+			for k, g in pairs(unitGroups) do
+				for i, u in ipairs(unitSelection) do
+					if findInTable(g.units, u) then
+						removeUnitFromGroup(g, u)
+					end
+				end
+			end
 			Spring.SendLuaRulesMsg("Delete Selected Units")
 			return true
 		end
