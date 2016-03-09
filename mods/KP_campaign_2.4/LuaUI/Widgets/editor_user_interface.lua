@@ -92,6 +92,13 @@ local selectAllyTeamsButtons = {} -- Select an ally team
 local allyTeamsListButtons = {} -- Add a team to the selected ally team
 local allyTeamsScrollPanels = {} -- Contains the allyTeamsListButtons
 local selectedAllyTeam = 0 -- Currently selected ally team
+local teamControlButtons = {} -- Allows the user to set how the team should be controlled
+local teamControl = {} -- player or computer
+local teamStateButtons = {} -- Allows the user to set if the team is enabled or not
+local teamState = {} -- enabled or disabled
+local teamColorEditBoxes = {}
+local teamColor = {}
+local teamColorImage = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -225,7 +232,11 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 		text = _text or ""
 	}
 	editBox.font.color = _color or {1, 1, 1, 1}
-	editBox.font.size = _h
+	if type(_h) ~= "string" then
+		editBox.font.size = _h
+	else
+		editBox.font.size = 16
+	end
 	return editBox
 end
 function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
@@ -462,7 +473,26 @@ function initForcesWindow()
 	for k, team in pairs(teamStateMachine.states) do
 		local panel = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
 		addLabel(panel, '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
-		-- TODO : add configurable parameters
+		-- Enabled/Disabled
+		teamStateButtons[team] = {}
+		teamStateButtons[team].enabled = addButton(panel, '20%', '10%', '10%', '35%', "Enabled", function() teamState[team] = "enabled" end)
+		teamStateButtons[team].disabled = addButton(panel, '20%', '55%', '10%', '35%', "Disabled", function() teamState[team] = "disabled" end)
+		teamState[team] = "disabled"
+		-- Controlled by
+		addLabel(panel, '35%', '20%', '20%', '30%', "Controlled by", 20, "center", nil, "center")
+		teamControlButtons[team] = {}
+		teamControlButtons[team].player = addButton(panel, '35%', '50%', '10%', '30%', "Player", function() teamControl[team] = "player" end)
+		teamControlButtons[team].computer = addButton(panel, '45%', '50%', '10%', '30%', "Computer", function() teamControl[team] = "computer" end)
+		teamControl[team] = "player"
+		-- Color
+		teamColor[team] = {}
+		teamColor[team].red, teamColor[team].green, teamColor[team].blue = teams[team].red, teams[team].green, teams[team].blue
+		addLabel(panel, '60%', '20%', '20%', '30%', "In-game color", 20, "center", nil, "center")
+		teamColorEditBoxes[team] = {}
+		teamColorEditBoxes[team].red = addEditBox(panel, '60%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].red), {1, 0, 0, 1}) -- replace by trackbar?
+		teamColorEditBoxes[team].green = addEditBox(panel, tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].green), {0, 1, 0, 1})
+		teamColorEditBoxes[team].blue = addEditBox(panel, tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].blue), {0, 0, 1, 1})
+		teamColorImage[team] = addImage(panel, '82%', '20%', '5%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 	end
 	
 	-- Ally Team Window
@@ -1366,7 +1396,14 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	end
 	table.sort(at)
 end
-
+function updateTeamColors()
+	for k, team in pairs(teamStateMachine.states) do
+		teamColorImage[team].color[1] = tonumber(teamColorEditBoxes[team].red.text)
+		teamColorImage[team].color[2] = tonumber(teamColorEditBoxes[team].green.text)
+		teamColorImage[team].color[3] = tonumber(teamColorEditBoxes[team].blue.text)
+		teamColorImage[team]:InvalidateSelf()
+	end
+end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Draw functions
@@ -1415,6 +1452,10 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(zoneButtons, zoneStateMachine:getCurrentState())
 	markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
 	markButtonWithinSet(forcesTabs, forcesStateMachine:getCurrentState())
+	for k, team in pairs(teamStateMachine.states) do
+		markButtonWithinSet(teamStateButtons[team], teamState[team])
+		markButtonWithinSet(teamControlButtons[team], teamControl[team])
+	end
 end
 function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
 	local specificCondition = true
@@ -1501,6 +1542,7 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
+		updateTeamColors()
 	end
 	
 	updateButtonVisualFeedback()
