@@ -67,7 +67,7 @@ local selectionRect -- Selection visual feedback
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
 -- Zone variables
-local zoneButtons -- Choose which type of zone to create
+local zoneButtons = {} -- Choose which type of zone to create
 local zoneScrollPanel -- List of zones placed
 local zoneBoxes = {} -- Contains an editbox to rename a zone and checkbox to display it
 local plotZone = false -- Lock to plot a new zone
@@ -615,18 +615,18 @@ function showUnitsInformation() -- Show information about selected and hovered u
 	end
 	gl.EndText()
 end
-function showUnitGroupsAttributionWindow()
+function showUnitGroupsAttributionWindow() -- Show a small window allowing to add the current selection to an existing or new group
 	clearTemporaryWindows()
 	unitGroupsAttributionWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
 	local attributionWindowScrollPanel = addScrollPanel(unitGroupsAttributionWindow, '0%', '0%', '100%', '100%')
 	
 	local count = 0
-	for k, group in pairs(unitGroups) do
-		addButton(attributionWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() addSelectedUnitsToGroup(group) clearTemporaryWindows() end)
+	for k, group in pairs(unitGroups) do -- Show already created unit groups
+		addButton(attributionWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() addSelectedUnitsToGroup(group) clearTemporaryWindows() end) -- Add unit selection to this group
 		count = count + 1
 	end
 	
-	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "")
+	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.font.size = 14
 	newUnitGroupEditBox.hint = "New Group"
 	local function newGroup()
@@ -637,7 +637,7 @@ function showUnitGroupsAttributionWindow()
 	end
 	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", newGroup)
 end
-function showUnitGroupsRemovalWindow()
+function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove the current selection from a group
 	clearTemporaryWindows()
 	unitGroupsRemovalWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
 	local removalWindowScrollPanel = addScrollPanel(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%')
@@ -650,18 +650,18 @@ function showUnitGroupsRemovalWindow()
 		local addUnitGroupButton = true
 		for i, u in ipairs(unitSelection) do
 			if not findInTable(group.units, u) then
-				addUnitGroupButton = false
+				addUnitGroupButton = false -- Only display groups that are common to every units of the current selection
 				break
 			end
 		end
 		if addUnitGroupButton then
-			addButton(removalWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() removeSelectedUnitsFromGroup(group) clearTemporaryWindows() end)
+			addButton(removalWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() removeSelectedUnitsFromGroup(group) clearTemporaryWindows() end) -- Remove unit selection from this group
 			count = count + 1
 			noGroupsInCommon = false
 		end
 	end
 	
-	if noGroupsInCommon then
+	if noGroupsInCommon then -- If units have to groups in common or the selected unit does not belong to any group, display a specific message
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
 		local text = "Selected units have no groups in common."
 		if unitSelection.n == 1 then
@@ -670,9 +670,10 @@ function showUnitGroupsRemovalWindow()
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
 	end
 end
-function updateUnitList()
+function updateUnitList() -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal then
+		-- Clear UI elements
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
 		end
@@ -682,7 +683,6 @@ function updateUnitList()
 		for k, i in pairs(unitListHighlight) do
 			unitListScrollPanel:RemoveChild(i)
 		end
-		
 		for k, b in pairs(groupListUnitsButtons) do
 			groupListUnitsScrollPanel:RemoveChild(b)
 		end
@@ -690,6 +690,7 @@ function updateUnitList()
 			groupListUnitsScrollPanel:RemoveChild(b)
 		end
 		
+		-- Add labels and buttons to both lists
 		local count = 0
 		for i, u in ipairs(units) do
 			-- Unit label (type, team and id)
@@ -724,7 +725,7 @@ function updateUnitList()
 		unitTotal = units.n
 	end
 end
-function updateUnitHighlights()
+function updateUnitHighlights() -- Visual feedback on the units list to see what units are selected
 	local units = Spring.GetAllUnits()
 	for i, u in ipairs(units) do
 		if Spring.IsUnitSelected(u) then
@@ -736,29 +737,33 @@ function updateUnitHighlights()
 		end
 	end
 end
-function updateUnitGroupPanels()
+function updateUnitGroupPanels() -- Update groups when a group is created/removed or a unit is added to/removed from a group
+	-- Check if update is mandatory
 	local updatePanels = false
-	if tableLength(unitGroups) ~= groupTotal then
+	if tableLength(unitGroups) ~= groupTotal then -- Group count changed
 		updatePanels = true
 	end
 	for k, group in pairs(unitGroups) do
-		if tableLength(group.units) ~= groupSizes[k] then
+		if tableLength(group.units) ~= groupSizes[k] then -- Unit count of a group changed
 			updatePanels = true
 			break
 		end
 	end
 	
+	-- Update
 	if updatePanels then
+		-- Clear UI elements
 		for k, p in pairs(groupPanels) do
 			groupListScrollPanel:RemoveChild(p)
 		end
 		groupListScrollPanel:RemoveChild(addGroupButton)
 		
 		local count = 0
-		local heights = {0, 0, 0, 0}
-		local widths = {0, 0, 0, 0}
+		local heights = {0, 0, 0, 0} -- Stores heights to place groups on the lower
+		local widths = {0, 0, 0, 0} -- Stores corresponding widths
 		for k, group in pairs(unitGroups) do
 			local x, y
+			-- Compute x and y depending on the number of groups
 			if count < 4 then
 				x = 300 * count
 				y = 0
@@ -771,6 +776,7 @@ function updateUnitGroupPanels()
 				y = heights[column]
 				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
 			end
+			-- Add panel, editbox, buttons
 			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
 			selectGroupButtons[k] = addButton(groupPanels[k], 0, 0, 30, 30, "", function() selectGroupButtons[k].state.chosen = not selectGroupButtons[k].state.chosen selectGroupButtons[k]:InvalidateSelf() end)
 			groupEditBoxes[k] = addEditBox(groupPanels[k], 35, 5, 220, 20, "left", group.name)
@@ -778,6 +784,7 @@ function updateUnitGroupPanels()
 			local deleteButton = addButton(groupPanels[k], 260, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
 			deleteButton.font.color = {1, 0, 0, 1}
 		end
+		-- Add a button to create an empty group
 		local x, y
 		if count < 4 then
 			x = 300 * count
@@ -790,8 +797,9 @@ function updateUnitGroupPanels()
 		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 60, "Add Group", addEmptyUnitGroup)
 		groupTotal = tableLength(unitGroups)
 		
-		
+		-- Update groups
 		for k, group in pairs(unitGroups) do
+			-- Clear UI elements
 			for key, l in pairs(unitGroupLabels[k]) do
 				groupPanels[k]:RemoveChild(l)
 			end
@@ -838,6 +846,7 @@ function updateUnitGroupPanels()
 		end
 	end
 	
+	-- String in the editbox as name for the group
 	for k, group in pairs(unitGroups) do
 		if group.name ~= groupEditBoxes[k].text and groupEditBoxes[k].text ~= "" then
 			group.name = groupEditBoxes[k].text
@@ -858,7 +867,7 @@ function addSelectedUnitsToGroup(group)
 		addUnitToGroup(group, u)
 	end
 end
-function addChosenUnitsToSelectedGroups()
+function addChosenUnitsToSelectedGroups() -- Add selected units to the selected groups (in the groups frame)
 	for groupKey, groupButton in pairs(selectGroupButtons) do
 		if groupButton.state.chosen then
 			for unitKey, unitButton in pairs(groupListUnitsButtons) do
@@ -1407,7 +1416,7 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
 	markButtonWithinSet(forcesTabs, forcesStateMachine:getCurrentState())
 end
-function markButtonWithinSet(buttonTable, markedButton, condition)
+function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
 	local specificCondition = true
 	if condition ~= nil then
 		specificCondition = condition
@@ -1432,7 +1441,6 @@ function widget:DrawScreen()
 	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		showUnitsInformation()
-		--showUnitAttributes()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZoneInformation()
