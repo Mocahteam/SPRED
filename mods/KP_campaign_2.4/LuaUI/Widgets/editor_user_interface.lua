@@ -46,14 +46,20 @@ local unitGroupsAttributionWindow
 local unitGroupsRemovalWindow
 local unitListScrollPanel
 local unitListLabels = {}
-local unitListButtons = {}
 local unitListViewButtons = {}
 local unitListHighlight = {}
 local groupListScrollPanel
+local groupListUnitsScrollPanel
 local groupPanels = {}
 local groupEditBoxes = {}
+local selectGroupButtons = {}
 local unitGroupLabels = {}
 local unitGroupViewButtons = {}
+local unitGroupRemoveUnitButtons = {}
+local addUnitsToGroupsButton
+local groupListUnitsButtons = {}
+local groupListUnitsViewButtons = {}
+local addGroupButton
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
@@ -392,13 +398,16 @@ function initUnitWindow()
 	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
 	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', "Unit List")
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
-	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", function() Screen0:AddChild(windows["unitGroupsWindow"]) end)
+	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", function() Screen0:AddChild(windows["unitGroupsWindow"]) Screen0:RemoveChild(windows['unitListWindow']) Screen0:RemoveChild(windows['unitWindow']) end)
 	
 	-- Unit Groups Window
-	windows["unitGroupsWindow"] = addWindow(Screen0, "15%", "15%", '62%', '60%', true)
-	addLabel(windows["unitGroupsWindow"], '0%', '0%', '100%', '10%', "Group List", 30, "center", nil, "center")
-	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '100%', '90%')
-	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", function() Screen0:RemoveChild(windows["unitGroupsWindow"]) end)
+	windows["unitGroupsWindow"] = addWindow(Screen0, "5%", "10%", '90%', '80%', true)
+	addLabel(windows["unitGroupsWindow"], '0%', '0%', '18%', '10%', "Unit List", 30, "center", nil, "center")
+	groupListUnitsScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '18%', '90%')
+	addUnitsToGroupsButton = addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
+	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '10%', "Group List", 30, "center", nil, "center")
+	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '22%', '10%', '78%', '90%')
+	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", function() Screen0:RemoveChild(windows["unitGroupsWindow"]) Screen0:AddChild(windows['unitListWindow']) Screen0:AddChild(windows['unitWindow']) end)
 	closeButton.font.color = {1, 0, 0, 1}
 end
 function initUnitContextualMenu()
@@ -659,12 +668,20 @@ function updateUnitList()
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
 		end
-		for k, b in pairs(unitListButtons) do
+		for k, b in pairs(unitListViewButtons) do
 			unitListScrollPanel:RemoveChild(b)
 		end
-		for k, i in pairs(unitListViewButtons) do
+		for k, i in pairs(unitListHighlight) do
 			unitListScrollPanel:RemoveChild(i)
 		end
+		
+		for k, b in pairs(groupListUnitsButtons) do
+			groupListUnitsScrollPanel:RemoveChild(b)
+		end
+		for k, b in pairs(groupListUnitsViewButtons) do
+			groupListUnitsScrollPanel:RemoveChild(b)
+		end
+		
 		local count = 0
 		for i, u in ipairs(units) do
 			-- Unit label (type, team and id)
@@ -672,6 +689,9 @@ function updateUnitList()
 			local name = UnitDefs[uDefID].humanName
 			local team = Spring.GetUnitTeam(u)
 			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+			groupListUnitsButtons[u] = addButton(groupListUnitsScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", function() groupListUnitsButtons[u].state.chosen = not groupListUnitsButtons[u].state.chosen groupListUnitsButtons[u]:InvalidateSelf() end)
+			groupListUnitsButtons[u].font.size = 16
+			groupListUnitsButtons[u].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 			
 			-- Eye button to focus a specific unit
 			local function viewUnit()
@@ -685,6 +705,8 @@ function updateUnitList()
 			end
 			unitListViewButtons[u] = addButton(unitListScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
 			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			groupListUnitsViewButtons[u] = addButton(groupListUnitsScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
+			addImage(groupListUnitsViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 			
 			-- Highlight
 			unitListHighlight[u] = addImage(unitListScrollPanel, '0%', 30 * count, '100%', 30, "bitmaps/editor/blank.png", false, {1, 1, 0.4, 0})
@@ -722,30 +744,42 @@ function updateUnitGroupPanels()
 		for k, p in pairs(groupPanels) do
 			groupListScrollPanel:RemoveChild(p)
 		end
+		groupListScrollPanel:RemoveChild(addGroupButton)
 		
 		local count = 0
-		local heights = {0, 0, 0, 0, 0}
-		local widths = {0, 0, 0, 0, 0}
+		local heights = {0, 0, 0, 0}
+		local widths = {0, 0, 0, 0}
 		for k, group in pairs(unitGroups) do
 			local x, y
-			if count < 5 then
-				x = 230 * count
+			if count < 4 then
+				x = 300 * count
 				y = 0
 				count = count + 1
 				heights[count] = 65 + 30 * tableLength(group.units)
-				widths[count] = 230 * (count - 1)
+				widths[count] = 300 * (count - 1)
 			else
 				local column = minOfTable(heights)
 				x = widths[column]
 				y = heights[column]
 				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
 			end
-			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 230, 60 + 30 * tableLength(group.units))
-			groupEditBoxes[k] = addEditBox(groupPanels[k], 5, 5, 180, 20, "left", group.name)
+			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
+			selectGroupButtons[k] = addButton(groupPanels[k], 0, 0, 30, 30, "", function() selectGroupButtons[k].state.chosen = not selectGroupButtons[k].state.chosen selectGroupButtons[k]:InvalidateSelf() end)
+			groupEditBoxes[k] = addEditBox(groupPanels[k], 35, 5, 220, 20, "left", group.name)
 			groupEditBoxes[k].font.size = 14
-			local deleteButton = addButton(groupPanels[k], 190, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
+			local deleteButton = addButton(groupPanels[k], 260, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
 			deleteButton.font.color = {1, 0, 0, 1}
 		end
+		local x, y
+		if count < 4 then
+			x = 300 * count
+			y = 0
+		else
+			local column = minOfTable(heights)
+			x = widths[column]
+			y = heights[column]
+		end
+		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 200, "Add Group", addEmptyUnitGroup)
 		groupTotal = tableLength(unitGroups)
 		
 		
@@ -756,15 +790,24 @@ function updateUnitGroupPanels()
 			for key, b in pairs(unitGroupViewButtons[k]) do
 				groupPanels[k]:RemoveChild(b)
 			end
+			for key, b in pairs(unitGroupRemoveUnitButtons[k]) do
+				groupPanels[k]:RemoveChild(b)
+			end
 			
 			local count = 0
 			unitGroupLabels[k] = {}
 			unitGroupViewButtons[k] = {}
 			for key, u in pairs(group.units) do
+				-- Remove button
+				local removeButton = addButton(groupPanels[k], '5%', 40 + 30 * count, '10%', 30, "X", function() removeUnitFromGroup(unitGroups[k], u) end)
+				removeButton.font.color = {1, 0, 0, 1}
+				table.insert(unitGroupRemoveUnitButtons[k], removeButton)
+				
+				-- Label of unit
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[k], '5%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				local label = addLabel(groupPanels[k], '20%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				table.insert(unitGroupLabels[k], label)
 				
 				-- Eye button to focus a specific unit
@@ -807,6 +850,21 @@ function addSelectedUnitsToGroup(group)
 		addUnitToGroup(group, u)
 	end
 end
+function addChosenUnitsToSelectedGroups()
+	for groupKey, groupButton in pairs(selectGroupButtons) do
+		if groupButton.state.chosen then
+			for unitKey, unitButton in pairs(groupListUnitsButtons) do
+				if unitButton.state.chosen then
+					addUnitToGroup(unitGroups[groupKey], unitKey)
+				end
+			end
+		end
+		groupButton.state.chosen = false
+	end
+	for unitKey, unitButton in pairs(groupListUnitsButtons) do
+		unitButton.state.chosen = false
+	end
+end
 function removeSelectedUnitsFromGroup(group)
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
@@ -833,6 +891,17 @@ function addUnitGroup(name)
 	groupSizes[groupNumber] = 0
 	unitGroupLabels[groupNumber] = {}
 	unitGroupViewButtons[groupNumber] = {}
+	unitGroupRemoveUnitButtons[groupNumber] = {}
+	groupNumber = groupNumber + 1
+end
+function addEmptyUnitGroup()
+	unitGroups[groupNumber] = {}
+	unitGroups[groupNumber].name = "Group #"..groupNumber
+	unitGroups[groupNumber].units = {}
+	groupSizes[groupNumber] = 0
+	unitGroupLabels[groupNumber] = {}
+	unitGroupViewButtons[groupNumber] = {}
+	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
 end
 function deleteUnitGroup(id)
