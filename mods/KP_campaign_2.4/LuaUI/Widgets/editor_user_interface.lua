@@ -21,81 +21,81 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
-local windows, buttons, topBarButtons, zoneButtons, labels, images, scrollPanels, editBoxes, panels = {}, {}, {}, {}, {}, {}, {}, {}, {} -- references to UI elements
+local windows, topBarButtons = {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 
 -- File Variables
 local fileButtons = {}
 
 -- Unit Variables
-local teams = getTeamsInformation()
-local teamCount = tableLength(teamStateMachine.states)
+local teams = getTeamsInformation() -- List of teams as read in the LevelEditor.txt file (contains id and color)
+local teamCount = tableLength(teamStateMachine.states) -- Total number of teams
 local unitScrollPanel
-local unitButtons = {}
+local unitButtons = {} -- Contains every type of unit as defined in UnitDef, buttons used to place units on the field
 local teamLabels = {}
-local teamButtons = {}
+local teamButtons = {} -- Contains every teams, buttons used to define the team of units being placed
 local teamImages = {}
-local unitContextualMenu
-local unitGroups = {}
-local unitTotal = 0
-local groupNumber = 1
-local groupTotal = nil
-local selectedGroup = 0
-local groupSizes = {}
-local unitGroupsAttributionWindow
-local unitGroupsRemovalWindow
-local unitListScrollPanel
+local unitContextualMenu -- Appears when right-clicking on a unit
+local unitGroups = {} -- Contains logical groups of units
+local unitTotal = 0 -- Total number of units placed on the field
+local groupNumber = 1 -- Current ID of a newly created group
+local groupTotal = nil -- Total number of unit groups
+local groupSizes = {} -- Contains the total number of units in each group
+local unitGroupsAttributionWindow -- Pop-up window to add selected units to a group
+local unitGroupsRemovalWindow -- Pop-up window to remove selected units from a group
+local unitListScrollPanel -- List of units placed on the field
 local unitListLabels = {}
-local unitListViewButtons = {}
-local unitListHighlight = {}
-local groupListScrollPanel
-local groupListUnitsScrollPanel
-local groupPanels = {}
-local groupEditBoxes = {}
-local selectGroupButtons = {}
-local unitGroupLabels = {}
-local unitGroupViewButtons = {}
-local unitGroupRemoveUnitButtons = {}
-local addUnitsToGroupsButton
-local groupListUnitsButtons = {}
-local groupListUnitsViewButtons = {}
-local addGroupButton
+local unitListViewButtons = {} -- Buttons to focus a unit
+local unitListHighlight = {} -- Show if unit is selected or not
+local groupListScrollPanel -- List of unit groups
+local groupListUnitsScrollPanel -- List of units in the unit groups frame
+local groupPanels = {} -- Panels of unit groups
+local groupEditBoxes = {} -- Allows changing the name of unit groups
+local selectGroupButtons = {} -- Select a group to assign units to it
+local unitGroupLabels = {} -- Name and id of unit in a group
+local unitGroupViewButtons = {} -- Focus on a unit that is in a group
+local unitGroupRemoveUnitButtons = {} -- Remove a unit from a group
+local addUnitsToGroupsButton -- Add the selected units to the selected groups (in the groups frame)
+local groupListUnitsButtons = {} -- Allows selection of units
+local groupListUnitsViewButtons = {} -- Focus on units
+local addGroupButton -- Creates a new group
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
 local plotSelection = false
-local selectionRect
+local selectionRect -- Selection visual feedback
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
 -- Zone variables
-local zoneScrollPanel
-local zoneBoxes = {}
-local plotZone = false
-local rValue, gValue, bValue = 0, 0, 0
-local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
-local zoneAnchorX, zoneAnchorZ = 0, 0
+local zoneButtons -- Choose which type of zone to create
+local zoneScrollPanel -- List of zones placed
+local zoneBoxes = {} -- Contains an editbox to rename a zone and checkbox to display it
+local plotZone = false -- Lock to plot a new zone
+local rValue, gValue, bValue = 0, 0, 0 -- Color of the new zone
+local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0 -- Position of the new zone
+local zoneAnchorX, zoneAnchorZ = 0, 0 -- Mouse anchor when resizing a zone
 local minZoneSize = 32
 local zoneList = {}
 local selectedZone = nil
-local zoneSide = ""
-local totalZones = #zoneList
-local zoneNumber = totalZones+1
+local zoneSide = "" -- Corresponds to the side on which the user clicked to resize a zone
+local totalZones = 0 -- Total number of placed zones
+local zoneNumber = 1 -- Current ID of a newly created zone
 
 -- Forces variables
-local forcesTabs = {}
-local teamConfigWindow, allyTeamsWindow
-local allyTeams = {}
-local allyTeamsSize = {}
-local allyTeamsRemoveTeamButtons = {}
-local allyTeamsRemoveTeamLabels = {}
-local selectAllyTeamsButtons = {}
-local allyTeamsListButtons = {}
-local allyTeamsScrollPanels = {}
-local selectedAllyTeam = 0
+local forcesTabs = {} -- Top frame buttons
+local teamConfigWindow, allyTeamsWindow -- Windows in the force frame
+local allyTeams = {} -- List of ally teams
+local allyTeamsSize = {} -- Respective sizes of ally teams
+local allyTeamsRemoveTeamButtons = {} -- Remove team from an ally team
+local allyTeamsRemoveTeamLabels = {} -- Name of teams in a ally team
+local selectAllyTeamsButtons = {} -- Select an ally team
+local allyTeamsListButtons = {} -- Add a team to the selected ally team
+local allyTeamsScrollPanels = {} -- Contains the allyTeamsListButtons
+local selectedAllyTeam = 0 -- Currently selected ally team
 
 -- Mouse variables
 local mouseMove = false
-local clickToSelect = false
+local clickToSelect = false -- Enable isolation through clicking on an already selected unit
 local doubleClick = 0
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -288,14 +288,10 @@ function forcesFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
 	Screen0:AddChild(windows["forceWindow"])
-	windows["forceWindow"].x = 100
-	windows["forceWindow"].y = 100
 	if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
 		teamConfig()
 	elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
 		allyTeam()
-	elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.UNITGROUPS then
-		unitGroupsPanel()
 	end
 end
 
@@ -355,7 +351,7 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", function() newMap() end)
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", newMap)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 function initUnitWindow()
@@ -398,7 +394,12 @@ function initUnitWindow()
 	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
 	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', "Unit List")
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
-	addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", function() Screen0:AddChild(windows["unitGroupsWindow"]) Screen0:RemoveChild(windows['unitListWindow']) Screen0:RemoveChild(windows['unitWindow']) end)
+	local showGroupsWindow = function()
+		Screen0:AddChild(windows["unitGroupsWindow"])
+		Screen0:RemoveChild(windows['unitListWindow'])
+		Screen0:RemoveChild(windows['unitWindow'])
+	end
+	local showGroupsButton = addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", showGroupsWindow)
 	
 	-- Unit Groups Window
 	windows["unitGroupsWindow"] = addWindow(Screen0, "5%", "10%", '90%', '80%', true)
@@ -407,7 +408,13 @@ function initUnitWindow()
 	addUnitsToGroupsButton = addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
 	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '10%', "Group List", 30, "center", nil, "center")
 	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '22%', '10%', '78%', '90%')
-	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", function() Screen0:RemoveChild(windows["unitGroupsWindow"]) Screen0:AddChild(windows['unitListWindow']) Screen0:AddChild(windows['unitWindow']) end)
+	local closeGroupsWindow = function()
+		Screen0:RemoveChild(windows["unitGroupsWindow"])
+		Screen0:AddChild(windows['unitListWindow'])
+		Screen0:AddChild(windows['unitWindow'])
+		showGroupsButton:InvalidateSelf()
+	end
+	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", closeGroupsWindow)
 	closeButton.font.color = {1, 0, 0, 1}
 end
 function initUnitContextualMenu()
@@ -425,20 +432,20 @@ function initZoneWindow()
 	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
 	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
 	
-	local toggleAllOn = 	function() -- show all zones
-									for k, zb in pairs(zoneBoxes) do
-										if not zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
-	local toggleAllOff = 	function() -- hide all zones
-									for k, zb in pairs(zoneBoxes) do
-										if zb.checkbox.checked then
-											zb.checkbox:Toggle()
-										end
-									end
-								end
+	local toggleAllOn = function() -- show all zones
+		for k, zb in pairs(zoneBoxes) do
+			if not zb.checkbox.checked then
+				zb.checkbox:Toggle()
+			end
+		end
+	end
+	local toggleAllOff = function() -- hide all zones
+		for k, zb in pairs(zoneBoxes) do
+			if zb.checkbox.checked then
+				zb.checkbox:Toggle()
+			end
+		end
+	end
 	addButton(zoneScrollPanel, 0, 0, "50%", 30, "Show all", toggleAllOn)
 	addButton(zoneScrollPanel, "50%", 0, "50%", 30, "Hide all", toggleAllOff)
 end
@@ -446,7 +453,6 @@ function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
 	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/3).."%", '5%', "Teams Configuration", teamConfig)
 	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/3).."%", "0%", tostring(95/3).."%", '5%', "Ally Teams", allyTeam)
-	forcesTabs[forcesStateMachine.states.UNITGROUPS] = addButton(windows['forceWindow'], tostring(2*95/3).."%", "0%", tostring(95/3).."%", '5%', "Unit Groups", unitGroupsPanel)
 	local closeButton = addButton(windows['forceWindow'], "95%", "0%", "5%", "5%", "X", clearUI)
 	closeButton.font.color = {1, 0, 0, 1}
 	
@@ -510,8 +516,8 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
-	local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
-	Spring.SendLuaRulesMsg(msg)
+	--local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
+	--Spring.SendLuaRulesMsg(msg)
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
 	if selectionRect ~= nil then
@@ -566,6 +572,7 @@ function previewUnit()-- Draw units before placing them
 end
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
 	-- TODO : requires rework
+--[[
 	local unitSelection = Spring.GetSelectedUnits()
 	if unitSelection.n > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
 		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
@@ -582,6 +589,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 		Screen0:RemoveChild(windows["unitAttributes"])
 		windows["unitAttributes"] = nil
 	end
+]]
 end
 function showUnitsInformation() -- Show information about selected and hovered units
 	gl.BeginText()
@@ -779,7 +787,7 @@ function updateUnitGroupPanels()
 			x = widths[column]
 			y = heights[column]
 		end
-		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 200, "Add Group", addEmptyUnitGroup)
+		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 60, "Add Group", addEmptyUnitGroup)
 		groupTotal = tableLength(unitGroups)
 		
 		
