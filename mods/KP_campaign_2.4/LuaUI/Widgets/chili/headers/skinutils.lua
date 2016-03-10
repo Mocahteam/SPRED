@@ -762,7 +762,11 @@ function DrawTrackbar(self)
   local skLeft,skTop,skRight,skBottom = unpack4(self.tiles)
   local pdLeft,pdTop,pdRight,pdBottom = unpack4(self.hitpadding)
 
-  gl.Color(1,1,1,1)
+  if self.color then
+	gl.Color(self.color[1], self.color[2], self.color[3], self.color[4])
+  else
+	gl.Color(1,1,1,1)
+  end
 
   TextureHandler.LoadTexture(0,self.TileImage,self)
     local texInfo = gl.TextureInfo(self.TileImage) or {xsize=1, ysize=1}

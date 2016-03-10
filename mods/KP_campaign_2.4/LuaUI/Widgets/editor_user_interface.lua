@@ -519,8 +519,11 @@ function initForcesWindow()
 			teamColorImage[team]:InvalidateSelf()
 		end
 		teamColorTrackbars[team].red.OnChange = {updateImage}
+		teamColorTrackbars[team].red.color = {1, 0, 0, 1}
 		teamColorTrackbars[team].green.OnChange = {updateImage}
+		teamColorTrackbars[team].green.color = {0, 1, 0, 1}
 		teamColorTrackbars[team].blue.OnChange = {updateImage}
+		teamColorTrackbars[team].blue.color = {0, 0, 1, 1}
 	end
 	
 	-- Ally Team Window
