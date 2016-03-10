@@ -96,7 +96,7 @@ local teamControlButtons = {} -- Allows the user to set how the team should be c
 local teamControl = {} -- player or computer
 local teamStateButtons = {} -- Allows the user to set if the team is enabled or not
 local teamState = {} -- enabled or disabled
-local teamColorEditBoxes = {}
+local teamColorTrackbars = {}
 local teamColor = {}
 local teamColorImage = {}
 
@@ -252,6 +252,20 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		checked = _checked or false
 	}
 	return checkBox
+end
+function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
+	local trackbar = Chili.Trackbar:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		min = _min or 0,
+		max = _max or 100,
+		value = _value or 50,
+		step = _step or 1
+	}
+	return trackbar
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -486,13 +500,27 @@ function initForcesWindow()
 		teamControl[team] = "player"
 		-- Color
 		teamColor[team] = {}
-		teamColor[team].red, teamColor[team].green, teamColor[team].blue = teams[team].red, teams[team].green, teams[team].blue
+		teamColor[team].red = tonumber(teams[team].red)
+		teamColor[team].green = tonumber(teams[team].green)
+		teamColor[team].blue = tonumber(teams[team].blue)
 		addLabel(panel, '60%', '20%', '20%', '30%', "In-game color", 20, "center", nil, "center")
-		teamColorEditBoxes[team] = {}
-		teamColorEditBoxes[team].red = addEditBox(panel, '60%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].red), {1, 0, 0, 1}) -- replace by trackbar?
-		teamColorEditBoxes[team].green = addEditBox(panel, tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].green), {0, 1, 0, 1})
-		teamColorEditBoxes[team].blue = addEditBox(panel, tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", "left", tostring(teamColor[team].blue), {0, 0, 1, 1})
 		teamColorImage[team] = addImage(panel, '82%', '20%', '5%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
+		teamColorTrackbars[team] = {}
+		teamColorTrackbars[team].red = addTrackbar(panel, '60%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
+		teamColorTrackbars[team].green = addTrackbar(panel, tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
+		teamColorTrackbars[team].blue = addTrackbar(panel, tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
+		local function updateImage()
+			teamColorImage[team].color = {
+				teamColorTrackbars[team].red.value,
+				teamColorTrackbars[team].green.value,
+				teamColorTrackbars[team].blue.value,
+				1
+			}
+			teamColorImage[team]:InvalidateSelf()
+		end
+		teamColorTrackbars[team].red.OnChange = {updateImage}
+		teamColorTrackbars[team].green.OnChange = {updateImage}
+		teamColorTrackbars[team].blue.OnChange = {updateImage}
 	end
 	
 	-- Ally Team Window
@@ -1396,14 +1424,7 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	end
 	table.sort(at)
 end
-function updateTeamColors()
-	for k, team in pairs(teamStateMachine.states) do
-		teamColorImage[team].color[1] = tonumber(teamColorEditBoxes[team].red.text)
-		teamColorImage[team].color[2] = tonumber(teamColorEditBoxes[team].green.text)
-		teamColorImage[team].color[3] = tonumber(teamColorEditBoxes[team].blue.text)
-		teamColorImage[team]:InvalidateSelf()
-	end
-end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Draw functions
@@ -1542,7 +1563,6 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		updateAllyTeamPanels()
-		updateTeamColors()
 	end
 	
 	updateButtonVisualFeedback()
