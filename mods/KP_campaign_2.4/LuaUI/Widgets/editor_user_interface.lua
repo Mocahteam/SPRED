@@ -37,6 +37,7 @@ local teamLabels = {}
 local teamButtons = {} -- Contains every teams, buttons used to define the team of units being placed
 local teamImages = {}
 local unitContextualMenu -- Appears when right-clicking on a unit
+local unitAttributesWindow
 local unitGroups = {} -- Contains logical groups of units
 local unitTotal = 0 -- Total number of units placed on the field
 local groupNumber = 1 -- Current ID of a newly created group
@@ -290,6 +291,7 @@ function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
 	Screen0:RemoveChild(unitGroupsAttributionWindow)
 	Screen0:RemoveChild(unitGroupsRemovalWindow)
+	Screen0:RemoveChild(unitAttributesWindow)
 end
 function fileFrame()
 	clearUI()
@@ -444,7 +446,7 @@ function initUnitWindow()
 end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
-	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", "Edit Attributes", nil)
+	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", "Edit Attributes", showUnitAttributes)
 	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Add to group", showUnitGroupsAttributionWindow)
 	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Remove from group", showUnitGroupsRemovalWindow)
 end
@@ -577,12 +579,13 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
-	--local msg = "Change HP".."++"..editBoxes["unitAttributesHpField"].text
-	--Spring.SendLuaRulesMsg(msg)
+	-- do something
+	clearTemporaryWindows()
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
 	if selectionRect ~= nil then
 		Screen0:RemoveChild(selectionRect)
+		selectionRect:Dispose()
 	end
 	if plotSelection then -- only draw it when mouse button 1 is down and global state is selection
 		-- compute good values for x1, x2, y1, y2, regarding respective anchors
@@ -632,25 +635,18 @@ function previewUnit()-- Draw units before placing them
 	end
 end
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
-	-- TODO : requires rework
---[[
+	clearTemporaryWindows()
 	local unitSelection = Spring.GetSelectedUnits()
-	if unitSelection.n > 0	and windows["unitAttributes"] == nil then -- only show the window when some units are selected
-		windows["unitAttributes"] = addWindow(Screen0, screenSizeX - 200, "50%", 200, 200, true)
-		labels["unitAttributesTitle"] = addLabel(windows["unitAttributes"], 0, 0, "100%", 20, "Attributes", 20)
-		labels["unitAttributesHp"] = addLabel(windows["unitAttributes"], 0, 50, "30%", 20, "HP%", 20, "right")
-		if #unitSelection == 1 then -- if unit is alone, show its hp percentage in the editbox
-			local h, mh = Spring.GetUnitHealth(unitSelection[1])
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], "35%", 50, "65%", 20, "left", tostring(round(100*(h/mh))))
-		else
-			editBoxes["unitAttributesHpField"] = addEditBox(windows["unitAttributes"], "35%", 50, "65%", 20, "left")
-		end
-		buttons["unitAttributesApply"] = addButton(windows["unitAttributes"], 0, "85%", "100%", "15%", "Apply", applyChangesToSelectedUnits)
-	elseif #unitSelection == 0 then
-		Screen0:RemoveChild(windows["unitAttributes"])
-		windows["unitAttributes"] = nil
+	unitAttributesWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
+	addLabel(unitAttributesWindow, '0%', 0, "100%", 20, "Attributes", 20)
+	addLabel(unitAttributesWindow, '0%', 50, "30%", 20, "HP%", 20, "right")
+	if #unitSelection == 1 then -- if unit is alone, show its hp percentage in the editbox
+		local h, mh = Spring.GetUnitHealth(unitSelection[1])
+		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left", tostring(round(100*(h/mh))))
+	else
+		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left")
 	end
-]]
+	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", "Apply", applyChangesToSelectedUnits)
 end
 function showUnitsInformation() -- Show information about selected and hovered units
 	gl.BeginText()
@@ -737,18 +733,23 @@ function updateUnitList() -- When a unit is created, update the two units lists 
 		-- Clear UI elements
 		for k, l in pairs(unitListLabels) do
 			unitListScrollPanel:RemoveChild(l)
+			l:Dispose()
 		end
 		for k, b in pairs(unitListViewButtons) do
 			unitListScrollPanel:RemoveChild(b)
+			b:Dispose()
 		end
 		for k, i in pairs(unitListHighlight) do
 			unitListScrollPanel:RemoveChild(i)
+			i:Dispose()
 		end
 		for k, b in pairs(groupListUnitsButtons) do
 			groupListUnitsScrollPanel:RemoveChild(b)
+			b:Dispose()
 		end
 		for k, b in pairs(groupListUnitsViewButtons) do
 			groupListUnitsScrollPanel:RemoveChild(b)
+			b:Dispose()
 		end
 		
 		-- Add labels and buttons to both lists
@@ -816,6 +817,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		-- Clear UI elements
 		for k, p in pairs(groupPanels) do
 			groupListScrollPanel:RemoveChild(p)
+			p:Dispose()
 		end
 		groupListScrollPanel:RemoveChild(addGroupButton)
 		
@@ -863,12 +865,15 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			-- Clear UI elements
 			for key, l in pairs(unitGroupLabels[k]) do
 				groupPanels[k]:RemoveChild(l)
+				l:Dispose()
 			end
 			for key, b in pairs(unitGroupViewButtons[k]) do
 				groupPanels[k]:RemoveChild(b)
+				b:Dispose()
 			end
 			for key, b in pairs(unitGroupRemoveUnitButtons[k]) do
 				groupPanels[k]:RemoveChild(b)
+				b:Dispose()
 			end
 			
 			local count = 0
@@ -1374,7 +1379,9 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		for k, zb in pairs(zoneBoxes) do
 			if k ~= "global" then
 				zoneScrollPanel:RemoveChild(zb.editBox)
+				zb.editBox:Dispose()
 				zoneScrollPanel:RemoveChild(zb.checkbox)
+				zb.checkbox:Dispose()
 			end
 		end
 		local size = 20
@@ -1398,9 +1405,11 @@ function updateAllyTeamPanels()
 		if tableLength(at) ~= allyTeamsSize[k] then
 			for _, c in ipairs(allyTeamsRemoveTeamButtons[k]) do
 				allyTeamsScrollPanels[k]:RemoveChild(c)
+				c:Dispose()
 			end
 			for _, c in ipairs(allyTeamsRemoveTeamLabels[k]) do
 				allyTeamsScrollPanels[k]:RemoveChild(c)
+				c:Dispose()
 			end
 			local count = 0
 			for i, t in ipairs(at) do
