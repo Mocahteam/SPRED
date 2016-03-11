@@ -376,7 +376,7 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", newMap)
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", newMap) -- needs a rework
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
 end
 function initUnitWindow()
@@ -1164,7 +1164,7 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 				side = "TOPLEFT"
 			elseif bottom >= 0 and bottom <= 8 then
 				side = "BOTLEFT"
-			else
+			elseif top >= 0 and bottom >= 0 then
 				side = "LEFT"
 			end
 		elseif right >= 0 and right <= 8 then
@@ -1172,13 +1172,15 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 				side = "TOPRIGHT"
 			elseif bottom >= 0 and bottom <= 8 then
 				side = "BOTRIGHT"
-			else
+			elseif top >= 0 and bottom >= 0 then
 				side = "RIGHT"
 			end
-		elseif top >= 0 and top <= 8 then
+		elseif top >= 0 and top <= 8 and left >= 0 and right >= 0 then
 			side = "TOP"
-		elseif bottom >= 0 and bottom <= 8 then
+		elseif bottom >= 0 and bottom <= 8 and left >= 0 and right >= 0 then
 			side = "BOT"
+		else
+			side = "CENTER"
 		end
 	elseif selectedZone.type == "Disk" then
 		local outer = (x-selectedZone.x)*(x-selectedZone.x)/(selectedZone.a*selectedZone.a) + (z-selectedZone.z)*(z-selectedZone.z)/(selectedZone.b*selectedZone.b)
@@ -1192,6 +1194,8 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 				side = "TOPRIGHT"
 			elseif x < selectedZone.x and z < selectedZone.z then
 				side = "TOPLEFT"
+			else
+				side = "CENTER"
 			end
 		end
 	end
@@ -1200,7 +1204,7 @@ end
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	if selectedZone.type == "Rectangle" then
 		-- depending on the side clicked, apply modifications
-		if zoneSide == "" then
+		if zoneSide == "CENTER" then
 			if selectedZone.x1 + dx > 0 and selectedZone.x2 + dx < Game.mapSizeX then
 				selectedZone.x1 = selectedZone.x1 + dx
 				selectedZone.x2 = selectedZone.x2 + dx
@@ -1297,7 +1301,7 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 			end
 		end
 	elseif selectedZone.type == "Disk" then
-		if zoneSide == "" then
+		if zoneSide == "CENTER" then
 			if selectedZone.x - selectedZone.a + dx > 0 and selectedZone.x + selectedZone.a + dx < Game.mapSizeX then
 				selectedZone.x = selectedZone.x + dx
 				zoneAnchorX = zoneAnchorX + dx
@@ -1455,19 +1459,44 @@ function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
 		end
 	end)
 end
-function changeMouseCursor() -- Hide mouse cursor in unit state and during movement, show another cursor in other states
-	--[[
-	local mouseCursor = Spring.GetMouseCursor()
-	if mouseCursor ~= "none" then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and Screen0.hoveredControl == false then
-			Spring.SetMouseCursor("none")
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.SELECTION and mouseMove then
-			Spring.SetMouseCursor("none")
+function initMouseCursors()
+	Spring.AssignMouseCursor("cursor-resize-x-y-1", "cursor-resize-x-y-1", false)
+	Spring.AssignMouseCursor("cursor-resize-x-y-2", "cursor-resize-x-y-2", false)
+	Spring.AssignMouseCursor("cursor-resize-x", "cursor-resize-x", false)
+	Spring.AssignMouseCursor("cursor-resize-y", "cursor-resize-y", false)
+end
+function changeMouseCursor()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
+		local mx, my, leftPressed = Spring.GetMouseState()
+		local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+		if var ~= nil and selectedZone ~= nil and not leftPressed then
+			local x, _, z = unpack(var)
+			if getZoneSide(x, z) == "LEFT" or getZoneSide(x, z) == "RIGHT" then
+				Spring.SetMouseCursor("cursor-resize-x")
+				return
+			elseif getZoneSide(x, z) == "TOP" or getZoneSide(x, z) == "BOT" then
+				Spring.SetMouseCursor("cursor-resize-y")
+				return
+			elseif getZoneSide(x, z) == "TOPLEFT" or getZoneSide(x, z) == "BOTRIGHT" then
+				Spring.SetMouseCursor("cursor-resize-x-y-1")
+				return
+			elseif getZoneSide(x, z) == "TOPRIGHT" or getZoneSide(x, z) == "BOTLEFT" then
+				Spring.SetMouseCursor("cursor-resize-x-y-2")
+				return
+			end
 		end
-	elseif mouseCursor ~= "cursornormal" then
-		Spring.SetMouseCursor("cursornormal") -- cursornormal, Guard, Move ...
+		if zoneSide == "LEFT" or zoneSide == "RIGHT" then
+			Spring.SetMouseCursor("cursor-resize-x")
+		elseif zoneSide == "TOP" or zoneSide == "BOT" then
+			Spring.SetMouseCursor("cursor-resize-y")
+		elseif zoneSide == "TOPLEFT" or zoneSide == "BOTRIGHT" then
+			Spring.SetMouseCursor("cursor-resize-x-y-1")
+		elseif zoneSide == "TOPRIGHT" or zoneSide == "BOTLEFT" then
+			Spring.SetMouseCursor("cursor-resize-x-y-2")
+		else
+			Spring.SetMouseCursor("normalcursor")
+		end
 	end
-	]]
 end
 function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
@@ -1503,7 +1532,6 @@ function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual fee
 	end
 end
 function widget:DrawScreen()
-	changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		showUnitsInformation()
 		drawSelectionRect()
@@ -1535,6 +1563,7 @@ function widget:Initialize()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
+	initMouseCursors()
 	initWindows()
 	fileFrame()
 end
@@ -1569,6 +1598,8 @@ function widget:Update(delta)
 	end
 	
 	updateButtonVisualFeedback()
+	
+	changeMouseCursor()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1676,7 +1707,7 @@ function widget:MousePress(mx, my, button)
 				end
 				if Spring.IsUnitSelected(var) then
 					Screen0:AddChild(unitContextualMenu)
-					if mx + unitContextualMenu.width > screenSizeX then
+					if mx + unitContextualMenu.width > screenSizeX then -- force contextual menu in the screen region
 						unitContextualMenu.x = mx - unitContextualMenu.width
 					else
 						unitContextualMenu.x = mx
@@ -1746,6 +1777,7 @@ function widget:MouseRelease(mx, my, button)
 			end
 			plotZone = false
 			mouseMove = false
+			zoneSide = ""
 		end
 	end
 	doubleClick = 0 -- reset double click timer

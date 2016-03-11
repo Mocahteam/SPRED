@@ -32,6 +32,12 @@ globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 local unitStates = {}
 for id,unitDef in pairs(UnitDefs) do
 	for name,param in unitDef:pairs() do
+		local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+		if name == "modCategories" then
+			if param.commander then
+				Spring.Echo(unitDef.humanName)
+			end
+		end -- buildOptions, id == 4
 		if name == "name" then
 			unitStates[param] = param
 		end
@@ -58,5 +64,5 @@ zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)
 ------------------------------
 -- Initialize forces state machine
 ------------------------------
-local forcesStates = { TEAMCONFIG = "teamConfig", ALLYTEAMS = "allyTeams", UNITGROUPS = "unitGroups" }
+local forcesStates = { TEAMCONFIG = "teamConfig", ALLYTEAMS = "allyTeams" }
 forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)
