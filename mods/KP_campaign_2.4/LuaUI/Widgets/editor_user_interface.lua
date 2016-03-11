@@ -1800,12 +1800,19 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	if button == 1 then
 		-- STATE SELECTION
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-			local altPressed = Spring.GetModKeyState()
+			local altPressed, ctrlPressed = Spring.GetModKeyState()
 			if altPressed then -- Send a message to the gadget to rotate selectedUnits
 				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 				if var ~= nil then
 					local x, _, z = unpack(var)
 					local msg = "Rotate Units".."++"..x.."++"..z
+					Spring.SendLuaRulesMsg(msg)
+				end
+			elseif ctrlPressed then -- Send a message to the gadget to make unit face a point
+				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+				if var ~= nil then
+					local x, _, z = unpack(var)
+					local msg = "Face Units".."++"..x.."++"..z
 					Spring.SendLuaRulesMsg(msg)
 				end
 			else -- Send a message to the gadget to move selected units
