@@ -1199,9 +1199,9 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 				side = "TOPRIGHT"
 			elseif x < selectedZone.x and z < selectedZone.z then
 				side = "TOPLEFT"
-			else
-				side = "CENTER"
 			end
+		else
+			side = "CENTER"
 		end
 	end
 	return side
