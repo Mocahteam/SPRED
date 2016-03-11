@@ -33,6 +33,7 @@ local teams = getTeamsInformation() -- List of teams as read in the LevelEditor.
 local teamCount = tableLength(teamStateMachine.states) -- Total number of teams
 local unitScrollPanel
 local unitButtons = {} -- Contains every type of unit as defined in UnitDef, buttons used to place units on the field
+local factionButtons = {}
 local teamLabels = {}
 local teamButtons = {} -- Contains every teams, buttons used to define the team of units being placed
 local teamImages = {}
@@ -377,31 +378,38 @@ function initWindows()
 	initForcesWindow()
 end
 function initFileWindow()
-	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '10%', "New Map", newMap) -- needs a rework
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '20%', '100%', '10%', "Load Map", function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
+	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File", 20, "center", nil, "center")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', "New", newMap) -- needs a rework
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', "Load", function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', "Save", nil)
+	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', "Export", nil)
+	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', "Settings", nil)
 end
 function initUnitWindow()
 	-- Left Panel
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
 	unitScrollPanel = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
 	
-	-- Unit Buttons
-	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
+	-- Faction Buttons
 	local button_size = 40
 	local y = 0
 	for c, t in ipairs(factionUnits) do
+		local function changeFactionButtonState()
+			factionButtons[c].state.chosen = not factionButtons[c].state.chosen
+			factionButtons[c]:InvalidateSelf()
+			updateUnitWindow()
+		end
 		if c == #factionUnits then
-			addLabel(unitScrollPanel, '0%', y, '100%', button_size, "Unstable units", 20, "center", nil, "center")
+			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, "Unstable units", changeFactionButtonState)
 		else
-			addLabel(unitScrollPanel, '0%', y, '100%', button_size, "Faction "..c, 20, "center", nil, "center")
+			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, "Faction "..c, changeFactionButtonState)
 		end
+		factionButtons[c].backgroundColor = {0.2, 0.8, 0.6, 1}
+		factionButtons[c].chosenColor = {0.2, 0.8, 0.2, 1}
+		factionButtons[c].state.chosen = false
 		y = y + button_size
-		for i, u in ipairs(t) do
-			unitButtons[u] = addButton(unitScrollPanel, '0%', y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
-			y = y + button_size
-		end
 	end
 	
 	-- Team buttons
@@ -578,6 +586,23 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+function updateUnitWindow()
+	for k, b in pairs(unitButtons) do
+		unitScrollPanel:RemoveChild(b)
+	end
+	local button_size = 40
+	local y = 0
+	for c, t in ipairs(factionUnits) do
+		factionButtons[c].y = y
+		y = y + button_size
+		if factionButtons[c].state.chosen then
+			for i, u in ipairs(t) do
+				unitButtons[u] = addButton(unitScrollPanel, '10%', y, '80%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+				y = y + button_size
+			end
+		end
+	end
+end
 function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
 	-- do something
 	clearTemporaryWindows()
