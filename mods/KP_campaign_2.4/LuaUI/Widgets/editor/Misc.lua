@@ -204,3 +204,43 @@ function getTeamsInformation()
 	end
 	return teams
 end
+
+-----------------------
+-- Sort units by faction
+-----------------------
+function getFactionUnits()
+	local factionUnits = {}
+	local inspected = {}
+	local function buildOptionsTree(unitDefID)
+		table.insert(inspected, unitDefID)
+		local tmptable = {}
+		for i, u in ipairs(UnitDefs[unitDefID].buildOptions) do
+			if not findInTable(inspected, u) then
+				local t = buildOptionsTree(u)
+				for _, unitID in ipairs(t) do
+					if not findInTable(tmptable, unitID) then
+						table.insert(tmptable, unitID)
+					end
+				end
+			end
+		end
+		if not findInTable(tmptable, unitDefID) then
+			table.insert(tmptable, unitDefID)
+		end
+		return tmptable
+	end
+	for id, unitDef in pairs(UnitDefs) do
+		for name, param in unitDef:pairs() do
+			if name == "modCategories" then
+				if param.commander then
+					local factionTable = {}
+					for i, u in ipairs(buildOptionsTree(unitDef.id)) do
+						table.insert(factionTable, UnitDefs[u].name)
+					end
+					table.insert(factionUnits, factionTable)
+				end
+			end
+		end
+	end
+	return factionUnits
+end

@@ -29,15 +29,10 @@ globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 ------------------------------
 -- Initialize unit state machine
 ------------------------------
+getFactionUnits()
 local unitStates = {}
 for id,unitDef in pairs(UnitDefs) do
 	for name,param in unitDef:pairs() do
-		local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
-		if name == "modCategories" then
-			if param.commander then
-				Spring.Echo(unitDef.humanName)
-			end
-		end -- buildOptions, id == 4
 		if name == "name" then
 			unitStates[param] = param
 		end
