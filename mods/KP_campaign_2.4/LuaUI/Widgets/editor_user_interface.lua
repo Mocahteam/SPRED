@@ -28,6 +28,7 @@ local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated fu
 local fileButtons = {}
 
 -- Unit Variables
+local factionUnits = getFactionUnits() -- List of units sorted by faction
 local teams = getTeamsInformation() -- List of teams as read in the LevelEditor.txt file (contains id and color)
 local teamCount = tableLength(teamStateMachine.states) -- Total number of teams
 local unitScrollPanel
@@ -384,22 +385,21 @@ function initUnitWindow()
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	unitScrollPanel = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
 	
-	-- Put unit states in an array to sort them alphabetically
-	local unitStates = {}
-	for k, u in pairs(unitStateMachine.states) do
-		if k ~= "SELECTION" then
-			table.insert(unitStates, u)
-		end
-	end
-	table.sort(unitStates)
-	
-	-- Unit buttons
+	-- Unit Buttons
 	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
 	local button_size = 40
 	local y = 0
-	for i,u in ipairs(unitStates) do
-		unitButtons[u] = addButton(unitScrollPanel, 0, y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+	for c, t in ipairs(factionUnits) do
+		if c == #factionUnits then
+			addLabel(unitScrollPanel, '0%', y, '100%', button_size, "Unstable units", 20, "center", nil, "center")
+		else
+			addLabel(unitScrollPanel, '0%', y, '100%', button_size, "Faction "..c, 20, "center", nil, "center")
+		end
 		y = y + button_size
+		for i, u in ipairs(t) do
+			unitButtons[u] = addButton(unitScrollPanel, '0%', y, '100%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
+			y = y + button_size
+		end
 	end
 	
 	-- Team buttons

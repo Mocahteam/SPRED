@@ -209,9 +209,10 @@ end
 -- Sort units by faction
 -----------------------
 function getFactionUnits()
-	local factionUnits = {}
-	local inspected = {}
-	local function buildOptionsTree(unitDefID)
+	local factionUnits = {} -- return
+	local inspected = {} -- units already inspected (prevents infinite loops)
+	
+	local function buildOptionsTree(unitDefID) -- recursively builds the construction tree
 		table.insert(inspected, unitDefID)
 		local tmptable = {}
 		for i, u in ipairs(UnitDefs[unitDefID].buildOptions) do
@@ -229,18 +230,41 @@ function getFactionUnits()
 		end
 		return tmptable
 	end
+	
+	local function compareHumanNames(a, b) -- compare human names without caring about upper/lower cases
+		return string.upper(UnitDefNames[a].humanName) < string.upper(UnitDefNames[b].humanName)
+	end
+	
 	for id, unitDef in pairs(UnitDefs) do
 		for name, param in unitDef:pairs() do
 			if name == "modCategories" then
 				if param.commander then
 					local factionTable = {}
-					for i, u in ipairs(buildOptionsTree(unitDef.id)) do
+					for i, u in ipairs(buildOptionsTree(unitDef.id)) do -- sort string by faction
 						table.insert(factionTable, UnitDefs[u].name)
 					end
+					table.sort(factionTable, compareHumanNames)
 					table.insert(factionUnits, factionTable)
 				end
 			end
 		end
 	end
+	
+	local otherUnits = {} -- contains units that does not seem to belong to a faction
+	for id, unitDef in pairs(UnitDefs) do
+		local alreadyInAFaction = false
+		for i, t in ipairs(factionUnits) do
+			if findInTable(t, unitDef.name) then
+				alreadyInAFaction = true
+				break
+			end
+		end
+		if not alreadyInAFaction then
+			table.insert(otherUnits, unitDef.name)
+		end
+	end
+	table.sort(otherUnits, compareHumanNames)
+	table.insert(factionUnits, otherUnits)
+	
 	return factionUnits
 end

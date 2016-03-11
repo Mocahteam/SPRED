@@ -29,7 +29,6 @@ globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 ------------------------------
 -- Initialize unit state machine
 ------------------------------
-getFactionUnits()
 local unitStates = {}
 for id,unitDef in pairs(UnitDefs) do
 	for name,param in unitDef:pairs() do
