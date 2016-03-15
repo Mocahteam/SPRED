@@ -1,13 +1,4 @@
 {
-"variables":
-	[
-		{
-			"name":"cryingCount",
-			"type":"number",
-			"initValue":"0",
-			"comment":"the number of times the unit cryed"
-		}
-	],		
 "armies" :
 	[
 		{
@@ -64,21 +55,6 @@
 					{
 					"positionId":"ennemyBitStartingPosition",
 					"validZone":"no"
-					},
-				"orientation" :"s",
-				"health":{
-					"relativeValue":"0.25",
-					"autoHeal":"disabled"
-					}
-				},
-				{
-				"id":"ennemyBitNew",
-				"visibleAtStart":"no",
-				"type":"bit",
-				"position":
-					{
-					"positionId":"ennemyBitStartingPositionNew",
-					"validZone":"30"
 					},
 				"orientation" :"s",
 				"health":{
@@ -160,13 +136,6 @@
 		"coordinates":"absolute",
 		"x":"600",
 		"z":"600"
-		},
-		{
-		"id":"ennemyBitStartingPositionNew",
-		"type":"static",
-		"coordinates":"absolute",
-		"x":"1056",
-		"z":"1500"
 		}
 	],
 "conditions":
@@ -226,14 +195,6 @@
 "actions":
 	[
 		{
-		"id":"createAgressiveEnnemy",
-		"toBeRepeated":"yes",
-		"delay":"0",
-		"type":"unitCreation",
-		"unitId": "ennemyBitNew",
-		"actionId":"startingAgressionNew"		
-		},
-		{
 		"id":"transferUnit",
 		"toBeRepeated":"no",
 		"delay":"0",
@@ -260,14 +221,6 @@
 		{
 		"id":"startingAgression",
 		"toBeRepeated":"no",
-		"delay":"0",
-		"type":"attack",
-		"object":"ennemyBit",
-		"attacked":"lostUnit"
-		},
-		{
-		"id":"startingAgressionNew",
-		"toBeRepeated":"yes",
 		"delay":"0",
 		"type":"attack",
 		"object":"ennemyBit",
@@ -367,22 +320,12 @@
 		},
 		{
 		"idEvent":"hasStopped",
-		"script":"cryingCount=cryingCount+1",
 		"trigger":"(not lostUnitisMoving)and(allyUnderAttack)",
 		"actions":
 			[
 			{"actionId":"AllyMoving"},
 			{"actionId":"AllyCryingForHelp"},
 			{"actionId":"deletingMarker"}
-			]
-		},
-		{
-		"idEvent":"newEnnemy",
-		"script":"cryingCount=0",
-		"trigger":"(cryingCount==2)",
-		"actions":
-			[
-			{"actionId":"createAgressiveEnnemy"}
 			]
 		}
 	],

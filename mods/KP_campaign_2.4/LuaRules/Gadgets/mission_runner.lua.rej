@@ -1,0 +1,9 @@
+diff a/mods/KP_campaign_2.4/LuaRules/Gadgets/mission_runner.lua b/mods/KP_campaign_2.4/LuaRules/Gadgets/mission_runner.lua	(rejected hunks)
+@@ -172,6 +172,7 @@
+     return true
+   end
+ end
++  
+ 
+ --------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------
