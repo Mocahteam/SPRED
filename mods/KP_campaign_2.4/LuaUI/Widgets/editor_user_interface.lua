@@ -87,6 +87,7 @@ local zoneNumber = 1 -- Current ID of a newly created zone
 -- Forces variables
 local forcesTabs = {} -- Top frame buttons
 local teamConfigWindow, allyTeamsWindow -- Windows in the force frame
+local teamConfigPanels = {}
 local allyTeams = {} -- List of ally teams
 local allyTeamsSize = {} -- Respective sizes of ally teams
 local allyTeamsRemoveTeamButtons = {} -- Remove team from an ally team
@@ -338,6 +339,9 @@ function teamConfig()
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
 	windows['forceWindow']:AddChild(teamConfigWindow)
+	for k, p in pairs(teamConfigPanels) do
+		p:InvalidateSelf()
+	end
 end
 function allyTeam()
 	clearForceWindow()
@@ -431,6 +435,9 @@ function initUnitWindow()
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
 	local showGroupsWindow = function()
 		Screen0:AddChild(windows["unitGroupsWindow"])
+		for k, p in pairs(groupPanels) do
+			p:InvalidateSelf()
+		end
 		Screen0:RemoveChild(windows['unitListWindow'])
 		Screen0:RemoveChild(windows['unitWindow'])
 	end
@@ -495,30 +502,30 @@ function initForcesWindow()
 	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
 	local teamConfigScrollPanel = addScrollPanel(teamConfigWindow, '0%', '0%', '100%', '100%')
 	for k, team in pairs(teamStateMachine.states) do
-		local panel = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
-		addLabel(panel, '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
+		addLabel(teamConfigPanels[team], '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		-- Enabled/Disabled
 		teamStateButtons[team] = {}
-		teamStateButtons[team].enabled = addButton(panel, '20%', '10%', '10%', '35%', "Enabled", function() teamState[team] = "enabled" end)
-		teamStateButtons[team].disabled = addButton(panel, '20%', '55%', '10%', '35%', "Disabled", function() teamState[team] = "disabled" end)
+		teamStateButtons[team].enabled = addButton(teamConfigPanels[team], '20%', '10%', '10%', '35%', "Enabled", function() teamState[team] = "enabled" end)
+		teamStateButtons[team].disabled = addButton(teamConfigPanels[team], '20%', '55%', '10%', '35%', "Disabled", function() teamState[team] = "disabled" end)
 		teamState[team] = "disabled"
 		-- Controlled by
-		addLabel(panel, '35%', '20%', '20%', '30%', "Controlled by", 20, "center", nil, "center")
+		addLabel(teamConfigPanels[team], '35%', '20%', '20%', '30%', "Controlled by", 20, "center", nil, "center")
 		teamControlButtons[team] = {}
-		teamControlButtons[team].player = addButton(panel, '35%', '50%', '10%', '30%', "Player", function() teamControl[team] = "player" end)
-		teamControlButtons[team].computer = addButton(panel, '45%', '50%', '10%', '30%', "Computer", function() teamControl[team] = "computer" end)
+		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', "Player", function() teamControl[team] = "player" end)
+		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', "Computer", function() teamControl[team] = "computer" end)
 		teamControl[team] = "player"
 		-- Color
 		teamColor[team] = {}
 		teamColor[team].red = tonumber(teams[team].red)
 		teamColor[team].green = tonumber(teams[team].green)
 		teamColor[team].blue = tonumber(teams[team].blue)
-		addLabel(panel, '60%', '20%', '20%', '30%', "In-game color", 20, "center", nil, "center")
-		teamColorImage[team] = addImage(panel, '82%', '20%', '5%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
+		addLabel(teamConfigPanels[team], '60%', '20%', '20%', '30%', "In-game color", 20, "center", nil, "center")
+		teamColorImage[team] = addImage(teamConfigPanels[team], '82%', '20%', '5%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 		teamColorTrackbars[team] = {}
-		teamColorTrackbars[team].red = addTrackbar(panel, '60%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
-		teamColorTrackbars[team].green = addTrackbar(panel, tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
-		teamColorTrackbars[team].blue = addTrackbar(panel, tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
+		teamColorTrackbars[team].red = addTrackbar(teamConfigPanels[team], '60%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
+		teamColorTrackbars[team].green = addTrackbar(teamConfigPanels[team], tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
+		teamColorTrackbars[team].blue = addTrackbar(teamConfigPanels[team], tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
 		local function updateImage()
 			teamColorImage[team].color = {
 				teamColorTrackbars[team].red.value,
