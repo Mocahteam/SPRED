@@ -313,6 +313,8 @@ function DrawButton(obj)
   elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
     bgcolor = obj.focusColor
     --bgcolor = mixColors(bgcolor, obj.focusColor, 0.5)
+  elseif (obj.state.chosen and obj.chosenColor ~= nil) then
+	bgcolor = obj.chosenColor
   end
   gl.Color(bgcolor)
 
@@ -328,6 +330,8 @@ function DrawButton(obj)
     fgcolor = mulColor(fgcolor, 0.4)
   elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
     fgcolor = obj.focusColor
+  elseif (obj.state.chosen and obj.chosenColor ~= nil) then
+	fgcolor = obj.chosenColor
   end
   gl.Color(fgcolor)
 
@@ -758,7 +762,11 @@ function DrawTrackbar(self)
   local skLeft,skTop,skRight,skBottom = unpack4(self.tiles)
   local pdLeft,pdTop,pdRight,pdBottom = unpack4(self.hitpadding)
 
-  gl.Color(1,1,1,1)
+  if self.color then
+	gl.Color(self.color[1], self.color[2], self.color[3], self.color[4])
+  else
+	gl.Color(1,1,1,1)
+  end
 
   TextureHandler.LoadTexture(0,self.TileImage,self)
     local texInfo = gl.TextureInfo(self.TileImage) or {xsize=1, ysize=1}

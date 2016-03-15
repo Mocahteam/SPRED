@@ -15,6 +15,7 @@ local skin = {
 skin.general = {
   focusColor  = {1.0, 0.7, 0.1, 0.8},
   borderColor = {1.0, 1.0, 1.0, 1.0},
+  chosenColor = {0.8, 0.8, 0.2, 1.0},
 
   font = {
     font    = SKINDIR .. "fonts/n019003l.pfb",

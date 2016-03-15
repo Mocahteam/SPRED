@@ -30,10 +30,12 @@ local selectedUnits = {}
 local xUnit, yUnit, zUnit = 0, 0, 0
 local newX, newZ = 0, 0
 local angle = 0
+local faceAngles = {}
 local moveUnits = false
 local deleteUnits = false
 local transferUnits = false
 local rotateUnits = false
+local faceUnits = false
 local resetMap = false
 local moveUnitsAnchor = nil
 local relativepos = {}
@@ -61,7 +63,7 @@ function gadget:RecvLuaMsg(msg, player)
 	elseif (msgContents[1] == "Anchor") then
 		relativepos = {}
 		moveUnitsAnchor = tonumber(msgContents[2])
-		newX, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		newX, _, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
 		for i, u in ipairs(selectedUnits) do
 			local curX, _, curZ = Spring.GetUnitPosition(u)
 			local refX, _, refZ = Spring.GetUnitPosition(moveUnitsAnchor)
@@ -74,7 +76,10 @@ function gadget:RecvLuaMsg(msg, player)
 	-- TRANSLATE UNITS : gets the pressed arrow
 	elseif (msgContents[1] == "Translate Units") then
 		moveUnits = true
-		dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+		newX, _, newZ = Spring.GetUnitPosition(moveUnitsAnchor)
+		local dX, dZ = tonumber(msgContents[2]), tonumber(msgContents[3])
+		newX = newX + dX
+		newZ = newZ + dZ
 	-- ROTATE UNITS : computes the angle of rotation
 	elseif (msgContents[1] == "Rotate Units") then
 		rotateUnits = true
@@ -84,6 +89,19 @@ function gadget:RecvLuaMsg(msg, player)
 		local length = math.sqrt(vectX*vectX + vectZ*vectZ)
 		if length > 0 then
 			angle = math.atan2(vectX/length, vectZ/length)
+		end
+	-- FACE UNITS : make units face a point
+	elseif (msgContents[1] == "Face Units") then
+		faceUnits = true
+		local x, z = msgContents[2], msgContents[3]
+		faceAngles = {}
+		for i, u in ipairs(selectedUnits) do
+			local refX, _, refZ = Spring.GetUnitPosition(u)
+			local vectX, vectZ = x - refX, z - refZ
+			local length = math.sqrt(vectX*vectX + vectZ*vectZ)
+			if length > 0 then
+				faceAngles[i] = math.atan2(vectX/length, vectZ/length)
+			end
 		end
 	-- SELECT UNITS : gets the current unit selection
 	elseif (msgContents[1] == "Select Units") then
@@ -155,6 +173,12 @@ function gadget:GameFrame( frameNumber )
 				Spring.SetUnitRotation(u, 0, -angle, 0)
 			end
 			rotateUnits = false
+		-- FACE UNITS
+		elseif faceUnits then
+			for i, u in ipairs(selectedUnits) do
+				Spring.SetUnitRotation(u, 0, -faceAngles[i], 0)
+			end
+			faceUnits = false
 		-- RESET MAP
 		elseif resetMap then
 			local units = Spring.GetAllUnits()

@@ -23,7 +23,7 @@ function StateMachine.getCurrentState(self) return self.currentState end
 ------------------------------
 -- Initialize global state machine
 ------------------------------
-local globalStates = { FILE = "file", UNIT = "unit", ZONE = "zone", FORCES = "forces" }
+local globalStates = { NONE = "none", FILE = "file", UNIT = "unit", ZONE = "zone", FORCES = "forces", TRIGGER = "trigger" }
 globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
 
 ------------------------------
@@ -44,13 +44,20 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 -- Initialize team state machine
 ------------------------------
 local teamStates = {}
-for _, t in pairs(getTeamsInformation()) do
-	teamStates[t.id] = t.id
+local teams = getTeamsInformation()
+for i = 0, #teams, 1 do
+	table.insert(teamStates, teams[i].id)
 end
-teamStateMachine = StateMachine.new(teamStates, teamStates[0])
+teamStateMachine = StateMachine.new(teamStates, teamStates[1])
 
 ------------------------------
 -- Initialize zone state machine
 ------------------------------
 local zoneStates = { DRAWRECT = "drawrect", DRAWDISK = "drawdisk", SELECTION = "selection" }
 zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)
+
+------------------------------
+-- Initialize forces state machine
+------------------------------
+local forcesStates = { TEAMCONFIG = "teamConfig", ALLYTEAMS = "allyTeams" }
+forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)

@@ -44,6 +44,21 @@ function tableLength(t)
 end
 
 -----------------------
+-- Returns the index of the minimum element of a table
+-----------------------
+function minOfTable(t)
+	local index = 0
+	local value = 0
+	for i, e in ipairs(t) do
+		if e < value or index == 0 then
+			value = e
+			index = i
+		end
+	end
+	return index
+end
+
+-----------------------
 -- Returns true if element is in table
 -----------------------
 function findInTable(tab, e)
@@ -136,8 +151,8 @@ end
 -- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
-	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
-	if shiftPressed or ctrlPressed then
+	local _, _, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed then
 		local selectedUnits = Spring.GetSelectedUnits()
 		for i, u in ipairs(units) do
 			table.insert(selectedUnits, u) -- add units to selection
@@ -153,8 +168,8 @@ end
 -- @return to disable click to select
 -----------------------
 function proceedDeselection(unit)
-	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
-	if shiftPressed or ctrlPressed then
+	local _, _, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed then
 		local selectedUnits = Spring.GetSelectedUnits()
 		for i, u in ipairs(selectedUnits) do
 			if u == unit then
@@ -188,4 +203,68 @@ function getTeamsInformation()
 		i = i + 1
 	end
 	return teams
+end
+
+-----------------------
+-- Sort units by faction
+-----------------------
+function getFactionUnits()
+	local factionUnits = {} -- return
+	local inspected = {} -- units already inspected (prevents infinite loops)
+	
+	local function buildOptionsTree(unitDefID) -- recursively builds the construction tree
+		table.insert(inspected, unitDefID)
+		local tmptable = {}
+		for i, u in ipairs(UnitDefs[unitDefID].buildOptions) do
+			if not findInTable(inspected, u) then
+				local t = buildOptionsTree(u)
+				for _, unitID in ipairs(t) do
+					if not findInTable(tmptable, unitID) then
+						table.insert(tmptable, unitID)
+					end
+				end
+			end
+		end
+		if not findInTable(tmptable, unitDefID) then
+			table.insert(tmptable, unitDefID)
+		end
+		return tmptable
+	end
+	
+	local function compareHumanNames(a, b) -- compare human names without caring about upper/lower cases
+		return string.upper(UnitDefNames[a].humanName) < string.upper(UnitDefNames[b].humanName)
+	end
+	
+	for id, unitDef in pairs(UnitDefs) do
+		for name, param in unitDef:pairs() do
+			if name == "modCategories" then
+				if param.commander then
+					local factionTable = {}
+					for i, u in ipairs(buildOptionsTree(unitDef.id)) do -- sort string by faction
+						table.insert(factionTable, UnitDefs[u].name)
+					end
+					table.sort(factionTable, compareHumanNames)
+					table.insert(factionUnits, factionTable)
+				end
+			end
+		end
+	end
+	
+	local otherUnits = {} -- contains units that does not seem to belong to a faction
+	for id, unitDef in pairs(UnitDefs) do
+		local alreadyInAFaction = false
+		for i, t in ipairs(factionUnits) do
+			if findInTable(t, unitDef.name) then
+				alreadyInAFaction = true
+				break
+			end
+		end
+		if not alreadyInAFaction then
+			table.insert(otherUnits, unitDef.name)
+		end
+	end
+	table.sort(otherUnits, compareHumanNames)
+	table.insert(factionUnits, otherUnits)
+	
+	return factionUnits
 end
