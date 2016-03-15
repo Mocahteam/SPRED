@@ -44,10 +44,11 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 -- Initialize team state machine
 ------------------------------
 local teamStates = {}
-for _, t in pairs(getTeamsInformation()) do
-	teamStates[t.id] = t.id
+local teams = getTeamsInformation()
+for i = 0, #teams, 1 do
+	table.insert(teamStates, teams[i].id)
 end
-teamStateMachine = StateMachine.new(teamStates, teamStates[0])
+teamStateMachine = StateMachine.new(teamStates, teamStates[1])
 
 ------------------------------
 -- Initialize zone state machine
