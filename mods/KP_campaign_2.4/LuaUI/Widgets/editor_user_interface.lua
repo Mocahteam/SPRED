@@ -41,6 +41,7 @@ local unitContextualMenu -- Appears when right-clicking on a unit
 local unitAttributesWindow
 local unitGroups = {} -- Contains logical groups of units
 local unitTotal = 0 -- Total number of units placed on the field
+local unitGroupsUnitTotal = 0 -- Total number of units placed on the field (used for the unitGroups frame)
 local groupNumber = 1 -- Current ID of a newly created group
 local groupTotal = nil -- Total number of unit groups
 local groupSizes = {} -- Contains the total number of units in each group
@@ -62,6 +63,7 @@ local addUnitsToGroupsButton -- Add the selected units to the selected groups (i
 local groupListUnitsButtons = {} -- Allows selection of units
 local groupListUnitsViewButtons = {} -- Focus on units
 local addGroupButton -- Creates a new group
+local updateTeamButtons = true
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
@@ -109,6 +111,8 @@ local enabledTeamsTotal = nil
 local teamColorTrackbars = {}
 local teamColor = {}
 local teamColorImage = {}
+local updateTeamConfig = true
+local updateAllyTeam = true
 
 -- Mouse variables
 local mouseMove = false
@@ -434,6 +438,8 @@ function initUnitWindow()
 		end
 		Screen0:RemoveChild(windows['unitListWindow'])
 		Screen0:RemoveChild(windows['unitWindow'])
+		updateGroupListUnitList()
+		unitStateMachine:setCurrentState(unitStateMachine.states.UNITGROUPS)
 	end
 	local showGroupsButton = addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", showGroupsWindow)
 	
@@ -449,6 +455,7 @@ function initUnitWindow()
 		Screen0:AddChild(windows['unitListWindow'])
 		Screen0:AddChild(windows['unitWindow'])
 		showGroupsButton:InvalidateSelf()
+		unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	end
 	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", closeGroupsWindow)
 	closeButton.font.color = {1, 0, 0, 1}
@@ -508,11 +515,14 @@ function initForcesWindow()
 			else
 				enableTeamButtons[team].caption = "Disabled"
 			end
+			if not enabledTeams[team] then
+				removeTeamFromTables(team)
+			end
 		end
 		enabledTeams[team] = false -- Disable all teams at start
 		enableTeamButtons[team].state.chosen = false
 		enableTeamButtons[team].OnClick = { changeTeamState }
-		if k == 0 or k == 1 or k == 2 then -- except the first 3 teams
+		if team == 0 or team == 1 or team == 2 then -- except the first 3 teams
 			changeTeamState()
 		end
 		-- Controlled by
@@ -654,7 +664,7 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 	end
 end
 function previewUnit()-- Draw units before placing them
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and not Screen0.hoveredControl then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() ~= unitStateMachine.states.UNITGROUPS and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and not Screen0.hoveredControl then
 		local mx, my = Spring.GetMouseState()
 		local kind, coords = Spring.TraceScreenRay(mx, my)
 		if kind == "ground" then -- only draw if unit is placeable
@@ -717,7 +727,11 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	
 	local count = 0
 	for k, group in pairs(unitGroups) do -- Show already created unit groups
-		addButton(attributionWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() addSelectedUnitsToGroup(group) clearTemporaryWindows() end) -- Add unit selection to this group
+		local function addToGroup()
+			addSelectedUnitsToGroup(group)
+			clearTemporaryWindows()
+		end
+		addButton(attributionWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, addToGroup) -- Add unit selection to this group
 		count = count + 1
 	end
 	
@@ -750,7 +764,11 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 			end
 		end
 		if addUnitGroupButton then
-			addButton(removalWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, function() removeSelectedUnitsFromGroup(group) clearTemporaryWindows() end) -- Remove unit selection from this group
+			local function removeFromGroup()
+				removeSelectedUnitsFromGroup(group)
+				clearTemporaryWindows()
+			end
+			addButton(removalWindowScrollPanel, '0%', count * 40, '100%', 40, group.name, removeFromGroup) -- Remove unit selection from this group
 			count = count + 1
 			noGroupsInCommon = false
 		end
@@ -763,6 +781,35 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 			text = "This unit does not belong to any group."
 		end
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
+	end
+end
+function updateSelectTeamButtons()
+	if updateTeamButtons then
+		for k, b in pairs(teamButtons) do
+			windows["unitWindow"]:RemoveChild(b)
+			b:Dispose()
+		end
+		local count = 0
+		local enabledTeamsCount = 0 -- count the number of enabled teams
+		for k, enabled in pairs(enabledTeams) do
+			if enabled then
+				enabledTeamsCount = enabledTeamsCount + 1
+			end
+		end
+		for i, team in ipairs(teamStateMachine.states) do
+			if enabledTeams[team] then
+				local x = tostring(count * 100 / math.ceil(enabledTeamsCount/2) - 100 * math.floor(count/math.ceil(enabledTeamsCount/2))).."%"
+				local y = tostring(90 + 5 * math.floor(count/math.ceil(enabledTeamsCount/2))).."%"
+				local w = tostring(100 / math.ceil(enabledTeamsCount/2)).."%"
+				local h = "5%"
+				local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+				teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
+				teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
+				teamLabels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15, "center", nil, "center")
+				count = count + 1
+			end
+		end
+		updateTeamButtons = false
 	end
 end
 function updateUnitList() -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
@@ -781,6 +828,41 @@ function updateUnitList() -- When a unit is created, update the two units lists 
 			unitListScrollPanel:RemoveChild(i)
 			i:Dispose()
 		end
+		
+		-- Add labels and buttons to both lists
+		local count = 0
+		for i, u in ipairs(units) do
+			-- Unit label (type, team and id)
+			local uDefID = Spring.GetUnitDefID(u)
+			local name = UnitDefs[uDefID].humanName
+			local team = Spring.GetUnitTeam(u)
+			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+			
+			-- Eye button to focus a specific unit
+			local function viewUnit()
+				local state = Spring.GetCameraState()
+				local x, y, z = Spring.GetUnitPosition(u)
+				state.px, state.py, state.pz = x, y, z
+				state.height = 500
+				Spring.SetCameraState(state, 2)
+				Spring.SelectUnitArray({u})
+				unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+			end
+			unitListViewButtons[u] = addButton(unitListScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
+			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			
+			-- Highlight
+			unitListHighlight[u] = addImage(unitListScrollPanel, '0%', 30 * count, '100%', 30, "bitmaps/editor/blank.png", false, {1, 1, 0.4, 0})
+			
+			count = count + 1
+		end
+		unitTotal = units.n
+	end
+end
+function updateGroupListUnitList()
+	local units = Spring.GetAllUnits()
+	if units.n ~= unitGroupsUnitTotal then
+		-- Clear UI elements
 		for k, b in pairs(groupListUnitsButtons) do
 			groupListUnitsScrollPanel:RemoveChild(b)
 			b:Dispose()
@@ -797,7 +879,6 @@ function updateUnitList() -- When a unit is created, update the two units lists 
 			local uDefID = Spring.GetUnitDefID(u)
 			local name = UnitDefs[uDefID].humanName
 			local team = Spring.GetUnitTeam(u)
-			unitListLabels[u] = addLabel(unitListScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 			groupListUnitsButtons[u] = addButton(groupListUnitsScrollPanel, '0%', 30 * count, '85%', 30, name.." ("..tostring(u)..")", function() groupListUnitsButtons[u].state.chosen = not groupListUnitsButtons[u].state.chosen groupListUnitsButtons[u]:InvalidateSelf() end)
 			groupListUnitsButtons[u].font.size = 16
 			groupListUnitsButtons[u].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
@@ -812,17 +893,12 @@ function updateUnitList() -- When a unit is created, update the two units lists 
 				Spring.SelectUnitArray({u})
 				unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 			end
-			unitListViewButtons[u] = addButton(unitListScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
-			addImage(unitListViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 			groupListUnitsViewButtons[u] = addButton(groupListUnitsScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
 			addImage(groupListUnitsViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-			
-			-- Highlight
-			unitListHighlight[u] = addImage(unitListScrollPanel, '0%', 30 * count, '100%', 30, "bitmaps/editor/blank.png", false, {1, 1, 0.4, 0})
-			
+
 			count = count + 1
 		end
-		unitTotal = units.n
+		unitGroupsUnitTotal = units.n
 	end
 end
 function updateUnitHighlights() -- Visual feedback on the units list to see what units are selected
@@ -1413,7 +1489,7 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	end
 end
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and totalZones ~= #zoneList then
+	if totalZones ~= #zoneList then
 		for k, zb in pairs(zoneBoxes) do
 			if k ~= "global" then
 				zoneScrollPanel:RemoveChild(zb.editBox)
@@ -1431,92 +1507,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		totalZones = #zoneList
 	end
 end
-function updateTeamsWindows()
-	local enabledTeamsCount = 0 -- count the number of enabled teams
-	for k, enabled in pairs(enabledTeams) do
-		if enabled then
-			enabledTeamsCount = enabledTeamsCount + 1
-		end
-	end
-	
-	if enabledTeamsCount ~= enabledTeamsTotal then -- update every windows
-		-- Select team buttons
-		for k, b in pairs(teamButtons) do
-			windows["unitWindow"]:RemoveChild(b)
-			b:Dispose()
-		end
-		local count = 0
-		for i, team in ipairs(teamStateMachine.states) do
-			if enabledTeams[team] then
-				local x = tostring(count * 100 / math.ceil(enabledTeamsCount/2) - 100 * math.floor(count/math.ceil(enabledTeamsCount/2))).."%"
-				local y = tostring(90 + 5 * math.floor(count/math.ceil(enabledTeamsCount/2))).."%"
-				local w = tostring(100 / math.ceil(enabledTeamsCount/2)).."%"
-				local h = "5%"
-				local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-				teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, "", teamFunctions[team])
-				teamImages[team] = addImage(teamButtons[team], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, color)
-				teamLabels[team] = addLabel(teamImages[team], "0%", "0%", "100%", "100%", team, 15, "center", nil, "center")
-				count = count + 1
-			end
-		end
-		
-		-- Team Config buttons
-		for k, l in pairs(teamControlLabels) do
-			teamConfigPanels[k]:RemoveChild(l)
-		end
-		for k, b in pairs(teamControlButtons) do
-			teamConfigPanels[k]:RemoveChild(b.player)
-			teamConfigPanels[k]:RemoveChild(b.computer)
-		end
-		for k, l in pairs(teamColorLabels) do
-			teamConfigPanels[k]:RemoveChild(l)
-		end
-		for k, i in pairs(teamColorImage) do
-			teamConfigPanels[k]:RemoveChild(i)
-		end
-		for k, t in pairs(teamColorTrackbars) do
-			teamConfigPanels[k]:RemoveChild(t.red)
-			teamConfigPanels[k]:RemoveChild(t.green)
-			teamConfigPanels[k]:RemoveChild(t.blue)
-		end
-		for i, team in ipairs(teamStateMachine.states) do
-			if enabledTeams[team] then
-				teamConfigPanels[team]:AddChild(teamControlLabels[team])
-				teamConfigPanels[team]:AddChild(teamControlButtons[team].player)
-				teamConfigPanels[team]:AddChild(teamControlButtons[team].computer)
-				teamConfigPanels[team]:AddChild(teamColorLabels[team])
-				teamConfigPanels[team]:AddChild(teamColorImage[team])
-				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].red)
-				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].green)
-				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].blue)
-			end
-		end
-		
-		-- Ally teams config
-		for k, p in pairs(allyTeamPanels) do
-			allyTeamsWindow:RemoveChild(p)
-		end
-		for k, b in pairs(allyTeamsListButtons) do
-			teamListScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
-		for k, l in pairs(allyTeamsListLabels) do
-			teamListScrollPanel:RemoveChild(l)
-			l:Dispose()
-		end
-		count = 0
-		for i, team in ipairs(teamStateMachine.states) do
-			if enabledTeams[team] then
-				allyTeamsWindow:AddChild(allyTeamPanels[team])
-				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
-				count = count + 1
-			end
-		end
-		
-		enabledTeamsTotal = enabledTeamsCount
-	end
-end
+
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -1547,6 +1538,30 @@ function updateAllyTeamPanels()
 			allyTeamsSize[k] = tableLength(at)
 		end
 	end
+	
+	if updateAllyTeam then
+		for k, p in pairs(allyTeamPanels) do
+			allyTeamsWindow:RemoveChild(p)
+		end
+		for k, b in pairs(allyTeamsListButtons) do
+			teamListScrollPanel:RemoveChild(b)
+			b:Dispose()
+		end
+		for k, l in pairs(allyTeamsListLabels) do
+			teamListScrollPanel:RemoveChild(l)
+			l:Dispose()
+		end
+		count = 0
+		for i, team in ipairs(teamStateMachine.states) do
+			if enabledTeams[team] then
+				allyTeamsWindow:AddChild(allyTeamPanels[team])
+				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
+				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				count = count + 1
+			end
+		end
+		updateAllyTeam = false
+	end
 end
 function addTeamToSelectedAllyTeam(team)
 	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
@@ -1563,6 +1578,61 @@ function removeTeamFromAllyTeam(allyTeam, team)
 		end
 	end
 	table.sort(at)
+end
+function removeTeamFromTables(team) -- FIXME : visual feedback bug
+	for k, at in pairs(allyTeams) do
+		removeTeamFromAllyTeam(k, team)
+	end
+end
+function updateTeamsWindows()
+	local enabledTeamsCount = 0 -- count the number of enabled teams
+	for k, enabled in pairs(enabledTeams) do
+		if enabled then
+			enabledTeamsCount = enabledTeamsCount + 1
+		end
+	end
+	
+	if enabledTeamsCount ~= enabledTeamsTotal then -- update every windows
+		updateTeamButtons = true
+		updateTeamConfig = true
+		updateAllyTeam = true
+		enabledTeamsTotal = enabledTeamsCount
+	end
+end
+function updateTeamConfigPanels()
+	if updateTeamConfig then
+		for k, l in pairs(teamControlLabels) do
+			teamConfigPanels[k]:RemoveChild(l)
+		end
+		for k, b in pairs(teamControlButtons) do
+			teamConfigPanels[k]:RemoveChild(b.player)
+			teamConfigPanels[k]:RemoveChild(b.computer)
+		end
+		for k, l in pairs(teamColorLabels) do
+			teamConfigPanels[k]:RemoveChild(l)
+		end
+		for k, i in pairs(teamColorImage) do
+			teamConfigPanels[k]:RemoveChild(i)
+		end
+		for k, t in pairs(teamColorTrackbars) do
+			teamConfigPanels[k]:RemoveChild(t.red)
+			teamConfigPanels[k]:RemoveChild(t.green)
+			teamConfigPanels[k]:RemoveChild(t.blue)
+		end
+		for i, team in ipairs(teamStateMachine.states) do
+			if enabledTeams[team] then
+				teamConfigPanels[team]:AddChild(teamControlLabels[team])
+				teamConfigPanels[team]:AddChild(teamControlButtons[team].player)
+				teamConfigPanels[team]:AddChild(teamControlButtons[team].computer)
+				teamConfigPanels[team]:AddChild(teamColorLabels[team])
+				teamConfigPanels[team]:AddChild(teamColorImage[team])
+				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].red)
+				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].green)
+				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].blue)
+			end
+		end
+		updateTeamConfig = false
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1639,7 +1709,6 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
 	markButtonWithinSet(forcesTabs, forcesStateMachine:getCurrentState())
 	for i, team in ipairs(teamStateMachine.states) do
-		--markButtonWithinSet(teamStateButtons[team], teamState[team])
 		markButtonWithinSet(teamControlButtons[team], teamControl[team])
 	end
 end
@@ -1718,18 +1787,26 @@ function widget:Update(delta)
 		clearTemporaryWindows()
 	end
 	
-	updateTeamsWindows()
-	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		updateSelectTeamButtons()
 		updateUnitList()
 		updateUnitHighlights()
-		updateUnitGroupPanels()
+		if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
+			updateUnitGroupPanels()
+		end
 	end
 	
-	updateZonePanel()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		updateZonePanel()
+	end
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		updateAllyTeamPanels()
+		updateTeamsWindows()
+		if forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
+			updateAllyTeamPanels()
+		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+			updateTeamConfigPanels()
+		end
 	end
 	
 	updateButtonVisualFeedback()
@@ -1763,7 +1840,7 @@ function widget:MousePress(mx, my, button)
 		-- STATE UNIT : place units on the field and select/move/rotate them
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 			-- STATE UNIT : place units on the field
-			if unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION then
+			if unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and unitStateMachine:getCurrentState() ~= unitStateMachine.states.UNITGROUPS then
 				if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
 					local xUnit, yUnit, zUnit = unpack(var)
 					xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)

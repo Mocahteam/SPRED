@@ -38,6 +38,7 @@ for id,unitDef in pairs(UnitDefs) do
 	end
 end
 unitStates.SELECTION = "selection"
+unitStates.UNITGROUPS = "unitGroups"
 unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 
 ------------------------------
