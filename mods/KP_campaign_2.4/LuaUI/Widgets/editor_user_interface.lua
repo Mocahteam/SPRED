@@ -114,6 +114,24 @@ local teamColorImage = {}
 local updateTeamConfig = true
 local updateAllyTeam = true
 
+-- Trigger variables
+local events = {}
+local eventScrollPanel -- scroll panel containing each event
+local eventConditionsScrollPanel -- scroll panel containing each condition of an event
+local eventActionsScrollPanel -- scroll panel containing each action of an event
+local eventButtons = {}
+local deleteEventButtons = {}
+local currentEvent
+local currentCondition
+local currentAction
+local eventNumber = 0
+local newEventConditionButton
+local conditionButtons = {}
+local deleteConditionButtons = {}
+local actionButtons = {}
+local deleteActionButtons = {}
+local newEventActionButton
+
 -- Mouse variables
 local mouseMove = false
 local clickToSelect = false -- Enable isolation through clicking on an already selected unit
@@ -334,6 +352,11 @@ function forcesFrame()
 		allyTeam()
 	end
 end
+function triggerFrame()
+	clearUI()
+	globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
+	Screen0:AddChild(windows["triggerWindow"])
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -382,7 +405,7 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', 'Units', unitFrame)
 	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', 'Zones', zoneFrame)
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', 'Forces', forcesFrame)
-	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', 'Triggers', nil)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', 'Triggers', triggerFrame)
 end
 function initWindows()
 	initFileWindow()
@@ -390,6 +413,7 @@ function initWindows()
 	initUnitContextualMenu()
 	initZoneWindow()
 	initForcesWindow()
+	initTriggerWindow()
 end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
@@ -583,6 +607,26 @@ function initForcesWindow()
 		allyTeams[team] = {}
 		allyTeamsSize[team] = 0
 	end
+end
+function initTriggerWindow()
+	-- Left Panel
+	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', "Events")
+	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '95%')
+	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, "+ New Event", createNewEvent)
+	
+	-- Event window
+	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
+	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', "Conditions", 20, "center")
+	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', "Actions", 20, "center")
+	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '88%')
+	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, "+ New Condition", createNewCondition)
+	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '88%')
+	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, "+ New Action", createNewAction)
+	
+	-- Condition/Action window
+	windows['conditionActionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1579,7 +1623,7 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	end
 	table.sort(at)
 end
-function removeTeamFromTables(team) -- FIXME : visual feedback bug
+function removeTeamFromTables(team)
 	for k, at in pairs(allyTeams) do
 		removeTeamFromAllyTeam(k, team)
 	end
@@ -1633,6 +1677,196 @@ function updateTeamConfigPanels()
 		end
 		updateTeamConfig = false
 	end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Triggers state functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function createNewEvent()
+	local event = {}
+	event.conditions = {}
+	event.trigger = ""
+	event.actions = {}
+	event.id = eventNumber
+	event.name = "Event "..tostring(event.id)
+	event.conditionNumber = 0
+	event.conditionTotal = 0
+	event.actionNumber = 0
+	event.actionTotal = 0
+	table.insert(events, event)
+	
+	eventNumber = eventNumber + 1
+	conditionButtons[event.id] = {}
+	deleteConditionButtons[event.id] = {}
+	actionButtons[event.id] = {}
+	deleteActionButtons[event.id] = {}
+	
+	editEvent(#events)
+end
+function editEvent(i)
+	Screen0:RemoveChild(windows['eventWindow'])
+	Screen0:AddChild(windows['eventWindow'])
+	if currentEvent ~= i then
+		currentEvent = i
+		currentEventFrame()
+	end
+end
+function removeEvent(i)
+	table.remove(events, i)
+	Screen0:RemoveChild(windows['eventWindow'])
+	currentEvent = nil
+end
+function createNewCondition()
+	if currentEvent then
+		local e = events[currentEvent]
+		local condition = {}
+		condition.id = e.conditionNumber
+		condition.name = "Condition "..tostring(condition.id)
+		table.insert(e.conditions, condition)
+		
+		e.conditionNumber = e.conditionNumber + 1
+		
+		editCondition(#(e.conditions))
+	end
+end
+function editCondition(i)
+	Screen0:RemoveChild(windows['conditionActionWindow'])
+	Screen0:AddChild(windows['conditionActionWindow'])
+	if currentCondition ~= i then
+		currentCondition = i
+		updateActionConditionFrame()
+	end
+end
+function removeCondition(i)
+	if currentEvent then
+		table.remove(events[currentEvent].conditions, i)
+		Screen0:RemoveChild(windows['conditionActionWindow'])
+		currentCondition = nil
+	end
+end
+function createNewAction()
+	if currentEvent then
+		local e = events[currentEvent]
+		local action = {}
+		action.id = e.actionNumber
+		action.name = "Action "..tostring(action.id)
+		table.insert(e.actions, action)
+		
+		e.actionNumber = e.actionNumber + 1
+		
+		editAction(#(e.actions))
+	end
+end
+function editAction(i)
+	Screen0:RemoveChild(windows['conditionActionWindow'])
+	Screen0:AddChild(windows['conditionActionWindow'])
+	if currentAction ~= i then
+		currentAction = i
+		updateActionConditionFrame()
+	end
+end
+function removeAction(i)
+	if currentEvent then
+		table.remove(events[currentEvent].actions, i)
+		Screen0:RemoveChild(windows['conditionActionWindow'])
+		currentAction = nil
+	end
+end
+function updateEventList()
+	if eventTotal ~= #events then
+		for k, b in pairs(eventButtons) do
+			eventScrollPanel:RemoveChild(b)
+			b:Dispose()
+		end
+		for k, b in pairs(deleteEventButtons) do
+			eventScrollPanel:RemoveChild(b)
+			b:Dispose()
+		end
+		local count = 0
+		for i, e in ipairs(events) do
+			eventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '80%', 40, e.name, function() editEvent(i) end)
+			deleteEventButtons[i] = addButton(eventScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeEvent(i) end)
+			deleteEventButtons[i].font.color = {1, 0, 0, 1}
+			deleteEventButtons[i].font.size = 20
+			count = count + 1
+		end
+		newEventButton.y = 40 * count
+		eventTotal = #events
+	end
+	
+	if currentEvent then
+		events[currentEvent].name = eventNameEditBox.text
+		if events[currentEvent].name ~= eventButtons[currentEvent].caption then
+			eventButtons[currentEvent].caption = events[currentEvent].name
+			eventButtons[currentEvent]:InvalidateSelf()
+		end
+	end
+end
+function updateEventFrame()
+	if currentEvent then
+		local e = events[currentEvent]
+		
+		if e.conditionTotal ~= #(e.conditions) then
+			for k, b in pairs(conditionButtons[e.id]) do
+				eventConditionsScrollPanel:RemoveChild(b)
+				b:Dispose()
+			end
+			for k, b in pairs(deleteConditionButtons[e.id]) do
+				eventConditionsScrollPanel:RemoveChild(b)
+				b:Dispose()
+			end
+			local count = 0
+			for i, c in ipairs(e.conditions) do
+				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
+				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeCondition(i) end)
+				deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
+				deleteConditionButtons[e.id][i].font.size = 20
+				count = count + 1
+			end
+			newEventConditionButton.y = 40 * count
+			e.conditionTotal = #(e.conditions)
+		end
+		
+		if e.actionTotal ~= #(e.actions) then
+			for k, b in pairs(actionButtons[e.id]) do
+				eventActionsScrollPanel:RemoveChild(b)
+				b:Dispose()
+			end
+			for k, b in pairs(deleteActionButtons[e.id]) do
+				eventActionsScrollPanel:RemoveChild(b)
+				b:Dispose()
+			end
+			local count = 0
+			for i, c in ipairs(e.actions) do
+				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
+				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+				deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
+				deleteActionButtons[e.id][i].font.size = 20
+				count = count + 1
+			end
+			newEventActionButton.y = 40 * count
+			e.actionTotal = #(e.actions)
+		end
+	end
+end
+function currentEventFrame()
+	if currentEvent then
+		local e = events[currentEvent]
+		eventNameEditBox:SetText(e.name)
+	end
+end
+function updateActionConditionFrame()
+	--[[
+	if currentCondition then
+		local c = e.conditions[currentCondition]
+	end
+	if currentAction then
+		local a = e.actions[currentAction]
+	end
+	]]
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1807,6 +2041,11 @@ function widget:Update(delta)
 		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
 			updateTeamConfigPanels()
 		end
+	end
+	
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+		updateEventList()
+		updateEventFrame()
 	end
 	
 	updateButtonVisualFeedback()
