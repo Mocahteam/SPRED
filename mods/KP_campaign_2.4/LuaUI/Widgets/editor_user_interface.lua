@@ -14,6 +14,7 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua") -- State machines definitio
 VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
 VFS.Include("LuaUI/Widgets/editor/Actions.lua")
+VFS.Include("LuaUI/Widgets/editor/Filters.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -129,9 +130,14 @@ local currentAction
 local eventNumber = 0
 local conditionNumber = 0
 local actionNumber = 0
-local newEventConditionButton
 local conditionButtons = {}
 local deleteConditionButtons = {}
+local newEventConditionButton
+local conditionNameEditBox
+local conditionTypeComboBox
+local conditionScrollPanel
+local conditionTextBox
+local conditionFeatures = {}
 local actionButtons = {}
 local deleteActionButtons = {}
 local newEventActionButton
@@ -140,8 +146,6 @@ local actionTypeComboBox
 local actionScrollPanel
 local actionTextBox
 local actionFeatures = {}
-local currentXEditBox
-local currentYEditBox
 
 -- Mouse variables
 local mouseMove = false
@@ -338,6 +342,9 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	selectedZone = nil
 	Spring.SelectUnitArray({})
 	clearTemporaryWindows()
+	currentEvent = nil
+	currentCondition = nil
+	currentAction = nil
 	globalStateMachine:setCurrentState(globalStateMachine.states.NONE)
 end
 function clearTemporaryWindows()
@@ -650,12 +657,21 @@ function initTriggerWindow()
 	
 	-- Condition window
 	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
-	--TODO
+	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
+	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', "Type", 20, "center", nil, "center")
+	local conditionTypesList = {}
+	for i, a in ipairs(conditions_list) do
+		table.insert(conditionTypesList, a.typeText)
+	end
+	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionTypesList, selectConditionType)
+	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '10%', '100%', '90%')
+	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
+	conditionTextBox.font.shadow = false
 	
 	-- Action window
 	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Action Type", 20, "left", nil, "center")
+	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Type", 20, "center", nil, "center")
 	local actionTypesList = {}
 	for i, a in ipairs(actions_list) do
 		table.insert(actionTypesList, a.typeText)
@@ -663,6 +679,7 @@ function initTriggerWindow()
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionTypesList, selectActionType)
 	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '10%', '100%', '90%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
+	actionTextBox.font.shadow = false
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1776,6 +1793,8 @@ function createNewCondition()
 end
 function editCondition(i)
 	Screen0:RemoveChild(windows['conditionWindow'])
+	Screen0:RemoveChild(windows['actionWindow'])
+	currentAction = nil
 	if currentCondition ~= i then
 		Screen0:AddChild(windows['conditionWindow'])
 		currentCondition = i
@@ -1788,7 +1807,9 @@ function removeCondition(i)
 	if currentEvent then
 		table.remove(events[currentEvent].conditions, i)
 		Screen0:RemoveChild(windows['conditionWindow'])
+		Screen0:RemoveChild(windows['actionWindow'])
 		currentCondition = nil
+		currentAction = nil
 	end
 end
 function createNewAction()
@@ -1806,7 +1827,9 @@ function createNewAction()
 	end
 end
 function editAction(i)
+	Screen0:RemoveChild(windows['conditionWindow'])
 	Screen0:RemoveChild(windows['actionWindow'])
+	currentCondition = nil
 	if currentAction ~= i then
 		Screen0:AddChild(windows['actionWindow'])
 		currentAction = i
@@ -1818,8 +1841,10 @@ end
 function removeAction(i)
 	if currentEvent then
 		table.remove(events[currentEvent].actions, i)
+		Screen0:RemoveChild(windows['conditionWindow'])
 		Screen0:RemoveChild(windows['actionWindow'])
 		currentAction = nil
+		currentCondition = nil
 	end
 end
 function updateEventList()
@@ -1898,7 +1923,7 @@ function updateEventFrame()
 			e.actionTotal = #(e.actions)
 		end
 	end
-	--[[
+	
 	if currentEvent and currentCondition then
 		events[currentEvent].conditions[currentCondition].name = conditionNameEditBox.text
 		if events[currentEvent].conditions[currentCondition].name ~= conditionButtons[events[currentEvent].id][currentCondition].caption then
@@ -1906,7 +1931,7 @@ function updateEventFrame()
 			conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
 		end
 	end
-	]]
+	
 	if currentEvent and currentAction then
 		events[currentEvent].actions[currentAction].name = actionNameEditBox.text
 		if events[currentEvent].actions[currentAction].name ~= actionButtons[events[currentEvent].id][currentAction].caption then
@@ -1979,10 +2004,30 @@ function currentActionFrame()
 	end
 end
 function currentConditionFrame()
-	
+	if currentCondition then
+		local c = events[currentEvent].conditions[currentCondition]
+		conditionNameEditBox:SetText(c.name)
+		if c.type then
+			for i, condition in ipairs(conditions_list) do
+				if condition.type == c.type then
+					conditionTypeComboBox:Select(i)
+					break
+				end
+			end
+		else
+			conditionTypeComboBox:Select(1)
+		end
+	end
 end
 function selectConditionType()
-
+	if currentEvent and currentCondition then
+		if events[currentEvent].conditions[currentCondition].type ~= conditions_list[conditionTypeComboBox.selected].type then
+			events[currentEvent].conditions[currentCondition].type = conditions_list[conditionTypeComboBox.selected].type
+			drawConditionFrame(true)
+		else
+			drawConditionFrame(false)
+		end
+	end
 end
 function selectActionType()
 	if currentEvent and currentAction then
@@ -2022,9 +2067,39 @@ function drawActionFrame(reset)
 		end
 	end
 end
+function drawConditionFrame(reset)
+	if currentEvent and currentCondition then
+		local a = events[currentEvent].conditions[currentCondition]
+		local condition_template
+		for i, condition in pairs(conditions_list) do
+			if condition.type == a.type then
+				condition_template = condition
+				break
+			end
+		end
+		conditionTextBox:SetText(condition_template.text)
+		if reset then
+			a.params = {}
+		end
+		for i, af in ipairs(conditionFeatures) do
+			for _, f in ipairs(af) do
+				conditionScrollPanel:RemoveChild(f)
+				f:Dispose()
+			end
+		end
+		local y = 120
+		conditionFeatures = {}
+		for i, attr in ipairs(condition_template.attributes) do
+			table.insert(conditionFeatures, drawFeature(attr, y, a, conditionScrollPanel))
+			y = y + 30
+		end
+	end
+end
 function drawFeature(attr, y, a, scrollPanel)
 	local feature = {}
-	table.insert(feature, addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center"))
+	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
+	text.font.shadow = false
+	table.insert(feature, text)
 	if attr.type == "unitType" then
 		local unitTypes = {}
 		for i, fu in ipairs(factionUnits) do
@@ -2086,6 +2161,8 @@ function drawFeature(attr, y, a, scrollPanel)
 		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function() triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT) end)
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
+	elseif attr.type == "zone" then
+		-- TODO
 	end
 	return feature
 end
@@ -2370,22 +2447,34 @@ function widget:MousePress(mx, my, button)
 		
 		-- STATE TRIGGER
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+			local e = {}
+			if currentAction then
+				e = events[currentEvent].actions[currentAction]
+			elseif currentCondition then
+				e = events[currentEvent].conditions[currentCondition]
+			end
 			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
 				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-				if var and currentEvent and (currentAction or currentCondition) then
+				if var and currentEvent and (currentCondition or currentAction) then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					local x, _, z = unpack(var)
-					local a = events[currentEvent].actions[currentAction]
-					a.params.positionX = round(x)
-					a.params.positionZ = round(z)
-					drawActionFrame(false)
+					e.params.positionX = round(x)
+					e.params.positionZ = round(z)
+					if currentAction then
+						drawActionFrame(false)
+					elseif currentCondition then
+						drawConditionFrame(false)
+					end
 				end
 			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
-				if kind == "unit" then
+				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					local a = events[currentEvent].actions[currentAction]
-					a.params.unit = var
-					drawActionFrame(false)
+					e.params.unit = var
+					if currentAction then
+						drawActionFrame(false)
+					elseif currentCondition then
+						drawConditionFrame(false)
+					end
 				end
 			end
 		end
