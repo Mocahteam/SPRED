@@ -135,6 +135,7 @@ local deleteConditionButtons = {}
 local newEventConditionButton
 local conditionNameEditBox
 local conditionTypeComboBox
+local conditionFilterComboBox
 local conditionScrollPanel
 local conditionTextBox
 local conditionFeatures = {}
@@ -143,9 +144,11 @@ local deleteActionButtons = {}
 local newEventActionButton
 local actionNameEditBox
 local actionTypeComboBox
+local actionFilterComboBox
 local actionScrollPanel
 local actionTextBox
 local actionFeatures = {}
+local dontUpdateComboBox = false
 
 -- Mouse variables
 local mouseMove = false
@@ -655,29 +658,47 @@ function initTriggerWindow()
 	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '88%')
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, "+ New Action", createNewAction)
 	
+	-- Action/Condition
+	local filterList = {}
+	for i, f in ipairs(filters_list) do
+		table.insert(filterList, f)
+	end
+	
 	-- Condition window
 	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', "Type", 20, "center", nil, "center")
+	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
+	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
+	--[[
 	local conditionTypesList = {}
-	for i, a in ipairs(conditions_list) do
-		table.insert(conditionTypesList, a.typeText)
+	for i, c in ipairs(conditions_list) do
+		table.insert(conditionTypesList, c.typeText)
 	end
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionTypesList, selectConditionType)
 	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '10%', '100%', '90%')
+	]]
+	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
+	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
+	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
 	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
 	conditionTextBox.font.shadow = false
 	
 	-- Action window
 	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Type", 20, "center", nil, "center")
+	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
+	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
+	--[[
 	local actionTypesList = {}
 	for i, a in ipairs(actions_list) do
 		table.insert(actionTypesList, a.typeText)
 	end
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionTypesList, selectActionType)
 	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '10%', '100%', '90%')
+	]]
+	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
+	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
+	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 	actionTextBox.font.shadow = false
 end
@@ -1989,40 +2010,93 @@ function currentEventFrame()
 end
 function currentActionFrame()
 	if currentAction then
+		dontUpdateComboBox = true
 		local a = events[currentEvent].actions[currentAction]
 		actionNameEditBox:SetText(a.name)
 		if a.type then
 			for i, action in ipairs(actions_list) do
 				if action.type == a.type then
+					actionFilterComboBox:Select(1)
 					actionTypeComboBox:Select(i)
 					break
 				end
 			end
 		else
+			actionFilterComboBox:Select(1)
 			actionTypeComboBox:Select(1)
 		end
+		dontUpdateComboBox = false
 	end
 end
 function currentConditionFrame()
 	if currentCondition then
+		dontUpdateComboBox = true
 		local c = events[currentEvent].conditions[currentCondition]
 		conditionNameEditBox:SetText(c.name)
 		if c.type then
 			for i, condition in ipairs(conditions_list) do
 				if condition.type == c.type then
+					conditionFilterComboBox:Select(1)
 					conditionTypeComboBox:Select(i)
 					break
 				end
 			end
 		else
+			conditionFilterComboBox:Select(1)
 			conditionTypeComboBox:Select(1)
+		end
+		dontUpdateComboBox = false
+	end
+end
+function selectFilter()
+	if currentCondition then
+		local conditionTypesList = {}
+		if conditionFilterComboBox.selected == 1 then
+			for i, c in ipairs(conditions_list) do
+				table.insert(conditionTypesList, c.typeText)
+			end
+		else
+			for i, c in ipairs(conditions_list) do
+				if conditionFilterComboBox.items[conditionFilterComboBox.selected] == c.filter then
+					table.insert(conditionTypesList, c.typeText)
+				end
+			end
+		end
+		conditionTypeComboBox.items = conditionTypesList
+		if not dontUpdateComboBox then
+			conditionTypeComboBox:Select(1)
+		end
+	elseif currentAction then
+		local actionTypesList = {}
+		if actionFilterComboBox.selected == 1 then
+			for i, c in ipairs(actions_list) do
+				table.insert(actionTypesList, c.typeText)
+			end
+		else
+			for i, c in ipairs(actions_list) do
+				if actionFilterComboBox.items[actionFilterComboBox.selected] == c.filter then
+					table.insert(actionTypesList, c.typeText)
+				end
+			end
+		end
+		actionTypeComboBox.items = actionTypesList
+		if not dontUpdateComboBox then
+			actionTypeComboBox:Select(1)
 		end
 	end
 end
 function selectConditionType()
 	if currentEvent and currentCondition then
-		if events[currentEvent].conditions[currentCondition].type ~= conditions_list[conditionTypeComboBox.selected].type then
-			events[currentEvent].conditions[currentCondition].type = conditions_list[conditionTypeComboBox.selected].type
+		local selectedItem = conditionTypeComboBox.items[conditionTypeComboBox.selected]
+		local conditionType
+		for i, cond in ipairs(conditions_list) do
+			if cond.typeText == selectedItem then
+				conditionType = cond.type
+				break
+			end
+		end
+		if events[currentEvent].conditions[currentCondition].type ~= conditionType then
+			events[currentEvent].conditions[currentCondition].type = conditionType
 			drawConditionFrame(true)
 		else
 			drawConditionFrame(false)
@@ -2031,8 +2105,16 @@ function selectConditionType()
 end
 function selectActionType()
 	if currentEvent and currentAction then
-		if events[currentEvent].actions[currentAction].type ~= actions_list[actionTypeComboBox.selected].type then
-			events[currentEvent].actions[currentAction].type = actions_list[actionTypeComboBox.selected].type
+		local selectedItem = actionTypeComboBox.items[actionTypeComboBox.selected]
+		local actionType
+		for i, act in ipairs(actions_list) do
+			if act.typeText == selectedItem then
+				actionType = act.type
+				break
+			end
+		end
+		if events[currentEvent].actions[currentAction].type ~= actionType then
+			events[currentEvent].actions[currentAction].type = actionType
 			drawActionFrame(true)
 		else
 			drawActionFrame(false)

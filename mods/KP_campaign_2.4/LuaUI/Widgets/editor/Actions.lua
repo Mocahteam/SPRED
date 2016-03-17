@@ -6,7 +6,7 @@ local w = "\255\255\255\255"
 actions_list = {
 	{
 		type = "createUnitAtPosition",
-		filter = "unit",
+		filter = "Unit",
 		typeText = "Create Unit at Position",
 		text = "Create unit of type "..r.."<UnitType>"..w.." for "..g.."<Team>"..w.." at "..b.."<Position>",
 		attributes = {
@@ -26,7 +26,7 @@ actions_list = {
 	},
 	{
 		type = "moveUnitToPosition",
-		filter = "unit",
+		filter = "Unit",
 		typeText = "Move Unit to Position",
 		text = "Move "..y.."<Unit>"..w.." to "..b.."<Position>",
 		attributes = {
