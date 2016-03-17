@@ -127,6 +127,8 @@ local currentEvent
 local currentCondition
 local currentAction
 local eventNumber = 0
+local conditionNumber = 0
+local actionNumber = 0
 local newEventConditionButton
 local conditionButtons = {}
 local deleteConditionButtons = {}
@@ -135,6 +137,9 @@ local deleteActionButtons = {}
 local newEventActionButton
 local actionNameEditBox
 local actionTypeComboBox
+local actionScrollPanel
+local actionTextBox
+local actionFeatures = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -654,6 +659,8 @@ function initTriggerWindow()
 		table.insert(actionTypesList, a.typeText)
 	end
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionTypesList, selectActionType)
+	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '10%', '100%', '90%')
+	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1719,9 +1726,7 @@ function createNewEvent()
 	event.actions = {}
 	event.id = eventNumber
 	event.name = "Event "..tostring(event.id)
-	event.conditionNumber = 0
 	event.conditionTotal = 0
-	event.actionNumber = 0
 	event.actionTotal = 0
 	table.insert(events, event)
 	
@@ -1758,11 +1763,11 @@ function createNewCondition()
 	if currentEvent then
 		local e = events[currentEvent]
 		local condition = {}
-		condition.id = e.conditionNumber
+		condition.id = conditionNumber
 		condition.name = "Condition "..tostring(condition.id)
 		table.insert(e.conditions, condition)
 		
-		e.conditionNumber = e.conditionNumber + 1
+		conditionNumber = conditionNumber + 1
 		
 		editCondition(#(e.conditions))
 	end
@@ -1788,11 +1793,12 @@ function createNewAction()
 	if currentEvent then
 		local e = events[currentEvent]
 		local action = {}
-		action.id = e.actionNumber
+		action.id = actionNumber
 		action.name = "Action "..tostring(action.id)
+		action.params = {}
 		table.insert(e.actions, action)
 		
-		e.actionNumber = e.actionNumber + 1
+		actionNumber = actionNumber + 1
 		
 		editAction(#(e.actions))
 	end
@@ -1978,8 +1984,65 @@ function selectConditionType()
 end
 function selectActionType()
 	if currentEvent and currentAction then
-		events[currentEvent].actions[currentAction].type = actions_list[actionTypeComboBox.selected].type
+		if events[currentEvent].actions[currentAction].type ~= actions_list[actionTypeComboBox.selected].type then
+			events[currentEvent].actions[currentAction].type = actions_list[actionTypeComboBox.selected].type
+			drawActionFrame(true)
+		else
+			drawActionFrame(false)
+		end
 	end
+end
+function drawActionFrame(reset)
+	if currentEvent and currentAction then
+		local a = events[currentEvent].actions[currentAction]
+		local action_template
+		for i, action in pairs(actions_list) do
+			if action.type == a.type then
+				action_template = action
+				break
+			end
+		end
+		actionTextBox:SetText(action_template.text)
+		if reset then
+			a.params = {}
+		end
+		for i, af in ipairs(actionFeatures) do
+			for _, f in ipairs(af) do
+				actionScrollPanel:RemoveChild(f)
+				f:Dispose()
+			end
+		end
+		local y = 120
+		actionFeatures = {}
+		for i, attr in ipairs(action_template.attributes) do
+			table.insert(actionFeatures, drawActionFeature(attr, y, a))
+			y = y + 30
+		end
+	end
+end
+function drawActionFeature(attr, y, a)
+	local feature = {}
+	table.insert(feature, addLabel(actionScrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center"))
+	if attr.type == "unitType" then
+		local comboBox = addComboBox(actionScrollPanel, '25%', y, '20%', 30, factionUnits[5]) --FIXME
+		if a.params.unitType then
+			for i, unitType in ipairs(comboBox.items) do
+				if a.params.unitType == unitType then
+					comboBox:Select(i)
+					break
+				end
+			end
+		end
+		comboBox.OnSelect = { function() a.params.unitType = comboBox.items[comboBox.selected] end }
+		table.insert(feature, comboBox)
+	elseif attr.type == "team" then
+	
+	elseif attr.type == "position" then
+	
+	elseif attr.type == "unit" then
+	
+	end
+	return feature
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
