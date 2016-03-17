@@ -2325,6 +2325,11 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	for i, team in ipairs(teamStateMachine.states) do
 		markButtonWithinSet(teamControlButtons[team], teamControl[team])
 	end
+	markButtonWithinSet(eventButtons, currentEvent)
+	if currentEvent then
+		markButtonWithinSet(actionButtons[events[currentEvent].id], currentAction)
+		markButtonWithinSet(conditionButtons[events[currentEvent].id], currentCondition)
+	end
 end
 function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
 	local specificCondition = true
