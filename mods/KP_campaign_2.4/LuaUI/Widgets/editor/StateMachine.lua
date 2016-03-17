@@ -62,3 +62,9 @@ zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)
 ------------------------------
 local forcesStates = { TEAMCONFIG = "teamConfig", ALLYTEAMS = "allyTeams" }
 forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)
+
+------------------------------
+-- Initialize triggers state machine
+------------------------------
+local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit" }
+triggerStateMachine = StateMachine.new(triggerStates, triggerStates.DEFAULT)

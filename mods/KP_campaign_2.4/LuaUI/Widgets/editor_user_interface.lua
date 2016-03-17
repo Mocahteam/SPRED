@@ -140,6 +140,8 @@ local actionTypeComboBox
 local actionScrollPanel
 local actionTextBox
 local actionFeatures = {}
+local currentXEditBox
+local currentYEditBox
 
 -- Mouse variables
 local mouseMove = false
@@ -2015,16 +2017,22 @@ function drawActionFrame(reset)
 		local y = 120
 		actionFeatures = {}
 		for i, attr in ipairs(action_template.attributes) do
-			table.insert(actionFeatures, drawActionFeature(attr, y, a))
+			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
 			y = y + 30
 		end
 	end
 end
-function drawActionFeature(attr, y, a)
+function drawFeature(attr, y, a, scrollPanel)
 	local feature = {}
-	table.insert(feature, addLabel(actionScrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center"))
+	table.insert(feature, addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center"))
 	if attr.type == "unitType" then
-		local comboBox = addComboBox(actionScrollPanel, '25%', y, '20%', 30, factionUnits[5]) --FIXME
+		local unitTypes = {}
+		for i, fu in ipairs(factionUnits) do
+			for i, u in ipairs(fu) do
+				table.insert(unitTypes, u)
+			end
+		end
+		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, unitTypes)
 		if a.params.unitType then
 			for i, unitType in ipairs(comboBox.items) do
 				if a.params.unitType == unitType then
@@ -2032,15 +2040,52 @@ function drawActionFeature(attr, y, a)
 					break
 				end
 			end
+		else
+			comboBox:Select(1)
 		end
 		comboBox.OnSelect = { function() a.params.unitType = comboBox.items[comboBox.selected] end }
 		table.insert(feature, comboBox)
 	elseif attr.type == "team" then
-	
+		local teamList = {}
+		for k, t in pairs(teamStateMachine.states) do
+			if enabledTeams[t] then
+				table.insert(teamList, "Team "..tostring(t))
+			end
+		end
+		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, teamList)
+		if a.params.team then
+			for i, team in ipairs(comboBox.items) do
+				if a.params.team == team then
+					comboBox:Select(i)
+					break
+				end
+			end
+		else
+			comboBox:Select(1)
+		end
+		comboBox.OnSelect = { function() a.params.team = comboBox.items[comboBox.selected] end }
+		table.insert(feature, comboBox)
 	elseif attr.type == "position" then
-	
+		local positionLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
+		if a.params.positionX and a.params.positionZ then
+			positionLabel:SetCaption("X: "..tostring(a.params.positionX).."   Z: "..tostring(a.params.positionZ))
+		end
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function() triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION) end)
+		table.insert(feature, positionLabel)
+		table.insert(feature, pickButton)
 	elseif attr.type == "unit" then
-	
+		local unitLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
+		if a.params.unit then
+			local u = a.params.unit
+			local uDefID = Spring.GetUnitDefID(u)
+			local name = UnitDefs[uDefID].humanName
+			local team = Spring.GetUnitTeam(u)
+			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+			unitLabel:SetCaption(name.." ("..tostring(u)..")")
+		end
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function() triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT) end)
+		table.insert(feature, unitLabel)
+		table.insert(feature, pickButton)
 	end
 	return feature
 end
@@ -2241,7 +2286,7 @@ function widget:MousePress(mx, my, button)
 	local kind,var = Spring.TraceScreenRay(mx,my)
 	
 	-- Change state depending on the clicked element
-	if kind == "unit" then
+	if kind == "unit" and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
 		if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
 			unitFrame()
 		end
@@ -2321,6 +2366,28 @@ function widget:MousePress(mx, my, button)
 			end
 			clickToSelect = true
 			return true
+		end
+		
+		-- STATE TRIGGER
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
+				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+				if var and currentEvent and (currentAction or currentCondition) then
+					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+					local x, _, z = unpack(var)
+					local a = events[currentEvent].actions[currentAction]
+					a.params.positionX = round(x)
+					a.params.positionZ = round(z)
+					drawActionFrame(false)
+				end
+			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+				if kind == "unit" then
+					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+					local a = events[currentEvent].actions[currentAction]
+					a.params.unit = var
+					drawActionFrame(false)
+				end
+			end
 		end
 		
 	-- Right click
