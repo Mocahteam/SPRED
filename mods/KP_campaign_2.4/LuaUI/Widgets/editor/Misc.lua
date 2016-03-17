@@ -1,6 +1,6 @@
 -- This file contains miscellaneous useful functions
 
-local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
 -----------------------
 -- Sort two values

@@ -12,6 +12,8 @@ end
 
 VFS.Include("LuaUI/Widgets/editor/StateMachine.lua") -- State machines definitions (class and instances)
 VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
+VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
+VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -131,6 +133,8 @@ local deleteConditionButtons = {}
 local actionButtons = {}
 local deleteActionButtons = {}
 local newEventActionButton
+local actionNameEditBox
+local actionTypeComboBox
 
 -- Mouse variables
 local mouseMove = false
@@ -298,6 +302,18 @@ function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
 		step = _step or 1
 	}
 	return trackbar
+end
+function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
+	local comboBox = Chili.ComboBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _w,
+		height = _h,
+		items = _items,
+		OnSelect = { onSelectFunction }
+	}
+	return comboBox
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -625,8 +641,19 @@ function initTriggerWindow()
 	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '88%')
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, "+ New Action", createNewAction)
 	
-	-- Condition/Action window
-	windows['conditionActionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	-- Condition window
+	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	--TODO
+	
+	-- Action window
+	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
+	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Action Type", 20, "left", nil, "center")
+	local actionTypesList = {}
+	for i, a in ipairs(actions_list) do
+		table.insert(actionTypesList, a.typeText)
+	end
+	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionTypesList, selectActionType)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1708,15 +1735,23 @@ function createNewEvent()
 end
 function editEvent(i)
 	Screen0:RemoveChild(windows['eventWindow'])
-	Screen0:AddChild(windows['eventWindow'])
+	Screen0:RemoveChild(windows['conditionWindow'])
+	currentCondition = nil
+	Screen0:RemoveChild(windows['actionWindow'])
+	currentAction = nil
 	if currentEvent ~= i then
+		Screen0:AddChild(windows['eventWindow'])
 		currentEvent = i
 		currentEventFrame()
+	else
+		currentEvent = nil
 	end
 end
 function removeEvent(i)
 	table.remove(events, i)
 	Screen0:RemoveChild(windows['eventWindow'])
+	Screen0:RemoveChild(windows['conditionWindow'])
+	Screen0:RemoveChild(windows['actionWindow'])
 	currentEvent = nil
 end
 function createNewCondition()
@@ -1733,17 +1768,19 @@ function createNewCondition()
 	end
 end
 function editCondition(i)
-	Screen0:RemoveChild(windows['conditionActionWindow'])
-	Screen0:AddChild(windows['conditionActionWindow'])
+	Screen0:RemoveChild(windows['conditionWindow'])
 	if currentCondition ~= i then
+		Screen0:AddChild(windows['conditionWindow'])
 		currentCondition = i
-		updateActionConditionFrame()
+		currentConditionFrame()
+	else
+		currentCondition = nil
 	end
 end
 function removeCondition(i)
 	if currentEvent then
 		table.remove(events[currentEvent].conditions, i)
-		Screen0:RemoveChild(windows['conditionActionWindow'])
+		Screen0:RemoveChild(windows['conditionWindow'])
 		currentCondition = nil
 	end
 end
@@ -1761,17 +1798,19 @@ function createNewAction()
 	end
 end
 function editAction(i)
-	Screen0:RemoveChild(windows['conditionActionWindow'])
-	Screen0:AddChild(windows['conditionActionWindow'])
+	Screen0:RemoveChild(windows['actionWindow'])
 	if currentAction ~= i then
+		Screen0:AddChild(windows['actionWindow'])
 		currentAction = i
-		updateActionConditionFrame()
+		currentActionFrame()
+	else
+		currentAction = nil
 	end
 end
 function removeAction(i)
 	if currentEvent then
 		table.remove(events[currentEvent].actions, i)
-		Screen0:RemoveChild(windows['conditionActionWindow'])
+		Screen0:RemoveChild(windows['actionWindow'])
 		currentAction = nil
 	end
 end
@@ -1851,22 +1890,96 @@ function updateEventFrame()
 			e.actionTotal = #(e.actions)
 		end
 	end
+	--[[
+	if currentEvent and currentCondition then
+		events[currentEvent].conditions[currentCondition].name = conditionNameEditBox.text
+		if events[currentEvent].conditions[currentCondition].name ~= conditionButtons[events[currentEvent].id][currentCondition].caption then
+			conditionButtons[events[currentEvent].id][currentCondition].caption = events[currentEvent].conditions[currentCondition].name
+			conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
+		end
+	end
+	]]
+	if currentEvent and currentAction then
+		events[currentEvent].actions[currentAction].name = actionNameEditBox.text
+		if events[currentEvent].actions[currentAction].name ~= actionButtons[events[currentEvent].id][currentAction].caption then
+			actionButtons[events[currentEvent].id][currentAction].caption = events[currentEvent].actions[currentAction].name
+			actionButtons[events[currentEvent].id][currentAction]:InvalidateSelf()
+		end
+	end
 end
 function currentEventFrame()
 	if currentEvent then
 		local e = events[currentEvent]
+		-- set editbox text
 		eventNameEditBox:SetText(e.name)
+		-- set condition buttons
+		for _, cB in pairs(conditionButtons) do
+			for k, b in pairs(cB) do
+				eventConditionsScrollPanel:RemoveChild(b)
+			end
+		end
+		for _, dCB in pairs(deleteConditionButtons) do
+			for k, b in pairs(dCB) do
+				eventConditionsScrollPanel:RemoveChild(b)
+			end
+		end
+		local count = 0
+		for i, c in ipairs(e.conditions) do
+			conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
+			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeCondition(i) end)
+			deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
+			deleteConditionButtons[e.id][i].font.size = 20
+			count = count + 1
+		end
+		newEventConditionButton.y = 40 * count
+		-- set action buttons
+		for _, aB in pairs(actionButtons) do
+			for k, b in pairs(aB) do
+				eventActionsScrollPanel:RemoveChild(b)
+			end
+		end
+		for _, dAB in pairs(deleteActionButtons) do
+			for k, b in pairs(dAB) do
+				eventActionsScrollPanel:RemoveChild(b)
+			end
+		end
+		local count = 0
+		for i, c in ipairs(e.actions) do
+			actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
+			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+			deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
+			deleteActionButtons[e.id][i].font.size = 20
+			count = count + 1
+		end
+		newEventActionButton.y = 40 * count
 	end
 end
-function updateActionConditionFrame()
-	--[[
-	if currentCondition then
-		local c = e.conditions[currentCondition]
-	end
+function currentActionFrame()
 	if currentAction then
-		local a = e.actions[currentAction]
+		local a = events[currentEvent].actions[currentAction]
+		actionNameEditBox:SetText(a.name)
+		if a.type then
+			for i, action in ipairs(actions_list) do
+				if action.type == a.type then
+					actionTypeComboBox:Select(i)
+					break
+				end
+			end
+		else
+			actionTypeComboBox:Select(1)
+		end
 	end
-	]]
+end
+function currentConditionFrame()
+	
+end
+function selectConditionType()
+
+end
+function selectActionType()
+	if currentEvent and currentAction then
+		events[currentEvent].actions[currentAction].type = actions_list[actionTypeComboBox.selected].type
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
