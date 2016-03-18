@@ -730,7 +730,7 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', "Action sequence", 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
 	-- Import Actions/Conditions
-	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', "Import condition or action from another event", 20, "left", nil, "center")
+	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', "Import condition or action from an event", 20, "left", nil, "center")
 	importEventComboBox = addComboBox(windows['configureEvent'], '0%', '85%', tostring(100/3).."%", "10%", {}, nil)
 	importConditionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '85%', tostring(100/3).."%", "5%", {}, nil)
 	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", "Import Condition", importCondition)
@@ -738,7 +738,7 @@ function initTriggerWindow()
 	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", "Import Action", importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 	
-	addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "Debug : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
+	--addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "Debug : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -2313,6 +2313,25 @@ function configureEvent()
 						table.insert(act, i-1, a)
 						updateActionSequence = true
 						configureEvent()
+						for _, aB in pairs(actionButtons) do
+							for k, b in pairs(aB) do
+								eventActionsScrollPanel:RemoveChild(b)
+							end
+						end
+						for _, dAB in pairs(deleteActionButtons) do
+							for k, b in pairs(dAB) do
+								eventActionsScrollPanel:RemoveChild(b)
+							end
+						end
+						local count = 0
+						for i, c in ipairs(e.actions) do
+							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
+							deleteActionButtons[e.id][i].font.size = 20
+							count = count + 1
+						end
+						newEventActionButton.y = 40 * count
 					end
 					local but = addButton(actionSequenceScrollPanel, '0%', (i - 1) * 40, '20%', 40, "", moveUpAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
@@ -2324,6 +2343,25 @@ function configureEvent()
 						table.insert(act, i+1, a)
 						updateActionSequence = true
 						configureEvent()
+						for _, aB in pairs(actionButtons) do
+							for k, b in pairs(aB) do
+								eventActionsScrollPanel:RemoveChild(b)
+							end
+						end
+						for _, dAB in pairs(deleteActionButtons) do
+							for k, b in pairs(dAB) do
+								eventActionsScrollPanel:RemoveChild(b)
+							end
+						end
+						local count = 0
+						for i, c in ipairs(e.actions) do
+							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
+							deleteActionButtons[e.id][i].font.size = 20
+							count = count + 1
+						end
+						newEventActionButton.y = 40 * count
 					end
 					local but = addButton(actionSequenceScrollPanel, '80%', (i - 1) * 40, '20%', 40, "", moveDownAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
@@ -2367,26 +2405,50 @@ function updateImportComboBoxes()
 end
 function importCondition()
 	local e = events[importEventComboBox.selected]
+	local ce = events[currentEvent]
 	local importedCondition = e.conditions[importConditionComboBox.selected]
 	local newCondition = {}
 	newCondition.id = conditionNumber
-	newCondition.name = "Condition"..tostring(newCondition.id)
+	local count = 0
+	for i, c in ipairs(ce.conditions) do
+		local substring = string.gsub(c.name, "%(%d+%)", "")
+		if substring == importedCondition.name then
+			count = count + 1
+		end
+	end
+	if count == 0 then
+		newCondition.name = importedCondition.name
+	else
+		newCondition.name = importedCondition.name.."("..count..")"
+	end
 	newCondition.type = importedCondition.type
 	newCondition.params = {}
 	for k, p in pairs(importedCondition.params) do
 		newCondition.params[k] = p
 	end
 	
-	table.insert(events[currentEvent].conditions, newCondition)
+	table.insert(ce.conditions, newCondition)
 	
 	conditionNumber = conditionNumber + 1
 end
 function importAction()
 	local e = events[importEventComboBox.selected]
+	local ce = events[currentEvent]
 	local importedAction = e.actions[importActionComboBox.selected]
 	local newAction = {}
 	newAction.id = actionNumber
-	newAction.name = "Action"..tostring(newAction.id)
+	local count = 0
+	for i, a in ipairs(ce.actions) do
+		local substring = string.gsub(a.name, "%(%d+%)", "")
+		if substring == importedAction.name then
+			count = count + 1
+		end
+	end
+	if count == 0 then
+		newAction.name = importedAction.name
+	else
+		newAction.name = importedAction.name.."("..count..")"
+	end
 	newAction.type = importedAction.type
 	newAction.params = {}
 	for k, p in pairs(importedAction.params) do
@@ -2396,6 +2458,9 @@ function importAction()
 	table.insert(events[currentEvent].actions, newAction)
 	
 	actionNumber = actionNumber + 1
+	
+	updateActionSequence = true
+	configureEvent()
 end
 function preventSpaces()
 	if currentEvent then
