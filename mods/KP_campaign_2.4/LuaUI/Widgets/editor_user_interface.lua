@@ -2398,7 +2398,30 @@ function importAction()
 	actionNumber = actionNumber + 1
 end
 function preventSpaces()
-
+	if currentEvent then
+		if string.find(eventNameEditBox.text, " ") then
+			local cursor = eventNameEditBox.cursor
+			eventNameEditBox:SetText(string.gsub(eventNameEditBox.text, "%s+", ""))
+			eventNameEditBox.cursor = cursor - 1
+			eventNameEditBox:InvalidateSelf()
+		end
+	end
+	if currentAction then
+		if string.find(actionNameEditBox.text, " ") then
+			local cursor = actionNameEditBox.cursor
+			actionNameEditBox:SetText(string.gsub(actionNameEditBox.text, "%s+", ""))
+			actionNameEditBox.cursor = cursor - 1
+			actionNameEditBox:InvalidateSelf()
+		end
+	end
+	if currentCondition then
+		if string.find(conditionNameEditBox.text, " ") then
+			local cursor = conditionNameEditBox.cursor
+			conditionNameEditBox:SetText(string.gsub(conditionNameEditBox.text, "%s+", ""))
+			conditionNameEditBox.cursor = cursor - 1
+			conditionNameEditBox:InvalidateSelf()
+		end
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2581,6 +2604,7 @@ function widget:Update(delta)
 	end
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+		preventSpaces()
 		updateEventList()
 		updateEventFrame()
 	end
