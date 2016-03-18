@@ -156,6 +156,9 @@ local defaultTriggerButton
 local actionSequenceScrollPanel
 local actionSequenceItems = {}
 local updateActionSequence = false
+local importEventComboBox
+local importConditionComboBox
+local importActionComboBox
 
 -- Mouse variables
 local mouseMove = false
@@ -727,6 +730,15 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', "Action sequence", 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
 	-- Import Actions/Conditions
+	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', "Import condition or action from another event", 20, "left", nil, "center")
+	importEventComboBox = addComboBox(windows['configureEvent'], '0%', '85%', tostring(100/3).."%", "10%", {}, nil)
+	importConditionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '85%', tostring(100/3).."%", "5%", {}, nil)
+	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", "Import Condition", importCondition)
+	importActionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '90%', tostring(100/3).."%", "5%", {}, nil)
+	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", "Import Action", importAction)
+	importEventComboBox.OnSelect = { updateImportComboBoxes }
+	
+	addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "Debug : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -2318,6 +2330,12 @@ function configureEvent()
 					table.insert(actionSequenceItems, but)
 				end
 			end
+			local eventList = {}
+			for i, ev in ipairs(events) do
+				table.insert(eventList, ev.name)
+			end
+			importEventComboBox.items = eventList
+			importEventComboBox:Select(1)
 			updateActionSequence = false
 		else
 			removeThirdWindows()
@@ -2325,6 +2343,59 @@ function configureEvent()
 			currentAction = nil
 		end
 	end
+end
+function updateImportComboBoxes()
+	local e = events[importEventComboBox.selected]
+	local conditionList = {}
+	for i, c in ipairs(e.conditions) do
+		table.insert(conditionList, c.name)
+	end
+	importConditionComboBox.items = conditionList
+	importConditionComboBox:InvalidateSelf()
+	if #conditionList > 0 then
+		importConditionComboBox:Select(1)
+	end
+	local actionList = {}
+	for i, a in ipairs(e.actions) do
+		table.insert(actionList, a.name)
+	end
+	importActionComboBox.items = actionList
+	importActionComboBox:InvalidateSelf()
+	if #actionList > 0 then
+		importActionComboBox:Select(1)
+	end
+end
+function importCondition()
+	local e = events[importEventComboBox.selected]
+	local importedCondition = e.conditions[importConditionComboBox.selected]
+	local newCondition = {}
+	newCondition.id = conditionNumber
+	newCondition.name = "Condition"..tostring(newCondition.id)
+	newCondition.type = importedCondition.type
+	newCondition.params = {}
+	for k, p in pairs(importedCondition.params) do
+		newCondition.params[k] = p
+	end
+	
+	table.insert(events[currentEvent].conditions, newCondition)
+	
+	conditionNumber = conditionNumber + 1
+end
+function importAction()
+	local e = events[importEventComboBox.selected]
+	local importedAction = e.actions[importActionComboBox.selected]
+	local newAction = {}
+	newAction.id = actionNumber
+	newAction.name = "Action"..tostring(newAction.id)
+	newAction.type = importedAction.type
+	newAction.params = {}
+	for k, p in pairs(importedAction.params) do
+		newAction.params[k] = p -- P MUST NOT BE A TABLE
+	end
+	
+	table.insert(events[currentEvent].actions, newAction)
+	
+	actionNumber = actionNumber + 1
 end
 function preventSpaces()
 
