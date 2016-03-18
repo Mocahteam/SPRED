@@ -149,6 +149,13 @@ local actionScrollPanel
 local actionTextBox
 local actionFeatures = {}
 local dontUpdateComboBox = false
+local configureEventButton
+local customTriggerEditBox
+local customTriggerButton
+local defaultTriggerButton
+local actionSequenceScrollPanel
+local actionSequenceItems = {}
+local updateActionSequence = false
 
 -- Mouse variables
 local mouseMove = false
@@ -651,12 +658,13 @@ function initTriggerWindow()
 	-- Event window
 	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', "Conditions", 20, "center")
-	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', "Actions", 20, "center")
-	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '88%')
+	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', "Conditions", 20, "center", nil, "center")
+	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', "Actions", 20, "center", nil, "center")
+	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '83%')
 	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, "+ New Condition", createNewCondition)
-	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '88%')
+	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, "+ New Action", createNewAction)
+	configureEventButton = addButton(windows['eventWindow'], '2%', '94%', '96%', '6%', "Configure Event", configureEvent)
 	
 	-- Action/Condition
 	local filterList = {}
@@ -669,14 +677,6 @@ function initTriggerWindow()
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
-	--[[
-	local conditionTypesList = {}
-	for i, c in ipairs(conditions_list) do
-		table.insert(conditionTypesList, c.typeText)
-	end
-	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionTypesList, selectConditionType)
-	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '10%', '100%', '90%')
-	]]
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
 	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
@@ -688,19 +688,45 @@ function initTriggerWindow()
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
-	--[[
-	local actionTypesList = {}
-	for i, a in ipairs(actions_list) do
-		table.insert(actionTypesList, a.typeText)
-	end
-	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionTypesList, selectActionType)
-	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '10%', '100%', '90%')
-	]]
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
 	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 	actionTextBox.font.shadow = false
+	
+	-- Configure event window
+	windows['configureEvent'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', "Configure", 20, "center", nil, "center")
+	-- Trigger
+	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', "Trigger (default: global and)", 20, "left", nil, "center")
+	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '3%', "left", "")
+	customTriggerEditBox.hint = "Custom trigger example: ((not condition1) or condition2) and condition3"
+	local useDefaultTrigger = function()
+		if currentEvent then
+			local e = events[currentEvent]
+			local trig = ""
+			for i, c in ipairs(e.conditions) do
+				trig = trig..c.name
+				if i ~= #(e.conditions) then
+					trig = trig.." and "
+				end
+			end
+			e.trigger = trig
+			customTriggerEditBox:SetText(trig)
+		end
+	end
+	local useCustomTrigger = function()
+		if currentEvent then
+			local e = events[currentEvent]
+			e.trigger = customTriggerEditBox.text
+		end
+	end
+	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', "Use custom trigger", useCustomTrigger)
+	defaultTriggerButton = addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', "Use default trigger", useDefaultTrigger)
+	-- Action sequence
+	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', "Action sequence", 20, "center", nil, "center")
+	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
+	-- Import Actions/Conditions
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1765,7 +1791,7 @@ function createNewEvent()
 	event.trigger = ""
 	event.actions = {}
 	event.id = eventNumber
-	event.name = "Event "..tostring(event.id)
+	event.name = "Event"..tostring(event.id)
 	event.conditionTotal = 0
 	event.actionTotal = 0
 	table.insert(events, event)
@@ -1780,9 +1806,8 @@ function createNewEvent()
 end
 function editEvent(i)
 	Screen0:RemoveChild(windows['eventWindow'])
-	Screen0:RemoveChild(windows['conditionWindow'])
+	removeThirdWindows()
 	currentCondition = nil
-	Screen0:RemoveChild(windows['actionWindow'])
 	currentAction = nil
 	if currentEvent ~= i then
 		Screen0:AddChild(windows['eventWindow'])
@@ -1795,8 +1820,7 @@ end
 function removeEvent(i)
 	table.remove(events, i)
 	Screen0:RemoveChild(windows['eventWindow'])
-	Screen0:RemoveChild(windows['conditionWindow'])
-	Screen0:RemoveChild(windows['actionWindow'])
+	removeThirdWindows()
 	currentEvent = nil
 end
 function createNewCondition()
@@ -1804,7 +1828,7 @@ function createNewCondition()
 		local e = events[currentEvent]
 		local condition = {}
 		condition.id = conditionNumber
-		condition.name = "Condition "..tostring(condition.id)
+		condition.name = "Condition"..tostring(condition.id)
 		table.insert(e.conditions, condition)
 		
 		conditionNumber = conditionNumber + 1
@@ -1813,8 +1837,7 @@ function createNewCondition()
 	end
 end
 function editCondition(i)
-	Screen0:RemoveChild(windows['conditionWindow'])
-	Screen0:RemoveChild(windows['actionWindow'])
+	removeThirdWindows()
 	currentAction = nil
 	if currentCondition ~= i then
 		Screen0:AddChild(windows['conditionWindow'])
@@ -1827,8 +1850,7 @@ end
 function removeCondition(i)
 	if currentEvent then
 		table.remove(events[currentEvent].conditions, i)
-		Screen0:RemoveChild(windows['conditionWindow'])
-		Screen0:RemoveChild(windows['actionWindow'])
+		removeThirdWindows()
 		currentCondition = nil
 		currentAction = nil
 	end
@@ -1838,7 +1860,7 @@ function createNewAction()
 		local e = events[currentEvent]
 		local action = {}
 		action.id = actionNumber
-		action.name = "Action "..tostring(action.id)
+		action.name = "Action"..tostring(action.id)
 		action.params = {}
 		table.insert(e.actions, action)
 		
@@ -1848,8 +1870,7 @@ function createNewAction()
 	end
 end
 function editAction(i)
-	Screen0:RemoveChild(windows['conditionWindow'])
-	Screen0:RemoveChild(windows['actionWindow'])
+	removeThirdWindows()
 	currentCondition = nil
 	if currentAction ~= i then
 		Screen0:AddChild(windows['actionWindow'])
@@ -1862,11 +1883,17 @@ end
 function removeAction(i)
 	if currentEvent then
 		table.remove(events[currentEvent].actions, i)
-		Screen0:RemoveChild(windows['conditionWindow'])
-		Screen0:RemoveChild(windows['actionWindow'])
+		removeThirdWindows()
 		currentAction = nil
 		currentCondition = nil
 	end
+end
+function removeThirdWindows()
+	Screen0:RemoveChild(windows['conditionWindow'])
+	Screen0:RemoveChild(windows['actionWindow'])
+	Screen0:RemoveChild(windows['configureEvent'])
+	configureEventButton.state.chosen = false
+	configureEventButton:InvalidateSelf()
 end
 function updateEventList()
 	if eventTotal ~= #events then
@@ -2247,6 +2274,60 @@ function drawFeature(attr, y, a, scrollPanel)
 		-- TODO
 	end
 	return feature
+end
+function configureEvent()
+	if currentEvent then
+		if not configureEventButton.state.chosen or updateActionSequence then
+			local e = events[currentEvent]
+			removeThirdWindows()
+			currentCondition = nil
+			currentAction = nil
+			Screen0:AddChild(windows['configureEvent'])
+			configureEventButton.state.chosen = true
+			configureEventButton:InvalidateSelf()
+			configureEventLabel:SetCaption("Configure "..events[currentEvent].name)
+			customTriggerEditBox:SetText(e.trigger)
+			for i, i in ipairs(actionSequenceItems) do
+				actionSequenceScrollPanel:RemoveChild(i)
+				i:Dispose()
+			end
+			local act = events[currentEvent].actions
+			for i, a in ipairs(act) do
+				local lab = addLabel(actionSequenceScrollPanel, '20%', (i - 1) * 40, '60%', 40, a.name, 16, "center", nil, "center")
+				table.insert(actionSequenceItems, lab)
+				if i ~= 1 then
+					local moveUpAction = function()
+						table.remove(act, i)
+						table.insert(act, i-1, a)
+						updateActionSequence = true
+						configureEvent()
+					end
+					local but = addButton(actionSequenceScrollPanel, '0%', (i - 1) * 40, '20%', 40, "", moveUpAction)
+					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
+					table.insert(actionSequenceItems, but)
+				end
+				if i ~= #(events[currentEvent].actions) then
+					local moveDownAction = function()
+						table.remove(act, i)
+						table.insert(act, i+1, a)
+						updateActionSequence = true
+						configureEvent()
+					end
+					local but = addButton(actionSequenceScrollPanel, '80%', (i - 1) * 40, '20%', 40, "", moveDownAction)
+					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
+					table.insert(actionSequenceItems, but)
+				end
+			end
+			updateActionSequence = false
+		else
+			removeThirdWindows()
+			currentCondition = nil
+			currentAction = nil
+		end
+	end
+end
+function preventSpaces()
+
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
