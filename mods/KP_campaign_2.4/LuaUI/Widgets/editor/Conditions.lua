@@ -1,3 +1,5 @@
+VFS.Include("LuaUI/Widgets/editor/TextColors.lua")
+
 conditions_list = {
 	{
 		type = "start",
@@ -25,3 +27,11 @@ conditions_list = {
 		}
 	}
 }
+
+-- COLOR TEXT
+for i, c in ipairs(conditions_list) do
+	for ii, attr in ipairs(c.attributes) do
+		c.text = string.gsub(c.text, attr.text, textColors[attr.type]..attr.text.."\255\255\255\255")
+		attr.text = textColors[attr.type]..attr.text
+	end
+end
