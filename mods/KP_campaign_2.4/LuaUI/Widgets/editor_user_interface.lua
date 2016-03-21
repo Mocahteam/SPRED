@@ -15,6 +15,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
 VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/Filters.lua")
+VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -401,6 +402,11 @@ function triggerFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
 	Screen0:AddChild(windows["triggerWindow"])
 end
+function mapSettingsFrame()
+	clearUI()
+	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
+	Screen0:AddChild(windows["mapSettingsWindow"])
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -445,11 +451,12 @@ function initTopBar()
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
 	
 	-- Menu buttons
-	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', 'File', fileFrame)
-	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', 'Units', unitFrame)
-	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', 'Zones', zoneFrame)
-	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', 'Forces', forcesFrame)
-	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', 'Triggers', triggerFrame)
+	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', EDITOR_FILE, fileFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
+	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
 end
 function initWindows()
 	initFileWindow()
@@ -458,21 +465,22 @@ function initWindows()
 	initZoneWindow()
 	initForcesWindow()
 	initTriggerWindow()
+	initMapSettingsWindow()
 end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
-	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', "File", 20, "center", nil, "center")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', "New", newMap) -- needs a rework
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', "Load", function() loadMap("Missions/jsonFiles/Mission3.json") end)
-	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', "Save", nil)
-	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', "Export", nil)
-	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', "Settings", nil)
+	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMap) -- needs a rework
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, nil)
+	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, nil)
+	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil)
 end
 function initUnitWindow()
 	-- Left Panel
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', "Units")
-	addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', "Team")
+	addLabel(windows['unitWindow'], '0%', '1%', '100%', '5%', EDITOR_UNITS)
+	addLabel(windows["unitWindow"], '0%', '87%', '100%', '5%', EDITOR_UNITS_TEAM)
 	unitScrollPanel = addScrollPanel(windows['unitWindow'], '0%', '5%', '100%', '80%')
 	
 	-- Faction Buttons
@@ -485,9 +493,9 @@ function initUnitWindow()
 			updateUnitWindow()
 		end
 		if c == #factionUnits then
-			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, "Unstable units", changeFactionButtonState)
+			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, EDITOR_UNITS_UNSTABLE, changeFactionButtonState)
 		else
-			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, "Faction "..c, changeFactionButtonState)
+			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, EDITOR_UNITS_FACTION.." "..c, changeFactionButtonState)
 		end
 		factionButtons[c].backgroundColor = {0.2, 0.8, 0.6, 1}
 		factionButtons[c].chosenColor = {0.2, 0.8, 0.2, 1}
@@ -497,7 +505,7 @@ function initUnitWindow()
 	
 	-- Unit List
 	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
-	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', "Unit List")
+	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', EDITOR_UNITS_LIST)
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
 	local showGroupsWindow = function()
 		Screen0:AddChild(windows["unitGroupsWindow"])
@@ -509,14 +517,14 @@ function initUnitWindow()
 		updateGroupListUnitList()
 		unitStateMachine:setCurrentState(unitStateMachine.states.UNITGROUPS)
 	end
-	local showGroupsButton = addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', "Show Unit Groups", showGroupsWindow)
+	local showGroupsButton = addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', EDITOR_UNITS_GROUPS_SHOW, showGroupsWindow)
 	
 	-- Unit Groups Window
 	windows["unitGroupsWindow"] = addWindow(Screen0, "5%", "10%", '90%', '80%', true)
-	addLabel(windows["unitGroupsWindow"], '0%', '0%', '18%', '10%', "Unit List", 30, "center", nil, "center")
+	addLabel(windows["unitGroupsWindow"], '0%', '0%', '18%', '10%', EDITOR_UNITS_LIST, 30, "center", nil, "center")
 	groupListUnitsScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '18%', '90%')
 	addUnitsToGroupsButton = addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
-	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '10%', "Group List", 30, "center", nil, "center")
+	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '10%', EDITOR_UNITS_GROUPS_LIST, 30, "center", nil, "center")
 	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '22%', '10%', '78%', '90%')
 	local closeGroupsWindow = function()
 		Screen0:RemoveChild(windows["unitGroupsWindow"])
@@ -525,18 +533,18 @@ function initUnitWindow()
 		showGroupsButton:InvalidateSelf()
 		unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	end
-	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", "X", closeGroupsWindow)
+	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", EDITOR_X, closeGroupsWindow)
 	closeButton.font.color = {1, 0, 0, 1}
 end
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
-	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", "Edit Attributes", showUnitAttributes)
-	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", "Add to group", showUnitGroupsAttributionWindow)
-	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", "Remove from group", showUnitGroupsRemovalWindow)
+	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", EDITOR_UNITS_EDIT_ATTRIBUTES_EDIT, showUnitAttributes)
+	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", EDITOR_UNITS_GROUPS_ADDTO, showUnitGroupsAttributionWindow)
+	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", EDITOR_UNITS_GROUPS_REMOVEFROM, showUnitGroupsRemovalWindow)
 end
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', "Zone")
+	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', EDITOR_ZONES)
 	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
 	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
@@ -557,14 +565,14 @@ function initZoneWindow()
 			end
 		end
 	end
-	addButton(zoneScrollPanel, 0, 0, "50%", 30, "Show all", toggleAllOn)
-	addButton(zoneScrollPanel, "50%", 0, "50%", 30, "Hide all", toggleAllOff)
+	addButton(zoneScrollPanel, 0, 0, "50%", 30, EDITOR_ZONES_SHOW, toggleAllOn)
+	addButton(zoneScrollPanel, "50%", 0, "50%", 30, EDITOR_ZONES_HIDE, toggleAllOff)
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
-	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/3).."%", '5%', "Teams Configuration", teamConfig)
-	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/3).."%", "0%", tostring(95/3).."%", '5%', "Ally Teams", allyTeam)
-	local closeButton = addButton(windows['forceWindow'], "95%", "0%", "5%", "5%", "X", clearUI)
+	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_TEAMCONFIG, teamConfig)
+	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/2).."%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_ALLYTEAMS, allyTeam)
+	local closeButton = addButton(windows['forceWindow'], "95%", "0%", "5%", "5%", EDITOR_X, clearUI)
 	closeButton.font.color = {1, 0, 0, 1}
 	
 	-- Team Config Window
@@ -572,16 +580,16 @@ function initForcesWindow()
 	local teamConfigScrollPanel = addScrollPanel(teamConfigWindow, '0%', '0%', '100%', '100%')
 	for i, team in ipairs(teamStateMachine.states) do
 		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
-		addLabel(teamConfigPanels[team], '0%', '0%', '20%', '100%', "Team "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		addLabel(teamConfigPanels[team], '0%', '0%', '20%', '100%', EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		-- Enabled/Disabled
-		enableTeamButtons[team] = addButton(teamConfigPanels[team], '20%', '30%', '10%', '40%', "Disabled", nil)
+		enableTeamButtons[team] = addButton(teamConfigPanels[team], '20%', '30%', '10%', '40%', EDITOR_FORCES_TEAMCONFIG_DISABLED, nil)
 		local function changeTeamState()
 			enabledTeams[team] = not enabledTeams[team]
 			enableTeamButtons[team].state.chosen = not enableTeamButtons[team].state.chosen
-			if enableTeamButtons[team].caption == "Disabled" then
-				enableTeamButtons[team].caption = "Enabled"
+			if enableTeamButtons[team].caption == EDITOR_FORCES_TEAMCONFIG_DISABLED then
+				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
 			else
-				enableTeamButtons[team].caption = "Disabled"
+				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
 			end
 			if not enabledTeams[team] then
 				removeTeamFromTables(team)
@@ -594,17 +602,17 @@ function initForcesWindow()
 			changeTeamState()
 		end
 		-- Controlled by
-		teamControlLabels[team] = addLabel(teamConfigPanels[team], '35%', '20%', '20%', '30%', "Controlled by", 20, "center", nil, "center")
+		teamControlLabels[team] = addLabel(teamConfigPanels[team], '35%', '20%', '20%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL, 20, "center", nil, "center")
 		teamControlButtons[team] = {}
-		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', "Player", function() teamControl[team] = "player" end)
-		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', "Computer", function() teamControl[team] = "computer" end)
+		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" end)
+		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" end)
 		teamControl[team] = "player"
 		-- Color
 		teamColor[team] = {}
 		teamColor[team].red = tonumber(teams[team].red)
 		teamColor[team].green = tonumber(teams[team].green)
 		teamColor[team].blue = tonumber(teams[team].blue)
-		teamColorLabels[team] = addLabel(teamConfigPanels[team], '60%', '20%', '20%', '30%', "In-game color", 20, "center", nil, "center")
+		teamColorLabels[team] = addLabel(teamConfigPanels[team], '60%', '20%', '20%', '30%', EDITOR_FORCES_TEAMCONFIG_COLOR, 20, "center", nil, "center")
 		teamColorImage[team] = addImage(teamConfigPanels[team], '82%', '20%', '5%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 		teamColorTrackbars[team] = {}
 		teamColorTrackbars[team].red = addTrackbar(teamConfigPanels[team], '60%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
@@ -629,7 +637,7 @@ function initForcesWindow()
 	
 	-- Ally Team Window
 	allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	addLabel(allyTeamsWindow, '0%', '0%', '20%', '10%', "Team List", 30, "center", nil, "center")
+	addLabel(allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30, "center", nil, "center")
 	teamListScrollPanel = addScrollPanel(allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
 	for i, team in ipairs(teamStateMachine.states) do
 		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
@@ -637,13 +645,13 @@ function initForcesWindow()
 		local w = tostring(80 / math.ceil(teamCount/2)).."%"
 		local h = "50%"
 		allyTeamPanels[team] = addWindow(allyTeamsWindow, x, y, w, h)
-		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', "Team "..tostring(team), function() selectedAllyTeam = team end)
+		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), function() selectedAllyTeam = team end)
 		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		selectAllyTeamsButtons[team].font.size = 20
 		allyTeamsScrollPanels[team] = addScrollPanel(allyTeamPanels[team], '2%', '10%', '96%', '89%')
 		
 		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*team, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		
 		allyTeamsRemoveTeamButtons[team] = {}
 		allyTeamsRemoveTeamLabels[team] = {}
@@ -655,20 +663,20 @@ end
 function initTriggerWindow()
 	-- Left Panel
 	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
-	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', "Events")
+	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS)
 	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '95%')
-	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, "+ New Event", createNewEvent)
+	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
 	
 	-- Event window
 	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', "Conditions", 20, "center", nil, "center")
-	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', "Actions", 20, "center", nil, "center")
+	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', EDITOR_TRIGGERS_CONDITIONS, 20, "center", nil, "center")
+	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', EDITOR_TRIGGERS_ACTIONS, 20, "center", nil, "center")
 	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '83%')
-	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, "+ New Condition", createNewCondition)
+	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
 	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
-	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, "+ New Action", createNewAction)
-	configureEventButton = addButton(windows['eventWindow'], '2%', '94%', '96%', '6%', "Configure Event", configureEvent)
+	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
+	configureEventButton = addButton(windows['eventWindow'], '2%', '94%', '96%', '6%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_EVENT, configureEvent)
 	
 	-- Action/Condition
 	local filterList = {}
@@ -679,8 +687,8 @@ function initTriggerWindow()
 	-- Condition window
 	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
-	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
+	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER, 20, "center", nil, "center")
+	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
 	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
@@ -700,11 +708,11 @@ function initTriggerWindow()
 	
 	-- Configure event window
 	windows['configureEvent'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
-	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', "Configure", 20, "center", nil, "center")
+	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE, 20, "center", nil, "center")
 	-- Trigger
-	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', "Trigger (default: global and)", 20, "left", nil, "center")
+	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left", nil, "center")
 	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '3%', "left", "")
-	customTriggerEditBox.hint = "Custom trigger example: ((not condition1) or condition2) and condition3"
+	customTriggerEditBox.hint = EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_EXAMPLE
 	local useDefaultTrigger = function()
 		if currentEvent then
 			local e = events[currentEvent]
@@ -725,21 +733,24 @@ function initTriggerWindow()
 			e.trigger = customTriggerEditBox.text
 		end
 	end
-	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', "Use custom trigger", useCustomTrigger)
-	defaultTriggerButton = addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', "Use default trigger", useDefaultTrigger)
+	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
+	defaultTriggerButton = addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
 	-- Action sequence
-	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', "Action sequence", 20, "center", nil, "center")
+	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE, 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
 	-- Import Actions/Conditions
-	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', "Import condition or action from an event", 20, "left", nil, "center")
+	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
 	importEventComboBox = addComboBox(windows['configureEvent'], '0%', '85%', tostring(100/3).."%", "10%", {}, nil)
 	importConditionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '85%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", "Import Condition", importCondition)
+	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
 	importActionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '90%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", "Import Action", importAction)
+	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 	
 	--addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "Debug : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
+end
+function initMapSettingsWindow()
+	windows['mapSettingsWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -843,15 +854,15 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	clearTemporaryWindows()
 	local unitSelection = Spring.GetSelectedUnits()
 	unitAttributesWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
-	addLabel(unitAttributesWindow, '0%', 0, "100%", 20, "Attributes", 20)
-	addLabel(unitAttributesWindow, '0%', 50, "30%", 20, "HP%", 20, "right")
+	addLabel(unitAttributesWindow, '0%', 0, "100%", 20, EDITOR_UNITS_EDIT_ATTRIBUTES, 20)
+	addLabel(unitAttributesWindow, '0%', 50, "30%", 20, EDITOR_UNITS_EDIT_ATTRIBUTES_HP.."%", 20, "right")
 	if #unitSelection == 1 then -- if unit is alone, show its hp percentage in the editbox
 		local h, mh = Spring.GetUnitHealth(unitSelection[1])
 		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left", tostring(round(100*(h/mh))))
 	else
 		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left")
 	end
-	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", "Apply", applyChangesToSelectedUnits)
+	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
 function showUnitsInformation() -- Show information about selected and hovered units
 	gl.BeginText()
@@ -894,14 +905,14 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	
 	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.font.size = 14
-	newUnitGroupEditBox.hint = "New Group"
+	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
 	local function newGroup()
 		if newUnitGroupEditBox.text ~= "" then
 			addUnitGroup(newUnitGroupEditBox.text)
 			clearTemporaryWindows()
 		end
 	end
-	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, "OK", newGroup)
+	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, EDITOR_OK, newGroup)
 end
 function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove the current selection from a group
 	clearTemporaryWindows()
@@ -933,9 +944,9 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 	
 	if noGroupsInCommon then -- If units have to groups in common or the selected unit does not belong to any group, display a specific message
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
-		local text = "Selected units have no groups in common."
+		local text = EDITOR_UNITS_GROUPS_NO_COMMON_GROUP
 		if unitSelection.n == 1 then
-			text = "This unit does not belong to any group."
+			text = EDITOR_UNITS_GROUPS_NO_GROUP
 		end
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
 	end
@@ -1114,7 +1125,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			selectGroupButtons[k] = addButton(groupPanels[k], 0, 0, 30, 30, "", function() selectGroupButtons[k].state.chosen = not selectGroupButtons[k].state.chosen selectGroupButtons[k]:InvalidateSelf() end)
 			groupEditBoxes[k] = addEditBox(groupPanels[k], 35, 5, 220, 20, "left", group.name)
 			groupEditBoxes[k].font.size = 14
-			local deleteButton = addButton(groupPanels[k], 260, 0, 30, 30, "X", function() deleteUnitGroup(k) end)
+			local deleteButton = addButton(groupPanels[k], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(k) end)
 			deleteButton.font.color = {1, 0, 0, 1}
 		end
 		-- Add a button to create an empty group
@@ -1127,7 +1138,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			x = widths[column]
 			y = heights[column]
 		end
-		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 60, "Add Group", addEmptyUnitGroup)
+		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 60, EDITOR_UNITS_GROUPS_ADD, addEmptyUnitGroup)
 		groupTotal = tableLength(unitGroups)
 		
 		-- Update groups
@@ -1151,7 +1162,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			unitGroupViewButtons[k] = {}
 			for key, u in pairs(group.units) do
 				-- Remove button
-				local removeButton = addButton(groupPanels[k], '5%', 40 + 30 * count, '10%', 30, "X", function() removeUnitFromGroup(unitGroups[k], u) end)
+				local removeButton = addButton(groupPanels[k], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(unitGroups[k], u) end)
 				removeButton.font.color = {1, 0, 0, 1}
 				table.insert(unitGroupRemoveUnitButtons[k], removeButton)
 				
@@ -1250,7 +1261,7 @@ function addUnitGroup(name)
 end
 function addEmptyUnitGroup()
 	unitGroups[groupNumber] = {}
-	unitGroups[groupNumber].name = "Group #"..groupNumber
+	unitGroups[groupNumber].name = EDITOR_UNITS_GROUPS_DEFAULT_NAME..groupNumber
 	unitGroups[groupNumber].units = {}
 	groupSizes[groupNumber] = 0
 	unitGroupLabels[groupNumber] = {}
@@ -1685,9 +1696,9 @@ function updateAllyTeamPanels()
 			end
 			local count = 0
 			for i, t in ipairs(at) do
-				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, "Team "..tostring(t), 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
+				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t), 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, "X", function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, EDITOR_X, function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
 				but.font.color = {1, 0, 0, 1}
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
 				count = count + 1
@@ -1713,7 +1724,7 @@ function updateAllyTeamPanels()
 			if enabledTeams[team] then
 				allyTeamsWindow:AddChild(allyTeamPanels[team])
 				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, "Team "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				count = count + 1
 			end
 		end
@@ -1804,7 +1815,7 @@ function createNewEvent()
 	event.trigger = ""
 	event.actions = {}
 	event.id = eventNumber
-	event.name = "Event"..tostring(event.id)
+	event.name = EDITOR_TRIGGERS_EVENTS_DEFAULT_NAME..tostring(event.id)
 	event.conditionTotal = 0
 	event.actionTotal = 0
 	table.insert(events, event)
@@ -1841,7 +1852,7 @@ function createNewCondition()
 		local e = events[currentEvent]
 		local condition = {}
 		condition.id = conditionNumber
-		condition.name = "Condition"..tostring(condition.id)
+		condition.name = EDITOR_TRIGGERS_CONDITIONS_DEFAULT_NAME..tostring(condition.id)
 		table.insert(e.conditions, condition)
 		
 		conditionNumber = conditionNumber + 1
@@ -1873,7 +1884,7 @@ function createNewAction()
 		local e = events[currentEvent]
 		local action = {}
 		action.id = actionNumber
-		action.name = "Action"..tostring(action.id)
+		action.name = EDITOR_TRIGGERS_ACTIONS_DEFAULT_NAME..tostring(action.id)
 		action.params = {}
 		table.insert(e.actions, action)
 		
@@ -1921,7 +1932,7 @@ function updateEventList()
 		local count = 0
 		for i, e in ipairs(events) do
 			eventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '80%', 40, e.name, function() editEvent(i) end)
-			deleteEventButtons[i] = addButton(eventScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeEvent(i) end)
+			deleteEventButtons[i] = addButton(eventScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeEvent(i) end)
 			deleteEventButtons[i].font.color = {1, 0, 0, 1}
 			deleteEventButtons[i].font.size = 20
 			count = count + 1
@@ -1954,7 +1965,7 @@ function updateEventFrame()
 			local count = 0
 			for i, c in ipairs(e.conditions) do
 				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeCondition(i) end)
+				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
 				deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
 				deleteConditionButtons[e.id][i].font.size = 20
 				count = count + 1
@@ -1975,7 +1986,7 @@ function updateEventFrame()
 			local count = 0
 			for i, c in ipairs(e.actions) do
 				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 				deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
 				deleteActionButtons[e.id][i].font.size = 20
 				count = count + 1
@@ -2020,7 +2031,7 @@ function currentEventFrame()
 		local count = 0
 		for i, c in ipairs(e.conditions) do
 			conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeCondition(i) end)
+			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
 			deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
 			deleteConditionButtons[e.id][i].font.size = 20
 			count = count + 1
@@ -2040,7 +2051,7 @@ function currentEventFrame()
 		local count = 0
 		for i, c in ipairs(e.actions) do
 			actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 			deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
 			deleteActionButtons[e.id][i].font.size = 20
 			count = count + 1
@@ -2233,7 +2244,7 @@ function drawFeature(attr, y, a, scrollPanel)
 		elseif attr.type == "team" then
 			for k, t in pairs(teamStateMachine.states) do
 				if enabledTeams[t] then
-					table.insert(comboBoxItems, "Team "..tostring(t))
+					table.insert(comboBoxItems, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t))
 				end
 			end
 		elseif attr.type == "group" then
@@ -2241,14 +2252,14 @@ function drawFeature(attr, y, a, scrollPanel)
 				table.insert(comboBoxItems, g.name)
 			end
 			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, "No group found")
+				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
 			end
 		elseif attr.type == "zone" then
 			for k, z in pairs(zoneList) do
 				table.insert(comboBoxItems, z.name)
 			end
 			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, "No zone found")
+				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_ZONE_NOT_FOUND)
 			end
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
@@ -2314,7 +2325,7 @@ function configureEvent()
 			Screen0:AddChild(windows['configureEvent'])
 			configureEventButton.state.chosen = true
 			configureEventButton:InvalidateSelf()
-			configureEventLabel:SetCaption("Configure "..events[currentEvent].name)
+			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
 			customTriggerEditBox:SetText(e.trigger)
 			for i, i in ipairs(actionSequenceItems) do
 				actionSequenceScrollPanel:RemoveChild(i)
@@ -2343,7 +2354,7 @@ function configureEvent()
 						local count = 0
 						for i, c in ipairs(e.actions) do
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
 							deleteActionButtons[e.id][i].font.size = 20
 							count = count + 1
@@ -2373,7 +2384,7 @@ function configureEvent()
 						local count = 0
 						for i, c in ipairs(e.actions) do
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "X", function() removeAction(i) end)
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
 							deleteActionButtons[e.id][i].font.size = 20
 							count = count + 1
@@ -2504,6 +2515,31 @@ function preventSpaces()
 			conditionNameEditBox:InvalidateSelf()
 		end
 	end
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Map settings functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			I/O functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function newMap()
+	Spring.SendLuaRulesMsg("New Map")
+end
+function loadMap()
+
+end
+function saveMap()
+
+end
+function exportMap()
+
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2880,8 +2916,8 @@ function widget:MouseRelease(mx, my, button)
 										x2 = round(zoneX2) - round(zoneX2)%8,
 										z1 = round(zoneZ1) - round(zoneZ1)%8,
 										z2 = round(zoneZ2) - round(zoneZ2)%8,
-										id = "Zone "..zoneNumber,
-										name = "Zone "..zoneNumber,
+										id = zoneNumber,
+										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Rectangle",
 										shown = true
 									}
@@ -2896,8 +2932,8 @@ function widget:MouseRelease(mx, my, button)
 										b = round((zoneZ2 - zoneZ1) / 2) - round((zoneZ2 - zoneZ1) / 2)%8,
 										x = round((zoneX1 + zoneX2) / 2) - round((zoneX1 + zoneX2) / 2)%8,
 										z = round((zoneZ1 + zoneZ2) / 2) - round((zoneZ1 + zoneZ2) / 2)%8,
-										id = "Zone "..zoneNumber,
-										name = "Zone "..zoneNumber,
+										id = zoneNumber,
+										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Disk",
 										shown = true
 									}

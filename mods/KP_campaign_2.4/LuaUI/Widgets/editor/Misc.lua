@@ -123,31 +123,6 @@ function GetUnitsInScreenRectangle(x1, y1, x2, y2)
 end
 
 -----------------------
--- Remove all units on the map
------------------------
-function newMap()
-	Spring.SendLuaRulesMsg("New Map")
-end
-
------------------------
--- Load a map using MissionPlayer utilities (may have to be changed)
--- TODO : Allow the loading of multiple maps (bugs the game atm)
------------------------
-function loadMap(jsonPath)
-	newMap()
-	local jsonFile = VFS.LoadFile(jsonPath)
-	Spring.SendLuaRulesMsg("Load Map".."++"..jsonFile)
-end
-
------------------------
--- Save a map to .json and .txt files
--- TODO
------------------------
-function saveMap()
-
-end
-
------------------------
 -- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
