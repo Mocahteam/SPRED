@@ -47,7 +47,9 @@ actions_list = {
 -- COLOR TEXT
 for i, a in ipairs(actions_list) do
 	for ii, attr in ipairs(a.attributes) do
-		a.text = string.gsub(a.text, attr.text, textColors[attr.type]..attr.text.."\255\255\255\255")
-		attr.text = textColors[attr.type]..attr.text
+		if textColors[attr.type] then
+			a.text = string.gsub(a.text, attr.text, textColors[attr.type]..attr.text.."\255\255\255\255")
+			attr.text = textColors[attr.type]..attr.text
+		end
 	end
 end

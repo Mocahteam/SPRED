@@ -1048,7 +1048,6 @@ function updateGroupListUnitList()
 				state.height = 500
 				Spring.SetCameraState(state, 2)
 				Spring.SelectUnitArray({u})
-				unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 			end
 			groupListUnitsViewButtons[u] = addButton(groupListUnitsScrollPanel, '85%', 30 * count, '15%', 30, "", viewUnit)
 			addImage(groupListUnitsViewButtons[u], '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
@@ -1171,7 +1170,6 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 					state.height = 500
 					Spring.SetCameraState(state, 2)
 					Spring.SelectUnitArray({u})
-					unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 				end
 				local but = addButton(groupPanels[k], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
 				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
@@ -1214,9 +1212,11 @@ function addChosenUnitsToSelectedGroups() -- Add selected units to the selected 
 			end
 		end
 		groupButton.state.chosen = false
+		groupButton:InvalidateSelf()
 	end
 	for unitKey, unitButton in pairs(groupListUnitsButtons) do
 		unitButton.state.chosen = false
+		unitButton:InvalidateSelf()
 	end
 end
 function removeSelectedUnitsFromGroup(group)
@@ -2222,37 +2222,39 @@ function drawFeature(attr, y, a, scrollPanel)
 	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
-	if attr.type == "unitType" then
-		local unitTypes = {}
-		for i, fu in ipairs(factionUnits) do
-			for i, u in ipairs(fu) do
-				table.insert(unitTypes, u)
-			end
-		end
-		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, unitTypes)
-		if a.params[attr.id] then
-			for i, unitType in ipairs(comboBox.items) do
-				if a.params[attr.id] == unitType then
-					comboBox:Select(i)
-					break
+	if attr.type == "unitType" or attr.type == "team" or attr.type == "group" or attr.type == "zone" then
+		local comboBoxItems = {}
+		if attr.type == "unitType" then
+			for i, fu in ipairs(factionUnits) do
+				for i, u in ipairs(fu) do
+					table.insert(comboBoxItems, u)
 				end
 			end
-		else
-			comboBox:Select(1)
-		end
-		comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
-		table.insert(feature, comboBox)
-	elseif attr.type == "team" then
-		local teamList = {}
-		for k, t in pairs(teamStateMachine.states) do
-			if enabledTeams[t] then
-				table.insert(teamList, "Team "..tostring(t))
+		elseif attr.type == "team" then
+			for k, t in pairs(teamStateMachine.states) do
+				if enabledTeams[t] then
+					table.insert(comboBoxItems, "Team "..tostring(t))
+				end
+			end
+		elseif attr.type == "group" then
+			for k, g in pairs(unitGroups) do
+				table.insert(comboBoxItems, g.name)
+			end
+			if #comboBoxItems == 0 then
+				table.insert(comboBoxItems, "No group found")
+			end
+		elseif attr.type == "zone" then
+			for k, z in pairs(zoneList) do
+				table.insert(comboBoxItems, z.name)
+			end
+			if #comboBoxItems == 0 then
+				table.insert(comboBoxItems, "No zone found")
 			end
 		end
-		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, teamList)
+		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
 		if a.params[attr.id] then
-			for i, team in ipairs(comboBox.items) do
-				if a.params[attr.id] == team then
+			for i, item in ipairs(comboBox.items) do
+				if a.params[attr.id] == item then
 					comboBox:Select(i)
 					break
 				end
@@ -2289,7 +2291,7 @@ function drawFeature(attr, y, a, scrollPanel)
 			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
 			unitLabel:SetCaption(name.." ("..tostring(u)..")")
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function()  end)
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", nil)
 		local pickUnit = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
@@ -2299,8 +2301,6 @@ function drawFeature(attr, y, a, scrollPanel)
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "zone" then
-		-- TODO
 	end
 	return feature
 end
@@ -2712,7 +2712,7 @@ function widget:MousePress(mx, my, button)
 		if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
 			unitFrame()
 		end
-	elseif clickedZone(mx, my) ~= nil then
+	elseif clickedZone(mx, my) ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
 		zoneFrame()
 		zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 	end
@@ -2880,7 +2880,8 @@ function widget:MouseRelease(mx, my, button)
 										x2 = round(zoneX2) - round(zoneX2)%8,
 										z1 = round(zoneZ1) - round(zoneZ1)%8,
 										z2 = round(zoneZ2) - round(zoneZ2)%8,
-										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
+										id = "Zone "..zoneNumber,
+										name = "Zone "..zoneNumber,
 										type = "Rectangle",
 										shown = true
 									}
@@ -2895,7 +2896,8 @@ function widget:MouseRelease(mx, my, button)
 										b = round((zoneZ2 - zoneZ1) / 2) - round((zoneZ2 - zoneZ1) / 2)%8,
 										x = round((zoneX1 + zoneX2) / 2) - round((zoneX1 + zoneX2) / 2)%8,
 										z = round((zoneZ1 + zoneZ2) / 2) - round((zoneZ1 + zoneZ2) / 2)%8,
-										id = "Zone "..zoneNumber, name = "Zone "..zoneNumber,
+										id = "Zone "..zoneNumber,
+										name = "Zone "..zoneNumber,
 										type = "Disk",
 										shown = true
 									}
