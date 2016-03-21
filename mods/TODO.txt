@@ -1,5 +1,2 @@
 couleur automatique
 variables
-configure trigger
-get condition/action from another event (?)
-order of actions

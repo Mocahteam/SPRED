@@ -14,11 +14,13 @@ conditions_list = {
 		attributes = {
 			{
 				text = "<Unit>",
-				type = "unit"
+				type = "unit",
+				id = "unit"
 			},
 			{
 				text = "<Zone>",
-				type = "zone"
+				type = "zone",
+				id = "zone"
 			}
 		}
 	}

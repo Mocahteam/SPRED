@@ -159,6 +159,7 @@ local updateActionSequence = false
 local importEventComboBox
 local importConditionComboBox
 local importActionComboBox
+local changedParam
 
 -- Mouse variables
 local mouseMove = false
@@ -2202,8 +2203,8 @@ function drawConditionFrame(reset)
 		if reset then
 			a.params = {}
 		end
-		for i, af in ipairs(conditionFeatures) do
-			for _, f in ipairs(af) do
+		for i, cf in ipairs(conditionFeatures) do
+			for _, f in ipairs(cf) do
 				conditionScrollPanel:RemoveChild(f)
 				f:Dispose()
 			end
@@ -2229,9 +2230,9 @@ function drawFeature(attr, y, a, scrollPanel)
 			end
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, unitTypes)
-		if a.params.unitType then
+		if a.params[attr.id] then
 			for i, unitType in ipairs(comboBox.items) do
-				if a.params.unitType == unitType then
+				if a.params[attr.id] == unitType then
 					comboBox:Select(i)
 					break
 				end
@@ -2239,7 +2240,7 @@ function drawFeature(attr, y, a, scrollPanel)
 		else
 			comboBox:Select(1)
 		end
-		comboBox.OnSelect = { function() a.params.unitType = comboBox.items[comboBox.selected] end }
+		comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		table.insert(feature, comboBox)
 	elseif attr.type == "team" then
 		local teamList = {}
@@ -2249,9 +2250,9 @@ function drawFeature(attr, y, a, scrollPanel)
 			end
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, teamList)
-		if a.params.team then
+		if a.params[attr.id] then
 			for i, team in ipairs(comboBox.items) do
-				if a.params.team == team then
+				if a.params[attr.id] == team then
 					comboBox:Select(i)
 					break
 				end
@@ -2259,27 +2260,43 @@ function drawFeature(attr, y, a, scrollPanel)
 		else
 			comboBox:Select(1)
 		end
-		comboBox.OnSelect = { function() a.params.team = comboBox.items[comboBox.selected] end }
+		comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		table.insert(feature, comboBox)
 	elseif attr.type == "position" then
 		local positionLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
-		if a.params.positionX and a.params.positionZ then
-			positionLabel:SetCaption("X: "..tostring(a.params.positionX).."   Z: "..tostring(a.params.positionZ))
+		if a.params[attr.id] then
+			if a.params[attr.id].x and a.params[attr.id].z then
+				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+			end
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function() triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION) end)
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", nil)
+		local pickPosition = function()
+			changedParam = attr.id 
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
+			pickButton.state.chosen = true
+			pickButton:InvalidateSelf()
+		end
+		pickButton.OnClick = { pickPosition }
 		table.insert(feature, positionLabel)
 		table.insert(feature, pickButton)
 	elseif attr.type == "unit" then
 		local unitLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
-		if a.params.unit then
-			local u = a.params.unit
+		if a.params[attr.id] then
+			local u = a.params[attr.id]
 			local uDefID = Spring.GetUnitDefID(u)
 			local name = UnitDefs[uDefID].humanName
 			local team = Spring.GetUnitTeam(u)
 			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
 			unitLabel:SetCaption(name.." ("..tostring(u)..")")
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function() triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT) end)
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", function()  end)
+		local pickUnit = function()
+			changedParam = attr.id 
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
+			pickButton.state.chosen = true
+			pickButton:InvalidateSelf()
+		end
+		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
 	elseif attr.type == "zone" then
@@ -2786,8 +2803,9 @@ function widget:MousePress(mx, my, button)
 				if var and currentEvent and (currentCondition or currentAction) then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					local x, _, z = unpack(var)
-					e.params.positionX = round(x)
-					e.params.positionZ = round(z)
+					e.params[changedParam] = {}
+					e.params[changedParam].x = round(x)
+					e.params[changedParam].z = round(z)
 					if currentAction then
 						drawActionFrame(false)
 					elseif currentCondition then
@@ -2797,7 +2815,7 @@ function widget:MousePress(mx, my, button)
 			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					e.params.unit = var
+					e.params[changedParam] = var
 					if currentAction then
 						drawActionFrame(false)
 					elseif currentCondition then

@@ -12,15 +12,18 @@ actions_list = {
 		attributes = {
 			{
 				text = r.."<UnitType>",
-				type = "unitType"
+				type = "unitType",
+				id = "unitType"
 			},
 			{
 				text = g.."<Team>",
-				type = "team"
+				type = "team",
+				id = "team"
 			},
 			{
 				text = b.."<Position>",
-				type = "position"
+				type = "position",
+				id = "position"
 			}
 		}
 	},
@@ -32,11 +35,13 @@ actions_list = {
 		attributes = {
 			{
 				text = y.."<Unit>",
-				type = "unit"
+				type = "unit",
+				id = "unit"
 			},
 			{
 				text = b.."<Position>",
-				type = "position"
+				type = "position",
+				id = "position"
 			}
 		}
 	}
