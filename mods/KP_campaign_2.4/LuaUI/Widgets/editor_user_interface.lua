@@ -123,24 +123,24 @@ local events = {}
 local eventScrollPanel -- scroll panel containing each event
 local eventConditionsScrollPanel -- scroll panel containing each condition of an event
 local eventActionsScrollPanel -- scroll panel containing each action of an event
-local eventButtons = {}
-local deleteEventButtons = {}
-local currentEvent
-local currentCondition
-local currentAction
-local eventNumber = 0
-local conditionNumber = 0
-local actionNumber = 0
-local conditionButtons = {}
-local deleteConditionButtons = {}
-local newEventConditionButton
-local conditionNameEditBox
-local conditionTypeComboBox
-local conditionFilterComboBox
-local conditionScrollPanel
-local conditionTextBox
-local conditionFeatures = {}
-local actionButtons = {}
+local eventButtons = {} -- buttons for each event
+local deleteEventButtons = {} -- buttons to delete an event
+local currentEvent -- index of the current inspected event
+local currentCondition -- index of the current inspected condition of the current inspected event
+local currentAction -- index of the current inspected action of the current inspected event
+local eventNumber = 0 -- used to assign a unique id to an event
+local conditionNumber = 0 -- used to assign a unique id to a condition
+local actionNumber = 0 -- used to assign a unique id to an action
+local conditionButtons = {} -- buttons for each condition of the selected event
+local deleteConditionButtons = {} -- buttons to delete a condition of the selected event
+local newEventConditionButton -- button to add a condition to an event
+local conditionNameEditBox -- to change the name of a condition
+local conditionTypeComboBox -- to change the type of a condition
+local conditionFilterComboBox -- to change the filter of the type combobox
+local conditionScrollPanel -- scrollpanel containing each conditionButton
+local conditionTextBox -- textbox containing the description of this type of condition
+local conditionFeatures = {} -- table containing each customizable parameter of the condition
+local actionButtons = {}  -- same for actions
 local deleteActionButtons = {}
 local newEventActionButton
 local actionNameEditBox
@@ -149,18 +149,25 @@ local actionFilterComboBox
 local actionScrollPanel
 local actionTextBox
 local actionFeatures = {}
-local dontUpdateComboBox = false
-local configureEventButton
-local customTriggerEditBox
-local customTriggerButton
-local defaultTriggerButton
-local actionSequenceScrollPanel
-local actionSequenceItems = {}
-local updateActionSequence = false
+local dontUpdateComboBox = false -- lock to prevent updating when it's required not to
+local configureEventButton -- button to show the configure event window
+local customTriggerEditBox -- to write a custom trigger
+local customTriggerButton -- to save the custom trigger
+local defaultTriggerButton -- to use the default trigger
+local actionSequenceScrollPanel -- scrollpanel containing labels and buttons for each action
+local actionSequenceItems = {} -- contains the aforementioned labels and buttons
+local updateActionSequence = false -- update panels when sequence is altered
 local importEventComboBox
 local importConditionComboBox
 local importActionComboBox
-local changedParam
+local changedParam -- parameter begin altered (picking for example)
+local triggerVariables = {}
+local variablesNumber = 0
+local variablesTotal = nil
+local editVariablesButton
+local variablesScrollPanel
+local variablesFeatures = {}
+local forceUpdateVariables = false
 
 -- Mouse variables
 local mouseMove = false
@@ -664,8 +671,9 @@ function initTriggerWindow()
 	-- Left Panel
 	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS)
-	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '95%')
+	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '85%')
 	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
+	editVariablesButton = addButton(windows['triggerWindow'], '0%', '90%', '100%', '10%', EDITOR_TRIGGERS_VARIABLES_EDIT, showVariablesFrame)
 	
 	-- Event window
 	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
@@ -747,7 +755,13 @@ function initTriggerWindow()
 	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 	
-	--addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "Debug : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
+	addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "DEBUG : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
+
+	-- Variables window
+	windows["variablesWindow"] = addWindow(Screen0, '15%', '5%', '60%', '80%')
+	addLabel(windows["variablesWindow"], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_VARIABLES, 20, "center", nil, "center")
+	variablesScrollPanel = addScrollPanel(windows["variablesWindow"], '2%', '7%', '96%', '91%')
+	newVariableButton = addButton(variablesScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
 function initMapSettingsWindow()
 	windows['mapSettingsWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
@@ -1826,10 +1840,10 @@ function createNewEvent()
 	actionButtons[event.id] = {}
 	deleteActionButtons[event.id] = {}
 	
-	editEvent(#events)
+	editEvent(#events) -- edit this event
 end
 function editEvent(i)
-	Screen0:RemoveChild(windows['eventWindow'])
+	removeSecondWindows()
 	removeThirdWindows()
 	currentCondition = nil
 	currentAction = nil
@@ -1837,14 +1851,14 @@ function editEvent(i)
 		Screen0:AddChild(windows['eventWindow'])
 		currentEvent = i
 		currentEventFrame()
-	else
+	else -- if the edit frame is already opened, close it
 		currentEvent = nil
 	end
 end
 function removeEvent(i)
 	table.remove(events, i)
-	Screen0:RemoveChild(windows['eventWindow'])
-	removeThirdWindows()
+	removeSecondWindows() -- close windows to prevent bugs
+	removeThirdWindows() 
 	currentEvent = nil
 end
 function createNewCondition()
@@ -1867,14 +1881,14 @@ function editCondition(i)
 		Screen0:AddChild(windows['conditionWindow'])
 		currentCondition = i
 		currentConditionFrame()
-	else
+	else -- if the edit frame is already opened, close it
 		currentCondition = nil
 	end
 end
 function removeCondition(i)
 	if currentEvent then
 		table.remove(events[currentEvent].conditions, i)
-		removeThirdWindows()
+		removeThirdWindows() -- close windows to prevent bugs
 		currentCondition = nil
 		currentAction = nil
 	end
@@ -1900,26 +1914,32 @@ function editAction(i)
 		Screen0:AddChild(windows['actionWindow'])
 		currentAction = i
 		currentActionFrame()
-	else
+	else -- if the edit frame is already opened, close it
 		currentAction = nil
 	end
 end
 function removeAction(i)
 	if currentEvent then
 		table.remove(events[currentEvent].actions, i)
-		removeThirdWindows()
+		removeThirdWindows() -- close windows to prevent bugs
 		currentAction = nil
 		currentCondition = nil
 	end
 end
-function removeThirdWindows()
+function removeSecondWindows() -- Removes the middle window
+	Screen0:RemoveChild(windows['eventWindow'])
+	Screen0:RemoveChild(windows['variablesWindow'])
+	editVariablesButton.state.chosen = false
+	editVariablesButton:InvalidateSelf()
+end
+function removeThirdWindows() -- Removes the rightmost window
 	Screen0:RemoveChild(windows['conditionWindow'])
 	Screen0:RemoveChild(windows['actionWindow'])
 	Screen0:RemoveChild(windows['configureEvent'])
 	configureEventButton.state.chosen = false
 	configureEventButton:InvalidateSelf()
 end
-function updateEventList()
+function updateEventList() -- When a new event is created or the name of an event is changed, update the list
 	if eventTotal ~= #events then
 		for k, b in pairs(eventButtons) do
 			eventScrollPanel:RemoveChild(b)
@@ -1949,7 +1969,7 @@ function updateEventList()
 		end
 	end
 end
-function updateEventFrame()
+function updateEventFrame() -- When a new condition or action is created or its name is changed, update lists
 	if currentEvent then
 		local e = events[currentEvent]
 		
@@ -2012,7 +2032,7 @@ function updateEventFrame()
 		end
 	end
 end
-function currentEventFrame()
+function currentEventFrame() -- Force update on the event frame when switching event
 	if currentEvent then
 		local e = events[currentEvent]
 		-- set editbox text
@@ -2059,7 +2079,7 @@ function currentEventFrame()
 		newEventActionButton.y = 40 * count
 	end
 end
-function currentActionFrame()
+function currentActionFrame() -- Force update on the action frame when switching action
 	if currentAction then
 		dontUpdateComboBox = true
 		local a = events[currentEvent].actions[currentAction]
@@ -2079,7 +2099,7 @@ function currentActionFrame()
 		dontUpdateComboBox = false
 	end
 end
-function currentConditionFrame()
+function currentConditionFrame() -- Force update on the condition frame when switching condition
 	if currentCondition then
 		dontUpdateComboBox = true
 		local c = events[currentEvent].conditions[currentCondition]
@@ -2099,7 +2119,7 @@ function currentConditionFrame()
 		dontUpdateComboBox = false
 	end
 end
-function selectFilter()
+function selectFilter() -- Only show some conditions/actions in the combobox
 	if currentCondition then
 		local conditionTypesList = {}
 		if conditionFilterComboBox.selected == 1 then
@@ -2136,7 +2156,7 @@ function selectFilter()
 		end
 	end
 end
-function selectConditionType()
+function selectConditionType() -- Callback when selecting a condition
 	if currentEvent and currentCondition then
 		local selectedItem = conditionTypeComboBox.items[conditionTypeComboBox.selected]
 		local conditionType
@@ -2154,7 +2174,7 @@ function selectConditionType()
 		end
 	end
 end
-function selectActionType()
+function selectActionType() -- Callback when selecting an action
 	if currentEvent and currentAction then
 		local selectedItem = actionTypeComboBox.items[actionTypeComboBox.selected]
 		local actionType
@@ -2172,7 +2192,7 @@ function selectActionType()
 		end
 	end
 end
-function drawActionFrame(reset)
+function drawActionFrame(reset) -- Display specific action with its parameters
 	if currentEvent and currentAction then
 		local a = events[currentEvent].actions[currentAction]
 		local action_template
@@ -2200,7 +2220,7 @@ function drawActionFrame(reset)
 		end
 	end
 end
-function drawConditionFrame(reset)
+function drawConditionFrame(reset) -- Display specific condition with its parameters
 	if currentEvent and currentCondition then
 		local a = events[currentEvent].conditions[currentCondition]
 		local condition_template
@@ -2228,7 +2248,7 @@ function drawConditionFrame(reset)
 		end
 	end
 end
-function drawFeature(attr, y, a, scrollPanel)
+function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to its type
 	local feature = {}
 	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
 	text.font.shadow = false
@@ -2282,7 +2302,7 @@ function drawFeature(attr, y, a, scrollPanel)
 				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
 			end
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", nil)
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickPosition = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
@@ -2302,7 +2322,7 @@ function drawFeature(attr, y, a, scrollPanel)
 			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
 			unitLabel:SetCaption(name.." ("..tostring(u)..")")
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, "Pick", nil)
+		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickUnit = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
@@ -2315,9 +2335,9 @@ function drawFeature(attr, y, a, scrollPanel)
 	end
 	return feature
 end
-function configureEvent()
+function configureEvent() -- Show the event configuration window
 	if currentEvent then
-		if not configureEventButton.state.chosen or updateActionSequence then
+		if not configureEventButton.state.chosen or updateActionSequence then -- force update when changing the action sequence
 			local e = events[currentEvent]
 			removeThirdWindows()
 			currentCondition = nil
@@ -2352,7 +2372,7 @@ function configureEvent()
 							end
 						end
 						local count = 0
-						for i, c in ipairs(e.actions) do
+						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
 							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
@@ -2382,7 +2402,7 @@ function configureEvent()
 							end
 						end
 						local count = 0
-						for i, c in ipairs(e.actions) do
+						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
 							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
 							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
@@ -2490,7 +2510,7 @@ function importAction()
 	updateActionSequence = true
 	configureEvent()
 end
-function preventSpaces()
+function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
 	if currentEvent then
 		if string.find(eventNameEditBox.text, " ") then
 			local cursor = eventNameEditBox.cursor
@@ -2515,6 +2535,126 @@ function preventSpaces()
 			conditionNameEditBox:InvalidateSelf()
 		end
 	end
+end
+function showVariablesFrame()
+	if not editVariablesButton.state.chosen then
+		removeSecondWindows()
+		removeThirdWindows()
+		currentCondition = nil
+		currentAction = nil
+		currentEvent = nil
+		Screen0:AddChild(windows['variablesWindow'])
+		editVariablesButton.state.chosen = true
+	else
+		removeSecondWindows()
+		removeThirdWindows()
+		currentCondition = nil
+		currentAction = nil
+		currentEvent = nil
+	end
+end
+function addVariable()
+	local variable = {}
+	variable.id = variablesNumber
+	variable.name = EDITOR_TRIGGERS_VARIABLES_DEFAULT_NAME.." "..tostring(variablesNumber)
+	variable.type = "number"
+	variable.initValue = 0
+	
+	table.insert(triggerVariables, variable)
+	
+	variablesNumber = variablesNumber + 1
+end
+function removeVariable(var)
+	for i, v in ipairs(triggerVariables) do
+		if var == v then
+			table.remove(triggerVariables, i)
+			break
+		end
+	end
+end
+function updateVariables()
+	if editVariablesButton.state.chosen then
+		for i, vf in ipairs(variablesFeatures) do
+			vf.var.name = vf.nameEditBox.text
+			if vf.var.type == "number" then
+				vf.var.initValue = tonumber(vf.initValueEditBox.text)
+			end
+		end
+	end
+	if variablesTotal ~= #triggerVariables or forceUpdateVariables then
+		for i, vf in ipairs(variablesFeatures) do
+			for k, f in pairs(vf) do
+				if k ~= "var" then
+					variablesScrollPanel:RemoveChild(f)
+				end
+			end
+		end
+		local count = 0
+		variablesFeatures = {}
+		for i, var in ipairs(triggerVariables) do
+			table.insert(variablesFeatures, drawVariableFeature(var, count * 40))
+			count = count + 1
+		end
+		newVariableButton.y = count * 40
+		variablesTotal = #triggerVariables
+		forceUpdateVariables = false
+	end
+end
+function drawVariableFeature(var, y)
+	local feature = {}
+	local nameLabel = addLabel(variablesScrollPanel, '0%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_NAME, 16, "center", nil, "center")
+	local nameEditBox = addEditBox(variablesScrollPanel, '5%', y, '30%', 40, "left", var.name)
+	nameEditBox.font.size = 16
+	local typeLabel = addLabel(variablesScrollPanel, '40%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_TYPE, 16, "center", nil, "center")
+	local typeComboBox = addComboBox(variablesScrollPanel, '45%', y, '10%', 40, { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
+	local selectType = function()
+		if typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER then
+			var.type = "number"
+			variablesScrollPanel:RemoveChild(feature.initValueComboBox)
+			variablesScrollPanel:RemoveChild(feature.initValueEditBox)
+			variablesScrollPanel:AddChild(feature.initValueEditBox)
+		elseif typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
+			var.type = "boolean"
+			variablesScrollPanel:RemoveChild(feature.initValueComboBox)
+			variablesScrollPanel:RemoveChild(feature.initValueEditBox)
+			variablesScrollPanel:AddChild(feature.initValueComboBox)
+		end
+	end
+	typeComboBox.OnSelect = { selectType }
+
+	local initValueLabel = addLabel(variablesScrollPanel, '60%', y, '10%', 40, EDITOR_TRIGGERS_VARIABLES_INITVALUE, 16, "center", nil, "center")
+	local initValueComboBox = addComboBox(variablesScrollPanel, '70%', y, '20%', 40, { "true", "false" }, nil)
+	local selectInitValue = function()
+		var.initValue = initValueComboBox.items[initValueComboBox.selected]
+	end
+	initValueComboBox.OnSelect = { selectInitValue }
+	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y, '20%', 40, "left", tostring(var.initValue))
+	initValueEditBox.font.size = 16
+	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, EDITOR_X, function() removeVariable(var) end)
+	deleteVariableButton.font.color = {1, 0, 0, 1}
+	
+	feature.nameLabel = nameLabel
+	feature.nameEditBox = nameEditBox
+	feature.typeLabel = typeLabel
+	feature.typeComboBox = typeComboBox
+	feature.initValueLabel = initValueLabel
+	feature.initValueEditBox = initValueEditBox
+	feature.initValueComboBox = initValueComboBox
+	feature.deleteVariableButton = deleteVariableButton
+	feature.var = var
+	
+	if var.type == "number" then
+		feature.typeComboBox:Select(1)
+	elseif var.type == "boolean" then
+		feature.typeComboBox:Select(2)
+		if var.initValue == "true" then
+			feature.initValueComboBox:Select(1)
+		elseif var.initValue == "false" then
+			feature.initValueComboBox:Select(2)
+		end
+	end
+	
+	return feature
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2725,6 +2865,7 @@ function widget:Update(delta)
 		preventSpaces()
 		updateEventList()
 		updateEventFrame()
+		updateVariables()
 	end
 	
 	updateButtonVisualFeedback()
