@@ -2308,10 +2308,12 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		end
 		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickPosition = function()
-			changedParam = attr.id 
+			changedParam = attr.id
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
-			pickButton.state.chosen = true
-			pickButton:InvalidateSelf()
+			Screen0:RemoveChild(windows["triggerWindow"])
+			Screen0:RemoveChild(windows["eventWindow"])
+			Screen0:RemoveChild(windows["conditionWindow"])
+			Screen0:RemoveChild(windows["actionWindow"])
 		end
 		pickButton.OnClick = { pickPosition }
 		table.insert(feature, positionLabel)
@@ -2330,8 +2332,10 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		local pickUnit = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
-			pickButton.state.chosen = true
-			pickButton:InvalidateSelf()
+			Screen0:RemoveChild(windows["triggerWindow"])
+			Screen0:RemoveChild(windows["eventWindow"])
+			Screen0:RemoveChild(windows["conditionWindow"])
+			Screen0:RemoveChild(windows["actionWindow"])
 		end
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
@@ -2660,6 +2664,20 @@ function drawVariableFeature(var, y)
 	
 	return feature
 end
+function showPickText()
+	local text = ""
+	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+		text = EDITOR_TRIGGER_EVENTS_PICK_UNIT
+	elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
+		text = EDITOR_TRIGGER_EVENTS_PICK_POSITION
+	end
+	if text ~= "" then
+		local w = gl.GetTextWidth(text)
+		local x = screenSizeX * 0.5
+		local y = screenSizeY * 0.8
+		gl.Text("\255\51\255\255"..text, x - (20*w/2), y, 20, "s")
+	end
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -2673,8 +2691,58 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function newMap()
+function newMap() -- doesn't work
+	-- Groups
+	unitGroups = {}
+	unitTotal = nil
+	unitGroupsUnitTotal = nil
+	groupNumber = 1
+	groupTotal = nil
+	groupSizes = {}
+	drawStartX, drawStartY, drawEndX, drawEndY = 0, 0, 0, 0
+	rValue, gValue, bValue = 0, 0, 0
+	-- Zone
+	zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
+	zoneAnchorX, zoneAnchorZ = 0, 0
+	zoneList = {}
+	selectedZone = nil
+	zoneSide = ""
+	totalZones = nil
+	zoneNumber = 1
+	-- AllyTeams
+	allyTeams = {}
+	allyTeamsSize = {}
+	selectedAllyTeam = 0
+	-- TeamConfig
+	teamControl = {}
+	enabledTeams = {}
+	enabledTeamsTotal = nil
+	teamColor = {}
+	-- Trigger
+	events = {}
+	currentEvent = nil
+	currentCondition = nil
+	currentAction = nil
+	eventNumber = 0
+	conditionNumber = 0
+	actionNumber = 0
+	changedParam = nil
+	-- Variables
+	triggerVariables = {}
+	variablesNumber = 0
+	variablesTotal = nil
+	-- Map
+	mapName = "Map"
+	mapBriefing = "Map Briefing"
+	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
+	-- Initialize
+	initTopBar()
+	initUnitFunctions()
+	initTeamFunctions()
+	initMouseCursors()
+	initWindows()
+	fileFrame()
 end
 function loadMap()
 	newMap()
@@ -2885,6 +2953,8 @@ function widget:DrawScreen()
 		drawSelectionRect()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		updateZoneInformation()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+		showPickText()
 	end
 	showZoneInformation()
 end
@@ -3077,9 +3147,13 @@ function widget:MousePress(mx, my, button)
 					e.params[changedParam] = {}
 					e.params[changedParam].x = round(x)
 					e.params[changedParam].z = round(z)
+					Screen0:AddChild(windows["triggerWindow"])
+					Screen0:AddChild(windows["eventWindow"])
 					if currentAction then
+						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
 					elseif currentCondition then
+						Screen0:AddChild(windows["conditionWindow"])
 						drawConditionFrame(false)
 					end
 				end
@@ -3087,9 +3161,13 @@ function widget:MousePress(mx, my, button)
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					e.params[changedParam] = var
+					Screen0:AddChild(windows["triggerWindow"])
+					Screen0:AddChild(windows["eventWindow"])
 					if currentAction then
+						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
 					elseif currentCondition then
+						Screen0:AddChild(windows["conditionWindow"])
 						drawConditionFrame(false)
 					end
 				end
