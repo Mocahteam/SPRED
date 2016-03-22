@@ -169,6 +169,10 @@ local variablesScrollPanel
 local variablesFeatures = {}
 local forceUpdateVariables = false
 
+-- Map settings variables
+local mapName = "Map"
+local mapBriefing = "Map Briefing"
+
 -- Mouse variables
 local mouseMove = false
 local clickToSelect = false -- Enable isolation through clicking on an already selected unit
@@ -479,7 +483,7 @@ function initFileWindow()
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMap) -- needs a rework
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, function() loadMap("Missions/jsonFiles/Mission3.json") end)
-	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, nil)
+	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMap)
 	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, nil)
 	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil)
 end
@@ -2673,10 +2677,100 @@ function newMap()
 	Spring.SendLuaRulesMsg("New Map")
 end
 function loadMap()
-
+	newMap()
 end
 function saveMap()
-
+	local savedTable = {}
+	-- Global description
+	savedTable.description = {}
+	savedTable.description.name = mapName
+	savedTable.description.briefing = mapBriefing
+	
+	-- Units
+	local units = Spring.GetAllUnits()
+	savedTable.units = {}
+	for i, u in ipairs(units) do
+		local unit = {}
+		unit.type = UnitDefs[Spring.GetUnitDefID(u)].name
+		unit.position = {}
+		unit.position.x, unit.position.y, unit.position.z = Spring.GetUnitPosition(u)
+		unit.team = Spring.GetUnitTeam(u)
+		local dirX, _, dirZ = Spring.GetUnitDirection(u)
+		local length = math.sqrt(dirX*dirX + dirZ*dirZ)
+		unit.orientation = math.atan2(dirX/length, dirZ/length)
+		-- TODO : specific attributes
+		unit.id = u
+		table.insert(savedTable.units, unit)
+	end
+	
+	-- Unit groups
+	savedTable.groups = {}
+	for k, g in pairs(unitGroups) do
+		local group = {}
+		group.name = g.name
+		group.id = g.id
+		group.units = g.units
+		table.insert(savedTable.groups, group)
+	end
+	
+	-- Zones
+	savedTable.zones = {}
+	for i, z in ipairs(zoneList) do
+		table.insert(savedTable.zones, z)
+	end
+	
+	-- Teams
+	savedTable.teams = {}
+	for k, t in pairs(teamStateMachine.states) do
+		savedTable.teams[t] = {}
+		savedTable.teams[t].control = teamControl[t]
+		savedTable.teams[t].enabled = enabledTeams[t]
+		savedTable.teams[t].color = teamColor[t]
+	end
+	
+	-- AllyTeams
+	savedTable.allyteams = allyTeams
+	
+	-- Variables
+	savedTable.variables = triggerVariables
+	
+	-- Triggers
+	savedTable.events = events
+	
+	-- Write
+	local jsonfile = json.encode(savedTable)
+	jsonfile = string.gsub(jsonfile, ",", ",\n")
+	jsonfile = string.gsub(jsonfile, "}", "\n}")
+	jsonfile = string.gsub(jsonfile, "{", "{\n")
+	jsonfile = string.gsub(jsonfile, "%[", "[\n")
+	jsonfile = string.gsub(jsonfile, "%]", " \n]")
+	local count = 0
+	jsonfile = string.gsub(
+		jsonfile,
+		".",
+		function(c)
+			if c == "\n" then
+				local rtr = "\n"
+				for i = 1, count, 1 do
+					rtr = rtr.."\t"
+				end
+				return rtr
+			end
+			if c == "[" or c == "{" then
+				count = count + 1
+				return c
+			end
+			if c == "]" or c == "}" then
+				count = count - 1
+				return c
+			end
+		end
+	)
+	jsonfile = string.gsub(jsonfile, "\t}", "}")
+	jsonfile = string.gsub(jsonfile, "\t%]", "]")
+	local file = io.open("CustomLevels/"..mapName..".editor.json", "w")
+	file:write(jsonfile)
+	file:close()
 end
 function exportMap()
 
