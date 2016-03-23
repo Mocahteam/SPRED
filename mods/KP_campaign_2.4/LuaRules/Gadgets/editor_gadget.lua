@@ -37,6 +37,8 @@ local transferUnits = false
 local rotateUnits = false
 local faceUnits = false
 local resetMap = false
+local loadMap = false
+local unitsInfo = {}
 local moveUnitsAnchor = nil
 local relativepos = {}
 local hpPercent = -1
@@ -124,6 +126,8 @@ function gadget:RecvLuaMsg(msg, player)
 		resetMap = true
 	-- LOAD MAP : gets the file to load
 	elseif (msgContents[1] == "Load Map") then
+		loadMap = true
+		unitsInfo = json.decode(msgContents[2])
 	-- CHANGE HP : change hp of selected units
 	elseif (msgContents[1] == "Change HP") then
 		hpPercent = tonumber(msgContents[2])/100
@@ -192,6 +196,15 @@ function gadget:GameFrame( frameNumber )
 				Spring.SetUnitHealth(u, hpPercent * mh)
 			end
 			hpPercent = -1
+		-- INSTANTIATE UNITS AND KEEP THEIR IDs
+		elseif loadMap then
+			local unitsNewIDs = {}
+			for i, u in ipairs(unitsInfo) do
+				unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
+				Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
+			end
+			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
+			loadMap = false
 		end
 	end
 end
@@ -204,6 +217,12 @@ else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+function gadget:RecvFromSynced(msg)
+	local msgContents = splitString(msg, "++")
+	if msgContents[1] == "loadmap" then
+		Script.LuaUI.GetNewUnitIDsAndContinueLoadMap(msgContents[2])
+	end
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

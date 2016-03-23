@@ -172,6 +172,7 @@ local forceUpdateVariables = false
 -- Map settings variables
 local mapName = "Map"
 local mapBriefing = "Map Briefing"
+local loadedTable = {}
 
 -- Mouse variables
 local mouseMove = false
@@ -482,7 +483,7 @@ function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMap) -- needs a rework
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, function() loadMap("Missions/jsonFiles/Mission3.json") end)
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, function() loadMap(mapName) end)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMap)
 	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, nil)
 	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil)
@@ -2745,11 +2746,33 @@ end
 function loadMap(name)
 	newMap()
 	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("CustomLevels/"..loadMapName..".editor.json",  VFS.RAW)
-		local savedTable = json.decode(mapfile)
+		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor.json",  VFS.RAW)
+		loadedTable = json.decode(mapfile)
+		-- Global description
+		mapName = loadedTable.description.name
+		mapBriefing = loadedTable.description.briefing
+		
+		-- Units
+		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
+		-- See next method
 	else
-		-- message map not found
+		-- TODO message map not found
 	end
+end
+function GetNewUnitIDsAndContinueLoadMap(unitIDs)
+	local uIDs = json.decode(unitIDs)
+	
+	-- Unit Groups
+	for i, g in ipairs(loadedTable.groups) do
+		addUnitGroup(g.name)
+		for ii, u in ipairs(g.units) do
+			addUnitToGroup(unitGroups[groupNumber-1], uIDs[tostring(u)])
+		end
+	end
+	
+	
+	
+	local tmpUnitGroups = loadedTable
 end
 function saveMap()
 	local savedTable = {}
@@ -2780,7 +2803,6 @@ function saveMap()
 	for k, g in pairs(unitGroups) do
 		local group = {}
 		group.name = g.name
-		group.id = g.id
 		group.units = g.units
 		table.insert(savedTable.groups, group)
 	end
@@ -2980,6 +3002,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
+	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
@@ -3040,7 +3063,9 @@ function widget:Update(delta)
 	
 	changeMouseCursor()
 end
-
+function widget:Shutdown()
+	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
+end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Input functions
@@ -3343,7 +3368,7 @@ function widget:KeyPress(key, mods)
 		return true
 	-- CTRL + O : load a map
 	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
-		loadMap("Missions/jsonFiles/Mission3.json")
+		loadMap(mapName)
 		return true
 	-- CTRL + N : new map
 	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
