@@ -437,6 +437,15 @@ function teamConfig()
 	for k, p in pairs(teamConfigPanels) do
 		p:InvalidateSelf()
 	end
+	for k, t in pairs(teamStateMachine.states) do
+		if enabledTeams[t] and not enableTeamButtons[t].state.chosen then
+			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
+			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+		elseif not enabledTeams[t] and enableTeamButtons[t].state.chosen then
+			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
+			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
+		end
+	end
 end
 function allyTeam()
 	clearForceWindow()
@@ -2770,7 +2779,23 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		end
 	end
 	
+	-- Zones
+	for i, z in ipairs(loadedTable.zones) do
+		table.insert(zoneList, z)
+		if z.id >= zoneNumber then
+			zoneNumber = z.id + 1
+		end
+	end
 	
+	-- Teams
+	updateTeamButtons = true
+	for k, t in pairs(teamStateMachine.states) do
+		teamControl[t] = loadedTable.teams[tostring(t)].control
+		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
+		for kk, col in pairs(loadedTable.teams[tostring(t)].color) do
+			teamColor[t][kk] = col
+		end
+	end
 	
 	local tmpUnitGroups = loadedTable
 end
