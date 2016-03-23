@@ -124,7 +124,6 @@ function gadget:RecvLuaMsg(msg, player)
 		resetMap = true
 	-- LOAD MAP : gets the file to load
 	elseif (msgContents[1] == "Load Map") then
-		missionScript.Start(msgContents[2])
 	-- CHANGE HP : change hp of selected units
 	elseif (msgContents[1] == "Change HP") then
 		hpPercent = tonumber(msgContents[2])/100
@@ -204,9 +203,6 @@ end
 else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
-
-
 
 
 --------------------------------------------------------------------------------

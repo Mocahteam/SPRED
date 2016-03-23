@@ -471,10 +471,10 @@ function initTopBar()
 end
 function initWindows()
 	initFileWindow()
+	initForcesWindow()
 	initUnitWindow()
 	initUnitContextualMenu()
 	initZoneWindow()
-	initForcesWindow()
 	initTriggerWindow()
 	initMapSettingsWindow()
 end
@@ -2691,7 +2691,7 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function newMap() -- doesn't work
+function newMap()
 	-- Groups
 	unitGroups = {}
 	unitTotal = nil
@@ -2737,15 +2737,19 @@ function newMap() -- doesn't work
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Initialize
-	initTopBar()
-	initUnitFunctions()
-	initTeamFunctions()
-	initMouseCursors()
+	updateTeamButtons = true -- prevents requiring to go to the forces menu
+	clearUI()
 	initWindows()
 	fileFrame()
 end
-function loadMap()
+function loadMap(name)
 	newMap()
+	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("CustomLevels/"..loadMapName..".editor.json",  VFS.RAW)
+		local savedTable = json.decode(mapfile)
+	else
+		-- message map not found
+	end
 end
 function saveMap()
 	local savedTable = {}
