@@ -30,6 +30,7 @@ local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated fu
 
 -- File Variables
 local fileButtons = {}
+local loadedTable = {}
 
 -- Unit Variables
 local factionUnits = getFactionUnits() -- List of units sorted by faction
@@ -173,7 +174,9 @@ local forceUpdateVariables = false
 -- Map settings variables
 local mapName = "Map"
 local mapBriefing = "Map Briefing"
-local loadedTable = {}
+local mapNameEditBox
+local mapBriefingEditBox
+local mapBriefingTextBox
 
 -- Mouse variables
 local mouseMove = false
@@ -419,6 +422,8 @@ function mapSettingsFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
+	mapNameEditBox:SetText(mapName)
+	mapBriefingEditBox:SetText(mapBriefing)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -779,7 +784,13 @@ function initTriggerWindow()
 	newVariableButton = addButton(variablesScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
 function initMapSettingsWindow()
-	windows['mapSettingsWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
+	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '25%', '60%', '50%', true)
+	addLabel(windows['mapSettingsWindow'], '0%', '0%', '100%', '5%', EDITOR_MAPSETTINGS, 20, "center", nil, "center")
+	addLabel(windows['mapSettingsWindow'], '0%', '10%', '10%', '10%', EDITOR_MAPSETTINGS_MAP_NAME, 16, "center", nil, "center")
+	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
+	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
+	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
+	mapBriefingTextBox = addTextBox(windows['mapSettingsWindow'], '2%', '45%', '96%', '50%', "Lorem ipsum blabla", 16)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -2696,6 +2707,14 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+function updateMapSettings()
+	mapName = mapNameEditBox.text
+	mapBriefing = mapBriefingEditBox.text
+	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
+		mapBriefingTextBox:SetText(mapBriefingEditBox.text)
+	end
+end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			I/O functions
@@ -3235,6 +3254,10 @@ function widget:Update(delta)
 		updateEventList()
 		updateEventFrame()
 		updateVariables()
+	end
+	
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
+		updateMapSettings()
 	end
 	
 	updateButtonVisualFeedback()
