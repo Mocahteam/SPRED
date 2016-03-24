@@ -2797,7 +2797,105 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		end
 	end
 	
-	local tmpUnitGroups = loadedTable
+	-- Ally Teams
+	for k, at in pairs(loadedTable.allyteams) do
+		selectedAllyTeam = tonumber(k)
+		for i, t in ipairs(at) do
+			addTeamToSelectedAllyTeam(t)
+		end
+	end
+	
+	-- Variables
+	for i, v in ipairs(loadedTable.variables) do
+		table.insert(triggerVariables, v)
+		if v.id >= variablesNumber then
+			variablesNumber = v.id + 1
+		end
+	end
+	
+	-- Triggers
+	for i, e in ipairs(loadedTable.events) do
+		local event = {}
+		event.id = e.id
+		if e.id >= eventNumber then
+			eventNumber = e.id + 1
+		end
+		event.name = e.name
+		event.actionTotal = e.actionTotal
+		event.conditionTotal = e.conditionTotal
+		event.trigger = e.trigger
+		event.conditions = {}
+		for ii, c in ipairs(e.conditions) do
+			local condition = {}
+			condition.id = c.id
+			if c.id >= conditionNumber then
+				conditionNumber = c.id + 1
+			end
+			condition.type = c.type
+			condition.name = c.name
+			condition.params = {}
+			for k, p in pairs(c.params) do
+				local updateUnitID = false
+				for iii, cond in ipairs(conditions_list) do
+					for iiii, attr in ipairs(cond.attributes) do
+						if attr.id == k and attr.type == "unit" then
+							updateUnitID = true
+							break
+						end
+					end
+					if updateUnitID then
+						break
+					end
+				end
+				if updateUnitID then
+					condition.params[k] = uIDs[tostring(p)]
+				else
+					condition.params[k] = p
+				end
+			end
+			-- todo add more
+			table.insert(event.conditions, condition)
+		end
+		event.actions = {}
+		for ii, a in ipairs(e.actions) do
+			local action = {}
+			action.id = a.id
+			if a.id >= actionNumber then
+				actionNumber = a.id
+			end
+			action.type = a.type
+			action.name = a.name
+			action.params = {}
+			for k, p in pairs(a.params) do
+				local updateUnitID = false
+				for iii, act in ipairs(actions_list) do
+					for iiii, attr in ipairs(act.attributes) do
+						if attr.id == k and attr.type == "unit" then
+							updateUnitID = true
+							break
+						end
+					end
+					if updateUnitID then
+						break
+					end
+				end
+				if updateUnitID then
+					action.params[k] = uIDs[tostring(p)]
+				else
+					action.params[k] = p
+				end
+			end
+			-- todo add more
+			table.insert(event.actions, action)
+		end
+		table.insert(events, event)
+		conditionButtons[event.id] = {}
+		deleteConditionButtons[event.id] = {}
+		actionButtons[event.id] = {}
+		deleteActionButtons[event.id] = {}
+	end
+	
+	loadedTable = nil
 end
 function saveMap()
 	local savedTable = {}
