@@ -120,6 +120,7 @@ local updateAllyTeam = true
 
 -- Trigger variables
 local events = {}
+local eventTotal
 local eventScrollPanel -- scroll panel containing each event
 local eventConditionsScrollPanel -- scroll panel containing each condition of an event
 local eventActionsScrollPanel -- scroll panel containing each action of an event
@@ -491,10 +492,10 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMap) -- needs a rework
-	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, function() loadMap(mapName) end)
-	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMap)
-	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, nil)
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame) -- needs a rework
+	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
+	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
+	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, exportMapFrame)
 	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil)
 end
 function initUnitWindow()
@@ -2730,6 +2731,7 @@ function newMap()
 	teamColor = {}
 	-- Trigger
 	events = {}
+	eventTotal = nil
 	currentEvent = nil
 	currentCondition = nil
 	currentAction = nil
@@ -2898,6 +2900,10 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	loadedTable = nil
 end
 function saveMap()
+	if windows["saveWindow"] then
+		Screen0:RemoveChild(windows["saveWindow"])
+		windows["saveWindow"]:Dispose()
+	end
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
@@ -2985,11 +2991,60 @@ function saveMap()
 	)
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
-	local file = io.open("CustomLevels/"..mapName..".editor.json", "w")
+	local name = string.gsub(mapName, " ", "_")
+	local file = io.open("CustomLevels/"..name..".editor.json", "w")
 	file:write(jsonfile)
 	file:close()
 end
 function exportMap()
+
+end
+function newMapFrame()
+	newMap()
+end
+function loadMapFrame()
+	if windows["loadWindow"] then
+		Screen0:RemoveChild(windows["loadWindow"])
+		windows["loadWindow"]:Dispose()
+	end
+	windows["loadWindow"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
+	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
+	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
+	delbut.font.color = {1, 0, 0, 1}
+	local levelList = VFS.DirList("CustomLevels/", "*.editor.json", VFS.RAW)
+	if #levelList == 0 then
+		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
+	else
+		local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
+		local count = 0
+		for i, l in ipairs(levelList) do
+			local name = string.gsub(l, "CustomLevels\\", "")
+			name = string.gsub(name, ".editor.json", "")
+			local displayedName = string.gsub(name, "_", " ")
+			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadMap(name) end)
+			count = count + 1
+		end
+	end
+end
+function saveMapFrame()
+	if windows["saveWindow"] then
+		Screen0:RemoveChild(windows["saveWindow"])
+		windows["saveWindow"]:Dispose()
+	end
+	local name = string.gsub(mapName, " ", "_")
+	if VFS.FileExists("CustomLevels/"..name..".editor.json", VFS.RAW) then
+		windows["saveWindow"] = addWindow(Screen0, "40%", "45%", "20%", "10%")
+		addLabel(windows["saveWindow"], '0%', '0%', '100%', '50%', EDITOR_FILE_SAVE_CONFIRM)
+		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
+		addButton(windows["saveWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
+	else
+		saveMap()
+	end
+end
+function exportMapFrame()
+	exportMap()
+end
+function settingsFrame()
 
 end
 
@@ -3487,15 +3542,19 @@ function widget:KeyPress(key, mods)
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then
-		saveMap()
+		saveMapFrame()
 		return true
 	-- CTRL + O : load a map
 	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
-		loadMap(mapName)
+		loadMapFrame()
 		return true
 	-- CTRL + N : new map
 	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
-		newMap()
+		newMapFrame()
+		return true
+	-- CTRL + E : export map
+	elseif key == Spring.GetKeyCode("e") and mods.ctrl then
+		exportMapFrame()
 		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
