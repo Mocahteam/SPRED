@@ -35,6 +35,28 @@ Ce dernier est composé de :
 \item Un fichier contenant des fonctions utilitaires. (Misc.lua)
 \item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua, Filters.lua)
 \end{itemize}
+\section{Description détaillée des modules}
+\subsection{Widget}
 \paragraph{}
-La suite de ce document s'attache à décrire chacun de ces fichiers très précisément.
+Le widget est l'élément central de l'éditeur des niveaux autour duquel s'articulent les autres modules. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts.
+\subsubsection{Framework Chili UI}
+\paragraph{}
+Afin de simplifier le développement de l'interface graphique, j'ai choisi d'utiliser un framework d'interface graphique développé spécifiquement pour Spring dénommé Chili UI. 
+\paragraph{}
+Ce framework a l'avantage de ne pas avoir à utiliser l'API OpenGL de Spring et les différents listeners pour afficher et permettre l'interaction avec des fenêtres, boutons etc. Tout y est déjà implémenté, ce qui a permis de réduire considérablement le temps requis pour obtenir les premiers résultats. Le problème majeur est que le framework est extrêmement mal documenté, et la meilleure façon de comprendre son fonctionnement pour s'en servir correctement voire même le modifier pour l'adapter à des besoins particuliers est de se référer au code source présent sur github\footnote{https://github.com/jk3064/chiliui/}.
+\paragraph{}
+Les modifications que j'y ai personnellement apporté concernent les boutons, qui possèdent un état supplémentaire \textit{chosen} permettant d'avoir un feedback visuel lorsqu'on les sélectionne (les modifications de cet état sont gérées "à la main", mais le feedback visuel est géré automatiquement par le framework).
+\paragraph{}
+Le widget comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans la catégorie \textit{Chili UI functions}.
+\paragraph{}
+Il faut faire extrêmement attention à une chose en particulier en ce qui concerne le framework : il ne faut surtout pas modifier les éléments d'interface qui ne sont pas affichés à l'écran (c'est-à-dire les éléments d'interface qui n'ont ni Screen0, ni un descendant de Screen0 en tant que parent). Ceci ne produit pas d'erreur lors de l'exécution, mais les éléments d'interface concernés ne s'actualiseront plus correctement, ce qui est très gênant d'un point de vue utilisateur (les opérations seront effectuées, mais l'utilisateur n'aura aucun feedback visuel).
+\subsubsection{Initialisation de l'interface}
+\paragraph{}
+L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation appelées dans la méthode \textit{widget:Initialize()}, et décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées précedemment), puis elles sont masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
+\paragraph{}
+Les fonctions des catégories \textit{Top bar functions} et \textit{Forces window buttons functions} s'occupent de changer l'état courant de la machine à états globale et de choisir quelles fenêtres doivent être affichées. Il s'agit pour la plupart de fonctions appelées lors de la pression sur des boutons.
+\subsection{Gadget}
+\subsection{Machines à états\label{statemachine}}
+\subsection{Fonctions utilitaires}
+\subsection{Fichiers de description}
 \end{document}
