@@ -69,6 +69,7 @@ local groupListUnitsButtons = {} -- Allows selection of units
 local groupListUnitsViewButtons = {} -- Focus on units
 local addGroupButton -- Creates a new group
 local updateTeamButtons = true
+local newUnitGroupEditBox
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
@@ -948,7 +949,7 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 		count = count + 1
 	end
 	
-	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
+	newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.font.size = 14
 	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
 	local function newGroup()
@@ -3299,6 +3300,10 @@ function widget:Update(delta)
 	updateButtonVisualFeedback()
 	
 	changeMouseCursor()
+	
+	if newUnitGroupEditBox then
+		Spring.Echo(json.encode(newUnitGroupEditBox.state))
+	end
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
@@ -3619,6 +3624,15 @@ function widget:KeyPress(key, mods)
 	elseif key == Spring.GetKeyCode("esc") then
 		clearUI()
 		return true
+	-- ENTER
+	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+		if newUnitGroupEditBox then
+			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
+				addUnitGroup(newUnitGroupEditBox.text)
+				clearTemporaryWindows()
+				return true
+			end
+		end
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
