@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[a4paper]{geometry}
+
+\title{Editeur de niveaux\\Prog \& Play}
+\author{Benjamin BONTEMPS}
+
+\sloppy
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Ce document a pour objectifs de récapituler l'essentiel du travail réalisé dans le cadre du projet de conception d'un éditeur de niveaux pour le jeu sérieux Prog\&Play et de permettre sa maintenabilité en cas de nécessité. Il suppose acquis les concepts de base liés à Prog\&Play, à Spring (moteur sur lequel est basé le jeu) et au développement en Lua.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Architecture}
+\paragraph{}
+Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de niveux.
+\paragraph{}
+Ce dernier est composé de :
+\begin{itemize}
+\item Un widget central permettant d'afficher les éléments de l'interface utilisateur et de capter les interactions avec cette dernière ou avec le moteur pour effectuer des actions en conséquence. (editor\_user\_interface.lua)
+\item Un gadget permettant l'utilisation de code synchronisé\footnote{Par exemple, la création d'une unité sur le terrain.}. (editor\_gadget.lua)
+\item Un fichier contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua)
+\item Un fichier définissant une classe\footnote{Au sens de Lua.} machine à états. (StateMachine.lua)
+\item Un fichier contenant des fonctions utilitaires. (Misc.lua)
+\item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua, Filters.lua)
+\end{itemize}
+\paragraph{}
+La suite de ce document s'attache à décrire chacun de ces fichiers très précisément.
+\end{document}
