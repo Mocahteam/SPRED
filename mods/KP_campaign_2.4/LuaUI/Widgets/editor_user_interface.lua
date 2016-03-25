@@ -156,6 +156,7 @@ local configureEventButton -- button to show the configure event window
 local customTriggerEditBox -- to write a custom trigger
 local customTriggerButton -- to save the custom trigger
 local defaultTriggerButton -- to use the default trigger
+local currentTriggerLabel
 local actionSequenceScrollPanel -- scrollpanel containing labels and buttons for each action
 local actionSequenceItems = {} -- contains the aforementioned labels and buttons
 local updateActionSequence = false -- update panels when sequence is altered
@@ -752,15 +753,18 @@ function initTriggerWindow()
 				end
 			end
 			e.trigger = trig
-			customTriggerEditBox:SetText(trig)
+			customTriggerEditBox:SetText("")
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..trig)
 		end
 	end
 	local useCustomTrigger = function()
 		if currentEvent then
 			local e = events[currentEvent]
 			e.trigger = customTriggerEditBox.text
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
 		end
 	end
+	currentTriggerLabel = addLabel(windows['configureEvent'], '2%', '19%', '96%', '2%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13, "left")
 	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
 	defaultTriggerButton = addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
 	-- Action sequence
@@ -790,7 +794,8 @@ function initMapSettingsWindow()
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
-	mapBriefingTextBox = addTextBox(windows['mapSettingsWindow'], '2%', '45%', '96%', '50%', "Lorem ipsum blabla", 16)
+	mapBriefingTextBox = addTextBox(windows['mapSettingsWindow'], '2%', '45%', '96%', '50%', "Lorem ipsum blabla", 18)
+	mapBriefingTextBox.font.shadow = false
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -2377,6 +2382,7 @@ function configureEvent() -- Show the event configuration window
 			configureEventButton:InvalidateSelf()
 			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
 			customTriggerEditBox:SetText(e.trigger)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
 			for i, i in ipairs(actionSequenceItems) do
 				actionSequenceScrollPanel:RemoveChild(i)
 				i:Dispose()
@@ -2633,7 +2639,7 @@ end
 function drawVariableFeature(var, y)
 	local feature = {}
 	local nameLabel = addLabel(variablesScrollPanel, '0%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_NAME, 16, "center", nil, "center")
-	local nameEditBox = addEditBox(variablesScrollPanel, '5%', y, '30%', 40, "left", var.name)
+	local nameEditBox = addEditBox(variablesScrollPanel, '5%', y+5, '30%', 30, "left", var.name)
 	nameEditBox.font.size = 16
 	local typeLabel = addLabel(variablesScrollPanel, '40%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_TYPE, 16, "center", nil, "center")
 	local typeComboBox = addComboBox(variablesScrollPanel, '45%', y, '10%', 40, { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
@@ -2658,7 +2664,7 @@ function drawVariableFeature(var, y)
 		var.initValue = initValueComboBox.items[initValueComboBox.selected]
 	end
 	initValueComboBox.OnSelect = { selectInitValue }
-	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y, '20%', 40, "left", tostring(var.initValue))
+	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y+5, '20%', 30, "left", tostring(var.initValue))
 	initValueEditBox.font.size = 16
 	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, EDITOR_X, function() removeVariable(var) end)
 	deleteVariableButton.font.color = {1, 0, 0, 1}
@@ -2699,6 +2705,16 @@ function showPickText()
 		local y = screenSizeY * 0.8
 		gl.Text("\255\51\255\255"..text, x - (20*w/2), y, 20, "s")
 	end
+	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
+		local mx, my = Spring.GetMouseState()
+		local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+		local text = EDITOR_TRIGGER_EVENTS_PICK_POSITION_WRONG
+		if var then
+			local x, _, z = unpack(var)
+			text = "("..tostring(round(x))..", "..tostring(round(z))..")"
+		end
+		gl.Text(text, mx, my, 16, "s")
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2711,6 +2727,23 @@ function updateMapSettings()
 	mapName = mapNameEditBox.text
 	mapBriefing = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
+	--[[ FIXME : try to implement this, but it's not working atm
+		local text = mapBriefingEditBox.text
+		local newText = text
+		for word in string.gmatch(text, "%[#%w*#.-%]") do
+			local color = string.gsub(word, "#[^#]+$", "")
+			color = string.gsub(color, "%[#", "")
+			local red = tonumber(string.sub(color, 1, 2), 16)
+			local green = tonumber(string.sub(color, 3, 4))
+			local blue = tonumber(string.sub(color, 5, 6))
+			local replacement = "\\255\\"..tostring(red).."\\"..tostring(green).."\\"..tostring(blue)
+			local newWord = string.gsub(word, "%[#%w*#", replacement)
+			newWord = string.gsub(newWord, "%]", "\\255\\255\\255\\255")
+			oldWord = string.gsub(word, "%[", "%%[")
+			newText = string.gsub(newText, oldWord, newWord)
+		end
+		mapBriefingTextBox:SetText(newText)
+	]]
 		mapBriefingTextBox:SetText(mapBriefingEditBox.text)
 	end
 end
@@ -3178,6 +3211,9 @@ function widget:DrawScreen()
 		updateZoneInformation()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		showPickText()
+		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+			showUnitsInformation()
+		end
 	end
 	showZoneInformation()
 end
@@ -3641,20 +3677,36 @@ function widget:KeyPress(key, mods)
 				return true
 			-- ARROWS : move selected zone
 			elseif key == Spring.GetKeyCode("up") then
-				selectedZone.z1 = selectedZone.z1 - 8
-				selectedZone.z2 = selectedZone.z2 - 8
+				if selectedZone.type == "Rectangle" then
+					selectedZone.z1 = selectedZone.z1 - 8
+					selectedZone.z2 = selectedZone.z2 - 8
+				elseif selectedZone.type == "Disk" then
+					selectedZone.z = selectedZone.z - 8
+				end
 				return true
 			elseif key == Spring.GetKeyCode("down") then
-				selectedZone.z1 = selectedZone.z1 + 8
-				selectedZone.z2 = selectedZone.z2 + 8
+				if selectedZone.type == "Rectangle" then
+					selectedZone.z1 = selectedZone.z1 + 8
+					selectedZone.z2 = selectedZone.z2 + 8
+				elseif selectedZone.type == "Disk" then
+					selectedZone.z = selectedZone.z + 8
+				end
 				return true
 			elseif key == Spring.GetKeyCode("left") then
-				selectedZone.x1 = selectedZone.x1 - 8
-				selectedZone.x2 = selectedZone.x2 - 8
+				if selectedZone.type == "Rectangle" then
+					selectedZone.x1 = selectedZone.x1 - 8
+					selectedZone.x2 = selectedZone.x2 - 8
+				elseif selectedZone.type == "Disk" then
+					selectedZone.x = selectedZone.x - 8
+				end
 				return true
 			elseif key == Spring.GetKeyCode("right") then
-				selectedZone.x1 = selectedZone.x1 + 8
-				selectedZone.x2 = selectedZone.x2 + 8
+				if selectedZone.type == "Rectangle" then
+					selectedZone.x1 = selectedZone.x1 + 8
+					selectedZone.x2 = selectedZone.x2 + 8
+				elseif selectedZone.type == "Disk" then
+					selectedZone.x = selectedZone.x + 8
+				end
 				return true
 			end
 		end
