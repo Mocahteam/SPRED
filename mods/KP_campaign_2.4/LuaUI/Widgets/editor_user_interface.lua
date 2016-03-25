@@ -44,6 +44,8 @@ local teamButtons = {} -- Contains every teams, buttons used to define the team 
 local teamImages = {}
 local unitContextualMenu -- Appears when right-clicking on a unit
 local unitAttributesWindow
+local changeHPEditBox
+local unitHP = {}
 local unitGroups = {} -- Contains logical groups of units
 local unitTotal = 0 -- Total number of units placed on the field
 local unitGroupsUnitTotal = 0 -- Total number of units placed on the field (used for the unitGroups frame)
@@ -576,7 +578,7 @@ function initZoneWindow()
 	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', EDITOR_ZONES)
 	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
-	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end) -- TODO
+	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
 	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
 	
@@ -779,8 +781,6 @@ function initTriggerWindow()
 	importActionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '90%', tostring(100/3).."%", "5%", {}, nil)
 	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
-	
-	addButton(windows['configureEvent'], '0%', '95%', '100%', '5%', "DEBUG : echo event", function() Spring.Echo(json.encode(events[currentEvent])) end)
 
 	-- Variables window
 	windows["variablesWindow"] = addWindow(Screen0, '15%', '5%', '60%', '80%')
@@ -841,7 +841,10 @@ function updateUnitWindow()
 	end
 end
 function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
-	-- do something
+	local unitSelection = Spring.GetSelectedUnits()
+	for i, u in ipairs(unitSelection) do
+		unitHP[u] = tonumber(changeHPEditBox.text)
+	end
 	clearTemporaryWindows()
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
@@ -902,12 +905,17 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	unitAttributesWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
 	addLabel(unitAttributesWindow, '0%', 0, "100%", 20, EDITOR_UNITS_EDIT_ATTRIBUTES, 20)
 	addLabel(unitAttributesWindow, '0%', 50, "30%", 20, EDITOR_UNITS_EDIT_ATTRIBUTES_HP.."%", 20, "right")
-	if #unitSelection == 1 then -- if unit is alone, show its hp percentage in the editbox
-		local h, mh = Spring.GetUnitHealth(unitSelection[1])
-		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left", tostring(round(100*(h/mh))))
-	else
-		addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left")
+	local hpPercent = ""
+	for i, u in ipairs(unitSelection) do
+		if i == 1 and unitHP[u] then
+			hpPercent = tostring(unitHP[u])
+		end
+		if hpPercent ~= tostring(unitHP[u]) then
+			hpPercent = ""
+			break
+		end
 	end
+	changeHPEditBox = addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left", hpPercent)
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
 function showUnitsInformation() -- Show information about selected and hovered units
@@ -2756,6 +2764,8 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function newMap()
+	-- Units
+	unitHP = {}
 	-- Groups
 	unitGroups = {}
 	unitTotal = nil
@@ -2819,12 +2829,13 @@ function loadMap(name)
 		-- Units
 		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
 		-- See next method
-	else
-		-- TODO message map not found
 	end
 end
 function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	local uIDs = json.decode(unitIDs)
+	for i, u in ipairs(loadedTable.units) do
+		unitHP[uIDs[tostring(u.id)]] = u.hp
+	end
 	
 	-- Unit Groups
 	for i, g in ipairs(loadedTable.groups) do
@@ -2908,7 +2919,6 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 					condition.params[k] = p
 				end
 			end
-			-- todo add more
 			table.insert(event.conditions, condition)
 		end
 		event.actions = {}
@@ -2940,7 +2950,6 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 					action.params[k] = p
 				end
 			end
-			-- todo add more
 			table.insert(event.actions, action)
 		end
 		table.insert(events, event)
@@ -2975,7 +2984,7 @@ function saveMap()
 		local dirX, _, dirZ = Spring.GetUnitDirection(u)
 		local length = math.sqrt(dirX*dirX + dirZ*dirZ)
 		unit.orientation = math.atan2(dirX/length, dirZ/length)
-		-- TODO : specific attributes
+		unit.hp = unitHP[u] or 100
 		unit.id = u
 		table.insert(savedTable.units, unit)
 	end
@@ -3300,10 +3309,6 @@ function widget:Update(delta)
 	updateButtonVisualFeedback()
 	
 	changeMouseCursor()
-	
-	if newUnitGroupEditBox then
-		Spring.Echo(json.encode(newUnitGroupEditBox.state))
-	end
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
