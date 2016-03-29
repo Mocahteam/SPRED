@@ -5,16 +5,57 @@
 \contentsline {section}{\numberline {2}Description d\IeC {\'e}taill\IeC {\'e}e des modules}{2}
 \contentsline {subsection}{\numberline {2.1}Widget}{2}
 \contentsline {paragraph}{}{2}
-\contentsline {subsubsection}{\numberline {2.1.1}Framework Chili UI}{2}
+\contentsline {subsubsection}{\numberline {2.1.1}Chili UI}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {subsubsection}{\numberline {2.1.2}Initialisation de l'interface}{3}
+\contentsline {subsubsection}{\numberline {2.1.2}Initialisation}{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {subsection}{\numberline {2.2}Gadget}{3}
-\contentsline {subsection}{\numberline {2.3}Machines \IeC {\`a} \IeC {\'e}tats}{3}
-\contentsline {subsection}{\numberline {2.4}Fonctions utilitaires}{3}
-\contentsline {subsection}{\numberline {2.5}Fichiers de description}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {subsubsection}{\numberline {2.1.3}Unit\IeC {\'e}s et groupes d'unit\IeC {\'e}s}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{updateUnitWindow}{3}
+\contentsline {paragraph}{applyChangesToSelectedUnits}{3}
+\contentsline {paragraph}{drawSelectionRect}{4}
+\contentsline {paragraph}{previewUnit}{4}
+\contentsline {paragraph}{showUnitAttributes}{4}
+\contentsline {paragraph}{showUnitsInformation}{4}
+\contentsline {paragraph}{showUnitGroupsAttributionWindow}{4}
+\contentsline {paragraph}{showUnitGroupsRemovalWindow}{4}
+\contentsline {paragraph}{updateSelectTeamButtons}{4}
+\contentsline {paragraph}{updateUnitList}{4}
+\contentsline {paragraph}{updateGroupListUnitList}{4}
+\contentsline {paragraph}{updateUnitHighlights}{4}
+\contentsline {paragraph}{updateUnitGroupPanels}{5}
+\contentsline {paragraph}{addUnitToGroup}{5}
+\contentsline {paragraph}{addSelectedUnitsToGroup}{5}
+\contentsline {paragraph}{addChosenUnitsToSelectedGroups}{5}
+\contentsline {paragraph}{removeSelectedUnitsFromGroup}{5}
+\contentsline {paragraph}{removeUnitFromGroup}{5}
+\contentsline {paragraph}{addUnitGroup}{5}
+\contentsline {paragraph}{addEmptyUnitGroup}{5}
+\contentsline {paragraph}{deleteUnitGroup}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {2.1.4}Zones}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{computeZoneWorldCoords}{5}
+\contentsline {paragraph}{drawZoneRect}{5}
+\contentsline {paragraph}{drawZoneDisk}{5}
+\contentsline {paragraph}{displayZones}{6}
+\contentsline {paragraph}{displaySelectedZoneAnchors}{6}
+\contentsline {paragraph}{showZoneInformation}{6}
+\contentsline {paragraph}{updateZoneInformation}{6}
+\contentsline {paragraph}{clickedZone}{6}
+\contentsline {subsubsection}{\numberline {2.1.5}Forces}{6}
+\contentsline {subsubsection}{\numberline {2.1.6}D\IeC {\'e}clencheurs}{6}
+\contentsline {subsubsection}{\numberline {2.1.7}Param\IeC {\`e}tres de la carte}{6}
+\contentsline {subsubsection}{\numberline {2.1.8}Entr\IeC {\'e}es / Sorties}{6}
+\contentsline {subsubsection}{\numberline {2.1.9}Fonctions de dessin}{6}
+\contentsline {subsubsection}{\numberline {2.1.10}Listeners}{6}
+\contentsline {subsection}{\numberline {2.2}Gadget}{6}
+\contentsline {subsection}{\numberline {2.3}Machines \IeC {\`a} \IeC {\'e}tats}{6}
+\contentsline {subsection}{\numberline {2.4}Fonctions utilitaires}{6}
+\contentsline {subsection}{\numberline {2.5}Fichiers de description}{6}

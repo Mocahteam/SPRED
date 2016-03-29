@@ -840,7 +840,7 @@ function updateUnitWindow()
 		end
 	end
 end
-function applyChangesToSelectedUnits()-- Tell the gadget to apply changes to units attributes
+function applyChangesToSelectedUnits()-- Apply changes to units attributes
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
 		unitHP[u] = tonumber(changeHPEditBox.text)
@@ -929,14 +929,7 @@ function showUnitsInformation() -- Show information about selected and hovered u
 	local mx, my = Spring.GetMouseState()
 	local kind, var = Spring.TraceScreenRay(mx, my)
 	if kind == "unit" then
-		local isUnitSelected = false
-		for _, u in ipairs(unitSelection) do
-			if var == u then
-				isUnitSelected = true
-				break
-			end
-		end
-		if not isUnitSelected then
+		if not Spring.IsUnitSelected(var) then
 			showUnitInformation(var)
 		end
 	end
@@ -3313,6 +3306,7 @@ end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
 end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Input functions
