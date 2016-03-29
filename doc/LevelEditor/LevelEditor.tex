@@ -92,7 +92,7 @@ Les fonctions de cette section concernent la création, suppression, affichage, 
 \paragraph{displaySelectedZoneAnchors} Affiche les bords de la zone sélectionnée pour permettre à l'utilisateur de la redimensionner.
 \paragraph{showZoneInformation} Affiche les coordonnées des points importants de la zone sélectionnée ainsi que le nom de toutes les zones affichées.
 \paragraph{updateZoneInformation} Actualise le nom et l'état affiché des différentes zones.
-\paragraph{clickedZone} Retourne la zone se trouvant sous la souris. Cette fonction parcours la liste de toutes les zones dans l'ordre et retourne la dernière trouvée sous la souris, ce qui permet d'éviter une possible indétermination. Si la zone actuellement sélectionnée se trouve sous la souris, on garde sélectionnée cette zone : ceci permet une meilleure interaction puisque la zone peut continuer à être déplacée même lorsqu'elle est sous une autre zone.
+\paragraph{getClickedZone} Retourne une zone se trouvant sous la souris. Cette fonction parcours la liste de toutes les zones de façon circulaire\footnote{La dernière zone pointe vers la première.} et renvoie la première zone se trouvant sous la souris.
 \subsubsection{Forces}
 \subsubsection{Déclencheurs}
 \subsubsection{Paramètres de la carte}

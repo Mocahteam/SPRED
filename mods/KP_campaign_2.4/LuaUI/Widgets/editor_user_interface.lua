@@ -93,6 +93,8 @@ local selectedZone = nil
 local zoneSide = "" -- Corresponds to the side on which the user clicked to resize a zone
 local totalZones = 0 -- Total number of placed zones
 local zoneNumber = 1 -- Current ID of a newly created zone
+local zoneIndex = 0
+local clickedZone
 
 -- Forces variables
 local forcesTabs = {} -- Top frame buttons
@@ -1461,30 +1463,27 @@ function updateZoneInformation() -- Change the name and the shown state of a zon
 		z.shown = zoneBoxes[z.id].checkbox.checked
 	end
 end
-function clickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
+function getClickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-	local clickedZone = nil
 	if var ~= nil then
 		local x, _, z = unpack(var)
-		for i, zone in ipairs(zoneList) do
+		for i, _ in ipairs(zoneList) do
+			local index = 1 + ((i - 1 + zoneIndex) % #zoneList)
+			local zone = zoneList[index]
 			if zone.type == "Rectangle" then
 				if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then -- check if we clicked in a zone
-					clickedZone = zone
-					if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
-						return selectedZone
-					end
+					zoneIndex = index
+					return zone
 				end
 			elseif zone.type == "Disk" then
 				if ((x - zone.x)*(x - zone.x)) / (zone.a*zone.a) + ((z - zone.z)*(z - zone.z)) / (zone.b*zone.b) <= 1 then -- check if we clicked in a zone
-					clickedZone = zone
-					if zone == selectedZone then -- if we clicked on the already selected zone, break and return selected zone
-						return selectedZone
-					end
+					zoneIndex = index
+					return zone
 				end
 			end
 		end
 	end
-	return clickedZone
+	return nil
 end
 function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	local side = ""
@@ -1720,6 +1719,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 			zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
 		end
 		totalZones = #zoneList
+		zoneIndex = 0
 	end
 end
 
@@ -2776,6 +2776,7 @@ function newMap()
 	zoneSide = ""
 	totalZones = nil
 	zoneNumber = 1
+	zoneIndex = 0
 	-- AllyTeams
 	allyTeams = {}
 	allyTeamsSize = {}
@@ -3318,12 +3319,14 @@ function widget:MousePress(mx, my, button)
 	-- raycast
 	local kind,var = Spring.TraceScreenRay(mx,my)
 	
+	clickedZone = getClickedZone(mx, my)
+	
 	-- Change state depending on the clicked element
 	if kind == "unit" and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
 		if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
 			unitFrame()
 		end
-	elseif clickedZone(mx, my) ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
+	elseif clickedZone ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
 		zoneFrame()
 		zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 	end
@@ -3388,8 +3391,8 @@ function widget:MousePress(mx, my, button)
 					local x, _, z = unpack(var)
 					zoneAnchorX, zoneAnchorZ = x, z
 					-- select new zone
-					if selectedZone ~= clickedZone(mx, my) then
-						selectedZone = clickedZone(mx, my)
+					if selectedZone ~= clickedZone then
+						selectedZone = clickedZone
 					end
 					if selectedZone ~= nil then
 						zoneSide = getZoneSide(x, z) -- get side to proceed movement/resizing
@@ -3490,7 +3493,7 @@ function widget:MouseRelease(mx, my, button)
 		
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 			if clickToSelect then -- select clicked zone and go to selection state
-				selectedZone = clickedZone(mx, my)
+				selectedZone = clickedZone
 				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				local zone = 	{ 	
