@@ -142,6 +142,7 @@ function gadget:GameFrame( frameNumber )
 			local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
 			Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
 			createUnit = false
+			SendToUnsynced("saveState")
 		-- MOVE UNITS
 		elseif moveUnits then
 			if selectedUnits ~= {} then
@@ -221,6 +222,9 @@ function gadget:RecvFromSynced(msg)
 	local msgContents = splitString(msg, "++")
 	if msgContents[1] == "loadmap" then
 		Script.LuaUI.GetNewUnitIDsAndContinueLoadMap(msgContents[2])
+	end
+	if msg == "saveState" then
+		Script.LuaUI.saveState()
 	end
 end
 

@@ -184,6 +184,11 @@ local mapNameEditBox
 local mapBriefingEditBox
 local mapBriefingTextBox
 
+-- Save states variables
+local saveStates = {}
+local loadLock = true
+local loadIndex = 1
+
 -- Mouse variables
 local mouseMove = false
 local clickToSelect = false -- Enable isolation through clicking on an already selected unit
@@ -2940,6 +2945,8 @@ function loadMap(name)
 	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor.json",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
+	end
+	if loadedTable then
 		-- Global description
 		mapName = loadedTable.description.name
 		mapBriefing = loadedTable.description.briefing
@@ -2974,6 +2981,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	-- Teams
 	updateTeamButtons = true
 	for k, t in pairs(teamStateMachine.states) do
+		Spring.Echo(tostring(t))
 		teamControl[t] = loadedTable.teams[tostring(t)].control
 		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
@@ -3104,61 +3112,8 @@ function saveMap()
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
 	end
-	local savedTable = {}
-	-- Global description
-	savedTable.description = {}
-	savedTable.description.name = mapName
-	savedTable.description.briefing = mapBriefing
 	
-	-- Units
-	local units = Spring.GetAllUnits()
-	savedTable.units = {}
-	for i, u in ipairs(units) do
-		local unit = {}
-		unit.type = UnitDefs[Spring.GetUnitDefID(u)].name
-		unit.position = {}
-		unit.position.x, unit.position.y, unit.position.z = Spring.GetUnitPosition(u)
-		unit.team = Spring.GetUnitTeam(u)
-		local dirX, _, dirZ = Spring.GetUnitDirection(u)
-		local length = math.sqrt(dirX*dirX + dirZ*dirZ)
-		unit.orientation = math.atan2(dirX/length, dirZ/length)
-		unit.hp = unitHP[u] or 100
-		unit.id = u
-		table.insert(savedTable.units, unit)
-	end
-	
-	-- Unit groups
-	savedTable.groups = {}
-	for k, g in pairs(unitGroups) do
-		local group = {}
-		group.name = g.name
-		group.units = g.units
-		table.insert(savedTable.groups, group)
-	end
-	
-	-- Zones
-	savedTable.zones = {}
-	for i, z in ipairs(zoneList) do
-		table.insert(savedTable.zones, z)
-	end
-	
-	-- Teams
-	savedTable.teams = {}
-	for k, t in pairs(teamStateMachine.states) do
-		savedTable.teams[t] = {}
-		savedTable.teams[t].control = teamControl[t]
-		savedTable.teams[t].enabled = enabledTeams[t]
-		savedTable.teams[t].color = teamColor[t]
-	end
-	
-	-- AllyTeams
-	savedTable.allyteams = allyTeams
-	
-	-- Variables
-	savedTable.variables = triggerVariables
-	
-	-- Triggers
-	savedTable.events = events
+	local savedTable = encodeSaveTable()
 	
 	-- Write
 	local jsonfile = json.encode(savedTable)
@@ -3246,6 +3201,100 @@ function exportMapFrame()
 end
 function settingsFrame()
 
+end
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
+--			Draw functions
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function encodeSaveTable()
+	local savedTable = {}
+	-- Global description
+	savedTable.description = {}
+	savedTable.description.name = mapName
+	savedTable.description.briefing = mapBriefing
+	
+	-- Units
+	local units = Spring.GetAllUnits()
+	savedTable.units = {}
+	for i, u in ipairs(units) do
+		local unit = {}
+		unit.type = UnitDefs[Spring.GetUnitDefID(u)].name
+		unit.position = {}
+		unit.position.x, unit.position.y, unit.position.z = Spring.GetUnitPosition(u)
+		unit.team = Spring.GetUnitTeam(u)
+		local dirX, _, dirZ = Spring.GetUnitDirection(u)
+		local length = math.sqrt(dirX*dirX + dirZ*dirZ)
+		unit.orientation = math.atan2(dirX/length, dirZ/length)
+		unit.hp = unitHP[u] or 100
+		unit.id = u
+		table.insert(savedTable.units, unit)
+	end
+	
+	-- Unit groups
+	savedTable.groups = {}
+	for k, g in pairs(unitGroups) do
+		local group = {}
+		group.name = g.name
+		group.units = g.units
+		table.insert(savedTable.groups, group)
+	end
+	
+	-- Zones
+	savedTable.zones = {}
+	for i, z in ipairs(zoneList) do
+		table.insert(savedTable.zones, z)
+	end
+	
+	-- Teams
+	savedTable.teams = {}
+	for k, t in pairs(teamStateMachine.states) do
+		savedTable.teams[t] = {}
+		savedTable.teams[t].control = teamControl[t]
+		savedTable.teams[t].enabled = enabledTeams[t]
+		savedTable.teams[t].color = teamColor[t]
+	end
+	
+	-- AllyTeams
+	savedTable.allyteams = allyTeams
+	
+	-- Variables
+	savedTable.variables = triggerVariables
+	
+	-- Triggers
+	savedTable.events = events
+	
+	return savedTable
+end
+function saveState()
+	if loadLock then
+		local savedTable = encodeSaveTable()
+		for i = 1, loadIndex-1, 1 do
+			table.remove(saveStates, 1)
+		end
+		loadIndex = 1
+		table.insert(saveStates, 1, savedTable)
+	end
+end
+function loadNextState()
+	loadLock = false
+	if loadIndex < #saveStates then
+		loadIndex = loadIndex + 1
+		loadedTable = saveStates[loadIndex]
+		loadMap("")
+	end
+	loadLock = true
+end
+function loadPreviousState()
+	loadLock = false
+	if loadIndex > 1 then
+		loadIndex = loadIndex - 1
+		loadedTable = saveStates[loadIndex]
+		loadMap("")
+	end
+	loadLock = true
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -3384,6 +3433,7 @@ end
 
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
+	widgetHandler:RegisterGlobal("saveState", saveState)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
@@ -3768,6 +3818,14 @@ function widget:KeyPress(key, mods)
 	-- CTRL + E : export map
 	elseif key == Spring.GetKeyCode("e") and mods.ctrl then
 		exportMapFrame()
+		return true
+	-- CTRL + Z
+	elseif key == Spring.GetKeyCode("z") and mods.ctrl then
+		loadNextState()
+		return true
+	-- CTRL + Y
+	elseif key == Spring.GetKeyCode("y") and mods.ctrl then
+		loadPreviousState()
 		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
