@@ -2112,26 +2112,6 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		newEventActionButton.y = 40 * count
 	end
 end
-function currentActionFrame() -- Force update on the action frame when switching action
-	if currentAction then
-		dontUpdateComboBox = true
-		local a = events[currentEvent].actions[currentAction]
-		actionNameEditBox:SetText(a.name)
-		if a.type then
-			for i, action in ipairs(actions_list) do
-				if action.type == a.type then
-					actionFilterComboBox:Select(1)
-					actionTypeComboBox:Select(i)
-					break
-				end
-			end
-		else
-			actionFilterComboBox:Select(1)
-			actionTypeComboBox:Select(1)
-		end
-		dontUpdateComboBox = false
-	end
-end
 function currentConditionFrame() -- Force update on the condition frame when switching condition
 	if currentCondition then
 		dontUpdateComboBox = true
@@ -2148,6 +2128,26 @@ function currentConditionFrame() -- Force update on the condition frame when swi
 		else
 			conditionFilterComboBox:Select(1)
 			conditionTypeComboBox:Select(1)
+		end
+		dontUpdateComboBox = false
+	end
+end
+function currentActionFrame() -- Force update on the action frame when switching action
+	if currentAction then
+		dontUpdateComboBox = true
+		local a = events[currentEvent].actions[currentAction]
+		actionNameEditBox:SetText(a.name)
+		if a.type then
+			for i, action in ipairs(actions_list) do
+				if action.type == a.type then
+					actionFilterComboBox:Select(1)
+					actionTypeComboBox:Select(i)
+					break
+				end
+			end
+		else
+			actionFilterComboBox:Select(1)
+			actionTypeComboBox:Select(1)
 		end
 		dontUpdateComboBox = false
 	end
@@ -2225,34 +2225,6 @@ function selectActionType() -- Callback when selecting an action
 		end
 	end
 end
-function drawActionFrame(reset) -- Display specific action with its parameters
-	if currentEvent and currentAction then
-		local a = events[currentEvent].actions[currentAction]
-		local action_template
-		for i, action in pairs(actions_list) do
-			if action.type == a.type then
-				action_template = action
-				break
-			end
-		end
-		actionTextBox:SetText(action_template.text)
-		if reset then
-			a.params = {}
-		end
-		for i, af in ipairs(actionFeatures) do
-			for _, f in ipairs(af) do
-				actionScrollPanel:RemoveChild(f)
-				f:Dispose()
-			end
-		end
-		local y = 120
-		actionFeatures = {}
-		for i, attr in ipairs(action_template.attributes) do
-			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
-			y = y + 30
-		end
-	end
-end
 function drawConditionFrame(reset) -- Display specific condition with its parameters
 	if currentEvent and currentCondition then
 		local a = events[currentEvent].conditions[currentCondition]
@@ -2277,6 +2249,34 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 		conditionFeatures = {}
 		for i, attr in ipairs(condition_template.attributes) do
 			table.insert(conditionFeatures, drawFeature(attr, y, a, conditionScrollPanel))
+			y = y + 30
+		end
+	end
+end
+function drawActionFrame(reset) -- Display specific action with its parameters
+	if currentEvent and currentAction then
+		local a = events[currentEvent].actions[currentAction]
+		local action_template
+		for i, action in pairs(actions_list) do
+			if action.type == a.type then
+				action_template = action
+				break
+			end
+		end
+		actionTextBox:SetText(action_template.text)
+		if reset then
+			a.params = {}
+		end
+		for i, af in ipairs(actionFeatures) do
+			for _, f in ipairs(af) do
+				actionScrollPanel:RemoveChild(f)
+				f:Dispose()
+			end
+		end
+		local y = 120
+		actionFeatures = {}
+		for i, attr in ipairs(action_template.attributes) do
+			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
 			y = y + 30
 		end
 	end
@@ -2729,23 +2729,23 @@ function updateMapSettings()
 	mapName = mapNameEditBox.text
 	mapBriefing = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
-	--[[ FIXME : try to implement this, but it's not working atm
-		local text = mapBriefingEditBox.text
-		local newText = text
-		for word in string.gmatch(text, "%[#%w*#.-%]") do
-			local color = string.gsub(word, "#[^#]+$", "")
-			color = string.gsub(color, "%[#", "")
-			local red = tonumber(string.sub(color, 1, 2), 16)
-			local green = tonumber(string.sub(color, 3, 4))
-			local blue = tonumber(string.sub(color, 5, 6))
-			local replacement = "\\255\\"..tostring(red).."\\"..tostring(green).."\\"..tostring(blue)
-			local newWord = string.gsub(word, "%[#%w*#", replacement)
-			newWord = string.gsub(newWord, "%]", "\\255\\255\\255\\255")
-			oldWord = string.gsub(word, "%[", "%%[")
-			newText = string.gsub(newText, oldWord, newWord)
-		end
-		mapBriefingTextBox:SetText(newText)
-	]]
+	-- FIXME : try to implement this, but it's not working atm
+	--	local text = mapBriefingEditBox.text
+	--	local newText = text
+	--	for word in string.gmatch(text, "%[#%w*#.-%]") do
+	--		local color = string.gsub(word, "#[^#]+$", "")
+	--		color = string.gsub(color, "%[#", "")
+	--		local red = tonumber(string.sub(color, 1, 2), 16)
+	--		local green = tonumber(string.sub(color, 3, 4))
+	--		local blue = tonumber(string.sub(color, 5, 6))
+	--		local replacement = "\\255\\"..tostring(red).."\\"..tostring(green).."\\"..tostring(blue)
+	--		local newWord = string.gsub(word, "%[#%w*#", replacement)
+	--		newWord = string.gsub(newWord, "%]", "\\255\\255\\255\\255")
+	--		oldWord = string.gsub(word, "%[", "%%[")
+	--		newText = string.gsub(newText, oldWord, newWord)
+	--	end
+	--	mapBriefingTextBox:SetText(newText)
+	
 		mapBriefingTextBox:SetText(mapBriefingEditBox.text)
 	end
 end

@@ -53,3 +53,8 @@ for i, a in ipairs(actions_list) do
 		end
 	end
 end
+
+-- ADD FILTER TO THE NAME
+for i, a in ipairs(actions_list) do
+	a.typeText = a.filter.." - "..a.typeText
+end

@@ -92,9 +92,47 @@ Les fonctions de cette section concernent la création, suppression, affichage, 
 \paragraph{displaySelectedZoneAnchors} Affiche les bords de la zone sélectionnée pour permettre à l'utilisateur de la redimensionner.
 \paragraph{showZoneInformation} Affiche les coordonnées des points importants de la zone sélectionnée ainsi que le nom de toutes les zones affichées.
 \paragraph{updateZoneInformation} Actualise le nom et l'état affiché des différentes zones.
-\paragraph{getClickedZone} Retourne une zone se trouvant sous la souris. Cette fonction parcours la liste de toutes les zones de façon circulaire\footnote{La dernière zone pointe vers la première.} et renvoie la première zone se trouvant sous la souris.
+\paragraph{getClickedZone} Cette fonction parcours la liste de toutes les zones de façon circulaire\footnote{La dernière zone pointe vers la première.} et renvoie la première zone se trouvant sous la souris. Ceci permet de cycler les zones et pouvoir ainsi toutes les sélectionner même si elles sont superposées.
+\paragraph{getZoneSide} Renvoie le côté de la zone sélectionnée sur lequel l'utilisateur a cliqué pour lui permettre de redimensionner la zone ou de la déplacer. Le côté est codé sous forme d'une chaîne de caractères. Les variables \textit{left}, \textit{right}, \textit{top} et \textit{bottom} correspondent à la distance entre l'endroit cliqué et l'un des bords du rectangle, tandis que \textit{outer} et \textit{inner} correspondent respectivement à l'appartenance de l'endroit cliqué à l'ellipse extérieure et intérieure (en fonction de leurs valeurs par rapport à 1).
+\paragraph{applyChangesToSelectedZone} Applique les déformations à la zone sélectionnée. Pour un rectangle, cela revient à changer les coordonnées des points correspondant à ce qui a été renvoyé par la méthode précédente. Pour une ellipse, cela revient à modifier les longueurs des petit et grand axes. La méthode est appelée récursivement dans le cas où la souris sortirai du terrain : ainsi, la zone peut s'étendre jusqu'au bord de la carte\footnote{Si on ne prends pas ces précautions, la zone s'arrête à l'endroit où était la souris à la frame qui précède la frame où la souris se trouve en dehors du terrain, ce qui rendait impossible le fait d'étendre la zone jusqu'au bord à moins d'aller très lentement.}.
+\paragraph{updateZonePanel} Si le nombre de zones a changé, mettre à jour la liste des zones avec le nom et une checkbox pour choisir ou non de l'afficher.
+\paragraph{}
+De même que précédemment, les états de la machine à états régissent les interactions souris, qui sont donc gérées dans les listeners du widget.
 \subsubsection{Forces}
+\paragraph{}
+Les fonctions de cette section s'occupent d'afficher les paramètres liés aux équipes et de gérer les alliances entre les différentes équipes actives.
+\paragraph{updateAllyTeamPanels} Cette fonction s'occupe de l'affichage des alliances entre les équipes. La première partie concerne l'affichage des alliés de chaque équipe ainsi que d'un bouton permettant de supprimer un allié. La seconde partie s'attache à n'afficher que les panneaux des équipes activées.
+\paragraph{addTeamToSelectedAllyTeam} Défini une équipe en tant qu'alliée d'une autre.
+\paragraph{removeTeamFromAllyTeam} Supprime l'allié d'une équipe.
+\paragraph{removeTeamFromTables} Supprime une équipe de toutes les alliances. Ceci assure qu'une équipe inactive n'apparaisse pas dans une alliance.
+\paragraph{updateTeamsWindows} Lorsque le nombre d'équipes actives est modifié, on met des switchs sur true pour actualiser certaines fenêtres lors de la prochaine ouverture de ces dernières. Ces actualisations concernent les boutons sélection de l'équipe lors du placement d'une unité, les paramètres des équipes et les alliances entre les équipes.
+\paragraph{updateTeamConfigPanels} Permet de n'afficher les modifications liées aux équipes (couleur en jeu, contrôle) que lorsque l'équipe en question est activée.
 \subsubsection{Déclencheurs}
+\paragraph{}
+Les fonctions de cette partie concernent la gestion du système de déclencheurs (création, édition, suppression des évènements, conditions et actions ainsi que la gestion des variables).
+\paragraph{createNewEvent} Création d'un nouvel évènement vide. Les IDs sont attribués aux évènements en commençant par 1 et en étant incrémentés à chaque nouvel évènement. Cette fonction instancie également les tableaux qui contiendront les boutons pour modifier et supprimer les conditions et les actions de cet évènement.
+\paragraph{editEvent} Cette fonction ouvre la fenêtre de gestion d'un évènement, la génère en fonction des paramètres de l'évènement et l'assigne à l'évènement courant.
+\paragraph{removeEvent} Supprime l'évènement. Par mesure de sécurité, les fenêtres sont fermées.
+\paragraph{createNewCondition, editCondition, removeCondition, createNewAction, editAction, removeAction} Il s'agit des mêmes fonctions que celles décrites précédemment mais pour les conditions et les actions.
+\paragraph{removeSecondWindows, removeThirdWindows} Cache respectivement les fenêtres en "deuxième" et "troisème" position, en allant de gauche à droite.
+\paragraph{updateEventList} Actualise la liste des évènements (fenêtre la plus à gauche) lorsque le nombre d'évènements change. Cette fonction s'occupe également d'actualiser le nom de l'évènement courant lorsque la valeur de l'editbox change. 
+\paragraph{updateEventFrame} Actualise l'évènement courant : lorsque le nombre de conditions ou d'actions change, on actualise les boutons qui permettent de les modifier ou de les supprimer. Cette fonction s'occupe également d'actualiser le nom de la condition ou de l'action courante lorsque la valeur de l'editbox change.
+\paragraph{currentEventFrame} Génère la fenêtre d'édition de l'évènement courant en fonction de son nom, de ses conditions et de ses actions.
+\paragraph{currentConditionFrame, currentActionFrame} Démarre le processus de génération de la fenêtre d'édition de la condition ou de l'action courante. Un point notable : si l'action ou la condition a déjà été définie et possède donc un type, on sélectionne dans la combobox l'action correspondante pour faciliter l'édition. Sinon, on sélectionne le premier élément. La fonction de callback liée à la sélection d'un item de la combobox s'occupe de générer les paramètres restants (cf fonctions suivantes). La variable \textit{dontUpdateComboBox} est un verrou permettant de sélectionner les items de certaines combobox sans appeler une partie de la fonction de callback de celles-ci.
+\paragraph{selectFilter} Fonction de callback liée à la sélection d'un item dans la combobox liée au filtre sur les types de conditions ou d'actions. Cette fonction génère la liste des conditions ou des actions correspondantes au filtre sélectionné.
+\paragraph{selectConditionType, selectActionType} Fonction de callback liée à la sélection d'un item dans la combobox correspondant au choix du type de condition (resp. action) pour la condition (resp. action) courante. Elle récupère le type de la condition (resp. action) sélectionnée et affiche le texte et les différents paramètres pour ce type.
+\paragraph{drawConditionFrame, drawActionFrame} Cette fonction récupère le template du type de la condition (resp. action) sélectionnée, affiche son texte et trace chacun de ses attributs en fonction du type de l'attribut. Ces tracés sont appelés \textit{features} par la suite. L'argument \textit{reset} permet de réinitialiser les valeurs des paramètres de la condition (resp. action) courante, dans le cas où le type serait changé.
+\paragraph{drawFeature} Cette fonction trace une feature correspondant au type de l'attribut actuellement étudié. Par exemple, si il s'agit d'un attribut de type "groupe", il faut afficher une combobox permettant de choisir le groupe parmi tous les groups disponibles.
+\paragraph{configureEvent} Cette fonction ouvre et génère la fenêtre de configuration de l'évènement courant. Cette fenêtre est composée d'une editbox permettant de modifier le déclencheur de l'évènement en utilisant des opérateurs logiques (not, and, or), d'un panneau permettant de changer l'ordre d'exécution des actions et d'un gestionnaire d'importation de conditions ou d'actions provenant d'autres évènements.
+\paragraph{updateImportComboBoxes} Fonction de callback de la combobox permettant de choisir de quel évènement on veut importer les conditions ou actions. Cette fonction génère donc les items des combobox permettant de choisir quel condition ou action on veut importer.
+\paragraph{importCondition, importAction} Créer une nouvelle condition (resp. action) possédant les mêmes paramètres que la condition (resp. action) importée sauf l'id qui continue à être incrémentée classiquement.
+\paragraph{preventSpaces} Empêche l'utilisateur de mettre des espaces dans les noms des évènements, conditions et actions.
+\paragraph{showVariablesFrame} Affiche la fenêtre permettant d'ajouter, supprimer et modifier des variables pouvant être utilisées dans les évènements.
+\paragraph{addVariable} Ajoute une nouvelle variable.
+\paragraph{removeVariable} Supprime une variable.
+\paragraph{updateVariables} Actualise le nom et les paramètres des différentes variables.
+\paragraph{drawVariableFeature} Affiche les éléments d'interface permettant de modifier les variables. Si une variable possède déjà des arguments (type, valeur initiale) les sélectionne lors de la génération des éléments d'interface.
+\paragraph{showPickText} Affiche un texte lorsque l'on choisi une unité ou une position.
 \subsubsection{Paramètres de la carte}
 \subsubsection{Entrées / Sorties}
 \subsubsection{Fonctions de dessin}
