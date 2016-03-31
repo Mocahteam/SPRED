@@ -383,6 +383,7 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	currentCondition = nil
 	currentAction = nil
 	globalStateMachine:setCurrentState(globalStateMachine.states.NONE)
+	triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -2286,7 +2287,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
-	if attr.type == "unitType" or attr.type == "team" or attr.type == "group" or attr.type == "zone" then
+	if attr.type == "unitType" or attr.type == "team" or attr.type == "group" or attr.type == "zone" or attr.type == "numberVariable" or attr.type == "booleanVariable" or attr.type == "comparison" then
 		local comboBoxItems = {}
 		if attr.type == "unitType" then
 			for i, fu in ipairs(factionUnits) do
@@ -2314,19 +2315,52 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			if #comboBoxItems == 0 then
 				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_ZONE_NOT_FOUND)
 			end
+		elseif attr.type == "numberVariable" then
+			for i, v in ipairs(triggerVariables) do
+				if v.type == "number" then
+					table.insert(comboBoxItems, v.name)
+				end
+			end
+			if #comboBoxItems == 0 then
+				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARNUM_NOT_FOUND)
+			end
+		elseif attr.type == "booleanVariable" then
+			for i, v in ipairs(triggerVariables) do
+				if v.type == "boolean" then
+					table.insert(comboBoxItems, v.name)
+				end
+			end
+			if #comboBoxItems == 0 then
+				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARBOOL_NOT_FOUND)
+			end
+		elseif attr.type == "comparison" then
+			comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
+		if attr.type == "team" then
+			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") end }
+		else
+			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+		end
 		if a.params[attr.id] then
-			for i, item in ipairs(comboBox.items) do
-				if a.params[attr.id] == item then
-					comboBox:Select(i)
-					break
+			if attr.type == "team" then
+				for i, item in ipairs(comboBox.items) do
+					if a.params[attr.id] == EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..item then
+						comboBox:Select(i)
+						break
+					end
+				end
+			else
+				for i, item in ipairs(comboBox.items) do
+					if a.params[attr.id] == item then
+						comboBox:Select(i)
+						break
+					end
 				end
 			end
 		else
 			comboBox:Select(1)
 		end
-		comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		table.insert(feature, comboBox)
 	elseif attr.type == "position" then
 		local positionLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
@@ -2369,6 +2403,64 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
+	elseif attr.type == "number" then
+		local editBox = addEditBox(scrollPanel, '25%', y, '40%', 30)
+		editBox.font.size = 13
+		if a.params[attr.id] then
+			editBox:SetText(tostring(a.params[attr.id]))
+		end
+		editBox.updateFunction = function() a.params[attr.id] = tonumber(editBox.text) end
+		editBox.isEditBox = true
+		table.insert(feature, editBox)
+	elseif attr.type == "numberComparison" then
+		local comboBoxItems = {
+			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_EXACTLY,
+			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_ATLEAST,
+			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_ATMOST
+		}
+		local comboBox = addComboBox(scrollPanel, '25%', y, '30%', 30, comboBoxItems)
+		comboBox.OnSelect = {
+			function()
+				if not a.params[attr.id] then
+					a.params[attr.id] = {}
+				end
+				if comboBox.selected == 1 then
+					a.params[attr.id].comparison = "exactly"
+				elseif comboBox.selected == 2 then
+					a.params[attr.id].comparison = "atleast"
+				elseif comboBox.selected == 3 then
+					a.params[attr.id].comparison = "atmost"
+				end
+			end
+		}
+		local editBox = addEditBox(scrollPanel, '55%', y, '30%', 30)
+		editBox.font.size = 13
+		editBox.updateFunction = function()
+			if not a.params[attr.id] then
+				a.params[attr.id] = {}
+			end
+			a.params[attr.id].number = tonumber(editBox.text)
+		end
+		editBox.isEditBox = true
+		if a.params[attr.id] then
+			if a.params[attr.id].comparison then
+				local comp = a.params[attr.id].comparison
+				if comp == "exactly" then
+					comboBox:Select(1)
+				elseif comp == "atleast" then
+					comboBox:Select(2)
+				elseif comp == "atmost" then
+					comboBox:Select(3)
+				end
+			else
+				comboBox:Select(1)
+			end
+			if a.params[attr.id].number then
+				editBox:SetText(tostring(a.params[attr.id].number))
+			end
+		end
+		table.insert(feature, comboBox)
+		table.insert(feature, editBox)
 	end
 	return feature
 end
@@ -2716,6 +2808,25 @@ function showPickText()
 			text = "("..tostring(round(x))..", "..tostring(round(z))..")"
 		end
 		gl.Text(text, mx, my, 16, "s")
+	end
+end
+function updateEditBoxesParams() -- update some attributes if they require editboxes
+	if currentAction then
+		for i, af in ipairs(actionFeatures) do
+			for ii, f in ipairs(af) do
+				if f.isEditBox then
+					f.updateFunction()
+				end
+			end
+		end
+	elseif currentCondition then
+		for i, cf in ipairs(conditionFeatures) do
+			for ii, f in ipairs(cf) do
+				if f.isEditBox then
+					f.updateFunction()
+				end
+			end
+		end
 	end
 end
 
@@ -3294,6 +3405,9 @@ function widget:Update(delta)
 		updateEventList()
 		updateEventFrame()
 		updateVariables()
+		if currentEvent and (currentAction or currentCondition) then
+			updateEditBoxesParams()
+		end
 	end
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
