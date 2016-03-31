@@ -2918,9 +2918,22 @@ function newMap()
 	Spring.SendLuaRulesMsg("New Map")
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
+	local currentState = globalStateMachine:getCurrentState()
 	clearUI()
-	initWindows()
-	fileFrame()
+	globalStateMachine:setCurrentState(currentState)
+	if currentState == globalStateMachine.states.FILE then
+		fileFrame()
+	elseif currentState == globalStateMachine.states.UNIT then
+		unitFrame()
+	elseif currentState == globalStateMachine.states.ZONE then
+		zoneFrame()
+	elseif currentState == globalStateMachine.states.FORCES then
+		forcesFrame()
+	elseif currentState == globalStateMachine.states.TRIGGER then
+		triggerFrame()
+	elseif currentState == globalStateMachine.states.MAPSETTINGS then
+		mapSettingsFrame()
+	end
 end
 function loadMap(name)
 	newMap()
@@ -2962,6 +2975,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	updateTeamButtons = true
 	for k, t in pairs(teamStateMachine.states) do
 		teamControl[t] = loadedTable.teams[tostring(t)].control
+		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
 		for kk, col in pairs(loadedTable.teams[tostring(t)].color) do
 			teamColor[t][kk] = col
@@ -3065,6 +3079,25 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	end
 	
 	loadedTable = nil
+	
+	-- Initialize
+	updateTeamButtons = true -- prevents requiring to go to the forces menu
+	local currentState = globalStateMachine:getCurrentState()
+	clearUI()
+	globalStateMachine:setCurrentState(currentState)
+	if currentState == globalStateMachine.states.FILE then
+		fileFrame()
+	elseif currentState == globalStateMachine.states.UNIT then
+		unitFrame()
+	elseif currentState == globalStateMachine.states.ZONE then
+		zoneFrame()
+	elseif currentState == globalStateMachine.states.FORCES then
+		forcesFrame()
+	elseif currentState == globalStateMachine.states.TRIGGER then
+		triggerFrame()
+	elseif currentState == globalStateMachine.states.MAPSETTINGS then
+		mapSettingsFrame()
+	end
 end
 function saveMap()
 	if windows["saveWindow"] then
