@@ -2981,7 +2981,6 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	-- Teams
 	updateTeamButtons = true
 	for k, t in pairs(teamStateMachine.states) do
-		Spring.Echo(tostring(t))
 		teamControl[t] = loadedTable.teams[tostring(t)].control
 		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
@@ -3205,7 +3204,7 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
---			Draw functions
+--			Save/load functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -3271,6 +3270,8 @@ end
 function saveState()
 	if loadLock then
 		local savedTable = encodeSaveTable()
+		local tmp = json.encode(savedTable)
+		savedTable = json.decode(tmp)
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
 		end
