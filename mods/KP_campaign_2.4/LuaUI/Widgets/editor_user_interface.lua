@@ -188,6 +188,9 @@ local mapBriefingTextBox
 local saveStates = {}
 local loadLock = true
 local loadIndex = 1
+local saveCurrentEvent = nil
+local saveCurrentCondition = nil
+local saveCurrentAction = nil
 
 -- Mouse variables
 local mouseMove = false
@@ -2350,7 +2353,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		if a.params[attr.id] then
 			if attr.type == "team" then
 				for i, item in ipairs(comboBox.items) do
-					if a.params[attr.id] == EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..item then
+					if a.params[attr.id] == string.gsub(item, EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") then
 						comboBox:Select(i)
 						break
 					end
@@ -2921,24 +2924,31 @@ function newMap()
 	mapBriefing = "Map Briefing"
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
+	-- Reset some chili elements
+	eventConditionsScrollPanel:Dispose()
+	newEventConditionButton:Dispose()
+	eventActionsScrollPanel:Dispose()
+	newEventActionButton:Dispose()
+	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '83%')
+	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
+	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
+	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
-	local currentState = globalStateMachine:getCurrentState()
-	clearUI()
-	globalStateMachine:setCurrentState(currentState)
-	if currentState == globalStateMachine.states.FILE then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
 		fileFrame()
-	elseif currentState == globalStateMachine.states.UNIT then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		unitFrame()
-	elseif currentState == globalStateMachine.states.ZONE then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		zoneFrame()
-	elseif currentState == globalStateMachine.states.FORCES then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		forcesFrame()
-	elseif currentState == globalStateMachine.states.TRIGGER then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		triggerFrame()
-	elseif currentState == globalStateMachine.states.MAPSETTINGS then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
 	end
+	saveState()
 end
 function loadMap(name)
 	newMap()
@@ -2992,6 +3002,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	-- Ally Teams
 	for k, at in pairs(loadedTable.allyteams) do
 		selectedAllyTeam = tonumber(k)
+		allyTeams[selectedAllyTeam] = {}
 		for i, t in ipairs(at) do
 			addTeamToSelectedAllyTeam(t)
 		end
@@ -3089,20 +3100,17 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
-	local currentState = globalStateMachine:getCurrentState()
-	clearUI()
-	globalStateMachine:setCurrentState(currentState)
-	if currentState == globalStateMachine.states.FILE then
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
 		fileFrame()
-	elseif currentState == globalStateMachine.states.UNIT then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		unitFrame()
-	elseif currentState == globalStateMachine.states.ZONE then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		zoneFrame()
-	elseif currentState == globalStateMachine.states.FORCES then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		forcesFrame()
-	elseif currentState == globalStateMachine.states.TRIGGER then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		triggerFrame()
-	elseif currentState == globalStateMachine.states.MAPSETTINGS then
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
 	end
 end
@@ -3281,6 +3289,9 @@ function saveState()
 end
 function loadNextState()
 	loadLock = false
+	saveCurrentEvent = currentEvent
+	saveCurrentAction = currentAction
+	saveCurrentCondition = currentCondition
 	if loadIndex < #saveStates then
 		loadIndex = loadIndex + 1
 		loadedTable = saveStates[loadIndex]
@@ -3290,6 +3301,9 @@ function loadNextState()
 end
 function loadPreviousState()
 	loadLock = false
+	saveCurrentEvent = currentEvent
+	saveCurrentAction = currentAction
+	saveCurrentCondition = currentCondition
 	if loadIndex > 1 then
 		loadIndex = loadIndex - 1
 		loadedTable = saveStates[loadIndex]
@@ -3443,6 +3457,7 @@ function widget:Initialize()
 	initMouseCursors()
 	initWindows()
 	fileFrame()
+	saveState()
 end
 function widget:Update(delta)
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
