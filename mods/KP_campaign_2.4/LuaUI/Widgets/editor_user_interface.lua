@@ -191,6 +191,8 @@ local loadIndex = 1
 local saveCurrentEvent = nil
 local saveCurrentCondition = nil
 local saveCurrentAction = nil
+local variablesWindowToBeShown = false
+local configureWindowToBeShown = false
 
 -- Mouse variables
 local mouseMove = false
@@ -432,6 +434,8 @@ function triggerFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
 	Screen0:AddChild(windows["triggerWindow"])
+	editVariablesButton.state.chosen = false
+	editVariablesButton:InvalidateSelf()
 end
 function mapSettingsFrame()
 	clearUI()
@@ -2957,10 +2961,6 @@ function loadMap(name)
 		loadedTable = json.decode(mapfile)
 	end
 	if loadedTable then
-		-- Global description
-		mapName = loadedTable.description.name
-		mapBriefing = loadedTable.description.briefing
-		
 		-- Units
 		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
 		-- See next method
@@ -3096,6 +3096,10 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		deleteActionButtons[event.id] = {}
 	end
 	
+	-- Global description
+	mapName = loadedTable.description.name
+	mapBriefing = loadedTable.description.briefing
+	
 	loadedTable = nil
 	
 	-- Initialize
@@ -3112,6 +3116,10 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		triggerFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
+	end
+	
+	if not loadLock then
+		continueLoadState()
 	end
 end
 function saveMap()
@@ -3287,27 +3295,32 @@ function saveState()
 		table.insert(saveStates, 1, savedTable)
 	end
 end
-function loadNextState()
+function loadState(direction)
 	loadLock = false
 	saveCurrentEvent = currentEvent
 	saveCurrentAction = currentAction
 	saveCurrentCondition = currentCondition
-	if loadIndex < #saveStates then
-		loadIndex = loadIndex + 1
+	variablesWindowToBeShown = editVariablesButton.state.chosen
+	configureWindowToBeShown = configureEventButton.state.chosen
+	if (loadIndex < #saveStates and direction > 0) or (loadIndex > 1 and direction < 0) then
+		loadIndex = loadIndex + direction
 		loadedTable = saveStates[loadIndex]
 		loadMap("")
 	end
-	loadLock = true
 end
-function loadPreviousState()
-	loadLock = false
-	saveCurrentEvent = currentEvent
-	saveCurrentAction = currentAction
-	saveCurrentCondition = currentCondition
-	if loadIndex > 1 then
-		loadIndex = loadIndex - 1
-		loadedTable = saveStates[loadIndex]
-		loadMap("")
+function continueLoadState()
+	if saveCurrentEvent and events[saveCurrentEvent] then
+		editEvent(saveCurrentEvent)
+		if saveCurrentAction and events[saveCurrentEvent].actions[saveCurrentAction] then
+			editAction(saveCurrentAction)
+		elseif saveCurrentCondition and events[saveCurrentEvent].conditions[saveCurrentCondition] then
+			editCondition(saveCurrentCondition)
+		elseif configureWindowToBeShown then
+			configureEvent()
+		end
+	end
+	if variablesWindowToBeShown then
+		showVariablesFrame()
 	end
 	loadLock = true
 end
@@ -3837,11 +3850,11 @@ function widget:KeyPress(key, mods)
 		return true
 	-- CTRL + Z
 	elseif key == Spring.GetKeyCode("z") and mods.ctrl then
-		loadNextState()
+		loadState(1)
 		return true
 	-- CTRL + Y
 	elseif key == Spring.GetKeyCode("y") and mods.ctrl then
-		loadPreviousState()
+		loadState(-1)
 		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
