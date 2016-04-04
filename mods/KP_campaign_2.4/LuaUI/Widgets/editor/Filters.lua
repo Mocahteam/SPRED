@@ -6,6 +6,9 @@ filters_list = {
 	"Kill",
 	"HP",
 	"Variable",
+	"Control",
 	"Unit",
-	"Group"
+	"Order",
+	"Message",
+	"Kill"
 }
