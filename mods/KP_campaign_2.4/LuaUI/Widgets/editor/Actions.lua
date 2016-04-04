@@ -28,6 +28,32 @@ actions_list = {
 		}
 	},
 	{
+		type = "wait",
+		filter = "Game",
+		typeText = "Wait",
+		text = "Wait <Time> seconds.",
+		attributes = {
+			{
+				text = "<Time>",
+				type = "number",
+				id = "time"
+			}
+		}
+	},
+	{
+		type = "waitCondition",
+		filter = "Game",
+		typeText = "Wait for condition",
+		text = "Wait for <Condition> to be true.",
+		attributes = {
+			{
+				text = "<Condition>",
+				type = "condition",
+				id = "condition"
+			}
+		}
+	},
+	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
@@ -97,7 +123,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Number>",
-				type = "numberComparison",
+				type = "number",
 				id = "number"
 			},
 			{
@@ -386,6 +412,270 @@ actions_list = {
 				text = "<Zone>",
 				type = "zone",
 				id = "zone"
+			}
+		}
+	},
+	{
+		type = "setHP",
+		filter = "HP",
+		typeText = "Set HP of unit",
+		text = "Set hit points of <Unit> to <Percentage> %.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Percentage>",
+				type = "number",
+				id = "percentage"
+			}
+		}
+	},
+	{
+		type = "addToGroup",
+		filter = "Group",
+		typeText = "Add unit to group",
+		text = "Add <Unit> to <Group>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			}
+		}
+	},
+	{
+		type = "transfer",
+		filter = "Transfer",
+		typeText = "Transfer unit",
+		text = "Transfer <Unit> to <Team>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "transferGroup",
+		filter = "Transfer",
+		typeText = "Transfer units from group",
+		text = "Transfer units of <Group> to <Team>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "transferTeam",
+		filter = "Transfer",
+		typeText = "Transfer units from team",
+		text = "Transfer units of <CurrentTeam> to <Team>.",
+		attributes = {
+			{
+				text = "<CurrentTeam>",
+				type = "team",
+				id = "currentTeam"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "transferType",
+		filter = "Transfer",
+		typeText = "Transfer units of type",
+		text = "Transfer units of type <UnitType> of <CurrentTeam> to <Team>.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "number",
+				id = "number"
+			},
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<CurrentTeam>",
+				type = "team",
+				id = "currentTeam"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "teleport",
+		filter = "Teleport",
+		typeText = "Teleport unit",
+		text = "Teleport <Unit> to <Position>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
+		type = "teleportGroup",
+		filter = "Teleport",
+		typeText = "Teleport units of group",
+		text = "Teleport units of <Group> to somewhere within <Zone>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			}
+		}
+	},
+	{
+		type = "teleportTeam",
+		filter = "Teleport",
+		typeText = "Teleport units of team",
+		text = "Teleport units of <Team> to somewhere within <Zone>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			}
+		}
+	},
+	{
+		type = "changeVariable",
+		filter = "Variable",
+		typeText = "Set number variable",
+		text = "Set <Variable> to <Number>",
+		attributes = {
+			{
+				text = "<Variable>",
+				type = "numberVariable",
+				id = "variable"
+			},
+			{
+				text = "<Number>",
+				type = "number",
+				id = "number"
+			}
+		}
+	},
+	{
+		type = "changeVariableNumber",
+		filter = "Variable",
+		typeText = "Change number variable",
+		text = "Set <Variable1> to <Variable2> <Operator> <Number>",
+		attributes = {
+			{
+				text = "<Variable1>",
+				type = "numberVariable",
+				id = "variable1"
+			},
+			{
+				text = "<Variable2>",
+				type = "numberVariable",
+				id = "variable2"
+			},
+			{
+				text = "<Operator>",
+				type = "operator",
+				id = "operator"
+			},
+			{
+				text = "<Number>",
+				type = "number",
+				id = "number"
+			}
+		}
+	},
+	{
+		type = "changeVariableVariable",
+		filter = "Variable",
+		typeText = "Change number variable using other variables",
+		text = "Set <Variable1> to <Variable2> <Operator> <Variable3>",
+		attributes = {
+			{
+				text = "<Variable1>",
+				type = "numberVariable",
+				id = "variable1"
+			},
+			{
+				text = "<Variable2>",
+				type = "numberVariable",
+				id = "variable2"
+			},
+			{
+				text = "<Operator>",
+				type = "operator",
+				id = "operator"
+			},
+			{
+				text = "<Variable3>",
+				type = "numberVariable",
+				id = "variable3"
+			}
+		}
+	},
+	{
+		type = "setBooleanVariable",
+		filter = "Variable",
+		typeText = "Set boolean variable",
+		text = "Set <Variable> to <Boolean>",
+		attributes = {
+			{
+				text = "<Variable>",
+				type = "booleanVariable",
+				id = "variable"
+			},
+			{
+				text = "<Boolean>",
+				type = "boolean",
+				id = "boolean"
 			}
 		}
 	}

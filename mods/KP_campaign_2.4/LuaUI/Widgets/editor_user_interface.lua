@@ -2234,7 +2234,19 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
-	if attr.type == "unitType" or attr.type == "team" or attr.type == "group" or attr.type == "zone" or attr.type == "numberVariable" or attr.type == "booleanVariable" or attr.type == "comparison" then
+	if 	attr.type == "unitType" 
+		or attr.type == "team" 
+		or attr.type == "group" 
+		or attr.type == "zone" 
+		or attr.type == "numberVariable" 
+		or attr.type == "booleanVariable" 
+		or attr.type == "comparison"
+		or attr.type == "condition"
+		or attr.type == "toggle"
+		or attr.type == "command"
+		or attr.type == "boolean"
+		or attr.type == "operator"
+	then
 		local comboBoxItems = {}
 		if attr.type == "unitType" then
 			for i, fu in ipairs(factionUnits) do
@@ -2282,6 +2294,20 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			end
 		elseif attr.type == "comparison" then
 			comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
+		elseif attr.type == "condition" then
+			for i, e in ipairs(events) do
+				for ii, c in ipairs(e.conditions) do
+					table.insert(comboBoxItems, c.name)
+				end
+			end
+		elseif attr.type == "toggle" then
+			comboBoxItems = { "enabled", "disabled" }
+		elseif attr.type == "command" then
+			comboBoxItems = { "NYI" } -- TODO
+		elseif attr.type == "boolean" then
+			comboBoxItems = { "true", "false" }
+		elseif attr.type == "operator" then
+			comboBoxItems = { "+", "-", "*", "/", "%" }
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" then
@@ -2350,13 +2376,25 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "number" then
+	elseif attr.type == "number" or attr.type == "text" then
 		local editBox = addEditBox(scrollPanel, '25%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
 			editBox:SetText(tostring(a.params[attr.id]))
 		end
-		editBox.updateFunction = function() a.params[attr.id] = tonumber(editBox.text) end
+		if attr.type == "number" then
+			editBox.updateFunction = function()
+				local cursor = editBox.cursor
+				editBox:SetText(string.gsub(editBox.text, "%D+", ""))
+				editBox.cursor = cursor - 1
+				editBox:InvalidateSelf()
+				a.params[attr.id] = tonumber(editBox.text)
+			end
+		elseif attr.type == "text" then
+			editBox.updateFunction = function()
+				a.params[attr.id] = tonumber(editBox.text)
+			end
+		end
 		editBox.isEditBox = true
 		table.insert(feature, editBox)
 	elseif attr.type == "numberComparison" then

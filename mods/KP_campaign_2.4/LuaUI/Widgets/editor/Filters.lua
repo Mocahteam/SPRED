@@ -8,7 +8,10 @@ filters_list = {
 	"Variable",
 	"Control",
 	"Unit",
+	"Group",
 	"Order",
 	"Message",
-	"Kill"
+	"Kill",
+	"Transfer",
+	"Teleport"
 }
