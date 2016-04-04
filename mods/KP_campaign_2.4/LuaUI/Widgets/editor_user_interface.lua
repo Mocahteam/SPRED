@@ -373,6 +373,15 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 	}
 	return comboBox
 end
+function removeElements(parent, elementsTable, dispose)
+	for k, e in pairs(elementsTable) do
+		parent:RemoveChild(e)
+		if dispose then
+			e:Dispose()
+		end
+	end
+end
+
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -839,9 +848,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function updateUnitWindow()
-	for k, b in pairs(unitButtons) do
-		unitScrollPanel:RemoveChild(b)
-	end
+	removeElements(unitScrollPanel, unitButtons, true)
 	local button_size = 40
 	local y = 0
 	for c, t in ipairs(factionUnits) do
@@ -1015,10 +1022,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 end
 function updateSelectTeamButtons()
 	if updateTeamButtons then
-		for k, b in pairs(teamButtons) do
-			windows["unitWindow"]:RemoveChild(b)
-			b:Dispose()
-		end
+		removeElements(windows["unitWindow"], teamButtons, true)
 		local count = 0
 		local enabledTeamsCount = 0 -- count the number of enabled teams
 		for k, enabled in pairs(enabledTeams) do
@@ -1046,18 +1050,9 @@ function updateUnitList() -- When a unit is created, update the two units lists 
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal then
 		-- Clear UI elements
-		for k, l in pairs(unitListLabels) do
-			unitListScrollPanel:RemoveChild(l)
-			l:Dispose()
-		end
-		for k, b in pairs(unitListViewButtons) do
-			unitListScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
-		for k, i in pairs(unitListHighlight) do
-			unitListScrollPanel:RemoveChild(i)
-			i:Dispose()
-		end
+		removeElements(unitListScrollPanel, unitListLabels, true)
+		removeElements(unitListScrollPanel, unitListViewButtons, true)
+		removeElements(unitListScrollPanel, unitListHighlight, true)
 		
 		-- Add labels and buttons to both lists
 		local count = 0
@@ -1093,14 +1088,8 @@ function updateGroupListUnitList()
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitGroupsUnitTotal then
 		-- Clear UI elements
-		for k, b in pairs(groupListUnitsButtons) do
-			groupListUnitsScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
-		for k, b in pairs(groupListUnitsViewButtons) do
-			groupListUnitsScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
+		removeElements(groupListUnitsScrollPanel, groupListUnitsButtons, true)
+		removeElements(groupListUnitsScrollPanel, groupListUnitsViewButtons, true)
 		
 		-- Add labels and buttons to both lists
 		local count = 0
@@ -1158,10 +1147,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 	-- Update
 	if updatePanels then
 		-- Clear UI elements
-		for k, p in pairs(groupPanels) do
-			groupListScrollPanel:RemoveChild(p)
-			p:Dispose()
-		end
+		removeElements(groupListScrollPanel, groupPanels, true)
 		groupListScrollPanel:RemoveChild(addGroupButton)
 		
 		local count = 0
@@ -1206,18 +1192,9 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		-- Update groups
 		for k, group in pairs(unitGroups) do
 			-- Clear UI elements
-			for key, l in pairs(unitGroupLabels[k]) do
-				groupPanels[k]:RemoveChild(l)
-				l:Dispose()
-			end
-			for key, b in pairs(unitGroupViewButtons[k]) do
-				groupPanels[k]:RemoveChild(b)
-				b:Dispose()
-			end
-			for key, b in pairs(unitGroupRemoveUnitButtons[k]) do
-				groupPanels[k]:RemoveChild(b)
-				b:Dispose()
-			end
+			removeElements(groupPanels[k], unitGroupLabels[k], true)
+			removeElements(groupPanels[k], unitGroupViewButtons[k], true)
+			removeElements(groupPanels[k], unitGroupRemoveUnitButtons[k], true)
 			
 			local count = 0
 			unitGroupLabels[k] = {}
@@ -1718,12 +1695,10 @@ end
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
 	if totalZones ~= #zoneList then
 		for k, zb in pairs(zoneBoxes) do
-			if k ~= "global" then
-				zoneScrollPanel:RemoveChild(zb.editBox)
-				zb.editBox:Dispose()
-				zoneScrollPanel:RemoveChild(zb.checkbox)
-				zb.checkbox:Dispose()
-			end
+			zoneScrollPanel:RemoveChild(zb.editBox)
+			zb.editBox:Dispose()
+			zoneScrollPanel:RemoveChild(zb.checkbox)
+			zb.checkbox:Dispose()
 		end
 		local size = 20
 		for i, z in ipairs(zoneList) do
@@ -1746,14 +1721,8 @@ end
 function updateAllyTeamPanels()
 	for k, at in pairs(allyTeams) do
 		if tableLength(at) ~= allyTeamsSize[k] then
-			for _, c in ipairs(allyTeamsRemoveTeamButtons[k]) do
-				allyTeamsScrollPanels[k]:RemoveChild(c)
-				c:Dispose()
-			end
-			for _, c in ipairs(allyTeamsRemoveTeamLabels[k]) do
-				allyTeamsScrollPanels[k]:RemoveChild(c)
-				c:Dispose()
-			end
+			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamButtons[k], true)
+			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamLabels[k], true)
 			local count = 0
 			for i, t in ipairs(at) do
 				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t), 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
@@ -1768,17 +1737,9 @@ function updateAllyTeamPanels()
 	end
 	
 	if updateAllyTeam then
-		for k, p in pairs(allyTeamPanels) do
-			allyTeamsWindow:RemoveChild(p)
-		end
-		for k, b in pairs(allyTeamsListButtons) do
-			teamListScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
-		for k, l in pairs(allyTeamsListLabels) do
-			teamListScrollPanel:RemoveChild(l)
-			l:Dispose()
-		end
+		removeElements(allyTeamsWindow, allyTeamPanels, false)
+		removeElements(teamListScrollPanel, allyTeamsListButtons, true)
+		removeElements(teamListScrollPanel, allyTeamsListLabels, true)
 		count = 0
 		for i, team in ipairs(teamStateMachine.states) do
 			if enabledTeams[team] then
@@ -1987,14 +1948,8 @@ function removeThirdWindows() -- Removes the rightmost window
 end
 function updateEventList() -- When a new event is created or the name of an event is changed, update the list
 	if eventTotal ~= #events then
-		for k, b in pairs(eventButtons) do
-			eventScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
-		for k, b in pairs(deleteEventButtons) do
-			eventScrollPanel:RemoveChild(b)
-			b:Dispose()
-		end
+		removeElements(eventScrollPanel, eventButtons, true)
+		removeElements(eventScrollPanel, deleteEventButtons, true)
 		local count = 0
 		for i, e in ipairs(events) do
 			eventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '80%', 40, e.name, function() editEvent(i) end)
@@ -2020,14 +1975,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 		local e = events[currentEvent]
 		
 		if e.conditionTotal ~= #(e.conditions) then
-			for k, b in pairs(conditionButtons[e.id]) do
-				eventConditionsScrollPanel:RemoveChild(b)
-				b:Dispose()
-			end
-			for k, b in pairs(deleteConditionButtons[e.id]) do
-				eventConditionsScrollPanel:RemoveChild(b)
-				b:Dispose()
-			end
+			removeElements(eventConditionsScrollPanel, conditionButtons[e.id], true)
+			removeElements(eventConditionsScrollPanel, deleteConditionButtons[e.id], true)
 			local count = 0
 			for i, c in ipairs(e.conditions) do
 				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
@@ -2041,14 +1990,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 		end
 		
 		if e.actionTotal ~= #(e.actions) then
-			for k, b in pairs(actionButtons[e.id]) do
-				eventActionsScrollPanel:RemoveChild(b)
-				b:Dispose()
-			end
-			for k, b in pairs(deleteActionButtons[e.id]) do
-				eventActionsScrollPanel:RemoveChild(b)
-				b:Dispose()
-			end
+			removeElements(eventActionsScrollPanel, actionButtons[e.id], true)
+			removeElements(eventActionsScrollPanel, deleteActionButtons[e.id], true)
 			local count = 0
 			for i, c in ipairs(e.actions) do
 				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
@@ -2085,14 +2028,10 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		eventNameEditBox:SetText(e.name)
 		-- set condition buttons
 		for _, cB in pairs(conditionButtons) do
-			for k, b in pairs(cB) do
-				eventConditionsScrollPanel:RemoveChild(b)
-			end
+			removeElements(eventConditionsScrollPanel, cB, false)
 		end
 		for _, dCB in pairs(deleteConditionButtons) do
-			for k, b in pairs(dCB) do
-				eventConditionsScrollPanel:RemoveChild(b)
-			end
+			removeElements(eventConditionsScrollPanel, dCB, false)
 		end
 		local count = 0
 		for i, c in ipairs(e.conditions) do
@@ -2105,14 +2044,10 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		newEventConditionButton.y = 40 * count
 		-- set action buttons
 		for _, aB in pairs(actionButtons) do
-			for k, b in pairs(aB) do
-				eventActionsScrollPanel:RemoveChild(b)
-			end
+			removeElements(eventActionsScrollPanel, aB, false)
 		end
 		for _, dAB in pairs(deleteActionButtons) do
-			for k, b in pairs(dAB) do
-				eventActionsScrollPanel:RemoveChild(b)
-			end
+			removeElements(eventActionsScrollPanel, dAB, false)
 		end
 		local count = 0
 		for i, c in ipairs(e.actions) do
@@ -2489,10 +2424,7 @@ function configureEvent() -- Show the event configuration window
 			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
 			customTriggerEditBox:SetText(e.trigger)
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
-			for i, i in ipairs(actionSequenceItems) do
-				actionSequenceScrollPanel:RemoveChild(i)
-				i:Dispose()
-			end
+			removeElements(actionSequenceScrollPanel, actionSequenceItems, true)
 			local act = events[currentEvent].actions
 			for i, a in ipairs(act) do
 				local lab = addLabel(actionSequenceScrollPanel, '20%', (i - 1) * 40, '60%', 40, a.name, 16, "center", nil, "center")
@@ -2504,14 +2436,10 @@ function configureEvent() -- Show the event configuration window
 						updateActionSequence = true
 						configureEvent()
 						for _, aB in pairs(actionButtons) do
-							for k, b in pairs(aB) do
-								eventActionsScrollPanel:RemoveChild(b)
-							end
+							removeElements(eventActionsScrollPanel, aB, false)
 						end
 						for _, dAB in pairs(deleteActionButtons) do
-							for k, b in pairs(dAB) do
-								eventActionsScrollPanel:RemoveChild(b)
-							end
+							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
@@ -2534,14 +2462,10 @@ function configureEvent() -- Show the event configuration window
 						updateActionSequence = true
 						configureEvent()
 						for _, aB in pairs(actionButtons) do
-							for k, b in pairs(aB) do
-								eventActionsScrollPanel:RemoveChild(b)
-							end
+							removeElements(eventActionsScrollPanel, aB, false)
 						end
 						for _, dAB in pairs(deleteActionButtons) do
-							for k, b in pairs(dAB) do
-								eventActionsScrollPanel:RemoveChild(b)
-							end
+							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
