@@ -167,6 +167,7 @@ function gadget:GameFrame( frameNumber )
 				end
 			end
 			moveUnits = false
+			SendToUnsynced("requestSave")
 		-- DELETE UNITS
 		elseif deleteUnits then
 			if selectedUnits ~= {} then
@@ -175,6 +176,7 @@ function gadget:GameFrame( frameNumber )
 				end
 			end
 			deleteUnits = false
+			SendToUnsynced("requestSave")
 		-- TRANSFER UNITS
 		elseif transferUnits then
 			for i, u in ipairs(selectedUnits) do
@@ -187,12 +189,14 @@ function gadget:GameFrame( frameNumber )
 				Spring.SetUnitRotation(u, 0, -angle, 0)
 			end
 			rotateUnits = false
+			SendToUnsynced("requestSave")
 		-- FACE UNITS
 		elseif faceUnits then
 			for i, u in ipairs(selectedUnits) do
 				Spring.SetUnitRotation(u, 0, -faceAngles[i], 0)
 			end
 			faceUnits = false
+			SendToUnsynced("requestSave")
 		-- RESET MAP
 		elseif resetMap then
 			local units = Spring.GetAllUnits()
@@ -207,6 +211,7 @@ function gadget:GameFrame( frameNumber )
 				Spring.SetUnitHealth(u, hpPercent * mh)
 			end
 			hpPercent = -1
+			SendToUnsynced("requestSave")
 		-- INSTANTIATE UNITS AND KEEP THEIR IDs
 		elseif loadMap then
 			local unitsNewIDs = {}
@@ -235,6 +240,9 @@ function gadget:RecvFromSynced(msg)
 	end
 	if msg == "saveState" then
 		Script.LuaUI.saveState()
+	end
+	if msg == "requestSave" then
+		Script.LuaUI.requestSave()
 	end
 end
 

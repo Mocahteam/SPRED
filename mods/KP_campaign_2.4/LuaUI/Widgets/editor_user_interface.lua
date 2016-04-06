@@ -195,6 +195,7 @@ local saveCurrentCondition = nil
 local saveCurrentAction = nil
 local variablesWindowToBeShown = false
 local configureWindowToBeShown = false
+local toSave = false
 
 -- Mouse variables
 local mouseMove = false
@@ -1123,12 +1124,14 @@ end
 function updateUnitHighlights() -- Visual feedback on the units list to see what units are selected
 	local units = Spring.GetAllUnits()
 	for i, u in ipairs(units) do
-		if Spring.IsUnitSelected(u) then
-			unitListHighlight[u].color = {1, 1, 0.4, 0.2}
-			unitListHighlight[u]:InvalidateSelf()
-		else
-			unitListHighlight[u].color = {1, 1, 0.4, 0}
-			unitListHighlight[u]:InvalidateSelf()
+		if unitListHighlight[u] then
+			if Spring.IsUnitSelected(u) then
+				unitListHighlight[u].color = {1, 1, 0.4, 0.2}
+				unitListHighlight[u]:InvalidateSelf()
+			else
+				unitListHighlight[u].color = {1, 1, 0.4, 0}
+				unitListHighlight[u]:InvalidateSelf()
+			end
 		end
 	end
 end
@@ -2972,7 +2975,11 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	
 	-- Zones
 	for i, z in ipairs(loadedTable.zones) do
-		table.insert(zoneList, z)
+		local zone = {}
+		for k, attr in pairs(z) do
+			zone[k] = attr
+		end
+		table.insert(zoneList, zone)
 		if z.id >= zoneNumber then
 			zoneNumber = z.id + 1
 		end
@@ -3252,7 +3259,11 @@ function encodeSaveTable()
 	-- Zones
 	savedTable.zones = {}
 	for i, z in ipairs(zoneList) do
-		table.insert(savedTable.zones, z)
+		local zone = {}
+		for k, attr in pairs(z) do
+			zone[k] = attr
+		end
+		table.insert(savedTable.zones, zone)
 	end
 	
 	-- Teams
@@ -3278,8 +3289,7 @@ end
 function saveState()
 	if loadLock then
 		local savedTable = encodeSaveTable()
-		local tmp = json.encode(savedTable)
-		savedTable = json.decode(tmp)
+		savedTable = json.decode(json.encode(savedTable))
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
 		end
@@ -3315,6 +3325,9 @@ function continueLoadState()
 		showVariablesFrame()
 	end
 	loadLock = true
+end
+function requestSave()
+	toSave = true
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -3454,6 +3467,7 @@ end
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
+	widgetHandler:RegisterGlobal("requestSave", requestSave)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
@@ -3732,6 +3746,7 @@ function widget:MouseRelease(mx, my, button)
 				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
+					requestSave()
 				end
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
 				local zone = 	{ 	
@@ -3748,6 +3763,7 @@ function widget:MouseRelease(mx, my, button)
 				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drew zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
+					requestSave()
 				end
 			end
 			plotZone = false
@@ -3756,6 +3772,10 @@ function widget:MouseRelease(mx, my, button)
 		end
 	end
 	doubleClick = 0 -- reset double click timer
+	if toSave then
+		saveState()
+		toSave = false
+	end
 	return true
 end
 function widget:MouseMove(mx, my, dmx, dmy, button)	
@@ -3784,7 +3804,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 			else -- Send a message to the gadget to move selected units
 				if mouseMove and not plotSelection then
 					local _, pos = Spring.TraceScreenRay(mx, my, true)
-					if pos ~=nil then
+					if pos then
 						local x, _, z = unpack(pos)
 						x, z = round(x), round(z)
 						local msg = "Move Units".."++"..x.."++"..z
@@ -3811,7 +3831,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 					drawEndY = my
 				end
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
-				if mouseMove and selectedZone ~= nil then
+				if mouseMove and selectedZone then
 					local _, var = Spring.TraceScreenRay(mx, my, true, true)
 					if var ~= nil then
 						local x, _, z = unpack(var)
@@ -3820,6 +3840,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 						dx = dx - sign(dx) * ( (sign(dx)*dx)%8 ) -- compute variations modulo 8 (complex because operator % only accepts positive numbers)
 						dz = dz - sign(dz) * ( (sign(dz)*dz)%8 )
 						applyChangesToSelectedZone(dx, dz)
+						requestSave()
 					end
 				end
 			end
@@ -3845,12 +3866,12 @@ function widget:KeyPress(key, mods)
 		exportMapFrame()
 		return true
 	-- CTRL + Z
-	elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.5 then
+	elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.2 then
 		saveLoadCooldown = 0
 		loadState(1)
 		return true
 	-- CTRL + Y
-	elseif key == Spring.GetKeyCode("y") and mods.ctrl and saveLoadCooldown > 0.5 then
+	elseif key == Spring.GetKeyCode("y") and mods.ctrl and saveLoadCooldown > 0.2 then
 		saveLoadCooldown = 0
 		loadState(-1)
 		return true
@@ -3864,6 +3885,7 @@ function widget:KeyPress(key, mods)
 			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
 				addUnitGroup(newUnitGroupEditBox.text)
 				clearTemporaryWindows()
+				saveState()
 				return true
 			end
 		end
@@ -3922,6 +3944,7 @@ function widget:KeyPress(key, mods)
 						break
 					end
 				end
+				saveState()
 				return true
 			-- ARROWS : move selected zone
 			elseif key == Spring.GetKeyCode("up") then
