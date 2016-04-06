@@ -42,7 +42,7 @@ local unitsInfo = {}
 local moveUnitsAnchor = nil
 local relativepos = {}
 local hpPercent = -1
-local missionScript = VFS.Include("MissionPlayer.lua") -- TODO : use something different than missionplayer
+local initialize = true
 
 function gadget:Initialize()
 	-- Allow to see everything and select any unit
@@ -137,6 +137,16 @@ end
 function gadget:GameFrame( frameNumber )
 	-- EDITOR ONLY
 	if missionName == "LevelEditor" then
+		-- Delete units at the beginning
+		if initialize then
+			local units = Spring.GetAllUnits()
+			if units.n ~= 0 and frameNumber > 0 then
+				for i, u in ipairs(units) do
+					Spring.DestroyUnit(u, false, true)
+				end
+				initialize = false
+			end
+		end
 		-- CREATE UNIT
 		if createUnit then
 			local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)

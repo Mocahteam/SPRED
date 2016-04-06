@@ -187,7 +187,9 @@ local mapBriefingTextBox
 -- Save states variables
 local saveStates = {}
 local loadLock = true
+local loading = false
 local loadIndex = 1
+local saveLoadCooldown = 0
 local saveCurrentEvent = nil
 local saveCurrentCondition = nil
 local saveCurrentAction = nil
@@ -381,7 +383,6 @@ function removeElements(parent, elementsTable, dispose)
 		end
 	end
 end
-
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -2300,6 +2301,9 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 					table.insert(comboBoxItems, c.name)
 				end
 			end
+			if #comboBoxItems == 0 then
+				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CONDITION_NOT_FOUND)
+			end
 		elseif attr.type == "toggle" then
 			comboBoxItems = { "enabled", "disabled" }
 		elseif attr.type == "command" then
@@ -2864,13 +2868,31 @@ function newMap()
 	zoneIndex = 0
 	-- AllyTeams
 	allyTeams = {}
+	for k, t in pairs(teamStateMachine.states) do
+		allyTeams[t] = {}
+	end
 	allyTeamsSize = {}
 	selectedAllyTeam = 0
 	-- TeamConfig
 	teamControl = {}
+	for k, t in pairs(teamStateMachine.states) do
+		teamControl[t] = "player"
+	end
 	enabledTeams = {}
+	for k, t in pairs(teamStateMachine.states) do
+		enabledTeams[t] = false
+		if t == 0 or t == 1 or t == 2 then
+			enabledTeams[t] = true
+		end
+	end
 	enabledTeamsTotal = nil
 	teamColor = {}
+	for k,t in pairs(teamStateMachine.states) do
+		teamColor[t] = {}
+		teamColor[t].red = tonumber(teams[t].red)
+		teamColor[t].green = tonumber(teams[t].green)
+		teamColor[t].blue = tonumber(teams[t].blue)
+	end
 	-- Trigger
 	events = {}
 	eventTotal = nil
@@ -2917,15 +2939,21 @@ function newMap()
 	saveState()
 end
 function loadMap(name)
+	if loading then return end
+	loading = true
 	newMap()
 	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor.json",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
+	else
+		loading = false
 	end
 	if loadedTable then
 		-- Units
 		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
 		-- See next method
+	else
+		loading = false
 	end
 end
 function GetNewUnitIDsAndContinueLoadMap(unitIDs)
@@ -3083,6 +3111,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	if not loadLock then
 		continueLoadState()
 	end
+	
+	loading = false
 end
 function saveMap()
 	if windows["saveWindow"] then
@@ -3491,6 +3521,10 @@ function widget:Update(delta)
 	updateButtonVisualFeedback()
 	
 	changeMouseCursor()
+	
+	if saveLoadCooldown < 1 then
+		saveLoadCooldown = saveLoadCooldown + delta
+	end
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
@@ -3811,11 +3845,13 @@ function widget:KeyPress(key, mods)
 		exportMapFrame()
 		return true
 	-- CTRL + Z
-	elseif key == Spring.GetKeyCode("z") and mods.ctrl then
+	elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.5 then
+		saveLoadCooldown = 0
 		loadState(1)
 		return true
 	-- CTRL + Y
-	elseif key == Spring.GetKeyCode("y") and mods.ctrl then
+	elseif key == Spring.GetKeyCode("y") and mods.ctrl and saveLoadCooldown > 0.5 then
+		saveLoadCooldown = 0
 		loadState(-1)
 		return true
 	-- ESCAPE : back to file menu
