@@ -138,9 +138,23 @@ function gadget:GameFrame( frameNumber )
 	-- EDITOR ONLY
 	if missionName == "LevelEditor" then
 		-- Delete units at the beginning
-		if initialize then
+		if initialize and frameNumber > 0 then -- TODO : cmd
+			local cmdList = {}
+			for id, unitDef in pairs(UnitDefs) do
+				local unitType = unitDef.name
+				local id = Spring.CreateUnit(unitType, 100, Spring.GetGroundHeight(100, 100), 100, "s", 0)
+				local cmds = Spring.GetUnitCmdDescs(id)
+				for i, cmd in ipairs(cmds) do
+					if cmd.id < 0 then
+						cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+					else
+						cmdList[cmd.name] = cmd.id
+					end
+				end
+			end
+			SendToUnsynced("commands".."++"..json.encode(cmdList))
 			local units = Spring.GetAllUnits()
-			if units.n ~= 0 and frameNumber > 0 then
+			if units.n ~= 0 then
 				for i, u in ipairs(units) do
 					Spring.DestroyUnit(u, false, true)
 				end
@@ -243,6 +257,9 @@ function gadget:RecvFromSynced(msg)
 	end
 	if msg == "requestSave" then
 		Script.LuaUI.requestSave()
+	end
+	if msgContents[1] == "commands" then
+		Script.LuaUI.getCommandsList(msgContents[2])
 	end
 end
 

@@ -176,6 +176,9 @@ local editVariablesButton
 local variablesScrollPanel
 local variablesFeatures = {}
 local forceUpdateVariables = false
+local commandsToID = {}
+local idToCommands = {}
+local sortedCommandsList = {}
 
 -- Map settings variables
 local mapName = "Map"
@@ -2238,7 +2241,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
-	if 	attr.type == "unitType" 
+	if attr.type == "unitType" 
 		or attr.type == "team" 
 		or attr.type == "group" 
 		or attr.type == "zone" 
@@ -2310,7 +2313,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		elseif attr.type == "toggle" then
 			comboBoxItems = { "enabled", "disabled" }
 		elseif attr.type == "command" then
-			comboBoxItems = { "NYI" } -- TODO
+			comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
 		elseif attr.type == "boolean" then
 			comboBoxItems = { "true", "false" }
 		elseif attr.type == "operator" then
@@ -2319,6 +2322,8 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" then
 			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") end }
+		elseif attr.type == "command" then
+			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 		else
 			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		end
@@ -2326,6 +2331,13 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			if attr.type == "team" then
 				for i, item in ipairs(comboBox.items) do
 					if a.params[attr.id] == string.gsub(item, EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") then
+						comboBox:Select(i)
+						break
+					end
+				end
+			elseif attr.type == "command" then
+				for i, item in ipairs(comboBox.items) do
+					if idToCommands[a.params[attr.id]] == item then
 						comboBox:Select(i)
 						break
 					end
@@ -2809,6 +2821,14 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 			end
 		end
 	end
+end
+function getCommandsList(encodedList)
+	commandsToID = json.decode(encodedList)
+	for c, id in pairs(commandsToID) do
+		table.insert(sortedCommandsList, c)
+		idToCommands[id] = c
+	end
+	table.sort(sortedCommandsList)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -3468,6 +3488,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
+	widgetHandler:RegisterGlobal("getCommandsList", getCommandsList)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
