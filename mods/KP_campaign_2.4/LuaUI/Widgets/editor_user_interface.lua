@@ -17,6 +17,23 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/Filters.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 
+-- \\\\ TODO LIST ////
+-- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
+-- Couleurs briefing
+-- Continuer à ajouter des spots pour CTRL+Z
+-- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
+-- Ajout d'une éventuelle boîte de dialogue pour ajouter des paramètres sur une commande
+-- Modification de l'équipe d'une unité
+-- Paramètres additionnels pour le niveau (camera auto etc)
+-- Choix de la carte lors de la création d'un nouveau niveau
+-- 
+-- 
+-- Passer l'éditeur sur la dernière version de Spring
+-- Possibilités de modifier le terrain (voir vidéo)
+-- Traduction des strings des déclencheurs
+-- Personnalisation de l'éditeur (raccourcis etc.)
+-- /\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\/
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Variables
@@ -186,6 +203,11 @@ local mapBriefing = "Map Briefing"
 local mapNameEditBox
 local mapBriefingEditBox
 local mapBriefingTextBox
+local cameraAutoButton
+local cameraAutoState = "enabled"
+local autoHealButton
+local autoHealState = "disabled"
+
 
 -- Save states variables
 local saveStates = {}
@@ -457,6 +479,20 @@ function mapSettingsFrame()
 	Screen0:AddChild(windows["mapSettingsWindow"])
 	mapNameEditBox:SetText(mapName)
 	mapBriefingEditBox:SetText(mapBriefing)
+	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
+		cameraAutoButton.state.chosen = true
+		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	elseif cameraAutoState == "disabled" and cameraAutoButton.state.chosen then
+		cameraAutoButton.state.chosen = false
+		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+	end
+	if autoHealState == "enabled" and not autoHealButton.state.chosen then
+		autoHealButton.state.chosen = true
+		autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	elseif autoHealState == "disabled" and autoHealButton.state.chosen then
+		autoHealButton.state.chosen = false
+		autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -824,7 +860,36 @@ function initMapSettingsWindow()
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
-	mapBriefingTextBox = addTextBox(windows['mapSettingsWindow'], '2%', '45%', '96%', '50%', "Lorem ipsum blabla", 18)
+	local panel = addPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '40%')
+	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
+	cameraAutoButton = addButton(windows['mapSettingsWindow'], '10%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	cameraAutoButton.state.chosen = true
+	cameraAutoButton.OnClick = {
+		function()
+			cameraAutoButton.state.chosen = not cameraAutoButton.state.chosen
+			if cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+				cameraAutoState = "disabled"
+			else
+				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+				cameraAutoState = "enabled"
+			end
+		end
+	}
+	autoHealButton = addButton(windows['mapSettingsWindow'], '60%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+	autoHealButton.state.chosen = false
+	autoHealButton.OnClick = {
+		function()
+			autoHealButton.state.chosen = not autoHealButton.state.chosen
+			if autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
+				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+				autoHealState = "disabled"
+			else
+				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+				autoHealState = "enabled"
+			end
+		end
+	}
 	mapBriefingTextBox.font.shadow = false
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -2933,6 +2998,8 @@ function newMap()
 	-- Map
 	mapName = "Map"
 	mapBriefing = "Map Briefing"
+	cameraAutoState = "enabled"
+	autoHealState = "disabled"
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -3116,6 +3183,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	-- Global description
 	mapName = loadedTable.description.name
 	mapBriefing = loadedTable.description.briefing
+	cameraAutoState = loadedTable.description.cameraAuto
+	autoHealState = loadedTable.description.autoHeal
 	
 	loadedTable = nil
 	
@@ -3249,6 +3318,8 @@ function encodeSaveTable()
 	savedTable.description = {}
 	savedTable.description.name = mapName
 	savedTable.description.briefing = mapBriefing
+	savedTable.description.cameraAuto = cameraAutoState
+	savedTable.description.autoHeal = autoHealState
 	
 	-- Units
 	local units = Spring.GetAllUnits()
