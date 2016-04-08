@@ -146,8 +146,8 @@ actions_list = {
 	{
 		type = "orderUnit",
 		filter = "Order",
-		typeText = "Order unit",
-		text = "Order <Unit> to begin <Command>.",
+		typeText = "Order unit (untargeted order)",
+		text = "Order <Unit> to begin <Command> with <Parameters>.",
 		attributes = {
 			{
 				text = "<Unit>",
@@ -158,6 +158,11 @@ actions_list = {
 				text = "<Command>",
 				type = "command",
 				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "text",
+				id = "parameters"
 			}
 		}
 	},
@@ -210,8 +215,8 @@ actions_list = {
 	{
 		type = "orderUnitGroup",
 		filter = "Order",
-		typeText = "Order units of group",
-		text = "Order units of <Group> to begin <Command>.",
+		typeText = "Order units of group (untargeted order)",
+		text = "Order units of <Group> to begin <Command> with <Parameters>.",
 		attributes = {
 			{
 				text = "<Group>",
@@ -222,6 +227,11 @@ actions_list = {
 				text = "<Command>",
 				type = "command",
 				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "text",
+				id = "parameters"
 			}
 		}
 	},
@@ -274,8 +284,8 @@ actions_list = {
 	{
 		type = "orderUnitTeam",
 		filter = "Order",
-		typeText = "Order units of team",
-		text = "Order units of <Team> to begin <Command>.",
+		typeText = "Order units of team (untargeted order)",
+		text = "Order units of <Team> to begin <Command> with <Parameters>.",
 		attributes = {
 			{
 				text = "<Team>",
@@ -286,6 +296,11 @@ actions_list = {
 				text = "<Command>",
 				type = "command",
 				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "text",
+				id = "parameters"
 			}
 		}
 	},

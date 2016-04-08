@@ -20,14 +20,13 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- autoheal local
+-- Modification de l'équipe d'une unité
 -- liste widget
 -- Conditions unité en train de se faire attaquer
 -- Choix unité créée par une action
 -- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Ajout d'une éventuelle boîte de dialogue pour ajouter des paramètres sur une commande
--- Modification de l'équipe d'une unité
--- Paramètres additionnels pour le niveau (camera auto etc)
 -- Choix de la carte lors de la création d'un nouveau niveau
 
 -- Passer l'éditeur sur la dernière version de Spring
@@ -213,7 +212,6 @@ local minimapButton
 local minimapState = "disabled"
 local mouseStateButton
 local mouseState = "disabled"
-
 
 -- Save states variables
 local saveStates = {}
@@ -586,7 +584,7 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', "\255".."\56".."\44".."\230"..EDITOR_FILE_NEW, newMapFrame) -- needs a rework
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame) -- TODO needs a rework
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
 	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, exportMapFrame)
@@ -2520,15 +2518,11 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		end
 		if attr.type == "number" then
 			editBox.updateFunction = function()
-				local cursor = editBox.cursor
-				editBox:SetText(string.gsub(editBox.text, "%D+", ""))
-				editBox.cursor = cursor - 1
-				editBox:InvalidateSelf()
 				a.params[attr.id] = tonumber(editBox.text)
 			end
 		elseif attr.type == "text" then
 			editBox.updateFunction = function()
-				a.params[attr.id] = tonumber(editBox.text)
+				a.params[attr.id] = editBox.text
 			end
 		end
 		editBox.isEditBox = true
