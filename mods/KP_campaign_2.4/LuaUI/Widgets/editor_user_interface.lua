@@ -19,15 +19,20 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
+-- autoheal local
+-- liste widget
+-- minimap
+-- mouse
 -- Couleurs briefing
+-- Conditions unité en train de se faire attaquer
+-- Choix unité créée par une action
 -- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Ajout d'une éventuelle boîte de dialogue pour ajouter des paramètres sur une commande
 -- Modification de l'équipe d'une unité
 -- Paramètres additionnels pour le niveau (camera auto etc)
 -- Choix de la carte lors de la création d'un nouveau niveau
--- 
--- 
+
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -207,6 +212,10 @@ local cameraAutoButton
 local cameraAutoState = "enabled"
 local autoHealButton
 local autoHealState = "disabled"
+local minimapButton
+local minimapState = "disabled"
+local mouseStateButton
+local mouseState = "disabled"
 
 
 -- Save states variables
@@ -492,6 +501,20 @@ function mapSettingsFrame()
 	elseif autoHealState == "disabled" and autoHealButton.state.chosen then
 		autoHealButton.state.chosen = false
 		autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+	end
+	if mouseState == "enabled" and not mouseStateButton.state.chosen then
+		mouseStateButton.state.chosen = true
+		mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+	elseif mouseState == "disabled" and mouseStateButton.state.chosen then
+		mouseStateButton.state.chosen = false
+		mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+	end
+	if minimapState == "enabled" and not minimapButton.state.chosen then
+		minimapButton.state.chosen = true
+		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+	elseif minimapState == "disabled" and minimapButton.state.chosen then
+		minimapButton.state.chosen = false
+		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	end
 end
 
@@ -860,9 +883,11 @@ function initMapSettingsWindow()
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
-	local panel = addPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '40%')
+	local panel = addPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
 	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
-	cameraAutoButton = addButton(windows['mapSettingsWindow'], '10%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	mapBriefingTextBox.font.shadow = false
+	
+	cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 	cameraAutoButton.state.chosen = true
 	cameraAutoButton.OnClick = {
 		function()
@@ -876,7 +901,8 @@ function initMapSettingsWindow()
 			end
 		end
 	}
-	autoHealButton = addButton(windows['mapSettingsWindow'], '60%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+	
+	autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 	autoHealButton.state.chosen = false
 	autoHealButton.OnClick = {
 		function()
@@ -890,7 +916,36 @@ function initMapSettingsWindow()
 			end
 		end
 	}
-	mapBriefingTextBox.font.shadow = false
+	
+	mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+	mouseStateButton.state.chosen = false
+	mouseStateButton.OnClick = {
+		function()
+			mouseStateButton.state.chosen = not mouseStateButton.state.chosen
+			if mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+				mouseState = "disabled"
+			else
+				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+				mouseState = "enabled"
+			end
+		end
+	}
+	
+	minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+	minimapButton.state.chosen = false
+	minimapButton.OnClick = {
+		function()
+			minimapButton.state.chosen = not minimapButton.state.chosen
+			if minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
+				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+				minimapState = "disabled"
+			else
+				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+				minimapState = "enabled"
+			end
+		end
+	}
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -3000,6 +3055,8 @@ function newMap()
 	mapBriefing = "Map Briefing"
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
+	mouseState = "disabled"
+	minimapState = "disabled"
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -3185,6 +3242,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	mapBriefing = loadedTable.description.briefing
 	cameraAutoState = loadedTable.description.cameraAuto
 	autoHealState = loadedTable.description.autoHeal
+	mouseState = loadedTable.description.mouse
+	minimapState = loadedTable.description.minimap
 	
 	loadedTable = nil
 	
@@ -3320,6 +3379,8 @@ function encodeSaveTable()
 	savedTable.description.briefing = mapBriefing
 	savedTable.description.cameraAuto = cameraAutoState
 	savedTable.description.autoHeal = autoHealState
+	savedTable.description.mouse = mouseState
+	savedTable.description.minimap = minimapState
 	
 	-- Units
 	local units = Spring.GetAllUnits()
