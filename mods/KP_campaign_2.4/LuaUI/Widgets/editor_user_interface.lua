@@ -21,9 +21,6 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- autoheal local
 -- liste widget
--- minimap
--- mouse
--- Couleurs briefing
 -- Conditions unité en train de se faire attaquer
 -- Choix unité créée par une action
 -- Continuer à ajouter des spots pour CTRL+Z
@@ -589,7 +586,7 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame) -- needs a rework
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', "\255".."\56".."\44".."\230"..EDITOR_FILE_NEW, newMapFrame) -- needs a rework
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
 	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, exportMapFrame)
@@ -2961,24 +2958,21 @@ function updateMapSettings()
 	mapName = mapNameEditBox.text
 	mapBriefing = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
-	-- FIXME : try to implement this, but it's not working atm
-	--	local text = mapBriefingEditBox.text
-	--	local newText = text
-	--	for word in string.gmatch(text, "%[#%w*#.-%]") do
-	--		local color = string.gsub(word, "#[^#]+$", "")
-	--		color = string.gsub(color, "%[#", "")
-	--		local red = tonumber(string.sub(color, 1, 2), 16)
-	--		local green = tonumber(string.sub(color, 3, 4))
-	--		local blue = tonumber(string.sub(color, 5, 6))
-	--		local replacement = "\\255\\"..tostring(red).."\\"..tostring(green).."\\"..tostring(blue)
-	--		local newWord = string.gsub(word, "%[#%w*#", replacement)
-	--		newWord = string.gsub(newWord, "%]", "\\255\\255\\255\\255")
-	--		oldWord = string.gsub(word, "%[", "%%[")
-	--		newText = string.gsub(newText, oldWord, newWord)
-	--	end
-	--	mapBriefingTextBox:SetText(newText)
-	
-		mapBriefingTextBox:SetText(mapBriefingEditBox.text)
+		local text = mapBriefingEditBox.text
+		local newText = text
+		for word in string.gmatch(text, "%[#%w*#.-%]") do
+			local color = string.gsub(word, "#[^#]+$", "")
+			color = string.gsub(color, "%[#", "")
+			local red = tonumber(string.sub(color, 1, 2), 16)
+			local green = tonumber(string.sub(color, 3, 4), 16)
+			local blue = tonumber(string.sub(color, 5, 6), 16)
+			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
+			local newWord = string.gsub(word, "%[#%w*#", replacement)
+			newWord = string.gsub(newWord, "%]", "\255\255\255\255")
+			oldWord = string.gsub(word, "%[", "%%[")
+			newText = string.gsub(newText, oldWord, newWord)
+		end
+		mapBriefingTextBox:SetText(newText)
 	end
 end
 
