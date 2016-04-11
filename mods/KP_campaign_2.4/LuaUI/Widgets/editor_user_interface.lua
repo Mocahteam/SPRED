@@ -3529,6 +3529,9 @@ function loadState(direction)
 	configureWindowToBeShown = configureEventButton.state.chosen
 	unitGroupsWindowToBeShown = (unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS)
 	if (loadIndex < #saveStates and direction > 0) or (loadIndex > 1 and direction < 0) then
+		if loadIndex == 1 then
+			saveState()
+		end
 		loadIndex = loadIndex + direction
 		loadedTable = saveStates[loadIndex]
 		loadMap("")
