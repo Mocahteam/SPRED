@@ -12,13 +12,7 @@ local function Start ()
 end
 
 local function ShowBriefing ()
-	local msg
-	if lang == "fr" then
-		msg = "Editeur de niveaux\n \n \nSalut.\n \n"..gray.."Appuyez sur Echap pour continuer"
-	else
-		msg = "Level Editor\n \n \nWazup.\n \n"..gray.."Press Escape to continue"
-	end
-	Script.LuaRules.showMessage(msg, false, 500)
+
 end
 
 local function Update (frameNumber)

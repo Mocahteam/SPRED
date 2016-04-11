@@ -148,6 +148,73 @@ conditions_list = {
 		}
 	},
 	{
+		type = "unitUnderAttack",
+		filter = "Attacked",
+		typeText = "Unit is under attack",
+		text = "<Unit> is under attack.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			}
+		}
+	},
+	{
+		type = "teamUnderAttack",
+		filter = "Attacked",
+		typeText = "Units of team are under attack",
+		text = "<Number> units of <Team> are under attack.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "numberComparison"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "groupUnderAttack",
+		filter = "Attacked",
+		typeText = "Units of group are under attack",
+		text = "<Number> units of <Group> are under attack.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "numberComparison"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			}
+		}
+	},
+	{
+		type = "typeUnderAttack",
+		filter = "Attacked",
+		typeText = "Units of specific type are under attack",
+		text = "<Number> units of type <UnitType> are under attack.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "numberComparison"
+			},
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			}
+		}
+	},
+	{
 		type = "deadUnit",
 		filter = "Dead",
 		typeText = "Unit is dead",

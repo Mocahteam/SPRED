@@ -22,11 +22,8 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- Modification de l'équipe d'une unité
 
 -- liste widget
--- Conditions unité en train de se faire attaquer
--- Choix unité créée par une action
 -- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
--- Ajout d'une éventuelle boîte de dialogue pour ajouter des paramètres sur une commande
 -- Choix de la carte lors de la création d'un nouveau niveau
 
 -- Passer l'éditeur sur la dernière version de Spring
@@ -199,6 +196,7 @@ local forceUpdateVariables = false
 local commandsToID = {}
 local idToCommands = {}
 local sortedCommandsList = {}
+local selectCreatedUnitsWindow
 
 -- Map settings variables
 local mapName = "Map"
@@ -226,6 +224,7 @@ local saveCurrentCondition = nil
 local saveCurrentAction = nil
 local variablesWindowToBeShown = false
 local configureWindowToBeShown = false
+local unitGroupsWindowToBeShown = false
 local toSave = false
 
 -- Mouse variables
@@ -436,6 +435,9 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	currentAction = nil
 	globalStateMachine:setCurrentState(globalStateMachine.states.NONE)
 	triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+	if selectCreatedUnitsWindow then
+		selectCreatedUnitsWindow:Dispose()
+	end
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -623,16 +625,6 @@ function initUnitWindow()
 	windows['unitListWindow'] = addWindow(Screen0, "85%", '5%', '15%', '80%')
 	addLabel(windows['unitListWindow'], '0%', '1%', '100%', '5%', EDITOR_UNITS_LIST)
 	unitListScrollPanel = addScrollPanel(windows['unitListWindow'], '0%', '5%', '100%', '85%')
-	local showGroupsWindow = function()
-		Screen0:AddChild(windows["unitGroupsWindow"])
-		for k, p in pairs(groupPanels) do
-			p:InvalidateSelf()
-		end
-		Screen0:RemoveChild(windows['unitListWindow'])
-		Screen0:RemoveChild(windows['unitWindow'])
-		updateGroupListUnitList()
-		unitStateMachine:setCurrentState(unitStateMachine.states.UNITGROUPS)
-	end
 	local showGroupsButton = addButton(windows['unitListWindow'], '0%', '90%', '100%', '10%', EDITOR_UNITS_GROUPS_SHOW, showGroupsWindow)
 	
 	-- Unit Groups Window
@@ -1390,6 +1382,16 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		end
 	end
 end
+function showGroupsWindow()
+	Screen0:AddChild(windows["unitGroupsWindow"])
+	for k, p in pairs(groupPanels) do
+		p:InvalidateSelf()
+	end
+	Screen0:RemoveChild(windows['unitListWindow'])
+	Screen0:RemoveChild(windows['unitWindow'])
+	updateGroupListUnitList()
+	unitStateMachine:setCurrentState(unitStateMachine.states.UNITGROUPS)
+end
 function addUnitToGroup(group, unit)
 	if group ~= nil then
 		if not findInTable(group.units, unit) then
@@ -1403,6 +1405,7 @@ function addSelectedUnitsToGroup(group)
 	for i, u in ipairs(unitSelection) do
 		addUnitToGroup(group, u)
 	end
+	saveState()
 end
 function addChosenUnitsToSelectedGroups() -- Add selected units to the selected groups (in the groups frame)
 	for groupKey, groupButton in pairs(selectGroupButtons) do
@@ -1420,12 +1423,14 @@ function addChosenUnitsToSelectedGroups() -- Add selected units to the selected 
 		unitButton.state.chosen = false
 		unitButton:InvalidateSelf()
 	end
+	saveState()
 end
 function removeSelectedUnitsFromGroup(group)
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
 		removeUnitFromGroup(group, u)
 	end
+	saveState()
 end
 function removeUnitFromGroup(group, unit)
 	local units = group.units
@@ -1435,6 +1440,7 @@ function removeUnitFromGroup(group, unit)
 			break
 		end
 	end
+	saveState()
 end
 function addUnitGroup(name)
 	local unitSelection = Spring.GetSelectedUnits()
@@ -1459,9 +1465,11 @@ function addEmptyUnitGroup()
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
+	saveState()
 end
 function deleteUnitGroup(id)
 	unitGroups[id] = nil
+	saveState()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2521,12 +2529,18 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 	elseif attr.type == "unit" then
 		local unitLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 		if a.params[attr.id] then
-			local u = a.params[attr.id]
-			local uDefID = Spring.GetUnitDefID(u)
-			local name = UnitDefs[uDefID].humanName
-			local team = Spring.GetUnitTeam(u)
-			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-			unitLabel:SetCaption(name.." ("..tostring(u)..")")
+			local param = a.params[attr.id]
+			if type(param) == "string" then
+				unitLabel.font.color = {1, 1, 1, 1}
+				unitLabel:SetCaption(param)
+			else
+				local u = param
+				local uDefID = Spring.GetUnitDefID(u)
+				local name = UnitDefs[uDefID].humanName
+				local team = Spring.GetUnitTeam(u)
+				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+				unitLabel:SetCaption(name.." ("..tostring(u)..")")
+			end
 		end
 		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickUnit = function()
@@ -2536,6 +2550,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
+			showCreatedUnitsWindow()
 		end
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
@@ -2970,6 +2985,41 @@ function getCommandsList(encodedList)
 		idToCommands[id] = c
 	end
 	table.sort(sortedCommandsList)
+end
+function showCreatedUnitsWindow()
+	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
+	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGER_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
+	local sp = addScrollPanel(selectCreatedUnitsWindow, '0%', '10%', '100%', '90%')
+	local count = 0
+	for i, e in ipairs(events) do
+		for ii, a in ipairs(e.actions) do
+			if a.type == "createUnitAtPosition" or a.type == "createUnitsInZone" then
+				local but = addButton(sp, "0%", count * 40, "100%", 40, a.name, nil)
+				local pickFunction = function()
+					local ca = {}
+					if currentAction then
+						ca = events[currentEvent].actions[currentAction]
+					elseif currentCondition then
+						ca = events[currentEvent].conditions[currentCondition]
+					end
+					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+					ca.params[changedParam] = a.name
+					Screen0:RemoveChild(selectCreatedUnitsWindow)
+					Screen0:AddChild(windows["triggerWindow"])
+					Screen0:AddChild(windows["eventWindow"])
+					if currentAction then
+						Screen0:AddChild(windows["actionWindow"])
+						drawActionFrame(false)
+					elseif currentCondition then
+						Screen0:AddChild(windows["conditionWindow"])
+						drawConditionFrame(false)
+					end
+				end
+				but.OnClick = { pickFunction }
+				count = count + 1
+			end
+		end
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -3477,6 +3527,7 @@ function loadState(direction)
 	saveCurrentCondition = currentCondition
 	variablesWindowToBeShown = editVariablesButton.state.chosen
 	configureWindowToBeShown = configureEventButton.state.chosen
+	unitGroupsWindowToBeShown = (unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS)
 	if (loadIndex < #saveStates and direction > 0) or (loadIndex > 1 and direction < 0) then
 		loadIndex = loadIndex + direction
 		loadedTable = saveStates[loadIndex]
@@ -3497,6 +3548,10 @@ function continueLoadState()
 	if variablesWindowToBeShown then
 		showVariablesFrame()
 	end
+	if unitGroupsWindowToBeShown then
+		showGroupsWindow()
+	end
+	
 	loadLock = true
 end
 function requestSave()

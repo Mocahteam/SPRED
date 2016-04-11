@@ -2,6 +2,7 @@ filters_list = {
 	"All",
 	"Game",
 	"Zone",
+	"Attacked",
 	"Dead",
 	"Kill",
 	"HP",
