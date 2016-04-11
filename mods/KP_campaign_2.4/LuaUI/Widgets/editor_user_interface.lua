@@ -42,6 +42,7 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
+local initialize = false
 
 -- File Variables
 local fileButtons = {}
@@ -212,6 +213,7 @@ local minimapButton
 local minimapState = "disabled"
 local mouseStateButton
 local mouseState = "disabled"
+local customWidgets = {}
 
 -- Save states variables
 local saveStates = {}
@@ -702,6 +704,7 @@ function initForcesWindow()
 			if not enabledTeams[team] then
 				removeTeamFromTables(team)
 			end
+			saveState()
 		end
 		enabledTeams[team] = false -- Disable all teams at start
 		enableTeamButtons[team].state.chosen = false
@@ -712,8 +715,8 @@ function initForcesWindow()
 		-- Controlled by
 		teamControlLabels[team] = addLabel(teamConfigPanels[team], '35%', '20%', '20%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL, 20, "center", nil, "center")
 		teamControlButtons[team] = {}
-		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" end)
-		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" end)
+		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" saveState() end)
+		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" saveState() end)
 		teamControl[team] = "player"
 		-- Color
 		teamColor[team] = {}
@@ -1917,6 +1920,7 @@ function addTeamToSelectedAllyTeam(team)
 		table.insert(allyTeams[selectedAllyTeam], team)
 		table.sort(allyTeams[selectedAllyTeam])
 	end
+	saveState()
 end
 function removeTeamFromAllyTeam(allyTeam, team)
 	local at = allyTeams[allyTeam]
@@ -1927,6 +1931,7 @@ function removeTeamFromAllyTeam(allyTeam, team)
 		end
 	end
 	table.sort(at)
+	saveState()
 end
 function removeTeamFromTables(team)
 	for k, at in pairs(allyTeams) do
@@ -3049,6 +3054,15 @@ function updateMapSettings()
 		mapBriefingTextBox:SetText(newText)
 	end
 end
+function initWidgetList()
+	for k, w in pairs(WG.widgetList) do
+		local customWidget = {}
+		customWidget.name = k
+		customWidget.active = w.active
+		customWidget.desc = w.desc
+		table.insert(customWidgets, customWidget)
+	end
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -3495,7 +3509,10 @@ function encodeSaveTable()
 		savedTable.teams[t] = {}
 		savedTable.teams[t].control = teamControl[t]
 		savedTable.teams[t].enabled = enabledTeams[t]
-		savedTable.teams[t].color = teamColor[t]
+		savedTable.teams[t].color = {}
+		savedTable.teams[t].color.red = teamColor[t].red
+		savedTable.teams[t].color.green = teamColor[t].green
+		savedTable.teams[t].color.blue = teamColor[t].blue
 	end
 	
 	-- AllyTeams
@@ -3510,7 +3527,7 @@ function encodeSaveTable()
 	return savedTable
 end
 function saveState()
-	if loadLock then
+	if loadLock and not initialize then
 		local savedTable = encodeSaveTable()
 		savedTable = json.decode(json.encode(savedTable))
 		for i = 1, loadIndex-1, 1 do
@@ -3696,6 +3713,7 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
+	initialize = true
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
@@ -3708,6 +3726,8 @@ function widget:Initialize()
 	initMouseCursors()
 	initWindows()
 	fileFrame()
+	initWidgetList()
+	initialize = false
 	saveState()
 end
 function widget:Update(delta)
