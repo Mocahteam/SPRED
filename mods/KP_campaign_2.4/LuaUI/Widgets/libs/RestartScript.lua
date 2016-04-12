@@ -47,6 +47,9 @@ function replaceSection(fullfile,sectionName,replacement)
 end
 
 function updateValues(fullFile,tableOperation)
+  -- works as follow : will replace the entire sections. 
+  -- For each section concerned a copy is made and replacements are done within this section
+  -- If the attribute is not present then it is added at the end of the section
   for section,operations in pairs(tableOperation) do
     local regexSection="%["..section.."%]%s*%{([^%}]*)%}"
     local contentSection=string.match(fullFile,regexSection) -- contain the content of the section
@@ -55,11 +58,11 @@ function updateValues(fullFile,tableOperation)
       if(string.match(contentSection,attribute.."=[^;]*;")) then
         contentSection,_=string.gsub(contentSection,attribute.."=[^;]*;",attribute.."="..value..";",1)
       else
-        contentSection=contentSection.."\r\n\t\t"..attribute.."="..value..";"
+        contentSection=contentSection.."\r\n\t\t"..attribute.."="..value..";"  -- If the attribute is not present then it is added at the end of the section
       end
     end
     contentSection="["..section.."]\r\n\t{"..contentSection.."\r\n\t}"
-    fullFile=replaceSection(fullFile,section,contentSection)
+    fullFile=replaceSection(fullFile,section,contentSection) -- will replace the old section by the newly created section
   end
     --local fullFile=string.gsub(fullFile,"%["..section.."%]%s*%{([^%}]*)%}",contentSection) -- replace the content of the action
   return fullFile 
