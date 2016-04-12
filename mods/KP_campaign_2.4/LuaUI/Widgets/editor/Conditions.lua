@@ -61,7 +61,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unitZone",
+		type = "unit_zone",
 		filter = "Zone",
 		typeText = "Unit is in a zone",
 		text = "<Unit> is in <Zone>.",
@@ -79,7 +79,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unitTeamZone",
+		type = "team_zone",
 		filter = "Zone",
 		typeText = "Units of team are in a zone",
 		text = "<Number> units of <Team> are in <Zone>.",
@@ -102,7 +102,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unitGroupZone",
+		type = "group_zone",
 		filter = "Zone",
 		typeText = "Units of group are in a zone",
 		text = "<Number> units of <Group> are in <Zone>.",
@@ -125,7 +125,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unitTypeZone",
+		type = "type_zone",
 		filter = "Zone",
 		typeText = "Units of specific type are in a zone",
 		text = "<Number> units of type <UnitType> are in <Zone>.",
@@ -148,7 +148,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unitUnderAttack",
+		type = "unit_underAttack",
 		filter = "Attacked",
 		typeText = "Unit is under attack",
 		text = "<Unit> is under attack.",
@@ -161,7 +161,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "teamUnderAttack",
+		type = "team_underAttack",
 		filter = "Attacked",
 		typeText = "Units of team are under attack",
 		text = "<Number> units of <Team> are under attack.",
@@ -179,7 +179,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "groupUnderAttack",
+		type = "group_underAttack",
 		filter = "Attacked",
 		typeText = "Units of group are under attack",
 		text = "<Number> units of <Group> are under attack.",
@@ -197,7 +197,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "typeUnderAttack",
+		type = "type_underAttack",
 		filter = "Attacked",
 		typeText = "Units of specific type are under attack",
 		text = "<Number> units of type <UnitType> are under attack.",
@@ -215,7 +215,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "deadUnit",
+		type = "unit_dead",
 		filter = "Dead",
 		typeText = "Unit is dead",
 		text = "<Unit> is dead.",
@@ -228,7 +228,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "deadTeamUnits",
+		type = "team_dead",
 		filter = "Dead",
 		typeText = "Units of team are dead",
 		text = "<Number> units of <Team> are dead.",
@@ -246,7 +246,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "deadGroupUnits",
+		type = "group_dead",
 		filter = "Dead",
 		typeText = "Units of group are dead",
 		text = "<Number> units of <Group> are dead.",
@@ -264,7 +264,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "deadTypeUnits",
+		type = "type_dead",
 		filter = "Dead",
 		typeText = "Units of specific type are dead",
 		text = "<Number> units of type <UnitType> are dead.",
@@ -282,7 +282,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "teamKilledUnits",
+		type = "unit_killed",
 		filter = "Kill",
 		typeText = "Team killed units",
 		text = "<Team> killed <Number> units.",
@@ -300,7 +300,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "teamKilledUnitsType",
+		type = "type_killed",
 		filter = "Kill",
 		typeText = "Team killed units of specific type",
 		text = "<Team> killed <Number> units of type <UnitType>.",
@@ -323,7 +323,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "hpUnit",
+		type = "unit_hp",
 		filter = "HP",
 		typeText = "HP of unit",
 		text = "Hit points of <Unit> are at <Percentage> %.",
@@ -341,7 +341,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "hpUnitGroup",
+		type = "group_hp",
 		filter = "HP",
 		typeText = "HP of units of group",
 		text = "Hit points of <Number> units of <Group> are at <Percentage> %.",
@@ -364,7 +364,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "hpUnitTeam",
+		type = "team_hp",
 		filter = "HP",
 		typeText = "HP of units of team",
 		text = "Hit points of <Number> units of <Team> are at <Percentage> %.",
