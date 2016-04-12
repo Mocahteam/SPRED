@@ -544,6 +544,10 @@ function teamConfig()
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
 			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
 		end
+		local r, g, b = teamColor[t].red, teamColor[t].green, teamColor[t].blue
+		teamColorTrackbars[t].red:SetValue(r)
+		teamColorTrackbars[t].green:SetValue(g)
+		teamColorTrackbars[t].blue:SetValue(b)
 	end
 end
 function allyTeam()
@@ -730,6 +734,9 @@ function initForcesWindow()
 		teamColorTrackbars[team].green = addTrackbar(teamConfigPanels[team], tostring(60 + 20/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
 		teamColorTrackbars[team].blue = addTrackbar(teamConfigPanels[team], tostring(60 + 40/3)..'%', '50%', tostring(20/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
 		local function updateImage()
+			teamColor[team].red = teamColorTrackbars[team].red.value
+			teamColor[team].green = teamColorTrackbars[team].green.value
+			teamColor[team].blue = teamColorTrackbars[team].blue.value
 			teamColorImage[team].color = {
 				teamColorTrackbars[team].red.value,
 				teamColorTrackbars[team].green.value,
@@ -3219,9 +3226,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		teamControl[t] = loadedTable.teams[tostring(t)].control
 		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
-		for kk, col in pairs(loadedTable.teams[tostring(t)].color) do
-			teamColor[t][kk] = col
-		end
+		teamColor[t].red = loadedTable.teams[tostring(t)].color.red
+		teamColor[t].blue = loadedTable.teams[tostring(t)].color.blue
+		teamColor[t].green = loadedTable.teams[tostring(t)].color.green
 	end
 	
 	-- Ally Teams
