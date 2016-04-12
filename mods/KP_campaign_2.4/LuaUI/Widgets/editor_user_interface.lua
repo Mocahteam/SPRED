@@ -21,7 +21,6 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- Modification de l'équipe d'une unité
 
--- liste widget
 -- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Choix de la carte lors de la création d'un nouveau niveau
@@ -202,6 +201,7 @@ local selectCreatedUnitsWindow
 -- Map settings variables
 local mapName = "Map"
 local mapBriefing = "Map Briefing"
+local mapBriefingRaw = "Map Briefing"
 local mapNameEditBox
 local mapBriefingEditBox
 local mapBriefingTextBox
@@ -493,7 +493,7 @@ function mapSettingsFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
 	mapNameEditBox:SetText(mapName)
-	mapBriefingEditBox:SetText(mapBriefing)
+	mapBriefingEditBox:SetText(mapBriefingRaw)
 	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
 		cameraAutoButton.state.chosen = true
 		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
@@ -853,6 +853,7 @@ function initTriggerWindow()
 			customTriggerEditBox:SetText("")
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..trig)
 		end
+		saveState()
 	end
 	local useCustomTrigger = function()
 		if currentEvent then
@@ -860,6 +861,7 @@ function initTriggerWindow()
 			e.trigger = customTriggerEditBox.text
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
 		end
+		saveState()
 	end
 	currentTriggerLabel = addLabel(windows['configureEvent'], '2%', '19%', '96%', '2%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13, "left")
 	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
@@ -1476,6 +1478,7 @@ function addUnitGroup(name)
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
+	saveState()
 end
 function addEmptyUnitGroup()
 	unitGroups[groupNumber] = {}
@@ -2031,6 +2034,7 @@ function createNewEvent()
 	deleteActionButtons[event.id] = {}
 	
 	editEvent(#events) -- edit this event
+	saveState()
 end
 function editEvent(i)
 	removeSecondWindows()
@@ -2052,6 +2056,7 @@ function removeEvent(i)
 	removeSecondWindows() -- close windows to prevent bugs
 	removeThirdWindows() 
 	currentEvent = nil
+	saveState()
 end
 function createNewCondition()
 	if currentEvent then
@@ -2064,6 +2069,7 @@ function createNewCondition()
 		conditionNumber = conditionNumber + 1
 		
 		editCondition(#(e.conditions))
+		saveState()
 	end
 end
 function editCondition(i)
@@ -2084,6 +2090,7 @@ function removeCondition(i)
 		removeThirdWindows() -- close windows to prevent bugs
 		currentCondition = nil
 		currentAction = nil
+		saveState()
 	end
 end
 function createNewAction()
@@ -2098,6 +2105,7 @@ function createNewAction()
 		actionNumber = actionNumber + 1
 		
 		editAction(#(e.actions))
+		saveState()
 	end
 end
 function editAction(i)
@@ -2118,6 +2126,7 @@ function removeAction(i)
 		removeThirdWindows() -- close windows to prevent bugs
 		currentAction = nil
 		currentCondition = nil
+		saveState()
 	end
 end
 function removeSecondWindows() -- Removes the middle window
@@ -2691,6 +2700,7 @@ function configureEvent() -- Show the event configuration window
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
+						saveState()
 					end
 					local but = addButton(actionSequenceScrollPanel, '0%', (i - 1) * 40, '20%', 40, "", moveUpAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
@@ -2717,6 +2727,7 @@ function configureEvent() -- Show the event configuration window
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
+						saveState()
 					end
 					local but = addButton(actionSequenceScrollPanel, '80%', (i - 1) * 40, '20%', 40, "", moveDownAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
@@ -2787,6 +2798,8 @@ function importCondition()
 	table.insert(ce.conditions, newCondition)
 	
 	conditionNumber = conditionNumber + 1
+	
+	saveState()
 end
 function importAction()
 	local e = events[importEventComboBox.selected]
@@ -2817,7 +2830,8 @@ function importAction()
 	actionNumber = actionNumber + 1
 	
 	updateActionSequence = true
-	configureEvent()
+	
+	saveState()
 end
 function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
 	if currentEvent then
@@ -2872,11 +2886,14 @@ function addVariable()
 	table.insert(triggerVariables, variable)
 	
 	variablesNumber = variablesNumber + 1
+	
+	saveState()
 end
 function removeVariable(var)
 	for i, v in ipairs(triggerVariables) do
 		if var == v then
 			table.remove(triggerVariables, i)
+			saveState()
 			break
 		end
 	end
@@ -3060,24 +3077,24 @@ end
 
 function updateMapSettings()
 	mapName = mapNameEditBox.text
-	mapBriefing = mapBriefingEditBox.text
+	mapBriefingRaw = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
 		local text = mapBriefingEditBox.text
 		local newText = text
-		for word in string.gmatch(text, "%[#%w*#.-%]") do
+		for word in string.gmatch(text, "/#%w*#.-/") do
 			local color = string.gsub(word, "#[^#]+$", "")
-			color = string.gsub(color, "%[#", "")
+			color = string.gsub(color, "/#", "")
 			local red = tonumber(string.sub(color, 1, 2), 16)
 			local green = tonumber(string.sub(color, 3, 4), 16)
 			local blue = tonumber(string.sub(color, 5, 6), 16)
 			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
-			local newWord = string.gsub(word, "%[#%w*#", replacement)
-			newWord = string.gsub(newWord, "%]", "\255\255\255\255")
-			oldWord = string.gsub(word, "%[", "%%[")
-			newText = string.gsub(newText, oldWord, newWord)
+			local newWord = string.gsub(word, "/#%w*#", replacement)
+			newWord = string.gsub(newWord, "/", "\255\255\255\255")
+			newText = string.gsub(newText, word, newWord)
 		end
 		mapBriefingTextBox:SetText(newText)
 	end
+	mapBriefing = mapBriefingTextBox.text
 end
 function initWidgetList()
 	customWidgets = {}
@@ -3193,6 +3210,7 @@ function newMap()
 	-- Map
 	mapName = "Map"
 	mapBriefing = "Map Briefing"
+	mapBriefingRaw = "Map Briefing"
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
@@ -3381,6 +3399,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	
 	-- Global description
 	mapName = loadedTable.description.name
+	mapBriefingRaw = loadedTable.description.briefingRaw
 	mapBriefing = loadedTable.description.briefing
 	cameraAutoState = loadedTable.description.cameraAuto
 	autoHealState = loadedTable.description.autoHeal
@@ -3525,8 +3544,10 @@ function encodeSaveTable()
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
+	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapName
 	savedTable.description.briefing = mapBriefing
+	savedTable.description.briefingRaw = mapBriefingRaw
 	savedTable.description.cameraAuto = cameraAutoState
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
@@ -4217,7 +4238,6 @@ function widget:KeyPress(key, mods)
 			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
 				addUnitGroup(newUnitGroupEditBox.text)
 				clearTemporaryWindows()
-				saveState()
 				return true
 			end
 		end
