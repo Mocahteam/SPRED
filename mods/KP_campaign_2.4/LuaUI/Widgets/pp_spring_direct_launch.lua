@@ -154,7 +154,8 @@ local function MissionsMenu()
 	local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
 	local ItemSize=math.min((vsy*(1-1/6))/(2*(#MissionsList+1))-2,vsy/24)
 	for MissionIndex,MissionFileName in ipairs(MissionsList) do
-		local EndIndex=(string.find(MissionFileName,".",string.len(MissionFileName)-4,true) or 1+string.len(MissionFileName))-1
+		local EndIndex=(string.find(MissionFileName,".",1,true) or 1+string.len(MissionFileName))-1
+		-- the fourth argument (true) avoid considering "." as joker and do a plain search instead
 		local BeginIndex=1
 		repeat
 			local NewBeginIndex=string.find(MissionFileName,"/",BeginIndex,true) or string.find(MissionFileName,"\\",BeginIndex,true)
