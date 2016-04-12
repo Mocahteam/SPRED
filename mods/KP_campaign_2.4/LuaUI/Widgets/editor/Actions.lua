@@ -2,7 +2,7 @@ VFS.Include("LuaUI/Widgets/editor/TextColors.lua")
 
 actions_list = {
 	{
-		type = "teamWin",
+		type = "win",
 		filter = "Game",
 		typeText = "Team wins",
 		text = "<Team> wins.",
@@ -15,7 +15,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "teamLose",
+		type = "lose",
 		filter = "Game",
 		typeText = "Team loses",
 		text = "<Team> loses.",
@@ -144,7 +144,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnit",
+		type = "unit_order",
 		filter = "Order",
 		typeText = "Order unit (untargeted order)",
 		text = "Order <Unit> to begin <Command> with <Parameters>.",
@@ -167,7 +167,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitPosition",
+		type = "unit_orderPosition",
 		filter = "Order",
 		typeText = "Order unit to position",
 		text = "Order <Unit> to begin <Command> towards <Position>.",
@@ -190,7 +190,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitTarget",
+		type = "unit_orderTarget",
 		filter = "Order",
 		typeText = "Order unit to target",
 		text = "Order <Unit> to begin <Command> towards <Target>.",
@@ -213,7 +213,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitGroup",
+		type = "group_order",
 		filter = "Order",
 		typeText = "Order units of group (untargeted order)",
 		text = "Order units of <Group> to begin <Command> with <Parameters>.",
@@ -236,7 +236,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitGroupPosition",
+		type = "group_orderPosition",
 		filter = "Order",
 		typeText = "Order units of group to position",
 		text = "Order units of <Group> to begin <Command> towards <Position>.",
@@ -259,7 +259,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitGroupTarget",
+		type = "group_orderTarget",
 		filter = "Order",
 		typeText = "Order units of group to target",
 		text = "Order units of <Group> to begin <Command> towards <Target>.",
@@ -282,7 +282,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitTeam",
+		type = "team_order",
 		filter = "Order",
 		typeText = "Order units of team (untargeted order)",
 		text = "Order units of <Team> to begin <Command> with <Parameters>.",
@@ -305,7 +305,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitTeamPosition",
+		type = "team_orderPosition",
 		filter = "Order",
 		typeText = "Order units of team to position",
 		text = "Order units of <Team> to begin <Command> towards <Position>.",
@@ -328,7 +328,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "orderUnitTeamTarget",
+		type = "team_orderTarget",
 		filter = "Order",
 		typeText = "Order units of team to target",
 		text = "Order units of <Team> to begin <Command> towards <Target>.",
@@ -347,6 +347,19 @@ actions_list = {
 				text = "<Target>",
 				type = "unit",
 				id = "target"
+			}
+		}
+	},
+	{
+		type = "messageGlobal",
+		filter = "Message",
+		typeText = "Display message",
+		text = "Display <Message>.",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "text",
+				id = "message"
 			}
 		}
 	},
@@ -374,7 +387,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "killUnit",
+		type = "unit_kill",
 		filter = "Kill",
 		typeText = "Kill unit",
 		text = "Kill <Unit>.",
@@ -387,7 +400,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "killGroup",
+		type = "group_kill",
 		filter = "Kill",
 		typeText = "Kill group",
 		text = "Kill units of <Group>.",
@@ -400,7 +413,20 @@ actions_list = {
 		}
 	},
 	{
-		type = "killTypeTeam",
+		type = "team_kill",
+		filter = "Kill",
+		typeText = "Kill team",
+		text = "Kill units of <Team>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "type_kill",
 		filter = "Kill",
 		typeText = "Kill units of type of team",
 		text = "Kill units of type <UnitType> of <Team>.",
@@ -418,7 +444,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "killZone",
+		type = "zone_kill",
 		filter = "Kill",
 		typeText = "Kill units in zone",
 		text = "Kill units in <Zone>",
@@ -431,7 +457,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "setHP",
+		type = "unit_hp",
 		filter = "HP",
 		typeText = "Set HP of unit",
 		text = "Set hit points of <Unit> to <Percentage> %.",
@@ -449,7 +475,66 @@ actions_list = {
 		}
 	},
 	{
-		type = "addToGroup",
+		type = "group_hp",
+		filter = "HP",
+		typeText = "Set HP of group",
+		text = "Set hit points of units of <Group> to <Percentage> %.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<Percentage>",
+				type = "number",
+				id = "percentage"
+			}
+		}
+	},
+	{
+		type = "team_hp",
+		filter = "HP",
+		typeText = "Set HP of team",
+		text = "Set hit points of units of <Team> to <Percentage> %.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Percentage>",
+				type = "number",
+				id = "percentage"
+			}
+		}
+	},
+	{
+		type = "type_hp",
+		filter = "HP",
+		typeText = "Set HP of type of team",
+		text = "Set hit points of units of type <UnitType> of <Team> to <Percentage> %.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Percentage>",
+				type = "number",
+				id = "percentage"
+			}
+		}
+	},
+	{
+		type = "unit_addToGroup",
 		filter = "Group",
 		typeText = "Add unit to group",
 		text = "Add <Unit> to <Group>.",
@@ -467,7 +552,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "transfer",
+		type = "unit_transfer",
 		filter = "Transfer",
 		typeText = "Transfer unit",
 		text = "Transfer <Unit> to <Team>.",
@@ -485,7 +570,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "transferGroup",
+		type = "group_transfer",
 		filter = "Transfer",
 		typeText = "Transfer units from group",
 		text = "Transfer units of <Group> to <Team>.",
@@ -503,7 +588,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "transferTeam",
+		type = "team_transfer",
 		filter = "Transfer",
 		typeText = "Transfer units from team",
 		text = "Transfer units of <CurrentTeam> to <Team>.",
@@ -521,7 +606,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "transferType",
+		type = "type_transfer",
 		filter = "Transfer",
 		typeText = "Transfer units of type",
 		text = "Transfer units of type <UnitType> of <CurrentTeam> to <Team>.",
@@ -549,7 +634,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "teleport",
+		type = "unit_teleport",
 		filter = "Teleport",
 		typeText = "Teleport unit",
 		text = "Teleport <Unit> to <Position>.",
@@ -567,7 +652,7 @@ actions_list = {
 		}
 	},
 	{
-		type = "teleportGroup",
+		type = "group_teleport",
 		filter = "Teleport",
 		typeText = "Teleport units of group",
 		text = "Teleport units of <Group> to somewhere within <Zone>.",
@@ -585,11 +670,34 @@ actions_list = {
 		}
 	},
 	{
-		type = "teleportTeam",
+		type = "team_teleport",
 		filter = "Teleport",
 		typeText = "Teleport units of team",
 		text = "Teleport units of <Team> to somewhere within <Zone>.",
 		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			}
+		}
+	},
+	{
+		type = "type_teleport",
+		filter = "Teleport",
+		typeText = "Teleport units of type of team",
+		text = "Teleport units of type <UnitType> of <Team> to somewhere within <Zone>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
 			{
 				text = "<Team>",
 				type = "team",
