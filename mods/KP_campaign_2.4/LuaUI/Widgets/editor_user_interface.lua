@@ -21,7 +21,6 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- Modification de l'équipe d'une unité
 
--- liste widget
 -- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Choix de la carte lors de la création d'un nouveau niveau
@@ -202,6 +201,7 @@ local selectCreatedUnitsWindow
 -- Map settings variables
 local mapName = "Map"
 local mapBriefing = "Map Briefing"
+local mapBriefingRaw = "Map Briefing"
 local mapNameEditBox
 local mapBriefingEditBox
 local mapBriefingTextBox
@@ -213,6 +213,7 @@ local minimapButton
 local minimapState = "disabled"
 local mouseStateButton
 local mouseState = "disabled"
+local widgetsButton
 local customWidgets = {}
 
 -- Save states variables
@@ -440,6 +441,10 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	if selectCreatedUnitsWindow then
 		selectCreatedUnitsWindow:Dispose()
 	end
+	if windows['widgetsWindow'] then
+		windows['widgetsWindow']:Dispose()
+		windows['widgetsWindow'] = nil
+	end
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -488,7 +493,7 @@ function mapSettingsFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
 	mapNameEditBox:SetText(mapName)
-	mapBriefingEditBox:SetText(mapBriefing)
+	mapBriefingEditBox:SetText(mapBriefingRaw)
 	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
 		cameraAutoButton.state.chosen = true
 		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
@@ -517,6 +522,8 @@ function mapSettingsFrame()
 		minimapButton.state.chosen = false
 		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	end
+	widgetsButton.state.chosen = false
+	widgetsButton:InvalidateSelf()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -846,6 +853,7 @@ function initTriggerWindow()
 			customTriggerEditBox:SetText("")
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..trig)
 		end
+		saveState()
 	end
 	local useCustomTrigger = function()
 		if currentEvent then
@@ -853,6 +861,7 @@ function initTriggerWindow()
 			e.trigger = customTriggerEditBox.text
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
 		end
+		saveState()
 	end
 	currentTriggerLabel = addLabel(windows['configureEvent'], '2%', '19%', '96%', '2%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13, "left")
 	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
@@ -860,13 +869,15 @@ function initTriggerWindow()
 	-- Action sequence
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE, 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
-	-- Import Actions/Conditions
-	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
-	importEventComboBox = addComboBox(windows['configureEvent'], '0%', '85%', tostring(100/3).."%", "10%", {}, nil)
-	importConditionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '85%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
-	importActionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '90%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
+	
+	-- Import Actions/Conditions window
+	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
+	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
+	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
+	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '20%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
+	importActionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '60%', tostring(100/3).."%", "40%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '60%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 
 	-- Variables window
@@ -945,6 +956,8 @@ function initMapSettingsWindow()
 			end
 		end
 	}
+	
+	widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -1465,6 +1478,7 @@ function addUnitGroup(name)
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
+	saveState()
 end
 function addEmptyUnitGroup()
 	unitGroups[groupNumber] = {}
@@ -2020,6 +2034,7 @@ function createNewEvent()
 	deleteActionButtons[event.id] = {}
 	
 	editEvent(#events) -- edit this event
+	saveState()
 end
 function editEvent(i)
 	removeSecondWindows()
@@ -2028,8 +2043,10 @@ function editEvent(i)
 	currentAction = nil
 	if currentEvent ~= i then
 		Screen0:AddChild(windows['eventWindow'])
+		Screen0:AddChild(windows["importWindow"])
 		currentEvent = i
 		currentEventFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentEvent = nil
 	end
@@ -2039,6 +2056,7 @@ function removeEvent(i)
 	removeSecondWindows() -- close windows to prevent bugs
 	removeThirdWindows() 
 	currentEvent = nil
+	saveState()
 end
 function createNewCondition()
 	if currentEvent then
@@ -2051,6 +2069,7 @@ function createNewCondition()
 		conditionNumber = conditionNumber + 1
 		
 		editCondition(#(e.conditions))
+		saveState()
 	end
 end
 function editCondition(i)
@@ -2060,6 +2079,7 @@ function editCondition(i)
 		Screen0:AddChild(windows['conditionWindow'])
 		currentCondition = i
 		currentConditionFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentCondition = nil
 	end
@@ -2070,6 +2090,7 @@ function removeCondition(i)
 		removeThirdWindows() -- close windows to prevent bugs
 		currentCondition = nil
 		currentAction = nil
+		saveState()
 	end
 end
 function createNewAction()
@@ -2084,6 +2105,7 @@ function createNewAction()
 		actionNumber = actionNumber + 1
 		
 		editAction(#(e.actions))
+		saveState()
 	end
 end
 function editAction(i)
@@ -2093,6 +2115,7 @@ function editAction(i)
 		Screen0:AddChild(windows['actionWindow'])
 		currentAction = i
 		currentActionFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentAction = nil
 	end
@@ -2103,10 +2126,12 @@ function removeAction(i)
 		removeThirdWindows() -- close windows to prevent bugs
 		currentAction = nil
 		currentCondition = nil
+		saveState()
 	end
 end
 function removeSecondWindows() -- Removes the middle window
 	Screen0:RemoveChild(windows['eventWindow'])
+	Screen0:RemoveChild(windows["importWindow"])
 	Screen0:RemoveChild(windows['variablesWindow'])
 	editVariablesButton.state.chosen = false
 	editVariablesButton:InvalidateSelf()
@@ -2675,6 +2700,7 @@ function configureEvent() -- Show the event configuration window
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
+						saveState()
 					end
 					local but = addButton(actionSequenceScrollPanel, '0%', (i - 1) * 40, '20%', 40, "", moveUpAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
@@ -2701,18 +2727,13 @@ function configureEvent() -- Show the event configuration window
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
+						saveState()
 					end
 					local but = addButton(actionSequenceScrollPanel, '80%', (i - 1) * 40, '20%', 40, "", moveDownAction)
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
 					table.insert(actionSequenceItems, but)
 				end
 			end
-			local eventList = {}
-			for i, ev in ipairs(events) do
-				table.insert(eventList, ev.name)
-			end
-			importEventComboBox.items = eventList
-			importEventComboBox:Select(1)
 			updateActionSequence = false
 		else
 			removeThirdWindows()
@@ -2720,6 +2741,14 @@ function configureEvent() -- Show the event configuration window
 			currentAction = nil
 		end
 	end
+end
+function updateImportWindow()
+		local eventList = {}
+		for i, ev in ipairs(events) do
+			table.insert(eventList, ev.name)
+		end
+		importEventComboBox.items = eventList
+		importEventComboBox:Select(1)
 end
 function updateImportComboBoxes()
 	local e = events[importEventComboBox.selected]
@@ -2769,6 +2798,8 @@ function importCondition()
 	table.insert(ce.conditions, newCondition)
 	
 	conditionNumber = conditionNumber + 1
+	
+	saveState()
 end
 function importAction()
 	local e = events[importEventComboBox.selected]
@@ -2799,7 +2830,8 @@ function importAction()
 	actionNumber = actionNumber + 1
 	
 	updateActionSequence = true
-	configureEvent()
+	
+	saveState()
 end
 function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
 	if currentEvent then
@@ -2854,11 +2886,14 @@ function addVariable()
 	table.insert(triggerVariables, variable)
 	
 	variablesNumber = variablesNumber + 1
+	
+	saveState()
 end
 function removeVariable(var)
 	for i, v in ipairs(triggerVariables) do
 		if var == v then
 			table.remove(triggerVariables, i)
+			saveState()
 			break
 		end
 	end
@@ -3042,32 +3077,64 @@ end
 
 function updateMapSettings()
 	mapName = mapNameEditBox.text
-	mapBriefing = mapBriefingEditBox.text
+	mapBriefingRaw = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
 		local text = mapBriefingEditBox.text
 		local newText = text
-		for word in string.gmatch(text, "%[#%w*#.-%]") do
+		for word in string.gmatch(text, "/#%w*#.-/") do
 			local color = string.gsub(word, "#[^#]+$", "")
-			color = string.gsub(color, "%[#", "")
-			local red = tonumber(string.sub(color, 1, 2), 16)
-			local green = tonumber(string.sub(color, 3, 4), 16)
-			local blue = tonumber(string.sub(color, 5, 6), 16)
+			color = string.gsub(color, "/#", "")
+			local red = tonumber(string.sub(color, 1, 2), 16) + 1
+			local green = tonumber(string.sub(color, 3, 4), 16) + 1
+			local blue = tonumber(string.sub(color, 5, 6), 16) + 1
 			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
-			local newWord = string.gsub(word, "%[#%w*#", replacement)
-			newWord = string.gsub(newWord, "%]", "\255\255\255\255")
-			oldWord = string.gsub(word, "%[", "%%[")
-			newText = string.gsub(newText, oldWord, newWord)
+			local newWord = string.gsub(word, "/#%w*#", replacement)
+			newWord = string.gsub(newWord, "/", "\255\255\255\255")
+			newText = string.gsub(newText, word, newWord)
 		end
 		mapBriefingTextBox:SetText(newText)
 	end
+	mapBriefing = mapBriefingTextBox.text
 end
 function initWidgetList()
+	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
 		local customWidget = {}
 		customWidget.name = k
 		customWidget.active = w.active
 		customWidget.desc = w.desc
 		table.insert(customWidgets, customWidget)
+	end
+end
+function showWidgetsWindow()
+	if windows['widgetsWindow'] then
+		widgetsButton.state.chosen = false
+		widgetsButton:InvalidateSelf()
+		windows['widgetsWindow']:Dispose()
+		windows['widgetsWindow'] = nil
+		return
+	end
+	widgetsButton.state.chosen = true
+	widgetsButton:InvalidateSelf()
+	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '50%')
+	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS, 20, "center", nil, "center")
+	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
+	local count = 0
+	for i, w in ipairs(customWidgets) do
+		local but = addButton(sp, '0%', 40 * count, '100%', 40, w.name)
+		but.state.chosen = w.active
+		but.OnClick = {
+			function()
+				but.state.chosen = not but.state.chosen
+				w.active = not w.active
+			end
+		}
+		count = count + 1
+	end
+end
+function updateWidgetsWindowPosition()
+	if windows['widgetsWindow'] then
+		windows['widgetsWindow']:SetPos(windows['mapSettingsWindow'].x + windows['mapSettingsWindow'].width, windows['mapSettingsWindow'].y, '15%', '50%')
 	end
 end
 
@@ -3143,10 +3210,12 @@ function newMap()
 	-- Map
 	mapName = "Map"
 	mapBriefing = "Map Briefing"
+	mapBriefingRaw = "Map Briefing"
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
 	minimapState = "disabled"
+	initWidgetList()
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -3179,8 +3248,8 @@ function loadMap(name)
 	if loading then return end
 	loading = true
 	newMap()
-	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor.json",  VFS.RAW)
+	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -3330,11 +3399,20 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	
 	-- Global description
 	mapName = loadedTable.description.name
+	mapBriefingRaw = loadedTable.description.briefingRaw
 	mapBriefing = loadedTable.description.briefing
 	cameraAutoState = loadedTable.description.cameraAuto
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
 	minimapState = loadedTable.description.minimap
+	for i, w in ipairs(loadedTable.description.widgets) do
+		for ii, wid in ipairs(customWidgets) do
+			if wid.name == w.name then
+				wid.active = w.active
+				break
+			end
+		end
+	end
 	
 	loadedTable = nil
 	
@@ -3367,6 +3445,7 @@ function saveMap()
 	end
 	
 	local savedTable = encodeSaveTable()
+	local saveName = savedTable.description.saveName
 	
 	-- Write
 	local jsonfile = json.encode(savedTable)
@@ -3399,8 +3478,7 @@ function saveMap()
 	)
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
-	local name = string.gsub(mapName, " ", "_")
-	local file = io.open("CustomLevels/"..name..".editor.json", "w")
+	local file = io.open("CustomLevels/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 end
@@ -3419,7 +3497,7 @@ function loadMapFrame()
 	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 	delbut.font.color = {1, 0, 0, 1}
-	local levelList = VFS.DirList("CustomLevels/", "*.editor.json", VFS.RAW)
+	local levelList = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
 	if #levelList == 0 then
 		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 	else
@@ -3427,7 +3505,7 @@ function loadMapFrame()
 		local count = 0
 		for i, l in ipairs(levelList) do
 			local name = string.gsub(l, "CustomLevels\\", "")
-			name = string.gsub(name, ".editor.json", "")
+			name = string.gsub(name, ".editor", "")
 			local displayedName = string.gsub(name, "_", " ")
 			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadMap(name) end)
 			count = count + 1
@@ -3439,8 +3517,8 @@ function saveMapFrame()
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
 	end
-	local name = string.gsub(mapName, " ", "_")
-	if VFS.FileExists("CustomLevels/"..name..".editor.json", VFS.RAW) then
+	local saveName = generateSaveName(mapName)
+	if VFS.FileExists("CustomLevels/"..saveName..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "40%", "45%", "20%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '50%', EDITOR_FILE_SAVE_CONFIRM)
 		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
@@ -3455,6 +3533,13 @@ end
 function settingsFrame()
 
 end
+function generateSaveName(name)
+	local saveName = name
+	saveName = string.gsub(name, " ", "_")
+	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
+	Spring.Echo(saveName)
+	return saveName
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -3466,12 +3551,23 @@ function encodeSaveTable()
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
+	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapName
+	savedTable.description.saveName = generateSaveName(mapName)
 	savedTable.description.briefing = mapBriefing
+	savedTable.description.briefingRaw = mapBriefingRaw
 	savedTable.description.cameraAuto = cameraAutoState
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
 	savedTable.description.minimap = minimapState
+	savedTable.description.widgets = {}
+	for i, w in ipairs(customWidgets) do
+		local widget = {}
+		widget.name = w.name
+		widget.active = w.active
+		widget.desc = w.desc
+		table.insert(savedTable.description.widgets, widget)
+	end
 	
 	-- Units
 	local units = Spring.GetAllUnits()
@@ -3789,6 +3885,7 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		updateMapSettings()
+		updateWidgetsWindowPosition()
 	end
 	
 	updateButtonVisualFeedback()
@@ -4107,6 +4204,11 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	end
 end
 function widget:KeyPress(key, mods)
+	-- DEBUG purposes
+	if key == Spring.GetKeyCode("p") then
+		 showWidgetsWindow()
+		 return true
+	end
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then
@@ -4144,7 +4246,6 @@ function widget:KeyPress(key, mods)
 			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
 				addUnitGroup(newUnitGroupEditBox.text)
 				clearTemporaryWindows()
-				saveState()
 				return true
 			end
 		end
