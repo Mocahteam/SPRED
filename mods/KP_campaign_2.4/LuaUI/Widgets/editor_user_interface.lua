@@ -860,13 +860,15 @@ function initTriggerWindow()
 	-- Action sequence
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE, 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
-	-- Import Actions/Conditions
-	addLabel(windows['configureEvent'], '0%', '80%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
-	importEventComboBox = addComboBox(windows['configureEvent'], '0%', '85%', tostring(100/3).."%", "10%", {}, nil)
-	importConditionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '85%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '85%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
-	importActionComboBox = addComboBox(windows['configureEvent'], tostring(100/3).."%", '90%', tostring(100/3).."%", "5%", {}, nil)
-	addButton(windows['configureEvent'], tostring(200/3).."%", '90%', tostring(100/3).."%", "5%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
+	
+	-- Import Actions/Conditions window
+	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
+	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
+	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
+	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '20%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
+	importActionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '60%', tostring(100/3).."%", "40%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '60%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 
 	-- Variables window
@@ -2028,8 +2030,10 @@ function editEvent(i)
 	currentAction = nil
 	if currentEvent ~= i then
 		Screen0:AddChild(windows['eventWindow'])
+		Screen0:AddChild(windows["importWindow"])
 		currentEvent = i
 		currentEventFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentEvent = nil
 	end
@@ -2060,6 +2064,7 @@ function editCondition(i)
 		Screen0:AddChild(windows['conditionWindow'])
 		currentCondition = i
 		currentConditionFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentCondition = nil
 	end
@@ -2093,6 +2098,7 @@ function editAction(i)
 		Screen0:AddChild(windows['actionWindow'])
 		currentAction = i
 		currentActionFrame()
+		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentAction = nil
 	end
@@ -2107,6 +2113,7 @@ function removeAction(i)
 end
 function removeSecondWindows() -- Removes the middle window
 	Screen0:RemoveChild(windows['eventWindow'])
+	Screen0:RemoveChild(windows["importWindow"])
 	Screen0:RemoveChild(windows['variablesWindow'])
 	editVariablesButton.state.chosen = false
 	editVariablesButton:InvalidateSelf()
@@ -2707,12 +2714,6 @@ function configureEvent() -- Show the event configuration window
 					table.insert(actionSequenceItems, but)
 				end
 			end
-			local eventList = {}
-			for i, ev in ipairs(events) do
-				table.insert(eventList, ev.name)
-			end
-			importEventComboBox.items = eventList
-			importEventComboBox:Select(1)
 			updateActionSequence = false
 		else
 			removeThirdWindows()
@@ -2720,6 +2721,14 @@ function configureEvent() -- Show the event configuration window
 			currentAction = nil
 		end
 	end
+end
+function updateImportWindow()
+		local eventList = {}
+		for i, ev in ipairs(events) do
+			table.insert(eventList, ev.name)
+		end
+		importEventComboBox.items = eventList
+		importEventComboBox:Select(1)
 end
 function updateImportComboBoxes()
 	local e = events[importEventComboBox.selected]
