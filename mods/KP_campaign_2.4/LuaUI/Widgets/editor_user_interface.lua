@@ -3084,9 +3084,9 @@ function updateMapSettings()
 		for word in string.gmatch(text, "/#%w*#.-/") do
 			local color = string.gsub(word, "#[^#]+$", "")
 			color = string.gsub(color, "/#", "")
-			local red = tonumber(string.sub(color, 1, 2), 16)
-			local green = tonumber(string.sub(color, 3, 4), 16)
-			local blue = tonumber(string.sub(color, 5, 6), 16)
+			local red = tonumber(string.sub(color, 1, 2), 16) + 1
+			local green = tonumber(string.sub(color, 3, 4), 16) + 1
+			local blue = tonumber(string.sub(color, 5, 6), 16) + 1
 			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
 			local newWord = string.gsub(word, "/#%w*#", replacement)
 			newWord = string.gsub(newWord, "/", "\255\255\255\255")
@@ -3445,6 +3445,7 @@ function saveMap()
 	end
 	
 	local savedTable = encodeSaveTable()
+	local saveName = savedTable.description.saveName
 	
 	-- Write
 	local jsonfile = json.encode(savedTable)
@@ -3477,8 +3478,7 @@ function saveMap()
 	)
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
-	local name = string.gsub(mapName, " ", "_")
-	local file = io.open("CustomLevels/"..name..".editor", "w")
+	local file = io.open("CustomLevels/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 end
@@ -3517,8 +3517,8 @@ function saveMapFrame()
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
 	end
-	local name = string.gsub(mapName, " ", "_")
-	if VFS.FileExists("CustomLevels/"..name..".editor", VFS.RAW) then
+	local saveName = generateSaveName(mapName)
+	if VFS.FileExists("CustomLevels/"..saveName..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "40%", "45%", "20%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '50%', EDITOR_FILE_SAVE_CONFIRM)
 		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
@@ -3533,6 +3533,13 @@ end
 function settingsFrame()
 
 end
+function generateSaveName(name)
+	local saveName = name
+	saveName = string.gsub(name, " ", "_")
+	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
+	Spring.Echo(saveName)
+	return saveName
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -3546,6 +3553,7 @@ function encodeSaveTable()
 	savedTable.description = {}
 	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapName
+	savedTable.description.saveName = generateSaveName(mapName)
 	savedTable.description.briefing = mapBriefing
 	savedTable.description.briefingRaw = mapBriefingRaw
 	savedTable.description.cameraAuto = cameraAutoState
