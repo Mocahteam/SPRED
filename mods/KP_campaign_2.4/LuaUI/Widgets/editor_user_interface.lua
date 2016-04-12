@@ -213,6 +213,7 @@ local minimapButton
 local minimapState = "disabled"
 local mouseStateButton
 local mouseState = "disabled"
+local widgetsButton
 local customWidgets = {}
 
 -- Save states variables
@@ -440,6 +441,10 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	if selectCreatedUnitsWindow then
 		selectCreatedUnitsWindow:Dispose()
 	end
+	if windows['widgetsWindow'] then
+		windows['widgetsWindow']:Dispose()
+		windows['widgetsWindow'] = nil
+	end
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -517,6 +522,8 @@ function mapSettingsFrame()
 		minimapButton.state.chosen = false
 		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	end
+	widgetsButton.state.chosen = false
+	widgetsButton:InvalidateSelf()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -947,6 +954,8 @@ function initMapSettingsWindow()
 			end
 		end
 	}
+	
+	widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
@@ -3071,12 +3080,44 @@ function updateMapSettings()
 	end
 end
 function initWidgetList()
+	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
 		local customWidget = {}
 		customWidget.name = k
 		customWidget.active = w.active
 		customWidget.desc = w.desc
 		table.insert(customWidgets, customWidget)
+	end
+end
+function showWidgetsWindow()
+	if windows['widgetsWindow'] then
+		widgetsButton.state.chosen = false
+		widgetsButton:InvalidateSelf()
+		windows['widgetsWindow']:Dispose()
+		windows['widgetsWindow'] = nil
+		return
+	end
+	widgetsButton.state.chosen = true
+	widgetsButton:InvalidateSelf()
+	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '50%')
+	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS, 20, "center", nil, "center")
+	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
+	local count = 0
+	for i, w in ipairs(customWidgets) do
+		local but = addButton(sp, '0%', 40 * count, '100%', 40, w.name)
+		but.state.chosen = w.active
+		but.OnClick = {
+			function()
+				but.state.chosen = not but.state.chosen
+				w.active = not w.active
+			end
+		}
+		count = count + 1
+	end
+end
+function updateWidgetsWindowPosition()
+	if windows['widgetsWindow'] then
+		windows['widgetsWindow']:SetPos(windows['mapSettingsWindow'].x + windows['mapSettingsWindow'].width, windows['mapSettingsWindow'].y, '15%', '50%')
 	end
 end
 
@@ -3156,6 +3197,7 @@ function newMap()
 	autoHealState = "disabled"
 	mouseState = "disabled"
 	minimapState = "disabled"
+	initWidgetList()
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -3188,8 +3230,8 @@ function loadMap(name)
 	if loading then return end
 	loading = true
 	newMap()
-	if VFS.FileExists("CustomLevels/"..name..".editor.json",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor.json",  VFS.RAW)
+	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -3344,6 +3386,14 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
 	minimapState = loadedTable.description.minimap
+	for i, w in ipairs(loadedTable.description.widgets) do
+		for ii, wid in ipairs(customWidgets) do
+			if wid.name == w.name then
+				wid.active = w.active
+				break
+			end
+		end
+	end
 	
 	loadedTable = nil
 	
@@ -3409,7 +3459,7 @@ function saveMap()
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
 	local name = string.gsub(mapName, " ", "_")
-	local file = io.open("CustomLevels/"..name..".editor.json", "w")
+	local file = io.open("CustomLevels/"..name..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 end
@@ -3428,7 +3478,7 @@ function loadMapFrame()
 	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 	delbut.font.color = {1, 0, 0, 1}
-	local levelList = VFS.DirList("CustomLevels/", "*.editor.json", VFS.RAW)
+	local levelList = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
 	if #levelList == 0 then
 		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 	else
@@ -3436,7 +3486,7 @@ function loadMapFrame()
 		local count = 0
 		for i, l in ipairs(levelList) do
 			local name = string.gsub(l, "CustomLevels\\", "")
-			name = string.gsub(name, ".editor.json", "")
+			name = string.gsub(name, ".editor", "")
 			local displayedName = string.gsub(name, "_", " ")
 			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadMap(name) end)
 			count = count + 1
@@ -3449,7 +3499,7 @@ function saveMapFrame()
 		windows["saveWindow"]:Dispose()
 	end
 	local name = string.gsub(mapName, " ", "_")
-	if VFS.FileExists("CustomLevels/"..name..".editor.json", VFS.RAW) then
+	if VFS.FileExists("CustomLevels/"..name..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "40%", "45%", "20%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '50%', EDITOR_FILE_SAVE_CONFIRM)
 		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
@@ -3481,6 +3531,14 @@ function encodeSaveTable()
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
 	savedTable.description.minimap = minimapState
+	savedTable.description.widgets = {}
+	for i, w in ipairs(customWidgets) do
+		local widget = {}
+		widget.name = w.name
+		widget.active = w.active
+		widget.desc = w.desc
+		table.insert(savedTable.description.widgets, widget)
+	end
 	
 	-- Units
 	local units = Spring.GetAllUnits()
@@ -3798,6 +3856,7 @@ function widget:Update(delta)
 	
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		updateMapSettings()
+		updateWidgetsWindowPosition()
 	end
 	
 	updateButtonVisualFeedback()
@@ -4116,6 +4175,11 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	end
 end
 function widget:KeyPress(key, mods)
+	-- DEBUG purposes
+	if key == Spring.GetKeyCode("p") then
+		 showWidgetsWindow()
+		 return true
+	end
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then
