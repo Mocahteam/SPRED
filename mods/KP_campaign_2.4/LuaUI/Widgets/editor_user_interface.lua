@@ -19,9 +19,8 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Modification de l'équipe d'une unité
+-- Modification de l'équipe d'une unité (bug)
 
--- Continuer à ajouter des spots pour CTRL+Z
 -- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Choix de la carte lors de la création d'un nouveau niveau
 
@@ -61,6 +60,7 @@ local unitContextualMenu -- Appears when right-clicking on a unit
 local unitAttributesWindow
 local changeHPEditBox
 local autoHealComboBox
+local teamComboBox
 local unitHP = {}
 local unitAutoHeal = {}
 local unitGroups = {} -- Contains logical groups of units
@@ -1011,6 +1011,8 @@ function applyChangesToSelectedUnits()-- Apply changes to units attributes
 			unitAutoHeal[u] = "disabled"
 		end
 	end
+	local team = string.gsub(teamComboBox.items[teamComboBox.selected], EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." ", "")
+	Spring.SendLuaRulesMsg("Transfer Units".."++"..team)
 	clearTemporaryWindows()
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
@@ -1084,8 +1086,8 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	end
 	changeHPEditBox = addEditBox(unitAttributesWindow, "35%", 50, "65%", 20, "left", hpPercent)
 	-- AutoHeal
-	addLabel(unitAttributesWindow, '0%', 90, '100%', 20, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL, 20, "center")
-	autoHealComboBox = addComboBox(unitAttributesWindow, "0%", 110, "100%", 30, { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED })
+	addLabel(unitAttributesWindow, '0%', 100, '100%', 20, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL, 20, "center")
+	autoHealComboBox = addComboBox(unitAttributesWindow, "0%", 120, "100%", 30, { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED })
 	local autoHealStatus = ""
 	for i, u in ipairs(unitSelection) do
 		if i == 1 and unitAutoHeal[u] then
@@ -1103,6 +1105,21 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	else
 		autoHealComboBox:Select(1)
 	end
+	-- Team
+	addLabel(unitAttributesWindow, '0%', 180, '100%', 20, EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM, 20, "center")
+	local comboBoxItems = {}
+	for k, t in pairs(teamStateMachine.states) do
+		table.insert(comboBoxItems, EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." "..tostring(t))
+	end
+	teamComboBox = addComboBox(unitAttributesWindow, '0%', 200, '100%', 30, comboBoxItems)
+	local team = Spring.GetUnitTeam(unitSelection[1])
+	for i, t in ipairs(comboBoxItems) do
+		if t == EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." "..team then
+			teamComboBox:Select(i)
+			break
+		end
+	end
+	-- Apply
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
 function showUnitsInformation() -- Show information about selected and hovered units
@@ -3537,7 +3554,6 @@ function generateSaveName(name)
 	local saveName = name
 	saveName = string.gsub(name, " ", "_")
 	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
-	Spring.Echo(saveName)
 	return saveName
 end
 
