@@ -83,17 +83,19 @@ local function writeAttributesAndSection(file,sectionName, levelOfIndentation, t
   return file
 end
 
-local function createFromScratch(editorJsonFile)
+local function createFromScratch(editorTables)
   local file=""
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
-  local mapName=editorJsonFile.description.map or "Marble_Madness_Map" 
-  local name=editorJsonFile.description.safename or "unamed"
-  local lang=editorJsonFile.description.lang or "en" 
+  local mapName=editorTables.description.map or "Marble_Madness_Map" 
+  local name=editorTables.description.safename or "unamed"
+  local lang=editorTables.description.lang or "en" 
   local table1 = {Mapname=mapName, Gametype="Kernel Panic Campaign 2.4", MyPlayerName="Player"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
-  
+  for teamNumber,teamInformations in pairs(editorTables.teams) do
+    local allyTeamInformation=pairs(editorTables.allyteams[teamNumber])
+  end
 end
 
