@@ -9,32 +9,6 @@ conditions_list = {
 		attributes = {}
 	},
 	{
-		type = "win",
-		filter = "Game",
-		typeText = "Team won",
-		text = "<Team> has won the game.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "lose",
-		filter = "Game",
-		typeText = "Team lost",
-		text = "<Team> has lost the game.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
 		type = "elapsedTime",
 		filter = "Game",
 		typeText = "Time elapsed",

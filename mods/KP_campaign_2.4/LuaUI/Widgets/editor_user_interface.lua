@@ -2706,9 +2706,12 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		local comboBoxItems = {
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_EXACTLY,
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
-			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST
+			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
+			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
 		}
 		local comboBox = addComboBox(scrollPanel, '25%', y, '30%', 30, comboBoxItems)
+		local editBox = addEditBox(scrollPanel, '55%', y, '30%', 30)
+		editBox.toShow = true
 		comboBox.OnSelect = {
 			function()
 				if not a.params[attr.id] then
@@ -2716,14 +2719,29 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 				end
 				if comboBox.selected == 1 then
 					a.params[attr.id].comparison = "exactly"
+					if not editBox.toShow then
+						scrollPanel:AddChild(editBox)
+						editBox.toShow = true
+					end
 				elseif comboBox.selected == 2 then
 					a.params[attr.id].comparison = "atleast"
+					if not editBox.toShow then
+						scrollPanel:AddChild(editBox)
+						editBox.toShow = true
+					end
 				elseif comboBox.selected == 3 then
 					a.params[attr.id].comparison = "atmost"
+					if not editBox.toShow then
+						scrollPanel:AddChild(editBox)
+						editBox.toShow = true
+					end
+				elseif comboBox.selected == 4 then
+					a.params[attr.id].comparison = "all"
+					scrollPanel:RemoveChild(editBox)
+					editBox.toShow = false
 				end
 			end
 		}
-		local editBox = addEditBox(scrollPanel, '55%', y, '30%', 30)
 		editBox.font.size = 13
 		editBox.updateFunction = function()
 			if not a.params[attr.id] then
@@ -2741,6 +2759,8 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 					comboBox:Select(2)
 				elseif comp == "atmost" then
 					comboBox:Select(3)
+				elseif comp == "all" then
+					comboBox:Select(4)
 				end
 			else
 				comboBox:Select(1)
