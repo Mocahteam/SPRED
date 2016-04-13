@@ -26,6 +26,7 @@ VFS.Include("LuaUI/Widgets/libs/context.lua")
 contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
 AppliqManager:parse()
 --AppliqManager:fullTest()
@@ -135,14 +136,25 @@ end
 
 local function RunScript(ScriptFileName, scenario)
 	if Spring.Restart then
-	local operations={
-  ["MODOPTIONS"]=
-    {
-    ["language"]=lang,
-    ["scenario"]=scenario
-    }
-  }
-		DoTheRestart(ScriptFileName, operations)
+	  if (string.sub(ScriptFileName, -3, -1)=="txt")then
+    	local operations={
+      ["MODOPTIONS"]=
+        {
+        ["language"]=lang,
+        ["scenario"]=scenario
+        }
+      }
+    	DoTheRestart(ScriptFileName, operations)
+    elseif (string.sub(ScriptFileName, -6, -1)=="editor")then
+      local operations={
+      ["MODOPTIONS"]=
+        {
+        ["language"]=lang,
+        ["scenario"]=scenario
+        }
+      }
+      DoTheRestart(ScriptFileName, operations)
+    end
 	else
     NoRestart()
 	end
@@ -154,7 +166,8 @@ local function MissionsMenu()
 	local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
 	local ItemSize=math.min((vsy*(1-1/6))/(2*(#MissionsList+1))-2,vsy/24)
 	for MissionIndex,MissionFileName in ipairs(MissionsList) do
-		local EndIndex=(string.find(MissionFileName,".",string.len(MissionFileName)-4,true) or 1+string.len(MissionFileName))-1
+		local EndIndex=(string.find(MissionFileName,".",1,true) or 1+string.len(MissionFileName))-1
+		-- the fourth argument (true) avoid considering "." as joker and do a plain search instead
 		local BeginIndex=1
 		repeat
 			local NewBeginIndex=string.find(MissionFileName,"/",BeginIndex,true) or string.find(MissionFileName,"\\",BeginIndex,true)
