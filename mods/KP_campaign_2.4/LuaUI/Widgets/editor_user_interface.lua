@@ -140,6 +140,8 @@ local teamColor = {}
 local teamColorImage = {}
 local updateTeamConfig = true
 local updateAllyTeam = true
+local teamNameEditBoxes = {}
+local teamName = {}
 
 -- Trigger variables
 local events = {}
@@ -544,6 +546,7 @@ function teamConfig()
 		p:InvalidateSelf()
 	end
 	for k, t in pairs(teamStateMachine.states) do
+		teamNameEditBoxes[t]:SetText(teamName[t])
 		if enabledTeams[t] and not enableTeamButtons[t].state.chosen then
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
 			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
@@ -561,6 +564,9 @@ function allyTeam()
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
 	windows['forceWindow']:AddChild(allyTeamsWindow)
+	for i, t in ipairs(teamStateMachine.states) do
+		selectAllyTeamsButtons[t]:SetCaption(teamName[t])
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -701,7 +707,8 @@ function initForcesWindow()
 	local teamConfigScrollPanel = addScrollPanel(teamConfigWindow, '0%', '0%', '100%', '100%')
 	for i, team in ipairs(teamStateMachine.states) do
 		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
-		addLabel(teamConfigPanels[team], '0%', '0%', '20%', '100%', EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 30, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '5%', '30%', '10%', '40%', "left", EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), {teams[team].red, teams[team].green, teams[team].blue, 1})
+		teamName[team] = teamNameEditBoxes[team].text
 		-- Enabled/Disabled
 		enableTeamButtons[team] = addButton(teamConfigPanels[team], '20%', '30%', '10%', '40%', EDITOR_FORCES_TEAMCONFIG_DISABLED, nil)
 		local function changeTeamState()
@@ -770,13 +777,13 @@ function initForcesWindow()
 		local w = tostring(80 / math.ceil(teamCount/2)).."%"
 		local h = "50%"
 		allyTeamPanels[team] = addWindow(allyTeamsWindow, x, y, w, h)
-		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), function() selectedAllyTeam = team end)
+		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', teamName[team], function() selectedAllyTeam = team end)
 		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		selectAllyTeamsButtons[team].font.size = 20
 		allyTeamsScrollPanels[team] = addScrollPanel(allyTeamPanels[team], '2%', '10%', '96%', '89%')
 		
 		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*team, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 		
 		allyTeamsRemoveTeamButtons[team] = {}
 		allyTeamsRemoveTeamLabels[team] = {}
@@ -1011,8 +1018,12 @@ function applyChangesToSelectedUnits()-- Apply changes to units attributes
 			unitAutoHeal[u] = "disabled"
 		end
 	end
-	local team = string.gsub(teamComboBox.items[teamComboBox.selected], EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." ", "")
-	Spring.SendLuaRulesMsg("Transfer Units".."++"..team)
+	for k, n in pairs(teamName) do
+		if teamComboBox.items[teamComboBox.selected] == n then
+			Spring.SendLuaRulesMsg("Transfer Units".."++"..k)
+			break
+		end
+	end
 	clearTemporaryWindows()
 end
 function drawSelectionRect() -- Draw the selection feedback rectangle
@@ -1109,12 +1120,14 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	addLabel(unitAttributesWindow, '0%', 180, '100%', 20, EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM, 20, "center")
 	local comboBoxItems = {}
 	for k, t in pairs(teamStateMachine.states) do
-		table.insert(comboBoxItems, EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." "..tostring(t))
+		if enabledTeams[t] then
+			table.insert(comboBoxItems, teamName[t])
+		end
 	end
 	teamComboBox = addComboBox(unitAttributesWindow, '0%', 200, '100%', 30, comboBoxItems)
 	local team = Spring.GetUnitTeam(unitSelection[1])
 	for i, t in ipairs(comboBoxItems) do
-		if t == EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM.." "..team then
+		if t == teamName[t] then
 			teamComboBox:Select(i)
 			break
 		end
@@ -1926,7 +1939,7 @@ function updateAllyTeamPanels()
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamLabels[k], true)
 			local count = 0
 			for i, t in ipairs(at) do
-				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t), 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
+				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, teamName[t], 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
 				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, EDITOR_X, function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
 				but.font.color = {1, 0, 0, 1}
@@ -1946,7 +1959,7 @@ function updateAllyTeamPanels()
 			if enabledTeams[team] then
 				allyTeamsWindow:AddChild(allyTeamPanels[team])
 				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				count = count + 1
 			end
 		end
@@ -2024,6 +2037,9 @@ function updateTeamConfigPanels()
 			end
 		end
 		updateTeamConfig = false
+	end
+	for i, t in ipairs(teamStateMachine.states) do
+		teamName[t] = teamNameEditBoxes[t].text
 	end
 end
 
@@ -2471,7 +2487,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		elseif attr.type == "team" then
 			for k, t in pairs(teamStateMachine.states) do
 				if enabledTeams[t] then
-					table.insert(comboBoxItems, EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t))
+					table.insert(comboBoxItems, teamName[t])
 				end
 			end
 		elseif attr.type == "group" then
@@ -2528,7 +2544,16 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		end
 		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" then
-			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") end }
+			comboBox.OnSelect = {
+				function()
+					for k, n in pairs(teamName) do
+						if comboBox.items[comboBox.selected] == n then
+							a.params[attr.id] = k
+							break
+						end
+					end
+				end
+			}
 		elseif attr.type == "command" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 		else
@@ -2537,7 +2562,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		if a.params[attr.id] then
 			if attr.type == "team" then
 				for i, item in ipairs(comboBox.items) do
-					if a.params[attr.id] == string.gsub(item, EDITOR_FORCES_TEAM_DEFAULT_NAME.." ", "") then
+					if teamName[a.params[attr.id]] == item then
 						comboBox:Select(i)
 						break
 					end
@@ -3210,6 +3235,10 @@ function newMap()
 		teamColor[t].green = tonumber(teams[t].green)
 		teamColor[t].blue = tonumber(teams[t].blue)
 	end
+	teamName = {}
+	for i, t in ipairs(teamStateMachine.states) do
+		teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
+	end
 	-- Trigger
 	events = {}
 	eventTotal = nil
@@ -3244,6 +3273,8 @@ function newMap()
 	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
 	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
+end
+function newMapInitialize()
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
@@ -3265,6 +3296,7 @@ function loadMap(name)
 	if loading then return end
 	loading = true
 	newMap()
+	newMapInitialize()
 	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
@@ -3315,6 +3347,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		teamColor[t].red = loadedTable.teams[tostring(t)].color.red
 		teamColor[t].blue = loadedTable.teams[tostring(t)].color.blue
 		teamColor[t].green = loadedTable.teams[tostring(t)].color.green
+		teamName[t] = loadedTable.teams[tostring(t)].name
 	end
 	
 	-- Ally Teams
@@ -3504,6 +3537,7 @@ function exportMap()
 end
 function newMapFrame()
 	newMap()
+	newMapInitialize()
 end
 function loadMapFrame()
 	if windows["loadWindow"] then
@@ -3632,6 +3666,7 @@ function encodeSaveTable()
 		savedTable.teams[t].color.red = teamColor[t].red
 		savedTable.teams[t].color.green = teamColor[t].green
 		savedTable.teams[t].color.blue = teamColor[t].blue
+		savedTable.teams[t].name = teamName[t]
 	end
 	
 	-- AllyTeams
