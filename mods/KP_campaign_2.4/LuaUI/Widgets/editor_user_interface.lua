@@ -21,7 +21,6 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- Modification de l'équipe d'une unité (bug)
 
--- Ajout de marqueurs sur la carte (de la même manière que pour les unités/zones)
 -- Choix de la carte lors de la création d'un nouveau niveau
 
 -- Passer l'éditeur sur la dernière version de Spring
@@ -50,19 +49,19 @@ local loadedTable = {}
 local factionUnits = getFactionUnits() -- List of units sorted by faction
 local teams = getTeamsInformation() -- List of teams as read in the LevelEditor.txt file (contains id and color)
 local teamCount = tableLength(teamStateMachine.states) -- Total number of teams
-local unitScrollPanel
+local unitScrollPanel -- Contains buttons to change the state of the unit state machine
 local unitButtons = {} -- Contains every type of unit as defined in UnitDef, buttons used to place units on the field
-local factionButtons = {}
-local teamLabels = {}
+local factionButtons = {} -- Buttons to expand or collapse unit buttons
+local teamLabels = {} -- Number of each team
 local teamButtons = {} -- Contains every teams, buttons used to define the team of units being placed
-local teamImages = {}
+local teamImages = {} -- Used to color the team buttons
 local unitContextualMenu -- Appears when right-clicking on a unit
-local unitAttributesWindow
-local changeHPEditBox
-local autoHealComboBox
-local teamComboBox
-local unitHP = {}
-local unitAutoHeal = {}
+local unitAttributesWindow -- Temporary window to change unit's attributes
+local changeHPEditBox -- Edit box to change the hp of the unit to a specific percentage
+local autoHealComboBox -- Choose whether the autoheal should be enabled, disabled or use global settings
+local teamComboBox -- Choose the targeted team for transfer
+local unitHP = {} -- Array to store the hp of every units
+local unitAutoHeal = {} -- Array to store the status of ever unit's autoheal
 local unitGroups = {} -- Contains logical groups of units
 local unitTotal = 0 -- Total number of units placed on the field
 local unitGroupsUnitTotal = 0 -- Total number of units placed on the field (used for the unitGroups frame)
@@ -72,7 +71,7 @@ local groupSizes = {} -- Contains the total number of units in each group
 local unitGroupsAttributionWindow -- Pop-up window to add selected units to a group
 local unitGroupsRemovalWindow -- Pop-up window to remove selected units from a group
 local unitListScrollPanel -- List of units placed on the field
-local unitListLabels = {}
+local unitListLabels = {} -- Type and ID of units as shown in right window
 local unitListViewButtons = {} -- Buttons to focus a unit
 local unitListHighlight = {} -- Show if unit is selected or not
 local groupListScrollPanel -- List of unit groups
@@ -87,12 +86,12 @@ local addUnitsToGroupsButton -- Add the selected units to the selected groups (i
 local groupListUnitsButtons = {} -- Allows selection of units
 local groupListUnitsViewButtons = {} -- Focus on units
 local addGroupButton -- Creates a new group
-local updateTeamButtons = true
-local newUnitGroupEditBox
+local updateTeamButtons = true -- Force update on the bottom-right team buttons
+local newUnitGroupEditBox -- Edit box to specify the name of the new group created from selected units
 
 -- Draw selection variables
-local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0
-local plotSelection = false
+local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0 -- Used to know where to plot the rectangle
+local plotSelection = false -- Used in mouse events to plot the selection feedback rectangle
 local selectionRect -- Selection visual feedback
 function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
@@ -104,49 +103,49 @@ local plotZone = false -- Lock to plot a new zone
 local rValue, gValue, bValue = 0, 0, 0 -- Color of the new zone
 local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0 -- Position of the new zone
 local zoneAnchorX, zoneAnchorZ = 0, 0 -- Mouse anchor when resizing a zone
-local minZoneSize = 32
-local zoneList = {}
-local selectedZone = nil
+local minZoneSize = 32 -- Minimum zone size
+local zoneList = {} -- List of the zones placed on the field
+local selectedZone = nil -- Currently selected zone for resizing/moving
 local zoneSide = "" -- Corresponds to the side on which the user clicked to resize a zone
 local totalZones = 0 -- Total number of placed zones
 local zoneNumber = 1 -- Current ID of a newly created zone
-local zoneIndex = 0
-local clickedZone
-local zonesAttributesButton
+local zoneIndex = 0 -- Used to go through every zones under the cursor when multiple zones are under it
+local clickedZone -- Contains the zone the user clicked on
+local zonesAttributesButton -- Button to show the window to change special attributes
 
 -- Forces variables
 local forcesTabs = {} -- Top frame buttons
 local teamConfigWindow, allyTeamsWindow -- Windows in the force frame
-local teamConfigPanels = {}
+local teamConfigPanels = {} -- Contains UI elements to change team options
 local allyTeams = {} -- List of ally teams
 local allyTeamsSize = {} -- Respective sizes of ally teams
 local allyTeamsRemoveTeamButtons = {} -- Remove team from an ally team
 local allyTeamsRemoveTeamLabels = {} -- Name of teams in a ally team
 local selectAllyTeamsButtons = {} -- Select an ally team
 local allyTeamsListButtons = {} -- Add a team to the selected ally team
-local allyTeamsListLabels = {}
+local allyTeamsListLabels = {} -- Name of the teams in the team list
 local allyTeamsScrollPanels = {} -- Contains the allyTeamsListButtons
-local allyTeamPanels = {}
-local teamListScrollPanel
+local allyTeamPanels = {} -- Panels to select an allyteam or to remove teams from an allyteam
+local teamListScrollPanel -- Scroll panel to store every enabled teams
 local selectedAllyTeam = 0 -- Currently selected ally team
 local teamControlButtons = {} -- Allows the user to set how the team should be controlled
 local teamControl = {} -- player or computer
-local teamControlLabels = {}
-local teamColorLabels = {}
+local teamControlLabels = {} -- So the user knows he is changing the control of a team
+local teamColorLabels = {} -- So the user knows he is changing the color of a team
 local enableTeamButtons = {} -- Allows the user to set if the team is enabled or not
 local enabledTeams = {} -- enabled or disabled
-local enabledTeamsTotal = nil
-local teamColorTrackbars = {}
-local teamColor = {}
-local teamColorImage = {}
-local updateTeamConfig = true
-local updateAllyTeam = true
-local teamNameEditBoxes = {}
-local teamName = {}
+local enabledTeamsTotal = nil -- Number of enabled teams
+local teamColorTrackbars = {} -- Trackbars to change the color of a team
+local teamColor = {} -- Stores the color of each team
+local teamColorImage = {} -- Image to preview the color of a team
+local updateTeamConfig = true -- Force update of the team config panel
+local updateAllyTeam = true -- Force update of the allyteam panel
+local teamNameEditBoxes = {} -- Edit boxes to change the name of the teams
+local teamName = {} -- Stores the names of the teams
 
 -- Trigger variables
-local events = {}
-local eventTotal
+local events = {} -- Stores the events
+local eventTotal -- Number of events
 local eventScrollPanel -- scroll panel containing each event
 local eventConditionsScrollPanel -- scroll panel containing each condition of an event
 local eventActionsScrollPanel -- scroll panel containing each action of an event
@@ -170,7 +169,7 @@ local conditionFeatures = {} -- table containing each customizable parameter of 
 local actionButtons = {}  -- same for actions
 local deleteActionButtons = {}
 local newEventActionButton
-local actionNameEditBox
+local actionNameEditBox 
 local actionTypeComboBox
 local actionFilterComboBox
 local actionScrollPanel
@@ -181,57 +180,57 @@ local configureEventButton -- button to show the configure event window
 local customTriggerEditBox -- to write a custom trigger
 local customTriggerButton -- to save the custom trigger
 local defaultTriggerButton -- to use the default trigger
-local currentTriggerLabel
+local currentTriggerLabel -- so the user knows which trigger is currently used
 local actionSequenceScrollPanel -- scrollpanel containing labels and buttons for each action
 local actionSequenceItems = {} -- contains the aforementioned labels and buttons
 local updateActionSequence = false -- update panels when sequence is altered
-local importEventComboBox
-local importConditionComboBox
-local importActionComboBox
+local importEventComboBox -- Choose the event from which conditions/actions should be imported
+local importConditionComboBox -- Choose the coniditon to be imported
+local importActionComboBox -- Choose the action to be imported
 local changedParam -- parameter begin altered (picking for example)
-local triggerVariables = {}
-local variablesNumber = 0
-local variablesTotal = nil
-local editVariablesButton
-local variablesScrollPanel
-local variablesFeatures = {}
-local forceUpdateVariables = false
-local commandsToID = {}
-local idToCommands = {}
-local sortedCommandsList = {}
-local selectCreatedUnitsWindow
+local triggerVariables = {} -- Stores the variables
+local variablesNumber = 0 -- Current ID to be attributed to a new variable
+local variablesTotal = nil -- Number of variables
+local editVariablesButton -- Button to show the window to edit variables
+local variablesScrollPanel -- Scroll panel which contains UI elements to edit variables
+local variablesFeatures = {} -- UI elements to edit variables
+local forceUpdateVariables = false -- Force variables update
+local commandsToID = {} -- Get the ID of a command knowing its name
+local idToCommands = {} -- Get the name of a command knowing its ID
+local sortedCommandsList = {} -- Sorted list of all the commands
+local selectCreatedUnitsWindow -- Window to select units created through an action
 
 -- Map settings variables
-local mapName = "Map"
-local mapBriefing = "Map Briefing"
-local mapBriefingRaw = "Map Briefing"
-local mapNameEditBox
-local mapBriefingEditBox
-local mapBriefingTextBox
-local cameraAutoButton
-local cameraAutoState = "enabled"
-local autoHealButton
-local autoHealState = "disabled"
-local minimapButton
-local minimapState = "disabled"
-local mouseStateButton
-local mouseState = "disabled"
-local widgetsButton
-local customWidgets = {}
+local mapName = "Map" -- Name of the map
+local mapBriefing = "Map Briefing" -- Briefing of the map
+local mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
+local mapNameEditBox -- Edit box to change the name of the map
+local mapBriefingEditBox -- Edit box to change the briefing of the map
+local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
+local cameraAutoButton -- Button to toggle camera auto state
+local cameraAutoState = "enabled" -- Current state of camera auto
+local autoHealButton -- Button to toggle auto heal state 
+local autoHealState = "disabled" -- Current state of auto heal
+local minimapButton -- Button to toggle minimap state
+local minimapState = "disabled" -- Current minimap state
+local mouseStateButton -- Button to toggle mouse state
+local mouseState = "disabled" -- Current state of the mouse
+local widgetsButton -- Button to show the widget window
+local customWidgets = {} -- List of widgets with status (enabled/disabled)
 
 -- Save states variables
-local saveStates = {}
-local loadLock = true
-local loading = false
-local loadIndex = 1
-local saveLoadCooldown = 0
-local saveCurrentEvent = nil
-local saveCurrentCondition = nil
-local saveCurrentAction = nil
-local variablesWindowToBeShown = false
-local configureWindowToBeShown = false
-local unitGroupsWindowToBeShown = false
-local toSave = false
+local saveStates = {} -- States for CTRL+Z
+local loadLock = true -- Prevents saving states when loading a state
+local loading = false -- Prevents multiple load
+local loadIndex = 1 -- State to be loaded
+local saveLoadCooldown = 0 -- Prevents too many loads in a short period of time
+local saveCurrentEvent = nil -- If an event was opened, save it to open it again after the load
+local saveCurrentCondition = nil -- same for condition
+local saveCurrentAction = nil -- same for action
+local variablesWindowToBeShown = false -- same for the variables window
+local configureWindowToBeShown = false -- same for the configure event window
+local unitGroupsWindowToBeShown = false -- same for the unit groups window
+local toSave = false -- Synchronised save when moving units for example
 
 -- Mouse variables
 local mouseMove = false
@@ -244,8 +243,8 @@ local doubleClick = 0
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function initChili()
-	if (not WG.Chili) then
+function initChili() -- Initialize Chili variables
+	if (not WG.Chili) then -- If the chili widget is not found, remove this widget
 		widgetHandler:RemoveWidget()
 		return
 	end
@@ -412,7 +411,7 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 	}
 	return comboBox
 end
-function removeElements(parent, elementsTable, dispose)
+function removeElements(parent, elementsTable, dispose) -- Remove UI elements from a parent and eventually dispose them
 	for k, e in pairs(elementsTable) do
 		parent:RemoveChild(e)
 		if dispose then
@@ -441,6 +440,8 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	currentAction = nil
 	globalStateMachine:setCurrentState(globalStateMachine.states.NONE)
 	triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+	
+	-- Dispose some windows
 	if selectCreatedUnitsWindow then
 		selectCreatedUnitsWindow:Dispose()
 	end
@@ -477,7 +478,7 @@ function zoneFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
 	Screen0:AddChild(windows["zoneWindow"])
-	zonesAttributesButton.state.chosen = false
+	zonesAttributesButton.state.chosen = false -- Reset state of this button
 	zonesAttributesButton:InvalidateSelf()
 end
 function forcesFrame()
@@ -494,13 +495,14 @@ function triggerFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
 	Screen0:AddChild(windows["triggerWindow"])
-	editVariablesButton.state.chosen = false
+	editVariablesButton.state.chosen = false -- Reset state of this button
 	editVariablesButton:InvalidateSelf()
 end
 function mapSettingsFrame()
 	clearUI()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
+	-- Set parameters to UI elements
 	mapNameEditBox:SetText(mapName)
 	mapBriefingEditBox:SetText(mapBriefingRaw)
 	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
@@ -531,7 +533,7 @@ function mapSettingsFrame()
 		minimapButton.state.chosen = false
 		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	end
-	widgetsButton.state.chosen = false
+	widgetsButton.state.chosen = false -- Reset the state of this button
 	widgetsButton:InvalidateSelf()
 end
 
@@ -545,15 +547,17 @@ function clearForceWindow()
 	windows['forceWindow']:RemoveChild(teamConfigWindow)
 	windows['forceWindow']:RemoveChild(allyTeamsWindow)
 end
-function teamConfig()
+function teamConfig() -- Show the team config panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
 	windows['forceWindow']:AddChild(teamConfigWindow)
-	for k, p in pairs(teamConfigPanels) do
+	for k, p in pairs(teamConfigPanels) do -- Force update on panels
 		p:InvalidateSelf()
 	end
 	for k, t in pairs(teamStateMachine.states) do
-		teamNameEditBoxes[t]:SetText(teamName[t])
+		-- Update the name of the teams
+		teamNameEditBoxes[t]:SetText(teamName[t]) 
+		-- Update the state of the buttons if they are in wrong state
 		if enabledTeams[t] and not enableTeamButtons[t].state.chosen then
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
 			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
@@ -561,17 +565,18 @@ function teamConfig()
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
 			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
 		end
+		-- Update the values of the trackbars
 		local r, g, b = teamColor[t].red, teamColor[t].green, teamColor[t].blue
 		teamColorTrackbars[t].red:SetValue(r)
 		teamColorTrackbars[t].green:SetValue(g)
 		teamColorTrackbars[t].blue:SetValue(b)
 	end
 end
-function allyTeam()
+function allyTeam() -- Show the allyteam panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
 	windows['forceWindow']:AddChild(allyTeamsWindow)
-	for i, t in ipairs(teamStateMachine.states) do
+	for i, t in ipairs(teamStateMachine.states) do -- Set the teams names
 		selectAllyTeamsButtons[t]:SetCaption(teamName[t])
 	end
 end
@@ -584,7 +589,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0")
+	Spring.SendCommands("resbar 0","fps 1","console 0","info 0") -- TODO : change fps 1 to fps 0 in release
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -618,7 +623,7 @@ function initFileWindow()
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
 	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, exportMapFrame)
-	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil)
+	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil) -- TODO or not
 end
 function initUnitWindow()
 	-- Left Panel
@@ -631,12 +636,12 @@ function initUnitWindow()
 	local button_size = 40
 	local y = 0
 	for c, t in ipairs(factionUnits) do
-		local function changeFactionButtonState()
+		local function changeFactionButtonState() -- Expand/Collapse unit buttons
 			factionButtons[c].state.chosen = not factionButtons[c].state.chosen
 			factionButtons[c]:InvalidateSelf()
 			updateUnitWindow()
 		end
-		if c == #factionUnits then
+		if c == #factionUnits then -- Rename the last faction, which corresponds to units not belonging to any faction
 			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, EDITOR_UNITS_UNSTABLE, changeFactionButtonState)
 		else
 			factionButtons[c] = addButton(unitScrollPanel, '0%', y, '100%', button_size, EDITOR_UNITS_FACTION.." "..c, changeFactionButtonState)
