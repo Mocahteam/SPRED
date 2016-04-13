@@ -112,6 +112,7 @@ local totalZones = 0 -- Total number of placed zones
 local zoneNumber = 1 -- Current ID of a newly created zone
 local zoneIndex = 0
 local clickedZone
+local zonesAttributesButton
 
 -- Forces variables
 local forcesTabs = {} -- Top frame buttons
@@ -447,6 +448,10 @@ function clearUI() -- remove every windows except topbar and clear current selec
 		windows['widgetsWindow']:Dispose()
 		windows['widgetsWindow'] = nil
 	end
+	if windows['zonesAttributes'] then
+		windows['zonesAttributes']:Dispose()
+		windows['zonesAttributes'] = nil
+	end
 end
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
@@ -472,6 +477,8 @@ function zoneFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
 	Screen0:AddChild(windows["zoneWindow"])
+	zonesAttributesButton.state.chosen = false
+	zonesAttributesButton:InvalidateSelf()
 end
 function forcesFrame()
 	clearUI()
@@ -676,7 +683,7 @@ function initZoneWindow()
 	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
 	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
-	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '85%')
+	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '75%')
 	
 	local toggleAllOn = function() -- show all zones
 		for k, zb in pairs(zoneBoxes) do
@@ -694,6 +701,8 @@ function initZoneWindow()
 	end
 	addButton(zoneScrollPanel, 0, 0, "50%", 30, EDITOR_ZONES_SHOW, toggleAllOn)
 	addButton(zoneScrollPanel, "50%", 0, "50%", 30, EDITOR_ZONES_HIDE, toggleAllOff)
+	
+	zonesAttributesButton = addButton(windows['zoneWindow'], '0%', '90%', '100%', '10%', EDITOR_ZONES_ATTRIBUTES, showZonesSpecialAttributesWindow)
 end
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
@@ -1923,8 +1932,50 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		totalZones = #zoneList
 		zoneIndex = 0
 	end
+	if windows['zonesAttributes'] and zoneStateMachine:getCurrentState() ~= zoneStateMachine.states.ATTR then
+		showZonesSpecialAttributesWindow()
+	end
 end
-
+function showZonesSpecialAttributesWindow()
+	if windows['zonesAttributes'] then
+		zonesAttributesButton.state.chosen = false
+		zonesAttributesButton:InvalidateSelf()
+		windows['zonesAttributes']:Dispose()
+		windows['zonesAttributes'] = nil
+		if zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR then
+			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+		end
+		return
+	end
+	zoneStateMachine:setCurrentState(zoneStateMachine.states.ATTR)
+	zonesAttributesButton.state.chosen = true
+	zonesAttributesButton:InvalidateSelf()
+	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
+	local count = 0
+	for i, z in ipairs(zoneList) do
+		addLabel(sp, '0%', count * 50, "20%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
+		local alwaysInViewButton = addButton(sp, "20%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
+		alwaysInViewButton.state.chosen = z.alwaysInView
+		alwaysInViewButton.OnClick = {
+			function()
+				alwaysInViewButton.state.chosen = not alwaysInViewButton.state.chosen
+				alwaysInViewButton:InvalidateSelf()
+				z.alwaysInView = not z.alwaysInView
+			end
+		}
+		local markerButton = addButton(sp, "60%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
+		markerButton.state.chosen = z.marker
+		markerButton.OnClick = {
+			function()
+				markerButton.state.chosen = not markerButton.state.chosen
+				markerButton:InvalidateSelf()
+				z.marker = not z.marker
+			end
+		}
+		count = count + 1
+	end
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -2653,9 +2704,9 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		table.insert(feature, editBox)
 	elseif attr.type == "numberComparison" then
 		local comboBoxItems = {
-			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_EXACTLY,
-			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_ATLEAST,
-			EDITOR_TRIGGER_EVENTS_COMPARISON_NUMBER_ATMOST
+			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_EXACTLY,
+			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
+			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST
 		}
 		local comboBox = addComboBox(scrollPanel, '25%', y, '30%', 30, comboBoxItems)
 		comboBox.OnSelect = {
@@ -3027,9 +3078,9 @@ end
 function showPickText()
 	local text = ""
 	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
-		text = EDITOR_TRIGGER_EVENTS_PICK_UNIT
+		text = EDITOR_TRIGGERS_EVENTS_PICK_UNIT
 	elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
-		text = EDITOR_TRIGGER_EVENTS_PICK_POSITION
+		text = EDITOR_TRIGGERS_EVENTS_PICK_POSITION
 	end
 	if text ~= "" then
 		local w = gl.GetTextWidth(text)
@@ -3040,7 +3091,7 @@ function showPickText()
 	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
 		local mx, my = Spring.GetMouseState()
 		local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-		local text = EDITOR_TRIGGER_EVENTS_PICK_POSITION_WRONG
+		local text = EDITOR_TRIGGERS_EVENTS_PICK_POSITION_WRONG
 		if var then
 			local x, _, z = unpack(var)
 			text = "("..tostring(round(x))..", "..tostring(round(z))..")"
@@ -3077,7 +3128,7 @@ function getCommandsList(encodedList)
 end
 function showCreatedUnitsWindow()
 	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
-	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGER_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
+	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
 	local sp = addScrollPanel(selectCreatedUnitsWindow, '0%', '10%', '100%', '90%')
 	local count = 0
 	for i, e in ipairs(events) do
@@ -4148,7 +4199,9 @@ function widget:MouseRelease(mx, my, button)
 										id = zoneNumber,
 										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Rectangle",
-										shown = true
+										shown = true,
+										alwaysInView = false,
+										marker = false
 									}
 				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
 					table.insert(zoneList, zone)
@@ -4165,7 +4218,9 @@ function widget:MouseRelease(mx, my, button)
 										id = zoneNumber,
 										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Disk",
-										shown = true
+										shown = true,
+										alwaysInView = false,
+										marker = false
 									}
 				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drew zone is large enough, store it
 					table.insert(zoneList, zone)
@@ -4255,11 +4310,6 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 	end
 end
 function widget:KeyPress(key, mods)
-	-- DEBUG purposes
-	if key == Spring.GetKeyCode("p") then
-		 showWidgetsWindow()
-		 return true
-	end
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then

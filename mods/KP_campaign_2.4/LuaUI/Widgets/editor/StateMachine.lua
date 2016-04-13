@@ -54,7 +54,7 @@ teamStateMachine = StateMachine.new(teamStates, teamStates[1])
 ------------------------------
 -- Initialize zone state machine
 ------------------------------
-local zoneStates = { DRAWRECT = "drawrect", DRAWDISK = "drawdisk", SELECTION = "selection" }
+local zoneStates = { DRAWRECT = "drawrect", DRAWDISK = "drawdisk", SELECTION = "selection", ATTR = "attributes" }
 zoneStateMachine = StateMachine.new(zoneStates, zoneStates.DRAWRECT)
 
 ------------------------------
