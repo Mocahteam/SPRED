@@ -199,6 +199,9 @@ local commandsToID = {} -- Get the ID of a command knowing its name
 local idToCommands = {} -- Get the name of a command knowing its ID
 local sortedCommandsList = {} -- Sorted list of all the commands
 local selectCreatedUnitsWindow -- Window to select units created through an action
+local repetitionComboBox -- Select if the event has to be repeated or not
+local repetitionEditBox -- Set the time of the repetition
+local repetitionButton -- Save this time
 
 -- Map settings variables
 local mapName = "Map" -- Name of the map
@@ -890,6 +893,9 @@ function initTriggerWindow()
 	-- Action sequence
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE, 20, "center", nil, "center")
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
+	-- Other parameters
+	addLabel(windows['configureEvent'], '0%', '75%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER, 20, "center", nil, "center")
+	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 16, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
@@ -1012,7 +1018,7 @@ function updateUnitWindow()
 	for c, t in ipairs(factionUnits) do
 		factionButtons[c].y = y
 		y = y + button_size
-		if factionButtons[c].state.chosen then
+		if factionButtons[c].state.chosen then -- Show unit buttons that belong to a faction which button is chosen
 			for i, u in ipairs(t) do
 				unitButtons[u] = addButton(unitScrollPanel, '10%', y, '80%', button_size, UnitDefNames[u].humanName, unitFunctions[u])
 				y = y + button_size
@@ -1020,7 +1026,7 @@ function updateUnitWindow()
 		end
 	end
 end
-function applyChangesToSelectedUnits()-- Apply changes to units attributes
+function applyChangesToSelectedUnits() -- Apply changes to units attributes
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
 		unitHP[u] = tonumber(changeHPEditBox.text)
@@ -1941,8 +1947,8 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		showZonesSpecialAttributesWindow()
 	end
 end
-function showZonesSpecialAttributesWindow()
-	if windows['zonesAttributes'] then
+function showZonesSpecialAttributesWindow() -- Show the window to change some special attributes concerning zones
+	if windows['zonesAttributes'] then -- if the window is already opened, close it
 		zonesAttributesButton.state.chosen = false
 		zonesAttributesButton:InvalidateSelf()
 		windows['zonesAttributes']:Dispose()
@@ -1958,10 +1964,10 @@ function showZonesSpecialAttributesWindow()
 	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
 	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
 	local count = 0
-	for i, z in ipairs(zoneList) do
+	for i, z in ipairs(zoneList) do -- Generate labels and buttons
 		addLabel(sp, '0%', count * 50, "20%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
 		local alwaysInViewButton = addButton(sp, "20%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
-		alwaysInViewButton.state.chosen = z.alwaysInView
+		alwaysInViewButton.state.chosen = z.alwaysInView -- Set to current value
 		alwaysInViewButton.OnClick = {
 			function()
 				alwaysInViewButton.state.chosen = not alwaysInViewButton.state.chosen
@@ -1970,7 +1976,7 @@ function showZonesSpecialAttributesWindow()
 			end
 		}
 		local markerButton = addButton(sp, "60%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
-		markerButton.state.chosen = z.marker
+		markerButton.state.chosen = z.marker -- Set to current value
 		markerButton.OnClick = {
 			function()
 				markerButton.state.chosen = not markerButton.state.chosen
@@ -1990,7 +1996,7 @@ end
 
 function updateAllyTeamPanels()
 	for k, at in pairs(allyTeams) do
-		if tableLength(at) ~= allyTeamsSize[k] then
+		if tableLength(at) ~= allyTeamsSize[k] then -- Update panel when the size of an allyteam changed
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamButtons[k], true)
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamLabels[k], true)
 			local count = 0
@@ -2114,6 +2120,7 @@ function createNewEvent()
 	event.name = EDITOR_TRIGGERS_EVENTS_DEFAULT_NAME..tostring(event.id)
 	event.conditionTotal = 0
 	event.actionTotal = 0
+	event.repetition = false
 	table.insert(events, event)
 	
 	eventNumber = eventNumber + 1
@@ -2789,9 +2796,12 @@ function configureEvent() -- Show the event configuration window
 			Screen0:AddChild(windows['configureEvent'])
 			configureEventButton.state.chosen = true
 			configureEventButton:InvalidateSelf()
+			-- Name
 			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
+			-- Trigger
 			customTriggerEditBox:SetText(e.trigger)
 			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
+			-- Action sequence
 			removeElements(actionSequenceScrollPanel, actionSequenceItems, true)
 			local act = events[currentEvent].actions
 			for i, a in ipairs(act) do
@@ -2851,6 +2861,42 @@ function configureEvent() -- Show the event configuration window
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
 					table.insert(actionSequenceItems, but)
 				end
+			end
+			-- Parameters
+			if repetitionComboBox then
+				windows['configureEvent']:RemoveChild(repetitionComboBox)
+				repetitionComboBox:Dispose()
+				repetitionComboBox = nil
+			end
+			if repetitionEditBox then
+				windows['configureEvent']:RemoveChild(repetitionEditBox)
+				repetitionEditBox:Dispose()
+				repetitionEditBox = nil
+			end
+			if repetitionButton then
+				windows['configureEvent']:RemoveChild(repetitionButton)
+				repetitionButton:Dispose()
+				repetitionButton = nil
+			end
+			repetitionComboBox = addComboBox(windows['configureEvent'], '25%', '80%', '40%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
+			repetitionComboBox.OnSelect = {
+				function()
+					if repetitionComboBox.selected == 1 then
+						e.repetition = false
+						e.repetitionTime = nil
+					else
+						e.repetition = true
+					end
+				end
+			}
+			repetitionEditBox = addEditBox(windows['configureEvent'], '70%', '81%', '10%', '3%')
+			repetitionEditBox.hint = "X = "
+			repetitionButton = addButton(windows['configureEvent'], '85%', '80%', '10%', '5%', EDITOR_OK, function() if e.repetition then e.repetitionTime = repetitionEditBox.text end end)
+			if e.repetition then
+				repetitionComboBox:Select(2)
+				repetitionEditBox:SetText(e.repetitionTime)
+			else
+				repetitionComboBox:Select(1)
 			end
 			updateActionSequence = false
 		else
