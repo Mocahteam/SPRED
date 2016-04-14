@@ -199,9 +199,7 @@ local commandsToID = {} -- Get the ID of a command knowing its name
 local idToCommands = {} -- Get the name of a command knowing its ID
 local sortedCommandsList = {} -- Sorted list of all the commands
 local selectCreatedUnitsWindow -- Window to select units created through an action
-local repetitionComboBox -- Select if the event has to be repeated or not
-local repetitionEditBox -- Set the time of the repetition
-local repetitionButton -- Save this time
+local repetitionUI = {} -- Contains repetition parameters elements
 
 -- Map settings variables
 local mapName = "Map" -- Name of the map
@@ -875,7 +873,7 @@ function initTriggerWindow()
 			end
 			e.trigger = trig
 			customTriggerEditBox:SetText("")
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..trig)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..trig)
 		end
 		saveState()
 	end
@@ -883,7 +881,7 @@ function initTriggerWindow()
 		if currentEvent then
 			local e = events[currentEvent]
 			e.trigger = customTriggerEditBox.text
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..e.trigger)
 		end
 		saveState()
 	end
@@ -895,7 +893,7 @@ function initTriggerWindow()
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
 	-- Other parameters
 	addLabel(windows['configureEvent'], '0%', '75%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER, 20, "center", nil, "center")
-	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 16, "left", nil, "center")
+	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
@@ -2863,40 +2861,40 @@ function configureEvent() -- Show the event configuration window
 				end
 			end
 			-- Parameters
-			if repetitionComboBox then
-				windows['configureEvent']:RemoveChild(repetitionComboBox)
-				repetitionComboBox:Dispose()
-				repetitionComboBox = nil
-			end
-			if repetitionEditBox then
-				windows['configureEvent']:RemoveChild(repetitionEditBox)
-				repetitionEditBox:Dispose()
-				repetitionEditBox = nil
-			end
-			if repetitionButton then
-				windows['configureEvent']:RemoveChild(repetitionButton)
-				repetitionButton:Dispose()
-				repetitionButton = nil
-			end
-			repetitionComboBox = addComboBox(windows['configureEvent'], '25%', '80%', '40%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
-			repetitionComboBox.OnSelect = {
+			removeElements(windows['configureEvent'], repetitionUI, true)
+			repetitionUI = {}
+			repetitionUI.repetitionLabel = addLabel(windows['configureEvent'], '10%', '85%', '80%', '5%', "", 16, "left")
+			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '25%', '80%', '40%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
+			repetitionUI.repetitionComboBox.OnSelect = {
 				function()
-					if repetitionComboBox.selected == 1 then
+					if repetitionUI.repetitionComboBox.selected == 1 then
 						e.repetition = false
 						e.repetitionTime = nil
+						repetitionUI.repetitionLabel:SetCaption("")
 					else
 						e.repetition = true
 					end
 				end
 			}
-			repetitionEditBox = addEditBox(windows['configureEvent'], '70%', '81%', '10%', '3%')
-			repetitionEditBox.hint = "X = "
-			repetitionButton = addButton(windows['configureEvent'], '85%', '80%', '10%', '5%', EDITOR_OK, function() if e.repetition then e.repetitionTime = repetitionEditBox.text end end)
+			repetitionUI.repetitionEditBox = addEditBox(windows['configureEvent'], '70%', '81%', '10%', '3%')
+			repetitionUI.repetitionEditBox.hint = "X = "
+			repetitionUI.repetitionButton = addButton(windows['configureEvent'], '85%', '80%', '10%', '5%', EDITOR_OK,
+				function()
+					if e.repetition then
+						e.repetitionTime = repetitionUI.repetitionEditBox.text
+						repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
+					end
+				end
+			)
 			if e.repetition then
-				repetitionComboBox:Select(2)
-				repetitionEditBox:SetText(e.repetitionTime)
+				repetitionUI.repetitionComboBox:Select(2)
+				repetitionUI.repetitionEditBox:SetText(e.repetitionTime)
+				if e.repetitionTime then
+					repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
+				end
 			else
-				repetitionComboBox:Select(1)
+				repetitionUI.repetitionComboBox:Select(1)
+				repetitionUI.repetitionLabel:SetCaption("")
 			end
 			updateActionSequence = false
 		else
