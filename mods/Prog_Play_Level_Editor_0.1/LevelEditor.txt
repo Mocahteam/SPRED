@@ -1,4 +1,4 @@
-// Launcher for Mission 3
+// Launcher for Level Editor
 
 [GAME]
 {
