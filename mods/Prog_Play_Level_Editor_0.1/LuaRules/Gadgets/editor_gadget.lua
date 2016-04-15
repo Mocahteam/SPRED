@@ -194,8 +194,9 @@ function gadget:GameFrame( frameNumber )
 		-- TRANSFER UNITS
 		elseif transferUnits then
 			for i, u in ipairs(selectedUnits) do
-				--Spring.TransferUnit(u, newTeam) --bug
-				--Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+				Spring.TransferUnit(u, newTeam) --bug
+				Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
+				Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 			end
 			SendToUnsynced("requestSave")
 			transferUnits = false
