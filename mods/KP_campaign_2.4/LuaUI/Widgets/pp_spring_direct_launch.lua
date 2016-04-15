@@ -146,14 +146,13 @@ local function RunScript(ScriptFileName, scenario)
       }
     	DoTheRestart(ScriptFileName, operations)
     elseif (string.sub(ScriptFileName, -6, -1)=="editor")then
-      local operations={
-      ["MODOPTIONS"]=
-        {
-        ["language"]=lang,
-        ["scenario"]=scenario
-        }
-      }
-      DoTheRestart(ScriptFileName, operations)
+      --local f = io.open("Missions/KPC/LevelEditor.txt", "rb")
+      --local content = f:read "*a"
+      --f:close()
+      --local tableEditor=json.decode(content)
+      local sf=VFS.LoadFile(ScriptFileName)
+      local tableEditor=json.decode(sf)
+      restartWithEditorFile(tableEditor)
     end
 	else
     NoRestart()
