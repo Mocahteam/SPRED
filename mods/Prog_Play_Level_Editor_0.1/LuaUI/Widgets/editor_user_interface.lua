@@ -20,6 +20,9 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- Modification de l'équipe d'une unité (bug)
+-- Groupe d'unités créées par tous les appels d'une action
+-- Unité(s) créée(s) par le dernier appels
+-- bug importation condition/action
 
 -- Choix de la carte lors de la création d'un nouveau niveau
 
@@ -286,7 +289,10 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 		width = _w,
 		height = _h,
 		caption = text,
-		OnClick = {onClickFunction}
+		OnClick = {onClickFunction},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	return button
 end
@@ -300,7 +306,10 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		caption = text,
 		fontsize = size or 20,
 		align = _align or "center",
-		valign = _valign or "linecenter"
+		valign = _valign or "linecenter",
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
 	return label
@@ -313,7 +322,10 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		width = _w,
 		height = _h,
 		text = _text,
-		fontsize = size or 20
+		fontsize = size or 20,
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
 	return textBox
@@ -362,7 +374,10 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 		width = _w,
 		height = _h,
 		align = _align or "left",
-		text = _text or ""
+		text = _text or "",
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	editBox.font.color = _color or {1, 1, 1, 1}
 	if type(_h) ~= "string" then
@@ -408,7 +423,10 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 		width = _w,
 		height = _h,
 		items = _items,
-		OnSelect = { onSelectFunction }
+		OnSelect = { onSelectFunction },
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	return comboBox
 end
@@ -590,7 +608,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0") -- TODO : change fps 1 to fps 0 in release
+	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -2555,6 +2573,14 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			for k, g in pairs(unitGroups) do
 				table.insert(comboBoxItems, g.name)
 			end
+			for i, ev in ipairs(events) do
+				for ii, act in ipairs(ev.actions) do
+					Spring.Echo(act.type)
+					if act.type == "createUnitAtPosition" or act.type == "createUnitsInZone" then
+						table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP..act.name)
+					end
+				end
+			end
 			if #comboBoxItems == 0 then
 				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
 			end
@@ -2615,6 +2641,8 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 					end
 				end
 			}
+		elseif attr.type == "group" then
+			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") end }
 		elseif attr.type == "command" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 		else
@@ -2624,6 +2652,13 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			if attr.type == "team" then
 				for i, item in ipairs(comboBox.items) do
 					if teamName[a.params[attr.id]] == item then
+						comboBox:Select(i)
+						break
+					end
+				end
+			elseif attr.type == "group" then
+				for i, item in ipairs(comboBox.items) do
+					if a.params[attr.id] == item or a.params[attr.id] == string.gsub(item, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") then
 						comboBox:Select(i)
 						break
 					end
@@ -2662,6 +2697,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
+			Screen0:RemoveChild(windows["importWindow"])
 		end
 		pickButton.OnClick = { pickPosition }
 		table.insert(feature, positionLabel)
@@ -2690,6 +2726,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
+			Screen0:RemoveChild(windows["importWindow"])
 			showCreatedUnitsWindow()
 		end
 		pickButton.OnClick = { pickUnit }
@@ -2937,6 +2974,7 @@ function importCondition()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedCondition = e.conditions[importConditionComboBox.selected]
+	if not importedCondition then return end
 	local newCondition = {}
 	newCondition.id = conditionNumber
 	local count = 0
@@ -2967,6 +3005,7 @@ function importAction()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedAction = e.actions[importActionComboBox.selected]
+	if not importedAction then return end
 	local newAction = {}
 	newAction.id = actionNumber
 	local count = 0
@@ -3216,6 +3255,7 @@ function showCreatedUnitsWindow()
 					Screen0:RemoveChild(selectCreatedUnitsWindow)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -4185,6 +4225,7 @@ function widget:MousePress(mx, my, button)
 					e.params[changedParam].z = round(z)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -4199,6 +4240,7 @@ function widget:MousePress(mx, my, button)
 					e.params[changedParam] = var
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
