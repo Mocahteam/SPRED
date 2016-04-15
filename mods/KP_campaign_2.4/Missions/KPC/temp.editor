@@ -235,24 +235,11 @@
 	],
 	"units":[
 		{
-			"type":"kernel",
-			"id":7061,
-			"position":{
-				"y":101,
-				"x":1010,
-				"z":1752
-			},
-			"orientation":-1.5723303556442,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
 			"type":"bit",
 			"id":16055,
 			"position":{
 				"y":116,
-				"x":528,
+				"x":1056,
 				"z":1834
 			},
 			"orientation":-2.7857091426849,
@@ -264,14 +251,27 @@
 			"type":"bit",
 			"id":5297,
 			"position":{
-				"y":116,
-				"x":445,
+				"y":116,						
+				"x":900,
 				"z":1726
 			},
 			"orientation":1.0308351516724,
 			"autoHeal":"disabled",
 			"hp":20,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":5298,
+			"position":{
+				"y":116,
+				"x":1200,
+				"z":1926
+			},
+			"orientation":1.0308351516724,
+			"autoHeal":"disabled",
+			"hp":20,
 			"team":0
-		} 
+		}  
 	]
 }

@@ -32,13 +32,9 @@ local gameOver = 0
 -- used to show briefing
 local showBriefing = false
 local missionScript=nil
+local initializeUnits = true
 
-
-function startTheGame(jsonfile) 
-  missionScript.Start(jsonfile)
-  missionScript.ShowBriefing()
-  gameOver = 0
-end   
+  
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
@@ -47,20 +43,24 @@ function gadget:RecvLuaMsg(msg, player)
   end
   if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="mission")) then
     local jsonfile=string.sub(msg,8,-1)
-    startTheGame(jsonfile)
+    missionScript.parseJson(jsonfile)
   end
 end
 
 function gadget:GamePreload()
-  if missionIsHardcoded then 
-    Spring.Echo("mission is hardcoded")
-    if missionName ~= nil then
-     fileToLoad=missionName..".lua"
+  if Spring.GetModOptions()["jsonlocation"]=="editor" then
+    fileToLoad="MissionPlayer_Editor.lua"
+  else 
+    if missionIsHardcoded then 
+      Spring.Echo("mission is hardcoded")
+      if missionName ~= nil then
+       fileToLoad=missionName..".lua"
+      else
+        Spring.Echo ("File "..missionName..".lua not found: start standard game")
+      end
     else
-      Spring.Echo ("File "..missionName..".lua not found: start standard game")
+      fileToLoad="MissionPlayer.lua"
     end
-  else
-    fileToLoad="MissionPlayer.lua"
   end
   if VFS.FileExists(fileToLoad) then --TODO can't work anymore, need to be fixed in start
     missionScript = VFS.Include(fileToLoad)
@@ -72,7 +72,11 @@ function gadget:GamePreload()
     Spring.Echo ("No mission name defined: start standard game")
   end
   if(missionIsHardcoded)then
-    startTheGame()
+    missionScript.parseJson()
+  end
+  if Spring.GetModOptions()["jsonlocation"]=="editor" then
+    local da=VFS.LoadFile("Missions/KPC/"..missionName..".editor")
+    missionScript.parseJson(da)
   end
 end
 
@@ -81,18 +85,23 @@ function gadget:GameFrame( frameNumber )
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local outputState
-    gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
-    -- if required, show GuiMission
-    if gameOver == -1 or gameOver == 1 then
-      _G.event = {logicType = "ShowMissionMenu",
-        state = "", outputstate=outputState}
-      if gameOver == -1 then
-        _G.event.state = "lost"
-      else
-        _G.event.state = "won"
+    if(frameNumber>=5 and initializeUnits and Spring.GetModOptions()["jsonlocation"]=="editor")then
+      missionScript.StartAfterJson()
+      initializeUnits = false
+    else
+      gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
+      -- if required, show GuiMission
+      if gameOver == -1 or gameOver == 1 then
+        _G.event = {logicType = "ShowMissionMenu",
+          state = "", outputstate=outputState}
+        if gameOver == -1 then
+          _G.event.state = "lost"
+        else
+          _G.event.state = "won"
+        end
+        SendToUnsynced("MissionEvent")
+        _G.event = nil
       end
-      SendToUnsynced("MissionEvent")
-      _G.event = nil
     end
   end
   
