@@ -3750,6 +3750,9 @@ function generateSaveName(name)
 	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
 	return saveName
 end
+function beginLoadLevel(name)
+	loadMap(name)
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -4032,6 +4035,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
 	widgetHandler:RegisterGlobal("getCommandsList", getCommandsList)
+	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
