@@ -13,12 +13,13 @@ function widget:GetInfo()
 end
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
-VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
+VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 
 local Chili, Screen0
 local IsActive = false
 local HideView = false
 local vsx, vsy
+local UI = {}
 
 function InitializeChili() 
 	if not WG.Chili then
@@ -30,7 +31,7 @@ function InitializeChili()
 end
 
 function InitializeLauncher()
-	local window = Chili.Window:New{
+	UI.MainWindow = Chili.Window:New{
 		parent = Screen0,
 		x = "0%",
 		y = "0%",
@@ -39,8 +40,8 @@ function InitializeLauncher()
 		draggable = false,
 		resizable = false
 	}
-	local label = Chili.Label:New{
-		parent = window,
+	UI.Title = Chili.Label:New{
+		parent = UI.MainWindow,
 		x = '0%',
 		y = '0%',
 		width = '100%',
@@ -54,36 +55,36 @@ function InitializeLauncher()
 			color = {0.2,0.6,0.8,1}
 		}
 	}
-	local newMissionButton = Chili.Button:New{
-		parent = window,
+	UI.NewMissionButton = Chili.Button:New{
+		parent = UI.MainWindow,
 		x = "30%",
 		y = "30%",
 		width = "40%",
 		height = "10%",
-		caption = LAUNCHER_NEW,
-		OnClick = { function() NewMission("Marble_Madness_Map") end },
+		caption = LAUNCHER_NEW_MISSION,
+		OnClick = { function() NewMission("ByteBattleMap") end },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
 			color = {0.2,1,0.8,1}
 		}
 	}
-	local editMissionButton = Chili.Button:New{
-		parent = window,
+	UI.EditMissionButton = Chili.Button:New{
+		parent = UI.MainWindow,
 		x = "30%",
 		y = "40%",
 		width = "40%",
 		height = "10%",
 		caption = LAUNCHER_EDIT_MISSION,
-		OnClick = {},
+		OnClick = { function() ChangeLanguage("fr") end },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
 			color = {0.2,1,0.8,1}
 		}
 	}
-	local editScenarioButton = Chili.Button:New{
-		parent = window,
+	UI.EditScenarioButton = Chili.Button:New{
+		parent = UI.MainWindow,
 		x = "30%",
 		y = "50%",
 		width = "40%",
@@ -98,6 +99,26 @@ function InitializeLauncher()
 	}
 end
 
+function UpdateCaption(element, text)
+	if UI[element] then
+		UI[element]:SetCaption(text)
+	end
+end
+
+function UpdateText(element, text)
+	if UI[element] then
+		UI[element]:SetText(text)
+	end
+end
+
+function ChangeLanguage(lang)
+	GetLauncherStrings(lang)
+	UpdateCaption("Title", LAUNCHER_TITLE)
+	UpdateCaption("NewMissionButton", LAUNCHER_NEW_MISSION)
+	UpdateCaption("EditMissionButton", LAUNCHER_EDIT_MISSION)
+	UpdateCaption("EditScenarioButton", LAUNCHER_EDIT_SCENARIO)
+end
+
 function InitializeEditor()
 	widgetHandler:EnableWidget("Chili Framework")
 	widgetHandler:EnableWidget("Hide commands")
@@ -105,14 +126,14 @@ function InitializeEditor()
 	widgetHandler:EnableWidget("Editor User Interface")
 end
 
-function NewMission(name)
+function NewMission(map)
 	local operations = {
 		["MODOPTIONS"] = {
 			["language"] = "fr",
 			["scenario"] = "noScenario"
 		},
-		["GAME"] = { -- FIXME doesn't seem to work
-			["Mapname"] = name
+		["GAME"] = {
+			["Mapname"] = map
 		}
 	}
 	DoTheRestart("LevelEditor.txt", operations)
@@ -169,6 +190,7 @@ end
 
 function widget:Initialize()
 	InitializeChili()
+	ChangeLanguage("en")
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()
 	else

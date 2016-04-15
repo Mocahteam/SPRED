@@ -47,7 +47,7 @@ function replaceSection(fullfile,sectionName,replacement)
 end
 
 function updateValues(fullFile,tableOperation)
-	Spring.Echo(fullFile)
+	--Spring.Echo(fullFile)
   -- works as follow : will replace the entire sections. 
   -- For each section concerned a copy is made and replacements are done within this section
   -- If the attribute is not present then it is added at the end of the section
