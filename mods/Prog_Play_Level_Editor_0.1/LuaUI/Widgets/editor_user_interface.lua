@@ -289,7 +289,10 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 		width = _w,
 		height = _h,
 		caption = text,
-		OnClick = {onClickFunction}
+		OnClick = {onClickFunction},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	return button
 end
@@ -303,7 +306,10 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		caption = text,
 		fontsize = size or 20,
 		align = _align or "center",
-		valign = _valign or "linecenter"
+		valign = _valign or "linecenter",
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
 	return label
@@ -316,7 +322,10 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		width = _w,
 		height = _h,
 		text = _text,
-		fontsize = size or 20
+		fontsize = size or 20,
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
 	return textBox
@@ -365,7 +374,10 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 		width = _w,
 		height = _h,
 		align = _align or "left",
-		text = _text or ""
+		text = _text or "",
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	editBox.font.color = _color or {1, 1, 1, 1}
 	if type(_h) ~= "string" then
@@ -411,7 +423,10 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 		width = _w,
 		height = _h,
 		items = _items,
-		OnSelect = { onSelectFunction }
+		OnSelect = { onSelectFunction },
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf"
+		}
 	}
 	return comboBox
 end
@@ -2682,6 +2697,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
+			Screen0:RemoveChild(windows["importWindow"])
 		end
 		pickButton.OnClick = { pickPosition }
 		table.insert(feature, positionLabel)
@@ -2710,6 +2726,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
+			Screen0:RemoveChild(windows["importWindow"])
 			showCreatedUnitsWindow()
 		end
 		pickButton.OnClick = { pickUnit }
@@ -2957,6 +2974,7 @@ function importCondition()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedCondition = e.conditions[importConditionComboBox.selected]
+	if not importedCondition then return end
 	local newCondition = {}
 	newCondition.id = conditionNumber
 	local count = 0
@@ -2987,6 +3005,7 @@ function importAction()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedAction = e.actions[importActionComboBox.selected]
+	if not importedAction then return end
 	local newAction = {}
 	newAction.id = actionNumber
 	local count = 0
@@ -3236,6 +3255,7 @@ function showCreatedUnitsWindow()
 					Screen0:RemoveChild(selectCreatedUnitsWindow)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -4205,6 +4225,7 @@ function widget:MousePress(mx, my, button)
 					e.params[changedParam].z = round(z)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -4219,6 +4240,7 @@ function widget:MousePress(mx, my, button)
 					e.params[changedParam] = var
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)

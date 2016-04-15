@@ -29,7 +29,7 @@ function InitializeChili()
 	Screen0 = Chili.Screen0
 end
 
-function InitializeWindows()
+function InitializeLauncher()
 	local window = Chili.Window:New{
 		parent = Screen0,
 		x = "0%",
@@ -98,6 +98,13 @@ function InitializeWindows()
 	}
 end
 
+function InitializeEditor()
+	widgetHandler:EnableWidget("Chili Framework")
+	widgetHandler:EnableWidget("Hide commands")
+	widgetHandler:EnableWidget("Editor Widget List")
+	widgetHandler:EnableWidget("Editor User Interface")
+end
+
 function NewMission(name)
 	local operations = {
 		["MODOPTIONS"] = {
@@ -120,7 +127,7 @@ function RemoveOtherWidgets()
 end
 
 function EitherDrawScreen(self)
-	if not vsx or not vsy or not IsActive then
+	if not vsx or not vsy then
 		return
 	end
 	
@@ -132,6 +139,19 @@ function EitherDrawScreen(self)
 		gl.TexRect(vsx, vsy, 0, 0, 0, 0, 1, 1)
 		gl.Texture(false)
 	end
+end
+
+function SwitchOn()
+	Spring.SendCommands({"NoSound 1"})
+	HideView = true
+	RemoveOtherWidgets()
+	InitializeLauncher()
+end
+
+function SwitchOff()
+	HideView = false
+	RemoveOtherWidgets()
+	InitializeEditor()
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
@@ -149,26 +169,9 @@ end
 
 function widget:Initialize()
 	InitializeChili()
-	IsActive = false
 	if not Spring.GetModOptions().hidemenu then
-		Spring.SendCommands({"NoSound 1"})
-		HideView = true
-		IsActive = true
-		RemoveOtherWidgets()
-		InitializeWindows()
+		SwitchOn()
 	else
-		widgetHandler:EnableWidget("Chili Framework")
-		widgetHandler:EnableWidget("Hide commands")
-		widgetHandler:EnableWidget("Editor Widget List")
-		widgetHandler:EnableWidget("Editor User Interface")
-		widgetHandler:DisableWidget("Spring Direct Launch 2 for Prog&Play Level Editor")
+		SwitchOff()
 	end
-end
-
-function widget:Update(delta)
-
-end
-
-function widget:Shutdown()
-
 end
