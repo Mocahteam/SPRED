@@ -6,7 +6,10 @@ LAUNCHER_NEW_NO_MAP_FOUND = ""
 LAUNCHER_EDIT_MISSION = ""
 LAUNCHER_EDIT_TITLE = ""
 LAUNCHER_EDIT_NO_LEVEL_FOUND = ""
-LAUNCHER_EDIT_SCENARIO = ""
+LAUNCHER_SCENARIO = ""
+LAUNCHER_SCENARIO_TITLE = ""
+LAUNCHER_SCENARIO_BEGIN = ""
+LAUNCHER_SCENARIO_END = ""
 
 function GetLauncherStrings(lang)
 	if lang == "fr" then
@@ -18,7 +21,10 @@ function GetLauncherStrings(lang)
 		LAUNCHER_EDIT_MISSION = "Modifier une mission existante"
 		LAUNCHER_EDIT_TITLE = "Choisissez une mission"
 		LAUNCHER_EDIT_NO_LEVEL_FOUND = "Aucune mission trouvée dans le répertoire \"CustomLevels/\""
-		LAUNCHER_EDIT_SCENARIO = "Modifier la scénarisation"
+		LAUNCHER_SCENARIO = "Modifier la scénarisation"
+		LAUNCHER_SCENARIO_TITLE = "Editeur de scénario"
+		LAUNCHER_SCENARIO_BEGIN = "Début"
+		LAUNCHER_SCENARIO_END = "Fin"
 	else
 		LAUNCHER_TITLE = "Prog & Play Level Editor"
 		LAUNCHER_QUIT = "Quit"
@@ -28,6 +34,9 @@ function GetLauncherStrings(lang)
 		LAUNCHER_EDIT_MISSION = "Edit existing mission"
 		LAUNCHER_EDIT_TITLE = "Choose a mission"
 		LAUNCHER_EDIT_NO_LEVEL_FOUND = "No mission found in the \"CustomLevels/\" directory"
-		LAUNCHER_EDIT_SCENARIO = "Edit scenario"
+		LAUNCHER_SCENARIO = "Edit scenario"
+		LAUNCHER_SCENARIO_TITLE = "Scenario Editor"
+		LAUNCHER_SCENARIO_BEGIN = "Begin"
+		LAUNCHER_SCENARIO_END = "End"
 	end
 end

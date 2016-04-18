@@ -161,7 +161,7 @@ end
 -- Returns a table containing the team color for each team as described in the .txt file
 -----------------------
 function getTeamsInformation()
-	local txtFile = VFS.LoadFile("Missions/"..Game.modShortName.."/LevelEditor.txt")
+	local txtFile = VFS.LoadFile("LevelEditor.txt")
 	local i = 0
 	local teams = {}
 	while true do

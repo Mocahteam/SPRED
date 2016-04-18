@@ -24,6 +24,7 @@ local vsx, vsy
 local UI = {}
 local MapList = {}
 local LevelList = {}
+local LevelListNames = {}
 
 function InitializeChili() 
 	if not WG.Chili then
@@ -42,6 +43,13 @@ function InitializeEditor()
 end
 
 function InitializeLauncher()
+	InitializeMainMenu()
+	InitializeMapButtons()
+	InitializeLevelButtons()
+	InitializeScenarioFrame()
+end
+
+function InitializeMainMenu()
 	UI.MainWindow = Chili.Window:New{
 		parent = Screen0,
 		x = "0%",
@@ -100,8 +108,8 @@ function InitializeLauncher()
 		y = "50%",
 		width = "40%",
 		height = "10%",
-		caption = LAUNCHER_EDIT_SCENARIO,
-		OnClick = {},
+		caption = LAUNCHER_SCENARIO,
+		OnClick = { EditScenarioFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
@@ -165,8 +173,6 @@ function InitializeLauncher()
 		focusColor= { 0.8, 0.6, 0.2, 1 },
 		OnClick = { Quit }
 	}
-	InitializeMapButtons()
-	InitializeLevelButtons()
 end
 
 function InitializeMapList()
@@ -179,11 +185,12 @@ function InitializeMapList()
 end
 
 function InitializeLevelList()
-	LevelList = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
-	for i, level in ipairs(LevelList) do
+	LevelListNames = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
+	for i, level in ipairs(LevelListNames) do
 		level = string.gsub(level, "CustomLevels\\", "")
 		level = string.gsub(level, ".editor", "")
-		LevelList[i] = level
+		LevelListNames[i] = level
+		LevelList[i] = json.decode(VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW))
 	end
 end
 
@@ -284,14 +291,14 @@ function InitializeLevelButtons()
 		}
 	}
 	UI.LoadLevel.LevelButtons = {}
-	for i, level in ipairs(LevelList) do
+	for i, level in ipairs(LevelListNames) do
 		local levelButton = Chili.Button:New{
 			parent = UI.LoadLevel.LevelScrollPanel,
 			x = "0%",
 			y = 80 * ( i - 1 ),
 			width = "100%",
 			height = 80,
-			caption = level,
+			caption = LevelList[i].description.name,
 			OnClick = { function() EditMission(level) end },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
@@ -300,6 +307,129 @@ function InitializeLevelButtons()
 			}
 		}
 		table.insert(UI.LoadLevel.LevelButtons, levelButton)
+	end
+end
+
+function InitializeScenarioFrame()
+	UI.Scenario = {}
+	UI.Scenario.Title = Chili.Label:New{
+		parent = UI.MainWindow,
+		x = "20%",
+		y = "15%",
+		width = "60%",
+		height = "5%",
+		align = "center",
+		valign = "center",
+		caption = LAUNCHER_SCENARIO_TITLE,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 40,
+			color = { 0, 0.8, 1, 1 }
+		}
+	}
+	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
+		parent = UI.MainWindow,
+		x = "2%",
+		y = "20%",
+		width = "96%",
+		height = "68%"
+	}
+	UI.Scenario.Output = {}
+	UI.Scenario.Input = {}
+	UI.Scenario.Levels = {}
+	UI.Scenario.Begin = Chili.Window:New{
+		parent = UI.Scenario.ScenarioScrollPanel,
+		x = 10,
+		y = 10,
+		width = 150,
+		height = 75,
+		draggable = true,
+		resizable = false
+	}
+	UI.Scenario.Output.Begin = Chili.Button:New{
+		parent = UI.Scenario.Begin,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "100%",
+		caption = LAUNCHER_SCENARIO_BEGIN,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 16
+		}
+	}
+	UI.Scenario.End = Chili.Window:New{
+		parent = UI.Scenario.ScenarioScrollPanel,
+		x = 170,
+		y = 10,
+		width = 150,
+		height = 75,
+		draggable = true,
+		resizable = false
+	}
+	UI.Scenario.Input.End = Chili.Button:New{
+		parent = UI.Scenario.End,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "100%",
+		caption = LAUNCHER_SCENARIO_END,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 16
+		}
+	}
+	local column = -1
+	for i, level in ipairs(LevelListNames) do
+		if i % 3 == 1 then
+			column = column + 1
+			UI.Scenario.Levels[i] = Chili.Window:New{
+				parent = UI.Scenario.ScenarioScrollPanel,
+				x = 10 + column * 310,
+				y = 95,
+				width = 300,
+				height = 150,
+				draggable = true,
+				resizable = false
+			}
+		else
+			UI.Scenario.Levels[i] = Chili.Window:New{
+				parent = UI.Scenario.ScenarioScrollPanel,
+				x = 10 + column * 310,
+				y = UI.Scenario.Levels[i-1].y + UI.Scenario.Levels[i-1].height + 10,
+				width = 300,
+				height = 150,
+				draggable = true,
+				resizable = false
+			}
+		end
+		Chili.Label:New{
+			parent = UI.Scenario.Levels[i],
+			x = 0,
+			y = 30,
+			width = 175,
+			height = 100,
+			caption = LevelList[i].description.name,
+			align = "center",
+			valign = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 18,
+				color = { 0, 0.8, 0.8, 1 }
+			}
+		}
+		Chili.Button:New{
+			parent = UI.Scenario.Levels[i],
+			x = 0,
+			y = 0,
+			width = 50,
+			height = 30,
+			caption = "IN",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 16
+			}
+		}
 	end
 end
 
@@ -328,6 +458,9 @@ function ClearUI()
 	UI.MainWindow:RemoveChild(UI.LoadLevel.Title)
 	UI.LoadLevel.LevelScrollPanel:RemoveChild(UI.LoadLevel.NoLevelMessage)
 	UI.MainWindow:RemoveChild(UI.LoadLevel.LevelScrollPanel)
+	
+	UI.MainWindow:RemoveChild(UI.Scenario.Title)
+	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 end
 
 function MainMenuFrame()
@@ -352,9 +485,16 @@ function EditMissionFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.LoadLevel.Title)
 	UI.MainWindow:AddChild(UI.LoadLevel.LevelScrollPanel)
-	if #LevelList == 0 then
+	if #LevelListNames == 0 then
 		UI.LoadLevel.LevelScrollPanel:AddChild(UI.LevelScrollPanel.NoLevelMessage)
 	end
+end
+
+function EditScenarioFrame()
+	ClearUI()
+	UI.MainWindow:AddChild(UI.BackButton)
+	UI.MainWindow:AddChild(UI.Scenario.Title)
+	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 end
 
 function ChangeLanguage(lang)
@@ -363,12 +503,15 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Title, LAUNCHER_TITLE)
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
-	UpdateCaption(UI.EditScenarioButton, LAUNCHER_EDIT_SCENARIO)
+	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
 	UpdateCaption(UI.QuitButton, LAUNCHER_QUIT)
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
 	UpdateCaption(UI.NewLevel.Title, LAUNCHER_NEW_TITLE)
 	UpdateText(UI.LoadLevel.NoLevelMessage, LAUNCHER_EDIT_NO_LEVEL_FOUND)
 	UpdateCaption(UI.LoadLevel.Title, LAUNCHER_EDIT_TITLE)
+	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
+	UpdateCaption(UI.Scenario.Output.Begin, LAUNCHER_SCENARIO_BEGIN)
+	UpdateCaption(UI.Scenario.Input.End, LAUNCHER_SCENARIO_END)
 end
 
 function NewMission(map)
