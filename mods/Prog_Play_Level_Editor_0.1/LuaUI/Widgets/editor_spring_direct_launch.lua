@@ -25,6 +25,11 @@ local UI = {}
 local MapList = {}
 local LevelList = {}
 local LevelListNames = {}
+local OutputStates = {}
+local Links = {}
+local selectedInput
+local selectedOutputMission
+local selectedOutput
 
 function InitializeChili() 
 	if not WG.Chili then
@@ -194,6 +199,20 @@ function InitializeLevelList()
 	end
 end
 
+function InitializeOutputStates()
+	for i, level in ipairs(LevelList) do
+		OutputStates[i] = {}
+		Links[i] = {}
+		for ii, e in ipairs(level.events) do
+			for iii, a in ipairs(e.actions) do
+				if a.type == "win" or a.type == "lose" then
+					table.insert(OutputStates[i], a.params.outputState)
+				end
+			end
+		end
+	end
+end
+
 function InitializeMapButtons()
 	InitializeMapList()
 	UI.NewLevel = {}
@@ -311,6 +330,7 @@ function InitializeLevelButtons()
 end
 
 function InitializeScenarioFrame()
+	InitializeOutputStates()
 	UI.Scenario = {}
 	UI.Scenario.Title = Chili.Label:New{
 		parent = UI.MainWindow,
@@ -334,6 +354,43 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
+	local function drawLinks()
+		for k, out in pairs(Links) do
+			if k == "begin" and out then
+				local x1, x2, y1, y2 = 0, 0, 0, 0
+				-- UI.Scenario.Output.Begin is the button, UI.Scenario.Begin.x is the parent window of the button ; same for the rest
+				x1 = UI.Scenario.Output.Begin.x + UI.Scenario.Begin.x
+				y1 = UI.Scenario.Output.Begin.y + UI.Scenario.Begin.y
+				x2 = UI.Scenario.Input[out].x + UI.Scenario.Levels[out].x
+				y2 = UI.Scenario.Input[out].y + UI.Scenario.Levels[out].y
+				gl.Vertex(x1, y1)
+				gl.Vertex(x2, y2)
+			else
+				for kk, linked in pairs(out) do
+					
+				end
+			end
+		end
+	end
+	UI.Scenario.Links = Chili.Control:New{
+		parent = UI.Scenario.ScenarioScrollPanel,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		DrawControl = function(obj)
+			local x = obj.x
+			local y = obj.y
+			local w = obj.width
+			local h = obj.height
+			gl.Color(1, 1, 1, 1)
+			gl.PushMatrix()
+			gl.Translate(x, y, 0)
+			gl.Scale(w, h, 1)
+			gl.BeginEnd(GL.LINES, drawLinks)
+			gl.PopMatrix()
+		end
+	}
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
@@ -356,7 +413,8 @@ function InitializeScenarioFrame()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
-		}
+		},
+		OnClick = { function() selectedOutputMission = "begin" selectedOutput = nil end }
 	}
 	UI.Scenario.End = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
@@ -377,10 +435,13 @@ function InitializeScenarioFrame()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
-		}
+		},
+		OnClick = { function() selectedInput = "end" end }
 	}
 	local column = -1
-	for i, level in ipairs(LevelListNames) do
+	for i, level in ipairs(LevelList) do
+		-- Search for output states
+		local outputStates = OutputStates[i]
 		if i % 3 == 1 then
 			column = column + 1
 			UI.Scenario.Levels[i] = Chili.Window:New{
@@ -388,9 +449,9 @@ function InitializeScenarioFrame()
 				x = 10 + column * 310,
 				y = 95,
 				width = 300,
-				height = 150,
+				height = math.max(150, (#outputStates + 2) * 30),
 				draggable = true,
-				resizable = false
+				resizable = true
 			}
 		else
 			UI.Scenario.Levels[i] = Chili.Window:New{
@@ -398,18 +459,18 @@ function InitializeScenarioFrame()
 				x = 10 + column * 310,
 				y = UI.Scenario.Levels[i-1].y + UI.Scenario.Levels[i-1].height + 10,
 				width = 300,
-				height = 150,
+				height = math.max(150, (#outputStates + 2) * 30),
 				draggable = true,
-				resizable = false
+				resizable = true
 			}
 		end
 		Chili.Label:New{
 			parent = UI.Scenario.Levels[i],
-			x = 0,
-			y = 30,
-			width = 175,
-			height = 100,
-			caption = LevelList[i].description.name,
+			x = "0%",
+			y = 0,
+			width = "100%",
+			height = 30,
+			caption = level.description.name,
 			align = "center",
 			valign = "center",
 			font = {
@@ -418,18 +479,36 @@ function InitializeScenarioFrame()
 				color = { 0, 0.8, 0.8, 1 }
 			}
 		}
-		Chili.Button:New{
+		UI.Scenario.Input[i] = Chili.Button:New{
 			parent = UI.Scenario.Levels[i],
 			x = 0,
-			y = 0,
+			y = 30,
 			width = 50,
 			height = 30,
-			caption = "IN",
+			caption = "In",
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 16
-			}
+			},
+			OnClick = { function() selectedInput = i end }
 		}
+		UI.Scenario.Output[i] = {}
+		for ii, out in ipairs(outputStates) do
+			local but = Chili.Button:New{
+				parent = UI.Scenario.Levels[i],
+				x = 155,
+				y = ii * 30,
+				width = 120,
+				height = 30,
+				caption = out,
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 16
+				}
+			}
+			but.OnClick = { function() selectedOutputMission = i selectedOutput = out end }
+			UI.Scenario.Output[i][out] = but
+		end
 	end
 end
 
@@ -545,6 +624,20 @@ function EditMission(level)
 	end
 end
 
+function MakeLink()
+	if selectedInput and selectedOutputMission then
+		if selectedOutputMission == "begin" then
+			Links.begin = selectedInput
+		else
+			Links[selectedOutputMission][selectedOutput] = selectedInput
+		end
+		selectedOutput = nil
+		selectedOutputMission = nil
+		selectedInput = nil
+		Spring.Echo(json.encode(Links))
+	end
+end
+
 function Quit()
 	Spring.SendCommands("quit")
 	Spring.SendCommands("quitforce")
@@ -558,24 +651,23 @@ function RemoveOtherWidgets()
 	end
 end
 
-function EitherDrawScreen(self)
-	if not vsx or not vsy then
+function EitherDrawScreen()
+	if not vsx or not vsy or not HideView then
 		return
 	end
 	
-	if HideView then
-		local bgText = "bitmaps/editor/blank.png"
-		gl.Blending(false)
-		gl.Color(0, 0, 0, 0)
-		gl.Texture(bgText)
-		gl.TexRect(vsx, vsy, 0, 0, 0, 0, 1, 1)
-		gl.Texture(false)
-	end
+	local bgText = "bitmaps/editor/blank.png"
+	gl.Blending(false)
+	gl.Color(0, 0, 0, 0)
+	gl.Texture(bgText)
+	gl.TexRect(vsx, vsy, 0, 0, 0, 0, 1, 1)
+	gl.Texture(false)
+	gl.Blending(true)
 end
 
 function SwitchOn()
 	Spring.SendCommands({"NoSound 1"})
-	Spring.SendCommands("fps 0")
+	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()
 	InitializeLauncher()
@@ -590,13 +682,13 @@ end
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	vsx, vsy = dse_vsx, dse_vsy
 	if Spring.IsGUIHidden() then
-		EitherDrawScreen(self)
+		EitherDrawScreen()
 	end
 end
 
 function widget:DrawScreen()
 	if not Spring.IsGUIHidden() then
-		EitherDrawScreen(self)
+		EitherDrawScreen()
 	end
 end
 
@@ -610,4 +702,8 @@ function widget:Initialize()
 		SwitchOff()
 	end
 	MainMenuFrame()
+end
+
+function widget:Update(delta)
+	MakeLink()
 end

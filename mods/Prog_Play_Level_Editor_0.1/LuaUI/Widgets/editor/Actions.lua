@@ -5,12 +5,17 @@ actions_list = {
 		type = "win",
 		filter = "Game",
 		typeText = "Team wins",
-		text = "<Team> wins.",
+		text = "<Team> wins with state <State>.",
 		attributes = {
 			{
 				text = "<Team>",
 				type = "team",
 				id = "team"
+			},
+			{
+				text = "<State>",
+				type = "text",
+				id = "outputState"
 			}
 		}
 	},
@@ -18,12 +23,17 @@ actions_list = {
 		type = "lose",
 		filter = "Game",
 		typeText = "Team loses",
-		text = "<Team> loses.",
+		text = "<Team> loses with <State>.",
 		attributes = {
 			{
 				text = "<Team>",
 				type = "team",
 				id = "team"
+			},
+			{
+				text = "<State>",
+				type = "text",
+				id = "outputState"
 			}
 		}
 	},
