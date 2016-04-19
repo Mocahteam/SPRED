@@ -16,6 +16,7 @@ VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
 VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/Filters.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
+VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
@@ -3696,8 +3697,27 @@ function exportMap()
 
 end
 function newMapFrame()
-	newMap()
-	newMapInitialize()
+	if windows["newMapWindow"] then
+		Screen0:RemoveChild(windows["newMapWindow"])
+		windows["newMapWindow"]:Dispose()
+	end
+	windows["newMapWindow"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
+	addLabel(windows["newMapWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_NEW_TITLE, 20, "center", nil, "center")
+	local delbut = addButton(windows["newMapWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["newMapWindow"]) windows["newMapWindow"]:Dispose() end)
+	delbut.font.color = {1, 0, 0, 1}
+	local mapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
+	if #mapList == 0 then
+		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_NEW_NO_MAP_FOUND, 16, {1, 0, 0, 1})
+	else
+		local scrollPanel = addScrollPanel(windows["newMapWindow"], '0%', '10%', '100%', '90%')
+		local count = 0
+		for i, m in ipairs(mapList) do
+			local name = string.gsub(m, "maps\\", "")
+			name = string.gsub(name, "%.sd.*", "")
+			addButton(scrollPanel, '0%', 40 * count, '100%', 40, name,  function() Screen0:RemoveChild(windows["newMapWindow"]) windows["newMapWindow"]:Dispose() newLevelWithRightMap(name) end)
+			count = count + 1
+		end
+	end
 end
 function loadMapFrame()
 	if windows["loadWindow"] then
@@ -3718,7 +3738,7 @@ function loadMapFrame()
 			local name = string.gsub(l, "CustomLevels\\", "")
 			name = string.gsub(name, ".editor", "")
 			local displayedName = string.gsub(name, "_", " ")
-			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadMap(name) end)
+			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
 			count = count + 1
 		end
 	end
@@ -3752,6 +3772,44 @@ function generateSaveName(name)
 end
 function beginLoadLevel(name)
 	loadMap(name)
+end
+function loadLevelWithRightMap(name)
+	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
+		levelFile = json.decode(levelFile)
+		if levelFile.description.map == Game.mapName then
+			loadMap(name)
+			return
+		end
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["toBeLoaded"] = name
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map
+			}
+		}
+		DoTheRestart("LevelEditor.txt", operations)
+	end
+end
+function newLevelWithRightMap(name)
+	if name == Game.mapName then
+		newMap()
+		newMapInitialize()
+		return
+	end
+	local operations = {
+		["MODOPTIONS"] = {
+			["language"] = Language,
+			["scenario"] = "noScenario"
+		},
+		["GAME"] = {
+			["Mapname"] = name
+		}
+	}
+	DoTheRestart("LevelEditor.txt", operations)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

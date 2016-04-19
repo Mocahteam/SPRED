@@ -349,6 +349,20 @@ function InitializeScenarioFrame()
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
+	UI.Scenario.Export = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "40%",
+		y = "90%",
+		width = "20%",
+		height = "5%",
+		caption = LAUNCHER_SCENARIO_EXPORT,
+		backgroundColor = { 0, 0.8, 1, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
+			--color = { 0, 0.8, 1, 1 }
+		}
+	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
 		x = "2%",
@@ -544,6 +558,7 @@ function ClearUI()
 	
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 end
 
 function MainMenuFrame()
@@ -578,6 +593,7 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:AddChild(UI.Scenario.Export)
 end
 
 function ChangeLanguage(lang)
@@ -599,6 +615,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output[0][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
+	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 end
 
 function NewMission(map)

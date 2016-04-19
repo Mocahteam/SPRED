@@ -8,6 +8,7 @@ LAUNCHER_EDIT_TITLE = ""
 LAUNCHER_EDIT_NO_LEVEL_FOUND = ""
 LAUNCHER_SCENARIO = ""
 LAUNCHER_SCENARIO_TITLE = ""
+LAUNCHER_SCENARIO_EXPORT = ""
 LAUNCHER_SCENARIO_BEGIN = ""
 LAUNCHER_SCENARIO_END = ""
 
@@ -23,6 +24,7 @@ function GetLauncherStrings(lang)
 		LAUNCHER_EDIT_NO_LEVEL_FOUND = "Aucune mission trouvée dans le répertoire \"CustomLevels/\""
 		LAUNCHER_SCENARIO = "Modifier la scénarisation"
 		LAUNCHER_SCENARIO_TITLE = "Editeur de scénario"
+		LAUNCHER_SCENARIO_EXPORT = "Exporter le scénario"
 		LAUNCHER_SCENARIO_BEGIN = "Début"
 		LAUNCHER_SCENARIO_END = "Fin"
 	else
@@ -36,6 +38,7 @@ function GetLauncherStrings(lang)
 		LAUNCHER_EDIT_NO_LEVEL_FOUND = "No mission found in the \"CustomLevels/\" directory"
 		LAUNCHER_SCENARIO = "Edit scenario"
 		LAUNCHER_SCENARIO_TITLE = "Scenario Editor"
+		LAUNCHER_SCENARIO_EXPORT = "Export scenario"
 		LAUNCHER_SCENARIO_BEGIN = "Begin"
 		LAUNCHER_SCENARIO_END = "End"
 	end
