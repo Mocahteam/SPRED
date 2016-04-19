@@ -20,13 +20,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Modification de l'équipe d'une unité (bug)
--- Groupe d'unités créées par tous les appels d'une action
--- Unité(s) créée(s) par le dernier appels
--- bug importation condition/action
-
--- Choix de la carte lors de la création d'un nouveau niveau
-
+-- nom team dans ally team list
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -2118,7 +2112,10 @@ function updateTeamConfigPanels()
 		updateTeamConfig = false
 	end
 	for i, t in ipairs(teamStateMachine.states) do
-		teamName[t] = teamNameEditBoxes[t].text
+		if teamName[t] ~= teamNameEditBoxes[t].text then
+			teamName[t] = teamNameEditBoxes[t].text
+			updateAllyTeam = true
+		end
 	end
 end
 

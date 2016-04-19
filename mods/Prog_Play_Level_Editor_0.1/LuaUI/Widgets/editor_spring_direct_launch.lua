@@ -744,10 +744,10 @@ function widget:Initialize()
 		GetLauncherStrings("en")
 		SwitchOn()
 		ChangeLanguage("en")
+		MainMenuFrame()
 	else
 		SwitchOff()
 	end
-	MainMenuFrame()
 end
 
 function widget:Update(delta)

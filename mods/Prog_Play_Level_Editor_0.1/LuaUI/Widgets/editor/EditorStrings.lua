@@ -3,7 +3,7 @@ local lang = Spring.GetModOptions()["language"]
 if lang == "fr" then
 	EDITOR_FILE = "Fichier"
 	EDITOR_FILE_NEW = "Nouveau"
-	EDITOR_FILE_NEW_TITLE = "Nouveau niveau"
+	EDITOR_FILE_NEW_TITLE = "Choisissez une carte"
 	EDITOR_FILE_NEW_NO_MAP_FOUND = "Aucune carte n'a été trouvée dans le répertoire maps"
 	EDITOR_FILE_LOAD = "Ouvrir"
 	EDITOR_FILE_LOAD_TITLE = "Charger niveau"
@@ -125,7 +125,7 @@ if lang == "fr" then
 else
 	EDITOR_FILE = "File"
 	EDITOR_FILE_NEW = "New"
-	EDITOR_FILE_NEW_TITLE = "New level"
+	EDITOR_FILE_NEW_TITLE = "Choose a map"
 	EDITOR_FILE_NEW_NO_MAP_FOUND = "No map has been found in the maps directory"
 	EDITOR_FILE_LOAD = "Load"
 	EDITOR_FILE_LOAD_TITLE = "Load level"

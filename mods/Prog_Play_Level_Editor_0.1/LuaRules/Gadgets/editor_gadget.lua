@@ -272,6 +272,10 @@ function gadget:RecvFromSynced(msg)
 	end
 end
 
+function gadget:MousePress(x, y, button)
+	return true
+end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 end
