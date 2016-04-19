@@ -200,6 +200,8 @@ function InitializeLevelList()
 end
 
 function InitializeOutputStates()
+	Links[0] = {}
+	Links[#LevelList+1] = {}
 	for i, level in ipairs(LevelList) do
 		OutputStates[i] = {}
 		Links[i] = {}
@@ -354,11 +356,11 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
+	--[[ FIXME
 	local function drawLinks()
 		for k, out in pairs(Links) do
 			if k == "begin" and out then
 				local x1, x2, y1, y2 = 0, 0, 0, 0
-				-- UI.Scenario.Output.Begin is the button, UI.Scenario.Begin.x is the parent window of the button ; same for the rest
 				x1 = UI.Scenario.Output.Begin.x + UI.Scenario.Begin.x
 				y1 = UI.Scenario.Output.Begin.y + UI.Scenario.Begin.y
 				x2 = UI.Scenario.Input[out].x + UI.Scenario.Levels[out].x
@@ -391,10 +393,11 @@ function InitializeScenarioFrame()
 			gl.PopMatrix()
 		end
 	}
+	]]
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
-	UI.Scenario.Begin = Chili.Window:New{
+	UI.Scenario.Levels[0] = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 10,
 		y = 10,
@@ -403,8 +406,9 @@ function InitializeScenarioFrame()
 		draggable = true,
 		resizable = false
 	}
-	UI.Scenario.Output.Begin = Chili.Button:New{
-		parent = UI.Scenario.Begin,
+	UI.Scenario.Output[0] = {}
+	UI.Scenario.Output[0][1] = Chili.Button:New{
+		parent = UI.Scenario.Levels[0],
 		x = "0%",
 		y = "0%",
 		width = "100%",
@@ -414,9 +418,9 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedOutputMission = "begin" selectedOutput = nil end }
+		OnClick = { function() selectedOutputMission = 0 selectedOutput = 1 end }
 	}
-	UI.Scenario.End = Chili.Window:New{
+	UI.Scenario.Levels[#LevelList+1] = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 170,
 		y = 10,
@@ -425,8 +429,8 @@ function InitializeScenarioFrame()
 		draggable = true,
 		resizable = false
 	}
-	UI.Scenario.Input.End = Chili.Button:New{
-		parent = UI.Scenario.End,
+	UI.Scenario.Input[#LevelList+1] = Chili.Button:New{
+		parent = UI.Scenario.Levels[#LevelList+1],
 		x = "0%",
 		y = "0%",
 		width = "100%",
@@ -436,7 +440,7 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedInput = "end" end }
+		OnClick = { function() selectedInput = #LevelList+1 end }
 	}
 	local column = -1
 	for i, level in ipairs(LevelList) do
@@ -579,18 +583,22 @@ end
 function ChangeLanguage(lang)
 	Language = lang
 	GetLauncherStrings(lang)
+	
 	UpdateCaption(UI.Title, LAUNCHER_TITLE)
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
 	UpdateCaption(UI.QuitButton, LAUNCHER_QUIT)
+	
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
 	UpdateCaption(UI.NewLevel.Title, LAUNCHER_NEW_TITLE)
+	
 	UpdateText(UI.LoadLevel.NoLevelMessage, LAUNCHER_EDIT_NO_LEVEL_FOUND)
 	UpdateCaption(UI.LoadLevel.Title, LAUNCHER_EDIT_TITLE)
+	
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
-	UpdateCaption(UI.Scenario.Output.Begin, LAUNCHER_SCENARIO_BEGIN)
-	UpdateCaption(UI.Scenario.Input.End, LAUNCHER_SCENARIO_END)
+	UpdateCaption(UI.Scenario.Output[0][1], LAUNCHER_SCENARIO_BEGIN)
+	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
 end
 
 function NewMission(map)
@@ -626,15 +634,36 @@ end
 
 function MakeLink()
 	if selectedInput and selectedOutputMission then
-		if selectedOutputMission == "begin" then
-			Links.begin = selectedInput
-		else
-			Links[selectedOutputMission][selectedOutput] = selectedInput
+	
+		if Links[selectedOutputMission][selectedOutput] then
+			UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
+			UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
 		end
+		for k, link in pairs(Links) do
+			for kk, output in pairs(link) do
+				if output == selectedInput then
+					UI.Scenario.Output[k][kk].state.chosen = false
+					UI.Scenario.Output[k][kk]:InvalidateSelf()
+					break
+				end
+			end
+		end
+		
+		Links[selectedOutputMission][selectedOutput] = selectedInput
+		
+		local r, g, b = math.random(), math.random(), math.random()
+		
+		UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
+		UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+		UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+		
+		UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
+		UI.Scenario.Input[selectedInput].state.chosen = true
+		UI.Scenario.Input[selectedInput]:InvalidateSelf()
+		
 		selectedOutput = nil
 		selectedOutputMission = nil
 		selectedInput = nil
-		Spring.Echo(json.encode(Links))
 	end
 end
 
