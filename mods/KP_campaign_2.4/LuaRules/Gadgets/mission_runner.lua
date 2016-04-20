@@ -76,6 +76,7 @@ function gadget:GamePreload()
   end
   if Spring.GetModOptions()["jsonlocation"]=="editor" then
     local da=VFS.LoadFile("Missions/KPC/"..missionName..".editor")
+    Spring.Echo("try to parse"..missionName)
     missionScript.parseJson(da)
   end
 end
@@ -147,7 +148,7 @@ end
 else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-local mouseDisabled = true
+local mouseDisabled = false
 
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...

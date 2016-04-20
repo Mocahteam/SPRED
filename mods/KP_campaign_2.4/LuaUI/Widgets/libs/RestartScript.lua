@@ -141,6 +141,5 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
-  Spring.Echo(txtFileContent)
   Spring.Restart("-s",txtFileContent)
 end

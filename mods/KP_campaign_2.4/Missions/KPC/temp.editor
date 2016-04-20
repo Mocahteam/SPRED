@@ -61,7 +61,7 @@
 	},
 	"description":{
 		"briefing":"Map Briefing de la mort qui tue",
-		"cameraAuto":"disabled",
+		"cameraAuto":"enabled",
 		"name":"Carte Par Defaut",
 		"autoHeal":"disabled",
 		"mouse":"disabled",
@@ -245,7 +245,7 @@
 			"orientation":-2.7857091426849,
 			"autoHeal":"disabled",
 			"hp":80,
-			"team":0
+			"team":1
 		},
 		{
 			"type":"bit",
@@ -271,7 +271,7 @@
 			"orientation":1.0308351516724,
 			"autoHeal":"disabled",
 			"hp":20,
-			"team":0
+			"team":1
 		}  
 	]
 }
