@@ -4189,8 +4189,10 @@ function widget:MousePress(mx, my, button)
 			unitFrame()
 		end
 	elseif clickedZone ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
-		zoneFrame()
-		zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+		if (unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION or unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS) and clickedZone.shown then
+			zoneFrame()
+			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+		end
 	end
 	
 	-- Left click

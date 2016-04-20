@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<game id_game="76" status="prepa" publication_date="2015-12-03T08:56:35+01:00">
+		<title>Kernel Panic Campaign 2.3</title>
+		<description>Kernel Panic Campaign 2.3 est un jeu s&#233;rieux destin&#233; &#224; faire travailler au joueur les fondamentaux de la programmation informatique. Il se pr&#233;sente sous la forme d'un jeu de strat&#233;gie en temps r&#233;el o&#249; le joueur doit programmer les unit&#233;s du jeu afin d'atteindre les objectifs d'une s&#233;rie de missions sc&#233;naris&#233;es. Ce jeu s&#233;rieux est bas&#233; sur le jeu de strat&#233;gie en temps r&#233;el Kernel Panic et le syst&#232;me Prog&amp;Play. Le jeu peut &#234;tre t&#233;l&#233;charg&#233; &#224; partir de l'adresse suivante : [http://www.irit.fr/ProgAndPlay-&gt;http://www.irit.fr/ProgAndPlay]</description>
+	
+		<activities>
+	
+			<activity id_activity="1123">
+				<name>Mission1</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1316"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1630"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1125">
+				<name>Mission2</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1318"/>
+		
+					<input_state id_input="1324" name="backToMission2"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1632"/>
+		
+					<output_state id_output="1637" name="nom"/>
+		
+					<output_state id_output="1638"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1077">
+				<name>Mission3</name>
+				<description>Test de branchement d'une mission</description>
+		
+				<input_states>
+		
+					<input_state id_input="1248" name="entreeMission3"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1559"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1126">
+				<name>Mission4</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1319"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1633"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1127">
+				<name>Mission5</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1320"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1634"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1128">
+				<name>Mission6</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1321"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1635"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1129">
+				<name>Mission7</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1322"/>
+		
+					<input_state id_input="1323" name="autre entr&#233;e"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1636"/>
+		
+				</output_states>
+		
+			</activity>
+	
+			<activity id_activity="1124">
+				<name>Mission8</name>
+				
+		
+				<input_states>
+		
+					<input_state id_input="1317"/>
+		
+				</input_states>
+		
+		
+				<output_states>
+		
+					<output_state id_output="1631"/>
+		
+				</output_states>
+		
+			</activity>
+	
+		</activities>
+	
+	
+	
+		<goals>
+	
+			<goal id_goal="1357" type="ludo" prerequisited="1">
+				<name>ludo1</name>
+				<description>dummy objectif to test </description>
+		
+				<goal_links>
+		
+					 <goal_link object="input_state" id_object="1318"/>
+		
+					 <goal_link object="output_state" id_object="1630"/>
+		
+				</goal_links>
+		
+			</goal>
+	
+			<goal id_goal="1361" type="ludo" prerequisited="0">
+				<name>ludo2</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+			<goal id_goal="1359" type="ludo" prerequisited="0">
+				<name>ludo3</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+			<goal id_goal="1360" type="ludo" prerequisited="0">
+				<name>ludo4</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+			<goal id_goal="1362" type="ludo" prerequisited="0">
+				<name>ludo5</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+			<goal id_goal="1353" type="peda" prerequisited="2">
+				<name>pedago2</name>
+				<description>dummy objectif to test </description>
+		
+				<goal_links>
+		
+					 <goal_link object="input_state" id_object="1248"/>
+		
+					 <goal_link object="input_state" id_object="1323"/>
+		
+					 <goal_link object="output_state" id_object="1632"/>
+		
+					 <goal_link object="output_state" id_object="1637"/>
+		
+				</goal_links>
+		
+			</goal>
+	
+			<goal id_goal="1363" type="peda" prerequisited="1">
+				<name>pedago1</name>
+				<description>dummy objectif to test </description>
+		
+				<goal_links>
+		
+					 <goal_link object="input_state" id_object="1318"/>
+		
+					 <goal_link object="output_state" id_object="1630"/>
+		
+				</goal_links>
+		
+			</goal>
+	
+			<goal id_goal="1354" type="peda" prerequisited="1">
+				<name>pedago3</name>
+				<description>dummy objectif to test </description>
+		
+				<goal_links>
+		
+					 <goal_link object="input_state" id_object="1323"/>
+		
+					 <goal_link object="output_state" id_object="1637"/>
+		
+				</goal_links>
+		
+			</goal>
+	
+			<goal id_goal="1355" type="peda" prerequisited="0">
+				<name>pedago4</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+			<goal id_goal="1356" type="peda" prerequisited="0">
+				<name>pedago5</name>
+				<description>dummy objectif to test </description>
+		
+			</goal>
+	
+		</goals>
+	
+	
+	
+	
+	
+		<link_sets>
+	
+			<link_set id_link_set="302" default="oui" publication_date="2015-10-21T10:28:17+02:00" status="prepa">
+				<title>TestBruno</title>
+				<description>Ce parcours est construit pour tester l'integration des parcours Appliq dans Prog&amp;Play</description>
+		
+		
+		
+				<links>
+		
+					<output_input_link id_output="start" id_input="1316"/>
+		
+					<output_input_link id_output="1559" id_input="1319"/>
+		
+					<output_input_link id_output="1630" id_input="1318"/>
+		
+					<output_input_link id_output="1631" id_input="end"/>
+		
+					<output_input_link id_output="1632" id_input="1248"/>
+		
+					<output_input_link id_output="1633" id_input="1320"/>
+		
+					<output_input_link id_output="1634" id_input="1321"/>
+		
+					<output_input_link id_output="1635" id_input="1322"/>
+		
+					<output_input_link id_output="1636" id_input="1317"/>
+		
+					<output_input_link id_output="1637" id_input="1323"/>
+		
+					<output_input_link id_output="1638" id_input="1324"/>
+		
+				</links>
+		
+			</link_set>
+	
+		</link_sets>
+	
+	</game>
+</games>
