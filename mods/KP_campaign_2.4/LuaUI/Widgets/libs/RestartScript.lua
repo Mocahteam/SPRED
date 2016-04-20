@@ -88,7 +88,7 @@ local function createFromScratch(editorTables)
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n{" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
-  local name=editorTables.description.safename or "temp"
+  local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
   local table1 = {Mapname=mapName, Gametype="Kernel Panic Campaign 2.4", MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
@@ -141,5 +141,6 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
+  Spring.Echo(txtFileContent)
   Spring.Restart("-s",txtFileContent)
 end
