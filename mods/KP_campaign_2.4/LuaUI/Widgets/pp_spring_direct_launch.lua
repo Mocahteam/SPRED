@@ -153,7 +153,7 @@ local function RunScript(ScriptFileName, scenario)
       local sf=VFS.LoadFile(ScriptFileName)
       local tableEditor=json.decode(sf)
       restartWithEditorFile(tableEditor)
-    end
+   end
 	else
     NoRestart()
 	end

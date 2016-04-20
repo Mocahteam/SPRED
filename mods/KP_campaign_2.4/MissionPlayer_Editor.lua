@@ -19,6 +19,7 @@ local conditions={}--associative array idCond->condition
 local actions={}--associative array idActions->actions
 local events={}--associative array idCond->event
 local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
+local zones={}
 
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
@@ -248,29 +249,26 @@ end
 local function createUnit(unitTable)
     Spring.Echo(json.encode(unitTable))
     local posit=unitTable.position
-    armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, Spring.GetGroundHeight(posit.x, posit.z),posit.z, "n", unitTable.team)
-  --Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
-    --Spring.Echo(unitTable.id)
-    --Spring.Echo(armySpring[unitTable.id])
+    armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
     armyInformations[unitTable.id]={}
---    local springUnit=armySpring[unitTable.id]    
---    armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
---    Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
---    Spring.Echo(unitTable.hp)
---    Spring.Echo((unitTable.hp/100))
---    
---    armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
---    armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
---    armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
---    armyInformations[unitTable.id].autoHealStatus=unitTable.autoheal
---    armyInformations[unitTable.id].isUnderAttack=false
---    --Spring.Echo("try to create unit with these informations")
---    Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
---    if(groupOfUnits[unitTable.team]==nil) then
---      groupOfUnits[unitTable.team]={}
---    end
---    Spring.Echo("unitCreated")
---    table.insert(groupOfUnits[unitTable.team],unitTable.id)
+    local springUnit=armySpring[unitTable.id]    
+    armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
+    Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
+    Spring.Echo(unitTable.hp)
+    Spring.Echo((unitTable.hp/100))
+    
+    armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
+    armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
+    armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
+    armyInformations[unitTable.id].autoHealStatus=unitTable.autoheal
+    armyInformations[unitTable.id].isUnderAttack=false
+    --Spring.Echo("try to create unit with these informations")
+    Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
+    if(groupOfUnits[unitTable.team]==nil) then
+      groupOfUnits[unitTable.team]={}
+    end
+    Spring.Echo("unitCreated")
+    table.insert(groupOfUnits[unitTable.team],unitTable.id)
 end
 
 -------------------------------------
@@ -717,7 +715,7 @@ local function writeCompassOnUnit(springUnitId)
 end
 
 local function parseJson(jsonFile)
-  --Spring.Echo(jsonFile)
+  Spring.Echo(jsonFile)
   if(jsonFile==nil) then
     return nil
   end
@@ -750,21 +748,19 @@ end
 -- @todo This function does too many things
 -------------------------------------
 local function StartAfterJson ()
-  Spring.Echo("LLLLLLLLLLOOOOOOOOOOAAAAAAAAAAAD")
-  
   -- Delete all the stuff (required as team kernel are placed by spring since the beginnning)
   
 
   --[[ 
+
+  --]]
+
+  -- COMMENTED OUT for the moment, avoid unsage attempt to modify gamestate
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
     --Spring.Echo("I am Totally Deleting Stuff")
     Spring.DestroyUnit(units[i], false, true)
-  end
-  --]]
-
-  -- COMMENTED OUT for the moment, avoid unsage attempt to modify gamestate
-  
+  end  
   
    -------------------------------
    -------VARIABLES---------------
@@ -826,81 +822,79 @@ local function StartAfterJson ()
   end
   
   ShowBriefing()
---[[    
+   
 
  -------------------------------
  ------GROUP OF ARMIES----------
  -------------------------------
-  if(mission["groupOfUnits"]~=nil) then
-    for i=1, table.getn(mission.groupOfUnits) do
-      local groupId=mission.groupOfUnits[i].id
-      groupOfUnits[groupId]={}
-      for i,unit in ipairs(mission.groupOfUnits[i].units) do
-        --Spring.Echo(unit)
-        table.insert(groupOfUnits[groupId],unit)
+  if(mission["groups"]~=nil) then
+    for i=1, table.getn(mission.groups) do
+      local groupname=mission.groups[i].name
+      groupOfUnits[groupname]={}
+      for i,unit in ipairs(mission.groups[i].units) do
+        table.insert(groupOfUnits[groupname],unit)
       end
     end
   end 
-  --Spring.Echo(json.encode(groupOfUnits))
- -------------------------------
- -------MESSAGES----------------
- -------------------------------
- if(mission.messages~=nil) then
-    for i=1, table.getn(mission.messages) do
-     local id=mission.messages[i].id
-     messages[id]=mission.messages[i].content
-    end 
- end
-  --Spring.Echo(json.encode(messages))
-  
+  Spring.Echo(json.encode(groupOfUnits))
+   
+
+
  -------------------------------
  -------CONDITIONS--------------
  -------------------------------
- if(mission.conditions~=nil)then
-    for i=1, table.getn(mission.conditions) do
-     local id=mission.conditions[i].id
-     conditions[id]={}
-     conditions[id]["object"]=mission.conditions[i].object
-     conditions[id]["attribute"]=mission.conditions[i].attribute
-     conditions[id]["value"]=mission.conditions[i].value
-     conditions[id]["currentlyValid"]=false
+if(mission.events~=nil)then
+    for i=1, table.getn(mission.events) do
+     local currentEvent=mission.events[i]
+     for j=1, table.getn(currentEvent.conditions)do
+       local currentCond=currentEvent.conditions[j]
+       local id=currentCond.name
+       conditions[id]=currentEvent.conditions[j]
+       conditions[id]["currentlyValid"]=false
     end 
   end
-  
- -------------------------------
- -------ACTIONS-----------------
- -------------------------------
- if(mission.actions~=nil)then   
-  for i=1, table.getn(mission.actions) do
-   local id=mission.actions[i].id
-   actions[id]=mission.actions[i]
-   actions[id]["alreadyDone"]=false
-  end
-end    
-   
+  Spring.Echo(json.encode(conditions))
+end
+
  -------------------------------
  -------EVENTS------------------
  -------------------------------
  if(mission.events~=nil)then   
   for i=1, table.getn(mission.events) do
-   local trigger=mission.events[i].trigger
-   local actions=mission.events[i].actions
-   local idEvent=mission.events[i].idEvent
-   local script=mission.events[i].script
+   local idEvent=mission.events[i].id
    events[idEvent]={}
-   events[idEvent].script=script
-   events[idEvent].actions=actions
-   events[idEvent].trigger=trigger
+   events[idEvent]=mission.events[i]
    events[idEvent].hasTakenPlace=false
-   for idEv,acts in pairs(events) do
-   --Spring.Echo(idEv)
-    for j=1,table.getn(acts) do 
-      --Spring.Echo(acts[j].type)
-    end
-   end
   end
 end
-  
+
+
+ -------------------------------
+ -------ZONES--------------------
+ -------------------------------
+ if(mission.zones~=nil)then   
+  for i=1, table.getn(mission.zones) do
+   local cZ=mission.zones[i]
+   local idZone=cZ.name
+   if(cZ.type=="Disk") then
+    zones[idZone]={type="Disk",center_xz={x=cZ.x, z=cZ.z},a=cZ.a,b=cZ.b}
+   elseif(cZ.type=="Rectangle") then
+    local demiLargeur=(cZ.x2-cZ.x1)/2
+    local demiLongueur=(cZ.z2-cZ.z1)/2
+    local center_xz={x=cZ.x1+demiLargeur, z=cZ.z1+demiLongueur}
+    zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
+   else
+    Spring.Echo(cZ.type.." not implemented yet")
+    end  
+  end
+end
+
+Spring.Echo(json.encode(zones))
+
+
+
+ --[[  
+   
    -------------------------------
    -------START------------------
    -------------------------------   
@@ -934,13 +928,6 @@ local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
 end
 
 local function Update (frameNumber) 
-  for idUnit,infos in pairs(armyInformations) do
-    local springUnit=armySpring[idUnit]
-    local x,y,z=Spring.GetUnitPosition(springUnit)
-    Spring.Echo(x)
-    Spring.Echo(y)
-    Spring.Echo(z)
-  end
   --[[
   if(not canUpdate)then
     return 0
