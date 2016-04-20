@@ -92,27 +92,61 @@ local function getAMessage(messageId)
   end
 end
 
+local function isXZInsideZone(x,z,zoneId)
+  local zone=zones[zoneId]
+  if(zone.type=="Rectangle") then
+    local center_x=zone.center_xz.x
+    local center_z=zone.center_xz.z
+    if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
+    if(center_x-zone.demiLargeur>x)then return false end
+    if(center_z+zone.demiLongueur<z)then return false end
+    if(center_z-zone.demiLongueur>z)then return false end
+    return true
+  elseif(zone.type=="Disk") then
+    local center_x=zone.center_xz.x
+    local center_z=zone.center_xz.z
+    local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
+    local bpart=((center_z-z)*(center_z-z))/((zone.b)*(zone.b))
+    return (apart+bpart<1)
+  end
+end
+
 -------------------------------------
--- get a position giving its Id.
+-- determine if a unit is in zone
+-------------------------------------
+local function isUnitInZone(unit,idZone)
+  local unitID=armySpring[unit]
+  local x, y, z = Spring.GetUnitPosition(unitID)
+  isXZInsideZone(x,z,idZone)
+end
+
+-------------------------------------
+-- get a position randomly drawn within a zone
 -- If extra parameters are given (such as validZone)
 -- a random position can be drawn
 -------------------------------------
-local function getAPosition(positionTable)
-  local posId=positionTable.positionId
-  local oldposit=positions[posId]
+local function getARandomPositionInZone(idZone)
+  local zone=zones[idZone]
   local posit={}
-  if(positionTable.validZone~="no")and(positionTable.validZone~=nil) then
-    local validZone=tonumber(positionTable.validZone)
-    local x1=oldposit.x-validZone
-    local x2=oldposit.x+validZone
-    local z1=oldposit.z-validZone
-    local z2=oldposit.z+validZone
-    posit["x"]=math.random(x1, x2)
-    posit["z"]=math.random(z1, z2)
-    return posit  
-  else
-    return oldposit
-  end
+  local center_x=zone.center_xz.x
+  local center_z=zone.center_xz.z
+  if(zone.type=="Disk") then
+    while true do -- rejection method to draw random points from ellipse (drawn from rectangle and accepted if inside ellipse
+      local x=math.random(center_x-zone.a, center_x+zone.a)
+      local z=math.random(center_z-zone.b, center_z+zone.b)
+      if(isXZInsideZone(x,z,idZone))then
+        posit["x"]=x
+        posit["z"]=z
+        return posit
+      end
+    end
+  elseif(zone.type=="Rectangle") then
+    local x=math.random(center_x-zone.demiLargeur, center_x+zone.demiLargeur)
+    local z=math.random(center_z-zone.demiLongueur, center_z+zone.demiLongueur)
+    posit["x"]=x
+    posit["z"]=z
+    return posit
+  end    
 end
 
 -------------------------------------
@@ -538,21 +572,6 @@ local function  UpdateGameState()
 end
 
 -------------------------------------
--- Check if an unit is at a certain position
--- The tolerance is a square zone
--- The tolerance is given by the validZone attribute
--------------------------------------
-local function CheckPosition (unitID,value)--for the moment only single unit
-  local x, y, z = Spring.GetUnitPosition(unitID)
-  local posit=positions[value.positionId]
-  local precision=tonumber(value.validZone)
-  if x > tonumber(posit.x)-precision and x < tonumber(posit.x)+precision and z > tonumber(posit.z)-precision and z < tonumber(posit.z)+precision then
-    return true
-  end
-  return false
-end
-
--------------------------------------
 -- Get the action of the unit
 -- Actions are in a queue list available by GetCommandQueue
 -------------------------------------
@@ -888,8 +907,6 @@ end
     end  
   end
 end
-
-Spring.Echo(json.encode(zones))
 
 
 
