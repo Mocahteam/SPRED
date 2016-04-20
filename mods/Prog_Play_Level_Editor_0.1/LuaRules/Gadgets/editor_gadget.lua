@@ -138,7 +138,7 @@ function gadget:GameFrame( frameNumber )
 	-- EDITOR ONLY
 	if missionName == "LevelEditor" then
 		-- Delete units at the beginning
-		if initialize and frameNumber > 0 then -- TODO : cmd
+		if initialize and frameNumber > 0 then
 			local cmdList = {}
 			for id, unitDef in pairs(UnitDefs) do
 				local unitType = unitDef.name
@@ -159,6 +159,9 @@ function gadget:GameFrame( frameNumber )
 					Spring.DestroyUnit(u, false, true)
 				end
 				initialize = false
+			end
+			if Spring.GetModOptions().tobeloaded then
+				SendToUnsynced("beginLoadLevel".."++"..Spring.GetModOptions().tobeloaded)
 			end
 		end
 		-- CREATE UNIT
@@ -194,8 +197,9 @@ function gadget:GameFrame( frameNumber )
 		-- TRANSFER UNITS
 		elseif transferUnits then
 			for i, u in ipairs(selectedUnits) do
-				--Spring.TransferUnit(u, newTeam) --bug
-				--Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+				Spring.TransferUnit(u, newTeam)
+				Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
+				Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 			end
 			SendToUnsynced("requestSave")
 			transferUnits = false
@@ -263,6 +267,13 @@ function gadget:RecvFromSynced(msg)
 	if msgContents[1] == "commands" then
 		Script.LuaUI.getCommandsList(msgContents[2])
 	end
+	if msgContents[1] == "beginLoadLevel" then
+		Script.LuaUI.beginLoadLevel(msgContents[2])
+	end
+end
+
+function gadget:MousePress(x, y, button)
+	return true
 end
 
 --------------------------------------------------------------------------------

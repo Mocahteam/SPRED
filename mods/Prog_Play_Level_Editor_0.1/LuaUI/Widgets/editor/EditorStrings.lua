@@ -1,12 +1,10 @@
 local lang = Spring.GetModOptions()["language"]
 
 if lang == "fr" then
-	LAUNCHER_TITLE = "Editeur de niveaux Prog & Play"
-	LAUNCHER_NEW = "Nouvelle mission"
-	LAUNCHER_EDIT_MISSION = "Modifier une mission existante"
-	LAUNCHER_EDIT_SCENARIO = "Modifier la scénarisation"
 	EDITOR_FILE = "Fichier"
 	EDITOR_FILE_NEW = "Nouveau"
+	EDITOR_FILE_NEW_TITLE = "Choisissez une carte"
+	EDITOR_FILE_NEW_NO_MAP_FOUND = "Aucune carte n'a été trouvée dans le répertoire maps"
 	EDITOR_FILE_LOAD = "Ouvrir"
 	EDITOR_FILE_LOAD_TITLE = "Charger niveau"
 	EDITOR_FILE_LOAD_NO_LEVEL_FOUND = "Aucun niveau n'a été trouvé dans le répertoire CustomLevels"
@@ -125,12 +123,10 @@ if lang == "fr" then
 	EDITOR_NO = "Non"
 	EDITOR_X = "X"
 else
-	LAUNCHER_TITLE = "Prog & Play Level Editor"
-	LAUNCHER_NEW = "New mission"
-	LAUNCHER_EDIT_MISSION = "Edit existing mission"
-	LAUNCHER_EDIT_SCENARIO = "Edit scenario"
 	EDITOR_FILE = "File"
 	EDITOR_FILE_NEW = "New"
+	EDITOR_FILE_NEW_TITLE = "Choose a map"
+	EDITOR_FILE_NEW_NO_MAP_FOUND = "No map has been found in the maps directory"
 	EDITOR_FILE_LOAD = "Load"
 	EDITOR_FILE_LOAD_TITLE = "Load level"
 	EDITOR_FILE_LOAD_NO_LEVEL_FOUND = "No level has been found in the CustomLevels directory"
