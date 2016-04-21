@@ -256,6 +256,24 @@ conditions_list = {
 		}
 	},
 	{
+		type = "killed",
+		filter = "Kill",
+		typeText = "Team killed specific unit",
+		text = "<Team> killed <Unit>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			}
+		}
+	},
+	{
 		type = "killed_unit",
 		filter = "Kill",
 		typeText = "Team killed units",
@@ -270,6 +288,52 @@ conditions_list = {
 				text = "<Number>",
 				type = "numberComparison",
 				id = "number"
+			}
+		}
+	},
+	{
+		type = "killed_team",
+		filter = "Kill",
+		typeText = "Team killed units of target team",
+		text = "<Team> killed <Number> units of <TargetTeam>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<TargetTeam>",
+				type = "team",
+				id = "targetTeam"
+			}
+		}
+	},
+	{
+		type = "killed_group",
+		filter = "Kill",
+		typeText = "Team killed units of group",
+		text = "<Team> killed <Number> units of <Group>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
 			}
 		}
 	},

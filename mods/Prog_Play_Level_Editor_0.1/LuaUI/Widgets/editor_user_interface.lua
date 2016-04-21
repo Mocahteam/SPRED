@@ -36,6 +36,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
+local textSize = 1
 local initialize = false
 
 -- File Variables
@@ -87,10 +88,9 @@ local updateTeamButtons = true -- Force update on the bottom-right team buttons
 local newUnitGroupEditBox -- Edit box to specify the name of the new group created from selected units
 
 -- Draw selection variables
-local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 0, 0 -- Used to know where to plot the rectangle
+local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 1920, 1080 -- Used to know where to plot the rectangle
 local plotSelection = false -- Used in mouse events to plot the selection feedback rectangle
 local selectionRect -- Selection visual feedback
-function widget:DrawScreenEffects(dse_vsx, dse_vsy) screenSizeX, screenSizeY = dse_vsx, dse_vsy end
 
 -- Zone variables
 local zoneButtons = {} -- Choose which type of zone to create
@@ -632,10 +632,9 @@ end
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
-	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame) -- TODO needs a rework
+	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
-	fileButtons['export'] = addButton(windows['fileWindow'], '0%', '55%', '100%', '15%', EDITOR_FILE_EXPORT, exportMapFrame)
 	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_SETTINGS, nil) -- TODO or not
 end
 function initUnitWindow()
@@ -3699,9 +3698,6 @@ function saveMap()
 	file:write(jsonfile)
 	file:close()
 end
-function exportMap()
-
-end
 function newMapFrame()
 	if windows["newMapWindow"] then
 		Screen0:RemoveChild(windows["newMapWindow"])
@@ -3756,8 +3752,9 @@ function saveMapFrame()
 	end
 	local saveName = generateSaveName(mapName)
 	if VFS.FileExists("CustomLevels/"..saveName..".editor", VFS.RAW) then
-		windows["saveWindow"] = addWindow(Screen0, "40%", "45%", "20%", "10%")
-		addLabel(windows["saveWindow"], '0%', '0%', '100%', '50%', EDITOR_FILE_SAVE_CONFIRM)
+		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM, 20)
+		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
 		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
 		addButton(windows["saveWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
 	else
@@ -4174,6 +4171,15 @@ function widget:Update(delta)
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
+end
+
+function widget:DrawScreenEffects(dse_vsx, dse_vsy)
+	textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
+	screenSizeX, screenSizeY = dse_vsx, dse_vsy
+	--[[ TODO : for all elements
+	fileButtons["new"].font.size = textSize * fileButtons["new"].font.size	
+	fileButtons["new"]:InvalidateSelf()
+	]]
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")

@@ -940,7 +940,3 @@ end
 function widget:Update(delta)
 	MakeLink()
 end
-
-function widget:KeyPress()
-	ExportScenario()
-end
