@@ -29,6 +29,7 @@ local success=nil -- when this global variable change (with event of type "end")
 local outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 local canUpdate=false
 local mission
+local startingFrame=5
 
 
 -------------------------------------
@@ -612,9 +613,7 @@ end
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
   if(c.attribute=="dead") then --untested yet
-    --Spring.Echo("is it alive ?")
     local alive=Spring.ValidUnitID(internalUnitId)
-    --Spring.Echo(alive)
     return not(alive)
   elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
@@ -632,28 +631,6 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
     end
   end
 end
-
-
-    --[[
-    elseif(c.attribute=="health") then
-      local tresholdRatio=tonumber(c.value.tresholdRatio)
-      local mode=c.value.mode--upTo/downTo
-      local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
-      if(mode=="upTo")then
-        if(maxhealth*tresholdRatio<=health) then
-          return true
-        else
-          return false
-        end
-      elseif(mode=="downTo")then
-        if(maxhealth*tresholdRatio>=health) then
-          return true
-        else
-          return false
-        end
-      end
-    end  
-  end    --]]
 
 -------------------------------------
 -- Determine if a group satisfies a condition
@@ -684,6 +661,17 @@ local function UpdateConditionsTruthfulness (frameNumber)
     local object=c["object"]
     if(object=="unit")then
       conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
+    elseif(object=="other")then  
+      -- Time related conditions
+      if(c.type=="elapsedTime") then
+      local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
+      conditions[idCond]["currentlyValid"]= compareValue(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+      elseif(c.type=="repeat") then
+        local framePeriod=secondesToFrames(c.params.number)
+        conditions[idCond]["currentlyValid"]=((frameNumber-startingFrame) % framePeriod==0)
+      elseif(c.type=="start") then
+        conditions[idCond]["currentlyValid"]=(frameNumber==startingFrame)--frame 5 is the new frame 0
+      end
     end
     
     --[[
