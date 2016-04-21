@@ -313,15 +313,17 @@ local function createUnit(unitTable)
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
     
     -- update group units (team related)
-    if(groupOfUnits[unitTable.team]==nil) then
-      groupOfUnits[unitTable.team]={}
+    local teamIndex="team_"..tostring(unitTable.team)
+    local typeIndex="type_"..tostring(unitTable.type)
+    if(groupOfUnits[teamIndex]==nil) then
+      groupOfUnits[teamIndex]={}
     end
-    table.insert(groupOfUnits[unitTable.team],unitTable.id)
+    table.insert(groupOfUnits[teamIndex],unitTable.id)
     -- update group units (type related)
-    if(groupOfUnits[unitTable.type]==nil) then
-      groupOfUnits[unitTable.type]={}
+    if(groupOfUnits[typeIndex]==nil) then
+      groupOfUnits[typeIndex]={}
     end
-    table.insert(groupOfUnits[unitTable.type],unitTable.id)
+    table.insert(groupOfUnits[typeIndex],unitTable.id)
 end
 
 -------------------------------------
@@ -604,6 +606,20 @@ local function GetCurrentUnitAction(unit)
   return action
 end
 
+local function extractListOfUnitsImpliedByCondition(condition)
+  --Spring.Echo(json.encode(condition))
+  if(condition.params.team~=nil)then
+    local teamIndex="team_"..tostring(condition.params.team)
+    return groupOfUnits[teamIndex]
+  elseif(condition.params.unitType~=nil) then
+    local typeIndex="type_"..tostring(condition.params.unitType)
+    return groupOfUnits[typeIndex]
+  elseif(condition.params.group~=nil) then
+    local groupIndex="group_"..tostring(condition.params.group)
+    return groupOfUnits[groupIndex]
+  end
+end
+
 -------------------------------------
 -- Determine if an unit satisfy a condition
 -- Two modes are possible depending on if we want the condition
@@ -672,6 +688,17 @@ local function UpdateConditionsTruthfulness (frameNumber)
       elseif(c.type=="start") then
         conditions[idCond]["currentlyValid"]=(frameNumber==startingFrame)--frame 5 is the new frame 0
       end
+    elseif(object=="group")then  
+      local springUnitList=extractListOfUnitsImpliedByCondition(c)
+      local count=0
+      local total=table.getn(springUnitList)
+      --Spring.Echo(json.encode(springUnitList))
+      for u,unit in ipairs(springUnitList) do
+        if(UpdateConditionOnUnit(unit,c)) then
+         count=count+1
+        end 
+      end
+      conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
     end
     
     --[[
@@ -863,9 +890,10 @@ local function StartAfterJson ()
   if(mission["groups"]~=nil) then
     for i=1, table.getn(mission.groups) do
       local groupname=mission.groups[i].name
-      groupOfUnits[groupname]={}
+      local groupIndex="group_"..groupname
+      groupOfUnits[groupIndex]={}
       for i,unit in ipairs(mission.groups[i].units) do
-        table.insert(groupOfUnits[groupname],unit)
+        table.insert(groupOfUnits[groupIndex],unit)
       end
     end
   end 
