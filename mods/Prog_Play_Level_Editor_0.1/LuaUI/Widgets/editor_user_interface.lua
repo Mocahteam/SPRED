@@ -4317,6 +4317,7 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
 					Screen0:AddChild(windows["importWindow"])
+					Screen0:RemoveChild(selectCreatedUnitsWindow)
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
