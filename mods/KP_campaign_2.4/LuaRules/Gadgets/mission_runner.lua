@@ -87,7 +87,7 @@ function gadget:GameFrame( frameNumber )
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local outputState
-    if(frameNumber<5)then -- now the first frame is officially 5 
+    if(frameNumber>2 and frameNumber<5)then -- now the first frame is officially 5 
       if (initializeUnits)then
         missionScript.StartAfterJson()
         initializeUnits = false
