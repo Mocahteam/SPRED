@@ -2753,6 +2753,9 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		editBox.isEditBox = true
 		table.insert(feature, editBox)
 	elseif attr.type == "numberComparison" then
+		if not a.params[attr.id] then
+			a.params[attr.id] = {}
+		end
 		local comboBoxItems = {
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_EXACTLY,
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
@@ -2764,9 +2767,6 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		editBox.toShow = true
 		comboBox.OnSelect = {
 			function()
-				if not a.params[attr.id] then
-					a.params[attr.id] = {}
-				end
 				if comboBox.selected == 1 then
 					a.params[attr.id].comparison = "exactly"
 					if not editBox.toShow then
@@ -2794,30 +2794,25 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		}
 		editBox.font.size = 13
 		editBox.updateFunction = function()
-			if not a.params[attr.id] then
-				a.params[attr.id] = {}
-			end
 			a.params[attr.id].number = tonumber(editBox.text)
 		end
 		editBox.isEditBox = true
-		if a.params[attr.id] then
-			if a.params[attr.id].comparison then
-				local comp = a.params[attr.id].comparison
-				if comp == "exactly" then
-					comboBox:Select(1)
-				elseif comp == "atleast" then
-					comboBox:Select(2)
-				elseif comp == "atmost" then
-					comboBox:Select(3)
-				elseif comp == "all" then
-					comboBox:Select(4)
-				end
-			else
+		if a.params[attr.id].comparison then
+			local comp = a.params[attr.id].comparison
+			if comp == "exactly" then
 				comboBox:Select(1)
+			elseif comp == "atleast" then
+				comboBox:Select(2)
+			elseif comp == "atmost" then
+				comboBox:Select(3)
+			elseif comp == "all" then
+				comboBox:Select(4)
 			end
-			if a.params[attr.id].number then
-				editBox:SetText(tostring(a.params[attr.id].number))
-			end
+		else
+			comboBox:Select(1)
+		end
+		if a.params[attr.id].number then
+			editBox:SetText(tostring(a.params[attr.id].number))
 		end
 		table.insert(feature, comboBox)
 		table.insert(feature, editBox)

@@ -24,8 +24,8 @@ conditions_list = {
 	{
 		type = "repeat",
 		filter = "Game",
-		typeText = "Repeated event",
-		text = "Every <Number> seconds.",
+		typeText = "Periodically true",
+		text = "True every <Number> seconds from the begining of the mission.",
 		attributes = {
 			{
 				text = "<Number>",
@@ -143,7 +143,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<Team>",
@@ -161,7 +161,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<Group>",
@@ -179,7 +179,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<UnitType>",
@@ -210,7 +210,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<Team>",
@@ -228,7 +228,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<Group>",
@@ -246,7 +246,7 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "numberComparison"
+				id = "number"
 			},
 			{
 				text = "<UnitType>",
