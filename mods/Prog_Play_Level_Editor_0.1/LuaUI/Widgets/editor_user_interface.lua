@@ -14,13 +14,12 @@ VFS.Include("LuaUI/Widgets/editor/StateMachine.lua") -- State machines definitio
 VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
 VFS.Include("LuaUI/Widgets/editor/Actions.lua")
-VFS.Include("LuaUI/Widgets/editor/Filters.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- filter condition/action
+-- modifier taille texte
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -840,9 +839,16 @@ function initTriggerWindow()
 	configureEventButton = addButton(windows['eventWindow'], '2%', '94%', '96%', '6%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_EVENT, configureEvent)
 	
 	-- Action/Condition
-	local filterList = {}
-	for i, f in ipairs(filters_list) do
-		table.insert(filterList, f)
+	local conditionFilterList, actionFilterList = { "All" }, { "All" }
+	for i, a in ipairs(actions_list) do
+		if not findInTable(actionFilterList, a.filter) then
+			table.insert(actionFilterList, a.filter)
+		end
+	end
+	for i, c in ipairs(conditions_list) do
+		if not findInTable(conditionFilterList, c.filter) then
+			table.insert(conditionFilterList, c.filter)
+		end
 	end
 	
 	-- Condition window
@@ -850,7 +856,7 @@ function initTriggerWindow()
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER, 20, "center", nil, "center")
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
-	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
+	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionFilterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
 	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
 	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
@@ -861,7 +867,7 @@ function initTriggerWindow()
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
-	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', filterList, selectFilter)
+	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionFilterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
 	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
@@ -3266,6 +3272,9 @@ function showCreatedUnitsWindow()
 				count = count + 1
 			end
 		end
+	end
+	if count == 0 then
+		selectCreatedUnitsWindow:Dispose()
 	end
 end
 
