@@ -11,6 +11,7 @@ function gadget:GetInfo()
   }
 end
 
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -140,6 +141,13 @@ function gadget:Shutdown()
   gadgetHandler:DeregisterGlobal("showTuto")
 end
 
+function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam) 
+  Spring.Echo("Source Gadget")
+  if(attackerTeam~=nil)and(attackerID~=nil)then
+    local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}   
+    Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
+  end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 
@@ -153,7 +161,8 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
-    mouseDisabled = arg2
+    mouseDisabled = false
+--    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then
       local specialPositions = {}
@@ -176,6 +185,8 @@ function gadget:RecvFromSynced(...)
     end
   end
 end
+
+
 
 function gadget:MousePress(x, y, button)
   if mouseDisabled then

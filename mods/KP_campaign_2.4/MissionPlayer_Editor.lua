@@ -20,6 +20,7 @@ local actions={}--associative array idActions->actions
 local events={}--associative array idCond->event
 local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 local zones={}
+local killByTeams={}
 
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
@@ -606,11 +607,9 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       return isUnitInZone(internalUnitId,c.params.zone)  
     elseif(c.attribute=="underAttack")then --untested yet
       return armyInformations[externalUnitId].isUnderAttack
-    elseif(c.attribute=="action") then 
-      local action=GetCurrentUnitAction(internalUnitId)
-      if c.value.action=="moving" then       
-        return (action==CMD.MOVE) --Spring.Echo("move Freaking searched")
-      end
+    elseif(c.attribute=="order") then 
+      local action=GetCurrentUnitAction(internalUnitId)     
+      return (action==CMD[c.params.command]) 
     end
   end
 end
@@ -1021,6 +1020,22 @@ local function Stop ()
 	
 	-- delete marker
 	Spring.MarkerErasePosition(1983, Spring.GetGroundHeight(1983, 1279), 1279)
+end
+
+function gadget:RecvLuaMsg(msg, player)
+  if((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,4)=="kill")) then
+    -- comes from mission runner unit destroyed
+    -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
+    -- is encoded
+    local jsonfile=string.sub(msg,5,-1)
+    local killTable=json.decode(jsonfile)
+    local attackerTeam=killTable.attackerTeam
+    if killByTeams[attackerTeam]==nil then
+      killByTeams[attackerTeam]={} 
+    end
+    table.insert(killByTeams[attackerTeam],killTable)
+    --Spring.Echo(json.encode(killByTeams))
+  end
 end
 
 local Mission = {}
