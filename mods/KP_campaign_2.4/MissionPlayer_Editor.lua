@@ -114,10 +114,9 @@ end
 -------------------------------------
 -- determine if a unit is in zone
 -------------------------------------
-local function isUnitInZone(unit,idZone)
-  local unitID=armySpring[unit]
-  local x, y, z = Spring.GetUnitPosition(unitID)
-  isXZInsideZone(x,z,idZone)
+local function isUnitInZone(springUnit,idZone)
+  local x, y, z = Spring.GetUnitPosition(springUnit)
+  return isXZInsideZone(x,z,idZone)
 end
 
 -------------------------------------
@@ -281,15 +280,12 @@ local function getUnitFactionTypeFromId(idUnit)
 end
 
 local function createUnit(unitTable)
-    Spring.Echo(json.encode(unitTable))
     local posit=unitTable.position
     armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
     armyInformations[unitTable.id]={}
     local springUnit=armySpring[unitTable.id]    
     armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
     Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
-    Spring.Echo(unitTable.hp)
-    Spring.Echo((unitTable.hp/100))
     
     armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
     armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
@@ -298,11 +294,17 @@ local function createUnit(unitTable)
     armyInformations[unitTable.id].isUnderAttack=false
     --Spring.Echo("try to create unit with these informations")
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
+    
+    -- update group units (team related)
     if(groupOfUnits[unitTable.team]==nil) then
       groupOfUnits[unitTable.team]={}
     end
-    Spring.Echo("unitCreated")
     table.insert(groupOfUnits[unitTable.team],unitTable.id)
+    -- update group units (type related)
+    if(groupOfUnits[unitTable.type]==nil) then
+      groupOfUnits[unitTable.type]={}
+    end
+    table.insert(groupOfUnits[unitTable.type],unitTable.id)
 end
 
 -------------------------------------
@@ -568,7 +570,7 @@ end
 -------------------------------------
 local function  UpdateGameState()
   cancelAutoHeal()
-  processEvents() 
+  --processEvents() 
 end
 
 -------------------------------------
@@ -593,21 +595,28 @@ end
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
-  if(Spring.ValidUnitID(internalUnitId)) then 
+  if(c.attribute=="dead") then --untested yet
+    --Spring.Echo("is it alive ?")
+    local alive=Spring.ValidUnitID(internalUnitId)
+    --Spring.Echo(alive)
+    return not(alive)
+  elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
-    if(c.attribute=="position") then
-      return CheckPosition(internalUnitId,c["value"])
-  
-    elseif(c.attribute=="action") then
-      local action=GetCurrentUnitAction(internalUnitId)
-      if c.value.action=="moving" then
-        --Spring.Echo("move Freaking searched")
-        return (action==CMD.MOVE) 
-      end
-    
-    elseif(c.attribute=="underAttack")then
+    if(c.attribute=="zone") then
+      return isUnitInZone(internalUnitId,c.params.zone)  
+    elseif(c.attribute=="underAttack")then --untested yet
       return armyInformations[externalUnitId].isUnderAttack
-    
+    elseif(c.attribute=="action") then 
+      local action=GetCurrentUnitAction(internalUnitId)
+      if c.value.action=="moving" then       
+        return (action==CMD.MOVE) --Spring.Echo("move Freaking searched")
+      end
+    end
+  end
+end
+
+
+    --[[
     elseif(c.attribute=="health") then
       local tresholdRatio=tonumber(c.value.tresholdRatio)
       local mode=c.value.mode--upTo/downTo
@@ -625,15 +634,8 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
           return false
         end
       end
-    end
-  end    
-  if(c.attribute=="dead") then --isolated because if dead then if condition on ValidUnitID is obviously not passed
-    --Spring.Echo("is it alive ?")
-    local alive=Spring.ValidUnitID(internalUnitId)
-    --Spring.Echo(alive)
-    return not(alive)
-  end
-end
+    end  
+  end    --]]
 
 -------------------------------------
 -- Determine if a group satisfies a condition
@@ -661,7 +663,12 @@ end
 -------------------------------------
 local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(conditions) do
-    local externalUnitId=c["object"]
+    local object=c["object"]
+    if(object=="unit")then
+      conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
+    end
+    
+    --[[
     if(externalUnitId=="frameNumber") then
       local bool=true
       bool=bool and ((c.value.superiorTo==nil)or(secondesToFrames(tonumber(c.value.superiorTo))<frameNumber))
@@ -674,6 +681,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       -- means that the condition is on a group
       conditions[idCond]["currentlyValid"]=UpdateConditionOnGroup(externalUnitId,c)
     end
+  --]]
   end 
 end
 
@@ -870,9 +878,27 @@ if(mission.events~=nil)then
        local id=currentCond.name
        conditions[id]=currentEvent.conditions[j]
        conditions[id]["currentlyValid"]=false
+       local type=currentCond.type
+       local cond_object="other"
+       local attribute=type
+       if(string.sub(type, 1, 5)=="type_") then
+        cond_object="group" -- group is the generic thing
+        attribute=string.sub(type, 6, -1)
+       elseif(string.sub(type, 1, 5)=="unit_") then
+        cond_object="unit"
+        attribute=string.sub(type, 6, -1)
+       elseif(string.sub(type, 1, 6)=="group_") then
+        cond_object="group"
+        attribute=string.sub(type, 7, -1)
+       elseif(string.sub(type, 1, 5)=="team_") then
+        cond_object="group"
+        attribute=string.sub(type, 6, -1)
+      end
+      conditions[id]["object"]=cond_object
+      conditions[id]["attribute"]=attribute
     end 
   end
-  Spring.Echo(json.encode(conditions))
+  -- Spring.Echo(json.encode(conditions))
 end
 
  -------------------------------
@@ -932,7 +958,6 @@ end
   ShowBriefing()    
 --]]        
 end
-
 -------------------------------------
 -- Update the game state of the mission 
 -- Called externally by the gadget mission_runner.lua 
@@ -944,7 +969,21 @@ local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
   StartAfterJson ()
 end
 
-local function Update (frameNumber) 
+local function Update (frameNumber)
+  UpdateConditionsTruthfulness(frameNumber) 
+  UpdateGameState()
+  if(success~=nil) then
+    return success,outputstate
+  else
+    return 0 -- means continue
+  end
+  -- Trigger Events
+end  
+  
+  
+  
+  
+  
   --[[
   if(not canUpdate)then
     return 0
@@ -966,10 +1005,10 @@ local function Update (frameNumber)
   else
     return 0 -- means continue
   end
-  --]]
+ 
   return 0
 end
-
+ --]]
 -------------------------------------
 -- Called by mission_runner at the end of the mission
 -------------------------------------
