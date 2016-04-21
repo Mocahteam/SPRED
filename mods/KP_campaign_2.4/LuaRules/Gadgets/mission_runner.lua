@@ -87,9 +87,11 @@ function gadget:GameFrame( frameNumber )
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local outputState
-    if(frameNumber>=5 and initializeUnits and Spring.GetModOptions()["jsonlocation"]=="editor")then
-      missionScript.StartAfterJson()
-      initializeUnits = false
+    if(frameNumber<5)then -- now the first frame is officially 5 
+      if (initializeUnits)then
+        missionScript.StartAfterJson()
+        initializeUnits = false
+      end
     else
       gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
       -- if required, show GuiMission
