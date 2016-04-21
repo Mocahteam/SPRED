@@ -11,6 +11,7 @@ function gadget:GetInfo()
   }
 end
 
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -86,9 +87,11 @@ function gadget:GameFrame( frameNumber )
   if missionScript ~= nil and gameOver == 0 then
     -- update gameOver
     local outputState
-    if(frameNumber>=5 and initializeUnits and Spring.GetModOptions()["jsonlocation"]=="editor")then
-      missionScript.StartAfterJson()
-      initializeUnits = false
+    if(frameNumber>2 and frameNumber<5)then -- now the first frame is officially 5 
+      if (initializeUnits)then
+        missionScript.StartAfterJson()
+        initializeUnits = false
+      end
     else
       gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
       -- if required, show GuiMission
@@ -140,6 +143,13 @@ function gadget:Shutdown()
   gadgetHandler:DeregisterGlobal("showTuto")
 end
 
+function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam) 
+  Spring.Echo("Source Gadget")
+  if(attackerTeam~=nil)and(attackerID~=nil)then
+    local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}   
+    Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
+  end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 
@@ -153,7 +163,8 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
-    mouseDisabled = arg2
+    mouseDisabled = false
+--    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then
       local specialPositions = {}
@@ -176,6 +187,8 @@ function gadget:RecvFromSynced(...)
     end
   end
 end
+
+
 
 function gadget:MousePress(x, y, button)
   if mouseDisabled then

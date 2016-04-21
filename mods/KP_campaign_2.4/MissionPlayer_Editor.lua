@@ -20,6 +20,7 @@ local actions={}--associative array idActions->actions
 local events={}--associative array idCond->event
 local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 local zones={}
+local killByTeams={}
 
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
@@ -28,7 +29,23 @@ local success=nil -- when this global variable change (with event of type "end")
 local outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 local canUpdate=false
 local mission
+local startingFrame=5
 
+
+-------------------------------------
+-- Compare value
+-------------------------------------
+local function compareValue(reference,maxRef,value,mode)
+  if(mode=="atmost")then
+    return (value<=reference)      
+  elseif(mode=="atleast")then
+    return (value>=reference)    
+  elseif(mode=="exactly")then
+    return (reference==value)  
+  elseif(mode=="all")then
+    return (maxRef==value)
+  end
+end
 
 local function deepcopy(orig)
     local orig_type = type(orig)
@@ -92,27 +109,60 @@ local function getAMessage(messageId)
   end
 end
 
+local function isXZInsideZone(x,z,zoneId)
+  local zone=zones[zoneId]
+  if(zone.type=="Rectangle") then
+    local center_x=zone.center_xz.x
+    local center_z=zone.center_xz.z
+    if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
+    if(center_x-zone.demiLargeur>x)then return false end
+    if(center_z+zone.demiLongueur<z)then return false end
+    if(center_z-zone.demiLongueur>z)then return false end
+    return true
+  elseif(zone.type=="Disk") then
+    local center_x=zone.center_xz.x
+    local center_z=zone.center_xz.z
+    local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
+    local bpart=((center_z-z)*(center_z-z))/((zone.b)*(zone.b))
+    return (apart+bpart<1)
+  end
+end
+
 -------------------------------------
--- get a position giving its Id.
+-- determine if a unit is in zone
+-------------------------------------
+local function isUnitInZone(springUnit,idZone)
+  local x, y, z = Spring.GetUnitPosition(springUnit)
+  return isXZInsideZone(x,z,idZone)
+end
+
+-------------------------------------
+-- get a position randomly drawn within a zone
 -- If extra parameters are given (such as validZone)
 -- a random position can be drawn
 -------------------------------------
-local function getAPosition(positionTable)
-  local posId=positionTable.positionId
-  local oldposit=positions[posId]
+local function getARandomPositionInZone(idZone)
+  local zone=zones[idZone]
   local posit={}
-  if(positionTable.validZone~="no")and(positionTable.validZone~=nil) then
-    local validZone=tonumber(positionTable.validZone)
-    local x1=oldposit.x-validZone
-    local x2=oldposit.x+validZone
-    local z1=oldposit.z-validZone
-    local z2=oldposit.z+validZone
-    posit["x"]=math.random(x1, x2)
-    posit["z"]=math.random(z1, z2)
-    return posit  
-  else
-    return oldposit
-  end
+  local center_x=zone.center_xz.x
+  local center_z=zone.center_xz.z
+  if(zone.type=="Disk") then
+    while true do -- rejection method to draw random points from ellipse (drawn from rectangle and accepted if inside ellipse
+      local x=math.random(center_x-zone.a, center_x+zone.a)
+      local z=math.random(center_z-zone.b, center_z+zone.b)
+      if(isXZInsideZone(x,z,idZone))then
+        posit["x"]=x
+        posit["z"]=z
+        return posit
+      end
+    end
+  elseif(zone.type=="Rectangle") then
+    local x=math.random(center_x-zone.demiLargeur, center_x+zone.demiLargeur)
+    local z=math.random(center_z-zone.demiLongueur, center_z+zone.demiLongueur)
+    posit["x"]=x
+    posit["z"]=z
+    return posit
+  end    
 end
 
 -------------------------------------
@@ -247,15 +297,12 @@ local function getUnitFactionTypeFromId(idUnit)
 end
 
 local function createUnit(unitTable)
-    Spring.Echo(json.encode(unitTable))
     local posit=unitTable.position
     armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
     armyInformations[unitTable.id]={}
     local springUnit=armySpring[unitTable.id]    
     armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
     Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
-    Spring.Echo(unitTable.hp)
-    Spring.Echo((unitTable.hp/100))
     
     armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
     armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
@@ -264,11 +311,19 @@ local function createUnit(unitTable)
     armyInformations[unitTable.id].isUnderAttack=false
     --Spring.Echo("try to create unit with these informations")
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
-    if(groupOfUnits[unitTable.team]==nil) then
-      groupOfUnits[unitTable.team]={}
+    
+    -- update group units (team related)
+    local teamIndex="team_"..tostring(unitTable.team)
+    local typeIndex="type_"..tostring(unitTable.type)
+    if(groupOfUnits[teamIndex]==nil) then
+      groupOfUnits[teamIndex]={}
     end
-    Spring.Echo("unitCreated")
-    table.insert(groupOfUnits[unitTable.team],unitTable.id)
+    table.insert(groupOfUnits[teamIndex],unitTable.id)
+    -- update group units (type related)
+    if(groupOfUnits[typeIndex]==nil) then
+      groupOfUnits[typeIndex]={}
+    end
+    table.insert(groupOfUnits[typeIndex],unitTable.id)
 end
 
 -------------------------------------
@@ -534,22 +589,7 @@ end
 -------------------------------------
 local function  UpdateGameState()
   cancelAutoHeal()
-  processEvents() 
-end
-
--------------------------------------
--- Check if an unit is at a certain position
--- The tolerance is a square zone
--- The tolerance is given by the validZone attribute
--------------------------------------
-local function CheckPosition (unitID,value)--for the moment only single unit
-  local x, y, z = Spring.GetUnitPosition(unitID)
-  local posit=positions[value.positionId]
-  local precision=tonumber(value.validZone)
-  if x > tonumber(posit.x)-precision and x < tonumber(posit.x)+precision and z > tonumber(posit.z)-precision and z < tonumber(posit.z)+precision then
-    return true
-  end
-  return false
+  --processEvents() 
 end
 
 -------------------------------------
@@ -566,6 +606,20 @@ local function GetCurrentUnitAction(unit)
   return action
 end
 
+local function extractListOfUnitsImpliedByCondition(condition)
+  --Spring.Echo(json.encode(condition))
+  if(condition.params.team~=nil)then
+    local teamIndex="team_"..tostring(condition.params.team)
+    return groupOfUnits[teamIndex]
+  elseif(condition.params.unitType~=nil) then
+    local typeIndex="type_"..tostring(condition.params.unitType)
+    return groupOfUnits[typeIndex]
+  elseif(condition.params.group~=nil) then
+    local groupIndex="group_"..tostring(condition.params.group)
+    return groupOfUnits[groupIndex]
+  end
+end
+
 -------------------------------------
 -- Determine if an unit satisfy a condition
 -- Two modes are possible depending on if we want the condition
@@ -574,45 +628,23 @@ end
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
-  if(Spring.ValidUnitID(internalUnitId)) then 
-  -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
-    if(c.attribute=="position") then
-      return CheckPosition(internalUnitId,c["value"])
-  
-    elseif(c.attribute=="action") then
-      local action=GetCurrentUnitAction(internalUnitId)
-      if c.value.action=="moving" then
-        --Spring.Echo("move Freaking searched")
-        return (action==CMD.MOVE) 
-      end
-    
-    elseif(c.attribute=="underAttack")then
-      return armyInformations[externalUnitId].isUnderAttack
-    
-    elseif(c.attribute=="health") then
-      local tresholdRatio=tonumber(c.value.tresholdRatio)
-      local mode=c.value.mode--upTo/downTo
-      local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
-      if(mode=="upTo")then
-        if(maxhealth*tresholdRatio<=health) then
-          return true
-        else
-          return false
-        end
-      elseif(mode=="downTo")then
-        if(maxhealth*tresholdRatio>=health) then
-          return true
-        else
-          return false
-        end
-      end
-    end
-  end    
-  if(c.attribute=="dead") then --isolated because if dead then if condition on ValidUnitID is obviously not passed
-    --Spring.Echo("is it alive ?")
+  if(c.attribute=="dead") then --untested yet
     local alive=Spring.ValidUnitID(internalUnitId)
-    --Spring.Echo(alive)
     return not(alive)
+  elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
+  -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
+    if(c.attribute=="zone") then
+      return isUnitInZone(internalUnitId,c.params.zone)  
+    elseif(c.attribute=="underAttack")then --untested yet
+      return armyInformations[externalUnitId].isUnderAttack
+    elseif(c.attribute=="order") then 
+      local action=GetCurrentUnitAction(internalUnitId)     
+      return (action==CMD[c.params.command]) 
+    elseif(c.attribute=="hp") then 
+      local tresholdRatio=c.params.hp.number/100
+      local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
+      return compareValue(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
+    end
   end
 end
 
@@ -642,7 +674,34 @@ end
 -------------------------------------
 local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(conditions) do
-    local externalUnitId=c["object"]
+    local object=c["object"]
+    if(object=="unit")then
+      conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
+    elseif(object=="other")then  
+      -- Time related conditions
+      if(c.type=="elapsedTime") then
+      local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
+      conditions[idCond]["currentlyValid"]= compareValue(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+      elseif(c.type=="repeat") then
+        local framePeriod=secondesToFrames(c.params.number)
+        conditions[idCond]["currentlyValid"]=((frameNumber-startingFrame) % framePeriod==0)
+      elseif(c.type=="start") then
+        conditions[idCond]["currentlyValid"]=(frameNumber==startingFrame)--frame 5 is the new frame 0
+      end
+    elseif(object=="group")then  
+      local springUnitList=extractListOfUnitsImpliedByCondition(c)
+      local count=0
+      local total=table.getn(springUnitList)
+      --Spring.Echo(json.encode(springUnitList))
+      for u,unit in ipairs(springUnitList) do
+        if(UpdateConditionOnUnit(unit,c)) then
+         count=count+1
+        end 
+      end
+      conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
+    end
+    
+    --[[
     if(externalUnitId=="frameNumber") then
       local bool=true
       bool=bool and ((c.value.superiorTo==nil)or(secondesToFrames(tonumber(c.value.superiorTo))<frameNumber))
@@ -655,6 +714,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       -- means that the condition is on a group
       conditions[idCond]["currentlyValid"]=UpdateConditionOnGroup(externalUnitId,c)
     end
+  --]]
   end 
 end
 
@@ -830,9 +890,10 @@ local function StartAfterJson ()
   if(mission["groups"]~=nil) then
     for i=1, table.getn(mission.groups) do
       local groupname=mission.groups[i].name
-      groupOfUnits[groupname]={}
+      local groupIndex="group_"..groupname
+      groupOfUnits[groupIndex]={}
       for i,unit in ipairs(mission.groups[i].units) do
-        table.insert(groupOfUnits[groupname],unit)
+        table.insert(groupOfUnits[groupIndex],unit)
       end
     end
   end 
@@ -851,9 +912,27 @@ if(mission.events~=nil)then
        local id=currentCond.name
        conditions[id]=currentEvent.conditions[j]
        conditions[id]["currentlyValid"]=false
+       local type=currentCond.type
+       local cond_object="other"
+       local attribute=type
+       if(string.sub(type, 1, 5)=="type_") then
+        cond_object="group" -- group is the generic thing
+        attribute=string.sub(type, 6, -1)
+       elseif(string.sub(type, 1, 5)=="unit_") then
+        cond_object="unit"
+        attribute=string.sub(type, 6, -1)
+       elseif(string.sub(type, 1, 6)=="group_") then
+        cond_object="group"
+        attribute=string.sub(type, 7, -1)
+       elseif(string.sub(type, 1, 5)=="team_") then
+        cond_object="group"
+        attribute=string.sub(type, 6, -1)
+      end
+      conditions[id]["object"]=cond_object
+      conditions[id]["attribute"]=attribute
     end 
   end
-  Spring.Echo(json.encode(conditions))
+  -- Spring.Echo(json.encode(conditions))
 end
 
  -------------------------------
@@ -889,8 +968,6 @@ end
   end
 end
 
-Spring.Echo(json.encode(zones))
-
 
 
  --[[  
@@ -915,7 +992,6 @@ Spring.Echo(json.encode(zones))
   ShowBriefing()    
 --]]        
 end
-
 -------------------------------------
 -- Update the game state of the mission 
 -- Called externally by the gadget mission_runner.lua 
@@ -927,7 +1003,21 @@ local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
   StartAfterJson ()
 end
 
-local function Update (frameNumber) 
+local function Update (frameNumber)
+  UpdateConditionsTruthfulness(frameNumber) 
+  UpdateGameState()
+  if(success~=nil) then
+    return success,outputstate
+  else
+    return 0 -- means continue
+  end
+  -- Trigger Events
+end  
+  
+  
+  
+  
+  
   --[[
   if(not canUpdate)then
     return 0
@@ -949,10 +1039,10 @@ local function Update (frameNumber)
   else
     return 0 -- means continue
   end
-  --]]
+ 
   return 0
 end
-
+ --]]
 -------------------------------------
 -- Called by mission_runner at the end of the mission
 -------------------------------------
@@ -965,6 +1055,22 @@ local function Stop ()
 	
 	-- delete marker
 	Spring.MarkerErasePosition(1983, Spring.GetGroundHeight(1983, 1279), 1279)
+end
+
+function gadget:RecvLuaMsg(msg, player)
+  if((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,4)=="kill")) then
+    -- comes from mission runner unit destroyed
+    -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
+    -- is encoded
+    local jsonfile=string.sub(msg,5,-1)
+    local killTable=json.decode(jsonfile)
+    local attackerTeam=killTable.attackerTeam
+    if killByTeams[attackerTeam]==nil then
+      killByTeams[attackerTeam]={} 
+    end
+    table.insert(killByTeams[attackerTeam],killTable)
+    --Spring.Echo(json.encode(killByTeams))
+  end
 end
 
 local Mission = {}
