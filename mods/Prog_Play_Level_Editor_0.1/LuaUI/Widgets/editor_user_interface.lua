@@ -1245,7 +1245,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 	if noGroupsInCommon then -- If units have to groups in common or the selected unit does not belong to any group, display a specific message
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
 		local text = EDITOR_UNITS_GROUPS_NO_COMMON_GROUP
-		if unitSelection.n == 1 then
+		if #unitSelection == 1 then
 			text = EDITOR_UNITS_GROUPS_NO_GROUP
 		end
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
@@ -4118,7 +4118,7 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	if unitSelection.n == 0 then
+	if #unitSelection == 0 then
 		clearTemporaryWindows()
 	end
 	
@@ -4330,7 +4330,7 @@ function widget:MousePress(mx, my, button)
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 			if kind == "unit" then
 				local unitSelection = Spring.GetSelectedUnits()
-				if unitSelection.n == 0 or not Spring.IsUnitSelected(var) then
+				if #unitSelection == 0 or not Spring.IsUnitSelected(var) then
 					proceedSelection({var})
 				end
 				if Spring.IsUnitSelected(var) then
@@ -4554,7 +4554,7 @@ function widget:KeyPress(key, mods)
 			return true
 		end
 		-- ARROWS : move selected units
-		if unitSelection.n > 0 then
+		if #unitSelection > 0 then
 			if key == Spring.GetKeyCode("up") then
 				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
 				local msg = "Translate Units".."++".."0".."++".."-1"
