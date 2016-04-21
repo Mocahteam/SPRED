@@ -31,6 +31,21 @@ local canUpdate=false
 local mission
 
 
+-------------------------------------
+-- Compare value
+-------------------------------------
+local function compareValue(reference,maxRef,value,mode)
+  if(mode=="atmost")then
+    return (value<=reference)      
+  elseif(mode=="atleast")then
+    return (value>=reference)    
+  elseif(mode=="exactly")then
+    return (reference==value)  
+  elseif(mode=="all")then
+    return (maxRef==value)
+  end
+end
+
 local function deepcopy(orig)
     local orig_type = type(orig)
     local copy
@@ -610,6 +625,10 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
     elseif(c.attribute=="order") then 
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==CMD[c.params.command]) 
+    elseif(c.attribute=="hp") then 
+      local tresholdRatio=c.params.hp.number/100
+      local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
+      return compareValue(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
     end
   end
 end
