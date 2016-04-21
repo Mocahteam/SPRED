@@ -818,6 +818,7 @@ function ExportScenario()
 		end
 	end
 	local xmlString = string.gsub(xml.serialize(xmlScenario), "%>%<", ">\n<")
+	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString
 	local file = io.open("CustomLevels/scenario.xml", "w")
 	file:write(xmlString)
 	file:close()
