@@ -15,7 +15,8 @@ end
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 
-local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+local xml = VFS.Include("LuaUI/Widgets/libs/xml-ser.lua")
+local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
 local Chili, Screen0
 local IsActive = false
 local HideView = false
@@ -201,7 +202,7 @@ end
 
 function InitializeOutputStates()
 	Links[0] = {}
-	Links[#LevelList+1] = {}
+	--Links[#LevelList+1] = {}
 	for i, level in ipairs(LevelList) do
 		OutputStates[i] = {}
 		Links[i] = {}
@@ -359,9 +360,9 @@ function InitializeScenarioFrame()
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25,
-			--color = { 0, 0.8, 1, 1 }
-		}
+			size = 25
+		},
+		OnClick = { ExportScenario }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
@@ -649,18 +650,187 @@ function EditMission(level)
 	end
 end
 
+function ComputeInputStates()
+	local inputStates = {}
+	for i = 1, #LevelList+1, 1 do
+		inputStates[i] = {}
+	end
+	for i = 0, #Links, 1 do
+		for k, link in pairs(Links[i]) do
+			table.insert(inputStates[link], { i, k })
+		end
+	end
+	return inputStates
+end
+
+function ExportScenario()
+	local inputStates = ComputeInputStates()
+	-- Base
+	local xmlScenario = {
+		["name"] = "games",
+		["attr"] = {
+			["xsi:noNamespaceSchemaLocation"] = "http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd",
+			["xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
+		},
+		["kids"] = {
+			{
+				["name"] = "game",
+				["attr"] = {
+					["id_game"] = "76",
+					["status"] = "prepa",
+					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00")
+				},
+				["kids"] = {
+					{
+						["name"] = "title",
+						["text"] = "GAMENAME"
+					},
+					{
+						["name"] = "description",
+						["text"] = "GAMEDESC"
+					},
+					{
+						["name"] = "activites",
+						["kids"] = {}
+					},
+					{
+						["name"] = "link_sets",
+						["kids"] = {
+							{
+								["name"] = "link_set",
+								["attr"] = {
+									["id_link_set"] = "302",
+									["default"] = "oui",
+									["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00"),
+									["status"] = "prepa"
+								},
+								["kids"] = {
+									{
+										["name"] = "title",
+										["text"] = "LINKSETNAME"
+									},
+									{
+										["name"] = "description",
+										["text"] = "LINKSETDESC"
+									},
+									{
+										["name"] = "links",
+										["kids"] = {}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	-- Activities
+	for i, level in ipairs(LevelList) do
+		local activity = {
+			["name"] = "activity",
+			["attr"] = {
+				["id_activity"] = tostring(i)
+			},
+			["kids"] = {
+				{
+					["name"] = "name",
+					["text"] = level.description.name
+				},
+				{
+					["name"] = "input_states",
+					["kids"] = {}
+				},
+				{
+					["name"] = "output_states",
+					["kids"] = {}
+				}
+			}
+		}
+		-- input
+		local count = 1
+		for ii, inp in ipairs(inputStates[i]) do
+			local inputState = {
+				["name"] = "input_states",
+				["attr"] = {
+					["id_input"] = tostring(i).."_"..count
+				}
+			}
+			table.insert(activity.kids[2].kids, inputState)
+			count = count + 1
+		end
+		-- output
+		for ii, out in ipairs(OutputStates[i]) do
+			local outputState = {
+				["name"] = "output_state",
+				["attr"] = {
+					["id_output"] = i.."_"..out
+				}
+			}
+			table.insert(activity.kids[3].kids, outputState)
+		end
+		table.insert(xmlScenario.kids[1].kids[3].kids, activity)
+	end
+	-- Links
+	for k, link in pairs(Links) do
+		if k == 0 and link[1] then
+			local id = link[1]
+			for ii, linku in ipairs(inputStates[link[1]]) do
+				if k == linku[1] and linku[2] == 1 then
+					id = id.."_"..ii
+					break
+				end
+			end
+			local l = {
+				["name"] = "output_input_link",
+				["attr"] = {
+					["id_output"] = "start",
+					["id_input"] = id
+				}
+			}
+			table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
+		else
+			for kk, link2 in pairs(link) do
+				if link2 == #LevelList + 1 then
+					local l = {
+						["name"] = "output_input_link",
+						["attr"] = {
+							["id_output"] = k.."_"..kk,
+							["id_input"] = "end"
+						}
+					}
+					table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
+				else
+					for iii, linku in ipairs(inputStates[link2]) do
+						if k == linku[1] and kk == linku[2] then
+							local l = {
+								["name"] = "output_input_link",
+								["attr"] = {
+									["id_output"] = k.."_"..kk,
+									["id_input"] = link2.."_"..iii
+								}
+							}
+							table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
+						end
+					end
+				end
+			end
+		end
+	end
+	local xmlString = string.gsub(xml.serialize(xmlScenario), "%>%<", ">\n<")
+	local file = io.open("CustomLevels/scenario.xml", "w")
+	file:write(xmlString)
+	file:close()
+end
+
 function MakeLink()
 	if selectedInput and selectedOutputMission then
-	
-		if Links[selectedOutputMission][selectedOutput] then
-			UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
-			UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
-		end
+		
+		local requireRecolor = true
 		for k, link in pairs(Links) do
 			for kk, output in pairs(link) do
 				if output == selectedInput then
-					UI.Scenario.Output[k][kk].state.chosen = false
-					UI.Scenario.Output[k][kk]:InvalidateSelf()
+					requireRecolor = false
 					break
 				end
 			end
@@ -668,15 +838,32 @@ function MakeLink()
 		
 		Links[selectedOutputMission][selectedOutput] = selectedInput
 		
-		local r, g, b = math.random(), math.random(), math.random()
-		
-		UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
-		UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-		UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-		
-		UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
-		UI.Scenario.Input[selectedInput].state.chosen = true
-		UI.Scenario.Input[selectedInput]:InvalidateSelf()
+		if requireRecolor then
+			local r, g, b = math.random(), math.random(), math.random()
+			UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
+			UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+			UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+			UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
+			UI.Scenario.Input[selectedInput].state.chosen = true
+			UI.Scenario.Input[selectedInput]:InvalidateSelf()
+		else
+			UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
+			UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+			UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+		end
+	
+		local someLinks = {}
+		for k, link in pairs(Links) do
+			for kk, output in pairs(link) do
+				someLinks[output] = true
+			end
+		end
+		for k, b in pairs(UI.Scenario.Input) do
+			if not someLinks[k] then
+				b.state.chosen = false
+				b:InvalidateSelf()
+			end
+		end
 		
 		selectedOutput = nil
 		selectedOutputMission = nil

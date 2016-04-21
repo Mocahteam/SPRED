@@ -256,7 +256,25 @@ conditions_list = {
 		}
 	},
 	{
-		type = "unit_killed",
+		type = "killed",
+		filter = "Kill",
+		typeText = "Team killed specific unit",
+		text = "<Team> killed <Unit>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			}
+		}
+	},
+	{
+		type = "killed_unit",
 		filter = "Kill",
 		typeText = "Team killed units",
 		text = "<Team> killed <Number> units.",
@@ -274,7 +292,53 @@ conditions_list = {
 		}
 	},
 	{
-		type = "type_killed",
+		type = "killed_team",
+		filter = "Kill",
+		typeText = "Team killed units of target team",
+		text = "<Team> killed <Number> units of <TargetTeam>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<TargetTeam>",
+				type = "team",
+				id = "targetTeam"
+			}
+		}
+	},
+	{
+		type = "killed_group",
+		filter = "Kill",
+		typeText = "Team killed units of group",
+		text = "<Team> killed <Number> units of <Group>.",
+		attributes = {
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			}
+		}
+	},
+	{
+		type = "killed_type",
 		filter = "Kill",
 		typeText = "Team killed units of specific type",
 		text = "<Team> killed <Number> units of type <UnitType>.",
@@ -357,6 +421,70 @@ conditions_list = {
 				text = "<Percentage>",
 				type = "numberComparison",
 				id = "hp"
+			}
+		}
+	},
+	{
+		type = "unit_order",
+		filter = "Order",
+		typeText = "Unit is doing command",
+		text = "<Unit> is doing <Command>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			}
+		}
+	},
+	{
+		type = "group_order",
+		filter = "Order",
+		typeText = "Units of group are doing command",
+		text = "<Number> units of <Group> are doing <Command>.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			}
+		}
+	},
+	{
+		type = "team_order",
+		filter = "Order",
+		typeText = "Units of team are doing command",
+		text = "<Number> units of <Team> are doing <Command>.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
 			}
 		}
 	},
