@@ -2753,11 +2753,15 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		if a.params[attr.id] then
 			if attr.type == "message" then
 				local text = ""
-				for i, msg in ipairs(a.params[attr.id]) do
-					text = text .. msg
-					if i ~= #a.params[attr.id] then
-						text = text .. " || "
+				if type(a.params[attr.id]) == "table" then
+					for i, msg in ipairs(a.params[attr.id]) do
+						text = text .. msg
+						if i ~= #a.params[attr.id] then
+							text = text .. " || "
+						end
 					end
+				else
+					text = a.params[attr.id]
 				end
 				editBox:SetText(text)
 			else

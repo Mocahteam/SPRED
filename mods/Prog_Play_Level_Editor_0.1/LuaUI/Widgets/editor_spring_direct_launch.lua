@@ -928,7 +928,6 @@ end
 
 function widget:Initialize()
 	InitializeChili()
-	widgetHandler:EnableWidget("XML scenario tester")
 	if not Spring.GetModOptions().hidemenu then
 		GetLauncherStrings("en")
 		SwitchOn()
