@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rts/System/Sound/CMakeFiles/no-sound.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/CMakeFiles/no-sound.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/CMakeFiles/no-sound.dir/rule
 .PHONY : rts/System/Sound/CMakeFiles/no-sound.dir/rule
 
 # Convenience name for target.
@@ -149,12 +149,12 @@ no-sound: rts/System/Sound/CMakeFiles/no-sound.dir/rule
 
 # fast build rule for target.
 no-sound/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/build
 .PHONY : no-sound/fast
 
 # Convenience name for target.
 rts/System/Sound/CMakeFiles/sound.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/CMakeFiles/sound.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/System/Sound/CMakeFiles/sound.dir/rule
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/rule
 
 # Convenience name for target.
@@ -163,7 +163,7 @@ sound: rts/System/Sound/CMakeFiles/sound.dir/rule
 
 # fast build rule for target.
 sound/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/build
 .PHONY : sound/fast
 
 ALShared.obj: ALShared.cpp.obj
@@ -171,7 +171,7 @@ ALShared.obj: ALShared.cpp.obj
 
 # target to build an object file
 ALShared.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj
 .PHONY : ALShared.cpp.obj
 
 ALShared.i: ALShared.cpp.i
@@ -179,7 +179,7 @@ ALShared.i: ALShared.cpp.i
 
 # target to preprocess a source file
 ALShared.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.i
 .PHONY : ALShared.cpp.i
 
 ALShared.s: ALShared.cpp.s
@@ -187,7 +187,7 @@ ALShared.s: ALShared.cpp.s
 
 # target to generate assembly for a file
 ALShared.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.s
 .PHONY : ALShared.cpp.s
 
 EffectChannel.obj: EffectChannel.cpp.obj
@@ -195,7 +195,7 @@ EffectChannel.obj: EffectChannel.cpp.obj
 
 # target to build an object file
 EffectChannel.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj
 .PHONY : EffectChannel.cpp.obj
 
 EffectChannel.i: EffectChannel.cpp.i
@@ -203,7 +203,7 @@ EffectChannel.i: EffectChannel.cpp.i
 
 # target to preprocess a source file
 EffectChannel.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.i
 .PHONY : EffectChannel.cpp.i
 
 EffectChannel.s: EffectChannel.cpp.s
@@ -211,7 +211,7 @@ EffectChannel.s: EffectChannel.cpp.s
 
 # target to generate assembly for a file
 EffectChannel.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.s
 .PHONY : EffectChannel.cpp.s
 
 IAudioChannel.obj: IAudioChannel.cpp.obj
@@ -219,8 +219,8 @@ IAudioChannel.obj: IAudioChannel.cpp.obj
 
 # target to build an object file
 IAudioChannel.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj
 .PHONY : IAudioChannel.cpp.obj
 
 IAudioChannel.i: IAudioChannel.cpp.i
@@ -228,8 +228,8 @@ IAudioChannel.i: IAudioChannel.cpp.i
 
 # target to preprocess a source file
 IAudioChannel.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.i
 .PHONY : IAudioChannel.cpp.i
 
 IAudioChannel.s: IAudioChannel.cpp.s
@@ -237,8 +237,8 @@ IAudioChannel.s: IAudioChannel.cpp.s
 
 # target to generate assembly for a file
 IAudioChannel.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IAudioChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.s
 .PHONY : IAudioChannel.cpp.s
 
 IEffectChannel.obj: IEffectChannel.cpp.obj
@@ -246,8 +246,8 @@ IEffectChannel.obj: IEffectChannel.cpp.obj
 
 # target to build an object file
 IEffectChannel.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj
 .PHONY : IEffectChannel.cpp.obj
 
 IEffectChannel.i: IEffectChannel.cpp.i
@@ -255,8 +255,8 @@ IEffectChannel.i: IEffectChannel.cpp.i
 
 # target to preprocess a source file
 IEffectChannel.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.i
 .PHONY : IEffectChannel.cpp.i
 
 IEffectChannel.s: IEffectChannel.cpp.s
@@ -264,8 +264,8 @@ IEffectChannel.s: IEffectChannel.cpp.s
 
 # target to generate assembly for a file
 IEffectChannel.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IEffectChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.s
 .PHONY : IEffectChannel.cpp.s
 
 IMusicChannel.obj: IMusicChannel.cpp.obj
@@ -273,8 +273,8 @@ IMusicChannel.obj: IMusicChannel.cpp.obj
 
 # target to build an object file
 IMusicChannel.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj
 .PHONY : IMusicChannel.cpp.obj
 
 IMusicChannel.i: IMusicChannel.cpp.i
@@ -282,8 +282,8 @@ IMusicChannel.i: IMusicChannel.cpp.i
 
 # target to preprocess a source file
 IMusicChannel.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.i
 .PHONY : IMusicChannel.cpp.i
 
 IMusicChannel.s: IMusicChannel.cpp.s
@@ -291,8 +291,8 @@ IMusicChannel.s: IMusicChannel.cpp.s
 
 # target to generate assembly for a file
 IMusicChannel.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/IMusicChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.s
 .PHONY : IMusicChannel.cpp.s
 
 ISound.obj: ISound.cpp.obj
@@ -300,8 +300,8 @@ ISound.obj: ISound.cpp.obj
 
 # target to build an object file
 ISound.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj
 .PHONY : ISound.cpp.obj
 
 ISound.i: ISound.cpp.i
@@ -309,8 +309,8 @@ ISound.i: ISound.cpp.i
 
 # target to preprocess a source file
 ISound.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.i
 .PHONY : ISound.cpp.i
 
 ISound.s: ISound.cpp.s
@@ -318,8 +318,8 @@ ISound.s: ISound.cpp.s
 
 # target to generate assembly for a file
 ISound.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/ISound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.s
 .PHONY : ISound.cpp.s
 
 MusicChannel.obj: MusicChannel.cpp.obj
@@ -327,7 +327,7 @@ MusicChannel.obj: MusicChannel.cpp.obj
 
 # target to build an object file
 MusicChannel.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj
 .PHONY : MusicChannel.cpp.obj
 
 MusicChannel.i: MusicChannel.cpp.i
@@ -335,7 +335,7 @@ MusicChannel.i: MusicChannel.cpp.i
 
 # target to preprocess a source file
 MusicChannel.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.i
 .PHONY : MusicChannel.cpp.i
 
 MusicChannel.s: MusicChannel.cpp.s
@@ -343,7 +343,7 @@ MusicChannel.s: MusicChannel.cpp.s
 
 # target to generate assembly for a file
 MusicChannel.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.s
 .PHONY : MusicChannel.cpp.s
 
 NullSound.obj: NullSound.cpp.obj
@@ -351,8 +351,8 @@ NullSound.obj: NullSound.cpp.obj
 
 # target to build an object file
 NullSound.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj
 .PHONY : NullSound.cpp.obj
 
 NullSound.i: NullSound.cpp.i
@@ -360,8 +360,8 @@ NullSound.i: NullSound.cpp.i
 
 # target to preprocess a source file
 NullSound.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.i
 .PHONY : NullSound.cpp.i
 
 NullSound.s: NullSound.cpp.s
@@ -369,8 +369,8 @@ NullSound.s: NullSound.cpp.s
 
 # target to generate assembly for a file
 NullSound.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/NullSound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.s
 .PHONY : NullSound.cpp.s
 
 OggStream.obj: OggStream.cpp.obj
@@ -378,7 +378,7 @@ OggStream.obj: OggStream.cpp.obj
 
 # target to build an object file
 OggStream.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj
 .PHONY : OggStream.cpp.obj
 
 OggStream.i: OggStream.cpp.i
@@ -386,7 +386,7 @@ OggStream.i: OggStream.cpp.i
 
 # target to preprocess a source file
 OggStream.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.i
 .PHONY : OggStream.cpp.i
 
 OggStream.s: OggStream.cpp.s
@@ -394,7 +394,7 @@ OggStream.s: OggStream.cpp.s
 
 # target to generate assembly for a file
 OggStream.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.s
 .PHONY : OggStream.cpp.s
 
 Sound.obj: Sound.cpp.obj
@@ -402,7 +402,7 @@ Sound.obj: Sound.cpp.obj
 
 # target to build an object file
 Sound.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj
 .PHONY : Sound.cpp.obj
 
 Sound.i: Sound.cpp.i
@@ -410,7 +410,7 @@ Sound.i: Sound.cpp.i
 
 # target to preprocess a source file
 Sound.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.i
 .PHONY : Sound.cpp.i
 
 Sound.s: Sound.cpp.s
@@ -418,7 +418,7 @@ Sound.s: Sound.cpp.s
 
 # target to generate assembly for a file
 Sound.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.s
 .PHONY : Sound.cpp.s
 
 SoundBuffer.obj: SoundBuffer.cpp.obj
@@ -426,7 +426,7 @@ SoundBuffer.obj: SoundBuffer.cpp.obj
 
 # target to build an object file
 SoundBuffer.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj
 .PHONY : SoundBuffer.cpp.obj
 
 SoundBuffer.i: SoundBuffer.cpp.i
@@ -434,7 +434,7 @@ SoundBuffer.i: SoundBuffer.cpp.i
 
 # target to preprocess a source file
 SoundBuffer.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.i
 .PHONY : SoundBuffer.cpp.i
 
 SoundBuffer.s: SoundBuffer.cpp.s
@@ -442,7 +442,7 @@ SoundBuffer.s: SoundBuffer.cpp.s
 
 # target to generate assembly for a file
 SoundBuffer.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.s
 .PHONY : SoundBuffer.cpp.s
 
 SoundItem.obj: SoundItem.cpp.obj
@@ -450,7 +450,7 @@ SoundItem.obj: SoundItem.cpp.obj
 
 # target to build an object file
 SoundItem.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj
 .PHONY : SoundItem.cpp.obj
 
 SoundItem.i: SoundItem.cpp.i
@@ -458,7 +458,7 @@ SoundItem.i: SoundItem.cpp.i
 
 # target to preprocess a source file
 SoundItem.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.i
 .PHONY : SoundItem.cpp.i
 
 SoundItem.s: SoundItem.cpp.s
@@ -466,7 +466,7 @@ SoundItem.s: SoundItem.cpp.s
 
 # target to generate assembly for a file
 SoundItem.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.s
 .PHONY : SoundItem.cpp.s
 
 SoundLog.obj: SoundLog.cpp.obj
@@ -474,8 +474,8 @@ SoundLog.obj: SoundLog.cpp.obj
 
 # target to build an object file
 SoundLog.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj
 .PHONY : SoundLog.cpp.obj
 
 SoundLog.i: SoundLog.cpp.i
@@ -483,8 +483,8 @@ SoundLog.i: SoundLog.cpp.i
 
 # target to preprocess a source file
 SoundLog.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.i
 .PHONY : SoundLog.cpp.i
 
 SoundLog.s: SoundLog.cpp.s
@@ -492,8 +492,8 @@ SoundLog.s: SoundLog.cpp.s
 
 # target to generate assembly for a file
 SoundLog.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\no-sound.dir\build.make rts/System/Sound/CMakeFiles/no-sound.dir/SoundLog.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.s
 .PHONY : SoundLog.cpp.s
 
 SoundSource.obj: SoundSource.cpp.obj
@@ -501,7 +501,7 @@ SoundSource.obj: SoundSource.cpp.obj
 
 # target to build an object file
 SoundSource.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj
 .PHONY : SoundSource.cpp.obj
 
 SoundSource.i: SoundSource.cpp.i
@@ -509,7 +509,7 @@ SoundSource.i: SoundSource.cpp.i
 
 # target to preprocess a source file
 SoundSource.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.i
 .PHONY : SoundSource.cpp.i
 
 SoundSource.s: SoundSource.cpp.s
@@ -517,7 +517,7 @@ SoundSource.s: SoundSource.cpp.s
 
 # target to generate assembly for a file
 SoundSource.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.s
 .PHONY : SoundSource.cpp.s
 
 VorbisShared.obj: VorbisShared.cpp.obj
@@ -525,7 +525,7 @@ VorbisShared.obj: VorbisShared.cpp.obj
 
 # target to build an object file
 VorbisShared.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj
 .PHONY : VorbisShared.cpp.obj
 
 VorbisShared.i: VorbisShared.cpp.i
@@ -533,7 +533,7 @@ VorbisShared.i: VorbisShared.cpp.i
 
 # target to preprocess a source file
 VorbisShared.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.i
 .PHONY : VorbisShared.cpp.i
 
 VorbisShared.s: VorbisShared.cpp.s
@@ -541,7 +541,7 @@ VorbisShared.s: VorbisShared.cpp.s
 
 # target to generate assembly for a file
 VorbisShared.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\System\Sound\CMakeFiles\sound.dir\build.make rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.s
 .PHONY : VorbisShared.cpp.s
 
 # Help Target
@@ -614,6 +614,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

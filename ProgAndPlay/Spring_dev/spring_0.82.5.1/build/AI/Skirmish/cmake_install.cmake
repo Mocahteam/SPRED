@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish
+# Install script for directory: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,15 +29,15 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/AAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/CppTestAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/E323AI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/HughAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/KAIK/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullJavaAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullOOJavaAI/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/RAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/AAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/CppTestAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/E323AI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/HughAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/KAIK/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullJavaAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/NullOOJavaAI/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/RAI/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

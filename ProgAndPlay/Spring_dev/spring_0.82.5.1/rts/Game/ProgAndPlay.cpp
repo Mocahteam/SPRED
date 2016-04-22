@@ -36,6 +36,7 @@
 #include "LogOutput.h"
 
 const std::string tracesDirname = "traces";
+const bool traceOnline = false;
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
 
@@ -92,9 +93,11 @@ CProgAndPlay::~CProgAndPlay() {
 	else
 		log("Prog&Play shut down and cleaned up");
   }
-  logFile.close();
+  tp.setEnd();
+  tracesThread.join();
   if (ppTraces.is_open())
 	ppTraces.close();
+  logFile.close();
   log("ProgAndPLay destructor end");
 }
 
@@ -102,9 +105,18 @@ void CProgAndPlay::Update(void) {
 	log("ProgAndPLay::Update begin");
 		
 	// Store log messages
-	if (ppTraces.is_open())
+	if (ppTraces.is_open()) {
 		logMessages();
-	
+		if (tp.compressionDone()) {
+			log("compression done");
+			std::vector<sp_trace> traces = tp.getTraces();
+			for (unsigned int i = 0; i < traces.size(); i++)
+				traces.at(i)->display(logFile);
+			tp.compressionRead();
+			//deal with compressed trace here for feedback
+		}
+	}
+		
 	// Execute pending commands
 	int nbCmd = execPendingCommands();
 	if (nbCmd == -1){
@@ -581,6 +593,12 @@ void CProgAndPlay::openTracesFile() {
 				startTime = std::time(NULL);
 				ppTraces << "start " << missionName << std::endl;
 				ppTraces << "mission_start_time " << startTime << std::endl;
+				// thread creation
+				if (traceOnline)
+					tracesThread = boost::thread(&TracesParser::parseTraceFileOnline, &tp, tracesDirname, missionName+".log", true);
+				else
+					tracesThread = boost::thread(&TracesParser::parseTraceFileOffline, &tp, tracesDirname, missionName+".log", true);
+				//***
 			}
 		}
 		else {

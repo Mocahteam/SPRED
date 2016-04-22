@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include AI/Skirmish/AAI/CMakeFiles/AAI.dir/depend.make
@@ -50,17 +50,17 @@ include AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj: ../AI/Skirmish/AAI/AAI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp > CMakeFiles\AAI.dir\AAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp > CMakeFiles\AAI.dir\AAI.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp -o CMakeFiles\AAI.dir\AAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAI.cpp -o CMakeFiles\AAI.dir\AAI.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj.requires
@@ -74,17 +74,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj.provides.build: AI/Skirmish/AAI/C
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj: ../AI/Skirmish/AAI/AAIAirForceManager.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAirForceManager.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAirForceManager.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIAirForceManager.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp > CMakeFiles\AAI.dir\AAIAirForceManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp > CMakeFiles\AAI.dir\AAIAirForceManager.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIAirForceManager.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp -o CMakeFiles\AAI.dir\AAIAirForceManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAirForceManager.cpp -o CMakeFiles\AAI.dir\AAIAirForceManager.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj.requires
@@ -98,17 +98,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj.provides.build: AI
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj: ../AI/Skirmish/AAI/AAIAttack.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAttack.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAttack.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIAttack.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp > CMakeFiles\AAI.dir\AAIAttack.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp > CMakeFiles\AAI.dir\AAIAttack.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIAttack.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp -o CMakeFiles\AAI.dir\AAIAttack.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttack.cpp -o CMakeFiles\AAI.dir\AAIAttack.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj.requires
@@ -122,17 +122,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj.provides.build: AI/Skirmish
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj: ../AI/Skirmish/AAI/AAIAttackManager.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAttackManager.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIAttackManager.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIAttackManager.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp > CMakeFiles\AAI.dir\AAIAttackManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp > CMakeFiles\AAI.dir\AAIAttackManager.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIAttackManager.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp -o CMakeFiles\AAI.dir\AAIAttackManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIAttackManager.cpp -o CMakeFiles\AAI.dir\AAIAttackManager.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj.requires
@@ -146,17 +146,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj.provides.build: AI/S
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj: ../AI/Skirmish/AAI/AAIBrain.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBrain.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBrain.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIBrain.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp > CMakeFiles\AAI.dir\AAIBrain.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp > CMakeFiles\AAI.dir\AAIBrain.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIBrain.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp -o CMakeFiles\AAI.dir\AAIBrain.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBrain.cpp -o CMakeFiles\AAI.dir\AAIBrain.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj.requires
@@ -170,17 +170,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj.provides.build: AI/Skirmish/
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj: ../AI/Skirmish/AAI/AAIBuildTable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBuildTable.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBuildTable.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIBuildTable.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp > CMakeFiles\AAI.dir\AAIBuildTable.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp > CMakeFiles\AAI.dir\AAIBuildTable.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIBuildTable.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp -o CMakeFiles\AAI.dir\AAIBuildTable.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTable.cpp -o CMakeFiles\AAI.dir\AAIBuildTable.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj.requires
@@ -194,17 +194,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj.provides.build: AI/Skir
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj: ../AI/Skirmish/AAI/AAIBuildTask.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBuildTask.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIBuildTask.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIBuildTask.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp > CMakeFiles\AAI.dir\AAIBuildTask.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp > CMakeFiles\AAI.dir\AAIBuildTask.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIBuildTask.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp -o CMakeFiles\AAI.dir\AAIBuildTask.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIBuildTask.cpp -o CMakeFiles\AAI.dir\AAIBuildTask.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj.requires
@@ -218,17 +218,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj.provides.build: AI/Skirm
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj: ../AI/Skirmish/AAI/AAIConfig.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIConfig.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIConfig.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIConfig.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp > CMakeFiles\AAI.dir\AAIConfig.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp > CMakeFiles\AAI.dir\AAIConfig.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIConfig.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp -o CMakeFiles\AAI.dir\AAIConfig.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConfig.cpp -o CMakeFiles\AAI.dir\AAIConfig.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj.requires
@@ -242,17 +242,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj.provides.build: AI/Skirmish
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj: ../AI/Skirmish/AAI/AAIConstructor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIConstructor.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIConstructor.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIConstructor.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp > CMakeFiles\AAI.dir\AAIConstructor.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp > CMakeFiles\AAI.dir\AAIConstructor.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIConstructor.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp -o CMakeFiles\AAI.dir\AAIConstructor.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIConstructor.cpp -o CMakeFiles\AAI.dir\AAIConstructor.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj.requires
@@ -266,17 +266,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj.provides.build: AI/Ski
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj: ../AI/Skirmish/AAI/AAIExecute.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIExecute.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIExecute.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIExecute.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp > CMakeFiles\AAI.dir\AAIExecute.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp > CMakeFiles\AAI.dir\AAIExecute.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIExecute.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp -o CMakeFiles\AAI.dir\AAIExecute.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIExecute.cpp -o CMakeFiles\AAI.dir\AAIExecute.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj.requires
@@ -290,17 +290,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj.provides.build: AI/Skirmis
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj: ../AI/Skirmish/AAI/AAIGroup.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIGroup.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIGroup.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIGroup.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp > CMakeFiles\AAI.dir\AAIGroup.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp > CMakeFiles\AAI.dir\AAIGroup.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIGroup.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp -o CMakeFiles\AAI.dir\AAIGroup.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIGroup.cpp -o CMakeFiles\AAI.dir\AAIGroup.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj.requires
@@ -314,17 +314,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj.provides.build: AI/Skirmish/
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj: ../AI/Skirmish/AAI/AAIMap.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIMap.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIMap.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIMap.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp > CMakeFiles\AAI.dir\AAIMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp > CMakeFiles\AAI.dir\AAIMap.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIMap.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp -o CMakeFiles\AAI.dir\AAIMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIMap.cpp -o CMakeFiles\AAI.dir\AAIMap.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj.requires
@@ -338,17 +338,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj.provides.build: AI/Skirmish/AA
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj: ../AI/Skirmish/AAI/AAISector.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAISector.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAISector.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAISector.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp > CMakeFiles\AAI.dir\AAISector.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp > CMakeFiles\AAI.dir\AAISector.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAISector.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp -o CMakeFiles\AAI.dir\AAISector.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAISector.cpp -o CMakeFiles\AAI.dir\AAISector.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj.requires
@@ -362,17 +362,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj.provides.build: AI/Skirmish
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj: ../AI/Skirmish/AAI/AAIUnitTable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIUnitTable.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AAIUnitTable.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AAIUnitTable.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp > CMakeFiles\AAI.dir\AAIUnitTable.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp > CMakeFiles\AAI.dir\AAIUnitTable.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AAIUnitTable.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp -o CMakeFiles\AAI.dir\AAIUnitTable.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AAIUnitTable.cpp -o CMakeFiles\AAI.dir\AAIUnitTable.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj.requires
@@ -386,17 +386,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj.provides.build: AI/Skirm
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj: ../AI/Skirmish/AAI/AIExport.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AIExport.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\AIExport.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/AIExport.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp > CMakeFiles\AAI.dir\AIExport.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp > CMakeFiles\AAI.dir\AIExport.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/AIExport.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp -o CMakeFiles\AAI.dir\AIExport.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\AIExport.cpp -o CMakeFiles\AAI.dir\AIExport.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj.requires
@@ -410,17 +410,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj.provides.build: AI/Skirmish/
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj: ../AI/Skirmish/AAI/Interface.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\Interface.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\Interface.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/Interface.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp > CMakeFiles\AAI.dir\Interface.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp > CMakeFiles\AAI.dir\Interface.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/Interface.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp -o CMakeFiles\AAI.dir\Interface.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI\Interface.cpp -o CMakeFiles\AAI.dir\Interface.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj.requires
@@ -434,17 +434,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj.provides.build: AI/Skirmish
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: ../AI/Wrappers/CUtils/SharedLibrary.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires
@@ -458,17 +458,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.pro
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: ../AI/Wrappers/CUtils/SimpleLog.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires
@@ -482,17 +482,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.provide
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj: ../AI/Wrappers/CUtils/Util.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\Util.c.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj.requires
@@ -506,17 +506,17 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj.provides.bui
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: AI/Skirmish/AAI/CMakeFiles/AAI.dir/flags.make
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: ../AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\AAI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires:
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires
@@ -578,7 +578,7 @@ AI/Skirmish/AAI/SkirmishAI.dll: AI/Wrappers/LegacyCpp/libLegacyCpp.a
 AI/Skirmish/AAI/SkirmishAI.dll: AI/Skirmish/AAI/CMakeFiles/AAI.dir/build.make
 AI/Skirmish/AAI/SkirmishAI.dll: AI/Skirmish/AAI/CMakeFiles/AAI.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared module SkirmishAI.dll"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\AAI.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\AAI.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/build: AI/Skirmish/AAI/SkirmishAI.dll
@@ -607,10 +607,10 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/requires: AI/Skirmish/AAI/CMakeFiles/AAI.dir/
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/requires
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && $(CMAKE_COMMAND) -P CMakeFiles\AAI.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && $(CMAKE_COMMAND) -P CMakeFiles\AAI.dir\cmake_clean.cmake
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/clean
 
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI\CMakeFiles\AAI.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\AAI C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI\CMakeFiles\AAI.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/depend
 

@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/System/Sound/CMakeFiles/sound.dir/depend.make
@@ -50,17 +50,17 @@ include rts/System/Sound/CMakeFiles/sound.dir/flags.make
 
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj: ../rts/System/Sound/IAudioChannel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IAudioChannel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IAudioChannel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/IAudioChannel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp > CMakeFiles\sound.dir\IAudioChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp > CMakeFiles\sound.dir\IAudioChannel.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/IAudioChannel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp -o CMakeFiles\sound.dir\IAudioChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IAudioChannel.cpp -o CMakeFiles\sound.dir\IAudioChannel.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj.provides.build: rts/
 
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj: ../rts/System/Sound/IEffectChannel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IEffectChannel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IEffectChannel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/IEffectChannel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp > CMakeFiles\sound.dir\IEffectChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp > CMakeFiles\sound.dir\IEffectChannel.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/IEffectChannel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp -o CMakeFiles\sound.dir\IEffectChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IEffectChannel.cpp -o CMakeFiles\sound.dir\IEffectChannel.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj.requires
@@ -98,17 +98,17 @@ rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj.provides.build: rts
 
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj: ../rts/System/Sound/IMusicChannel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IMusicChannel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\IMusicChannel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/IMusicChannel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp > CMakeFiles\sound.dir\IMusicChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp > CMakeFiles\sound.dir\IMusicChannel.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/IMusicChannel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp -o CMakeFiles\sound.dir\IMusicChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\IMusicChannel.cpp -o CMakeFiles\sound.dir\IMusicChannel.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj.requires
@@ -122,17 +122,17 @@ rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj.provides.build: rts/
 
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj: ../rts/System/Sound/ISound.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\ISound.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\ISound.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/ISound.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp > CMakeFiles\sound.dir\ISound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp > CMakeFiles\sound.dir\ISound.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/ISound.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp -o CMakeFiles\sound.dir\ISound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ISound.cpp -o CMakeFiles\sound.dir\ISound.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj.requires
@@ -146,17 +146,17 @@ rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj.provides.build: rts/System/
 
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj: ../rts/System/Sound/NullSound.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\NullSound.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\NullSound.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/NullSound.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp > CMakeFiles\sound.dir\NullSound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp > CMakeFiles\sound.dir\NullSound.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/NullSound.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp -o CMakeFiles\sound.dir\NullSound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\NullSound.cpp -o CMakeFiles\sound.dir\NullSound.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj.requires
@@ -170,17 +170,17 @@ rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj.provides.build: rts/Syst
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj: ../rts/System/Sound/SoundLog.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundLog.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundLog.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/SoundLog.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp > CMakeFiles\sound.dir\SoundLog.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp > CMakeFiles\sound.dir\SoundLog.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/SoundLog.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp -o CMakeFiles\sound.dir\SoundLog.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundLog.cpp -o CMakeFiles\sound.dir\SoundLog.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj.requires
@@ -194,17 +194,17 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj.provides.build: rts/Syste
 
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj: ../rts/System/Sound/ALShared.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\ALShared.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\ALShared.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/ALShared.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp > CMakeFiles\sound.dir\ALShared.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp > CMakeFiles\sound.dir\ALShared.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/ALShared.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp -o CMakeFiles\sound.dir\ALShared.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\ALShared.cpp -o CMakeFiles\sound.dir\ALShared.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj.requires
@@ -218,17 +218,17 @@ rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj.provides.build: rts/Syste
 
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj: ../rts/System/Sound/EffectChannel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\EffectChannel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\EffectChannel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/EffectChannel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp > CMakeFiles\sound.dir\EffectChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp > CMakeFiles\sound.dir\EffectChannel.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/EffectChannel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp -o CMakeFiles\sound.dir\EffectChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\EffectChannel.cpp -o CMakeFiles\sound.dir\EffectChannel.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj.requires
@@ -242,17 +242,17 @@ rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj.provides.build: rts/
 
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj: ../rts/System/Sound/MusicChannel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\MusicChannel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\MusicChannel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/MusicChannel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp > CMakeFiles\sound.dir\MusicChannel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp > CMakeFiles\sound.dir\MusicChannel.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/MusicChannel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp -o CMakeFiles\sound.dir\MusicChannel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\MusicChannel.cpp -o CMakeFiles\sound.dir\MusicChannel.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj.requires
@@ -266,17 +266,17 @@ rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj.provides.build: rts/S
 
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj: ../rts/System/Sound/OggStream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\OggStream.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\OggStream.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/OggStream.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp > CMakeFiles\sound.dir\OggStream.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp > CMakeFiles\sound.dir\OggStream.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/OggStream.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp -o CMakeFiles\sound.dir\OggStream.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\OggStream.cpp -o CMakeFiles\sound.dir\OggStream.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj.requires
@@ -290,17 +290,17 @@ rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj.provides.build: rts/Syst
 
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj: ../rts/System/Sound/Sound.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\Sound.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\Sound.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/Sound.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp > CMakeFiles\sound.dir\Sound.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp > CMakeFiles\sound.dir\Sound.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/Sound.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp -o CMakeFiles\sound.dir\Sound.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\Sound.cpp -o CMakeFiles\sound.dir\Sound.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj.requires
@@ -314,17 +314,17 @@ rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj.provides.build: rts/System/S
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj: ../rts/System/Sound/SoundBuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundBuffer.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundBuffer.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/SoundBuffer.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp > CMakeFiles\sound.dir\SoundBuffer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp > CMakeFiles\sound.dir\SoundBuffer.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/SoundBuffer.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp -o CMakeFiles\sound.dir\SoundBuffer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundBuffer.cpp -o CMakeFiles\sound.dir\SoundBuffer.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj.requires
@@ -338,17 +338,17 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj.provides.build: rts/Sy
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj: ../rts/System/Sound/SoundItem.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundItem.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundItem.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/SoundItem.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp > CMakeFiles\sound.dir\SoundItem.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp > CMakeFiles\sound.dir\SoundItem.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/SoundItem.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp -o CMakeFiles\sound.dir\SoundItem.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundItem.cpp -o CMakeFiles\sound.dir\SoundItem.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj.requires
@@ -362,17 +362,17 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj.provides.build: rts/Syst
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj: ../rts/System/Sound/SoundSource.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundSource.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\SoundSource.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/SoundSource.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp > CMakeFiles\sound.dir\SoundSource.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp > CMakeFiles\sound.dir\SoundSource.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/SoundSource.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp -o CMakeFiles\sound.dir\SoundSource.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\SoundSource.cpp -o CMakeFiles\sound.dir\SoundSource.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj.requires
@@ -386,17 +386,17 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj.provides.build: rts/Sy
 
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj: rts/System/Sound/CMakeFiles/sound.dir/flags.make
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj: ../rts/System/Sound/VorbisShared.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\VorbisShared.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\sound.dir\VorbisShared.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp
 
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sound.dir/VorbisShared.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp > CMakeFiles\sound.dir\VorbisShared.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp > CMakeFiles\sound.dir\VorbisShared.cpp.i
 
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sound.dir/VorbisShared.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp -o CMakeFiles\sound.dir\VorbisShared.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound\VorbisShared.cpp -o CMakeFiles\sound.dir\VorbisShared.cpp.s
 
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj.requires:
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj.requires
@@ -447,8 +447,8 @@ rts/System/Sound/libsound.a: rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.
 rts/System/Sound/libsound.a: rts/System/Sound/CMakeFiles/sound.dir/build.make
 rts/System/Sound/libsound.a: rts/System/Sound/CMakeFiles/sound.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libsound.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -P CMakeFiles\sound.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\sound.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -P CMakeFiles\sound.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\sound.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/System/Sound/CMakeFiles/sound.dir/build: rts/System/Sound/libsound.a
@@ -472,10 +472,10 @@ rts/System/Sound/CMakeFiles/sound.dir/requires: rts/System/Sound/CMakeFiles/soun
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/requires
 
 rts/System/Sound/CMakeFiles/sound.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -P CMakeFiles\sound.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound && $(CMAKE_COMMAND) -P CMakeFiles\sound.dir\cmake_clean.cmake
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/clean
 
 rts/System/Sound/CMakeFiles/sound.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound\CMakeFiles\sound.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Sound C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\System\Sound\CMakeFiles\sound.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/System/Sound/CMakeFiles/sound.dir/depend
 

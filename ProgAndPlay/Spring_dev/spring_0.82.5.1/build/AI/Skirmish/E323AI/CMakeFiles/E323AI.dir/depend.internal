@@ -4,17 +4,17 @@
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
  ../rts/System/booldefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj
  ../rts/ExternalAI/Interface/ELevelOfSupport.h
  ../rts/ExternalAI/Interface/SAIInterfaceLibrary.h
@@ -24,12 +24,12 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
  ../rts/lib/streflop/streflopC.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -710,11 +710,11 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AIExport.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AIExport.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -1390,18 +1390,18 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ATask.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ATask.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -1726,12 +1726,12 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -2407,19 +2407,19 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -3095,22 +3095,22 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -3800,39 +3800,39 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CE323AI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -4508,36 +4508,36 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -5213,30 +5213,30 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -5912,20 +5912,20 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -6248,13 +6248,13 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -6930,35 +6930,35 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CRNG.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CRNG.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -7648,32 +7648,32 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -8361,12 +8361,12 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -9054,33 +9054,33 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CScopedTimer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -9756,22 +9756,22 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CIntel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CMilitary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -10447,18 +10447,18 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CRNG.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CRNG.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -11134,20 +11134,20 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ReusableObjectFactory.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -11823,19 +11823,19 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -12511,25 +12511,25 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/GameMap.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HEngine.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj
  ../rts/ExternalAI/Interface/ELevelOfSupport.h
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/MathUtil.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/Defines.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -12851,18 +12851,18 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/Util.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/headers/HAIInterface.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -13538,20 +13538,20 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Assist.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -14227,23 +14227,23 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Attack.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -14919,30 +14919,30 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CEconomy.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CTaskHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Assist.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Attack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Build.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Factory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Guard.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Merge.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CEconomy.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CTaskHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Assist.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Attack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Build.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Build.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -15618,21 +15618,21 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CConfigParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnit.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CConfigParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnit.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CWishList.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Factory.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -16308,17 +16308,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Guard.h
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -16994,18 +16994,18 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CDefenseMatrix.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../AAStar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ARegistrar.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../ATask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CDefenseMatrix.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CLogger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CPathfinder.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../CThreatMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/../AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/Defines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HAIInterface.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/../headers/HEngine.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/E323AI/atask/Merge.h

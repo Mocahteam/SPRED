@@ -74,3 +74,79 @@ mingw32-make.exe[1]: Leaving directory `C:/Users/StephaneMeresse/Desktop/mocahte
 mingw32-make.exe: *** [cmTryCompileExec/fast] Error 2
 
 
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:C:/MinGW-gcc4.4/bin/mingw32-make.exe "cmTryCompileExec/fast"
+C:/MinGW-gcc4.4/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec.dir\build.make CMakeFiles/cmTryCompileExec.dir/build
+mingw32-make.exe[1]: Entering directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\CMakeTmp\CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
+C:\MinGW-gcc4.4\bin\gcc.exe   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj   -c "C:\Program Files (x86)\CMake 2.6\share\cmake-2.6\Modules\CheckFunctionExists.c"
+Linking C executable cmTryCompileExec.exe
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec.dir\link.txt --verbose=1
+C:\MinGW-gcc4.4\bin\gcc.exe     -DCHECK_FUNCTION_EXISTS=pthread_create   CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj  -o cmTryCompileExec.exe -Wl,--out-implib,libcmTryCompileExec.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lpthreads 
+c:/mingw-gcc4.4/bin/../lib/gcc/mingw32/4.4.0/../../../../mingw32/bin/ld.exe: cannot find -lpthreads
+collect2: ld returned 1 exit status
+mingw32-make.exe[1]: *** [cmTryCompileExec.exe] Error 1
+mingw32-make.exe[1]: Leaving directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function vorbis_bitrate_addblock exists in the vorbis failed with the following output:
+Change Dir: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:C:/MinGW-gcc4.4/bin/mingw32-make.exe "cmTryCompileExec/fast"
+C:/MinGW-gcc4.4/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec.dir\build.make CMakeFiles/cmTryCompileExec.dir/build
+mingw32-make.exe[1]: Entering directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\CMakeTmp\CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
+C:\MinGW-gcc4.4\bin\gcc.exe   -DCHECK_FUNCTION_EXISTS=vorbis_bitrate_addblock   -o CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj   -c "C:\Program Files (x86)\CMake 2.6\share\cmake-2.6\Modules\CheckFunctionExists.c"
+Linking C executable cmTryCompileExec.exe
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec.dir\link.txt --verbose=1
+C:\MinGW-gcc4.4\bin\gcc.exe     -DCHECK_FUNCTION_EXISTS=vorbis_bitrate_addblock   CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj  -o cmTryCompileExec.exe -Wl,--out-implib,libcmTryCompileExec.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lvorbis C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\ogg.dll C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\vorbis.dll C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\vorbisfile.dll 
+c:/mingw-gcc4.4/bin/../lib/gcc/mingw32/4.4.0/../../../../mingw32/bin/ld.exe: cannot find -lvorbis
+collect2: ld returned 1 exit status
+mingw32-make.exe[1]: *** [cmTryCompileExec.exe] Error 1
+mingw32-make.exe[1]: Leaving directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:C:/MinGW-gcc4.4/bin/mingw32-make.exe "cmTryCompileExec/fast"
+C:/MinGW-gcc4.4/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec.dir\build.make CMakeFiles/cmTryCompileExec.dir/build
+mingw32-make.exe[1]: Entering directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\CMakeTmp\CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
+C:\MinGW-gcc4.4\bin\gcc.exe   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj   -c "C:\Program Files (x86)\CMake 2.6\share\cmake-2.6\Modules\CheckFunctionExists.c"
+Linking C executable cmTryCompileExec.exe
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec.dir\link.txt --verbose=1
+C:\MinGW-gcc4.4\bin\gcc.exe     -DCHECK_FUNCTION_EXISTS=pthread_create   CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj  -o cmTryCompileExec.exe -Wl,--out-implib,libcmTryCompileExec.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lpthreads 
+c:/mingw-gcc4.4/bin/../lib/gcc/mingw32/4.4.0/../../../../mingw32/bin/ld.exe: cannot find -lpthreads
+collect2: ld returned 1 exit status
+mingw32-make.exe[1]: *** [cmTryCompileExec.exe] Error 1
+mingw32-make.exe[1]: Leaving directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function vorbis_bitrate_addblock exists in the vorbis failed with the following output:
+Change Dir: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:C:/MinGW-gcc4.4/bin/mingw32-make.exe "cmTryCompileExec/fast"
+C:/MinGW-gcc4.4/bin/mingw32-make.exe -f CMakeFiles\cmTryCompileExec.dir\build.make CMakeFiles/cmTryCompileExec.dir/build
+mingw32-make.exe[1]: Entering directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\CMakeTmp\CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
+C:\MinGW-gcc4.4\bin\gcc.exe   -DCHECK_FUNCTION_EXISTS=vorbis_bitrate_addblock   -o CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj   -c "C:\Program Files (x86)\CMake 2.6\share\cmake-2.6\Modules\CheckFunctionExists.c"
+Linking C executable cmTryCompileExec.exe
+"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTryCompileExec.dir\link.txt --verbose=1
+C:\MinGW-gcc4.4\bin\gcc.exe     -DCHECK_FUNCTION_EXISTS=vorbis_bitrate_addblock   CMakeFiles\cmTryCompileExec.dir\CheckFunctionExists.c.obj  -o cmTryCompileExec.exe -Wl,--out-implib,libcmTryCompileExec.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lvorbis C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\ogg.dll C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\vorbis.dll C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\mingwlibs\dll\vorbisfile.dll 
+c:/mingw-gcc4.4/bin/../lib/gcc/mingw32/4.4.0/../../../../mingw32/bin/ld.exe: cannot find -lvorbis
+collect2: ld returned 1 exit status
+mingw32-make.exe[1]: *** [cmTryCompileExec.exe] Error 1
+mingw32-make.exe[1]: Leaving directory `C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [cmTryCompileExec/fast] Error 2
+
+

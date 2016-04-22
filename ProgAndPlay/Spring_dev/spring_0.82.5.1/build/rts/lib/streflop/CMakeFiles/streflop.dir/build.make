@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/lib/streflop/CMakeFiles/streflop.dir/depend.make
@@ -50,17 +50,17 @@ include rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 
 rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj: ../rts/lib/streflop/SMath.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\SMath.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\SMath.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/SMath.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp > CMakeFiles\streflop.dir\SMath.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp > CMakeFiles\streflop.dir\SMath.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/SMath.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp -o CMakeFiles\streflop.dir\SMath.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\SMath.cpp -o CMakeFiles\streflop.dir\SMath.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj.provides.build: rts/lib/s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj: ../rts/lib/streflop/Random.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\Random.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\Random.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/Random.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp > CMakeFiles\streflop.dir\Random.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp > CMakeFiles\streflop.dir\Random.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/Random.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp -o CMakeFiles\streflop.dir\Random.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\Random.cpp -o CMakeFiles\streflop.dir\Random.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj.requires
@@ -98,17 +98,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj.provides.build: rts/lib/
 
 rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj: ../rts/lib/streflop/streflopC.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\streflopC.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\streflop.dir\streflopC.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/streflopC.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp > CMakeFiles\streflop.dir\streflopC.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp > CMakeFiles\streflop.dir\streflopC.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/streflopC.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp -o CMakeFiles\streflop.dir\streflopC.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\streflopC.cpp -o CMakeFiles\streflop.dir\streflopC.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj.requires
@@ -122,17 +122,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj.provides.build: rts/l
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_acosf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_acosf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj.requires
@@ -146,17 +146,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_acoshf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_acoshf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_acoshf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj.requires
@@ -170,17 +170,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_asinf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_asinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_asinf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj.requires
@@ -194,17 +194,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_atan2f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atan2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_atan2f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj.requires
@@ -218,17 +218,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_atanhf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_atanhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_atanhf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj.requires
@@ -242,17 +242,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_coshf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_coshf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_coshf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj.requires
@@ -266,17 +266,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_exp2f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_exp2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_exp2f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj.requires
@@ -290,17 +290,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_expf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_expf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_expf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj.requires
@@ -314,17 +314,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_fmodf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_fmodf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_fmodf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj.requires
@@ -338,17 +338,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_gammaf_r.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_gammaf_r.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_gammaf_r.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj.requires
@@ -362,17 +362,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj.provides
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_hypotf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_hypotf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_hypotf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj.requires
@@ -386,17 +386,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_j0f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j0f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_j0f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj.requires
@@ -410,17 +410,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj.provides.buil
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_j1f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_j1f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_j1f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj.requires
@@ -434,17 +434,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj.provides.buil
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_jnf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_jnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_jnf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj.requires
@@ -458,17 +458,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj.provides.buil
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_lgammaf_r.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_lgammaf_r.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_lgammaf_r.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj.requires
@@ -482,17 +482,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj.provide
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_log10f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log10f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_log10f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj.requires
@@ -506,17 +506,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_log2f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_log2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_log2f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj.requires
@@ -530,17 +530,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_logf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_logf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_logf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj.requires
@@ -554,17 +554,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_powf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_powf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_powf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj.requires
@@ -578,17 +578,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_remainderf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_remainderf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_remainderf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj.requires
@@ -602,17 +602,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj.provid
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_rem_pio2f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_rem_pio2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_rem_pio2f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj.requires
@@ -626,17 +626,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj.provide
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_sinhf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sinhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_sinhf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj.requires
@@ -650,17 +650,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj: ../rts/lib/streflop/libm/flt-32/e_sqrtf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp > CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\e_sqrtf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\e_sqrtf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj.requires
@@ -674,17 +674,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj: ../rts/lib/streflop/libm/flt-32/k_cosf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_cosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_cosf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj.requires
@@ -698,17 +698,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj: ../rts/lib/streflop/libm/flt-32/k_rem_pio2f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_rem_pio2f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_rem_pio2f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj.requires
@@ -722,17 +722,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj.provide
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj: ../rts/lib/streflop/libm/flt-32/k_sinf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_sinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_sinf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj.requires
@@ -746,17 +746,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj: ../rts/lib/streflop/libm/flt-32/k_tanf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\k_tanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\k_tanf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj.requires
@@ -770,17 +770,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_asinhf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_asinhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_asinhf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj.requires
@@ -794,17 +794,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_atanf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_atanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_atanf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj.requires
@@ -818,17 +818,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_cbrtf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cbrtf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_cbrtf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj.requires
@@ -842,17 +842,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_ceilf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ceilf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ceilf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj.requires
@@ -866,17 +866,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_copysignf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_copysignf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_copysignf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj.requires
@@ -890,17 +890,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj.provide
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_cosf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_cosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_cosf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj.requires
@@ -914,17 +914,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_erff.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_erff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_erff.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj.requires
@@ -938,17 +938,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_expm1f.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_expm1f.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_expm1f.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj.requires
@@ -962,17 +962,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_fabsf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fabsf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_fabsf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj.requires
@@ -986,17 +986,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_finitef.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_finitef.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_finitef.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj.requires
@@ -1010,17 +1010,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_floorf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_41)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_floorf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_floorf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj.requires
@@ -1034,17 +1034,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_fpclassifyf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_42)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_fpclassifyf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_fpclassifyf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj.requires
@@ -1058,17 +1058,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj.provi
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_frexpf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_43)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_frexpf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_frexpf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj.requires
@@ -1082,17 +1082,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_ilogbf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_44)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ilogbf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ilogbf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj.requires
@@ -1106,17 +1106,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_isinff.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_45)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isinff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_isinff.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj.requires
@@ -1130,17 +1130,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_isnanf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_46)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_isnanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_isnanf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj.requires
@@ -1154,17 +1154,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_ldexpf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_47)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_47)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_ldexpf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_ldexpf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj.requires
@@ -1178,17 +1178,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_llrintf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_48)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_48)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llrintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_llrintf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj.requires
@@ -1202,17 +1202,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_llroundf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_49)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_49)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_llroundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_llroundf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj.requires
@@ -1226,17 +1226,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj.provides
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_log1pf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_50)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_50)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_log1pf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_log1pf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj.requires
@@ -1250,17 +1250,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_logbf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_51)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_51)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_logbf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_logbf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj.requires
@@ -1274,17 +1274,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_lrintf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_52)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_52)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lrintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_lrintf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj.requires
@@ -1298,17 +1298,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_lroundf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_53)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_53)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_lroundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_lroundf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj.requires
@@ -1322,17 +1322,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_modff.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_54)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_54)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_modff.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_modff.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj.requires
@@ -1346,17 +1346,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_nearbyintf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_55)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_55)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nearbyintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_nearbyintf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj.requires
@@ -1370,17 +1370,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj.provid
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_nextafterf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_56)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_56)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_nextafterf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_nextafterf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj.requires
@@ -1394,17 +1394,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj.provid
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_remquof.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_57)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_57)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_remquof.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_remquof.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj.requires
@@ -1418,17 +1418,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_rintf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_58)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_58)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_rintf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_rintf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj.requires
@@ -1442,17 +1442,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_roundf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_59)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_59)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_roundf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_roundf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj.requires
@@ -1466,17 +1466,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_scalblnf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_60)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_60)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalblnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_scalblnf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj.requires
@@ -1490,17 +1490,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj.provides
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_scalbnf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_61)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_61)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_scalbnf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_scalbnf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj.requires
@@ -1514,17 +1514,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_signbitf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_62)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_62)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_signbitf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_signbitf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj.requires
@@ -1538,17 +1538,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj.provides
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_sincosf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_63)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_63)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sincosf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_sincosf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj.requires
@@ -1562,17 +1562,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj.provides.
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_sinf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_64)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_64)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_sinf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_sinf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj.requires
@@ -1586,17 +1586,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_tanf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_65)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_65)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_tanf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj.requires
@@ -1610,17 +1610,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj.provides.bui
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_tanhf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_66)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_66)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_tanhf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_tanhf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj.requires
@@ -1634,17 +1634,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj.provides.bu
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj: ../rts/lib/streflop/libm/flt-32/s_truncf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_67)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_67)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp > CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\s_truncf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\s_truncf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj.requires
@@ -1658,17 +1658,17 @@ rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj.provides.b
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj: rts/lib/streflop/CMakeFiles/streflop.dir/flags.make
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj: ../rts/lib/streflop/libm/flt-32/w_expf.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_68)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_68)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -o CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp > CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp > CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.i
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DLIBM_COMPILING_FLT32 -w -O3 -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/streflop/libm/headers -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop\libm\flt-32\w_expf.cpp -o CMakeFiles\streflop.dir\libm\flt-32\w_expf.cpp.s
 
 rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj.requires:
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj.requires
@@ -1825,8 +1825,8 @@ rts/lib/streflop/libstreflop.a: rts/lib/streflop/CMakeFiles/streflop.dir/libm/fl
 rts/lib/streflop/libstreflop.a: rts/lib/streflop/CMakeFiles/streflop.dir/build.make
 rts/lib/streflop/libstreflop.a: rts/lib/streflop/CMakeFiles/streflop.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libstreflop.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -P CMakeFiles\streflop.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\streflop.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -P CMakeFiles\streflop.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\streflop.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/lib/streflop/CMakeFiles/streflop.dir/build: rts/lib/streflop/libstreflop.a
@@ -1903,10 +1903,10 @@ rts/lib/streflop/CMakeFiles/streflop.dir/requires: rts/lib/streflop/CMakeFiles/s
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/requires
 
 rts/lib/streflop/CMakeFiles/streflop.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -P CMakeFiles\streflop.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && $(CMAKE_COMMAND) -P CMakeFiles\streflop.dir\cmake_clean.cmake
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/clean
 
 rts/lib/streflop/CMakeFiles/streflop.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop\CMakeFiles\streflop.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\streflop C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop\CMakeFiles\streflop.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/depend
 

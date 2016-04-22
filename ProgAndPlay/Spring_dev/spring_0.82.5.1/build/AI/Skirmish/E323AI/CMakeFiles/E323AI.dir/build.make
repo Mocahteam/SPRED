@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/depend.make
@@ -50,17 +50,17 @@ include AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj: ../AI/Skirmish/E323AI/AAStar.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\AAStar.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\AAStar.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/AAStar.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp > CMakeFiles\E323AI.dir\AAStar.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp > CMakeFiles\E323AI.dir\AAStar.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/AAStar.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp -o CMakeFiles\E323AI.dir\AAStar.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AAStar.cpp -o CMakeFiles\E323AI.dir\AAStar.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj.requires
@@ -74,17 +74,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AAStar.cpp.obj.provides.build: AI/Skirm
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj: ../AI/Skirmish/E323AI/AIExport.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\AIExport.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\AIExport.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/AIExport.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp > CMakeFiles\E323AI.dir\AIExport.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp > CMakeFiles\E323AI.dir\AIExport.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/AIExport.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp -o CMakeFiles\E323AI.dir\AIExport.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\AIExport.cpp -o CMakeFiles\E323AI.dir\AIExport.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj.requires
@@ -98,17 +98,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/AIExport.cpp.obj.provides.build: AI/Ski
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj: ../AI/Skirmish/E323AI/atask/Assist.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Assist.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Assist.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Assist.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp > CMakeFiles\E323AI.dir\atask\Assist.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp > CMakeFiles\E323AI.dir\atask\Assist.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Assist.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp -o CMakeFiles\E323AI.dir\atask\Assist.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Assist.cpp -o CMakeFiles\E323AI.dir\atask\Assist.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj.requires
@@ -122,17 +122,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Assist.cpp.obj.provides.build: AI
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj: ../AI/Skirmish/E323AI/atask/Attack.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Attack.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Attack.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Attack.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp > CMakeFiles\E323AI.dir\atask\Attack.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp > CMakeFiles\E323AI.dir\atask\Attack.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Attack.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp -o CMakeFiles\E323AI.dir\atask\Attack.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Attack.cpp -o CMakeFiles\E323AI.dir\atask\Attack.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj.requires
@@ -146,17 +146,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Attack.cpp.obj.provides.build: AI
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj: ../AI/Skirmish/E323AI/atask/Build.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Build.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Build.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Build.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp > CMakeFiles\E323AI.dir\atask\Build.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp > CMakeFiles\E323AI.dir\atask\Build.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Build.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp -o CMakeFiles\E323AI.dir\atask\Build.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Build.cpp -o CMakeFiles\E323AI.dir\atask\Build.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj.requires
@@ -170,17 +170,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Build.cpp.obj.provides.build: AI/
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj: ../AI/Skirmish/E323AI/atask/Factory.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Factory.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Factory.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Factory.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp > CMakeFiles\E323AI.dir\atask\Factory.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp > CMakeFiles\E323AI.dir\atask\Factory.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Factory.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp -o CMakeFiles\E323AI.dir\atask\Factory.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Factory.cpp -o CMakeFiles\E323AI.dir\atask\Factory.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj.requires
@@ -194,17 +194,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Factory.cpp.obj.provides.build: A
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj: ../AI/Skirmish/E323AI/atask/Guard.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Guard.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Guard.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Guard.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp > CMakeFiles\E323AI.dir\atask\Guard.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp > CMakeFiles\E323AI.dir\atask\Guard.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Guard.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp -o CMakeFiles\E323AI.dir\atask\Guard.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Guard.cpp -o CMakeFiles\E323AI.dir\atask\Guard.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj.requires
@@ -218,17 +218,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Guard.cpp.obj.provides.build: AI/
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj: ../AI/Skirmish/E323AI/atask/Merge.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Merge.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\atask\Merge.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/atask/Merge.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp > CMakeFiles\E323AI.dir\atask\Merge.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp > CMakeFiles\E323AI.dir\atask\Merge.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/atask/Merge.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp -o CMakeFiles\E323AI.dir\atask\Merge.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\atask\Merge.cpp -o CMakeFiles\E323AI.dir\atask\Merge.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj.requires
@@ -242,17 +242,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/atask/Merge.cpp.obj.provides.build: AI/
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj: ../AI/Skirmish/E323AI/ATask.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\ATask.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\ATask.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/ATask.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp > CMakeFiles\E323AI.dir\ATask.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp > CMakeFiles\E323AI.dir\ATask.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/ATask.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp -o CMakeFiles\E323AI.dir\ATask.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\ATask.cpp -o CMakeFiles\E323AI.dir\ATask.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj.requires
@@ -266,17 +266,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/ATask.cpp.obj.provides.build: AI/Skirmi
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj: ../AI/Skirmish/E323AI/CAI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CAI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CAI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CAI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp > CMakeFiles\E323AI.dir\CAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp > CMakeFiles\E323AI.dir\CAI.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CAI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp -o CMakeFiles\E323AI.dir\CAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CAI.cpp -o CMakeFiles\E323AI.dir\CAI.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj.requires
@@ -290,17 +290,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CAI.cpp.obj.provides.build: AI/Skirmish
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj: ../AI/Skirmish/E323AI/CConfigParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CConfigParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CConfigParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CConfigParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp > CMakeFiles\E323AI.dir\CConfigParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp > CMakeFiles\E323AI.dir\CConfigParser.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CConfigParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp -o CMakeFiles\E323AI.dir\CConfigParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CConfigParser.cpp -o CMakeFiles\E323AI.dir\CConfigParser.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj.requires
@@ -314,17 +314,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CConfigParser.cpp.obj.provides.build: A
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj: ../AI/Skirmish/E323AI/CDefenseMatrix.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp > CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp > CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp -o CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CDefenseMatrix.cpp -o CMakeFiles\E323AI.dir\CDefenseMatrix.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj.requires
@@ -338,17 +338,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CDefenseMatrix.cpp.obj.provides.build: 
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj: ../AI/Skirmish/E323AI/CE323AI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CE323AI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CE323AI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CE323AI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp > CMakeFiles\E323AI.dir\CE323AI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp > CMakeFiles\E323AI.dir\CE323AI.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CE323AI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp -o CMakeFiles\E323AI.dir\CE323AI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CE323AI.cpp -o CMakeFiles\E323AI.dir\CE323AI.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj.requires
@@ -362,17 +362,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CE323AI.cpp.obj.provides.build: AI/Skir
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj: ../AI/Skirmish/E323AI/CEconomy.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CEconomy.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CEconomy.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CEconomy.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp > CMakeFiles\E323AI.dir\CEconomy.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp > CMakeFiles\E323AI.dir\CEconomy.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CEconomy.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp -o CMakeFiles\E323AI.dir\CEconomy.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CEconomy.cpp -o CMakeFiles\E323AI.dir\CEconomy.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj.requires
@@ -386,17 +386,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CEconomy.cpp.obj.provides.build: AI/Ski
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj: ../AI/Skirmish/E323AI/CGroup.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CGroup.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CGroup.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CGroup.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp > CMakeFiles\E323AI.dir\CGroup.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp > CMakeFiles\E323AI.dir\CGroup.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CGroup.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp -o CMakeFiles\E323AI.dir\CGroup.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CGroup.cpp -o CMakeFiles\E323AI.dir\CGroup.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj.requires
@@ -410,17 +410,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CGroup.cpp.obj.provides.build: AI/Skirm
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj: ../AI/Skirmish/E323AI/CIntel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CIntel.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CIntel.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CIntel.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp > CMakeFiles\E323AI.dir\CIntel.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp > CMakeFiles\E323AI.dir\CIntel.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CIntel.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp -o CMakeFiles\E323AI.dir\CIntel.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CIntel.cpp -o CMakeFiles\E323AI.dir\CIntel.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj.requires
@@ -434,17 +434,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CIntel.cpp.obj.provides.build: AI/Skirm
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj: ../AI/Skirmish/E323AI/CLogger.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CLogger.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CLogger.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CLogger.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp > CMakeFiles\E323AI.dir\CLogger.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp > CMakeFiles\E323AI.dir\CLogger.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CLogger.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp -o CMakeFiles\E323AI.dir\CLogger.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CLogger.cpp -o CMakeFiles\E323AI.dir\CLogger.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj.requires
@@ -458,17 +458,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CLogger.cpp.obj.provides.build: AI/Skir
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj: ../AI/Skirmish/E323AI/CMilitary.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CMilitary.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CMilitary.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CMilitary.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp > CMakeFiles\E323AI.dir\CMilitary.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp > CMakeFiles\E323AI.dir\CMilitary.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CMilitary.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp -o CMakeFiles\E323AI.dir\CMilitary.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CMilitary.cpp -o CMakeFiles\E323AI.dir\CMilitary.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj.requires
@@ -482,17 +482,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CMilitary.cpp.obj.provides.build: AI/Sk
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj: ../AI/Skirmish/E323AI/CPathfinder.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CPathfinder.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CPathfinder.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CPathfinder.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp > CMakeFiles\E323AI.dir\CPathfinder.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp > CMakeFiles\E323AI.dir\CPathfinder.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CPathfinder.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp -o CMakeFiles\E323AI.dir\CPathfinder.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CPathfinder.cpp -o CMakeFiles\E323AI.dir\CPathfinder.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj.requires
@@ -506,17 +506,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CPathfinder.cpp.obj.provides.build: AI/
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj: ../AI/Skirmish/E323AI/CScopedTimer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CScopedTimer.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CScopedTimer.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CScopedTimer.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp > CMakeFiles\E323AI.dir\CScopedTimer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp > CMakeFiles\E323AI.dir\CScopedTimer.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CScopedTimer.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp -o CMakeFiles\E323AI.dir\CScopedTimer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CScopedTimer.cpp -o CMakeFiles\E323AI.dir\CScopedTimer.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj.requires
@@ -530,17 +530,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CScopedTimer.cpp.obj.provides.build: AI
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj: ../AI/Skirmish/E323AI/CTaskHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CTaskHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CTaskHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CTaskHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp > CMakeFiles\E323AI.dir\CTaskHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp > CMakeFiles\E323AI.dir\CTaskHandler.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CTaskHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp -o CMakeFiles\E323AI.dir\CTaskHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CTaskHandler.cpp -o CMakeFiles\E323AI.dir\CTaskHandler.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj.requires
@@ -554,17 +554,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CTaskHandler.cpp.obj.provides.build: AI
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj: ../AI/Skirmish/E323AI/CThreatMap.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CThreatMap.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CThreatMap.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CThreatMap.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp > CMakeFiles\E323AI.dir\CThreatMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp > CMakeFiles\E323AI.dir\CThreatMap.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CThreatMap.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp -o CMakeFiles\E323AI.dir\CThreatMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CThreatMap.cpp -o CMakeFiles\E323AI.dir\CThreatMap.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj.requires
@@ -578,17 +578,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CThreatMap.cpp.obj.provides.build: AI/S
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj: ../AI/Skirmish/E323AI/CUnit.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CUnit.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CUnit.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CUnit.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp > CMakeFiles\E323AI.dir\CUnit.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp > CMakeFiles\E323AI.dir\CUnit.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CUnit.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp -o CMakeFiles\E323AI.dir\CUnit.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnit.cpp -o CMakeFiles\E323AI.dir\CUnit.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj.requires
@@ -602,17 +602,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnit.cpp.obj.provides.build: AI/Skirmi
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj: ../AI/Skirmish/E323AI/CUnitTable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CUnitTable.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CUnitTable.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CUnitTable.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp > CMakeFiles\E323AI.dir\CUnitTable.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp > CMakeFiles\E323AI.dir\CUnitTable.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CUnitTable.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp -o CMakeFiles\E323AI.dir\CUnitTable.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CUnitTable.cpp -o CMakeFiles\E323AI.dir\CUnitTable.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj.requires
@@ -626,17 +626,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CUnitTable.cpp.obj.provides.build: AI/S
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj: ../AI/Skirmish/E323AI/CWishList.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CWishList.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\CWishList.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/CWishList.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp > CMakeFiles\E323AI.dir\CWishList.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp > CMakeFiles\E323AI.dir\CWishList.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/CWishList.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp -o CMakeFiles\E323AI.dir\CWishList.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\CWishList.cpp -o CMakeFiles\E323AI.dir\CWishList.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj.requires
@@ -650,17 +650,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/CWishList.cpp.obj.provides.build: AI/Sk
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj: ../AI/Skirmish/E323AI/GameMap.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\GameMap.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\GameMap.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/GameMap.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp > CMakeFiles\E323AI.dir\GameMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp > CMakeFiles\E323AI.dir\GameMap.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/GameMap.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp -o CMakeFiles\E323AI.dir\GameMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\GameMap.cpp -o CMakeFiles\E323AI.dir\GameMap.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj.requires
@@ -674,17 +674,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/GameMap.cpp.obj.provides.build: AI/Skir
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj: ../AI/Skirmish/E323AI/MathUtil.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\MathUtil.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\MathUtil.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/MathUtil.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp > CMakeFiles\E323AI.dir\MathUtil.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp > CMakeFiles\E323AI.dir\MathUtil.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/MathUtil.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp -o CMakeFiles\E323AI.dir\MathUtil.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\MathUtil.cpp -o CMakeFiles\E323AI.dir\MathUtil.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj.requires
@@ -698,17 +698,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/MathUtil.cpp.obj.provides.build: AI/Ski
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj: ../AI/Skirmish/E323AI/Util.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\Util.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\Util.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/Util.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp > CMakeFiles\E323AI.dir\Util.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp > CMakeFiles\E323AI.dir\Util.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/Util.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp -o CMakeFiles\E323AI.dir\Util.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI\Util.cpp -o CMakeFiles\E323AI.dir\Util.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj.requires
@@ -722,17 +722,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/Util.cpp.obj.provides.build: AI/Skirmis
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: ../AI/Wrappers/CUtils/SharedLibrary.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires
@@ -746,17 +746,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.o
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: ../AI/Wrappers/CUtils/SimpleLog.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires
@@ -770,17 +770,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.p
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj: ../AI/Wrappers/CUtils/Util.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\Util.c.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj.requires
@@ -794,17 +794,17 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/Util.c.obj.provid
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/flags.make
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: ../AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\E323AI.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires:
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires
@@ -891,7 +891,7 @@ AI/Skirmish/E323AI/SkirmishAI.dll: ../mingwlibs/lib/libboost_thread-mt.a
 AI/Skirmish/E323AI/SkirmishAI.dll: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/build.make
 AI/Skirmish/E323AI/SkirmishAI.dll: AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared module SkirmishAI.dll"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\E323AI.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\E323AI.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/build: AI/Skirmish/E323AI/SkirmishAI.dll
@@ -932,10 +932,10 @@ AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/requires: AI/Skirmish/E323AI/CMakeFiles
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/requires
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && $(CMAKE_COMMAND) -P CMakeFiles\E323AI.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI && $(CMAKE_COMMAND) -P CMakeFiles\E323AI.dir\cmake_clean.cmake
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/clean
 
 AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI\CMakeFiles\E323AI.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Skirmish\E323AI C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\E323AI\CMakeFiles\E323AI.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/depend
 

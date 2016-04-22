@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -109,9 +109,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\progress.make
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles\progress.make
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -269,6 +269,19 @@ pp-supplier/fast:
 .PHONY : pp-supplier/fast
 
 #=============================================================================
+# Target rules for targets named pp-traces
+
+# Build rule for target.
+pp-traces: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 pp-traces
+.PHONY : pp-traces
+
+# fast build rule for target.
+pp-traces/fast:
+	$(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/build
+.PHONY : pp-traces/fast
+
+#=============================================================================
 # Target rules for targets named gml
 
 # Build rule for target.
@@ -332,19 +345,6 @@ C-AIInterface: cmake_check_build_system
 C-AIInterface/fast:
 	$(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/build
 .PHONY : C-AIInterface/fast
-
-#=============================================================================
-# Target rules for targets named Python-AIInterface
-
-# Build rule for target.
-Python-AIInterface: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 Python-AIInterface
-.PHONY : Python-AIInterface
-
-# fast build rule for target.
-Python-AIInterface/fast:
-	$(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build
-.PHONY : Python-AIInterface/fast
 
 #=============================================================================
 # Target rules for targets named AAI
@@ -680,12 +680,12 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... lobby-test"
 	@$(CMAKE_COMMAND) -E echo "... headlessStubs"
 	@$(CMAKE_COMMAND) -E echo "... pp-supplier"
+	@$(CMAKE_COMMAND) -E echo "... pp-traces"
 	@$(CMAKE_COMMAND) -E echo "... gml"
 	@$(CMAKE_COMMAND) -E echo "... Cpp-AIWrapper"
 	@$(CMAKE_COMMAND) -E echo "... LegacyCpp-AIWrapper"
 	@$(CMAKE_COMMAND) -E echo "... LegacyCpp-Creg-AIWrapper"
 	@$(CMAKE_COMMAND) -E echo "... C-AIInterface"
-	@$(CMAKE_COMMAND) -E echo "... Python-AIInterface"
 	@$(CMAKE_COMMAND) -E echo "... AAI"
 	@$(CMAKE_COMMAND) -E echo "... CppTestAI"
 	@$(CMAKE_COMMAND) -E echo "... E323AI"

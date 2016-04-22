@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/depend.make
@@ -50,17 +50,17 @@ include AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj: ../AI/Wrappers/LegacyCpp/AIAI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAI.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAI.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj.requires
@@ -74,17 +74,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj.provi
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj: ../AI/Wrappers/LegacyCpp/AIAICallback.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICallback.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICallback.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj.requires
@@ -98,17 +98,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.o
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj: ../AI/Wrappers/LegacyCpp/AIAICheats.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIAICheats.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIAICheats.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj.requires
@@ -122,17 +122,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj: ../AI/Wrappers/LegacyCpp/AIGlobalAI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAI.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAI.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj.requires
@@ -146,17 +146,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj: ../AI/Wrappers/LegacyCpp/AIGlobalAICallback.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AIGlobalAICallback.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AIGlobalAICallback.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj.requires
@@ -170,17 +170,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj: ../AI/Wrappers/LegacyCpp/AISCommands.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\AISCommands.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\AISCommands.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj.requires
@@ -194,17 +194,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.ob
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj: ../AI/Wrappers/LegacyCpp/UnitDef.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp\UnitDef.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\UnitDef.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj.requires
@@ -218,17 +218,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj.pr
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj: ../rts/Game/GameVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Game\GameVersion.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj.requires
@@ -242,17 +242,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj: ../rts/System/float3.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float3.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\float3.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj.requires
@@ -266,17 +266,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj: ../rts/Sim/Misc/DamageArray.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\DamageArray.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\Sim\Misc\DamageArray.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj.requires
@@ -290,17 +290,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/M
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj: ../rts/System/creg/creg.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\creg.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\creg.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj.requires
@@ -314,17 +314,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj: ../rts/System/creg/Serializer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\Serializer.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\Serializer.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj.requires
@@ -338,17 +338,17 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/flags.make
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj: ../rts/System/creg/VarTypes.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp > CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.i
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DUSING_CREG -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\creg\VarTypes.cpp -o CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\__\__\__\rts\System\creg\VarTypes.cpp.s
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj.requires:
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj.requires
@@ -395,8 +395,8 @@ AI/Wrappers/LegacyCpp/libLegacyCppCreg.a: AI/Wrappers/LegacyCpp/CMakeFiles/Legac
 AI/Wrappers/LegacyCpp/libLegacyCppCreg.a: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/build.make
 AI/Wrappers/LegacyCpp/libLegacyCppCreg.a: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libLegacyCppCreg.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -P CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -P CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/build: AI/Wrappers/LegacyCpp/libLegacyCppCreg.a
@@ -418,10 +418,10 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/requires: AI/Wrapp
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/requires
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -P CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && $(CMAKE_COMMAND) -P CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\cmake_clean.cmake
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/clean
 
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\LegacyCpp C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/depend
 

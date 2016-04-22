@@ -12,6 +12,9 @@ ADD_SUBDIRECTORY(headlessStubs)
 # Muratet (Add P&P subdirectory) ---
 ADD_SUBDIRECTORY(pp)
 # ---
+# Meresse (Add traces subdirectory in pp) ---
+ADD_SUBDIRECTORY(pp/traces)
+# ---
 
 if    (NOT HEADLESS_SYSTEM)
 	Add_Subdirectory(gml)

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib
+# Install script for directory: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,16 +29,17 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/lua/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/7z/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/oscpack/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/minizip/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/streflop/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/md5/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/lobby/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/headlessStubs/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/pp/cmake_install.cmake")
-  INCLUDE("C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/gml/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/lua/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/7z/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/oscpack/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/minizip/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/streflop/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/md5/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/lobby/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/headlessStubs/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/pp/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/pp/traces/cmake_install.cmake")
+  INCLUDE("C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/lib/gml/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

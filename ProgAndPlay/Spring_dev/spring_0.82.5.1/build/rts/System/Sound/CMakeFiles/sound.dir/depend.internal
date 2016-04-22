@@ -4,9 +4,9 @@
 rts/System/Sound/CMakeFiles/sound.dir/ALShared.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
 rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -679,15 +679,15 @@ rts/System/Sound/CMakeFiles/sound.dir/EffectChannel.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
 rts/System/Sound/CMakeFiles/sound.dir/IAudioChannel.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
 rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -994,17 +994,17 @@ rts/System/Sound/CMakeFiles/sound.dir/IEffectChannel.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
 rts/System/Sound/CMakeFiles/sound.dir/IMusicChannel.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
 rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj
  ../mingwlibs/include/boost/algorithm/string/case_conv.hpp
  ../mingwlibs/include/boost/algorithm/string/compare.hpp
@@ -1757,11 +1757,11 @@ rts/System/Sound/CMakeFiles/sound.dir/ISound.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
 rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/boost/algorithm/string/case_conv.hpp
@@ -2305,19 +2305,19 @@ rts/System/Sound/CMakeFiles/sound.dir/MusicChannel.cpp.obj
  ../mingwlibs/include/boost/utility/binary.hpp
  ../mingwlibs/include/boost/utility/enable_if.hpp
  ../mingwlibs/include/boost/version.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
 rts/System/Sound/CMakeFiles/sound.dir/NullSound.cpp.obj
  ../rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullSound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
 rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/SDL/SDL.h
@@ -2366,10 +2366,10 @@ rts/System/Sound/CMakeFiles/sound.dir/OggStream.cpp.obj
  ../rts/System/FileSystem/FileHandler.h
  ../rts/System/FileSystem/VFSModes.h
  ../rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h
 rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/AL/alc.h
@@ -3160,21 +3160,21 @@ rts/System/Sound/CMakeFiles/sound.dir/Sound.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/EffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IAudioChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/IMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ISound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/MusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullEffectChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/NullMusicChannel.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/Sound.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
 rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/boost/assert.hpp
@@ -3416,11 +3416,11 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundBuffer.cpp.obj
  ../rts/System/LogOutput.h
  ../rts/System/Platform/byteorder.h
  ../rts/System/Platform/errorhandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h
 rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/boost/assert.hpp
@@ -3656,13 +3656,13 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundItem.cpp.obj
  ../mingwlibs/include/boost/type_traits/remove_reference.hpp
  ../mingwlibs/include/boost/type_traits/type_with_alignment.hpp
  ../rts/System/UnsyncedRNG.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
 rts/System/Sound/CMakeFiles/sound.dir/SoundLog.cpp.obj
  ../rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
 rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj
  ../mingwlibs/include/AL/al.h
  ../mingwlibs/include/AL/alc.h
@@ -4281,17 +4281,17 @@ rts/System/Sound/CMakeFiles/sound.dir/SoundSource.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/ALShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/OggStream.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundBuffer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundItem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/SoundSource.h
 rts/System/Sound/CMakeFiles/sound.dir/VorbisShared.cpp.obj
  ../mingwlibs/include/ogg/ogg.h
  ../mingwlibs/include/ogg/os_types.h
  ../mingwlibs/include/vorbis/codec.h
  ../mingwlibs/include/vorbis/vorbisfile.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sound/VorbisShared.h

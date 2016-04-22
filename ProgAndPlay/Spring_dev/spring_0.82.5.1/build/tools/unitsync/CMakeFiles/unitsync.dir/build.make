@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include tools/unitsync/CMakeFiles/unitsync.dir/depend.make
@@ -50,17 +50,17 @@ include tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj: ../rts/System/FileSystem/Archive7Zip.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\Archive7Zip.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj.requires
@@ -74,17 +74,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.c
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj: ../rts/System/FileSystem/ArchiveBase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBase.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj.requires
@@ -98,17 +98,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.c
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj: ../rts/System/FileSystem/ArchiveBuffered.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveBuffered.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj.requires
@@ -122,17 +122,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffer
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj: ../rts/System/FileSystem/ArchiveDir.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveDir.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj.requires
@@ -146,17 +146,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj: ../rts/System/FileSystem/ArchiveFactory.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveFactory.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj.requires
@@ -170,17 +170,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactor
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj: ../rts/System/FileSystem/ArchivePool.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchivePool.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj.requires
@@ -194,17 +194,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.c
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj: ../rts/System/FileSystem/ArchiveScanner.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveScanner.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj.requires
@@ -218,17 +218,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanne
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj: ../rts/System/FileSystem/ArchiveZip.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\ArchiveZip.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj.requires
@@ -242,17 +242,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj: ../rts/System/FileSystem/CacheDir.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CacheDir.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj.requires
@@ -266,17 +266,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj: ../rts/System/FileSystem/CRC.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\CRC.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj.requires
@@ -290,17 +290,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj.p
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj: ../rts/System/FileSystem/DataDirLocater.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\DataDirLocater.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj.requires
@@ -314,17 +314,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocate
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj: ../rts/System/FileSystem/FileFilter.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileFilter.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj.requires
@@ -338,17 +338,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj: ../rts/System/FileSystem/FileHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileHandler.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj.requires
@@ -362,17 +362,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.c
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj: ../rts/System/FileSystem/FileSystem.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystem.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj.requires
@@ -386,17 +386,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj: ../rts/System/FileSystem/FileSystemHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\FileSystemHandler.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj.requires
@@ -410,17 +410,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHan
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj: ../rts/System/FileSystem/SimpleParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\SimpleParser.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj.requires
@@ -434,17 +434,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj: ../rts/System/FileSystem/VFSHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\FileSystem\VFSHandler.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj.requires
@@ -458,17 +458,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj: ../rts/System/Platform/Misc.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Misc.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj.requires
@@ -482,17 +482,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj.pr
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj: ../rts/System/ConfigHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\ConfigHandler.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj.requires
@@ -506,17 +506,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj.pr
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj: ../rts/System/GlobalConfig.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\GlobalConfig.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj.requires
@@ -530,17 +530,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj.pro
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj: ../rts/System/LogOutput.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\LogOutput.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj.requires
@@ -554,17 +554,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj.provid
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj: ../rts/System/TdfParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\TdfParser.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj.requires
@@ -578,17 +578,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj.provid
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj: ../rts/System/Info.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Info.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Info.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj.requires
@@ -602,17 +602,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj.provides.bu
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj: ../rts/System/Option.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Option.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Option.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj.requires
@@ -626,17 +626,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj.provides.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj: ../rts/System/Util.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Util.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj.requires
@@ -650,17 +650,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj.provides.bu
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj: ../rts/System/float4.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\float4.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj.requires
@@ -674,17 +674,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj.provides.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj: ../rts/Sim/Misc/SideParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\SideParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Sim\Misc\SideParser.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj.requires
@@ -698,17 +698,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj.pro
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj: ../rts/Game/GameVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Game\GameVersion.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj.requires
@@ -722,17 +722,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj.provid
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj: ../rts/ExternalAI/LuaAIImplHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp > CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\ExternalAI\LuaAIImplHandler.cpp -o CMakeFiles\unitsync.dir\__\__\rts\ExternalAI\LuaAIImplHandler.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj.requires
@@ -746,17 +746,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj: ../rts/Lua/LuaParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaParser.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj.requires
@@ -770,17 +770,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj.provides.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj: ../rts/Lua/LuaUtils.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaUtils.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj.requires
@@ -794,17 +794,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj.provides.b
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj: ../rts/Lua/LuaIO.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp > CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Lua\LuaIO.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj.requires
@@ -818,17 +818,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj.provides.buil
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj: ../rts/Map/MapParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Map\MapParser.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj.requires
@@ -842,17 +842,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj.provides.
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj: ../rts/Map/SMF/SmfMapFile.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp > CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp > CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\SMF\SmfMapFile.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Map\SMF\SmfMapFile.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj.requires
@@ -866,17 +866,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj.prov
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj: ../rts/Rendering/Textures/Bitmap.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp > CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp > CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Rendering\Textures\Bitmap.cpp -o CMakeFiles\unitsync.dir\__\__\rts\Rendering\Textures\Bitmap.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj.requires
@@ -890,17 +890,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.o
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj: ../rts/System/Platform/Win/WinVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp > CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp -o CMakeFiles\unitsync.dir\__\__\rts\System\Platform\Win\WinVersion.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj.requires
@@ -914,17 +914,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.
 
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj: ../tools/unitsync/unitsync.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\unitsync.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\unitsync.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/unitsync.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp > CMakeFiles\unitsync.dir\unitsync.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp > CMakeFiles\unitsync.dir\unitsync.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/unitsync.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp -o CMakeFiles\unitsync.dir\unitsync.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\unitsync.cpp -o CMakeFiles\unitsync.dir\unitsync.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj.requires
@@ -938,17 +938,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj.provides.build: tools/un
 
 tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj: ../tools/unitsync/LuaParserAPI.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\LuaParserAPI.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\LuaParserAPI.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/LuaParserAPI.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp > CMakeFiles\unitsync.dir\LuaParserAPI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp > CMakeFiles\unitsync.dir\LuaParserAPI.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/LuaParserAPI.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp -o CMakeFiles\unitsync.dir\LuaParserAPI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\LuaParserAPI.cpp -o CMakeFiles\unitsync.dir\LuaParserAPI.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj.requires
@@ -962,17 +962,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj.provides.build: tool
 
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj: ../tools/unitsync/Syncer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\Syncer.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\Syncer.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/Syncer.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp > CMakeFiles\unitsync.dir\Syncer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp > CMakeFiles\unitsync.dir\Syncer.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/Syncer.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp -o CMakeFiles\unitsync.dir\Syncer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\Syncer.cpp -o CMakeFiles\unitsync.dir\Syncer.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj.requires
@@ -986,17 +986,17 @@ tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj.provides.build: tools/unit
 
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj: tools/unitsync/CMakeFiles/unitsync.dir/flags.make
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj: ../tools/unitsync/stdafx.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\stdafx.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\unitsync.dir\stdafx.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp
 
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unitsync.dir/stdafx.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp > CMakeFiles\unitsync.dir\stdafx.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp > CMakeFiles\unitsync.dir\stdafx.cpp.i
 
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unitsync.dir/stdafx.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp -o CMakeFiles\unitsync.dir\stdafx.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync\stdafx.cpp -o CMakeFiles\unitsync.dir\stdafx.cpp.s
 
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj.requires:
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj.requires
@@ -1107,7 +1107,7 @@ unitsync.dll: rts/lib/streflop/libstreflop.a
 unitsync.dll: tools/unitsync/CMakeFiles/unitsync.dir/build.make
 unitsync.dll: tools/unitsync/CMakeFiles/unitsync.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared module ..\..\unitsync.dll"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\unitsync.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\unitsync.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tools/unitsync/CMakeFiles/unitsync.dir/build: unitsync.dll
@@ -1156,10 +1156,10 @@ tools/unitsync/CMakeFiles/unitsync.dir/requires: tools/unitsync/CMakeFiles/units
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/requires
 
 tools/unitsync/CMakeFiles/unitsync.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && $(CMAKE_COMMAND) -P CMakeFiles\unitsync.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync && $(CMAKE_COMMAND) -P CMakeFiles\unitsync.dir\cmake_clean.cmake
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/clean
 
 tools/unitsync/CMakeFiles/unitsync.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync\CMakeFiles\unitsync.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\unitsync C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\unitsync\CMakeFiles\unitsync.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : tools/unitsync/CMakeFiles/unitsync.dir/depend
 

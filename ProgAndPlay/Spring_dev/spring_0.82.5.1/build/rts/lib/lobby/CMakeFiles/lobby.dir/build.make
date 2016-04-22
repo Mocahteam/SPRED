@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/lib/lobby/CMakeFiles/lobby.dir/depend.make
@@ -50,17 +50,17 @@ include rts/lib/lobby/CMakeFiles/lobby.dir/flags.make
 
 rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj: rts/lib/lobby/CMakeFiles/lobby.dir/flags.make
 rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj: ../rts/lib/lobby/RawTextMessage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\lobby.dir\RawTextMessage.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\lobby.dir\RawTextMessage.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp
 
 rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lobby.dir/RawTextMessage.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp > CMakeFiles\lobby.dir\RawTextMessage.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp > CMakeFiles\lobby.dir\RawTextMessage.cpp.i
 
 rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lobby.dir/RawTextMessage.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp -o CMakeFiles\lobby.dir\RawTextMessage.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\RawTextMessage.cpp -o CMakeFiles\lobby.dir\RawTextMessage.cpp.s
 
 rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj.requires:
 .PHONY : rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/lib/lobby/CMakeFiles/lobby.dir/RawTextMessage.cpp.obj.provides.build: rts/li
 
 rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj: rts/lib/lobby/CMakeFiles/lobby.dir/flags.make
 rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj: ../rts/lib/lobby/Connection.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\lobby.dir\Connection.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\lobby.dir\Connection.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp
 
 rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lobby.dir/Connection.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp > CMakeFiles\lobby.dir\Connection.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp > CMakeFiles\lobby.dir\Connection.cpp.i
 
 rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lobby.dir/Connection.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp -o CMakeFiles\lobby.dir\Connection.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby\Connection.cpp -o CMakeFiles\lobby.dir\Connection.cpp.s
 
 rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj.requires:
 .PHONY : rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj.requires
@@ -109,8 +109,8 @@ rts/lib/lobby/liblobby.a: rts/lib/lobby/CMakeFiles/lobby.dir/Connection.cpp.obj
 rts/lib/lobby/liblobby.a: rts/lib/lobby/CMakeFiles/lobby.dir/build.make
 rts/lib/lobby/liblobby.a: rts/lib/lobby/CMakeFiles/lobby.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library liblobby.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -P CMakeFiles\lobby.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\lobby.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -P CMakeFiles\lobby.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\lobby.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/lib/lobby/CMakeFiles/lobby.dir/build: rts/lib/lobby/liblobby.a
@@ -121,10 +121,10 @@ rts/lib/lobby/CMakeFiles/lobby.dir/requires: rts/lib/lobby/CMakeFiles/lobby.dir/
 .PHONY : rts/lib/lobby/CMakeFiles/lobby.dir/requires
 
 rts/lib/lobby/CMakeFiles/lobby.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -P CMakeFiles\lobby.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby && $(CMAKE_COMMAND) -P CMakeFiles\lobby.dir\cmake_clean.cmake
 .PHONY : rts/lib/lobby/CMakeFiles/lobby.dir/clean
 
 rts/lib/lobby/CMakeFiles/lobby.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby\CMakeFiles\lobby.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\lobby C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\lobby\CMakeFiles\lobby.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/lib/lobby/CMakeFiles/lobby.dir/depend
 

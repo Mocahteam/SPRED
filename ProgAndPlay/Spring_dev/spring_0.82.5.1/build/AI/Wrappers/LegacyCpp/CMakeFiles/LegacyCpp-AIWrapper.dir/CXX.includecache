@@ -7152,37 +7152,37 @@ streflop.h
 cmath
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.cpp
 AIAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
 Event/AIEvents.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
 IGlobalAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
 ExternalAI/Interface/AISEvents.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISEvents.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISEvents.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.cpp
 AIAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
 UnitDef.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
 ExternalAI/Interface/SSkirmishAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/SSkirmishAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/SSkirmishAICallback.h
 ExternalAI/Interface/AISCommands.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISCommands.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISCommands.h
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/creg/creg_cond.h
 Sim/Units/CommandAI/CommandQueue.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/CommandQueue.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/CommandQueue.h
 Sim/MoveTypes/MoveInfo.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/MoveTypes/MoveInfo.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/MoveTypes/MoveInfo.h
 Sim/Features/FeatureDef.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Features/FeatureDef.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Features/FeatureDef.h
 Sim/Weapons/WeaponDefHandler.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Weapons/WeaponDefHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Weapons/WeaponDefHandler.h
 string
 -
 string.h
@@ -7190,69 +7190,69 @@ string.h
 cassert
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
 IAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.cpp
 AIAICheats.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
 ExternalAI/Interface/SSkirmishAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/SSkirmishAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/SSkirmishAICallback.h
 AIAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
 ExternalAI/Interface/AISCommands.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISCommands.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/Interface/AISCommands.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
 IAICheats.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.cpp
 AIGlobalAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
 IGlobalAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
 IGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
 AIAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.cpp
 AIGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
 AIAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
 AIAICheats.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
 IGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AISCommands.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AISCommands.cpp
 ExternalAI/AISCommands.cpp
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/AISCommands.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/AISCommands.cpp
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
 AIAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
 IGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
 ExternalAI/AILegacySupport.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../ExternalAI/AILegacySupport.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../ExternalAI/AILegacySupport.h
 Sim/Misc/GlobalConstants.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Misc/GlobalConstants.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Misc/GlobalConstants.h
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
 string
 -
 vector
@@ -7260,207 +7260,207 @@ vector
 map
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
 cstdlib
 -
 cstring
 -
 aibase.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../aibase.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../aibase.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Units/CommandAI/Command.h
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
 vector
 -
 deque
 -
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../float3.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../Sim/Units/CommandAI/Command.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 ../IGlobalAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
 ../IGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
 ../AIAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
 ../AIGlobalAI.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
 ExternalAI/Interface/AISEvents.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISEvents.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISEvents.h
 ExternalAI/Interface/AISCommands.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISCommands.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISCommands.h
 ExternalAI/Interface/SSkirmishAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/SSkirmishAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/SSkirmishAICallback.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 AINullEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
 AIInitEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
 AIReleaseEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
 AIUpdateEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
 AIMessageEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
 AIUnitCreatedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
 AIUnitFinishedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
 AIUnitIdleEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
 AIUnitMoveFailedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
 AIUnitDamagedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
 AIUnitDestroyedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
 AIUnitGivenEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
 AIUnitCapturedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
 AIEnemyCreatedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
 AIEnemyFinishedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
 AIEnemyEnterLOSEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
 AIEnemyLeaveLOSEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
 AIEnemyEnterRadarEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
 AIEnemyLeaveRadarEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
 AIEnemyDamagedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
 AIEnemyDestroyedEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
 AIWeaponFiredEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
 AIPlayerCommandEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
 AISeismicPingEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 ../IGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
 ../AIGlobalAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 ExternalAI/Interface/AISCommands.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISCommands.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/ExternalAI/Interface/AISCommands.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
 AIEvent.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
 ../IAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
 ExternalAI/AILegacySupport.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/AILegacySupport.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/ExternalAI/AILegacySupport.h
 Sim/Misc/GlobalConstants.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GlobalConstants.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GlobalConstants.h
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
 string
 -
 vector
@@ -7468,45 +7468,45 @@ vector
 map
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
 Sim/Misc/GlobalConstants.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GlobalConstants.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GlobalConstants.h
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
 IAICallback.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
 cstdlib
 -
 cstring
 -
 aibase.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
 vector
 -
 deque
 -
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/float3.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.cpp
 UnitDef.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
 Sim/MoveTypes/MoveInfo.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/MoveTypes/MoveInfo.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/MoveTypes/MoveInfo.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
 string
 -
 vector
@@ -7514,43 +7514,43 @@ vector
 map
 -
 Rendering/Icon.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Rendering/Icon.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Rendering/Icon.h
 Sim/Misc/GuiSoundSet.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GuiSoundSet.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Misc/GuiSoundSet.h
 System/float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/System/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/System/float3.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
 Sim/Units/CommandAI/Command.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Units/CommandAI/Command.h
 Sim/Weapons/WeaponDefHandler.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Weapons/WeaponDefHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Sim/Weapons/WeaponDefHandler.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
 StdAfx.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/StdAfx.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/StdAfx.h
 GameVersion.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
 cstring
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
 string
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.cpp
 DamageArray.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
 DamageArrayHandler.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
 algorithm
 -
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/creg/creg_cond.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
 string
 -
 vector
@@ -7560,49 +7560,49 @@ map
 boost/noncopyable.hpp
 -
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/creg/creg_cond.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
 xmmintrin.h
 -
 boost/cstdint.hpp
 -
 lib/streflop/streflop_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/lib/streflop/streflop_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/lib/streflop/streflop_cond.h
 System/maindefines.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/System/maindefines.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/System/maindefines.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 creg/creg.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg/creg.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg/creg.h
 creg/ISerializer.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg/ISerializer.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg/ISerializer.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.cpp
 float3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
 Vec2.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
 cassert
 -
 BranchPrediction.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
 lib/streflop/streflop_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/lib/streflop/streflop_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/lib/streflop/streflop_cond.h
 creg/creg_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 ExternalAI/Interface/SAIFloat3.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ExternalAI/Interface/SAIFloat3.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ExternalAI/Interface/SAIFloat3.h
 FastMath.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
 

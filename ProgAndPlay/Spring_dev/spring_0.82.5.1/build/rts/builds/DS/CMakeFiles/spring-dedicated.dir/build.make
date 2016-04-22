@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/builds/DS/CMakeFiles/spring-dedicated.dir/depend.make
@@ -50,17 +50,17 @@ include rts/builds/DS/CMakeFiles/spring-dedicated.dir/flags.make
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj: rts/builds/DS/CMakeFiles/spring-dedicated.dir/flags.make
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj: ../rts/Map/MapParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.i
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\spring-dedicated.dir\__\__\Map\MapParser.cpp.s
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/builds/DS/CMakeFiles/spring-dedicated.dir/__/__/Map/MapParser.cpp.obj.provid
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.obj: rts/builds/DS/CMakeFiles/spring-dedicated.dir/flags.make
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.obj: ../rts/builds/DS/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\spring-dedicated.dir\main.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\spring-dedicated.dir\main.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/spring-dedicated.dir/main.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp > CMakeFiles\spring-dedicated.dir\main.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp > CMakeFiles\spring-dedicated.dir\main.cpp.i
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/spring-dedicated.dir/main.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp -o CMakeFiles\spring-dedicated.dir\main.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS\main.cpp -o CMakeFiles\spring-dedicated.dir\main.cpp.s
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/spring-dedicated.dir/main.cpp.obj.requires
@@ -119,7 +119,7 @@ spring-dedicated.exe: ../mingwlibs/lib/libboost_thread-mt.a
 spring-dedicated.exe: rts/builds/DS/CMakeFiles/spring-dedicated.dir/build.make
 spring-dedicated.exe: rts/builds/DS/CMakeFiles/spring-dedicated.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ..\..\..\spring-dedicated.exe"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\spring-dedicated.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\spring-dedicated.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/build: spring-dedicated.exe
@@ -130,10 +130,10 @@ rts/builds/DS/CMakeFiles/spring-dedicated.dir/requires: rts/builds/DS/CMakeFiles
 .PHONY : rts/builds/DS/CMakeFiles/spring-dedicated.dir/requires
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\spring-dedicated.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\spring-dedicated.dir\cmake_clean.cmake
 .PHONY : rts/builds/DS/CMakeFiles/spring-dedicated.dir/clean
 
 rts/builds/DS/CMakeFiles/spring-dedicated.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\spring-dedicated.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\spring-dedicated.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/builds/DS/CMakeFiles/spring-dedicated.dir/depend
 

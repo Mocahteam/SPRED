@@ -4396,13 +4396,13 @@ boost/config.hpp
 
 ../mingwlibs/include/boost/version.hpp
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Error_Private.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Error_Private.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Private.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Private.h
 PP.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
 boost/interprocess/managed_shared_memory.hpp
 -
 boost/interprocess/containers/map.hpp
@@ -4414,15 +4414,15 @@ boost/interprocess/containers/string.hpp
 boost/interprocess/containers/list.hpp
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.cpp
 PP_Supplier.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.h
 PP_Private.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Private.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Private.h
 PP_Error_Private.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Error_Private.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Error_Private.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP_Supplier.h
 PP.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/PP.h
 
