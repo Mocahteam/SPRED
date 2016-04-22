@@ -20,6 +20,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
 -- modifier taille texte
+-- corriger le bug sur la v0.2 pour les editbox
+-- back to menu
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -1277,9 +1279,9 @@ function updateSelectTeamButtons()
 		updateTeamButtons = false
 	end
 end
-function updateUnitList() -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
+function updateUnitList(forceUpdate) -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
 	local units = Spring.GetAllUnits()
-	if units.n ~= unitTotal then
+	if units.n ~= unitTotal or forceUpdate then
 		-- Clear UI elements
 		removeElements(unitListScrollPanel, unitListLabels, true)
 		removeElements(unitListScrollPanel, unitListViewButtons, true)
@@ -1775,6 +1777,7 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	return side
 end
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
+	if dx == 0 and dz == 0 then return end
 	if selectedZone.type == "Rectangle" then
 		-- depending on the side clicked, apply modifications
 		if zoneSide == "CENTER" then
@@ -4124,6 +4127,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
 	widgetHandler:RegisterGlobal("getCommandsList", getCommandsList)
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
+	widgetHandler:RegisterGlobal("requestUnitListUpdate", function() updateUnitList(true) end)
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
