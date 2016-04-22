@@ -675,8 +675,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/LuaParserAPI.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/LuaParserAPI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/LuaParserAPI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.h
 tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -1350,8 +1350,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/Syncer.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp.obj
  ../mingwlibs/include/boost/config.hpp
  ../mingwlibs/include/boost/config/no_tr1/utility.hpp
@@ -1377,8 +1377,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/ExternalAI/LuaAIImplHandler.cpp
  ../tools/unitsync/../../rts/System/booldefines.h
  ../tools/unitsync/../../rts/System/exportdefines.h
  ../tools/unitsync/../../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/ExternalAI/LuaAIImplHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/ExternalAI/LuaAIImplHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/ExternalAI/LuaAIImplHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/ExternalAI/LuaAIImplHandler.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -2048,8 +2048,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Game/GameVersion.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -2724,14 +2724,14 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaIO.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDisplayLists.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaFBOs.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHandle.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaRBOs.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaShaders.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaTextures.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDisplayLists.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaFBOs.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHandle.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaRBOs.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaShaders.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaTextures.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -3482,12 +3482,12 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaParser.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDefs.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHashString.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDefs.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHashString.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaIO.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -4163,10 +4163,10 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Lua/LuaUtils.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDefs.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHashString.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaDefs.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaHashString.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Lua/LuaUtils.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -4841,8 +4841,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/MapParser.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/MapParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/MapParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/MapParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/MapParser.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -5517,9 +5517,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Map/SMF/SmfMapFile.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/SmfMapFile.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/SmfMapFile.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/mapfile.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/SmfMapFile.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/SmfMapFile.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Map/SMF/mapfile.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -6208,9 +6208,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Rendering/Textures/Bitmap.cpp.o
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/Bitmap.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/Bitmap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/nv_dds.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/Bitmap.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/Bitmap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Rendering/Textures/nv_dds.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -6884,8 +6884,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/Sim/Misc/SideParser.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/SideParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/SideParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/SideParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/SideParser.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -7547,20 +7547,20 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/ConfigHandler.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.cpp.obj
  ../mingwlibs/include/boost/algorithm/string/case_conv.hpp
  ../mingwlibs/include/boost/algorithm/string/compare.hpp
@@ -8121,9 +8121,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/Archive7Zip.c
  ../tools/unitsync/../../rts/lib/7z/Archive/7z/7zIn.h
  ../tools/unitsync/../../rts/lib/7z/Archive/7z/7zItem.h
  ../tools/unitsync/../../rts/lib/7z/Types.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.cpp.obj
  ../mingwlibs/include/boost/config.hpp
  ../mingwlibs/include/boost/config/no_tr1/utility.hpp
@@ -8141,9 +8141,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBase.c
  ../tools/unitsync/../../rts/System/Util.h
  ../tools/unitsync/../../rts/System/booldefines.h
  ../tools/unitsync/../../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffered.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -8813,9 +8813,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveBuffer
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -9487,9 +9487,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveDir.cp
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactory.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -10173,15 +10173,15 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveFactor
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/Archive7Zip.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -10854,11 +10854,11 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchivePool.c
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchivePool.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanner.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -11535,12 +11535,12 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveScanne
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -12217,20 +12217,20 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/ArchiveZip.cp
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBuffered.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveZip.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CRC.cpp.obj
  ../tools/unitsync/../../rts/lib/7z/7zCrc.h
  ../tools/unitsync/../../rts/lib/7z/Types.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CRC.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/CacheDir.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocater.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -12905,11 +12905,11 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/DataDirLocate
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/CacheDir.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -13631,8 +13631,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileFilter.cp
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileFilter.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -14355,10 +14355,10 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileHandler.c
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -15029,12 +15029,12 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystem.cp
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHandler.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -15331,10 +15331,10 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/FileSystemHan
  ../tools/unitsync/../../rts/System/Util.h
  ../tools/unitsync/../../rts/System/booldefines.h
  ../tools/unitsync/../../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -16005,10 +16005,10 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/SimpleParser.
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/SimpleParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/SimpleParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/SimpleParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/SimpleParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -16680,13 +16680,13 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/FileSystem/VFSHandler.cp
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveDir.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveFactory.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/ArchiveScanner.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystem.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSHandler.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -17348,18 +17348,18 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/GlobalConfig.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj
  ../tools/unitsync/../../rts/Lua/LuaParser.h
  ../tools/unitsync/../../rts/System/Exceptions.h
@@ -17367,9 +17367,9 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Info.cpp.obj
  ../tools/unitsync/../../rts/System/Util.h
  ../tools/unitsync/../../rts/System/booldefines.h
  ../tools/unitsync/../../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Info.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Info.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Info.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Info.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -18031,22 +18031,22 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/LogOutput.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/mmgr.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/ConfigHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/DataDirLocater.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileSystemHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/mmgr.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -18358,15 +18358,15 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Option.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Option.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Option.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Option.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Option.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Misc.cpp.obj
  ../tools/unitsync/../../rts/System/FileSystem/FileSystem.h
  ../tools/unitsync/../../rts/System/LogOutput.h
  ../tools/unitsync/../../rts/System/Platform/Win/WinVersion.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Misc.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -19036,7 +19036,7 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Platform/Win/WinVersion.
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Win/WinVersion.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Platform/Win/WinVersion.cpp
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -19864,35 +19864,35 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/TdfParser.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Exceptions.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncChecker.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncDebugger.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncTracer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitive.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitiveBase.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitiveIO.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/Upcast.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/TdfParser.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/TdfParser.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/mmgr.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/tdf_grammar.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Exceptions.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/FileHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FileSystem/VFSModes.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/GlobalUnsynced.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/LogOutput.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/StdAfx.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncChecker.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncDebugger.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncTracer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitive.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitiveBase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/SyncedPrimitiveIO.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/Upcast.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/TdfParser.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/TdfParser.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/mmgr.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/tdf_grammar.hpp
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/Util.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/booldefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/maindefines.h
 tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -20195,12 +20195,12 @@ tools/unitsync/CMakeFiles/unitsync.dir/__/__/rts/System/float4.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float4.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float4.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float4.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float4.h
 tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -20870,7 +20870,7 @@ tools/unitsync/CMakeFiles/unitsync.dir/stdafx.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/stdafx.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/stdafx.cpp
 tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -21570,8 +21570,8 @@ tools/unitsync/CMakeFiles/unitsync.dir/unitsync.cpp.obj
  ../tools/unitsync/../../rts/lib/streflop/X87DenormalSquasher.h
  ../tools/unitsync/../../rts/lib/streflop/streflop.h
  ../tools/unitsync/../../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/LuaParserAPI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync_api.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/LuaParserAPI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/Syncer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/unitsync/unitsync_api.h

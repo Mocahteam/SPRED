@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/lib/7z/CMakeFiles/7zip.dir/depend.make
@@ -50,17 +50,17 @@ include rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj: ../rts/lib/7z/7zBuf.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zBuf.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zBuf.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/7zBuf.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c > CMakeFiles\7zip.dir\7zBuf.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c > CMakeFiles\7zip.dir\7zBuf.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/7zBuf.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c -o CMakeFiles\7zip.dir\7zBuf.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf.c -o CMakeFiles\7zip.dir\7zBuf.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj.requires
@@ -74,17 +74,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/7zBuf.c.obj.provides.build: rts/lib/7z/CMakeFiles
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj: ../rts/lib/7z/7zBuf2.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zBuf2.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zBuf2.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/7zBuf2.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c > CMakeFiles\7zip.dir\7zBuf2.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c > CMakeFiles\7zip.dir\7zBuf2.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/7zBuf2.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c -o CMakeFiles\7zip.dir\7zBuf2.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zBuf2.c -o CMakeFiles\7zip.dir\7zBuf2.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj.requires
@@ -98,17 +98,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/7zBuf2.c.obj.provides.build: rts/lib/7z/CMakeFile
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj: ../rts/lib/7z/7zCrc.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zCrc.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zCrc.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/7zCrc.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c > CMakeFiles\7zip.dir\7zCrc.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c > CMakeFiles\7zip.dir\7zCrc.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/7zCrc.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c -o CMakeFiles\7zip.dir\7zCrc.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zCrc.c -o CMakeFiles\7zip.dir\7zCrc.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj.requires
@@ -122,17 +122,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/7zCrc.c.obj.provides.build: rts/lib/7z/CMakeFiles
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj: ../rts/lib/7z/7zFile.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zFile.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zFile.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/7zFile.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c > CMakeFiles\7zip.dir\7zFile.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c > CMakeFiles\7zip.dir\7zFile.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/7zFile.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c -o CMakeFiles\7zip.dir\7zFile.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zFile.c -o CMakeFiles\7zip.dir\7zFile.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj.requires
@@ -146,17 +146,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/7zFile.c.obj.provides.build: rts/lib/7z/CMakeFile
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj: ../rts/lib/7z/7zStream.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zStream.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\7zStream.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/7zStream.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c > CMakeFiles\7zip.dir\7zStream.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c > CMakeFiles\7zip.dir\7zStream.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/7zStream.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c -o CMakeFiles\7zip.dir\7zStream.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\7zStream.c -o CMakeFiles\7zip.dir\7zStream.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj.requires
@@ -170,17 +170,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/7zStream.c.obj.provides.build: rts/lib/7z/CMakeFi
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj: ../rts/lib/7z/Bcj2.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bcj2.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bcj2.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Bcj2.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c > CMakeFiles\7zip.dir\Bcj2.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c > CMakeFiles\7zip.dir\Bcj2.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Bcj2.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c -o CMakeFiles\7zip.dir\Bcj2.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bcj2.c -o CMakeFiles\7zip.dir\Bcj2.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj.requires
@@ -194,17 +194,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Bcj2.c.obj.provides.build: rts/lib/7z/CMakeFiles/
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj: ../rts/lib/7z/Bra.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bra.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bra.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Bra.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c > CMakeFiles\7zip.dir\Bra.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c > CMakeFiles\7zip.dir\Bra.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Bra.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c -o CMakeFiles\7zip.dir\Bra.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra.c -o CMakeFiles\7zip.dir\Bra.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj.requires
@@ -218,17 +218,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Bra.c.obj.provides.build: rts/lib/7z/CMakeFiles/7
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj: ../rts/lib/7z/Bra86.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bra86.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Bra86.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Bra86.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c > CMakeFiles\7zip.dir\Bra86.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c > CMakeFiles\7zip.dir\Bra86.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Bra86.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c -o CMakeFiles\7zip.dir\Bra86.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Bra86.c -o CMakeFiles\7zip.dir\Bra86.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj.requires
@@ -242,17 +242,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Bra86.c.obj.provides.build: rts/lib/7z/CMakeFiles
 
 rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj: ../rts/lib/7z/LzmaDec.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\LzmaDec.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\LzmaDec.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/LzmaDec.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c > CMakeFiles\7zip.dir\LzmaDec.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c > CMakeFiles\7zip.dir\LzmaDec.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/LzmaDec.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c -o CMakeFiles\7zip.dir\LzmaDec.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\LzmaDec.c -o CMakeFiles\7zip.dir\LzmaDec.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj.requires
@@ -266,17 +266,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/LzmaDec.c.obj.provides.build: rts/lib/7z/CMakeFil
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj: ../rts/lib/7z/Archive/7z/7zAlloc.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c > CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c > CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c -o CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zAlloc.c -o CMakeFiles\7zip.dir\Archive\7z\7zAlloc.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj.requires
@@ -290,17 +290,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zAlloc.c.obj.provides.build: rts/lib/
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj: ../rts/lib/7z/Archive/7z/7zDecode.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c > CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c > CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c -o CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zDecode.c -o CMakeFiles\7zip.dir\Archive\7z\7zDecode.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj.requires
@@ -314,17 +314,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zDecode.c.obj.provides.build: rts/lib
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj: ../rts/lib/7z/Archive/7z/7zExtract.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c > CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c > CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c -o CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zExtract.c -o CMakeFiles\7zip.dir\Archive\7z\7zExtract.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj.requires
@@ -338,17 +338,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zExtract.c.obj.provides.build: rts/li
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj: ../rts/lib/7z/Archive/7z/7zHeader.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c > CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c > CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c -o CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zHeader.c -o CMakeFiles\7zip.dir\Archive\7z\7zHeader.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj.requires
@@ -362,17 +362,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zHeader.c.obj.provides.build: rts/lib
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj: ../rts/lib/7z/Archive/7z/7zIn.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zIn.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zIn.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zIn.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c > CMakeFiles\7zip.dir\Archive\7z\7zIn.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c > CMakeFiles\7zip.dir\Archive\7z\7zIn.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zIn.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c -o CMakeFiles\7zip.dir\Archive\7z\7zIn.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zIn.c -o CMakeFiles\7zip.dir\Archive\7z\7zIn.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj.requires
@@ -386,17 +386,17 @@ rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zIn.c.obj.provides.build: rts/lib/7z/
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj: rts/lib/7z/CMakeFiles/7zip.dir/flags.make
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj: ../rts/lib/7z/Archive/7z/7zItem.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zItem.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\7zip.dir\Archive\7z\7zItem.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/7zip.dir/Archive/7z/7zItem.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c > CMakeFiles\7zip.dir\Archive\7z\7zItem.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c > CMakeFiles\7zip.dir\Archive\7z\7zItem.c.i
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/7zip.dir/Archive/7z/7zItem.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c -o CMakeFiles\7zip.dir\Archive\7z\7zItem.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z\Archive\7z\7zItem.c -o CMakeFiles\7zip.dir\Archive\7z\7zItem.c.s
 
 rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj.requires:
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj.requires
@@ -447,8 +447,8 @@ rts/lib/7z/lib7zip.a: rts/lib/7z/CMakeFiles/7zip.dir/Archive/7z/7zItem.c.obj
 rts/lib/7z/lib7zip.a: rts/lib/7z/CMakeFiles/7zip.dir/build.make
 rts/lib/7z/lib7zip.a: rts/lib/7z/CMakeFiles/7zip.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C static library lib7zip.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -P CMakeFiles\7zip.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\7zip.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -P CMakeFiles\7zip.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\7zip.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/lib/7z/CMakeFiles/7zip.dir/build: rts/lib/7z/lib7zip.a
@@ -472,10 +472,10 @@ rts/lib/7z/CMakeFiles/7zip.dir/requires: rts/lib/7z/CMakeFiles/7zip.dir/Archive/
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/requires
 
 rts/lib/7z/CMakeFiles/7zip.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -P CMakeFiles\7zip.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z && $(CMAKE_COMMAND) -P CMakeFiles\7zip.dir\cmake_clean.cmake
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/clean
 
 rts/lib/7z/CMakeFiles/7zip.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z\CMakeFiles\7zip.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\7z C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\7z\CMakeFiles\7zip.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/lib/7z/CMakeFiles/7zip.dir/depend
 

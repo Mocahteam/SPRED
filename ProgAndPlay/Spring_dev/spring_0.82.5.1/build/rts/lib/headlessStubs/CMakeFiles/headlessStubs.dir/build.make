@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/depend.make
@@ -50,17 +50,17 @@ include rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj: ../rts/lib/headlessStubs/glewstub.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glewstub.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glewstub.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/headlessStubs.dir/glewstub.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c > CMakeFiles\headlessStubs.dir\glewstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c > CMakeFiles\headlessStubs.dir\glewstub.c.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/headlessStubs.dir/glewstub.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c -o CMakeFiles\headlessStubs.dir\glewstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glewstub.c -o CMakeFiles\headlessStubs.dir\glewstub.c.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj.requires
@@ -74,17 +74,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj.provides.build
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj: ../rts/lib/headlessStubs/glstub.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glstub.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glstub.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/headlessStubs.dir/glstub.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c > CMakeFiles\headlessStubs.dir\glstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c > CMakeFiles\headlessStubs.dir\glstub.c.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/headlessStubs.dir/glstub.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c -o CMakeFiles\headlessStubs.dir\glstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glstub.c -o CMakeFiles\headlessStubs.dir\glstub.c.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj.requires
@@ -98,17 +98,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj.provides.build: 
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj: ../rts/lib/headlessStubs/glustub.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glustub.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glustub.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/headlessStubs.dir/glustub.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c > CMakeFiles\headlessStubs.dir\glustub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c > CMakeFiles\headlessStubs.dir\glustub.c.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/headlessStubs.dir/glustub.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c -o CMakeFiles\headlessStubs.dir\glustub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glustub.c -o CMakeFiles\headlessStubs.dir\glustub.c.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj.requires
@@ -122,17 +122,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj.provides.build:
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj: ../rts/lib/headlessStubs/glxextstub.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glxextstub.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\glxextstub.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/headlessStubs.dir/glxextstub.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c > CMakeFiles\headlessStubs.dir\glxextstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c > CMakeFiles\headlessStubs.dir\glxextstub.c.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/headlessStubs.dir/glxextstub.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c -o CMakeFiles\headlessStubs.dir\glxextstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\glxextstub.c -o CMakeFiles\headlessStubs.dir\glxextstub.c.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj.requires
@@ -146,17 +146,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj.provides.bui
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj: ../rts/lib/headlessStubs/sdlstub.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\sdlstub.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\headlessStubs.dir\sdlstub.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/headlessStubs.dir/sdlstub.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c > CMakeFiles\headlessStubs.dir\sdlstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c > CMakeFiles\headlessStubs.dir\sdlstub.c.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/headlessStubs.dir/sdlstub.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c -o CMakeFiles\headlessStubs.dir\sdlstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub.c -o CMakeFiles\headlessStubs.dir\sdlstub.c.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj.requires
@@ -170,17 +170,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj.provides.build:
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj: ../rts/lib/headlessStubs/sdlstub_cppbit.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp > CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp > CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp -o CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\sdlstub_cppbit.cpp -o CMakeFiles\headlessStubs.dir\sdlstub_cppbit.cpp.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj.requires
@@ -194,17 +194,17 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj.provid
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/flags.make
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj: ../rts/lib/headlessStubs/wglstub.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\headlessStubs.dir\wglstub.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\headlessStubs.dir\wglstub.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/headlessStubs.dir/wglstub.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp > CMakeFiles\headlessStubs.dir\wglstub.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp > CMakeFiles\headlessStubs.dir\wglstub.cpp.i
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/headlessStubs.dir/wglstub.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp -o CMakeFiles\headlessStubs.dir\wglstub.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs\wglstub.cpp -o CMakeFiles\headlessStubs.dir\wglstub.cpp.s
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj.requires:
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj.requires
@@ -239,8 +239,8 @@ rts/lib/headlessStubs/libheadlessStubs.a: rts/lib/headlessStubs/CMakeFiles/headl
 rts/lib/headlessStubs/libheadlessStubs.a: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/build.make
 rts/lib/headlessStubs/libheadlessStubs.a: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libheadlessStubs.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -P CMakeFiles\headlessStubs.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\headlessStubs.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -P CMakeFiles\headlessStubs.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\headlessStubs.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/build: rts/lib/headlessStubs/libheadlessStubs.a
@@ -256,10 +256,10 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/requires: rts/lib/headlessStu
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/requires
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -P CMakeFiles\headlessStubs.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && $(CMAKE_COMMAND) -P CMakeFiles\headlessStubs.dir\cmake_clean.cmake
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/clean
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\headlessStubs C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/depend
 

@@ -9964,13 +9964,13 @@ streflop.h
 cmath
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.cpp
 lib/streflop/streflop_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/streflop/streflop_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/streflop/streflop_cond.h
 Connection.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.h
 RawTextMessage.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
 bitset
 -
 boost/asio.hpp
@@ -9978,13 +9978,13 @@ boost/asio.hpp
 boost/bind.hpp
 -
 lib/md5/md5.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/md5/md5.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/md5/md5.h
 lib/md5/base64.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/md5/base64.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/md5/base64.h
 lib/streflop/streflop_cond.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/streflop/streflop_cond.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/lib/streflop/streflop_cond.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/Connection.h
 boost/asio/streambuf.hpp
 -
 boost/asio/deadline_timer.hpp
@@ -9996,15 +9996,15 @@ string
 list
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.cpp
 RawTextMessage.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
 string
 -
 sstream
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/lobby/RawTextMessage.h
 string
 -
 

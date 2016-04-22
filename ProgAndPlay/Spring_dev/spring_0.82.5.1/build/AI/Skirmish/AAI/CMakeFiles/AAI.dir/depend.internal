@@ -4,17 +4,17 @@
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
  ../rts/System/booldefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj
  ../rts/ExternalAI/Interface/ELevelOfSupport.h
  ../rts/ExternalAI/Interface/SAIInterfaceLibrary.h
@@ -24,9 +24,9 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
  ../rts/lib/streflop/streflopC.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -705,22 +705,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -1399,22 +1399,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -2093,23 +2093,23 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -2788,23 +2788,23 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -3483,22 +3483,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -4177,22 +4177,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -4871,22 +4871,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -5565,22 +5565,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -6259,22 +6259,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -6953,22 +6953,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -7647,23 +7647,23 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttack.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -8342,22 +8342,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -9036,22 +9036,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj
  ../AI/Wrappers/LegacyCpp/IAICallback.h
  ../AI/Wrappers/LegacyCpp/IAICheats.h
@@ -9730,22 +9730,22 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj
  ../AI/Wrappers/CUtils/Util.h
  ../AI/Wrappers/CUtils/cutilsdefines.h
@@ -10431,30 +10431,30 @@ AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAirForceManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIAttackManager.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBrain.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIBuildTask.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConfig.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIConstructor.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIExecute.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIGroup.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIMap.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAISector.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AAIUnitTable.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/AIExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/aidef.h
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/Interface.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/AAI/Interface.cpp
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h

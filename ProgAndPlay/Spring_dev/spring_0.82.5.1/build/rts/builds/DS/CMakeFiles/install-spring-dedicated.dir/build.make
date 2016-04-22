@@ -34,19 +34,19 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Utility rule file for install-spring-dedicated.
 
 rts/builds/DS/CMakeFiles/install-spring-dedicated: rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/build.make
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "  spring-dedicated: Installing ..."
-	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/builds/DS/cmake_install.cmake
-	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/unitsync/cmake_install.cmake
-	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/cont/cmake_install.cmake
+	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/rts/builds/DS/cmake_install.cmake
+	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/unitsync/cmake_install.cmake
+	"C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/cont/cmake_install.cmake
 
 install-spring-dedicated: rts/builds/DS/CMakeFiles/install-spring-dedicated
 install-spring-dedicated: rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/build.make
@@ -57,10 +57,10 @@ rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/build: install-spring-dedi
 .PHONY : rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/build
 
 rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\install-spring-dedicated.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\install-spring-dedicated.dir\cmake_clean.cmake
 .PHONY : rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/clean
 
 rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\install-spring-dedicated.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\install-spring-dedicated.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/builds/DS/CMakeFiles/install-spring-dedicated.dir/depend
 

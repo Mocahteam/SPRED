@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include tools/DemoTool/CMakeFiles/demotool.dir/depend.make
@@ -50,17 +50,17 @@ include tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 
 tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj: ../tools/DemoTool/DemoTool.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\DemoTool.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\DemoTool.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/DemoTool.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp > CMakeFiles\demotool.dir\DemoTool.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp > CMakeFiles\demotool.dir\DemoTool.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/DemoTool.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp -o CMakeFiles\demotool.dir\DemoTool.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool\DemoTool.cpp -o CMakeFiles\demotool.dir\DemoTool.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj.requires
@@ -74,17 +74,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/DemoTool.cpp.obj.provides.build: tools/De
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj: ../rts/Game/GameVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\demotool.dir\__\__\rts\Game\GameVersion.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj.requires
@@ -98,17 +98,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/GameVersion.cpp.obj.provid
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj: ../rts/Game/PlayerStatistics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp > CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp > CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp -o CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp -o CMakeFiles\demotool.dir\__\__\rts\Game\PlayerStatistics.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj.requires
@@ -122,17 +122,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Game/PlayerStatistics.cpp.obj.p
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj: ../rts/Sim/Misc/TeamStatistics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp > CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp > CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp -o CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp -o CMakeFiles\demotool.dir\__\__\rts\Sim\Misc\TeamStatistics.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj.requires
@@ -146,17 +146,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/Sim/Misc/TeamStatistics.cpp.obj
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj: ../rts/System/Net/RawPacket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp > CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp > CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\Net\RawPacket.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj.requires
@@ -170,17 +170,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/Net/RawPacket.cpp.obj.pr
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.obj: ../rts/System/LoadSave/DemoReader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp > CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp > CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\DemoReader.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.obj.requires
@@ -194,17 +194,17 @@ tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/DemoReader.cpp.
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.obj: tools/DemoTool/CMakeFiles/demotool.dir/flags.make
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.obj: ../rts/System/LoadSave/Demo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp > CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp > CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.i
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp -o CMakeFiles\demotool.dir\__\__\rts\System\LoadSave\Demo.cpp.s
 
 tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.obj.requires:
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/__/__/rts/System/LoadSave/Demo.cpp.obj.requires
@@ -240,7 +240,7 @@ demotool.exe: ../mingwlibs/lib/libboost_program_options-mt.a
 demotool.exe: tools/DemoTool/CMakeFiles/demotool.dir/build.make
 demotool.exe: tools/DemoTool/CMakeFiles/demotool.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ..\..\demotool.exe"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\demotool.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\demotool.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tools/DemoTool/CMakeFiles/demotool.dir/build: demotool.exe
@@ -256,10 +256,10 @@ tools/DemoTool/CMakeFiles/demotool.dir/requires: tools/DemoTool/CMakeFiles/demot
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/requires
 
 tools/DemoTool/CMakeFiles/demotool.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && $(CMAKE_COMMAND) -P CMakeFiles\demotool.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool && $(CMAKE_COMMAND) -P CMakeFiles\demotool.dir\cmake_clean.cmake
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/clean
 
 tools/DemoTool/CMakeFiles/demotool.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool\CMakeFiles\demotool.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\DemoTool C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\DemoTool\CMakeFiles\demotool.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : tools/DemoTool/CMakeFiles/demotool.dir/depend
 

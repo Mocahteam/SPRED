@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\AAI\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 AI/Skirmish/AAI/CMakeFiles/AAI.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/CMakeFiles/AAI.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/AAI/CMakeFiles/AAI.dir/rule
 .PHONY : AI/Skirmish/AAI/CMakeFiles/AAI.dir/rule
 
 # Convenience name for target.
@@ -149,7 +149,7 @@ AAI: AI/Skirmish/AAI/CMakeFiles/AAI.dir/rule
 
 # fast build rule for target.
 AAI/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/build
 .PHONY : AAI/fast
 
 AAI.obj: AAI.cpp.obj
@@ -157,7 +157,7 @@ AAI.obj: AAI.cpp.obj
 
 # target to build an object file
 AAI.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.obj
 .PHONY : AAI.cpp.obj
 
 AAI.i: AAI.cpp.i
@@ -165,7 +165,7 @@ AAI.i: AAI.cpp.i
 
 # target to preprocess a source file
 AAI.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.i
 .PHONY : AAI.cpp.i
 
 AAI.s: AAI.cpp.s
@@ -173,7 +173,7 @@ AAI.s: AAI.cpp.s
 
 # target to generate assembly for a file
 AAI.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAI.cpp.s
 .PHONY : AAI.cpp.s
 
 AAIAirForceManager.obj: AAIAirForceManager.cpp.obj
@@ -181,7 +181,7 @@ AAIAirForceManager.obj: AAIAirForceManager.cpp.obj
 
 # target to build an object file
 AAIAirForceManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.obj
 .PHONY : AAIAirForceManager.cpp.obj
 
 AAIAirForceManager.i: AAIAirForceManager.cpp.i
@@ -189,7 +189,7 @@ AAIAirForceManager.i: AAIAirForceManager.cpp.i
 
 # target to preprocess a source file
 AAIAirForceManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.i
 .PHONY : AAIAirForceManager.cpp.i
 
 AAIAirForceManager.s: AAIAirForceManager.cpp.s
@@ -197,7 +197,7 @@ AAIAirForceManager.s: AAIAirForceManager.cpp.s
 
 # target to generate assembly for a file
 AAIAirForceManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAirForceManager.cpp.s
 .PHONY : AAIAirForceManager.cpp.s
 
 AAIAttack.obj: AAIAttack.cpp.obj
@@ -205,7 +205,7 @@ AAIAttack.obj: AAIAttack.cpp.obj
 
 # target to build an object file
 AAIAttack.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.obj
 .PHONY : AAIAttack.cpp.obj
 
 AAIAttack.i: AAIAttack.cpp.i
@@ -213,7 +213,7 @@ AAIAttack.i: AAIAttack.cpp.i
 
 # target to preprocess a source file
 AAIAttack.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.i
 .PHONY : AAIAttack.cpp.i
 
 AAIAttack.s: AAIAttack.cpp.s
@@ -221,7 +221,7 @@ AAIAttack.s: AAIAttack.cpp.s
 
 # target to generate assembly for a file
 AAIAttack.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttack.cpp.s
 .PHONY : AAIAttack.cpp.s
 
 AAIAttackManager.obj: AAIAttackManager.cpp.obj
@@ -229,7 +229,7 @@ AAIAttackManager.obj: AAIAttackManager.cpp.obj
 
 # target to build an object file
 AAIAttackManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.obj
 .PHONY : AAIAttackManager.cpp.obj
 
 AAIAttackManager.i: AAIAttackManager.cpp.i
@@ -237,7 +237,7 @@ AAIAttackManager.i: AAIAttackManager.cpp.i
 
 # target to preprocess a source file
 AAIAttackManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.i
 .PHONY : AAIAttackManager.cpp.i
 
 AAIAttackManager.s: AAIAttackManager.cpp.s
@@ -245,7 +245,7 @@ AAIAttackManager.s: AAIAttackManager.cpp.s
 
 # target to generate assembly for a file
 AAIAttackManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIAttackManager.cpp.s
 .PHONY : AAIAttackManager.cpp.s
 
 AAIBrain.obj: AAIBrain.cpp.obj
@@ -253,7 +253,7 @@ AAIBrain.obj: AAIBrain.cpp.obj
 
 # target to build an object file
 AAIBrain.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.obj
 .PHONY : AAIBrain.cpp.obj
 
 AAIBrain.i: AAIBrain.cpp.i
@@ -261,7 +261,7 @@ AAIBrain.i: AAIBrain.cpp.i
 
 # target to preprocess a source file
 AAIBrain.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.i
 .PHONY : AAIBrain.cpp.i
 
 AAIBrain.s: AAIBrain.cpp.s
@@ -269,7 +269,7 @@ AAIBrain.s: AAIBrain.cpp.s
 
 # target to generate assembly for a file
 AAIBrain.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBrain.cpp.s
 .PHONY : AAIBrain.cpp.s
 
 AAIBuildTable.obj: AAIBuildTable.cpp.obj
@@ -277,7 +277,7 @@ AAIBuildTable.obj: AAIBuildTable.cpp.obj
 
 # target to build an object file
 AAIBuildTable.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.obj
 .PHONY : AAIBuildTable.cpp.obj
 
 AAIBuildTable.i: AAIBuildTable.cpp.i
@@ -285,7 +285,7 @@ AAIBuildTable.i: AAIBuildTable.cpp.i
 
 # target to preprocess a source file
 AAIBuildTable.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.i
 .PHONY : AAIBuildTable.cpp.i
 
 AAIBuildTable.s: AAIBuildTable.cpp.s
@@ -293,7 +293,7 @@ AAIBuildTable.s: AAIBuildTable.cpp.s
 
 # target to generate assembly for a file
 AAIBuildTable.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTable.cpp.s
 .PHONY : AAIBuildTable.cpp.s
 
 AAIBuildTask.obj: AAIBuildTask.cpp.obj
@@ -301,7 +301,7 @@ AAIBuildTask.obj: AAIBuildTask.cpp.obj
 
 # target to build an object file
 AAIBuildTask.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.obj
 .PHONY : AAIBuildTask.cpp.obj
 
 AAIBuildTask.i: AAIBuildTask.cpp.i
@@ -309,7 +309,7 @@ AAIBuildTask.i: AAIBuildTask.cpp.i
 
 # target to preprocess a source file
 AAIBuildTask.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.i
 .PHONY : AAIBuildTask.cpp.i
 
 AAIBuildTask.s: AAIBuildTask.cpp.s
@@ -317,7 +317,7 @@ AAIBuildTask.s: AAIBuildTask.cpp.s
 
 # target to generate assembly for a file
 AAIBuildTask.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIBuildTask.cpp.s
 .PHONY : AAIBuildTask.cpp.s
 
 AAIConfig.obj: AAIConfig.cpp.obj
@@ -325,7 +325,7 @@ AAIConfig.obj: AAIConfig.cpp.obj
 
 # target to build an object file
 AAIConfig.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.obj
 .PHONY : AAIConfig.cpp.obj
 
 AAIConfig.i: AAIConfig.cpp.i
@@ -333,7 +333,7 @@ AAIConfig.i: AAIConfig.cpp.i
 
 # target to preprocess a source file
 AAIConfig.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.i
 .PHONY : AAIConfig.cpp.i
 
 AAIConfig.s: AAIConfig.cpp.s
@@ -341,7 +341,7 @@ AAIConfig.s: AAIConfig.cpp.s
 
 # target to generate assembly for a file
 AAIConfig.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConfig.cpp.s
 .PHONY : AAIConfig.cpp.s
 
 AAIConstructor.obj: AAIConstructor.cpp.obj
@@ -349,7 +349,7 @@ AAIConstructor.obj: AAIConstructor.cpp.obj
 
 # target to build an object file
 AAIConstructor.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.obj
 .PHONY : AAIConstructor.cpp.obj
 
 AAIConstructor.i: AAIConstructor.cpp.i
@@ -357,7 +357,7 @@ AAIConstructor.i: AAIConstructor.cpp.i
 
 # target to preprocess a source file
 AAIConstructor.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.i
 .PHONY : AAIConstructor.cpp.i
 
 AAIConstructor.s: AAIConstructor.cpp.s
@@ -365,7 +365,7 @@ AAIConstructor.s: AAIConstructor.cpp.s
 
 # target to generate assembly for a file
 AAIConstructor.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIConstructor.cpp.s
 .PHONY : AAIConstructor.cpp.s
 
 AAIExecute.obj: AAIExecute.cpp.obj
@@ -373,7 +373,7 @@ AAIExecute.obj: AAIExecute.cpp.obj
 
 # target to build an object file
 AAIExecute.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.obj
 .PHONY : AAIExecute.cpp.obj
 
 AAIExecute.i: AAIExecute.cpp.i
@@ -381,7 +381,7 @@ AAIExecute.i: AAIExecute.cpp.i
 
 # target to preprocess a source file
 AAIExecute.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.i
 .PHONY : AAIExecute.cpp.i
 
 AAIExecute.s: AAIExecute.cpp.s
@@ -389,7 +389,7 @@ AAIExecute.s: AAIExecute.cpp.s
 
 # target to generate assembly for a file
 AAIExecute.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIExecute.cpp.s
 .PHONY : AAIExecute.cpp.s
 
 AAIGroup.obj: AAIGroup.cpp.obj
@@ -397,7 +397,7 @@ AAIGroup.obj: AAIGroup.cpp.obj
 
 # target to build an object file
 AAIGroup.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.obj
 .PHONY : AAIGroup.cpp.obj
 
 AAIGroup.i: AAIGroup.cpp.i
@@ -405,7 +405,7 @@ AAIGroup.i: AAIGroup.cpp.i
 
 # target to preprocess a source file
 AAIGroup.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.i
 .PHONY : AAIGroup.cpp.i
 
 AAIGroup.s: AAIGroup.cpp.s
@@ -413,7 +413,7 @@ AAIGroup.s: AAIGroup.cpp.s
 
 # target to generate assembly for a file
 AAIGroup.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIGroup.cpp.s
 .PHONY : AAIGroup.cpp.s
 
 AAIMap.obj: AAIMap.cpp.obj
@@ -421,7 +421,7 @@ AAIMap.obj: AAIMap.cpp.obj
 
 # target to build an object file
 AAIMap.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.obj
 .PHONY : AAIMap.cpp.obj
 
 AAIMap.i: AAIMap.cpp.i
@@ -429,7 +429,7 @@ AAIMap.i: AAIMap.cpp.i
 
 # target to preprocess a source file
 AAIMap.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.i
 .PHONY : AAIMap.cpp.i
 
 AAIMap.s: AAIMap.cpp.s
@@ -437,7 +437,7 @@ AAIMap.s: AAIMap.cpp.s
 
 # target to generate assembly for a file
 AAIMap.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIMap.cpp.s
 .PHONY : AAIMap.cpp.s
 
 AAISector.obj: AAISector.cpp.obj
@@ -445,7 +445,7 @@ AAISector.obj: AAISector.cpp.obj
 
 # target to build an object file
 AAISector.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.obj
 .PHONY : AAISector.cpp.obj
 
 AAISector.i: AAISector.cpp.i
@@ -453,7 +453,7 @@ AAISector.i: AAISector.cpp.i
 
 # target to preprocess a source file
 AAISector.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.i
 .PHONY : AAISector.cpp.i
 
 AAISector.s: AAISector.cpp.s
@@ -461,7 +461,7 @@ AAISector.s: AAISector.cpp.s
 
 # target to generate assembly for a file
 AAISector.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAISector.cpp.s
 .PHONY : AAISector.cpp.s
 
 AAIUnitTable.obj: AAIUnitTable.cpp.obj
@@ -469,7 +469,7 @@ AAIUnitTable.obj: AAIUnitTable.cpp.obj
 
 # target to build an object file
 AAIUnitTable.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.obj
 .PHONY : AAIUnitTable.cpp.obj
 
 AAIUnitTable.i: AAIUnitTable.cpp.i
@@ -477,7 +477,7 @@ AAIUnitTable.i: AAIUnitTable.cpp.i
 
 # target to preprocess a source file
 AAIUnitTable.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.i
 .PHONY : AAIUnitTable.cpp.i
 
 AAIUnitTable.s: AAIUnitTable.cpp.s
@@ -485,7 +485,7 @@ AAIUnitTable.s: AAIUnitTable.cpp.s
 
 # target to generate assembly for a file
 AAIUnitTable.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AAIUnitTable.cpp.s
 .PHONY : AAIUnitTable.cpp.s
 
 AIExport.obj: AIExport.cpp.obj
@@ -493,7 +493,7 @@ AIExport.obj: AIExport.cpp.obj
 
 # target to build an object file
 AIExport.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.obj
 .PHONY : AIExport.cpp.obj
 
 AIExport.i: AIExport.cpp.i
@@ -501,7 +501,7 @@ AIExport.i: AIExport.cpp.i
 
 # target to preprocess a source file
 AIExport.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.i
 .PHONY : AIExport.cpp.i
 
 AIExport.s: AIExport.cpp.s
@@ -509,7 +509,7 @@ AIExport.s: AIExport.cpp.s
 
 # target to generate assembly for a file
 AIExport.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/AIExport.cpp.s
 .PHONY : AIExport.cpp.s
 
 Interface.obj: Interface.cpp.obj
@@ -517,7 +517,7 @@ Interface.obj: Interface.cpp.obj
 
 # target to build an object file
 Interface.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.obj
 .PHONY : Interface.cpp.obj
 
 Interface.i: Interface.cpp.i
@@ -525,7 +525,7 @@ Interface.i: Interface.cpp.i
 
 # target to preprocess a source file
 Interface.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.i
 .PHONY : Interface.cpp.i
 
 Interface.s: Interface.cpp.s
@@ -533,7 +533,7 @@ Interface.s: Interface.cpp.s
 
 # target to generate assembly for a file
 Interface.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/Interface.cpp.s
 .PHONY : Interface.cpp.s
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
@@ -541,7 +541,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishA
 
 # target to build an object file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
@@ -549,7 +549,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
@@ -557,7 +557,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 
 __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.obj
@@ -565,7 +565,7 @@ __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.o
 
 # target to build an object file
 __/__/Wrappers/CUtils/SharedLibrary.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.obj
 
 __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
@@ -573,7 +573,7 @@ __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SharedLibrary.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
@@ -581,7 +581,7 @@ __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SharedLibrary.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
@@ -589,7 +589,7 @@ __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/SimpleLog.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
@@ -597,7 +597,7 @@ __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SimpleLog.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.i
 
 __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
@@ -605,7 +605,7 @@ __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SimpleLog.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.s
 
 __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
@@ -613,7 +613,7 @@ __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/Util.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.obj
 .PHONY : __/__/Wrappers/CUtils/Util.c.obj
 
 __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
@@ -621,7 +621,7 @@ __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/Util.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.i
 .PHONY : __/__/Wrappers/CUtils/Util.c.i
 
 __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
@@ -629,7 +629,7 @@ __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/Util.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\AAI\CMakeFiles\AAI.dir\build.make AI/Skirmish/AAI/CMakeFiles/AAI.dir/__/__/Wrappers/CUtils/Util.c.s
 .PHONY : __/__/Wrappers/CUtils/Util.c.s
 
 # Help Target
@@ -716,6 +716,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

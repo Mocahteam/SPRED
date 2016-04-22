@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\C\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/rule
 .PHONY : AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/rule
 
 # Convenience name for target.
@@ -149,7 +149,7 @@ C-AIInterface: AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/rule
 
 # fast build rule for target.
 C-AIInterface/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/build
 .PHONY : C-AIInterface/fast
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
@@ -157,7 +157,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishA
 
 # target to build an object file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
@@ -165,7 +165,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
@@ -173,7 +173,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 
 __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.obj
@@ -181,7 +181,7 @@ __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.o
 
 # target to build an object file
 __/__/Wrappers/CUtils/SharedLibrary.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.obj
 
 __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
@@ -189,7 +189,7 @@ __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SharedLibrary.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
@@ -197,7 +197,7 @@ __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SharedLibrary.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
@@ -205,7 +205,7 @@ __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/SimpleLog.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
@@ -213,7 +213,7 @@ __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SimpleLog.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.i
 
 __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
@@ -221,7 +221,7 @@ __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SimpleLog.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.s
 
 __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
@@ -229,7 +229,7 @@ __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/Util.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj
 .PHONY : __/__/Wrappers/CUtils/Util.c.obj
 
 __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
@@ -237,7 +237,7 @@ __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/Util.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.i
 .PHONY : __/__/Wrappers/CUtils/Util.c.i
 
 __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
@@ -245,7 +245,7 @@ __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/Util.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.s
 .PHONY : __/__/Wrappers/CUtils/Util.c.s
 
 __/__/__/rts/Game/GameVersion.obj: __/__/__/rts/Game/GameVersion.cpp.obj
@@ -253,7 +253,7 @@ __/__/__/rts/Game/GameVersion.obj: __/__/__/rts/Game/GameVersion.cpp.obj
 
 # target to build an object file
 __/__/__/rts/Game/GameVersion.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.obj
 
 __/__/__/rts/Game/GameVersion.i: __/__/__/rts/Game/GameVersion.cpp.i
@@ -261,7 +261,7 @@ __/__/__/rts/Game/GameVersion.i: __/__/__/rts/Game/GameVersion.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/Game/GameVersion.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.i
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.i
 
 __/__/__/rts/Game/GameVersion.s: __/__/__/rts/Game/GameVersion.cpp.s
@@ -269,7 +269,7 @@ __/__/__/rts/Game/GameVersion.s: __/__/__/rts/Game/GameVersion.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/Game/GameVersion.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.s
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.s
 
 src/Interface.obj: src/Interface.cpp.obj
@@ -277,7 +277,7 @@ src/Interface.obj: src/Interface.cpp.obj
 
 # target to build an object file
 src/Interface.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.obj
 .PHONY : src/Interface.cpp.obj
 
 src/Interface.i: src/Interface.cpp.i
@@ -285,7 +285,7 @@ src/Interface.i: src/Interface.cpp.i
 
 # target to preprocess a source file
 src/Interface.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.i
 .PHONY : src/Interface.cpp.i
 
 src/Interface.s: src/Interface.cpp.s
@@ -293,7 +293,7 @@ src/Interface.s: src/Interface.cpp.s
 
 # target to generate assembly for a file
 src/Interface.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/Interface.cpp.s
 .PHONY : src/Interface.cpp.s
 
 src/InterfaceExport.obj: src/InterfaceExport.cpp.obj
@@ -301,7 +301,7 @@ src/InterfaceExport.obj: src/InterfaceExport.cpp.obj
 
 # target to build an object file
 src/InterfaceExport.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.obj
 .PHONY : src/InterfaceExport.cpp.obj
 
 src/InterfaceExport.i: src/InterfaceExport.cpp.i
@@ -309,7 +309,7 @@ src/InterfaceExport.i: src/InterfaceExport.cpp.i
 
 # target to preprocess a source file
 src/InterfaceExport.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.i
 .PHONY : src/InterfaceExport.cpp.i
 
 src/InterfaceExport.s: src/InterfaceExport.cpp.s
@@ -317,7 +317,7 @@ src/InterfaceExport.s: src/InterfaceExport.cpp.s
 
 # target to generate assembly for a file
 src/InterfaceExport.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\C\CMakeFiles\C-AIInterface.dir\build.make AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/src/InterfaceExport.cpp.s
 .PHONY : src/InterfaceExport.cpp.s
 
 # Help Target
@@ -365,6 +365,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

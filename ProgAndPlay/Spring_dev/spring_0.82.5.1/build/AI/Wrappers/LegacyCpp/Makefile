@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Wrappers\LegacyCpp\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/rule
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/rule
 
 # Convenience name for target.
@@ -149,12 +149,12 @@ LegacyCpp-AIWrapper: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/ru
 
 # fast build rule for target.
 LegacyCpp-AIWrapper/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/build
 .PHONY : LegacyCpp-AIWrapper/fast
 
 # Convenience name for target.
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/rule
 .PHONY : AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/rule
 
 # Convenience name for target.
@@ -163,7 +163,7 @@ LegacyCpp-Creg-AIWrapper: AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrap
 
 # fast build rule for target.
 LegacyCpp-Creg-AIWrapper/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/build
 .PHONY : LegacyCpp-Creg-AIWrapper/fast
 
 AIAI.obj: AIAI.cpp.obj
@@ -171,8 +171,8 @@ AIAI.obj: AIAI.cpp.obj
 
 # target to build an object file
 AIAI.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj
 .PHONY : AIAI.cpp.obj
 
 AIAI.i: AIAI.cpp.i
@@ -180,8 +180,8 @@ AIAI.i: AIAI.cpp.i
 
 # target to preprocess a source file
 AIAI.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.i
 .PHONY : AIAI.cpp.i
 
 AIAI.s: AIAI.cpp.s
@@ -189,8 +189,8 @@ AIAI.s: AIAI.cpp.s
 
 # target to generate assembly for a file
 AIAI.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.s
 .PHONY : AIAI.cpp.s
 
 AIAICallback.obj: AIAICallback.cpp.obj
@@ -198,8 +198,8 @@ AIAICallback.obj: AIAICallback.cpp.obj
 
 # target to build an object file
 AIAICallback.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj
 .PHONY : AIAICallback.cpp.obj
 
 AIAICallback.i: AIAICallback.cpp.i
@@ -207,8 +207,8 @@ AIAICallback.i: AIAICallback.cpp.i
 
 # target to preprocess a source file
 AIAICallback.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.i
 .PHONY : AIAICallback.cpp.i
 
 AIAICallback.s: AIAICallback.cpp.s
@@ -216,8 +216,8 @@ AIAICallback.s: AIAICallback.cpp.s
 
 # target to generate assembly for a file
 AIAICallback.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.s
 .PHONY : AIAICallback.cpp.s
 
 AIAICheats.obj: AIAICheats.cpp.obj
@@ -225,8 +225,8 @@ AIAICheats.obj: AIAICheats.cpp.obj
 
 # target to build an object file
 AIAICheats.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj
 .PHONY : AIAICheats.cpp.obj
 
 AIAICheats.i: AIAICheats.cpp.i
@@ -234,8 +234,8 @@ AIAICheats.i: AIAICheats.cpp.i
 
 # target to preprocess a source file
 AIAICheats.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.i
 .PHONY : AIAICheats.cpp.i
 
 AIAICheats.s: AIAICheats.cpp.s
@@ -243,8 +243,8 @@ AIAICheats.s: AIAICheats.cpp.s
 
 # target to generate assembly for a file
 AIAICheats.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIAICheats.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.s
 .PHONY : AIAICheats.cpp.s
 
 AIGlobalAI.obj: AIGlobalAI.cpp.obj
@@ -252,8 +252,8 @@ AIGlobalAI.obj: AIGlobalAI.cpp.obj
 
 # target to build an object file
 AIGlobalAI.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj
 .PHONY : AIGlobalAI.cpp.obj
 
 AIGlobalAI.i: AIGlobalAI.cpp.i
@@ -261,8 +261,8 @@ AIGlobalAI.i: AIGlobalAI.cpp.i
 
 # target to preprocess a source file
 AIGlobalAI.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.i
 .PHONY : AIGlobalAI.cpp.i
 
 AIGlobalAI.s: AIGlobalAI.cpp.s
@@ -270,8 +270,8 @@ AIGlobalAI.s: AIGlobalAI.cpp.s
 
 # target to generate assembly for a file
 AIGlobalAI.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.s
 .PHONY : AIGlobalAI.cpp.s
 
 AIGlobalAICallback.obj: AIGlobalAICallback.cpp.obj
@@ -279,8 +279,8 @@ AIGlobalAICallback.obj: AIGlobalAICallback.cpp.obj
 
 # target to build an object file
 AIGlobalAICallback.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj
 .PHONY : AIGlobalAICallback.cpp.obj
 
 AIGlobalAICallback.i: AIGlobalAICallback.cpp.i
@@ -288,8 +288,8 @@ AIGlobalAICallback.i: AIGlobalAICallback.cpp.i
 
 # target to preprocess a source file
 AIGlobalAICallback.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.i
 .PHONY : AIGlobalAICallback.cpp.i
 
 AIGlobalAICallback.s: AIGlobalAICallback.cpp.s
@@ -297,8 +297,8 @@ AIGlobalAICallback.s: AIGlobalAICallback.cpp.s
 
 # target to generate assembly for a file
 AIGlobalAICallback.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AIGlobalAICallback.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.s
 .PHONY : AIGlobalAICallback.cpp.s
 
 AISCommands.obj: AISCommands.cpp.obj
@@ -306,8 +306,8 @@ AISCommands.obj: AISCommands.cpp.obj
 
 # target to build an object file
 AISCommands.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj
 .PHONY : AISCommands.cpp.obj
 
 AISCommands.i: AISCommands.cpp.i
@@ -315,8 +315,8 @@ AISCommands.i: AISCommands.cpp.i
 
 # target to preprocess a source file
 AISCommands.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.i
 .PHONY : AISCommands.cpp.i
 
 AISCommands.s: AISCommands.cpp.s
@@ -324,8 +324,8 @@ AISCommands.s: AISCommands.cpp.s
 
 # target to generate assembly for a file
 AISCommands.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/AISCommands.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.s
 .PHONY : AISCommands.cpp.s
 
 UnitDef.obj: UnitDef.cpp.obj
@@ -333,8 +333,8 @@ UnitDef.obj: UnitDef.cpp.obj
 
 # target to build an object file
 UnitDef.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj
 .PHONY : UnitDef.cpp.obj
 
 UnitDef.i: UnitDef.cpp.i
@@ -342,8 +342,8 @@ UnitDef.i: UnitDef.cpp.i
 
 # target to preprocess a source file
 UnitDef.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.i
 .PHONY : UnitDef.cpp.i
 
 UnitDef.s: UnitDef.cpp.s
@@ -351,8 +351,8 @@ UnitDef.s: UnitDef.cpp.s
 
 # target to generate assembly for a file
 UnitDef.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/UnitDef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.s
 .PHONY : UnitDef.cpp.s
 
 __/__/__/rts/Game/GameVersion.obj: __/__/__/rts/Game/GameVersion.cpp.obj
@@ -360,8 +360,8 @@ __/__/__/rts/Game/GameVersion.obj: __/__/__/rts/Game/GameVersion.cpp.obj
 
 # target to build an object file
 __/__/__/rts/Game/GameVersion.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.obj
 
 __/__/__/rts/Game/GameVersion.i: __/__/__/rts/Game/GameVersion.cpp.i
@@ -369,8 +369,8 @@ __/__/__/rts/Game/GameVersion.i: __/__/__/rts/Game/GameVersion.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/Game/GameVersion.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.i
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.i
 
 __/__/__/rts/Game/GameVersion.s: __/__/__/rts/Game/GameVersion.cpp.s
@@ -378,8 +378,8 @@ __/__/__/rts/Game/GameVersion.s: __/__/__/rts/Game/GameVersion.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/Game/GameVersion.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.s
 .PHONY : __/__/__/rts/Game/GameVersion.cpp.s
 
 __/__/__/rts/Sim/Misc/DamageArray.obj: __/__/__/rts/Sim/Misc/DamageArray.cpp.obj
@@ -387,8 +387,8 @@ __/__/__/rts/Sim/Misc/DamageArray.obj: __/__/__/rts/Sim/Misc/DamageArray.cpp.obj
 
 # target to build an object file
 __/__/__/rts/Sim/Misc/DamageArray.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj
 .PHONY : __/__/__/rts/Sim/Misc/DamageArray.cpp.obj
 
 __/__/__/rts/Sim/Misc/DamageArray.i: __/__/__/rts/Sim/Misc/DamageArray.cpp.i
@@ -396,8 +396,8 @@ __/__/__/rts/Sim/Misc/DamageArray.i: __/__/__/rts/Sim/Misc/DamageArray.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/Sim/Misc/DamageArray.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.i
 .PHONY : __/__/__/rts/Sim/Misc/DamageArray.cpp.i
 
 __/__/__/rts/Sim/Misc/DamageArray.s: __/__/__/rts/Sim/Misc/DamageArray.cpp.s
@@ -405,8 +405,8 @@ __/__/__/rts/Sim/Misc/DamageArray.s: __/__/__/rts/Sim/Misc/DamageArray.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/Sim/Misc/DamageArray.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.s
 .PHONY : __/__/__/rts/Sim/Misc/DamageArray.cpp.s
 
 __/__/__/rts/System/creg/Serializer.obj: __/__/__/rts/System/creg/Serializer.cpp.obj
@@ -414,7 +414,7 @@ __/__/__/rts/System/creg/Serializer.obj: __/__/__/rts/System/creg/Serializer.cpp
 
 # target to build an object file
 __/__/__/rts/System/creg/Serializer.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj
 .PHONY : __/__/__/rts/System/creg/Serializer.cpp.obj
 
 __/__/__/rts/System/creg/Serializer.i: __/__/__/rts/System/creg/Serializer.cpp.i
@@ -422,7 +422,7 @@ __/__/__/rts/System/creg/Serializer.i: __/__/__/rts/System/creg/Serializer.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/System/creg/Serializer.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.i
 .PHONY : __/__/__/rts/System/creg/Serializer.cpp.i
 
 __/__/__/rts/System/creg/Serializer.s: __/__/__/rts/System/creg/Serializer.cpp.s
@@ -430,7 +430,7 @@ __/__/__/rts/System/creg/Serializer.s: __/__/__/rts/System/creg/Serializer.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/System/creg/Serializer.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.s
 .PHONY : __/__/__/rts/System/creg/Serializer.cpp.s
 
 __/__/__/rts/System/creg/VarTypes.obj: __/__/__/rts/System/creg/VarTypes.cpp.obj
@@ -438,7 +438,7 @@ __/__/__/rts/System/creg/VarTypes.obj: __/__/__/rts/System/creg/VarTypes.cpp.obj
 
 # target to build an object file
 __/__/__/rts/System/creg/VarTypes.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj
 .PHONY : __/__/__/rts/System/creg/VarTypes.cpp.obj
 
 __/__/__/rts/System/creg/VarTypes.i: __/__/__/rts/System/creg/VarTypes.cpp.i
@@ -446,7 +446,7 @@ __/__/__/rts/System/creg/VarTypes.i: __/__/__/rts/System/creg/VarTypes.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/System/creg/VarTypes.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.i
 .PHONY : __/__/__/rts/System/creg/VarTypes.cpp.i
 
 __/__/__/rts/System/creg/VarTypes.s: __/__/__/rts/System/creg/VarTypes.cpp.s
@@ -454,7 +454,7 @@ __/__/__/rts/System/creg/VarTypes.s: __/__/__/rts/System/creg/VarTypes.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/System/creg/VarTypes.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.s
 .PHONY : __/__/__/rts/System/creg/VarTypes.cpp.s
 
 __/__/__/rts/System/creg/creg.obj: __/__/__/rts/System/creg/creg.cpp.obj
@@ -462,7 +462,7 @@ __/__/__/rts/System/creg/creg.obj: __/__/__/rts/System/creg/creg.cpp.obj
 
 # target to build an object file
 __/__/__/rts/System/creg/creg.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj
 .PHONY : __/__/__/rts/System/creg/creg.cpp.obj
 
 __/__/__/rts/System/creg/creg.i: __/__/__/rts/System/creg/creg.cpp.i
@@ -470,7 +470,7 @@ __/__/__/rts/System/creg/creg.i: __/__/__/rts/System/creg/creg.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/System/creg/creg.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.i
 .PHONY : __/__/__/rts/System/creg/creg.cpp.i
 
 __/__/__/rts/System/creg/creg.s: __/__/__/rts/System/creg/creg.cpp.s
@@ -478,7 +478,7 @@ __/__/__/rts/System/creg/creg.s: __/__/__/rts/System/creg/creg.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/System/creg/creg.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.s
 .PHONY : __/__/__/rts/System/creg/creg.cpp.s
 
 __/__/__/rts/System/float3.obj: __/__/__/rts/System/float3.cpp.obj
@@ -486,8 +486,8 @@ __/__/__/rts/System/float3.obj: __/__/__/rts/System/float3.cpp.obj
 
 # target to build an object file
 __/__/__/rts/System/float3.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj
 .PHONY : __/__/__/rts/System/float3.cpp.obj
 
 __/__/__/rts/System/float3.i: __/__/__/rts/System/float3.cpp.i
@@ -495,8 +495,8 @@ __/__/__/rts/System/float3.i: __/__/__/rts/System/float3.cpp.i
 
 # target to preprocess a source file
 __/__/__/rts/System/float3.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.i
 .PHONY : __/__/__/rts/System/float3.cpp.i
 
 __/__/__/rts/System/float3.s: __/__/__/rts/System/float3.cpp.s
@@ -504,8 +504,8 @@ __/__/__/rts/System/float3.s: __/__/__/rts/System/float3.cpp.s
 
 # target to generate assembly for a file
 __/__/__/rts/System/float3.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Wrappers\LegacyCpp\CMakeFiles\LegacyCpp-Creg-AIWrapper.dir\build.make AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.s
 .PHONY : __/__/__/rts/System/float3.cpp.s
 
 # Help Target
@@ -572,6 +572,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

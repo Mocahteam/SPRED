@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/depend.make
@@ -50,17 +50,17 @@ include tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/flags.make
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj: tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/flags.make
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj: ../tools/ArchiveMover/ArchiveMover.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp > CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp > CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.i
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp -o CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover\ArchiveMover.cpp -o CMakeFiles\ArchiveMover.dir\ArchiveMover.cpp.s
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj.requires:
 .PHONY : tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj.requires
@@ -73,9 +73,9 @@ tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj.provides.bui
 .PHONY : tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj.provides.build
 
 tools/ArchiveMover/icon.o: tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/build.make
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating icon.o"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\windres.exe -IC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover -iC:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/icon.rc -o C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/ArchiveMover/icon.o -v
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && C:\MinGW-gcc4.4\bin\windres.exe -IC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover -iC:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/icon.rc -o C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/ArchiveMover/icon.o -v
 
 # Object files for target ArchiveMover
 ArchiveMover_OBJECTS = \
@@ -83,7 +83,7 @@ ArchiveMover_OBJECTS = \
 
 # External object files for target ArchiveMover
 ArchiveMover_EXTERNAL_OBJECTS = \
-"C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/ArchiveMover/icon.o"
+"C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/tools/ArchiveMover/icon.o"
 
 tools/ArchiveMover/ArchiveMover.exe: tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/ArchiveMover.cpp.obj
 tools/ArchiveMover/ArchiveMover.exe: ../mingwlibs/lib/libboost_system-mt.a
@@ -95,7 +95,7 @@ tools/ArchiveMover/ArchiveMover.exe: tools/ArchiveMover/CMakeFiles/ArchiveMover.
 tools/ArchiveMover/ArchiveMover.exe: tools/ArchiveMover/icon.o
 tools/ArchiveMover/ArchiveMover.exe: tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ArchiveMover.exe"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ArchiveMover.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ArchiveMover.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/build: tools/ArchiveMover/ArchiveMover.exe
@@ -105,10 +105,10 @@ tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/requires: tools/ArchiveMover/CMak
 .PHONY : tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/requires
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && $(CMAKE_COMMAND) -P CMakeFiles\ArchiveMover.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover && $(CMAKE_COMMAND) -P CMakeFiles\ArchiveMover.dir\cmake_clean.cmake
 .PHONY : tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/clean
 
 tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/depend: tools/ArchiveMover/icon.o
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover\CMakeFiles\ArchiveMover.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\tools\ArchiveMover C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\tools\ArchiveMover\CMakeFiles\ArchiveMover.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : tools/ArchiveMover/CMakeFiles/ArchiveMover.dir/depend
 

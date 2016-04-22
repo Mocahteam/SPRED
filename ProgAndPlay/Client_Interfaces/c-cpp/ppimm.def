@@ -12,3 +12,6 @@ EXPORTS
     PP_PartieTerminee @11
     PP_Position @12
     PP_Stopper @13
+    activeTrace @14 DATA
+    errorsArr @15 DATA
+    tracePlayer @16 DATA

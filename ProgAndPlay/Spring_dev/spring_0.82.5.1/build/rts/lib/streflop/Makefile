@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\streflop\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rts/lib/streflop/CMakeFiles/streflop.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/CMakeFiles/streflop.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/streflop/CMakeFiles/streflop.dir/rule
 .PHONY : rts/lib/streflop/CMakeFiles/streflop.dir/rule
 
 # Convenience name for target.
@@ -149,7 +149,7 @@ streflop: rts/lib/streflop/CMakeFiles/streflop.dir/rule
 
 # fast build rule for target.
 streflop/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/build
 .PHONY : streflop/fast
 
 Random.obj: Random.cpp.obj
@@ -157,7 +157,7 @@ Random.obj: Random.cpp.obj
 
 # target to build an object file
 Random.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.obj
 .PHONY : Random.cpp.obj
 
 Random.i: Random.cpp.i
@@ -165,7 +165,7 @@ Random.i: Random.cpp.i
 
 # target to preprocess a source file
 Random.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.i
 .PHONY : Random.cpp.i
 
 Random.s: Random.cpp.s
@@ -173,7 +173,7 @@ Random.s: Random.cpp.s
 
 # target to generate assembly for a file
 Random.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/Random.cpp.s
 .PHONY : Random.cpp.s
 
 SMath.obj: SMath.cpp.obj
@@ -181,7 +181,7 @@ SMath.obj: SMath.cpp.obj
 
 # target to build an object file
 SMath.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.obj
 .PHONY : SMath.cpp.obj
 
 SMath.i: SMath.cpp.i
@@ -189,7 +189,7 @@ SMath.i: SMath.cpp.i
 
 # target to preprocess a source file
 SMath.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.i
 .PHONY : SMath.cpp.i
 
 SMath.s: SMath.cpp.s
@@ -197,7 +197,7 @@ SMath.s: SMath.cpp.s
 
 # target to generate assembly for a file
 SMath.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/SMath.cpp.s
 .PHONY : SMath.cpp.s
 
 libm/flt-32/e_acosf.obj: libm/flt-32/e_acosf.cpp.obj
@@ -205,7 +205,7 @@ libm/flt-32/e_acosf.obj: libm/flt-32/e_acosf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_acosf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.obj
 .PHONY : libm/flt-32/e_acosf.cpp.obj
 
 libm/flt-32/e_acosf.i: libm/flt-32/e_acosf.cpp.i
@@ -213,7 +213,7 @@ libm/flt-32/e_acosf.i: libm/flt-32/e_acosf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_acosf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.i
 .PHONY : libm/flt-32/e_acosf.cpp.i
 
 libm/flt-32/e_acosf.s: libm/flt-32/e_acosf.cpp.s
@@ -221,7 +221,7 @@ libm/flt-32/e_acosf.s: libm/flt-32/e_acosf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_acosf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acosf.cpp.s
 .PHONY : libm/flt-32/e_acosf.cpp.s
 
 libm/flt-32/e_acoshf.obj: libm/flt-32/e_acoshf.cpp.obj
@@ -229,7 +229,7 @@ libm/flt-32/e_acoshf.obj: libm/flt-32/e_acoshf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_acoshf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.obj
 .PHONY : libm/flt-32/e_acoshf.cpp.obj
 
 libm/flt-32/e_acoshf.i: libm/flt-32/e_acoshf.cpp.i
@@ -237,7 +237,7 @@ libm/flt-32/e_acoshf.i: libm/flt-32/e_acoshf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_acoshf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.i
 .PHONY : libm/flt-32/e_acoshf.cpp.i
 
 libm/flt-32/e_acoshf.s: libm/flt-32/e_acoshf.cpp.s
@@ -245,7 +245,7 @@ libm/flt-32/e_acoshf.s: libm/flt-32/e_acoshf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_acoshf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_acoshf.cpp.s
 .PHONY : libm/flt-32/e_acoshf.cpp.s
 
 libm/flt-32/e_asinf.obj: libm/flt-32/e_asinf.cpp.obj
@@ -253,7 +253,7 @@ libm/flt-32/e_asinf.obj: libm/flt-32/e_asinf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_asinf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.obj
 .PHONY : libm/flt-32/e_asinf.cpp.obj
 
 libm/flt-32/e_asinf.i: libm/flt-32/e_asinf.cpp.i
@@ -261,7 +261,7 @@ libm/flt-32/e_asinf.i: libm/flt-32/e_asinf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_asinf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.i
 .PHONY : libm/flt-32/e_asinf.cpp.i
 
 libm/flt-32/e_asinf.s: libm/flt-32/e_asinf.cpp.s
@@ -269,7 +269,7 @@ libm/flt-32/e_asinf.s: libm/flt-32/e_asinf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_asinf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_asinf.cpp.s
 .PHONY : libm/flt-32/e_asinf.cpp.s
 
 libm/flt-32/e_atan2f.obj: libm/flt-32/e_atan2f.cpp.obj
@@ -277,7 +277,7 @@ libm/flt-32/e_atan2f.obj: libm/flt-32/e_atan2f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_atan2f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.obj
 .PHONY : libm/flt-32/e_atan2f.cpp.obj
 
 libm/flt-32/e_atan2f.i: libm/flt-32/e_atan2f.cpp.i
@@ -285,7 +285,7 @@ libm/flt-32/e_atan2f.i: libm/flt-32/e_atan2f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_atan2f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.i
 .PHONY : libm/flt-32/e_atan2f.cpp.i
 
 libm/flt-32/e_atan2f.s: libm/flt-32/e_atan2f.cpp.s
@@ -293,7 +293,7 @@ libm/flt-32/e_atan2f.s: libm/flt-32/e_atan2f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_atan2f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atan2f.cpp.s
 .PHONY : libm/flt-32/e_atan2f.cpp.s
 
 libm/flt-32/e_atanhf.obj: libm/flt-32/e_atanhf.cpp.obj
@@ -301,7 +301,7 @@ libm/flt-32/e_atanhf.obj: libm/flt-32/e_atanhf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_atanhf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.obj
 .PHONY : libm/flt-32/e_atanhf.cpp.obj
 
 libm/flt-32/e_atanhf.i: libm/flt-32/e_atanhf.cpp.i
@@ -309,7 +309,7 @@ libm/flt-32/e_atanhf.i: libm/flt-32/e_atanhf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_atanhf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.i
 .PHONY : libm/flt-32/e_atanhf.cpp.i
 
 libm/flt-32/e_atanhf.s: libm/flt-32/e_atanhf.cpp.s
@@ -317,7 +317,7 @@ libm/flt-32/e_atanhf.s: libm/flt-32/e_atanhf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_atanhf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_atanhf.cpp.s
 .PHONY : libm/flt-32/e_atanhf.cpp.s
 
 libm/flt-32/e_coshf.obj: libm/flt-32/e_coshf.cpp.obj
@@ -325,7 +325,7 @@ libm/flt-32/e_coshf.obj: libm/flt-32/e_coshf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_coshf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.obj
 .PHONY : libm/flt-32/e_coshf.cpp.obj
 
 libm/flt-32/e_coshf.i: libm/flt-32/e_coshf.cpp.i
@@ -333,7 +333,7 @@ libm/flt-32/e_coshf.i: libm/flt-32/e_coshf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_coshf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.i
 .PHONY : libm/flt-32/e_coshf.cpp.i
 
 libm/flt-32/e_coshf.s: libm/flt-32/e_coshf.cpp.s
@@ -341,7 +341,7 @@ libm/flt-32/e_coshf.s: libm/flt-32/e_coshf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_coshf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_coshf.cpp.s
 .PHONY : libm/flt-32/e_coshf.cpp.s
 
 libm/flt-32/e_exp2f.obj: libm/flt-32/e_exp2f.cpp.obj
@@ -349,7 +349,7 @@ libm/flt-32/e_exp2f.obj: libm/flt-32/e_exp2f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_exp2f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.obj
 .PHONY : libm/flt-32/e_exp2f.cpp.obj
 
 libm/flt-32/e_exp2f.i: libm/flt-32/e_exp2f.cpp.i
@@ -357,7 +357,7 @@ libm/flt-32/e_exp2f.i: libm/flt-32/e_exp2f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_exp2f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.i
 .PHONY : libm/flt-32/e_exp2f.cpp.i
 
 libm/flt-32/e_exp2f.s: libm/flt-32/e_exp2f.cpp.s
@@ -365,7 +365,7 @@ libm/flt-32/e_exp2f.s: libm/flt-32/e_exp2f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_exp2f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_exp2f.cpp.s
 .PHONY : libm/flt-32/e_exp2f.cpp.s
 
 libm/flt-32/e_expf.obj: libm/flt-32/e_expf.cpp.obj
@@ -373,7 +373,7 @@ libm/flt-32/e_expf.obj: libm/flt-32/e_expf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_expf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.obj
 .PHONY : libm/flt-32/e_expf.cpp.obj
 
 libm/flt-32/e_expf.i: libm/flt-32/e_expf.cpp.i
@@ -381,7 +381,7 @@ libm/flt-32/e_expf.i: libm/flt-32/e_expf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_expf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.i
 .PHONY : libm/flt-32/e_expf.cpp.i
 
 libm/flt-32/e_expf.s: libm/flt-32/e_expf.cpp.s
@@ -389,7 +389,7 @@ libm/flt-32/e_expf.s: libm/flt-32/e_expf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_expf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_expf.cpp.s
 .PHONY : libm/flt-32/e_expf.cpp.s
 
 libm/flt-32/e_fmodf.obj: libm/flt-32/e_fmodf.cpp.obj
@@ -397,7 +397,7 @@ libm/flt-32/e_fmodf.obj: libm/flt-32/e_fmodf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_fmodf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.obj
 .PHONY : libm/flt-32/e_fmodf.cpp.obj
 
 libm/flt-32/e_fmodf.i: libm/flt-32/e_fmodf.cpp.i
@@ -405,7 +405,7 @@ libm/flt-32/e_fmodf.i: libm/flt-32/e_fmodf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_fmodf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.i
 .PHONY : libm/flt-32/e_fmodf.cpp.i
 
 libm/flt-32/e_fmodf.s: libm/flt-32/e_fmodf.cpp.s
@@ -413,7 +413,7 @@ libm/flt-32/e_fmodf.s: libm/flt-32/e_fmodf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_fmodf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_fmodf.cpp.s
 .PHONY : libm/flt-32/e_fmodf.cpp.s
 
 libm/flt-32/e_gammaf_r.obj: libm/flt-32/e_gammaf_r.cpp.obj
@@ -421,7 +421,7 @@ libm/flt-32/e_gammaf_r.obj: libm/flt-32/e_gammaf_r.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_gammaf_r.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.obj
 .PHONY : libm/flt-32/e_gammaf_r.cpp.obj
 
 libm/flt-32/e_gammaf_r.i: libm/flt-32/e_gammaf_r.cpp.i
@@ -429,7 +429,7 @@ libm/flt-32/e_gammaf_r.i: libm/flt-32/e_gammaf_r.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_gammaf_r.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.i
 .PHONY : libm/flt-32/e_gammaf_r.cpp.i
 
 libm/flt-32/e_gammaf_r.s: libm/flt-32/e_gammaf_r.cpp.s
@@ -437,7 +437,7 @@ libm/flt-32/e_gammaf_r.s: libm/flt-32/e_gammaf_r.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_gammaf_r.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_gammaf_r.cpp.s
 .PHONY : libm/flt-32/e_gammaf_r.cpp.s
 
 libm/flt-32/e_hypotf.obj: libm/flt-32/e_hypotf.cpp.obj
@@ -445,7 +445,7 @@ libm/flt-32/e_hypotf.obj: libm/flt-32/e_hypotf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_hypotf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.obj
 .PHONY : libm/flt-32/e_hypotf.cpp.obj
 
 libm/flt-32/e_hypotf.i: libm/flt-32/e_hypotf.cpp.i
@@ -453,7 +453,7 @@ libm/flt-32/e_hypotf.i: libm/flt-32/e_hypotf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_hypotf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.i
 .PHONY : libm/flt-32/e_hypotf.cpp.i
 
 libm/flt-32/e_hypotf.s: libm/flt-32/e_hypotf.cpp.s
@@ -461,7 +461,7 @@ libm/flt-32/e_hypotf.s: libm/flt-32/e_hypotf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_hypotf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_hypotf.cpp.s
 .PHONY : libm/flt-32/e_hypotf.cpp.s
 
 libm/flt-32/e_j0f.obj: libm/flt-32/e_j0f.cpp.obj
@@ -469,7 +469,7 @@ libm/flt-32/e_j0f.obj: libm/flt-32/e_j0f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_j0f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.obj
 .PHONY : libm/flt-32/e_j0f.cpp.obj
 
 libm/flt-32/e_j0f.i: libm/flt-32/e_j0f.cpp.i
@@ -477,7 +477,7 @@ libm/flt-32/e_j0f.i: libm/flt-32/e_j0f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_j0f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.i
 .PHONY : libm/flt-32/e_j0f.cpp.i
 
 libm/flt-32/e_j0f.s: libm/flt-32/e_j0f.cpp.s
@@ -485,7 +485,7 @@ libm/flt-32/e_j0f.s: libm/flt-32/e_j0f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_j0f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j0f.cpp.s
 .PHONY : libm/flt-32/e_j0f.cpp.s
 
 libm/flt-32/e_j1f.obj: libm/flt-32/e_j1f.cpp.obj
@@ -493,7 +493,7 @@ libm/flt-32/e_j1f.obj: libm/flt-32/e_j1f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_j1f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.obj
 .PHONY : libm/flt-32/e_j1f.cpp.obj
 
 libm/flt-32/e_j1f.i: libm/flt-32/e_j1f.cpp.i
@@ -501,7 +501,7 @@ libm/flt-32/e_j1f.i: libm/flt-32/e_j1f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_j1f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.i
 .PHONY : libm/flt-32/e_j1f.cpp.i
 
 libm/flt-32/e_j1f.s: libm/flt-32/e_j1f.cpp.s
@@ -509,7 +509,7 @@ libm/flt-32/e_j1f.s: libm/flt-32/e_j1f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_j1f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_j1f.cpp.s
 .PHONY : libm/flt-32/e_j1f.cpp.s
 
 libm/flt-32/e_jnf.obj: libm/flt-32/e_jnf.cpp.obj
@@ -517,7 +517,7 @@ libm/flt-32/e_jnf.obj: libm/flt-32/e_jnf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_jnf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.obj
 .PHONY : libm/flt-32/e_jnf.cpp.obj
 
 libm/flt-32/e_jnf.i: libm/flt-32/e_jnf.cpp.i
@@ -525,7 +525,7 @@ libm/flt-32/e_jnf.i: libm/flt-32/e_jnf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_jnf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.i
 .PHONY : libm/flt-32/e_jnf.cpp.i
 
 libm/flt-32/e_jnf.s: libm/flt-32/e_jnf.cpp.s
@@ -533,7 +533,7 @@ libm/flt-32/e_jnf.s: libm/flt-32/e_jnf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_jnf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_jnf.cpp.s
 .PHONY : libm/flt-32/e_jnf.cpp.s
 
 libm/flt-32/e_lgammaf_r.obj: libm/flt-32/e_lgammaf_r.cpp.obj
@@ -541,7 +541,7 @@ libm/flt-32/e_lgammaf_r.obj: libm/flt-32/e_lgammaf_r.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_lgammaf_r.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.obj
 .PHONY : libm/flt-32/e_lgammaf_r.cpp.obj
 
 libm/flt-32/e_lgammaf_r.i: libm/flt-32/e_lgammaf_r.cpp.i
@@ -549,7 +549,7 @@ libm/flt-32/e_lgammaf_r.i: libm/flt-32/e_lgammaf_r.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_lgammaf_r.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.i
 .PHONY : libm/flt-32/e_lgammaf_r.cpp.i
 
 libm/flt-32/e_lgammaf_r.s: libm/flt-32/e_lgammaf_r.cpp.s
@@ -557,7 +557,7 @@ libm/flt-32/e_lgammaf_r.s: libm/flt-32/e_lgammaf_r.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_lgammaf_r.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_lgammaf_r.cpp.s
 .PHONY : libm/flt-32/e_lgammaf_r.cpp.s
 
 libm/flt-32/e_log10f.obj: libm/flt-32/e_log10f.cpp.obj
@@ -565,7 +565,7 @@ libm/flt-32/e_log10f.obj: libm/flt-32/e_log10f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_log10f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.obj
 .PHONY : libm/flt-32/e_log10f.cpp.obj
 
 libm/flt-32/e_log10f.i: libm/flt-32/e_log10f.cpp.i
@@ -573,7 +573,7 @@ libm/flt-32/e_log10f.i: libm/flt-32/e_log10f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_log10f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.i
 .PHONY : libm/flt-32/e_log10f.cpp.i
 
 libm/flt-32/e_log10f.s: libm/flt-32/e_log10f.cpp.s
@@ -581,7 +581,7 @@ libm/flt-32/e_log10f.s: libm/flt-32/e_log10f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_log10f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log10f.cpp.s
 .PHONY : libm/flt-32/e_log10f.cpp.s
 
 libm/flt-32/e_log2f.obj: libm/flt-32/e_log2f.cpp.obj
@@ -589,7 +589,7 @@ libm/flt-32/e_log2f.obj: libm/flt-32/e_log2f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_log2f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.obj
 .PHONY : libm/flt-32/e_log2f.cpp.obj
 
 libm/flt-32/e_log2f.i: libm/flt-32/e_log2f.cpp.i
@@ -597,7 +597,7 @@ libm/flt-32/e_log2f.i: libm/flt-32/e_log2f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_log2f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.i
 .PHONY : libm/flt-32/e_log2f.cpp.i
 
 libm/flt-32/e_log2f.s: libm/flt-32/e_log2f.cpp.s
@@ -605,7 +605,7 @@ libm/flt-32/e_log2f.s: libm/flt-32/e_log2f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_log2f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_log2f.cpp.s
 .PHONY : libm/flt-32/e_log2f.cpp.s
 
 libm/flt-32/e_logf.obj: libm/flt-32/e_logf.cpp.obj
@@ -613,7 +613,7 @@ libm/flt-32/e_logf.obj: libm/flt-32/e_logf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_logf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.obj
 .PHONY : libm/flt-32/e_logf.cpp.obj
 
 libm/flt-32/e_logf.i: libm/flt-32/e_logf.cpp.i
@@ -621,7 +621,7 @@ libm/flt-32/e_logf.i: libm/flt-32/e_logf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_logf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.i
 .PHONY : libm/flt-32/e_logf.cpp.i
 
 libm/flt-32/e_logf.s: libm/flt-32/e_logf.cpp.s
@@ -629,7 +629,7 @@ libm/flt-32/e_logf.s: libm/flt-32/e_logf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_logf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_logf.cpp.s
 .PHONY : libm/flt-32/e_logf.cpp.s
 
 libm/flt-32/e_powf.obj: libm/flt-32/e_powf.cpp.obj
@@ -637,7 +637,7 @@ libm/flt-32/e_powf.obj: libm/flt-32/e_powf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_powf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.obj
 .PHONY : libm/flt-32/e_powf.cpp.obj
 
 libm/flt-32/e_powf.i: libm/flt-32/e_powf.cpp.i
@@ -645,7 +645,7 @@ libm/flt-32/e_powf.i: libm/flt-32/e_powf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_powf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.i
 .PHONY : libm/flt-32/e_powf.cpp.i
 
 libm/flt-32/e_powf.s: libm/flt-32/e_powf.cpp.s
@@ -653,7 +653,7 @@ libm/flt-32/e_powf.s: libm/flt-32/e_powf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_powf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_powf.cpp.s
 .PHONY : libm/flt-32/e_powf.cpp.s
 
 libm/flt-32/e_rem_pio2f.obj: libm/flt-32/e_rem_pio2f.cpp.obj
@@ -661,7 +661,7 @@ libm/flt-32/e_rem_pio2f.obj: libm/flt-32/e_rem_pio2f.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_rem_pio2f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.obj
 .PHONY : libm/flt-32/e_rem_pio2f.cpp.obj
 
 libm/flt-32/e_rem_pio2f.i: libm/flt-32/e_rem_pio2f.cpp.i
@@ -669,7 +669,7 @@ libm/flt-32/e_rem_pio2f.i: libm/flt-32/e_rem_pio2f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_rem_pio2f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.i
 .PHONY : libm/flt-32/e_rem_pio2f.cpp.i
 
 libm/flt-32/e_rem_pio2f.s: libm/flt-32/e_rem_pio2f.cpp.s
@@ -677,7 +677,7 @@ libm/flt-32/e_rem_pio2f.s: libm/flt-32/e_rem_pio2f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_rem_pio2f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_rem_pio2f.cpp.s
 .PHONY : libm/flt-32/e_rem_pio2f.cpp.s
 
 libm/flt-32/e_remainderf.obj: libm/flt-32/e_remainderf.cpp.obj
@@ -685,7 +685,7 @@ libm/flt-32/e_remainderf.obj: libm/flt-32/e_remainderf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_remainderf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.obj
 .PHONY : libm/flt-32/e_remainderf.cpp.obj
 
 libm/flt-32/e_remainderf.i: libm/flt-32/e_remainderf.cpp.i
@@ -693,7 +693,7 @@ libm/flt-32/e_remainderf.i: libm/flt-32/e_remainderf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_remainderf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.i
 .PHONY : libm/flt-32/e_remainderf.cpp.i
 
 libm/flt-32/e_remainderf.s: libm/flt-32/e_remainderf.cpp.s
@@ -701,7 +701,7 @@ libm/flt-32/e_remainderf.s: libm/flt-32/e_remainderf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_remainderf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_remainderf.cpp.s
 .PHONY : libm/flt-32/e_remainderf.cpp.s
 
 libm/flt-32/e_sinhf.obj: libm/flt-32/e_sinhf.cpp.obj
@@ -709,7 +709,7 @@ libm/flt-32/e_sinhf.obj: libm/flt-32/e_sinhf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_sinhf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.obj
 .PHONY : libm/flt-32/e_sinhf.cpp.obj
 
 libm/flt-32/e_sinhf.i: libm/flt-32/e_sinhf.cpp.i
@@ -717,7 +717,7 @@ libm/flt-32/e_sinhf.i: libm/flt-32/e_sinhf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_sinhf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.i
 .PHONY : libm/flt-32/e_sinhf.cpp.i
 
 libm/flt-32/e_sinhf.s: libm/flt-32/e_sinhf.cpp.s
@@ -725,7 +725,7 @@ libm/flt-32/e_sinhf.s: libm/flt-32/e_sinhf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_sinhf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sinhf.cpp.s
 .PHONY : libm/flt-32/e_sinhf.cpp.s
 
 libm/flt-32/e_sqrtf.obj: libm/flt-32/e_sqrtf.cpp.obj
@@ -733,7 +733,7 @@ libm/flt-32/e_sqrtf.obj: libm/flt-32/e_sqrtf.cpp.obj
 
 # target to build an object file
 libm/flt-32/e_sqrtf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.obj
 .PHONY : libm/flt-32/e_sqrtf.cpp.obj
 
 libm/flt-32/e_sqrtf.i: libm/flt-32/e_sqrtf.cpp.i
@@ -741,7 +741,7 @@ libm/flt-32/e_sqrtf.i: libm/flt-32/e_sqrtf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/e_sqrtf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.i
 .PHONY : libm/flt-32/e_sqrtf.cpp.i
 
 libm/flt-32/e_sqrtf.s: libm/flt-32/e_sqrtf.cpp.s
@@ -749,7 +749,7 @@ libm/flt-32/e_sqrtf.s: libm/flt-32/e_sqrtf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/e_sqrtf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/e_sqrtf.cpp.s
 .PHONY : libm/flt-32/e_sqrtf.cpp.s
 
 libm/flt-32/k_cosf.obj: libm/flt-32/k_cosf.cpp.obj
@@ -757,7 +757,7 @@ libm/flt-32/k_cosf.obj: libm/flt-32/k_cosf.cpp.obj
 
 # target to build an object file
 libm/flt-32/k_cosf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.obj
 .PHONY : libm/flt-32/k_cosf.cpp.obj
 
 libm/flt-32/k_cosf.i: libm/flt-32/k_cosf.cpp.i
@@ -765,7 +765,7 @@ libm/flt-32/k_cosf.i: libm/flt-32/k_cosf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/k_cosf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.i
 .PHONY : libm/flt-32/k_cosf.cpp.i
 
 libm/flt-32/k_cosf.s: libm/flt-32/k_cosf.cpp.s
@@ -773,7 +773,7 @@ libm/flt-32/k_cosf.s: libm/flt-32/k_cosf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/k_cosf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_cosf.cpp.s
 .PHONY : libm/flt-32/k_cosf.cpp.s
 
 libm/flt-32/k_rem_pio2f.obj: libm/flt-32/k_rem_pio2f.cpp.obj
@@ -781,7 +781,7 @@ libm/flt-32/k_rem_pio2f.obj: libm/flt-32/k_rem_pio2f.cpp.obj
 
 # target to build an object file
 libm/flt-32/k_rem_pio2f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.obj
 .PHONY : libm/flt-32/k_rem_pio2f.cpp.obj
 
 libm/flt-32/k_rem_pio2f.i: libm/flt-32/k_rem_pio2f.cpp.i
@@ -789,7 +789,7 @@ libm/flt-32/k_rem_pio2f.i: libm/flt-32/k_rem_pio2f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/k_rem_pio2f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.i
 .PHONY : libm/flt-32/k_rem_pio2f.cpp.i
 
 libm/flt-32/k_rem_pio2f.s: libm/flt-32/k_rem_pio2f.cpp.s
@@ -797,7 +797,7 @@ libm/flt-32/k_rem_pio2f.s: libm/flt-32/k_rem_pio2f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/k_rem_pio2f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_rem_pio2f.cpp.s
 .PHONY : libm/flt-32/k_rem_pio2f.cpp.s
 
 libm/flt-32/k_sinf.obj: libm/flt-32/k_sinf.cpp.obj
@@ -805,7 +805,7 @@ libm/flt-32/k_sinf.obj: libm/flt-32/k_sinf.cpp.obj
 
 # target to build an object file
 libm/flt-32/k_sinf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.obj
 .PHONY : libm/flt-32/k_sinf.cpp.obj
 
 libm/flt-32/k_sinf.i: libm/flt-32/k_sinf.cpp.i
@@ -813,7 +813,7 @@ libm/flt-32/k_sinf.i: libm/flt-32/k_sinf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/k_sinf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.i
 .PHONY : libm/flt-32/k_sinf.cpp.i
 
 libm/flt-32/k_sinf.s: libm/flt-32/k_sinf.cpp.s
@@ -821,7 +821,7 @@ libm/flt-32/k_sinf.s: libm/flt-32/k_sinf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/k_sinf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_sinf.cpp.s
 .PHONY : libm/flt-32/k_sinf.cpp.s
 
 libm/flt-32/k_tanf.obj: libm/flt-32/k_tanf.cpp.obj
@@ -829,7 +829,7 @@ libm/flt-32/k_tanf.obj: libm/flt-32/k_tanf.cpp.obj
 
 # target to build an object file
 libm/flt-32/k_tanf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.obj
 .PHONY : libm/flt-32/k_tanf.cpp.obj
 
 libm/flt-32/k_tanf.i: libm/flt-32/k_tanf.cpp.i
@@ -837,7 +837,7 @@ libm/flt-32/k_tanf.i: libm/flt-32/k_tanf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/k_tanf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.i
 .PHONY : libm/flt-32/k_tanf.cpp.i
 
 libm/flt-32/k_tanf.s: libm/flt-32/k_tanf.cpp.s
@@ -845,7 +845,7 @@ libm/flt-32/k_tanf.s: libm/flt-32/k_tanf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/k_tanf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/k_tanf.cpp.s
 .PHONY : libm/flt-32/k_tanf.cpp.s
 
 libm/flt-32/s_asinhf.obj: libm/flt-32/s_asinhf.cpp.obj
@@ -853,7 +853,7 @@ libm/flt-32/s_asinhf.obj: libm/flt-32/s_asinhf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_asinhf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.obj
 .PHONY : libm/flt-32/s_asinhf.cpp.obj
 
 libm/flt-32/s_asinhf.i: libm/flt-32/s_asinhf.cpp.i
@@ -861,7 +861,7 @@ libm/flt-32/s_asinhf.i: libm/flt-32/s_asinhf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_asinhf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.i
 .PHONY : libm/flt-32/s_asinhf.cpp.i
 
 libm/flt-32/s_asinhf.s: libm/flt-32/s_asinhf.cpp.s
@@ -869,7 +869,7 @@ libm/flt-32/s_asinhf.s: libm/flt-32/s_asinhf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_asinhf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_asinhf.cpp.s
 .PHONY : libm/flt-32/s_asinhf.cpp.s
 
 libm/flt-32/s_atanf.obj: libm/flt-32/s_atanf.cpp.obj
@@ -877,7 +877,7 @@ libm/flt-32/s_atanf.obj: libm/flt-32/s_atanf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_atanf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.obj
 .PHONY : libm/flt-32/s_atanf.cpp.obj
 
 libm/flt-32/s_atanf.i: libm/flt-32/s_atanf.cpp.i
@@ -885,7 +885,7 @@ libm/flt-32/s_atanf.i: libm/flt-32/s_atanf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_atanf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.i
 .PHONY : libm/flt-32/s_atanf.cpp.i
 
 libm/flt-32/s_atanf.s: libm/flt-32/s_atanf.cpp.s
@@ -893,7 +893,7 @@ libm/flt-32/s_atanf.s: libm/flt-32/s_atanf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_atanf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_atanf.cpp.s
 .PHONY : libm/flt-32/s_atanf.cpp.s
 
 libm/flt-32/s_cbrtf.obj: libm/flt-32/s_cbrtf.cpp.obj
@@ -901,7 +901,7 @@ libm/flt-32/s_cbrtf.obj: libm/flt-32/s_cbrtf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_cbrtf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.obj
 .PHONY : libm/flt-32/s_cbrtf.cpp.obj
 
 libm/flt-32/s_cbrtf.i: libm/flt-32/s_cbrtf.cpp.i
@@ -909,7 +909,7 @@ libm/flt-32/s_cbrtf.i: libm/flt-32/s_cbrtf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_cbrtf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.i
 .PHONY : libm/flt-32/s_cbrtf.cpp.i
 
 libm/flt-32/s_cbrtf.s: libm/flt-32/s_cbrtf.cpp.s
@@ -917,7 +917,7 @@ libm/flt-32/s_cbrtf.s: libm/flt-32/s_cbrtf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_cbrtf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cbrtf.cpp.s
 .PHONY : libm/flt-32/s_cbrtf.cpp.s
 
 libm/flt-32/s_ceilf.obj: libm/flt-32/s_ceilf.cpp.obj
@@ -925,7 +925,7 @@ libm/flt-32/s_ceilf.obj: libm/flt-32/s_ceilf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_ceilf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.obj
 .PHONY : libm/flt-32/s_ceilf.cpp.obj
 
 libm/flt-32/s_ceilf.i: libm/flt-32/s_ceilf.cpp.i
@@ -933,7 +933,7 @@ libm/flt-32/s_ceilf.i: libm/flt-32/s_ceilf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_ceilf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.i
 .PHONY : libm/flt-32/s_ceilf.cpp.i
 
 libm/flt-32/s_ceilf.s: libm/flt-32/s_ceilf.cpp.s
@@ -941,7 +941,7 @@ libm/flt-32/s_ceilf.s: libm/flt-32/s_ceilf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_ceilf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ceilf.cpp.s
 .PHONY : libm/flt-32/s_ceilf.cpp.s
 
 libm/flt-32/s_copysignf.obj: libm/flt-32/s_copysignf.cpp.obj
@@ -949,7 +949,7 @@ libm/flt-32/s_copysignf.obj: libm/flt-32/s_copysignf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_copysignf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.obj
 .PHONY : libm/flt-32/s_copysignf.cpp.obj
 
 libm/flt-32/s_copysignf.i: libm/flt-32/s_copysignf.cpp.i
@@ -957,7 +957,7 @@ libm/flt-32/s_copysignf.i: libm/flt-32/s_copysignf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_copysignf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.i
 .PHONY : libm/flt-32/s_copysignf.cpp.i
 
 libm/flt-32/s_copysignf.s: libm/flt-32/s_copysignf.cpp.s
@@ -965,7 +965,7 @@ libm/flt-32/s_copysignf.s: libm/flt-32/s_copysignf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_copysignf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_copysignf.cpp.s
 .PHONY : libm/flt-32/s_copysignf.cpp.s
 
 libm/flt-32/s_cosf.obj: libm/flt-32/s_cosf.cpp.obj
@@ -973,7 +973,7 @@ libm/flt-32/s_cosf.obj: libm/flt-32/s_cosf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_cosf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.obj
 .PHONY : libm/flt-32/s_cosf.cpp.obj
 
 libm/flt-32/s_cosf.i: libm/flt-32/s_cosf.cpp.i
@@ -981,7 +981,7 @@ libm/flt-32/s_cosf.i: libm/flt-32/s_cosf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_cosf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.i
 .PHONY : libm/flt-32/s_cosf.cpp.i
 
 libm/flt-32/s_cosf.s: libm/flt-32/s_cosf.cpp.s
@@ -989,7 +989,7 @@ libm/flt-32/s_cosf.s: libm/flt-32/s_cosf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_cosf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_cosf.cpp.s
 .PHONY : libm/flt-32/s_cosf.cpp.s
 
 libm/flt-32/s_erff.obj: libm/flt-32/s_erff.cpp.obj
@@ -997,7 +997,7 @@ libm/flt-32/s_erff.obj: libm/flt-32/s_erff.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_erff.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.obj
 .PHONY : libm/flt-32/s_erff.cpp.obj
 
 libm/flt-32/s_erff.i: libm/flt-32/s_erff.cpp.i
@@ -1005,7 +1005,7 @@ libm/flt-32/s_erff.i: libm/flt-32/s_erff.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_erff.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.i
 .PHONY : libm/flt-32/s_erff.cpp.i
 
 libm/flt-32/s_erff.s: libm/flt-32/s_erff.cpp.s
@@ -1013,7 +1013,7 @@ libm/flt-32/s_erff.s: libm/flt-32/s_erff.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_erff.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_erff.cpp.s
 .PHONY : libm/flt-32/s_erff.cpp.s
 
 libm/flt-32/s_expm1f.obj: libm/flt-32/s_expm1f.cpp.obj
@@ -1021,7 +1021,7 @@ libm/flt-32/s_expm1f.obj: libm/flt-32/s_expm1f.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_expm1f.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.obj
 .PHONY : libm/flt-32/s_expm1f.cpp.obj
 
 libm/flt-32/s_expm1f.i: libm/flt-32/s_expm1f.cpp.i
@@ -1029,7 +1029,7 @@ libm/flt-32/s_expm1f.i: libm/flt-32/s_expm1f.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_expm1f.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.i
 .PHONY : libm/flt-32/s_expm1f.cpp.i
 
 libm/flt-32/s_expm1f.s: libm/flt-32/s_expm1f.cpp.s
@@ -1037,7 +1037,7 @@ libm/flt-32/s_expm1f.s: libm/flt-32/s_expm1f.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_expm1f.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_expm1f.cpp.s
 .PHONY : libm/flt-32/s_expm1f.cpp.s
 
 libm/flt-32/s_fabsf.obj: libm/flt-32/s_fabsf.cpp.obj
@@ -1045,7 +1045,7 @@ libm/flt-32/s_fabsf.obj: libm/flt-32/s_fabsf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_fabsf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.obj
 .PHONY : libm/flt-32/s_fabsf.cpp.obj
 
 libm/flt-32/s_fabsf.i: libm/flt-32/s_fabsf.cpp.i
@@ -1053,7 +1053,7 @@ libm/flt-32/s_fabsf.i: libm/flt-32/s_fabsf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_fabsf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.i
 .PHONY : libm/flt-32/s_fabsf.cpp.i
 
 libm/flt-32/s_fabsf.s: libm/flt-32/s_fabsf.cpp.s
@@ -1061,7 +1061,7 @@ libm/flt-32/s_fabsf.s: libm/flt-32/s_fabsf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_fabsf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fabsf.cpp.s
 .PHONY : libm/flt-32/s_fabsf.cpp.s
 
 libm/flt-32/s_finitef.obj: libm/flt-32/s_finitef.cpp.obj
@@ -1069,7 +1069,7 @@ libm/flt-32/s_finitef.obj: libm/flt-32/s_finitef.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_finitef.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.obj
 .PHONY : libm/flt-32/s_finitef.cpp.obj
 
 libm/flt-32/s_finitef.i: libm/flt-32/s_finitef.cpp.i
@@ -1077,7 +1077,7 @@ libm/flt-32/s_finitef.i: libm/flt-32/s_finitef.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_finitef.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.i
 .PHONY : libm/flt-32/s_finitef.cpp.i
 
 libm/flt-32/s_finitef.s: libm/flt-32/s_finitef.cpp.s
@@ -1085,7 +1085,7 @@ libm/flt-32/s_finitef.s: libm/flt-32/s_finitef.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_finitef.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_finitef.cpp.s
 .PHONY : libm/flt-32/s_finitef.cpp.s
 
 libm/flt-32/s_floorf.obj: libm/flt-32/s_floorf.cpp.obj
@@ -1093,7 +1093,7 @@ libm/flt-32/s_floorf.obj: libm/flt-32/s_floorf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_floorf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.obj
 .PHONY : libm/flt-32/s_floorf.cpp.obj
 
 libm/flt-32/s_floorf.i: libm/flt-32/s_floorf.cpp.i
@@ -1101,7 +1101,7 @@ libm/flt-32/s_floorf.i: libm/flt-32/s_floorf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_floorf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.i
 .PHONY : libm/flt-32/s_floorf.cpp.i
 
 libm/flt-32/s_floorf.s: libm/flt-32/s_floorf.cpp.s
@@ -1109,7 +1109,7 @@ libm/flt-32/s_floorf.s: libm/flt-32/s_floorf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_floorf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_floorf.cpp.s
 .PHONY : libm/flt-32/s_floorf.cpp.s
 
 libm/flt-32/s_fpclassifyf.obj: libm/flt-32/s_fpclassifyf.cpp.obj
@@ -1117,7 +1117,7 @@ libm/flt-32/s_fpclassifyf.obj: libm/flt-32/s_fpclassifyf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_fpclassifyf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.obj
 .PHONY : libm/flt-32/s_fpclassifyf.cpp.obj
 
 libm/flt-32/s_fpclassifyf.i: libm/flt-32/s_fpclassifyf.cpp.i
@@ -1125,7 +1125,7 @@ libm/flt-32/s_fpclassifyf.i: libm/flt-32/s_fpclassifyf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_fpclassifyf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.i
 .PHONY : libm/flt-32/s_fpclassifyf.cpp.i
 
 libm/flt-32/s_fpclassifyf.s: libm/flt-32/s_fpclassifyf.cpp.s
@@ -1133,7 +1133,7 @@ libm/flt-32/s_fpclassifyf.s: libm/flt-32/s_fpclassifyf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_fpclassifyf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_fpclassifyf.cpp.s
 .PHONY : libm/flt-32/s_fpclassifyf.cpp.s
 
 libm/flt-32/s_frexpf.obj: libm/flt-32/s_frexpf.cpp.obj
@@ -1141,7 +1141,7 @@ libm/flt-32/s_frexpf.obj: libm/flt-32/s_frexpf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_frexpf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.obj
 .PHONY : libm/flt-32/s_frexpf.cpp.obj
 
 libm/flt-32/s_frexpf.i: libm/flt-32/s_frexpf.cpp.i
@@ -1149,7 +1149,7 @@ libm/flt-32/s_frexpf.i: libm/flt-32/s_frexpf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_frexpf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.i
 .PHONY : libm/flt-32/s_frexpf.cpp.i
 
 libm/flt-32/s_frexpf.s: libm/flt-32/s_frexpf.cpp.s
@@ -1157,7 +1157,7 @@ libm/flt-32/s_frexpf.s: libm/flt-32/s_frexpf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_frexpf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_frexpf.cpp.s
 .PHONY : libm/flt-32/s_frexpf.cpp.s
 
 libm/flt-32/s_ilogbf.obj: libm/flt-32/s_ilogbf.cpp.obj
@@ -1165,7 +1165,7 @@ libm/flt-32/s_ilogbf.obj: libm/flt-32/s_ilogbf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_ilogbf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.obj
 .PHONY : libm/flt-32/s_ilogbf.cpp.obj
 
 libm/flt-32/s_ilogbf.i: libm/flt-32/s_ilogbf.cpp.i
@@ -1173,7 +1173,7 @@ libm/flt-32/s_ilogbf.i: libm/flt-32/s_ilogbf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_ilogbf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.i
 .PHONY : libm/flt-32/s_ilogbf.cpp.i
 
 libm/flt-32/s_ilogbf.s: libm/flt-32/s_ilogbf.cpp.s
@@ -1181,7 +1181,7 @@ libm/flt-32/s_ilogbf.s: libm/flt-32/s_ilogbf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_ilogbf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ilogbf.cpp.s
 .PHONY : libm/flt-32/s_ilogbf.cpp.s
 
 libm/flt-32/s_isinff.obj: libm/flt-32/s_isinff.cpp.obj
@@ -1189,7 +1189,7 @@ libm/flt-32/s_isinff.obj: libm/flt-32/s_isinff.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_isinff.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.obj
 .PHONY : libm/flt-32/s_isinff.cpp.obj
 
 libm/flt-32/s_isinff.i: libm/flt-32/s_isinff.cpp.i
@@ -1197,7 +1197,7 @@ libm/flt-32/s_isinff.i: libm/flt-32/s_isinff.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_isinff.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.i
 .PHONY : libm/flt-32/s_isinff.cpp.i
 
 libm/flt-32/s_isinff.s: libm/flt-32/s_isinff.cpp.s
@@ -1205,7 +1205,7 @@ libm/flt-32/s_isinff.s: libm/flt-32/s_isinff.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_isinff.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isinff.cpp.s
 .PHONY : libm/flt-32/s_isinff.cpp.s
 
 libm/flt-32/s_isnanf.obj: libm/flt-32/s_isnanf.cpp.obj
@@ -1213,7 +1213,7 @@ libm/flt-32/s_isnanf.obj: libm/flt-32/s_isnanf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_isnanf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.obj
 .PHONY : libm/flt-32/s_isnanf.cpp.obj
 
 libm/flt-32/s_isnanf.i: libm/flt-32/s_isnanf.cpp.i
@@ -1221,7 +1221,7 @@ libm/flt-32/s_isnanf.i: libm/flt-32/s_isnanf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_isnanf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.i
 .PHONY : libm/flt-32/s_isnanf.cpp.i
 
 libm/flt-32/s_isnanf.s: libm/flt-32/s_isnanf.cpp.s
@@ -1229,7 +1229,7 @@ libm/flt-32/s_isnanf.s: libm/flt-32/s_isnanf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_isnanf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_isnanf.cpp.s
 .PHONY : libm/flt-32/s_isnanf.cpp.s
 
 libm/flt-32/s_ldexpf.obj: libm/flt-32/s_ldexpf.cpp.obj
@@ -1237,7 +1237,7 @@ libm/flt-32/s_ldexpf.obj: libm/flt-32/s_ldexpf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_ldexpf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.obj
 .PHONY : libm/flt-32/s_ldexpf.cpp.obj
 
 libm/flt-32/s_ldexpf.i: libm/flt-32/s_ldexpf.cpp.i
@@ -1245,7 +1245,7 @@ libm/flt-32/s_ldexpf.i: libm/flt-32/s_ldexpf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_ldexpf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.i
 .PHONY : libm/flt-32/s_ldexpf.cpp.i
 
 libm/flt-32/s_ldexpf.s: libm/flt-32/s_ldexpf.cpp.s
@@ -1253,7 +1253,7 @@ libm/flt-32/s_ldexpf.s: libm/flt-32/s_ldexpf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_ldexpf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_ldexpf.cpp.s
 .PHONY : libm/flt-32/s_ldexpf.cpp.s
 
 libm/flt-32/s_llrintf.obj: libm/flt-32/s_llrintf.cpp.obj
@@ -1261,7 +1261,7 @@ libm/flt-32/s_llrintf.obj: libm/flt-32/s_llrintf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_llrintf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.obj
 .PHONY : libm/flt-32/s_llrintf.cpp.obj
 
 libm/flt-32/s_llrintf.i: libm/flt-32/s_llrintf.cpp.i
@@ -1269,7 +1269,7 @@ libm/flt-32/s_llrintf.i: libm/flt-32/s_llrintf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_llrintf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.i
 .PHONY : libm/flt-32/s_llrintf.cpp.i
 
 libm/flt-32/s_llrintf.s: libm/flt-32/s_llrintf.cpp.s
@@ -1277,7 +1277,7 @@ libm/flt-32/s_llrintf.s: libm/flt-32/s_llrintf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_llrintf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llrintf.cpp.s
 .PHONY : libm/flt-32/s_llrintf.cpp.s
 
 libm/flt-32/s_llroundf.obj: libm/flt-32/s_llroundf.cpp.obj
@@ -1285,7 +1285,7 @@ libm/flt-32/s_llroundf.obj: libm/flt-32/s_llroundf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_llroundf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.obj
 .PHONY : libm/flt-32/s_llroundf.cpp.obj
 
 libm/flt-32/s_llroundf.i: libm/flt-32/s_llroundf.cpp.i
@@ -1293,7 +1293,7 @@ libm/flt-32/s_llroundf.i: libm/flt-32/s_llroundf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_llroundf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.i
 .PHONY : libm/flt-32/s_llroundf.cpp.i
 
 libm/flt-32/s_llroundf.s: libm/flt-32/s_llroundf.cpp.s
@@ -1301,7 +1301,7 @@ libm/flt-32/s_llroundf.s: libm/flt-32/s_llroundf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_llroundf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_llroundf.cpp.s
 .PHONY : libm/flt-32/s_llroundf.cpp.s
 
 libm/flt-32/s_log1pf.obj: libm/flt-32/s_log1pf.cpp.obj
@@ -1309,7 +1309,7 @@ libm/flt-32/s_log1pf.obj: libm/flt-32/s_log1pf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_log1pf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.obj
 .PHONY : libm/flt-32/s_log1pf.cpp.obj
 
 libm/flt-32/s_log1pf.i: libm/flt-32/s_log1pf.cpp.i
@@ -1317,7 +1317,7 @@ libm/flt-32/s_log1pf.i: libm/flt-32/s_log1pf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_log1pf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.i
 .PHONY : libm/flt-32/s_log1pf.cpp.i
 
 libm/flt-32/s_log1pf.s: libm/flt-32/s_log1pf.cpp.s
@@ -1325,7 +1325,7 @@ libm/flt-32/s_log1pf.s: libm/flt-32/s_log1pf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_log1pf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_log1pf.cpp.s
 .PHONY : libm/flt-32/s_log1pf.cpp.s
 
 libm/flt-32/s_logbf.obj: libm/flt-32/s_logbf.cpp.obj
@@ -1333,7 +1333,7 @@ libm/flt-32/s_logbf.obj: libm/flt-32/s_logbf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_logbf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.obj
 .PHONY : libm/flt-32/s_logbf.cpp.obj
 
 libm/flt-32/s_logbf.i: libm/flt-32/s_logbf.cpp.i
@@ -1341,7 +1341,7 @@ libm/flt-32/s_logbf.i: libm/flt-32/s_logbf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_logbf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.i
 .PHONY : libm/flt-32/s_logbf.cpp.i
 
 libm/flt-32/s_logbf.s: libm/flt-32/s_logbf.cpp.s
@@ -1349,7 +1349,7 @@ libm/flt-32/s_logbf.s: libm/flt-32/s_logbf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_logbf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_logbf.cpp.s
 .PHONY : libm/flt-32/s_logbf.cpp.s
 
 libm/flt-32/s_lrintf.obj: libm/flt-32/s_lrintf.cpp.obj
@@ -1357,7 +1357,7 @@ libm/flt-32/s_lrintf.obj: libm/flt-32/s_lrintf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_lrintf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.obj
 .PHONY : libm/flt-32/s_lrintf.cpp.obj
 
 libm/flt-32/s_lrintf.i: libm/flt-32/s_lrintf.cpp.i
@@ -1365,7 +1365,7 @@ libm/flt-32/s_lrintf.i: libm/flt-32/s_lrintf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_lrintf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.i
 .PHONY : libm/flt-32/s_lrintf.cpp.i
 
 libm/flt-32/s_lrintf.s: libm/flt-32/s_lrintf.cpp.s
@@ -1373,7 +1373,7 @@ libm/flt-32/s_lrintf.s: libm/flt-32/s_lrintf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_lrintf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lrintf.cpp.s
 .PHONY : libm/flt-32/s_lrintf.cpp.s
 
 libm/flt-32/s_lroundf.obj: libm/flt-32/s_lroundf.cpp.obj
@@ -1381,7 +1381,7 @@ libm/flt-32/s_lroundf.obj: libm/flt-32/s_lroundf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_lroundf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.obj
 .PHONY : libm/flt-32/s_lroundf.cpp.obj
 
 libm/flt-32/s_lroundf.i: libm/flt-32/s_lroundf.cpp.i
@@ -1389,7 +1389,7 @@ libm/flt-32/s_lroundf.i: libm/flt-32/s_lroundf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_lroundf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.i
 .PHONY : libm/flt-32/s_lroundf.cpp.i
 
 libm/flt-32/s_lroundf.s: libm/flt-32/s_lroundf.cpp.s
@@ -1397,7 +1397,7 @@ libm/flt-32/s_lroundf.s: libm/flt-32/s_lroundf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_lroundf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_lroundf.cpp.s
 .PHONY : libm/flt-32/s_lroundf.cpp.s
 
 libm/flt-32/s_modff.obj: libm/flt-32/s_modff.cpp.obj
@@ -1405,7 +1405,7 @@ libm/flt-32/s_modff.obj: libm/flt-32/s_modff.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_modff.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.obj
 .PHONY : libm/flt-32/s_modff.cpp.obj
 
 libm/flt-32/s_modff.i: libm/flt-32/s_modff.cpp.i
@@ -1413,7 +1413,7 @@ libm/flt-32/s_modff.i: libm/flt-32/s_modff.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_modff.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.i
 .PHONY : libm/flt-32/s_modff.cpp.i
 
 libm/flt-32/s_modff.s: libm/flt-32/s_modff.cpp.s
@@ -1421,7 +1421,7 @@ libm/flt-32/s_modff.s: libm/flt-32/s_modff.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_modff.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_modff.cpp.s
 .PHONY : libm/flt-32/s_modff.cpp.s
 
 libm/flt-32/s_nearbyintf.obj: libm/flt-32/s_nearbyintf.cpp.obj
@@ -1429,7 +1429,7 @@ libm/flt-32/s_nearbyintf.obj: libm/flt-32/s_nearbyintf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_nearbyintf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.obj
 .PHONY : libm/flt-32/s_nearbyintf.cpp.obj
 
 libm/flt-32/s_nearbyintf.i: libm/flt-32/s_nearbyintf.cpp.i
@@ -1437,7 +1437,7 @@ libm/flt-32/s_nearbyintf.i: libm/flt-32/s_nearbyintf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_nearbyintf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.i
 .PHONY : libm/flt-32/s_nearbyintf.cpp.i
 
 libm/flt-32/s_nearbyintf.s: libm/flt-32/s_nearbyintf.cpp.s
@@ -1445,7 +1445,7 @@ libm/flt-32/s_nearbyintf.s: libm/flt-32/s_nearbyintf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_nearbyintf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nearbyintf.cpp.s
 .PHONY : libm/flt-32/s_nearbyintf.cpp.s
 
 libm/flt-32/s_nextafterf.obj: libm/flt-32/s_nextafterf.cpp.obj
@@ -1453,7 +1453,7 @@ libm/flt-32/s_nextafterf.obj: libm/flt-32/s_nextafterf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_nextafterf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.obj
 .PHONY : libm/flt-32/s_nextafterf.cpp.obj
 
 libm/flt-32/s_nextafterf.i: libm/flt-32/s_nextafterf.cpp.i
@@ -1461,7 +1461,7 @@ libm/flt-32/s_nextafterf.i: libm/flt-32/s_nextafterf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_nextafterf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.i
 .PHONY : libm/flt-32/s_nextafterf.cpp.i
 
 libm/flt-32/s_nextafterf.s: libm/flt-32/s_nextafterf.cpp.s
@@ -1469,7 +1469,7 @@ libm/flt-32/s_nextafterf.s: libm/flt-32/s_nextafterf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_nextafterf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_nextafterf.cpp.s
 .PHONY : libm/flt-32/s_nextafterf.cpp.s
 
 libm/flt-32/s_remquof.obj: libm/flt-32/s_remquof.cpp.obj
@@ -1477,7 +1477,7 @@ libm/flt-32/s_remquof.obj: libm/flt-32/s_remquof.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_remquof.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.obj
 .PHONY : libm/flt-32/s_remquof.cpp.obj
 
 libm/flt-32/s_remquof.i: libm/flt-32/s_remquof.cpp.i
@@ -1485,7 +1485,7 @@ libm/flt-32/s_remquof.i: libm/flt-32/s_remquof.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_remquof.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.i
 .PHONY : libm/flt-32/s_remquof.cpp.i
 
 libm/flt-32/s_remquof.s: libm/flt-32/s_remquof.cpp.s
@@ -1493,7 +1493,7 @@ libm/flt-32/s_remquof.s: libm/flt-32/s_remquof.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_remquof.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_remquof.cpp.s
 .PHONY : libm/flt-32/s_remquof.cpp.s
 
 libm/flt-32/s_rintf.obj: libm/flt-32/s_rintf.cpp.obj
@@ -1501,7 +1501,7 @@ libm/flt-32/s_rintf.obj: libm/flt-32/s_rintf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_rintf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.obj
 .PHONY : libm/flt-32/s_rintf.cpp.obj
 
 libm/flt-32/s_rintf.i: libm/flt-32/s_rintf.cpp.i
@@ -1509,7 +1509,7 @@ libm/flt-32/s_rintf.i: libm/flt-32/s_rintf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_rintf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.i
 .PHONY : libm/flt-32/s_rintf.cpp.i
 
 libm/flt-32/s_rintf.s: libm/flt-32/s_rintf.cpp.s
@@ -1517,7 +1517,7 @@ libm/flt-32/s_rintf.s: libm/flt-32/s_rintf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_rintf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_rintf.cpp.s
 .PHONY : libm/flt-32/s_rintf.cpp.s
 
 libm/flt-32/s_roundf.obj: libm/flt-32/s_roundf.cpp.obj
@@ -1525,7 +1525,7 @@ libm/flt-32/s_roundf.obj: libm/flt-32/s_roundf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_roundf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.obj
 .PHONY : libm/flt-32/s_roundf.cpp.obj
 
 libm/flt-32/s_roundf.i: libm/flt-32/s_roundf.cpp.i
@@ -1533,7 +1533,7 @@ libm/flt-32/s_roundf.i: libm/flt-32/s_roundf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_roundf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.i
 .PHONY : libm/flt-32/s_roundf.cpp.i
 
 libm/flt-32/s_roundf.s: libm/flt-32/s_roundf.cpp.s
@@ -1541,7 +1541,7 @@ libm/flt-32/s_roundf.s: libm/flt-32/s_roundf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_roundf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_roundf.cpp.s
 .PHONY : libm/flt-32/s_roundf.cpp.s
 
 libm/flt-32/s_scalblnf.obj: libm/flt-32/s_scalblnf.cpp.obj
@@ -1549,7 +1549,7 @@ libm/flt-32/s_scalblnf.obj: libm/flt-32/s_scalblnf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_scalblnf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.obj
 .PHONY : libm/flt-32/s_scalblnf.cpp.obj
 
 libm/flt-32/s_scalblnf.i: libm/flt-32/s_scalblnf.cpp.i
@@ -1557,7 +1557,7 @@ libm/flt-32/s_scalblnf.i: libm/flt-32/s_scalblnf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_scalblnf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.i
 .PHONY : libm/flt-32/s_scalblnf.cpp.i
 
 libm/flt-32/s_scalblnf.s: libm/flt-32/s_scalblnf.cpp.s
@@ -1565,7 +1565,7 @@ libm/flt-32/s_scalblnf.s: libm/flt-32/s_scalblnf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_scalblnf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalblnf.cpp.s
 .PHONY : libm/flt-32/s_scalblnf.cpp.s
 
 libm/flt-32/s_scalbnf.obj: libm/flt-32/s_scalbnf.cpp.obj
@@ -1573,7 +1573,7 @@ libm/flt-32/s_scalbnf.obj: libm/flt-32/s_scalbnf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_scalbnf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.obj
 .PHONY : libm/flt-32/s_scalbnf.cpp.obj
 
 libm/flt-32/s_scalbnf.i: libm/flt-32/s_scalbnf.cpp.i
@@ -1581,7 +1581,7 @@ libm/flt-32/s_scalbnf.i: libm/flt-32/s_scalbnf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_scalbnf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.i
 .PHONY : libm/flt-32/s_scalbnf.cpp.i
 
 libm/flt-32/s_scalbnf.s: libm/flt-32/s_scalbnf.cpp.s
@@ -1589,7 +1589,7 @@ libm/flt-32/s_scalbnf.s: libm/flt-32/s_scalbnf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_scalbnf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_scalbnf.cpp.s
 .PHONY : libm/flt-32/s_scalbnf.cpp.s
 
 libm/flt-32/s_signbitf.obj: libm/flt-32/s_signbitf.cpp.obj
@@ -1597,7 +1597,7 @@ libm/flt-32/s_signbitf.obj: libm/flt-32/s_signbitf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_signbitf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.obj
 .PHONY : libm/flt-32/s_signbitf.cpp.obj
 
 libm/flt-32/s_signbitf.i: libm/flt-32/s_signbitf.cpp.i
@@ -1605,7 +1605,7 @@ libm/flt-32/s_signbitf.i: libm/flt-32/s_signbitf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_signbitf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.i
 .PHONY : libm/flt-32/s_signbitf.cpp.i
 
 libm/flt-32/s_signbitf.s: libm/flt-32/s_signbitf.cpp.s
@@ -1613,7 +1613,7 @@ libm/flt-32/s_signbitf.s: libm/flt-32/s_signbitf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_signbitf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_signbitf.cpp.s
 .PHONY : libm/flt-32/s_signbitf.cpp.s
 
 libm/flt-32/s_sincosf.obj: libm/flt-32/s_sincosf.cpp.obj
@@ -1621,7 +1621,7 @@ libm/flt-32/s_sincosf.obj: libm/flt-32/s_sincosf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_sincosf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.obj
 .PHONY : libm/flt-32/s_sincosf.cpp.obj
 
 libm/flt-32/s_sincosf.i: libm/flt-32/s_sincosf.cpp.i
@@ -1629,7 +1629,7 @@ libm/flt-32/s_sincosf.i: libm/flt-32/s_sincosf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_sincosf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.i
 .PHONY : libm/flt-32/s_sincosf.cpp.i
 
 libm/flt-32/s_sincosf.s: libm/flt-32/s_sincosf.cpp.s
@@ -1637,7 +1637,7 @@ libm/flt-32/s_sincosf.s: libm/flt-32/s_sincosf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_sincosf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sincosf.cpp.s
 .PHONY : libm/flt-32/s_sincosf.cpp.s
 
 libm/flt-32/s_sinf.obj: libm/flt-32/s_sinf.cpp.obj
@@ -1645,7 +1645,7 @@ libm/flt-32/s_sinf.obj: libm/flt-32/s_sinf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_sinf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.obj
 .PHONY : libm/flt-32/s_sinf.cpp.obj
 
 libm/flt-32/s_sinf.i: libm/flt-32/s_sinf.cpp.i
@@ -1653,7 +1653,7 @@ libm/flt-32/s_sinf.i: libm/flt-32/s_sinf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_sinf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.i
 .PHONY : libm/flt-32/s_sinf.cpp.i
 
 libm/flt-32/s_sinf.s: libm/flt-32/s_sinf.cpp.s
@@ -1661,7 +1661,7 @@ libm/flt-32/s_sinf.s: libm/flt-32/s_sinf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_sinf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_sinf.cpp.s
 .PHONY : libm/flt-32/s_sinf.cpp.s
 
 libm/flt-32/s_tanf.obj: libm/flt-32/s_tanf.cpp.obj
@@ -1669,7 +1669,7 @@ libm/flt-32/s_tanf.obj: libm/flt-32/s_tanf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_tanf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.obj
 .PHONY : libm/flt-32/s_tanf.cpp.obj
 
 libm/flt-32/s_tanf.i: libm/flt-32/s_tanf.cpp.i
@@ -1677,7 +1677,7 @@ libm/flt-32/s_tanf.i: libm/flt-32/s_tanf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_tanf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.i
 .PHONY : libm/flt-32/s_tanf.cpp.i
 
 libm/flt-32/s_tanf.s: libm/flt-32/s_tanf.cpp.s
@@ -1685,7 +1685,7 @@ libm/flt-32/s_tanf.s: libm/flt-32/s_tanf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_tanf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanf.cpp.s
 .PHONY : libm/flt-32/s_tanf.cpp.s
 
 libm/flt-32/s_tanhf.obj: libm/flt-32/s_tanhf.cpp.obj
@@ -1693,7 +1693,7 @@ libm/flt-32/s_tanhf.obj: libm/flt-32/s_tanhf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_tanhf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.obj
 .PHONY : libm/flt-32/s_tanhf.cpp.obj
 
 libm/flt-32/s_tanhf.i: libm/flt-32/s_tanhf.cpp.i
@@ -1701,7 +1701,7 @@ libm/flt-32/s_tanhf.i: libm/flt-32/s_tanhf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_tanhf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.i
 .PHONY : libm/flt-32/s_tanhf.cpp.i
 
 libm/flt-32/s_tanhf.s: libm/flt-32/s_tanhf.cpp.s
@@ -1709,7 +1709,7 @@ libm/flt-32/s_tanhf.s: libm/flt-32/s_tanhf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_tanhf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_tanhf.cpp.s
 .PHONY : libm/flt-32/s_tanhf.cpp.s
 
 libm/flt-32/s_truncf.obj: libm/flt-32/s_truncf.cpp.obj
@@ -1717,7 +1717,7 @@ libm/flt-32/s_truncf.obj: libm/flt-32/s_truncf.cpp.obj
 
 # target to build an object file
 libm/flt-32/s_truncf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.obj
 .PHONY : libm/flt-32/s_truncf.cpp.obj
 
 libm/flt-32/s_truncf.i: libm/flt-32/s_truncf.cpp.i
@@ -1725,7 +1725,7 @@ libm/flt-32/s_truncf.i: libm/flt-32/s_truncf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/s_truncf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.i
 .PHONY : libm/flt-32/s_truncf.cpp.i
 
 libm/flt-32/s_truncf.s: libm/flt-32/s_truncf.cpp.s
@@ -1733,7 +1733,7 @@ libm/flt-32/s_truncf.s: libm/flt-32/s_truncf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/s_truncf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/s_truncf.cpp.s
 .PHONY : libm/flt-32/s_truncf.cpp.s
 
 libm/flt-32/w_expf.obj: libm/flt-32/w_expf.cpp.obj
@@ -1741,7 +1741,7 @@ libm/flt-32/w_expf.obj: libm/flt-32/w_expf.cpp.obj
 
 # target to build an object file
 libm/flt-32/w_expf.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.obj
 .PHONY : libm/flt-32/w_expf.cpp.obj
 
 libm/flt-32/w_expf.i: libm/flt-32/w_expf.cpp.i
@@ -1749,7 +1749,7 @@ libm/flt-32/w_expf.i: libm/flt-32/w_expf.cpp.i
 
 # target to preprocess a source file
 libm/flt-32/w_expf.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.i
 .PHONY : libm/flt-32/w_expf.cpp.i
 
 libm/flt-32/w_expf.s: libm/flt-32/w_expf.cpp.s
@@ -1757,7 +1757,7 @@ libm/flt-32/w_expf.s: libm/flt-32/w_expf.cpp.s
 
 # target to generate assembly for a file
 libm/flt-32/w_expf.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/libm/flt-32/w_expf.cpp.s
 .PHONY : libm/flt-32/w_expf.cpp.s
 
 streflopC.obj: streflopC.cpp.obj
@@ -1765,7 +1765,7 @@ streflopC.obj: streflopC.cpp.obj
 
 # target to build an object file
 streflopC.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.obj
 .PHONY : streflopC.cpp.obj
 
 streflopC.i: streflopC.cpp.i
@@ -1773,7 +1773,7 @@ streflopC.i: streflopC.cpp.i
 
 # target to preprocess a source file
 streflopC.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.i
 .PHONY : streflopC.cpp.i
 
 streflopC.s: streflopC.cpp.s
@@ -1781,7 +1781,7 @@ streflopC.s: streflopC.cpp.s
 
 # target to generate assembly for a file
 streflopC.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\streflop\CMakeFiles\streflop.dir\build.make rts/lib/streflop/CMakeFiles/streflop.dir/streflopC.cpp.s
 .PHONY : streflopC.cpp.s
 
 # Help Target
@@ -2012,6 +2012,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

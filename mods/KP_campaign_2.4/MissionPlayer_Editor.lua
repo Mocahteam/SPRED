@@ -2,7 +2,7 @@
 -- this module play generic missions encoded in a json data format
 -- @module MissionPlayer
 -- ----------------
-
+--
 local maxHealth, tmp
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local lang = Spring.GetModOptions()["language"] -- get the language
@@ -35,6 +35,8 @@ local startingFrame=5
 -------------------------------------
 -- Compare value
 -------------------------------------
+--
+--
 local function compareValue(reference,maxRef,value,mode)
   if(mode=="atmost")then
     return (value<=reference)      
@@ -46,6 +48,16 @@ local function compareValue(reference,maxRef,value,mode)
     return (maxRef==value)
   end
 end
+
+
+local function compareValues(v1,v2,mode) 
+  if(mode==">")then return v1>v2 end
+  if(mode==">=")then return v1>=v2 end
+  if(mode=="<")then return v1<v2 end
+  if(mode=="<=")then return v1<=v2 end
+  if(mode=="==")then return v1==v2 end
+  if(mode=="!=")then return v1~=v2 end
+end 
 
 local function deepcopy(orig)
     local orig_type = type(orig)
@@ -247,17 +259,21 @@ end
 -- Check if a condition, expressed as a string describing boolean condition where variables
 -- are related to conditions in the json files.
 -------------------------------------
-local function isTriggerable(trigger)
-  for idCond,valueCond in pairs(conditions) do
+local function isTriggerable(event)
+  -- if 
+  -- chaine vide => create trigger
+  local trigger=event.trigger
+  if(trigger=="")then
+    for c,cond in pairs(event.listOfInvolvedConditions) do
+      trigger=trigger..cond.." and "
+    end
+    trigger=string.sub(trigger,1,-5) -- drop the last "and"
+  end
+  for c,cond in pairs(event.listOfInvolvedConditions) do
     -- first step : conditions are replaced to their boolean values.
-    trigger=string.gsub(trigger, idCond, boolAsString(valueCond["currentlyValid"]))
+    local valueCond=conditions[cond]
+    trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
-  
-  for name,value in pairs(variables) do
-  -- second step : conditions are replaced to their boolean values.
-    trigger=string.gsub(trigger, name, 'variables.'..name)
-  end
-  
   -- third step : turn the string in return statement
   local executableStatement="return("..trigger..")"
   local f = loadstring(executableStatement)
@@ -556,7 +572,7 @@ end
 -------------------------------------
 local function processEvents()
   for idEvent,event in pairs(events) do
-    if isTriggerable(event.trigger) then
+    if isTriggerable(event) then
       if(event.script~=nil)then
         --Spring.Echo("before")
         --Spring.Echo(json.encode(variables))
@@ -571,14 +587,16 @@ local function processEvents()
         f()
       end
       --Spring.Echo("after")
-      --Spring.Echo(json.encode(variables))          
+      --Spring.Echo(json.encode(variables))  
+      --[[        
       for j=1,table.getn(event.actions) do
         local actId=event.actions[j].actionId
         local allowMultipleInStack=actions[actId].allowMultipleInStack   
         if ((allowMultipleInStack==nil or allowMultipleInStack=="yes"))or(not(alreadyInStack(actId))) then
           AddActionInStack(actId,tonumber(actions[actId].delay))
         end
-      end 
+      end
+      --]] 
     end
   end
 end
@@ -589,7 +607,7 @@ end
 -------------------------------------
 local function  UpdateGameState()
   cancelAutoHeal()
-  --processEvents() 
+  processEvents() 
 end
 
 -------------------------------------
@@ -606,17 +624,13 @@ local function GetCurrentUnitAction(unit)
   return action
 end
 
-local function extractListOfUnitsImpliedByCondition(condition)
+local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   --Spring.Echo(json.encode(condition))
-  if(condition.params.team~=nil)then
-    local teamIndex="team_"..tostring(condition.params.team)
-    return groupOfUnits[teamIndex]
-  elseif(condition.params.unitType~=nil) then
-    local typeIndex="type_"..tostring(condition.params.unitType)
-    return groupOfUnits[typeIndex]
-  elseif(condition.params.group~=nil) then
-    local groupIndex="group_"..tostring(condition.params.group)
-    return groupOfUnits[groupIndex]
+  for conditionTerm,prefixTerm in pairs(tableLookup)do    
+    if(conditionParams[conditionTerm]~=nil)then
+      local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
+      return groupOfUnits[groupIndex]
+    end
   end
 end
 
@@ -637,9 +651,9 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       return isUnitInZone(internalUnitId,c.params.zone)  
     elseif(c.attribute=="underAttack")then --untested yet
       return armyInformations[externalUnitId].isUnderAttack
-    elseif(c.attribute=="order") then 
+    elseif(c.attribute=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
-      return (action==CMD[c.params.command]) 
+      return (action==c.params.command) 
     elseif(c.attribute=="hp") then 
       local tresholdRatio=c.params.hp.number/100
       local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
@@ -678,7 +692,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
     if(object=="unit")then
       conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
     elseif(object=="other")then  
-      -- Time related conditions
+      -- Time related conditions [START]
       if(c.type=="elapsedTime") then
       local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
       conditions[idCond]["currentlyValid"]= compareValue(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
@@ -687,34 +701,71 @@ local function UpdateConditionsTruthfulness (frameNumber)
         conditions[idCond]["currentlyValid"]=((frameNumber-startingFrame) % framePeriod==0)
       elseif(c.type=="start") then
         conditions[idCond]["currentlyValid"]=(frameNumber==startingFrame)--frame 5 is the new frame 0
+      -- Time related conditions [END]
+      -- Variable related conditions [START]
+      elseif(c.type=="variableVSnumber") then
+        local v1=variables[c.params.variable]
+        local v2=c.params.number
+        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)    
+      elseif(c.type=="variableVSvariable") then
+        local v1=variables[c.params.variable1]
+        local v2=variables[c.params.variable2]
+        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)   
+      elseif(c.type=="booleanVariable") then
+        conditions[idCond]["currentlyValid"]=variables[c.params.variable] -- very simple indeed 
       end
+      
     elseif(object=="group")then  
-      local springUnitList=extractListOfUnitsImpliedByCondition(c)
+      local tlkup={team="team",unitType="type",group="group"}
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
       local count=0
-      local total=table.getn(springUnitList)
-      --Spring.Echo(json.encode(springUnitList))
-      for u,unit in ipairs(springUnitList) do
+      local total=table.getn(externalUnitList)
+      --Spring.Echo(json.encode(externalUnitList))
+      for u,unit in ipairs(externalUnitList) do
         if(UpdateConditionOnUnit(unit,c)) then
          count=count+1
         end 
       end
       conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
+    elseif(object=="killed")then 
+      if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
+        local tlkup={targetTeam="team",unitType="type",group="group"}
+        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
+        local total=table.getn(externalUnitList)
+        local count=0
+        if(killByTeams[c.params.team]~=nil)then
+          for u,unit in ipairs(externalUnitList) do
+            local spUnit=armySpring[unit]
+            for u2,killInformation in ipairs(killByTeams[c.params.team]) do
+              if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
+                count=count+1
+                break
+              end
+            end
+          end
+        end
+        conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
+      elseif (c.type=="killed_unit") then
+        local numberOfKill=0
+        if(killByTeams[c.params.team]~=nil)then
+          local numberOfKill=table.getn(killByTeams[c.params.team])
+        end
+        conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
+        -- For the moment the "killed all" is not implemented 
+      elseif (c.type=="killed") then
+        local targetedUnit=armySpring[c.params.unit]
+        local kills=killByTeams[c.params.team]
+        if(kills~=nil)then
+          for u2,killInformation in ipairs(kills) do
+            if targetedUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
+              conditions[idCond]["currentlyValid"]=true
+              return
+            end
+          end
+        end
+        conditions[idCond]["currentlyValid"]=false 
+      end
     end
-    
-    --[[
-    if(externalUnitId=="frameNumber") then
-      local bool=true
-      bool=bool and ((c.value.superiorTo==nil)or(secondesToFrames(tonumber(c.value.superiorTo))<frameNumber))
-      bool=bool and ((c.value.inferiorTo==nil)or(secondesToFrames(tonumber(c.value.inferiorTo))>frameNumber))
-      conditions[idCond]["currentlyValid"]=bool          
-    elseif(groupOfUnits[externalUnitId]==nil) then 
-      -- means that the condition is on only one unit
-      conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(externalUnitId,c)
-    else 
-      -- means that the condition is on a group
-      conditions[idCond]["currentlyValid"]=UpdateConditionOnGroup(externalUnitId,c)
-    end
-  --]]
   end 
 end
 
@@ -825,13 +876,14 @@ local function StartAfterJson ()
    -------------------------------
    -------VARIABLES---------------
    -------------------------------
+
   if(mission.variables~=nil)then
     for i=1,table.getn(mission.variables) do
       local missionVar=mission.variables[i]
       local initValue=missionVar.initValue
       local name=missionVar.name
       if(missionVar.type=="number") then
-        initValue=tonumber(initValue)
+        initValue=initValue
       elseif(missionVar.type=="boolean") then
         initValue=(initValue=="true")
       end
@@ -901,15 +953,21 @@ local function StartAfterJson ()
    
 
 
- -------------------------------
- -------CONDITIONS--------------
- -------------------------------
+ ---------------------------------------------
+ -------EVENTS   AND  CONDITIONS--------------
+ ---------------------------------------------
 if(mission.events~=nil)then
     for i=1, table.getn(mission.events) do
      local currentEvent=mission.events[i]
+     local idEvent=mission.events[i].id
+     events[idEvent]={}
+     events[idEvent]=mission.events[i]
+     events[idEvent].hasTakenPlace=false
+     events[idEvent].listOfInvolvedConditions={}
      for j=1, table.getn(currentEvent.conditions)do
        local currentCond=currentEvent.conditions[j]
        local id=currentCond.name
+       table.insert(events[idEvent].listOfInvolvedConditions,id)
        conditions[id]=currentEvent.conditions[j]
        conditions[id]["currentlyValid"]=false
        local type=currentCond.type
@@ -918,6 +976,8 @@ if(mission.events~=nil)then
        if(string.sub(type, 1, 5)=="type_") then
         cond_object="group" -- group is the generic thing
         attribute=string.sub(type, 6, -1)
+       elseif(string.sub(type, 1, 6)=="killed") then
+        cond_object="killed" -- very special group (not working like others)
        elseif(string.sub(type, 1, 5)=="unit_") then
         cond_object="unit"
         attribute=string.sub(type, 6, -1)
@@ -932,20 +992,8 @@ if(mission.events~=nil)then
       conditions[id]["attribute"]=attribute
     end 
   end
-  -- Spring.Echo(json.encode(conditions))
 end
 
- -------------------------------
- -------EVENTS------------------
- -------------------------------
- if(mission.events~=nil)then   
-  for i=1, table.getn(mission.events) do
-   local idEvent=mission.events[i].id
-   events[idEvent]={}
-   events[idEvent]=mission.events[i]
-   events[idEvent].hasTakenPlace=false
-  end
-end
 
 
  -------------------------------

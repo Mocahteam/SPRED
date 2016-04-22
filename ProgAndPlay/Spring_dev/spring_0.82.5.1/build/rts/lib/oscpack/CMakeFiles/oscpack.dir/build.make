@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/lib/oscpack/CMakeFiles/oscpack.dir/depend.make
@@ -50,17 +50,17 @@ include rts/lib/oscpack/CMakeFiles/oscpack.dir/flags.make
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj: rts/lib/oscpack/CMakeFiles/oscpack.dir/flags.make
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj: ../rts/lib/oscpack/OscOutboundPacketStream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -o CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -o CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp > CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp > CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.i
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp -o CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscOutboundPacketStream.cpp -o CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.s
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj.requires:
 .PHONY : rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/lib/oscpack/CMakeFiles/oscpack.dir/OscOutboundPacketStream.cpp.obj.provides.
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.obj: rts/lib/oscpack/CMakeFiles/oscpack.dir/flags.make
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.obj: ../rts/lib/oscpack/OscTypes.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -o CMakeFiles\oscpack.dir\OscTypes.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -o CMakeFiles\oscpack.dir\OscTypes.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/oscpack.dir/OscTypes.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp > CMakeFiles\oscpack.dir\OscTypes.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp > CMakeFiles\oscpack.dir\OscTypes.cpp.i
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/oscpack.dir/OscTypes.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp -o CMakeFiles\oscpack.dir\OscTypes.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -DOSC_HOST_LITTLE_ENDIAN -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack\OscTypes.cpp -o CMakeFiles\oscpack.dir\OscTypes.cpp.s
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.obj.requires:
 .PHONY : rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cpp.obj.requires
@@ -109,8 +109,8 @@ rts/lib/oscpack/liboscpack.a: rts/lib/oscpack/CMakeFiles/oscpack.dir/OscTypes.cp
 rts/lib/oscpack/liboscpack.a: rts/lib/oscpack/CMakeFiles/oscpack.dir/build.make
 rts/lib/oscpack/liboscpack.a: rts/lib/oscpack/CMakeFiles/oscpack.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library liboscpack.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -P CMakeFiles\oscpack.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\oscpack.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -P CMakeFiles\oscpack.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\oscpack.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/lib/oscpack/CMakeFiles/oscpack.dir/build: rts/lib/oscpack/liboscpack.a
@@ -121,10 +121,10 @@ rts/lib/oscpack/CMakeFiles/oscpack.dir/requires: rts/lib/oscpack/CMakeFiles/oscp
 .PHONY : rts/lib/oscpack/CMakeFiles/oscpack.dir/requires
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -P CMakeFiles\oscpack.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack && $(CMAKE_COMMAND) -P CMakeFiles\oscpack.dir\cmake_clean.cmake
 .PHONY : rts/lib/oscpack/CMakeFiles/oscpack.dir/clean
 
 rts/lib/oscpack/CMakeFiles/oscpack.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack\CMakeFiles\oscpack.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\oscpack C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\oscpack\CMakeFiles\oscpack.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/lib/oscpack/CMakeFiles/oscpack.dir/depend
 

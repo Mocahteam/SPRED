@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI
+# Install script for directory: C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -28,16 +28,16 @@ IF(NOT CMAKE_INSTALL_COMPONENT)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" MATCHES "^(Unspecified)$")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE DIRECTORY FILES "C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI/data/" FILES_MATCHING REGEX "ai(info|options)\\.lua$" REGEX "/\\.svn$" EXCLUDE)
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE DIRECTORY FILES "C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI/data/" FILES_MATCHING REGEX "ai(info|options)\\.lua$" REGEX "/\\.svn$" EXCLUDE)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" MATCHES "^(Unspecified)$")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" MATCHES "^(Unspecified)$")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE DIRECTORY FILES "C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI/data/" FILES_MATCHING REGEX "ai(info|options)\\.lua$" EXCLUDE REGEX "/[^/]*$" REGEX "/\\.svn$" EXCLUDE)
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE DIRECTORY FILES "C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Skirmish/CppTestAI/data/" FILES_MATCHING REGEX "ai(info|options)\\.lua$" EXCLUDE REGEX "/[^/]*$" REGEX "/\\.svn$" EXCLUDE)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" MATCHES "^(Unspecified)$")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" MATCHES "^(Unspecified)$")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE MODULE FILES "C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/CppTestAI/SkirmishAI.dll")
+    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1" TYPE MODULE FILES "C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Skirmish/CppTestAI/SkirmishAI.dll")
     IF(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1/SkirmishAI.dll")
       IF(CMAKE_INSTALL_DO_STRIP)
         EXECUTE_PROCESS(COMMAND "C:/MinGW-gcc4.4/bin/strip.exe" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./AI/Skirmish/CppTestAI/0.1/SkirmishAI.dll")

@@ -7,6 +7,8 @@
 
 #include "Sim/Units/Unit.h"
 #include <ctime>
+#include "lib/pp/traces/TracesParser.h"
+#include <boost/thread.hpp>
 
 class CProgAndPlay
 {
@@ -32,6 +34,8 @@ private:
 	bool tracePlayer;
 	std::string missionName;
 	std::time_t startTime;
+	boost::thread tracesThread;
+	TracesParser tp;
 		
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play

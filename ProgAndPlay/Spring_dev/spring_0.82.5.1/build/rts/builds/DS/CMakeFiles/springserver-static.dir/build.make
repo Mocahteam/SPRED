@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include rts/builds/DS/CMakeFiles/springserver-static.dir/depend.make
@@ -50,17 +50,17 @@ include rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.obj: ../rts/System/FileSystem/Archive7Zip.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\Archive7Zip.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\Archive7Zip.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive7Zip.cpp.obj.requires
@@ -74,17 +74,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.obj: ../rts/System/FileSystem/ArchiveBase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBase.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBase.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBase.cpp.obj.requires
@@ -98,17 +98,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.obj: ../rts/System/FileSystem/ArchiveBuffered.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveBuffered.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveBuffered.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveBuffered.cpp.obj.requires
@@ -122,17 +122,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.obj: ../rts/System/FileSystem/ArchiveDir.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveDir.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveDir.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveDir.cpp.obj.requires
@@ -146,17 +146,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.obj: ../rts/System/FileSystem/ArchiveFactory.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveFactory.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveFactory.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveFactory.cpp.obj.requires
@@ -170,17 +170,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.obj: ../rts/System/FileSystem/ArchivePool.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchivePool.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchivePool.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchivePool.cpp.obj.requires
@@ -194,17 +194,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.obj: ../rts/System/FileSystem/ArchiveScanner.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveScanner.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveScanner.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveScanner.cpp.obj.requires
@@ -218,17 +218,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.obj: ../rts/System/FileSystem/ArchiveZip.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\ArchiveZip.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\ArchiveZip.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/ArchiveZip.cpp.obj.requires
@@ -242,17 +242,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/Archive
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.obj: ../rts/System/FileSystem/CacheDir.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CacheDir.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CacheDir.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDir.cpp.obj.requires
@@ -266,17 +266,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CacheDi
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.obj: ../rts/System/FileSystem/CRC.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\CRC.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\CRC.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp.obj.requires
@@ -290,17 +290,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/CRC.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.obj: ../rts/System/FileSystem/DataDirLocater.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\DataDirLocater.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\DataDirLocater.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDirLocater.cpp.obj.requires
@@ -314,17 +314,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/DataDir
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.obj: ../rts/System/FileSystem/FileFilter.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileFilter.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileFilter.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFilter.cpp.obj.requires
@@ -338,17 +338,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileFil
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.obj: ../rts/System/FileSystem/FileHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileHandler.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHandler.cpp.obj.requires
@@ -362,17 +362,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileHan
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.obj: ../rts/System/FileSystem/FileSystem.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystem.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystem.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystem.cpp.obj.requires
@@ -386,17 +386,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSys
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.obj: ../rts/System/FileSystem/FileSystemHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\FileSystemHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\FileSystemHandler.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSystemHandler.cpp.obj.requires
@@ -410,17 +410,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/FileSys
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.obj: ../rts/System/FileSystem/SimpleParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\SimpleParser.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\SimpleParser.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleParser.cpp.obj.requires
@@ -434,17 +434,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/SimpleP
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.obj: ../rts/System/FileSystem/VFSHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\FileSystem\VFSHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\FileSystem\VFSHandler.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHandler.cpp.obj.requires
@@ -458,17 +458,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/FileSystem/VFSHand
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.obj: ../rts/System/Net/Connection.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Connection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\Connection.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp.obj.requires
@@ -482,17 +482,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Connection.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.obj: ../rts/System/Net/LocalConnection.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\LocalConnection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\LocalConnection.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnection.cpp.obj.requires
@@ -506,17 +506,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/LocalConnectio
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.obj: ../rts/System/Net/PackPacket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\PackPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\PackPacket.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp.obj.requires
@@ -530,17 +530,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/PackPacket.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.obj: ../rts/System/Net/ProtocolDef.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\ProtocolDef.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\ProtocolDef.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cpp.obj.requires
@@ -554,17 +554,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/ProtocolDef.cp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.obj: ../rts/System/Net/RawPacket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\RawPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\RawPacket.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.obj.requires
@@ -578,17 +578,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/RawPacket.cpp.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj: ../rts/System/Net/Socket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\Socket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\Socket.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj.requires
@@ -602,17 +602,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/Socket.cpp.obj
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.obj: ../rts/System/Net/UDPConnection.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPConnection.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPConnection.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.cpp.obj.requires
@@ -626,17 +626,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPConnection.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.obj: ../rts/System/Net/UDPListener.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UDPListener.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UDPListener.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cpp.obj.requires
@@ -650,17 +650,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UDPListener.cp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.obj: ../rts/System/Net/UnpackPacket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp > CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Net\UnpackPacket.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Net\UnpackPacket.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.cpp.obj.requires
@@ -674,17 +674,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Net/UnpackPacket.c
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.obj: ../rts/System/Platform/Misc.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Misc.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Misc.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.obj.requires
@@ -698,17 +698,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Misc.cpp.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.obj: ../rts/System/Platform/errorhandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\errorhandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\errorhandler.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhandler.cpp.obj.requires
@@ -722,17 +722,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/errorhand
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj: ../rts/System/TdfParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp > CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp > CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp -o CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TdfParser.cpp -o CMakeFiles\springserver-static.dir\__\__\System\TdfParser.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj.requires
@@ -746,17 +746,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TdfParser.cpp.obj.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.obj: ../rts/System/ConfigHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp > CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\ConfigHandler.cpp -o CMakeFiles\springserver-static.dir\__\__\System\ConfigHandler.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.obj.requires
@@ -770,17 +770,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/ConfigHandler.cpp.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.obj: ../rts/System/GlobalConfig.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp > CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp > CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp -o CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\GlobalConfig.cpp -o CMakeFiles\springserver-static.dir\__\__\System\GlobalConfig.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.obj.requires
@@ -794,17 +794,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/GlobalConfig.cpp.o
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj: ../rts/System/LogOutput.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp > CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp > CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LogOutput.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LogOutput.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj.requires
@@ -818,17 +818,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LogOutput.cpp.obj.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj: ../rts/System/TimeUtil.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp > CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp > CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp -o CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\TimeUtil.cpp -o CMakeFiles\springserver-static.dir\__\__\System\TimeUtil.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj.requires
@@ -842,17 +842,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/TimeUtil.cpp.obj.p
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.obj: ../rts/System/BaseNetProtocol.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp > CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp > CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp -o CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\BaseNetProtocol.cpp -o CMakeFiles\springserver-static.dir\__\__\System\BaseNetProtocol.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cpp.obj.requires
@@ -866,17 +866,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/BaseNetProtocol.cp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.obj: ../rts/System/LoadSave/Demo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\Demo.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\Demo.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.obj.requires
@@ -890,17 +890,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/Demo.cpp.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.obj: ../rts/System/LoadSave/DemoReader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoReader.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoReader.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReader.cpp.obj.requires
@@ -914,17 +914,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoReade
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.obj: ../rts/System/LoadSave/DemoRecorder.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp > CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\LoadSave\DemoRecorder.cpp -o CMakeFiles\springserver-static.dir\__\__\System\LoadSave\DemoRecorder.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecorder.cpp.obj.requires
@@ -938,17 +938,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/LoadSave/DemoRecor
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.obj: ../rts/System/AutohostInterface.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp > CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp > CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp -o CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\AutohostInterface.cpp -o CMakeFiles\springserver-static.dir\__\__\System\AutohostInterface.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.cpp.obj.requires
@@ -962,17 +962,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/AutohostInterface.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.obj: ../rts/System/UnsyncedRNG.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp > CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp > CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp -o CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\UnsyncedRNG.cpp -o CMakeFiles\springserver-static.dir\__\__\System\UnsyncedRNG.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.obj.requires
@@ -986,17 +986,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/UnsyncedRNG.cpp.ob
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj: ../rts/System/Util.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp > CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp > CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Util.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Util.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj.requires
@@ -1010,17 +1010,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Util.cpp.obj.provi
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj: ../rts/System/float4.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_41)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp > CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp > CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp -o CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\float4.cpp -o CMakeFiles\springserver-static.dir\__\__\System\float4.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj.requires
@@ -1034,17 +1034,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/float4.cpp.obj.pro
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.obj: ../rts/System/Platform/Win/WinVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_42)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp > CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\System\Platform\Win\WinVersion.cpp -o CMakeFiles\springserver-static.dir\__\__\System\Platform\Win\WinVersion.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVersion.cpp.obj.requires
@@ -1058,17 +1058,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/System/Platform/Win/WinVe
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.obj: ../rts/Game/Server/GameParticipant.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_43)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp > CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp > CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Server\GameParticipant.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\Server\GameParticipant.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipant.cpp.obj.requires
@@ -1082,17 +1082,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Server/GameParticipa
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj: ../rts/Game/GameServer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_44)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameServer.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameServer.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj.requires
@@ -1106,17 +1106,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameServer.cpp.obj.p
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj: ../rts/Game/ClientSetup.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_45)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp > CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp > CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ClientSetup.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\ClientSetup.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj.requires
@@ -1130,17 +1130,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ClientSetup.cpp.obj.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj: ../rts/Game/GameSetup.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_46)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameSetup.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameSetup.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj.requires
@@ -1154,17 +1154,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameSetup.cpp.obj.pr
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj: ../rts/Game/GameData.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_47)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_47)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameData.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameData.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj.requires
@@ -1178,17 +1178,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameData.cpp.obj.pro
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj: ../rts/Game/PlayerBase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_48)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_48)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp > CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp > CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerBase.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerBase.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj.requires
@@ -1202,17 +1202,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerBase.cpp.obj.p
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.obj: ../rts/Game/PlayerStatistics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_49)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_49)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp > CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp > CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\PlayerStatistics.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\PlayerStatistics.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp.obj.requires
@@ -1226,17 +1226,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/PlayerStatistics.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj: ../rts/Game/GameVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_50)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_50)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\GameVersion.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj.requires
@@ -1250,17 +1250,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/GameVersion.cpp.obj.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.obj: ../rts/Game/IVideoCapturing.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_51)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_51)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp > CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp > CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\IVideoCapturing.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\IVideoCapturing.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.obj.requires
@@ -1274,17 +1274,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/IVideoCapturing.cpp.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.obj: ../rts/Game/DummyVideoCapturing.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_52)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_52)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp > CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp > CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\DummyVideoCapturing.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\DummyVideoCapturing.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.cpp.obj.requires
@@ -1298,17 +1298,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/DummyVideoCapturing.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.obj: ../rts/Game/CommandMessage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_53)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_53)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp > CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp > CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\CommandMessage.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\CommandMessage.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.obj.requires
@@ -1322,17 +1322,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/CommandMessage.cpp.o
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj: ../rts/Game/ChatMessage.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_54)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_54)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp > CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp > CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\ChatMessage.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\ChatMessage.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj.requires
@@ -1346,17 +1346,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/ChatMessage.cpp.obj.
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj: ../rts/Game/Action.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_55)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_55)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp > CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp > CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\Action.cpp -o CMakeFiles\springserver-static.dir\__\__\Game\Action.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj.requires
@@ -1370,17 +1370,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Game/Action.cpp.obj.provi
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj: ../rts/Sim/Misc/TeamBase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_56)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_56)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamBase.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamBase.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj.requires
@@ -1394,17 +1394,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamBase.cpp.obj
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.obj: ../rts/Sim/Misc/TeamStatistics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_57)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_57)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\TeamStatistics.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\TeamStatistics.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.cpp.obj.requires
@@ -1418,17 +1418,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/TeamStatistics.c
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj: ../rts/Sim/Misc/AllyTeam.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_58)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_58)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp > CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Sim\Misc\AllyTeam.cpp -o CMakeFiles\springserver-static.dir\__\__\Sim\Misc\AllyTeam.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj.requires
@@ -1442,17 +1442,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Sim/Misc/AllyTeam.cpp.obj
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj: ../rts/Lua/LuaIO.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_59)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_59)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaIO.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaIO.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj.requires
@@ -1466,17 +1466,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaIO.cpp.obj.provide
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj: ../rts/Lua/LuaParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_60)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_60)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaParser.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaParser.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj.requires
@@ -1490,17 +1490,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaParser.cpp.obj.pro
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj: ../rts/Lua/LuaUtils.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_61)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_61)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp > CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Lua\LuaUtils.cpp -o CMakeFiles\springserver-static.dir\__\__\Lua\LuaUtils.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj.requires
@@ -1514,17 +1514,17 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Lua/LuaUtils.cpp.obj.prov
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.obj: rts/builds/DS/CMakeFiles/springserver-static.dir/flags.make
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.obj: ../rts/Map/MapParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_62)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_62)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp > CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.i
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Map\MapParser.cpp -o CMakeFiles\springserver-static.dir\__\__\Map\MapParser.cpp.s
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.obj.requires:
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/__/__/Map/MapParser.cpp.obj.requires
@@ -1669,8 +1669,8 @@ rts/builds/DS/libspringserver-static.a: rts/builds/DS/CMakeFiles/springserver-st
 rts/builds/DS/libspringserver-static.a: rts/builds/DS/CMakeFiles/springserver-static.dir/build.make
 rts/builds/DS/libspringserver-static.a: rts/builds/DS/CMakeFiles/springserver-static.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libspringserver-static.a"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\springserver-static.dir\cmake_clean_target.cmake
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\springserver-static.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\springserver-static.dir\cmake_clean_target.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\springserver-static.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rts/builds/DS/CMakeFiles/springserver-static.dir/build: rts/builds/DS/libspringserver-static.a
@@ -1741,10 +1741,10 @@ rts/builds/DS/CMakeFiles/springserver-static.dir/requires: rts/builds/DS/CMakeFi
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/requires
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\springserver-static.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS && $(CMAKE_COMMAND) -P CMakeFiles\springserver-static.dir\cmake_clean.cmake
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/clean
 
 rts/builds/DS/CMakeFiles/springserver-static.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\springserver-static.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\builds\DS\CMakeFiles\springserver-static.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : rts/builds/DS/CMakeFiles/springserver-static.dir/depend
 

@@ -3668,7 +3668,7 @@ zlib.h
 ioapi.h
 ../tools/ArchiveMover/../../rts/lib/minizip/ioapi.h
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/ArchiveMover.cpp
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/ArchiveMover.cpp
 cstdio
 -
 cctype
@@ -3710,17 +3710,17 @@ shlobj.h
 shlwapi.h
 -
 lib/minizip/unzip.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/minizip/unzip.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/minizip/unzip.h
 lib/7z/Types.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Types.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Types.h
 lib/7z/Archive/7z/7zAlloc.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zAlloc.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zAlloc.h
 lib/7z/Archive/7z/7zIn.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zIn.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zIn.h
 lib/7z/Archive/7z/7zExtract.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zExtract.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/Archive/7z/7zExtract.h
 lib/7z/7zCrc.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/7zCrc.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/7zCrc.h
 lib/7z/7zFile.h
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/7zFile.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/tools/ArchiveMover/lib/7z/7zFile.h
 

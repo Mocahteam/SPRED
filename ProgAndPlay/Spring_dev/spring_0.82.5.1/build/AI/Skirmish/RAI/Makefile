@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Skirmish\RAI\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 AI/Skirmish/RAI/CMakeFiles/RAI.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/CMakeFiles/RAI.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Skirmish/RAI/CMakeFiles/RAI.dir/rule
 .PHONY : AI/Skirmish/RAI/CMakeFiles/RAI.dir/rule
 
 # Convenience name for target.
@@ -149,7 +149,7 @@ RAI: AI/Skirmish/RAI/CMakeFiles/RAI.dir/rule
 
 # fast build rule for target.
 RAI/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/build
 .PHONY : RAI/fast
 
 AIExport.obj: AIExport.cpp.obj
@@ -157,7 +157,7 @@ AIExport.obj: AIExport.cpp.obj
 
 # target to build an object file
 AIExport.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.obj
 .PHONY : AIExport.cpp.obj
 
 AIExport.i: AIExport.cpp.i
@@ -165,7 +165,7 @@ AIExport.i: AIExport.cpp.i
 
 # target to preprocess a source file
 AIExport.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.i
 .PHONY : AIExport.cpp.i
 
 AIExport.s: AIExport.cpp.s
@@ -173,7 +173,7 @@ AIExport.s: AIExport.cpp.s
 
 # target to generate assembly for a file
 AIExport.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/AIExport.cpp.s
 .PHONY : AIExport.cpp.s
 
 Builder.obj: Builder.cpp.obj
@@ -181,7 +181,7 @@ Builder.obj: Builder.cpp.obj
 
 # target to build an object file
 Builder.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.obj
 .PHONY : Builder.cpp.obj
 
 Builder.i: Builder.cpp.i
@@ -189,7 +189,7 @@ Builder.i: Builder.cpp.i
 
 # target to preprocess a source file
 Builder.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.i
 .PHONY : Builder.cpp.i
 
 Builder.s: Builder.cpp.s
@@ -197,7 +197,7 @@ Builder.s: Builder.cpp.s
 
 # target to generate assembly for a file
 Builder.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/Builder.cpp.s
 .PHONY : Builder.cpp.s
 
 BuilderPlacement.obj: BuilderPlacement.cpp.obj
@@ -205,7 +205,7 @@ BuilderPlacement.obj: BuilderPlacement.cpp.obj
 
 # target to build an object file
 BuilderPlacement.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.obj
 .PHONY : BuilderPlacement.cpp.obj
 
 BuilderPlacement.i: BuilderPlacement.cpp.i
@@ -213,7 +213,7 @@ BuilderPlacement.i: BuilderPlacement.cpp.i
 
 # target to preprocess a source file
 BuilderPlacement.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.i
 .PHONY : BuilderPlacement.cpp.i
 
 BuilderPlacement.s: BuilderPlacement.cpp.s
@@ -221,7 +221,7 @@ BuilderPlacement.s: BuilderPlacement.cpp.s
 
 # target to generate assembly for a file
 BuilderPlacement.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/BuilderPlacement.cpp.s
 .PHONY : BuilderPlacement.cpp.s
 
 CombatManager.obj: CombatManager.cpp.obj
@@ -229,7 +229,7 @@ CombatManager.obj: CombatManager.cpp.obj
 
 # target to build an object file
 CombatManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.obj
 .PHONY : CombatManager.cpp.obj
 
 CombatManager.i: CombatManager.cpp.i
@@ -237,7 +237,7 @@ CombatManager.i: CombatManager.cpp.i
 
 # target to preprocess a source file
 CombatManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.i
 .PHONY : CombatManager.cpp.i
 
 CombatManager.s: CombatManager.cpp.s
@@ -245,7 +245,7 @@ CombatManager.s: CombatManager.cpp.s
 
 # target to generate assembly for a file
 CombatManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/CombatManager.cpp.s
 .PHONY : CombatManager.cpp.s
 
 GResourceMap.obj: GResourceMap.cpp.obj
@@ -253,7 +253,7 @@ GResourceMap.obj: GResourceMap.cpp.obj
 
 # target to build an object file
 GResourceMap.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.obj
 .PHONY : GResourceMap.cpp.obj
 
 GResourceMap.i: GResourceMap.cpp.i
@@ -261,7 +261,7 @@ GResourceMap.i: GResourceMap.cpp.i
 
 # target to preprocess a source file
 GResourceMap.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.i
 .PHONY : GResourceMap.cpp.i
 
 GResourceMap.s: GResourceMap.cpp.s
@@ -269,7 +269,7 @@ GResourceMap.s: GResourceMap.cpp.s
 
 # target to generate assembly for a file
 GResourceMap.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GResourceMap.cpp.s
 .PHONY : GResourceMap.cpp.s
 
 GTerrainMap.obj: GTerrainMap.cpp.obj
@@ -277,7 +277,7 @@ GTerrainMap.obj: GTerrainMap.cpp.obj
 
 # target to build an object file
 GTerrainMap.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.obj
 .PHONY : GTerrainMap.cpp.obj
 
 GTerrainMap.i: GTerrainMap.cpp.i
@@ -285,7 +285,7 @@ GTerrainMap.i: GTerrainMap.cpp.i
 
 # target to preprocess a source file
 GTerrainMap.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.i
 .PHONY : GTerrainMap.cpp.i
 
 GTerrainMap.s: GTerrainMap.cpp.s
@@ -293,7 +293,7 @@ GTerrainMap.s: GTerrainMap.cpp.s
 
 # target to generate assembly for a file
 GTerrainMap.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/GTerrainMap.cpp.s
 .PHONY : GTerrainMap.cpp.s
 
 LogFile.obj: LogFile.cpp.obj
@@ -301,7 +301,7 @@ LogFile.obj: LogFile.cpp.obj
 
 # target to build an object file
 LogFile.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.obj
 .PHONY : LogFile.cpp.obj
 
 LogFile.i: LogFile.cpp.i
@@ -309,7 +309,7 @@ LogFile.i: LogFile.cpp.i
 
 # target to preprocess a source file
 LogFile.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.i
 .PHONY : LogFile.cpp.i
 
 LogFile.s: LogFile.cpp.s
@@ -317,7 +317,7 @@ LogFile.s: LogFile.cpp.s
 
 # target to generate assembly for a file
 LogFile.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/LogFile.cpp.s
 .PHONY : LogFile.cpp.s
 
 PowerManager.obj: PowerManager.cpp.obj
@@ -325,7 +325,7 @@ PowerManager.obj: PowerManager.cpp.obj
 
 # target to build an object file
 PowerManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.obj
 .PHONY : PowerManager.cpp.obj
 
 PowerManager.i: PowerManager.cpp.i
@@ -333,7 +333,7 @@ PowerManager.i: PowerManager.cpp.i
 
 # target to preprocess a source file
 PowerManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.i
 .PHONY : PowerManager.cpp.i
 
 PowerManager.s: PowerManager.cpp.s
@@ -341,7 +341,7 @@ PowerManager.s: PowerManager.cpp.s
 
 # target to generate assembly for a file
 PowerManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/PowerManager.cpp.s
 .PHONY : PowerManager.cpp.s
 
 RAI.obj: RAI.cpp.obj
@@ -349,7 +349,7 @@ RAI.obj: RAI.cpp.obj
 
 # target to build an object file
 RAI.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.obj
 .PHONY : RAI.cpp.obj
 
 RAI.i: RAI.cpp.i
@@ -357,7 +357,7 @@ RAI.i: RAI.cpp.i
 
 # target to preprocess a source file
 RAI.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.i
 .PHONY : RAI.cpp.i
 
 RAI.s: RAI.cpp.s
@@ -365,7 +365,7 @@ RAI.s: RAI.cpp.s
 
 # target to generate assembly for a file
 RAI.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/RAI.cpp.s
 .PHONY : RAI.cpp.s
 
 SWeaponManager.obj: SWeaponManager.cpp.obj
@@ -373,7 +373,7 @@ SWeaponManager.obj: SWeaponManager.cpp.obj
 
 # target to build an object file
 SWeaponManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.obj
 .PHONY : SWeaponManager.cpp.obj
 
 SWeaponManager.i: SWeaponManager.cpp.i
@@ -381,7 +381,7 @@ SWeaponManager.i: SWeaponManager.cpp.i
 
 # target to preprocess a source file
 SWeaponManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.i
 .PHONY : SWeaponManager.cpp.i
 
 SWeaponManager.s: SWeaponManager.cpp.s
@@ -389,7 +389,7 @@ SWeaponManager.s: SWeaponManager.cpp.s
 
 # target to generate assembly for a file
 SWeaponManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/SWeaponManager.cpp.s
 .PHONY : SWeaponManager.cpp.s
 
 UnitDefHandler.obj: UnitDefHandler.cpp.obj
@@ -397,7 +397,7 @@ UnitDefHandler.obj: UnitDefHandler.cpp.obj
 
 # target to build an object file
 UnitDefHandler.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.obj
 .PHONY : UnitDefHandler.cpp.obj
 
 UnitDefHandler.i: UnitDefHandler.cpp.i
@@ -405,7 +405,7 @@ UnitDefHandler.i: UnitDefHandler.cpp.i
 
 # target to preprocess a source file
 UnitDefHandler.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.i
 .PHONY : UnitDefHandler.cpp.i
 
 UnitDefHandler.s: UnitDefHandler.cpp.s
@@ -413,7 +413,7 @@ UnitDefHandler.s: UnitDefHandler.cpp.s
 
 # target to generate assembly for a file
 UnitDefHandler.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitDefHandler.cpp.s
 .PHONY : UnitDefHandler.cpp.s
 
 UnitManager.obj: UnitManager.cpp.obj
@@ -421,7 +421,7 @@ UnitManager.obj: UnitManager.cpp.obj
 
 # target to build an object file
 UnitManager.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.obj
 .PHONY : UnitManager.cpp.obj
 
 UnitManager.i: UnitManager.cpp.i
@@ -429,7 +429,7 @@ UnitManager.i: UnitManager.cpp.i
 
 # target to preprocess a source file
 UnitManager.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.i
 .PHONY : UnitManager.cpp.i
 
 UnitManager.s: UnitManager.cpp.s
@@ -437,7 +437,7 @@ UnitManager.s: UnitManager.cpp.s
 
 # target to generate assembly for a file
 UnitManager.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/UnitManager.cpp.s
 .PHONY : UnitManager.cpp.s
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
@@ -445,7 +445,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishA
 
 # target to build an object file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
@@ -453,7 +453,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
 
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
@@ -461,7 +461,7 @@ __/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAIS
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 .PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
 
 __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.obj
@@ -469,7 +469,7 @@ __/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.o
 
 # target to build an object file
 __/__/Wrappers/CUtils/SharedLibrary.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.obj
 
 __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
@@ -477,7 +477,7 @@ __/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SharedLibrary.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.i
 
 __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
@@ -485,7 +485,7 @@ __/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SharedLibrary.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
 .PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.s
 
 __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
@@ -493,7 +493,7 @@ __/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/SimpleLog.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.obj
 
 __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
@@ -501,7 +501,7 @@ __/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/SimpleLog.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.i
 
 __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
@@ -509,7 +509,7 @@ __/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/SimpleLog.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
 .PHONY : __/__/Wrappers/CUtils/SimpleLog.c.s
 
 __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
@@ -517,7 +517,7 @@ __/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
 
 # target to build an object file
 __/__/Wrappers/CUtils/Util.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.obj
 .PHONY : __/__/Wrappers/CUtils/Util.c.obj
 
 __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
@@ -525,7 +525,7 @@ __/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
 
 # target to preprocess a source file
 __/__/Wrappers/CUtils/Util.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.i
 .PHONY : __/__/Wrappers/CUtils/Util.c.i
 
 __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
@@ -533,7 +533,7 @@ __/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
 
 # target to generate assembly for a file
 __/__/Wrappers/CUtils/Util.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Skirmish\RAI\CMakeFiles\RAI.dir\build.make AI/Skirmish/RAI/CMakeFiles/RAI.dir/__/__/Wrappers/CUtils/Util.c.s
 .PHONY : __/__/Wrappers/CUtils/Util.c.s
 
 # Help Target
@@ -608,6 +608,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

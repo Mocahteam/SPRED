@@ -3,17 +3,17 @@
 
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj
  ../mingwlibs/include/GL/glext.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glewstub.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glewstub.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glewstub.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glewstub.h
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj
  ../mingwlibs/include/GL/glext.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glstub.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glstub.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glstub.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glstub.h
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glustub.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glustub.c
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glxextstub.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glxextstub.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glxextstub.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/glxextstub.h
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj
  ../mingwlibs/include/SDL/SDL.h
  ../mingwlibs/include/SDL/SDL_active.h
@@ -41,7 +41,7 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj
  ../mingwlibs/include/SDL/SDL_video.h
  ../mingwlibs/include/SDL/begin_code.h
  ../mingwlibs/include/SDL/close_code.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/sdlstub.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/sdlstub.c
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj
  ../mingwlibs/include/boost/algorithm/string/case_conv.hpp
  ../mingwlibs/include/boost/algorithm/string/compare.hpp
@@ -633,7 +633,7 @@ rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj
  ../mingwlibs/include/boost/utility/enable_if.hpp
  ../mingwlibs/include/boost/version.hpp
  ../mingwlibs/include/boost/visit_each.hpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/sdlstub_cppbit.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/sdlstub_cppbit.cpp
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/wglstub.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/wglstub.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/wglstub.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/headlessStubs/wglstub.h

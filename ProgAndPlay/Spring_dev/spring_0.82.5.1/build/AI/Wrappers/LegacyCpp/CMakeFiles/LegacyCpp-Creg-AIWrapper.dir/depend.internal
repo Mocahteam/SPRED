@@ -320,42 +320,42 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAI.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../AIGlobalAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/../IGlobalAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyCreatedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDamagedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyDestroyedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterLOSEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyEnterRadarEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyFinishedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveLOSEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEnemyLeaveRadarEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIEvents.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIInitEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIMessageEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AINullEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIPlayerCommandEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIReleaseEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AISeismicPingEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCapturedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitCreatedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDamagedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitDestroyedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitFinishedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitGivenEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitIdleEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUnitMoveFailedEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIUpdateEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/Event/AIWeaponFiredEvent.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -1026,10 +1026,10 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICallback.cpp.o
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -1343,11 +1343,11 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIAICheats.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -1660,12 +1660,12 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAI.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAI.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/aibase.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -1975,13 +1975,13 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AIGlobalAICallback
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIAICheats.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AIGlobalAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICallback.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IAICheats.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/IGlobalAICallback.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -2283,7 +2283,7 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/AISCommands.cpp.ob
  ../rts/System/creg/creg_cond.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AISCommands.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/AISCommands.cpp
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -2594,8 +2594,8 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/UnitDef.cpp.obj
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/LegacyCpp/UnitDef.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/GameVersion.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -3258,8 +3258,8 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Game/
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/Misc/DamageArray.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -3554,9 +3554,9 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Sim/M
  ../rts/System/creg/TypeDeduction.h
  ../rts/System/creg/creg.h
  ../rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArray.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Sim/Misc/DamageArrayHandler.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/Serializer.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -4221,10 +4221,10 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/ISerializer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/Serializer.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/Serializer.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/ISerializer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/Serializer.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/Serializer.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/VarTypes.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -4888,9 +4888,9 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/VarTypes.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/VarTypes.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/VarTypes.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/VarTypes.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/creg/creg.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -5554,8 +5554,8 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
 AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/System/float3.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp
@@ -5858,9 +5858,9 @@ AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/__/__/__/rts/Syste
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/BranchPrediction.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/FastMath.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Vec2.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/creg/creg_cond.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/float3.h

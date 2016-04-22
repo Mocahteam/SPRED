@@ -51,7 +51,7 @@ LIST(APPEND engineCommonLibraries ${Boost_REGEX_LIBRARY} ${Boost_THREAD_LIBRARY}
 
 # Muratet (Add pp-supplier lib to engineCommonLibraries) ---
 # LIST(APPEND engineCommonLibraries lua 7zip oscpack minizip streflop lobby)
-LIST(APPEND engineCommonLibraries lua 7zip oscpack minizip streflop lobby pp-supplier)
+LIST(APPEND engineCommonLibraries lua 7zip oscpack minizip streflop lobby pp-supplier pp-traces)
 # ---
 
 IF    (UNIX)

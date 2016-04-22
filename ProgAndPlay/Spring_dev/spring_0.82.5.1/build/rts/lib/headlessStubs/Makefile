@@ -38,10 +38,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake-gui.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -59,19 +59,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -81,7 +81,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -100,7 +100,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs && "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -109,14 +109,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs\CMakeFiles\progress.make
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\headlessStubs\CMakeFiles\progress.make
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/clean
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/clean
 .PHONY : clean
 
 # The main clean target
@@ -125,22 +125,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/preinstall
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/rule:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/rule
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/rule
 .PHONY : rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/rule
 
 # Convenience name for target.
@@ -149,7 +149,7 @@ headlessStubs: rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/rule
 
 # fast build rule for target.
 headlessStubs/fast:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/build
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/build
 .PHONY : headlessStubs/fast
 
 glewstub.obj: glewstub.c.obj
@@ -157,7 +157,7 @@ glewstub.obj: glewstub.c.obj
 
 # target to build an object file
 glewstub.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.obj
 .PHONY : glewstub.c.obj
 
 glewstub.i: glewstub.c.i
@@ -165,7 +165,7 @@ glewstub.i: glewstub.c.i
 
 # target to preprocess a source file
 glewstub.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.i
 .PHONY : glewstub.c.i
 
 glewstub.s: glewstub.c.s
@@ -173,7 +173,7 @@ glewstub.s: glewstub.c.s
 
 # target to generate assembly for a file
 glewstub.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glewstub.c.s
 .PHONY : glewstub.c.s
 
 glstub.obj: glstub.c.obj
@@ -181,7 +181,7 @@ glstub.obj: glstub.c.obj
 
 # target to build an object file
 glstub.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.obj
 .PHONY : glstub.c.obj
 
 glstub.i: glstub.c.i
@@ -189,7 +189,7 @@ glstub.i: glstub.c.i
 
 # target to preprocess a source file
 glstub.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.i
 .PHONY : glstub.c.i
 
 glstub.s: glstub.c.s
@@ -197,7 +197,7 @@ glstub.s: glstub.c.s
 
 # target to generate assembly for a file
 glstub.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glstub.c.s
 .PHONY : glstub.c.s
 
 glustub.obj: glustub.c.obj
@@ -205,7 +205,7 @@ glustub.obj: glustub.c.obj
 
 # target to build an object file
 glustub.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.obj
 .PHONY : glustub.c.obj
 
 glustub.i: glustub.c.i
@@ -213,7 +213,7 @@ glustub.i: glustub.c.i
 
 # target to preprocess a source file
 glustub.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.i
 .PHONY : glustub.c.i
 
 glustub.s: glustub.c.s
@@ -221,7 +221,7 @@ glustub.s: glustub.c.s
 
 # target to generate assembly for a file
 glustub.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glustub.c.s
 .PHONY : glustub.c.s
 
 glxextstub.obj: glxextstub.c.obj
@@ -229,7 +229,7 @@ glxextstub.obj: glxextstub.c.obj
 
 # target to build an object file
 glxextstub.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.obj
 .PHONY : glxextstub.c.obj
 
 glxextstub.i: glxextstub.c.i
@@ -237,7 +237,7 @@ glxextstub.i: glxextstub.c.i
 
 # target to preprocess a source file
 glxextstub.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.i
 .PHONY : glxextstub.c.i
 
 glxextstub.s: glxextstub.c.s
@@ -245,7 +245,7 @@ glxextstub.s: glxextstub.c.s
 
 # target to generate assembly for a file
 glxextstub.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/glxextstub.c.s
 .PHONY : glxextstub.c.s
 
 sdlstub.obj: sdlstub.c.obj
@@ -253,7 +253,7 @@ sdlstub.obj: sdlstub.c.obj
 
 # target to build an object file
 sdlstub.c.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.obj
 .PHONY : sdlstub.c.obj
 
 sdlstub.i: sdlstub.c.i
@@ -261,7 +261,7 @@ sdlstub.i: sdlstub.c.i
 
 # target to preprocess a source file
 sdlstub.c.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.i
 .PHONY : sdlstub.c.i
 
 sdlstub.s: sdlstub.c.s
@@ -269,7 +269,7 @@ sdlstub.s: sdlstub.c.s
 
 # target to generate assembly for a file
 sdlstub.c.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub.c.s
 .PHONY : sdlstub.c.s
 
 sdlstub_cppbit.obj: sdlstub_cppbit.cpp.obj
@@ -277,7 +277,7 @@ sdlstub_cppbit.obj: sdlstub_cppbit.cpp.obj
 
 # target to build an object file
 sdlstub_cppbit.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.obj
 .PHONY : sdlstub_cppbit.cpp.obj
 
 sdlstub_cppbit.i: sdlstub_cppbit.cpp.i
@@ -285,7 +285,7 @@ sdlstub_cppbit.i: sdlstub_cppbit.cpp.i
 
 # target to preprocess a source file
 sdlstub_cppbit.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.i
 .PHONY : sdlstub_cppbit.cpp.i
 
 sdlstub_cppbit.s: sdlstub_cppbit.cpp.s
@@ -293,7 +293,7 @@ sdlstub_cppbit.s: sdlstub_cppbit.cpp.s
 
 # target to generate assembly for a file
 sdlstub_cppbit.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/sdlstub_cppbit.cpp.s
 .PHONY : sdlstub_cppbit.cpp.s
 
 wglstub.obj: wglstub.cpp.obj
@@ -301,7 +301,7 @@ wglstub.obj: wglstub.cpp.obj
 
 # target to build an object file
 wglstub.cpp.obj:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.obj
 .PHONY : wglstub.cpp.obj
 
 wglstub.i: wglstub.cpp.i
@@ -309,7 +309,7 @@ wglstub.i: wglstub.cpp.i
 
 # target to preprocess a source file
 wglstub.cpp.i:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.i
 .PHONY : wglstub.cpp.i
 
 wglstub.s: wglstub.cpp.s
@@ -317,7 +317,7 @@ wglstub.s: wglstub.cpp.s
 
 # target to generate assembly for a file
 wglstub.cpp.s:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\headlessStubs\CMakeFiles\headlessStubs.dir\build.make rts/lib/headlessStubs/CMakeFiles/headlessStubs.dir/wglstub.cpp.s
 .PHONY : wglstub.cpp.s
 
 # Help Target
@@ -365,6 +365,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
