@@ -259,17 +259,14 @@ end
 -- Check if a condition, expressed as a string describing boolean condition where variables
 -- are related to conditions in the json files.
 -------------------------------------
-local function isTriggerable(trigger)
+local function isTriggerable(event)
+  -- if 
+  -- chaine vide => create trigger
+  local trigger=event.trigger
   for idCond,valueCond in pairs(conditions) do
     -- first step : conditions are replaced to their boolean values.
     trigger=string.gsub(trigger, idCond, boolAsString(valueCond["currentlyValid"]))
-  end
-  
-  for name,value in pairs(variables) do
-  -- second step : conditions are replaced to their boolean values.
-    trigger=string.gsub(trigger, name, 'variables.'..name)
-  end
-  
+  end  
   -- third step : turn the string in return statement
   local executableStatement="return("..trigger..")"
   local f = loadstring(executableStatement)
@@ -568,7 +565,7 @@ end
 -------------------------------------
 local function processEvents()
   for idEvent,event in pairs(events) do
-    if isTriggerable(event.trigger) then
+    if isTriggerable(event) then
       if(event.script~=nil)then
         --Spring.Echo("before")
         --Spring.Echo(json.encode(variables))
@@ -601,7 +598,7 @@ end
 -------------------------------------
 local function  UpdateGameState()
   cancelAutoHeal()
-  --processEvents() 
+  processEvents() 
 end
 
 -------------------------------------
@@ -959,15 +956,21 @@ local function StartAfterJson ()
    
 
 
- -------------------------------
- -------CONDITIONS--------------
- -------------------------------
+ ---------------------------------------------
+ -------EVENTS   AND  CONDITIONS--------------
+ ---------------------------------------------
 if(mission.events~=nil)then
     for i=1, table.getn(mission.events) do
      local currentEvent=mission.events[i]
+     local idEvent=mission.events[i].id
+     events[idEvent]={}
+     events[idEvent]=mission.events[i]
+     events[idEvent].hasTakenPlace=false
+     events[idEvent].listOfInvolvedConditions={}
      for j=1, table.getn(currentEvent.conditions)do
        local currentCond=currentEvent.conditions[j]
        local id=currentCond.name
+       table.insert(events[idEvent].listOfInvolvedConditions,id)
        conditions[id]=currentEvent.conditions[j]
        conditions[id]["currentlyValid"]=false
        local type=currentCond.type
@@ -992,20 +995,9 @@ if(mission.events~=nil)then
       conditions[id]["attribute"]=attribute
     end 
   end
-  -- Spring.Echo(json.encode(conditions))
+  Spring.Echo(json.encode(events))
 end
 
- -------------------------------
- -------EVENTS------------------
- -------------------------------
- if(mission.events~=nil)then   
-  for i=1, table.getn(mission.events) do
-   local idEvent=mission.events[i].id
-   events[idEvent]={}
-   events[idEvent]=mission.events[i]
-   events[idEvent].hasTakenPlace=false
-  end
-end
 
 
  -------------------------------
