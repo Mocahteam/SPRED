@@ -368,7 +368,7 @@ actions_list = {
 		attributes = {
 			{
 				text = '<Message>',
-				type = "text",
+				type = "message",
 				id = "message"
 			}
 		}
@@ -381,7 +381,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Message>",
-				type = "text",
+				type = "message",
 				id = "message"
 			},
 			{
