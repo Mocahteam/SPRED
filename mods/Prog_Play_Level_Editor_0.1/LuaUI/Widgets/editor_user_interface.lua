@@ -1245,7 +1245,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 	if noGroupsInCommon then -- If units have to groups in common or the selected unit does not belong to any group, display a specific message
 		unitGroupsRemovalWindow:RemoveChild(removalWindowScrollPanel)
 		local text = EDITOR_UNITS_GROUPS_NO_COMMON_GROUP
-		if unitSelection.n == 1 then
+		if #unitSelection == 1 then
 			text = EDITOR_UNITS_GROUPS_NO_GROUP
 		end
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
@@ -2505,11 +2505,12 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 				f:Dispose()
 			end
 		end
-		local y = 120
+		local y = {}
+		y[1] = 120
 		conditionFeatures = {}
 		for i, attr in ipairs(condition_template.attributes) do
 			table.insert(conditionFeatures, drawFeature(attr, y, a, conditionScrollPanel))
-			y = y + 30
+			y[1] = y[1] + 30
 		end
 	end
 end
@@ -2533,17 +2534,19 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 				f:Dispose()
 			end
 		end
-		local y = 120
+		local y = {}
+		y[1] = 120
 		actionFeatures = {}
 		for i, attr in ipairs(action_template.attributes) do
 			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
-			y = y + 30
+			y[1] = y[1] + 30
 		end
 	end
 end
-function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to its type
+function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according to its type
+	local y = yref[1]
 	local feature = {}
-	local text = addLabel(scrollPanel, '5%', y, '20%', 30, attr.text, 16, "left", nil, "center")
+	local text = addLabel(scrollPanel, '5%', y, '30%', 30, attr.text, 16, "center", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
 	if attr.type == "unitType" 
@@ -2602,6 +2605,9 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			end
 			if #comboBoxItems == 0 then
 				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARNUM_NOT_FOUND)
+				local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_VARIABLE_HINT, 14, { 0.6, 1, 1, 1 })
+				table.insert(feature, variableHint)
+				yref[1] = yref[1] + 40
 			end
 		elseif attr.type == "booleanVariable" then
 			for i, v in ipairs(triggerVariables) do
@@ -2611,6 +2617,9 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			end
 			if #comboBoxItems == 0 then
 				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARBOOL_NOT_FOUND)
+				local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_VARIABLE_HINT, 14, { 0.6, 1, 1, 1 })
+				table.insert(feature, variableHint)
+				yref[1] = yref[1] + 40
 			end
 		elseif attr.type == "comparison" then
 			comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
@@ -2632,7 +2641,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		elseif attr.type == "operator" then
 			comboBoxItems = { "+", "-", "*", "/", "%" }
 		end
-		local comboBox = addComboBox(scrollPanel, '25%', y, '40%', 30, comboBoxItems)
+		local comboBox = addComboBox(scrollPanel, '35%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" then
 			comboBox.OnSelect = {
 				function()
@@ -2686,13 +2695,13 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		end
 		table.insert(feature, comboBox)
 	elseif attr.type == "position" then
-		local positionLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
+		local positionLabel = addLabel(scrollPanel, '35%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
 		if a.params[attr.id] then
 			if a.params[attr.id].x and a.params[attr.id].z then
 				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
 			end
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickPosition = function()
 			changedParam = attr.id
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
@@ -2706,7 +2715,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		table.insert(feature, positionLabel)
 		table.insert(feature, pickButton)
 	elseif attr.type == "unit" then
-		local unitLabel = addLabel(scrollPanel, '25%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
+		local unitLabel = addLabel(scrollPanel, '35%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 		if a.params[attr.id] then
 			local param = a.params[attr.id]
 			if type(param) == "string" then
@@ -2721,7 +2730,7 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 				unitLabel:SetCaption(name.." ("..tostring(u)..")")
 			end
 		end
-		local pickButton = addButton(scrollPanel, '65%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickUnit = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
@@ -2735,11 +2744,22 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "number" or attr.type == "text" then
-		local editBox = addEditBox(scrollPanel, '25%', y, '40%', 30)
+	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" then
+		local editBox = addEditBox(scrollPanel, '35%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
-			editBox:SetText(tostring(a.params[attr.id]))
+			if attr.type == "message" then
+				local text = ""
+				for i, msg in ipairs(a.params[attr.id]) do
+					text = text .. msg
+					if i ~= #a.params[attr.id] then
+						text = text .. " || "
+					end
+				end
+				editBox:SetText(text)
+			else
+				editBox:SetText(tostring(a.params[attr.id]))
+			end
 		end
 		if attr.type == "number" then
 			editBox.updateFunction = function()
@@ -2749,6 +2769,18 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			editBox.updateFunction = function()
 				a.params[attr.id] = editBox.text
 			end
+		elseif attr.type == "message" then
+			editBox.updateFunction = function()
+				local msgs = splitString(editBox.text, "||")
+				for i in ipairs(msgs) do
+					msgs[i] = string.gsub(msgs[i], "^%s+", "")
+					msgs[i] = string.gsub(msgs[i], "%s+$", "")
+				end
+				a.params[attr.id] = msgs
+			end
+			local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_MESSAGE_HINT, 14, { 0.6, 1, 1, 1 })
+			table.insert(feature, messageHint)
+			yref[1] = yref[1] + 40
 		end
 		editBox.isEditBox = true
 		table.insert(feature, editBox)
@@ -2762,8 +2794,8 @@ function drawFeature(attr, y, a, scrollPanel) -- Display parameter according to 
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
 		}
-		local comboBox = addComboBox(scrollPanel, '25%', y, '30%', 30, comboBoxItems)
-		local editBox = addEditBox(scrollPanel, '55%', y, '30%', 30)
+		local comboBox = addComboBox(scrollPanel, '35%', y, '30%', 30, comboBoxItems)
+		local editBox = addEditBox(scrollPanel, '65%', y, '30%', 30)
 		editBox.toShow = true
 		comboBox.OnSelect = {
 			function()
@@ -4118,7 +4150,7 @@ function widget:Update(delta)
 		doubleClick = doubleClick + delta
 	end
 	
-	if unitSelection.n == 0 then
+	if #unitSelection == 0 then
 		clearTemporaryWindows()
 	end
 	
@@ -4330,7 +4362,7 @@ function widget:MousePress(mx, my, button)
 			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 			if kind == "unit" then
 				local unitSelection = Spring.GetSelectedUnits()
-				if unitSelection.n == 0 or not Spring.IsUnitSelected(var) then
+				if #unitSelection == 0 or not Spring.IsUnitSelected(var) then
 					proceedSelection({var})
 				end
 				if Spring.IsUnitSelected(var) then
@@ -4554,7 +4586,7 @@ function widget:KeyPress(key, mods)
 			return true
 		end
 		-- ARROWS : move selected units
-		if unitSelection.n > 0 then
+		if #unitSelection > 0 then
 			if key == Spring.GetKeyCode("up") then
 				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
 				local msg = "Translate Units".."++".."0".."++".."-1"

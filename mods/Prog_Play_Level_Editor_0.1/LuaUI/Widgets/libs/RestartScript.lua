@@ -27,7 +27,11 @@ function DoTheRestart(startscriptfilename, tableOperation)
 		file:write(VFS.LoadFile("infolog.txt"))
 		file:flush()
 		file:close()
-		Spring.Restart(params,trimmed)
+		if Game.version == "0.82.5.1" then
+			Spring.Restart(params,trimmed)
+		else
+			Spring.Reload(trimmed)
+		end
 		Spring.Echo(widget:GetInfo().name..": Just called Spring.Restart(\""..params.."\",\"[GAME]{..}\")")
 		Spring.Echo(widget:GetInfo().name..": Wait, we shouldn't be here, should have restarted or crashed or quitted by now.")
 	else

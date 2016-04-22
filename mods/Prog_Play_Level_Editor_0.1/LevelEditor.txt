@@ -29,7 +29,7 @@
 	[PLAYER0]
 	{
 		Name=Player;		// pure info
-		Spectator=0;
+		Spectator=1;
 		Team=0; 				// the team this player controlls
 	}
 	// more players ...
