@@ -263,10 +263,17 @@ local function isTriggerable(event)
   -- if 
   -- chaine vide => create trigger
   local trigger=event.trigger
-  for idCond,valueCond in pairs(conditions) do
+  if(trigger=="")then
+    for c,cond in pairs(event.listOfInvolvedConditions) do
+      trigger=trigger..cond.." and "
+    end
+    trigger=string.sub(trigger,1,-5) -- drop the last "and"
+  end
+  for c,cond in pairs(event.listOfInvolvedConditions) do
     -- first step : conditions are replaced to their boolean values.
-    trigger=string.gsub(trigger, idCond, boolAsString(valueCond["currentlyValid"]))
-  end  
+    local valueCond=conditions[cond]
+    trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
+  end
   -- third step : turn the string in return statement
   local executableStatement="return("..trigger..")"
   local f = loadstring(executableStatement)
@@ -580,14 +587,16 @@ local function processEvents()
         f()
       end
       --Spring.Echo("after")
-      --Spring.Echo(json.encode(variables))          
+      --Spring.Echo(json.encode(variables))  
+      --[[        
       for j=1,table.getn(event.actions) do
         local actId=event.actions[j].actionId
         local allowMultipleInStack=actions[actId].allowMultipleInStack   
         if ((allowMultipleInStack==nil or allowMultipleInStack=="yes"))or(not(alreadyInStack(actId))) then
           AddActionInStack(actId,tonumber(actions[actId].delay))
         end
-      end 
+      end
+      --]] 
     end
   end
 end
@@ -697,25 +706,13 @@ local function UpdateConditionsTruthfulness (frameNumber)
       elseif(c.type=="variableVSnumber") then
         local v1=variables[c.params.variable]
         local v2=c.params.number
-        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)  
-        if(conditions[idCond]["currentlyValid"])then
-          Spring.Echo("variableConditionValid")
-          Spring.Echo(c.id)
-        end    
+        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)    
       elseif(c.type=="variableVSvariable") then
         local v1=variables[c.params.variable1]
         local v2=variables[c.params.variable2]
-        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)
-        if(conditions[idCond]["currentlyValid"])then
-          Spring.Echo("variableConditionValid")
-          Spring.Echo(c.id)
-        end    
+        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)   
       elseif(c.type=="booleanVariable") then
-        conditions[idCond]["currentlyValid"]=variables[c.params.variable] -- very simple indeed
-        if(conditions[idCond]["currentlyValid"])then
-          Spring.Echo("variableConditionValid")
-          Spring.Echo(c.id)
-        end  
+        conditions[idCond]["currentlyValid"]=variables[c.params.variable] -- very simple indeed 
       end
       
     elseif(object=="group")then  
@@ -995,7 +992,6 @@ if(mission.events~=nil)then
       conditions[id]["attribute"]=attribute
     end 
   end
-  Spring.Echo(json.encode(events))
 end
 
 
