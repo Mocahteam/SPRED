@@ -30,6 +30,7 @@ local outputstate=nil -- if various success or defeat states exist, outputstate 
 local canUpdate=false
 local mission
 local startingFrame=5
+local globalIndexOfCreatedUnits=0
 
 
 -------------------------------------
@@ -426,6 +427,22 @@ local function ApplyGroupableAction(unit,act)
 end
 
 
+local function createUnitAtPosition(act,position)
+    local y=Spring.GetGroundHeight(position.x,position.z)
+    local spId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
+    armySpring[act.name]=spId
+    -- armySpring[act.name] will be override each time this action is called
+    -- this is on purpose as some actions can take the last unit created by this unit creation action
+    local realId=act.name..tostring(globalIndexOfCreatedUnits)
+    armySpring[realId]=spId 
+    -- in order to keep to track of all units
+    globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
+    local gpIndex="group_"..act.name
+    if(groupOfUnits[gpIndex]==nil) then
+      groupOfUnits[gpIndex]={}
+    end
+    table.insert(groupOfUnits[gpIndex],realId)
+end
 -------------------------------------
 -- Apply a groupable action, generally not related to an unit
 -------------------------------------
@@ -479,28 +496,16 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="changeVariableVariable")then
     variables[act.params.variable1]=makeOperation(variables[act.params.variable2],variables[act.params.variable3],act.params.operator)           
         
-  elseif(act.type=="unitCreation") then
-    local oldId=act.unitId
-    local tableUnit=getUnitTableFromId(oldId)
-    local factionType=getUnitFactionTypeFromId(oldId)
-    local factionTypeCode=getFactionCode(factionType)
-    local newId=oldId -- by default
-    if(armyInformations[oldId]~=nil)then -- if an ennemy with the same id has already been created, then create another id 
-      local index=0   
-      while (armyInformations[oldId.."_"..tostring(index)]~=nil) do
-        index=index+1
-      end
-      newId=oldId.."_"..tostring(index) 
+  elseif(act.type=="createUnitAtPosition") then
+    --globalIndexOfCreatedUnits
+     createUnitAtPosition(act,act.params.position)
+  elseif(act.type=="createUnitsInZone") then
+    for var=1,act.params.number do
+      local position=getARandomPositionInZone(act.params.zone)
+      createUnitAtPosition(act,position)
     end 
-    local newtableUnit=deepcopy(tableUnit)
-    newtableUnit.id=newId
-    createUnit(newtableUnit,factionTypeCode)
-    if(act.actionId~=nil)then
-      ApplyAction (act.actionId,newId)
-    end
   end
 end
-
 
 -------------------------------------
 -- The more general function to apply an action
@@ -629,6 +634,8 @@ end
 -- forbide to do so, such as allowMultipleInStack
 -------------------------------------
 local function processEvents(frameNumber)
+  local creationOfNewEvent=false
+  local newevent
   for idEvent,event in pairs(events) do
     if isTriggerable(event) then
       if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
@@ -639,12 +646,30 @@ local function processEvents(frameNumber)
           frameDelay=frameDelay+1
           local a=event.actions[j]
           if(a.type=="wait")then
-            frameDelay=frameDelay+a.params.number -- TODO: Vérifier
+            frameDelay=frameDelay+secondesToFrames(a.params.number) -- TODO: Vérifier
           elseif(a.type=="waitCondition")then
-            Spring.Echo("todo, need to create event")                             
-          else  
-            AddActionInStack(a,frameDelay)
+            creationOfNewEvent=true
+            newevent=deepcopy(event)
+            newevent["actions"]={}
+            newevent.hasTakenPlace=false
+            newevent.lastExecution=nil
+            newevent.listOfInvolvedConditions={}
+            table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
+            newevent.conditions={}
+            newevent.conditions[a.params.condition]=conditions[a.params.condition]
+            --Spring.Echo("this event is created")
+            --Spring.Echo(json.encode(newevent))                      
+          else
+            if creationOfNewEvent==false then
+              AddActionInStack(a,frameDelay)
+            else
+              table.insert(newevent["actions"],a)
+            end
           end
+        end
+        if creationOfNewEvent then
+          events[tostring(frameNumber+100)]=newevent -- dirty trick to generate an unique id for this new event
+          --Spring.Echo(json.encode(events))
         end
       end
     end
@@ -1023,7 +1048,7 @@ local function StartAfterJson ()
 
 
  ---------------------------------------------
- -------EVENTS   AND  CONDITIONS--------------
+ -------EVENTS  AND  CONDITIONS--------------
  ---------------------------------------------
 if(mission.events~=nil)then
     for i=1, table.getn(mission.events) do
@@ -1126,10 +1151,8 @@ local function Update (frameNumber)
   actionStack=updateStack(refreshPeriod)
   applyCurrentActions() 
   if(success==1) then
-    Spring.Echo("success")
     return 0
   elseif(success==-1) then
-    Spring.Echo("fail")
     return 0
   else
     return 0 -- means continue
