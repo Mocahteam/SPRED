@@ -14,8 +14,9 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
+VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
-local xml = VFS.Include("LuaUI/Widgets/libs/xml-ser.lua")
+local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua")
 local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
 local Chili, Screen0
 local IsActive = false
@@ -202,7 +203,6 @@ end
 
 function InitializeOutputStates()
 	Links[0] = {}
-	--Links[#LevelList+1] = {}
 	for i, level in ipairs(LevelList) do
 		OutputStates[i] = {}
 		Links[i] = {}
@@ -371,7 +371,6 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
-	-- FIXME
 	local drawLinks = function(obj)
 		gl.Color(1, 1, 1, 1)
 		gl.LineWidth(3)
@@ -418,7 +417,6 @@ function InitializeScenarioFrame()
 		DrawControl = drawLinks,
 		drawcontrolv2 = true
 	}
-	
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
@@ -605,6 +603,9 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
+	if VFS.FileExists("CustomLevels/scenario.xml") then
+		LoadScenario(serde.deserialize(VFS.LoadFile("CustomLevels/scenario.xml")))
+	end
 end
 
 function ChangeLanguage(lang)
@@ -827,11 +828,33 @@ function ExportScenario()
 			end
 		end
 	end
-	local xmlString = string.gsub(xml.serialize(xmlScenario), "%>%<", ">\n<")
+	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<")
 	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString
 	local file = io.open("CustomLevels/scenario.xml", "w")
 	file:write(xmlString)
 	file:close()
+end
+
+function LoadScenario(xmlTable)
+	local links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
+	for i, link in ipairs(links) do
+		local input = splitString(link.attr.id_input, "_")[1]
+		local outputMission, output = unpack(splitString(link.attr.id_output, "_"))
+		if outputMission == "start" then
+			selectedOutputMission = 0
+			selectedOutput = 1
+			selectedInput = tonumber(input)
+		elseif input == "end" then
+			selectedOutputMission = tonumber(outputMission)
+			selectedOutput = output
+			selectedInput = #LevelList+1
+		else
+			selectedOutputMission = tonumber(outputMission)
+			selectedOutput = output
+			selectedInput = tonumber(input)
+		end
+		MakeLink()
+	end
 end
 
 function MakeLink()
@@ -854,6 +877,7 @@ function MakeLink()
 			UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
 			UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
 			UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+			Spring.Echo(selectedOutputMission, selectedOutput, selectedInput)
 			UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
 			UI.Scenario.Input[selectedInput].state.chosen = true
 			UI.Scenario.Input[selectedInput]:InvalidateSelf()
