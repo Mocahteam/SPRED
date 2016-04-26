@@ -109,21 +109,28 @@ local function boolAsString(booleanValue)
 end 
 
 -------------------------------------
--- Get a message giving its Id.
+-- Get a message from a message table
 -- If the message is not unique (a list), taking one by random
 -------------------------------------
-local function getAMessage(messageId) 
-  local mess=messages[messageId] -- messageId can be a list
-  if(mess[1]==nil) then
-    return mess
+local function getAMessage(messageTable) 
+  if(messageTable[1]==nil) then
+    return messageTable
   else
-    return mess[math.random(#mess)]
+    return messageTable[math.random(#messageTable)]
   end
 end
 
 local function isXZInsideZone(x,z,zoneId)
   local zone=zones[zoneId]
   if(zone.type=="Rectangle") then
+  --[[
+    Spring.Echo("debug : x,z,centerx,centerz,demL,deml")
+    Spring.Echo(x)
+    Spring.Echo(z)
+    Spring.Echo(zone.center_xz.x)
+    Spring.Echo(zone.center_xz.z)
+    Spring.Echo(zone.demiLongueur)
+    Spring.Echo(zone.demiLargeur)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
@@ -132,6 +139,14 @@ local function isXZInsideZone(x,z,zoneId)
     if(center_z-zone.demiLongueur>z)then return false end
     return true
   elseif(zone.type=="Disk") then
+   --[[
+    Spring.Echo("debug : x,z,centerx,centerz,a,b")
+    Spring.Echo(x)
+    Spring.Echo(z)
+    Spring.Echo(zone.center_xz.x)
+    Spring.Echo(zone.center_xz.z)
+    Spring.Echo(zone.a)
+    Spring.Echo(zone.b)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
@@ -345,12 +360,27 @@ end
 -------------------------------------
 -- Indicate if the action is groupable, which means that
 -- it can be applied to a group of units
+-- add information in the action to facilitate manipulations of this action
 -------------------------------------
-local function isAGroupableTypeOfAction(actionType)
-  if (actionType=="attack")or(actionType=="noFire")or(actionType=="move")or(actionType=="transfert") then
-    return true
-  end
-  return false
+local function isAGroupableTypeOfAction(a)
+ local groupable=true
+ if(string.sub(a.type, 1, 5)=="type_") then
+    a["cond_object"]="group" -- group is the generic thing
+    a["attribute"]=string.sub(a.type, 6, -1)
+ elseif(string.sub(a.type, 1, 5)=="unit_") then
+    a["cond_object"]="unit"
+    a["attribute"]=string.sub(a.type, 6, -1)
+ elseif(string.sub(a.type, 1, 6)=="group_") then
+    a["cond_object"]="group"
+    a["attribute"]=string.sub(a.type, 7, -1)
+  return a,true
+ elseif(string.sub(a.type, 1, 5)=="team_") then
+    a["cond_object"]="group"
+    a["attribute"]=string.sub(a.type, 6, -1)
+  else
+    groupable=false
+  end 
+  return a,groupable
 end
 
 -------------------------------------
@@ -362,8 +392,8 @@ local function ApplyGroupableAction(unit,act)
     -- Maybe One day check if valid unit are recquiered (not dead I mean)
       local attacked=armySpring[act.attacked] 
       if(Spring.ValidUnitID(attacked))then -- check if the unit is still on board
-        Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
-        -- command this unit to attack the byte
+        Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {}) -- command this unit to attack the byte
+       
         Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
       end    
     
@@ -382,33 +412,39 @@ local function ApplyGroupableAction(unit,act)
   end
 end
 
+
 -------------------------------------
 -- Apply a groupable action, generally not related to an unit
 -------------------------------------
 local function ApplyNonGroupableAction(act)
-  if(act.type=="marker") then
-    local posit=getAPosition(act.position)
-    local message=getAMessage(act.messageId)
-    --Spring.Echo("this is the intended message "..message[lang])
-    Spring.MarkerAddPoint(tonumber(posit.x), Spring.GetGroundHeight(tonumber(posit.x), tonumber(posit.z)),tonumber(posit.z), message[lang])
-  
-  elseif(act.type=="briefing") then
-    local content=getAMessage(act.messageId)
-    showMessage(content) 
+  if(act.type=="messageGlobal") then
+    Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
+    
+   elseif(act.type=="messageUnit") then
+      local springUnitId=armySpring[act.params.unit]
+      if Spring.ValidUnitID(springUnitId) then
+        local x,y,z=Spring.GetUnitPosition(springUnitId)
+        Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
+        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z}} --to erase message after timeout
+        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))
+      end
+  elseif(act.type=="messagePosition") then
+    Spring.MarkerAddPoint(x,y,z, act.params.message)
+    local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z}} --to erase message after timeout
+    AddActionInStack(deletePositionAction, act.params.time)
      
   elseif(act.type=="erasemarker") then 
-    local posit=getAPosition(act.position)
-    Spring.MarkerErasePosition(tonumber(posit.x), Spring.GetGroundHeight(tonumber(posit.x), tonumber(posit.z)),tonumber(posit.z))
+    Spring.MarkerErasePosition(act.params.x,act.params.y,act.params.z)
   
-  elseif(act.type=="end") then -- Change global variable success, and outputstate
-    --Spring.Echo("applyingVictory")
-    --Spring.Echo(json.encode(conditions))
-    outputstate=act.outputState
-    if(act.result=="success")then
-      success=1
-    else
-      success=-1
-    end 
+  elseif((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="player"))
+      or((act.type=="lose")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
+    outputstate=act.params.outputState
+    success=1
+  -- Note : this is binary, it needs to be improved if multiplayer is enabled
+  elseif((act.type=="lose")and(mission.teams[tostring(act.params.team)]["control"]=="player"))
+      or((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
+    outputstate=act.params.outputState
+    success=-1
     
   elseif(act.type=="unitCreation") then
     local oldId=act.unitId
@@ -432,40 +468,29 @@ local function ApplyNonGroupableAction(act)
   end
 end
 
+
 -------------------------------------
 -- The more general function to apply an action
 -- according to its type, will be applied within another function
 -- Handle group of units
 -------------------------------------
-function ApplyAction (actionId,overridingId)
+function ApplyAction (a)
   --Spring.Echo("try to apply "..actionId)
   --Spring.Echo(json.encode(actions))
-  if (not actions[actionId]["alreadyDone"])or(actions[actionId].toBeRepeated=="yes") then
-    actions[actionId]["alreadyDone"]=true
-    local act=actions[actionId] 
-    if(isAGroupableTypeOfAction(act.type)) then 
-    -- All actions have a type attribute, allowing us to know what they deal about
-      local externalUnitId=act.object
-      if(overridingId~=nil) then
-        externalUnitId=overridingId
-      end
-      if(groupOfUnits[externalUnitId]==nil) then 
-      -- the first thing we check is wether the id is related to a group or not
-      -- if we pass this condition, it means that the condition is on only one unit
-        local unit=armySpring[externalUnitId]
-        --Spring.Echo(externalUnitId.." is asked to "..act.type)
-        ApplyGroupableAction(unit,act)
-      else
-        -- we apply the condition the whole group
-        for i, externalUnitId in ipairs(groupOfUnits[externalUnitId]) do
-          local unit=armySpring[externalUnitId]
-          ApplyGroupableAction(unit,act)
-        end
-      end
-    else
-      ApplyNonGroupableAction(act)
-    end  
-  end
+  Spring.Echo("we try to apply action :")
+  Spring.Echo(a.name)
+  
+  local a, groupable=isAGroupableTypeOfAction(a)
+  --if(groupable)then
+  if(false) then
+    --extract units
+    for i, externalUnitId in ipairs(listOfUnits) do
+      local unit=armySpring[externalUnitId]
+      ApplyGroupableAction(unit,a)
+    end
+  else
+    ApplyNonGroupableAction(a)
+  end   
 end
 
 -------------------------------------
@@ -496,11 +521,11 @@ end
 -- At the beginning of table if the quickest action to be applied
 -- At the end if the action with the biggest delay
 -------------------------------------
-local function AddActionInStack(actId, delSeconds)
+function AddActionInStack(action, delSeconds)
   local delay=secondesToFrames(delSeconds)
   local element={}
   element["delay"]=delay
-  element["actId"]=actId
+  element["action"]=action
   --Spring.Echo(actId.." is added with delay : "..delay)
   for index,el in pairs(actionStack) do
     local del=el.delay
@@ -533,7 +558,7 @@ end
 local function applyCurrentActions()
   for index,el in pairs(actionStack) do
     if(el.delay<0)then
-      ApplyAction(el.actId, nil)
+      ApplyAction(el.action, nil)
       table.remove(actionStack,index)
     end
   end
@@ -570,33 +595,25 @@ end
 -- All the actions will be put in stack unless some specific options
 -- forbide to do so, such as allowMultipleInStack
 -------------------------------------
-local function processEvents()
+local function processEvents(frameNumber)
   for idEvent,event in pairs(events) do
     if isTriggerable(event) then
-      if(event.script~=nil)then
-        --Spring.Echo("before")
-        --Spring.Echo(json.encode(variables))
-        local script=event.script
-        --Spring.Echo()
-        for name,value in pairs(variables) do
-          -- first step : conditions are replaced to their boolean values.
-          script=string.gsub(script, name, 'variables.'..name)
-        end
-        -- second step : turn the string in return statement
-        local f = loadstring(script)
-        f()
-      end
-      --Spring.Echo("after")
-      --Spring.Echo(json.encode(variables))  
-      --[[        
-      for j=1,table.getn(event.actions) do
-        local actId=event.actions[j].actionId
-        local allowMultipleInStack=actions[actId].allowMultipleInStack   
-        if ((allowMultipleInStack==nil or allowMultipleInStack=="yes"))or(not(alreadyInStack(actId))) then
-          AddActionInStack(actId,tonumber(actions[actId].delay))
+      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
+        -- Handle repetition
+        event.lastExecution=frameNumber
+        local frameDelay=0          
+        for j=1,table.getn(event.actions) do
+          frameDelay=frameDelay+1
+          local a=event.actions[j]
+          if(a.type=="wait")then
+            frameDelay=frameDelay+a.params.number -- TODO: Vérifier
+          elseif(a.type=="waitCondition")then
+            Spring.Echo("todo, need to create event")                             
+          else  
+            AddActionInStack(a,frameDelay)
+          end
         end
       end
-      --]] 
     end
   end
 end
@@ -605,9 +622,9 @@ end
 -- wrapper for two main functions related to
 -- the main operations on the game
 -------------------------------------
-local function  UpdateGameState()
+local function  UpdateGameState(frameNumber)
   cancelAutoHeal()
-  processEvents() 
+  processEvents(frameNumber) 
 end
 
 -------------------------------------
@@ -624,6 +641,11 @@ local function GetCurrentUnitAction(unit)
   return action
 end
 
+-------------------------------------
+-- Extract the list of units related to a condition
+-- tableLookup represent a list of attributes to look up in the condition
+-- When one is found the search is interrupted
+-------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   --Spring.Echo(json.encode(condition))
   for conditionTerm,prefixTerm in pairs(tableLookup)do    
@@ -648,7 +670,18 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
   elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
     if(c.attribute=="zone") then
-      return isUnitInZone(internalUnitId,c.params.zone)  
+      local i=isUnitInZone(internalUnitId,c.params.zone)
+     --[[Spring.Echo("we check an unit in a zone")
+      Spring.Echo(internalUnitId)
+      Spring.Echo(c.params.zone)
+      if(i)then
+        Spring.Echo("IN DA ZONE :")
+        Spring.Echo(c.name)
+      end
+      if(i and c.name=="enterda")then
+        Spring.Echo("condition validated")
+      end--]]
+      return i  
     elseif(c.attribute=="underAttack")then --untested yet
       return armyInformations[externalUnitId].isUnderAttack
     elseif(c.attribute=="order") then
@@ -731,6 +764,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
         local tlkup={targetTeam="team",unitType="type",group="group"}
         local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
+        --Spring.Echo(json.encode(externalUnitList))
         local total=table.getn(externalUnitList)
         local count=0
         if(killByTeams[c.params.team]~=nil)then
@@ -753,17 +787,19 @@ local function UpdateConditionsTruthfulness (frameNumber)
         conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
         -- For the moment the "killed all" is not implemented 
       elseif (c.type=="killed") then
+        local found=false
         local targetedUnit=armySpring[c.params.unit]
         local kills=killByTeams[c.params.team]
         if(kills~=nil)then
           for u2,killInformation in ipairs(kills) do
             if targetedUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
               conditions[idCond]["currentlyValid"]=true
-              return
+              found=true
+              break
             end
           end
         end
-        conditions[idCond]["currentlyValid"]=false 
+        if(not found)then conditions[idCond]["currentlyValid"]=false end 
       end
     end
   end 
@@ -1053,9 +1089,15 @@ end
 
 local function Update (frameNumber)
   UpdateConditionsTruthfulness(frameNumber) 
-  UpdateGameState()
-  if(success~=nil) then
-    return success,outputstate
+  UpdateGameState(frameNumber)
+  actionStack=updateStack(refreshPeriod)
+  applyCurrentActions() 
+  if(success==1) then
+    Spring.Echo("success")
+    return 0
+  elseif(success==-1) then
+    Spring.Echo("fail")
+    return 0
   else
     return 0 -- means continue
   end
@@ -1100,9 +1142,6 @@ local function Stop ()
 	for i = 1,table.getn(units) do
 		Spring.DestroyUnit(units[i], false, true)
 	end
-	
-	-- delete marker
-	Spring.MarkerErasePosition(1983, Spring.GetGroundHeight(1983, 1279), 1279)
 end
 
 function gadget:RecvLuaMsg(msg, player)
