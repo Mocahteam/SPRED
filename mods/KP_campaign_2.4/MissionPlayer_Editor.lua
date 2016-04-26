@@ -59,6 +59,19 @@ local function compareValues(v1,v2,mode)
   if(mode=="!=")then return v1~=v2 end
 end 
 
+local function makeOperation(v1,v2,operation)
+  if(operation=="*")then return v1*v2 end
+  if(operation=="+")then return v1+v2 end
+  if(operation=="-")then return v1-v2 end
+  if(operation=="/")then
+    if(v2~=0)then return v1/v2 end
+    else
+      Spring.Echo("division by 0 replaced by division by 1")
+      return v1
+    end
+  if(operation=="%")then return v1 - math.floor(v1/v2)*v1 end
+end
+
 local function deepcopy(orig)
     local orig_type = type(orig)
     local copy
@@ -417,6 +430,9 @@ end
 -- Apply a groupable action, generally not related to an unit
 -------------------------------------
 local function ApplyNonGroupableAction(act)
+
+  -- MESSAGES
+  
   if(act.type=="messageGlobal") then
     Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
     
@@ -440,6 +456,8 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="erasemarker") then 
     Spring.MarkerErasePosition(act.params.x,act.params.y,act.params.z)
   
+   -- WIN/LOSE
+   
   elseif((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="player"))
       or((act.type=="lose")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
     outputstate=act.params.outputState
@@ -449,7 +467,18 @@ local function ApplyNonGroupableAction(act)
       or((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
     outputstate=act.params.outputState
     success=-1
+   
+   -- VARIABLES
     
+  elseif(act.type=="changeVariable")then
+    variables[act.params.variable]=act.params.number   
+  elseif(act.type=="changeVariableNumber")then
+    variables[act.params.variable1]=makeOperation(variables[act.params.variable2],act.params.number,act.params.operator)   
+  elseif(act.type=="setBooleanVariable")then
+    variables[act.params.variable]=(act.params.boolean=="true")
+  elseif(act.type=="changeVariableVariable")then
+    variables[act.params.variable1]=makeOperation(variables[act.params.variable2],variables[act.params.variable3],act.params.operator)           
+        
   elseif(act.type=="unitCreation") then
     local oldId=act.unitId
     local tableUnit=getUnitTableFromId(oldId)
