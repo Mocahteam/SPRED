@@ -371,23 +371,17 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
-	--[[ FIXME
-	local function drawLinks()
-		for k, out in pairs(Links) do
-			if k == "begin" and out then
-				local x1, x2, y1, y2 = 0, 0, 0, 0
-				x1 = UI.Scenario.Output.Begin.x + UI.Scenario.Begin.x
-				y1 = UI.Scenario.Output.Begin.y + UI.Scenario.Begin.y
-				x2 = UI.Scenario.Input[out].x + UI.Scenario.Levels[out].x
-				y2 = UI.Scenario.Input[out].y + UI.Scenario.Levels[out].y
-				gl.Vertex(x1, y1)
-				gl.Vertex(x2, y2)
-			else
-				for kk, linked in pairs(out) do
-					
-				end
-			end
-		end
+	-- FIXME
+	local drawLinks = function(obj)
+		gl.Color(1, 1, 1, 1)
+		gl.LineWidth(3)
+		gl.BeginEnd(GL.LINES, function()
+			local x1, y1, x2, y2 = 0, 0, 0, 0
+			x1 = UI.Scenario.Output[0][1].x + UI.Scenario.Output[0][1].tiles[1] + UI.Scenario.Levels[0].x + UI.Scenario.Output[0][1].width/2
+			y1 = UI.Scenario.Output[0][1].y + UI.Scenario.Output[0][1].tiles[2] + UI.Scenario.Levels[0].y + UI.Scenario.Output[0][1].height/2
+			gl.Vertex(x1, y1)
+			gl.Vertex(x2, y2)
+		end)
 	end
 	UI.Scenario.Links = Chili.Control:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
@@ -395,20 +389,10 @@ function InitializeScenarioFrame()
 		y = '0%',
 		width = '100%',
 		height = '100%',
-		DrawControl = function(obj)
-			local x = obj.x
-			local y = obj.y
-			local w = obj.width
-			local h = obj.height
-			gl.Color(1, 1, 1, 1)
-			gl.PushMatrix()
-			gl.Translate(x, y, 0)
-			gl.Scale(w, h, 1)
-			gl.BeginEnd(GL.LINES, drawLinks)
-			gl.PopMatrix()
-		end
+		DrawControl = drawLinks,
+		drawcontrolv2 = true
 	}
-	]]
+	
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
@@ -529,6 +513,25 @@ function InitializeScenarioFrame()
 			UI.Scenario.Output[i][out] = but
 		end
 	end
+end
+
+function ComputeGlobalX(obj)
+	local x = obj.x
+	local w = obj.width
+	if obj.parent then
+		x = x + ComputeGlobalX(obj.parent)
+	end
+	if obj.tiles then
+		local skLeft = obj.tiles[1]
+		x = x + skLeft
+	end
+	return x
+end
+
+function ComputeGlobalY(obj)
+	local y = obj.y
+	local h = obj.height
+
 end
 
 function UpdateCaption(element, text)
@@ -870,6 +873,8 @@ function MakeLink()
 		selectedOutputMission = nil
 		selectedInput = nil
 	end
+	
+	UI.Scenario.Links:InvalidateSelf()
 end
 
 function Quit()
