@@ -11,6 +11,8 @@ LAUNCHER_SCENARIO_TITLE = ""
 LAUNCHER_SCENARIO_EXPORT = ""
 LAUNCHER_SCENARIO_BEGIN = ""
 LAUNCHER_SCENARIO_END = ""
+LAUNCHER_SCENARIO_NAME_DEFAULT = ""
+LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT = ""
 
 function GetLauncherStrings(lang)
 	if lang == "fr" then
@@ -27,6 +29,8 @@ function GetLauncherStrings(lang)
 		LAUNCHER_SCENARIO_EXPORT = "Exporter le scénario"
 		LAUNCHER_SCENARIO_BEGIN = "Début"
 		LAUNCHER_SCENARIO_END = "Fin"
+		LAUNCHER_SCENARIO_NAME_DEFAULT = "Scenario"
+		LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT = "Scenario pour le jeu Prog&Play"
 	else
 		LAUNCHER_TITLE = "Prog & Play Level Editor"
 		LAUNCHER_QUIT = "Quit"
@@ -41,5 +45,7 @@ function GetLauncherStrings(lang)
 		LAUNCHER_SCENARIO_EXPORT = "Export scenario"
 		LAUNCHER_SCENARIO_BEGIN = "Begin"
 		LAUNCHER_SCENARIO_END = "End"
+		LAUNCHER_SCENARIO_NAME_DEFAULT = "Scenario"
+		LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT = "Scenario for the game Prog&Play"
 	end
 end
