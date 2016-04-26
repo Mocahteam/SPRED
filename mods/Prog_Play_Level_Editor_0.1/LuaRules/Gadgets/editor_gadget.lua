@@ -202,6 +202,7 @@ function gadget:GameFrame( frameNumber )
 				Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 			end
 			SendToUnsynced("requestSave")
+			SendToUnsynced("requestUpdate")
 			transferUnits = false
 		-- ROTATE UNITS
 		elseif rotateUnits then
@@ -269,6 +270,9 @@ function gadget:RecvFromSynced(msg)
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2])
+	end
+	if msgContents[1] == "requestSave" then
+		Script.LuaUI.requestUnitListUpdate()
 	end
 end
 

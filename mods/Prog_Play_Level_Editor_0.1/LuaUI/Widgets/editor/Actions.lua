@@ -361,6 +361,90 @@ actions_list = {
 		}
 	},
 	{
+		type = "type_order",
+		filter = "Order",
+		typeText = "Order units of type (untargeted order)",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> with <Parameters>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "text",
+				id = "parameters"
+			}
+		}
+	},
+	{
+		type = "type_orderPosition",
+		filter = "Order",
+		typeText = "Order units of type to position",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Position>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
+		type = "type_orderTarget",
+		filter = "Order",
+		typeText = "Order units of type to target",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Target>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Target>",
+				type = "unit",
+				id = "target"
+			}
+		}
+	},
+	{
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",
@@ -370,6 +454,29 @@ actions_list = {
 				text = '<Message>',
 				type = "message",
 				id = "message"
+			}
+		}
+	},
+	{
+		type = "messagePosition",
+		filter = "Message",
+		typeText = "Display message at position",
+		text = "Display <Message> at <Position> for <Time> seconds.",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "message",
+				id = "message"
+			},
+			{
+				text = "<Position>",
+				type ="position",
+				id = "position"
+			},
+			{
+				text = "<Time>",
+				type = "number",
+				id = "time"
 			}
 		}
 	},
