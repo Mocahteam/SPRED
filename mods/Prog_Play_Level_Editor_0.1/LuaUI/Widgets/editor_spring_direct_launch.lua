@@ -376,11 +376,37 @@ function InitializeScenarioFrame()
 		gl.Color(1, 1, 1, 1)
 		gl.LineWidth(3)
 		gl.BeginEnd(GL.LINES, function()
-			local x1, y1, x2, y2 = 0, 0, 0, 0
-			x1 = UI.Scenario.Output[0][1].x + UI.Scenario.Output[0][1].tiles[1] + UI.Scenario.Levels[0].x + UI.Scenario.Output[0][1].width/2
-			y1 = UI.Scenario.Output[0][1].y + UI.Scenario.Output[0][1].tiles[2] + UI.Scenario.Levels[0].y + UI.Scenario.Output[0][1].height/2
-			gl.Vertex(x1, y1)
-			gl.Vertex(x2, y2)
+			if selectedInput then
+				local x, y
+				x = UI.Scenario.Input[selectedInput].x + UI.Scenario.Input[selectedInput].tiles[1]/2 + UI.Scenario.Levels[selectedInput].x + UI.Scenario.Input[selectedInput].width/2
+				y = UI.Scenario.Input[selectedInput].y + UI.Scenario.Input[selectedInput].tiles[2]/2 + UI.Scenario.Levels[selectedInput].y + UI.Scenario.Input[selectedInput].height/2
+				local mouseX, mouseY = Spring.GetMouseState()
+				mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
+				mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
+				gl.Vertex(x, y)
+				gl.Vertex(mouseX, mouseY)
+			elseif selectedOutputMission and selectedOutput then
+				local x, y
+				x = UI.Scenario.Output[selectedOutputMission][selectedOutput].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].width/2
+				y = UI.Scenario.Output[selectedOutputMission][selectedOutput].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].height/2
+				local mouseX, mouseY = Spring.GetMouseState()
+				mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
+				mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
+				gl.Vertex(x, y)
+				gl.Vertex(mouseX, mouseY)
+			end
+			for k, link in pairs(Links) do
+				for kk, out in pairs(link) do
+					gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor))
+					local x1, y1, x2, y2
+					x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2
+					y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
+					x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
+					y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
+					gl.Vertex(x1, y1)
+					gl.Vertex(x2, y2)
+				end
+			end
 		end)
 	end
 	UI.Scenario.Links = Chili.Control:New{
@@ -513,25 +539,6 @@ function InitializeScenarioFrame()
 			UI.Scenario.Output[i][out] = but
 		end
 	end
-end
-
-function ComputeGlobalX(obj)
-	local x = obj.x
-	local w = obj.width
-	if obj.parent then
-		x = x + ComputeGlobalX(obj.parent)
-	end
-	if obj.tiles then
-		local skLeft = obj.tiles[1]
-		x = x + skLeft
-	end
-	return x
-end
-
-function ComputeGlobalY(obj)
-	local y = obj.y
-	local h = obj.height
-
 end
 
 function UpdateCaption(element, text)
