@@ -163,7 +163,10 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
+    mouseDisabled = true
+  elseif arg1 == "mouseEnabled" then
     mouseDisabled = false
+
 --    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then
@@ -173,6 +176,12 @@ function gadget:RecvFromSynced(...)
       end
       Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
     end
+
+  elseif arg1 == "disableCameraAuto" then
+    if Script.LuaUI("CameraAuto") then
+      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["disable"], {}) -- absolutely not sure of the "disable" thing
+    end
+    
   elseif arg1 == "TutorialEvent" then
     if Script.LuaUI("TutorialEvent") then
       Script.LuaUI.TutorialEvent() -- function defined and registered in mission_gui widget

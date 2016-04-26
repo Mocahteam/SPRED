@@ -448,9 +448,43 @@ end
 -------------------------------------
 local function ApplyNonGroupableAction(act)
 
+
+  if(act.type=="cameraAuto") then
+    if(act.params.toggle=="enabled")then
+      _G.cameraAuto = {
+        enable = true,
+        specialPositions = {} --TODO: minimap and special position géree dans les zones
+      }
+      SendToUnsynced("enableCameraAuto")
+      _G.cameraAuto = nil
+    else
+      _G.cameraAuto = {
+        enable = false,
+        specialPositions = {} --TODO: minimap and special position géree dans les zones
+      }
+      SendToUnsynced("disableCameraAuto")
+      _G.cameraAuto = nil  
+    end
+
+  elseif(act.type=="mouse") then
+    if(act.params.toggle=="enabled")then
+      SendToUnsynced("mouseEnabled", true)
+    else
+      SendToUnsynced("mouseDisabled", true) 
+    end
+    
+  elseif(act.type=="centerCamera") then
+    Spring.Echo("we did messed up")
+      _G.cameraAuto = {
+        enable = true,
+        specialPositions = {{act.params.position.x,act.params.position.z}} --TODO: minimap and special position géree dans les zones
+      }
+      SendToUnsynced("enableCameraAuto")
+      _G.cameraAuto = nil 
+   
   -- MESSAGES
   
-  if(act.type=="messageGlobal") then
+  elseif(act.type=="messageGlobal") then
     Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
     
    elseif(act.type=="messageUnit") then
@@ -646,7 +680,7 @@ local function processEvents(frameNumber)
           frameDelay=frameDelay+1
           local a=event.actions[j]
           if(a.type=="wait")then
-            frameDelay=frameDelay+secondesToFrames(a.params.number) -- TODO: Vérifier
+            frameDelay=frameDelay+secondesToFrames(a.params.time) -- TODO: Vérifier
           elseif(a.type=="waitCondition")then
             creationOfNewEvent=true
             newevent=deepcopy(event)
