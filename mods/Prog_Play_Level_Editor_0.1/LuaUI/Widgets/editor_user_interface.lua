@@ -38,8 +38,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
-local textSize = 1
 local initialize = false
+local UIelements = {}
 
 -- File Variables
 local fileButtons = {}
@@ -263,6 +263,7 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 		draggable = _draggable or false,
 		resizable = false
 	}
+	table.insert(UIelements, window)
 	return window
 end
 function addPanel(_parent, _x, _y, _w, _h)
@@ -275,6 +276,7 @@ function addPanel(_parent, _x, _y, _w, _h)
 		draggable = false,
 		resizable = false
 	}
+	table.insert(UIelements, panel)
 	return panel
 end
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
@@ -290,6 +292,7 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
+	table.insert(UIelements, button)
 	return button
 end
 function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
@@ -308,6 +311,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
+	table.insert(UIelements, label)
 	return label
 end
 function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
@@ -324,6 +328,7 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
+	table.insert(UIelements, textBox)
 	return textBox
 end
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
@@ -337,6 +342,7 @@ function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 		keepAspect = _keepAspect or false,
 		color = _color or {1, 1, 1, 1}
 	}
+	table.insert(UIelements, image)
 	return image
 end
 function addRect(_parent, x1, y1, x2, y2, _color)
@@ -350,6 +356,7 @@ function addRect(_parent, x1, y1, x2, y2, _color)
 		color = _color,
 		keepAspect = false
 	}
+	table.insert(UIelements, rect)
 	return rect
 end
 function addScrollPanel(_parent, _x, _y, _w, _h)
@@ -360,6 +367,7 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 		width = _w,
 		height = _h
 	}
+	table.insert(UIelements, scrollPanel)
 	return scrollPanel
 end
 function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
@@ -381,6 +389,7 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	else
 		editBox.font.size = 16
 	end
+	table.insert(UIelements, editBox)
 	return editBox
 end
 function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
@@ -395,6 +404,7 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		boxsize = _h or 10,
 		checked = _checked or false
 	}
+	table.insert(UIelements, checkBox)
 	return checkBox
 end
 function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
@@ -409,6 +419,7 @@ function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
 		value = _value or 50,
 		step = _step or 1
 	}
+	table.insert(UIelements, trackbar)
 	return trackbar
 end
 function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
@@ -424,6 +435,7 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
+	table.insert(UIelements, comboBox)
 	return comboBox
 end
 function removeElements(parent, elementsTable, dispose) -- Remove UI elements from a parent and eventually dispose them
@@ -4067,6 +4079,17 @@ function changeMouseCursor()
 		end
 	end
 end
+function recursiveResize(obj, textSize)
+	if obj.children then
+		for i, child in ipairs(obj.children) do
+			recursiveResize(child, textSize)
+		end
+	end
+	if obj.font then
+		obj.font.size = obj.font.size * textSize
+		obj:InvalidateSelf()
+	end
+end
 function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
 	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
@@ -4217,15 +4240,29 @@ function widget:Update(delta)
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
+	
+	local toBeRemoved = {}
+	for i, obj in ipairs(UIelements) do
+		if not obj.parent then
+			table.insert(toBeRemoved, i)
+		end
+	end
+	for _, i in ipairs(toBeRemoved) do
+		table.remove(UIelements, i)
+	end
 end
-
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
-	textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
-	screenSizeX, screenSizeY = dse_vsx, dse_vsy
-	--[[ TODO : for all elements
-	fileButtons["new"].font.size = textSize * fileButtons["new"].font.size	
-	fileButtons["new"]:InvalidateSelf()
-	]]
+	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
+		local textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
+		--recursiveResize(Screen0, textSize)
+		for i, obj in ipairs(UIelements) do
+			if obj.font then
+				obj.font.size = obj.font.size * textSize
+				obj:InvalidateSelf()
+			end
+		end
+		screenSizeX, screenSizeY = dse_vsx, dse_vsy
+	end
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
