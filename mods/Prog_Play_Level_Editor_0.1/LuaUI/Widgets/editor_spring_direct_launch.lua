@@ -1052,3 +1052,11 @@ end
 function widget:Update(delta)
 	MakeLink()
 end
+
+function widget:MousePress(mx, my, button)
+	if button == 3 then
+		selectedInput = nil
+		selectedOutputMission = nil
+		selectedOutput = nil
+	end
+end
