@@ -977,7 +977,9 @@ function MakeLink()
 		selectedInput = nil
 	end
 	
-	UI.Scenario.Links:InvalidateSelf()
+	if UI.Scenario then
+		UI.Scenario.Links:InvalidateSelf()
+	end
 end
 
 function Quit()
@@ -1008,12 +1010,16 @@ function EitherDrawScreen()
 end
 
 function SwitchOn()
+	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
 	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()
 	InitializeLauncher()
+	ChangeLanguage("en")
+	MainMenuFrame()
 end
+WG.BackToMainMenu = SwitchOn
 
 function SwitchOff()
 	HideView = false
@@ -1037,10 +1043,7 @@ end
 function widget:Initialize()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
-		GetLauncherStrings("en")
 		SwitchOn()
-		ChangeLanguage("en")
-		MainMenuFrame()
 	else
 		SwitchOff()
 	end

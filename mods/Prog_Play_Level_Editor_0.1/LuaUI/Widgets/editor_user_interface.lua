@@ -3801,6 +3801,17 @@ end
 function settingsFrame()
 
 end
+function backToMenuFrame()
+	if windows["backToMenu"] then
+		Screen0:RemoveChild(windows["backToMenu"])
+		windows["backToMenu"]:Dispose()
+	end
+	windows["backToMenu"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
+	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
+	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
+end
 function generateSaveName(name)
 	local saveName = name
 	saveName = string.gsub(name, " ", "_")
@@ -4562,7 +4573,11 @@ function widget:KeyPress(key, mods)
 		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
-		clearUI()
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.NONE then
+			backToMenuFrame()
+		else
+			clearUI()
+		end
 		return true
 	-- ENTER
 	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
