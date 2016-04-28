@@ -921,7 +921,7 @@ function initTriggerWindow()
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
-	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
+	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 16, "left", nil, "center")
 	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
 	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
 	addButton(windows["importWindow"], tostring(200/3).."%", '20%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
@@ -3618,7 +3618,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 			local action = {}
 			action.id = a.id
 			if a.id >= actionNumber then
-				actionNumber = a.id
+				actionNumber = a.id + 1
 			end
 			action.type = a.type
 			action.name = a.name
@@ -4063,6 +4063,8 @@ function changeMouseCursor()
 		else
 			Spring.SetMouseCursor("normalcursor")
 		end
+	else
+		Spring.SetMouseCursor("normalcursor")
 	end
 end
 function recursiveResize(obj, textSize)
