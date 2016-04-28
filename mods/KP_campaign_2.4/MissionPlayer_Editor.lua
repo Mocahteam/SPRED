@@ -326,6 +326,21 @@ local function getUnitTableFromId(idUnit)
   return nil
 end
 
+-------------------------------------
+-- Extract the list of units related to a condition
+-- tableLookup represent a list of attributes to look up in the condition
+-- When one is found the search is interrupted
+-------------------------------------
+local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
+  --Spring.Echo(json.encode(condition))
+  for conditionTerm,prefixTerm in pairs(tableLookup)do    
+    if(conditionParams[conditionTerm]~=nil)then
+      local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
+      return groupOfUnits[groupIndex]
+    end
+  end
+end
+
 local function getUnitFactionTypeFromId(idUnit)
   for i=1,table.getn(mission.armies) do
     local factionArmies=mission.armies[i]
@@ -402,27 +417,29 @@ end
 -------------------------------------
 local function ApplyGroupableAction(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
-    if(act.type=="attack") then
-    -- Maybe One day check if valid unit are recquiered (not dead I mean)
-      local attacked=armySpring[act.attacked] 
-      if(Spring.ValidUnitID(attacked))then -- check if the unit is still on board
-        Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {}) -- command this unit to attack the byte
-       
-        Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
-      end    
-    
-    elseif(act.type=="noFire") then
-      Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})   
-        
-    elseif(act.type=="move")then
-      local posit=getAPosition(act.position)
-      Spring.GiveOrderToUnit(unit, CMD.MOVE, {tonumber(posit.x), Spring.GetGroundHeight(tonumber(posit.x), tonumber(posit.z)),tonumber(posit.z)}, {})
-      
-    elseif(act.type=="transfert")then -- gives the possession at another faction
-      local faction=act.factionReceiving
-      local factioncode=getFactionCode(faction)
-      Spring.TransferUnit(unit, factioncode)
+    Spring.Echo("valid")
+    if(act.attribute=="transfer") then
+      Spring.TransferUnit(unit,act.params.team)
+    elseif(act.attribute=="kill")then
+      Spring.DestroyUnit(unit)
+    elseif(act.attribute=="hp")then
+      local health,maxhealth=Spring.GetUnitHealth(unit)
+      Spring.SetUnitHealth(unit,maxhealth*(act.params.percentage)/100)
+    elseif(act.attribute=="teleport")then
+      Spring.SetUnitPosition(unit,act.params.position.x,act.params.position.z)
+    elseif(act.attribute=="group")then
+      table.insert(groupOfUnits["group_"..act.params.group],unit)
+    elseif(act.attribute=="order")then
+      Spring.GiveOrderToUnit(unit, act.params.command, {}, {})
+    elseif(act.attribute=="orderPosition")then
+      Spring.GiveOrderToUnit(unit, act.params.command,{act.params.position.x,Spring.GetGroundHeight(act.params.position.x, act.params.position.z),act.params.position.z}, {})
+    elseif(act.attribute=="orderTarget")then
+      local u=act.params.unit
+      local spUnit=armySpring[u]
+      Spring.GiveOrderToUnit(unit, act.params.command,spUnit, {})
     end
+
+    --Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
   end
 end
 
@@ -554,11 +571,20 @@ function ApplyAction (a)
   
   local a, groupable=isAGroupableTypeOfAction(a)
   --if(groupable)then
-  if(false) then
+  if(groupable) then
     --extract units
-    for i, externalUnitId in ipairs(listOfUnits) do
-      local unit=armySpring[externalUnitId]
-      ApplyGroupableAction(unit,a)
+    if(a.params.unit~=nil)then
+      local u=armySpring[a.params.unit]
+      ApplyGroupableAction(u,a)
+    else   
+      local tl={currentTeam="team",team="team",unitType="type",group="group"}
+      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,tl)
+      Spring.Echo("we try to apply the groupable action to this group")
+      Spring.Echo(json.encode(listOfUnits))
+      for i, externalUnitId in ipairs(listOfUnits) do
+        local unit=armySpring[externalUnitId]
+        ApplyGroupableAction(unit,a)
+      end
     end
   else
     ApplyNonGroupableAction(a)
@@ -733,20 +759,6 @@ local function GetCurrentUnitAction(unit)
   return action
 end
 
--------------------------------------
--- Extract the list of units related to a condition
--- tableLookup represent a list of attributes to look up in the condition
--- When one is found the search is interrupted
--------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
-  --Spring.Echo(json.encode(condition))
-  for conditionTerm,prefixTerm in pairs(tableLookup)do    
-    if(conditionParams[conditionTerm]~=nil)then
-      local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
-      return groupOfUnits[groupIndex]
-    end
-  end
-end
 
 -------------------------------------
 -- Determine if an unit satisfy a condition
