@@ -366,6 +366,20 @@ function InitializeScenarioFrame()
 		},
 		OnClick = { ExportScenarioFrame }
 	}
+	UI.Scenario.Import = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "2%",
+		y = "90%",
+		width = "20%",
+		height = "5%",
+		caption = LAUNCHER_SCENARIO_IMPORT,
+		backgroundColor = { 0.2, 1, 0.8, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25
+		},
+		OnClick = { ImportScenarioFrame }
+	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
 		x = "2%",
@@ -517,7 +531,7 @@ function InitializeScenarioFrame()
 			y = 30,
 			width = 50,
 			height = 30,
-			caption = "In",
+			caption = "in",
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 16
@@ -573,6 +587,7 @@ function ClearUI()
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
+	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 end
 
 function MainMenuFrame()
@@ -608,9 +623,7 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
-	if VFS.FileExists("CustomLevels/scenario.xml") then
-		LoadScenario(serde.deserialize(VFS.LoadFile("CustomLevels/scenario.xml")))
-	end
+	UI.MainWindow:AddChild(UI.Scenario.Import)
 end
 
 function ExportScenarioFrame()
@@ -679,6 +692,64 @@ function ExportScenarioFrame()
 	end }
 end
 
+function ImportScenarioFrame()
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '30%',
+		y = '30%',
+		width = '40%',
+		height = '40%',
+		draggable = false,
+		resizable = false
+	}
+	local scrollPanel = Chili.ScrollPanel:New{
+		parent = window,
+		x = '0%',
+		y = '10%',
+		width = '100%',
+		height = '90%'
+	}
+	local closeButton = Chili.Button:New{
+		parent = window,
+		x = '90%',
+		y = '0%',
+		width = '10%',
+		height = '10%',
+		caption = LAUNCHER_X,
+		OnClick = { function() window:Dispose() end }
+	}
+	closeButton.font.color = { 1, 0, 0, 1 }
+	local scenarioList = VFS.DirList("CustomLevels/", "*.xml", VFS.RAW)
+	if #scenarioList == 0 then
+		Chili.TextBox:New{
+			parent = scrollPanel,
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 30,
+				color = { 1, 0, 0, 1 }
+			}
+		}
+	else
+		for i, scen in ipairs(scenarioList) do
+			local name = string.gsub(scen, "CustomLevels\\", "")
+			Chili.Button:New{
+				parent = scrollPanel,
+				x = '0%',
+				y = (i-1) * 40,
+				width = '100%',
+				height = 40,
+				caption = name,
+				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("CustomLevels/"..name))) window:Dispose() end }
+			}
+		end
+	end
+end
+
 function ChangeLanguage(lang)
 	Language = lang
 	GetLauncherStrings(lang)
@@ -699,6 +770,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Output[0][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
+	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 end
 
 function NewMission(map)
@@ -901,7 +973,8 @@ function ExportScenario(name, desc)
 	end
 	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<")
 	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString
-	local file = io.open("CustomLevels/scenario.xml", "w")
+	local saveName = generateSaveName(name)
+	local file = io.open("CustomLevels/"..saveName..".xml", "w")
 	file:write(xmlString)
 	file:close()
 end

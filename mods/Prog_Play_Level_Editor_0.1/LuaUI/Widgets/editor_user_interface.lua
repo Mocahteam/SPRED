@@ -261,7 +261,6 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 		draggable = _draggable or false,
 		resizable = false
 	}
-	table.insert(UIelements, window)
 	return window
 end
 function addPanel(_parent, _x, _y, _w, _h)
@@ -274,7 +273,6 @@ function addPanel(_parent, _x, _y, _w, _h)
 		draggable = false,
 		resizable = false
 	}
-	table.insert(UIelements, panel)
 	return panel
 end
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
@@ -340,7 +338,6 @@ function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 		keepAspect = _keepAspect or false,
 		color = _color or {1, 1, 1, 1}
 	}
-	table.insert(UIelements, image)
 	return image
 end
 function addRect(_parent, x1, y1, x2, y2, _color)
@@ -354,7 +351,6 @@ function addRect(_parent, x1, y1, x2, y2, _color)
 		color = _color,
 		keepAspect = false
 	}
-	table.insert(UIelements, rect)
 	return rect
 end
 function addScrollPanel(_parent, _x, _y, _w, _h)
@@ -365,7 +361,6 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 		width = _w,
 		height = _h
 	}
-	table.insert(UIelements, scrollPanel)
 	return scrollPanel
 end
 function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
@@ -417,7 +412,6 @@ function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
 		value = _value or 50,
 		step = _step or 1
 	}
-	table.insert(UIelements, trackbar)
 	return trackbar
 end
 function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
@@ -3821,12 +3815,6 @@ function backToMenuFrame()
 	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
-end
-function generateSaveName(name)
-	local saveName = name
-	saveName = string.gsub(name, " ", "_")
-	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
-	return saveName
 end
 function beginLoadLevel(name)
 	loadMap(name)
