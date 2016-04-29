@@ -896,16 +896,34 @@ function initTriggerWindow()
 				end
 			end
 			e.trigger = trig
-			customTriggerEditBox:SetText("")
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..trig)
+			customTriggerEditBox:SetText(trig)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
 		end
 		saveState()
 	end
 	local useCustomTrigger = function()
 		if currentEvent then
 			local e = events[currentEvent]
-			e.trigger = customTriggerEditBox.text
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..e.trigger)
+			local validTrigger = false
+			local checkingTrigger = customTriggerEditBox.text
+			local count = 0
+			for i, c in ipairs(e.conditions) do
+				checkingTrigger = string.gsub(checkingTrigger, c.name, "")
+			end
+			checkingTrigger = string.gsub(checkingTrigger, ".", function(c) if c == "(" then count = count + 1 return "" elseif c == ")" then count = count - 1 return "" end return c end)
+			checkingTrigger = string.gsub(checkingTrigger, "or", "")
+			checkingTrigger = string.gsub(checkingTrigger, "and", "")
+			checkingTrigger = string.gsub(checkingTrigger, "not", "")
+			checkingTrigger = string.gsub(checkingTrigger, " ", "")
+			if count == 0 and checkingTrigger == "" then
+				validTrigger = true
+			end
+			if validTrigger then
+				e.trigger = customTriggerEditBox.text
+				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+			else
+				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+			end
 		end
 		saveState()
 	end
