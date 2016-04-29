@@ -239,6 +239,8 @@ function gadget:GameFrame( frameNumber )
 			for i, u in ipairs(unitsInfo) do
 				unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
 				Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
+				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.STOP, {}, {})
+				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.FIRE_STATE, {0}, {})
 			end
 			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
 			loadMap = false

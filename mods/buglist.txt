@@ -1,0 +1,4 @@
+Zone avec marqueur ne marche pas
+Les équipes alliées ne partagent pas la vision
+Briefing semble bugger
+Untargeted order semble incomplet
