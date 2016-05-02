@@ -470,7 +470,22 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedOutputMission = "start" selectedOutput = 1 end }
+		OnClick = { function()
+			if selectedOutputMission == "start" and selectedOutput == 1 then
+				if Links[selectedOutputMission][selectedOutput] then
+					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
+					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
+					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
+					Links[selectedOutputMission][selectedOutput] = nil
+				end
+				selectedOutput = nil
+				selectedOutputMission = nil
+			else
+				selectedOutputMission = "start"
+				selectedOutput = 1
+			end
+		end }
 	}
 	UI.Scenario.Levels["end"] = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
@@ -492,7 +507,24 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedInput = "end" end }
+		OnClick = { function() 
+				if selectedInput == "end" then
+					for k, link in pairs(Links) do
+						for kk, linked in pairs(link) do
+							if linked == selectedInput then
+								UI.Scenario.Output[k][kk].state.chosen = false
+								UI.Scenario.Output[k][kk]:InvalidateSelf()
+								Links[k][kk] = nil
+							end
+						end
+					end
+					UI.Scenario.Input[selectedInput].state.chosen = false
+					UI.Scenario.Input[selectedInput]:InvalidateSelf()
+					selectedInput = nil
+				else
+					selectedInput = "end"
+				end
+			end }
 	}
 	local column = -1
 	for i, level in ipairs(LevelList) do
@@ -546,7 +578,24 @@ function InitializeScenarioFrame()
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 16
 			},
-			OnClick = { function() selectedInput = LevelListNames[i] end }
+			OnClick = { function() 
+				if selectedInput == LevelListNames[i] then
+					for k, link in pairs(Links) do
+						for kk, linked in pairs(link) do
+							if linked == selectedInput then
+								UI.Scenario.Output[k][kk].state.chosen = false
+								UI.Scenario.Output[k][kk]:InvalidateSelf()
+								Links[k][kk] = nil
+							end
+						end
+					end
+					UI.Scenario.Input[selectedInput].state.chosen = false
+					UI.Scenario.Input[selectedInput]:InvalidateSelf()
+					selectedInput = nil
+				else
+					selectedInput = LevelListNames[i]
+				end
+			end }
 		}
 		UI.Scenario.Output[LevelListNames[i]] = {}
 		for ii, out in ipairs(outputStates) do
@@ -562,7 +611,22 @@ function InitializeScenarioFrame()
 					size = 16
 				}
 			}
-			but.OnClick = { function() selectedOutputMission = LevelListNames[i] selectedOutput = out end }
+			but.OnClick = { function()
+				if selectedOutputMission == LevelListNames[i] and selectedOutput == out then
+					if Links[selectedOutputMission][selectedOutput] then
+						UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
+						UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
+						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
+						Links[selectedOutputMission][selectedOutput] = nil
+					end
+					selectedOutput = nil
+					selectedOutputMission = nil
+				else
+					selectedOutputMission = LevelListNames[i]
+					selectedOutput = out
+				end
+			end }
 			UI.Scenario.Output[LevelListNames[i]][out] = but
 		end
 	end
