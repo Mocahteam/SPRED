@@ -204,14 +204,14 @@ function InitializeLevelList()
 end
 
 function InitializeOutputStates()
-	Links[0] = {}
+	Links["start"] = {}
 	for i, level in ipairs(LevelList) do
-		OutputStates[i] = {}
-		Links[i] = {}
+		OutputStates[LevelListNames[i]] = {}
+		Links[LevelListNames[i]] = {}
 		for ii, e in ipairs(level.events) do
 			for iii, a in ipairs(e.actions) do
 				if a.type == "win" or a.type == "lose" then
-					table.insert(OutputStates[i], a.params.outputState)
+					table.insert(OutputStates[LevelListNames[i]], a.params.outputState)
 				end
 			end
 		end
@@ -449,7 +449,7 @@ function InitializeScenarioFrame()
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
-	UI.Scenario.Levels[0] = Chili.Window:New{
+	UI.Scenario.Levels["start"] = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 10,
 		y = 10,
@@ -458,9 +458,9 @@ function InitializeScenarioFrame()
 		draggable = true,
 		resizable = false
 	}
-	UI.Scenario.Output[0] = {}
-	UI.Scenario.Output[0][1] = Chili.Button:New{
-		parent = UI.Scenario.Levels[0],
+	UI.Scenario.Output["start"] = {}
+	UI.Scenario.Output["start"][1] = Chili.Button:New{
+		parent = UI.Scenario.Levels["start"],
 		x = "0%",
 		y = "0%",
 		width = "100%",
@@ -470,9 +470,9 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedOutputMission = 0 selectedOutput = 1 end }
+		OnClick = { function() selectedOutputMission = "start" selectedOutput = 1 end }
 	}
-	UI.Scenario.Levels[#LevelList+1] = Chili.Window:New{
+	UI.Scenario.Levels["end"] = Chili.Window:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 170,
 		y = 10,
@@ -481,8 +481,8 @@ function InitializeScenarioFrame()
 		draggable = true,
 		resizable = false
 	}
-	UI.Scenario.Input[#LevelList+1] = Chili.Button:New{
-		parent = UI.Scenario.Levels[#LevelList+1],
+	UI.Scenario.Input["end"] = Chili.Button:New{
+		parent = UI.Scenario.Levels["end"],
 		x = "0%",
 		y = "0%",
 		width = "100%",
@@ -492,15 +492,15 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16
 		},
-		OnClick = { function() selectedInput = #LevelList+1 end }
+		OnClick = { function() selectedInput = "end" end }
 	}
 	local column = -1
 	for i, level in ipairs(LevelList) do
 		-- Search for output states
-		local outputStates = OutputStates[i]
+		local outputStates = OutputStates[LevelListNames[i]]
 		if i % 3 == 1 then
 			column = column + 1
-			UI.Scenario.Levels[i] = Chili.Window:New{
+			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
 				parent = UI.Scenario.ScenarioScrollPanel,
 				x = 10 + column * 310,
 				y = 95,
@@ -510,10 +510,10 @@ function InitializeScenarioFrame()
 				resizable = true
 			}
 		else
-			UI.Scenario.Levels[i] = Chili.Window:New{
+			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
 				parent = UI.Scenario.ScenarioScrollPanel,
 				x = 10 + column * 310,
-				y = UI.Scenario.Levels[i-1].y + UI.Scenario.Levels[i-1].height + 10,
+				y = UI.Scenario.Levels[LevelListNames[i-1]].y + UI.Scenario.Levels[LevelListNames[i-1]].height + 10,
 				width = 300,
 				height = math.max(150, (#outputStates + 2) * 30),
 				draggable = true,
@@ -521,7 +521,7 @@ function InitializeScenarioFrame()
 			}
 		end
 		Chili.Label:New{
-			parent = UI.Scenario.Levels[i],
+			parent = UI.Scenario.Levels[LevelListNames[i]],
 			x = "0%",
 			y = 0,
 			width = "100%",
@@ -535,8 +535,8 @@ function InitializeScenarioFrame()
 				color = { 0, 0.8, 0.8, 1 }
 			}
 		}
-		UI.Scenario.Input[i] = Chili.Button:New{
-			parent = UI.Scenario.Levels[i],
+		UI.Scenario.Input[LevelListNames[i]] = Chili.Button:New{
+			parent = UI.Scenario.Levels[LevelListNames[i]],
 			x = 0,
 			y = 30,
 			width = 50,
@@ -546,12 +546,12 @@ function InitializeScenarioFrame()
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 16
 			},
-			OnClick = { function() selectedInput = i end }
+			OnClick = { function() selectedInput = LevelListNames[i] end }
 		}
-		UI.Scenario.Output[i] = {}
+		UI.Scenario.Output[LevelListNames[i]] = {}
 		for ii, out in ipairs(outputStates) do
 			local but = Chili.Button:New{
-				parent = UI.Scenario.Levels[i],
+				parent = UI.Scenario.Levels[LevelListNames[i]],
 				x = 155,
 				y = ii * 30,
 				width = 120,
@@ -562,8 +562,8 @@ function InitializeScenarioFrame()
 					size = 16
 				}
 			}
-			but.OnClick = { function() selectedOutputMission = i selectedOutput = out end }
-			UI.Scenario.Output[i][out] = but
+			but.OnClick = { function() selectedOutputMission = LevelListNames[i] selectedOutput = out end }
+			UI.Scenario.Output[LevelListNames[i]][out] = but
 		end
 	end
 end
@@ -829,8 +829,8 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.LoadLevel.Title, LAUNCHER_EDIT_TITLE)
 	
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
-	UpdateCaption(UI.Scenario.Output[0][1], LAUNCHER_SCENARIO_BEGIN)
-	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
+	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
+	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
@@ -869,12 +869,13 @@ end
 
 function ComputeInputStates()
 	local inputStates = {}
-	for i = 1, #LevelList+1, 1 do
-		inputStates[i] = {}
+	for i = 1, #LevelList, 1 do
+		inputStates[LevelListNames[i]] = {}
 	end
-	for i = 0, #Links, 1 do
-		for k, link in pairs(Links[i]) do
-			table.insert(inputStates[link], { i, k })
+	inputStates["end"] = {}
+	for k, link in pairs(Links) do
+		for kk, linku in pairs(link) do
+			table.insert(inputStates[linku], { k, kk })
 		end
 	end
 	return inputStates
@@ -947,7 +948,7 @@ function ExportScenario(name, desc)
 		local activity = {
 			["name"] = "activity",
 			["attr"] = {
-				["id_activity"] = tostring(i)
+				["id_activity"] = tostring(LevelListNames[i])
 			},
 			["kids"] = {
 				{
@@ -966,22 +967,22 @@ function ExportScenario(name, desc)
 		}
 		-- input
 		local count = 1
-		for ii, inp in ipairs(inputStates[i]) do
+		for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
 			local inputState = {
 				["name"] = "input_states",
 				["attr"] = {
-					["id_input"] = tostring(i).."_"..count
+					["id_input"] = LevelListNames[i].."//"..count
 				}
 			}
 			table.insert(activity.kids[2].kids, inputState)
 			count = count + 1
 		end
 		-- output
-		for ii, out in ipairs(OutputStates[i]) do
+		for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
 			local outputState = {
 				["name"] = "output_state",
 				["attr"] = {
-					["id_output"] = i.."_"..out
+					["id_output"] = LevelListNames[i].."//"..out
 				}
 			}
 			table.insert(activity.kids[3].kids, outputState)
@@ -990,11 +991,11 @@ function ExportScenario(name, desc)
 	end
 	-- Links
 	for k, link in pairs(Links) do
-		if k == 0 and link[1] then
+		if k == "start" and link[1] then
 			local id = link[1]
 			for ii, linku in ipairs(inputStates[link[1]]) do
 				if k == linku[1] and linku[2] == 1 then
-					id = id.."_"..ii
+					id = id.."//"..ii
 					break
 				end
 			end
@@ -1008,11 +1009,11 @@ function ExportScenario(name, desc)
 			table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
 		else
 			for kk, link2 in pairs(link) do
-				if link2 == #LevelList + 1 then
+				if link2 == "end" then
 					local l = {
 						["name"] = "output_input_link",
 						["attr"] = {
-							["id_output"] = k.."_"..kk,
+							["id_output"] = k.."//"..kk,
 							["id_input"] = "end"
 						}
 					}
@@ -1023,8 +1024,8 @@ function ExportScenario(name, desc)
 							local l = {
 								["name"] = "output_input_link",
 								["attr"] = {
-									["id_output"] = k.."_"..kk,
-									["id_input"] = link2.."_"..iii
+									["id_output"] = k.."//"..kk,
+									["id_input"] = link2.."//"..iii
 								}
 							}
 							table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
@@ -1045,20 +1046,16 @@ end
 function LoadScenario(xmlTable)
 	local links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
 	for i, link in ipairs(links) do
-		local input = splitString(link.attr.id_input, "_")[1]
-		local outputMission, output = unpack(splitString(link.attr.id_output, "_"))
+		local input = splitString(link.attr.id_input, "//")[1]
+		local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
 		if outputMission == "start" then
-			selectedOutputMission = 0
+			selectedOutputMission = "start"
 			selectedOutput = 1
-			selectedInput = tonumber(input)
-		elseif input == "end" then
-			selectedOutputMission = tonumber(outputMission)
-			selectedOutput = output
-			selectedInput = #LevelList+1
+			selectedInput = input
 		else
-			selectedOutputMission = tonumber(outputMission)
+			selectedOutputMission = outputMission
 			selectedOutput = output
-			selectedInput = tonumber(input)
+			selectedInput = input
 		end
 		MakeLink()
 	end
@@ -1067,17 +1064,17 @@ function LoadScenario(xmlTable)
 end
 
 function ResetScenario()
-	for i = 0, #LevelList do
-		Links[i] = {}
+	for k, link in pairs(Links) do
+		Links[k] = {}
 	end
 	ScenarioName = ""
 	ScenarioDesc = ""
-	for i, but in ipairs(UI.Scenario.Input) do
+	for k, but in pairs(UI.Scenario.Input) do
 		but.state.chosen = false
 		but:InvalidateSelf()
 	end
 	for k, out in pairs(UI.Scenario.Output) do
-		for i, but in pairs(out) do
+		for kk, but in pairs(out) do
 			but.state.chosen = false
 			but:InvalidateSelf()
 		end
@@ -1097,32 +1094,45 @@ function MakeLink()
 			end
 		end
 		
-		Links[selectedOutputMission][selectedOutput] = selectedInput
-		
-		if requireRecolor then
-			local r, g, b = math.random(), math.random(), math.random()
-			UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
-			UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-			UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-			UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
-			UI.Scenario.Input[selectedInput].state.chosen = true
-			UI.Scenario.Input[selectedInput]:InvalidateSelf()
-		else
-			UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
-			UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-			UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-		end
-	
-		local someLinks = {}
-		for k, link in pairs(Links) do
-			for kk, output in pairs(link) do
-				someLinks[output] = true
+		if (findInTable(LevelListNames, selectedInput) and findInTable(LevelListNames, selectedOutputMission))
+			or (selectedOutputMission == "start" and findInTable(LevelListNames, selectedInput)) 
+			or (selectedInput == "end" and findInTable(LevelListNames, selectedOutputMission))
+		then
+			local isValidOutput = false
+			if selectedOutputMission == "start" then
+				isValidOutput = true
+			else
+				isValidOutput = findInTable(OutputStates[selectedOutputMission], selectedOutput)
 			end
-		end
-		for k, b in pairs(UI.Scenario.Input) do
-			if not someLinks[k] then
-				b.state.chosen = false
-				b:InvalidateSelf()
+			if isValidOutput then
+				Links[selectedOutputMission][selectedOutput] = selectedInput
+				
+				if requireRecolor then
+					local r, g, b = math.random(), math.random(), math.random()
+					UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
+					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+					UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
+					UI.Scenario.Input[selectedInput].state.chosen = true
+					UI.Scenario.Input[selectedInput]:InvalidateSelf()
+				else
+					UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
+					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+				end
+			
+				local someLinks = {}
+				for k, link in pairs(Links) do
+					for kk, output in pairs(link) do
+						someLinks[output] = true
+					end
+				end
+				for k, b in pairs(UI.Scenario.Input) do
+					if not someLinks[k] then
+						b.state.chosen = false
+						b:InvalidateSelf()
+					end
+				end
 			end
 		end
 		
