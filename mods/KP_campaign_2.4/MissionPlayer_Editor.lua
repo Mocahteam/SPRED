@@ -792,27 +792,6 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
 end
 
 -------------------------------------
--- Determine if a group satisfies a condition
--------------------------------------
-local function UpdateConditionOnGroup(groupId,c)
-  --Spring.Echo("group Investigated : "..groupId)
-  for i, externalUnitId in ipairs(groupOfUnits[groupId]) do
-    --Spring.Echo("unit Investigated : "..externalUnitId)
-    local bool=UpdateConditionOnUnit (externalUnitId,c)
-    --Spring.Echo(bool)
-    if(c["value"]["group"]=="any")and(bool) then
-      return true
-    elseif(c["value"]["group"]=="all")and(not bool) then
-      return false
-    end     
-  end
-  return(c["value"]["group"]=="all")
-  --trick to figure out the boolean value if the loop never break.
-  -- if it was "all" then bool was always true, then the whole condition is true
-  -- if it was "any" then bool was always false, then the whole condition is false
-end   
-
--------------------------------------
 -- Update the truthfulness of a condition
 -------------------------------------
 local function UpdateConditionsTruthfulness (frameNumber)
