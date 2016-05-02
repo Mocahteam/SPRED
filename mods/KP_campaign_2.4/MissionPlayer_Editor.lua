@@ -486,13 +486,7 @@ local function ApplyNonGroupableAction(act)
     end
     
   elseif(act.type=="centerCamera") then
-    Spring.Echo("we did messed up")
-      _G.cameraAuto = {
-        enable = true,
-        specialPositions = {{act.params.position.x,act.params.position.z}} 
-      }
-      SendToUnsynced("enableCameraAuto")
-      _G.cameraAuto = nil 
+    SendToUnsynced("centerCamera", json.encode(act.params.position))
    
   -- MESSAGES
   
@@ -695,7 +689,9 @@ local function processEvents(frameNumber)
       if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
         -- Handle repetition
         event.lastExecution=frameNumber
-        local frameDelay=0          
+        local frameDelay=0
+        Spring.Echo("try to apply the event with the following actions")
+        Spring.Echo(json.encode(event.actions))          
         for j=1,table.getn(event.actions) do
           frameDelay=frameDelay+1
           local a=event.actions[j]
@@ -716,6 +712,7 @@ local function processEvents(frameNumber)
           else
             if creationOfNewEvent==false then
               AddActionInStack(a,frameDelay)
+              Spring.Echo(a.name.." added to stack")
             else
               table.insert(newevent["actions"],a)
             end
@@ -1017,7 +1014,6 @@ end
  -------------------------------
  -------VARIABLES---------------
  -------------------------------
-
 if(mission.variables~=nil)then
   for i=1,table.getn(mission.variables) do
     local missionVar=mission.variables[i]
@@ -1038,24 +1034,24 @@ Spring.Echo(json.encode(variables))
   -- specialPositionTables[i]={positions[id].x,positions[id].z}
   -- 
 
-   -------------------------------
-   -------SETTINGS----------------
-   -------------------------------
-  messages["briefing"]=mission.description.briefing
-  Spring.Echo(messages["briefing"])
+ -------------------------------
+ -------SETTINGS----------------
+ -------------------------------
+messages["briefing"]=mission.description.briefing
+Spring.Echo(messages["briefing"])
 --  if(mission.description.mouse=="disabled") then
 --   SendToUnsynced("mouseDisabled", true)
 --  end
 
-  if(mission.description.cameraAuto=="enabled") then
-    _G.cameraAuto = {
-      enable = true,
-      specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
-    }
-    SendToUnsynced("enableCameraAuto")
-    _G.cameraAuto = nil
-  end
-  local isautoHealGlobal=(mission.description.autoHeal=="enabled")
+if(mission.description.cameraAuto=="enabled") then
+  _G.cameraAuto = {
+    enable = true,
+    specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
+  }
+  SendToUnsynced("enableCameraAuto")
+  _G.cameraAuto = nil
+end
+local isautoHealGlobal=(mission.description.autoHeal=="enabled")
   
  -------------------------------
  ----------ARMIES---------------

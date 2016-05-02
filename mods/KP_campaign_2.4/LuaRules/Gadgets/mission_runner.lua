@@ -178,8 +178,10 @@ function gadget:RecvFromSynced(...)
     end
 
   elseif arg1 == "disableCameraAuto" then
+    Spring.Echo("try to desab")
     if Script.LuaUI("CameraAuto") then
-      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["disable"], {}) -- absolutely not sure of the "disable" thing
+      Spring.Echo("try to desab_2")
+      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
     end
     
   elseif arg1 == "TutorialEvent" then
@@ -194,6 +196,14 @@ function gadget:RecvFromSynced(...)
         end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
+  elseif arg1=="centerCamera" then
+    Spring.Echo("I tried Bonnie, I tried")
+    local state = Spring.GetCameraState()
+    local pos=json.decode(arg2)
+    state.px=pos.x
+    state.pz=pos.z
+    state.height = 800
+    Spring.SetCameraState(state, 2)
   end
 end
 
