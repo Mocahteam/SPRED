@@ -2769,11 +2769,11 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" then
+	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
 		local editBox = addEditBox(scrollPanel, '35%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
-			if attr.type == "message" then
+			if attr.type == "message" or attr.type == "parameters" then
 				local text = ""
 				if type(a.params[attr.id]) == "table" then
 					for i, msg in ipairs(a.params[attr.id]) do
@@ -2798,7 +2798,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			editBox.updateFunction = function()
 				a.params[attr.id] = editBox.text
 			end
-		elseif attr.type == "message" then
+		elseif attr.type == "message" or attr.type == "parameters" then
 			editBox.updateFunction = function()
 				local msgs = splitString(editBox.text, "||")
 				for i in ipairs(msgs) do
@@ -2807,9 +2807,11 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				end
 				a.params[attr.id] = msgs
 			end
-			local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_MESSAGE_HINT, 14, { 0.6, 1, 1, 1 })
-			table.insert(feature, messageHint)
-			yref[1] = yref[1] + 40
+			if attr.type == "message" then
+				local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_MESSAGE_HINT, 14, { 0.6, 1, 1, 1 })
+				table.insert(feature, messageHint)
+				yref[1] = yref[1] + 40
+			end
 		end
 		editBox.isEditBox = true
 		table.insert(feature, editBox)
