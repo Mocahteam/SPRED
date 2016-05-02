@@ -526,7 +526,7 @@ local function ApplyNonGroupableAction(act)
       if Spring.ValidUnitID(springUnitId) then
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
-        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z}} --to erase message after timeout
+        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
         AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))
       end
   elseif(act.type=="messagePosition") then
