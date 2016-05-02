@@ -26,13 +26,14 @@ function widget:DrawScreen()
 		local u, m = mes.unit, mes.message
 		local x, y, z = Spring.GetUnitPosition(u)
 		x, y = Spring.WorldToScreenCoords(x, y+50, z)
-		local s = 15
+		local s = 30
 		local w = gl.GetTextWidth(m)*s
 		gl.Text(m, x - (w/2), y, s, "s")
 	end
 	for i, mes in ipairs(PositionMessages) do
 		local x, y, z, m = mes.x, mes.y, mes.z, mes.message
-		local s = 15
+		x, y = Spring.WorldToScreenCoords(x, y, z)
+		local s = 30
 		local w = gl.GetTextWidth(m)*s
 		gl.Text(m, x - (w/2), y, s, "s")
 	end
