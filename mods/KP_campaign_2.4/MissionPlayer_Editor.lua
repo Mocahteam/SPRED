@@ -483,8 +483,6 @@ end
 -- Apply a groupable action, generally not related to an unit
 -------------------------------------
 local function ApplyNonGroupableAction(act)
-
-
   if(act.type=="cameraAuto") then
     if(act.params.toggle=="enabled")then
       _G.cameraAuto = {
@@ -496,7 +494,7 @@ local function ApplyNonGroupableAction(act)
     else
       _G.cameraAuto = {
         enable = false,
-        specialPositions = {} --TODO: minimap and special position géree dans les zones
+        specialPositions = {} 
       }
       SendToUnsynced("disableCameraAuto")
       _G.cameraAuto = nil  
@@ -513,7 +511,7 @@ local function ApplyNonGroupableAction(act)
     Spring.Echo("we did messed up")
       _G.cameraAuto = {
         enable = true,
-        specialPositions = {{act.params.position.x,act.params.position.z}} --TODO: minimap and special position géree dans les zones
+        specialPositions = {{act.params.position.x,act.params.position.z}} 
       }
       SendToUnsynced("enableCameraAuto")
       _G.cameraAuto = nil 
@@ -585,9 +583,7 @@ end
 function ApplyAction (a)
   --Spring.Echo("try to apply "..actionId)
   --Spring.Echo(json.encode(actions))
-  Spring.Echo("we try to apply action :")
-  Spring.Echo(a.name)
-  
+  Spring.Echo("we try to apply action :"..tostring(a.name))
   local a, groupable=isAGroupableTypeOfAction(a)
   --if(groupable)then
   if(groupable) then
@@ -598,8 +594,8 @@ function ApplyAction (a)
     else   
       local tl={currentTeam="team",team="team",unitType="type",group="group"}
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,tl)
-      Spring.Echo("we try to apply the groupable action to this group")
-      Spring.Echo(json.encode(listOfUnits))
+      --Spring.Echo("we try to apply the groupable action to this group")
+      --Spring.Echo(json.encode(listOfUnits))
       for i, externalUnitId in ipairs(listOfUnits) do
         local unit=armySpring[externalUnitId]
         ApplyGroupableAction(unit,a)
