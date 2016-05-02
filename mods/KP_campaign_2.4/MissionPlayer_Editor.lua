@@ -286,7 +286,7 @@ end
 -------------------------------------
 local function ShowBriefing ()
   --Spring.Echo(json.encode(mission))
-  showMessage(getAMessage("briefing"))-- convention all json files have briefing attribute
+  showMessage(getAMessage(messages["briefing"]))-- convention all json files have briefing attribute
 end
 
 -------------------------------------
@@ -329,7 +329,10 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   end
 end
 
-
+-------------------------------------
+-- Create unit according informations stored in a table
+-- Also add unit in tables
+-------------------------------------
 local function createUnit(unitTable)
     local posit=unitTable.position
     armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
