@@ -983,28 +983,58 @@ local function StartAfterJson ()
     --Spring.Echo("I am Totally Deleting Stuff")
     Spring.DestroyUnit(units[i], false, true)
   end  
-  
-   -------------------------------
-   -------VARIABLES---------------
-   -------------------------------
-
-  if(mission.variables~=nil)then
-    for i=1,table.getn(mission.variables) do
-      local missionVar=mission.variables[i]
-      local initValue=missionVar.initValue
-      local name=missionVar.name
-      if(missionVar.type=="number") then
-        initValue=initValue
-      elseif(missionVar.type=="boolean") then
-        initValue=(initValue=="true")
+ 
+ local specialPositionTables={} 
+ 
+ -------------------------------
+ -------ZONES-------------------
+ -------------------------------
+ if(mission.zones~=nil)then   
+  for i=1, table.getn(mission.zones) do
+    local center_xz
+     local cZ=mission.zones[i]
+     local idZone=cZ.name
+     if(cZ.type=="Disk") then
+      center_xz={x=cZ.x, z=cZ.z}
+      zones[idZone]={type="Disk",center_xz=center_xz,a=cZ.a,b=cZ.b}
+     elseif(cZ.type=="Rectangle") then
+      local demiLargeur=(cZ.x2-cZ.x1)/2
+      local demiLongueur=(cZ.z2-cZ.z1)/2
+      center_xz={x=cZ.x1+demiLargeur, z=cZ.z1+demiLongueur}
+      zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
+     else
+      Spring.Echo(cZ.type.." not implemented yet")
       end
-      variables[name]=initValue
+    if(cZ.alwaysInView)then
+      table.insert(specialPositionTables,{center_xz.x,center_xz.z})
+    end 
+    if(cZ.marker)then
+      Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, cZ.name)
+    end 
+  end
+end
+ 
+ -------------------------------
+ -------VARIABLES---------------
+ -------------------------------
+
+if(mission.variables~=nil)then
+  for i=1,table.getn(mission.variables) do
+    local missionVar=mission.variables[i]
+    local initValue=missionVar.initValue
+    local name=missionVar.name
+    if(missionVar.type=="number") then
+      initValue=initValue
+    elseif(missionVar.type=="boolean") then
+      initValue=(initValue=="true")
     end
-  end  
-  Spring.Echo(json.encode(variables))
+    variables[name]=initValue
+  end
+end  
+Spring.Echo(json.encode(variables))
 
 
-  local specialPositionTables={}
+
   -- specialPositionTables[i]={positions[id].x,positions[id].z}
   -- 
 
@@ -1107,25 +1137,7 @@ end
 
 
 
- -------------------------------
- -------ZONES--------------------
- -------------------------------
- if(mission.zones~=nil)then   
-  for i=1, table.getn(mission.zones) do
-   local cZ=mission.zones[i]
-   local idZone=cZ.name
-   if(cZ.type=="Disk") then
-    zones[idZone]={type="Disk",center_xz={x=cZ.x, z=cZ.z},a=cZ.a,b=cZ.b}
-   elseif(cZ.type=="Rectangle") then
-    local demiLargeur=(cZ.x2-cZ.x1)/2
-    local demiLongueur=(cZ.z2-cZ.z1)/2
-    local center_xz={x=cZ.x1+demiLargeur, z=cZ.z1+demiLongueur}
-    zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
-   else
-    Spring.Echo(cZ.type.." not implemented yet")
-    end  
-  end
-end
+
 
 
 
