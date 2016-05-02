@@ -19,9 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- modifier taille texte
 -- corriger le bug sur la v0.2 pour les editbox
--- back to menu
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -38,8 +36,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
-local textSize = 1
 local initialize = false
+local UIelements = {}
 
 -- File Variables
 local fileButtons = {}
@@ -290,6 +288,7 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
+	table.insert(UIelements, button)
 	return button
 end
 function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
@@ -308,6 +307,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
+	table.insert(UIelements, label)
 	return label
 end
 function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
@@ -324,6 +324,7 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
+	table.insert(UIelements, textBox)
 	return textBox
 end
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
@@ -381,6 +382,7 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	else
 		editBox.font.size = 16
 	end
+	table.insert(UIelements, editBox)
 	return editBox
 end
 function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
@@ -395,6 +397,7 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		boxsize = _h or 10,
 		checked = _checked or false
 	}
+	table.insert(UIelements, checkBox)
 	return checkBox
 end
 function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
@@ -424,6 +427,7 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
+	table.insert(UIelements, comboBox)
 	return comboBox
 end
 function removeElements(parent, elementsTable, dispose) -- Remove UI elements from a parent and eventually dispose them
@@ -892,16 +896,34 @@ function initTriggerWindow()
 				end
 			end
 			e.trigger = trig
-			customTriggerEditBox:SetText("")
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..trig)
+			customTriggerEditBox:SetText(trig)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
 		end
 		saveState()
 	end
 	local useCustomTrigger = function()
 		if currentEvent then
 			local e = events[currentEvent]
-			e.trigger = customTriggerEditBox.text
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\0"..e.trigger)
+			local validTrigger = false
+			local checkingTrigger = customTriggerEditBox.text
+			local count = 0
+			for i, c in ipairs(e.conditions) do
+				checkingTrigger = string.gsub(checkingTrigger, c.name, "")
+			end
+			checkingTrigger = string.gsub(checkingTrigger, ".", function(c) if c == "(" then count = count + 1 return "" elseif c == ")" then count = count - 1 return "" end return c end)
+			checkingTrigger = string.gsub(checkingTrigger, "or", "")
+			checkingTrigger = string.gsub(checkingTrigger, "and", "")
+			checkingTrigger = string.gsub(checkingTrigger, "not", "")
+			checkingTrigger = string.gsub(checkingTrigger, " ", "")
+			if count == 0 and checkingTrigger == "" then
+				validTrigger = true
+			end
+			if validTrigger then
+				e.trigger = customTriggerEditBox.text
+				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+			else
+				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+			end
 		end
 		saveState()
 	end
@@ -917,7 +939,7 @@ function initTriggerWindow()
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
-	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 20, "left", nil, "center")
+	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 16, "left", nil, "center")
 	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
 	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
 	addButton(windows["importWindow"], tostring(200/3).."%", '20%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
@@ -3614,7 +3636,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 			local action = {}
 			action.id = a.id
 			if a.id >= actionNumber then
-				actionNumber = a.id
+				actionNumber = a.id + 1
 			end
 			action.type = a.type
 			action.name = a.name
@@ -3801,11 +3823,16 @@ end
 function settingsFrame()
 
 end
-function generateSaveName(name)
-	local saveName = name
-	saveName = string.gsub(name, " ", "_")
-	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
-	return saveName
+function backToMenuFrame()
+	if windows["backToMenu"] then
+		Screen0:RemoveChild(windows["backToMenu"])
+		windows["backToMenu"]:Dispose()
+	end
+	windows["backToMenu"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
+	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
+	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 function beginLoadLevel(name)
 	loadMap(name)
@@ -4054,6 +4081,19 @@ function changeMouseCursor()
 		else
 			Spring.SetMouseCursor("normalcursor")
 		end
+	else
+		Spring.SetMouseCursor("normalcursor")
+	end
+end
+function recursiveResize(obj, textSize)
+	if obj.children then
+		for i, child in ipairs(obj.children) do
+			recursiveResize(child, textSize)
+		end
+	end
+	if obj.font then
+		obj.font.size = obj.font.size * textSize
+		obj:InvalidateSelf()
 	end
 end
 function updateButtonVisualFeedback() -- Show current states on GUI
@@ -4206,15 +4246,29 @@ function widget:Update(delta)
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
+	
+	local toBeRemoved = {}
+	for i, obj in ipairs(UIelements) do
+		if not obj.parent then
+			table.insert(toBeRemoved, i)
+		end
+	end
+	for _, i in ipairs(toBeRemoved) do
+		table.remove(UIelements, i)
+	end
 end
-
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
-	textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
-	screenSizeX, screenSizeY = dse_vsx, dse_vsy
-	--[[ TODO : for all elements
-	fileButtons["new"].font.size = textSize * fileButtons["new"].font.size	
-	fileButtons["new"]:InvalidateSelf()
-	]]
+	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
+		local textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
+		--recursiveResize(Screen0, textSize)
+		for i, obj in ipairs(UIelements) do
+			if obj.font then
+				obj.font.size = obj.font.size * textSize
+				obj:InvalidateSelf()
+			end
+		end
+		screenSizeX, screenSizeY = dse_vsx, dse_vsy
+	end
 end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
@@ -4562,7 +4616,11 @@ function widget:KeyPress(key, mods)
 		return true
 	-- ESCAPE : back to file menu
 	elseif key == Spring.GetKeyCode("esc") then
-		clearUI()
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.NONE then
+			backToMenuFrame()
+		else
+			clearUI()
+		end
 		return true
 	-- ENTER
 	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then

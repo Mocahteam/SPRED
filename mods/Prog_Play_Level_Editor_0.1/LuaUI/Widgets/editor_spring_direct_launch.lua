@@ -14,8 +14,9 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
+VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
-local xml = VFS.Include("LuaUI/Widgets/libs/xml-ser.lua")
+local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua")
 local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
 local Chili, Screen0
 local IsActive = false
@@ -28,6 +29,8 @@ local LevelList = {}
 local LevelListNames = {}
 local OutputStates = {}
 local Links = {}
+local ScenarioName = ""
+local ScenarioDesc = ""
 local selectedInput
 local selectedOutputMission
 local selectedOutput
@@ -202,7 +205,6 @@ end
 
 function InitializeOutputStates()
 	Links[0] = {}
-	--Links[#LevelList+1] = {}
 	for i, level in ipairs(LevelList) do
 		OutputStates[i] = {}
 		Links[i] = {}
@@ -362,7 +364,21 @@ function InitializeScenarioFrame()
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 25
 		},
-		OnClick = { ExportScenario }
+		OnClick = { ExportScenarioFrame }
+	}
+	UI.Scenario.Import = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "2%",
+		y = "90%",
+		width = "20%",
+		height = "5%",
+		caption = LAUNCHER_SCENARIO_IMPORT,
+		backgroundColor = { 0.2, 1, 0.8, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25
+		},
+		OnClick = { ImportScenarioFrame }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
@@ -371,43 +387,45 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
-	-- FIXME
 	local drawLinks = function(obj)
 		gl.Color(1, 1, 1, 1)
 		gl.LineWidth(3)
-		gl.BeginEnd(GL.LINES, function()
-			if selectedInput then
-				local x, y
-				x = UI.Scenario.Input[selectedInput].x + UI.Scenario.Input[selectedInput].tiles[1]/2 + UI.Scenario.Levels[selectedInput].x + UI.Scenario.Input[selectedInput].width/2
-				y = UI.Scenario.Input[selectedInput].y + UI.Scenario.Input[selectedInput].tiles[2]/2 + UI.Scenario.Levels[selectedInput].y + UI.Scenario.Input[selectedInput].height/2
-				local mouseX, mouseY = Spring.GetMouseState()
-				mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
-				mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
-				gl.Vertex(x, y)
-				gl.Vertex(mouseX, mouseY)
-			elseif selectedOutputMission and selectedOutput then
-				local x, y
-				x = UI.Scenario.Output[selectedOutputMission][selectedOutput].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].width/2
-				y = UI.Scenario.Output[selectedOutputMission][selectedOutput].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].height/2
-				local mouseX, mouseY = Spring.GetMouseState()
-				mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
-				mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
-				gl.Vertex(x, y)
-				gl.Vertex(mouseX, mouseY)
-			end
-			for k, link in pairs(Links) do
-				for kk, out in pairs(link) do
-					gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor))
-					local x1, y1, x2, y2
-					x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2
-					y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
-					x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
-					y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
-					gl.Vertex(x1, y1)
-					gl.Vertex(x2, y2)
+		gl.BeginEnd(
+			GL.LINES,
+			function()
+				if selectedInput then
+					local x, y
+					x = UI.Scenario.Input[selectedInput].x + UI.Scenario.Input[selectedInput].tiles[1]/2 + UI.Scenario.Levels[selectedInput].x + UI.Scenario.Input[selectedInput].width/2
+					y = UI.Scenario.Input[selectedInput].y + UI.Scenario.Input[selectedInput].tiles[2]/2 + UI.Scenario.Levels[selectedInput].y + UI.Scenario.Input[selectedInput].height/2
+					local mouseX, mouseY = Spring.GetMouseState()
+					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
+					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
+					gl.Vertex(x, y)
+					gl.Vertex(mouseX, mouseY)
+				elseif selectedOutputMission and selectedOutput then
+					local x, y
+					x = UI.Scenario.Output[selectedOutputMission][selectedOutput].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].width/2
+					y = UI.Scenario.Output[selectedOutputMission][selectedOutput].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].height/2
+					local mouseX, mouseY = Spring.GetMouseState()
+					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
+					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
+					gl.Vertex(x, y)
+					gl.Vertex(mouseX, mouseY)
+				end
+				for k, link in pairs(Links) do
+					for kk, out in pairs(link) do
+						gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor))
+						local x1, y1, x2, y2
+						x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2
+						y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
+						x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
+						y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
+						gl.Vertex(x1, y1)
+						gl.Vertex(x2, y2)
+					end
 				end
 			end
-		end)
+		)
 	end
 	UI.Scenario.Links = Chili.Control:New{
 		parent = UI.Scenario.ScenarioScrollPanel,
@@ -418,7 +436,6 @@ function InitializeScenarioFrame()
 		DrawControl = drawLinks,
 		drawcontrolv2 = true
 	}
-	
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
@@ -514,7 +531,7 @@ function InitializeScenarioFrame()
 			y = 30,
 			width = 50,
 			height = 30,
-			caption = "In",
+			caption = "in",
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 16
@@ -570,6 +587,7 @@ function ClearUI()
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
+	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 end
 
 function MainMenuFrame()
@@ -605,6 +623,131 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
+	UI.MainWindow:AddChild(UI.Scenario.Import)
+end
+
+function ExportScenarioFrame()
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '20%',
+		y = '40%',
+		width = '60%',
+		height = '20%',
+		draggable = false,
+		resizable = false
+	}
+	local nameBox = Chili.EditBox:New{
+		parent = window,
+		x = '10%',
+		y = '10%',
+		width = '80%',
+		height = '20%',
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		},
+		text = ScenarioName,
+		hint = LAUNCHER_SCENARIO_NAME_DEFAULT
+	}
+	local descBox = Chili.EditBox:New{
+		parent = window,
+		x = '2%',
+		y = '35%',
+		width = '96%',
+		height = '20%',
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 16
+		},
+		text = ScenarioDesc,
+		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
+	}
+	local exportBut = Chili.Button:New{
+		parent = window,
+		x = "30%",
+		y = "60%",
+		width = "40%",
+		height = "30%",
+		caption = LAUNCHER_SCENARIO_EXPORT,
+		backgroundColor = { 0, 0.8, 1, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25
+		}
+	}
+	exportBut.OnClick = { function()
+		local name, desc
+		if nameBox.text ~= "" then
+			name = nameBox.text
+		else
+			name = LAUNCHER_SCENARIO_NAME_DEFAULT
+		end
+		if descBox.text ~= "" then
+			desc = descBox.text
+		else
+			desc = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
+		end
+		window:Dispose()
+		ExportScenario(name, desc)
+	end }
+end
+
+function ImportScenarioFrame()
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '30%',
+		y = '30%',
+		width = '40%',
+		height = '40%',
+		draggable = false,
+		resizable = false
+	}
+	local scrollPanel = Chili.ScrollPanel:New{
+		parent = window,
+		x = '0%',
+		y = '10%',
+		width = '100%',
+		height = '90%'
+	}
+	local closeButton = Chili.Button:New{
+		parent = window,
+		x = '90%',
+		y = '0%',
+		width = '10%',
+		height = '10%',
+		caption = LAUNCHER_X,
+		OnClick = { function() window:Dispose() end }
+	}
+	closeButton.font.color = { 1, 0, 0, 1 }
+	local scenarioList = VFS.DirList("CustomLevels/", "*.xml", VFS.RAW)
+	if #scenarioList == 0 then
+		Chili.TextBox:New{
+			parent = scrollPanel,
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 30,
+				color = { 1, 0, 0, 1 }
+			}
+		}
+	else
+		for i, scen in ipairs(scenarioList) do
+			local name = string.gsub(scen, "CustomLevels\\", "")
+			Chili.Button:New{
+				parent = scrollPanel,
+				x = '0%',
+				y = (i-1) * 40,
+				width = '100%',
+				height = 40,
+				caption = name,
+				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("CustomLevels/"..name))) window:Dispose() end }
+			}
+		end
+	end
 end
 
 function ChangeLanguage(lang)
@@ -627,6 +770,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Output[0][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
+	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 end
 
 function NewMission(map)
@@ -673,7 +817,7 @@ function ComputeInputStates()
 	return inputStates
 end
 
-function ExportScenario()
+function ExportScenario(name, desc)
 	local inputStates = ComputeInputStates()
 	-- Base
 	local xmlScenario = {
@@ -693,11 +837,11 @@ function ExportScenario()
 				["kids"] = {
 					{
 						["name"] = "title",
-						["text"] = "GAMENAME"
+						["text"] = "Prog & Play"
 					},
 					{
 						["name"] = "description",
-						["text"] = "GAMEDESC"
+						["text"] = "Prog & Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d'un jeu de stratégie en temps réel à l'aide d'une bibliothèque de fonctions."
 					},
 					{
 						["name"] = "activites",
@@ -717,11 +861,11 @@ function ExportScenario()
 								["kids"] = {
 									{
 										["name"] = "title",
-										["text"] = "LINKSETNAME"
+										["text"] = name
 									},
 									{
 										["name"] = "description",
-										["text"] = "LINKSETDESC"
+										["text"] = desc
 									},
 									{
 										["name"] = "links",
@@ -827,11 +971,36 @@ function ExportScenario()
 			end
 		end
 	end
-	local xmlString = string.gsub(xml.serialize(xmlScenario), "%>%<", ">\n<")
+	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<")
 	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString
-	local file = io.open("CustomLevels/scenario.xml", "w")
+	local saveName = generateSaveName(name)
+	local file = io.open("CustomLevels/"..saveName..".xml", "w")
 	file:write(xmlString)
 	file:close()
+end
+
+function LoadScenario(xmlTable)
+	local links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
+	for i, link in ipairs(links) do
+		local input = splitString(link.attr.id_input, "_")[1]
+		local outputMission, output = unpack(splitString(link.attr.id_output, "_"))
+		if outputMission == "start" then
+			selectedOutputMission = 0
+			selectedOutput = 1
+			selectedInput = tonumber(input)
+		elseif input == "end" then
+			selectedOutputMission = tonumber(outputMission)
+			selectedOutput = output
+			selectedInput = #LevelList+1
+		else
+			selectedOutputMission = tonumber(outputMission)
+			selectedOutput = output
+			selectedInput = tonumber(input)
+		end
+		MakeLink()
+	end
+	ScenarioName = xmlTable.kids[1].kids[4].kids[1].kids[1].text
+	ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
 end
 
 function MakeLink()
@@ -881,7 +1050,9 @@ function MakeLink()
 		selectedInput = nil
 	end
 	
-	UI.Scenario.Links:InvalidateSelf()
+	if UI.Scenario then
+		UI.Scenario.Links:InvalidateSelf()
+	end
 end
 
 function Quit()
@@ -912,12 +1083,16 @@ function EitherDrawScreen()
 end
 
 function SwitchOn()
+	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
 	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()
 	InitializeLauncher()
+	ChangeLanguage("en")
+	MainMenuFrame()
 end
+WG.BackToMainMenu = SwitchOn
 
 function SwitchOff()
 	HideView = false
@@ -941,10 +1116,7 @@ end
 function widget:Initialize()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
-		GetLauncherStrings("en")
 		SwitchOn()
-		ChangeLanguage("en")
-		MainMenuFrame()
 	else
 		SwitchOff()
 	end
@@ -952,4 +1124,12 @@ end
 
 function widget:Update(delta)
 	MakeLink()
+end
+
+function widget:MousePress(mx, my, button)
+	if button == 3 then
+		selectedInput = nil
+		selectedOutputMission = nil
+		selectedOutput = nil
+	end
 end

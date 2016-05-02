@@ -87,6 +87,16 @@ function splitString(inputstr, sep)
 end
 
 -----------------------
+-- Generate a name for a file from a string
+-----------------------
+function generateSaveName(name)
+	local saveName = name
+	saveName = string.gsub(name, " ", "_")
+	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
+	return saveName
+end
+
+-----------------------
 -- Shows units information above unit
 -----------------------
 function showUnitInformation(u)
