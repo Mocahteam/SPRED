@@ -352,6 +352,16 @@ function InitializeScenarioFrame()
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
+	UI.Scenario.Reset = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = '90%',
+		y = '15%',
+		width = '8%',
+		height = '5%',
+		caption = LAUNCHER_SCENARIO_RESET,
+		OnClick = { ResetScenario },
+		backgroundColor = { 1, 0.8, 0.4, 1 }
+	}
 	UI.Scenario.Export = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "40%",
@@ -571,6 +581,7 @@ function UpdateText(element, text)
 end
 
 function ClearUI()
+	ClearTemporaryUI()
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
@@ -588,6 +599,16 @@ function ClearUI()
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
+	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
+end
+
+function ClearTemporaryUI()
+	if UI.ImportScenario then
+		UI.ImportScenario:Dispose()
+	end
+	if UI.ExportScenario then
+		UI.ExportScenario:Dispose()
+	end
 end
 
 function MainMenuFrame()
@@ -624,23 +645,48 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
+	UI.MainWindow:AddChild(UI.Scenario.Reset)
 end
 
 function ExportScenarioFrame()
+	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
 		x = '20%',
 		y = '40%',
 		width = '60%',
 		height = '20%',
-		draggable = false,
+		draggable = true,
 		resizable = false
+	}
+	local closeButton = Chili.Button:New{
+		parent = window,
+		x = '97%',
+		y = '0%',
+		width = '3%',
+		height = '20%',
+		caption = LAUNCHER_X,
+		OnClick = { function() window:Dispose() end }
+	}
+	closeButton.font.color = { 1, 0, 0, 1 }
+	Chili.Label:New{
+		parent = window,
+		x = '5%',
+		y = '10%',
+		width = '10%',
+		height = '20%',
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		},
+		valign = "center",
+		caption = LAUNCHER_SCENARIO_NAME
 	}
 	local nameBox = Chili.EditBox:New{
 		parent = window,
-		x = '10%',
+		x = '15%',
 		y = '10%',
-		width = '80%',
+		width = '75%',
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -649,11 +695,24 @@ function ExportScenarioFrame()
 		text = ScenarioName,
 		hint = LAUNCHER_SCENARIO_NAME_DEFAULT
 	}
+	Chili.Label:New{
+		parent = window,
+		x = '5%',
+		y = '35%',
+		width = '10%',
+		height = '20%',
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		},
+		valign = "center",
+		caption = LAUNCHER_SCENARIO_DESCRIPTION
+	}
 	local descBox = Chili.EditBox:New{
 		parent = window,
-		x = '2%',
+		x = '15%',
 		y = '35%',
-		width = '96%',
+		width = '75%',
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -690,9 +749,11 @@ function ExportScenarioFrame()
 		window:Dispose()
 		ExportScenario(name, desc)
 	end }
+	UI.ExportScenario = window
 end
 
 function ImportScenarioFrame()
+	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
 		x = '30%',
@@ -748,6 +809,7 @@ function ImportScenarioFrame()
 			}
 		end
 	end
+	UI.ImportScenario = window
 end
 
 function ChangeLanguage(lang)
@@ -771,6 +833,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Input[#LevelList+1], LAUNCHER_SCENARIO_END)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
+	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
 end
 
 function NewMission(map)
@@ -1001,6 +1064,24 @@ function LoadScenario(xmlTable)
 	end
 	ScenarioName = xmlTable.kids[1].kids[4].kids[1].kids[1].text
 	ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
+end
+
+function ResetScenario()
+	for i = 0, #LevelList do
+		Links[i] = {}
+	end
+	ScenarioName = ""
+	ScenarioDesc = ""
+	for i, but in ipairs(UI.Scenario.Input) do
+		but.state.chosen = false
+		but:InvalidateSelf()
+	end
+	for k, out in pairs(UI.Scenario.Output) do
+		for i, but in pairs(out) do
+			but.state.chosen = false
+			but:InvalidateSelf()
+		end
+	end
 end
 
 function MakeLink()
