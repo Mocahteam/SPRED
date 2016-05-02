@@ -443,7 +443,12 @@ local function ApplyGroupableAction(unit,act)
   end
 end
 
-
+-------------------------------------
+-- Create an unit at a certain position
+-- As side effects, the unit is added to various groups
+-- One special group is also used in order to identify all the units
+-- created by an action 
+-------------------------------------
 local function createUnitAtPosition(act,position)
     local y=Spring.GetGroundHeight(position.x,position.z)
     local spId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
@@ -452,14 +457,28 @@ local function createUnitAtPosition(act,position)
     -- this is on purpose as some actions can take the last unit created by this unit creation action
     local realId=act.name..tostring(globalIndexOfCreatedUnits)
     armySpring[realId]=spId 
-    -- in order to keep to track of all units
+    -- in order to keep to track of all created units
     globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
     local gpIndex="group_"..act.name
     if(groupOfUnits[gpIndex]==nil) then
       groupOfUnits[gpIndex]={}
     end
     table.insert(groupOfUnits[gpIndex],realId)
+    
+    -- Nasty copy pasta from the other function to create unit
+    local teamIndex="team_"..tostring(act.params.team)
+    local typeIndex="type_"..tostring(act.params.unitType)
+    if(groupOfUnits[teamIndex]==nil) then
+      groupOfUnits[teamIndex]={}
+    end
+    table.insert(groupOfUnits[teamIndex],realId)
+    -- update group units (type related)
+    if(groupOfUnits[typeIndex]==nil) then
+      groupOfUnits[typeIndex]={}
+    end
+    table.insert(groupOfUnits[typeIndex],realId)
 end
+
 -------------------------------------
 -- Apply a groupable action, generally not related to an unit
 -------------------------------------
