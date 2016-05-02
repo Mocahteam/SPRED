@@ -331,7 +331,7 @@ end
 
 -------------------------------------
 -- Create unit according informations stored in a table
--- Also add unit in tables
+-- Also add unit in group tables (team, type) 
 -------------------------------------
 local function createUnit(unitTable)
     local posit=unitTable.position
@@ -367,6 +367,7 @@ end
 -- Indicate if the action is groupable, which means that
 -- it can be applied to a group of units
 -- add information in the action to facilitate manipulations of this action
+-- return a boolean indicating if it's groupable
 -------------------------------------
 local function isAGroupableTypeOfAction(a)
  local groupable=true
@@ -390,7 +391,7 @@ local function isAGroupableTypeOfAction(a)
 end
 
 -------------------------------------
--- Apply a groupable action on a unit
+-- Apply a groupable action on a single unit
 -------------------------------------
 local function ApplyGroupableAction(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
@@ -554,7 +555,7 @@ end
 
 -------------------------------------
 -- The more general function to apply an action
--- according to its type, will be applied within another function
+-- according to its type (groupable or not) will be applied within another function
 -- Handle group of units
 -------------------------------------
 function ApplyAction (a)
@@ -682,8 +683,9 @@ end
 
 -------------------------------------
 -- If an event must be triggered, then shall be it
--- All the actions will be put in stack unless some specific options
+-- All the actions will be put in stack unless some specific options related to repetition
 -- forbide to do so, such as allowMultipleInStack
+-- this function as a side effect : it can create new actions (ex : to remove a message after a certain delay)
 -------------------------------------
 local function processEvents(frameNumber)
   local creationOfNewEvent=false
@@ -698,7 +700,7 @@ local function processEvents(frameNumber)
           frameDelay=frameDelay+1
           local a=event.actions[j]
           if(a.type=="wait")then
-            frameDelay=frameDelay+secondesToFrames(a.params.time) -- TODO: Vérifier
+            frameDelay=frameDelay+secondesToFrames(a.params.time) 
           elseif(a.type=="waitCondition")then
             creationOfNewEvent=true
             newevent=deepcopy(event)
@@ -753,10 +755,8 @@ end
 
 
 -------------------------------------
--- Determine if an unit satisfy a condition
--- Two modes are possible depending on if we want the condition
--- to be satisfied if at least one unit of this group satisfy it
--- or if all the units satisfy it
+-- Determine if an unit satisfies a condition
+-- Two modes are possible depending on the mode of comparison (at least, at most ...)
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
