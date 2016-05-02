@@ -31,7 +31,7 @@ function widget:DrawScreen()
 		gl.Text(m, x - (w/2), y, s, "s")
 	end
 	for i, mes in ipairs(PositionMessages) do
-		local x, y, z, m = mes.x, mes.y, mes.z mes.message
+		local x, y, z, m = mes.x, mes.y, mes.z, mes.message
 		local s = 15
 		local w = gl.GetTextWidth(m)*s
 		gl.Text(m, x - (w/2), y, s, "s")
