@@ -329,20 +329,6 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   end
 end
 
-local function getUnitFactionTypeFromId(idUnit)
-  for i=1,table.getn(mission.armies) do
-    local factionArmies=mission.armies[i]
-    local factionType=factionArmies.faction
-    local factionTypeCode=getFactionCode(factionType)
-    for j=1,table.getn(factionArmies.units) do
-      local unitTable=factionArmies.units[j]
-      if(unitTable.id==idUnit)then
-        return factionType
-      end
-    end
-  end
-  return nil
-end
 
 local function createUnit(unitTable)
     local posit=unitTable.position
