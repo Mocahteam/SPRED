@@ -496,19 +496,29 @@ local function ApplyNonGroupableAction(act)
    elseif(act.type=="messageUnit") then
       local springUnitId=armySpring[act.params.unit]
       if Spring.ValidUnitID(springUnitId) then
+        local factor=Spring.GetGameSpeed()
+        --Spring.Echo("try to send : DisplayMessageAboveUnit")
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/factor}))
+        --[[
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
         local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
-        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))
+        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))--]]
       end
   elseif(act.type=="messagePosition") then
-  --act.params.position.x,y,act.params.position.x
+    --Spring.Echo("try to send : DisplayMessagePosition")
+  --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
+    local factor=Spring.GetGameSpeed()   
     local x=act.params.position.x
     local y=Spring.GetGroundHeight(act.params.position.x,act.params.position.z)
     local z=act.params.position.z
-    Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/factor}))
+    
+    
+   --[[ Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
     local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z}} --to erase message after timeout
     AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))
+    --]]
      
   elseif(act.type=="erasemarker") then 
     Spring.MarkerErasePosition(act.params.x,act.params.y,act.params.z)
