@@ -35,6 +35,7 @@ local globalIndexOfCreatedUnits=0
 
 -------------------------------------
 -- Compare numerical values, a verbal "mode" being given 
+-- @return boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
   if(mode=="atmost")then return (value<=reference)      
@@ -46,6 +47,7 @@ end
 
 -------------------------------------
 -- Compare numerical values, a numerical "mode" being given 
+-- @return boolean
 -------------------------------------
 local function compareValue_Numerical(v1,v2,mode) 
   if(mode==">")then return v1>v2 end
@@ -58,6 +60,7 @@ end
 
 -------------------------------------
 -- Make an operation, a numerical "operator" being given 
+-- @return number
 -------------------------------------
 local function makeOperation(v1,v2,operation)
   if(operation=="*")then return v1*v2 end
@@ -133,6 +136,10 @@ local function getAMessage(messageTable)
   end
 end
 
+-------------------------------------
+-- Indicates if a point is inside a zone (disk or rectangle)
+-- @return boolean
+-------------------------------------
 local function isXZInsideZone(x,z,zoneId)
   local zone=zones[zoneId]
   if(zone.type=="Rectangle") then
@@ -169,7 +176,8 @@ local function isXZInsideZone(x,z,zoneId)
 end
 
 -------------------------------------
--- determine if a unit is in zone
+-- Indicates if an unit is inside a zone (disk or rectangle)
+-- @return boolean
 -------------------------------------
 local function isUnitInZone(springUnit,idZone)
   local x, y, z = Spring.GetUnitPosition(springUnit)
@@ -177,9 +185,7 @@ local function isUnitInZone(springUnit,idZone)
 end
 
 -------------------------------------
--- get a position randomly drawn within a zone
--- If extra parameters are given (such as validZone)
--- a random position can be drawn
+-- draw a position randomly drawn within a zone
 -------------------------------------
 local function getARandomPositionInZone(idZone)
   local zone=zones[idZone]
