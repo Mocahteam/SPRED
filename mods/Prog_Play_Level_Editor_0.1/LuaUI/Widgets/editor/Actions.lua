@@ -171,7 +171,7 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
+				type = "parameters",
 				id = "parameters"
 			}
 		}
@@ -240,7 +240,7 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
+				type = "parameters",
 				id = "parameters"
 			}
 		}
@@ -309,7 +309,7 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
+				type = "parameters",
 				id = "parameters"
 			}
 		}
@@ -383,7 +383,7 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
+				type = "parameters",
 				id = "parameters"
 			}
 		}
