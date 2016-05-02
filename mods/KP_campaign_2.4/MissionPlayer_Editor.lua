@@ -294,17 +294,16 @@ end
 -- are related to conditions in the json files.
 -------------------------------------
 local function isTriggerable(event)
-  -- if 
-  -- chaine vide => create trigger
   local trigger=event.trigger
-  if(trigger=="")then
+  if(trigger=="")then   -- empty string => create trigger by cunjunction (ands) of all conditions
+  -- step 1 : write the trigger
     for c,cond in pairs(event.listOfInvolvedConditions) do
       trigger=trigger..cond.." and "
     end
     trigger=string.sub(trigger,1,-5) -- drop the last "and"
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
-    -- first step : conditions are replaced to their boolean values.
+    -- second step : conditions are replaced to their boolean values.
     local valueCond=conditions[cond]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
@@ -313,22 +312,6 @@ local function isTriggerable(event)
   local f = loadstring(executableStatement)
    -- fourth step : loadstring is used to create the function.
   return(f())
-end
-
-
-local function getUnitTableFromId(idUnit)
-  for i=1,table.getn(mission.armies) do
-    local factionArmies=mission.armies[i]
-    for j=1,table.getn(factionArmies.units) do
-      local unitTable=factionArmies.units[j]
-      if(unitTable.id==idUnit)then
-        return unitTable
-      end
-    end
-  end
-  --Spring.Echo("impossible to find the table of "..idUnit.." in mission.armies")
-  --Spring.Echo(json.encode(mission.armies))
-  return nil
 end
 
 -------------------------------------
