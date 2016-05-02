@@ -34,24 +34,20 @@ local globalIndexOfCreatedUnits=0
 
 
 -------------------------------------
--- Compare value
+-- Compare numerical values, a verbal "mode" being given 
 -------------------------------------
---
---
-local function compareValue(reference,maxRef,value,mode)
-  if(mode=="atmost")then
-    return (value<=reference)      
-  elseif(mode=="atleast")then
-    return (value>=reference)    
-  elseif(mode=="exactly")then
-    return (reference==value)  
-  elseif(mode=="all")then
-    return (maxRef==value)
+local function compareValue_Verbal(reference,maxRef,value,mode)
+  if(mode=="atmost")then return (value<=reference)      
+  elseif(mode=="atleast")then  return (value>=reference)    
+  elseif(mode=="exactly")then return (reference==value)  
+  elseif(mode=="all")then return (maxRef==value)
   end
 end
 
-
-local function compareValues(v1,v2,mode) 
+-------------------------------------
+-- Compare numerical values, a numerical "mode" being given 
+-------------------------------------
+local function compareValue_Numerical(v1,v2,mode) 
   if(mode==">")then return v1>v2 end
   if(mode==">=")then return v1>=v2 end
   if(mode=="<")then return v1<v2 end
@@ -60,6 +56,9 @@ local function compareValues(v1,v2,mode)
   if(mode=="!=")then return v1~=v2 end
 end 
 
+-------------------------------------
+-- Make an operation, a numerical "operator" being given 
+-------------------------------------
 local function makeOperation(v1,v2,operation)
   if(operation=="*")then return v1*v2 end
   if(operation=="+")then return v1+v2 end
@@ -809,7 +808,7 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
     elseif(c.attribute=="hp") then 
       local tresholdRatio=c.params.hp.number/100
       local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
-      return compareValue(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
+      return compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
     end
   end
 end
@@ -847,7 +846,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
       local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
-      conditions[idCond]["currentlyValid"]= compareValue(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+      conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
       elseif(c.type=="repeat") then
         local framePeriod=secondesToFrames(c.params.number)
         conditions[idCond]["currentlyValid"]=((frameNumber-startingFrame) % framePeriod==0)
@@ -858,11 +857,11 @@ local function UpdateConditionsTruthfulness (frameNumber)
       elseif(c.type=="variableVSnumber") then
         local v1=variables[c.params.variable]
         local v2=c.params.number
-        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)    
+        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)    
       elseif(c.type=="variableVSvariable") then
         local v1=variables[c.params.variable1]
         local v2=variables[c.params.variable2]
-        conditions[idCond]["currentlyValid"]=compareValues(v1,v2,c.params.comparison)   
+        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="booleanVariable") then
         conditions[idCond]["currentlyValid"]=variables[c.params.variable] -- very simple indeed 
       end
@@ -878,7 +877,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
          count=count+1
         end 
       end
-      conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
+      conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
         local tlkup={targetTeam="team",unitType="type",group="group"}
@@ -897,13 +896,13 @@ local function UpdateConditionsTruthfulness (frameNumber)
             end
           end
         end
-        conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,total,count,c.params.number.comparison)
+        conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
       elseif (c.type=="killed_unit") then
         local numberOfKill=0
         if(killByTeams[c.params.team]~=nil)then
           local numberOfKill=table.getn(killByTeams[c.params.team])
         end
-        conditions[idCond]["currentlyValid"]= compareValue(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
+        conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
         -- For the moment the "killed all" is not implemented 
       elseif (c.type=="killed") then
         local found=false
