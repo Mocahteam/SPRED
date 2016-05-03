@@ -1290,6 +1290,7 @@ function widget:MousePress(mx, my, button)
 end
 
 function widget:KeyPress(key, mods)
+	VFS.CompressFolder("CustomLevels")
 	Spring.Echo(key)
 	--Spring.Echo(string.char(key))
 	--Spring.Echo(Spring.GetKeySymbol(key), "||", string.char(key), "||", string.byte(Spring.GetKeySymbol(key)))
