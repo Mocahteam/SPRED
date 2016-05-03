@@ -412,9 +412,11 @@ local function ApplyGroupableAction(unit,act)
     elseif(act.attribute=="orderPosition")then
       Spring.GiveOrderToUnit(unit, act.params.command,{act.params.position.x,Spring.GetGroundHeight(act.params.position.x, act.params.position.z),act.params.position.z}, {})
     elseif(act.attribute=="orderTarget")then
-      local u=act.params.unit
+      local u=act.params.target
       local spUnit=armySpring[u]
-      Spring.GiveOrderToUnit(unit, act.params.command,spUnit, {})
+      --Spring.GiveOrderToUnit(unit, act.params.command,{spUnit}, {})
+      --Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
+      Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {}) 
     end
 
     --Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
@@ -1189,6 +1191,7 @@ local function Update (frameNumber)
   UpdateGameState(frameNumber)
   actionStack=updateStack(refreshPeriod)
   applyCurrentActions() 
+
   if(success==1) then
     return 0
   elseif(success==-1) then
