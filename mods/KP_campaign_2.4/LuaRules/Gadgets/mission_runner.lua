@@ -163,7 +163,10 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
+    mouseDisabled = true
+  elseif arg1 == "mouseEnabled" then
     mouseDisabled = false
+
 --    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then
@@ -173,6 +176,14 @@ function gadget:RecvFromSynced(...)
       end
       Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
     end
+
+  elseif arg1 == "disableCameraAuto" then
+    Spring.Echo("try to desab")
+    if Script.LuaUI("CameraAuto") then
+      Spring.Echo("try to desab_2")
+      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
+    end
+    
   elseif arg1 == "TutorialEvent" then
     if Script.LuaUI("TutorialEvent") then
       Script.LuaUI.TutorialEvent() -- function defined and registered in mission_gui widget
@@ -185,6 +196,14 @@ function gadget:RecvFromSynced(...)
         end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
+  elseif arg1=="centerCamera" then
+    Spring.Echo("I tried Bonnie, I tried")
+    local state = Spring.GetCameraState()
+    local pos=json.decode(arg2)
+    state.px=pos.x
+    state.pz=pos.z
+    state.height = 800
+    Spring.SetCameraState(state, 2)
   end
 end
 
