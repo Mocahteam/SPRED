@@ -14,11 +14,11 @@ local UnitMessages = {}
 local PositionMessages = {}
 
 function DisplayMessageAboveUnit(message, unit, timer)
-	table.insert(UnitMessages, {message = message, unit = unit, timer = timer})
+	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
 end
 
 function DisplayMessageAtPosition(message, x, y, z, timer)
-	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer})
+	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer,infinite=(timer==0)})
 end
 
 function widget:DrawScreen()
@@ -47,10 +47,12 @@ end
 function widget:Update(delta)
 	local toBeRemoved = {}
 	for i, m in ipairs(UnitMessages) do
-		m.timer = m.timer - delta
-		if m.timer < 0 then
-			table.insert(toBeRemoved, i)
-		end
+	 if (not m.infinite)then
+  		m.timer = m.timer - delta
+  		if m.timer < 0 then
+  			table.insert(toBeRemoved, i)
+  		end
+    end
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(UnitMessages, i)
@@ -58,10 +60,12 @@ function widget:Update(delta)
 	
 	toBeRemoved = {}
 	for i, m in ipairs(PositionMessages) do
-		m.timer = m.timer - delta
-		if m.timer < 0 then
-			table.insert(toBeRemoved, i)
-		end
+   if (not m.infinite)then
+      m.timer = m.timer - delta
+      if m.timer < 0 then
+        table.insert(toBeRemoved, i)
+      end
+    end
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(PositionMessages, i)
