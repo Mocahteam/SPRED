@@ -2606,7 +2606,6 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			end
 			for i, ev in ipairs(events) do
 				for ii, act in ipairs(ev.actions) do
-					Spring.Echo(act.type)
 					if act.type == "createUnitAtPosition" or act.type == "createUnitsInZone" then
 						table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP..act.name)
 					end
@@ -3616,7 +3615,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, cond in ipairs(conditions_list) do
 					for iiii, attr in ipairs(cond.attributes) do
-						if attr.id == k and attr.type == "unit" then
+						if attr.id == k and attr.type == "unit" and type(c.params[attr.id]) == "number" then
 							updateUnitID = true
 							break
 						end
@@ -3647,7 +3646,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, act in ipairs(actions_list) do
 					for iiii, attr in ipairs(act.attributes) do
-						if attr.id == k and attr.type == "unit" then
+						if attr.id == k and attr.type == "unit" and type(a.params[attr.id]) == "number" then
 							updateUnitID = true
 							break
 						end

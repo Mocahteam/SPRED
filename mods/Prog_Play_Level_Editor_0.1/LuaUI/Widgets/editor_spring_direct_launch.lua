@@ -1288,3 +1288,9 @@ function widget:MousePress(mx, my, button)
 		selectedOutput = nil
 	end
 end
+
+function widget:KeyPress(key, mods)
+	Spring.Echo(key)
+	--Spring.Echo(string.char(key))
+	--Spring.Echo(Spring.GetKeySymbol(key), "||", string.char(key), "||", string.byte(Spring.GetKeySymbol(key)))
+end
