@@ -162,8 +162,6 @@ local mouseDisabled = false
 
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
-  Spring.Echo(arg1)
-  Spring.Echo(arg2)
   if arg1 == "mouseDisabled" then
     mouseDisabled = true
   elseif arg1 == "mouseEnabled" then
