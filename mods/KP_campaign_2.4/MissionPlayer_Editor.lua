@@ -578,9 +578,13 @@ function ApplyAction (a)
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,tl)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
-      for i, externalUnitId in ipairs(listOfUnits) do
-        local unit=armySpring[externalUnitId]
-        ApplyGroupableAction(unit,a)
+      if(listOfUnits~=nil)then
+        for i, externalUnitId in ipairs(listOfUnits) do
+          local unit=armySpring[externalUnitId]
+          ApplyGroupableAction(unit,a)
+        end
+      else
+        Spring.Echo("no units available for this action")
       end
     end
   else
