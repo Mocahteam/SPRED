@@ -185,11 +185,15 @@ function InitializeMainMenu()
 end
 
 function InitializeMapList()
-	MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
-	for i, map in ipairs(MapList) do
-		map = string.gsub(map, "maps\\", "")
-		map = string.gsub(map, "%.sd.*", "")
-		MapList[i] = map
+	if Game.version == "0.82.5.1" then
+		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
+		for i, map in ipairs(MapList) do
+			map = string.gsub(map, "maps\\", "")
+			map = string.gsub(map, "%.sd.*", "")
+			MapList[i] = map
+		end
+	else
+		MapList = VFS.GetMaps()
 	end
 end
 
@@ -1145,6 +1149,17 @@ function ResetScenario()
 	end
 end
 
+function ExportAchive()
+--[[
+	local fileString = VFS.LoadFile("LuaUI/Widgets/hide_commands.lua", VFS.ZIP)
+	local file = io.open("CustomLevels/hide_commands.lua", "w")
+	file:write(fileString)
+	file:close()
+	VFS.CompressFolder("CustomLevels")
+	Spring.Echo(json.encode(VFS.GetGames()))
+	]]
+end
+
 function MakeLink()
 	if selectedInput and selectedOutputMission then
 		
@@ -1290,8 +1305,5 @@ function widget:MousePress(mx, my, button)
 end
 
 function widget:KeyPress(key, mods)
-	--VFS.CompressFolder("CustomLevels")
-	Spring.Echo(key)
-	--Spring.Echo(string.char(key))
-	--Spring.Echo(Spring.GetKeySymbol(key), "||", string.char(key), "||", string.byte(Spring.GetKeySymbol(key)))
+	ExportAchive()
 end

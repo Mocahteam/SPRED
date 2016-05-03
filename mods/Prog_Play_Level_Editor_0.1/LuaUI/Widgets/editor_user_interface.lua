@@ -19,7 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- corriger le bug sur la v0.2 pour les editbox
+-- Message pour infini -- proposition : nouvelle action
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -2681,6 +2681,17 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") end }
 		elseif attr.type == "command" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
+		elseif attr.type == "zone" then
+			comboBox.OnSelect = { 
+				function() 
+					for i, zone in ipairs(zoneList) do
+						if zone.name == comboBox.items[comboBox.selected] then
+							a.params[attr.id] = zone.id
+							break
+						end
+					end
+				end
+			}
 		else
 			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		end
@@ -2702,6 +2713,19 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			elseif attr.type == "command" then
 				for i, item in ipairs(comboBox.items) do
 					if idToCommands[a.params[attr.id]] == item then
+						comboBox:Select(i)
+						break
+					end
+				end
+			elseif attr.type == "zone" then
+				chosenZone = ""
+				for i, zone in ipairs(zoneList) do
+					if zone.id == a.params[attr.id] then
+						chosenZone = zone.name
+					end
+				end
+				for i, item in ipairs(comboBox.items) do
+					if chosenZone == item then
 						comboBox:Select(i)
 						break
 					end
@@ -3721,7 +3745,7 @@ function saveMap()
 	local saveName = savedTable.description.saveName
 	
 	-- Write
-	local jsonfile = json.encode(savedTable)
+	local jsonfile = json.encode(savedTable) -- TODO remove format
 	jsonfile = string.gsub(jsonfile, ",", ",\n")
 	jsonfile = string.gsub(jsonfile, "}", "\n}")
 	jsonfile = string.gsub(jsonfile, "{", "{\n")
