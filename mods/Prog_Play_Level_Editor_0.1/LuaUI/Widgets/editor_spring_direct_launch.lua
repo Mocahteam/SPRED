@@ -688,7 +688,7 @@ function NewMissionFrame()
 	UI.MainWindow:AddChild(UI.NewLevel.Title)
 	UI.MainWindow:AddChild(UI.NewLevel.MapScrollPanel)
 	if #MapList == 0 then
-		UI.NewLevel.MapScrollPanel:AddChild(UI.MapScrollPanel.NoMapMessage)
+		UI.NewLevel.MapScrollPanel:AddChild(UI.NewLevel.NoMapMessage)
 	end
 end
 
@@ -698,7 +698,7 @@ function EditMissionFrame()
 	UI.MainWindow:AddChild(UI.LoadLevel.Title)
 	UI.MainWindow:AddChild(UI.LoadLevel.LevelScrollPanel)
 	if #LevelListNames == 0 then
-		UI.LoadLevel.LevelScrollPanel:AddChild(UI.LevelScrollPanel.NoLevelMessage)
+		UI.LoadLevel.LevelScrollPanel:AddChild(UI.LoadLevel.NoLevelMessage)
 	end
 end
 
@@ -1290,7 +1290,7 @@ function widget:MousePress(mx, my, button)
 end
 
 function widget:KeyPress(key, mods)
-	VFS.CompressFolder("CustomLevels")
+	--VFS.CompressFolder("CustomLevels")
 	Spring.Echo(key)
 	--Spring.Echo(string.char(key))
 	--Spring.Echo(Spring.GetKeySymbol(key), "||", string.char(key), "||", string.byte(Spring.GetKeySymbol(key)))
