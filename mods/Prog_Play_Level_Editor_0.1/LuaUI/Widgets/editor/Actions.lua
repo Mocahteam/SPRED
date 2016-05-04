@@ -475,7 +475,7 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "time",
 				id = "time"
 			}
 		}
@@ -498,7 +498,53 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "time",
+				id = "time"
+			}
+		}
+	},
+	{
+		type = "bubbleUnit",
+		filter = "Message",
+		typeText = "Display message in a bubble above unit",
+		text = "Display <Message> in a bubble over <Unit> for <Time> seconds",
+		attributes = {
+			{
+				text = "<Message>",
+				type = "message",
+				id = "message"
+			},
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Time>",
+				type = "time",
+				id = "time"
+			}
+		}
+	},
+	{
+		type = "markerPosition",
+		filter = "Message",
+		typeText = "Display marker at position",
+		text = "Display a marker with <Message> at <Position> for <Time> seconds.",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "message",
+				id = "message"
+			},
+			{
+				text = "<Position>",
+				type ="position",
+				id = "position"
+			},
+			{
+				text = "<Time>",
+				type = "time",
 				id = "time"
 			}
 		}

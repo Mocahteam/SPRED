@@ -19,7 +19,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- corriger le bug sur la v0.2 pour les editbox
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -196,6 +195,7 @@ local commandsToID = {} -- Get the ID of a command knowing its name
 local idToCommands = {} -- Get the name of a command knowing its ID
 local sortedCommandsList = {} -- Sorted list of all the commands
 local selectCreatedUnitsWindow -- Window to select units created through an action
+local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
 
 -- Map settings variables
@@ -463,6 +463,9 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	-- Dispose some windows
 	if selectCreatedUnitsWindow then
 		selectCreatedUnitsWindow:Dispose()
+	end
+	if randomInZoneWindow then
+		randomInZoneWindow:Dispose()
 	end
 	if windows['widgetsWindow'] then
 		windows['widgetsWindow']:Dispose()
@@ -960,6 +963,7 @@ function initMapSettingsWindow()
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
+	addLabel(windows['mapSettingsWindow'], '4%', '40%', '94%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR_HINT, 14, "left", nil, "center")
 	local panel = addPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
 	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
 	mapBriefingTextBox.font.shadow = false
@@ -2681,6 +2685,17 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") end }
 		elseif attr.type == "command" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
+		elseif attr.type == "zone" then
+			comboBox.OnSelect = { 
+				function() 
+					for i, zone in ipairs(zoneList) do
+						if zone.name == comboBox.items[comboBox.selected] then
+							a.params[attr.id] = zone.id
+							break
+						end
+					end
+				end
+			}
 		else
 			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		end
@@ -2706,6 +2721,19 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 						break
 					end
 				end
+			elseif attr.type == "zone" then
+				chosenZone = ""
+				for i, zone in ipairs(zoneList) do
+					if zone.id == a.params[attr.id] then
+						chosenZone = zone.name
+					end
+				end
+				for i, item in ipairs(comboBox.items) do
+					if chosenZone == item then
+						comboBox:Select(i)
+						break
+					end
+				end
 			else
 				for i, item in ipairs(comboBox.items) do
 					if a.params[attr.id] == item then
@@ -2721,8 +2749,23 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 	elseif attr.type == "position" then
 		local positionLabel = addLabel(scrollPanel, '35%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
 		if a.params[attr.id] then
-			if a.params[attr.id].x and a.params[attr.id].z then
-				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+			local param = a.params[attr.id]
+			if type(param) == "number" then
+				local zoneName = ""
+				local r, g, b = 255, 255, 255
+				for i, z in ipairs(zoneList) do
+					if z.id == param then
+						zoneName = z.name
+						r, g, b = round(z.red*255)+1, round(z.green*255)+1, round(z.blue*255)+1
+						break
+					end
+				end
+				positionLabel.font.color = {1, 1, 1, 1}
+				positionLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_RANDOM_ZONE.." \255"..colorTable[r]..colorTable[g]..colorTable[b]..zoneName)
+			else
+				if a.params[attr.id].x and a.params[attr.id].z then
+					positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+				end
 			end
 		end
 		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
@@ -2734,6 +2777,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
 			Screen0:RemoveChild(windows["importWindow"])
+			showRandomPositionInZoneWindow()
 		end
 		pickButton.OnClick = { pickPosition }
 		table.insert(feature, positionLabel)
@@ -2768,7 +2812,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
+	elseif attr.type == "number" or attr.type == "time" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
 		local editBox = addEditBox(scrollPanel, '35%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
@@ -2789,9 +2833,14 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				editBox:SetText(tostring(a.params[attr.id]))
 			end
 		end
-		if attr.type == "number" then
+		if attr.type == "number" or attr.type == "time" then
 			editBox.updateFunction = function()
 				a.params[attr.id] = tonumber(editBox.text)
+			end
+			if attr.type == "time" then
+				local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_TIME_HINT, 14, { 0.6, 1, 1, 1 })
+				table.insert(feature, messageHint)
+				yref[1] = yref[1] + 40
 			end
 		elseif attr.type == "text" then
 			editBox.updateFunction = function()
@@ -3333,6 +3382,39 @@ function showCreatedUnitsWindow()
 		selectCreatedUnitsWindow:Dispose()
 	end
 end
+function showRandomPositionInZoneWindow()
+	randomInZoneWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
+	addLabel(randomInZoneWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_RANDOM_ZONE, 20, "center", nil, "center")
+	local sp = addScrollPanel(randomInZoneWindow, '0%', '10%', '100%', '90%')
+	for i, z in ipairs(zoneList) do
+		local but = addButton(sp, "0%", (i - 1) * 40, "100%", 40, z.name, nil)
+		local pickFunction = function()
+			local ca = {}
+			if currentAction then
+				ca = events[currentEvent].actions[currentAction]
+			elseif currentCondition then
+				ca = events[currentEvent].conditions[currentCondition]
+			end
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+			ca.params[changedParam] = z.id
+			Screen0:RemoveChild(randomInZoneWindow)
+			Screen0:AddChild(windows["triggerWindow"])
+			Screen0:AddChild(windows["eventWindow"])
+			Screen0:AddChild(windows["importWindow"])
+			if currentAction then
+				Screen0:AddChild(windows["actionWindow"])
+				drawActionFrame(false)
+			elseif currentCondition then
+				Screen0:AddChild(windows["conditionWindow"])
+				drawConditionFrame(false)
+			end
+		end
+		but.OnClick = { pickFunction }
+	end
+	if #zoneList == 0 then
+		randomInZoneWindow:Dispose()
+	end
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -3721,7 +3803,7 @@ function saveMap()
 	local saveName = savedTable.description.saveName
 	
 	-- Write
-	local jsonfile = json.encode(savedTable)
+	local jsonfile = json.encode(savedTable) -- TODO remove format
 	jsonfile = string.gsub(jsonfile, ",", ",\n")
 	jsonfile = string.gsub(jsonfile, "}", "\n}")
 	jsonfile = string.gsub(jsonfile, "{", "{\n")
@@ -4392,6 +4474,7 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
 					Screen0:AddChild(windows["importWindow"])
+					Screen0:RemoveChild(randomInZoneWindow)
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
