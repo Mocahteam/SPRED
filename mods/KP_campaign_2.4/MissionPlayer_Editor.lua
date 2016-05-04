@@ -858,12 +858,14 @@ local function UpdateConditionsTruthfulness (frameNumber)
       local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
       local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tl)
       local count=0
-      local total=table.getn(externalUnitList)
-      --Spring.Echo(json.encode(externalUnitList))
-      for u,unit in ipairs(externalUnitList) do
-        if(UpdateConditionOnUnit(unit,c)) then
-         count=count+1
-        end 
+      if(externalUnitList~=nil)then
+        local total=table.getn(externalUnitList)
+        --Spring.Echo(json.encode(externalUnitList))
+        for u,unit in ipairs(externalUnitList) do
+          if(UpdateConditionOnUnit(unit,c)) then
+           count=count+1
+          end 
+        end
       end
       conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
@@ -1211,9 +1213,9 @@ local function Update (frameNumber)
   applyCurrentActions() 
 
   if(success==1) then
-    return 0
+    return success,outputstate
   elseif(success==-1) then
-    return 0
+    return success,outputstate
   else
     return 0 -- means continue
   end
