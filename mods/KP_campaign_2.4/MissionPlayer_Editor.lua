@@ -1029,7 +1029,7 @@ local function StartAfterJson ()
   for i=1, table.getn(mission.zones) do
     local center_xz
      local cZ=mission.zones[i]
-     local idZone=cZ.name
+     local idZone=cZ.id
      if(cZ.type=="Disk") then
       center_xz={x=cZ.x, z=cZ.z}
       zones[idZone]={type="Disk",center_xz=center_xz,a=cZ.a,b=cZ.b}
