@@ -471,6 +471,11 @@ local function createUnitAtPosition(act,position)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],realId)
+    armyInformations[realId].previousHealth=Spring.GetUnitHealth(realId)
+    armyInformations[realId].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[realId])]["autoHeal"]
+    armyInformations[realId].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[realId])]["idleAutoHeal"]
+    armyInformations[realId].autoHealStatus=(mission.description.autoHeal=="enabled")
+    armyInformations[realId].isUnderAttack=false
 end
 
 -------------------------------------
@@ -691,7 +696,7 @@ end
 -- This function allows to cancel auto heal
 -- for the units concerned by this option
 -------------------------------------
-local function cancelAutoHeal()
+local function watchHeal()
   for idUnit,infos in pairs(armyInformations) do
     local springUnit=armySpring[idUnit]
   -- armyInformations
@@ -768,7 +773,7 @@ end
 -- the main operations on the game
 -------------------------------------
 local function  UpdateGameState(frameNumber)
-  cancelAutoHeal()
+  watchHeal()
   processEvents(frameNumber) 
 end
 
@@ -812,6 +817,8 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       end--]]
       return i  
     elseif(c.attribute=="underAttack")then --untested yet
+      Spring.Echo("is it working")
+      Spring.Echo(armyInformations[externalUnitId].isUnderAttack)
       return armyInformations[externalUnitId].isUnderAttack
     elseif(c.attribute=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
