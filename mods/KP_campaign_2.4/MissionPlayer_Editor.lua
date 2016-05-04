@@ -142,6 +142,11 @@ end
 -------------------------------------
 local function isXZInsideZone(x,z,zoneId)
   local zone=zones[zoneId]
+  if(zone==nil)then
+    Spring.Echo("not found")
+    Spring.Echo(zoneId)
+    Spring.Echo(json.encode(zones))
+  end
   if(zone.type=="Rectangle") then
   --[[
     Spring.Echo("debug : x,z,centerx,centerz,demL,deml")
@@ -321,9 +326,15 @@ end
 -------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   --Spring.Echo(json.encode(condition))
-  for conditionTerm,prefixTerm in pairs(tableLookup)do    
+  for idx,tableT in ipairs(tableLookup)do
+    local conditionTerm=tableT[1]
+    local prefixTerm=tableT[2]   
+    --Spring.Echo("we look for this term in the conditions")
+    --Spring.Echo(conditionTerm) 
     if(conditionParams[conditionTerm]~=nil)then
       local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
+      --Spring.Echo("this group is selected")
+      --Spring.Echo(conditionTerm)
       return groupOfUnits[groupIndex]
     end
   end
@@ -397,6 +408,7 @@ local function ApplyGroupableAction(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
     Spring.Echo("valid")
     if(act.attribute=="transfer") then
+      Spring.Echo("try to apply transfert")
       Spring.TransferUnit(unit,act.params.team)
     elseif(act.attribute=="kill")then
       Spring.DestroyUnit(unit)
@@ -576,14 +588,20 @@ function ApplyAction (a)
       local u=armySpring[a.params.unit]
       ApplyGroupableAction(u,a)
     else   
-      local tl={currentTeam="team",team="team",unitType="type",group="group"}
+      local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,tl)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
+      if(a.attribute=="transfer")then
+        Spring.Echo("about to transfer")
+        Spring.Echo(json.encode(listOfUnits))
+      end
+      
       if(listOfUnits~=nil)then
         for i, externalUnitId in ipairs(listOfUnits) do
           local unit=armySpring[externalUnitId]
           ApplyGroupableAction(unit,a)
+          --
         end
       else
         Spring.Echo("no units available for this action")
@@ -837,8 +855,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
       end
       
     elseif(object=="group")then  
-      local tlkup={team="team",unitType="type",group="group"}
-      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
+      local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tl)
       local count=0
       local total=table.getn(externalUnitList)
       --Spring.Echo(json.encode(externalUnitList))
@@ -850,7 +868,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
-        local tlkup={targetTeam="team",unitType="type",group="group"}
+        local tlkup={[1]={"targetTeam","team"},[2]={"unitType","type"},[3]={"group","group"}}
         local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
         --Spring.Echo(json.encode(externalUnitList))
         local total=table.getn(externalUnitList)
