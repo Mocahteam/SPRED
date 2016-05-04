@@ -12,6 +12,7 @@ replacements["gray"] = "\255\100\100\100"
 
 local positions={}--table to store positions
 local armySpring={}--table to store created spring units externalId->SpringId
+local armyExternal={}--table to store created spring units SpringId->externalId
 local groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
 local armyInformations={}--table to store information on units externalId->Informations
 local messages={}--associative array messageId->message type
@@ -21,6 +22,7 @@ local events={}--associative array idCond->event
 local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 local zones={}
 local killByTeams={}
+local attackedUnits={}
 
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
@@ -349,6 +351,7 @@ end
 local function createUnit(unitTable)
     local posit=unitTable.position
     armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
+    armyExternal[armySpring[unitTable.id]]=unitTable.id
     armyInformations[unitTable.id]={}
     local springUnit=armySpring[unitTable.id]    
     armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
@@ -447,6 +450,7 @@ local function createUnitAtPosition(act,position)
     local y=Spring.GetGroundHeight(position.x,position.z)
     local spId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
     armySpring[act.name]=spId
+    armyExternal[spId]=act.name
     -- armySpring[act.name] will be override each time this action is called
     -- this is on purpose as some actions can take the last unit created by this unit creation action
     local realId=act.name..tostring(globalIndexOfCreatedUnits)
@@ -471,11 +475,13 @@ local function createUnitAtPosition(act,position)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],realId)
-    armyInformations[realId].previousHealth=Spring.GetUnitHealth(realId)
-    armyInformations[realId].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[realId])]["autoHeal"]
-    armyInformations[realId].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[realId])]["idleAutoHeal"]
-    armyInformations[realId].autoHealStatus=(mission.description.autoHeal=="enabled")
-    armyInformations[realId].isUnderAttack=false
+    armyInformations[realId]={}
+    armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
+    armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
+    armyInformations[realId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["autoHeal"]
+    armyInformations[realId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["idleAutoHeal"]
+    armyInformations[realId]["autoHealStatus"]=(mission.description.autoHeal=="enabled")
+    armyInformations[realId]["isUnderAttack"]=false
 end
 
 -------------------------------------
@@ -696,7 +702,26 @@ end
 -- This function allows to cancel auto heal
 -- for the units concerned by this option
 -------------------------------------
-local function watchHeal()
+local function watchHeal(frameNumber)
+--attackedUnits
+  -- for attacked TODO: for loop here and stuff
+  for attacked,tableInfo in pairs(attackedUnits) do
+    local idAttacked=armyExternal[attacked]
+    if(idAttacked~=nil)and (armyInformations[idAttacked]~=nil)then
+      --Spring.Echo(json.encode(tableInfo))
+      if(tableInfo.frame==-1)then
+        attackedUnits[attacked].frame=frameNumber
+        armyInformations[idAttacked].isUnderAttack=true
+        --Spring.Echo("under attack")
+      elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(5))then
+        armyInformations[idAttacked].isUnderAttack=true
+        --Spring.Echo("still under attack")
+      else
+       -- Spring.Echo("no more under attack")
+        armyInformations[idAttacked].isUnderAttack=false
+      end
+    end
+  end
   for idUnit,infos in pairs(armyInformations) do
     local springUnit=armySpring[idUnit]
   -- armyInformations
@@ -704,11 +729,12 @@ local function watchHeal()
       local currentHealth = Spring.GetUnitHealth(springUnit)
       if currentHealth == infos.previousHealth+infos.autoHeal or currentHealth == infos.previousHealth+infos.idleAutoHeal then
         Spring.SetUnitHealth(springUnit, infos.previousHealth)
+        
       else
-        if(currentHealth<infos.previousHealth)then
+        --if(currentHealth<infos.previousHealth)then
           --if updated too often this is not reliable (to fix)
-          infos.isUnderAttack=true
-        end
+          --infos.isUnderAttack=true
+        --end
         infos.previousHealth = currentHealth
       end
     end
@@ -773,7 +799,7 @@ end
 -- the main operations on the game
 -------------------------------------
 local function  UpdateGameState(frameNumber)
-  watchHeal()
+  watchHeal(frameNumber)
   processEvents(frameNumber) 
 end
 
@@ -817,8 +843,8 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       end--]]
       return i  
     elseif(c.attribute=="underAttack")then --untested yet
-      Spring.Echo("is it working")
-      Spring.Echo(armyInformations[externalUnitId].isUnderAttack)
+      --Spring.Echo("is it working")
+      --Spring.Echo(armyInformations[externalUnitId].isUnderAttack)
       return armyInformations[externalUnitId].isUnderAttack
     elseif(c.attribute=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
@@ -1285,8 +1311,24 @@ function gadget:RecvLuaMsg(msg, player)
     end
     table.insert(killByTeams[attackerTeam],killTable)
     --Spring.Echo(json.encode(killByTeams))
+  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,6)=="damage")) then
+    -- comes from mission runner unit destroyed
+    -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
+    -- is encoded
+    --Spring.Echo("damage received")
+    local jsonfile=string.sub(msg,7,-1)
+    local damageTable=json.decode(jsonfile)
+    local attackedUnit=damageTable.attackedUnit
+    damageTable.frame=tonumber(damageTable.frame)
+    if attackedUnits[attackedUnit]==nil then
+      attackedUnits[attackedUnit]={} 
+    end
+    attackedUnits[attackedUnit]=damageTable
+    --Spring.Echo(json.encode(attackedUnits))
   end
 end
+
+
 
 local Mission = {}
 
