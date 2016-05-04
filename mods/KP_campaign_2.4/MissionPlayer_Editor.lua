@@ -335,6 +335,8 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
       local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
       --Spring.Echo("this group is selected")
       --Spring.Echo(conditionTerm)
+     -- Spring.Echo(groupIndex)
+      --Spring.Echo(json.encode(groupOfUnits))
       return groupOfUnits[groupIndex]
     end
   end
@@ -858,8 +860,9 @@ local function UpdateConditionsTruthfulness (frameNumber)
       local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
       local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tl)
       local count=0
+      local total=0
       if(externalUnitList~=nil)then
-        local total=table.getn(externalUnitList)
+        total=table.getn(externalUnitList)
         --Spring.Echo(json.encode(externalUnitList))
         for u,unit in ipairs(externalUnitList) do
           if(UpdateConditionOnUnit(unit,c)) then
