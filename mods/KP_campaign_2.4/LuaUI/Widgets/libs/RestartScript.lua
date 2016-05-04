@@ -96,25 +96,36 @@ local function createFromScratch(editorTables)
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
   local indexPlayer=0
   local indexIA=0
+  local nteam=0
+  
+  -- find max 
+  local max=0
+  for teamNumber,teamInformations in pairs(editorTables.teams) do
+    if teamInformations.enabled and (tonumber(teamNumber)>max)then max=tonumber(teamNumber) end
+  end
+  
+  
   for teamNumber,teamInformations in pairs(editorTables.teams) do
     local allyTeamInformation=editorTables.allyteams[teamNumber]
     -- Write first section : who controls the team (player/IA)
-    if(teamInformations.enabled)then
-      if(teamInformations.control=="computer") then
+    if(tonumber(teamNumber)<=max)then 
+      nteam=nteam+1
+      if (teamInformations.control=="player") then
+        local sectionName="PLAYER"..tostring(indexPlayer)
+        local name=teamInformations.name or string.lower(sectionName)
+        indexPlayer=indexPlayer+1
+        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
+        file=writeAttributesAndSection(file,sectionName, 1, tableController)   
+      else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
+      -- when max is attained, it's not necessary to add disabled teams anymore
         local sectionName="AI"..tostring(indexIA)
         indexIA=indexIA+1
         local name=teamInformations.name or string.lower(sectionName)
         local shortName=teamInformations.shortname or "NullAI"
         
         local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
-        file=writeAttributesAndSection(file,sectionName, 1, tableController)    
-      elseif (teamInformations.control=="player") then
-        local sectionName="PLAYER"..tostring(indexPlayer)
-        local name=teamInformations.name or string.lower(sectionName)
-        indexPlayer=indexPlayer+1
-        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
-        file=writeAttributesAndSection(file,sectionName, 1, tableController)   
-      end
+        file=writeAttributesAndSection(file,sectionName, 1, tableController) 
+      end  
       -- Write Second section : information about the team (player/IA)
       local teamSectionName="TEAM"..tostring(teamNumber)
       local arbitraryPosition=tostring(teamNumber*200+100)
@@ -131,8 +142,8 @@ local function createFromScratch(editorTables)
         local allyKey="Ally"..tostring(i-1)
         tableAllyTeam[allyKey]=u
       end
-      file=writeAttributesAndSection(file,allyTeamSectionName, 1, tableAllyTeam)
-    end      
+      file=writeAttributesAndSection(file,allyTeamSectionName, 1, tableAllyTeam)  
+    end   
   end
   file=file.."\n}"
   return file

@@ -169,6 +169,7 @@ function gadget:RecvFromSynced(...)
 
 --    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
+    --Script.LuaUI.DisplayMessageAtPosition("teeeeeeest", 1200, Spring.GetGroundHeight(1200,300), 300, 10)
     if Script.LuaUI("CameraAuto") then
       local specialPositions = {}
       for k, v in spairs(SYNCED.cameraAuto["specialPositions"]) do
@@ -203,7 +204,15 @@ function gadget:RecvFromSynced(...)
     state.px=pos.x
     state.pz=pos.z
     state.height = 800
-    Spring.SetCameraState(state, 2)
+    Spring.SetCameraState(state, 2)  
+  elseif arg1 == "DisplayMessageAboveUnit" then
+    local p=json.decode(arg2)
+    Spring.Echo("try to on unit")
+    Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
+  elseif arg1 == "displayMessageOnPosition" then
+    Spring.Echo("try to on pos")
+    local p=json.decode(arg2)
+    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time)    
   end
 end
 
