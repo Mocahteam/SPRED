@@ -1,0 +1,636 @@
+{
+	"zones":[
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":512,
+			"z1":1656,
+			"z2":1920,
+			"x1":152,
+			"marker":false,
+			"name":"pt1",
+			"green":0.55862176418304,
+			"alwaysInView":true,
+			"shown":true,
+			"id":1,
+			"red":0.51526319980621
+		},
+		{
+			"type":"Rectangle",
+			"blue":0.13901698589325,
+			"x2":1496,
+			"z1":1240,
+			"z2":1464,
+			"x1":1256,
+			"marker":false,
+			"name":"pt2",
+			"green":0.50874388217926,
+			"alwaysInView":true,
+			"shown":true,
+			"id":2,
+			"red":0.79427468776703
+		} 
+	],
+	"allyteams":{
+		"1":[
+			0 
+		],
+		"2":[
+			 
+		],
+		"3":[
+			 
+		],
+		"4":[
+			 
+		],
+		"5":[
+			 
+		],
+		"6":[
+			 
+		],
+		"7":[
+			 
+		],
+		"8":[
+			 
+		],
+		"9":[
+			 
+		],
+		"0":[
+			1 
+		]
+	},
+	"description":{
+		"map":"Marble_Madness_Map",
+		"cameraAuto":"enabled",
+		"briefingRaw":"very long,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"minimap":"disabled",
+		"name":"_mission4",
+		"widgets":[
+			{
+				"desc":"User interface of the level editor",
+				"name":"Editor User Interface",
+				"active":true
+			},
+			{
+				"desc":"Teach you to play the game,
+				 one tip at a time",
+				"name":"Kernel Panic Automatic Tip Dispenser",
+				"active":false
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},
+			{
+				"desc":"Show some P&P menu when Spring.exe is run directly.",
+				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
+				"active":true
+			},
+			{
+				"desc":"Control the rest of your army while in Hero mode",
+				"name":"Heroes Right Click",
+				"active":false
+			},
+			{
+				"desc":"Hot GUI Framework",
+				"name":"Chili Framework",
+				"active":true
+			},
+			{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},
+			{
+				"desc":"Show the mission title and briefing",
+				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},
+			{
+				"desc":"Prettier background for the tooltip",
+				"name":"Kernel Panic MidKnight's tooltip background",
+				"active":false
+			},
+			{
+				"desc":"Replace the default Spring tooltip by one customised for K.P.",
+				"name":"Kernel Panic Tooltip",
+				"active":false
+			},
+			{
+				"desc":"Sets immobile builders to ROAM,
+				 with a PATROL command",
+				"name":"ImmobileBuilder",
+				"active":false
+			},
+			{
+				"desc":"XrayShader",
+				"name":"XrayShader",
+				"active":false
+			},
+			{
+				"desc":"test",
+				"name":"test",
+				"active":false
+			},
+			{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
+				"active":false
+			},
+			{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
+				"active":false
+			},
+			{
+				"desc":"Hides all commands",
+				"name":"Hide commands",
+				"active":true
+			},
+			{
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},
+			{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},
+			{
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":false
+			},
+			{
+				"desc":"Indicator for the CommEnds state (at game start)",
+				"name":"CommanderEnds",
+				"active":false
+			},
+			{
+				"desc":"Automatically adds 100 stockpile builds to new units",
+				"name":"Stockpiler",
+				"active":false
+			},
+			{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},
+			{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},
+			{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Controls metal makers to minimize energy stalls",
+				"name":"MetalMakers",
+				"active":false
+			},
+			{
+				"desc":"Assigns new builders to assist their source factory",
+				"name":"FactoryGuard",
+				"active":false
+			},
+			{
+				"desc":"Shows a team color platter above all visible units",
+				"name":"TeamPlatter",
+				"active":false
+			},
+			{
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
+				"active":false
+			},
+			{
+				"desc":"Alternate view movement for the middle mouse button",
+				"name":"SmoothScroll",
+				"active":false
+			},
+			{
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},
+			{
+				"desc":"Highlight the Geovents when placing Buildings,
+				 or when in metal view",
+				"name":"Kernel Panic Geos Highlight",
+				"active":false
+			},
+			{
+				"desc":"Camera shakes",
+				"name":"CameraShake",
+				"active":false
+			},
+			{
+				"desc":"Keeps the minimap at a relative size (maxspect)",
+				"name":"RelativeMinimap",
+				"active":false
+			},
+			{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},
+			{
+				"desc":"Returns the llist of known widgets",
+				"name":"Editor Widget List",
+				"active":true
+			},
+			{
+				"desc":"Remove the need to add /luarules in front of some gadgets command",
+				"name":"Kernel Panic Console Commands",
+				"active":false
+			},
+			{
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
+				"active":false
+			} 
+		],
+		"briefing":"very long,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
+		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"mouse":"disabled",
+		"saveName":"_mission4",
+		"autoHeal":"disabled"
+	},
+	"events":[
+		{
+			"actions":[
+				{
+					"id":0,
+					"type":"messageGlobal",
+					"name":"Action0",
+					"params":{
+						"message":[
+							"WIN !" 
+						]
+					}
+				},
+				{
+					"id":3,
+					"type":"team_transfer",
+					"name":"Action3",
+					"params":{
+						"currentTeam":1,
+						"team":0
+					}
+				} 
+			],
+			"name":"WellPlaced",
+			"trigger":"",
+			"actionTotal":2,
+			"conditions":[
+				{
+					"id":0,
+					"type":"unit_zone",
+					"name":"Condition0",
+					"params":{
+						"unit":2539,
+						"zone":1
+					}
+				},
+				{
+					"id":1,
+					"type":"unit_zone",
+					"name":"Condition1",
+					"params":{
+						"unit":12087,
+						"zone":2
+					}
+				} 
+			],
+			"conditionTotal":2,
+			"id":0
+		},
+		{
+			"actions":[
+				{
+					"id":1,
+					"type":"messagePosition",
+					"name":"Action1",
+					"params":{
+						"message":[
+							"point de ralliement des BYTES (400-1500)" 
+						],
+						"time":0,
+						"position":{
+							"z":1784,
+							"x":318
+						}
+					}
+				},
+				{
+					"id":2,
+					"type":"messagePosition",
+					"name":"Action2",
+					"params":{
+						"message":[
+							"point de ralliement des bits (1400-1400)" 
+						],
+						"time":0,
+						"position":{
+							"z":1368,
+							"x":1377
+						}
+					}
+				} 
+			],
+			"name":"markers",
+			"trigger":"",
+			"actionTotal":2,
+			"conditions":[
+				{
+					"id":2,
+					"type":"start",
+					"name":"Condition2",
+					"params":[
+						 
+					]
+				} 
+			],
+			"conditionTotal":1,
+			"id":1
+		},
+		{
+			"actions":[
+				{
+					"id":5,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_4"
+					}
+				} 
+			],
+			"name":"teamOIsDead",
+			"trigger":"",
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":5,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"id":2
+		} 
+	],
+	"variables":[
+		 
+	],
+	"teams":{
+		"1":{
+			"enabled":true,
+			"color":{
+				"green":1,
+				"blue":0,
+				"red":0
+			},
+			"name":"Team 1",
+			"control":"computer"
+		},
+		"2":{
+			"enabled":false,
+			"color":{
+				"green":0,
+				"blue":0,
+				"red":1
+			},
+			"name":"Team 2",
+			"control":"player"
+		},
+		"3":{
+			"enabled":false,
+			"color":{
+				"green":0,
+				"blue":0.5,
+				"red":0.5
+			},
+			"name":"Team 3",
+			"control":"player"
+		},
+		"4":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":1
+			},
+			"name":"Team 4",
+			"control":"player"
+		},
+		"5":{
+			"enabled":false,
+			"color":{
+				"green":1,
+				"blue":1,
+				"red":1
+			},
+			"name":"Team 5",
+			"control":"player"
+		},
+		"6":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":1
+			},
+			"name":"Team 6",
+			"control":"player"
+		},
+		"7":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0
+			},
+			"name":"Team 7",
+			"control":"player"
+		},
+		"8":{
+			"enabled":false,
+			"color":{
+				"green":1,
+				"blue":0.5,
+				"red":0
+			},
+			"name":"Team 8",
+			"control":"player"
+		},
+		"9":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":0.5
+			},
+			"name":"Team 9",
+			"control":"player"
+		},
+		"0":{
+			"enabled":true,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0.5
+			},
+			"name":"Team 0",
+			"control":"player"
+		}
+	},
+	"groups":[
+		 
+	],
+	"units":[
+		{
+			"type":"bit",
+			"id":14126,
+			"position":{
+				"y":270.39453125,
+				"x":1332,
+				"z":1313
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":10929,
+			"position":{
+				"y":270.39453125,
+				"x":1348,
+				"z":1313
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":3587,
+			"position":{
+				"y":270.39453125,
+				"x":1344,
+				"z":1395
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":13093,
+			"position":{
+				"y":270.39453125,
+				"x":1302,
+				"z":1453
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":9581,
+			"position":{
+				"y":270.39453125,
+				"x":1441,
+				"z":1415
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":3618,
+			"position":{
+				"y":130,
+				"x":269,
+				"z":1818
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":2724,
+			"position":{
+				"y":130,
+				"x":409,
+				"z":1765
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":2539,
+			"position":{
+				"y":130,
+				"x":1117,
+				"z":1752
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12087,
+			"position":{
+				"y":116,
+				"x":1218,
+				"z":1805
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		} 
+	]
+}
