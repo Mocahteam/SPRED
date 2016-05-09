@@ -37,7 +37,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"réparer all the units",
+		"briefingRaw":"reparer /#FF0000#toutes/ les unités",
 		"minimap":"disabled",
 		"name":"_mission7",
 		"widgets":[
@@ -234,18 +234,28 @@
 				"active":false
 			} 
 		],
-		"briefing":"réparer all the units",
+		"briefing":"reparer ÿÿ\u0000\u0000toutesÿÿÿÿ les unités",
 		"mouse":"disabled",
 		"saveName":"_mission7",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
-			"repetition":false,
-			"actionTotal":1,
+			"actions":[
+				{
+					"id":1,
+					"type":"messageGlobal",
+					"name":"Action1",
+					"params":{
+						"message":[
+							"WIIIIIN" 
+						]
+					}
+				} 
+			],
 			"name":"Event1",
-			"conditionTotal":1,
-			"id":1,
+			"trigger":"",
+			"actionTotal":1,
 			"conditions":[
 				{
 					"id":4,
@@ -263,19 +273,39 @@
 					}
 				} 
 			],
+			"conditionTotal":1,
+			"id":1
+		},
+		{
 			"actions":[
 				{
-					"id":1,
-					"type":"messageGlobal",
-					"name":"Action1",
+					"id":2,
+					"type":"lose",
+					"name":"endbydead",
 					"params":{
-						"message":[
-							"WIIIIIN" 
-						]
+						"team":0,
+						"outputState":"endByDead_5"
 					}
 				} 
 			],
-			"trigger":""
+			"name":"teamOIsDead",
+			"trigger":"",
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":5,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"id":2
 		} 
 	],
 	"variables":[
@@ -388,12 +418,38 @@
 	],
 	"units":[
 		{
+			"type":"assembler",
+			"id":3084,
+			"position":{
+				"y":116,
+				"x":272,
+				"z":906
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
 			"type":"byte",
-			"id":2450,
+			"id":5621,
 			"position":{
 				"y":130,
-				"x":255,
-				"z":1084
+				"x":112,
+				"z":1094
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":3188,
+			"position":{
+				"y":130,
+				"x":172,
+				"z":980
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -402,11 +458,11 @@
 		},
 		{
 			"type":"bit",
-			"id":3420,
+			"id":8104,
 			"position":{
 				"y":116,
-				"x":429,
-				"z":997
+				"x":384,
+				"z":990
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -415,46 +471,7 @@
 		},
 		{
 			"type":"bit",
-			"id":8010,
-			"position":{
-				"y":116,
-				"x":359,
-				"z":949
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14573,
-			"position":{
-				"y":116,
-				"x":335,
-				"z":1012
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":5201,
-			"position":{
-				"y":116,
-				"x":379,
-				"z":1071
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13198,
+			"id":3537,
 			"position":{
 				"y":116,
 				"x":452,
@@ -467,11 +484,50 @@
 		},
 		{
 			"type":"bit",
-			"id":5812,
+			"id":7018,
 			"position":{
 				"y":116,
-				"x":384,
-				"z":990
+				"x":379,
+				"z":1071
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11847,
+			"position":{
+				"y":116,
+				"x":335,
+				"z":1012
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13568,
+			"position":{
+				"y":116,
+				"x":359,
+				"z":949
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5979,
+			"position":{
+				"y":116,
+				"x":429,
+				"z":997
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -480,41 +536,15 @@
 		},
 		{
 			"type":"byte",
-			"id":9977,
+			"id":11811,
 			"position":{
 				"y":130,
-				"x":172,
-				"z":980
+				"x":255,
+				"z":1084
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":12820,
-			"position":{
-				"y":130,
-				"x":112,
-				"z":1094
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"assembler",
-			"id":15405,
-			"position":{
-				"y":115.99993133545,
-				"x":272,
-				"z":906
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
 			"team":0
 		} 
 	]
