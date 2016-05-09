@@ -371,24 +371,24 @@ function InitializeScenarioFrame()
 		OnClick = { ResetScenario },
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
-	UI.Scenario.Export = Chili.Button:New{
+	UI.Scenario.ExportGame = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "40%",
 		y = "90%",
 		width = "20%",
 		height = "5%",
-		caption = LAUNCHER_SCENARIO_EXPORT,
-		backgroundColor = { 0, 0.8, 1, 1 },
+		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
+		backgroundColor = { 0.4, 0, 0.6, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 25
 		},
-		OnClick = { ExportScenarioFrame }
+		OnClick = { ExportGame }
 	}
 	UI.Scenario.Import = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "2%",
-		y = "90%",
+		y = "89%",
 		width = "20%",
 		height = "5%",
 		caption = LAUNCHER_SCENARIO_IMPORT,
@@ -398,6 +398,20 @@ function InitializeScenarioFrame()
 			size = 25
 		},
 		OnClick = { ImportScenarioFrame }
+	}
+	UI.Scenario.Export = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "2%",
+		y = "94%",
+		width = "20%",
+		height = "5%",
+		caption = LAUNCHER_SCENARIO_EXPORT,
+		backgroundColor = { 0, 0.8, 1, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25
+		},
+		OnClick = { ExportScenarioFrame }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
@@ -677,6 +691,7 @@ function ClearUI()
 	
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:RemoveChild(UI.Scenario.ExportGame)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
@@ -723,6 +738,7 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:AddChild(UI.Scenario.ExportGame)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
@@ -911,6 +927,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
+	UpdateCaption(UI.Scenario.ExportGame, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
@@ -1195,7 +1212,7 @@ function ResetScenario()
 	ScenarioDesc = ""
 end
 
-function ExportAchive()
+function ExportGame() --todo
 --[[
 	local fileString = VFS.LoadFile("LuaUI/Widgets/hide_commands.lua", VFS.ZIP)
 	local file = io.open("CustomLevels/hide_commands.lua", "w")
