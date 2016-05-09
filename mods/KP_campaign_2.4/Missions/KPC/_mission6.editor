@@ -51,11 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefingRaw":"Mission 6\\n \\n \\nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256 ; 811).\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission6",
 		"widgets":[
@@ -291,7 +287,39 @@
 			],
 			"conditionTotal":1,
 			"id":0
-		} 
+		},
+		{
+			"repetition":false,
+			"actionTotal":1,
+			"name":"teamOIsDead",
+			"conditionTotal":1,
+			"id":1,
+			"conditions":[
+				{
+					"id":4,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":1,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
+			"trigger":""
+		}  
 	],
 	"variables":[
 		 

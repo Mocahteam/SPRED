@@ -66,11 +66,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefingRaw":"Mission 4\\n \\n \\nPour vous remercier de votre aide; l'OCTET (BYTE) se rallie à notre cause et vous informe que d'autres entités partisanes se sont regroupées non loin de là. Il vous communique les coordonnées de la formation d'OCTETS qu'il tentait de rejoindre avant votre arrivée (479; 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400; 1371).\\n \\nAfin de récupérer ces nouvelles forces; ordonnez à vos deux entités de rejoindre leurs compatriotes respectifs.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission4",
 		"widgets":[

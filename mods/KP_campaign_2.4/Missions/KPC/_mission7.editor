@@ -37,7 +37,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"reparer /#FF0000#toutes/ les unités",
+		"briefingRaw":"Mission 7\\n \\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR (ASSEMBLER) du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission7",
 		"widgets":[

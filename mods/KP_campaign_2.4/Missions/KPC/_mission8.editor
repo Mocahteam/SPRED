@@ -37,7 +37,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"attack ! (1520-218)",
+		"briefingRaw":"Mission 8\\n \\n \\nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792 ; 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission8",
 		"widgets":[
