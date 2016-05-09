@@ -117,7 +117,7 @@ local template_endMission = {
     ["scenario"]=scenarioType
     }
   }
-					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", operations)
+					genericRestart(missionName, operations,false)
 				end
 			end
 		},
@@ -267,7 +267,7 @@ function MissionEvent(e)
             ["scenario"]=scenarioType
             }
           }
-							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", operations)
+							genericRestart(campaign[missionName].previousMission, operations,false)
 						end
 					end
 			end
@@ -336,7 +336,7 @@ function MissionEvent(e)
               local options={["MODOPTIONS"]=currentoptions}    
               --Spring.Echo("test")
               --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
-              DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+              genericRestart(mission, options,false) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
             end
           end
       end
