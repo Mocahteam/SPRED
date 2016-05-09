@@ -35,6 +35,11 @@ local selectedInput
 local selectedOutputMission
 local selectedOutput
 
+-- CTRL+Z/Y
+local LoadLock = true
+local SaveStates = {}
+local LoadIndex = 1
+
 function InitializeChili() 
 	if not WG.Chili then
 		widgetHandler:RemoveWidget()
@@ -366,24 +371,24 @@ function InitializeScenarioFrame()
 		OnClick = { ResetScenario },
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
-	UI.Scenario.Export = Chili.Button:New{
+	UI.Scenario.ExportGame = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "40%",
 		y = "90%",
 		width = "20%",
 		height = "5%",
-		caption = LAUNCHER_SCENARIO_EXPORT,
-		backgroundColor = { 0, 0.8, 1, 1 },
+		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
+		backgroundColor = { 0.4, 0, 0.6, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 25
 		},
-		OnClick = { ExportScenarioFrame }
+		OnClick = { ExportGame }
 	}
 	UI.Scenario.Import = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "2%",
-		y = "90%",
+		y = "89%",
 		width = "20%",
 		height = "5%",
 		caption = LAUNCHER_SCENARIO_IMPORT,
@@ -393,6 +398,20 @@ function InitializeScenarioFrame()
 			size = 25
 		},
 		OnClick = { ImportScenarioFrame }
+	}
+	UI.Scenario.Export = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "2%",
+		y = "94%",
+		width = "20%",
+		height = "5%",
+		caption = LAUNCHER_SCENARIO_EXPORT,
+		backgroundColor = { 0, 0.8, 1, 1 },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25
+		},
+		OnClick = { ExportScenarioFrame }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
@@ -485,6 +504,7 @@ function InitializeScenarioFrame()
 				end
 				selectedOutput = nil
 				selectedOutputMission = nil
+				SaveState()
 			else
 				selectedOutputMission = "start"
 				selectedOutput = 1
@@ -525,10 +545,13 @@ function InitializeScenarioFrame()
 					UI.Scenario.Input[selectedInput].state.chosen = false
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
+					SaveState()
 				else
 					selectedInput = "end"
 				end
-			end }
+			end
+		},
+		chosenColor = { math.random(), math.random(), math.random(), 1 }
 	}
 	local column = -1
 	for i, level in ipairs(LevelList) do
@@ -596,10 +619,12 @@ function InitializeScenarioFrame()
 					UI.Scenario.Input[selectedInput].state.chosen = false
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
+					SaveState()
 				else
 					selectedInput = LevelListNames[i]
 				end
-			end }
+			end },
+			chosenColor = { math.random(), math.random(), math.random(), 1 }
 		}
 		UI.Scenario.Output[LevelListNames[i]] = {}
 		for ii, out in ipairs(outputStates) do
@@ -626,6 +651,7 @@ function InitializeScenarioFrame()
 					end
 					selectedOutput = nil
 					selectedOutputMission = nil
+					SaveState()
 				else
 					selectedOutputMission = LevelListNames[i]
 					selectedOutput = out
@@ -665,6 +691,7 @@ function ClearUI()
 	
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:RemoveChild(UI.Scenario.ExportGame)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
@@ -711,6 +738,7 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
+	UI.MainWindow:AddChild(UI.Scenario.ExportGame)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
@@ -899,6 +927,7 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
+	UpdateCaption(UI.Scenario.ExportGame, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
@@ -1111,8 +1140,38 @@ function ExportScenario(name, desc)
 	file:close()
 end
 
+function SaveState()
+	if LoadLock then
+		savedLinks = deepcopy(Links)
+		for i = 1, LoadIndex-1, 1 do
+			table.remove(SaveStates, 1)
+		end
+		LoadIndex = 1
+		table.insert(SaveStates, 1, savedLinks)
+	end
+end
+
+function LoadState(direction)
+	LoadLock = false
+	if (LoadIndex < #SaveStates and direction > 0) or (LoadIndex > 1 and direction < 0) then
+		LoadIndex = LoadIndex + direction
+		ResetLinks()
+		local links = SaveStates[LoadIndex]
+		for k, link in pairs(links) do
+			for kk, input in pairs(link) do
+				selectedInput = input
+				selectedOutputMission = k
+				selectedOutput = kk
+				MakeLink()
+			end
+		end
+	end
+	LoadLock = true
+end
+
 function LoadScenario(xmlTable)
-	local links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
+	ResetLinks()
+	links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
 	for i, link in ipairs(links) do
 		local input = splitString(link.attr.id_input, "//")[1]
 		local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
@@ -1131,12 +1190,10 @@ function LoadScenario(xmlTable)
 	ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
 end
 
-function ResetScenario()
+function ResetLinks()
 	for k, link in pairs(Links) do
 		Links[k] = {}
 	end
-	ScenarioName = ""
-	ScenarioDesc = ""
 	for k, but in pairs(UI.Scenario.Input) do
 		but.state.chosen = false
 		but:InvalidateSelf()
@@ -1149,7 +1206,13 @@ function ResetScenario()
 	end
 end
 
-function ExportAchive()
+function ResetScenario()
+	ResetLinks()
+	ScenarioName = ""
+	ScenarioDesc = ""
+end
+
+function ExportGame() --todo
 --[[
 	local fileString = VFS.LoadFile("LuaUI/Widgets/hide_commands.lua", VFS.ZIP)
 	local file = io.open("CustomLevels/hide_commands.lua", "w")
@@ -1162,16 +1225,6 @@ end
 
 function MakeLink()
 	if selectedInput and selectedOutputMission then
-		
-		local requireRecolor = true
-		for k, link in pairs(Links) do
-			for kk, output in pairs(link) do
-				if output == selectedInput then
-					requireRecolor = false
-					break
-				end
-			end
-		end
 		
 		if (findInTable(LevelListNames, selectedInput) and findInTable(LevelListNames, selectedOutputMission))
 			or (selectedOutputMission == "start" and findInTable(LevelListNames, selectedInput)) 
@@ -1186,19 +1239,11 @@ function MakeLink()
 			if isValidOutput then
 				Links[selectedOutputMission][selectedOutput] = selectedInput
 				
-				if requireRecolor then
-					local r, g, b = math.random(), math.random(), math.random()
-					UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = { r, g, b, 1 }
-					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-					UI.Scenario.Input[selectedInput].chosenColor = { r, g, b, 1 }
-					UI.Scenario.Input[selectedInput].state.chosen = true
-					UI.Scenario.Input[selectedInput]:InvalidateSelf()
-				else
-					UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
-					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-				end
+				UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
+				UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
+				UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+				UI.Scenario.Input[selectedInput].state.chosen = true
+				UI.Scenario.Input[selectedInput]:InvalidateSelf()
 			
 				local someLinks = {}
 				for k, link in pairs(Links) do
@@ -1212,6 +1257,8 @@ function MakeLink()
 						b:InvalidateSelf()
 					end
 				end
+		
+				SaveState()
 			end
 		end
 		
@@ -1261,6 +1308,7 @@ function SwitchOn()
 	InitializeLauncher()
 	ChangeLanguage("en")
 	MainMenuFrame()
+	SaveState()
 end
 WG.BackToMainMenu = SwitchOn
 
@@ -1305,5 +1353,16 @@ function widget:MousePress(mx, my, button)
 end
 
 function widget:KeyPress(key, mods)
-	ExportAchive()
+	if key == Spring.GetKeyCode("esc") then
+		MainMenuFrame()
+		return true
+	end
+	if key == Spring.GetKeyCode("z") and mods.ctrl then
+		LoadState(1)
+		return true
+	end
+	if key == Spring.GetKeyCode("y") and mods.ctrl then
+		LoadState(-1)
+		return true
+	end
 end
