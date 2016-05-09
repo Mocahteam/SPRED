@@ -1,3 +1,5 @@
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
   -- for exemple, as it happened, using a key such as mode when gamemode already exists.
@@ -151,6 +153,36 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
-  Spring.Echo(txtFileContent)
-  Spring.Restart("-s",txtFileContent)
+  Spring.Echo(txtFileContent)--comment the next line to see this output
+  Spring.Restart("-s",txtFileContent)--(this line, yes)
 end
+
+-- restart can be used for .editor files or .txt files giving some (or none) updating operation
+-- a bit of copy pasta in this function, could be refractored easily
+function genericRestart(missionName,operations,contextFile)
+   local updatedTxtFileContent=""
+   if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
+     if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
+        local sf=VFS.LoadFile("Missions/"..Game.modShortName.."/"..missionName..".editor")-- because we are in the context : Ingame
+        local tableEditor=json.decode(sf)
+        local txtFileContent=createFromScratch(tableEditor)
+        updatedTxtFileContent=updateValues(txtFileContent, operations)
+        Spring.Restart("-s",updatedTxtFileContent)
+     else
+        DoTheRestart("Missions/"..Game.modShortName.."/"..missionName.."txt", operations)  
+     end
+   else -- meaning Not in game, we just have access to the file name
+    if (string.sub(missionName, -3, -1)=="txt")then      
+      DoTheRestart(missionName, operations)  
+    elseif (string.sub(missionName, -6, -1)=="editor")then
+      local sf=VFS.LoadFile(missionName)
+      local tableEditor=json.decode(sf)
+      local txtFileContent=createFromScratch(tableEditor)
+      updatedTxtFileContent=updateValues(txtFileContent, operations)
+      Spring.Restart("-s",updatedTxtFileContent)
+    else
+      Spring.Echo("Warning, pbm in restart script")
+    end   
+  end
+end   
+      

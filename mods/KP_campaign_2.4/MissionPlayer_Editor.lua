@@ -360,7 +360,8 @@ local function createUnit(unitTable)
     armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
     armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
     armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
-    armyInformations[unitTable.id].autoHealStatus=unitTable.autoheal
+    armyInformations[unitTable.id].autoHealStatus=unitTable.autoHeal
+    --Spring.Echo(armyInformations[unitTable.id].autoHealStatus)
     armyInformations[unitTable.id].isUnderAttack=false
     --Spring.Echo("try to create unit with these informations")
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
@@ -725,7 +726,9 @@ local function watchHeal(frameNumber)
   for idUnit,infos in pairs(armyInformations) do
     local springUnit=armySpring[idUnit]
   -- armyInformations
-    if(infos.autoHealStatus=="disabled")and(Spring.ValidUnitID(springUnit)) then
+    if(not infos.autoHealStatus)and(Spring.ValidUnitID(springUnit)) then
+      --Spring.Echo("try to fix autoheal")
+      --Spring.Echo(springUnit)
       local currentHealth = Spring.GetUnitHealth(springUnit)
       if currentHealth == infos.previousHealth+infos.autoHeal or currentHealth == infos.previousHealth+infos.idleAutoHeal then
         Spring.SetUnitHealth(springUnit, infos.previousHealth)

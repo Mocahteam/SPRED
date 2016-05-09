@@ -26,7 +26,7 @@ VFS.Include("LuaUI/Widgets/libs/context.lua")
 contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
-local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+
 local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
 AppliqManager:parse()
 --AppliqManager:fullTest()
@@ -136,7 +136,8 @@ end
 
 local function RunScript(ScriptFileName, scenario)
 	if Spring.Restart then
-	  if (string.sub(ScriptFileName, -3, -1)=="txt")then
+	   local contextFile=true
+	  --if (string.sub(ScriptFileName, -3, -1)=="txt")then
     	local operations={
       ["MODOPTIONS"]=
         {
@@ -144,16 +145,18 @@ local function RunScript(ScriptFileName, scenario)
         ["scenario"]=scenario
         }
       }
-    	DoTheRestart(ScriptFileName, operations)
-    elseif (string.sub(ScriptFileName, -6, -1)=="editor")then
-      --local f = io.open("Missions/KPC/LevelEditor.txt", "rb")
-      --local content = f:read "*a"
-      --f:close()
-      --local tableEditor=json.decode(content)
-      local sf=VFS.LoadFile(ScriptFileName)
-      local tableEditor=json.decode(sf)
-      restartWithEditorFile(tableEditor)
-   end
+      
+      genericRestart(ScriptFileName,operations,contextFile)
+--    	DoTheRestart(ScriptFileName, operations)
+--    elseif (string.sub(ScriptFileName, -6, -1)=="editor")then
+--      --local f = io.open("Missions/KPC/LevelEditor.txt", "rb")
+--      --local content = f:read "*a"
+--      --f:close()
+--      --local tableEditor=json.decode(content)
+--      local sf=VFS.LoadFile(ScriptFileName)
+--      local tableEditor=json.decode(sf)
+--      restartWithEditorFile(tableEditor)
+--   end
 	else
     NoRestart()
 	end

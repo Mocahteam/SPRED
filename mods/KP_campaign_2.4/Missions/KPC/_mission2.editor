@@ -18,7 +18,7 @@
 	],
 	"allyteams":{
 		"1":[
-			 
+			0 
 		],
 		"2":[
 			 
@@ -39,19 +39,19 @@
 			 
 		],
 		"8":[
-			 
+			1 
 		],
 		"9":[
 			 
 		],
 		"0":[
-			 
+			1 
 		]
 	},
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"dadada",
+		"briefingRaw":"Mission 2\\n \\n \\nLe rapport que vous aviez reçu était correct mais l'OCTET (BYTE) ne se trouve plus au point de ralliement prévu. Des traces vous indiquent qu'il s'est éloigné de 927 unités vers l'ouest et 513 unités vers le sud .\\n \\nDéplacez votre BIT dans ces directions pour rattraper ce BYTE\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission2",
 		"widgets":[
@@ -248,13 +248,29 @@
 				"active":false
 			} 
 		],
-		"briefing":"dadada",
+		"briefing":"Mission 2\n \n \nLe rapport que vous aviez reçu était correct mais l'OCTET (BYTE) ne se trouve plus au point de ralliement prévu. Des traces vous indiquent qu'il s'est éloigné de 927 unités vers l'ouest et 513 unités vers le sud .\n \nDéplacez votre BIT dans ces directions pour rattraper ce BYTE\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission2",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
+			"actionTotal":6,
+			"repetition":false,
+			"name":"Event0",
+			"id":0,
+			"conditionTotal":1,
+			"conditions":[
+				{
+					"id":0,
+					"type":"unit_zone",
+					"name":"Condition0",
+					"params":{
+						"unit":9466,
+						"zone":1
+					}
+				} 
+			],
 			"actions":[
 				{
 					"id":4,
@@ -270,9 +286,42 @@
 					"name":"Action4",
 					"params":{
 						"position":{
-							"x":1032,
-							"z":279
+							"z":1785,
+							"x":1004
 						}
+					}
+				},
+				{
+					"id":8,
+					"type":"messageUnit",
+					"name":"Action8",
+					"params":{
+						"message":[
+							"Trouvé !",
+							"Enfin !" 
+						],
+						"time":1,
+						"unit":9466
+					}
+				},
+				{
+					"id":9,
+					"type":"wait",
+					"name":"Action9",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":10,
+					"type":"messageUnit",
+					"name":"Action10",
+					"params":{
+						"message":[
+							"Merci d'être venu ! Des armées veulent ma peau !" 
+						],
+						"time":4,
+						"unit":11180
 					}
 				},
 				{
@@ -285,22 +334,7 @@
 					}
 				} 
 			],
-			"name":"Event0",
-			"trigger":"",
-			"actionTotal":3,
-			"conditions":[
-				{
-					"id":0,
-					"type":"unit_zone",
-					"name":"Condition0",
-					"params":{
-						"unit":15880,
-						"zone":"Arrival"
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"id":0
+			"trigger":""
 		},
 		{
 			"actions":[
@@ -310,10 +344,12 @@
 					"name":"Action1",
 					"params":{
 						"message":[
-							"I am moving" 
+							"gogogo",
+							"cette fois ci c'est la bonne",
+							"en route simone" 
 						],
 						"time":2,
-						"unit":15880
+						"unit":9466
 					}
 				},
 				{
@@ -336,7 +372,7 @@
 					"name":"Condition1",
 					"params":{
 						"command":10,
-						"unit":15880
+						"unit":9466
 					}
 				} 
 			],
@@ -344,11 +380,33 @@
 			"id":1
 		},
 		{
-			"id":2,
-			"conditionTotal":3,
+			"actions":[
+				{
+					"id":5,
+					"type":"messageUnit",
+					"name":"Action5",
+					"params":{
+						"message":[
+							"Je doute être au bon endroit",
+							"encore un échec...." 
+						],
+						"time":5,
+						"unit":9466
+					}
+				},
+				{
+					"id":4,
+					"type":"lose",
+					"name":"los",
+					"params":{
+						"team":0,
+						"outputState":"wrong"
+					}
+				} 
+			],
 			"name":"wrongspot",
-			"repetition":false,
 			"trigger":"Condition2 and not Condition3 and not Condition0",
+			"actionTotal":2,
 			"conditions":[
 				{
 					"id":2,
@@ -364,7 +422,7 @@
 					"name":"Condition3",
 					"params":{
 						"command":10,
-						"unit":15880
+						"unit":9466
 					}
 				},
 				{
@@ -372,35 +430,44 @@
 					"type":"unit_zone",
 					"name":"Condition0",
 					"params":{
-						"zone":"Arrival",
-						"unit":15880
+						"zone":1,
+						"unit":9466
 					}
 				} 
 			],
+			"conditionTotal":3,
+			"id":2
+		},
+		{
 			"actions":[
 				{
-					"id":5,
-					"type":"messageUnit",
-					"name":"Action5",
-					"params":{
-						"message":[
-							"Je doute être au bon endroit" 
-						],
-						"time":5,
-						"unit":15880
-					}
-				},
-				{
-					"id":4,
+					"id":7,
 					"type":"lose",
-					"name":"los",
+					"name":"endbydead",
 					"params":{
 						"team":0,
-						"outputState":"wrong"
+						"outputState":"endByDead_2"
 					}
 				} 
 			],
-			"actionTotal":2
+			"name":"teamOIsDead",
+			"trigger":"",
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":6,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"id":3
 		} 
 	],
 	"variables":[
@@ -413,7 +480,7 @@
 	],
 	"teams":{
 		"1":{
-			"enabled":false,
+			"enabled":true,
 			"color":{
 				"green":1,
 				"blue":0,
@@ -519,9 +586,9 @@
 	"units":[
 		{
 			"type":"bit",
-			"id":15880,
+			"id":9466,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":1804,
 				"z":1070
 			},
@@ -529,6 +596,19 @@
 			"autoHeal":"global",
 			"hp":40,
 			"team":0
+		},
+		{
+			"type":"byte",
+			"id":11180,
+			"position":{
+				"y":130,
+				"x":1010,
+				"z":1723
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
 		} 
 	]
 }

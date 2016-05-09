@@ -67,7 +67,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"dadada",
+		"briefingRaw":"Mission 3\\n \\n \\nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission3",
 		"widgets":[

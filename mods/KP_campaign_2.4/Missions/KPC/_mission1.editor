@@ -3,10 +3,10 @@
 		{
 			"type":"Rectangle",
 			"blue":0.80613851547241,
-			"x2":1904,
-			"z1":984,
-			"z2":1192,
-			"x1":1664,
+			"x2":2040,
+			"z1":1168,
+			"z2":1376,
+			"x1":1800,
 			"marker":false,
 			"name":"Arrival",
 			"green":0.55862176418304,
@@ -51,7 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Map Briefing",
+		"briefingRaw":"Mission 1\\n \\n \\nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final; nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la  \"guerre numérique\".\\n \\nUn rapport vous est parvenu vous indiquant qu'un BYTE (OCTET) se trouverait au point de ralliement (1983; 1279). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage...\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission1",
 		"widgets":[
@@ -248,7 +248,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"Map Briefing",
+		"briefing":"Mission 1\n \n \nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final; nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la  \"guerre numérique\".\n \nUn rapport vous est parvenu vous indiquant qu'un BYTE (OCTET) se trouverait au point de ralliement (1983; 1279). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage...\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission1",
 		"autoHeal":"disabled"
@@ -257,7 +257,7 @@
 		{
 			"actions":[
 				{
-					"id":4,
+					"id":2,
 					"type":"cameraAuto",
 					"name":"cam_aut",
 					"params":{
@@ -265,13 +265,13 @@
 					}
 				},
 				{
-					"id":4,
+					"id":6,
 					"type":"centerCamera",
 					"name":"Action4",
 					"params":{
 						"position":{
-							"z":279,
-							"x":1032
+							"z":1263,
+							"x":1969
 						}
 					}
 				},
@@ -294,8 +294,8 @@
 					"type":"unit_zone",
 					"name":"Condition0",
 					"params":{
-						"unit":12499,
-						"zone":"Arrival"
+						"unit":10880,
+						"zone":1
 					}
 				} 
 			],
@@ -310,10 +310,10 @@
 					"name":"Action1",
 					"params":{
 						"message":[
-							"I am moving" 
+							"c'est parti !" 
 						],
 						"time":2,
-						"unit":12499
+						"unit":10880
 					}
 				},
 				{
@@ -336,7 +336,7 @@
 					"name":"Condition1",
 					"params":{
 						"command":10,
-						"unit":12499
+						"unit":10880
 					}
 				} 
 			],
@@ -354,7 +354,7 @@
 							"Je doute être au bon endroit" 
 						],
 						"time":5,
-						"unit":12499
+						"unit":10880
 					}
 				},
 				{
@@ -385,7 +385,7 @@
 					"name":"Condition3",
 					"params":{
 						"command":10,
-						"unit":12499
+						"unit":10880
 					}
 				},
 				{
@@ -393,8 +393,8 @@
 					"type":"unit_zone",
 					"name":"Condition0",
 					"params":{
-						"zone":"Arrival",
-						"unit":12499
+						"zone":1,
+						"unit":10880
 					}
 				} 
 			],
@@ -402,11 +402,20 @@
 			"id":2
 		},
 		{
-			"repetition":false,
-			"actionTotal":1,
+			"actions":[
+				{
+					"id":6,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_1"
+					}
+				} 
+			],
 			"name":"teamOIsDead",
-			"conditionTotal":1,
-			"id":3,
+			"trigger":"",
+			"actionTotal":1,
 			"conditions":[
 				{
 					"id":5,
@@ -420,18 +429,8 @@
 					}
 				} 
 			],
-			"actions":[
-				{
-					"id":6,
-					"type":"lose",
-					"name":"endbydead",
-					"params":{
-						"team":0,
-						"outputState":"endByDead_1"
-					}
-				} 
-			],
-			"trigger":""
+			"conditionTotal":1,
+			"id":3
 		} 
 	],
 	"variables":[
@@ -550,7 +549,7 @@
 	"units":[
 		{
 			"type":"bit",
-			"id":12499,
+			"id":10880,
 			"position":{
 				"y":116,
 				"x":1790,

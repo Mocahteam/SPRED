@@ -51,11 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission5",
 		"widgets":[
@@ -294,6 +290,38 @@
 			],
 			"conditionTotal":1,
 			"id":0
+		},
+		{
+			"repetition":false,
+			"actionTotal":1,
+			"name":"teamOIsDead",
+			"conditionTotal":1,
+			"id":1,
+			"conditions":[
+				{
+					"id":4,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":1,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
+			"trigger":""
 		} 
 	],
 	"variables":[
