@@ -964,7 +964,7 @@ function initMapSettingsWindow()
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
 	addLabel(windows['mapSettingsWindow'], '4%', '40%', '94%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR_HINT, 14, "left", nil, "center")
-	local panel = addPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
+	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
 	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
 	mapBriefingTextBox.font.shadow = false
 	
@@ -3439,6 +3439,7 @@ function updateMapSettings()
 			newWord = string.gsub(newWord, "/", "\255\255\255\255")
 			newText = string.gsub(newText, word, newWord)
 		end
+		newText = string.gsub(newText, "\\n", "\n")
 		mapBriefingTextBox:SetText(newText)
 	end
 	mapBriefing = mapBriefingTextBox.text
