@@ -229,12 +229,14 @@ function MissionEvent(e)
 			if e.state == "won" then
 			  popup.lineArray = {victory}
 				if scenarioType == "default" then
-					if campaign[missionName].nextMission == nil then
+					if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
 						popup.lineArray = {victoryCampaign}
-					end
-				elseif scenarioType == "noScenario" then
+            else 
+              popup.lineArray = {victory}
+            end
+				else --elseif scenarioType == "noScenario" then --commented out to be more robust
 					popup.lineArray = {victory}
-				else
+				--else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
 				if ppTraces ~= nil then
