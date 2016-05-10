@@ -16,31 +16,31 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
-local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua")
-local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
-local Chili, Screen0
-local IsActive = false
-local HideView = false
-local Language = "en"
-local vsx, vsy
-local UI = {}
-local MapList = {}
-local LevelList = {}
-local LevelListNames = {}
-local OutputStates = {}
-local Links = {}
-local ScenarioName = ""
-local ScenarioDesc = ""
-local selectedInput
-local selectedOutputMission
-local selectedOutput
+local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua") -- XML serializer/deserializer
+local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua") -- Json serializer/deserializer
+local Chili, Screen0 -- Chili
+local IsActive = false -- True if this widget has to be shown
+local HideView = false -- True if there is need for a black background
+local Language = "en" -- Current language
+local vsx, vsy -- Window size
+local UI = {} -- Contains each UI element
+local MapList = {} -- List of the maps as read in the maps/ directory
+local LevelList = {} -- List of the levels as read in the CustomLevels/ directory
+local LevelListNames = {} -- Names of the aforementioned levels
+local OutputStates = {} -- List of the output states of the levels
+local Links = {} -- Links betwenn output and input states
+local ScenarioName = "" -- Name of the current scenario
+local ScenarioDesc = "" -- Description of the current scenario
+local selectedInput -- Currently selected input state
+local selectedOutputMission -- Currently selected output mission
+local selectedOutput -- Currently selected output state
 
 -- CTRL+Z/Y
-local LoadLock = true
-local SaveStates = {}
-local LoadIndex = 1
+local LoadLock = true -- Lock to prevent saving when loading
+local SaveStates = {} -- Save states
+local LoadIndex = 1 -- Current load index
 
-function InitializeChili() 
+function InitializeChili() -- Initialize Chili variables
 	if not WG.Chili then
 		widgetHandler:RemoveWidget()
 		return
@@ -49,21 +49,21 @@ function InitializeChili()
 	Screen0 = Chili.Screen0
 end
 
-function InitializeEditor()
+function InitializeEditor() -- Enable editor widgets
 	widgetHandler:EnableWidget("Chili Framework")
 	widgetHandler:EnableWidget("Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")
 	widgetHandler:EnableWidget("Editor User Interface")
 end
 
-function InitializeLauncher()
+function InitializeLauncher() -- Initialize UI elements for the launcher
 	InitializeMainMenu()
 	InitializeMapButtons()
 	InitializeLevelButtons()
 	InitializeScenarioFrame()
 end
 
-function InitializeMainMenu()
+function InitializeMainMenu() -- Initialize the main window and buttons of the main menu
 	UI.MainWindow = Chili.Window:New{
 		parent = Screen0,
 		x = "0%",
@@ -143,7 +143,7 @@ function InitializeMainMenu()
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
-	UI.LanguageComboBox.OnSelect = {
+	UI.LanguageComboBox.OnSelect = { -- Change language to the newly selected language
 		function()
 			if UI.LanguageComboBox.selected == 1 then
 				ChangeLanguage("en")
@@ -162,7 +162,7 @@ function InitializeMainMenu()
 		focusColor = { 0, 0.6, 1, 1 },
 		OnClick = { MainMenuFrame }
 	}
-	Chili.Image:New{
+	Chili.Image:New{ -- Image for the back button
 		parent = UI.BackButton,
 		x = "10%",
 		y = "10%",
@@ -189,8 +189,8 @@ function InitializeMainMenu()
 	}
 end
 
-function InitializeMapList()
-	if Game.version == "0.82.5.1" then
+function InitializeMapList() -- Initialization of maps
+	if Game.version == "0.82.5.1" then -- In the older version, the maps are read in the maps/ directory and their names are written in the list
 		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
 		for i, map in ipairs(MapList) do
 			map = string.gsub(map, "maps\\", "")
@@ -202,24 +202,24 @@ function InitializeMapList()
 	end
 end
 
-function InitializeLevelList()
+function InitializeLevelList() -- Initialization of levels
 	LevelListNames = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
 	for i, level in ipairs(LevelListNames) do
 		level = string.gsub(level, "CustomLevels\\", "")
 		level = string.gsub(level, ".editor", "")
-		LevelListNames[i] = level
-		LevelList[i] = json.decode(VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW))
+		LevelListNames[i] = level -- This table contains the raw name of the levels
+		LevelList[i] = json.decode(VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
 	end
 end
 
-function InitializeOutputStates()
+function InitializeOutputStates() -- Initialization of the list that contains every output states
 	Links["start"] = {}
 	for i, level in ipairs(LevelList) do
 		OutputStates[LevelListNames[i]] = {}
 		Links[LevelListNames[i]] = {}
 		for ii, e in ipairs(level.events) do
 			for iii, a in ipairs(e.actions) do
-				if a.type == "win" or a.type == "lose" then
+				if a.type == "win" or a.type == "lose" then -- Read the output states within the win and lose actions of events
 					table.insert(OutputStates[LevelListNames[i]], a.params.outputState)
 				end
 			end
@@ -227,7 +227,7 @@ function InitializeOutputStates()
 	end
 end
 
-function InitializeMapButtons()
+function InitializeMapButtons() -- Create a button for each map to select it
 	InitializeMapList()
 	UI.NewLevel = {}
 	UI.NewLevel.Title = Chili.Label:New{
@@ -285,7 +285,7 @@ function InitializeMapButtons()
 	end
 end
 
-function InitializeLevelButtons()
+function InitializeLevelButtons() -- Create a button for each level to edit it
 	InitializeLevelList()
 	UI.LoadLevel = {}
 	UI.LoadLevel.Title = Chili.Label:New{
@@ -343,7 +343,7 @@ function InitializeLevelButtons()
 	end
 end
 
-function InitializeScenarioFrame()
+function InitializeScenarioFrame() -- Create a window for each level, and in each window, create a button for each output state and one for the input state
 	InitializeOutputStates()
 	UI.Scenario = {}
 	UI.Scenario.Title = Chili.Label:New{
@@ -420,13 +420,13 @@ function InitializeScenarioFrame()
 		width = "96%",
 		height = "68%"
 	}
-	local drawLinks = function(obj)
+	local drawLinks = function(obj) -- Function to draw links between buttons
 		gl.Color(1, 1, 1, 1)
 		gl.LineWidth(3)
 		gl.BeginEnd(
 			GL.LINES,
 			function()
-				if selectedInput then
+				if selectedInput then -- Draw a link between the center of the selected input and the mouse cursor
 					local x, y
 					x = UI.Scenario.Input[selectedInput].x + UI.Scenario.Input[selectedInput].tiles[1]/2 + UI.Scenario.Levels[selectedInput].x + UI.Scenario.Input[selectedInput].width/2
 					y = UI.Scenario.Input[selectedInput].y + UI.Scenario.Input[selectedInput].tiles[2]/2 + UI.Scenario.Levels[selectedInput].y + UI.Scenario.Input[selectedInput].height/2
@@ -435,7 +435,7 @@ function InitializeScenarioFrame()
 					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
 					gl.Vertex(x, y)
 					gl.Vertex(mouseX, mouseY)
-				elseif selectedOutputMission and selectedOutput then
+				elseif selectedOutputMission and selectedOutput then -- Draw a link between the center of the selected output and the mouse cursor
 					local x, y
 					x = UI.Scenario.Output[selectedOutputMission][selectedOutput].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].width/2
 					y = UI.Scenario.Output[selectedOutputMission][selectedOutput].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].height/2
@@ -445,11 +445,11 @@ function InitializeScenarioFrame()
 					gl.Vertex(x, y)
 					gl.Vertex(mouseX, mouseY)
 				end
-				for k, link in pairs(Links) do
+				for k, link in pairs(Links) do -- Draw a link between each linked pair input/output
 					for kk, out in pairs(link) do
-						gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor))
+						gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor)) -- Color is the color of the button
 						local x1, y1, x2, y2
-						x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2
+						x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2 -- Compute the coordinates of the center of the button. Tiles represents an offset to make children buttons look better.
 						y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
 						x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
 						y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
@@ -472,7 +472,7 @@ function InitializeScenarioFrame()
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
-	UI.Scenario.Levels["start"] = Chili.Window:New{
+	UI.Scenario.Levels["start"] = Chili.Window:New{ -- Specific start window
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 10,
 		y = 10,
@@ -494,7 +494,7 @@ function InitializeScenarioFrame()
 			size = 16
 		},
 		OnClick = { function()
-			if selectedOutputMission == "start" and selectedOutput == 1 then
+			if selectedOutputMission == "start" and selectedOutput == 1 then -- Delete links when double-click
 				if Links[selectedOutputMission][selectedOutput] then
 					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
@@ -511,7 +511,7 @@ function InitializeScenarioFrame()
 			end
 		end }
 	}
-	UI.Scenario.Levels["end"] = Chili.Window:New{
+	UI.Scenario.Levels["end"] = Chili.Window:New{ -- Specific end window
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 170,
 		y = 10,
@@ -532,7 +532,7 @@ function InitializeScenarioFrame()
 			size = 16
 		},
 		OnClick = { function() 
-				if selectedInput == "end" then
+				if selectedInput == "end" then -- Delete links when double-click
 					for k, link in pairs(Links) do
 						for kk, linked in pairs(link) do
 							if linked == selectedInput then
@@ -551,7 +551,7 @@ function InitializeScenarioFrame()
 				end
 			end
 		},
-		chosenColor = { math.random(), math.random(), math.random(), 1 }
+		chosenColor = { math.random(), math.random(), math.random(), 1 } -- Initialize the chosen color for links
 	}
 	local column = -1
 	for i, level in ipairs(LevelList) do
@@ -606,7 +606,7 @@ function InitializeScenarioFrame()
 				size = 16
 			},
 			OnClick = { function() 
-				if selectedInput == LevelListNames[i] then
+				if selectedInput == LevelListNames[i] then -- Delete links when double-click
 					for k, link in pairs(Links) do
 						for kk, linked in pairs(link) do
 							if linked == selectedInput then
@@ -624,7 +624,7 @@ function InitializeScenarioFrame()
 					selectedInput = LevelListNames[i]
 				end
 			end },
-			chosenColor = { math.random(), math.random(), math.random(), 1 }
+			chosenColor = { math.random(), math.random(), math.random(), 1 } -- Initialize the chosen color for links
 		}
 		UI.Scenario.Output[LevelListNames[i]] = {}
 		for ii, out in ipairs(outputStates) do
@@ -641,7 +641,7 @@ function InitializeScenarioFrame()
 				}
 			}
 			but.OnClick = { function()
-				if selectedOutputMission == LevelListNames[i] and selectedOutput == out then
+				if selectedOutputMission == LevelListNames[i] and selectedOutput == out then -- Delete links when double-click
 					if Links[selectedOutputMission][selectedOutput] then
 						UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 						UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
@@ -662,19 +662,19 @@ function InitializeScenarioFrame()
 	end
 end
 
-function UpdateCaption(element, text)
+function UpdateCaption(element, text) -- Update the caption of an UI element
 	if element then
 		element:SetCaption(text)
 	end
 end
 
-function UpdateText(element, text)
+function UpdateText(element, text) -- Update the text of an UI element
 	if element then
 		element:SetText(text)
 	end
 end
 
-function ClearUI()
+function ClearUI() -- Remove UI elements from the screen
 	ClearTemporaryUI()
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
@@ -697,7 +697,7 @@ function ClearUI()
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
 end
 
-function ClearTemporaryUI()
+function ClearTemporaryUI() -- Remove pop-ups
 	if UI.ImportScenario then
 		UI.ImportScenario:Dispose()
 	end
@@ -706,14 +706,14 @@ function ClearTemporaryUI()
 	end
 end
 
-function MainMenuFrame()
+function MainMenuFrame() -- Shows the main menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
 	UI.MainWindow:AddChild(UI.EditScenarioButton)
 end
 
-function NewMissionFrame()
+function NewMissionFrame() -- Shows the new mission menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.NewLevel.Title)
@@ -723,7 +723,7 @@ function NewMissionFrame()
 	end
 end
 
-function EditMissionFrame()
+function EditMissionFrame() -- Shows the edit mission menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.LoadLevel.Title)
@@ -733,7 +733,7 @@ function EditMissionFrame()
 	end
 end
 
-function EditScenarioFrame()
+function EditScenarioFrame() -- Shows the edit scenario menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
@@ -744,7 +744,7 @@ function EditScenarioFrame()
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
 end
 
-function ExportScenarioFrame()
+function ExportScenarioFrame() -- Shows the export scenario pop-up
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
@@ -848,7 +848,7 @@ function ExportScenarioFrame()
 	UI.ExportScenario = window
 end
 
-function ImportScenarioFrame()
+function ImportScenarioFrame() -- Shows the import scenario pop-up
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
@@ -908,7 +908,7 @@ function ImportScenarioFrame()
 	UI.ImportScenario = window
 end
 
-function ChangeLanguage(lang)
+function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
 	Language = lang
 	GetLauncherStrings(lang)
 	
@@ -933,38 +933,67 @@ function ChangeLanguage(lang)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
 end
 
-function NewMission(map)
-	local operations = {
-		["MODOPTIONS"] = {
-			["language"] = Language,
-			["scenario"] = "noScenario"
-		},
-		["GAME"] = {
-			["Mapname"] = map
-		}
-	}
-	DoTheRestart("LevelEditor.txt", operations)
-end
-
-function EditMission(level)
-	if VFS.FileExists("CustomLevels/"..level..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)
-		levelFile = json.decode(levelFile)
+function NewMission(map) -- Start editor with empty mission on the selected map
+	if Game.version == "0.82.5.1" then
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario",
-				["toBeLoaded"] = level
+				["scenario"] = "noScenario"
 			},
 			["GAME"] = {
-				["Mapname"] = levelFile.description.map
+				["Mapname"] = map
+			}
+		}
+		DoTheRestart("LevelEditor.txt", operations)
+	else
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario"
+			},
+			["GAME"] = {
+				["Mapname"] = map,
+				["Gametype"] = Game.gameName.." "..Game.gameVersion
 			}
 		}
 		DoTheRestart("LevelEditor.txt", operations)
 	end
 end
 
-function ComputeInputStates()
+function EditMission(level) -- Start editor with selected mission
+	if VFS.FileExists("CustomLevels/"..level..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)
+		levelFile = json.decode(levelFile)
+		if Game.version == "0.82.5.1" then
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		else
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.gameName.." "..Game.gameVersion
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		end
+	end
+end
+
+function ComputeInputStates() -- Associative table between input states and output states/missions
 	local inputStates = {}
 	for i = 1, #LevelList, 1 do
 		inputStates[LevelListNames[i]] = {}
@@ -978,7 +1007,7 @@ function ComputeInputStates()
 	return inputStates
 end
 
-function ExportScenario(name, desc)
+function ExportScenario(name, desc) -- Creates a table using the xml-serde formalism and export it as a xml file
 	local inputStates = ComputeInputStates()
 	-- Base
 	local xmlScenario = {
@@ -1132,18 +1161,18 @@ function ExportScenario(name, desc)
 			end
 		end
 	end
-	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<")
-	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString
+	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<") -- Serialize as xml string and insert \n for a more readable file
+	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString -- Add the first line
 	local saveName = generateSaveName(name)
 	local file = io.open("CustomLevels/"..saveName..".xml", "w")
 	file:write(xmlString)
 	file:close()
 end
 
-function SaveState()
+function SaveState() -- Save the current state of the scenario
 	if LoadLock then
 		savedLinks = deepcopy(Links)
-		for i = 1, LoadIndex-1, 1 do
+		for i = 1, LoadIndex-1, 1 do -- Erase states
 			table.remove(SaveStates, 1)
 		end
 		LoadIndex = 1
@@ -1151,7 +1180,7 @@ function SaveState()
 	end
 end
 
-function LoadState(direction)
+function LoadState(direction) -- Load a previous state of the scenario
 	LoadLock = false
 	if (LoadIndex < #SaveStates and direction > 0) or (LoadIndex > 1 and direction < 0) then
 		LoadIndex = LoadIndex + direction
@@ -1169,7 +1198,7 @@ function LoadState(direction)
 	LoadLock = true
 end
 
-function LoadScenario(xmlTable)
+function LoadScenario(xmlTable) -- Import a scenario from a xml file
 	ResetLinks()
 	links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
 	for i, link in ipairs(links) do
@@ -1223,7 +1252,7 @@ function ExportGame() --todo
 	]]
 end
 
-function MakeLink()
+function MakeLink() -- If both input and output are selected, proceed linking
 	if selectedInput and selectedOutputMission then
 		
 		if (findInTable(LevelListNames, selectedInput) and findInTable(LevelListNames, selectedOutputMission))
@@ -1272,12 +1301,12 @@ function MakeLink()
 	end
 end
 
-function Quit()
+function Quit() -- Close spring
 	Spring.SendCommands("quit")
 	Spring.SendCommands("quitforce")
 end
 
-function RemoveOtherWidgets()
+function RemoveOtherWidgets() -- Disable other widgets
 	for name, w in pairs(widgetHandler.knownWidgets) do
 		if w.active and name ~= "Spring Direct Launch 2 for Prog&Play Level Editor" and name ~= "Chili Framework" then
 			widgetHandler:DisableWidget(name)
@@ -1285,7 +1314,7 @@ function RemoveOtherWidgets()
 	end
 end
 
-function EitherDrawScreen()
+function EitherDrawScreen() -- Shows a black background if required
 	if not vsx or not vsy or not HideView then
 		return
 	end
@@ -1299,7 +1328,7 @@ function EitherDrawScreen()
 	gl.Blending(true)
 end
 
-function SwitchOn()
+function SwitchOn() -- Activate this widget
 	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
 	Spring.SendCommands("fps 1")
@@ -1312,7 +1341,7 @@ function SwitchOn()
 end
 WG.BackToMainMenu = SwitchOn
 
-function SwitchOff()
+function SwitchOff() -- Desactivate this widget
 	HideView = false
 	RemoveOtherWidgets()
 	InitializeEditor()
