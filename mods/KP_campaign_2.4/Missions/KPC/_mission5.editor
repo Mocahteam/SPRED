@@ -10,9 +10,9 @@
 			"marker":true,
 			"name":"point de ralliement (260-1000)",
 			"green":0.55862176418304,
-			"alwaysInView":true,
-			"shown":true,
 			"id":1,
+			"shown":true,
+			"alwaysInView":true,
 			"red":0.51526319980621
 		} 
 	],
@@ -51,7 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission5",
 		"widgets":[
@@ -248,11 +248,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefing":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission5",
 		"autoHeal":"disabled"
@@ -262,40 +258,50 @@
 			"actions":[
 				{
 					"id":0,
-					"type":"messageGlobal",
+					"type":"win",
 					"name":"Action0",
 					"params":{
-						"message":[
-							"WIN !" 
-						]
+						"team":0,
+						"outputState":"wellPlaced"
 					}
 				} 
 			],
 			"name":"WellPlaced",
 			"trigger":"",
-			"actionTotal":1,
+			"id":0,
 			"conditions":[
 				{
 					"id":3,
 					"type":"team_zone",
-					"name":"Condition3",
+					"name":"ConditionPlaced",
 					"params":{
 						"team":0,
 						"number":{
+							"number":1,
 							"comparison":"all"
 						},
-						"zone":"point de ralliement (260-1000)"
+						"zone":1
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"id":0
+			"actionTotal":1
 		},
 		{
-			"repetition":false,
-			"actionTotal":1,
+			"actions":[
+				{
+					"id":1,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
+			"trigger":"",
 			"name":"teamOIsDead",
-			"conditionTotal":1,
+			"repetition":false,
 			"id":1,
 			"conditions":[
 				{
@@ -310,22 +316,224 @@
 					}
 				} 
 			],
-			"actions":[
+			"conditionTotal":1,
+			"actionTotal":1
+		},
+		{
+			"actionTotal":3,
+			"conditionTotal":3,
+			"name":"NotSimultaneous",
+			"repetition":false,
+			"trigger":"Condition6 and not allMove and not Condition13",
+			"conditions":[
 				{
-					"id":1,
-					"type":"lose",
-					"name":"endbydead",
+					"id":6,
+					"type":"booleanVariable",
+					"name":"Condition6",
 					"params":{
+						"variable":"unitsAreMoving"
+					}
+				},
+				{
+					"id":8,
+					"type":"team_order",
+					"name":"allMove",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"all"
+						},
 						"team":0,
-						"outputState":"endByDead_5"
+						"command":10
+					}
+				},
+				{
+					"id":13,
+					"type":"booleanVariable",
+					"name":"Condition13",
+					"params":{
+						"variable":"units_lag"
 					}
 				} 
 			],
-			"trigger":""
+			"actions":[
+				{
+					"id":5,
+					"type":"messageGlobal",
+					"name":"Action5",
+					"params":{
+						"message":[
+							"Votre armée n'est pas très synchronisée,
+							\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t il ne faut pas perdre de temps" 
+						]
+					}
+				},
+				{
+					"id":6,
+					"type":"wait",
+					"name":"Wt",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":4,
+					"type":"lose",
+					"name":"Action4",
+					"params":{
+						"team":0,
+						"outputState":"not simulatenous"
+					}
+				} 
+			],
+			"id":2
+		},
+		{
+			"actions":[
+				{
+					"id":2,
+					"type":"wait",
+					"name":"wait",
+					"params":{
+						"time":4
+					}
+				},
+				{
+					"id":3,
+					"type":"setBooleanVariable",
+					"name":"Action3",
+					"params":{
+						"boolean":"true",
+						"variable":"unitsAreMoving"
+					}
+				},
+				{
+					"id":10,
+					"type":"wait",
+					"name":"wait2",
+					"params":{
+						"time":4
+					}
+				},
+				{
+					"id":11,
+					"type":"setBooleanVariable",
+					"name":"Action11",
+					"params":{
+						"boolean":"true",
+						"variable":"units_lag"
+					}
+				} 
+			],
+			"trigger":"",
+			"name":"unitsAreMoving",
+			"repetition":false,
+			"id":3,
+			"conditions":[
+				{
+					"id":5,
+					"type":"team_order",
+					"name":"Condition5",
+					"params":{
+						"command":10,
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"actionTotal":4
+		},
+		{
+			"actionTotal":3,
+			"conditionTotal":3,
+			"name":"NotWellPlaced",
+			"repetition":false,
+			"trigger":"not Condition3 and not move and Condition12",
+			"conditions":[
+				{
+					"id":10,
+					"type":"team_zone",
+					"name":"Condition3",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0,
+						"zone":1
+					}
+				},
+				{
+					"id":11,
+					"type":"team_order",
+					"name":"move",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0,
+						"command":10
+					}
+				},
+				{
+					"id":12,
+					"type":"booleanVariable",
+					"name":"Condition12",
+					"params":{
+						"variable":"unitsAreMoving"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":7,
+					"type":"messageGlobal",
+					"name":"Action7",
+					"params":{
+						"message":[
+							"Mauvais placement" 
+						]
+					}
+				},
+				{
+					"id":8,
+					"type":"wait",
+					"name":"Action8",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":9,
+					"type":"lose",
+					"name":"Action9",
+					"params":{
+						"team":0,
+						"outputState":"wrongSpot"
+					}
+				} 
+			],
+			"id":4
 		} 
 	],
 	"variables":[
-		 
+		{
+			"id":0,
+			"type":"boolean",
+			"name":"unitsAreMoving",
+			"initValue":"false"
+		},
+		{
+			"id":1,
+			"type":"boolean",
+			"name":"units_lag",
+			"initValue":"false"
+		} 
 	],
 	"teams":{
 		"1":{
@@ -430,16 +638,34 @@
 		}
 	},
 	"groups":[
-		 
+		{
+			"name":"da",
+			"units":[
+				 
+			]
+		} 
 	],
 	"units":[
 		{
 			"type":"byte",
-			"id":2119,
+			"id":9137,
 			"position":{
 				"y":130,
-				"x":437,
-				"z":1852
+				"x":294,
+				"z":1862
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":11316,
+			"position":{
+				"y":130,
+				"x":354,
+				"z":1748
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -448,11 +674,11 @@
 		},
 		{
 			"type":"bit",
-			"id":1339,
+			"id":3274,
 			"position":{
 				"y":270.39453125,
-				"x":1401,
-				"z":1377
+				"x":1356,
+				"z":1370
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -461,46 +687,7 @@
 		},
 		{
 			"type":"bit",
-			"id":7368,
-			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1329
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":7447,
-			"position":{
-				"y":270.39453125,
-				"x":1307,
-				"z":1392
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14826,
-			"position":{
-				"y":270.39453125,
-				"x":1351,
-				"z":1451
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":1877,
+			"id":13526,
 			"position":{
 				"y":270.39453125,
 				"x":1424,
@@ -513,11 +700,50 @@
 		},
 		{
 			"type":"bit",
-			"id":8977,
+			"id":5269,
 			"position":{
 				"y":270.39453125,
-				"x":1356,
-				"z":1370
+				"x":1351,
+				"z":1451
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14973,
+			"position":{
+				"y":270.39453125,
+				"x":1307,
+				"z":1392
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":4048,
+			"position":{
+				"y":270.39453125,
+				"x":1331,
+				"z":1329
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13710,
+			"position":{
+				"y":270.39453125,
+				"x":1401,
+				"z":1377
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -526,24 +752,11 @@
 		},
 		{
 			"type":"byte",
-			"id":13854,
+			"id":2984,
 			"position":{
 				"y":130,
-				"x":354,
-				"z":1748
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":5637,
-			"position":{
-				"y":130,
-				"x":294,
-				"z":1862
+				"x":437,
+				"z":1852
 			},
 			"orientation":0,
 			"autoHeal":"global",

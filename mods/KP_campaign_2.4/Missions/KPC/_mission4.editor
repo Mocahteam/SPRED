@@ -10,9 +10,9 @@
 			"marker":false,
 			"name":"pt1",
 			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"id":1,
 			"red":0.51526319980621
 		},
 		{
@@ -25,9 +25,9 @@
 			"marker":false,
 			"name":"pt2",
 			"green":0.50874388217926,
-			"id":2,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"id":2,
 			"red":0.79427468776703
 		} 
 	],
@@ -66,7 +66,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 4\\n \\n \\nPour vous remercier de votre aide; l'OCTET (BYTE) se rallie à notre cause et vous informe que d'autres entités partisanes se sont regroupées non loin de là. Il vous communique les coordonnées de la formation d'OCTETS qu'il tentait de rejoindre avant votre arrivée (479; 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400; 1371).\\n \\nAfin de récupérer ces nouvelles forces; ordonnez à vos deux entités de rejoindre leurs compatriotes respectifs.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 4\\n \\n \\nPour vous remercier de votre aide; l'OCTET (BYTE) se rallie à notre cause et vous informe que d'autres entités partisanes se sont regroupées non loin de là. Il vous communique les coordonnées de la formation d'OCTETS qu'il tentait de rejoindre avant votre arrivée (479 ; 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400; 1371).\\n \\nAfin de récupérer ces nouvelles forces; ordonnez à vos deux entités de rejoindre leurs compatriotes respectifs.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission4",
 		"widgets":[
@@ -263,11 +263,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefing":"Mission 4\n \n \nPour vous remercier de votre aide; l'OCTET (BYTE) se rallie à notre cause et vous informe que d'autres entités partisanes se sont regroupées non loin de là. Il vous communique les coordonnées de la formation d'OCTETS qu'il tentait de rejoindre avant votre arrivée (479 ; 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400; 1371).\n \nAfin de récupérer ces nouvelles forces; ordonnez à vos deux entités de rejoindre leurs compatriotes respectifs.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission4",
 		"autoHeal":"disabled"
@@ -303,7 +299,7 @@
 					"type":"unit_zone",
 					"name":"Condition0",
 					"params":{
-						"unit":1991,
+						"unit":11057,
 						"zone":1
 					}
 				},
@@ -312,7 +308,7 @@
 					"type":"unit_zone",
 					"name":"Condition1",
 					"params":{
-						"unit":7543,
+						"unit":11594,
 						"zone":2
 					}
 				} 
@@ -332,8 +328,8 @@
 						],
 						"time":0,
 						"position":{
-							"x":318,
-							"z":1784
+							"z":1784,
+							"x":318
 						}
 					}
 				},
@@ -347,8 +343,8 @@
 						],
 						"time":0,
 						"position":{
-							"x":1377,
-							"z":1368
+							"z":1368,
+							"x":1377
 						}
 					}
 				} 
@@ -423,7 +419,7 @@
 					"name":"Condition6",
 					"params":{
 						"command":10,
-						"unit":7543
+						"unit":11594
 					}
 				} 
 			],
@@ -453,7 +449,7 @@
 					"name":"Condition7",
 					"params":{
 						"command":10,
-						"unit":1991
+						"unit":11057
 					}
 				} 
 			],
@@ -461,39 +457,6 @@
 			"actionTotal":1
 		},
 		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"ByteNotWellPlaced",
-			"repetition":false,
-			"trigger":"Condition10 and not By and not Condition12",
-			"conditions":[
-				{
-					"id":9,
-					"type":"unit_zone",
-					"name":"By",
-					"params":{
-						"zone":1,
-						"unit":1991
-					}
-				},
-				{
-					"id":10,
-					"type":"booleanVariable",
-					"name":"Condition10",
-					"params":{
-						"variable":"ByteHasMoved"
-					}
-				},
-				{
-					"id":12,
-					"type":"unit_order",
-					"name":"Condition12",
-					"params":{
-						"command":10,
-						"unit":1991
-					}
-				} 
-			],
 			"actions":[
 				{
 					"id":11,
@@ -504,7 +467,7 @@
 							"SSeul...Une fois de plus" 
 						],
 						"time":4,
-						"unit":1991
+						"unit":11057
 					}
 				},
 				{
@@ -525,42 +488,42 @@
 					}
 				} 
 			],
-			"id":5
-		},
-		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"BitNotWellPlaced",
+			"trigger":"Condition10 and not By and not Condition12",
+			"name":"ByteNotWellPlaced",
 			"repetition":false,
-			"trigger":"Condition11 and not Bi and not Condition13",
+			"id":5,
 			"conditions":[
 				{
-					"id":8,
+					"id":9,
 					"type":"unit_zone",
-					"name":"Bi",
+					"name":"By",
 					"params":{
-						"zone":2,
-						"unit":7543
+						"zone":1,
+						"unit":11057
 					}
 				},
 				{
-					"id":11,
+					"id":10,
 					"type":"booleanVariable",
-					"name":"Condition11",
+					"name":"Condition10",
 					"params":{
-						"variable":"BitHasMoved"
+						"variable":"ByteHasMoved"
 					}
 				},
 				{
-					"id":13,
+					"id":12,
 					"type":"unit_order",
-					"name":"Condition13",
+					"name":"Condition12",
 					"params":{
 						"command":10,
-						"unit":7543
+						"unit":11057
 					}
 				} 
 			],
+			"conditionTotal":3,
+			"actionTotal":3
+		},
+		{
 			"actions":[
 				{
 					"id":14,
@@ -571,7 +534,7 @@
 							"Mes alliés ne semblent pas être ici" 
 						],
 						"time":3,
-						"unit":7543
+						"unit":11594
 					}
 				},
 				{
@@ -592,7 +555,40 @@
 					}
 				} 
 			],
-			"id":6
+			"trigger":"Condition11 and not Bi and not Condition13",
+			"name":"BitNotWellPlaced",
+			"repetition":false,
+			"id":6,
+			"conditions":[
+				{
+					"id":8,
+					"type":"unit_zone",
+					"name":"Bi",
+					"params":{
+						"zone":2,
+						"unit":11594
+					}
+				},
+				{
+					"id":11,
+					"type":"booleanVariable",
+					"name":"Condition11",
+					"params":{
+						"variable":"BitHasMoved"
+					}
+				},
+				{
+					"id":13,
+					"type":"unit_order",
+					"name":"Condition13",
+					"params":{
+						"command":10,
+						"unit":11594
+					}
+				} 
+			],
+			"conditionTotal":3,
+			"actionTotal":3
 		} 
 	],
 	"variables":[
@@ -717,63 +713,11 @@
 	"units":[
 		{
 			"type":"bit",
-			"id":7543,
-			"position":{
-				"y":116,
-				"x":1218,
-				"z":1805
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":1991,
-			"position":{
-				"y":130,
-				"x":1117,
-				"z":1752
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":13863,
-			"position":{
-				"y":130,
-				"x":409,
-				"z":1765
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
-			"type":"byte",
-			"id":7296,
-			"position":{
-				"y":130,
-				"x":269,
-				"z":1818
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
-			"type":"bit",
-			"id":5110,
+			"id":12025,
 			"position":{
 				"y":270.39453125,
-				"x":1441,
-				"z":1415
+				"x":1332,
+				"z":1313
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -782,33 +726,7 @@
 		},
 		{
 			"type":"bit",
-			"id":10958,
-			"position":{
-				"y":270.39453125,
-				"x":1302,
-				"z":1453
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
-			"type":"bit",
-			"id":2054,
-			"position":{
-				"y":270.39453125,
-				"x":1344,
-				"z":1395
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
-			"type":"bit",
-			"id":13483,
+			"id":10685,
 			"position":{
 				"y":270.39453125,
 				"x":1348,
@@ -821,16 +739,94 @@
 		},
 		{
 			"type":"bit",
-			"id":7361,
+			"id":6870,
 			"position":{
 				"y":270.39453125,
-				"x":1332,
-				"z":1313
+				"x":1344,
+				"z":1395
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
 			"team":1
+		},
+		{
+			"type":"bit",
+			"id":7131,
+			"position":{
+				"y":270.39453125,
+				"x":1302,
+				"z":1453
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":3710,
+			"position":{
+				"y":270.39453125,
+				"x":1441,
+				"z":1415
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":8927,
+			"position":{
+				"y":130,
+				"x":269,
+				"z":1818
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":7601,
+			"position":{
+				"y":130,
+				"x":409,
+				"z":1765
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"byte",
+			"id":11057,
+			"position":{
+				"y":130,
+				"x":1117,
+				"z":1752
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11594,
+			"position":{
+				"y":116,
+				"x":1218,
+				"z":1805
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
 		} 
 	]
 }
