@@ -19,7 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Commentaire configure event
+-- Fix bug import
 -- Ajouter le nom du mod dans le .editor
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
@@ -199,11 +199,13 @@ local sortedCommandsList = {} -- Sorted list of all the commands
 local selectCreatedUnitsWindow -- Window to select units created through an action
 local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
+local eventCommentEditBox -- Add a comment to an event
 
 -- Map settings variables
-local mapName = "Map" -- Name of the map
-local mapBriefing = "Map Briefing" -- Briefing of the map
-local mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
+local mapDescription = {}
+mapDescription.mapName = "Map" -- Name of the map
+mapDescription.mapBriefing = "Map Briefing" -- Briefing of the map
+mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
@@ -527,8 +529,8 @@ function mapSettingsFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
 	-- Set parameters to UI elements
-	mapNameEditBox:SetText(mapName)
-	mapBriefingEditBox:SetText(mapBriefingRaw)
+	mapNameEditBox:SetText(mapDescription.mapName)
+	mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
 	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
 		cameraAutoButton.state.chosen = true
 		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
@@ -941,6 +943,7 @@ function initTriggerWindow()
 	-- Other parameters
 	addLabel(windows['configureEvent'], '0%', '75%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER, 20, "center", nil, "center")
 	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left", nil, "center")
+	addLabel(windows['configureEvent'], '5%', '90%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
@@ -2171,6 +2174,7 @@ function createNewEvent()
 	event.conditionTotal = 0
 	event.actionTotal = 0
 	event.repetition = false
+	event.comment = ""
 	table.insert(events, event)
 	
 	eventNumber = eventNumber + 1
@@ -2283,6 +2287,11 @@ function removeSecondWindows() -- Removes the middle window
 	editVariablesButton:InvalidateSelf()
 end
 function removeThirdWindows() -- Removes the rightmost window
+	if eventCommentEditBox then
+		windows["configureEvent"]:RemoveChild(eventCommentEditBox)
+		eventCommentEditBox:Dispose()
+		eventCommentEditBox = nil
+	end
 	Screen0:RemoveChild(windows['conditionWindow'])
 	Screen0:RemoveChild(windows['actionWindow'])
 	Screen0:RemoveChild(windows['configureEvent'])
@@ -2316,6 +2325,10 @@ end
 function updateEventFrame() -- When a new condition or action is created or its name is changed, update lists
 	if currentEvent then
 		local e = events[currentEvent]
+		
+		if eventCommentEditBox then
+			e.comment = eventCommentEditBox.text
+		end
 		
 		if e.conditionTotal ~= #(e.conditions) then
 			removeElements(eventConditionsScrollPanel, conditionButtons[e.id], true)
@@ -3044,6 +3057,14 @@ function configureEvent() -- Show the event configuration window
 				repetitionUI.repetitionComboBox:Select(1)
 				repetitionUI.repetitionLabel:SetCaption("")
 			end
+			
+			eventCommentEditBox = addEditBox(windows["configureEvent"], '25%', '90%', '70%', '4%', "left", "")
+			if e.comment then
+				eventCommentEditBox:SetText(e.comment)
+			else
+				eventCommentEditBox:SetText("")
+			end
+			
 			updateActionSequence = false
 		else
 			removeThirdWindows()
@@ -3425,8 +3446,8 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function updateMapSettings()
-	mapName = mapNameEditBox.text
-	mapBriefingRaw = mapBriefingEditBox.text
+	mapDescription.mapName = mapNameEditBox.text
+	mapDescription.mapBriefingRaw = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
 		local text = mapBriefingEditBox.text
 		local newText = text
@@ -3444,7 +3465,7 @@ function updateMapSettings()
 		newText = string.gsub(newText, "\\n", "\n")
 		mapBriefingTextBox:SetText(newText)
 	end
-	mapBriefing = mapBriefingTextBox.text
+	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
 function initWidgetList()
 	customWidgets = {}
@@ -3562,9 +3583,9 @@ function newMap()
 	variablesNumber = 0
 	variablesTotal = nil
 	-- Map
-	mapName = "Map"
-	mapBriefing = "Map Briefing"
-	mapBriefingRaw = "Map Briefing"
+	mapDescription.mapName = "Map"
+	mapDescription.mapBriefing = "Map Briefing"
+	mapDescription.mapBriefingRaw = "Map Briefing"
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
@@ -3687,6 +3708,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		event.conditionTotal = e.conditionTotal
 		event.trigger = e.trigger
 		event.repetition = e.repetition
+		event.comment = e.comment
 		event.repetitionTime = e.repetitionTime
 		event.conditions = {}
 		for ii, c in ipairs(e.conditions) do
@@ -3758,9 +3780,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	end
 	
 	-- Global description
-	mapName = loadedTable.description.name
-	mapBriefingRaw = loadedTable.description.briefingRaw
-	mapBriefing = loadedTable.description.briefing
+	mapDescription.mapName = loadedTable.description.name
+	mapDescription.mapBriefingRaw = loadedTable.description.briefingRaw
+	mapDescription.mapBriefing = loadedTable.description.briefing
 	cameraAutoState = loadedTable.description.cameraAuto
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
@@ -3894,7 +3916,7 @@ function saveMapFrame()
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
 	end
-	local saveName = generateSaveName(mapName)
+	local saveName = generateSaveName(mapDescription.mapName)
 	if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM, 20)
@@ -4004,10 +4026,10 @@ function encodeSaveTable()
 	-- Global description
 	savedTable.description = {}
 	savedTable.description.map = Game.mapName
-	savedTable.description.name = mapName
-	savedTable.description.saveName = generateSaveName(mapName)
-	savedTable.description.briefing = mapBriefing
-	savedTable.description.briefingRaw = mapBriefingRaw
+	savedTable.description.name = mapDescription.mapName
+	savedTable.description.saveName = generateSaveName(mapDescription.mapName)
+	savedTable.description.briefing = mapDescription.mapBriefing
+	savedTable.description.briefingRaw = mapDescription.mapBriefingRaw
 	savedTable.description.cameraAuto = cameraAutoState
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState

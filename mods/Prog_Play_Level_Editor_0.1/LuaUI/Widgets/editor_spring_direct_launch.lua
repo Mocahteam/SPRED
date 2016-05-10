@@ -1344,6 +1344,19 @@ function MakeLink() -- If both input and output are selected, proceed linking
 	end
 end
 
+function FadeConfirmationMessage()
+	if UI.Scenario then
+		if UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
+			UI.Scenario.ConfirmationMessage:InvalidateSelf()
+			if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
+				UI.Scenario.ConfirmationMessage:Dispose()
+				UI.Scenario.ConfirmationMessage = nil
+			end
+		end
+	end
+end
+
 function Quit() -- Close spring
 	Spring.SendCommands("quit")
 	Spring.SendCommands("quitforce")
@@ -1414,15 +1427,7 @@ end
 
 function widget:Update(delta)
 	MakeLink()
-	
-	if UI.Scenario.ConfirmationMessage then
-		UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
-		UI.Scenario.ConfirmationMessage:InvalidateSelf()
-		if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
-			UI.Scenario.ConfirmationMessage:Dispose()
-			UI.Scenario.ConfirmationMessage = nil
-		end
-	end
+	FadeConfirmationMessage()
 end
 
 function widget:MousePress(mx, my, button)
