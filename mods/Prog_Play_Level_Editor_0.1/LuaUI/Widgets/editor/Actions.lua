@@ -64,6 +64,19 @@ actions_list = {
 		}
 	},
 	{
+		type = "waitTrigger",
+		filter = "Game",
+		typeText = "Wait for trigger",
+		text = "Wait for <Trigger> to be true.",
+		attributes = {
+			{
+				text = "<Trigger>",
+				type = "text",
+				id = "trigger"
+			}
+		}
+	},
+	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
