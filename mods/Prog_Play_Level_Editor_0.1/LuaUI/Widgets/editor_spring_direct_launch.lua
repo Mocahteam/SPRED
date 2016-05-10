@@ -934,33 +934,62 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
-	local operations = {
-		["MODOPTIONS"] = {
-			["language"] = Language,
-			["scenario"] = "noScenario"
-		},
-		["GAME"] = {
-			["Mapname"] = map
+	if Game.version == "0.82.5.1" then
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario"
+			},
+			["GAME"] = {
+				["Mapname"] = map
+			}
 		}
-	}
-	DoTheRestart("LevelEditor.txt", operations)
+		DoTheRestart("LevelEditor.txt", operations)
+	else
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario"
+			},
+			["GAME"] = {
+				["Mapname"] = map,
+				["Gametype"] = Game.gameName.." "..Game.gameVersion
+			}
+		}
+		DoTheRestart("LevelEditor.txt", operations)
+	end
 end
 
 function EditMission(level) -- Start editor with selected mission
 	if VFS.FileExists("CustomLevels/"..level..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["toBeLoaded"] = level
-			},
-			["GAME"] = {
-				["Mapname"] = levelFile.description.map
+		if Game.version == "0.82.5.1" then
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map
+				}
 			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
+			DoTheRestart("LevelEditor.txt", operations)
+		else
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.gameName.." "..Game.gameVersion
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		end
 	end
 end
 

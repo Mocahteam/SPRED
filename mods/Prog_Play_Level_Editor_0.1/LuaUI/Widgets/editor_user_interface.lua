@@ -3929,17 +3929,32 @@ function loadLevelWithRightMap(name)
 			loadMap(name)
 			return
 		end
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["toBeLoaded"] = name
-			},
-			["GAME"] = {
-				["Mapname"] = levelFile.description.map
+		if Game.version == "0.82.5.1" then
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map
+				}
 			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
+			DoTheRestart("LevelEditor.txt", operations)
+		else
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["toBeLoaded"] = level
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.gameName.." "..Game.gameVersion
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		end
 	end
 end
 function newLevelWithRightMap(name)
@@ -3948,16 +3963,30 @@ function newLevelWithRightMap(name)
 		newMapInitialize()
 		return
 	end
-	local operations = {
-		["MODOPTIONS"] = {
-			["language"] = Language,
-			["scenario"] = "noScenario"
-		},
-		["GAME"] = {
-			["Mapname"] = name
+	if Game.version == "0.82.5.1" then
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario"
+			},
+			["GAME"] = {
+				["Mapname"] = map
+			}
 		}
-	}
-	DoTheRestart("LevelEditor.txt", operations)
+		DoTheRestart("LevelEditor.txt", operations)
+	else
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario"
+			},
+			["GAME"] = {
+				["Mapname"] = map,
+				["Gametype"] = Game.gameName.." "..Game.gameVersion
+			}
+		}
+		DoTheRestart("LevelEditor.txt", operations)
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
