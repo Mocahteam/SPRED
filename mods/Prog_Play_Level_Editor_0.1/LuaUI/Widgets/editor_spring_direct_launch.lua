@@ -25,7 +25,7 @@ local Language = "en" -- Current language
 local vsx, vsy -- Window size
 local UI = {} -- Contains each UI element
 local MapList = {} -- List of the maps as read in the maps/ directory
-local LevelList = {} -- List of the levels as read in the CustomLevels/ directory
+local LevelList = {} -- List of the levels as read in the pp_editor/missions/ directory
 local LevelListNames = {} -- Names of the aforementioned levels
 local OutputStates = {} -- List of the output states of the levels
 local Links = {} -- Links betwenn output and input states
@@ -203,12 +203,28 @@ function InitializeMapList() -- Initialization of maps
 end
 
 function InitializeLevelList() -- Initialization of levels
-	LevelListNames = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
+	local toBeRemoved = {} -- Remove levels not corresponding to the chosen game
+	LevelListNames = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
 	for i, level in ipairs(LevelListNames) do
-		level = string.gsub(level, "CustomLevels\\", "")
+		level = string.gsub(level, "pp_editor\\missions\\", "")
 		level = string.gsub(level, ".editor", "")
 		LevelListNames[i] = level -- This table contains the raw name of the levels
-		LevelList[i] = json.decode(VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
+		LevelList[i] = json.decode(VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
+		if LevelList[i].description.mainGame ~= Spring.GetModOptions().maingame then
+			table.insert(toBeRemoved, level)
+		end
+	end
+	for i, level in ipairs(toBeRemoved) do
+		local removedIndex = nil
+		for ii, l in ipairs(LevelListNames) do
+			if level == l then
+				removedIndex = ii
+			end
+		end
+		if removedIndex then
+			table.remove(LevelListNames, removedIndex)
+			table.remove(LevelList, removedIndex)
+		end
 	end
 end
 
@@ -876,7 +892,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		OnClick = { function() window:Dispose() end }
 	}
 	closeButton.font.color = { 1, 0, 0, 1 }
-	local scenarioList = VFS.DirList("CustomLevels/", "*.xml", VFS.RAW)
+	local scenarioList = VFS.DirList("pp_editor/scenarios/", "*.xml", VFS.RAW)
 	if #scenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
@@ -893,7 +909,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		}
 	else
 		for i, scen in ipairs(scenarioList) do
-			local name = string.gsub(scen, "CustomLevels\\", "")
+			local name = string.gsub(scen, "pp_editor\\scenarios\\", "")
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
@@ -901,7 +917,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 				width = '100%',
 				height = 40,
 				caption = name,
-				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("CustomLevels/"..name))) window:Dispose() end }
+				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("pp_editor/scenarios/"..name))) window:Dispose() end }
 			}
 		end
 	end
@@ -938,7 +954,8 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map
@@ -949,7 +966,8 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -961,15 +979,16 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 end
 
 function EditMission(level) -- Start editor with selected mission
-	if VFS.FileExists("CustomLevels/"..level..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("CustomLevels/"..level..".editor",  VFS.RAW)
+	if VFS.FileExists("pp_editor/missions/"..level..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if Game.version == "0.82.5.1" then
 			local operations = {
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map
@@ -981,7 +1000,8 @@ function EditMission(level) -- Start editor with selected mission
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -1164,7 +1184,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<") -- Serialize as xml string and insert \n for a more readable file
 	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString -- Add the first line
 	local saveName = generateSaveName(name)
-	local file = io.open("CustomLevels/"..saveName..".xml", "w")
+	local file = io.open("pp_editor/scenarios/"..saveName..".xml", "w")
 	file:write(xmlString)
 	file:close()
 end
@@ -1241,15 +1261,58 @@ function ResetScenario()
 	ScenarioDesc = ""
 end
 
-function ExportGame() --todo
---[[
-	local fileString = VFS.LoadFile("LuaUI/Widgets/hide_commands.lua", VFS.ZIP)
-	local file = io.open("CustomLevels/hide_commands.lua", "w")
-	file:write(fileString)
-	file:close()
-	VFS.CompressFolder("CustomLevels")
-	Spring.Echo(json.encode(VFS.GetGames()))
-	]]
+function ExportGame()
+	local name = generateSaveName(ScenarioName)
+	if not VFS.FileExists("games/"..name..".sdz") then
+		-- Add levels and scenario
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
+		for i, level in ipairs(LevelListNames) do
+			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+		end
+		-- Compress
+		VFS.CompressFolder("pp_editor/game_files")
+		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+		-- Remove levels and scenario
+		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		for i, level in ipairs(LevelListNames) do
+			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+		end
+		-- Show message
+		if not UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", name..".sdz"),
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 0.2, 1, 0.2, 1 }
+				}
+			}
+		end
+	else
+		-- Show message
+		if not UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", name..".sdz"),
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
+	end
 end
 
 function MakeLink() -- If both input and output are selected, proceed linking
@@ -1298,6 +1361,19 @@ function MakeLink() -- If both input and output are selected, proceed linking
 	
 	if UI.Scenario then
 		UI.Scenario.Links:InvalidateSelf()
+	end
+end
+
+function FadeConfirmationMessage()
+	if UI.Scenario then
+		if UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
+			UI.Scenario.ConfirmationMessage:InvalidateSelf()
+			if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
+				UI.Scenario.ConfirmationMessage:Dispose()
+				UI.Scenario.ConfirmationMessage = nil
+			end
+		end
 	end
 end
 
@@ -1371,6 +1447,7 @@ end
 
 function widget:Update(delta)
 	MakeLink()
+	FadeConfirmationMessage()
 end
 
 function widget:MousePress(mx, my, button)

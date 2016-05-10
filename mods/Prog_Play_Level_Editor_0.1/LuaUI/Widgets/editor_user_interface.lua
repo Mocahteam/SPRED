@@ -19,6 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
+-- Ajouter le nom du mod dans le .editor
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -197,11 +198,13 @@ local sortedCommandsList = {} -- Sorted list of all the commands
 local selectCreatedUnitsWindow -- Window to select units created through an action
 local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
+local eventCommentEditBox -- Add a comment to an event
 
 -- Map settings variables
-local mapName = "Map" -- Name of the map
-local mapBriefing = "Map Briefing" -- Briefing of the map
-local mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
+local mapDescription = {}
+mapDescription.mapName = "Map" -- Name of the map
+mapDescription.mapBriefing = "Map Briefing" -- Briefing of the map
+mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
@@ -525,8 +528,8 @@ function mapSettingsFrame()
 	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 	Screen0:AddChild(windows["mapSettingsWindow"])
 	-- Set parameters to UI elements
-	mapNameEditBox:SetText(mapName)
-	mapBriefingEditBox:SetText(mapBriefingRaw)
+	mapNameEditBox:SetText(mapDescription.mapName)
+	mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
 	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
 		cameraAutoButton.state.chosen = true
 		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
@@ -939,6 +942,7 @@ function initTriggerWindow()
 	-- Other parameters
 	addLabel(windows['configureEvent'], '0%', '75%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER, 20, "center", nil, "center")
 	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left", nil, "center")
+	addLabel(windows['configureEvent'], '5%', '90%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
@@ -2169,6 +2173,7 @@ function createNewEvent()
 	event.conditionTotal = 0
 	event.actionTotal = 0
 	event.repetition = false
+	event.comment = ""
 	table.insert(events, event)
 	
 	eventNumber = eventNumber + 1
@@ -2281,6 +2286,11 @@ function removeSecondWindows() -- Removes the middle window
 	editVariablesButton:InvalidateSelf()
 end
 function removeThirdWindows() -- Removes the rightmost window
+	if eventCommentEditBox then
+		windows["configureEvent"]:RemoveChild(eventCommentEditBox)
+		eventCommentEditBox:Dispose()
+		eventCommentEditBox = nil
+	end
 	Screen0:RemoveChild(windows['conditionWindow'])
 	Screen0:RemoveChild(windows['actionWindow'])
 	Screen0:RemoveChild(windows['configureEvent'])
@@ -2314,6 +2324,10 @@ end
 function updateEventFrame() -- When a new condition or action is created or its name is changed, update lists
 	if currentEvent then
 		local e = events[currentEvent]
+		
+		if eventCommentEditBox then
+			e.comment = eventCommentEditBox.text
+		end
 		
 		if e.conditionTotal ~= #(e.conditions) then
 			removeElements(eventConditionsScrollPanel, conditionButtons[e.id], true)
@@ -3042,6 +3056,14 @@ function configureEvent() -- Show the event configuration window
 				repetitionUI.repetitionComboBox:Select(1)
 				repetitionUI.repetitionLabel:SetCaption("")
 			end
+			
+			eventCommentEditBox = addEditBox(windows["configureEvent"], '25%', '90%', '70%', '4%', "left", "")
+			if e.comment then
+				eventCommentEditBox:SetText(e.comment)
+			else
+				eventCommentEditBox:SetText("")
+			end
+			
 			updateActionSequence = false
 		else
 			removeThirdWindows()
@@ -3099,10 +3121,7 @@ function importCondition()
 		newCondition.name = importedCondition.name.."("..count..")"
 	end
 	newCondition.type = importedCondition.type
-	newCondition.params = {}
-	for k, p in pairs(importedCondition.params) do
-		newCondition.params[k] = p
-	end
+	newCondition.params = deepcopy(importedCondition.params)
 	
 	table.insert(ce.conditions, newCondition)
 	
@@ -3130,10 +3149,7 @@ function importAction()
 		newAction.name = importedAction.name.."("..count..")"
 	end
 	newAction.type = importedAction.type
-	newAction.params = {}
-	for k, p in pairs(importedAction.params) do
-		newAction.params[k] = p -- P MUST NOT BE A TABLE
-	end
+	newAction.params = deepcopy(importedAction.params)
 	
 	table.insert(events[currentEvent].actions, newAction)
 	
@@ -3423,8 +3439,8 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function updateMapSettings()
-	mapName = mapNameEditBox.text
-	mapBriefingRaw = mapBriefingEditBox.text
+	mapDescription.mapName = mapNameEditBox.text
+	mapDescription.mapBriefingRaw = mapBriefingEditBox.text
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
 		local text = mapBriefingEditBox.text
 		local newText = text
@@ -3442,7 +3458,7 @@ function updateMapSettings()
 		newText = string.gsub(newText, "\\n", "\n")
 		mapBriefingTextBox:SetText(newText)
 	end
-	mapBriefing = mapBriefingTextBox.text
+	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
 function initWidgetList()
 	customWidgets = {}
@@ -3560,9 +3576,9 @@ function newMap()
 	variablesNumber = 0
 	variablesTotal = nil
 	-- Map
-	mapName = "Map"
-	mapBriefing = "Map Briefing"
-	mapBriefingRaw = "Map Briefing"
+	mapDescription.mapName = "Map"
+	mapDescription.mapBriefing = "Map Briefing"
+	mapDescription.mapBriefingRaw = "Map Briefing"
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
@@ -3603,8 +3619,8 @@ function loadMap(name)
 	loading = true
 	newMap()
 	newMapInitialize()
-	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -3685,6 +3701,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		event.conditionTotal = e.conditionTotal
 		event.trigger = e.trigger
 		event.repetition = e.repetition
+		event.comment = e.comment
 		event.repetitionTime = e.repetitionTime
 		event.conditions = {}
 		for ii, c in ipairs(e.conditions) do
@@ -3756,9 +3773,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	end
 	
 	-- Global description
-	mapName = loadedTable.description.name
-	mapBriefingRaw = loadedTable.description.briefingRaw
-	mapBriefing = loadedTable.description.briefing
+	mapDescription.mapName = loadedTable.description.name
+	mapDescription.mapBriefingRaw = loadedTable.description.briefingRaw
+	mapDescription.mapBriefing = loadedTable.description.briefing
 	cameraAutoState = loadedTable.description.cameraAuto
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
@@ -3836,7 +3853,7 @@ function saveMap()
 	)
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
-	local file = io.open("CustomLevels/"..saveName..".editor", "w")
+	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 end
@@ -3872,18 +3889,25 @@ function loadMapFrame()
 	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 	delbut.font.color = {1, 0, 0, 1}
-	local levelList = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
+	local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
 	if #levelList == 0 then
 		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 	else
 		local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
 		local count = 0
 		for i, l in ipairs(levelList) do
-			local name = string.gsub(l, "CustomLevels\\", "")
+			local name = string.gsub(l, "pp_editor\\missions\\", "")
 			name = string.gsub(name, ".editor", "")
-			local displayedName = string.gsub(name, "_", " ")
-			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
-			count = count + 1
+			local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
+			if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
+				local displayedName = string.gsub(name, "_", " ")
+				addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
+				count = count + 1
+			end
+		end
+		if count == 0 then
+			scrollPanel:Dispose()
+			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND_GAME, 16, {1, 0, 0, 1})
 		end
 	end
 end
@@ -3892,8 +3916,8 @@ function saveMapFrame()
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
 	end
-	local saveName = generateSaveName(mapName)
-	if VFS.FileExists("CustomLevels/"..saveName..".editor", VFS.RAW) then
+	local saveName = generateSaveName(mapDescription.mapName)
+	if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM, 20)
 		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
@@ -3924,8 +3948,8 @@ function beginLoadLevel(name)
 	loadMap(name)
 end
 function loadLevelWithRightMap(name)
-	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if levelFile.description.map == Game.mapName then
 			loadMap(name)
@@ -3936,7 +3960,8 @@ function loadLevelWithRightMap(name)
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map
@@ -3948,7 +3973,8 @@ function loadLevelWithRightMap(name)
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -3969,7 +3995,8 @@ function newLevelWithRightMap(name)
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map
@@ -3980,7 +4007,8 @@ function newLevelWithRightMap(name)
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -4001,11 +4029,12 @@ function encodeSaveTable()
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
+	savedTable.description.mainGame = Spring.GetModOptions().maingame
 	savedTable.description.map = Game.mapName
-	savedTable.description.name = mapName
-	savedTable.description.saveName = generateSaveName(mapName)
-	savedTable.description.briefing = mapBriefing
-	savedTable.description.briefingRaw = mapBriefingRaw
+	savedTable.description.name = mapDescription.mapName
+	savedTable.description.saveName = generateSaveName(mapDescription.mapName)
+	savedTable.description.briefing = mapDescription.mapBriefing
+	savedTable.description.briefingRaw = mapDescription.mapBriefingRaw
 	savedTable.description.cameraAuto = cameraAutoState
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
