@@ -1246,14 +1246,52 @@ function ExportGame()
 	if not VFS.FileExists("games/"..name..".sdz") then
 		-- Add levels and scenario
 		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
+		for i, level in ipairs(LevelListNames) do
+			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+		end
 		-- Compress
 		VFS.CompressFolder("pp_editor/game_files")
 		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
 		-- Remove levels and scenario
 		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		for i, level in ipairs(LevelListNames) do
+			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+		end
 		-- Show message
+		if not UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", name..".sdz"),
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 0.2, 1, 0.2, 1 }
+				}
+			}
+		end
 	else
 		-- Show message
+		if not UI.Scenario.ConfirmationMessage then
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", name..".sdz"),
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
 	end
 end
 
@@ -1376,6 +1414,15 @@ end
 
 function widget:Update(delta)
 	MakeLink()
+	
+	if UI.Scenario.ConfirmationMessage then
+		UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
+		UI.Scenario.ConfirmationMessage:InvalidateSelf()
+		if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
+			UI.Scenario.ConfirmationMessage:Dispose()
+			UI.Scenario.ConfirmationMessage = nil
+		end
+	end
 end
 
 function widget:MousePress(mx, my, button)
