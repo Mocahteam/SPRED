@@ -952,22 +952,6 @@ local function UpdateConditionsTruthfulness (frameNumber)
   end 
 end
 
--------------------------------------
--- Update dynamic variables
--------------------------------------
-local function UpdateDynamicVariables ()--for the moment only positions
-  -- POSITIONS
-  for idPos,p in pairs(positions) do
-    if(p.type=="dynamic") then
-      local springUnitId=armySpring[p.updatedAccording]
-      if(Spring.ValidUnitID(springUnitId))then
-        local x,y,z=Spring.GetUnitPosition(springUnitId)
-        positions[idPos].x=x
-        positions[idPos].z=z
-      end
-    end
-  end 
-end
 
 -------------------------------------
 --Write a compass on unit, useful to help the player with
