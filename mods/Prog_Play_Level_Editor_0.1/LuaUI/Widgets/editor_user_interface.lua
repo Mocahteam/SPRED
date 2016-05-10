@@ -3684,6 +3684,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		event.actionTotal = e.actionTotal
 		event.conditionTotal = e.conditionTotal
 		event.trigger = e.trigger
+		event.repetition = e.repetition
+		event.repetitionTime = e.repetitionTime
 		event.conditions = {}
 		for ii, c in ipairs(e.conditions) do
 			local condition = {}
