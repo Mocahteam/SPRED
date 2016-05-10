@@ -236,7 +236,7 @@ end
 -------------------------------------
 -- Write letter on map giving its position
 -- Only O,W,N,S,E implemented
--------------------------------------
+------------------------------------- 
 local function writeLetter(x, y, z, letter)
   if letter == "O" then
     -- write letter
@@ -776,7 +776,7 @@ local function processEvents(frameNumber)
   local newevent
   for idEvent,event in pairs(events) do
     if isTriggerable(event) then
-      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
+      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
