@@ -203,12 +203,28 @@ function InitializeMapList() -- Initialization of maps
 end
 
 function InitializeLevelList() -- Initialization of levels
+	local toBeRemoved = {} -- Remove levels not corresponding to the chosen game
 	LevelListNames = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
 	for i, level in ipairs(LevelListNames) do
 		level = string.gsub(level, "pp_editor\\missions\\", "")
 		level = string.gsub(level, ".editor", "")
 		LevelListNames[i] = level -- This table contains the raw name of the levels
 		LevelList[i] = json.decode(VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
+		if LevelList[i].description.mainGame ~= Spring.GetModOptions().maingame then
+			table.insert(toBeRemoved, level)
+		end
+	end
+	for i, level in ipairs(toBeRemoved) do
+		local removedIndex = nil
+		for ii, l in ipairs(LevelListNames) do
+			if level == l then
+				removedIndex = ii
+			end
+		end
+		if removedIndex then
+			table.remove(LevelListNames, removedIndex)
+			table.remove(LevelList, removedIndex)
+		end
 	end
 end
 
@@ -938,7 +954,8 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map
@@ -949,7 +966,8 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -969,7 +987,8 @@ function EditMission(level) -- Start editor with selected mission
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map
@@ -981,7 +1000,8 @@ function EditMission(level) -- Start editor with selected mission
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,

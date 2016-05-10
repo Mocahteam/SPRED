@@ -3898,9 +3898,16 @@ function loadMapFrame()
 		for i, l in ipairs(levelList) do
 			local name = string.gsub(l, "pp_editor\\missions\\", "")
 			name = string.gsub(name, ".editor", "")
-			local displayedName = string.gsub(name, "_", " ")
-			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
-			count = count + 1
+			local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
+			if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
+				local displayedName = string.gsub(name, "_", " ")
+				addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
+				count = count + 1
+			end
+		end
+		if count == 0 then
+			scrollPanel:Dispose()
+			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND_GAME, 16, {1, 0, 0, 1})
 		end
 	end
 end
@@ -3953,7 +3960,8 @@ function loadLevelWithRightMap(name)
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map
@@ -3965,7 +3973,8 @@ function loadLevelWithRightMap(name)
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level
+					["toBeLoaded"] = level,
+					["maingame"] = Spring.GetModOptions().maingame
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -3986,7 +3995,8 @@ function newLevelWithRightMap(name)
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map
@@ -3997,7 +4007,8 @@ function newLevelWithRightMap(name)
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
-				["scenario"] = "noScenario"
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -4018,6 +4029,7 @@ function encodeSaveTable()
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
+	savedTable.description.mainGame = Spring.GetModOptions().maingame
 	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapDescription.mapName
 	savedTable.description.saveName = generateSaveName(mapDescription.mapName)

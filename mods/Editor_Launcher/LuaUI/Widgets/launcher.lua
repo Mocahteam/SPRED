@@ -86,6 +86,9 @@ function Launch(game)
 		os.rename("pp_editor/editor_files.sdz", "games/Prog & Play Level Editor for "..game..".sdz")
 	end
 	local operations = {
+		["MODOPTIONS"] = {
+			["maingame"] = game
+		},
 		["GAME"] = {
 			["Gametype"] = "Prog & Play Level Editor for "..game.." 0.1"
 		}
