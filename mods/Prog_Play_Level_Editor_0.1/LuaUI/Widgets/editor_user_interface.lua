@@ -19,6 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
+-- Ajouter le nom du mod dans le .editor
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
@@ -3603,8 +3604,8 @@ function loadMap(name)
 	loading = true
 	newMap()
 	newMapInitialize()
-	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -3836,7 +3837,7 @@ function saveMap()
 	)
 	jsonfile = string.gsub(jsonfile, "\t}", "}")
 	jsonfile = string.gsub(jsonfile, "\t%]", "]")
-	local file = io.open("CustomLevels/"..saveName..".editor", "w")
+	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 end
@@ -3872,14 +3873,14 @@ function loadMapFrame()
 	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 	delbut.font.color = {1, 0, 0, 1}
-	local levelList = VFS.DirList("CustomLevels/", "*.editor", VFS.RAW)
+	local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
 	if #levelList == 0 then
 		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 	else
 		local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
 		local count = 0
 		for i, l in ipairs(levelList) do
-			local name = string.gsub(l, "CustomLevels\\", "")
+			local name = string.gsub(l, "pp_editor\\missions\\", "")
 			name = string.gsub(name, ".editor", "")
 			local displayedName = string.gsub(name, "_", " ")
 			addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
@@ -3893,7 +3894,7 @@ function saveMapFrame()
 		windows["saveWindow"]:Dispose()
 	end
 	local saveName = generateSaveName(mapName)
-	if VFS.FileExists("CustomLevels/"..saveName..".editor", VFS.RAW) then
+	if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM, 20)
 		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
@@ -3924,8 +3925,8 @@ function beginLoadLevel(name)
 	loadMap(name)
 end
 function loadLevelWithRightMap(name)
-	if VFS.FileExists("CustomLevels/"..name..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("CustomLevels/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if levelFile.description.map == Game.mapName then
 			loadMap(name)

@@ -79,11 +79,11 @@ end
 function Launch(game)
 	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") then
 		local modInfo = "return { game='PPLE', shortGame='PPLE', name='Prog & Play Level Editor for "..game.."', shortName='PPLE', mutator='official', version='0.1', description='A level editor for Prog & Play.', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
-		local file = io.open("games/editor/editor_files/ModInfo.lua", "w")
+		local file = io.open("pp_editor/editor_files/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
-		VFS.CompressFolder("games/editor/editor_files")
-		os.rename("games/editor/editor_files.sdz", "games/Prog & Play Level Editor for "..game..".sdz")
+		VFS.CompressFolder("pp_editor/editor_files")
+		os.rename("pp_editor/editor_files.sdz", "games/Prog & Play Level Editor for "..game..".sdz")
 	end
 	local operations = {
 		["GAME"] = {
