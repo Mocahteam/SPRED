@@ -19,7 +19,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Fix bug import
 -- Ajouter le nom du mod dans le .editor
 -- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
@@ -3122,10 +3121,7 @@ function importCondition()
 		newCondition.name = importedCondition.name.."("..count..")"
 	end
 	newCondition.type = importedCondition.type
-	newCondition.params = {}
-	for k, p in pairs(importedCondition.params) do
-		newCondition.params[k] = p
-	end
+	newCondition.params = deepcopy(importedCondition.params)
 	
 	table.insert(ce.conditions, newCondition)
 	
@@ -3153,10 +3149,7 @@ function importAction()
 		newAction.name = importedAction.name.."("..count..")"
 	end
 	newAction.type = importedAction.type
-	newAction.params = {}
-	for k, p in pairs(importedAction.params) do
-		newAction.params[k] = p -- P MUST NOT BE A TABLE
-	end
+	newAction.params = deepcopy(importedAction.params)
 	
 	table.insert(events[currentEvent].actions, newAction)
 	
