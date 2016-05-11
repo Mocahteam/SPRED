@@ -195,33 +195,48 @@ end
 -- draw a position randomly drawn within a zone
 -------------------------------------
 local function getARandomPositionInZone(idZone)
-  local zone=zones[idZone]
-  local posit={}
-  local center_x=zone.center_xz.x
-  local center_z=zone.center_xz.z
-  if(zone.type=="Disk") then
-    while true do -- rejection method to draw random points from ellipse (drawn from rectangle and accepted if inside ellipse
-      local x=math.random(center_x-zone.a, center_x+zone.a)
-      local z=math.random(center_z-zone.b, center_z+zone.b)
-      if(isXZInsideZone(x,z,idZone))then
-        posit["x"]=x
-        posit["z"]=z
-        return posit
+  if(zones[idZone]~=nil) then
+    local zone=zones[idZone]
+    local posit={}
+    local center_x=zone.center_xz.x
+    local center_z=zone.center_xz.z
+    if(zone.type=="Disk") then
+      while true do -- rejection method to draw random points from ellipse (drawn from rectangle and accepted if inside ellipse
+        local x=math.random(center_x-zone.a, center_x+zone.a)
+        local z=math.random(center_z-zone.b, center_z+zone.b)
+        if(isXZInsideZone(x,z,idZone))then
+          posit["x"]=x
+          posit["z"]=z
+          return posit
+        end
       end
-    end
-  elseif(zone.type=="Rectangle") then
-    local x=math.random(center_x-zone.demiLargeur, center_x+zone.demiLargeur)
-    local z=math.random(center_z-zone.demiLongueur, center_z+zone.demiLongueur)
-    posit["x"]=x
-    posit["z"]=z
-    return posit
-  end    
+    elseif(zone.type=="Rectangle") then
+      local x=math.random(center_x-zone.demiLargeur, center_x+zone.demiLargeur)
+      local z=math.random(center_z-zone.demiLongueur, center_z+zone.demiLongueur)
+      posit["x"]=x
+      posit["z"]=z
+      return posit
+    end 
+  else
+    Spring.Echo("zone not found")
+  end   
 end
 
 -------------------------------------
+-- Extract position from parameters
+-- Sometimes a zone is given and getARandomPositionInZone will be called
+-------------------------------------
+local function extractPosition(tablePosOrMaybeJustZoneId)
+  if(type(tablePosOrMaybeJustZoneId)~="number")then
+    return tablePosOrMaybeJustZoneId
+  else
+    return getARandomPositionInZone(tablePosOrMaybeJustZoneId)
+  end
+end
+-------------------------------------
 -- Write letter on map giving its position
 -- Only O,W,N,S,E implemented
--------------------------------------
+------------------------------------- 
 local function writeLetter(x, y, z, letter)
   if letter == "O" then
     -- write letter
@@ -422,13 +437,15 @@ local function ApplyGroupableAction(unit,act)
       local health,maxhealth=Spring.GetUnitHealth(unit)
       Spring.SetUnitHealth(unit,maxhealth*(act.params.percentage)/100)
     elseif(act.attribute=="teleport")then
-      Spring.SetUnitPosition(unit,act.params.position.x,act.params.position.z)
+      local posFound=extractPosition(act.params.position)
+      Spring.SetUnitPosition(unit,posFound.x,posFound.z)
     elseif(act.attribute=="group")then
       table.insert(groupOfUnits["group_"..act.params.group],unit)
     elseif(act.attribute=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, {}, {})
     elseif(act.attribute=="orderPosition")then
-      Spring.GiveOrderToUnit(unit, act.params.command,{act.params.position.x,Spring.GetGroundHeight(act.params.position.x, act.params.position.z),act.params.position.z}, {})
+      local posFound=extractPosition(act.params.position)
+      Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
     elseif(act.attribute=="orderTarget")then
       local u=act.params.target
       local spUnit=armySpring[u]
@@ -514,7 +531,8 @@ local function ApplyNonGroupableAction(act)
     end
     
   elseif(act.type=="centerCamera") then
-    SendToUnsynced("centerCamera", json.encode(act.params.position))
+    local posFound=extractPosition(act.params.position)
+    SendToUnsynced("centerCamera", json.encode(posFound))
    
   -- MESSAGES
   
@@ -536,10 +554,11 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="messagePosition") then
     --Spring.Echo("try to send : DisplayMessagePosition")
   --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
-    local factor=Spring.GetGameSpeed()   
-    local x=act.params.position.x
-    local y=Spring.GetGroundHeight(act.params.position.x,act.params.position.z)
-    local z=act.params.position.z
+    local factor=Spring.GetGameSpeed()
+    local posFound=extractPosition(act.params.position)   
+    local x=posFound.x
+    local y=Spring.GetGroundHeight(posFound.x,posFound.z)
+    local z=posFound.z
     SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/factor}))
     
     
@@ -576,7 +595,8 @@ local function ApplyNonGroupableAction(act)
         
   elseif(act.type=="createUnitAtPosition") then
     --globalIndexOfCreatedUnits
-     createUnitAtPosition(act,act.params.position)
+    local posFound=extractPosition(act.params.position)
+     createUnitAtPosition(act,posFound)
   elseif(act.type=="createUnitsInZone") then
     for var=1,act.params.number do
       local position=getARandomPositionInZone(act.params.zone)
@@ -756,7 +776,7 @@ local function processEvents(frameNumber)
   local newevent
   for idEvent,event in pairs(events) do
     if isTriggerable(event) then
-      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
+      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
@@ -952,22 +972,6 @@ local function UpdateConditionsTruthfulness (frameNumber)
   end 
 end
 
--------------------------------------
--- Update dynamic variables
--------------------------------------
-local function UpdateDynamicVariables ()--for the moment only positions
-  -- POSITIONS
-  for idPos,p in pairs(positions) do
-    if(p.type=="dynamic") then
-      local springUnitId=armySpring[p.updatedAccording]
-      if(Spring.ValidUnitID(springUnitId))then
-        local x,y,z=Spring.GetUnitPosition(springUnitId)
-        positions[idPos].x=x
-        positions[idPos].z=z
-      end
-    end
-  end 
-end
 
 -------------------------------------
 --Write a compass on unit, useful to help the player with

@@ -264,7 +264,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"dadada",
+		"briefing":"Mission 3\n \n \nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission3",
 		"autoHeal":"disabled"
@@ -277,9 +277,9 @@
 					"type":"unit_orderTarget",
 					"name":"Action6",
 					"params":{
-						"target":14820,
+						"target":12265,
 						"command":20,
-						"unit":8139
+						"unit":5556
 					}
 				} 
 			],
@@ -318,7 +318,7 @@
 					"name":"Action9",
 					"params":{
 						"command":20,
-						"target":14820,
+						"target":12265,
 						"unit":"Action7"
 					}
 				} 
@@ -337,9 +337,20 @@
 							"comparison":"atleast"
 						}
 					}
+				},
+				{
+					"id":14,
+					"type":"elapsedTime",
+					"name":"conditiontonullifythisevent",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atmost"
+						}
+					}
 				} 
 			],
-			"conditionTotal":1,
+			"conditionTotal":2,
 			"id":4
 		},
 		{
@@ -353,13 +364,22 @@
 							"Merci !" 
 						],
 						"time":5,
-						"unit":14820
+						"unit":12265
+					}
+				},
+				{
+					"id":13,
+					"type":"win",
+					"name":"Action13",
+					"params":{
+						"team":0,
+						"outputState":"ennemyKilled"
 					}
 				} 
 			],
 			"name":"Event5",
 			"trigger":"",
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[
 				{
 					"id":7,
@@ -408,34 +428,91 @@
 			"id":6
 		},
 		{
-			"repetition":false,
-			"actionTotal":1,
-			"name":"behaviorUnderattack",
-			"conditionTotal":1,
 			"id":7,
+			"conditionTotal":2,
+			"repetitionTime":"4",
+			"name":"behaviorUnderattack",
+			"repetition":true,
+			"trigger":"Condition11 and not Condition13",
 			"conditions":[
 				{
 					"id":11,
 					"type":"unit_underAttack",
 					"name":"Condition11",
 					"params":{
-						"unit":14820
+						"unit":12265
+					}
+				},
+				{
+					"id":13,
+					"type":"unit_order",
+					"name":"Condition13",
+					"params":{
+						"command":10,
+						"unit":12265
 					}
 				} 
 			],
 			"actions":[
 				{
 					"id":11,
-					"type":"messageGlobal",
+					"type":"messageUnit",
 					"name":"Action11",
 					"params":{
 						"message":[
-							"i am under attack" 
-						]
+							"Aidez moi !!!",
+							"S'il vous plait...",
+							"AAaarghh",
+							"J'ai besoin d'aide",
+							"Que faites vous ?",
+							"Je ne tiendrai\npas longtemps",
+							"Mon energie diminue",
+							"Il m'en met\nplein la gueule",
+							"Noooonnn",
+						],
+						"time":3,
+						"unit":12265
+					}
+				},
+				{
+					"id":12,
+					"type":"unit_orderPosition",
+					"name":"Action12",
+					"params":{
+						"command":10,
+						"position":2,
+						"unit":12265
+					}
+				},
+				{
+					"id":14,
+					"type":"wait",
+					"name":"Action14",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":15,
+					"type":"messageUnit",
+					"name":"Action15",
+					"params":{
+						"message":[
+							"Muhahah",
+							"C'est presque trop facile !",
+							"Tu peux courir ; mais m'échapper tu ne peux",
+							"Quelle aubaine !",
+							"C'est bientôt la fin cher ami"
+							"Je suis un tueur né",	
+							"Je me délecte de ton désespoir",	
+							"Où est ton berger petite brebis égarée ?",									
+						],
+						"time":2,
+						"unit":5556
 					}
 				} 
 			],
-			"trigger":""
+			"actionTotal":4
 		} 
 	],
 	"variables":[
@@ -554,7 +631,7 @@
 	"units":[
 		{
 			"type":"byte",
-			"id":14820,
+			"id":12265,
 			"position":{
 				"y":130,
 				"x":1024,
@@ -567,20 +644,20 @@
 		},
 		{
 			"type":"bit",
-			"id":7550,
+			"id":4373,
 			"position":{
 				"y":116,
 				"x":1034,
 				"z":1942
 			},
-			"orientation":-2.228874206543,
+			"orientation":-2.2472820281982,
 			"autoHeal":"global",
 			"hp":40,
 			"team":0
 		},
 		{
 			"type":"bit",
-			"id":8139,
+			"id":5556,
 			"position":{
 				"y":270.39453125,
 				"x":1032,
