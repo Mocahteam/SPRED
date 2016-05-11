@@ -82,8 +82,27 @@ function Launch(game)
 		local file = io.open("pp_editor/editor_files/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
+		-- Move game files
+		os.rename("pp_editor/game_files/MissionPlayer_Editor.lua", "pp_editor/editor_files/MissionPlayer_Editor.lua")
+		os.rename("pp_editor/game_files/editorTxtGenerator.lua", "pp_editor/editor_files/editorTxtGenerator.lua")
+		os.rename("pp_editor/game_files/LuaRules/Gadgets/mission_runner.lua", "pp_editor/editor_files/LuaRules/Gadgets/mission_runner.lua")
+		os.rename("pp_editor/game_files/LuaUI/Widgets/pp_cameraAuto.lua", "pp_editor/editor_files/LuaUI/Widgets/pp_cameraAuto.lua")
+		os.rename("pp_editor/game_files/LuaUI/Widgets/pp_display_message.lua", "pp_editor/editor_files/LuaUI/Widgets/pp_display_message.lua")
+		os.rename("pp_editor/game_files/LuaUI/Widgets/pp_gui_rooms.lua", "pp_editor/editor_files/LuaUI/Widgets/pp_gui_rooms.lua")
+		os.rename("pp_editor/game_files/LuaUI/Widgets/pp_mission_gui.lua", "pp_editor/editor_files/LuaUI/Widgets/pp_mission_gui.lua")
+		os.rename("pp_editor/game_files/LuaUI/Widgets/pp_mission_messenger.lua", "pp_editor/editor_files/LuaUI/Widgets/pp_mission_messenger.lua")
+		-- Compress Archive
 		VFS.CompressFolder("pp_editor/editor_files")
 		os.rename("pp_editor/editor_files.sdz", "games/Prog & Play Level Editor for "..game..".sdz")
+		-- Move game files
+		os.rename("pp_editor/editor_files/MissionPlayer_Editor.lua", "pp_editor/game_files/MissionPlayer_Editor.lua")
+		os.rename("pp_editor/editor_files/editorTxtGenerator.lua", "pp_editor/game_files/editorTxtGenerator.lua")
+		os.rename("pp_editor/editor_files/LuaRules/Gadgets/mission_runner.lua", "pp_editor/game_files/LuaRules/Gadgets/mission_runner.lua")
+		os.rename("pp_editor/editor_files/LuaUI/Widgets/pp_cameraAuto.lua", "pp_editor/game_files/LuaUI/Widgets/pp_cameraAuto.lua")
+		os.rename("pp_editor/editor_files/LuaUI/Widgets/pp_display_message.lua", "pp_editor/game_files/LuaUI/Widgets/pp_display_message.lua")
+		os.rename("pp_editor/editor_files/LuaUI/Widgets/pp_gui_rooms.lua", "pp_editor/game_files/LuaUI/Widgets/pp_gui_rooms.lua")
+		os.rename("pp_editor/editor_files/LuaUI/Widgets/pp_mission_gui.lua", "pp_editor/game_files/LuaUI/Widgets/pp_mission_gui.lua")
+		os.rename("pp_editor/editor_files/LuaUI/Widgets/pp_mission_messenger.lua", "pp_editor/game_files/LuaUI/Widgets/pp_mission_messenger.lua")
 	end
 	local operations = {
 		["MODOPTIONS"] = {
