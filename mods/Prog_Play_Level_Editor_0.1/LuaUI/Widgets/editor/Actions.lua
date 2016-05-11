@@ -962,6 +962,29 @@ actions_list = {
 		}
 	},
 	{
+		type = "changeVariableRandom",
+		filter = "Variable",
+		typeText = "Change the value of a variable randomly",
+		text = "Set <Variable> to a random number between <Min> and <Max>.",
+		attributes = {
+			{
+				text = "<Variable>",
+				type = "numberVariable",
+				id = "variable"
+			},
+			{
+				text = "<Min>",
+				type = "number",
+				id = "min"
+			},
+			{
+				text = "<Max>",
+				type = "number",
+				id = "max"
+			}
+		}
+	},
+	{
 		type = "setBooleanVariable",
 		filter = "Variable",
 		typeText = "Set boolean variable",
