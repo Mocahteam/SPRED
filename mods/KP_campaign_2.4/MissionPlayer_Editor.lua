@@ -37,6 +37,27 @@ local globalIndexOfCreatedUnits=0
 
 -------------------------------------
 -- Compare numerical values, a verbal "mode" being given 
+-- @return nil or list
+-------------------------------------
+local function intersection(list1,list2)
+  local inters={}
+  if list1==nil then return nil end
+  if list2==nil then return nil end
+  for i,el in pairs(list1)do
+    for i2,el2 in pairs(list2)do
+      if(el==el2)then
+        table.insert(inters,el)
+        break
+      end
+    end
+  end
+  Spring.Echo("resuilt of interset")
+  Spring.Echo(json.encode(inters))
+  return inters
+end
+
+-------------------------------------
+-- Compare numerical values, a verbal "mode" being given 
 -- @return boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
@@ -343,6 +364,13 @@ end
 -------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   --Spring.Echo(json.encode(condition))
+  
+  -- special case here, processed in a sadly ugly manner : unitTYpe t of Team X must be an intersection
+  if(conditionParams.unitType~=nil)and(conditionParams.team~=nil)then
+    local l1=groupOfUnits["team_"..conditionParams.team]
+    local l2=groupOfUnits["type_"..conditionParams.unitType]
+    return intersection(l1,l2) 
+  end
   for idx,tableT in ipairs(tableLookup)do
     local conditionTerm=tableT[1]
     local prefixTerm=tableT[2]   
@@ -371,7 +399,6 @@ local function createUnit(unitTable)
     local springUnit=armySpring[unitTable.id]    
     armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
     Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
-    
     armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
     armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
     armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
@@ -1332,6 +1359,29 @@ function gadget:RecvLuaMsg(msg, player)
     end
     attackedUnits[attackedUnit]=damageTable
     --Spring.Echo(json.encode(attackedUnits))
+    
+  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
+    local jsonfile=string.sub(msg,13,-1)
+    Spring.Echo(jsonfile)
+    local creationTable=json.decode(jsonfile)
+    -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
+    --local attackedUnit=damageTable.attackedUnit
+    local teamIndex="team_"..tostring(creationTable.unitTeam)
+    local typeIndex="type_"..tostring(UnitDefs[creationTable.unitDefID].name)
+    globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
+    local realId="createdUnit"..tostring(globalIndexOfCreatedUnits)
+    armySpring[realId]=creationTable.unitID 
+    Spring.Echo("this unit is created")
+    Spring.Echo(creationTable.unitID)
+    if(groupOfUnits[teamIndex]==nil) then
+      groupOfUnits[teamIndex]={}
+    end
+    table.insert(groupOfUnits[teamIndex],realId)
+    -- update group units (type related)
+    if(groupOfUnits[typeIndex]==nil) then
+      groupOfUnits[typeIndex]={}
+    end
+    table.insert(groupOfUnits[typeIndex],realId) 
   end
 end
 

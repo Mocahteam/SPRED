@@ -154,10 +154,20 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
   if(unitID~=nil)then
     local damageTable={attackedUnit=unitID,damage=damage, attacker=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
     Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
-    Spring.Echo("damage sent")
+    --Spring.Echo("damage sent")
   end
 end
-    
+
+--function gadget:UnitFromFactory(unitID, unitDefID, unitTeam, factID, factDefID, userOrders) 
+--    local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+--    Spring.SendLuaRulesMsg("unitCreation"..json.encode(damageTable))
+--    Spring.Echo("unitCreatedFromFactory")
+--end
+
+function gadget:UnitFinished(unitID, unitDefID, unitTeam)
+    local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+    Spring.SendLuaRulesMsg("unitCreation"..json.encode(damageTable))
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 
@@ -206,7 +216,7 @@ function gadget:RecvFromSynced(...)
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
   elseif arg1=="centerCamera" then
-    Spring.Echo("I tried Bonnie, I tried")
+    --Spring.Echo("I tried Bonnie, I tried")
     local state = Spring.GetCameraState()
     local pos=json.decode(arg2)
     state.px=pos.x
@@ -218,7 +228,7 @@ function gadget:RecvFromSynced(...)
     Spring.Echo("try to on unit")
     Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
   elseif arg1 == "displayMessageOnPosition" then
-    Spring.Echo("try to on pos")
+    --Spring.Echo("try to on pos")
     local p=json.decode(arg2)
     Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time)    
   end
