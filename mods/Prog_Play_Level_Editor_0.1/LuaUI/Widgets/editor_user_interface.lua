@@ -19,8 +19,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Ajouter le nom du mod dans le .editor
--- Passer l'éditeur sur la dernière version de Spring
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
 -- Personnalisation de l'éditeur (raccourcis etc.)
@@ -2958,7 +2956,7 @@ function configureEvent() -- Show the event configuration window
 			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
 			-- Trigger
 			customTriggerEditBox:SetText(e.trigger)
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT..e.trigger)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
 			-- Action sequence
 			removeElements(actionSequenceScrollPanel, actionSequenceItems, true)
 			local act = events[currentEvent].actions
