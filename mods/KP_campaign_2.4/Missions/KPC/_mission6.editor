@@ -3,10 +3,10 @@
 		{
 			"type":"Rectangle",
 			"blue":0.80613851547241,
-			"x2":352,
-			"z1":672,
-			"z2":888,
-			"x1":144,
+			"x2":336,
+			"z1":680,
+			"z2":856,
+			"x1":160,
 			"marker":true,
 			"name":"point de ralliement de l'assembleur (250-750)",
 			"green":0.55862176418304,
@@ -51,7 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 6\\n \\n \\nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256 ; 811).\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 6\\n \\n \\nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256-811).\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission6",
 		"widgets":[
@@ -248,11 +248,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"very long,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\tlong briefing aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t bbbbbbbbbbbbbbbbbb (43,
-		\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t38)",
+		"briefing":"Mission 6\n \n \nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256-811).\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission6",
 		"autoHeal":"disabled"
@@ -261,38 +257,47 @@
 		{
 			"actions":[
 				{
-					"id":0,
-					"type":"messageGlobal",
-					"name":"Action0",
+					"id":7,
+					"type":"win",
+					"name":"Action7",
 					"params":{
-						"message":[
-							"WIN !" 
-						]
+						"team":0,
+						"outputState":""
 					}
 				} 
 			],
 			"name":"WellPlaced",
 			"trigger":"",
-			"actionTotal":1,
+			"id":0,
 			"conditions":[
 				{
 					"id":3,
 					"type":"unit_zone",
 					"name":"Condition3",
 					"params":{
-						"unit":2616,
-						"zone":"point de ralliement de l'assembleur (250-750)"
+						"unit":6975,
+						"zone":1
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"id":0
+			"actionTotal":1
 		},
 		{
-			"repetition":false,
-			"actionTotal":1,
+			"actions":[
+				{
+					"id":1,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
+			"trigger":"",
 			"name":"teamOIsDead",
-			"conditionTotal":1,
+			"repetition":false,
 			"id":1,
 			"conditions":[
 				{
@@ -307,22 +312,124 @@
 					}
 				} 
 			],
+			"conditionTotal":1,
+			"actionTotal":1
+		},
+		{
 			"actions":[
 				{
-					"id":1,
+					"id":6,
+					"type":"messageUnit",
+					"name":"Action6",
+					"params":{
+						"message":[
+							"Personne ... ?" 
+						],
+						"time":3,
+						"unit":6975
+					}
+				},
+				{
+					"id":3,
+					"type":"group_orderTarget",
+					"name":"Action3",
+					"params":{
+						"group":"ennemyBits",
+						"command":20,
+						"target":6975
+					}
+				},
+				{
+					"id":4,
+					"type":"wait",
+					"name":"Action4",
+					"params":{
+						"time":5
+					}
+				},
+				{
+					"id":5,
 					"type":"lose",
-					"name":"endbydead",
+					"name":"Action5",
 					"params":{
 						"team":0,
-						"outputState":"endByDead_5"
+						"outputState":"notWP"
 					}
 				} 
 			],
-			"trigger":""
-		}  
+			"trigger":"not placed and Condition7 and not Condition8",
+			"name":"NotWellPlaced",
+			"repetition":false,
+			"id":2,
+			"conditions":[
+				{
+					"id":5,
+					"type":"unit_zone",
+					"name":"placed",
+					"params":{
+						"zone":1,
+						"unit":6975
+					}
+				},
+				{
+					"id":7,
+					"type":"booleanVariable",
+					"name":"Condition7",
+					"params":{
+						"variable":"AssemblerHasMoved"
+					}
+				},
+				{
+					"id":8,
+					"type":"unit_order",
+					"name":"Condition8",
+					"params":{
+						"command":10,
+						"unit":6975
+					}
+				} 
+			],
+			"conditionTotal":3,
+			"actionTotal":4
+		},
+		{
+			"actions":[
+				{
+					"id":2,
+					"type":"setBooleanVariable",
+					"name":"Action2",
+					"params":{
+						"boolean":"true",
+						"variable":"AssemblerHasMoved"
+					}
+				} 
+			],
+			"trigger":"",
+			"name":"AssemblerHasMoved",
+			"repetition":false,
+			"id":3,
+			"conditions":[
+				{
+					"id":6,
+					"type":"unit_order",
+					"name":"Condition6",
+					"params":{
+						"command":10,
+						"unit":6975
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"actionTotal":1
+		} 
 	],
 	"variables":[
-		 
+		{
+			"id":0,
+			"type":"boolean",
+			"name":"AssemblerHasMoved",
+			"initValue":"false"
+		} 
 	],
 	"teams":{
 		"1":{
@@ -336,14 +443,14 @@
 			"control":"computer"
 		},
 		"2":{
-			"enabled":false,
+			"enabled":true,
 			"color":{
 				"green":0,
 				"blue":0,
 				"red":1
 			},
 			"name":"Team 2",
-			"control":"player"
+			"control":"computer"
 		},
 		"3":{
 			"enabled":false,
@@ -427,16 +534,23 @@
 		}
 	},
 	"groups":[
-		 
+		{
+			"name":"ennemyBits",
+			"units":[
+				6543,
+				10978,
+				11984 
+			]
+		} 
 	],
 	"units":[
 		{
 			"type":"assembler",
-			"id":2616,
+			"id":6975,
 			"position":{
-				"y":115.99993133545,
-				"x":104,
-				"z":202
+				"y":116,
+				"x":158,
+				"z":271
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -445,9 +559,9 @@
 		},
 		{
 			"type":"byte",
-			"id":530,
+			"id":12927,
 			"position":{
-				"y":129.99987792969,
+				"y":130,
 				"x":112,
 				"z":1094
 			},
@@ -458,9 +572,9 @@
 		},
 		{
 			"type":"byte",
-			"id":2305,
+			"id":15142,
 			"position":{
-				"y":129.99987792969,
+				"y":130,
 				"x":172,
 				"z":980
 			},
@@ -471,9 +585,9 @@
 		},
 		{
 			"type":"bit",
-			"id":6490,
+			"id":16352,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":384,
 				"z":990
 			},
@@ -484,9 +598,9 @@
 		},
 		{
 			"type":"bit",
-			"id":1010,
+			"id":14825,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":452,
 				"z":1056
 			},
@@ -497,9 +611,9 @@
 		},
 		{
 			"type":"bit",
-			"id":5019,
+			"id":1553,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":379,
 				"z":1071
 			},
@@ -510,9 +624,9 @@
 		},
 		{
 			"type":"bit",
-			"id":15199,
+			"id":4128,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":335,
 				"z":1012
 			},
@@ -523,9 +637,9 @@
 		},
 		{
 			"type":"bit",
-			"id":3844,
+			"id":13865,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":359,
 				"z":949
 			},
@@ -536,9 +650,9 @@
 		},
 		{
 			"type":"bit",
-			"id":3083,
+			"id":2741,
 			"position":{
-				"y":115.99993133545,
+				"y":116,
 				"x":429,
 				"z":997
 			},
@@ -549,9 +663,9 @@
 		},
 		{
 			"type":"byte",
-			"id":14952,
+			"id":2630,
 			"position":{
-				"y":129.99987792969,
+				"y":130,
 				"x":255,
 				"z":1084
 			},
@@ -559,6 +673,45 @@
 			"autoHeal":"global",
 			"hp":40,
 			"team":0
+		},
+		{
+			"type":"bit",
+			"id":10978,
+			"position":{
+				"y":116,
+				"x":1071,
+				"z":233
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":6543,
+			"position":{
+				"y":116,
+				"x":1069,
+				"z":286
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":11984,
+			"position":{
+				"y":116,
+				"x":1068,
+				"z":338
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
 		} 
 	]
 }
