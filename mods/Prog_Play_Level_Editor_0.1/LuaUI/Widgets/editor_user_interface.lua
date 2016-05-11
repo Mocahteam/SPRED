@@ -33,6 +33,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
+local testLevelButton
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
 local UIelements = {}
@@ -559,6 +560,9 @@ function mapSettingsFrame()
 	widgetsButton.state.chosen = false -- Reset the state of this button
 	widgetsButton:InvalidateSelf()
 end
+function testLevel()
+
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -629,6 +633,8 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
 	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
 	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
+	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
 function initWindows()
 	initFileWindow()
