@@ -1,4 +1,5 @@
 VFS.Include("LuaUI/Widgets/editor/TextColors.lua")
+local lang = Spring.GetModOptions()["language"]
 
 actions_list = {
 	{
