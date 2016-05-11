@@ -2864,6 +2864,9 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				for i in ipairs(msgs) do
 					msgs[i] = string.gsub(msgs[i], "^%s+", "")
 					msgs[i] = string.gsub(msgs[i], "%s+$", "")
+					if attr.type == "parameters" then
+						msgs[i] = tonumber(msgs[i])
+					end
 				end
 				a.params[attr.id] = msgs
 			end
