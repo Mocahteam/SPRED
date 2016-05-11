@@ -10,9 +10,9 @@
 			"marker":false,
 			"name":"spawn",
 			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"id":1,
 			"red":0.51526319980621
 		},
 		{
@@ -25,9 +25,9 @@
 			"marker":false,
 			"name":"randomMove",
 			"green":0.55862176418304,
-			"id":2,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"id":2,
 			"red":0.51526319980621
 		} 
 	],
@@ -277,15 +277,15 @@
 					"type":"unit_orderTarget",
 					"name":"Action6",
 					"params":{
-						"target":12265,
+						"target":14039,
 						"command":20,
-						"unit":5556
+						"unit":1871
 					}
 				} 
 			],
 			"name":"firstAgression",
 			"trigger":"",
-			"actionTotal":1,
+			"id":3,
 			"conditions":[
 				{
 					"id":5,
@@ -297,7 +297,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":3
+			"actionTotal":1
 		},
 		{
 			"actions":[
@@ -318,14 +318,14 @@
 					"name":"Action9",
 					"params":{
 						"command":20,
-						"target":12265,
+						"target":14039,
 						"unit":"Action7"
 					}
 				} 
 			],
 			"name":"Moreagressions",
 			"trigger":"",
-			"actionTotal":2,
+			"id":4,
 			"conditions":[
 				{
 					"id":6,
@@ -351,7 +351,7 @@
 				} 
 			],
 			"conditionTotal":2,
-			"id":4
+			"actionTotal":2
 		},
 		{
 			"actions":[
@@ -364,7 +364,7 @@
 							"Merci !" 
 						],
 						"time":5,
-						"unit":12265
+						"unit":14039
 					}
 				},
 				{
@@ -379,7 +379,7 @@
 			],
 			"name":"Event5",
 			"trigger":"",
-			"actionTotal":2,
+			"id":5,
 			"conditions":[
 				{
 					"id":7,
@@ -394,7 +394,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":5
+			"actionTotal":2
 		},
 		{
 			"actions":[
@@ -410,7 +410,7 @@
 			],
 			"name":"teamOIsDead",
 			"trigger":"",
-			"actionTotal":1,
+			"id":6,
 			"conditions":[
 				{
 					"id":10,
@@ -425,22 +425,22 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":6
+			"actionTotal":1
 		},
 		{
 			"id":7,
 			"conditionTotal":2,
-			"repetitionTime":"4",
-			"name":"behaviorUnderattack",
 			"repetition":true,
+			"name":"behaviorUnderattack",
 			"trigger":"Condition11 and not Condition13",
+			"repetitionTime":"4",
 			"conditions":[
 				{
 					"id":11,
 					"type":"unit_underAttack",
 					"name":"Condition11",
 					"params":{
-						"unit":12265
+						"unit":14039
 					}
 				},
 				{
@@ -449,7 +449,7 @@
 					"name":"Condition13",
 					"params":{
 						"command":10,
-						"unit":12265
+						"unit":14039
 					}
 				} 
 			],
@@ -468,10 +468,10 @@
 							"Je ne tiendrai\npas longtemps",
 							"Mon energie diminue",
 							"Il m'en met\nplein la gueule",
-							"Noooonnn",
+							"Noooonnn" 
 						],
 						"time":3,
-						"unit":12265
+						"unit":14039
 					}
 				},
 				{
@@ -481,7 +481,7 @@
 					"params":{
 						"command":10,
 						"position":2,
-						"unit":12265
+						"unit":14039
 					}
 				},
 				{
@@ -502,17 +502,49 @@
 							"C'est presque trop facile !",
 							"Tu peux courir ; mais m'échapper tu ne peux",
 							"Quelle aubaine !",
-							"C'est bientôt la fin cher ami"
-							"Je suis un tueur né",	
-							"Je me délecte de ton désespoir",	
-							"Où est ton berger petite brebis égarée ?",									
+							"C'est bientôt la fin cher ami",
+							"Je suis un tueur né",
+							"Je me délecte de ton désespoir",
+							"Où est ton berger petite brebis égarée ?" 
 						],
 						"time":2,
-						"unit":5556
+						"unit":1871
 					}
 				} 
 			],
 			"actionTotal":4
+		},
+		{
+			"repetition":false,
+			"actionTotal":1,
+			"name":"noAttack",
+			"conditionTotal":1,
+			"id":8,
+			"conditions":[
+				{
+					"id":15,
+					"type":"start",
+					"name":"Condition15",
+					"params":[
+						 
+					]
+				} 
+			],
+			"actions":[
+				{
+					"id":16,
+					"type":"unit_order",
+					"name":"Action16",
+					"params":{
+						"command":45,
+						"unit":5220,
+						"parameters":[
+							0
+						]
+					}
+				} 
+			],
+			"trigger":""
 		} 
 	],
 	"variables":[
@@ -630,34 +662,8 @@
 	],
 	"units":[
 		{
-			"type":"byte",
-			"id":12265,
-			"position":{
-				"y":130,
-				"x":1024,
-				"z":1816
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":1
-		},
-		{
 			"type":"bit",
-			"id":4373,
-			"position":{
-				"y":116,
-				"x":1034,
-				"z":1942
-			},
-			"orientation":-2.2472820281982,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":5556,
+			"id":1871,
 			"position":{
 				"y":270.39453125,
 				"x":1032,
@@ -667,6 +673,32 @@
 			"autoHeal":"global",
 			"hp":40,
 			"team":2
+		},
+		{
+			"type":"bit",
+			"id":5220,
+			"position":{
+				"y":116,
+				"x":1034,
+				"z":1942
+			},
+			"orientation":-2.2503497600555,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":14039,
+			"position":{
+				"y":130,
+				"x":1024,
+				"z":1816
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
 		} 
 	]
 }

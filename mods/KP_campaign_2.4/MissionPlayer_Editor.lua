@@ -442,7 +442,7 @@ local function ApplyGroupableAction(unit,act)
     elseif(act.attribute=="group")then
       table.insert(groupOfUnits["group_"..act.params.group],unit)
     elseif(act.attribute=="order")then
-      Spring.GiveOrderToUnit(unit, act.params.command, {}, {})
+      Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.attribute=="orderPosition")then
       local posFound=extractPosition(act.params.position)
       Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
