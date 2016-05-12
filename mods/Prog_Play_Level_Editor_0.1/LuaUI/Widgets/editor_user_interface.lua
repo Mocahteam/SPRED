@@ -33,6 +33,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
+local testLevelButton
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
 local UIelements = {}
@@ -559,6 +560,9 @@ function mapSettingsFrame()
 	widgetsButton.state.chosen = false -- Reset the state of this button
 	widgetsButton:InvalidateSelf()
 end
+function testLevel()
+
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -629,6 +633,8 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
 	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
 	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
+	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
 function initWindows()
 	initFileWindow()
@@ -2694,7 +2700,23 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				end
 			}
 		elseif attr.type == "group" then
-			comboBox.OnSelect = { function() a.params[attr.id] = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") end }
+			comboBox.OnSelect = {
+				function()
+					if not string.match(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP) then
+						a.params[attr.id] = comboBox.items[comboBox.selected]
+						return
+					end
+					local actionName = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "")
+					for i, ev in ipairs(events) do
+						for ii, act in ipairs(ev.actions) do
+							if act.name == actionName then
+								a.params[attr.id] = "id"..act.id
+								return
+							end
+						end
+					end
+				end
+			}
 		elseif attr.type == "command" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 		elseif attr.type == "zone" then
@@ -2720,10 +2742,33 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					end
 				end
 			elseif attr.type == "group" then
+				local found = false
 				for i, item in ipairs(comboBox.items) do
-					if a.params[attr.id] == item or a.params[attr.id] == string.gsub(item, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") then
+					if a.params[attr.id] == item then
 						comboBox:Select(i)
+						found = true
 						break
+					end
+				end
+				if not found then
+					local param = string.gsub(a.params[attr.id], "id", "")
+					param = tonumber(param)
+					local correspondingAction
+					for i, ev in ipairs(events) do
+						for ii, act in ipairs(ev.actions) do
+							if act.id == param then
+								correspondingAction = act.name
+								break
+							end
+						end
+					end
+					if correspondingAction then
+						for i, item in ipairs(comboBox.items) do
+							if correspondingAction == string.gsub(item, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") then
+								comboBox:Select(i)
+								break
+							end
+						end
 					end
 				end
 			elseif attr.type == "command" then
@@ -2799,15 +2844,26 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		if a.params[attr.id] then
 			local param = a.params[attr.id]
 			if type(param) == "string" then
-				unitLabel.font.color = {1, 1, 1, 1}
-				unitLabel:SetCaption(param)
+				param = string.gsub(param, "id", "")
+				param = tonumber(param)
+				for i, ev in ipairs(events) do
+					for ii, act in ipairs(ev.actions) do
+						if act.id == param then
+							unitLabel.font.color = {1, 1, 1, 1}
+							unitLabel:SetCaption(act.name)
+							break
+						end
+					end
+				end
 			else
 				local u = param
 				local uDefID = Spring.GetUnitDefID(u)
-				local name = UnitDefs[uDefID].humanName
-				local team = Spring.GetUnitTeam(u)
-				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-				unitLabel:SetCaption(name.." ("..tostring(u)..")")
+				if uDefID then
+					local name = UnitDefs[uDefID].humanName
+					local team = Spring.GetUnitTeam(u)
+					unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+					unitLabel:SetCaption(name.." ("..tostring(u)..")")
+				end
 			end
 		end
 		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
@@ -3377,7 +3433,7 @@ function showCreatedUnitsWindow()
 						ca = events[currentEvent].conditions[currentCondition]
 					end
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					ca.params[changedParam] = a.name
+					ca.params[changedParam] = "id"..a.id
 					Screen0:RemoveChild(selectCreatedUnitsWindow)
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
