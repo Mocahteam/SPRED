@@ -17,12 +17,14 @@ local groupOfUnits={}--table to store group of units externalIdGroups-> list of 
 local armyInformations={}--table to store information on units externalId->Informations
 local messages={}--associative array messageId->message type
 local conditions={}--associative array idCond->condition
+local conditionsShortNamesToId={}--associative array idCond->condition
 local actions={}--associative array idActions->actions
 local events={}--associative array idCond->event
 local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 local zones={}
 local killByTeams={}
 local attackedUnits={}
+local recordCreatedUnits=false
 
 local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 local frameIndex=0 -- related to refresh
@@ -347,7 +349,7 @@ local function isTriggerable(event)
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
-    local valueCond=conditions[cond]
+    local valueCond=conditions[cond..tostring(event.id)]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
   -- third step : turn the string in return statement
@@ -409,7 +411,7 @@ local function createUnit(unitTable)
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
     
     -- update group units (team related)
-    --[[
+
     local teamIndex="team_"..tostring(unitTable.team)
     local typeIndex="type_"..tostring(unitTable.type)
     if(groupOfUnits[teamIndex]==nil) then
@@ -421,7 +423,7 @@ local function createUnit(unitTable)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],unitTable.id)
-    --]]
+
 end
 
 -------------------------------------
@@ -511,7 +513,7 @@ local function createUnitAtPosition(act,position)
     table.insert(groupOfUnits[gpIndex],realId)
     
     -- Nasty copy pasta from the other function to create unit
-    --[[
+
     local teamIndex="team_"..tostring(act.params.team)
     local typeIndex="type_"..tostring(act.params.unitType)
     if(groupOfUnits[teamIndex]==nil) then
@@ -523,7 +525,7 @@ local function createUnitAtPosition(act,position)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],realId)
-    --]]
+
     armyInformations[realId]={}
     armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
     armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
@@ -832,7 +834,8 @@ local function processEvents(frameNumber)
             newevent.listOfInvolvedConditions={}
             table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
             newevent.conditions={}
-            newevent.conditions[a.params.condition]=conditions[a.params.condition]
+            newevent.id=tostring(frameNumber)
+            newevent.conditions[a.params.condition..newevent.id]=conditions[a.params.condition..tostring(event.id)]
             --Spring.Echo("this event is created")
             --Spring.Echo(json.encode(newevent))                      
           else
@@ -884,7 +887,10 @@ end
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
   if(c.attribute=="dead") then --untested yet
+    Spring.Echo("is it dead ?")
+    Spring.Echo(externalUnitId)
     local alive=Spring.ValidUnitID(internalUnitId)
+    Spring.Echo(alive)
     return not(alive)
   elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
@@ -1220,8 +1226,8 @@ if(mission.events~=nil)then
        local currentCond=currentEvent.conditions[j]
        local id=currentCond.name
        table.insert(events[idEvent].listOfInvolvedConditions,id)
-       conditions[id]=currentEvent.conditions[j]
-       conditions[id]["currentlyValid"]=false
+       conditions[id..tostring(events[idEvent].id)]=currentEvent.conditions[j]
+       conditions[id..tostring(events[idEvent].id)]["currentlyValid"]=false
        local type=currentCond.type
        local cond_object="other"
        local attribute=type
@@ -1240,8 +1246,8 @@ if(mission.events~=nil)then
         cond_object="group"
         attribute=string.sub(type, 6, -1)
       end
-      conditions[id]["object"]=cond_object
-      conditions[id]["attribute"]=attribute
+      conditions[id..tostring(events[idEvent].id)]["object"]=cond_object
+      conditions[id..tostring(events[idEvent].id)]["attribute"]=attribute
     end 
   end
 end
@@ -1290,6 +1296,7 @@ local function Update (frameNumber)
   UpdateGameState(frameNumber)
   actionStack=updateStack(refreshPeriod)
   applyCurrentActions() 
+  if(frameNumber>10)then recordCreatedUnits=true end
 
   if(success==1) then
     return success,outputstate
@@ -1353,6 +1360,7 @@ function gadget:RecvLuaMsg(msg, player)
       killByTeams[attackerTeam]={} 
     end
     table.insert(killByTeams[attackerTeam],killTable)
+    Spring.Echo(json.encode(killByTeams))
     --Spring.Echo(json.encode(killByTeams))
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,6)=="damage")) then
     -- comes from mission runner unit destroyed
@@ -1370,27 +1378,35 @@ function gadget:RecvLuaMsg(msg, player)
     --Spring.Echo(json.encode(attackedUnits))
     
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
-    local jsonfile=string.sub(msg,13,-1)
-    Spring.Echo(jsonfile)
-    local creationTable=json.decode(jsonfile)
-    -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
-    --local attackedUnit=damageTable.attackedUnit
-    local teamIndex="team_"..tostring(creationTable.unitTeam)
-    local typeIndex="type_"..tostring(UnitDefs[creationTable.unitDefID].name)
-    globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
-    local realId="createdUnit"..tostring(globalIndexOfCreatedUnits)
-    armySpring[realId]=creationTable.unitID 
-    Spring.Echo("this unit is created")
-    Spring.Echo(creationTable.unitID)
-    if(groupOfUnits[teamIndex]==nil) then
-      groupOfUnits[teamIndex]={}
-    end
-    table.insert(groupOfUnits[teamIndex],realId)
-    -- update group units (type related)
-    if(groupOfUnits[typeIndex]==nil) then
-      groupOfUnits[typeIndex]={}
-    end
-    table.insert(groupOfUnits[typeIndex],realId) 
+    if(recordCreatedUnits)then -- this avoid to store starting bases in the tables
+      local jsonfile=string.sub(msg,13,-1)
+      Spring.Echo(jsonfile)
+      local creationTable=json.decode(jsonfile)
+      -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
+      --local attackedUnit=damageTable.attackedUnit
+      local teamIndex="team_"..tostring(creationTable.unitTeam)
+      local typeIndex="type_"..tostring(UnitDefs[creationTable.unitDefID].name)
+      globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
+      local realId="createdUnit"..tostring(globalIndexOfCreatedUnits)
+      armySpring[realId]=creationTable.unitID 
+      Spring.Echo("this unit is created")
+      Spring.Echo(creationTable.unitID)
+      if(groupOfUnits[teamIndex]==nil) then
+        groupOfUnits[teamIndex]={}
+      end
+      local isAlreadyStored=false
+      for i = 1,table.getn(groupOfUnits[teamIndex]) do
+        if(realId==groupOfUnits[teamIndex][i]) then isAlreadyStored=true end
+      end
+      if(not isAlreadyStored)then   
+        table.insert(groupOfUnits[teamIndex],realId)
+      end
+      -- update group units (type related)
+      if(groupOfUnits[typeIndex]==nil) then
+        groupOfUnits[typeIndex]={}
+      end
+      table.insert(groupOfUnits[typeIndex],realId)
+    end 
   end
 end
 
