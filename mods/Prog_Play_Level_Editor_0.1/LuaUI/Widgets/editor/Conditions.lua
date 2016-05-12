@@ -549,19 +549,19 @@ if lang == "fr" then
 				}
 			}
 		},
-	{
-		type = "script",
-		filter = "Script",
-		typeText = "Evaluer booléen personnalisé",
-		text = "Evaluer un booléen personnalisé retourné par le script LUA <Script>.",
-		attributes = {
-			{
-				text = "<Script>",
-				type = "text",
-				id = "script"
+		{
+			type = "script",
+			filter = "Script",
+			typeText = "Evaluer booléen personnalisé",
+			text = "Evaluer un booléen personnalisé retourné par le script LUA <Script>.",
+			attributes = {
+				{
+					text = "<Script>",
+					type = "text",
+					id = "script"
+				}
 			}
 		}
-	}
 	}
 else
 	conditions_list = {

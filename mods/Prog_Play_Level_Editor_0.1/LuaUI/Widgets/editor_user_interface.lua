@@ -485,80 +485,104 @@ function clearTemporaryWindows()
 	Screen0:RemoveChild(unitAttributesWindow)
 end
 function fileFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
-	Screen0:AddChild(windows["fileWindow"])
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
+		Screen0:AddChild(windows["fileWindow"])
+	end
 end
 function unitFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
-	unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
-	teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
-	Screen0:AddChild(windows["unitWindow"])
-	Screen0:AddChild(windows["unitListWindow"])
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.UNIT)
+		unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+		teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
+		Screen0:AddChild(windows["unitWindow"])
+		Screen0:AddChild(windows["unitListWindow"])
+	end
 end
 function zoneFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
-	zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
-	Screen0:AddChild(windows["zoneWindow"])
-	zonesAttributesButton.state.chosen = false -- Reset state of this button
-	zonesAttributesButton:InvalidateSelf()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
+		zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
+		Screen0:AddChild(windows["zoneWindow"])
+		zonesAttributesButton.state.chosen = false -- Reset state of this button
+		zonesAttributesButton:InvalidateSelf()
+	end
 end
 function forcesFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
-	Screen0:AddChild(windows["forceWindow"])
-	if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
-		teamConfig()
-	elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
-		allyTeam()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
+		Screen0:AddChild(windows["forceWindow"])
+		if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+			teamConfig()
+		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
+			allyTeam()
+		end
 	end
 end
 function triggerFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
-	Screen0:AddChild(windows["triggerWindow"])
-	editVariablesButton.state.chosen = false -- Reset state of this button
-	editVariablesButton:InvalidateSelf()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.TRIGGER)
+		Screen0:AddChild(windows["triggerWindow"])
+		editVariablesButton.state.chosen = false -- Reset state of this button
+		editVariablesButton:InvalidateSelf()
+	end
 end
 function mapSettingsFrame()
-	clearUI()
-	globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
-	Screen0:AddChild(windows["mapSettingsWindow"])
-	-- Set parameters to UI elements
-	mapNameEditBox:SetText(mapDescription.mapName)
-	mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
-	if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
-		cameraAutoButton.state.chosen = true
-		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	elseif cameraAutoState == "disabled" and cameraAutoButton.state.chosen then
-		cameraAutoButton.state.chosen = false
-		cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
+		Screen0:AddChild(windows["mapSettingsWindow"])
+		-- Set parameters to UI elements
+		mapNameEditBox:SetText(mapDescription.mapName)
+		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
+		if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
+			cameraAutoButton.state.chosen = true
+			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		elseif cameraAutoState == "disabled" and cameraAutoButton.state.chosen then
+			cameraAutoButton.state.chosen = false
+			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+		end
+		if autoHealState == "enabled" and not autoHealButton.state.chosen then
+			autoHealButton.state.chosen = true
+			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		elseif autoHealState == "disabled" and autoHealButton.state.chosen then
+			autoHealButton.state.chosen = false
+			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+		end
+		if mouseState == "enabled" and not mouseStateButton.state.chosen then
+			mouseStateButton.state.chosen = true
+			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+		elseif mouseState == "disabled" and mouseStateButton.state.chosen then
+			mouseStateButton.state.chosen = false
+			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+		end
+		if minimapState == "enabled" and not minimapButton.state.chosen then
+			minimapButton.state.chosen = true
+			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+		elseif minimapState == "disabled" and minimapButton.state.chosen then
+			minimapButton.state.chosen = false
+			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+		end
+		widgetsButton.state.chosen = false -- Reset the state of this button
+		widgetsButton:InvalidateSelf()
 	end
-	if autoHealState == "enabled" and not autoHealButton.state.chosen then
-		autoHealButton.state.chosen = true
-		autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	elseif autoHealState == "disabled" and autoHealButton.state.chosen then
-		autoHealButton.state.chosen = false
-		autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
-	end
-	if mouseState == "enabled" and not mouseStateButton.state.chosen then
-		mouseStateButton.state.chosen = true
-		mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
-	elseif mouseState == "disabled" and mouseStateButton.state.chosen then
-		mouseStateButton.state.chosen = false
-		mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	end
-	if minimapState == "enabled" and not minimapButton.state.chosen then
-		minimapButton.state.chosen = true
-		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
-	elseif minimapState == "disabled" and minimapButton.state.chosen then
-		minimapButton.state.chosen = false
-		minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
-	end
-	widgetsButton.state.chosen = false -- Reset the state of this button
-	widgetsButton:InvalidateSelf()
 end
 function testLevel()
 
@@ -844,6 +868,8 @@ function initTriggerWindow()
 	
 	-- Event window
 	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	local closeEvent = addButton(windows['eventWindow'], '93%', '0%', '7%', '4%', "X", function() editEvent(currentEvent) end)
+	closeEvent.font.color = { 1, 0, 0, 1 }
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', EDITOR_TRIGGERS_CONDITIONS, 20, "center", nil, "center")
 	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', EDITOR_TRIGGERS_ACTIONS, 20, "center", nil, "center")
@@ -868,6 +894,8 @@ function initTriggerWindow()
 	
 	-- Condition window
 	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	local closeCondition = addButton(windows['conditionWindow'], '93%', '0%', '7%', '4%', "X", function() editCondition(currentCondition) end)
+	closeCondition.font.color = { 1, 0, 0, 1 }
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER, 20, "center", nil, "center")
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
@@ -879,6 +907,8 @@ function initTriggerWindow()
 	
 	-- Action window
 	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	local closeAction = addButton(windows['actionWindow'], '93%', '0%', '7%', '4%', "X", function() editAction(currentAction) end)
+	closeAction.font.color = { 1, 0, 0, 1 }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
 	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Filter", 20, "center", nil, "center")
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
@@ -890,6 +920,8 @@ function initTriggerWindow()
 	
 	-- Configure event window
 	windows['configureEvent'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	local closeConfigure = addButton(windows['configureEvent'], '93%', '0%', '7%', '4%', "X", configureEvent)
+	closeConfigure.font.color = { 1, 0, 0, 1 }
 	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE, 20, "center", nil, "center")
 	-- Trigger
 	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left", nil, "center")
@@ -960,12 +992,16 @@ function initTriggerWindow()
 
 	-- Variables window
 	windows["variablesWindow"] = addWindow(Screen0, '15%', '5%', '60%', '80%')
+	local closeVariables = addButton(windows['variablesWindow'], '97%', '0%', '3%', '4%', "X", showVariablesFrame)
+	closeVariables.font.color = { 1, 0, 0, 1 }
 	addLabel(windows["variablesWindow"], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_VARIABLES, 20, "center", nil, "center")
 	variablesScrollPanel = addScrollPanel(windows["variablesWindow"], '2%', '7%', '96%', '91%')
 	newVariableButton = addButton(variablesScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
 function initMapSettingsWindow()
 	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '25%', '60%', '50%', true)
+	local closeButton = addButton(windows['mapSettingsWindow'], '95%', '0%', '5%', '7%', "X", mapSettingsFrame)
+	closeButton.font.color = { 1, 0, 0, 1 }
 	addLabel(windows['mapSettingsWindow'], '0%', '0%', '100%', '5%', EDITOR_MAPSETTINGS, 20, "center", nil, "center")
 	addLabel(windows['mapSettingsWindow'], '0%', '10%', '10%', '10%', EDITOR_MAPSETTINGS_MAP_NAME, 16, "center", nil, "center")
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
@@ -1199,7 +1235,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	teamComboBox = addComboBox(unitAttributesWindow, '0%', 200, '100%', 30, comboBoxItems)
 	local team = Spring.GetUnitTeam(unitSelection[1])
 	for i, t in ipairs(comboBoxItems) do
-		if t == teamName[t] then
+		if t == teamName[team] then
 			teamComboBox:Select(i)
 			break
 		end
@@ -3974,14 +4010,31 @@ function saveMapFrame()
 		windows["saveWindow"]:Dispose()
 	end
 	local saveName = generateSaveName(mapDescription.mapName)
-	if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
+	if saveName == "Map" then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
-		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM, 20)
-		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
-		addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, saveMap)
-		addButton(windows["saveWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
+		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
+		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
+		addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() mapSettingsFrame() end)
 	else
-		saveMap()
+		local confirmSave = function()
+			if windows["saveWindow"] then
+				Screen0:RemoveChild(windows["saveWindow"])
+				windows["saveWindow"]:Dispose()
+			end
+			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." ("..saveName..".editor)", 20)
+			addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
+		end
+		if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
+			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM.." ("..saveName..".editor)", 20)
+			addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
+			addButton(windows["saveWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, function() saveMap() confirmSave() end)
+			addButton(windows["saveWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
+		else
+			saveMap()
+			confirmSave()
+		end
 	end
 end
 function exportMapFrame()
