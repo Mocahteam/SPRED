@@ -409,6 +409,7 @@ local function createUnit(unitTable)
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
     
     -- update group units (team related)
+    --[[
     local teamIndex="team_"..tostring(unitTable.team)
     local typeIndex="type_"..tostring(unitTable.type)
     if(groupOfUnits[teamIndex]==nil) then
@@ -420,6 +421,7 @@ local function createUnit(unitTable)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],unitTable.id)
+    --]]
 end
 
 -------------------------------------
@@ -509,6 +511,7 @@ local function createUnitAtPosition(act,position)
     table.insert(groupOfUnits[gpIndex],realId)
     
     -- Nasty copy pasta from the other function to create unit
+    --[[
     local teamIndex="team_"..tostring(act.params.team)
     local typeIndex="type_"..tostring(act.params.unitType)
     if(groupOfUnits[teamIndex]==nil) then
@@ -520,6 +523,7 @@ local function createUnitAtPosition(act,position)
       groupOfUnits[typeIndex]={}
     end
     table.insert(groupOfUnits[typeIndex],realId)
+    --]]
     armyInformations[realId]={}
     armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
     armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
@@ -935,7 +939,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       elseif(c.type=="variableVSnumber") then
         local v1=variables[c.params.variable]
         local v2=c.params.number
-        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)    
+        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="variableVSvariable") then
         local v1=variables[c.params.variable1]
         local v2=variables[c.params.variable2]
