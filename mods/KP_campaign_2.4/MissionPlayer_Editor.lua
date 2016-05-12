@@ -629,6 +629,11 @@ local function ApplyNonGroupableAction(act)
       local position=getARandomPositionInZone(act.params.zone)
       createUnitAtPosition(act,position)
     end 
+  elseif(act.type=="changeVariableRandom") then
+    local v=math.random(act.params.min,act.params.max)
+    Spring.Echo("drawn variable")
+    Spring.Echo(v)
+    variables[act.params.variable]=v
   end
 end
 
