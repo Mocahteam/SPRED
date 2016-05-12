@@ -548,7 +548,20 @@ if lang == "fr" then
 					id = "variable"
 				}
 			}
+		},
+	{
+		type = "script",
+		filter = "Script",
+		typeText = "Evaluer booléen personnalisé",
+		text = "Evaluer un booléen personnalisé retourné par le script LUA <Script>.",
+		attributes = {
+			{
+				text = "<Script>",
+				type = "text",
+				id = "script"
+			}
 		}
+	}
 	}
 else
 	conditions_list = {
@@ -1096,6 +1109,19 @@ else
 					type = "booleanVariable",
 					id = "variable"
 				}
+			}
+		}
+	},
+	{
+		type = "script",
+		filter = "Script",
+		typeText = "Evaluate custom boolean",
+		text = "Evaluate custom boolean returned by LUA script <Script>.",
+		attributes = {
+			{
+				text = "<Script>",
+				type = "text",
+				id = "script"
 			}
 		}
 	}

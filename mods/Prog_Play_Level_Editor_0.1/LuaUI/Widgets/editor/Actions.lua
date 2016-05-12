@@ -1001,6 +1001,19 @@ actions_list = {
 				id = "boolean"
 			}
 		}
+	},
+	{
+		type = "script",
+		filter = "Script",
+		typeText = "Execute custom script",
+		text = "Execute custom LUA script <Script>",
+		attributes = {
+			{
+				text = "<Script>",
+				type = "text",
+				id = "script"
+			}
+		}
 	}
 }
 
