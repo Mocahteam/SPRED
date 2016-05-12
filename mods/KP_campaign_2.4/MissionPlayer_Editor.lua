@@ -887,10 +887,10 @@ end
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=armySpring[externalUnitId]
   if(c.attribute=="dead") then --untested yet
-    Spring.Echo("is it dead ?")
-    Spring.Echo(externalUnitId)
+    --Spring.Echo("is it dead ?")
+    --Spring.Echo(externalUnitId)
     local alive=Spring.ValidUnitID(internalUnitId)
-    Spring.Echo(alive)
+    --Spring.Echo(alive)
     return not(alive)
   elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
