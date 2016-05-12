@@ -387,6 +387,21 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		OnClick = { ResetScenario },
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
+	UI.Scenario.IncludeMissions = Chili.Checkbox:New{
+		parent = UI.MainWindow,
+		x = "61%",
+		y = "90%",
+		width = "20%",
+		height = "5%",
+		boxsize = 30,
+		boxalign = "left",
+		checked = false,
+		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		}		
+	}
 	UI.Scenario.ExportGame = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "40%",
@@ -708,6 +723,7 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:RemoveChild(UI.Scenario.ExportGame)
+	UI.MainWindow:RemoveChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
@@ -755,6 +771,7 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:AddChild(UI.Scenario.ExportGame)
+	UI.MainWindow:AddChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
@@ -947,6 +964,10 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
+	if UI.Scenario.IncludeMissions then -- no SetCaption method for checkbox
+		UI.Scenario.IncludeMissions.caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE
+		UI.Scenario.IncludeMissions:InvalidateSelf()
+	end
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
@@ -1028,6 +1049,8 @@ function ComputeInputStates() -- Associative table between input states and outp
 end
 
 function ExportScenario(name, desc) -- Creates a table using the xml-serde formalism and export it as a xml file
+	ScenarioName = name
+	ScenarioDesc = desc
 	local inputStates = ComputeInputStates()
 	-- Base
 	local xmlScenario = {
@@ -1264,9 +1287,22 @@ end
 function ExportGame()
 	local name = generateSaveName(ScenarioName)
 	if not VFS.FileExists("games/"..name..".sdz") then
+		-- Choose levels
+		local levelList = {}
+		if UI.Scenario.IncludeMissions.checked then
+			levelList = LevelListNames
+		else
+			for k, link in pairs(Links) do
+				for kk, input in pairs(link) do
+					if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
+						table.insert(levelList, input)
+					end
+				end
+			end
+		end
 		-- Add levels and scenario
 		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
-		for i, level in ipairs(LevelListNames) do
+		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
 		end
 		-- Compress
@@ -1274,7 +1310,7 @@ function ExportGame()
 		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
 		-- Remove levels and scenario
 		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
-		for i, level in ipairs(LevelListNames) do
+		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
 		-- Show message
@@ -1364,7 +1400,7 @@ function MakeLink() -- If both input and output are selected, proceed linking
 	end
 end
 
-function FadeConfirmationMessage()
+function FadeConfirmationMessage(delta)
 	if UI.Scenario then
 		if UI.Scenario.ConfirmationMessage then
 			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
@@ -1447,7 +1483,7 @@ end
 
 function widget:Update(delta)
 	MakeLink()
-	FadeConfirmationMessage()
+	FadeConfirmationMessage(delta)
 end
 
 function widget:MousePress(mx, my, button)
