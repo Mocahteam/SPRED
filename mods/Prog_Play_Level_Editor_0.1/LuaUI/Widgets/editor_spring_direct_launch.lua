@@ -74,6 +74,15 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		draggable = false,
 		resizable = false
 	}
+	UI.Logo = Chili.Image:New{
+		parent = UI.MainWindow,
+		x = '0%',
+		y = '80%',
+		width = '20%',
+		height = '20%',
+		keepAspect = false,
+		file = "bitmaps/launcher/su.png"
+	}
 	UI.Title = Chili.Label:New{
 		parent = UI.MainWindow,
 		x = '0%',
@@ -708,6 +717,7 @@ end
 
 function ClearUI() -- Remove UI elements from the screen
 	ClearTemporaryUI()
+	UI.MainWindow:RemoveChild(UI.Logo)
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
@@ -744,6 +754,7 @@ end
 
 function MainMenuFrame() -- Shows the main menu
 	ClearUI()
+	UI.MainWindow:AddChild(UI.Logo)
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
 	UI.MainWindow:AddChild(UI.EditScenarioButton)
@@ -939,63 +950,6 @@ function ImportScenarioFrameWarning() -- Shows a warning if trying to load when 
 		UI.Scenario.Warning = window
 	else
 		ImportScenarioFrame()
-	end
-end
-
-function QuitWarning()
-	if NeedToBeSaved then
-		local window = Chili.Window:New{
-			parent = UI.MainWindow,
-			x = '20%',
-			y = '45%',
-			width = '60%',
-			height = '10%',
-			draggable = true,
-			resizable = false
-		}
-		Chili.Label:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '50%',
-			align = "center",
-			valign = "center",
-			caption = LAUNCHER_SCENARIO_WARNING,
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '0%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_YES,
-			OnClick = { Quit },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '50%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_NO,
-			OnClick = { ClearTemporaryUI },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		UI.Scenario.Warning = window
-	else
-		Quit()
 	end
 end
 
@@ -1569,6 +1523,63 @@ function FadeConfirmationMessage(delta)
 				UI.Scenario.ConfirmationMessage = nil
 			end
 		end
+	end
+end
+
+function QuitWarning()
+	if NeedToBeSaved then
+		local window = Chili.Window:New{
+			parent = UI.MainWindow,
+			x = '20%',
+			y = '45%',
+			width = '60%',
+			height = '10%',
+			draggable = true,
+			resizable = false
+		}
+		Chili.Label:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '50%',
+			align = "center",
+			valign = "center",
+			caption = LAUNCHER_SCENARIO_WARNING,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		Chili.Button:New{
+			parent = window,
+			x = '0%',
+			y = '50%',
+			width = '50%',
+			height = '50%',
+			caption = LAUNCHER_YES,
+			OnClick = { Quit },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		Chili.Button:New{
+			parent = window,
+			x = '50%',
+			y = '50%',
+			width = '50%',
+			height = '50%',
+			caption = LAUNCHER_NO,
+			OnClick = { ClearTemporaryUI },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		UI.Scenario.Warning = window
+	else
+		Quit()
 	end
 end
 

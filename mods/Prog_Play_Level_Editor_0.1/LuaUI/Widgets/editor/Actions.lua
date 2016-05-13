@@ -6,11 +6,11 @@ actions_list = {
 		type = "win",
 		filter = "Game",
 		typeText = "Team wins",
-		text = "<Team> wins with state <State>.",
+		text = "<Player> wins with state <State>.",
 		attributes = {
 			{
-				text = "<Team>",
-				type = "team",
+				text = "<Player>",
+				type = "player",
 				id = "team"
 			},
 			{
@@ -24,11 +24,11 @@ actions_list = {
 		type = "lose",
 		filter = "Game",
 		typeText = "Team loses",
-		text = "<Team> loses with <State>.",
+		text = "<Player> loses with <State>.",
 		attributes = {
 			{
-				text = "<Team>",
-				type = "team",
+				text = "<Player>",
+				type = "player",
 				id = "team"
 			},
 			{
@@ -47,7 +47,8 @@ actions_list = {
 			{
 				text = "<Time>",
 				type = "number",
-				id = "time"
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -186,7 +187,8 @@ actions_list = {
 			{
 				text = "<Parameters>",
 				type = "parameters",
-				id = "parameters"
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -255,7 +257,8 @@ actions_list = {
 			{
 				text = "<Parameters>",
 				type = "parameters",
-				id = "parameters"
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -324,7 +327,8 @@ actions_list = {
 			{
 				text = "<Parameters>",
 				type = "parameters",
-				id = "parameters"
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -398,7 +402,8 @@ actions_list = {
 			{
 				text = "<Parameters>",
 				type = "parameters",
-				id = "parameters"
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -467,7 +472,8 @@ actions_list = {
 			{
 				text = '<Message>',
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			}
 		}
 	},
@@ -480,7 +486,8 @@ actions_list = {
 			{
 				text = '<Message>',
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
 				text = "<Position>",
@@ -489,8 +496,9 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "time",
-				id = "time"
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -503,7 +511,8 @@ actions_list = {
 			{
 				text = "<Message>",
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
 				text = "<Unit>",
@@ -512,8 +521,9 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "time",
-				id = "time"
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -526,7 +536,8 @@ actions_list = {
 			{
 				text = "<Message>",
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
 				text = "<Unit>",
@@ -535,8 +546,9 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "time",
-				id = "time"
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -549,7 +561,8 @@ actions_list = {
 			{
 				text = '<Message>',
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
 				text = "<Position>",
@@ -558,8 +571,9 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "time",
-				id = "time"
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -896,7 +910,8 @@ actions_list = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
-				id = "variable"
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Number>",
@@ -914,7 +929,8 @@ actions_list = {
 			{
 				text = "<Variable1>",
 				type = "numberVariable",
-				id = "variable1"
+				id = "variable1",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Variable2>",
@@ -942,7 +958,8 @@ actions_list = {
 			{
 				text = "<Variable1>",
 				type = "numberVariable",
-				id = "variable1"
+				id = "variable1",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Variable2>",
@@ -970,7 +987,8 @@ actions_list = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
-				id = "variable"
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Min>",
@@ -993,7 +1011,8 @@ actions_list = {
 			{
 				text = "<Variable>",
 				type = "booleanVariable",
-				id = "variable"
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Boolean>",

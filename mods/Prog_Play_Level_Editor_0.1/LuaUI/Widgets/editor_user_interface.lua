@@ -2634,7 +2634,8 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 	text.font.shadow = false
 	table.insert(feature, text)
 	if attr.type == "unitType" 
-		or attr.type == "team" 
+		or attr.type == "team"
+		or attr.type == "player"
 		or attr.type == "group" 
 		or attr.type == "zone" 
 		or attr.type == "numberVariable" 
@@ -2657,6 +2658,12 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		elseif attr.type == "team" then
 			for k, t in pairs(teamStateMachine.states) do
 				if enabledTeams[t] then
+					table.insert(comboBoxItems, teamName[t])
+				end
+			end
+		elseif attr.type == "player" then
+			for k, t in pairs(teamStateMachine.states) do
+				if enabledTeams[t] and teamControl[t] == "player" then
 					table.insert(comboBoxItems, teamName[t])
 				end
 			end
@@ -2687,23 +2694,11 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					table.insert(comboBoxItems, v.name)
 				end
 			end
-			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARNUM_NOT_FOUND)
-				local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_VARIABLE_HINT, 14, { 0.6, 1, 1, 1 })
-				table.insert(feature, variableHint)
-				yref[1] = yref[1] + 40
-			end
 		elseif attr.type == "booleanVariable" then
 			for i, v in ipairs(triggerVariables) do
 				if v.type == "boolean" then
 					table.insert(comboBoxItems, v.name)
 				end
-			end
-			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARBOOL_NOT_FOUND)
-				local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_VARIABLE_HINT, 14, { 0.6, 1, 1, 1 })
-				table.insert(feature, variableHint)
-				yref[1] = yref[1] + 40
 			end
 		elseif attr.type == "comparison" then
 			comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
@@ -2738,7 +2733,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBoxItems = { "+", "-", "*", "/", "%" }
 		end
 		local comboBox = addComboBox(scrollPanel, '35%', y, '40%', 30, comboBoxItems)
-		if attr.type == "team" then
+		if attr.type == "team" or attr.type == "player" then
 			comboBox.OnSelect = {
 				function()
 					for k, n in pairs(teamName) do
@@ -2784,7 +2779,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 		end
 		if a.params[attr.id] then
-			if attr.type == "team" then
+			if attr.type == "team" or attr.type == "player" then
 				for i, item in ipairs(comboBox.items) do
 					if teamName[a.params[attr.id]] == item then
 						comboBox:Select(i)
@@ -2930,7 +2925,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
-	elseif attr.type == "number" or attr.type == "time" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
+	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
 		local editBox = addEditBox(scrollPanel, '35%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
@@ -2951,14 +2946,9 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				editBox:SetText(tostring(a.params[attr.id]))
 			end
 		end
-		if attr.type == "number" or attr.type == "time" then
+		if attr.type == "number" then
 			editBox.updateFunction = function()
 				a.params[attr.id] = tonumber(editBox.text)
-			end
-			if attr.type == "time" then
-				local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_TIME_HINT, 14, { 0.6, 1, 1, 1 })
-				table.insert(feature, messageHint)
-				yref[1] = yref[1] + 40
 			end
 		elseif attr.type == "text" then
 			editBox.updateFunction = function()
@@ -2975,11 +2965,6 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					end
 				end
 				a.params[attr.id] = msgs
-			end
-			if attr.type == "message" then
-				local messageHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, EDITOR_TRIGGERS_EVENTS_MESSAGE_HINT, 14, { 0.6, 1, 1, 1 })
-				table.insert(feature, messageHint)
-				yref[1] = yref[1] + 40
 			end
 		end
 		editBox.isEditBox = true
@@ -3048,6 +3033,11 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		end
 		table.insert(feature, comboBox)
 		table.insert(feature, editBox)
+	end
+	if attr.hint then
+		local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, attr.hint, 14, { 0.6, 1, 1, 1 })
+		table.insert(feature, variableHint)
+		yref[1] = yref[1] + 40
 	end
 	return feature
 end
@@ -3580,7 +3570,7 @@ function initWidgetList()
 	for k, w in pairs(WG.widgetList) do
 		local customWidget = {}
 		customWidget.name = k
-		customWidget.active = w.active
+		customWidget.active = false
 		customWidget.desc = w.desc
 		table.insert(customWidgets, customWidget)
 	end
@@ -4043,7 +4033,7 @@ function saveMapFrame()
 				Screen0:RemoveChild(windows["saveWindow"])
 				windows["saveWindow"]:Dispose()
 			end
-			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+			windows["saveWindow"] = addWindow(Screen0, "25%", "45%", "50%", "10%")
 			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/pp_editor/levels/"..saveName..".editor)", 20)
 			addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
 		end
