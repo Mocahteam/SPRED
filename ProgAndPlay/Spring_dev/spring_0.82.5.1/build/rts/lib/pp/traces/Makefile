@@ -248,6 +248,30 @@ Trace.cpp.s:
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.s
 .PHONY : Trace.cpp.s
 
+TracesAnalyser.obj: TracesAnalyser.cpp.obj
+.PHONY : TracesAnalyser.obj
+
+# target to build an object file
+TracesAnalyser.cpp.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj
+.PHONY : TracesAnalyser.cpp.obj
+
+TracesAnalyser.i: TracesAnalyser.cpp.i
+.PHONY : TracesAnalyser.i
+
+# target to preprocess a source file
+TracesAnalyser.cpp.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.i
+.PHONY : TracesAnalyser.cpp.i
+
+TracesAnalyser.s: TracesAnalyser.cpp.s
+.PHONY : TracesAnalyser.s
+
+# target to generate assembly for a file
+TracesAnalyser.cpp.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.s
+.PHONY : TracesAnalyser.cpp.s
+
 TracesParser.obj: TracesParser.cpp.obj
 .PHONY : TracesParser.obj
 
@@ -297,6 +321,9 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... Trace.obj"
 	@$(CMAKE_COMMAND) -E echo "... Trace.i"
 	@$(CMAKE_COMMAND) -E echo "... Trace.s"
+	@$(CMAKE_COMMAND) -E echo "... TracesAnalyser.obj"
+	@$(CMAKE_COMMAND) -E echo "... TracesAnalyser.i"
+	@$(CMAKE_COMMAND) -E echo "... TracesAnalyser.s"
 	@$(CMAKE_COMMAND) -E echo "... TracesParser.obj"
 	@$(CMAKE_COMMAND) -E echo "... TracesParser.i"
 	@$(CMAKE_COMMAND) -E echo "... TracesParser.s"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission3" start_time="1457511691" end_time="1457511786" status="loss">
+		<execution start_time="1457511715" end_time="1457511715">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_Unit_ActionOnPosition" error="wrong_position" params="2910 766"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+	<mission name="Mission3" start_time="1457511791">
+		<execution start_time="1457511818" end_time="1457511818">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_Unit_ActionOnPosition" error="wrong_position" params="2908 768"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+	<mission name="Mission3" start_time="1457511856">
+		<execution start_time="1457511879" end_time="1457511879">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_Unit_ActionOnPosition" params="5892_4 10 1981 1281"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+	<mission name="Mission3" start_time="1457511908"/>
+	<mission name="Mission3" start_time="1457511998" end_time="1457512092" status="loss"/>
+	<mission name="Mission3" start_time="1457512511" end_time="1457512609" status="loss">
+		<execution start_time="1457512934">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" error="out_of_range" params="0 0"/>
+		</execution>
+		<execution start_time="1457513019" end_time="1457513019">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" error="out_of_range" params="0 0"/>
+			<call label="PP_Unit_ActionOnPosition" error="wrong_unit" params="-1"/>
+			<call label="PP_Unit_ActionOnUnit" error="wrong_unit" params="4"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+	<mission name="Mission3" start_time="1457513028" end_time="1457513121" status="loss">
+		<execution start_time="1457513042" end_time="1457513042">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_Unit_ActionOnPosition" params="4199_4 10 1056 1792"/>
+			<call label="PP_Unit_ActionOnUnit" error="wrong_unit" params="4"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+	<mission name="Mission3" start_time="1457513408" end_time="1457513426" status="won">
+		<execution start_time="1457513421">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_GetUnitAt" params="2 0"/>
+			<call label="PP_Unit_ActionOnPosition" params="4462_4 10 1056 1792"/>
+			<call label="PP_Unit_ActionOnUnit" params="4462_4 20 3240_4"/>
+		</execution>
+		<execution start_time="1457513427" end_time="1457513427">
+			<call label="PP_Open"/>
+			<call label="PP_GetUnitAt" params="0 0"/>
+			<call label="PP_GetUnitAt" params="2 1"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+</trace>
+

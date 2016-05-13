@@ -1,8 +1,7 @@
 #ifndef __TRACE_H__
 #define __TRACE_H__
 
-#define MAX_SIZE_PARAMS 2
-
+#include <vector>
 #include <iostream>
 #include <string.h>
 #include <boost/shared_ptr.hpp>
@@ -24,16 +23,20 @@ public:
 	virtual void display(std::ostream &os = std::cout) const = 0;
 	
 	static int inArray(const char *ch, const char *arr[]);
+	static unsigned int getLength(const std::vector< boost::shared_ptr<Trace> >& traces);
 	
-	static unsigned int numTab;
+	static int numTab;
 	int indSearch;
 	unsigned int lenSearch;
 	unsigned int endSearch;
 	
-	TraceType getType() const;
 	bool isSequence() const;
+	bool isEvent() const;
+	bool isCall() const;
 	bool isDelayed() const;
 	void setDelayed();
+	
+	boost::shared_ptr<Trace> aligned;
 		
 protected:
 

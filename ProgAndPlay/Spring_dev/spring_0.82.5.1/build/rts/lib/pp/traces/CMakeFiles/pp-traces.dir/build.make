@@ -72,9 +72,33 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj.provides: rts/li
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj.provides.build: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj
 .PHONY : rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj.provides.build
 
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/flags.make
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../rts/lib/pp/traces/TracesAnalyser.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj"
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\pp-traces.dir\TracesAnalyser.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\TracesAnalyser.cpp
+
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.i"
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\TracesAnalyser.cpp > CMakeFiles\pp-traces.dir\TracesAnalyser.cpp.i
+
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.s"
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\TracesAnalyser.cpp -o CMakeFiles\pp-traces.dir\TracesAnalyser.cpp.s
+
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.requires:
+.PHONY : rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.requires
+
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.provides: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.requires
+	$(MAKE) -f rts\lib\pp\traces\CMakeFiles\pp-traces.dir\build.make rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.provides.build
+.PHONY : rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.provides
+
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.provides.build: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj
+.PHONY : rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.provides.build
+
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/flags.make
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj: ../rts/lib/pp/traces/Trace.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj"
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\pp-traces.dir\Trace.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\Trace.cpp
 
@@ -98,7 +122,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj.provides.build: rts/lib
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/flags.make
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../rts/lib/pp/traces/Sequence.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj"
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\pp-traces.dir\Sequence.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\Sequence.cpp
 
@@ -122,7 +146,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj.provides.build: rts/
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/flags.make
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../rts/lib/pp/traces/Event.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj"
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\pp-traces.dir\Event.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\Event.cpp
 
@@ -146,7 +170,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj.provides.build: rts/lib
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/flags.make
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Call.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj"
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\rts\lib\pp\traces && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\pp-traces.dir\Call.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\lib\pp\traces\Call.cpp
 
@@ -171,6 +195,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj.provides.build: rts/lib/
 # Object files for target pp-traces
 pp__traces_OBJECTS = \
 "CMakeFiles/pp-traces.dir/TracesParser.cpp.obj" \
+"CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj" \
 "CMakeFiles/pp-traces.dir/Trace.cpp.obj" \
 "CMakeFiles/pp-traces.dir/Sequence.cpp.obj" \
 "CMakeFiles/pp-traces.dir/Event.cpp.obj" \
@@ -180,6 +205,7 @@ pp__traces_OBJECTS = \
 pp__traces_EXTERNAL_OBJECTS =
 
 rts/lib/pp/traces/libpp-traces.a: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj
+rts/lib/pp/traces/libpp-traces.a: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj
 rts/lib/pp/traces/libpp-traces.a: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj
 rts/lib/pp/traces/libpp-traces.a: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj
 rts/lib/pp/traces/libpp-traces.a: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj
@@ -195,6 +221,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/build: rts/lib/pp/traces/libpp-traces
 .PHONY : rts/lib/pp/traces/CMakeFiles/pp-traces.dir/build
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/requires: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj.requires
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/requires: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj.requires
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/requires: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj.requires
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/requires: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj.requires
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/requires: rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj.requires

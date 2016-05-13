@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission5" start_time="1462271412" end_time="1462271434" status="won">
+		<execution start_time="1462271419" end_time="1462271419">
+			<call label="PP_Open"/>
+			<sequence num_map="10:1">
+				<call label="PP_GetNumUnits" params="0"/>
+				<call label="PP_GetUnitAt" params="0 0"/>
+				<call label="PP_Unit_ActionOnPosition" params="2457_4 10 256 1024"/>
+			</sequence>
+			<call label="PP_GetNumUnits" params="0"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+</trace>
+

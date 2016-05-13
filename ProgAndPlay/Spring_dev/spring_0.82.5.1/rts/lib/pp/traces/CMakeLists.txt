@@ -2,6 +2,7 @@
 
 SET(tracesSource
 		"TracesParser"
+		"TracesAnalyser"
 		"Trace"
 		"Sequence"
 		"Event"

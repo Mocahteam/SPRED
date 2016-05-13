@@ -270,9 +270,9 @@ int PP_Open(){
 		
 		// notify function call to Spring
 		enterCriticalSection();
-			std::stringstream ss;
-			ss << "execution_start_time " << PP_GetTimestamp();
-			PP_PushMessage(ss.str().c_str());
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "execution_start_time " << PP_GetTimestamp();
+			PP_PushMessage(oss.str().c_str());
 			PP_PushMessage("PP_Open");
 		exitCriticalSection();
 			
@@ -297,9 +297,9 @@ int PP_Close (){
 		// notify function call to Spring
 		enterCriticalSection();
 			PP_PushMessage("PP_Close");
-			std::stringstream ss;
-			ss << "execution_end_time " << PP_GetTimestamp();
-			PP_PushMessage(ss.str().c_str());
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "execution_end_time " << PP_GetTimestamp();
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 		opened = false;
 		/* deletes "segment" that enables access of data */
@@ -321,8 +321,10 @@ int PP_IsGameOver(){
 	if (ret == 0){
 		enterCriticalSection();
 			ret = *(shd.gameOver);
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "PP_IsGameOver - " << ret;
 			// notify function call to Spring
-			PP_PushMessage("PP_IsGameOver");
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	return ret;
@@ -335,8 +337,10 @@ int PP_IsGamePaused() {
 	if (ret == 0) {
 		enterCriticalSection();
 			ret = *(shd.gamePaused);
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "PP_IsGamePaused - " << ret;
 			// notify function call to Spring
-			PP_PushMessage("PP_IsGamePaused");
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	return ret;
@@ -361,8 +365,10 @@ PP_Pos PP_GetMapSize(){
 	if (ret == 0){
 		enterCriticalSection();
 			tmp = *(shd.mapSize);
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "PP_GetMapSize - " << tmp.x << " " << tmp.y;
 			// notify function call to Spring
-			PP_PushMessage("PP_GetMapSize");
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	else{
@@ -379,8 +385,10 @@ PP_Pos PP_GetStartPosition(){
 	if (ret == 0){
 		enterCriticalSection();
 			tmp = *(shd.startPosition);
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "PP_GetStartPosition - " << tmp.x << " " << tmp.y;
 			// notify function call to Spring
-			PP_PushMessage("PP_GetStartPosition");
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	else{
@@ -396,8 +404,10 @@ int PP_GetNumSpecialAreas(){
 	if (ret == 0){
 		enterCriticalSection();
 			ret = shd.specialAreas->size();
+			std::ostringstream oss(std::ostringstream::out);
+			oss << "PP_GetNumSpecialAreas - " << ret;
 			// notify function call to Spring
-			PP_PushMessage("PP_GetNumSpecialAreas");
+			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
 	}
 	return ret;
@@ -412,14 +422,14 @@ PP_Pos PP_GetSpecialAreaPosition(int g){
 			std::ostringstream oss(std::ostringstream::out);
 			try {
 				tmp = shd.specialAreas->at(g);
+				oss << "PP_GetSpecialAreaPosition " << g << " - " << tmp.x << " " << tmp.y;
 			} catch (std::out_of_range e){
 				PP_SetError("PP_GetSpecialAreaPosition : special area not \
 found\n");
-				oss << errorsArr[0];
+				oss << errorsArr[0] << "PP_GetSpecialAreaPosition " << g;
 				tmp.x = -1;
 				tmp.y = -1;
 			}
-			oss << "PP_GetSpecialAreaPosition " << g;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -439,12 +449,12 @@ int PP_GetResource(PP_Resource id){
 			std::ostringstream oss(std::ostringstream::out);
 			try{
 				ret = shd.resources->at(id);
+				oss << "PP_GetResource " << id << " - " << ret;
 			} catch (std::out_of_range e) {
 				PP_SetError("PP_GetResource : ressource out of range\n");
-				oss << errorsArr[0];
+				oss << errorsArr[0] << "PP_GetResource " << id;
 				ret = -1;
 			}
-			oss << "PP_GetResource " << id;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -460,10 +470,11 @@ int PP_GetNumUnits(PP_Coalition c){
 		enterCriticalSection();
 			std::ostringstream oss(std::ostringstream::out);
 			if (ret != 0)
-				oss << errorsArr[1];
-			else
+				oss << errorsArr[1] << "PP_GetNumUnits " << c;
+			else {
 				ret = shd.coalitions[c].size();
-			oss << "PP_GetNumUnits " << c;
+				oss << "PP_GetNumUnits " << c << " - " << ret;
+			}
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -485,11 +496,11 @@ PP_Unit PP_GetUnitAt(PP_Coalition c, int index){
 					// Returns directly data. If index is inaccurate, an exception
 					// will be thrown
 					ret = shd.coalitions[c].at(index);
-					oss << "PP_GetUnitAt " << c << " " << index;
+					oss << "PP_GetUnitAt " << c << " " << index << " - " << ret;
 				} catch (std::out_of_range e) {
+					ret = -1;
 					PP_SetError("PP_GetUnitAt : index out of range\n");
 					oss << errorsArr[0] << "PP_GetUnitAt " << c << " " << index;
-					ret = -1;
 				}
 			}
 			// notify function call to Spring
@@ -510,7 +521,7 @@ PP_Coalition PP_Unit_GetCoalition(PP_Unit unit){
 			ret = checkParams("PP_Unit_GetCoalition", &u);
 			if (ret == 0) {
 				ret = u->second.coalition;
-				oss << "PP_Unit_GetCoalition " << unit << "_" << u->second.type;
+				oss << "PP_Unit_GetCoalition " << unit << "_" << u->second.type << " - " << ret;
 			}
 			else
 				oss << errorsArr[2] << "PP_Unit_GetCoalition " << unit;
@@ -537,7 +548,7 @@ int PP_Unit_GetType(PP_Unit unit){
 				}
 				else {
 					ret = u->second.type;
-					oss << "PP_Unit_GetType " << unit << "_" << ret;
+					oss << "PP_Unit_GetType " << unit << "_" << ret << " - " << ret;
 				}
 			}
 			else
@@ -560,7 +571,7 @@ PP_Pos PP_Unit_GetPosition(PP_Unit unit){
 			ret = checkParams("PP_Unit_GetPosition", &u);
 			if (ret == 0) {
 				tmp = u->second.pos;
-				oss << "PP_Unit_GetPosition " << unit << "_" << u->second.type;
+				oss << "PP_Unit_GetPosition " << unit << "_" << u->second.type << " - " << tmp.x << " " << tmp.y;
 			}
 			else {
 				tmp.x = ret;
@@ -588,7 +599,7 @@ float PP_Unit_GetHealth(PP_Unit unit){
 			ret = checkParams("PP_Unit_GetHealth", &u);
 			if ((int)ret == 0) {
 				ret = u->second.health;
-				oss << "PP_Unit_GetHealth " << unit << "_" << u->second.type;
+				oss << "PP_Unit_GetHealth " << unit << "_" << u->second.type << " - " << ret;
 			}
 			else
 				oss << errorsArr[2] << "PP_Unit_GetHealth " << unit;
@@ -609,7 +620,7 @@ float PP_Unit_GetMaxHealth(PP_Unit unit){
 			ret = checkParams("PP_Unit_GetMaxHealth", &u);
 			if ((int)ret == 0) {
 				ret = u->second.maxHealth;
-				oss << "PP_Unit_GetMaxHealth " << unit << "_" << u->second.type;
+				oss << "PP_Unit_GetMaxHealth " << unit << "_" << u->second.type << " - " << ret;
 			}
 			else
 				oss << errorsArr[2] << "PP_Unit_GetMaxHealth " << unit;
@@ -677,7 +688,7 @@ int PP_Unit_GetGroup(PP_Unit unit){
 					ret = -2;
 				else
 					ret = u->second.group;
-				oss << "PP_Unit_GetGroup " << unit << "_" << u->second.type;
+				oss << "PP_Unit_GetGroup " << unit << "_" << u->second.type << " - " << ret;
 			}
 			else
 				oss << errorsArr[2] << "PP_Unit_GetGroup " << unit;
@@ -893,7 +904,7 @@ int PP_Unit_GetNumPdgCmds(PP_Unit unit){
 				oss.clear();
 				if (commandQueue) {
 					ret = commandQueue->size();
-					oss << "PP_Unit_GetNumPdgCmds " << unit << "_" << u->second.type;
+					oss << "PP_Unit_GetNumPdgCmds " << unit << "_" << u->second.type << " - " << ret;
 				}
 				else {
 					PP_SetError("PP_Unit_GetNumPdgCmds : commandQueue undefined\n");
@@ -937,7 +948,7 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 						// Returns directly data. If idCmd is inaccurate, an
 						// exception will be thrown
 						ret = commandQueue->at(idCmd).code;
-						oss << "PP_Unit_PdgCmd_GetCode " << unit << "_" << u->second.type << " " << idCmd;
+						oss << "PP_Unit_PdgCmd_GetCode " << unit << "_" << u->second.type << " " << idCmd << " - " << ret;
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetCode : idCmd out of range\n");
 						ret = -1;
@@ -997,7 +1008,7 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 							(ossParams.str().c_str()).first;
 						if (params) {
 							ret = params->size();
-							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << "_" << u->second.type << " " << idCmd;
+							oss << "PP_Unit_PdgCmd_GetNumParams " << unit << "_" << u->second.type << " " << idCmd << " - " << ret;
 						}
 						else {
 							PP_SetError("PP_Unit_PdgCmd_GetNumParams : param undefined\n");
@@ -1065,7 +1076,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 								// Returns directly data. If idParam is inaccurate, an
 								// exception will be thrown
 								ret = params->at(idParam);
-								oss << "PP_Unit_PdgCmd_GetParam " << unit << "_" << u->second.type << " " << idCmd << " " << idParam;
+								oss << "PP_Unit_PdgCmd_GetParam " << unit << "_" << u->second.type << " " << idCmd << " " << idParam << " - " << ret;
 							} catch (std::out_of_range e) {
 								PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
 								ret = -1;

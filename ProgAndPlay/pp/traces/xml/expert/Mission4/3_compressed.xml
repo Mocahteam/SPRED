@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission4" start_time="1463139904" end_time="1463139919" status="won">
+		<execution start_time="1463139909" end_time="1463139909">
+			<call label="PP_Open"/>
+			<sequence num_map="2:1">
+				<call label="PP_GetNumUnits" params="0" return="2 "/>
+				<call label="PP_GetUnitAt" params="0 0" return="4176 "/>
+				<sequence num_map="1:1 2:1">
+					<call label="PP_Unit_GetType" params="4176_4" return="4 "/>
+				</sequence>
+				<call label="PP_Unit_ActionOnPosition" params="4176_4 10 1400 1371"/>
+			</sequence>
+			<call label="PP_GetNumUnits" params="0" return="2 "/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+</trace>
+

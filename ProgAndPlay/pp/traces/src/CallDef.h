@@ -5,9 +5,12 @@
 #include <cmath>
 #include <boost/lexical_cast.hpp>
 
+#include "Call.h"
+
 namespace CallMisc {
 
 	enum Coalition {
+		NONE = -1,
 		MY_COALITION,
 		ALLY_COALITION,
 		ENEMY_COALITION
@@ -17,8 +20,8 @@ namespace CallMisc {
 		int id;
 		int type;
 		
-		bool operator==(const Unit& u) const {
-			return id == u.id;
+		bool operator!=(const Unit& u) const {
+			return id != u.id;
 		}
 	};
 
@@ -26,8 +29,8 @@ namespace CallMisc {
 		float x;
 		float y;
 		
-		bool operator==(const Pos& p) const {
-			return x == p.x && y == p.y;
+		bool operator!=(const Pos& p) const {
+			return x != p.x || y != p.y;
 		}
 	};
 
@@ -39,31 +42,49 @@ public:
 	
 	WrongCall(std::string label, ErrorType err, int num_args, ...): Call(label,err) {
 		va_list args;
-		num_args = std::min(num_args, MAX_SIZE_PARAMS);
+		this->num_args = std::min(num_args, MAX_SIZE_PARAMS);
 		va_start(args, num_args);
 		for(int i = 0; i < num_args; i++)
             error_params[i] = va_arg(args, double);
-		num_args_ = num_args;
 		va_end(args);
 	}
 
 private:
 
-	unsigned int num_args_;
+	int num_args;
 	float error_params[MAX_SIZE_PARAMS];
 
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
+		WrongCall *cc = dynamic_cast<WrongCall*>(c);
+		bool equal = num_args == cc->num_args;
+		if (equal) {
+			for (int i = 0; i < num_args; i++) {
+				if (error_params[i] != cc->error_params[i])
+					equal = false;
+			}
+		}
+		if (!equal) {
+			if (Call::paramsMap.contains("WrongCall","params"))
+				return false;
+			if (num_args > -1)
+				num_args = -1;
+			if (cc->num_args > -1)
+				cc->num_args = -1;
+		}
 		return true;
 	}
 
 	virtual std::string getParams() const {
-		std::string s = "";
-		for (unsigned int i = 0; i < num_args_; i++) {
-			s += boost::lexical_cast<std::string>(error_params[i]);
-			if (i < num_args_-1)
-				s += " ";
+		if (num_args > -1) {
+			std::string s = "";
+			for (int i = 0; i < num_args; i++) {
+				if (i > 0)
+					s += " ";
+				s += boost::lexical_cast<std::string>(error_params[i]);
+			}
+			return s;
 		}
-		return s;
+		return "?";
 	}
 	
 };
@@ -76,7 +97,7 @@ public:
 	
 private:
 
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		return true;
 	}
 	
@@ -96,12 +117,22 @@ private:
 	
 	int specialAreaId;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetSpecialAreaPositionCall *cc = dynamic_cast<GetSpecialAreaPositionCall*>(c);
-		return specialAreaId == cc->specialAreaId;
+		if (specialAreaId != cc->specialAreaId) {
+			if (Call::paramsMap.contains(label,"specialAreaId"))
+				return false;
+			if (specialAreaId != -1)
+				specialAreaId = -1;
+			if (cc->specialAreaId != -1)
+				cc->specialAreaId = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
+		if (specialAreaId == -1)
+			return "?";
 		return boost::lexical_cast<std::string>(specialAreaId);
 	}
 	
@@ -117,12 +148,22 @@ private:
 	
 	int resourceId;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetResourceCall *cc = dynamic_cast<GetResourceCall*>(c);
-		return resourceId == cc->resourceId;
+		if (resourceId != cc->resourceId) {
+			if (Call::paramsMap.contains(label,"resourceId"))
+				return false;
+			if (resourceId > -1)
+				resourceId = -1;
+			if (cc->resourceId > -1)
+				cc->resourceId = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
+		if (resourceId == -1)
+			return "?";
 		return boost::lexical_cast<std::string>(resourceId);
 	}
 	
@@ -138,12 +179,22 @@ private:
 
 	CallMisc::Coalition coalition;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetNumUnitsCall *cc = dynamic_cast<GetNumUnitsCall*>(c);
-		return coalition == cc->coalition; 
+		if (coalition != cc->coalition) {
+			if (Call::paramsMap.contains(label,"coalition"))
+				return false;
+			if (coalition != CallMisc::NONE)
+				coalition = CallMisc::NONE;
+			if (cc->coalition != CallMisc::NONE)
+				cc->coalition = CallMisc::NONE;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
+		if (coalition == CallMisc::NONE)
+			return "?";
 		return boost::lexical_cast<std::string>(static_cast<int>(coalition));
 	}
 
@@ -160,71 +211,40 @@ private:
 	CallMisc::Coalition coalition;
 	int index;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetUnitAtCall *cc = dynamic_cast<GetUnitAtCall*>(c);
-		return coalition == cc->coalition;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(static_cast<int>(coalition)) + " " + boost::lexical_cast<std::string>(index);
-	}
-	
-};
-
-class GetCoalitionCall : public Call {
-
-public:
-
-	GetCoalitionCall(int unitId, int unitType): Call("PP_Unit_GetCoalition") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		GetCoalitionCall *cc = dynamic_cast<GetCoalitionCall*>(c);
-		return unit == cc->unit;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
-	}
-
-};
-
-class GetTypeCall : public Call {
-
-public:
-
-	GetTypeCall(int unitId, int unitType): Call("PP_Unit_GetType") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		//GetTypeCall *cc = dynamic_cast<GetTypeCall*>(c);
-		//return unit == cc->unit;
+		if ((Call::paramsMap.contains(label,"coalition") && coalition != cc->coalition) || (Call::paramsMap.contains(label,"index") && index != cc->index))
+			return false;
+		if (!Call::paramsMap.contains(label,"coalition") && coalition != cc->coalition) {
+			if (coalition != CallMisc::NONE)
+				coalition = CallMisc::NONE;
+			if (cc->coalition != CallMisc::NONE)
+				cc->coalition = CallMisc::NONE;
+		}
+		if (!Call::paramsMap.contains(label,"index") && index != cc->index) {
+			if (index != -1)
+				index = -1;
+			if (cc->index != -1)
+				cc->index = -1;
+		}
 		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
+		std::string s = "";
+		s += (coalition == CallMisc::NONE) ? "?" : boost::lexical_cast<std::string>(static_cast<int>(coalition));
+		s += " ";
+		s += (index == -1) ? "?" : boost::lexical_cast<std::string>(index);
+		return s;
 	}
-
+	
 };
 
-class GetPositionCall : public Call {
+class UnitCall : public Call {
 
 public:
 
-	GetPositionCall(int unitId, int unitType): Call("PP_Unit_GetPosition") {
+	UnitCall(std::string label, int unitId, int unitType): Call(label) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -233,111 +253,31 @@ private:
 
 	CallMisc::Unit unit;
 	
-	virtual bool compare(Call *c) const {
-		GetPositionCall *cc = dynamic_cast<GetPositionCall*>(c);
-		return unit == cc->unit;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
-	}
-
-};
-
-class GetHealthCall : public Call {
-
-public:
-
-	GetHealthCall(int unitId, int unitType): Call("PP_Unit_GetHealth") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		//GetHealthCall *cc = dynamic_cast<GetHealthCall*>(c);
-		//return unit == cc->unit;
+	virtual bool compare(Call *c) {
+		UnitCall *cc = dynamic_cast<UnitCall*>(c);
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
 		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
-	}
-
-};
-
-class GetMaxHealthCall : public Call {
-
-public:
-
-	GetMaxHealthCall(int unitId, int unitType): Call("PP_Unit_GetMaxHealth") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		//GetMaxHealthCall *cc = dynamic_cast<GetMaxHealthCall*>(c);
-		//return unit == cc->unit;
-		return true;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
-	}
-
-};
-
-class GetPendingCommandsCall : public Call {
-
-public:
-
-	GetPendingCommandsCall(int unitId, int unitType): Call("PP_Unit_GetPendingCommands") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		//GetPendingCommandsCall *cc = dynamic_cast<GetPendingCommandsCall*>(c);
-		return true;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
-	}
-
-};
-
-class GetGroupCall : public Call {
-
-public:
-
-	GetGroupCall(int unitId, int unitType): Call("PP_Unit_GetGroup") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		GetGroupCall *cc = dynamic_cast<GetGroupCall*>(c);
-		return unit == cc->unit;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		return s;		
 	}
 
 };
@@ -356,13 +296,39 @@ private:
 	CallMisc::Unit unit;
 	int groupId;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		SetGroupCall *cc = dynamic_cast<SetGroupCall*>(c);
-		return unit == cc->unit && groupId == cc->groupId;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"groupId") && groupId != cc->groupId))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"groupId") && groupId != cc->groupId) {
+			if (groupId != -1)
+				groupId = -1;
+			if (cc->groupId != -1)
+				cc->groupId = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(groupId);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (groupId == -1) ? "?" : boost::lexical_cast<std::string>(groupId);
+		return s;
 	}
 	
 };
@@ -384,13 +350,55 @@ private:
 	int action;
 	CallMisc::Unit target;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		ActionOnUnitCall *cc = dynamic_cast<ActionOnUnitCall*>(c);
-		return action == cc->action;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"action") && action != cc->action) || (Call::paramsMap.contains(label,"targetId") && target.id != cc->target.id) || (Call::paramsMap.contains(label,"targetType") && target.type != cc->target.type))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"action") && action != cc->action) {
+			if (action != -1)
+				action = -1;
+			if (cc->action != -1)
+				cc->action = -1;
+		}
+		if (!Call::paramsMap.contains(label,"targetId") && target.id != cc->target.id) {
+			if (target.id != -1)
+				target.id = -1;
+			if (cc->target.id != -1)
+				cc->target.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"targetType") && target.type != cc->target.type) {
+			if (target.type != -1)
+				target.type = -1;
+			if (cc->target.type != -1)
+				cc->target.type = -1;
+		}
+		return true;	
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(action) + " " + boost::lexical_cast<std::string>(target.id) + "_" + boost::lexical_cast<std::string>(target.type);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (action == -1) ? "?" : boost::lexical_cast<std::string>(action);
+		s += " ";
+		s += (target.id == -1) ? "?" : boost::lexical_cast<std::string>(target.id);
+		s += "_";
+		s += (target.type == -1) ? "?" : boost::lexical_cast<std::string>(target.type);
+		return s;
 	}
 
 };
@@ -412,13 +420,51 @@ private:
 	int action;
 	CallMisc::Pos pos;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		ActionOnPositionCall *cc = dynamic_cast<ActionOnPositionCall*>(c);
-		return action == cc->action;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"action") && action != cc->action) || (Call::paramsMap.contains(label,"position") && pos != cc->pos))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"action") && action != cc->action) {
+			if (action != -1)
+				action = -1;
+			if (cc->action != -1)
+				cc->action = -1;
+		}
+		if (!Call::paramsMap.contains(label,"position") && pos != cc->pos) {
+			if (pos.x != -1 || pos.y != -1) {
+				pos.x = -1;
+				pos.y = -1;
+			}
+			if (cc->pos.x != -1 || cc->pos.y != -1) {
+				cc->pos.x = -1;
+				cc->pos.y = -1;
+			}
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(action) + " " + boost::lexical_cast<std::string>(pos.x) + " " + boost::lexical_cast<std::string>(pos.y);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (action == -1) ? "?" : boost::lexical_cast<std::string>(action);
+		s += " ";
+		s += (pos.x == -1 && pos.y == -1) ? "? ?" : boost::lexical_cast<std::string>(pos.x) + " " + boost::lexical_cast<std::string>(pos.y);
+		return s;
 	}
 
 };
@@ -438,37 +484,47 @@ private:
 	int action;
 	float param;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		UntargetedActionCall *cc = dynamic_cast<UntargetedActionCall*>(c);
-		return action == cc->action;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"action") && action != cc->action) || (Call::paramsMap.contains(label,"param") && param != cc->param))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"action") && action != cc->action) {
+			if (action != -1)
+				action = -1;
+			if (cc->action != -1)
+				cc->action = -1;
+		}
+		if (!Call::paramsMap.contains(label,"param") && param != cc->param) {
+			if (param != -1)
+				param = -1;
+			if (cc->param != -1)
+				cc->param = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(action) + " " + boost::lexical_cast<std::string>(param);
-	}
-
-};
-
-class GetNumPdgCmdsCall : public Call {
-
-public:
-
-	GetNumPdgCmdsCall(int unitId, int unitType): Call("PP_Unit_GetNumPdgCmds") {
-		unit.id = unitId;
-		unit.type = unitType;
-	}
-	
-private:
-
-	CallMisc::Unit unit;
-	
-	virtual bool compare(Call *c) const {
-		GetNumPdgCmdsCall *cc = dynamic_cast<GetNumPdgCmdsCall*>(c);
-		return unit == cc->unit;
-	}
-	
-	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (action == -1) ? "?" : boost::lexical_cast<std::string>(action);
+		s += " ";
+		s += (param == -1) ? "?" : boost::lexical_cast<std::string>(param);
+		return s;
 	}
 
 };
@@ -487,13 +543,39 @@ private:
 	CallMisc::Unit unit;
 	int idCmd;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetCodePdgCmdCall *cc = dynamic_cast<GetCodePdgCmdCall*>(c);
-		return unit == cc->unit && idCmd == cc->idCmd;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd) {
+			if (idCmd != -1)
+				idCmd = -1;
+			if (cc->idCmd != -1)
+				cc->idCmd = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(idCmd);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
+		return s;
 	}
 	
 };
@@ -512,13 +594,39 @@ private:
 	CallMisc::Unit unit;
 	int idCmd;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetNumParamsPdgCmdCall *cc = dynamic_cast<GetNumParamsPdgCmdCall*>(c);
-		return unit == cc->unit && idCmd == cc->idCmd;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd) {
+			if (idCmd != -1)
+				idCmd = -1;
+			if (cc->idCmd != -1)
+				cc->idCmd = -1;
+		}
+		return true;
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(idCmd);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
+		return s;
 	}
 
 };
@@ -538,13 +646,47 @@ private:
 	int idCmd;
 	int idParam;
 	
-	virtual bool compare(Call *c) const {
+	virtual bool compare(Call *c) {
 		GetParamPdgCmdCall *cc = dynamic_cast<GetParamPdgCmdCall*>(c);
-		return unit == cc->unit && idCmd == cc->idCmd && idParam == cc->idParam;
+		if ((Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) || (Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) || (Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd) || (Call::paramsMap.contains(label,"idParam") && idParam != cc->idParam))
+			return false;
+		if (!Call::paramsMap.contains(label,"unitId") && unit.id != cc->unit.id) {
+			if (unit.id != -1)
+				unit.id = -1;
+			if (cc->unit.id != -1)
+				cc->unit.id = -1;
+		}
+		if (!Call::paramsMap.contains(label,"unitType") && unit.type != cc->unit.type) {
+			if (unit.type != -1)
+				unit.type = -1;
+			if (cc->unit.type != -1)
+				cc->unit.type = -1;
+		}
+		if (!Call::paramsMap.contains(label,"idCmd") && idCmd != cc->idCmd) {
+			if (idCmd != -1)
+				idCmd = -1;
+			if (cc->idCmd != -1)
+				cc->idCmd = -1;
+		}
+		if (!Call::paramsMap.contains(label,"idParam") && idParam != cc->idParam) {
+			if (idParam != -1)
+				idParam = -1;
+			if (cc->idParam != -1)
+				cc->idParam = -1;
+		}
+		return true;	
 	}
 	
 	virtual std::string getParams() const {
-		return boost::lexical_cast<std::string>(unit.id) + "_" + boost::lexical_cast<std::string>(unit.type) + " " + boost::lexical_cast<std::string>(idCmd) + " " + boost::lexical_cast<std::string>(idParam);
+		std::string s = "";
+		s += (unit.id == -1) ? "?" : boost::lexical_cast<std::string>(unit.id);
+		s += "_";
+		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
+		s += " ";
+		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
+		s += " ";
+		s += (idParam == -1) ? "?" : boost::lexical_cast<std::string>(idParam);
+		return s;
 	}
 	
 };
