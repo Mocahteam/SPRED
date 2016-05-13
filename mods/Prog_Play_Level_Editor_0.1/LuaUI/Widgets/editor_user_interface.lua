@@ -2630,7 +2630,7 @@ end
 function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according to its type
 	local y = yref[1]
 	local feature = {}
-	local text = addLabel(scrollPanel, '5%', y, '30%', 30, attr.text, 16, "center", nil, "center")
+	local text = addLabel(scrollPanel, '0%', y, '30%', 30, attr.text, 16, "center", nil, "center")
 	text.font.shadow = false
 	table.insert(feature, text)
 	if attr.type == "unitType" 
@@ -2732,7 +2732,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		elseif attr.type == "operator" then
 			comboBoxItems = { "+", "-", "*", "/", "%" }
 		end
-		local comboBox = addComboBox(scrollPanel, '35%', y, '40%', 30, comboBoxItems)
+		local comboBox = addComboBox(scrollPanel, '30%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" or attr.type == "player" then
 			comboBox.OnSelect = {
 				function()
@@ -2849,7 +2849,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		end
 		table.insert(feature, comboBox)
 	elseif attr.type == "position" then
-		local positionLabel = addLabel(scrollPanel, '35%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
+		local positionLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
 		if a.params[attr.id] then
 			local param = a.params[attr.id]
 			if type(param) == "number" then
@@ -2867,10 +2867,21 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			else
 				if a.params[attr.id].x and a.params[attr.id].z then
 					positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+					local function viewPosition()
+						local state = Spring.GetCameraState()
+						local x, z = a.params[attr.id].x, a.params[attr.id].z
+						state.px, state.py, state.pz = x, Spring.GetGroundHeight(x, z), z
+						state.height = 500
+						Spring.SetCameraState(state, 2)
+						-- todo add temp marker
+					end
+					local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewPosition)
+					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+					table.insert(feature, viewButton)
 				end
 			end
 		end
-		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickPosition = function()
 			changedParam = attr.id
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
@@ -2885,7 +2896,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		table.insert(feature, positionLabel)
 		table.insert(feature, pickButton)
 	elseif attr.type == "unit" then
-		local unitLabel = addLabel(scrollPanel, '35%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
+		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 		if a.params[attr.id] then
 			local param = a.params[attr.id]
 			if type(param) == "string" then
@@ -2908,10 +2919,20 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					local team = Spring.GetUnitTeam(u)
 					unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
 					unitLabel:SetCaption(name.." ("..tostring(u)..")")
+					local function viewUnit()
+						local state = Spring.GetCameraState()
+						local x, y, z = Spring.GetUnitPosition(u)
+						state.px, state.py, state.pz = x, y, z
+						state.height = 500
+						Spring.SetCameraState(state, 2)
+					end
+					local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
+					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+					table.insert(feature, viewButton)
 				end
 			end
 		end
-		local pickButton = addButton(scrollPanel, '75%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickUnit = function()
 			changedParam = attr.id 
 			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
@@ -2926,7 +2947,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		table.insert(feature, unitLabel)
 		table.insert(feature, pickButton)
 	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
-		local editBox = addEditBox(scrollPanel, '35%', y, '40%', 30)
+		local editBox = addEditBox(scrollPanel, '30%', y, '40%', 30)
 		editBox.font.size = 13
 		if a.params[attr.id] then
 			if attr.type == "message" or attr.type == "parameters" then
@@ -2979,8 +3000,8 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
 			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
 		}
-		local comboBox = addComboBox(scrollPanel, '35%', y, '30%', 30, comboBoxItems)
-		local editBox = addEditBox(scrollPanel, '65%', y, '30%', 30)
+		local comboBox = addComboBox(scrollPanel, '30%', y, '30%', 30, comboBoxItems)
+		local editBox = addEditBox(scrollPanel, '60%', y, '30%', 30)
 		editBox.toShow = true
 		comboBox.OnSelect = {
 			function()
