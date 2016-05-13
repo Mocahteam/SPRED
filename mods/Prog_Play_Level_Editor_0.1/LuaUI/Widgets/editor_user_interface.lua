@@ -4044,7 +4044,7 @@ function saveMapFrame()
 				windows["saveWindow"]:Dispose()
 			end
 			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
-			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." ("..saveName..".editor)", 20)
+			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/pp_editor/levels/"..saveName..".editor)", 20)
 			addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
 		end
 		if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
