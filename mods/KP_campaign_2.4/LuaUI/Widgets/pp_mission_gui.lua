@@ -117,7 +117,7 @@ local template_endMission = {
     ["scenario"]=scenarioType
     }
   }
-					DoTheRestart("Missions/"..Game.modShortName.."/"..missionName..".txt", operations)
+					genericRestart(missionName, operations,false)
 				end
 			end
 		},
@@ -229,12 +229,14 @@ function MissionEvent(e)
 			if e.state == "won" then
 			  popup.lineArray = {victory}
 				if scenarioType == "default" then
-					if campaign[missionName].nextMission == nil then
+					if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
 						popup.lineArray = {victoryCampaign}
-					end
-				elseif scenarioType == "noScenario" then
+            else 
+              popup.lineArray = {victory}
+            end
+				else --elseif scenarioType == "noScenario" then --commented out to be more robust
 					popup.lineArray = {victory}
-				else
+				--else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
 				if ppTraces ~= nil then
@@ -265,7 +267,7 @@ function MissionEvent(e)
             ["scenario"]=scenarioType
             }
           }
-							DoTheRestart("Missions/"..Game.modShortName.."/"..campaign[missionName].previousMission..".txt", operations)
+							genericRestart(campaign[missionName].previousMission, operations,false)
 						end
 					end
 			end
@@ -334,7 +336,7 @@ function MissionEvent(e)
               local options={["MODOPTIONS"]=currentoptions}    
               --Spring.Echo("test")
               --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
-              DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+              genericRestart(mission, options,false) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
             end
           end
       end

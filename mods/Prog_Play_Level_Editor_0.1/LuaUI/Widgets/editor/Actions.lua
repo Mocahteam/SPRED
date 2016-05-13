@@ -1,15 +1,16 @@
 VFS.Include("LuaUI/Widgets/editor/TextColors.lua")
+local lang = Spring.GetModOptions()["language"]
 
 actions_list = {
 	{
 		type = "win",
 		filter = "Game",
 		typeText = "Team wins",
-		text = "<Team> wins with state <State>.",
+		text = "<Player> wins with state <State>.",
 		attributes = {
 			{
-				text = "<Team>",
-				type = "team",
+				text = "<Player>",
+				type = "player",
 				id = "team"
 			},
 			{
@@ -23,11 +24,11 @@ actions_list = {
 		type = "lose",
 		filter = "Game",
 		typeText = "Team loses",
-		text = "<Team> loses with <State>.",
+		text = "<Player> loses with <State>.",
 		attributes = {
 			{
-				text = "<Team>",
-				type = "team",
+				text = "<Player>",
+				type = "player",
 				id = "team"
 			},
 			{
@@ -46,7 +47,8 @@ actions_list = {
 			{
 				text = "<Time>",
 				type = "number",
-				id = "time"
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -60,6 +62,19 @@ actions_list = {
 				text = "<Condition>",
 				type = "condition",
 				id = "condition"
+			}
+		}
+	},
+	{
+		type = "waitTrigger",
+		filter = "Game",
+		typeText = "Wait for trigger",
+		text = "Wait for <Trigger> to be true.",
+		attributes = {
+			{
+				text = "<Trigger>",
+				type = "text",
+				id = "trigger"
 			}
 		}
 	},
@@ -166,13 +181,14 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
-				id = "parameters"
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -189,7 +205,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{
@@ -212,7 +228,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{
@@ -240,8 +256,9 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
-				id = "parameters"
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -309,8 +326,9 @@ actions_list = {
 			},
 			{
 				text = "<Parameters>",
-				type = "text",
-				id = "parameters"
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
 		}
 	},
@@ -361,6 +379,91 @@ actions_list = {
 		}
 	},
 	{
+		type = "type_order",
+		filter = "Order",
+		typeText = "Order units of type (untargeted order)",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> with <Parameters>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
+			}
+		}
+	},
+	{
+		type = "type_orderPosition",
+		filter = "Order",
+		typeText = "Order units of type to position",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Position>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
+		type = "type_orderTarget",
+		filter = "Order",
+		typeText = "Order units of type to target",
+		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Target>.",
+		attributes = {
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "unitType"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Target>",
+				type = "unit",
+				id = "target"
+			}
+		}
+	},
+	{
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",
@@ -369,7 +472,33 @@ actions_list = {
 			{
 				text = '<Message>',
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+			}
+		}
+	},
+	{
+		type = "messagePosition",
+		filter = "Message",
+		typeText = "Display message at position",
+		text = "Display <Message> at <Position> for <Time> seconds.",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "message",
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+			},
+			{
+				text = "<Position>",
+				type ="position",
+				id = "position"
+			},
+			{
+				text = "<Time>",
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -382,7 +511,8 @@ actions_list = {
 			{
 				text = "<Message>",
 				type = "message",
-				id = "message"
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
 				text = "<Unit>",
@@ -392,7 +522,58 @@ actions_list = {
 			{
 				text = "<Time>",
 				type = "number",
-				id = "time"
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
+			}
+		}
+	},
+	{
+		type = "bubbleUnit",
+		filter = "Message",
+		typeText = "Display message in a bubble above unit",
+		text = "Display <Message> in a bubble over <Unit> for <Time> seconds",
+		attributes = {
+			{
+				text = "<Message>",
+				type = "message",
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+			},
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Time>",
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
+			}
+		}
+	},
+	{
+		type = "markerPosition",
+		filter = "Message",
+		typeText = "Display marker at position",
+		text = "Display a marker with <Message> at <Position> for <Time> seconds.",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "message",
+				id = "message",
+				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+			},
+			{
+				text = "<Position>",
+				type ="position",
+				id = "position"
+			},
+			{
+				text = "<Time>",
+				type = "number",
+				id = "time",
+				hint = "You can put 0 in this field for an infinite duration."
 			}
 		}
 	},
@@ -729,7 +910,8 @@ actions_list = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
-				id = "variable"
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Number>",
@@ -747,7 +929,8 @@ actions_list = {
 			{
 				text = "<Variable1>",
 				type = "numberVariable",
-				id = "variable1"
+				id = "variable1",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Variable2>",
@@ -775,7 +958,8 @@ actions_list = {
 			{
 				text = "<Variable1>",
 				type = "numberVariable",
-				id = "variable1"
+				id = "variable1",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Variable2>",
@@ -795,6 +979,30 @@ actions_list = {
 		}
 	},
 	{
+		type = "changeVariableRandom",
+		filter = "Variable",
+		typeText = "Change the value of a variable randomly",
+		text = "Set <Variable> to a random number between <Min> and <Max>.",
+		attributes = {
+			{
+				text = "<Variable>",
+				type = "numberVariable",
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
+			},
+			{
+				text = "<Min>",
+				type = "number",
+				id = "min"
+			},
+			{
+				text = "<Max>",
+				type = "number",
+				id = "max"
+			}
+		}
+	},
+	{
 		type = "setBooleanVariable",
 		filter = "Variable",
 		typeText = "Set boolean variable",
@@ -803,12 +1011,26 @@ actions_list = {
 			{
 				text = "<Variable>",
 				type = "booleanVariable",
-				id = "variable"
+				id = "variable",
+				hint = "Variables can be defined by going to the menu available through the event panel"
 			},
 			{
 				text = "<Boolean>",
 				type = "boolean",
 				id = "boolean"
+			}
+		}
+	},
+	{
+		type = "script",
+		filter = "Script",
+		typeText = "Execute custom script",
+		text = "Execute custom LUA script <Script>",
+		attributes = {
+			{
+				text = "<Script>",
+				type = "text",
+				id = "script"
 			}
 		}
 	}

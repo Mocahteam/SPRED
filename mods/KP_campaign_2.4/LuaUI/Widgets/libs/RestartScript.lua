@@ -1,3 +1,5 @@
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
   -- for exemple, as it happened, using a key such as mode when gamemode already exists.
@@ -96,25 +98,36 @@ local function createFromScratch(editorTables)
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
   local indexPlayer=0
   local indexIA=0
+  local nteam=0
+  
+  -- find max 
+  local max=0
+  for teamNumber,teamInformations in pairs(editorTables.teams) do
+    if teamInformations.enabled and (tonumber(teamNumber)>max)then max=tonumber(teamNumber) end
+  end
+  
+  
   for teamNumber,teamInformations in pairs(editorTables.teams) do
     local allyTeamInformation=editorTables.allyteams[teamNumber]
     -- Write first section : who controls the team (player/IA)
-    if(teamInformations.enabled)then
-      if(teamInformations.control=="computer") then
+    if(tonumber(teamNumber)<=max)then 
+      nteam=nteam+1
+      if (teamInformations.control=="player") then
+        local sectionName="PLAYER"..tostring(indexPlayer)
+        local name=teamInformations.name or string.lower(sectionName)
+        indexPlayer=indexPlayer+1
+        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
+        file=writeAttributesAndSection(file,sectionName, 1, tableController)   
+      else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
+      -- when max is attained, it's not necessary to add disabled teams anymore
         local sectionName="AI"..tostring(indexIA)
         indexIA=indexIA+1
         local name=teamInformations.name or string.lower(sectionName)
         local shortName=teamInformations.shortname or "NullAI"
         
         local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
-        file=writeAttributesAndSection(file,sectionName, 1, tableController)    
-      elseif (teamInformations.control=="player") then
-        local sectionName="PLAYER"..tostring(indexPlayer)
-        local name=teamInformations.name or string.lower(sectionName)
-        indexPlayer=indexPlayer+1
-        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
-        file=writeAttributesAndSection(file,sectionName, 1, tableController)   
-      end
+        file=writeAttributesAndSection(file,sectionName, 1, tableController) 
+      end  
       -- Write Second section : information about the team (player/IA)
       local teamSectionName="TEAM"..tostring(teamNumber)
       local arbitraryPosition=tostring(teamNumber*200+100)
@@ -131,8 +144,8 @@ local function createFromScratch(editorTables)
         local allyKey="Ally"..tostring(i-1)
         tableAllyTeam[allyKey]=u
       end
-      file=writeAttributesAndSection(file,allyTeamSectionName, 1, tableAllyTeam)
-    end      
+      file=writeAttributesAndSection(file,allyTeamSectionName, 1, tableAllyTeam)  
+    end   
   end
   file=file.."\n}"
   return file
@@ -140,6 +153,36 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
-  Spring.Echo(txtFileContent)
-  Spring.Restart("-s",txtFileContent)
+  Spring.Echo(txtFileContent)--comment the next line to see this output
+  Spring.Restart("-s",txtFileContent)--(this line, yes)
 end
+
+-- restart can be used for .editor files or .txt files giving some (or none) updating operation
+-- a bit of copy pasta in this function, could be refractored easily
+function genericRestart(missionName,operations,contextFile)
+   local updatedTxtFileContent=""
+   if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
+     if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
+        local sf=VFS.LoadFile("Missions/"..Game.modShortName.."/"..missionName..".editor")-- because we are in the context : Ingame
+        local tableEditor=json.decode(sf)
+        local txtFileContent=createFromScratch(tableEditor)
+        updatedTxtFileContent=updateValues(txtFileContent, operations)
+        Spring.Restart("-s",updatedTxtFileContent)
+     else
+        DoTheRestart("Missions/"..Game.modShortName.."/"..missionName.."txt", operations)  
+     end
+   else -- meaning Not in game, we just have access to the file name
+    if (string.sub(missionName, -3, -1)=="txt")then      
+      DoTheRestart(missionName, operations)  
+    elseif (string.sub(missionName, -6, -1)=="editor")then
+      local sf=VFS.LoadFile(missionName)
+      local tableEditor=json.decode(sf)
+      local txtFileContent=createFromScratch(tableEditor)
+      updatedTxtFileContent=updateValues(txtFileContent, operations)
+      Spring.Restart("-s",updatedTxtFileContent)
+    else
+      Spring.Echo("Warning, pbm in restart script")
+    end   
+  end
+end   
+      

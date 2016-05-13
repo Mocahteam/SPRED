@@ -144,11 +144,29 @@ function gadget:Shutdown()
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam) 
-  Spring.Echo("Source Gadget")
   if(attackerTeam~=nil)and(attackerID~=nil)then
     local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}   
     Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
   end
+end
+
+function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, projectileID, attackerID, attackerDefID, attackerTeam)
+  if(unitID~=nil)then
+    local damageTable={attackedUnit=unitID,damage=damage, attacker=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+    Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
+    --Spring.Echo("damage sent")
+  end
+end
+
+--function gadget:UnitFromFactory(unitID, unitDefID, unitTeam, factID, factDefID, userOrders) 
+--    local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+--    Spring.SendLuaRulesMsg("unitCreation"..json.encode(damageTable))
+--    Spring.Echo("unitCreatedFromFactory")
+--end
+
+function gadget:UnitFinished(unitID, unitDefID, unitTeam)
+    local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+    Spring.SendLuaRulesMsg("unitCreation"..json.encode(damageTable))
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -163,9 +181,13 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
+    mouseDisabled = true
+  elseif arg1 == "mouseEnabled" then
     mouseDisabled = false
+
 --    mouseDisabled = arg2
   elseif arg1 == "enableCameraAuto" then
+    --Script.LuaUI.DisplayMessageAtPosition("teeeeeeest", 1200, Spring.GetGroundHeight(1200,300), 300, 10)
     if Script.LuaUI("CameraAuto") then
       local specialPositions = {}
       for k, v in spairs(SYNCED.cameraAuto["specialPositions"]) do
@@ -173,6 +195,14 @@ function gadget:RecvFromSynced(...)
       end
       Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
     end
+
+  elseif arg1 == "disableCameraAuto" then
+    Spring.Echo("try to desab")
+    if Script.LuaUI("CameraAuto") then
+      Spring.Echo("try to desab_2")
+      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
+    end
+    
   elseif arg1 == "TutorialEvent" then
     if Script.LuaUI("TutorialEvent") then
       Script.LuaUI.TutorialEvent() -- function defined and registered in mission_gui widget
@@ -185,6 +215,22 @@ function gadget:RecvFromSynced(...)
         end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
     end
+  elseif arg1=="centerCamera" then
+    --Spring.Echo("I tried Bonnie, I tried")
+    local state = Spring.GetCameraState()
+    local pos=json.decode(arg2)
+    state.px=pos.x
+    state.pz=pos.z
+    state.height = 800
+    Spring.SetCameraState(state, 2)  
+  elseif arg1 == "DisplayMessageAboveUnit" then
+    local p=json.decode(arg2)
+    Spring.Echo("try to on unit")
+    Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
+  elseif arg1 == "displayMessageOnPosition" then
+    --Spring.Echo("try to on pos")
+    local p=json.decode(arg2)
+    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time)    
   end
 end
 

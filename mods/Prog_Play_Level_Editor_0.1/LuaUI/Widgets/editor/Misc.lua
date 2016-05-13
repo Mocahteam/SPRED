@@ -87,6 +87,34 @@ function splitString(inputstr, sep)
 end
 
 -----------------------
+-- Generate a name for a file from a string
+-----------------------
+function generateSaveName(name)
+	local saveName = name
+	saveName = string.gsub(name, " ", "_")
+	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
+	return saveName
+end
+
+-----------------------
+-- Copy an array
+-----------------------
+function deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+-----------------------
 -- Shows units information above unit
 -----------------------
 function showUnitInformation(u)

@@ -140,19 +140,23 @@ function gadget:GameFrame( frameNumber )
 		-- Delete units at the beginning
 		if initialize and frameNumber > 0 then
 			local cmdList = {}
+			local cmdListUnit = {}
 			for id, unitDef in pairs(UnitDefs) do
 				local unitType = unitDef.name
+				cmdListUnit[unitType] = {}
 				local id = Spring.CreateUnit(unitType, 100, Spring.GetGroundHeight(100, 100), 100, "s", 0)
 				local cmds = Spring.GetUnitCmdDescs(id)
 				for i, cmd in ipairs(cmds) do
 					if cmd.id < 0 then
 						cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+						cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
 					else
 						cmdList[cmd.name] = cmd.id
+						cmdListUnit[unitType][cmd.name] = cmd.id
 					end
 				end
 			end
-			SendToUnsynced("commands".."++"..json.encode(cmdList))
+			SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
 			local units = Spring.GetAllUnits()
 			if units.n ~= 0 then
 				for i, u in ipairs(units) do
@@ -202,6 +206,7 @@ function gadget:GameFrame( frameNumber )
 				Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
 			end
 			SendToUnsynced("requestSave")
+			SendToUnsynced("requestUpdate")
 			transferUnits = false
 		-- ROTATE UNITS
 		elseif rotateUnits then
@@ -238,6 +243,8 @@ function gadget:GameFrame( frameNumber )
 			for i, u in ipairs(unitsInfo) do
 				unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
 				Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
+				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.STOP, {}, {})
+				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.FIRE_STATE, {0}, {})
 			end
 			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
 			loadMap = false
@@ -265,10 +272,13 @@ function gadget:RecvFromSynced(msg)
 		Script.LuaUI.requestSave()
 	end
 	if msgContents[1] == "commands" then
-		Script.LuaUI.getCommandsList(msgContents[2])
+		Script.LuaUI.getCommandsList(msgContents[2], msgContents[3])
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2])
+	end
+	if msgContents[1] == "requestSave" then
+		Script.LuaUI.requestUnitListUpdate()
 	end
 end
 
