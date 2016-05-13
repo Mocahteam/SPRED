@@ -1001,7 +1001,7 @@ else
 				},
 				{
 					text = "<Command>",
-					type = "command",
+					type = "commandUnit",
 					id = "command"
 				}
 			}

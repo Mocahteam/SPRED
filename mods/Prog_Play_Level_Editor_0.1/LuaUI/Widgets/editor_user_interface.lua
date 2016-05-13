@@ -111,7 +111,7 @@ local zonesAttributesButton -- Button to show the window to change special attri
 
 -- Forces variables
 local forcesTabs = {} -- Top frame buttons
-local teamConfigWindow, allyTeamsWindow -- Windows in the force frame
+local forcesWindows = {} -- Windows in the force frame
 local teamConfigPanels = {} -- Contains UI elements to change team options
 local allyTeams = {} -- List of ally teams
 local allyTeamsSize = {} -- Respective sizes of ally teams
@@ -194,6 +194,7 @@ local forceUpdateVariables = false -- Force variables update
 local commandsToID = {} -- Get the ID of a command knowing its name
 local idToCommands = {} -- Get the name of a command knowing its ID
 local sortedCommandsList = {} -- Sorted list of all the commands
+local sortedCommandsListUnit = {} -- Sorted list of all the commands filtered by unit
 local selectCreatedUnitsWindow -- Window to select units created through an action
 local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
@@ -595,13 +596,13 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function clearForceWindow()
-	windows['forceWindow']:RemoveChild(teamConfigWindow)
-	windows['forceWindow']:RemoveChild(allyTeamsWindow)
+	windows['forceWindow']:RemoveChild(forcesWindows.teamConfigWindow)
+	windows['forceWindow']:RemoveChild(forcesWindows.allyTeamsWindow)
 end
 function teamConfig() -- Show the team config panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
-	windows['forceWindow']:AddChild(teamConfigWindow)
+	windows['forceWindow']:AddChild(forcesWindows.teamConfigWindow)
 	for k, p in pairs(teamConfigPanels) do -- Force update on panels
 		p:InvalidateSelf()
 	end
@@ -626,7 +627,7 @@ end
 function allyTeam() -- Show the allyteam panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
-	windows['forceWindow']:AddChild(allyTeamsWindow)
+	windows['forceWindow']:AddChild(forcesWindows.allyTeamsWindow)
 	for i, t in ipairs(teamStateMachine.states) do -- Set the teams names
 		selectAllyTeamsButtons[t]:SetCaption(teamName[t])
 	end
@@ -769,8 +770,8 @@ function initForcesWindow()
 	closeButton.font.color = {1, 0, 0, 1}
 	
 	-- Team Config Window
-	teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	local teamConfigScrollPanel = addScrollPanel(teamConfigWindow, '0%', '0%', '100%', '100%')
+	forcesWindows.teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	local teamConfigScrollPanel = addScrollPanel(forcesWindows.teamConfigWindow, '0%', '0%', '100%', '100%')
 	for i, team in ipairs(teamStateMachine.states) do
 		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
 		teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '5%', '30%', '10%', '40%', "left", EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), {teams[team].red, teams[team].green, teams[team].blue, 1})
@@ -834,15 +835,15 @@ function initForcesWindow()
 	end
 	
 	-- Ally Team Window
-	allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
-	addLabel(allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30, "center", nil, "center")
-	teamListScrollPanel = addScrollPanel(allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
+	forcesWindows.allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	addLabel(forcesWindows.allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30, "center", nil, "center")
+	teamListScrollPanel = addScrollPanel(forcesWindows.allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
 	for i, team in ipairs(teamStateMachine.states) do
 		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
 		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
 		local w = tostring(80 / math.ceil(teamCount/2)).."%"
 		local h = "50%"
-		allyTeamPanels[team] = addWindow(allyTeamsWindow, x, y, w, h)
+		allyTeamPanels[team] = addWindow(forcesWindows.allyTeamsWindow, x, y, w, h)
 		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', teamName[team], function() selectedAllyTeam = team end)
 		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
 		selectAllyTeamsButtons[team].font.size = 20
@@ -2102,13 +2103,13 @@ function updateAllyTeamPanels()
 	end
 	
 	if updateAllyTeam then
-		removeElements(allyTeamsWindow, allyTeamPanels, false)
+		removeElements(forcesWindows.allyTeamsWindow, allyTeamPanels, false)
 		removeElements(teamListScrollPanel, allyTeamsListButtons, true)
 		removeElements(teamListScrollPanel, allyTeamsListLabels, true)
 		count = 0
 		for i, team in ipairs(teamStateMachine.states) do
 			if enabledTeams[team] then
-				allyTeamsWindow:AddChild(allyTeamPanels[team])
+				forcesWindows.allyTeamsWindow:AddChild(allyTeamPanels[team])
 				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
 				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				count = count + 1
@@ -2642,6 +2643,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		or attr.type == "condition"
 		or attr.type == "toggle"
 		or attr.type == "command"
+		or attr.type == "commandUnit"
 		or attr.type == "boolean"
 		or attr.type == "operator"
 	then
@@ -2718,6 +2720,18 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBoxItems = { "enabled", "disabled" }
 		elseif attr.type == "command" then
 			comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+		elseif attr.type == "commandUnit" then
+			if a.params["unit"] then
+				if type(a.params["unit"]) == "number" then
+					local uDefID = Spring.GetUnitDefID(a.params["unit"])
+					local unitType = UnitDefs[uDefID].name
+					comboBoxItems = sortedCommandsListUnit[unitType] or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+				else
+					comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+				end
+			else
+				comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+			end
 		elseif attr.type == "boolean" then
 			comboBoxItems = { "true", "false" }
 		elseif attr.type == "operator" then
@@ -2753,7 +2767,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					end
 				end
 			}
-		elseif attr.type == "command" then
+		elseif attr.type == "command" or attr.type == "commandUnit" then
 			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 		elseif attr.type == "zone" then
 			comboBox.OnSelect = { 
@@ -2807,7 +2821,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 						end
 					end
 				end
-			elseif attr.type == "command" then
+			elseif attr.type == "command" or attr.type == "commandUnit" then
 				for i, item in ipairs(comboBox.items) do
 					if idToCommands[a.params[attr.id]] == item then
 						comboBox:Select(i)
@@ -3444,13 +3458,21 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 		end
 	end
 end
-function getCommandsList(encodedList)
+function getCommandsList(encodedList, encodedUnitList)
 	commandsToID = json.decode(encodedList)
 	for c, id in pairs(commandsToID) do
 		table.insert(sortedCommandsList, c)
 		idToCommands[id] = c
 	end
 	table.sort(sortedCommandsList)
+	local commandsUnitList = json.decode(encodedUnitList)
+	for u, cl in pairs(commandsUnitList) do
+		sortedCommandsListUnit[u] = {}
+		for c, id in pairs(cl) do
+			table.insert(sortedCommandsListUnit[u], c)
+		end
+		table.sort(sortedCommandsListUnit[u])
+	end
 end
 function showCreatedUnitsWindow()
 	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)

@@ -1403,7 +1403,7 @@ end
 function FadeConfirmationMessage(delta)
 	if UI.Scenario then
 		if UI.Scenario.ConfirmationMessage then
-			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/2)
+			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/6)
 			UI.Scenario.ConfirmationMessage:InvalidateSelf()
 			if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
 				UI.Scenario.ConfirmationMessage:Dispose()

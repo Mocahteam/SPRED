@@ -180,7 +180,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{
@@ -203,7 +203,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{
@@ -226,7 +226,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "command",
+				type = "commandUnit",
 				id = "command"
 			},
 			{

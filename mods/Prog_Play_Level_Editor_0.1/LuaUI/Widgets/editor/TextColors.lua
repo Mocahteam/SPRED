@@ -14,6 +14,7 @@ textColors = {
 	condition = "\255\128\255\128",
 	toggle = "\255\255\128\0",
 	command = "\255\0\128\255",
+	commandUnit = "\255\0\128\255",
 	text = "\255\128\0\255",
 	message = "\255\128\0\255",
 	parameters = "\255\128\0\255",
