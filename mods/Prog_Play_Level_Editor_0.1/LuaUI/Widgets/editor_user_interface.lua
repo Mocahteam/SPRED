@@ -233,6 +233,7 @@ local variablesWindowToBeShown = false -- same for the variables window
 local configureWindowToBeShown = false -- same for the configure event window
 local unitGroupsWindowToBeShown = false -- same for the unit groups window
 local toSave = false -- Synchronised save when moving units for example
+local NeedToBeSaved = true -- Know when changes happened
 
 -- Mouse variables
 local mouseMove = false
@@ -3926,6 +3927,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	end
 	
 	loading = false
+	NeedToBeSaved = true
 end
 function saveMap()
 	if windows["saveWindow"] then
@@ -3970,6 +3972,7 @@ function saveMap()
 	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
+	NeedToBeSaved = false
 end
 function newMapFrame()
 	if windows["newMapWindow"] then
@@ -3999,30 +4002,42 @@ function loadMapFrame()
 		Screen0:RemoveChild(windows["loadWindow"])
 		windows["loadWindow"]:Dispose()
 	end
-	windows["loadWindow"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
-	addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
-	local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
-	delbut.font.color = {1, 0, 0, 1}
-	local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
-	if #levelList == 0 then
-		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
-	else
-		local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
-		local count = 0
-		for i, l in ipairs(levelList) do
-			local name = string.gsub(l, "pp_editor\\missions\\", "")
-			name = string.gsub(name, ".editor", "")
-			local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
-			if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
-				local displayedName = string.gsub(name, "_", " ")
-				addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
-				count = count + 1
+	local showLoadWindow = function()
+		windows["loadWindow"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
+		addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
+		local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
+		delbut.font.color = {1, 0, 0, 1}
+		local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
+		if #levelList == 0 then
+			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
+		else
+			local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
+			local count = 0
+			for i, l in ipairs(levelList) do
+				local name = string.gsub(l, "pp_editor\\missions\\", "")
+				name = string.gsub(name, ".editor", "")
+				local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
+				if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
+					local displayedName = string.gsub(name, "_", " ")
+					addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
+					count = count + 1
+				end
+			end
+			if count == 0 then
+				scrollPanel:Dispose()
+				addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND_GAME, 16, {1, 0, 0, 1})
 			end
 		end
-		if count == 0 then
-			scrollPanel:Dispose()
-			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND_GAME, 16, {1, 0, 0, 1})
-		end
+	end
+	if NeedToBeSaved then
+		windows["loadWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+		addLabel(windows["loadWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
+		addLabel(windows["loadWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGES_HELP, 14)
+		addButton(windows["loadWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() saveMapFrame() end)
+		addButton(windows["loadWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() showLoadWindow() end)
+		return
+	else
+		showLoadWindow()
 	end
 end
 function saveMapFrame()
@@ -4057,12 +4072,6 @@ function saveMapFrame()
 			confirmSave()
 		end
 	end
-end
-function exportMapFrame()
-	exportMap()
-end
-function settingsFrame()
-
 end
 function backToMenuFrame()
 	if windows["backToMenu"] then
@@ -4241,6 +4250,7 @@ function encodeSaveTable()
 	return savedTable
 end
 function saveState()
+	NeedToBeSaved = true
 	if loadLock and not initialize then
 		local savedTable = encodeSaveTable()
 		savedTable = json.decode(json.encode(savedTable))
@@ -4252,6 +4262,7 @@ function saveState()
 	end
 end
 function loadState(direction)
+	NeedToBeSaved = true
 	loadLock = false
 	saveCurrentEvent = currentEvent
 	saveCurrentAction = currentAction
@@ -4883,10 +4894,6 @@ function widget:KeyPress(key, mods)
 	-- CTRL + N : new map
 	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
 		newMapFrame()
-		return true
-	-- CTRL + E : export map
-	elseif key == Spring.GetKeyCode("e") and mods.ctrl then
-		exportMapFrame()
 		return true
 	-- CTRL + Z
 	elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.2 then
