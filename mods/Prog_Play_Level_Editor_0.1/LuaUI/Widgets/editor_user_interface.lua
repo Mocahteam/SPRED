@@ -553,32 +553,24 @@ function mapSettingsFrame()
 		-- Set parameters to UI elements
 		mapNameEditBox:SetText(mapDescription.mapName)
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
-		if cameraAutoState == "enabled" and not cameraAutoButton.state.chosen then
-			cameraAutoButton.state.chosen = true
+		if cameraAutoState == "enabled" then
 			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-		elseif cameraAutoState == "disabled" and cameraAutoButton.state.chosen then
-			cameraAutoButton.state.chosen = false
+		elseif cameraAutoState == "disabled" then
 			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 		end
-		if autoHealState == "enabled" and not autoHealButton.state.chosen then
-			autoHealButton.state.chosen = true
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-		elseif autoHealState == "disabled" and autoHealButton.state.chosen then
-			autoHealButton.state.chosen = false
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+		if autoHealState == "enabled" then
+			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+		elseif autoHealState == "disabled" then
+			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 		end
-		if mouseState == "enabled" and not mouseStateButton.state.chosen then
-			mouseStateButton.state.chosen = true
+		if mouseState == "enabled" then
 			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
-		elseif mouseState == "disabled" and mouseStateButton.state.chosen then
-			mouseStateButton.state.chosen = false
+		elseif mouseState == "disabled" then
 			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 		end
-		if minimapState == "enabled" and not minimapButton.state.chosen then
-			minimapButton.state.chosen = true
+		if minimapState == "enabled" then
 			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
-		elseif minimapState == "disabled" and minimapButton.state.chosen then
-			minimapButton.state.chosen = false
+		elseif minimapState == "disabled" then
 			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 		end
 		widgetsButton.state.chosen = false -- Reset the state of this button
@@ -1014,10 +1006,8 @@ function initMapSettingsWindow()
 	mapBriefingTextBox.font.shadow = false
 	
 	cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	cameraAutoButton.state.chosen = true
 	cameraAutoButton.OnClick = {
 		function()
-			cameraAutoButton.state.chosen = not cameraAutoButton.state.chosen
 			if cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
 				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 				cameraAutoState = "disabled"
@@ -1029,10 +1019,8 @@ function initMapSettingsWindow()
 	}
 	
 	autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
-	autoHealButton.state.chosen = false
 	autoHealButton.OnClick = {
 		function()
-			autoHealButton.state.chosen = not autoHealButton.state.chosen
 			if autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
 				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 				autoHealState = "disabled"
@@ -1044,10 +1032,8 @@ function initMapSettingsWindow()
 	}
 	
 	mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	mouseStateButton.state.chosen = false
 	mouseStateButton.OnClick = {
 		function()
-			mouseStateButton.state.chosen = not mouseStateButton.state.chosen
 			if mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
 				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 				mouseState = "disabled"
@@ -1059,10 +1045,8 @@ function initMapSettingsWindow()
 	}
 	
 	minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
-	minimapButton.state.chosen = false
 	minimapButton.OnClick = {
 		function()
-			minimapButton.state.chosen = not minimapButton.state.chosen
 			if minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
 				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 				minimapState = "disabled"
