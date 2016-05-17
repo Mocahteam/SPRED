@@ -50,8 +50,8 @@ function DisplayTextAtScreenPosition(x, y, texte)
     local tableLine=TurnToIntoLines(texte)
     local nLines=table.getn(tableLine)
     for i, m in ipairs(tableLine) do
-      local w = gl.GetTextWidth(texte)*s
-      gl.Text(m, x-50, y+(nLines-i)*s, s, "s")
+      local w = gl.GetTextWidth(m)*s
+      gl.Text(m, x-(w/2), y+(nLines-i)*s, s, "s")
     end
 end
 
