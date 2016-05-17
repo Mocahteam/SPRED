@@ -617,7 +617,7 @@ function widget:Initialize()
 	
 	-- disable console
 	Spring.SendCommands("console 0")
-	-- minimize minimap
+	Spring.SendCommands("tooltip 0")
 	Spring.SendCommands("minimap min")
 	
 	-- enable editor widgets only in editor, too hardcoded
