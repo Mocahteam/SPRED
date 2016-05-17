@@ -230,7 +230,19 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "displayMessageOnPosition" then
     --Spring.Echo("try to on pos")
     local p=json.decode(arg2)
-    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time)    
+    
+  elseif arg1 == "changeWidgetState" then
+    -- This may be not the better approach to activate/deactivate widgets
+    -- as an activated widget will be reloaded. These special settings are processed at frame0
+    -- so the side effects may not be harmful. If they do are harmful, then changeWidgetState from widget_activator.lua
+    -- should be called. However, registerGlobals do not work as registerGlobals can't work because of the necessary option handler = true
+    -- Using a Callins such as :KeyPress could be a workaround to use the function changeWidgetState whenever it's necessary
+    local p=json.decode(arg2)
+    Spring.Echo("try to change widget Activation")
+    Spring.Echo(p.widgetName)
+    Spring.Echo(p.activation)
+    if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
+    if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
   end
 end
 

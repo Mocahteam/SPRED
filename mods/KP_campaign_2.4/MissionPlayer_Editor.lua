@@ -53,8 +53,8 @@ local function intersection(list1,list2)
       end
     end
   end
-  Spring.Echo("resuilt of interset")
-  Spring.Echo(json.encode(inters))
+  --Spring.Echo("resuilt of interset")
+  --Spring.Echo(json.encode(inters))
   return inters
 end
 
@@ -1064,6 +1064,14 @@ local function parseJson(jsonFile)
   --Spring.Echo("we try to decode"..jsonFile)
   mission=json.decode(jsonFile)
   
+  -- desactivate widget
+  -- This should be done ASAP
+  for i=1, table.getn(mission.description.widgets) do
+    local widgetName=mission.description.widgets[i].name
+    local activation=mission.description.widgets[i].active
+    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+  end 
+  
   return true
 end
 
@@ -1173,7 +1181,8 @@ if(mission.description.cameraAuto=="enabled") then
   _G.cameraAuto = nil
 end
 local isautoHealGlobal=(mission.description.autoHeal=="enabled")
-  
+
+ 
  -------------------------------
  ----------ARMIES---------------
  -------------------------------
