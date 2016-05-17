@@ -79,6 +79,32 @@ actions_list = {
 		}
 	},
 	{
+		type = "enableWidget",
+		filter = "Game",
+		typeText = "Enable Widget",
+		text = "Enable <Widget>.",
+		attributes = {
+			{
+				text = "<Widget>",
+				type = "widget",
+				id = "widget"
+			}
+		}
+	},
+	{
+		type = "disableWidget",
+		filter = "Game",
+		typeText = "Disable Widget",
+		text = "Disable <Widget>.",
+		attributes = {
+			{
+				text = "<Widget>",
+				type = "widget",
+				id = "widget"
+			}
+		}
+	},
+	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",

@@ -2641,6 +2641,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		or attr.type == "commandUnit"
 		or attr.type == "boolean"
 		or attr.type == "operator"
+		or attr.type == "widget"
 	then
 		local comboBoxItems = {}
 		if attr.type == "unitType" then
@@ -2725,6 +2726,10 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBoxItems = { "true", "false" }
 		elseif attr.type == "operator" then
 			comboBoxItems = { "+", "-", "*", "/", "%" }
+		elseif attr.type == "widget" then
+			for i, w in ipairs(customWidgets) do
+				table.insert(comboBoxItems, w.name)
+			end
 		end
 		local comboBox = addComboBox(scrollPanel, '30%', y, '40%', 30, comboBoxItems)
 		if attr.type == "team" or attr.type == "player" then

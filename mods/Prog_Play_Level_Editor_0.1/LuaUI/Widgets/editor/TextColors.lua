@@ -19,7 +19,8 @@ textColors = {
 	text = "\255\128\0\255",
 	message = "\255\128\0\255",
 	parameters = "\255\128\0\255",
-	boolean = "\255\0\255\255"
+	boolean = "\255\0\255\255",
+	widget = "\255\128\255\255"
 }
 
 colorTable = {
