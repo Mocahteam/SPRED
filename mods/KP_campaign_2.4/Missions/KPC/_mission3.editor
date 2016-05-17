@@ -74,7 +74,7 @@
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":true
+				"active":false
 			},
 			{
 				"desc":"Teach you to play the game,
@@ -498,14 +498,9 @@
 					"name":"Action15",
 					"params":{
 						"message":[
-							"Muhahah",
-							"C'est presque trop facile !",
-							"Tu peux courir ; mais m'échapper tu ne peux",
-							"Quelle aubaine !",
-							"C'est bientôt la fin cher ami",
-							"Je suis un tueur né",
-							"Je me délecte de ton désespoir",
-							"Où est ton berger petite brebis égarée ?" 
+							"Muhahah C'est presque trop facile ! Tu peux courir ; mais m'échapper tu ne peux",
+							"Quelle aubaine ! C'est bientôt la fin cher ami. Je suis un tueur né",
+							"Je me délecte de ton désespoir. Où est ton berger petite brebis égarée ?"
 						],
 						"time":2,
 						"unit":1871
