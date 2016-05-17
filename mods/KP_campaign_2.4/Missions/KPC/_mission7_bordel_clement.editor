@@ -1,20 +1,6 @@
 {
 	"zones":[
-		{
-			"type":"Rectangle",
-			"blue":0.80613851547241,
-			"x2":440,
-			"z1":808,
-			"z2":1208,
-			"x1":64,
-			"marker":true,
-			"name":"point de ralliement (260-1000)",
-			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
-			"alwaysInView":true,
-			"red":0.51526319980621
-		} 
+		 
 	],
 	"allyteams":{
 		"1":[
@@ -51,9 +37,9 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 7\\n \\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR (ASSEMBLER) du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
-		"name":"_mission5",
+		"name":"_mission7_bordel_clement",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
@@ -248,49 +234,52 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"Mission 7\n \n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR (ASSEMBLER) du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
-		"saveName":"_mission5",
+		"saveName":"_mission7_bordel_clement",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
 			"actions":[
 				{
-					"id":0,
-					"type":"win",
-					"name":"Action0",
+					"id":1,
+					"type":"messageGlobal",
+					"name":"Action1",
 					"params":{
-						"team":0,
-						"outputState":"wellPlaced"
+						"message":[
+							"WIIIIIN" 
+						]
 					}
 				} 
 			],
-			"name":"WellPlaced",
-			"trigger":"",
-			"id":0,
+			"name":"Event1",
+			"actionTotal":1,
+			"id":1,
 			"conditions":[
 				{
-					"id":3,
-					"type":"team_zone",
-					"name":"ConditionPlaced",
+					"id":4,
+					"type":"team_hp",
+					"name":"Condition4",
 					"params":{
 						"team":0,
-						"number":{
-							"number":1,
-							"comparison":"all"
+						"hp":{
+							"number":99,
+							"comparison":"atleast"
 						},
-						"zone":1
+						"number":{
+							"comparison":"all"
+						}
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":1
+			"trigger":""
 		},
 		{
 			"actions":[
 				{
-					"id":1,
+					"id":2,
 					"type":"lose",
 					"name":"endbydead",
 					"params":{
@@ -299,13 +288,12 @@
 					}
 				} 
 			],
-			"trigger":"",
 			"name":"teamOIsDead",
-			"repetition":false,
-			"id":1,
+			"actionTotal":1,
+			"id":2,
 			"conditions":[
 				{
-					"id":4,
+					"id":5,
 					"type":"team_dead",
 					"name":"team0isdead",
 					"params":{
@@ -317,223 +305,55 @@
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":1
+			"trigger":""
 		},
 		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotSimultaneous",
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"movetest",
 			"repetition":false,
-			"trigger":"Condition6 and not allMove and not Condition13",
+			"actionTotal":2,
 			"conditions":[
 				{
 					"id":6,
-					"type":"booleanVariable",
+					"type":"start",
 					"name":"Condition6",
-					"params":{
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":8,
-					"type":"team_order",
-					"name":"allMove",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"all"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":13,
-					"type":"booleanVariable",
-					"name":"Condition13",
-					"params":{
-						"variable":"units_lag"
-					}
+					"params":[
+						 
+					]
 				} 
 			],
 			"actions":[
 				{
-					"id":5,
-					"type":"messageGlobal",
-					"name":"Action5",
+					"id":3,
+					"type":"unit_orderPosition",
+					"name":"Action3",
 					"params":{
-						"message":[
-							"Votre armée n'est pas très synchronisée,
-							\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t il ne faut pas perdre de temps" 
-						]
-					}
-				},
-				{
-					"id":6,
-					"type":"wait",
-					"name":"Wt",
-					"params":{
-						"time":3
+						"command":10,
+						"position":{
+							"z":932,
+							"x":621
+						},
+						"unit":4811
 					}
 				},
 				{
 					"id":4,
-					"type":"lose",
+					"type":"unit_orderTarget",
 					"name":"Action4",
 					"params":{
-						"team":0,
-						"outputState":"not simulatenous"
-					}
-				} 
-			],
-			"id":2
-		},
-		{
-			"actions":[
-				{
-					"id":2,
-					"type":"wait",
-					"name":"wait",
-					"params":{
-						"time":4
-					}
-				},
-				{
-					"id":3,
-					"type":"setBooleanVariable",
-					"name":"Action3",
-					"params":{
-						"boolean":"true",
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":10,
-					"type":"wait",
-					"name":"wait2",
-					"params":{
-						"time":4
-					}
-				},
-				{
-					"id":11,
-					"type":"setBooleanVariable",
-					"name":"Action11",
-					"params":{
-						"boolean":"true",
-						"variable":"units_lag"
-					}
-				} 
-			],
-			"trigger":"",
-			"name":"unitsAreMoving",
-			"repetition":false,
-			"id":3,
-			"conditions":[
-				{
-					"id":5,
-					"type":"team_order",
-					"name":"Condition5",
-					"params":{
 						"command":10,
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0
+						"target":4811,
+						"unit":8738
 					}
 				} 
 			],
-			"conditionTotal":1,
-			"actionTotal":4
-		},
-		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotWellPlaced",
-			"repetition":false,
-			"trigger":"not Condition3 and not move and Condition12",
-			"conditions":[
-				{
-					"id":10,
-					"type":"team_zone",
-					"name":"Condition3",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"zone":1
-					}
-				},
-				{
-					"id":11,
-					"type":"team_order",
-					"name":"move",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":12,
-					"type":"booleanVariable",
-					"name":"Condition12",
-					"params":{
-						"variable":"unitsAreMoving"
-					}
-				} 
-			],
-			"actions":[
-				{
-					"id":7,
-					"type":"messageGlobal",
-					"name":"Action7",
-					"params":{
-						"message":[
-							"Mauvais placement" 
-						]
-					}
-				},
-				{
-					"id":8,
-					"type":"wait",
-					"name":"Action8",
-					"params":{
-						"time":3
-					}
-				},
-				{
-					"id":9,
-					"type":"lose",
-					"name":"Action9",
-					"params":{
-						"team":0,
-						"outputState":"wrongSpot"
-					}
-				} 
-			],
-			"id":4
+			"id":3
 		} 
 	],
 	"variables":[
-		{
-			"id":0,
-			"type":"boolean",
-			"name":"unitsAreMoving",
-			"initValue":"false"
-		},
-		{
-			"id":1,
-			"type":"boolean",
-			"name":"units_lag",
-			"initValue":"false"
-		} 
+		 
 	],
 	"teams":{
 		"1":{
@@ -631,7 +451,7 @@
 			"color":{
 				"green":0.5,
 				"blue":1,
-				"red":0.5
+				"red":1
 			},
 			"name":"Team 0",
 			"control":"player"
@@ -639,20 +459,99 @@
 	},
 	"groups":[
 		{
-			"name":"da",
+			"name":"tetrsfg",
 			"units":[
-				 
+				4811,
+				8738 
 			]
 		} 
 	],
 	"units":[
 		{
 			"type":"byte",
-			"id":9137,
+			"id":10772,
 			"position":{
 				"y":130,
-				"x":294,
-				"z":1862
+				"x":255,
+				"z":1084
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":4811,
+			"position":{
+				"y":115.99993133545,
+				"x":440,
+				"z":927
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":8738,
+			"position":{
+				"y":116,
+				"x":359,
+				"z":949
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":789,
+			"position":{
+				"y":116,
+				"x":335,
+				"z":1012
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14493,
+			"position":{
+				"y":116,
+				"x":379,
+				"z":1071
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":1667,
+			"position":{
+				"y":116,
+				"x":452,
+				"z":1056
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":4280,
+			"position":{
+				"y":116,
+				"x":384,
+				"z":990
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -661,89 +560,11 @@
 		},
 		{
 			"type":"byte",
-			"id":11316,
+			"id":15106,
 			"position":{
 				"y":130,
-				"x":354,
-				"z":1748
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":3274,
-			"position":{
-				"y":270.39453125,
-				"x":1356,
-				"z":1370
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13526,
-			"position":{
-				"y":270.39453125,
-				"x":1424,
-				"z":1436
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":5269,
-			"position":{
-				"y":270.39453125,
-				"x":1351,
-				"z":1451
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14973,
-			"position":{
-				"y":270.39453125,
-				"x":1307,
-				"z":1392
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":4048,
-			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1329
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13710,
-			"position":{
-				"y":270.39453125,
-				"x":1401,
-				"z":1377
+				"x":172,
+				"z":980
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -752,15 +573,28 @@
 		},
 		{
 			"type":"byte",
-			"id":2984,
+			"id":4720,
 			"position":{
 				"y":130,
-				"x":437,
-				"z":1852
+				"x":112,
+				"z":1094
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
+			"team":0
+		},
+		{
+			"type":"assembler",
+			"id":5979,
+			"position":{
+				"y":116,
+				"x":272,
+				"z":906
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
 			"team":0
 		} 
 	]

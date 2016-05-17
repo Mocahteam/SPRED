@@ -4,7 +4,7 @@
 	],
 	"allyteams":{
 		"1":[
-			0 
+			 
 		],
 		"2":[
 			 
@@ -37,9 +37,9 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 8\\n \\n \\nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque à la position (1792 ; 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"minimap":"disabled",
-		"name":"_mission8",
+		"name":"_mission10",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
@@ -145,6 +145,11 @@
 				"active":false
 			},
 			{
+				"desc":"Widget selection widget",
+				"name":"WidgetSelector",
+				"active":false
+			},
+			{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
 				"active":false
@@ -234,88 +239,402 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 8\n \n \nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque à la position (1792 ; 256).\n \nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\n \nBonne chance.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"mouse":"disabled",
-		"saveName":"_mission8",
+		"saveName":"_mission10",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
-			"actions":[
-				{
-					"id":1,
-					"type":"messageGlobal",
-					"name":"Action1",
-					"params":{
-						"message":[
-							"WIIIIIN" 
-						]
-					}
-				} 
-			],
-			"name":"Event1",
-			"actionTotal":1,
-			"id":1,
-			"conditions":[
-				{
-					"id":4,
-					"type":"team_dead",
-					"name":"Condition4",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"team":2
-					}
-				} 
-			],
+			"comment":"",
+			"trigger":"",
 			"conditionTotal":1,
-			"trigger":""
-		},
-		{
-			"actions":[
-				{
-					"id":2,
-					"type":"lose",
-					"name":"endbydead",
-					"params":{
-						"team":0,
-						"outputState":"endByDead_5"
-					}
-				} 
-			],
-			"actionTotal":1,
-			"name":"teamOIsDead",
+			"name":"Event0",
 			"repetition":false,
-			"id":1,
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":5,
-					"type":"team_dead",
-					"name":"team0isdead",
+					"id":0,
+					"type":"elapsedTime",
+					"name":"Condition0",
 					"params":{
 						"number":{
-							"comparison":"all"
-						},
-						"team":0
+							"number":3,
+							"comparison":"exactly"
+						}
 					}
 				} 
 			],
-			"conditionTotal":1,
-			"trigger":""
+			"actions":[
+				{
+					"id":0,
+					"type":"changeVariableRandom",
+					"name":"Action0",
+					"params":{
+						"min":1,
+						"variable":"v1",
+						"max":4
+					}
+				} 
+			],
+			"id":0
 		},
 		{
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"passiveUnitsAtStart",
+			"name":"AttackWest",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":1,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":1,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":1,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"command":10,
+						"team":2,
+						"position":{
+							"x":288,
+							"z":1026
+						}
+					}
+				} 
+			],
+			"id":1
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackNorth",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":2,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":2,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":2,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"team":2,
+						"command":10,
+						"position":{
+							"x":1012,
+							"z":272
+						}
+					}
+				} 
+			],
+			"id":2
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackEast",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":3,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":3,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":3,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"command":10,
+						"team":2,
+						"position":{
+							"x":1801,
+							"z":1021
+						}
+					}
+				} 
+			],
+			"id":3
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackSouth",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":4,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":4,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":4,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"team":2,
+						"command":10,
+						"position":{
+							"x":1004,
+							"z":1796
+						}
+					}
+				} 
+			],
+			"id":4
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"westUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":5,
+					"type":"unit_underAttack",
+					"name":"Condition5",
+					"params":{
+						"unit":12830
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":5,
+					"type":"messageUnit",
+					"name":"westmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":12830
+					}
+				} 
+			],
+			"id":5
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"NorthUnder",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[
 				{
 					"id":6,
+					"type":"unit_underAttack",
+					"name":"northUnder",
+					"params":{
+						"unit":11744
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":6,
+					"type":"messageUnit",
+					"name":"northMess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":11744
+					}
+				} 
+			],
+			"id":6
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"eastUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":7,
+					"type":"unit_underAttack",
+					"name":"eastunder",
+					"params":{
+						"unit":2786
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":7,
+					"type":"messageUnit",
+					"name":"eastmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":2786
+					}
+				} 
+			],
+			"id":7
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"SouthUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":8,
+					"type":"unit_underAttack",
+					"name":"southUnder",
+					"params":{
+						"unit":4212
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":8,
+					"type":"messageUnit",
+					"name":"southmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":4212
+					}
+				} 
+			],
+			"id":8
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"WIN",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":9,
+					"type":"team_dead",
+					"name":"Condition9",
+					"params":{
+						"number":{
+							"number":2,
+							"comparison":"exactly"
+						},
+						"team":2
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":9,
+					"type":"win",
+					"name":"Action9",
+					"params":{
+						"team":0,
+						"outputState":""
+					}
+				} 
+			],
+			"id":9
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"LOSE",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":10,
+					"type":"group_dead",
+					"name":"Condition10",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"exactly"
+						},
+						"group":"mybytes"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":10,
+					"type":"lose",
+					"name":"Action10",
+					"params":{
+						"team":0,
+						"outputState":""
+					}
+				} 
+			],
+			"id":10
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Event11",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":11,
 					"type":"start",
-					"name":"Condition6",
+					"name":"Condition11",
 					"params":[
 						 
 					]
@@ -323,23 +642,29 @@
 			],
 			"actions":[
 				{
-					"id":3,
-					"type":"team_order",
-					"name":"Action3",
+					"id":11,
+					"type":"type_order",
+					"name":"Action11",
 					"params":{
-						"command":10,
 						"team":0,
+						"command":45,
+						"unitType":"bit",
 						"parameters":[
 							0 
 						]
 					}
 				} 
 			],
-			"id":2
+			"id":11
 		} 
 	],
 	"variables":[
-		 
+		{
+			"id":0,
+			"type":"number",
+			"name":"v1",
+			"initValue":0
+		} 
 	],
 	"teams":{
 		"1":{
@@ -350,7 +675,7 @@
 				"red":0
 			},
 			"name":"Team 1",
-			"control":"computer"
+			"control":"player"
 		},
 		"2":{
 			"enabled":true,
@@ -444,185 +769,115 @@
 		}
 	},
 	"groups":[
-		 
+		{
+			"name":"mybytes",
+			"units":[
+				2786,
+				4212,
+				11744,
+				12830 
+			]
+		} 
 	],
 	"units":[
 		{
-			"type":"bit",
-			"id":2493,
+			"type":"byte",
+			"id":11845,
 			"position":{
-				"y":116,
-				"x":1436,
-				"z":89
+				"y":284.39453125,
+				"x":1016,
+				"z":981
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":12463,
-			"position":{
-				"y":116,
-				"x":1454,
-				"z":352
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":792,
-			"position":{
-				"y":116,
-				"x":1532,
-				"z":250
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
+			"hp":80,
 			"team":2
 		},
 		{
 			"type":"byte",
-			"id":5551,
+			"id":1661,
 			"position":{
-				"y":130,
-				"x":1648,
-				"z":320
+				"y":284.39453125,
+				"x":1033,
+				"z":1083
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":80,
 			"team":2
 		},
 		{
 			"type":"byte",
-			"id":11941,
+			"id":12830,
 			"position":{
 				"y":130,
-				"x":1472,
-				"z":253
+				"x":276,
+				"z":985
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":0
 		},
 		{
 			"type":"byte",
-			"id":1609,
+			"id":4212,
 			"position":{
 				"y":130,
-				"x":1541,
-				"z":175
+				"x":1009,
+				"z":1786
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":12951,
-			"position":{
-				"y":116,
-				"x":1508,
-				"z":77
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":7371,
-			"position":{
-				"y":116,
-				"x":1634,
-				"z":233
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":2038,
-			"position":{
-				"y":116,
-				"x":1575,
-				"z":273
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":7488,
-			"position":{
-				"y":116,
-				"x":1574,
-				"z":353
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":1733,
-			"position":{
-				"y":116,
-				"x":1510,
-				"z":337
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":2710,
-			"position":{
-				"y":116,
-				"x":1474,
-				"z":184
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":4262,
-			"position":{
-				"y":116,
-				"x":1591,
-				"z":119
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
+			"team":0
 		},
 		{
 			"type":"byte",
-			"id":3090,
+			"id":2786,
 			"position":{
 				"y":130,
+				"x":1817,
+				"z":1040
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":11744,
+			"position":{
+				"y":130,
+				"x":1004,
+				"z":278
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":2817,
+			"position":{
+				"y":116,
+				"x":213,
+				"z":1737
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":15799,
+			"position":{
+				"y":116,
 				"x":255,
-				"z":1084
+				"z":1740
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -631,11 +886,11 @@
 		},
 		{
 			"type":"bit",
-			"id":7990,
+			"id":5922,
 			"position":{
 				"y":116,
-				"x":429,
-				"z":997
+				"x":314,
+				"z":1740
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -644,11 +899,11 @@
 		},
 		{
 			"type":"bit",
-			"id":7127,
+			"id":1607,
 			"position":{
 				"y":116,
-				"x":359,
-				"z":949
+				"x":210,
+				"z":1783
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -657,11 +912,11 @@
 		},
 		{
 			"type":"bit",
-			"id":9550,
+			"id":8699,
 			"position":{
 				"y":116,
-				"x":335,
-				"z":1012
+				"x":255,
+				"z":1783
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -670,11 +925,11 @@
 		},
 		{
 			"type":"bit",
-			"id":13454,
+			"id":718,
 			"position":{
 				"y":116,
-				"x":379,
-				"z":1071
+				"x":310,
+				"z":1790
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -683,11 +938,11 @@
 		},
 		{
 			"type":"bit",
-			"id":1979,
+			"id":7764,
 			"position":{
 				"y":116,
-				"x":452,
-				"z":1056
+				"x":212,
+				"z":1838
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -696,11 +951,11 @@
 		},
 		{
 			"type":"bit",
-			"id":8778,
+			"id":3769,
 			"position":{
 				"y":116,
-				"x":384,
-				"z":990
+				"x":260,
+				"z":1839
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -708,38 +963,129 @@
 			"team":0
 		},
 		{
-			"type":"byte",
-			"id":7228,
-			"position":{
-				"y":130,
-				"x":172,
-				"z":980
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":9534,
-			"position":{
-				"y":130,
-				"x":112,
-				"z":1094
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"assembler",
-			"id":11633,
+			"type":"bit",
+			"id":1406,
 			"position":{
 				"y":116,
-				"x":272,
-				"z":906
+				"x":310,
+				"z":1839
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5196,
+			"position":{
+				"y":116,
+				"x":1733,
+				"z":201
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12654,
+			"position":{
+				"y":116,
+				"x":1735,
+				"z":262
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12102,
+			"position":{
+				"y":116,
+				"x":1734,
+				"z":318
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11103,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14333,
+			"position":{
+				"y":116,
+				"x":1833,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5161,
+			"position":{
+				"y":116,
+				"x":1784,
+				"z":208
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13269,
+			"position":{
+				"y":116,
+				"x":1834,
+				"z":211
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":10593,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":315
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":8077,
+			"position":{
+				"y":116,
+				"x":1837,
+				"z":318
 			},
 			"orientation":0,
 			"autoHeal":"global",
