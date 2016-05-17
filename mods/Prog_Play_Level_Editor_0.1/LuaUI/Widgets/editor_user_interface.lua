@@ -956,8 +956,16 @@ function initTriggerWindow()
 				validTrigger = true
 			end
 			if validTrigger then
-				e.trigger = customTriggerEditBox.text
-				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+				checkingTrigger = customTriggerEditBox.text
+				for i, c in ipairs(e.conditions) do
+					checkingTrigger = string.gsub(checkingTrigger, c.name, "true")
+				end
+				if pcall(loadstring("return "..checkingTrigger)) then
+					e.trigger = customTriggerEditBox.text
+					currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+				else
+					currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+				end
 			else
 				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 			end
