@@ -97,7 +97,7 @@ local zoneScrollPanel -- List of zones placed
 local zoneBoxes = {} -- Contains an editbox to rename a zone and checkbox to display it
 local plotZone = false -- Lock to plot a new zone
 local rValue, gValue, bValue = 0, 0, 0 -- Color of the new zone
-local zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0 -- Position of the new zone
+local zonePositions = { zoneX1 = 0, zoneX2 = 0, zoneZ1 = 0, zoneZ2 = 0 }
 local zoneAnchorX, zoneAnchorZ = 0, 0 -- Mouse anchor when resizing a zone
 local minZoneSize = 32 -- Minimum zone size
 local zoneList = {} -- List of the zones placed on the field
@@ -199,6 +199,7 @@ local selectCreatedUnitsWindow -- Window to select units created through an acti
 local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
 local eventCommentEditBox -- Add a comment to an event
+local markerList = {}
 
 -- Map settings variables
 local mapDescription = {}
@@ -1629,26 +1630,26 @@ function computeZoneWorldCoords()
 	local _,varA = Spring.TraceScreenRay(drawStartX, drawStartY, true, true) -- compute world's coords of the beginning of the draw
 	local _, varB = Spring.TraceScreenRay(drawEndX, drawEndY, true, true) -- compute world's coords of the end of the draw
 	if varA ~= nil and varB ~= nil then
-		zoneX1, _, zoneZ1 = unpack(varA)
-		zoneX2, _, zoneZ2 = unpack(varB)
+		zonePositions.zoneX1, _, zonePositions.zoneZ1 = unpack(varA)
+		zonePositions.zoneX2, _, zonePositions.zoneZ2 = unpack(varB)
 	else
-		zoneX1, zoneZ1, zoneX2, zoneZ2 = 0, 0, 0, 0
+		zonePositions.zoneX1, zonePositions.zoneZ1, zonePositions.zoneX2, zonePositions.zoneZ2 = 0, 0, 0, 0
 	end
-	zoneX1, zoneX2 = sort(zoneX1, zoneX2) -- sort values to prevent errors
-	zoneZ1, zoneZ2 = sort(zoneZ1, zoneZ2)
+	zonePositions.zoneX1, zonePositions.zoneX2 = sort(zonePositions.zoneX1, zonePositions.zoneX2) -- sort values to prevent errors
+	zonePositions.zoneZ1, zonePositions.zoneZ2 = sort(zonePositions.zoneZ1, zonePositions.zoneZ2)
 	
 	local altPressed = Spring.GetModKeyState() -- force square if alt is pressed
 	if altPressed then
-		local length = math.min(zoneX2 - zoneX1, zoneZ2 - zoneZ1)
+		local length = math.min(zonePositions.zoneX2 - zonePositions.zoneX1, zonePositions.zoneZ2 - zonePositions.zoneZ1)
 		if drawStartX > drawEndX then
-			zoneX1 = zoneX2 - length
+			zonePositions.zoneX1 = zonePositions.zoneX2 - length
 		else
-			zoneX2 = zoneX1 + length
+			zonePositions.zoneX2 = zonePositions.zoneX1 + length
 		end
 		if drawStartY > drawEndY then
-			zoneZ2 = zoneZ1 + length
+			zonePositions.zoneZ2 = zonePositions.zoneZ1 + length
 		else
-			zoneZ1 = zoneZ2 - length
+			zonePositions.zoneZ1 = zonePositions.zoneZ2 - length
 		end
 	end
 end
@@ -1660,7 +1661,7 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 			
 			if plotZone then
 				gl.Color(rValue, gValue, bValue, 0.5)
-				gl.DrawGroundQuad(zoneX1, zoneZ1, zoneX2, zoneZ2) -- draw the zone
+				gl.DrawGroundQuad(zonePositions.zoneX1, zonePositions.zoneZ1, zonePositions.zoneX2, zonePositions.zoneZ2) -- draw the zone
 			end
 		end
 	end
@@ -1672,8 +1673,8 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 			computeZoneWorldCoords()
 			
 			if plotZone then
-				local a, b = (zoneX2 - zoneX1) / 2, (zoneZ2 - zoneZ1) /2
-				local centerX, centerZ = (zoneX1 + zoneX2) / 2, (zoneZ1 + zoneZ2) / 2
+				local a, b = (zonePositions.zoneX2 - zonePositions.zoneX1) / 2, (zonePositions.zoneZ2 - zonePositions.zoneZ1) /2
+				local centerX, centerZ = (zonePositions.zoneX1 + zonePositions.zoneX2) / 2, (zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2
 				gl.Color(rValue, gValue, bValue, 0.5)
 				drawGroundFilledEllipsis(centerX, centerZ, a, b, 50)
 			end
@@ -2854,10 +2855,13 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					local function viewPosition()
 						local state = Spring.GetCameraState()
 						local x, z = a.params[attr.id].x, a.params[attr.id].z
-						state.px, state.py, state.pz = x, Spring.GetGroundHeight(x, z), z
+						local y = Spring.GetGroundHeight(x, z)
+						state.px, state.py, state.pz = x, y, z
 						state.height = 500
 						Spring.SetCameraState(state, 2)
 						-- todo add temp marker
+						Spring.MarkerAddPoint(x, y, z, "("..tostring(x)..", "..tostring(z)..")")
+						table.insert(markerList, { x = x, y = y, z = z, timer = 2 })
 					end
 					local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewPosition)
 					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
@@ -3632,7 +3636,7 @@ function newMap()
 	drawStartX, drawStartY, drawEndX, drawEndY = 0, 0, 0, 0
 	rValue, gValue, bValue = 0, 0, 0
 	-- Zone
-	zoneX1, zoneX2, zoneZ1, zoneZ2 = 0, 0, 0, 0
+	zonePositions.zoneX1, zonePositions.zoneX2, zonePositions.zoneZ1, zonePositions.zoneZ2 = 0, 0, 0, 0
 	zoneAnchorX, zoneAnchorZ = 0, 0
 	zoneList = {}
 	selectedZone = nil
@@ -4514,6 +4518,14 @@ function widget:Update(delta)
 	
 	changeMouseCursor()
 	
+	for i, marker in ipairs(markerList) do
+		marker.timer = marker.timer - delta
+		if marker.timer < 0 then
+			Spring.MarkerErasePosition(marker.x, marker.y, marker.z)
+			table.remove(markerList, i)
+		end
+	end
+	
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
@@ -4564,7 +4576,7 @@ function widget:MousePress(mx, my, button)
 			unitFrame()
 		end
 	elseif clickedZone ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
-		if (unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION or unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS) and clickedZone.shown then
+		if (unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION or unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS) and clickedZone.shown and globalStateMachine:getCurrentState() ~= globalStateMachine.states.ZONE then
 			zoneFrame()
 			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
@@ -4741,10 +4753,10 @@ function widget:MouseRelease(mx, my, button)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 				local zone = 	{ 	
 										red = rValue, green = gValue, blue = bValue,
-										x1 = round(zoneX1) - round(zoneX1)%8,
-										x2 = round(zoneX2) - round(zoneX2)%8,
-										z1 = round(zoneZ1) - round(zoneZ1)%8,
-										z2 = round(zoneZ2) - round(zoneZ2)%8,
+										x1 = round(zonePositions.zoneX1) - round(zonePositions.zoneX1)%8,
+										x2 = round(zonePositions.zoneX2) - round(zonePositions.zoneX2)%8,
+										z1 = round(zonePositions.zoneZ1) - round(zonePositions.zoneZ1)%8,
+										z2 = round(zonePositions.zoneZ2) - round(zonePositions.zoneZ2)%8,
 										id = zoneNumber,
 										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Rectangle",
@@ -4760,10 +4772,10 @@ function widget:MouseRelease(mx, my, button)
 			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
 				local zone = 	{ 	
 										red = rValue, green = gValue, blue = bValue,
-										a = round((zoneX2 - zoneX1) / 2) - round((zoneX2 - zoneX1) / 2)%8,
-										b = round((zoneZ2 - zoneZ1) / 2) - round((zoneZ2 - zoneZ1) / 2)%8,
-										x = round((zoneX1 + zoneX2) / 2) - round((zoneX1 + zoneX2) / 2)%8,
-										z = round((zoneZ1 + zoneZ2) / 2) - round((zoneZ1 + zoneZ2) / 2)%8,
+										a = round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2) - round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2)%8,
+										b = round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2) - round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2)%8,
+										x = round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2) - round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2)%8,
+										z = round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2) - round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2)%8,
 										id = zoneNumber,
 										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
 										type = "Disk",
