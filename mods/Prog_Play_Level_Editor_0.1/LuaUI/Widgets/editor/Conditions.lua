@@ -439,7 +439,7 @@ if lang == "fr" then
 				},
 				{
 					text = "<Ordre>",
-					type = "command",
+					type = "commandUnit",
 					id = "command"
 				}
 			}
@@ -499,7 +499,8 @@ if lang == "fr" then
 				{
 					text = "<Variable>",
 					type = "numberVariable",
-					id = "variable"
+					id = "variable",
+					hint = "Des variables personnalisées peuvent être définies en allant dans le menu accessible depuis le panneau des évènements"
 				},
 				{
 					text = "<Comparaison>",
@@ -522,7 +523,8 @@ if lang == "fr" then
 				{
 					text = "<Variable>",
 					type = "numberVariable",
-					id = "variable1"
+					id = "variable1",
+					hint = "Des variables personnalisées peuvent être définies en allant dans le menu accessible depuis le panneau des évènements"
 				},
 				{
 					text = "<Comparaison>",
@@ -545,7 +547,21 @@ if lang == "fr" then
 				{
 					text = "<Variable>",
 					type = "booleanVariable",
-					id = "variable"
+					id = "variable",
+					hint = "Des variables personnalisées peuvent être définies en allant dans le menu accessible depuis le panneau des évènements"
+				}
+			}
+		},
+		{
+			type = "script",
+			filter = "Script",
+			typeText = "Evaluer booléen personnalisé",
+			text = "Evaluer un booléen personnalisé retourné par le script LUA <Script>.",
+			attributes = {
+				{
+					text = "<Script>",
+					type = "text",
+					id = "script"
 				}
 			}
 		}
@@ -988,7 +1004,7 @@ else
 				},
 				{
 					text = "<Command>",
-					type = "command",
+					type = "commandUnit",
 					id = "command"
 				}
 			}
@@ -1048,7 +1064,8 @@ else
 				{
 					text = "<Variable>",
 					type = "numberVariable",
-					id = "variable"
+					id = "variable",
+					hint = "Variables can be defined by going to the menu available through the event panel"
 				},
 				{
 					text = "<Comparison>",
@@ -1071,7 +1088,8 @@ else
 				{
 					text = "<Variable>",
 					type = "numberVariable",
-					id = "variable1"
+					id = "variable1",
+					hint = "Variables can be defined by going to the menu available through the event panel"
 				},
 				{
 					text = "<Comparison>",
@@ -1094,8 +1112,22 @@ else
 				{
 					text = "<Variable>",
 					type = "booleanVariable",
-					id = "variable"
+					id = "variable",
+					hint = "Variables can be defined by going to the menu available through the event panel"
 				}
+			}
+		}
+	},
+	{
+		type = "script",
+		filter = "Script",
+		typeText = "Evaluate custom boolean",
+		text = "Evaluate custom boolean returned by LUA script <Script>.",
+		attributes = {
+			{
+				text = "<Script>",
+				type = "text",
+				id = "script"
 			}
 		}
 	}

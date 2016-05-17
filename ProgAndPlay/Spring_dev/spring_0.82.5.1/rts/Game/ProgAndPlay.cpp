@@ -105,15 +105,13 @@ void CProgAndPlay::Update(void) {
 	log("ProgAndPLay::Update begin");
 		
 	// Store log messages
-	if (ppTraces.is_open()) {
+	if (ppTraces.good()) {
 		logMessages();
 		if (tp.compressionDone()) {
 			log("compression done");
-			std::vector<sp_trace> traces = tp.getTraces();
+			std::vector<sp_trace> traces = TracesParser::importTraceFromXml("traces", missionName + "_compressed.xml");
 			for (unsigned int i = 0; i < traces.size(); i++)
 				traces.at(i)->display(logFile);
-			tp.compressionRead();
-			//deal with compressed trace here for feedback
 		}
 	}
 		

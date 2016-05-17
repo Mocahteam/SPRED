@@ -1,0 +1,10 @@
+mission name : Mission1
+mission start time : 1462271288
+	execution start time : 1462271294
+		PP_Open
+		PP_GetUnitAt coalition : 0
+		PP_Unit_ActionOnPosition action : 10
+		PP_Close
+	execution end time : 1462271294
+status : won
+mission end time : 1462271299

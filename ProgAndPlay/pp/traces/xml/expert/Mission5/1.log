@@ -1,0 +1,39 @@
+start Mission5
+mission_start_time 1462271412
+execution_start_time 1462271419
+PP_Open
+PP_GetNumUnits 0
+PP_GetUnitAt 0 0
+PP_Unit_ActionOnPosition 2457_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 1
+PP_Unit_ActionOnPosition 191_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 2
+PP_Unit_ActionOnPosition 2445_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 3
+PP_Unit_ActionOnPosition 378_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 4
+PP_Unit_ActionOnPosition 1350_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 5
+PP_Unit_ActionOnPosition 829_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 6
+PP_Unit_ActionOnPosition 1868_4 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 7
+PP_Unit_ActionOnPosition 2_7 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 8
+PP_Unit_ActionOnPosition 1054_7 10 256 1024
+PP_GetNumUnits 0
+PP_GetUnitAt 0 9
+PP_Unit_ActionOnPosition 258_7 10 256 1024
+PP_GetNumUnits 0
+PP_Close
+execution_end_time 1462271419
+mission_end_time 1462271434
+end won Mission5

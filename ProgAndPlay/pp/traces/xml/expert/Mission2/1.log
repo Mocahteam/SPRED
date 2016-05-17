@@ -1,0 +1,11 @@
+start Mission2
+mission_start_time 1462271304
+execution_start_time 1462271309
+PP_Open
+PP_GetUnitAt 0 0
+PP_Unit_GetPosition 186_4
+PP_Unit_ActionOnPosition 186_4 10 1056 1792
+PP_Close
+execution_end_time 1462271309
+mission_end_time 1462271322
+end won Mission2

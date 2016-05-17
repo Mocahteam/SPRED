@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
 "CMakeFiles/pp-traces.dir/TracesParser.cpp.obj"
+"CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj"
 "CMakeFiles/pp-traces.dir/Trace.cpp.obj"
 "CMakeFiles/pp-traces.dir/Sequence.cpp.obj"
 "CMakeFiles/pp-traces.dir/Event.cpp.obj"

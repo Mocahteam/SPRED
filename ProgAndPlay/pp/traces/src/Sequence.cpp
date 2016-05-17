@@ -1,68 +1,107 @@
 #include "Sequence.h"
 
-Sequence::Sequence(unsigned int num, bool shared): Trace(SEQUENCE), num(num), pt(0), valid(false), endReached(false), shared(shared) {}
+Sequence::Sequence(): Trace(SEQUENCE), num(0), pt(0), valid(false), endReached(false), shared(false) {}
 
-bool Sequence::operator==(Trace* t) {
+Sequence::Sequence(unsigned int num): Trace(SEQUENCE), num(num), pt(0), valid(false), endReached(false), shared(false) {
+	updateNumMap(num);
+}
+
+Sequence::Sequence(sp_sequence sps): Trace(SEQUENCE), pt(0), valid(false), endReached(false), shared(false) {
+	num = sps->getNum();
+	updateNumMap(sps->getNumMap());
+}
+
+Sequence::Sequence(sp_sequence sps_up, sp_sequence sps_down): Trace(SEQUENCE), pt(0), valid(false), endReached(false), shared(true) {
+	num = std::max(sps_up->getNum(),sps_down->getNum());
+	updateNumMap(sps_up->getNumMap());
+	updateNumMap(sps_down->getNumMap());
+}
+
+bool Sequence::operator==(Trace *t) {
 	bool res = false;
+	if (t->isSequence()) {
+		Sequence *s = dynamic_cast<Sequence*>(t);
+		if (traces.size() == s->size()) {
+			for (unsigned int i = 0; i < traces.size(); i++) {
+				if (!at(i)->operator==(s->at(i).get()))
+					return false;
+			}
+			res = true;
+		}
+	}
+	return res;
+}
+
+bool Sequence::compare(Trace* t) {
+	bool res = false, next_up = false, next_down = false;
 	if (t->isSequence()) {
 		Sequence *s = dynamic_cast<Sequence*>(t);
 		if (length() == s->length()) {
 			reset();
 			s->reset();
-			std::stack<Sequence*> firstStack;
-			firstStack.push(this);
-			std::stack<Sequence*> secondStack;
-			secondStack.push(s);
-			Trace *first = next().get();
-			Trace *second = s->next().get();
-			while (!firstStack.empty() && !secondStack.empty()) {
-				while (first->isSequence()) {
-					s = dynamic_cast<Sequence*>(first);
-					firstStack.push(s);
-					first = s->next().get();
+			std::stack<Sequence*> upStack;
+			upStack.push(this);
+			std::stack<Sequence*> downStack;
+			downStack.push(s);
+			Trace *up = next().get();
+			Trace *down = s->next().get();
+			while (!upStack.empty() || !downStack.empty()) {
+				while (up->isSequence()) {
+					s = dynamic_cast<Sequence*>(up);
+					upStack.push(s);
+					up = s->next().get();
 				}
-				while (second->isSequence()) {
-					s = dynamic_cast<Sequence*>(second);
-					secondStack.push(s);
-					second = s->next().get();
+				while (down->isSequence()) {
+					s = dynamic_cast<Sequence*>(down);
+					downStack.push(s);
+					down = s->next().get();
 				}
-				if (first->operator==(second)) {
-					s = firstStack.top();
-					while (!firstStack.empty() && s->isEndReached()) {
-						firstStack.pop();
-						if (!firstStack.empty())
-							s = firstStack.top();
+				next_up = up->isEvent();
+				next_down = down->isEvent();
+				if (!next_up && !next_down) {
+					if (up->operator==(down)) {
+						next_up = true;
+						next_down = true;
 					}
-					first = s->next().get();
-					s = secondStack.top();
-					while (!secondStack.empty() && s->isEndReached()) {
-						secondStack.pop();
-						if (!secondStack.empty())
-							s = secondStack.top();
-					}
-					second = s->next().get();
+					else
+						break;
 				}
-				else
-					break;
+				if (next_up) {
+					s = upStack.top();
+					while (!upStack.empty() && s->isEndReached()) {
+						upStack.pop();
+						if (!upStack.empty())
+							s = upStack.top();
+					}
+					up = s->next().get();
+					next_up = false;
+				}
+				if (next_down) {
+					s = downStack.top();
+					while (!downStack.empty() && s->isEndReached()) {
+						downStack.pop();
+						if (!downStack.empty())
+							s = downStack.top();
+					}
+					down = s->next().get();
+					next_down = false;
+				}
 			}
-			if (firstStack.empty() && secondStack.empty())
+			if (upStack.empty() && downStack.empty())
 				res = true;
 		}
 	}
-	// else if (traces.size() == 1)
-		// res = at(0)->operator==(t);
 	return res;
 }
 
 void Sequence::display(std::ostream &os) const {
-	unsigned int i = 0;
 	numTab++;
-	for (i = 0; i < numTab; i++)
+	for (int i = 0; i < numTab; i++)
 		os << "\t";
 	if (delayed)
 		os << "delayed ";
-	os << "Sequence(" << num << ")" << std::endl;
-	for (i = 0; i < traces.size(); i++)
+	os << "Sequence < " << getNumMapString() << " >" << std::endl;
+	for (unsigned int i = 0; i < traces.size(); i++)
 		traces.at(i)->display(os);
 	numTab--;
 }
@@ -74,14 +113,16 @@ unsigned int Sequence::length() const {
 	return len;
 }
 
-void Sequence::removeRedundancies() {
+void Sequence::removeRedundancies(std::vector<sp_trace>& traces) {
 	int cpt;
 	sp_sequence sps;
 	std::vector<sp_trace>::iterator it = traces.begin();
 	while (it != traces.end()) {
-		if ((*it)->isSequence())
-			boost::dynamic_pointer_cast<Sequence>(*it)->removeRedundancies();
-		else {
+		if ((*it)->isSequence()) {
+			sps = boost::dynamic_pointer_cast<Sequence>(*it);
+			sps->removeRedundancies(sps->getTraces());
+		}
+		else if (!(*it)->isEvent() || Trace::inArray(boost::dynamic_pointer_cast<Event>(*it)->getLabel().c_str(), Event::noConcatEventsArr) == -1) {
 			std::vector<sp_trace>::iterator _it = it+1;
 			cpt = 1;
 			while (_it != traces.end() && (*it)->operator==((*_it).get())) {
@@ -99,12 +140,17 @@ void Sequence::removeRedundancies() {
 	}
 }
 
+std::vector<sp_trace>& Sequence::getTraces() {
+	return traces;
+}
+
 unsigned int Sequence::getNum() const {
 	return num;
 }
 
 void Sequence::addOne() {
-	num++;
+	updateNumMap(num,-1);
+	updateNumMap(++num);	
 }
 
 unsigned int Sequence::size() const {
@@ -160,22 +206,23 @@ bool Sequence::isValid() const {
 
 void Sequence::setValid(bool v) {
 	valid = v;
-}
-
-void Sequence::resetValid(bool v) {
-	for (unsigned int i = 0; i < traces.size(); i++) {
-		if (traces.at(i).get()->isSequence()) {
-			Sequence *s = dynamic_cast<Sequence*>(traces.at(i).get());
-			s->setValid(v);
+	if (!v) {
+		sp_sequence sps;
+		for (unsigned int i = 0; i < traces.size(); i++) {
+			if (traces.at(i)->isSequence()) {
+				sps = boost::dynamic_pointer_cast<Sequence>(traces.at(i));
+				sps->setValid(v);
+			}
 		}
 	}
 }
 
 bool Sequence::checkValid() {
+	sp_sequence sps;
 	for (unsigned int i = 0; i < traces.size(); i++) {
-		if (traces.at(i).get()->isSequence()) {
-			Sequence *s = dynamic_cast<Sequence*>(traces.at(i).get());
-			if (!s->isValid())
+		if (traces.at(i)->isSequence()) {
+			sps = boost::dynamic_pointer_cast<Sequence>(traces.at(i));
+			if (!sps->isValid())
 				return false;
 		}
 	}
@@ -195,14 +242,50 @@ bool Sequence::isUniform() const {
 
 bool Sequence::checkDelayed() {
 	if (!delayed) {
-		unsigned int i;
-		for (i = 0; i < traces.size(); i++) {
-			if (!traces.at(i).get()->isDelayed()) {
-				break;
+		for (unsigned i = 0; i < traces.size(); i++) {
+			if (traces.at(i)->isSequence()) {
+				Sequence *s = dynamic_cast<Sequence*>(traces.at(i).get());
+				if (!s->checkDelayed())
+					return false;
 			}
+			else if (!traces.at(i)->isDelayed())
+				return false;
 		}
-		if (i == traces.size())
-			delayed = true;
+		delayed = true;
 	}
 	return delayed;
+}
+
+const std::map<unsigned int,unsigned int>& Sequence::getNumMap() const {
+	return numMap;
+}
+
+std::string Sequence::getNumMapString() const {
+	std::string s = "";
+	std::map<unsigned int,unsigned int>::const_iterator it = numMap.begin();
+	while (it != numMap.end()) {
+		if (it != numMap.begin())
+			s += " ";
+		s += boost::lexical_cast<std::string>(it->first) + ":" + boost::lexical_cast<std::string>(it->second);
+		it++;
+	}
+	return s;
+}
+
+void Sequence::updateNumMap(unsigned int num, int update) {
+	if (numMap.find(num) == numMap.end())
+		numMap.insert(std::make_pair<unsigned int, unsigned int>(num,update));
+	else {
+		numMap.at(num) += update;
+		if (update < 0 && numMap.at(num) == 0)
+			numMap.erase(num);
+	}
+}
+
+void Sequence::updateNumMap(const std::map<unsigned int,unsigned int>& numMap) {
+	std::map<unsigned int, unsigned int>::const_iterator it = numMap.begin();
+	while (it != numMap.end()) {
+		updateNumMap(it->first,it->second);
+		it++;
+	}
 }

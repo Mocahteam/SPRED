@@ -1,32 +1,29 @@
 #include "Event.h"
 
+const char* Event::concatEventsArr[NUM_CONCAT_EVENTS+1] = {"game_paused", "game_unpaused", NULL};
+const char* Event::noConcatEventsArr[NUM_NO_CONCAT_EVENTS+1] = {"start_mission", "end_mission", "new_execution", "end_execution", "eof", NULL};
+
 Event::Event(std::string label): Trace(EVENT), label(label) {}
 
 bool Event::operator==(Trace* t) {
 	bool res = false;
-	if (t->getType() == EVENT) {
+	if (t->isEvent()) {
 		Event *e = dynamic_cast<Event*>(t);
 		if (label.compare(e->label) == 0)
 			res = true;
 	}
-	// else if (t->isSequence()) {
-		// Sequence *s = dynamic_cast<Sequence*>(t);
-		// if (s->size() == 1)
-			// res = operator==(s->at(0).get());
-	// }
 	return res;
 }
 
 void Event::display(std::ostream &os) const {
-	unsigned int i = 0;
-	for (i = 0; i <= numTab; i++)
+	for (int i = 0; i <= numTab; i++)
 		os << "\t";
 	os << label;
 	os << " " << getParams() << std::endl;
 }
 
 unsigned int Event::length() const {
-	return 1;
+	return 0;
 }
 
 std::string Event::getLabel() const {

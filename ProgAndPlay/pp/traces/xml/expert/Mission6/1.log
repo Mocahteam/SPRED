@@ -1,0 +1,43 @@
+start Mission6
+mission_start_time 1462271448
+execution_start_time 1462271454
+PP_Open
+PP_GetNumUnits 0
+PP_GetUnitAt 0 0
+PP_Unit_GetType 985_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 1
+PP_Unit_GetType 1504_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 2
+PP_Unit_GetType 733_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 3
+PP_Unit_GetType 263_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 4
+PP_Unit_GetType 1137_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 5
+PP_Unit_GetType 1962_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 6
+PP_Unit_GetType 2093_4
+PP_GetNumUnits 0
+PP_GetUnitAt 0 7
+PP_Unit_GetType 824_7
+PP_GetNumUnits 0
+PP_GetUnitAt 0 8
+PP_Unit_GetType 82_7
+PP_GetNumUnits 0
+PP_GetUnitAt 0 9
+PP_Unit_GetType 119_7
+PP_GetNumUnits 0
+PP_GetUnitAt 0 10
+PP_Unit_GetType 2810_2
+PP_Unit_ActionOnPosition 2810_2 10 256 811
+PP_GetNumUnits 0
+PP_Close
+execution_end_time 1462271454
+mission_end_time 1462271465
+end won Mission6
