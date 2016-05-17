@@ -51,6 +51,7 @@ function InitializeChili() -- Initialize Chili variables
 end
 
 function InitializeEditor() -- Enable editor widgets
+	widgetHandler:EnableWidget("Editor Loading Screen")
 	widgetHandler:EnableWidget("Chili Framework")
 	widgetHandler:EnableWidget("Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")

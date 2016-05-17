@@ -167,6 +167,7 @@ function gadget:GameFrame( frameNumber )
 			if Spring.GetModOptions().tobeloaded then
 				SendToUnsynced("beginLoadLevel".."++"..Spring.GetModOptions().tobeloaded)
 			end
+			SendToUnsynced("finishedLoading")
 		end
 		-- CREATE UNIT
 		if createUnit then
@@ -279,6 +280,9 @@ function gadget:RecvFromSynced(msg)
 	end
 	if msgContents[1] == "requestSave" then
 		Script.LuaUI.requestUnitListUpdate()
+	end
+	if msgContents[1] == "finishedLoading" then
+		Script.LuaUI.finishedLoading()
 	end
 end
 
