@@ -1187,51 +1187,64 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			}
 		}
 	}
+	
+	-- Only consider levels with links
+	local purifiedLevelList = {}
+	for k, link in pairs(Links) do
+		for kk, input in pairs(link) do
+			if not findInTable(purifiedLevelList, input) and findInTable(LevelListNames, input) then
+				table.insert(purifiedLevelList, input)
+			end
+		end
+	end
+		
 	-- Activities
 	for i, level in ipairs(LevelList) do
-		local activity = {
-			["name"] = "activity",
-			["attr"] = {
-				["id_activity"] = tostring(LevelListNames[i])
-			},
-			["kids"] = {
-				{
-					["name"] = "name",
-					["text"] = level.description.name
+		if findInTable(purifiedLevelList, LevelListNames[i]) then
+			local activity = {
+				["name"] = "activity",
+				["attr"] = {
+					["id_activity"] = tostring(LevelListNames[i])
 				},
-				{
+				["kids"] = {
+					{
+						["name"] = "name",
+						["text"] = level.description.name
+					},
+					{
+						["name"] = "input_states",
+						["kids"] = {}
+					},
+					{
+						["name"] = "output_states",
+						["kids"] = {}
+					}
+				}
+			}
+			-- input
+			local count = 1
+			for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
+				local inputState = {
 					["name"] = "input_states",
-					["kids"] = {}
-				},
-				{
-					["name"] = "output_states",
-					["kids"] = {}
+					["attr"] = {
+						["id_input"] = LevelListNames[i].."//"..count
+					}
 				}
-			}
-		}
-		-- input
-		local count = 1
-		for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
-			local inputState = {
-				["name"] = "input_states",
-				["attr"] = {
-					["id_input"] = LevelListNames[i].."//"..count
+				table.insert(activity.kids[2].kids, inputState)
+				count = count + 1
+			end
+			-- output
+			for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
+				local outputState = {
+					["name"] = "output_state",
+					["attr"] = {
+						["id_output"] = LevelListNames[i].."//"..out
+					}
 				}
-			}
-			table.insert(activity.kids[2].kids, inputState)
-			count = count + 1
+				table.insert(activity.kids[3].kids, outputState)
+			end
+			table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 		end
-		-- output
-		for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
-			local outputState = {
-				["name"] = "output_state",
-				["attr"] = {
-					["id_output"] = LevelListNames[i].."//"..out
-				}
-			}
-			table.insert(activity.kids[3].kids, outputState)
-		end
-		table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 	end
 	-- Links
 	for k, link in pairs(Links) do
