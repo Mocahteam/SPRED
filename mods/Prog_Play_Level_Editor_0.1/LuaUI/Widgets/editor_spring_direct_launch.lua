@@ -59,6 +59,7 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
+	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
 	InitializeLevelButtons()
@@ -1139,7 +1140,8 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 				["attr"] = {
 					["id_game"] = "76",
 					["status"] = "prepa",
-					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00")
+					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00"),
+					["activity_prefix"] = "true"
 				},
 				["kids"] = {
 					{
@@ -1151,7 +1153,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 						["text"] = "Prog & Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d'un jeu de stratégie en temps réel à l'aide d'une bibliothèque de fonctions."
 					},
 					{
-						["name"] = "activites",
+						["name"] = "activities",
 						["kids"] = {}
 					},
 					{
@@ -1186,51 +1188,64 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			}
 		}
 	}
+	
+	-- Only consider levels with links
+	local purifiedLevelList = {}
+	for k, link in pairs(Links) do
+		for kk, input in pairs(link) do
+			if not findInTable(purifiedLevelList, input) and findInTable(LevelListNames, input) then
+				table.insert(purifiedLevelList, input)
+			end
+		end
+	end
+		
 	-- Activities
 	for i, level in ipairs(LevelList) do
-		local activity = {
-			["name"] = "activity",
-			["attr"] = {
-				["id_activity"] = tostring(LevelListNames[i])
-			},
-			["kids"] = {
-				{
-					["name"] = "name",
-					["text"] = level.description.name
-				},
-				{
-					["name"] = "input_states",
-					["kids"] = {}
-				},
-				{
-					["name"] = "output_states",
-					["kids"] = {}
-				}
-			}
-		}
-		-- input
-		local count = 1
-		for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
-			local inputState = {
-				["name"] = "input_states",
+		if findInTable(purifiedLevelList, LevelListNames[i]) then
+			local activity = {
+				["name"] = "activity",
 				["attr"] = {
-					["id_input"] = LevelListNames[i].."//"..count
+					["id_activity"] = tostring(LevelListNames[i])
+				},
+				["kids"] = {
+					{
+						["name"] = "name",
+						["text"] = level.description.name
+					},
+					{
+						["name"] = "input_states",
+						["kids"] = {}
+					},
+					{
+						["name"] = "output_states",
+						["kids"] = {}
+					}
 				}
 			}
-			table.insert(activity.kids[2].kids, inputState)
-			count = count + 1
-		end
-		-- output
-		for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
-			local outputState = {
-				["name"] = "output_state",
-				["attr"] = {
-					["id_output"] = LevelListNames[i].."//"..out
+			-- input
+			local count = 1
+			for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
+				local inputState = {
+					["name"] = "input_state",
+					["attr"] = {
+						["id_input"] = LevelListNames[i].."//"..count
+					}
 				}
-			}
-			table.insert(activity.kids[3].kids, outputState)
+				table.insert(activity.kids[2].kids, inputState)
+				count = count + 1
+			end
+			-- output
+			for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
+				local outputState = {
+					["name"] = "output_state",
+					["attr"] = {
+						["id_output"] = LevelListNames[i].."//"..out
+					}
+				}
+				table.insert(activity.kids[3].kids, outputState)
+			end
+			table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 		end
-		table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 	end
 	-- Links
 	for k, link in pairs(Links) do
@@ -1413,7 +1428,7 @@ function ExportGame()
 			end
 		end
 		-- Add levels and scenario
-		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
 		end
@@ -1421,7 +1436,7 @@ function ExportGame()
 		VFS.CompressFolder("pp_editor/game_files")
 		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
 		-- Remove levels and scenario
-		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
@@ -1614,6 +1629,7 @@ end
 function SwitchOn() -- Activate this widget
 	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
+	Spring.SendCommands("forcestart")
 	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()

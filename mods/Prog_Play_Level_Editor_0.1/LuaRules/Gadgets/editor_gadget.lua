@@ -139,28 +139,10 @@ function gadget:GameFrame( frameNumber )
 	if missionName == "LevelEditor" then
 		-- Delete units at the beginning
 		if initialize and frameNumber > 0 then
-			local cmdList = {}
-			local cmdListUnit = {}
-			for id, unitDef in pairs(UnitDefs) do
-				local unitType = unitDef.name
-				cmdListUnit[unitType] = {}
-				local id = Spring.CreateUnit(unitType, 100, Spring.GetGroundHeight(100, 100), 100, "s", 0)
-				local cmds = Spring.GetUnitCmdDescs(id)
-				for i, cmd in ipairs(cmds) do
-					if cmd.id < 0 then
-						cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-						cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-					else
-						cmdList[cmd.name] = cmd.id
-						cmdListUnit[unitType][cmd.name] = cmd.id
-					end
-				end
-			end
-			SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
 			local units = Spring.GetAllUnits()
 			if units.n ~= 0 then
 				for i, u in ipairs(units) do
-					Spring.DestroyUnit(u, false, true)
+					Spring.DestroyUnit(u, true, true)
 				end
 				initialize = false
 			end
@@ -249,6 +231,29 @@ function gadget:GameFrame( frameNumber )
 			end
 			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
 			loadMap = false
+		end
+	elseif initialize then
+		initialize = false
+		Spring.Echo('salut')
+		local cmdList = {}
+		local cmdListUnit = {}
+		for id, unitDef in pairs(UnitDefs) do
+			local unitType = unitDef.name
+			cmdListUnit[unitType] = {}
+			local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
+			Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
+			Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
+			local cmds = Spring.GetUnitCmdDescs(id)
+			for i, cmd in ipairs(cmds) do
+				if cmd.id < 0 then
+					cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+					cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+				else
+					cmdList[cmd.name] = cmd.id
+					cmdListUnit[unitType][cmd.name] = cmd.id
+				end
+			end
+			Spring.DestroyUnit(id, true, true)
 		end
 	end
 end
