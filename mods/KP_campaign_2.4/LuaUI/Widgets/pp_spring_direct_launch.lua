@@ -27,8 +27,13 @@ contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootD
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
-local AppliqManager=appliqManager:new("scenario/scenario_test.xml")
-AppliqManager:parse()
+local xmlFiles = VFS.DirList("scenario/", "*.xml")
+local AppliqManager
+Spring.Echo(xmlFiles[1])
+if(xmlFiles[1]~=nil)then
+  AppliqManager=appliqManager:new(xmlFiles[1])
+  AppliqManager:parse()
+end
 
 --AppliqManager:fullTest()
 
