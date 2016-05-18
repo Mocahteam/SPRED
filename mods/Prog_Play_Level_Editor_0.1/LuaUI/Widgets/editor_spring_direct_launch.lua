@@ -59,6 +59,7 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
+	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
 	InitializeLevelButtons()
@@ -1151,7 +1152,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 						["text"] = "Prog & Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d'un jeu de stratégie en temps réel à l'aide d'une bibliothèque de fonctions."
 					},
 					{
-						["name"] = "activites",
+						["name"] = "activities",
 						["kids"] = {}
 					},
 					{
@@ -1413,7 +1414,7 @@ function ExportGame()
 			end
 		end
 		-- Add levels and scenario
-		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
 		end
@@ -1421,7 +1422,7 @@ function ExportGame()
 		VFS.CompressFolder("pp_editor/game_files")
 		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
 		-- Remove levels and scenario
-		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
@@ -1614,6 +1615,7 @@ end
 function SwitchOn() -- Activate this widget
 	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
+	Spring.SendCommands("forcestart")
 	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()

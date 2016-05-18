@@ -3471,20 +3471,11 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 		end
 	end
 end
-function getCommandsList(encodedList, encodedUnitList)
-	commandsToID = json.decode(encodedList)
-	for c, id in pairs(commandsToID) do
-		table.insert(sortedCommandsList, c)
-		idToCommands[id] = c
-	end
-	table.sort(sortedCommandsList)
-	local commandsUnitList = json.decode(encodedUnitList)
-	for u, cl in pairs(commandsUnitList) do
-		sortedCommandsListUnit[u] = {}
-		for c, id in pairs(cl) do
-			table.insert(sortedCommandsListUnit[u], c)
-		end
-		table.sort(sortedCommandsListUnit[u])
+function getCommandsList()
+	if VFS.FileExists("pp_editor/editor_files/commands.editordata") then
+		local commandList = VFS.LoadFile("pp_editor/editor_files/commands.editordata")
+		commandList = splitString(commandList, "++")
+		commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
 	end
 end
 function showCreatedUnitsWindow()
@@ -4468,9 +4459,9 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
-	widgetHandler:RegisterGlobal("getCommandsList", getCommandsList)
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
 	widgetHandler:RegisterGlobal("requestUnitListUpdate", function() updateUnitList(true) end)
+	getCommandsList()
 	hideDefaultGUI()
 	initChili()
 	initTopBar()
