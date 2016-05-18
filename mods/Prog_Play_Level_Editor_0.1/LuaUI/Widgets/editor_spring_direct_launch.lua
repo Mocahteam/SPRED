@@ -1225,7 +1225,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			local count = 1
 			for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
 				local inputState = {
-					["name"] = "input_states",
+					["name"] = "input_state",
 					["attr"] = {
 						["id_input"] = LevelListNames[i].."//"..count
 					}
