@@ -94,8 +94,13 @@ function gadget:GameFrame( frameNumber )
       end
     else
       gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
+
       -- if required, show GuiMission
       if gameOver == -1 or gameOver == 1 then
+        local prefix=true
+        if (prefix)then
+          outputState=missionName.."//"..outputState
+        end
         _G.event = {logicType = "ShowMissionMenu",
           state = "", outputstate=outputState}
         if gameOver == -1 then

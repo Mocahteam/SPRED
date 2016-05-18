@@ -38,7 +38,7 @@ function appliqManager:new(xmldata)
   instance.game = nil
   instance.scenario = nil
   instance.activities = nil
-  instance.goals = nil
+  instance.goals = {}--avoid bugs
   instance.selectedScenarioIndex = nil
 	instance.x = xml.xmlParser(instance.treehandler)
   return instance
@@ -48,7 +48,8 @@ end
 -- Parsing function, necessary to get informations from the xml file
 -------------------------------------
 function appliqManager:parse()
-  local loadedFile=contx:LoadFileFromSpringRoot(self.xmldata)
+  local loadedFile=VFS.LoadFile(self.xmldata)
+  --local loadedFile=contx:LoadFileFromSpringRoot(self.xmldata)
   if(loadedFile)==nil then
     self=nil
     return
@@ -57,17 +58,21 @@ function appliqManager:parse()
   -- check if we have at least a game node. If not, something wrong !!!
   if (self.treehandler.root and self.treehandler.root.games and self.treehandler.root.games.game) then
     self.game = self.treehandler.root.games.game
+    Spring.Echo("game is parsed")
     -- trying to initialise scenario
     if self.game.link_sets and self.game.link_sets.link_set then
       self.scenario = self.game.link_sets.link_set
+       Spring.Echo("scenario is parsed")
     end
     -- trying to initialise activities
     if self.game.activities and self.game.activities.activity then
       self.activities = self.game.activities.activity
+      Spring.Echo("activ are parsed")
     end
     -- trying to initialise and goals
     if self.game.goals and self.game.goals.goal then
       self.goals = self.game.goals.goal
+      Spring.Echo("goals are parsed")
     end
   end
 end
@@ -178,6 +183,9 @@ function appliqManager:getActivityFromInput(input_stateId)
   if input_stateId == nil then
     return nil
   end
+  if input_stateId == "end" then
+    return "end"
+  end
   -- find activity's name with this input_stateId
   for i=1,table.getn(self.activities) do
     -- check if activity is well formed
@@ -198,7 +206,7 @@ end
 -- @return nil on error
 -------------------------------------
 function appliqManager:getNextActivityFromOutput(output)
-  input_stateId=self:getInputFromOutput(output)
+  local input_stateId=self:getInputFromOutput(output)
   return self:getActivityFromInput(input_stateId)
 end
 
@@ -212,15 +220,18 @@ end
 function appliqManager:getIONameFromId(idToFind,state)
   for i=1,table.getn(self.activities) do
     local act=self.activities[i]
+    --Spring.Echo(state)
     local elements=act[state.."_states"][state.."_state"]
-    for j=1,table.getn(elements) do
-      local element=elements[j]
-      if((element._attr)["id_"..state]==idToFind) then
-      local val=element._attr.name
-        if val==nil then
-          return "unnamed"
+    if(elements~=nil)then
+      for j=1,table.getn(elements) do
+        local element=elements[j]
+        if((element._attr)["id_"..state]==idToFind) then
+        local val=element._attr.name
+          if val==nil then
+            return "unnamed"
+          end
+          return val
         end
-        return val
       end
     end
   end
@@ -253,6 +264,7 @@ end
 function appliqManager:getActivityNameFromId(idAct)
   for i=1,table.getn(self.activities) do
     local act=self.activities[i]
+    Spring.Echo(act._attr.id_activity)
     if(act._attr.id_activity==idAct) then
       return act.name
     end
@@ -308,6 +320,7 @@ end
 function appliqManager:startRoute()
   self.currentActivityID=self:getNextActivityFromOutput(self.start)
   --self.progressionOutputs={self.start}--commented out as not homoegenous as setPrgression
+  
   return self.currentActivityID
 end
 

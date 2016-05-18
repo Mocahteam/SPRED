@@ -24,8 +24,14 @@ VFS.Include("LuaUI/Widgets/libs/context.lua")
 contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
-local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
-AppliqManager:parse()
+local xmlFiles = VFS.DirList("scenario/", "*.xml")
+local AppliqManager
+Spring.Echo(xmlFiles[1])
+if(xmlFiles[1]~=nil)then
+  AppliqManager=appliqManager:new(xmlFiles[1])
+  AppliqManager:parse()
+end
+
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
 local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
@@ -296,6 +302,40 @@ function MissionEvent(e)
     -- Of course, we can pass to the next mission if current mission is won
       if mode=="appliq" and AppliqManager~=nil then     
         Spring.Echo("APPLIQ MODE")
+        local currentoptions=Spring.GetModOptions()       
+        AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
+        AppliqManager:startRoute()
+        --Spring.Echo(e.outputstate)
+        --Spring.Echo("current Act ID")
+        --Spring.Echo(AppliqManager.currentActivityID)
+        local progression=unpickleProgression(currentoptions["progression"])
+        --AppliqManager:setProgression(unpickle(currentoptions["progression"]))
+        --Spring.Echo(e.outputstate)
+        AppliqManager:setProgression(progression)
+        local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
+        --Spring.Echo(pickle(outputs))  
+        local nextMiss=AppliqManager:next(e.outputstate)   
+        local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
+        if(nextMiss==nil) then     
+          Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
+          local selectedOutput=outputs[math.random(#outputs)]
+          AppliqManager:next(selectedOutput)         
+        elseif (nextMiss=="end") then
+          Spring.Echo("end of scenario")
+          popup.lineArray = {victoryCampaign}
+          continue="\255\50\50\50"..continue.."\255\255\255\255"
+        else      
+          
+          local currentInput=AppliqManager:getCurrentInputName()
+          --Spring.Echo(currentoptions["progression"])
+         -- Spring.Echo(currentInput)
+          --Spring.Echo(e.outputstate)         
+          --Spring.Echo(mission)           
+          currentoptions["currentinput"]=currentInput  
+          currentoptions["missionname"]=mission
+          currentoptions["currentinput"]=currentInput
+          currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
+        end          
         popup.tabs[2].preset = function(tab)
           tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
           tab.OnClick = function()
@@ -306,37 +346,12 @@ function MissionEvent(e)
             tab.title = continue
             tab.position = "bottom"
             tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
-              tab.parent:Close()            
-              local currentoptions=Spring.GetModOptions()       
-              AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
-              AppliqManager:startRoute()
-              Spring.Echo(e.outputstate)
-              local progression=unpickleProgression(currentoptions["progression"])
-              --AppliqManager:setProgression(unpickle(currentoptions["progression"]))
-              --Spring.Echo(e.outputstate)
-              AppliqManager:setProgression(progression)
-              local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()       
-              if(AppliqManager:next(e.outputstate)==nil) then
-              -- mildly useless echo as a Spring Restart will tend to happen      
-                Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
-                local selectedOutput=outputs[math.random(#outputs)]
-                AppliqManager:next(selectedOutput)
-              end
-              
-              local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
-              local currentInput=AppliqManager:getCurrentInputName()
-              --Spring.Echo(currentoptions["progression"])
-             -- Spring.Echo(currentInput)
-              --Spring.Echo(e.outputstate)         
-              Spring.Echo(mission)           
-              currentoptions["currentinput"]=currentInput  
-              currentoptions["missionname"]=mission
-              currentoptions["currentinput"]=currentInput
-              currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
-              local options={["MODOPTIONS"]=currentoptions}    
+              if(nextMiss~="end")then
+                tab.parent:Close()            
               --Spring.Echo("test")
               --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
-              genericRestart(mission, options,false) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+                genericRestart(mission, {["MODOPTIONS"]=currentoptions}  ,false) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+              end
             end
           end
       end
@@ -355,6 +370,7 @@ function MissionEvent(e)
 			winPopup = nil
 		end
 		-- create new one with preset popup config
+		Spring.Echo("try to open popup")
 		winPopup = Window:CreateCentered(popup)
 		-- and open it
 		winPopup:Open()
