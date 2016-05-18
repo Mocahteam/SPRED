@@ -12,7 +12,7 @@ function widget:GetInfo()
 	}
 end
 
-
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
@@ -27,8 +27,9 @@ contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootD
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
-local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
+local AppliqManager=appliqManager:new("scenario/scenario_test.xml")
 AppliqManager:parse()
+
 --AppliqManager:fullTest()
 
 local IsActive = false
@@ -82,10 +83,12 @@ end
 
 local function RunScenario(i)
   if Spring.Restart then
+    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
     AppliqManager:selectScenario(i)
     AppliqManager:startRoute()
-    AppliqManager:setProgression({"1630","1638"})
+    --AppliqManager:setProgression({"1630","1638"})
     --AppliqManager:next("1630")
+    Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))    
     local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
     local currentInput=AppliqManager:getCurrentInputName()
     Spring.Echo(currentInput)
@@ -95,12 +98,17 @@ local function RunScenario(i)
       ["scenariomode"]="appliq",
       ["language"]=lang,
       ["scenario"]=i, --Todo: Should be an id instead
-      ["missionname"]=mission,
+      --["missionname"]=mission,
       ["currentinput"]=currentInput,
       ["progression"]=pickle(AppliqManager.progressionOutputs)
       }
     }
-    DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
+    local contextFile=true
+    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
+    --Spring.Echo(mission)
+    --Spring.Echo(json.encode(options))
+    genericRestart("Missions/"..Game.modShortName.."/"..mission..".editor",options,contextFile)
+    --DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
   else
     NoRestart()
   end
