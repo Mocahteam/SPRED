@@ -3582,11 +3582,26 @@ end
 function initWidgetList()
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
-		local customWidget = {}
-		customWidget.name = k
-		customWidget.active = false
-		customWidget.desc = w.desc
-		table.insert(customWidgets, customWidget)
+		if 	k ~= "Spring Direct Launch 2 for Prog&Play" and
+			k ~= "Messenger" and
+			k ~= "Mission GUI" and
+			k ~= "CA Interface" and
+			k ~= "Files IO" and
+			k ~= "Display Message" and
+			k ~= "Camera Auto" and
+			k ~= "Chili Framework" and
+			k ~= "Editor Commands List" and
+			k ~= "Editor Loading Screen" and
+			k ~= "Spring Direct Launch 2 for Prog&Play Level Editor" and
+			k ~= "Editor User Interface" and
+			k ~= "Editor Widget List"
+		then
+			local customWidget = {}
+			customWidget.name = k
+			customWidget.active = false
+			customWidget.desc = w.desc
+			table.insert(customWidgets, customWidget)
+		end
 	end
 end
 function showWidgetsWindow()

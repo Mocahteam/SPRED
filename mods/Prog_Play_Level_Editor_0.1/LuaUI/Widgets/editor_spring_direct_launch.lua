@@ -1140,7 +1140,8 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 				["attr"] = {
 					["id_game"] = "76",
 					["status"] = "prepa",
-					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00")
+					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00"),
+					["activity_prefix"] = "true"
 				},
 				["kids"] = {
 					{
