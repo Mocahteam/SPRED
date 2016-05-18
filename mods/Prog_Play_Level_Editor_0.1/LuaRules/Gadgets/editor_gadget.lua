@@ -142,7 +142,7 @@ function gadget:GameFrame( frameNumber )
 			local units = Spring.GetAllUnits()
 			if units.n ~= 0 then
 				for i, u in ipairs(units) do
-					Spring.DestroyUnit(u, false, true)
+					Spring.DestroyUnit(u, true, true)
 				end
 				initialize = false
 			end
@@ -240,7 +240,9 @@ function gadget:GameFrame( frameNumber )
 		for id, unitDef in pairs(UnitDefs) do
 			local unitType = unitDef.name
 			cmdListUnit[unitType] = {}
-			local id = Spring.CreateUnit(unitType, 100, Spring.GetGroundHeight(100, 100), 100, "s", 0)
+			local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
+			Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
+			Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
 			local cmds = Spring.GetUnitCmdDescs(id)
 			for i, cmd in ipairs(cmds) do
 				if cmd.id < 0 then
@@ -251,8 +253,8 @@ function gadget:GameFrame( frameNumber )
 					cmdListUnit[unitType][cmd.name] = cmd.id
 				end
 			end
+			Spring.DestroyUnit(id, true, true)
 		end
-		SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
 	end
 end
 --------------------------------------------------------------------------------
