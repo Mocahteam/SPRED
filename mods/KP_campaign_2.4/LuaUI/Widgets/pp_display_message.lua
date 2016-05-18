@@ -12,7 +12,7 @@ end
 
 local UnitMessages = {}
 local PositionMessages = {}
-
+local BubbleMessages = {}
 
 function DisplayMessageAboveUnit(message, unit, timer)
 	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
@@ -20,6 +20,42 @@ end
 
 function DisplayMessageAtPosition(message, x, y, z, timer)
 	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer,infinite=(timer==0)})
+end
+
+function DisplayMessageInBubble(message, unit, timer)
+	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
+end
+
+function GetTeamColor(team)
+	local splitString = function(inputstr, sep)
+		if sep == nil then
+			sep = "%s"
+		end
+		local t = {}
+		local i = 1
+		for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+			t[i] = str
+			i = i + 1
+		end
+		return t
+	end
+	local txtFile = VFS.LoadFile("_script.txt")
+	local regexSection="%[".."team"..team.."%]%s*%{([^%}]*)%}"
+	local contentSection = string.match(txtFile, regexSection)
+	if contentSection == nil then
+		return 1, 1, 1
+	end
+	local rgbRegex = "rgbcolor%=.*"
+	local rgbSection = string.match(contentSection, rgbRegex)
+	local msgContents = splitString(rgbSection, "=")
+	local colorsStrings = splitString(msgContents[2], "\n")
+	local colorsString = colorsStrings[1]
+	local colors = splitString(string.gsub(colorsString, ";", ""), " ")
+	if colors[1] and colors[2] and colors[3] then
+		return tonumber(colors[1]), tonumber(colors[2]), tonumber(colors[3])
+	else
+		return 1, 1, 1
+	end
 end
 
 function TurnToIntoLines(texte)
@@ -55,6 +91,33 @@ function DisplayTextAtScreenPosition(x, y, texte)
     end
 end
 
+function DisplayBubbleAtScreenPosition(x, y, text, u)
+	x = x - 80
+	local s = 20
+	local tableLine = TurnToIntoLines(text)
+	local nLines = table.getn(tableLine)
+	local height = s * nLines
+	for i, m in ipairs(tableLine) do
+		gl.Text(m, x+10, y+(nLines-i)*s+80, s, "s")
+	end
+	local top_tex = "bitmaps/game/bubble_top.png"
+	local mid_tex = "bitmaps/game/bubble_mid.png"
+	local bot_tex = "bitmaps/game/bubble_bot.png"
+	local team = Spring.GetUnitTeam(u)
+	local r, g, b = 1, 1, 1
+	if pcall(function() GetTeamColor(team) end) then
+		r, g, b = GetTeamColor(team)
+	end
+	gl.Color(r, g, b, 1)
+	gl.Texture(bot_tex)
+	gl.TexRect(x, y, x+300, y+80, false, false)
+	gl.Texture(top_tex)
+	gl.TexRect(x, y+height+80, x+300, y+height+100, false, false)
+	gl.Texture(mid_tex)
+	gl.TexRect(x, y+80, x+300, y+height+80, false, false)
+	gl.Texture(false)
+end
+
 function widget:DrawScreen()
 	for i, mes in ipairs(UnitMessages) do
 		local u, m = mes.unit, mes.message
@@ -65,13 +128,20 @@ function widget:DrawScreen()
 	for i, mes in ipairs(PositionMessages) do
 		local x, y, z, m = mes.x, mes.y, mes.z, mes.message
 		x, y = Spring.WorldToScreenCoords(x, y, z)
-    DisplayTextAtScreenPosition(x, y, m)
+		DisplayTextAtScreenPosition(x, y, m)
+	end
+	for i, mes in ipairs(BubbleMessages) do
+		local u, m = mes.unit, mes.message
+		local x, y, z = Spring.GetUnitPosition(u)
+		x, y = Spring.WorldToScreenCoords(x, y+50, z)
+		DisplayBubbleAtScreenPosition(x, y, m, u)
 	end
 end
 
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("DisplayMessageAboveUnit", DisplayMessageAboveUnit)
 	widgetHandler:RegisterGlobal("DisplayMessageAtPosition", DisplayMessageAtPosition)
+	widgetHandler:RegisterGlobal("DisplayMessageInBubble", DisplayMessageInBubble)
 end
 
 function widget:Update(delta)
@@ -99,6 +169,19 @@ function widget:Update(delta)
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(PositionMessages, i)
+	end
+	
+	toBeRemoved = {}
+	for i, m in ipairs(BubbleMessages) do
+   if (not m.infinite)then
+      m.timer = m.timer - delta
+      if m.timer < 0 then
+        table.insert(toBeRemoved, i)
+      end
+    end
+	end
+	for _, i in ipairs(toBeRemoved) do
+		table.remove(BubbleMessages, i)
 	end
 end
 
