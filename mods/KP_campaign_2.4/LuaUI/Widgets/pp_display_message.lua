@@ -22,21 +22,22 @@ function DisplayMessageAtPosition(message, x, y, z, timer)
 	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer,infinite=(timer==0)})
 end
 
-function TurnToIntoLines(texte)
+function TurnTextIntoLines(texte)
   local maxWidth=10
   local tableLines={}
   local message=""
   local wCurrentLine=0
   local f=true--first insert
   for token in string.gmatch(texte, "[^%s]+") do
-    if(((wCurrentLine+gl.GetTextWidth(token))<maxWidth) or (message=="")) then -- we continue to write on the same line
+    local tokSize=gl.GetTextWidth(token)
+    if(((wCurrentLine+tokSize)<maxWidth) or (message=="")) then -- we continue to write on the same line
       if (f) then message=token ; f=false -- to avoid a blank space at the beginning of the message
       else message=message.." "..token end
-      wCurrentLine=wCurrentLine+gl.GetTextWidth(token)
+      wCurrentLine=wCurrentLine+tokSize
     else -- threshold reached => newline
       table.insert(tableLines,message)
       message=token
-      wCurrentLine=0
+      wCurrentLine=tokSize
     end
   end
   table.insert(tableLines,message) -- to include the tail of the string for which, by definition, the threshold is not reached
@@ -44,10 +45,10 @@ function TurnToIntoLines(texte)
 end
 
 -- display text at position, if the text is too wide
--- it will be cut in smaller parts by the call of TurnToIntoLines
+-- it will be cut in smaller parts by the call of TurnTextIntoLines
 function DisplayTextAtScreenPosition(x, y, texte)
     local s = 30
-    local tableLine=TurnToIntoLines(texte)
+    local tableLine=TurnTextIntoLines(texte)
     local nLines=table.getn(tableLine)
     for i, m in ipairs(tableLine) do
       local w = gl.GetTextWidth(m)*s
