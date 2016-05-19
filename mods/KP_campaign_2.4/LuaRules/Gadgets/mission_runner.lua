@@ -231,7 +231,11 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "DisplayMessageAboveUnit" then
     local p=json.decode(arg2)
     Spring.Echo("try to on unit")
-    Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
+    if(not p.bubble)then
+      Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
+    else
+      Script.LuaUI.DisplayMessageInBubble(p.message, p.unit, p.time)
+    end
   elseif arg1 == "displayMessageOnPosition" then
     --Spring.Echo("try to on pos")
     local p=json.decode(arg2)

@@ -23,6 +23,7 @@ function DisplayMessageAtPosition(message, x, y, z, timer)
 end
 
 function DisplayMessageInBubble(message, unit, timer)
+  Spring.Echo("tryyyyyyyyyyy to diplay BUB")
 	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
 end
 
@@ -189,4 +190,5 @@ end
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("DisplayMessageAboveUnit")
 	widgetHandler:DeregisterGlobal("DisplayMessageAtPosition")
+  widgetHandler:DeregisterGlobal("DisplayMessageInBubble")
 end

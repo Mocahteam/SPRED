@@ -572,12 +572,16 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="messageGlobal") then
     Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
     
-   elseif(act.type=="messageUnit") then
+   elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
+    --bubbleUnit
       local springUnitId=armySpring[act.params.unit]
       if Spring.ValidUnitID(springUnitId) then
         local factor=Spring.GetGameSpeed()
         --Spring.Echo("try to send : DisplayMessageAboveUnit")
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/factor}))
+        if(act.type=="bubbleUnit")then
+          Spring.Echo("dddddddddddddddddd")
+        end
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/factor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
