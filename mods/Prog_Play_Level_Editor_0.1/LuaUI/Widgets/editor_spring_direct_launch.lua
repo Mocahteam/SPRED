@@ -1716,11 +1716,13 @@ end
 function widget:Update(delta)
 	MakeLink()
 	FadeConfirmationMessage(delta)
-	if UI.Scenario.BeginExportationMessage then
-		if UI.Scenario.BeginExportationMessage.beginExport then
-			BeginExportGame()
-		else
-			UI.Scenario.BeginExportationMessage.beginExport = true
+	if UI.Scenario then
+		if UI.Scenario.BeginExportationMessage then
+			if UI.Scenario.BeginExportationMessage.beginExport then
+				BeginExportGame()
+			else
+				UI.Scenario.BeginExportationMessage.beginExport = true
+			end
 		end
 	end
 end
