@@ -22,7 +22,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- Couleurs des teams
 -- Copier/coller script \n
 -- Ajouter nom ia à coté d'un computer forces
--- Message d'atente de fin d'exportation
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
 -- Personnalisation de l'éditeur (raccourcis etc.)
