@@ -293,7 +293,7 @@
 				},
 				{
 					"id":8,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action8",
 					"params":{
 						"message":[
@@ -314,7 +314,7 @@
 				},
 				{
 					"id":10,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action10",
 					"params":{
 						"message":[
@@ -340,7 +340,7 @@
 			"actions":[
 				{
 					"id":1,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action1",
 					"params":{
 						"message":[
@@ -383,7 +383,7 @@
 			"actions":[
 				{
 					"id":5,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action5",
 					"params":{
 						"message":[

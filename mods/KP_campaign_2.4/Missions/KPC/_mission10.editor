@@ -443,7 +443,7 @@
 			"actions":[
 				{
 					"id":5,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"westmess",
 					"params":{
 						"message":[
@@ -476,7 +476,7 @@
 			"actions":[
 				{
 					"id":6,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"northMess",
 					"params":{
 						"message":[
@@ -509,7 +509,7 @@
 			"actions":[
 				{
 					"id":7,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"eastmess",
 					"params":{
 						"message":[
@@ -542,7 +542,7 @@
 			"actions":[
 				{
 					"id":8,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"southmess",
 					"params":{
 						"message":[

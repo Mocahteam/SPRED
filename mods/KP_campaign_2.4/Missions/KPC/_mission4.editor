@@ -460,7 +460,7 @@
 			"actions":[
 				{
 					"id":11,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action11",
 					"params":{
 						"message":[
@@ -527,7 +527,7 @@
 			"actions":[
 				{
 					"id":14,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action14",
 					"params":{
 						"message":[

@@ -319,7 +319,7 @@
 			"actions":[
 				{
 					"id":6,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action6",
 					"params":{
 						"message":[
