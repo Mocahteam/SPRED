@@ -23,40 +23,7 @@ function DisplayMessageAtPosition(message, x, y, z, timer)
 end
 
 function DisplayMessageInBubble(message, unit, timer)
-  Spring.Echo("tryyyyyyyyyyy to diplay BUB")
 	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
-end
-
-function GetTeamColor(team)
-	local splitString = function(inputstr, sep)
-		if sep == nil then
-			sep = "%s"
-		end
-		local t = {}
-		local i = 1
-		for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-			t[i] = str
-			i = i + 1
-		end
-		return t
-	end
-	local txtFile = VFS.LoadFile("_script.txt")
-	local regexSection="%[".."team"..team.."%]%s*%{([^%}]*)%}"
-	local contentSection = string.match(txtFile, regexSection)
-	if contentSection == nil then
-		return 1, 1, 1
-	end
-	local rgbRegex = "rgbcolor%=.*"
-	local rgbSection = string.match(contentSection, rgbRegex)
-	local msgContents = splitString(rgbSection, "=")
-	local colorsStrings = splitString(msgContents[2], "\n")
-	local colorsString = colorsStrings[1]
-	local colors = splitString(string.gsub(colorsString, ";", ""), " ")
-	if colors[1] and colors[2] and colors[3] then
-		return tonumber(colors[1]), tonumber(colors[2]), tonumber(colors[3])
-	else
-		return 1, 1, 1
-	end
 end
 
 function TurnTextIntoLines(texte)
@@ -106,11 +73,8 @@ function DisplayBubbleAtScreenPosition(x, y, text, u)
 	local mid_tex = "bitmaps/game/bubble_mid.png"
 	local bot_tex = "bitmaps/game/bubble_bot.png"
 	local team = Spring.GetUnitTeam(u)
-	local r, g, b = 1, 1, 1
-	if pcall(function() GetTeamColor(team) end) then
-		r, g, b = GetTeamColor(team)
-	end
-	gl.Color(r, g, b, 1)
+	local r, g, b, a = Spring.GetTeamColor(team)
+	gl.Color(r, g, b, a)
 	gl.Texture(bot_tex)
 	gl.TexRect(x, y, x+300, y+80, false, false)
 	gl.Texture(top_tex)

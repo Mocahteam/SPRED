@@ -1116,18 +1116,18 @@ else
 					hint = "Variables can be defined by going to the menu available through the event panel"
 				}
 			}
-		}
-	},
-	{
-		type = "script",
-		filter = "Script",
-		typeText = "Evaluate custom boolean",
-		text = "Evaluate custom boolean returned by LUA script <Script>.",
-		attributes = {
-			{
-				text = "<Script>",
-				type = "text",
-				id = "script"
+		},
+		{
+			type = "script",
+			filter = "Script",
+			typeText = "Evaluate custom boolean",
+			text = "Evaluate custom boolean returned by LUA script <Script>.",
+			attributes = {
+				{
+					text = "<Script>",
+					type = "text",
+					id = "script"
+				}
 			}
 		}
 	}
