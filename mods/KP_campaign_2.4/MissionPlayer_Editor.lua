@@ -1065,24 +1065,23 @@ local function writeCompassOnUnit(springUnitId)
     writeSign(x+18, y, z+48, "+")
 end
 
+-------------------------------------
+-- Parse the editor file
+-- enable/deactivate widgets according to the settings
+-------------------------------------
 local function parseJson(jsonFile)
-  Spring.Echo(jsonFile)
+  --Spring.Echo(jsonFile)
   if(jsonFile==nil) then
     return nil
   end
   ctx.canUpdate=true
-  --Spring.Echo(jsonName)
-  --Spring.Echo("we try to decode"..jsonFile)
   ctx.mission=json.decode(jsonFile)
-  
   -- desactivate widget
-  -- This should be done ASAP
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
     local activation=ctx.mission.description.widgets[i].active
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
   end 
-  
   return true
 end
 
@@ -1096,38 +1095,12 @@ local function returnEventsTriggered()
   return eventsTriggered
 end
 
-local function returnTestsToPlay()
-  --Spring.Echo(json.encode(ctx.mission.tests))
-  return ctx.mission.tests
-end
-
 -------------------------------------
 -- Initialize the mission by parsing informations from the json
 -- and process some datas
 -- @todo This function does too many things
 -------------------------------------
 local function StartAfterJson ()
-  -- Delete all the stuff (required as team kernel are placed by spring since the beginnning)
-  
-
-  --[[ 
-
- 
-
-  -- COMMENTED OUT for the moment, avoid unsage attempt to modify gamestate
-  
-
-  Spring.Echo("trééééééééééééééééé")
-  local context = {}
-  local uuu=1
-  context.uuu = uuu
-  context.Spring=Spring
-  -- etc. add libraries/functions that are safe for your application.
-  -- see: http://lua-users.org/wiki/SandBoxes
-  load_code("uuu=uuu+1;Spring.Echo(uuu)", context)
-  Spring.Echo(uuu)
-  Spring.Echo(context.uuu)
-   --]]
   
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
@@ -1164,50 +1137,49 @@ local function StartAfterJson ()
     end 
   end
 end
- 
- -------------------------------
- -------VARIABLES---------------
- -------------------------------
-if(ctx.mission.variables~=nil)then
-  for i=1,table.getn(ctx.mission.variables) do
-    local missionVar=ctx.mission.variables[i]
-    local initValue=missionVar.initValue
-    local name=missionVar.name
-    if(missionVar.type=="number") then
-      initValue=initValue
-    elseif(missionVar.type=="boolean") then
-      initValue=(initValue=="true")
+   
+   -------------------------------
+   -------VARIABLES---------------
+   -------------------------------
+  if(ctx.mission.variables~=nil)then
+    for i=1,table.getn(ctx.mission.variables) do
+      local missionVar=ctx.mission.variables[i]
+      local initValue=missionVar.initValue
+      local name=missionVar.name
+      if(missionVar.type=="number") then
+        initValue=initValue
+      elseif(missionVar.type=="boolean") then
+        initValue=(initValue=="true")
+      end
+      ctx.variables[name]=initValue
     end
-    ctx.variables[name]=initValue
+  end  
+  Spring.Echo(json.encode(ctx.variables))
+  
+  
+  
+    -- specialPositionTables[i]={positions[id].x,positions[id].z}
+    -- 
+  
+   -------------------------------
+   -------SETTINGS----------------
+   -------------------------------
+  ctx.messages["briefing"]=ctx.mission.description.briefing
+  Spring.Echo(ctx.messages["briefing"])
+  --  if(mission.description.mouse=="disabled") then
+  --   SendToUnsynced("mouseDisabled", true)
+  --  end
+  
+  if(ctx.mission.description.cameraAuto=="enabled") then
+    _G.cameraAuto = {
+      enable = true,
+      specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
+    }
+    SendToUnsynced("enableCameraAuto")
+    _G.cameraAuto = nil
   end
-end  
-Spring.Echo(json.encode(ctx.variables))
-
-
-
-  -- specialPositionTables[i]={positions[id].x,positions[id].z}
-  -- 
-
- -------------------------------
- -------SETTINGS----------------
- -------------------------------
-ctx.messages["briefing"]=ctx.mission.description.briefing
-Spring.Echo(ctx.messages["briefing"])
---  if(mission.description.mouse=="disabled") then
---   SendToUnsynced("mouseDisabled", true)
---  end
-
-if(ctx.mission.description.cameraAuto=="enabled") then
-  _G.cameraAuto = {
-    enable = true,
-    specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
-  }
-  SendToUnsynced("enableCameraAuto")
-  _G.cameraAuto = nil
-end
-local isautoHealGlobal=(ctx.mission.description.autoHeal=="enabled")
-
- 
+  local isautoHealGlobal=(ctx.mission.description.autoHeal=="enabled")
+  
  -------------------------------
  ----------ARMIES---------------
  -------------------------------
@@ -1245,93 +1217,67 @@ local isautoHealGlobal=(ctx.mission.description.autoHeal=="enabled")
    
 
 
- ---------------------------------------------
- -------EVENTS  AND  CONDITIONS--------------
- ---------------------------------------------
-if(ctx.mission.events~=nil)then
-    for i=1, table.getn(ctx.mission.events) do
-     local currentEvent=ctx.mission.events[i]
-     local idEvent=ctx.mission.events[i].id
-     ctx.events[idEvent]={}
-     ctx.events[idEvent]=ctx.mission.events[i]
-     ctx.events[idEvent].hasTakenPlace=false
-     ctx.events[idEvent].listOfInvolvedConditions={}
-     for j=1, table.getn(currentEvent.conditions)do
-       local currentCond=currentEvent.conditions[j]
-       local id=currentCond.name
-       table.insert(ctx.events[idEvent].listOfInvolvedConditions,id)
-       ctx.conditions[id..tostring(ctx.events[idEvent].id)]=currentEvent.conditions[j]
-       ctx.conditions[id..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
-       local type=currentCond.type
-       local cond_object="other"
-       local attribute=type
-       if(string.sub(type, 1, 5)=="type_") then
-        cond_object="group" -- group is the generic thing
-        attribute=string.sub(type, 6, -1)
-       elseif(string.sub(type, 1, 6)=="killed") then
-        cond_object="killed" -- very special group (not working like others)
-       elseif(string.sub(type, 1, 5)=="unit_") then
-        cond_object="unit"
-        attribute=string.sub(type, 6, -1)
-       elseif(string.sub(type, 1, 6)=="group_") then
-        cond_object="group"
-        attribute=string.sub(type, 7, -1)
-       elseif(string.sub(type, 1, 5)=="team_") then
-        cond_object="group"
-        attribute=string.sub(type, 6, -1)
-      end
-      ctx.conditions[id..tostring(ctx.events[idEvent].id)]["object"]=cond_object
-      ctx.conditions[id..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
-    end 
-  end
-end
-
-
-
-
-
-
-
- --[[  
-   
-   -------------------------------
-   -------START------------------
-   -------------------------------   
-  
-  --Spring.DestroyUnit(ctx.armySpring["ahah"],false,false)
-  
-  conditions["START"]={}
-  for idEvent,event in pairs(events) do
-    if(event.trigger=="START") then -- CONVENTION : Id Condition for start is START, does not recquired to get a definition
-      for j=1, table.getn(event.actions) do
-        local actId=event.actions[j].actionId
-        --Spring.Echo("try to apply"..actId)
-        AddActionInStack(actId,tonumber(actions[actId].delay))
-      end
+   ---------------------------------------------
+   -------EVENTS  AND  CONDITIONS--------------
+   ---------------------------------------------
+  if(ctx.mission.events~=nil)then
+      for i=1, table.getn(ctx.mission.events) do
+       local currentEvent=ctx.mission.events[i]
+       local idEvent=ctx.mission.events[i].id
+       ctx.events[idEvent]={}
+       ctx.events[idEvent]=ctx.mission.events[i]
+       ctx.events[idEvent].hasTakenPlace=false
+       ctx.events[idEvent].listOfInvolvedConditions={}
+       for j=1, table.getn(currentEvent.conditions)do
+         local currentCond=currentEvent.conditions[j]
+         local id=currentCond.name
+         table.insert(ctx.events[idEvent].listOfInvolvedConditions,id)
+         ctx.conditions[id..tostring(ctx.events[idEvent].id)]=currentEvent.conditions[j]
+         ctx.conditions[id..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
+         local type=currentCond.type
+         local cond_object="other"
+         local attribute=type
+         if(string.sub(type, 1, 5)=="type_") then
+          cond_object="group" -- group is the generic thing
+          attribute=string.sub(type, 6, -1)
+         elseif(string.sub(type, 1, 6)=="killed") then
+          cond_object="killed" -- very special group (not working like others)
+         elseif(string.sub(type, 1, 5)=="unit_") then
+          cond_object="unit"
+          attribute=string.sub(type, 6, -1)
+         elseif(string.sub(type, 1, 6)=="group_") then
+          cond_object="group"
+          attribute=string.sub(type, 7, -1)
+         elseif(string.sub(type, 1, 5)=="team_") then
+          cond_object="group"
+          attribute=string.sub(type, 6, -1)
+        end
+        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["object"]=cond_object
+        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
+      end 
     end
-  end
-  conditions["START"]["currentlyValid"]=false
-  ShowBriefing()    
---]]        
+  end     
 end
--------------------------------------
--- Update the game state of the mission 
--- Called externally by the gadget mission_runner.lua 
--- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
--------------------------------------
 
-local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
+
+-- shorthand for parseJson + StartAfterJson.
+local function Start(jsonFile) 
   parseJson(jsonFile)
   StartAfterJson ()
 end
 
+-------------------------------------
+-- The main function of Mission Player
+-- Update the game state of the mission 
+-- Called externally by the gadget mission_runner.lua 
+-- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
+-------------------------------------
 local function Update (frameNumber)
   UpdateConditionsTruthfulness(frameNumber) 
   UpdateGameState(frameNumber)
-  ctx.actionStack=updateStack(1)
+  ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)
   applyCurrentActions() 
-  if(frameNumber>10)then ctx.recordCreatedUnits=true end
-
+  if(frameNumber>10)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
   if(ctx.success==1) then
     return ctx.success,ctx.outputstate
   elseif(ctx.success==-1) then
@@ -1342,35 +1288,6 @@ local function Update (frameNumber)
   -- Trigger Events
 end  
   
-  
-  
-  
-  
-  --[[
-  if(not ctx.canUpdate)then
-    return 0
-  end
-  frameIndex=frameIndex+1
-  if(frameIndex>=refreshPeriod) then
-    --printMyStack()
-    frameIndex=0  
-    actionStack=updateStack(refreshPeriod)
-    applyCurrentActions() 
-    UpdateDynamicVariables() -- update knowledge on the game situation
-    UpdateConditionsTruthfulness(frameNumber)-- update truthfulness of conditions
-    UpdateGameState()-- act upon the situation
-    if(ctx.success~=nil) then
-      return ctx.success,outputstate
-    else
-      return 0 -- means continue
-    end
-  else
-    return 0 -- means continue
-  end
- 
-  return 0
-end
- --]]
 -------------------------------------
 -- Called by mission_runner at the end of the mission
 -------------------------------------
@@ -1382,6 +1299,10 @@ local function Stop ()
 	end
 end
 
+-------------------------------------
+-- Information received from Unsynced Code 
+-- Executed in mission_runner.lua
+-------------------------------------
 function gadget:RecvLuaMsg(msg, player)
   if((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,4)=="kill")) then
     -- comes from mission runner unit destroyed
