@@ -255,6 +255,7 @@ function gadget:GameFrame( frameNumber )
 			end
 			Spring.DestroyUnit(id, true, true)
 		end
+		SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
 	end
 end
 --------------------------------------------------------------------------------

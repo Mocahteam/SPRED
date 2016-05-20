@@ -1703,8 +1703,6 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
-	a = "bonjour"
-	loadstring("Spring.Echo(a)")()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()
