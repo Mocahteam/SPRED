@@ -42,10 +42,10 @@ local function load_code(code)
     if setfenv and loadstring then
         local f = assert(loadstring(code))
         setfenv(f,ctx)
-        f()
+        return f()
     else
-        f=assert(load(code, nil,"t",ctx))
-        f()
+        local f=assert(load(code, nil,"t",ctx))
+        return f()
     end
 end
 
