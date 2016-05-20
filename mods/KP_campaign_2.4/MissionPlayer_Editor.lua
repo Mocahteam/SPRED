@@ -31,7 +31,7 @@ ctx.canUpdate=false
 ctx.mission={}
 ctx.startingFrame=5
 ctx.globalIndexOfCreatedUnits=0
-
+ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
 -------------------------------------
 -- Load codegiven an environnement (table of variables that can be accessed and changed)
@@ -112,6 +112,10 @@ local function makeOperation(v1,v2,operation)
   if(operation=="%")then return v1 - math.floor(v1/v2)*v1 end
 end
 
+-------------------------------------
+-- Deep copy of tables 
+-- @return table
+-------------------------------------
 local function deepcopy(orig)
     local orig_type = type(orig)
     local copy
@@ -180,19 +184,9 @@ end
 local function isXZInsideZone(x,z,zoneId)
   local zone=ctx.zones[zoneId]
   if(zone==nil)then
-    Spring.Echo("not found")
-    Spring.Echo(zoneId)
-    Spring.Echo(json.encode(ctx.zones))
+    Spring.Echo(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)))
   end
   if(zone.type=="Rectangle") then
-  --[[
-    Spring.Echo("debug : x,z,centerx,centerz,demL,deml")
-    Spring.Echo(x)
-    Spring.Echo(z)
-    Spring.Echo(zone.center_xz.x)
-    Spring.Echo(zone.center_xz.z)
-    Spring.Echo(zone.demiLongueur)
-    Spring.Echo(zone.demiLargeur)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
@@ -201,14 +195,6 @@ local function isXZInsideZone(x,z,zoneId)
     if(center_z-zone.demiLongueur>z)then return false end
     return true
   elseif(zone.type=="Disk") then
-   --[[
-    Spring.Echo("debug : x,z,centerx,centerz,a,b")
-    Spring.Echo(x)
-    Spring.Echo(z)
-    Spring.Echo(zone.center_xz.x)
-    Spring.Echo(zone.center_xz.z)
-    Spring.Echo(zone.a)
-    Spring.Echo(zone.b)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
@@ -228,6 +214,7 @@ end
 
 -------------------------------------
 -- draw a position randomly drawn within a zone
+-- @return table with x,z attributes 
 -------------------------------------
 local function getARandomPositionInZone(idZone)
   if(ctx.zones[idZone]~=nil) then
@@ -262,10 +249,10 @@ end
 -- Sometimes a zone is given and getARandomPositionInZone will be called
 -------------------------------------
 local function extractPosition(tablePosOrMaybeJustZoneId)
-  if(type(tablePosOrMaybeJustZoneId)~="number")then
-    return tablePosOrMaybeJustZoneId
-  else
+  if(type(tablePosOrMaybeJustZoneId)=="number")then
     return getARandomPositionInZone(tablePosOrMaybeJustZoneId)
+  else
+    return tablePosOrMaybeJustZoneId
   end
 end
 -------------------------------------
