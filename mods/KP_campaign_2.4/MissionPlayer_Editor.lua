@@ -643,6 +643,11 @@ local function ApplyNonGroupableAction(act)
     ctx.variables[act.params.variable]=v   
   elseif(act.type=="script") then
     load_code(act.params.script)
+ 
+  elseif(act.type=="enableWidget")or(act.type=="enableWidget") then
+    local widgetName=act.params.widget
+    local activation=(act.type=="enableWidget")
+    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
   end
 end
 
@@ -955,6 +960,9 @@ local function UpdateConditionsTruthfulness (frameNumber)
         ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="booleanVariable") then
         ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
+      elseif(c.type=="script") then
+        ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script) --TODO (vérifier)
+        --Spring.Echo(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])))
       end
       
     elseif(object=="group")then  
