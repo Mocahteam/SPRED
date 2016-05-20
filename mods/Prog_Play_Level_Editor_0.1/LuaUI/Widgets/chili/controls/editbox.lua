@@ -300,7 +300,11 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 			self:ClearSelected()
 		end
 	elseif mods.ctrl and key == Spring.GetKeyCode("v") then
-		self:TextInput(Spring.GetClipboard())
+		local cctext = Spring.GetClipboard()
+		cctext = string.gsub(cctext, "\n", " ")
+		cctext = string.gsub(cctext, "\r", "")
+		cctext = string.gsub(cctext, "\t", "")
+		self:TextInput(cctext)
 
 	-- select all
 	elseif mods.ctrl and key == Spring.GetKeyCode("a") then

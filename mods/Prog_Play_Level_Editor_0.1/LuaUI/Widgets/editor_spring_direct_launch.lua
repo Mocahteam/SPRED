@@ -541,9 +541,19 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				if Links[selectedOutputMission][selectedOutput] then
 					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
-					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
 					Links[selectedOutputMission][selectedOutput] = nil
+					local someLinks = {}
+					for k, link in pairs(Links) do
+						for kk, output in pairs(link) do
+							someLinks[output] = true
+						end
+					end
+					for k, b in pairs(UI.Scenario.Input) do
+						if not someLinks[k] then
+							b.state.chosen = false
+							b:InvalidateSelf()
+						end
+					end
 				end
 				selectedOutput = nil
 				selectedOutputMission = nil
@@ -589,7 +599,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
 					SaveState()
-				else
+				elseif selectedOutputMission and selectedOutput then
 					selectedInput = "end"
 				end
 			end
@@ -663,7 +673,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
 					SaveState()
-				else
+				elseif selectedOutputMission and selectedOutput then
 					selectedInput = LevelListNames[i]
 				end
 			end },
@@ -688,9 +698,19 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					if Links[selectedOutputMission][selectedOutput] then
 						UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 						UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
-						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
 						Links[selectedOutputMission][selectedOutput] = nil
+						local someLinks = {}
+						for k, link in pairs(Links) do
+							for kk, output in pairs(link) do
+								someLinks[output] = true
+							end
+						end
+						for k, b in pairs(UI.Scenario.Input) do
+							if not someLinks[k] then
+								b.state.chosen = false
+								b:InvalidateSelf()
+							end
+						end
 					end
 					selectedOutput = nil
 					selectedOutputMission = nil
@@ -1401,82 +1421,104 @@ function ExportGame()
 		end
 	end
 	if not UI.Scenario.ConfirmationMessage then
-		local name = generateSaveName(ScenarioName)
-		local alreadyExists = false
-		if VFS.FileExists("games/"..name..".sdz") then
-			alreadyExists = true
-			local count = 1
-			local newName = name.."(1)"
-			while VFS.FileExists("games/"..newName..".sdz") do
-				count = count + 1
-				newName = name.."("..tostring(count)..")"
-			end
-			name = newName
+		UI.Scenario.BeginExportationMessage = Chili.Label:New{
+			parent = UI.MainWindow,
+			x = "20%",
+			y = "95%",
+			width = "60%",
+			height = "5%",
+			caption = LAUNCHER_SCENARIO_EXPORT_GAME_BEGIN,
+			align = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				color = { 0.4, 0.2, 1, 1 }
+			},
+			beginExport = false
+		}
+	end
+end
+
+function BeginExportGame()
+	if UI.Scenario.BeginExportationMessage then
+		UI.Scenario.BeginExportationMessage:Dispose()
+		UI.Scenario.BeginExportationMessage = nil
+	end
+	local name = generateSaveName(ScenarioName)
+	local alreadyExists = false
+	if VFS.FileExists("games/"..name..".sdz") then
+		alreadyExists = true
+		local count = 1
+		local newName = name.."(1)"
+		while VFS.FileExists("games/"..newName..".sdz") do
+			count = count + 1
+			newName = name.."("..tostring(count)..")"
 		end
-		
-		-- Choose levels
-		local levelList = {}
-		if UI.Scenario.IncludeMissions.checked then
-			levelList = LevelListNames
-		else
-			for k, link in pairs(Links) do
-				for kk, input in pairs(link) do
-					if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
-						table.insert(levelList, input)
-					end
+		name = newName
+	end
+	
+	-- Choose levels
+	local levelList = {}
+	if UI.Scenario.IncludeMissions.checked then
+		levelList = LevelListNames
+	else
+		for k, link in pairs(Links) do
+			for kk, input in pairs(link) do
+				if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
+					table.insert(levelList, input)
 				end
 			end
 		end
-		-- Add levels and scenario
-		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
-		end
-		-- Compress
-		VFS.CompressFolder("pp_editor/game_files")
-		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
-		-- Remove levels and scenario
-		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
-		end
-			
-		-- Show message
-		if not alreadyExists then
-			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = message,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					color = { 0.2, 1, 0.2, 1 }
-				}
+	end
+	-- Add levels and scenario
+	os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
+	for i, level in ipairs(levelList) do
+		os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+	end
+	-- Compress
+	VFS.CompressFolder("pp_editor/game_files")
+	os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+	-- Remove levels and scenario
+	os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+	for i, level in ipairs(levelList) do
+		os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+	end
+		
+	-- Show message
+	if not alreadyExists then
+		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
+		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+		UI.Scenario.ConfirmationMessage = Chili.Label:New{
+			parent = UI.MainWindow,
+			x = "20%",
+			y = "95%",
+			width = "60%",
+			height = "5%",
+			caption = message,
+			align = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				color = { 0.2, 1, 0.2, 1 }
 			}
-		else
-			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = message,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					color = { 1, 0.2, 0.2, 1 }
-				}
+		}
+	else
+		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
+		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+		UI.Scenario.ConfirmationMessage = Chili.Label:New{
+			parent = UI.MainWindow,
+			x = "20%",
+			y = "95%",
+			width = "60%",
+			height = "5%",
+			caption = message,
+			align = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				color = { 1, 0.2, 0.2, 1 }
 			}
-		end
+		}
 	end
 end
 
@@ -1661,6 +1703,8 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
+	a = "bonjour"
+	loadstring("Spring.Echo(a)")()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()
@@ -1672,6 +1716,15 @@ end
 function widget:Update(delta)
 	MakeLink()
 	FadeConfirmationMessage(delta)
+	if UI.Scenario then
+		if UI.Scenario.BeginExportationMessage then
+			if UI.Scenario.BeginExportationMessage.beginExport then
+				BeginExportGame()
+			else
+				UI.Scenario.BeginExportationMessage.beginExport = true
+			end
+		end
+	end
 end
 
 function widget:MousePress(mx, my, button)

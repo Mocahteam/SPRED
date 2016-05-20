@@ -16,7 +16,8 @@ actions_list = {
 			{
 				text = "<State>",
 				type = "text",
-				id = "outputState"
+				id = "outputState",
+				hint = "This string will be used as output state for the scenario editor"
 			}
 		}
 	},
@@ -34,7 +35,8 @@ actions_list = {
 			{
 				text = "<State>",
 				type = "text",
-				id = "outputState"
+				id = "outputState",
+				hint = "This string will be used as output state for the scenario editor"
 			}
 		}
 	},

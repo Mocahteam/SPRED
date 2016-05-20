@@ -19,6 +19,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- \\\\ TODO LIST ////
 -- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
+-- Ajouter nom ia à coté d'un computer forces
 -- Possibilités de modifier le terrain (voir vidéo)
 -- Traduction des strings des déclencheurs
 -- Personnalisation de l'éditeur (raccourcis etc.)
@@ -138,6 +139,10 @@ local updateTeamConfig = true -- Force update of the team config panel
 local updateAllyTeam = true -- Force update of the allyteam panel
 local teamNameEditBoxes = {} -- Edit boxes to change the name of the teams
 local teamName = {} -- Stores the names of the teams
+local teamAIElements = {}
+teamAIElements.teamAI = {} -- AI of computer controlled teams
+teamAIElements.teamAILabels = {}
+teamAIElements.teamAIEditBoxes = {}
 
 -- Trigger variables
 local events = {} -- Stores the events
@@ -616,6 +621,8 @@ function teamConfig() -- Show the team config panel
 		teamColorTrackbars[t].red:SetValue(r)
 		teamColorTrackbars[t].green:SetValue(g)
 		teamColorTrackbars[t].blue:SetValue(b)
+		-- Update the values of AI
+		teamAIElements.teamAIEditBoxes[t]:SetText(teamAIElements.teamAI[t])
 	end
 end
 function allyTeam() -- Show the allyteam panel
@@ -794,8 +801,8 @@ function initForcesWindow()
 		-- Controlled by
 		teamControlLabels[team] = addLabel(teamConfigPanels[team], '35%', '20%', '20%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL, 20, "center", nil, "center")
 		teamControlButtons[team] = {}
-		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" saveState() end)
-		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" saveState() end)
+		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" updateTeamConfig = true saveState() end)
+		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" updateTeamConfig = true saveState() end)
 		teamControl[team] = "player"
 		-- Color
 		teamColor[team] = {}
@@ -826,6 +833,10 @@ function initForcesWindow()
 		teamColorTrackbars[team].green.color = {0, 1, 0, 1}
 		teamColorTrackbars[team].blue.OnChange = {updateImage}
 		teamColorTrackbars[team].blue.color = {0, 0, 1, 1}
+		-- IA field
+		teamAIElements.teamAI[team] = ""
+		teamAIElements.teamAILabels[team] = addLabel(teamConfigPanels[team], '90%', '20%', '8%', '30%', EDITOR_FORCES_TEAMCONFIG_AI, 20, "center", nil, "center")
+		teamAIElements.teamAIEditBoxes[team] = addEditBox(teamConfigPanels[team], '90%', '50%', '8%', '30%')
 	end
 	
 	-- Ally Team Window
@@ -2170,6 +2181,12 @@ function updateTeamConfigPanels()
 			teamConfigPanels[k]:RemoveChild(t.green)
 			teamConfigPanels[k]:RemoveChild(t.blue)
 		end
+		for k, l in pairs(teamAIElements.teamAILabels) do
+			teamConfigPanels[k]:RemoveChild(l)
+		end
+		for k, e in pairs(teamAIElements.teamAIEditBoxes) do
+			teamConfigPanels[k]:RemoveChild(e)
+		end
 		for i, team in ipairs(teamStateMachine.states) do
 			if enabledTeams[team] then
 				teamConfigPanels[team]:AddChild(teamControlLabels[team])
@@ -2180,6 +2197,10 @@ function updateTeamConfigPanels()
 				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].red)
 				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].green)
 				teamConfigPanels[team]:AddChild(teamColorTrackbars[team].blue)
+				if teamControl[team] == "computer" then
+					teamConfigPanels[team]:AddChild(teamAIElements.teamAILabels[team])
+					teamConfigPanels[team]:AddChild(teamAIElements.teamAIEditBoxes[team])
+				end
 			end
 		end
 		updateTeamConfig = false
@@ -2188,6 +2209,9 @@ function updateTeamConfigPanels()
 		if teamName[t] ~= teamNameEditBoxes[t].text then
 			teamName[t] = teamNameEditBoxes[t].text
 			updateAllyTeam = true
+		end
+		if teamAIElements.teamAI[t] ~= teamAIElements.teamAIEditBoxes[t].text then
+			teamAIElements.teamAI[t] = teamAIElements.teamAIEditBoxes[t].text
 		end
 	end
 end
@@ -3695,6 +3719,10 @@ function newMap()
 	for i, t in ipairs(teamStateMachine.states) do
 		teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
 	end
+	teamAIElements.teamAI = {}
+	for i, t in ipairs(teamStateMachine.states) do
+		teamAIElements.teamAI[t] = ""
+	end
 	-- Trigger
 	events = {}
 	eventTotal = nil
@@ -3800,6 +3828,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 		teamControl[t] = loadedTable.teams[tostring(t)].control
 		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
+		teamAIElements.teamAI[t] = loadedTable.teams[tostring(t)].ai
 		teamColor[t].red = loadedTable.teams[tostring(t)].color.red
 		teamColor[t].blue = loadedTable.teams[tostring(t)].color.blue
 		teamColor[t].green = loadedTable.teams[tostring(t)].color.green
@@ -4250,6 +4279,7 @@ function encodeSaveTable()
 		savedTable.teams[t] = {}
 		savedTable.teams[t].control = teamControl[t]
 		savedTable.teams[t].enabled = enabledTeams[t]
+		savedTable.teams[t].ai = teamAIElements.teamAI[t]
 		savedTable.teams[t].color = {}
 		savedTable.teams[t].color.red = teamColor[t].red
 		savedTable.teams[t].color.green = teamColor[t].green
