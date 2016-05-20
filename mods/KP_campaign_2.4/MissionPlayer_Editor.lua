@@ -469,6 +469,7 @@ local function ApplyGroupableAction(unit,act)
     elseif(act.attribute=="teleport")then
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
+      Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
     elseif(act.attribute=="group")then
       table.insert(ctx.groupOfUnits["group_"..act.params.group],unit)
     elseif(act.attribute=="order")then
