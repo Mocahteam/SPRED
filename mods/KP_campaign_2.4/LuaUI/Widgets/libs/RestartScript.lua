@@ -125,7 +125,7 @@ local function createFromScratch(editorTables)
         local sectionName="AI"..tostring(indexIA)
         indexIA=indexIA+1
         local name=teamInformations.name or string.lower(sectionName)
-        local shortName=teamInformations.shortname or "NullAI"
+        local shortName=teamInformations.ai or "NullAI"
         
         local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
         file=writeAttributesAndSection(file,sectionName, 1, tableController) 
@@ -189,4 +189,22 @@ function genericRestart(missionName,operations,contextFile)
     end   
   end
 end   
+
+
+function restartToConnect(playerName,IP)
+  local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
+  local file=writeAttributesAndSection("","GAME", 0, table2)
+  Spring.Restart("-s",file)--(this line, yes)
+--[[
+[GAME]
+{
+  HostIP=132.227.207.137;
+  Hostport=8451;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
+  IsHost=0;           // 0: no server will be started in this instance
+                      // 1: start a server
+  
+  MyPlayerName=Player2; // our ingame-name (needs to match one players Name= field)
+}
+--]]
+end 
       
