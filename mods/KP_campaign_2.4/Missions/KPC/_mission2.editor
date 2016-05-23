@@ -10,9 +10,9 @@
 			"marker":false,
 			"name":"Arrival",
 			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"id":1,
 			"red":0.51526319980621
 		} 
 	],
@@ -56,39 +56,19 @@
 		"name":"_mission2",
 		"widgets":[
 			{
-				"desc":"User interface of the level editor",
-				"name":"Editor User Interface",
-				"active":false
-			},
-			{
 				"desc":"Teach you to play the game,
 				 one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
 				"active":false
 			},
 			{
-				"desc":"Maintain unit selection through morphing",
-				"name":"Keep Morpheds Selected",
-				"active":false
-			},
-			{
-				"desc":"Show some P&P menu when Spring.exe is run directly.",
-				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
 				"active":false
 			},
 			{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
-				"active":false
-			},
-			{
-				"desc":"Hot GUI Framework",
-				"name":"Chili Framework",
-				"active":true
-			},
-			{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
 				"active":false
 			},
 			{
@@ -148,12 +128,6 @@
 				"active":false
 			},
 			{
-				"desc":"Makes sockets or window automatically spam bits or bugs,
-				 and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
-				"active":false
-			},
-			{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
@@ -164,18 +138,23 @@
 				"active":false
 			},
 			{
-				"desc":"Buttons for the current selection (incomplete)",
-				"name":"SelectionButtons",
-				"active":false
-			},
-			{
 				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
 				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},
 			{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},
+			{
 				"desc":"Display info tips related to O.N.S. shields",
 				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
 				"active":false
 			},
 			{
@@ -194,8 +173,11 @@
 				"active":false
 			},
 			{
-				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
-				"name":"HighlightUnit",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},
 			{
@@ -204,8 +186,8 @@
 				"active":false
 			},
 			{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},
 			{
@@ -225,14 +207,14 @@
 				"active":false
 			},
 			{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},
 			{
-				"desc":"Returns the llist of known widgets",
-				"name":"Editor Widget List",
-				"active":true
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
 			},
 			{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
@@ -240,11 +222,9 @@
 				"active":false
 			},
 			{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
-				4,
-				6,
-				8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			} 
 		],
@@ -255,22 +235,6 @@
 	},
 	"events":[
 		{
-			"actionTotal":6,
-			"repetition":false,
-			"name":"Event0",
-			"id":0,
-			"conditionTotal":1,
-			"conditions":[
-				{
-					"id":0,
-					"type":"unit_zone",
-					"name":"Condition0",
-					"params":{
-						"unit":9466,
-						"zone":1
-					}
-				} 
-			],
 			"actions":[
 				{
 					"id":4,
@@ -286,8 +250,8 @@
 					"name":"Action4",
 					"params":{
 						"position":{
-							"z":1785,
-							"x":1004
+							"x":1004,
+							"z":1785
 						}
 					}
 				},
@@ -301,7 +265,7 @@
 							"Enfin !" 
 						],
 						"time":1,
-						"unit":9466
+						"unit":7921
 					}
 				},
 				{
@@ -321,7 +285,7 @@
 							"Merci d'être venu ! Des armées veulent ma peau !" 
 						],
 						"time":4,
-						"unit":11180
+						"unit":253
 					}
 				},
 				{
@@ -334,6 +298,22 @@
 					}
 				} 
 			],
+			"actionTotal":6,
+			"name":"Event0",
+			"repetition":false,
+			"id":0,
+			"conditions":[
+				{
+					"id":0,
+					"type":"unit_zone",
+					"name":"Condition0",
+					"params":{
+						"unit":7921,
+						"zone":1
+					}
+				} 
+			],
+			"conditionTotal":1,
 			"trigger":""
 		},
 		{
@@ -349,7 +329,7 @@
 							"en route simone" 
 						],
 						"time":2,
-						"unit":9466
+						"unit":7921
 					}
 				},
 				{
@@ -363,8 +343,8 @@
 				} 
 			],
 			"name":"ismoving",
-			"trigger":"",
 			"actionTotal":2,
+			"id":1,
 			"conditions":[
 				{
 					"id":1,
@@ -372,12 +352,12 @@
 					"name":"Condition1",
 					"params":{
 						"command":10,
-						"unit":9466
+						"unit":7921
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"id":1
+			"trigger":""
 		},
 		{
 			"actions":[
@@ -391,7 +371,7 @@
 							"encore un échec...." 
 						],
 						"time":5,
-						"unit":9466
+						"unit":7921
 					}
 				},
 				{
@@ -405,8 +385,8 @@
 				} 
 			],
 			"name":"wrongspot",
-			"trigger":"Condition2 and not Condition3 and not Condition0",
 			"actionTotal":2,
+			"id":2,
 			"conditions":[
 				{
 					"id":2,
@@ -422,7 +402,7 @@
 					"name":"Condition3",
 					"params":{
 						"command":10,
-						"unit":9466
+						"unit":7921
 					}
 				},
 				{
@@ -431,12 +411,12 @@
 					"name":"Condition0",
 					"params":{
 						"zone":1,
-						"unit":9466
+						"unit":7921
 					}
 				} 
 			],
 			"conditionTotal":3,
-			"id":2
+			"trigger":"Condition2 and not Condition3 and not Condition0"
 		},
 		{
 			"actions":[
@@ -451,8 +431,8 @@
 				} 
 			],
 			"name":"teamOIsDead",
-			"trigger":"",
 			"actionTotal":1,
+			"id":3,
 			"conditions":[
 				{
 					"id":6,
@@ -467,7 +447,73 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":3
+			"trigger":""
+		},
+		{
+			"comment":"",
+			"trigger":"Condition7 and not Condition8",
+			"conditionTotal":2,
+			"name":"Event4",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":7,
+					"type":"start",
+					"name":"Condition7",
+					"params":[
+						 
+					]
+				},
+				{
+					"id":8,
+					"type":"booleanVariable",
+					"name":"Condition8",
+					"params":{
+						"variable":"hasmoved"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":11,
+					"type":"script",
+					"name":"Action11",
+					"params":{
+						"script":"writeCompassOnUnit(armySpring[groupOfUnits[\"team_0\"][1]])"
+					}
+				} 
+			],
+			"id":4
+		},
+		{
+			"comment":"",
+			"trigger":"Condition9",
+			"conditionTotal":1,
+			"name":"Event5",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":9,
+					"type":"booleanVariable",
+					"name":"Condition9",
+					"params":{
+						"variable":"hasmoved"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":12,
+					"type":"script",
+					"name":"Action12",
+					"params":{
+						"script":"Spring.MarkerErasePosition(Spring.GetUnitPosition(armySpring[groupOfUnits[\"team_0\"][1]]))"
+					}
+				} 
+			],
+			"id":5
 		} 
 	],
 	"variables":[
@@ -585,21 +631,8 @@
 	],
 	"units":[
 		{
-			"type":"bit",
-			"id":9466,
-			"position":{
-				"y":116,
-				"x":1804,
-				"z":1070
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
 			"type":"byte",
-			"id":11180,
+			"id":253,
 			"position":{
 				"y":130,
 				"x":1010,
@@ -609,6 +642,19 @@
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
+		},
+		{
+			"type":"bit",
+			"id":7921,
+			"position":{
+				"y":116,
+				"x":1804,
+				"z":1070
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
 		} 
 	]
 }
