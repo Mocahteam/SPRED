@@ -1,0 +1,14 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Lancement de l'\IeC {\'e}diteur}{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {section}{\numberline {2}Launcher propre au mod s\IeC {\'e}lectionn\IeC {\'e}}{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {subsection}{\numberline {2.1}Cr\IeC {\'e}ation d'un nouveau niveau}{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {subsection}{\numberline {2.2}Modification d'un niveau existant}{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {subsection}{\numberline {2.3}\IeC {\'E}diteur de sc\IeC {\'e}nario}{2}
+\contentsline {paragraph}{ }{2}
+\contentsline {section}{\numberline {3}\IeC {\'E}diteur de niveaux}{3}
