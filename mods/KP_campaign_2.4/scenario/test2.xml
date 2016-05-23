@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd">
+<game status="prepa" id_game="76" activity_prefix="true" publication_date="2016-05-19T10:02:15+01:00">
+<title>Prog &amp; Play</title>
+<description>Prog &amp; Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d&apos;un jeu de stratégie en temps réel à l&apos;aide d&apos;une bibliothèque de fonctions.</description>
+<activities>
+<activity id_activity="_mission1">
+<name>_mission1</name>
+<input_states>
+<input_state id_input="_mission1//1"/>
+<input_state id_input="_mission1//2"/>
+<input_state id_input="_mission1//3"/>
+</input_states>
+<output_states>
+<output_state id_output="_mission1//goodSPOT"/>
+<output_state id_output="_mission1//wrongspot"/>
+<output_state id_output="_mission1//endByDead_1"/>
+</output_states>
+</activity>
+<activity id_activity="_mission3">
+<name>_mission3</name>
+<input_states>
+<input_state id_input="_mission3//1"/>
+<input_state id_input="_mission3//2"/>
+</input_states>
+<output_states>
+<output_state id_output="_mission3//ennemyKilled"/>
+<output_state id_output="_mission3//endByDead_3"/>
+</output_states>
+</activity>
+<activity id_activity="_mission6">
+<name>_mission6</name>
+<input_states>
+<input_state id_input="_mission6//1"/>
+<input_state id_input="_mission6//2"/>
+</input_states>
+<output_states>
+<output_state id_output="_mission6//"/>
+<output_state id_output="_mission6//endByDead_5"/>
+<output_state id_output="_mission6//notWP"/>
+</output_states>
+</activity>
+</activities>
+<link_sets>
+<link_set publication_date="2016-05-19T10:02:15+01:00" status="prepa" default="oui" id_link_set="302">
+<title>test2</title>
+<description>test</description>
+<links>
+<output_input_link id_output="_mission3//endByDead_3" id_input="_mission3//1"/>
+<output_input_link id_output="_mission3//ennemyKilled" id_input="_mission6//1"/>
+<output_input_link id_output="start" id_input="_mission1//1"/>
+<output_input_link id_output="_mission1//wrongspot" id_input="_mission1//2"/>
+<output_input_link id_output="_mission1//endByDead_1" id_input="_mission1//3"/>
+<output_input_link id_output="_mission1//goodSPOT" id_input="_mission3//2"/>
+<output_input_link id_output="_mission6//" id_input="end"/>
+<output_input_link id_output="_mission6//notWP" id_input="_mission6//2"/>
+</links>
+</link_set>
+</link_sets>
+</game>
+</games>
