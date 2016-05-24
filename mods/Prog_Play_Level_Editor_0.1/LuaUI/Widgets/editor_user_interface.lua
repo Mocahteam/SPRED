@@ -2841,7 +2841,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				end
 			elseif attr.type == "command" or attr.type == "commandUnit" then
 				for i, item in ipairs(comboBox.items) do
-					if idToCommands[a.params[attr.id]] == item then
+					if idToCommands[tostring(a.params[attr.id])] == item then
 						comboBox:Select(i)
 						break
 					end
