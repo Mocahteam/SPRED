@@ -577,9 +577,8 @@ local function ApplyNonGroupableAction(act)
     --bubbleUnit
       local springUnitId=ctx.armySpring[act.params.unit]
       if Spring.ValidUnitID(springUnitId) then
-        local factor=Spring.GetGameSpeed()
         --Spring.Echo("try to send : DisplayMessageAboveUnit")
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/factor,bubble=(act.type=="bubbleUnit")}))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -589,12 +588,11 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="messagePosition") then
     --Spring.Echo("try to send : DisplayMessagePosition")
   --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
-    local factor=Spring.GetGameSpeed()
     local posFound=extractPosition(act.params.position)   
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/factor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/ctx.speedFactor}))
     
     
    --[[ Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
