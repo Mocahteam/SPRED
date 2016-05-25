@@ -125,7 +125,10 @@ local function createFromScratch(editorTables)
         local sectionName="AI"..tostring(indexIA)
         indexIA=indexIA+1
         local name=teamInformations.name or string.lower(sectionName)
-        local shortName=teamInformations.ai or "NullAI"
+        local shortName="NullAI"
+        if(teamInformations.ai~=nil and teamInformations.ai~="")then
+          shortName=teamInformations.ai
+        end
         
         local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
         file=writeAttributesAndSection(file,sectionName, 1, tableController) 
