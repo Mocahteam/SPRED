@@ -31,6 +31,7 @@ ctx.canUpdate=false
 ctx.mission={}
 ctx.startingFrame=5
 ctx.globalIndexOfCreatedUnits=0
+ctx.speedFactor=1
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
 -------------------------------------
@@ -864,6 +865,16 @@ local function processEvents(frameNumber)
 end
 
 -------------------------------------
+-- update values which are available in unsync only
+-- It justs request unsync code by sendMessage
+-- Values are sent back to sync code (check RecvLuaMsg(msg, player))
+-------------------------------------
+local function  UpdateUnsyncValues(frameNumber)
+  if(frameNumber%10~=0)then return end
+  SendToUnsynced("requestUnsyncVals")
+end
+
+-------------------------------------
 -- wrapper for two main functions related to
 -- the main operations on the game
 -------------------------------------
@@ -1282,6 +1293,7 @@ local function Update (frameNumber)
   ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)
   applyCurrentActions() 
   if(frameNumber>10)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
+  UpdateUnsyncValues(frameNumber)
   if(ctx.success==1) then
     return ctx.success,ctx.outputstate
   elseif(ctx.success==-1) then
@@ -1366,6 +1378,12 @@ function gadget:RecvLuaMsg(msg, player)
       end
       table.insert(ctx.groupOfUnits[typeIndex],realId)
     end 
+  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,16)=="returnUnsyncVals")) then
+    local jsonfile=string.sub(msg,17,-1)
+    local values=json.decode(jsonfile)
+    for ind,val in pairs(values)do
+      ctx[ind]=val
+    end
   end
 end
 

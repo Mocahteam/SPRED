@@ -252,6 +252,10 @@ function gadget:RecvFromSynced(...)
     Spring.Echo(p.activation)
     if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
     if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
+  elseif arg1 == "requestUnsyncVals" then
+    local valsToSend={}
+    valsToSend["speedFactor"]=Spring.GetGameSpeed()
+    Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
   end
 end
 
