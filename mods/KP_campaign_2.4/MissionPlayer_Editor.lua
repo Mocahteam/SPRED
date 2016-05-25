@@ -877,13 +877,18 @@ end
 -- Actions are in a queue list available by GetCommandQueue
 -------------------------------------
 local function GetCurrentUnitAction(unit)
-  local q=Spring.GetCommandQueue(unit,1) -- 1 means the only the first action in the stack
-  local action=""
-  if(q~=nil)and(q[1]~=nil) then
-    action=q[1].id
-    -- get the string describing the action by CMD[q[1].id] if you want
+if(Spring.ValidUnitID(unit))then
+    local q=Spring.GetCommandQueue(unit,1) -- 1 means the only the first action in the stack
+    local action=""
+    if(q~=nil)and(q[1]~=nil) then
+      action=q[1].id
+      -- get the string describing the action by CMD[q[1].id] if you want
+    end
+    return action
+  else
+    Spring.Echo("GetCurrentUnitAction called with invalid unit it")
+    return nil
   end
-  return action
 end
 
 
