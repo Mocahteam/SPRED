@@ -720,16 +720,15 @@ end
 -- At the beginning of table if the quickest action to be applied
 -- At the end if the action with the biggest delay
 -------------------------------------
-function AddActionInStack(action, delSeconds)
-  local delay=secondesToFrames(delSeconds)
+function AddActionInStack(action, delayFrame)
   local element={}
-  element["delay"]=delay
+  element["delay"]=delayFrame
   element["action"]=action
   --Spring.Echo(actId.." is added with delay : "..delay)
   for index,el in pairs(ctx.actionStack) do
     local del=el.delay
     local act=el.actId
-    if(del>delay) then
+    if(del>delayFrame) then
       table.insert(ctx.actionStack,index,element)
       return
     end
