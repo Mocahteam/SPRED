@@ -159,7 +159,8 @@ end
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
   Spring.Echo(txtFileContent)--comment the next line to see this output
-  Spring.Restart("-s",txtFileContent)--(this line, yes)
+  --Spring.Restart("-s",txtFileContent)--(this line, yes)
+  Spring.Reload(txtFileContent)
 end
 
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
@@ -172,7 +173,8 @@ function genericRestart(missionName,operations,contextFile)
         local tableEditor=json.decode(sf)
         local txtFileContent=createFromScratch(tableEditor)
         updatedTxtFileContent=updateValues(txtFileContent, operations)
-        Spring.Restart("-s",updatedTxtFileContent)
+        --Spring.Restart("-s",updatedTxtFileContent)
+        Spring.Reload(updatedTxtFileContent)
      else
         DoTheRestart("Missions/"..Game.modShortName.."/"..missionName.."txt", operations)  
      end
@@ -186,7 +188,8 @@ function genericRestart(missionName,operations,contextFile)
       Spring.Echo("decoded with success")
       local txtFileContent=createFromScratch(tableEditor)
       updatedTxtFileContent=updateValues(txtFileContent, operations)
-      Spring.Restart("-s",updatedTxtFileContent)
+      --Spring.Restart("-s",updatedTxtFileContent)
+      Spring.Reload(updatedTxtFileContent)--(this line, yes)
     else
       Spring.Echo("Warning, pbm in restart script")
     end   
@@ -197,7 +200,8 @@ end
 function restartToConnect(playerName,IP)
   local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
   local file=writeAttributesAndSection("","GAME", 0, table2)
-  Spring.Restart("-s",file)--(this line, yes)
+  Spring.Reload(file)--(this line, yes)
+  --  Spring.Restart("-s",file)--(this line, yes)
 --[[
 [GAME]
 {
