@@ -1094,7 +1094,17 @@ local function parseJson(jsonFile)
     local widgetName=ctx.mission.description.widgets[i].name
     local activation=ctx.mission.description.widgets[i].active
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
-  end 
+  end
+  
+  -- Required widgets for Prog&Play   
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Display Message",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Hide commands",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Messenger",activation=true})) 
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Mission GUI",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Spring Direct Launch 2 for Prog&Play",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="CA interface",activation=true}))
+  
+  
   return true
 end
 
