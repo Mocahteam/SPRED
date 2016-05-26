@@ -20,7 +20,7 @@ return
 	modtype=1,
 	-- other archives this one depends on
 	depend= {
-		"Kernel Panic 4.1",
+		"Kernel Panic 4.6",
 		--"Balanced Annihilation V7.50",
 		"Marble_Madness_Map",
 		--"SmallDivide"
