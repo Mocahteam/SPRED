@@ -181,6 +181,13 @@ end
 else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+Spring.SendCommands("resbar 0","fps 1","console 0","info 0") -- TODO : change fps 1 to fps 0 in release
+-- leaves rendering duty to widget (we won't)
+gl.SlaveMiniMap(true)
+-- a hitbox remains for the minimap, unless you do this
+gl.ConfigMiniMap(0,0,0,0)
+  
 local mouseDisabled = false
 
 function gadget:RecvFromSynced(...)
