@@ -847,7 +847,7 @@ local function processEvents(frameNumber)
           else
             if creationOfNewEvent==false then
               AddActionInStack(a,frameDelay)
-              Spring.Echo(a.name.." added to stack")
+              Spring.Echo(a.name.." added to stack with delay"..tostring(frameDelay))
             else
               table.insert(newevent["actions"],a)
             end
