@@ -10,9 +10,9 @@
 			"marker":false,
 			"name":"spawn",
 			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"id":1,
 			"red":0.51526319980621
 		},
 		{
@@ -25,9 +25,9 @@
 			"marker":false,
 			"name":"randomMove",
 			"green":0.55862176418304,
-			"id":2,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"id":2,
 			"red":0.51526319980621
 		} 
 	],
@@ -78,8 +78,23 @@
 				"active":false
 			},
 			{
-				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
-				"name":"HighlightUnit",
+				"desc":"Hides all commands",
+				"name":"Hide commands",
+				"active":true
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},
+			{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},
+			{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
 				"active":false
 			},
 			{
@@ -88,8 +103,28 @@
 				"active":false
 			},
 			{
+				"desc":"Prints a message when a team die",
+				"name":"TeamDiedMessages",
+				"active":false
+			},
+			{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},
+			{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},
+			{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
 				"active":false
 			},
 			{
@@ -103,92 +138,6 @@
 				"active":false
 			},
 			{
-				"desc":"Sets immobile builders to ROAM,
-				 with a PATROL command",
-				"name":"ImmobileBuilder",
-				"active":false
-			},
-			{
-				"desc":"XrayShader",
-				"name":"XrayShader",
-				"active":false
-			},
-			{
-				"desc":"test",
-				"name":"test",
-				"active":false
-			},
-			{
-				"desc":"Reset settings and widgets to fit Kernel Panic",
-				"name":"Set Spring-wide settings and Lua WhiteList",
-				"active":false
-			},
-			{
-				"desc":"Show some KP menu when Spring.exe is run directly",
-				"name":"Spring Direct Launch 2",
-				"active":false
-			},
-			{
-				"desc":"Hides all commands",
-				"name":"Hide commands",
-				"active":true
-			},
-			{
-				"desc":"Allows using the rightclick for some commands",
-				"name":"Kernel Panic Default Commands",
-				"active":false
-			},
-			{
-				"desc":"Display the debug information of K.P.A.I.",
-				"name":"Kernel Panic A.I. Debug",
-				"active":false
-			},
-			{
-				"desc":"Indicator for the CommEnds state (at game start)",
-				"name":"CommanderEnds",
-				"active":false
-			},
-			{
-				"desc":"Automatically adds 100 stockpile builds to new units",
-				"name":"Stockpiler",
-				"active":false
-			},
-			{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
-				"active":false
-			},
-			{
-				"desc":"Buttons for the current selection (incomplete)",
-				"name":"SelectionButtons",
-				"active":false
-			},
-			{
-				"desc":"Display info tips related to O.N.S. shields",
-				"name":"Kernel Panic O.N.S. help tips",
-				"active":false
-			},
-			{
-				"desc":"Maintain unit selection through morphing",
-				"name":"Keep Morpheds Selected",
-				"active":false
-			},
-			{
-				"desc":"Controls metal makers to minimize energy stalls",
-				"name":"MetalMakers",
-				"active":false
-			},
-			{
-				"desc":"Assigns new builders to assist their source factory",
-				"name":"FactoryGuard",
-				"active":false
-			},
-			{
-				"desc":"Shows a team color platter above all visible units",
-				"name":"TeamPlatter",
-				"active":false
-			},
-			{
 				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
 				4,
 				6,
@@ -197,13 +146,9 @@
 				"active":false
 			},
 			{
-				"desc":"Alternate view movement for the middle mouse button",
-				"name":"SmoothScroll",
-				"active":false
-			},
-			{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},
 			{
@@ -213,34 +158,23 @@
 				"active":false
 			},
 			{
-				"desc":"Camera shakes",
-				"name":"CameraShake",
-				"active":false
-			},
-			{
-				"desc":"Keeps the minimap at a relative size (maxspect)",
-				"name":"RelativeMinimap",
-				"active":false
-			},
-			{
 				"desc":"Necessary for Lua gadgets to write startscripts.",
 				"name":"Write GameState",
 				"active":false
 			},
 			{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},
+			{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
 				"active":false
 			},
 			{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
-				"active":false
-			},
-			{
-				"desc":"Makes sockets or window automatically spam bits or bugs,
-				 and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			} 
 		],
@@ -257,9 +191,9 @@
 					"type":"unit_orderTarget",
 					"name":"Action6",
 					"params":{
-						"target":9055,
+						"target":16596,
 						"command":20,
-						"unit":14439
+						"unit":11999
 					}
 				} 
 			],
@@ -298,7 +232,7 @@
 					"name":"Action9",
 					"params":{
 						"command":20,
-						"target":9055,
+						"target":16596,
 						"unit":"Action7"
 					}
 				} 
@@ -344,7 +278,7 @@
 							"Merci !" 
 						],
 						"time":5,
-						"unit":9055
+						"unit":16596
 					}
 				},
 				{
@@ -408,6 +342,7 @@
 			"trigger":""
 		},
 		{
+			"comment":"",
 			"trigger":"Condition11 and not Condition13",
 			"conditionTotal":2,
 			"repetition":true,
@@ -420,7 +355,7 @@
 					"type":"unit_underAttack",
 					"name":"Condition11",
 					"params":{
-						"unit":9055
+						"unit":16596
 					}
 				},
 				{
@@ -429,7 +364,7 @@
 					"name":"Condition13",
 					"params":{
 						"command":10,
-						"unit":9055
+						"unit":16596
 					}
 				} 
 			],
@@ -451,7 +386,7 @@
 							"Noooonnn" 
 						],
 						"time":3,
-						"unit":9055
+						"unit":16596
 					}
 				},
 				{
@@ -461,7 +396,7 @@
 					"params":{
 						"command":10,
 						"position":2,
-						"unit":9055
+						"unit":16596
 					}
 				},
 				{
@@ -488,7 +423,7 @@
 							"Où est ton berger petite brebis égarée ?" 
 						],
 						"time":2,
-						"unit":14439
+						"unit":11999
 					}
 				} 
 			],
@@ -502,7 +437,7 @@
 					"name":"Action16",
 					"params":{
 						"command":45,
-						"unit":7090,
+						"unit":17419,
 						"parameters":[
 							0 
 						]
@@ -539,7 +474,7 @@
 					"type":"unit_dead",
 					"name":"Condition16",
 					"params":{
-						"unit":9055
+						"unit":16596
 					}
 				} 
 			],
@@ -672,23 +607,23 @@
 	],
 	"units":[
 		{
-			"type":"byte",
-			"id":9055,
+			"type":"bit",
+			"id":11999,
 			"position":{
-				"y":130,
-				"x":1024,
-				"z":1816
+				"y":254.39453125,
+				"x":1032,
+				"z":1226
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
-			"team":1
+			"team":2
 		},
 		{
 			"type":"bit",
-			"id":7090,
+			"id":17419,
 			"position":{
-				"y":116,
+				"y":100,
 				"x":1034,
 				"z":1942
 			},
@@ -698,17 +633,17 @@
 			"team":0
 		},
 		{
-			"type":"bit",
-			"id":14439,
+			"type":"byte",
+			"id":16596,
 			"position":{
-				"y":270.39453125,
-				"x":1032,
-				"z":1226
+				"y":100,
+				"x":1024,
+				"z":1816
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
-			"team":2
+			"team":1
 		} 
 	]
 }
