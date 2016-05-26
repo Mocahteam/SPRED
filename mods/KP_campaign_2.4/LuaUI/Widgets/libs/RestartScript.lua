@@ -1,4 +1,5 @@
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+local reloadAvailable=tonumber(Game.version)>=99
 
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
@@ -158,9 +159,12 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
-  Spring.Echo(txtFileContent)--comment the next line to see this output
-  --Spring.Restart("-s",txtFileContent)--(this line, yes)
-  Spring.Reload(txtFileContent)
+  Spring.Echo(txtFileContent)--comment the next lines to see this output
+  if(reloadAvailable) then
+    Spring.Reload(txtFileContent) --(this line, yes)
+  else
+    Spring.Restart("-s",txtFileContent)--( and this line too)
+  end
 end
 
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
@@ -189,7 +193,11 @@ function genericRestart(missionName,operations,contextFile)
       local txtFileContent=createFromScratch(tableEditor)
       updatedTxtFileContent=updateValues(txtFileContent, operations)
       --Spring.Restart("-s",updatedTxtFileContent)
-      Spring.Reload(updatedTxtFileContent)--(this line, yes)
+        if(reloadAvailable) then
+          Spring.Reload(updatedTxtFileContent) --(this line, yes)
+        else
+          Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+        end
     else
       Spring.Echo("Warning, pbm in restart script")
     end   
