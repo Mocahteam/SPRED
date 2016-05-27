@@ -1444,6 +1444,7 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage:Dispose()
 		UI.Scenario.BeginExportationMessage = nil
 	end
+	
 	local name = generateSaveName(ScenarioName)
 	local alreadyExists = false
 	if VFS.FileExists("games/"..name..".sdz") then
@@ -1470,40 +1471,75 @@ function BeginExportGame()
 			end
 		end
 	end
-	-- Add levels and scenario
-	os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
-	for i, level in ipairs(levelList) do
-		os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
-	end
-	-- Compress
-	VFS.CompressFolder("pp_editor/game_files")
-	os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
-	-- Remove levels and scenario
-	os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
-	for i, level in ipairs(levelList) do
-		os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
-	end
-		
-	-- Show message
-	if not alreadyExists then
-		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
-		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-		UI.Scenario.ConfirmationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = message,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				color = { 0.2, 1, 0.2, 1 }
+	
+	if Game.version == "100.0" or os.execute then
+		if Game.version == "100.0" then
+			-- Add levels and scenario
+			os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
+			for i, level in ipairs(levelList) do
+				os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+			end
+			-- Compress
+			VFS.CompressFolder("pp_editor/game_files")
+			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+			-- Remove levels and scenario
+			os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+			for i, level in ipairs(levelList) do
+				os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+			end
+		elseif os.execute then
+			-- Add levels and scenario
+			os.execute("move pp_editor\\scenarios\\"..name..".xml pp_editor\\game_files\\scenario\\"..name..".xml")
+			for i, level in ipairs(levelList) do
+				os.execute("move pp_editor\\missions\\"..level..".editor pp_editor\\game_files\\missions\\"..level..".editor")
+			end
+			-- Compress
+			os.execute("pp_editor\\utils\\7za.exe a -r -tzip -y -xr!.svn mods\\"..name..".sdz pp_editor\\game_files\\*")
+			-- Remove levels and scenario
+			os.execute("move pp_editor\\game_files\\scenario\\"..name..".xml pp_editor\\scenarios\\"..name..".xml")
+			for i, level in ipairs(levelList) do
+				os.execute("move pp_editor\\game_files\\missions\\"..level..".editor pp_editor\\missions\\"..level..".editor")
+			end
+		end
+			
+		-- Show message
+		if not alreadyExists then
+			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 0.2, 1, 0.2, 1 }
+				}
 			}
-		}
+		else
+			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
 	else
-		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
+		local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
 		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
 		UI.Scenario.ConfirmationMessage = Chili.Label:New{
 			parent = UI.MainWindow,
