@@ -15,8 +15,6 @@ end
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 local Chili, Screen0
-local MainWindow
-local ErrorMessage
 
 function InitializeChili() 
 	if not WG.Chili then
@@ -88,18 +86,33 @@ function InitializeMenu()
 			count = count + 1
 		end
 	end
-	ErrorMessage = Chili.Label:New{
+	ErrorMessage1 = Chili.Label:New{
 		parent = MainWindow,
 		x = "0%",
 		y = "85%",
 		width = "100%",
-		height = "10%",
+		height = "5%",
 		caption = "",
 		align = "center",
 		valign = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
+			color = { 1, 0.2, 0.2, 1 }
+		}
+	}
+	ErrorMessage2 = Chili.Label:New{
+		parent = MainWindow,
+		x = "0%",
+		y = "90%",
+		width = "100%",
+		height = "5%",
+		caption = "",
+		align = "center",
+		valign = "center",
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
 			color = { 1, 0.6, 0.2, 1 }
 		}
 	}
@@ -124,10 +137,11 @@ end
 function Launch(game)
 	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") then
 		if Game.version == "0.82.5.1" then
-			if Spring.BuildPPEditor then
+			if Spring.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
 				Spring.BuildPPEditor(game)
 			else
-				ErrorMessage:SetCaption("The editor does not work on the version of Spring you are using.")
+				ErrorMessage1:SetCaption("The editor does not work on the version of Spring you are using.")
+				ErrorMessage2:SetCaption("Please use the tweaked 0.82.5.1 or a 98+ version.")
 			end
 		else
 			local modInfo = "return { game='PPLE', shortGame='PPLE', name='Prog & Play Level Editor for "..game.."', shortName='PPLE', mutator='official', version='1.0', description='A level editor for Prog & Play.', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..game.."\" },}"
