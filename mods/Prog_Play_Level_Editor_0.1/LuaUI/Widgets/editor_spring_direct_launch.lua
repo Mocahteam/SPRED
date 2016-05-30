@@ -1472,34 +1472,24 @@ function BeginExportGame()
 		end
 	end
 	
-	if Game.version == "100.0" or os.execute then
-		if Game.version == "100.0" then
-			-- Add levels and scenario
-			os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
-			for i, level in ipairs(levelList) do
-				os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
-			end
-			-- Compress
+	if Game.version == "100" or os.execute then
+		-- Add levels and scenario
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
+		for i, level in ipairs(levelList) do
+			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+		end
+		-- Compress
+		if Game.version == "100azerfzef" then
 			VFS.CompressFolder("pp_editor/game_files")
 			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
-			-- Remove levels and scenario
-			os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
-			for i, level in ipairs(levelList) do
-				os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
-			end
 		elseif os.execute then
-			-- Add levels and scenario
-			os.execute("move pp_editor\\scenarios\\"..name..".xml pp_editor\\game_files\\scenario\\"..name..".xml")
-			for i, level in ipairs(levelList) do
-				os.execute("move pp_editor\\missions\\"..level..".editor pp_editor\\game_files\\missions\\"..level..".editor")
-			end
-			-- Compress
-			os.execute("pp_editor\\utils\\7za.exe a -r -tzip -y -xr!.svn mods\\"..name..".sdz pp_editor\\game_files\\*")
-			-- Remove levels and scenario
-			os.execute("move pp_editor\\game_files\\scenario\\"..name..".xml pp_editor\\scenarios\\"..name..".xml")
-			for i, level in ipairs(levelList) do
-				os.execute("move pp_editor\\game_files\\missions\\"..level..".editor pp_editor\\missions\\"..level..".editor")
-			end
+			os.execute("cd pp_editor\\game_files\\ & ..\\utils\\7za.exe a -r -tzip -y -xr!.svn "..name..".sdz *")
+			os.rename("pp_editor/game_files/"..name..".sdz", "games/"..name..".sdz")
+		end
+		-- Remove levels and scenario
+		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		for i, level in ipairs(levelList) do
+			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
 			
 		-- Show message
