@@ -10,6 +10,7 @@ function widget:GetInfo()
     handler = true
   }
 end
+local lang="fr"
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
@@ -37,11 +38,17 @@ local TextLocale = {
   fr = {back="Retour", continue="Continuer la dernière partie", SelectScenario="Nouvelle partie", quit="Quitter", specificMission="Jouer une mission précise", whichScenario="Choisissez un scenario", whichMission="Choisissez une mission"},
   en = {back="Back", continue="Continue previous game", SelectScenario="New game", quit="Quit", specificMission="Play a specific mission", whichScenario="Choose a scenario", whichMission="Choose a mission"}
 }
+local tableCaptions={{el="NewPartyButton",fr="Nouvelle Partie",en="New Game"},{el="ListMissionButtons",fr="Missions",en="Missions"},{el="QuitButton",fr="Quitter",en="Quit"}}
 local UI = {} -- Contains each UI element
 
 function hideDefaultGUI()
   -- get rid of engine UI
-  Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
+    -- disable console
+  Spring.SendCommands("tooltip 0")
+  Spring.SendCommands("minimap min")
+  Spring.SendCommands("endgraph 0")
+  Spring.SendCommands("hideinterface 0")
+  Spring.SendCommands("resbar 0","fps 0","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
   -- leaves rendering duty to widget (we won't)
   gl.SlaveMiniMap(true)
   -- a hitbox remains for the minimap, unless you do this
@@ -60,16 +67,6 @@ function initChili() -- Initialize Chili variables
 end
 
 local function removeWidgets(self)
-  -- disable console
-  Spring.SendCommands("tooltip 0")
-  Spring.SendCommands("minimap min")
-  Spring.SendCommands("endgraph 0")
-  Spring.SendCommands("hideinterface 0")
-  Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
-  -- leaves rendering duty to widget (we won't)
-  gl.SlaveMiniMap(true)
-  -- a hitbox remains for the minimap, unless you do this
-  gl.ConfigMiniMap(0,0,0,0)
   for name, w in pairs(widgetHandler.knownWidgets) do
     if w.active and name ~= "Chili Hello World" and name ~= "Chili Framework" then
       widgetHandler:DisableWidget(name)
@@ -77,19 +74,38 @@ local function removeWidgets(self)
   end
 end
 
-local function French()
-  lang = "fr"
-  FunctionsList.NewGameOrContinue()
-end
-
-local function English()
-  lang = "en"
-  FunctionsList.NewGameOrContinue()
+function clearUI() -- Remove UI elements from the screen
+  for name,el in pairs(UI) do
+    if(name~="MainWindow") then 
+      UI.MainWindow:RemoveChild(el)
+    end
+  end
 end
 
 local function Quit()
   Spring.SendCommands("quit")
   Spring.SendCommands("quitforce")
+end
+
+function UpdateCaption(element, text) -- Update the caption of an UI element
+  if element then
+    element:SetCaption(text)
+  end
+end
+
+function UpdateText(element, text) -- Update the text of an UI element
+  if element then
+    element:SetText(text)
+  end
+end
+
+local function ChangeLanguage(lg)
+  lang = lg
+  for _,bloc in pairs(tableCaptions) do
+    local newCaption=bloc[lg]
+    local elToChange=bloc["el"]
+    UpdateCaption(UI[elToChange], newCaption)
+  end
 end
 
 local function RunScenario(i)
@@ -129,6 +145,23 @@ local function Capitalize(str)
   return string.gsub (str, "(%w)(%w*)", function(a,b) return string.upper(a) .. b end)
 end
 
+local function RunScript(ScriptFileName, scenario)
+  if Spring.Restart then
+     local contextFile=true
+    --if (string.sub(ScriptFileName, -3, -1)=="txt")then
+      local operations={
+      ["MODOPTIONS"]=
+        {
+        ["language"]=lang,
+        ["scenario"]=scenario
+        }
+      }    
+      genericRestart(ScriptFileName,operations,contextFile)
+  else
+    NoRestart()
+  end
+end
+
 local function MissionsMenu()
   RemoveAllFrames()
   AddFrame("Prog&Play! "..TextLocale[lang].whichMission,{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
@@ -148,7 +181,7 @@ local function MissionsMenu()
 end
 
 function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
-  
+  if (not vsx or not vsy) then return end
   local bgText = "bitmaps/editor/blank.png"
   gl.Blending(false)
   gl.Color(0, 0, 0, 0)
@@ -158,9 +191,13 @@ function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
   gl.Blending(true)
 end
 
+local function newParty()
+  Spring.Echo("Nouvelle Partie")
+end
 
-function InitializeMainMenu() -- Initialize the main window and buttons of the main menu
-  UI.MainWindow = Chili.Window:New{
+local function commonElements()
+  if UI.MainWindow ==nil then 
+    UI.MainWindow = Chili.Window:New{
     parent = Screen0,
     x = "0%",
     y = "0%",
@@ -169,15 +206,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
     draggable = false,
     resizable = false
   }
-  UI.Logo = Chili.Image:New{
-    parent = UI.MainWindow,
-    x = '0%',
-    y = '80%',
-    width = '20%',
-    height = '20%',
-    keepAspect = false,
-    file = "bitmaps/launcher/su.png"
-  }
+  end
   UI.Title = Chili.Label:New{
     parent = UI.MainWindow,
     x = '0%',
@@ -186,55 +215,14 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
     height = '10%',
     align = "center",
     valign = "center",
-    caption = LAUNCHER_TITLE,
+    caption = "Prog & Play",
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 60,
       color = { 0.2, 0.6, 0.8, 1 }
     }
   }
-  UI.NewMissionButton = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "30%",
-    y = "30%",
-    width = "40%",
-    height = "10%",
-    caption = "Nouvelle Partie",
-    OnClick = { Spring.Echo("Nouvelle Partie") },
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.2, 1, 0.8, 1 }
-    }
-  }
-  UI.EditMissionButton = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "30%",
-    y = "40%",
-    width = "40%",
-    height = "10%",
-    caption = "Liste des missions",
-    OnClick = { Spring.Echo("Liste des missions") },
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.2, 1, 0.8, 1 }
-    }
-  }
---  UI.EditScenarioButton = Chili.Button:New{
---    parent = UI.MainWindow,
---    x = "30%",
---    y = "50%",
---    width = "40%",
---    height = "10%",
---    caption = LAUNCHER_SCENARIO,
---    OnClick = { EditScenarioFrame },
---    font = {
---      font = "LuaUI/Fonts/Asimov.otf",
---      size = 40,
---      color = { 0.2, 1, 0.8, 1 }
---    }
---  }
+  -- scrollPanel
   UI.LanguageComboBox = Chili.ComboBox:New{
     parent = UI.MainWindow,
     x = "85%",
@@ -257,6 +245,69 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
       end
     end
   }
+
+  UI.QuitButton = Chili.Button:New{
+      parent = UI.MainWindow,
+      x = "90%",
+      y = "90%",
+      width = "10%",
+      height = "10%",
+      caption = "quitter",
+      font = {
+        font = "LuaUI/Fonts/Asimov.otf",
+        size = 40,
+        color = { 0.8, 0.6, 0.2, 1 }
+      },
+      backgroundColor = { 0.8, 0, 0.2, 1 },
+      focusColor= { 0.8, 0.6, 0.2, 1 },
+      OnClick = {function() Spring.SendCommands("quit");Spring.SendCommands("quitforce") end}
+    }
+end
+
+local function InitializeMainMenu() -- Initialize the main window and buttons of the main menu
+  clearUI()
+  commonElements()
+  UI.NewPartyButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "30%",
+    y = "30%",
+    width = "40%",
+    height = "10%",
+    caption = "Nouvelle Partie",
+    OnClick = { newParty() },
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 40,
+      color = { 0.2, 1, 0.8, 1 }
+    }
+  }
+  UI.ListMissionButtons = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "30%",
+    y = "40%",
+    width = "40%",
+    height = "10%",
+    caption = "Liste des missions",
+    OnClick = { missionMenu },
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 40,
+      color = { 0.2, 1, 0.8, 1 }
+    }
+  }
+end
+
+function missionMenu()
+ clearUI()
+ commonElements()
+  UI.MapScrollPanel = Chili.ScrollPanel:New{
+    parent = UI.MainWindow,
+    x = "20%",
+    y = "20%",
+    width = "60%",
+    height = "60%"
+  }
+  
   UI.BackButton = Chili.Button:New{
     parent = UI.MainWindow,
     x = "0%",
@@ -265,7 +316,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
     height = "10%",
     backgroundColor = { 0, 0.2, 0.6, 1 },
     focusColor = { 0, 0.6, 1, 1 },
-    OnClick = { MainMenuFrame }
+    OnClick = { InitializeMainMenu }
   }
   Chili.Image:New{ -- Image for the back button
     parent = UI.BackButton,
@@ -276,24 +327,34 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
     keepAspect = false,
     file = "bitmaps/launcher/arrow.png"
   }
-  UI.QuitButton = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "90%",
-    y = "90%",
-    width = "10%",
-    height = "10%",
-    caption = LAUNCHER_QUIT,
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.8, 0.6, 0.2, 1 }
-    },
-    backgroundColor = { 0.8, 0, 0.2, 1 },
-    focusColor= { 0.8, 0.6, 0.2, 1 },
-    OnClick = { QuitWarning }
-  }
+  UI.MapButtons = {}
+  local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
+  for i,MissionFileName in ipairs(MissionsList) do 
+    local mapButton = Chili.Button:New{
+      parent = UI.MapScrollPanel,
+      x = "0%",
+      y = 80 * ( i - 1 ),
+      width = "100%",
+      height = 80,
+      caption = MissionFileName,
+      OnClick = { function() RunScript(MissionFileName,"noScenario") end },
+      font = {
+        font = "LuaUI/Fonts/Asimov.otf",
+        size = 40,
+        color = { 0.2, 0.4, 0.8, 1 }
+      }
+    }
+    table.insert(UI.MapButtons, mapButton)
+  end
 end
 
+
+
+
+
+function InitializeMissionList() -- Initialize the main window and buttons of the main menu
+  UI={}
+end
 
 function widget:Initialize()  
   if (not WG.Chili) then
@@ -302,6 +363,7 @@ function widget:Initialize()
     return
   end
   hideDefaultGUI()
+  removeWidgets(self)
   initChili()
   InitializeMainMenu()
   --[[
@@ -338,8 +400,15 @@ function widget:Initialize()
   --]]
 end
 
-function widget:DrawScreenEffects(dse_vsx, dse_vsy)
+function widget:DrawScreen()
   --vsx, vsy = dse_vsx, dse_vsy
+ --if Spring.IsGUIHidden() then
+    EitherDrawScreen(vsx, vsy )
+-- end
+end
+
+function widget:DrawScreenEffects(dse_vsx, dse_vsy)
+  vsx, vsy = dse_vsx, dse_vsy
  --if Spring.IsGUIHidden() then
     EitherDrawScreen(dse_vsx, dse_vsy)
 -- end
@@ -347,5 +416,4 @@ end
 
 function widget:Update()
   --clean()
-  removeWidgets(self)
 end
