@@ -1445,6 +1445,7 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage = nil
 	end
 	
+	-- Generate name
 	local name = generateSaveName(ScenarioName)
 	local alreadyExists = false
 	if VFS.FileExists("games/"..name..".sdz") then
@@ -1472,26 +1473,58 @@ function BeginExportGame()
 		end
 	end
 	
-	if Game.version == "100" or os.execute then
+	local exportSuccess = false
+	
+	if Game.version == "0.82.5.1" then
+		if Spring.BuildPPGame then
+			Spring.BuildPPGame(ScenarioName, ScenarioDesc, name, levelList)
+			exportSuccess = true
+		else
+			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
+	else
+		-- Change Modinfo.lua
+		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1 }"
+		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
+		file:write(modInfo)
+		file:close()
+		
 		-- Add levels and scenario
 		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
 		end
+		
 		-- Compress
-		if Game.version == "100azerfzef" then
+		if not VFS.FileExists("pp_editor/game_files.sdz") then
 			VFS.CompressFolder("pp_editor/game_files")
 			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
-		elseif os.execute then
-			os.execute("cd pp_editor\\game_files\\ & ..\\utils\\7za.exe a -r -tzip -y -xr!.svn "..name..".sdz *")
-			os.rename("pp_editor/game_files/"..name..".sdz", "games/"..name..".sdz")
 		end
+		
 		-- Remove levels and scenario
 		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
-			
+		
+		exportSuccess = true
+	end
+	
+	if exportSuccess then
 		-- Show message
 		if not alreadyExists then
 			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
@@ -1528,23 +1561,6 @@ function BeginExportGame()
 				}
 			}
 		end
-	else
-		local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
-		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-		UI.Scenario.ConfirmationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = message,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				color = { 1, 0.2, 0.2, 1 }
-			}
-		}
 	end
 end
 
