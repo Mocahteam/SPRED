@@ -10,6 +10,7 @@ function widget:GetInfo()
     handler = true
   }
 end
+local hideView=true
 local lang="fr"
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
@@ -27,6 +28,10 @@ Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
+if(xmlFiles[1]~=nil)then
+  AppliqManager=appliqManager:new(xmlFiles[1])
+  AppliqManager:parse()
+end
 
 local RemovedWidgetList = {}
 local Chili, Screen0
@@ -154,7 +159,8 @@ local function RunScript(ScriptFileName, scenario)
       ["MODOPTIONS"]=
         {
         ["language"]=lang,
-        ["scenario"]=scenario
+        ["scenario"]=scenario,
+        ["hidemenu"]="true"
         }
       }    
       genericRestart(ScriptFileName,operations,contextFile)
@@ -182,7 +188,7 @@ local function MissionsMenu()
 end
 
 function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
-  if (not vsx or not vsy) then return end
+  if (not vsx or not vsy or not hideView) then return end
   local bgText = "bitmaps/editor/blank.png"
   gl.Blending(false)
   gl.Color(0, 0, 0, 0)
@@ -190,10 +196,6 @@ function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
   gl.TexRect(vsx, vsy, 0, 0, 0, 0, 1, 1)
   gl.Texture(false)
   gl.Blending(true)
-end
-
-local function newParty()
-  Spring.Echo("Nouvelle Partie")
 end
 
 local function commonElements()
@@ -275,7 +277,7 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
     width = "40%",
     height = "10%",
     caption = "Nouvelle Partie",
-    OnClick = { newParty() },
+    OnClick = { function() RunScenario(1) end },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 40,
@@ -367,7 +369,7 @@ function widget:Initialize()
     initChili()
     InitializeMainMenu()
   else
-    widgetHandler:DisableWidget("campaign launcher")
+    hideView=false
   end
 end
 
