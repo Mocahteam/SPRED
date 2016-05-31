@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name    = "Chili Hello World",
+    name    = "campaign launcher",
     desc    = "",
     author  = "",
     date    = "",
@@ -68,7 +68,7 @@ end
 
 local function removeWidgets(self)
   for name, w in pairs(widgetHandler.knownWidgets) do
-    if w.active and name ~= "Chili Hello World" and name ~= "Chili Framework" then
+    if w.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
       widgetHandler:DisableWidget(name)
     end
   end
@@ -127,6 +127,7 @@ local function RunScenario(i)
       ["scenario"]=i, --Todo: Should be an id instead
       --["missionname"]=mission,
       ["currentinput"]=currentInput,
+      ["hidemenu"]="true",
       ["progression"]=pickle(AppliqManager.progressionOutputs)
       }
     }
@@ -215,7 +216,7 @@ local function commonElements()
     height = '10%',
     align = "center",
     valign = "center",
-    caption = "Prog & Play",
+    caption = "Campaign",
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 60,
@@ -330,13 +331,14 @@ function missionMenu()
   UI.MapButtons = {}
   local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
   for i,MissionFileName in ipairs(MissionsList) do 
+    local userMissionName=string.match(MissionFileName, '/([^/]*)%.')--match string between the last "/" and the "." of .editor 
     local mapButton = Chili.Button:New{
       parent = UI.MapScrollPanel,
       x = "0%",
       y = 80 * ( i - 1 ),
       width = "100%",
       height = 80,
-      caption = MissionFileName,
+      caption = userMissionName,
       OnClick = { function() RunScript(MissionFileName,"noScenario") end },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
@@ -349,55 +351,24 @@ function missionMenu()
 end
 
 
-
-
-
 function InitializeMissionList() -- Initialize the main window and buttons of the main menu
   UI={}
 end
 
-function widget:Initialize()  
-  if (not WG.Chili) then
-    -- don't run if we can't find Chili
-    widgetHandler:RemoveWidget()
-    return
+function widget:Initialize()
+  if not Spring.GetModOptions().hidemenu then
+    if (not WG.Chili) then
+      -- don't run if we can't find Chili
+      widgetHandler:RemoveWidget()
+      return
+    end
+    hideDefaultGUI()
+    removeWidgets(self)
+    initChili()
+    InitializeMainMenu()
+  else
+    widgetHandler:DisableWidget("campaign launcher")
   end
-  hideDefaultGUI()
-  removeWidgets(self)
-  initChili()
-  InitializeMainMenu()
-  --[[
-  -- Get ready to use Chili
-  Chili = WG.Chili
-  Screen0 = Chili.Screen0
-  
-  UI.MainWindow = Chili.Window:New{
-    parent = Screen0,
-    x = "0%",
-    y = "0%",
-    width  = "100%",
-    height = "100%",
-    draggable = false,
-    resizable = false
-  }
-  -- Create the window
-  UI.helloWorldWindow = Chili.Window:New{
-    parent = UI.MainWindow,
-    x = '40%',
-    y = '40%',
-    width  = '20%',
-    height = '20%', 
-  } 
-
-  -- Create some text inside the window
-  helloWorldLabel = Chili.Label:New{
-    parent = UI.helloWorldWindow,
-    width  = '100%',
-    height = '100%',
-    caption = "Hello world",
-  }
-  InitializeTimer = Spring.GetTimer()
-  --]]
 end
 
 function widget:DrawScreen()
