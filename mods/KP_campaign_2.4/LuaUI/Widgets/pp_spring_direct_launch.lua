@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name    = "campaign launcher",
     desc    = "",
-    author  = "",
+    author  = "zigaroula,bruno",
     date    = "",
     license = "GNU GPL v2",
     layer   = 20,
@@ -32,18 +32,16 @@ if(xmlFiles[1]~=nil)then
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
 end
-
 local RemovedWidgetList = {}
-local Chili, Screen0
 local Chili, Screen0 -- Chili framework, main screen
-local helloWorldWindow
-local helloWorldLabel
-local InitializeTimer = nil
-local TextLocale = {
-  fr = {back="Retour", continue="Continuer la dernière partie", SelectScenario="Nouvelle partie", quit="Quitter", specificMission="Jouer une mission précise", whichScenario="Choisissez un scenario", whichMission="Choisissez une mission"},
-  en = {back="Back", continue="Continue previous game", SelectScenario="New game", quit="Quit", specificMission="Play a specific mission", whichScenario="Choose a scenario", whichMission="Choose a mission"}
+local tableCaptions={
+  {el="NewPartyButton",fr="Nouvelle Partie",en="New Game"},
+  {el="ListMissionButtons",fr="Missions",en="Missions"},
+  {el="Title",fr="campagne",en="campaign"},
+  {el="NewPartyButton",fr="Nouvelle Partie",en="Start Campaign"},
+  {el="ListMissionButtons",fr="Liste Des Missions",en="Missions List"},
+  {el="QuitButton",fr="Quitter",en="Quit"}
 }
-local tableCaptions={{el="NewPartyButton",fr="Nouvelle Partie",en="New Game"},{el="ListMissionButtons",fr="Missions",en="Missions"},{el="QuitButton",fr="Quitter",en="Quit"}}
 local UI = {} -- Contains each UI element
 
 function hideDefaultGUI()
@@ -115,11 +113,8 @@ end
 
 local function RunScenario(i)
   if Spring.Restart then
-    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
     AppliqManager:selectScenario(i)
     AppliqManager:startRoute()
-    --AppliqManager:setProgression({"1630","1638"})
-    --AppliqManager:next("1630")
     Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))    
     local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
     local currentInput=AppliqManager:getCurrentInputName()
@@ -137,11 +132,7 @@ local function RunScenario(i)
       }
     }
     local contextFile=true
-    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
-    --Spring.Echo(mission)
-    --Spring.Echo(json.encode(options))
     genericRestart("Missions/"..Game.modShortName.."/"..mission..".editor",options,contextFile)
-    --DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
   else
     NoRestart()
   end
@@ -167,24 +158,6 @@ local function RunScript(ScriptFileName, scenario)
   else
     NoRestart()
   end
-end
-
-local function MissionsMenu()
-  RemoveAllFrames()
-  AddFrame("Prog&Play! "..TextLocale[lang].whichMission,{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
-  local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
-  local ItemSize=math.min((vsy*(1-1/6))/(2*(#MissionsList+1))-2,vsy/24)
-  for MissionIndex,MissionFileName in ipairs(MissionsList) do
-    local EndIndex=(string.find(MissionFileName,".",1,true) or 1+string.len(MissionFileName))-1
-    -- the fourth argument (true) avoid considering "." as joker and do a plain search instead
-    local BeginIndex=1
-    repeat
-      local NewBeginIndex=string.find(MissionFileName,"/",BeginIndex,true) or string.find(MissionFileName,"\\",BeginIndex,true)
-      BeginIndex=NewBeginIndex and NewBeginIndex+1 or BeginIndex
-    until not NewBeginIndex
-    AddFrame(Capitalize(string.sub(MissionFileName,BeginIndex,EndIndex)),{x=vsx*0.5,y=vsy*(1-1/6)-2*MissionIndex*(2+ItemSize)},ItemSize,{0,1,0,0.5},"cb","c",RunScript,MissionFileName, "noScenario")
-  end
-  AddFrame(TextLocale[lang].back,{x=vsx*0.5,y=0},ItemSize*0.8,{0,0,1,0.5},"cb","c",FunctionsList.NewGameOrContinue)
 end
 
 function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
@@ -218,7 +191,7 @@ local function commonElements()
     height = '10%',
     align = "center",
     valign = "center",
-    caption = "Campaign",
+    caption = "campagne",
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 60,
@@ -263,7 +236,7 @@ local function commonElements()
       },
       backgroundColor = { 0.8, 0, 0.2, 1 },
       focusColor= { 0.8, 0.6, 0.2, 1 },
-      OnClick = {function() Spring.SendCommands("quit");Spring.SendCommands("quitforce") end}
+      OnClick = {Quit}
     }
 end
 
@@ -350,11 +323,6 @@ function missionMenu()
     }
     table.insert(UI.MapButtons, mapButton)
   end
-end
-
-
-function InitializeMissionList() -- Initialize the main window and buttons of the main menu
-  UI={}
 end
 
 function widget:Initialize()
