@@ -1102,7 +1102,7 @@ local function parseJson(jsonFile)
   SendToUnsynced("changeWidgetState", json.encode({widgetName="Messenger",activation=true})) 
   SendToUnsynced("changeWidgetState", json.encode({widgetName="Mission GUI",activation=true}))
   SendToUnsynced("changeWidgetState", json.encode({widgetName="Spring Direct Launch 2 for Prog&Play",activation=true}))
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="CA interface",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="CA Interface",activation=true}))
   
   
   return true
