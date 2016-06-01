@@ -59,7 +59,9 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
-	widgetHandler:EnableWidget("Editor Loading Screen")
+	if not Spring.GetModOptions().editor then
+		widgetHandler:EnableWidget("Editor Loading Screen")
+	end
 	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
@@ -203,6 +205,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 end
 
 function InitializeMapList() -- Initialization of maps
+	-- TODO : custom getmaps
 	if Game.version == "0.82.5.1" then -- In the older version, the maps are read in the maps/ directory and their names are written in the list
 		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
 		for i, map in ipairs(MapList) do
@@ -1456,11 +1459,11 @@ function BeginExportGame()
 	-- Generate name
 	local name = generateSaveName(ScenarioName)
 	local alreadyExists = false
-	if VFS.FileExists("games/"..name..".sdz") then
+	if VFS.FileExists("games/"..name..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..name..".sdz")) then
 		alreadyExists = true
 		local count = 1
 		local newName = name.."(1)"
-		while VFS.FileExists("games/"..newName..".sdz") do
+		while VFS.FileExists("games/"..newName..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..newName..".sdz")) do
 			count = count + 1
 			newName = name.."("..tostring(count)..")"
 		end
@@ -1485,7 +1488,7 @@ function BeginExportGame()
 	
 	if Game.version == "0.82.5.1" then
 		if VFS.BuildPPGame then
-			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, levelList)
+			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList)
 			exportSuccess = true
 		else
 			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
@@ -1506,7 +1509,8 @@ function BeginExportGame()
 		end
 	else
 		-- Change Modinfo.lua
-		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1 }"
+		local maingame = Spring.GetModOptions().maingame
+		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
 		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()

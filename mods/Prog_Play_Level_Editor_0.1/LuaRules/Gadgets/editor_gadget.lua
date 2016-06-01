@@ -234,7 +234,6 @@ function gadget:GameFrame( frameNumber )
 		end
 	elseif initialize then
 		initialize = false
-		Spring.Echo('salut')
 		local cmdList = {}
 		local cmdListUnit = {}
 		for id, unitDef in pairs(UnitDefs) do
