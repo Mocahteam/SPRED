@@ -137,14 +137,14 @@ end
 function Launch(game)
 	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") then
 		if Game.version == "0.82.5.1" then
-			if Spring.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
-				Spring.BuildPPEditor(game)
+			if VFS.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
+				VFS.BuildPPEditor(game)
 			else
 				ErrorMessage1:SetCaption("The editor does not work on the version of Spring you are using.")
 				ErrorMessage2:SetCaption("Please use the tweaked 0.82.5.1 or a 98+ version.")
 			end
 		else
-			local modInfo = "return { game='PPLE', shortGame='PPLE', name='Prog & Play Level Editor for "..game.."', shortName='PPLE', mutator='official', version='1.0', description='A level editor for Prog & Play.', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..game.."\" },}"
+			local modInfo = "return { game='PPLE', shortGame='PPLE', name='Prog & Play Level Editor for "..game.."', shortName='PPLE', mutator='official', version='1.0', description='A level editor for Prog & Play.', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
 			local file = io.open("pp_editor/editor_files/ModInfo.lua", "w")
 			file:write(modInfo)
 			file:close()
@@ -174,7 +174,7 @@ function Launch(game)
 		end
 	end
 	
-	if VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") then
+	if VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") or (VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") and Game.version == "0.82.5.1") then
 		local operations = {
 			["MODOPTIONS"] = {
 				["maingame"] = game

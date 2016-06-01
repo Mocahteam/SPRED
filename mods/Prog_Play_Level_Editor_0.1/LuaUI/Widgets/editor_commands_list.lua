@@ -13,7 +13,7 @@ end
 local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
 local commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = {}, {}, {}, {}
 
-function getCommandsList(encodedList, encodedUnitList)
+function generateCommandsList(encodedList, encodedUnitList)
 	commandsToID = json.decode(encodedList)
 	for c, id in pairs(commandsToID) do
 		table.insert(sortedCommandsList, c)
@@ -28,11 +28,13 @@ function getCommandsList(encodedList, encodedUnitList)
 		end
 		table.sort(sortedCommandsListUnit[u])
 	end
-	local file = io.open("pp_editor/editor_files/commands.editordata", "w")
-	file:write(json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit))
-	file:close()
+end
+
+function getCommandsList()
+	return json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 end
 
 function widget:Initialize()
+	widgetHandler:RegisterGlobal("generateCommandsList", generateCommandsList)
 	widgetHandler:RegisterGlobal("getCommandsList", getCommandsList)
 end

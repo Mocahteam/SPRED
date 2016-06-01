@@ -59,6 +59,7 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
+	widgetHandler:EnableWidget("Editor Loading Screen")
 	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
@@ -1070,19 +1071,23 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
-				["Mapname"] = map
+				["Mapname"] = map,
+				["Gametype"] = Game.modName
 			}
 		}
+		Spring.Echo(Game.modName)
 		DoTheRestart("LevelEditor.txt", operations)
 	else
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -1103,10 +1108,12 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
-					["Mapname"] = levelFile.description.map
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
 			}
 			DoTheRestart("LevelEditor.txt", operations)
@@ -1116,7 +1123,8 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -1476,8 +1484,8 @@ function BeginExportGame()
 	local exportSuccess = false
 	
 	if Game.version == "0.82.5.1" then
-		if Spring.BuildPPGame then
-			Spring.BuildPPGame(ScenarioName, ScenarioDesc, name, levelList)
+		if VFS.BuildPPGame then
+			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, levelList)
 			exportSuccess = true
 		else
 			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION

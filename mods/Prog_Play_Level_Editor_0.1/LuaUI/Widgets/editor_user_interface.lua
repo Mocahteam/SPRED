@@ -3496,11 +3496,9 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 	end
 end
 function getCommandsList()
-	if VFS.FileExists("pp_editor/editor_files/commands.editordata") then
-		local commandList = VFS.LoadFile("pp_editor/editor_files/commands.editordata")
-		commandList = splitString(commandList, "++")
-		commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
-	end
+	local commandList = Spring.GetModOptions().commands
+	commandList = splitString(commandList, "++")
+	commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
 end
 function showCreatedUnitsWindow()
 	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
@@ -4149,10 +4147,12 @@ function loadLevelWithRightMap(name)
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
 				["GAME"] = {
-					["Mapname"] = levelFile.description.map
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
 			}
 			DoTheRestart("LevelEditor.txt", operations)
@@ -4162,7 +4162,8 @@ function loadLevelWithRightMap(name)
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -4184,10 +4185,12 @@ function newLevelWithRightMap(name)
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 			},
 			["GAME"] = {
-				["Mapname"] = map
+				["Mapname"] = map,
+				["Gametype"] = Game.modName
 			}
 		}
 		DoTheRestart("LevelEditor.txt", operations)
@@ -4196,7 +4199,8 @@ function newLevelWithRightMap(name)
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 			},
 			["GAME"] = {
 				["Mapname"] = map,
