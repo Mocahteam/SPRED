@@ -56,17 +56,7 @@ function InitializeMenu()
 		height = "60%"
 	}
 	local gameList = {}
-	-- TODO : custom getgames
-	if Game.version == "0.82.5.1" then
-		gameList = VFS.DirList("mods/", "*.sd*", VFS.RAW)
-		for i, g in ipairs(gameList) do
-			g = string.gsub(g, "mods\\", "")
-			g = string.gsub(g, "%.sd.*", "")
-			gameList[i] = g
-		end
-	else
-		gameList = VFS.GetGames()
-	end
+	gameList = VFS.GetGames()
 	local count = 0
 	for i, game in ipairs(gameList) do
 		if not string.match(game, "Prog & Play") then

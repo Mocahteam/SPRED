@@ -4029,16 +4029,14 @@ function newMapFrame()
 	addLabel(windows["newMapWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_NEW_TITLE, 20, "center", nil, "center")
 	local delbut = addButton(windows["newMapWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["newMapWindow"]) windows["newMapWindow"]:Dispose() end)
 	delbut.font.color = {1, 0, 0, 1}
-	local mapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
+	local mapList = VFS.GetMaps()
 	if #mapList == 0 then
 		addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_NEW_NO_MAP_FOUND, 16, {1, 0, 0, 1})
 	else
 		local scrollPanel = addScrollPanel(windows["newMapWindow"], '0%', '10%', '100%', '90%')
 		local count = 0
 		for i, m in ipairs(mapList) do
-			local name = string.gsub(m, "maps\\", "")
-			name = string.gsub(name, "%.sd.*", "")
-			addButton(scrollPanel, '0%', 40 * count, '100%', 40, name,  function() Screen0:RemoveChild(windows["newMapWindow"]) windows["newMapWindow"]:Dispose() newLevelWithRightMap(name) end)
+			addButton(scrollPanel, '0%', 40 * count, '100%', 40, m,  function() Screen0:RemoveChild(windows["newMapWindow"]) windows["newMapWindow"]:Dispose() newLevelWithRightMap(m) end)
 			count = count + 1
 		end
 	end
@@ -4189,7 +4187,7 @@ function newLevelWithRightMap(name)
 				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 			},
 			["GAME"] = {
-				["Mapname"] = map,
+				["Mapname"] = name,
 				["Gametype"] = Game.modName
 			}
 		}
@@ -4203,7 +4201,7 @@ function newLevelWithRightMap(name)
 				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 			},
 			["GAME"] = {
-				["Mapname"] = map,
+				["Mapname"] = name,
 				["Gametype"] = Game.gameName.." "..Game.gameVersion
 			}
 		}

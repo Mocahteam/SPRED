@@ -205,17 +205,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 end
 
 function InitializeMapList() -- Initialization of maps
-	-- TODO : custom getmaps
-	if Game.version == "0.82.5.1" then -- In the older version, the maps are read in the maps/ directory and their names are written in the list
-		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
-		for i, map in ipairs(MapList) do
-			map = string.gsub(map, "maps\\", "")
-			map = string.gsub(map, "%.sd.*", "")
-			MapList[i] = map
-		end
-	else
-		MapList = VFS.GetMaps()
-	end
+	MapList = VFS.GetMaps()
 end
 
 function InitializeLevelList() -- Initialization of levels
