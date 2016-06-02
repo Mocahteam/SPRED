@@ -126,7 +126,7 @@ function InitializeMenu()
 end
 
 function Launch(game)
-	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") then
+	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") or (Game.version == "0.82.5.1" and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz")) then
 		if Game.version == "0.82.5.1" then
 			if VFS.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
 				VFS.BuildPPEditor(game)

@@ -677,7 +677,10 @@ function initFileWindow()
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
 	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
-	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '80%', '100%', '15%', EDITOR_FILE_MENU, backToMenuFrame)
+	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '70%', '100%', '15%', EDITOR_FILE_MENU, backToMenuFrame)
+	fileButtons['quit'] = addButton(windows['fileWindow'], '0%', '85%', '100%', '15%', EDITOR_FILE_QUIT, quitFrame)
+	fileButtons['quit'].backgroundColor = { 0.8, 0, 0.2, 1 }
+	fileButtons['quit'].focusColor = { 0.8, 0.6, 0.2, 1 }
 end
 function initUnitWindow()
 	-- Left Panel
@@ -1020,11 +1023,39 @@ function initMapSettingsWindow()
 	addLabel(windows['mapSettingsWindow'], '0%', '10%', '10%', '10%', EDITOR_MAPSETTINGS_MAP_NAME, 16, "center", nil, "center")
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
 	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "center", nil, "center")
-	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '35%', '96%', '5%')
-	addLabel(windows['mapSettingsWindow'], '4%', '40%', '94%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR_HINT, 14, "left", nil, "center")
+	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '30%', '96%', '5%')
 	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
 	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
 	mapBriefingTextBox.font.shadow = false
+	
+	local colorUI = {}
+	colorUI.red = addTrackbar(windows['mapSettingsWindow'], '5%', '37%', "20%", "5%", 0, 1, 1, 0.02)
+	colorUI.green = addTrackbar(windows['mapSettingsWindow'], '25%', '37%', "20%", "5%", 0, 1, 0, 0.02)
+	colorUI.blue = addTrackbar(windows['mapSettingsWindow'], '45%', '37%', "20%", "5%", 0, 1, 0, 0.02)
+	colorUI.previewImage = addImage(windows['mapSettingsWindow'], '67%', '37%', '6%', '5%', "bitmaps/editor/blank.png", false, {1, 0, 0, 1})
+	colorUI.button = addButton(windows['mapSettingsWindow'], '75%', '37%', '20%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR)
+	
+	local function updateImage()
+		colorUI.previewImage.color = { colorUI.red.value, colorUI.green.value, colorUI.blue.value, 1 }
+		colorUI.previewImage:InvalidateSelf()
+	end
+	colorUI.red.color = {1, 0, 0, 1}
+	colorUI.red.OnChange = {updateImage}
+	colorUI.green.color = {0, 1, 0, 1}
+	colorUI.green.OnChange = {updateImage}
+	colorUI.blue.color = {0, 0, 1, 1}
+	colorUI.blue.OnChange = {updateImage}
+	local function applyColor()
+		local selStart, selEnd = mapBriefingEditBox.selStart, mapBriefingEditBox.selEnd
+		if not (selStart and selEnd) then return end
+		if selStart > selEnd then selStart, selEnd = selEnd, selStart end
+		local hexColor = "/#"..DEC_HEX(colorUI.red.value*255)..DEC_HEX(colorUI.green.value*255)..DEC_HEX(colorUI.blue.value*255).."#"
+		local txt = mapBriefingEditBox.text
+		txt = string.sub(txt, 1, selEnd - 1) .. "/" .. string.sub(txt, selEnd, #txt)
+		txt = string.sub(txt, 1, selStart - 1) .. hexColor .. string.sub(txt, selStart, #txt)
+		mapBriefingEditBox:SetText(txt)
+	end
+	colorUI.button.OnClick = {applyColor}
 	
 	cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 	cameraAutoButton.OnClick = {
@@ -3588,13 +3619,18 @@ function updateMapSettings()
 		for word in string.gmatch(text, "/#%w*#.-/") do
 			local color = string.gsub(word, "#[^#]+$", "")
 			color = string.gsub(color, "/#", "")
-			local red = tonumber(string.sub(color, 1, 2), 16) + 1
-			local green = tonumber(string.sub(color, 3, 4), 16) + 1
-			local blue = tonumber(string.sub(color, 5, 6), 16) + 1
-			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
-			local newWord = string.gsub(word, "/#%w*#", replacement)
-			newWord = string.gsub(newWord, "/", "\255\255\255\255")
-			newText = string.gsub(newText, word, newWord)
+			local red = tonumber(string.sub(color, 1, 2), 16)
+			if red then red = red + 1 end
+			local green = tonumber(string.sub(color, 3, 4), 16)
+			if green then green = green + 1 end
+			local blue = tonumber(string.sub(color, 5, 6), 16)
+			if blue then blue = blue + 1 end
+			if red and green and blue then
+				local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
+				local newWord = string.gsub(word, "/#%w*#", replacement)
+				newWord = string.gsub(newWord, "/", "\255\255\255\255")
+				newText = string.gsub(newText, word, newWord)
+			end
 		end
 		newText = string.gsub(newText, "\\n", "\n")
 		mapBriefingTextBox:SetText(newText)
@@ -4126,6 +4162,17 @@ function backToMenuFrame()
 	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
 	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
+	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
+end
+function quitFrame()
+	if windows["backToMenu"] then
+		Screen0:RemoveChild(windows["backToMenu"])
+		windows["backToMenu"]:Dispose()
+	end
+	windows["backToMenu"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_QUIT_CONFIRM, 20)
+	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() Spring.SendCommands("quit") Spring.SendCommands("quitforce") end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 function beginLoadLevel(name)
