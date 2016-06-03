@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[a4paper]{geometry}
+
+\title{Editeur de niveaux Prog \& Play\\ Documentation Utilisateur}
+\author{Benjamin BONTEMPS}
+
+\sloppy
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Lancement de l'éditeur}
+\paragraph{ }
+Pour démarrer l'éditeur de niveaux de Prog \& Play, il faut tout d'abord s'assurer que tous les fichiers nécessaires à son bon fonctionnement sont présents :
+\begin{itemize}
+\item L'archive \textit{Editor\_Launcher.sdz} doit être présente dans le répertoire \textit{<Spring>/games/}. Cette archive constitue le mod "Launcher", qui permet donc de lancer l'éditeur dans de bonnes conditions.
+\item Le dossier \textit{pp\_editor} doit être présent à la racine de Spring. Il contient des fichiers nécessaires au lancement de l'éditeur (dans \textit{editor\_files}), des fichiers nécessaires à la création de l'archive finale (dans \textit{game\_files}) et les niveaux et scénarios créés (respectivement dans \textit{missions} et \textit{scenarios}).
+\item Au moins un mod pour Spring (\textit{Kernel Panic 4.6} par exemple) doit être présent dans le répertoire \textit{<Spring>/games/}. Celui-ci servira de base pour créer les niveaux.
+\end{itemize}
+\paragraph{ }
+Une fois que ceci est fait, il suffit de lancer Spring, puis de lancer le mod \textit{Prog \& Play Level Editor Launcher 1.0}. (Il vous sera demandé de choisir une carte et une IA. Ces dernières n'ayant aucune influence sur la suite, n'importe lesquelles feront l'affaire.)
+\paragraph{ }
+Enfin, il vous sera demandé de sélectionner un mod parmi ceux présents dans le dossier \textit{<Spring>/games} et qui ne sont pas en lien avec Prog \& Play. Ce mod sert à définir le jeu de base sur lequel seront créés les niveaux pour Prog \& Play (définition des unités et de leur comportement). Une fois ce mod sélectionné, Spring redémarrera sur l'éditeur à proprement parler.
+
+\section{Launcher propre au mod sélectionné}
+\paragraph{ }
+Le launcher se divise en 3 menus distincts : Création d'un nouveau niveau, Modification d'un niveau existant et Éditeur de scénario.
+\subsection{Création d'un nouveau niveau}
+\paragraph{ }
+Ce menu permet de choisir la carte sur laquelle on veut créer un nouveau niveau. L'ensemble des cartes disponibles correspond aux cartes présentes dans le répertoire \textit{<Spring>/maps}.
+\subsection{Modification d'un niveau existant}
+\paragraph{ }
+Ce menu permet de choisir une mission préalablement créée via l'éditeur. L'ensemble des missions proposées correspond aux missions présentes dans le répertoire \textit{<Spring>/pp\_editor/missions}. Les missions recensées sont celles ayant été créées pour le mod de base préalablement choisi.
+\subsection{Éditeur de scénario}
+\paragraph{ }
+L'éditeur de scénario permet de scénariser les missions créées avec l'éditeur de niveaux. Chaque niveau est représenté par une fenêtre contenant le nom du niveau, un état d'entrée et un ou plusieurs états de sortie en fonction de ce qui a été défini dans l'éditeur. Les états de sortie peuvent être connectés à des états d'entrée. Il est possible de sauvegarder et de charger des scénarios (ces derniers se trouvant dans le répertoire \textit{<Spring>/pp\_editor/scenarios}). Enfin, la génération de l'archive finale du jeu créé avec les différentes missions et la scénarisation se fait dans ce menu.
+\section{Éditeur de niveaux}
+
+\end{document}

@@ -12,7 +12,7 @@ function widget:GetInfo()
 	}
 end
 
-
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
@@ -27,8 +27,14 @@ contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootD
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
-local AppliqManager=appliqManager:new("Appliq/exempleKP23.xml")
-AppliqManager:parse()
+local xmlFiles = VFS.DirList("scenario/", "*.xml")
+local AppliqManager
+Spring.Echo(xmlFiles[1])
+if(xmlFiles[1]~=nil)then
+  AppliqManager=appliqManager:new(xmlFiles[1])
+  AppliqManager:parse()
+end
+
 --AppliqManager:fullTest()
 
 local IsActive = false
@@ -82,10 +88,12 @@ end
 
 local function RunScenario(i)
   if Spring.Restart then
+    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
     AppliqManager:selectScenario(i)
     AppliqManager:startRoute()
-    AppliqManager:setProgression({"1630","1638"})
+    --AppliqManager:setProgression({"1630","1638"})
     --AppliqManager:next("1630")
+    Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))    
     local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
     local currentInput=AppliqManager:getCurrentInputName()
     Spring.Echo(currentInput)
@@ -95,12 +103,17 @@ local function RunScenario(i)
       ["scenariomode"]="appliq",
       ["language"]=lang,
       ["scenario"]=i, --Todo: Should be an id instead
-      ["missionname"]=mission,
+      --["missionname"]=mission,
       ["currentinput"]=currentInput,
       ["progression"]=pickle(AppliqManager.progressionOutputs)
       }
     }
-    DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
+    local contextFile=true
+    --Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))
+    --Spring.Echo(mission)
+    --Spring.Echo(json.encode(options))
+    genericRestart("Missions/"..Game.modShortName.."/"..mission..".editor",options,contextFile)
+    --DoTheRestart("Missions/"..Game.modShortName.."/"..mission..".txt", options)
   else
     NoRestart()
   end
@@ -617,7 +630,7 @@ function widget:Initialize()
 	
 	-- disable console
 	Spring.SendCommands("console 0")
-	-- minimize minimap
+	Spring.SendCommands("tooltip 0")
 	Spring.SendCommands("minimap min")
 	
 	-- enable editor widgets only in editor, too hardcoded

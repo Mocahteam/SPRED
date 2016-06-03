@@ -112,7 +112,9 @@ local function createFromScratch(editorTables)
     -- Write first section : who controls the team (player/IA)
     if(tonumber(teamNumber)<=max)then 
       nteam=nteam+1
-      if (teamInformations.control=="player") then
+      if (teamInformations.control=="player" and teamInformations.enabled==true) then 
+-- if a team is player controled but disabled it should not be stored as a player  
+-- controled team to avoid bug "Player1 has name player which is already taken" 
         local sectionName="PLAYER"..tostring(indexPlayer)
         local name=teamInformations.name or string.lower(sectionName)
         indexPlayer=indexPlayer+1
@@ -176,7 +178,9 @@ function genericRestart(missionName,operations,contextFile)
       DoTheRestart(missionName, operations)  
     elseif (string.sub(missionName, -6, -1)=="editor")then
       local sf=VFS.LoadFile(missionName)
+      Spring.Echo("try to decode")
       local tableEditor=json.decode(sf)
+      Spring.Echo("decoded with success")
       local txtFileContent=createFromScratch(tableEditor)
       updatedTxtFileContent=updateValues(txtFileContent, operations)
       Spring.Restart("-s",updatedTxtFileContent)

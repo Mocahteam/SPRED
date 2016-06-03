@@ -16,7 +16,8 @@ actions_list = {
 			{
 				text = "<State>",
 				type = "text",
-				id = "outputState"
+				id = "outputState",
+				hint = "This string will be used as output state for the scenario editor"
 			}
 		}
 	},
@@ -34,7 +35,8 @@ actions_list = {
 			{
 				text = "<State>",
 				type = "text",
-				id = "outputState"
+				id = "outputState",
+				hint = "This string will be used as output state for the scenario editor"
 			}
 		}
 	},
@@ -75,6 +77,32 @@ actions_list = {
 				text = "<Trigger>",
 				type = "text",
 				id = "trigger"
+			}
+		}
+	},
+	{
+		type = "enableWidget",
+		filter = "Game",
+		typeText = "Enable Widget",
+		text = "Enable <Widget>.",
+		attributes = {
+			{
+				text = "<Widget>",
+				type = "widget",
+				id = "widget"
+			}
+		}
+	},
+	{
+		type = "disableWidget",
+		filter = "Game",
+		typeText = "Disable Widget",
+		text = "Disable <Widget>.",
+		attributes = {
+			{
+				text = "<Widget>",
+				type = "widget",
+				id = "widget"
 			}
 		}
 	},

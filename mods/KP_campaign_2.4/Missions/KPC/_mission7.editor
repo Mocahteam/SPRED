@@ -44,7 +44,7 @@
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":true
+				"active":false
 			},
 			{
 				"desc":"Teach you to play the game,

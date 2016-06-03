@@ -33,6 +33,22 @@ function sign(x)
 end
 
 -----------------------
+-- Transform decimal number into hex
+-----------------------
+function DEC_HEX(IN)
+	local NUM = IN
+	if NUM == 0 then return "00" end
+    local B,K,OUT,I,D=16,"0123456789ABCDEF","",0
+    while IN>0 do
+        I=I+1
+        IN,D=math.floor(IN/B), (IN%B)+1
+        OUT=string.sub(K,D,D)..OUT
+    end
+	if NUM < B then return "0"..OUT end
+    return OUT
+end
+
+-----------------------
 -- Returns the length of a table
 -----------------------
 function tableLength(t)
@@ -198,10 +214,8 @@ function getTeamsInformation()
 		if contentSection == nil then
 			break
 		end
-		local rgbRegex = "RGBColor%=%d.%d+ %d.%d+ %d.%d+"
-		local rgbSection = string.match(contentSection, rgbRegex)
-		local msgContents = splitString(rgbSection, "=")
-		local colors = splitString(msgContents[2], " ")
+		local colors = {}
+		colors[1], colors[2], colors[3] = Spring.GetTeamColor(i)
 		teams[i] = { id = i, red = colors[1], green = colors[2], blue = colors[3] }
 		i = i + 1
 	end

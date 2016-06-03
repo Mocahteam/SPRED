@@ -58,7 +58,7 @@
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":true
+				"active":false
 			},
 			{
 				"desc":"Teach you to play the game,
@@ -306,7 +306,7 @@
 			"actions":[
 				{
 					"id":1,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action1",
 					"params":{
 						"message":[
@@ -347,7 +347,7 @@
 			"actions":[
 				{
 					"id":5,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action5",
 					"params":{
 						"message":[

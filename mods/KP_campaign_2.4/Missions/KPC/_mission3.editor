@@ -10,9 +10,9 @@
 			"marker":false,
 			"name":"spawn",
 			"green":0.55862176418304,
-			"alwaysInView":false,
-			"shown":true,
 			"id":1,
+			"shown":true,
+			"alwaysInView":false,
 			"red":0.51526319980621
 		},
 		{
@@ -25,9 +25,9 @@
 			"marker":false,
 			"name":"randomMove",
 			"green":0.55862176418304,
-			"alwaysInView":false,
-			"shown":true,
 			"id":2,
+			"shown":true,
+			"alwaysInView":false,
 			"red":0.51526319980621
 		} 
 	],
@@ -72,39 +72,19 @@
 		"name":"_mission3",
 		"widgets":[
 			{
-				"desc":"User interface of the level editor",
-				"name":"Editor User Interface",
-				"active":true
-			},
-			{
 				"desc":"Teach you to play the game,
 				 one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
 				"active":false
 			},
 			{
-				"desc":"Maintain unit selection through morphing",
-				"name":"Keep Morpheds Selected",
-				"active":false
-			},
-			{
-				"desc":"Show some P&P menu when Spring.exe is run directly.",
-				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
 				"active":false
 			},
 			{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
-				"active":false
-			},
-			{
-				"desc":"Hot GUI Framework",
-				"name":"Chili Framework",
-				"active":true
-			},
-			{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
 				"active":false
 			},
 			{
@@ -164,12 +144,6 @@
 				"active":false
 			},
 			{
-				"desc":"Makes sockets or window automatically spam bits or bugs,
-				 and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
-				"active":false
-			},
-			{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
@@ -180,18 +154,23 @@
 				"active":false
 			},
 			{
-				"desc":"Buttons for the current selection (incomplete)",
-				"name":"SelectionButtons",
-				"active":false
-			},
-			{
 				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
 				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},
 			{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},
+			{
 				"desc":"Display info tips related to O.N.S. shields",
 				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
 				"active":false
 			},
 			{
@@ -210,8 +189,11 @@
 				"active":false
 			},
 			{
-				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
-				"name":"HighlightUnit",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},
 			{
@@ -220,8 +202,8 @@
 				"active":false
 			},
 			{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},
 			{
@@ -241,14 +223,14 @@
 				"active":false
 			},
 			{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},
 			{
-				"desc":"Returns the llist of known widgets",
-				"name":"Editor Widget List",
-				"active":true
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
 			},
 			{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
@@ -256,11 +238,9 @@
 				"active":false
 			},
 			{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
-				4,
-				6,
-				8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			} 
 		],
@@ -277,14 +257,14 @@
 					"type":"unit_orderTarget",
 					"name":"Action6",
 					"params":{
-						"target":14039,
+						"target":9055,
 						"command":20,
-						"unit":1871
+						"unit":14439
 					}
 				} 
 			],
 			"name":"firstAgression",
-			"trigger":"",
+			"actionTotal":1,
 			"id":3,
 			"conditions":[
 				{
@@ -297,7 +277,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":1
+			"trigger":""
 		},
 		{
 			"actions":[
@@ -318,13 +298,13 @@
 					"name":"Action9",
 					"params":{
 						"command":20,
-						"target":14039,
+						"target":9055,
 						"unit":"Action7"
 					}
 				} 
 			],
 			"name":"Moreagressions",
-			"trigger":"",
+			"actionTotal":2,
 			"id":4,
 			"conditions":[
 				{
@@ -351,20 +331,20 @@
 				} 
 			],
 			"conditionTotal":2,
-			"actionTotal":2
+			"trigger":""
 		},
 		{
 			"actions":[
 				{
 					"id":8,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action_message",
 					"params":{
 						"message":[
 							"Merci !" 
 						],
 						"time":5,
-						"unit":14039
+						"unit":9055
 					}
 				},
 				{
@@ -378,7 +358,7 @@
 				} 
 			],
 			"name":"Event5",
-			"trigger":"",
+			"actionTotal":2,
 			"id":5,
 			"conditions":[
 				{
@@ -394,7 +374,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":2
+			"trigger":""
 		},
 		{
 			"actions":[
@@ -409,7 +389,7 @@
 				} 
 			],
 			"name":"teamOIsDead",
-			"trigger":"",
+			"actionTotal":1,
 			"id":6,
 			"conditions":[
 				{
@@ -425,14 +405,14 @@
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":1
+			"trigger":""
 		},
 		{
-			"id":7,
+			"trigger":"Condition11 and not Condition13",
 			"conditionTotal":2,
 			"repetition":true,
 			"name":"behaviorUnderattack",
-			"trigger":"Condition11 and not Condition13",
+			"actionTotal":4,
 			"repetitionTime":"4",
 			"conditions":[
 				{
@@ -440,7 +420,7 @@
 					"type":"unit_underAttack",
 					"name":"Condition11",
 					"params":{
-						"unit":14039
+						"unit":9055
 					}
 				},
 				{
@@ -449,14 +429,14 @@
 					"name":"Condition13",
 					"params":{
 						"command":10,
-						"unit":14039
+						"unit":9055
 					}
 				} 
 			],
 			"actions":[
 				{
 					"id":11,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action11",
 					"params":{
 						"message":[
@@ -471,7 +451,7 @@
 							"Noooonnn" 
 						],
 						"time":3,
-						"unit":14039
+						"unit":9055
 					}
 				},
 				{
@@ -481,7 +461,7 @@
 					"params":{
 						"command":10,
 						"position":2,
-						"unit":14039
+						"unit":9055
 					}
 				},
 				{
@@ -494,7 +474,7 @@
 				},
 				{
 					"id":15,
-					"type":"messageUnit",
+					"type":"bubbleUnit",
 					"name":"Action15",
 					"params":{
 						"message":[
@@ -508,17 +488,30 @@
 							"Où est ton berger petite brebis égarée ?" 
 						],
 						"time":2,
-						"unit":1871
+						"unit":14439
 					}
 				} 
 			],
-			"actionTotal":4
+			"id":7
 		},
 		{
-			"repetition":false,
+			"actions":[
+				{
+					"id":16,
+					"type":"unit_order",
+					"name":"Action16",
+					"params":{
+						"command":45,
+						"unit":7090,
+						"parameters":[
+							0 
+						]
+					}
+				} 
+			],
 			"actionTotal":1,
 			"name":"noAttack",
-			"conditionTotal":1,
+			"repetition":false,
 			"id":8,
 			"conditions":[
 				{
@@ -530,21 +523,38 @@
 					]
 				} 
 			],
-			"actions":[
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"allydead",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
 				{
 					"id":16,
-					"type":"unit_order",
-					"name":"Action16",
+					"type":"unit_dead",
+					"name":"Condition16",
 					"params":{
-						"command":45,
-						"unit":5220,
-						"parameters":[
-							0
-						]
+						"unit":9055
 					}
 				} 
 			],
-			"trigger":""
+			"actions":[
+				{
+					"id":17,
+					"type":"lose",
+					"name":"Action17",
+					"params":{
+						"team":0,
+						"outputState":"allyDead"
+					}
+				} 
+			],
+			"id":9
 		} 
 	],
 	"variables":[
@@ -662,34 +672,8 @@
 	],
 	"units":[
 		{
-			"type":"bit",
-			"id":1871,
-			"position":{
-				"y":270.39453125,
-				"x":1032,
-				"z":1226
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":5220,
-			"position":{
-				"y":116,
-				"x":1034,
-				"z":1942
-			},
-			"orientation":-2.2503497600555,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
 			"type":"byte",
-			"id":14039,
+			"id":9055,
 			"position":{
 				"y":130,
 				"x":1024,
@@ -699,6 +683,32 @@
 			"autoHeal":"global",
 			"hp":40,
 			"team":1
+		},
+		{
+			"type":"bit",
+			"id":7090,
+			"position":{
+				"y":116,
+				"x":1034,
+				"z":1942
+			},
+			"orientation":-2.25341796875,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14439,
+			"position":{
+				"y":270.39453125,
+				"x":1032,
+				"z":1226
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":2
 		} 
 	]
 }

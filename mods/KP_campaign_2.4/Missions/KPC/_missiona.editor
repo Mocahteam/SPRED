@@ -1,24 +1,10 @@
 {
 	"zones":[
-		{
-			"type":"Rectangle",
-			"blue":0.80613851547241,
-			"x2":440,
-			"z1":808,
-			"z2":1208,
-			"x1":64,
-			"marker":true,
-			"name":"point de ralliement (260-1000)",
-			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
-			"alwaysInView":true,
-			"red":0.51526319980621
-		} 
+		 
 	],
 	"allyteams":{
 		"1":[
-			0 
+			 
 		],
 		"2":[
 			 
@@ -51,14 +37,14 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"minimap":"disabled",
-		"name":"_mission5",
+		"name":"_mission10",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":false
+				"active":true
 			},
 			{
 				"desc":"Teach you to play the game,
@@ -248,273 +234,182 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"mouse":"disabled",
-		"saveName":"_mission5",
+		"saveName":"_mission10",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Event0",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":0,
+					"type":"start",
+					"name":"Condition0",
+					"params":[
+						 
+					]
+				} 
+			],
 			"actions":[
 				{
 					"id":0,
-					"type":"win",
+					"type":"changeVariableRandom",
 					"name":"Action0",
 					"params":{
-						"team":0,
-						"outputState":"wellPlaced"
+						"min":1,
+						"variable":"v1",
+						"max":4
 					}
 				} 
 			],
-			"name":"WellPlaced",
-			"trigger":"",
-			"id":0,
-			"conditions":[
-				{
-					"id":3,
-					"type":"team_zone",
-					"name":"ConditionPlaced",
-					"params":{
-						"team":0,
-						"number":{
-							"number":1,
-							"comparison":"all"
-						},
-						"zone":1
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"actionTotal":1
+			"id":0
 		},
 		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackWest",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":1,
+					"type":"variableVSnumber",
+					"name":"Conditiona",
+					"params":{
+						"number":1,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
 			"actions":[
 				{
 					"id":1,
-					"type":"lose",
-					"name":"endbydead",
+					"type":"team_orderPosition",
+					"name":"Action1",
 					"params":{
-						"team":0,
-						"outputState":"endByDead_5"
+						"command":21,
+						"team":2,
+						"position":{
+							"z":1026,
+							"x":288
+						}
 					}
 				} 
 			],
-			"trigger":"",
-			"name":"teamOIsDead",
-			"repetition":false,
-			"id":1,
-			"conditions":[
-				{
-					"id":4,
-					"type":"team_dead",
-					"name":"team0isdead",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"team":0
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"actionTotal":1
+			"id":1
 		},
 		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotSimultaneous",
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackNorth",
 			"repetition":false,
-			"trigger":"Condition6 and not allMove and not Condition13",
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":6,
-					"type":"booleanVariable",
-					"name":"Condition6",
+					"id":2,
+					"type":"variableVSnumber",
+					"name":"Conditionb",
 					"params":{
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":8,
-					"type":"team_order",
-					"name":"allMove",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"all"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":13,
-					"type":"booleanVariable",
-					"name":"Condition13",
-					"params":{
-						"variable":"units_lag"
+						"number":2,
+						"variable":"v1",
+						"comparison":"=="
 					}
 				} 
 			],
 			"actions":[
 				{
-					"id":5,
-					"type":"messageGlobal",
-					"name":"Action5",
+					"id":2,
+					"type":"team_orderPosition",
+					"name":"Action1",
 					"params":{
-						"message":[
-							"Votre armée n'est pas très synchronisée,
-							\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t il ne faut pas perdre de temps" 
-						]
-					}
-				},
-				{
-					"id":6,
-					"type":"wait",
-					"name":"Wt",
-					"params":{
-						"time":3
-					}
-				},
-				{
-					"id":4,
-					"type":"lose",
-					"name":"Action4",
-					"params":{
-						"team":0,
-						"outputState":"not simulatenous"
+						"team":2,
+						"command":21,
+						"position":{
+							"z":272,
+							"x":1012
+						}
 					}
 				} 
 			],
 			"id":2
 		},
 		{
-			"actions":[
-				{
-					"id":2,
-					"type":"wait",
-					"name":"wait",
-					"params":{
-						"time":4
-					}
-				},
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackEast",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
 				{
 					"id":3,
-					"type":"setBooleanVariable",
-					"name":"Action3",
+					"type":"variableVSnumber",
+					"name":"Conditionc",
 					"params":{
-						"boolean":"true",
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":10,
-					"type":"wait",
-					"name":"wait2",
-					"params":{
-						"time":4
-					}
-				},
-				{
-					"id":11,
-					"type":"setBooleanVariable",
-					"name":"Action11",
-					"params":{
-						"boolean":"true",
-						"variable":"units_lag"
-					}
-				} 
-			],
-			"trigger":"",
-			"name":"unitsAreMoving",
-			"repetition":false,
-			"id":3,
-			"conditions":[
-				{
-					"id":5,
-					"type":"team_order",
-					"name":"Condition5",
-					"params":{
-						"command":10,
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"actionTotal":4
-		},
-		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotWellPlaced",
-			"repetition":false,
-			"trigger":"not Condition3 and not move and Condition12",
-			"conditions":[
-				{
-					"id":10,
-					"type":"team_zone",
-					"name":"Condition3",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"zone":1
-					}
-				},
-				{
-					"id":11,
-					"type":"team_order",
-					"name":"move",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":12,
-					"type":"booleanVariable",
-					"name":"Condition12",
-					"params":{
-						"variable":"unitsAreMoving"
+						"number":3,
+						"variable":"v1",
+						"comparison":"=="
 					}
 				} 
 			],
 			"actions":[
 				{
-					"id":7,
-					"type":"messageGlobal",
-					"name":"Action7",
+					"id":3,
+					"type":"team_orderPosition",
+					"name":"Action1",
 					"params":{
-						"message":[
-							"Mauvais placement" 
-						]
+						"command":21,
+						"team":2,
+						"position":{
+							"z":1021,
+							"x":1801
+						}
 					}
-				},
+				} 
+			],
+			"id":3
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackSouth",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
 				{
-					"id":8,
-					"type":"wait",
-					"name":"Action8",
+					"id":4,
+					"type":"variableVSnumber",
+					"name":"Conditiond",
 					"params":{
-						"time":3
+						"number":4,
+						"variable":"v1",
+						"comparison":"=="
 					}
-				},
+				} 
+			],
+			"actions":[
 				{
-					"id":9,
-					"type":"lose",
-					"name":"Action9",
+					"id":4,
+					"type":"team_orderPosition",
+					"name":"Action1",
 					"params":{
-						"team":0,
-						"outputState":"wrongSpot"
+						"team":2,
+						"command":21,
+						"position":{
+							"z":1796,
+							"x":1004
+						}
 					}
 				} 
 			],
@@ -524,15 +419,9 @@
 	"variables":[
 		{
 			"id":0,
-			"type":"boolean",
-			"name":"unitsAreMoving",
-			"initValue":"false"
-		},
-		{
-			"id":1,
-			"type":"boolean",
-			"name":"units_lag",
-			"initValue":"false"
+			"type":"number",
+			"name":"v1",
+			"initValue":0
 		} 
 	],
 	"teams":{
@@ -547,14 +436,14 @@
 			"control":"computer"
 		},
 		"2":{
-			"enabled":false,
+			"enabled":true,
 			"color":{
 				"green":0,
 				"blue":0,
 				"red":1
 			},
 			"name":"Team 2",
-			"control":"player"
+			"control":"computer"
 		},
 		"3":{
 			"enabled":false,
@@ -638,130 +527,320 @@
 		}
 	},
 	"groups":[
-		{
-			"name":"da",
-			"units":[
-				 
-			]
-		} 
+		 
 	],
 	"units":[
 		{
+			"type":"bit",
+			"id":15002,
+			"position":{
+				"y":116,
+				"x":1837,
+				"z":318
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":8919,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":315
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13911,
+			"position":{
+				"y":116,
+				"x":1834,
+				"z":211
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":185,
+			"position":{
+				"y":116,
+				"x":1784,
+				"z":208
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14649,
+			"position":{
+				"y":116,
+				"x":1833,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12812,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":6863,
+			"position":{
+				"y":116,
+				"x":1734,
+				"z":318
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13956,
+			"position":{
+				"y":116,
+				"x":1735,
+				"z":262
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":6180,
+			"position":{
+				"y":116,
+				"x":1733,
+				"z":201
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":1335,
+			"position":{
+				"y":116,
+				"x":310,
+				"z":1839
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11079,
+			"position":{
+				"y":116,
+				"x":260,
+				"z":1839
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5373,
+			"position":{
+				"y":116,
+				"x":212,
+				"z":1838
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":7118,
+			"position":{
+				"y":116,
+				"x":310,
+				"z":1790
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14219,
+			"position":{
+				"y":116,
+				"x":255,
+				"z":1783
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14622,
+			"position":{
+				"y":116,
+				"x":210,
+				"z":1783
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":1722,
+			"position":{
+				"y":116,
+				"x":314,
+				"z":1740
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14942,
+			"position":{
+				"y":116,
+				"x":255,
+				"z":1740
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11507,
+			"position":{
+				"y":116,
+				"x":213,
+				"z":1737
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
 			"type":"byte",
-			"id":9137,
+			"id":3314,
 			"position":{
 				"y":130,
-				"x":294,
-				"z":1862
+				"x":1011,
+				"z":238
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		},
 		{
 			"type":"byte",
-			"id":11316,
+			"id":4940,
 			"position":{
 				"y":130,
-				"x":354,
-				"z":1748
+				"x":1824,
+				"z":1000
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":3274,
-			"position":{
-				"y":270.39453125,
-				"x":1356,
-				"z":1370
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13526,
-			"position":{
-				"y":270.39453125,
-				"x":1424,
-				"z":1436
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":5269,
-			"position":{
-				"y":270.39453125,
-				"x":1351,
-				"z":1451
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14973,
-			"position":{
-				"y":270.39453125,
-				"x":1307,
-				"z":1392
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":4048,
-			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1329
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13710,
-			"position":{
-				"y":270.39453125,
-				"x":1401,
-				"z":1377
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		},
 		{
 			"type":"byte",
-			"id":2984,
+			"id":9930,
 			"position":{
 				"y":130,
-				"x":437,
-				"z":1852
+				"x":1009,
+				"z":1786
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
+		},
+		{
+			"type":"byte",
+			"id":4531,
+			"position":{
+				"y":130,
+				"x":276,
+				"z":985
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":6189,
+			"position":{
+				"y":284.39453125,
+				"x":1022,
+				"z":1046
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":469,
+			"position":{
+				"y":284.39453125,
+				"x":1016,
+				"z":981
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
 		} 
 	]
 }

@@ -37,14 +37,14 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 8\\n \\n \\nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792 ; 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 8\\n \\n \\nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque à la position (1792 ; 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
 		"name":"_mission8",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":true
+				"active":false
 			},
 			{
 				"desc":"Teach you to play the game,
@@ -234,7 +234,7 @@
 				"active":false
 			} 
 		],
-		"briefing":"attack ! (1520-218)",
+		"briefing":"Mission 8\n \n \nVotre groupe d'intervention spéciale est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque à la position (1792 ; 256).\n \nN'oubliez pas que l'ASSEMBLEUR (ASSEMBLER) peut vous être d'une aide précieuse...\n \nBonne chance.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
 		"saveName":"_mission8",
 		"autoHeal":"disabled"
@@ -254,8 +254,8 @@
 				} 
 			],
 			"name":"Event1",
-			"trigger":"",
 			"actionTotal":1,
+			"id":1,
 			"conditions":[
 				{
 					"id":4,
@@ -270,13 +270,23 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":1
+			"trigger":""
 		},
 		{
-			"repetition":false,
+			"actions":[
+				{
+					"id":2,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
 			"actionTotal":1,
 			"name":"teamOIsDead",
-			"conditionTotal":1,
+			"repetition":false,
 			"id":1,
 			"conditions":[
 				{
@@ -291,19 +301,42 @@
 					}
 				} 
 			],
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"passiveUnitsAtStart",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":6,
+					"type":"start",
+					"name":"Condition6",
+					"params":[
+						 
+					]
+				} 
+			],
 			"actions":[
 				{
-					"id":2,
-					"type":"lose",
-					"name":"endbydead",
+					"id":3,
+					"type":"team_order",
+					"name":"Action3",
 					"params":{
+						"command":10,
 						"team":0,
-						"outputState":"endByDead_5"
+						"parameters":[
+							0 
+						]
 					}
 				} 
 			],
-			"trigger":""
-		}  
+			"id":2
+		} 
 	],
 	"variables":[
 		 
@@ -415,142 +448,12 @@
 	],
 	"units":[
 		{
-			"type":"assembler",
-			"id":15310,
-			"position":{
-				"y":116,
-				"x":272,
-				"z":906
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":1445,
-			"position":{
-				"y":130,
-				"x":112,
-				"z":1094
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":4714,
-			"position":{
-				"y":130,
-				"x":172,
-				"z":980
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
 			"type":"bit",
-			"id":15561,
+			"id":2493,
 			"position":{
 				"y":116,
-				"x":384,
-				"z":990
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":358,
-			"position":{
-				"y":116,
-				"x":452,
-				"z":1056
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":12622,
-			"position":{
-				"y":116,
-				"x":379,
-				"z":1071
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":434,
-			"position":{
-				"y":116,
-				"x":335,
-				"z":1012
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":12846,
-			"position":{
-				"y":116,
-				"x":359,
-				"z":949
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":263,
-			"position":{
-				"y":116,
-				"x":429,
-				"z":997
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":6348,
-			"position":{
-				"y":130,
-				"x":255,
-				"z":1084
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":16461,
-			"position":{
-				"y":116,
-				"x":1591,
-				"z":119
+				"x":1436,
+				"z":89
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -559,137 +462,7 @@
 		},
 		{
 			"type":"bit",
-			"id":10705,
-			"position":{
-				"y":116,
-				"x":1474,
-				"z":184
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":8053,
-			"position":{
-				"y":116,
-				"x":1510,
-				"z":337
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":2260,
-			"position":{
-				"y":116,
-				"x":1574,
-				"z":353
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":9180,
-			"position":{
-				"y":116,
-				"x":1575,
-				"z":273
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":13207,
-			"position":{
-				"y":116,
-				"x":1634,
-				"z":233
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":5703,
-			"position":{
-				"y":116,
-				"x":1508,
-				"z":77
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"byte",
-			"id":2640,
-			"position":{
-				"y":130,
-				"x":1541,
-				"z":175
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"byte",
-			"id":3722,
-			"position":{
-				"y":130,
-				"x":1472,
-				"z":253
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"byte",
-			"id":9013,
-			"position":{
-				"y":130,
-				"x":1648,
-				"z":320
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":3189,
-			"position":{
-				"y":116,
-				"x":1532,
-				"z":250
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},
-		{
-			"type":"bit",
-			"id":15890,
+			"id":12463,
 			"position":{
 				"y":116,
 				"x":1454,
@@ -702,16 +475,276 @@
 		},
 		{
 			"type":"bit",
-			"id":14843,
+			"id":792,
 			"position":{
 				"y":116,
-				"x":1436,
-				"z":89
+				"x":1532,
+				"z":250
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
+		},
+		{
+			"type":"byte",
+			"id":5551,
+			"position":{
+				"y":130,
+				"x":1648,
+				"z":320
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":11941,
+			"position":{
+				"y":130,
+				"x":1472,
+				"z":253
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":1609,
+			"position":{
+				"y":130,
+				"x":1541,
+				"z":175
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":12951,
+			"position":{
+				"y":116,
+				"x":1508,
+				"z":77
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":7371,
+			"position":{
+				"y":116,
+				"x":1634,
+				"z":233
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":2038,
+			"position":{
+				"y":116,
+				"x":1575,
+				"z":273
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":7488,
+			"position":{
+				"y":116,
+				"x":1574,
+				"z":353
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":1733,
+			"position":{
+				"y":116,
+				"x":1510,
+				"z":337
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":2710,
+			"position":{
+				"y":116,
+				"x":1474,
+				"z":184
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"bit",
+			"id":4262,
+			"position":{
+				"y":116,
+				"x":1591,
+				"z":119
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":3090,
+			"position":{
+				"y":130,
+				"x":255,
+				"z":1084
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":7990,
+			"position":{
+				"y":116,
+				"x":429,
+				"z":997
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":7127,
+			"position":{
+				"y":116,
+				"x":359,
+				"z":949
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":9550,
+			"position":{
+				"y":116,
+				"x":335,
+				"z":1012
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13454,
+			"position":{
+				"y":116,
+				"x":379,
+				"z":1071
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":1979,
+			"position":{
+				"y":116,
+				"x":452,
+				"z":1056
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":8778,
+			"position":{
+				"y":116,
+				"x":384,
+				"z":990
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":7228,
+			"position":{
+				"y":130,
+				"x":172,
+				"z":980
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":9534,
+			"position":{
+				"y":130,
+				"x":112,
+				"z":1094
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"assembler",
+			"id":11633,
+			"position":{
+				"y":116,
+				"x":272,
+				"z":906
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
 		} 
 	]
 }

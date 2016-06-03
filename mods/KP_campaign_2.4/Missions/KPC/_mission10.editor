@@ -1,24 +1,10 @@
 {
 	"zones":[
-		{
-			"type":"Rectangle",
-			"blue":0.80613851547241,
-			"x2":336,
-			"z1":680,
-			"z2":856,
-			"x1":160,
-			"marker":true,
-			"name":"point de ralliement de l'assembleur (250-750)",
-			"green":0.55862176418304,
-			"id":1,
-			"shown":true,
-			"alwaysInView":true,
-			"red":0.51526319980621
-		} 
+		 
 	],
 	"allyteams":{
 		"1":[
-			0 
+			 
 		],
 		"2":[
 			 
@@ -51,9 +37,9 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 6\\n \\n \\nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256-811).\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"minimap":"disabled",
-		"name":"_mission6",
+		"name":"_mission10",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
@@ -159,6 +145,11 @@
 				"active":false
 			},
 			{
+				"desc":"Widget selection widget",
+				"name":"WidgetSelector",
+				"active":false
+			},
+			{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
 				"active":false
@@ -248,187 +239,431 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 6\n \n \nL'ASSEMBLEUR (ASSEMBLER) vient d'apparaître sur la carte ; aidez le à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256-811).\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"2 Bytes sont au sommet de la colline. Selon notre informateur; leur but est clair : Emporter avec eux autant de nos unités que possible. Nous avons des bits en renfort pour éviter un massacre. Lorsque l'ennemi aura choisi son angle d'attaque il faudra les envoyer aider notre Byte aggressé.",
 		"mouse":"disabled",
-		"saveName":"_mission6",
+		"saveName":"_mission10",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Event0",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":0,
+					"type":"elapsedTime",
+					"name":"Condition0",
+					"params":{
+						"number":{
+							"number":3,
+							"comparison":"exactly"
+						}
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":0,
+					"type":"changeVariableRandom",
+					"name":"Action0",
+					"params":{
+						"min":1,
+						"variable":"v1",
+						"max":4
+					}
+				} 
+			],
+			"id":0
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackWest",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":1,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":1,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":1,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"command":10,
+						"team":2,
+						"position":{
+							"x":288,
+							"z":1026
+						}
+					}
+				} 
+			],
+			"id":1
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackNorth",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":2,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":2,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":2,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"team":2,
+						"command":10,
+						"position":{
+							"x":1012,
+							"z":272
+						}
+					}
+				} 
+			],
+			"id":2
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackEast",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":3,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":3,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":3,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"command":10,
+						"team":2,
+						"position":{
+							"x":1801,
+							"z":1021
+						}
+					}
+				} 
+			],
+			"id":3
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"AttackSouth",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":4,
+					"type":"variableVSnumber",
+					"name":"Condition1",
+					"params":{
+						"number":4,
+						"variable":"v1",
+						"comparison":"=="
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":4,
+					"type":"team_orderPosition",
+					"name":"Action1",
+					"params":{
+						"team":2,
+						"command":10,
+						"position":{
+							"x":1004,
+							"z":1796
+						}
+					}
+				} 
+			],
+			"id":4
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"westUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":5,
+					"type":"unit_underAttack",
+					"name":"Condition5",
+					"params":{
+						"unit":12830
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":5,
+					"type":"bubbleUnit",
+					"name":"westmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":12830
+					}
+				} 
+			],
+			"id":5
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"NorthUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":6,
+					"type":"unit_underAttack",
+					"name":"northUnder",
+					"params":{
+						"unit":11744
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":6,
+					"type":"bubbleUnit",
+					"name":"northMess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":11744
+					}
+				} 
+			],
+			"id":6
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"eastUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":7,
+					"type":"unit_underAttack",
+					"name":"eastunder",
+					"params":{
+						"unit":2786
+					}
+				} 
+			],
 			"actions":[
 				{
 					"id":7,
+					"type":"bubbleUnit",
+					"name":"eastmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":2786
+					}
+				} 
+			],
+			"id":7
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"SouthUnder",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":8,
+					"type":"unit_underAttack",
+					"name":"southUnder",
+					"params":{
+						"unit":4212
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":8,
+					"type":"bubbleUnit",
+					"name":"southmess",
+					"params":{
+						"message":[
+							"A l'aide !" 
+						],
+						"time":4,
+						"unit":4212
+					}
+				} 
+			],
+			"id":8
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"WIN",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":9,
+					"type":"team_dead",
+					"name":"Condition9",
+					"params":{
+						"number":{
+							"number":2,
+							"comparison":"exactly"
+						},
+						"team":2
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":9,
 					"type":"win",
-					"name":"Action7",
+					"name":"Action9",
 					"params":{
 						"team":0,
 						"outputState":""
 					}
 				} 
 			],
-			"name":"WellPlaced",
-			"trigger":"",
-			"id":0,
-			"conditions":[
-				{
-					"id":3,
-					"type":"unit_zone",
-					"name":"Condition3",
-					"params":{
-						"unit":6975,
-						"zone":1
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"actionTotal":1
+			"id":9
 		},
 		{
-			"actions":[
-				{
-					"id":1,
-					"type":"lose",
-					"name":"endbydead",
-					"params":{
-						"team":0,
-						"outputState":"endByDead_5"
-					}
-				} 
-			],
+			"comment":"",
 			"trigger":"",
-			"name":"teamOIsDead",
+			"conditionTotal":1,
+			"name":"LOSE",
 			"repetition":false,
-			"id":1,
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":4,
-					"type":"team_dead",
-					"name":"team0isdead",
+					"id":10,
+					"type":"group_dead",
+					"name":"Condition10",
 					"params":{
 						"number":{
-							"comparison":"all"
+							"number":1,
+							"comparison":"exactly"
 						},
-						"team":0
+						"group":"mybytes"
 					}
 				} 
 			],
-			"conditionTotal":1,
-			"actionTotal":1
-		},
-		{
 			"actions":[
 				{
-					"id":6,
-					"type":"bubbleUnit",
-					"name":"Action6",
-					"params":{
-						"message":[
-							"Personne ... ?" 
-						],
-						"time":3,
-						"unit":6975
-					}
-				},
-				{
-					"id":3,
-					"type":"group_orderTarget",
-					"name":"Action3",
-					"params":{
-						"group":"ennemyBits",
-						"command":20,
-						"target":6975
-					}
-				},
-				{
-					"id":4,
-					"type":"wait",
-					"name":"Action4",
-					"params":{
-						"time":5
-					}
-				},
-				{
-					"id":5,
+					"id":10,
 					"type":"lose",
-					"name":"Action5",
+					"name":"Action10",
 					"params":{
 						"team":0,
-						"outputState":"notWP"
+						"outputState":""
 					}
 				} 
 			],
-			"trigger":"not placed and Condition7 and not Condition8",
-			"name":"NotWellPlaced",
-			"repetition":false,
-			"id":2,
-			"conditions":[
-				{
-					"id":5,
-					"type":"unit_zone",
-					"name":"placed",
-					"params":{
-						"zone":1,
-						"unit":6975
-					}
-				},
-				{
-					"id":7,
-					"type":"booleanVariable",
-					"name":"Condition7",
-					"params":{
-						"variable":"AssemblerHasMoved"
-					}
-				},
-				{
-					"id":8,
-					"type":"unit_order",
-					"name":"Condition8",
-					"params":{
-						"command":10,
-						"unit":6975
-					}
-				} 
-			],
-			"conditionTotal":3,
-			"actionTotal":4
+			"id":10
 		},
 		{
-			"actions":[
-				{
-					"id":2,
-					"type":"setBooleanVariable",
-					"name":"Action2",
-					"params":{
-						"boolean":"true",
-						"variable":"AssemblerHasMoved"
-					}
-				} 
-			],
+			"comment":"",
 			"trigger":"",
-			"name":"AssemblerHasMoved",
+			"conditionTotal":1,
+			"name":"Event11",
 			"repetition":false,
-			"id":3,
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":6,
-					"type":"unit_order",
-					"name":"Condition6",
+					"id":11,
+					"type":"start",
+					"name":"Condition11",
+					"params":[
+						 
+					]
+				} 
+			],
+			"actions":[
+				{
+					"id":11,
+					"type":"type_order",
+					"name":"Action11",
 					"params":{
-						"command":10,
-						"unit":6975
+						"team":0,
+						"command":45,
+						"unitType":"bit",
+						"parameters":[
+							0 
+						]
 					}
 				} 
 			],
-			"conditionTotal":1,
-			"actionTotal":1
+			"id":11
 		} 
 	],
 	"variables":[
 		{
 			"id":0,
-			"type":"boolean",
-			"name":"AssemblerHasMoved",
-			"initValue":"false"
+			"type":"number",
+			"name":"v1",
+			"initValue":0
 		} 
 	],
 	"teams":{
@@ -440,7 +675,7 @@
 				"red":0
 			},
 			"name":"Team 1",
-			"control":"computer"
+			"control":"player"
 		},
 		"2":{
 			"enabled":true,
@@ -535,22 +770,49 @@
 	},
 	"groups":[
 		{
-			"name":"ennemyBits",
+			"name":"mybytes",
 			"units":[
-				6543,
-				10978,
-				11984 
+				2786,
+				4212,
+				11744,
+				12830 
 			]
 		} 
 	],
 	"units":[
 		{
-			"type":"assembler",
-			"id":6975,
+			"type":"byte",
+			"id":11845,
 			"position":{
-				"y":116,
-				"x":158,
-				"z":271
+				"y":284.39453125,
+				"x":1016,
+				"z":981
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":80,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":1661,
+			"position":{
+				"y":284.39453125,
+				"x":1033,
+				"z":1083
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":80,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":12830,
+			"position":{
+				"y":130,
+				"x":276,
+				"z":985
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -559,159 +821,276 @@
 		},
 		{
 			"type":"byte",
-			"id":12927,
+			"id":4212,
 			"position":{
 				"y":130,
-				"x":112,
-				"z":1094
+				"x":1009,
+				"z":1786
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		},
 		{
 			"type":"byte",
-			"id":15142,
+			"id":2786,
 			"position":{
 				"y":130,
-				"x":172,
-				"z":980
+				"x":1817,
+				"z":1040
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":16352,
-			"position":{
-				"y":116,
-				"x":384,
-				"z":990
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14825,
-			"position":{
-				"y":116,
-				"x":452,
-				"z":1056
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":1553,
-			"position":{
-				"y":116,
-				"x":379,
-				"z":1071
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":4128,
-			"position":{
-				"y":116,
-				"x":335,
-				"z":1012
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13865,
-			"position":{
-				"y":116,
-				"x":359,
-				"z":949
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":2741,
-			"position":{
-				"y":116,
-				"x":429,
-				"z":997
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		},
 		{
 			"type":"byte",
-			"id":2630,
+			"id":11744,
 			"position":{
 				"y":130,
+				"x":1004,
+				"z":278
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":2817,
+			"position":{
+				"y":116,
+				"x":213,
+				"z":1737
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":15799,
+			"position":{
+				"y":116,
 				"x":255,
-				"z":1084
+				"z":1740
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		},
 		{
 			"type":"bit",
-			"id":10978,
+			"id":5922,
 			"position":{
 				"y":116,
-				"x":1071,
-				"z":233
+				"x":314,
+				"z":1740
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":0
 		},
 		{
 			"type":"bit",
-			"id":6543,
+			"id":1607,
 			"position":{
 				"y":116,
-				"x":1069,
-				"z":286
+				"x":210,
+				"z":1783
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":0
 		},
 		{
 			"type":"bit",
-			"id":11984,
+			"id":8699,
 			"position":{
 				"y":116,
-				"x":1068,
-				"z":338
+				"x":255,
+				"z":1783
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":718,
+			"position":{
+				"y":116,
+				"x":310,
+				"z":1790
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":7764,
+			"position":{
+				"y":116,
+				"x":212,
+				"z":1838
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":3769,
+			"position":{
+				"y":116,
+				"x":260,
+				"z":1839
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":1406,
+			"position":{
+				"y":116,
+				"x":310,
+				"z":1839
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5196,
+			"position":{
+				"y":116,
+				"x":1733,
+				"z":201
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12654,
+			"position":{
+				"y":116,
+				"x":1735,
+				"z":262
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12102,
+			"position":{
+				"y":116,
+				"x":1734,
+				"z":318
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":11103,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14333,
+			"position":{
+				"y":116,
+				"x":1833,
+				"z":265
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5161,
+			"position":{
+				"y":116,
+				"x":1784,
+				"z":208
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13269,
+			"position":{
+				"y":116,
+				"x":1834,
+				"z":211
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":10593,
+			"position":{
+				"y":116,
+				"x":1785,
+				"z":315
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":8077,
+			"position":{
+				"y":116,
+				"x":1837,
+				"z":318
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
 		} 
 	]
 }

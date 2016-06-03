@@ -33,6 +33,10 @@ SPRING
 
 	* Ajout d'une variable PP_modGameTime
 	
+* Spring_dev\spring_0.82.5.1\build\rts\builds\default\cmake_install.cmake :
+
+	* Ajout : copie du fichier params.json dans le dossier d'installation de l'exécutable spring
+
 LUA
 ---
 

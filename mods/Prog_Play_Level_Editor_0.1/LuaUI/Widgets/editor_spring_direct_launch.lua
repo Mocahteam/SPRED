@@ -51,6 +51,7 @@ function InitializeChili() -- Initialize Chili variables
 end
 
 function InitializeEditor() -- Enable editor widgets
+	widgetHandler:EnableWidget("Editor Loading Screen")
 	widgetHandler:EnableWidget("Chili Framework")
 	widgetHandler:EnableWidget("Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")
@@ -58,6 +59,10 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
+	if not Spring.GetModOptions().editor then
+		widgetHandler:EnableWidget("Editor Loading Screen")
+	end
+	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
 	InitializeLevelButtons()
@@ -200,16 +205,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 end
 
 function InitializeMapList() -- Initialization of maps
-	if Game.version == "0.82.5.1" then -- In the older version, the maps are read in the maps/ directory and their names are written in the list
-		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
-		for i, map in ipairs(MapList) do
-			map = string.gsub(map, "maps\\", "")
-			map = string.gsub(map, "%.sd.*", "")
-			MapList[i] = map
-		end
-	else
-		MapList = VFS.GetMaps()
-	end
+	MapList = VFS.GetMaps()
 end
 
 function InitializeLevelList() -- Initialization of levels
@@ -539,9 +535,19 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				if Links[selectedOutputMission][selectedOutput] then
 					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
-					UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
 					Links[selectedOutputMission][selectedOutput] = nil
+					local someLinks = {}
+					for k, link in pairs(Links) do
+						for kk, output in pairs(link) do
+							someLinks[output] = true
+						end
+					end
+					for k, b in pairs(UI.Scenario.Input) do
+						if not someLinks[k] then
+							b.state.chosen = false
+							b:InvalidateSelf()
+						end
+					end
 				end
 				selectedOutput = nil
 				selectedOutputMission = nil
@@ -587,7 +593,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
 					SaveState()
-				else
+				elseif selectedOutputMission and selectedOutput then
 					selectedInput = "end"
 				end
 			end
@@ -661,7 +667,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
 					SaveState()
-				else
+				elseif selectedOutputMission and selectedOutput then
 					selectedInput = LevelListNames[i]
 				end
 			end },
@@ -686,9 +692,19 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					if Links[selectedOutputMission][selectedOutput] then
 						UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
 						UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]].state.chosen = false
-						UI.Scenario.Input[Links[selectedOutputMission][selectedOutput]]:InvalidateSelf()
 						Links[selectedOutputMission][selectedOutput] = nil
+						local someLinks = {}
+						for k, link in pairs(Links) do
+							for kk, output in pairs(link) do
+								someLinks[output] = true
+							end
+						end
+						for k, b in pairs(UI.Scenario.Input) do
+							if not someLinks[k] then
+								b.state.chosen = false
+								b:InvalidateSelf()
+							end
+						end
 					end
 					selectedOutput = nil
 					selectedOutputMission = nil
@@ -1048,19 +1064,23 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
-				["Mapname"] = map
+				["Mapname"] = map,
+				["Gametype"] = Game.modName
 			}
 		}
+		Spring.Echo(Game.modName)
 		DoTheRestart("LevelEditor.txt", operations)
 	else
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -1081,10 +1101,12 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
-					["Mapname"] = levelFile.description.map
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
 			}
 			DoTheRestart("LevelEditor.txt", operations)
@@ -1094,7 +1116,8 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -1138,7 +1161,8 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 				["attr"] = {
 					["id_game"] = "76",
 					["status"] = "prepa",
-					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00")
+					["publication_date"] = os.date("%Y-%m-%dT%H:%M:%S+01:00"),
+					["activity_prefix"] = "true"
 				},
 				["kids"] = {
 					{
@@ -1150,7 +1174,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 						["text"] = "Prog & Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d'un jeu de stratégie en temps réel à l'aide d'une bibliothèque de fonctions."
 					},
 					{
-						["name"] = "activites",
+						["name"] = "activities",
 						["kids"] = {}
 					},
 					{
@@ -1185,51 +1209,64 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			}
 		}
 	}
+	
+	-- Only consider levels with links
+	local purifiedLevelList = {}
+	for k, link in pairs(Links) do
+		for kk, input in pairs(link) do
+			if not findInTable(purifiedLevelList, input) and findInTable(LevelListNames, input) then
+				table.insert(purifiedLevelList, input)
+			end
+		end
+	end
+		
 	-- Activities
 	for i, level in ipairs(LevelList) do
-		local activity = {
-			["name"] = "activity",
-			["attr"] = {
-				["id_activity"] = tostring(LevelListNames[i])
-			},
-			["kids"] = {
-				{
-					["name"] = "name",
-					["text"] = level.description.name
-				},
-				{
-					["name"] = "input_states",
-					["kids"] = {}
-				},
-				{
-					["name"] = "output_states",
-					["kids"] = {}
-				}
-			}
-		}
-		-- input
-		local count = 1
-		for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
-			local inputState = {
-				["name"] = "input_states",
+		if findInTable(purifiedLevelList, LevelListNames[i]) then
+			local activity = {
+				["name"] = "activity",
 				["attr"] = {
-					["id_input"] = LevelListNames[i].."//"..count
+					["id_activity"] = tostring(LevelListNames[i])
+				},
+				["kids"] = {
+					{
+						["name"] = "name",
+						["text"] = level.description.name
+					},
+					{
+						["name"] = "input_states",
+						["kids"] = {}
+					},
+					{
+						["name"] = "output_states",
+						["kids"] = {}
+					}
 				}
 			}
-			table.insert(activity.kids[2].kids, inputState)
-			count = count + 1
-		end
-		-- output
-		for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
-			local outputState = {
-				["name"] = "output_state",
-				["attr"] = {
-					["id_output"] = LevelListNames[i].."//"..out
+			-- input
+			local count = 1
+			for ii, inp in ipairs(inputStates[LevelListNames[i]]) do
+				local inputState = {
+					["name"] = "input_state",
+					["attr"] = {
+						["id_input"] = LevelListNames[i].."//"..count
+					}
 				}
-			}
-			table.insert(activity.kids[3].kids, outputState)
+				table.insert(activity.kids[2].kids, inputState)
+				count = count + 1
+			end
+			-- output
+			for ii, out in ipairs(OutputStates[LevelListNames[i]]) do
+				local outputState = {
+					["name"] = "output_state",
+					["attr"] = {
+						["id_output"] = LevelListNames[i].."//"..out
+					}
+				}
+				table.insert(activity.kids[3].kids, outputState)
+			end
+			table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 		end
-		table.insert(xmlScenario.kids[1].kids[3].kids, activity)
 	end
 	-- Links
 	for k, link in pairs(Links) do
@@ -1385,46 +1422,111 @@ function ExportGame()
 		end
 	end
 	if not UI.Scenario.ConfirmationMessage then
-		local name = generateSaveName(ScenarioName)
-		local alreadyExists = false
-		if VFS.FileExists("games/"..name..".sdz") then
-			alreadyExists = true
-			local count = 1
-			local newName = name.."(1)"
-			while VFS.FileExists("games/"..newName..".sdz") do
-				count = count + 1
-				newName = name.."("..tostring(count)..")"
-			end
-			name = newName
+		UI.Scenario.BeginExportationMessage = Chili.Label:New{
+			parent = UI.MainWindow,
+			x = "20%",
+			y = "95%",
+			width = "60%",
+			height = "5%",
+			caption = LAUNCHER_SCENARIO_EXPORT_GAME_BEGIN,
+			align = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				color = { 0.4, 0.2, 1, 1 }
+			},
+			beginExport = false
+		}
+	end
+end
+
+function BeginExportGame()
+	if UI.Scenario.BeginExportationMessage then
+		UI.Scenario.BeginExportationMessage:Dispose()
+		UI.Scenario.BeginExportationMessage = nil
+	end
+	
+	-- Generate name
+	local name = generateSaveName(ScenarioName)
+	local alreadyExists = false
+	if VFS.FileExists("games/"..name..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..name..".sdz")) then
+		alreadyExists = true
+		local count = 1
+		local newName = name.."(1)"
+		while VFS.FileExists("games/"..newName..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..newName..".sdz")) do
+			count = count + 1
+			newName = name.."("..tostring(count)..")"
 		end
-		
-		-- Choose levels
-		local levelList = {}
-		if UI.Scenario.IncludeMissions.checked then
-			levelList = LevelListNames
-		else
-			for k, link in pairs(Links) do
-				for kk, input in pairs(link) do
-					if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
-						table.insert(levelList, input)
-					end
+		name = newName
+	end
+	
+	-- Choose levels
+	local levelList = {}
+	if UI.Scenario.IncludeMissions.checked then
+		levelList = LevelListNames
+	else
+		for k, link in pairs(Links) do
+			for kk, input in pairs(link) do
+				if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
+					table.insert(levelList, input)
 				end
 			end
 		end
+	end
+	
+	local exportSuccess = false
+	
+	if Game.version == "0.82.5.1" then
+		if VFS.BuildPPGame then
+			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList)
+			exportSuccess = true
+		else
+			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
+	else
+		-- Change Modinfo.lua
+		local maingame = Spring.GetModOptions().maingame
+		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
+		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
+		file:write(modInfo)
+		file:close()
+		
 		-- Add levels and scenario
-		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/"..name..".xml")
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
 		end
+		
 		-- Compress
-		VFS.CompressFolder("pp_editor/game_files")
-		os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+		if not VFS.FileExists("pp_editor/game_files.sdz") then
+			VFS.CompressFolder("pp_editor/game_files")
+			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+		end
+		
 		-- Remove levels and scenario
-		os.rename("pp_editor/game_files/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
 		end
-			
+		
+		exportSuccess = true
+	end
+	
+	if exportSuccess then
 		-- Show message
 		if not alreadyExists then
 			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
@@ -1613,6 +1715,7 @@ end
 function SwitchOn() -- Activate this widget
 	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
+	Spring.SendCommands("forcestart")
 	Spring.SendCommands("fps 1")
 	HideView = true
 	RemoveOtherWidgets()
@@ -1655,6 +1758,15 @@ end
 function widget:Update(delta)
 	MakeLink()
 	FadeConfirmationMessage(delta)
+	if UI.Scenario then
+		if UI.Scenario.BeginExportationMessage then
+			if UI.Scenario.BeginExportationMessage.beginExport then
+				BeginExportGame()
+			else
+				UI.Scenario.BeginExportationMessage.beginExport = true
+			end
+		end
+	end
 end
 
 function widget:MousePress(mx, my, button)

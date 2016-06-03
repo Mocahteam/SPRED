@@ -3,14 +3,29 @@
 		{
 			"type":"Rectangle",
 			"blue":0.80613851547241,
-			"x2":440,
-			"z1":808,
-			"z2":1208,
-			"x1":64,
-			"marker":true,
-			"name":"point de ralliement (260-1000)",
+			"x2":1232,
+			"z1":120,
+			"z2":456,
+			"x1":848,
+			"marker":false,
+			"name":"Arrival",
 			"green":0.55862176418304,
+			"alwaysInView":false,
+			"shown":true,
 			"id":1,
+			"red":0.51526319980621
+		},
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":1904,
+			"z1":1208,
+			"z2":1360,
+			"x1":1720,
+			"marker":true,
+			"name":"keep in view",
+			"green":0.55862176418304,
+			"id":2,
 			"shown":true,
 			"alwaysInView":true,
 			"red":0.51526319980621
@@ -18,7 +33,7 @@
 	],
 	"allyteams":{
 		"1":[
-			0 
+			 
 		],
 		"2":[
 			 
@@ -51,14 +66,14 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"this is the new briefing",
 		"minimap":"disabled",
-		"name":"_mission5",
+		"name":"temp",
 		"widgets":[
 			{
 				"desc":"User interface of the level editor",
 				"name":"Editor User Interface",
-				"active":false
+				"active":true
 			},
 			{
 				"desc":"Teach you to play the game,
@@ -74,7 +89,7 @@
 			{
 				"desc":"Show some P&P menu when Spring.exe is run directly.",
 				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
-				"active":true
+				"active":false
 			},
 			{
 				"desc":"Control the rest of your army while in Hero mode",
@@ -248,9 +263,9 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"this is the new briefing",
 		"mouse":"disabled",
-		"saveName":"_mission5",
+		"saveName":"temp",
 		"autoHeal":"disabled"
 	},
 	"events":[
@@ -262,140 +277,39 @@
 					"name":"Action0",
 					"params":{
 						"team":0,
-						"outputState":"wellPlaced"
+						"outputState":"goodSPOT"
 					}
 				} 
 			],
-			"name":"WellPlaced",
+			"name":"Event0",
 			"trigger":"",
-			"id":0,
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":3,
-					"type":"team_zone",
-					"name":"ConditionPlaced",
+					"id":0,
+					"type":"unit_zone",
+					"name":"Condition0",
 					"params":{
-						"team":0,
-						"number":{
-							"number":1,
-							"comparison":"all"
-						},
-						"zone":1
+						"unit":4135,
+						"zone":"Arrival"
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":1
+			"id":0
 		},
 		{
 			"actions":[
 				{
 					"id":1,
-					"type":"lose",
-					"name":"endbydead",
-					"params":{
-						"team":0,
-						"outputState":"endByDead_5"
-					}
-				} 
-			],
-			"trigger":"",
-			"name":"teamOIsDead",
-			"repetition":false,
-			"id":1,
-			"conditions":[
-				{
-					"id":4,
-					"type":"team_dead",
-					"name":"team0isdead",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"team":0
-					}
-				} 
-			],
-			"conditionTotal":1,
-			"actionTotal":1
-		},
-		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotSimultaneous",
-			"repetition":false,
-			"trigger":"Condition6 and not allMove and not Condition13",
-			"conditions":[
-				{
-					"id":6,
-					"type":"booleanVariable",
-					"name":"Condition6",
-					"params":{
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":8,
-					"type":"team_order",
-					"name":"allMove",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"all"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":13,
-					"type":"booleanVariable",
-					"name":"Condition13",
-					"params":{
-						"variable":"units_lag"
-					}
-				} 
-			],
-			"actions":[
-				{
-					"id":5,
-					"type":"messageGlobal",
-					"name":"Action5",
+					"type":"messageUnit",
+					"name":"Action1",
 					"params":{
 						"message":[
-							"Votre armée n'est pas très synchronisée,
-							\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t il ne faut pas perdre de temps" 
-						]
-					}
-				},
-				{
-					"id":6,
-					"type":"wait",
-					"name":"Wt",
-					"params":{
-						"time":3
-					}
-				},
-				{
-					"id":4,
-					"type":"lose",
-					"name":"Action4",
-					"params":{
-						"team":0,
-						"outputState":"not simulatenous"
-					}
-				} 
-			],
-			"id":2
-		},
-		{
-			"actions":[
-				{
-					"id":2,
-					"type":"wait",
-					"name":"wait",
-					"params":{
-						"time":4
+							"I am moving" 
+						],
+						"time":2,
+						"unit":4135
 					}
 				},
 				{
@@ -404,134 +318,73 @@
 					"name":"Action3",
 					"params":{
 						"boolean":"true",
-						"variable":"unitsAreMoving"
-					}
-				},
-				{
-					"id":10,
-					"type":"wait",
-					"name":"wait2",
-					"params":{
-						"time":4
-					}
-				},
-				{
-					"id":11,
-					"type":"setBooleanVariable",
-					"name":"Action11",
-					"params":{
-						"boolean":"true",
-						"variable":"units_lag"
+						"variable":"hasmoved"
 					}
 				} 
 			],
+			"name":"ismoving",
 			"trigger":"",
-			"name":"unitsAreMoving",
-			"repetition":false,
-			"id":3,
+			"actionTotal":2,
 			"conditions":[
 				{
-					"id":5,
-					"type":"team_order",
-					"name":"Condition5",
+					"id":1,
+					"type":"unit_order",
+					"name":"Condition1",
 					"params":{
 						"command":10,
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0
+						"unit":4135
 					}
 				} 
 			],
 			"conditionTotal":1,
-			"actionTotal":4
+			"id":1
 		},
 		{
-			"actionTotal":3,
-			"conditionTotal":3,
-			"name":"NotWellPlaced",
-			"repetition":false,
-			"trigger":"not Condition3 and not move and Condition12",
-			"conditions":[
-				{
-					"id":10,
-					"type":"team_zone",
-					"name":"Condition3",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"zone":1
-					}
-				},
-				{
-					"id":11,
-					"type":"team_order",
-					"name":"move",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atleast"
-						},
-						"team":0,
-						"command":10
-					}
-				},
-				{
-					"id":12,
-					"type":"booleanVariable",
-					"name":"Condition12",
-					"params":{
-						"variable":"unitsAreMoving"
-					}
-				} 
-			],
 			"actions":[
 				{
-					"id":7,
-					"type":"messageGlobal",
-					"name":"Action7",
+					"id":4,
+					"type":"messageUnit",
+					"name":"Action4",
 					"params":{
 						"message":[
-							"Mauvais placement" 
-						]
-					}
-				},
-				{
-					"id":8,
-					"type":"wait",
-					"name":"Action8",
-					"params":{
-						"time":3
-					}
-				},
-				{
-					"id":9,
-					"type":"lose",
-					"name":"Action9",
-					"params":{
-						"team":0,
-						"outputState":"wrongSpot"
+							"I just stopped" 
+						],
+						"time":2,
+						"unit":4135
 					}
 				} 
 			],
-			"id":4
+			"name":"stopMoving",
+			"trigger":"Condition2 and not Condition3",
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":2,
+					"type":"booleanVariable",
+					"name":"Condition2",
+					"params":{
+						"variable":"hasmoved"
+					}
+				},
+				{
+					"id":3,
+					"type":"unit_order",
+					"name":"Condition3",
+					"params":{
+						"command":10,
+						"unit":4135
+					}
+				} 
+			],
+			"conditionTotal":2,
+			"id":2
 		} 
 	],
 	"variables":[
 		{
 			"id":0,
 			"type":"boolean",
-			"name":"unitsAreMoving",
-			"initValue":"false"
-		},
-		{
-			"id":1,
-			"type":"boolean",
-			"name":"units_lag",
+			"name":"hasmoved",
 			"initValue":"false"
 		} 
 	],
@@ -554,7 +407,7 @@
 				"red":1
 			},
 			"name":"Team 2",
-			"control":"player"
+			"control":"computer"
 		},
 		"3":{
 			"enabled":false,
@@ -638,129 +491,20 @@
 		}
 	},
 	"groups":[
-		{
-			"name":"da",
-			"units":[
-				 
-			]
-		} 
+		 
 	],
 	"units":[
 		{
-			"type":"byte",
-			"id":9137,
-			"position":{
-				"y":130,
-				"x":294,
-				"z":1862
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":11316,
-			"position":{
-				"y":130,
-				"x":354,
-				"z":1748
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
 			"type":"bit",
-			"id":3274,
+			"id":4135,
 			"position":{
-				"y":270.39453125,
-				"x":1356,
-				"z":1370
+				"y":116,
+				"x":1816,
+				"z":974
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13526,
-			"position":{
-				"y":270.39453125,
-				"x":1424,
-				"z":1436
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":5269,
-			"position":{
-				"y":270.39453125,
-				"x":1351,
-				"z":1451
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14973,
-			"position":{
-				"y":270.39453125,
-				"x":1307,
-				"z":1392
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":4048,
-			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1329
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13710,
-			"position":{
-				"y":270.39453125,
-				"x":1401,
-				"z":1377
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":2984,
-			"position":{
-				"y":130,
-				"x":437,
-				"z":1852
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":0
 		} 
 	]
