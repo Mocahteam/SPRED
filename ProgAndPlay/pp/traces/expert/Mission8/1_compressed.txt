@@ -1,0 +1,85 @@
+mission name : Mission8
+mission start time : 1463494153
+	execution start time : 1463494158
+		PP_Open
+		Sequence < 11:1 >
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetType ?_? - ?
+			PP_Unit_ActionOnPosition ?_? 10 ? 255
+		Sequence < 24011:1 >
+			Sequence < 1:0.58619 2:0.41381 >
+				PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetPendingCommands ?_?
+		Sequence < 12:1 >
+			Sequence < 1:0.833333 2:0.166667 >
+				PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			Sequence < 1:0.166667 2:0.833333 >
+				PP_Unit_GetType ?_? - ?
+		Sequence < 7:1 >
+			PP_Unit_ActionOnUnit ?_4 25 5048_7
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetType ?_? - ?
+		Sequence < 3:1 >
+			PP_Unit_ActionOnPosition ?_7 16 1792 256
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetType ?_? - ?
+		PP_Unit_ActionOnUnit 5422_2 25 5048_7
+		PP_GetNumUnits 0 - 11
+		Sequence < 37325:1 >
+			PP_GetNumUnits 2 - 0
+		Sequence < 10:1 >
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetType ?_? - ?
+			PP_Unit_ActionOnPosition ?_? 16 1792 256
+		PP_GetNumUnits 0 - 11
+		PP_GetUnitAt 0 10 - 5422
+		PP_Unit_GetType 5422_2 - 2
+		PP_GetNumUnits 0 - 11
+		PP_Unit_GetType 5422_2 - 2
+		Sequence < 549:1 >
+			Sequence < 1:0.998179 32:0.00182149 >
+				PP_IsGameOver - 0
+				Sequence < 4:1 >
+					PP_Unit_GetType ?_? - ?
+				Sequence < 4:1 >
+					PP_Unit_GetHealth ?_7 - 15000
+				PP_Unit_GetPendingCommands 5422_2
+			PP_Unit_ActionOnUnit 5422_2 40 5048_7
+		Sequence < 6088:1 >
+			PP_IsGameOver - 0
+			Sequence < 4:1 >
+				PP_Unit_GetType ?_? - ?
+			Sequence < 4:1 >
+				PP_Unit_GetHealth ?_7 - ?
+			PP_Unit_GetPendingCommands 5422_2
+		PP_IsGameOver - 0
+		PP_Unit_GetType 5422_2 - 2
+		wrong_unit PP_Unit_GetType 5048_?
+		Sequence < 2:1 >
+			PP_Unit_GetType ?_7 - 7
+		Sequence < 2:1 >
+			PP_Unit_GetHealth ?_7 - ?
+		PP_Unit_GetPendingCommands 5422_2
+		Sequence < 1107:1 >
+			PP_Unit_ActionOnUnit 5422_2 40 ?_7
+			Sequence < 1:0.999097 21979:0.000903342 >
+				PP_IsGameOver - 0
+				Sequence < 3:1 >
+					PP_Unit_GetType ?_? - ?
+				Sequence < 2:1 >
+					PP_Unit_GetHealth ?_7 - ?
+					game_paused 
+					game_unpaused 
+				PP_Unit_GetPendingCommands 5422_2
+		delayed PP_Unit_ActionOnUnit 5422_2 40 5662_7
+		delayed PP_IsGameOver - 1
+		delayed PP_Close
+	execution end time : 1463494367
+status : won
+mission end time : 1463494367

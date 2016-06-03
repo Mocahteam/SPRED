@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission8" start_time="1463494153" end_time="1463494367" status="won">
+		<execution start_time="1463494158" end_time="1463494367">
+			<call label="PP_Open"/>
+			<sequence num_map="11:1">
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetType" params="?_?" return="?"/>
+				<call label="PP_Unit_ActionOnPosition" params="?_? 10 ? 255"/>
+			</sequence>
+			<sequence num_map="24011:1">
+				<sequence num_map="1:14075 2:9936">
+					<call label="PP_GetNumUnits" params="0" return="11"/>
+				</sequence>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetPendingCommands" params="?_?"/>
+			</sequence>
+			<sequence num_map="12:1">
+				<sequence num_map="1:10 2:2">
+					<call label="PP_GetNumUnits" params="0" return="11"/>
+				</sequence>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<sequence num_map="1:2 2:10">
+					<call label="PP_Unit_GetType" params="?_?" return="?"/>
+				</sequence>
+			</sequence>
+			<sequence num_map="7:1">
+				<call label="PP_Unit_ActionOnUnit" params="?_4 25 5048_7"/>
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetType" params="?_?" return="?"/>
+			</sequence>
+			<sequence num_map="3:1">
+				<call label="PP_Unit_ActionOnPosition" params="?_7 16 1792 256"/>
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetType" params="?_?" return="?"/>
+			</sequence>
+			<call label="PP_Unit_ActionOnUnit" params="5422_2 25 5048_7"/>
+			<call label="PP_GetNumUnits" params="0" return="11"/>
+			<sequence num_map="37325:1">
+				<call label="PP_GetNumUnits" params="2" return="0"/>
+			</sequence>
+			<sequence num_map="10:1">
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetType" params="?_?" return="?"/>
+				<call label="PP_Unit_ActionOnPosition" params="?_? 16 1792 256"/>
+			</sequence>
+			<call label="PP_GetNumUnits" params="0" return="11"/>
+			<call label="PP_GetUnitAt" params="0 10" return="5422"/>
+			<call label="PP_Unit_GetType" params="5422_2" return="2"/>
+			<call label="PP_GetNumUnits" params="0" return="11"/>
+			<call label="PP_Unit_GetType" params="5422_2" return="2"/>
+			<sequence num_map="549:1">
+				<sequence num_map="1:548 32:1">
+					<call label="PP_IsGameOver" return="0"/>
+					<sequence num_map="4:580">
+						<call label="PP_Unit_GetType" params="?_?" return="?"/>
+					</sequence>
+					<sequence num_map="4:580">
+						<call label="PP_Unit_GetHealth" params="?_7" return="15000"/>
+					</sequence>
+					<call label="PP_Unit_GetPendingCommands" params="5422_2"/>
+				</sequence>
+				<call label="PP_Unit_ActionOnUnit" params="5422_2 40 5048_7"/>
+			</sequence>
+			<sequence num_map="6088:1">
+				<call label="PP_IsGameOver" return="0"/>
+				<sequence num_map="4:6088">
+					<call label="PP_Unit_GetType" params="?_?" return="?"/>
+				</sequence>
+				<sequence num_map="4:6088">
+					<call label="PP_Unit_GetHealth" params="?_7" return="?"/>
+				</sequence>
+				<call label="PP_Unit_GetPendingCommands" params="5422_2"/>
+			</sequence>
+			<call label="PP_IsGameOver" return="0"/>
+			<call label="PP_Unit_GetType" params="5422_2" return="2"/>
+			<call label="PP_Unit_GetType" error="wrong_unit" params="5048_?"/>
+			<sequence num_map="2:1">
+				<call label="PP_Unit_GetType" params="?_7" return="7"/>
+			</sequence>
+			<sequence num_map="2:1">
+				<call label="PP_Unit_GetHealth" params="?_7" return="?"/>
+			</sequence>
+			<call label="PP_Unit_GetPendingCommands" params="5422_2"/>
+			<sequence num_map="1107:1">
+				<call label="PP_Unit_ActionOnUnit" params="5422_2 40 ?_7"/>
+				<sequence num_map="1:1106 21979:1">
+					<call label="PP_IsGameOver" return="0"/>
+					<sequence num_map="3:23085">
+						<call label="PP_Unit_GetType" params="?_?" return="?"/>
+					</sequence>
+					<sequence num_map="2:23085">
+						<call label="PP_Unit_GetHealth" params="?_7" return="?"/>
+						<event label="game_paused"/>
+						<event label="game_unpaused"/>
+					</sequence>
+					<call label="PP_Unit_GetPendingCommands" params="5422_2"/>
+				</sequence>
+			</sequence>
+			<call label="PP_Unit_ActionOnUnit" params="5422_2 40 5662_7"/>
+			<call label="PP_IsGameOver" return="1"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+</trace>
+

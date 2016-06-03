@@ -1,0 +1,13 @@
+mission name : Mission5
+mission start time : 1463494611
+	execution start time : 1463494615
+		PP_Open
+		Sequence < 10:1 >
+			PP_GetNumUnits 0 - 10
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_ActionOnPosition ?_? 10 256 1024
+		PP_GetNumUnits 0 - 10
+		PP_Close
+	execution end time : 1463494615
+status : won
+mission end time : 1463494630

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission7" start_time="1463494425" end_time="1463494516" status="won">
+		<execution start_time="1463494430" end_time="1463494516">
+			<call label="PP_Open"/>
+			<sequence num_map="11:1">
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<sequence num_map="1:10 2:1">
+					<call label="PP_Unit_GetType" params="?_?" return="?"/>
+				</sequence>
+			</sequence>
+			<sequence num_map="10:1">
+				<call label="PP_GetNumUnits" params="0" return="11"/>
+				<call label="PP_GetUnitAt" params="0 ?" return="?"/>
+				<call label="PP_Unit_GetHealth" params="?_?" return="?"/>
+				<call label="PP_Unit_GetMaxHealth" params="?_?" return="?"/>
+				<call label="PP_Unit_ActionOnUnit" params="2271_2 40 ?_?"/>
+				<sequence num_map="1385:1 1399:1 1414:1 1421:1 1749:1 1799:1 2177:1 15405:1 15604:1 15812:1">
+					<sequence num_map="1:10 2:58155">
+						<call label="PP_Unit_GetHealth" params="?_?" return="?"/>
+					</sequence>
+					<sequence num_map="1:10 2:58155">
+						<call label="PP_Unit_GetMaxHealth" params="?_?" return="?"/>
+					</sequence>
+				</sequence>
+			</sequence>
+			<call label="PP_GetNumUnits" params="0" return="11"/>
+			<call label="PP_GetUnitAt" params="0 10" return="2271"/>
+			<call label="PP_Unit_GetHealth" params="2271_2" return="2000"/>
+			<call label="PP_Unit_GetMaxHealth" params="2271_2" return="2000"/>
+			<call label="PP_GetNumUnits" params="0" return="11"/>
+			<call label="PP_Close"/>
+		</execution>
+	</mission>
+</trace>
+

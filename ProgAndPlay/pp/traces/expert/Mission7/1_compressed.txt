@@ -1,0 +1,29 @@
+mission name : Mission7
+mission start time : 1463494425
+	execution start time : 1463494430
+		PP_Open
+		Sequence < 11:1 >
+			PP_GetUnitAt 0 ? - ?
+			PP_GetNumUnits 0 - 11
+			Sequence < 1:0.909091 2:0.0909091 >
+				PP_Unit_GetType ?_? - ?
+		Sequence < 10:1 >
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetHealth ?_? - ?
+			PP_Unit_GetMaxHealth ?_? - ?
+			PP_Unit_ActionOnUnit 2271_2 40 ?_?
+			Sequence < 1385:0.1 1399:0.1 1414:0.1 1421:0.1 1749:0.1 1799:0.1 2177:0.1 15405:0.1 15604:0.1 15812:0.1 >
+				Sequence < 1:0.000171925 2:0.999828 >
+					PP_Unit_GetHealth ?_? - ?
+				Sequence < 1:0.000171925 2:0.999828 >
+					PP_Unit_GetMaxHealth ?_? - ?
+		delayed PP_GetNumUnits 0 - 11
+		delayed PP_GetUnitAt 0 10 - 2271
+		delayed PP_Unit_GetHealth 2271_2 - 2000
+		delayed PP_Unit_GetMaxHealth 2271_2 - 2000
+		delayed PP_GetNumUnits 0 - 11
+		delayed PP_Close
+	execution end time : 1463494516
+status : won
+mission end time : 1463494516

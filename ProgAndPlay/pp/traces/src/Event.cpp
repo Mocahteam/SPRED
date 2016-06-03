@@ -1,11 +1,11 @@
 #include "Event.h"
 
-const char* Event::concatEventsArr[NUM_CONCAT_EVENTS+1] = {"game_paused", "game_unpaused", NULL};
-const char* Event::noConcatEventsArr[NUM_NO_CONCAT_EVENTS+1] = {"start_mission", "end_mission", "new_execution", "end_execution", "eof", NULL};
+const char* Event::concatEventsArr[] = {"game_paused", "game_unpaused", NULL};
+const char* Event::noConcatEventsArr[] = {"start_mission", "end_mission", "new_execution", "end_execution", "eof", NULL};
 
 Event::Event(std::string label): Trace(EVENT), label(label) {}
 
-bool Event::operator==(Trace* t) {
+bool Event::operator==(Trace *t) const {
 	bool res = false;
 	if (t->isEvent()) {
 		Event *e = dynamic_cast<Event*>(t);

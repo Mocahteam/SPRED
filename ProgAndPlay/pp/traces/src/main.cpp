@@ -22,7 +22,7 @@ int compressAllTraces(std::string dir_path, bool on) {
 			std::string filename(pent->d_name);
 			if (filename.find("_compressed") == std::string::npos && filename.compare("meta.log") != 0) {
 				std::cout << "parse " << dir_path << "\\" << filename << std::endl;
-				TracesParser tp;
+				TracesParser tp(false);
 				if (on)
 					tp.parseTraceFileOnline(dir_path, filename);
 				else
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 	if (strcmp(argv[3], "all") == 0)
 		return compressAllTraces(argv[2], on);
 	else {
-		TracesParser tp;
+		TracesParser tp(false);
 		if (on)
 			tp.parseTraceFileOnline(argv[2], argv[3]);
 		else
