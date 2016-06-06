@@ -1,0 +1,14 @@
+start Mission4
+mission_start_time 1463494805
+execution_start_time 1463494809
+PP_Open
+PP_GetUnitAt 0 0 - 2067
+PP_Unit_GetType 2067_4 - 4
+PP_GetUnitAt 0 0 - 2067
+PP_Unit_ActionOnPosition 2067_4 10 1400 1371
+PP_GetUnitAt 0 1 - 1132
+PP_Unit_ActionOnPosition 1132_7 10 479 1825
+PP_Close
+execution_end_time 1463494809
+mission_end_time 1463494820
+end won Mission4

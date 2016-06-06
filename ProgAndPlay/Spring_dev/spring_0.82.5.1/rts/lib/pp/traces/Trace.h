@@ -11,6 +11,8 @@ class Trace {
 
 public:
 
+	typedef boost::shared_ptr<Trace> sp_trace;
+
 	enum TraceType {
 		SEQUENCE,
 		CALL,
@@ -19,11 +21,12 @@ public:
 
 	virtual ~Trace() {}
 	virtual unsigned int length() const = 0;
-	virtual bool operator==(Trace* t) = 0;
+	virtual bool operator==(Trace *t) const = 0;
 	virtual void display(std::ostream &os = std::cout) const = 0;
+	virtual void resetAligned();
 	
 	static int inArray(const char *ch, const char *arr[]);
-	static unsigned int getLength(const std::vector< boost::shared_ptr<Trace> >& traces);
+	static unsigned int getLength(const std::vector<sp_trace>& traces);
 	
 	static int numTab;
 	int indSearch;
@@ -35,17 +38,22 @@ public:
 	bool isCall() const;
 	bool isDelayed() const;
 	void setDelayed();
-	
-	boost::shared_ptr<Trace> aligned;
+	const sp_trace& getParent() const;
+	const sp_trace& getAligned() const;
+	void setParent(const sp_trace& spt);
+	void setAligned(const sp_trace& spt);
+	unsigned int getLevel() const;
 		
 protected:
 
 	Trace(TraceType type = CALL);
 	TraceType type;
 	bool delayed;
+	// Contains a pointer to the trace aligned with this trace during the alignment stage.
+	sp_trace aligned;
+	// Contains the parent sequence which contains this trace. Is null if the trace is located at the root.
+	sp_trace parent;
 	
 };
-
-typedef boost::shared_ptr<Trace> sp_trace;
 
 #endif

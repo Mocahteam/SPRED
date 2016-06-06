@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feedbacks>
+	<feedback type="useful_call" priority="0">
+		<expert>
+			<call label="PP_Close"/>
+		</expert>
+		<infos>
+			<info>PP_Close doit être la dernière instruction de ton programme</info>
+		</infos>
+	</feedback>
+	<feedback type="seq_lack" priority="1">
+		<expert>
+			<sequence>
+				<call label="PP_GetNumUnits" params="2"/>
+			</sequence>
+		</expert>
+		<infos>
+			<info>Tu devrais attendre qu'il y ait au moins un ennemi sur la carte avant de donner des ordres à tes unités</info>
+		</infos>
+	</feedback>
+	<feedback type="seq_lack" priority="1">
+		<expert>
+			<sequence>
+				<call label="PP_Unit_GetHealth"/>
+				<call label="PP_Unit_GetMaxHealth"/>
+			</sequence>
+		</expert>
+		<infos>
+			<info>N'oublie pas de placer une boucle d'attente après avoir ordonné à un assembleur de soigner une unité si tu veux qu'elle récupère toute sa santé</info>
+		</infos>
+	</feedback>
+	<feedback type="useful_call" priority="500">
+		<infos>
+			<info>Tu n'as pas utilisé la fonction *label* dans ton programme</info>
+			<info>Pense à utiliser la fonction *label*. Elle peut être utile :)</info>
+		</infos>
+	</feedback>
+	<feedback type="useless_call" priority="500">
+		<infos>
+			<info>Tiens, tu es la première personne à utiliser la fonction *label* pour résoudre cette mission. Tu as peut être trouvé une nouvelle solution... ou alors tu ne devrais pas l'utiliser</info>
+		</infos>
+	</feedback>
+	<feedback type="seq_extra" priority="1000">
+		<infos>
+			<info>Séquence en trop</info>
+		</infos>
+	</feedback>
+	<feedback type="seq_lack" priority="1000">
+		<infos>
+			<info>Séquence en moins</info>
+		</infos>
+	</feedback>
+	<feedback type="seq_num" priority="1100">
+		<infos>
+			<info>Problème sur les indices</info>
+		</infos>
+	</feedback>
+	<feedback type="call_extra" priority="2000">
+		<infos>
+			<info>Appel en trop</info>
+		</infos>
+	</feedback>
+	<feedback type="call_lack" priority="2000">
+		<infos>
+			<info>Appel en moins</info>
+		</infos>
+	</feedback>
+	<feedback type="call_params" priority="2100">
+		<infos>
+			<info>Les paramètres que tu passes a la fonction *label* ne semblent pas être les bons\n*diff_params*</info>
+		</infos>
+	</feedback>
+</feedbacks>

@@ -51,7 +51,7 @@ void log(std::string msg) {
 
 CProgAndPlay* pp;
 
-CProgAndPlay::CProgAndPlay() {
+CProgAndPlay::CProgAndPlay() : tp(true) {
 	log("ProgAndPLay constructor begin");
 	
 	loaded = false;
@@ -107,11 +107,28 @@ void CProgAndPlay::Update(void) {
 	// Store log messages
 	if (ppTraces.good()) {
 		logMessages();
+		bool proceed = allUnitsIdled() || (missionEnded && frame_counter++ > 2 * UNIT_SLOWUPDATE_RATE); 
+		tp.setProceed(proceed);
+		if (proceed)
+			log("proceed is true");
+		else
+			log("proceed is false");
 		if (tp.compressionDone()) {
 			log("compression done");
-			std::vector<sp_trace> traces = TracesParser::importTraceFromXml("traces", missionName + "_compressed.xml");
-			for (unsigned int i = 0; i < traces.size(); i++)
-				traces.at(i)->display(logFile);
+			
+			// std::vector<Trace::sp_trace> traces = TracesParser::importTraceFromXml(tracesDirname, missionName + "_compressed.xml");
+			// for (unsigned int i = 0; i < traces.size(); i++)
+				// traces.at(i)->display(logFile);
+			
+			// Launch analysis of player's traces
+			TracesAnalyser ta(true);
+			std::string feedback = ta.getFeedback(tracesDirname, missionName + "_compressed.xml");
+			if (feedback.compare("") != 0) {
+				std::string s = "feedback : " + feedback;
+				log(s);
+			}
+			else
+				log("no feedback");
 		}
 	}
 		
@@ -531,6 +548,21 @@ log("ProgAndPLay::execPendingCommands end");
 	return nbCmd;
 }
 
+bool CProgAndPlay::allUnitsIdled() {
+	CUnitSet *tmp = &(teamHandler->Team(gu->myTeam)->units);
+	CUnitSet::iterator it = tmp->begin();
+	while (it != tmp->end()) {
+		const CCommandAI* commandAI = (*it)->commandAI;
+		if (commandAI != NULL) {
+			const CCommandQueue* queue = &commandAI->commandQue;
+			if (queue->size() > 0)
+				return false;
+		}
+		it++;
+	}
+	return true;
+}
+
 void CProgAndPlay::logMessages() {
 	log("ProgAndPLay::logMessages begin");
 	int i = 0;
@@ -555,15 +587,17 @@ void CProgAndPlay::logMessages() {
 	// Get next message
 	char * msg = PP_PopMessage();
 	while (msg != NULL) {
-		if (missionEnded)
-			ppTraces << "delayed ";
-		// Write this message on traces file
-		ppTraces << msg << std::endl;
+		if (!missionEnded || frame_counter++ <= 2 * UNIT_SLOWUPDATE_RATE) {
+			if (missionEnded)
+				ppTraces << "delayed ";
+			// Write this message on traces file
+			ppTraces << msg << std::endl;
+			i++;
+		}
 		// free memory storing this message
 		delete[] msg;
 		// Get next message
 		msg = PP_PopMessage();
-		i++;
 	}
 	if (i > 0) {
 		std::stringstream ss;
@@ -593,9 +627,9 @@ void CProgAndPlay::openTracesFile() {
 				ppTraces << "mission_start_time " << startTime << std::endl;
 				// thread creation
 				if (traceOnline)
-					tracesThread = boost::thread(&TracesParser::parseTraceFileOnline, &tp, tracesDirname, missionName+".log", true);
+					tracesThread = boost::thread(&TracesParser::parseTraceFileOnline, &tp, tracesDirname, missionName+".log");
 				else
-					tracesThread = boost::thread(&TracesParser::parseTraceFileOffline, &tp, tracesDirname, missionName+".log", true);
+					tracesThread = boost::thread(&TracesParser::parseTraceFileOffline, &tp, tracesDirname, missionName+".log");
 				//***
 			}
 		}

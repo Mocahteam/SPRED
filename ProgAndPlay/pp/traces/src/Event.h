@@ -1,9 +1,6 @@
 #ifndef __EVENT_H__
 #define __EVENT_H__
 
-#define NUM_CONCAT_EVENTS 2
-#define NUM_NO_CONCAT_EVENTS 5
-
 #include <iostream>
 
 #include "Trace.h"
@@ -12,14 +9,16 @@
 class Event : public Trace {
 	
 public:
+
+	typedef boost::shared_ptr<Event> sp_event;
 		
 	Event(std::string label);
 	
-	static const char* concatEventsArr[NUM_CONCAT_EVENTS+1];
-	static const char* noConcatEventsArr[NUM_NO_CONCAT_EVENTS+1];
+	static const char* concatEventsArr[];
+	static const char* noConcatEventsArr[];
 	
 	virtual unsigned int length() const;
-	virtual bool operator==(Trace* t);
+	virtual bool operator==(Trace *t) const;
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual std::string getParams() const;
 	
@@ -30,7 +29,5 @@ protected:
 	std::string label;
 
 };
-
-typedef boost::shared_ptr<Event> sp_event;
 
 #endif

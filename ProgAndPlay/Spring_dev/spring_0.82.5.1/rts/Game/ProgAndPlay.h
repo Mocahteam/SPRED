@@ -6,8 +6,10 @@
 // Muratet (Define Class CProgAndPlay) ---
 
 #include "Sim/Units/Unit.h"
+#include "Sim/Misc/GlobalConstants.h"
 #include <ctime>
 #include "lib/pp/traces/TracesParser.h"
+#include "lib/pp/traces/TracesAnalyser.h"
 #include <boost/thread.hpp>
 
 class CProgAndPlay
@@ -41,8 +43,11 @@ private:
 	int execPendingCommands(); // execute pending command from Prog&Play
 	void logMessages(); // log messages from Prog&Play
 	void openTracesFile(); // open the appropriate traces file based on the current mission
+	bool allUnitsIdled(); //returns true if all units' command queues are empty
 	
 };
+
+static int frame_counter = 0;
 
 extern CProgAndPlay* pp;
 

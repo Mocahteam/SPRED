@@ -25,21 +25,26 @@ class TracesParser {
 
 public:
 	
-	TracesParser();
+	TracesParser(bool in_game);
 	~TracesParser();
 	
 	static int lineNum;
 	
-	void parseTraceFileOnline(const std::string& dir_path, const std::string& filename, bool on_writing = false);
-	void parseTraceFileOffline(const std::string& dir_path, const std::string& filename, bool on_writing = false);
+	void parseTraceFileOnline(const std::string& dir_path, const std::string& filename);
+	void parseTraceFileOffline(const std::string& dir_path, const std::string& filename);
 	void parseTraceFile(const std::string& dir_path, const std::string& filename);
 	void display(std::ostream &os = std::cout);
 	void setEnd();
 	bool compressionDone();
-	const std::vector<sp_trace>& getTraces() const;
+	void setProceed(bool proceed);
+	const std::vector<Trace::sp_trace>& getTraces() const;
 	
-	static sp_sequence mergeSequences(sp_sequence sps_up, sp_sequence sps_down);
-	static std::vector<sp_trace> importTraceFromXml(const std::string& dir_path, const std::string& filename);
+	static Trace::sp_trace handleLine(const std::string& s);
+	static Sequence::sp_sequence mergeSequences(Sequence::sp_sequence sps_up, Sequence::sp_sequence sps_down);
+	static void removeRedundancies(std::vector<Trace::sp_trace>& traces);
+	static std::vector<Trace::sp_trace> importTraceFromXml(const std::string& dir_path, const std::string& filename);
+	static void importTraceFromNode(rapidxml::xml_node<> *node, std::vector<Trace::sp_trace>& traces);
+	static unsigned int getNodeChildCount(rapidxml::xml_node<> *node);
 	static std::vector<std::string> splitLine(const std::string& s, char delim = ' ');
 	static int stoi(const std::string& s);
 	static float stof(const std::string& s);
@@ -48,11 +53,13 @@ private:
 
 	static std::string mission_name;
 	static int mission_end_time;
-	static sp_trace spe_eme;
+	static Trace::sp_trace spe_eme;
 
+	bool in_game;
 	bool launched;
 	bool compress;
 	bool end;
+	bool proceed;
 	
 	int start;
 	unsigned int pt;
@@ -62,37 +69,34 @@ private:
 	std::string dir_path;
 	std::string filename;
 	
-	std::vector<sp_trace> traces;
+	std::vector<Trace::sp_trace> traces;
 	
-	std::vector<sp_trace> tracesSave;
-	std::stack<sp_sequence> seqStack;
-	std::stack<sp_sequence> histStack;
-	sp_sequence cur_seq;
+	std::vector<Trace::sp_trace> tracesSave;
+	std::stack<Sequence::sp_sequence> seqStack;
+	std::stack<Sequence::sp_sequence> histStack;
+	Sequence::sp_sequence cur_seq;
 	
 	bool beginParse(const std::string& dir_path, const std::string& filename);
 	void endParse();
 	void writeFiles(bool online);
 	
 	void readTracesOnline();
-	void readTracesOnlineOnWriting();
+	void readTracesOnlineInGame();
 	void readTracesOffline();
-	void readTracesOfflineOnWriting();
+	void readTracesOfflineInGame();
 	void exportTraceToXml();
 	bool reachLastStart();
 	
-	static sp_trace handleLine(const std::string& s);
-	static WrongCall* handleError(Call::ErrorType err, const std::vector<std::string>& tokens, int ind);
-	
 	//Online
-	bool doCheckOnline(sp_trace spt);
-	bool handleTraceOnline(const sp_trace& spt, bool onWriting = false);
+	bool doCheckOnline(Trace::sp_trace spt);
+	bool handleTraceOnline(const Trace::sp_trace& spt);
 	void sequenceDetected();
-	bool searchSequence(const sp_trace& spt);
+	bool searchSequence(const Trace::sp_trace& spt);
 	void findSequence();
 	void compactHistory();
 	
 	//Offline
-	void handleTraceOffline(const sp_trace& spt);
+	void handleTraceOffline(const Trace::sp_trace& spt);
 	bool checkFeasibility(unsigned int min_length, unsigned int ind_start);
 	void detectSequences();
 

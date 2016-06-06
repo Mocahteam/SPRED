@@ -4,11 +4,11 @@
 int main () {
 	/* define target position */
 	PP_Pos p;
-	p.x = 1920.0;
+	p.x = 1800.0;
 	p.y = 1279.0;
 	PP_Open(); /* open the Prog&Play API */
 	PP_Unit_ActionOnPosition(PP_GetUnitAt(MY_COALITION, 0), MOVE, p);
 	/* close the Prog&Play API */
-	PP_Close();
+	// PP_Close();
 	return 0;
 }

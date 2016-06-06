@@ -1,0 +1,14 @@
+mission name : Mission6
+mission start time : 1463494561
+	execution start time : 1463494565
+		PP_Open
+		Sequence < 11:1 >
+			PP_GetNumUnits 0 - 11
+			PP_GetUnitAt 0 ? - ?
+			PP_Unit_GetType ?_? - ?
+		PP_Unit_ActionOnPosition 2179_2 10 256 811
+		PP_GetNumUnits 0 - 11
+		PP_Close
+	execution end time : 1463494565
+status : won
+mission end time : 1463494576

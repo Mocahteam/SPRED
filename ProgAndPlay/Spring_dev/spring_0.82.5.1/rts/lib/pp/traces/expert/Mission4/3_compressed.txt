@@ -1,0 +1,15 @@
+mission name : Mission4
+mission start time : 1463494861
+	execution start time : 1463494866
+		PP_Open
+		Sequence < 2:1 >
+			PP_GetNumUnits 0 - 2
+			PP_GetUnitAt 0 ? - ?
+			Sequence < 1:0.5 2:0.5 >
+				PP_Unit_GetType ?_? - ?
+			PP_Unit_ActionOnPosition ?_? 10 ? ?
+		PP_GetNumUnits 0 - 2
+		PP_Close
+	execution end time : 1463494866
+status : won
+mission end time : 1463494877

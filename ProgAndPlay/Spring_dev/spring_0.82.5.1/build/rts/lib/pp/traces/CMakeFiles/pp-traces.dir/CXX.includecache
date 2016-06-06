@@ -2491,8 +2491,6 @@ Sequence.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/CallDef.h
-stdarg.h
--
 cmath
 -
 boost/lexical_cast.hpp
@@ -2519,9 +2517,13 @@ boost/lexical_cast.hpp
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.cpp
 Sequence.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
+TracesAnalyser.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 iostream
+-
+sstream
 -
 stack
 -
@@ -2530,6 +2532,8 @@ vector
 algorithm
 -
 map
+-
+cmath
 -
 boost/lexical_cast.hpp
 -
@@ -2557,16 +2561,34 @@ boost/make_shared.hpp
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.cpp
 TracesAnalyser.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.h
+TracesParser.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesParser.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.h
+iostream
+-
+cstdlib
+-
+ctime
+-
 dirent.h
 -
 vector
 -
-iostream
+map
 -
-TracesParser.h
-C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesParser.h
+stack
+-
+limits
+-
+algorithm
+-
+rapidxml-1.13/rapidxml.hpp
+-
+Trace.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
+Call.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Call.h
 Sequence.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 Event.h

@@ -1,0 +1,13 @@
+mission name : Mission3
+mission start time : 1463494970
+	execution start time : 1463494974
+		PP_Open
+		PP_GetUnitAt 0 0 - 1776
+		Sequence < 6497:1 >
+			PP_GetNumUnits 2 - 0
+		PP_GetUnitAt 2 0 - 843
+		PP_Unit_ActionOnUnit 1776_4 20 843_4
+		PP_Close
+	execution end time : 1463494977
+status : won
+mission end time : 1463494984
