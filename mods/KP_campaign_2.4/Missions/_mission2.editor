@@ -3,41 +3,25 @@
 		{
 			"type":"Rectangle",
 			"blue":0.80613851547241,
-			"x2":1192,
-			"z1":1104,
-			"z2":1312,
-			"x1":856,
+			"x2":1144,
+			"z1":1680,
+			"z2":1888,
+			"x1":904,
 			"marker":false,
-			"name":"spawn",
+			"name":"Arrival",
 			"green":0.55862176418304,
+			"alwaysInView":false,
+			"shown":true,
 			"id":1,
-			"shown":true,
-			"alwaysInView":false,
-			"red":0.51526319980621
-		},
-		{
-			"type":"Rectangle",
-			"blue":0.80613851547241,
-			"x2":1256,
-			"z1":1664,
-			"z2":1896,
-			"x1":816,
-			"marker":false,
-			"name":"randomMove",
-			"green":0.55862176418304,
-			"id":2,
-			"shown":true,
-			"alwaysInView":false,
 			"red":0.51526319980621
 		} 
 	],
 	"allyteams":{
 		"1":[
-			0,
-			2 
+			0 
 		],
 		"2":[
-			0 
+			 
 		],
 		"3":[
 			 
@@ -67,9 +51,9 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 3\\n \\n \\nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 2\\n \\n \\nLe rapport que vous aviez reçu était correct mais l'OCTET (BYTE) ne se trouve plus au point de ralliement prévu. Des traces vous indiquent qu'il s'est éloigné de 927 unités vers l'ouest et 513 unités vers le sud .\\n \\nDéplacez votre BIT dans ces directions pour rattraper ce BYTE\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
 		"minimap":"disabled",
-		"name":"_mission3",
+		"name":"_mission2",
 		"widgets":[
 			{
 				"desc":"Teach you to play the game,
@@ -244,132 +228,88 @@
 				"active":false
 			} 
 		],
-		"briefing":"Mission 3\n \n \nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"briefing":"Mission 2\n \n \nLe rapport que vous aviez reçu était correct mais l'OCTET (BYTE) ne se trouve plus au point de ralliement prévu. Des traces vous indiquent qu'il s'est éloigné de 927 unités vers l'ouest et 513 unités vers le sud .\n \nDéplacez votre BIT dans ces directions pour rattraper ce BYTE\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
 		"mouse":"disabled",
-		"saveName":"_mission3",
+		"saveName":"_mission2",
 		"autoHeal":"disabled"
 	},
 	"events":[
 		{
 			"actions":[
 				{
-					"id":6,
-					"type":"unit_orderTarget",
-					"name":"Action6",
+					"id":4,
+					"type":"cameraAuto",
+					"name":"cam_aut",
 					"params":{
-						"target":9055,
-						"command":20,
-						"unit":14439
+						"toggle":"disabled"
 					}
-				} 
-			],
-			"name":"firstAgression",
-			"actionTotal":1,
-			"id":3,
-			"conditions":[
+				},
 				{
-					"id":5,
-					"type":"start",
-					"name":"Condition5",
-					"params":[
-						 
-					]
-				} 
-			],
-			"conditionTotal":1,
-			"trigger":""
-		},
-		{
-			"actions":[
-				{
-					"id":7,
-					"type":"createUnitsInZone",
-					"name":"Action7",
+					"id":4,
+					"type":"centerCamera",
+					"name":"Action4",
 					"params":{
-						"team":2,
-						"number":1,
-						"unitType":"bit",
-						"zone":1
+						"position":{
+							"x":1004,
+							"z":1785
+						}
+					}
+				},
+				{
+					"id":8,
+					"type":"bubbleUnit",
+					"name":"Action8",
+					"params":{
+						"message":[
+							"Trouvé !",
+							"Enfin !" 
+						],
+						"time":1,
+						"unit":7921
 					}
 				},
 				{
 					"id":9,
-					"type":"unit_orderTarget",
+					"type":"wait",
 					"name":"Action9",
 					"params":{
-						"command":20,
-						"target":9055,
-						"unit":"Action7"
-					}
-				} 
-			],
-			"name":"Moreagressions",
-			"actionTotal":2,
-			"id":4,
-			"conditions":[
-				{
-					"id":6,
-					"type":"elapsedTime",
-					"name":"Condition6",
-					"params":{
-						"number":{
-							"number":4,
-							"comparison":"atleast"
-						}
+						"time":3
 					}
 				},
 				{
-					"id":14,
-					"type":"elapsedTime",
-					"name":"conditiontonullifythisevent",
-					"params":{
-						"number":{
-							"number":1,
-							"comparison":"atmost"
-						}
-					}
-				} 
-			],
-			"conditionTotal":2,
-			"trigger":""
-		},
-		{
-			"actions":[
-				{
-					"id":8,
+					"id":10,
 					"type":"bubbleUnit",
-					"name":"Action_message",
+					"name":"Action10",
 					"params":{
 						"message":[
-							"Merci !" 
+							"Merci d'être venu ! Des armées veulent ma peau !" 
 						],
-						"time":5,
-						"unit":9055
+						"time":4,
+						"unit":253
 					}
 				},
 				{
-					"id":13,
+					"id":0,
 					"type":"win",
-					"name":"Action13",
+					"name":"Action0",
 					"params":{
 						"team":0,
-						"outputState":"ennemyKilled"
+						"outputState":"goodSPOT"
 					}
 				} 
 			],
-			"name":"Event5",
-			"actionTotal":2,
-			"id":5,
+			"actionTotal":6,
+			"name":"Event0",
+			"repetition":false,
+			"id":0,
 			"conditions":[
 				{
-					"id":7,
-					"type":"team_dead",
-					"name":"Condition7",
+					"id":0,
+					"type":"unit_zone",
+					"name":"Condition0",
 					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"team":2
+						"unit":7921,
+						"zone":1
 					}
 				} 
 			],
@@ -379,21 +319,123 @@
 		{
 			"actions":[
 				{
-					"id":10,
+					"id":1,
+					"type":"bubbleUnit",
+					"name":"Action1",
+					"params":{
+						"message":[
+							"gogogo",
+							"cette fois ci c'est la bonne",
+							"en route simone" 
+						],
+						"time":2,
+						"unit":7921
+					}
+				},
+				{
+					"id":3,
+					"type":"setBooleanVariable",
+					"name":"Action3",
+					"params":{
+						"boolean":"true",
+						"variable":"hasmoved"
+					}
+				} 
+			],
+			"name":"ismoving",
+			"actionTotal":2,
+			"id":1,
+			"conditions":[
+				{
+					"id":1,
+					"type":"unit_order",
+					"name":"Condition1",
+					"params":{
+						"command":10,
+						"unit":7921
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"actions":[
+				{
+					"id":5,
+					"type":"bubbleUnit",
+					"name":"Action5",
+					"params":{
+						"message":[
+							"Je doute être au bon endroit",
+							"encore un échec...." 
+						],
+						"time":5,
+						"unit":7921
+					}
+				},
+				{
+					"id":4,
+					"type":"lose",
+					"name":"los",
+					"params":{
+						"team":0,
+						"outputState":"wrong"
+					}
+				} 
+			],
+			"name":"wrongspot",
+			"actionTotal":2,
+			"id":2,
+			"conditions":[
+				{
+					"id":2,
+					"type":"booleanVariable",
+					"name":"Condition2",
+					"params":{
+						"variable":"hasmoved"
+					}
+				},
+				{
+					"id":3,
+					"type":"unit_order",
+					"name":"Condition3",
+					"params":{
+						"command":10,
+						"unit":7921
+					}
+				},
+				{
+					"id":4,
+					"type":"unit_zone",
+					"name":"Condition0",
+					"params":{
+						"zone":1,
+						"unit":7921
+					}
+				} 
+			],
+			"conditionTotal":3,
+			"trigger":"Condition2 and not Condition3 and not Condition0"
+		},
+		{
+			"actions":[
+				{
+					"id":7,
 					"type":"lose",
 					"name":"endbydead",
 					"params":{
 						"team":0,
-						"outputState":"endByDead_3"
+						"outputState":"endByDead_2"
 					}
 				} 
 			],
 			"name":"teamOIsDead",
 			"actionTotal":1,
-			"id":6,
+			"id":3,
 			"conditions":[
 				{
-					"id":10,
+					"id":6,
 					"type":"team_dead",
 					"name":"team0isdead",
 					"params":{
@@ -408,153 +450,70 @@
 			"trigger":""
 		},
 		{
-			"trigger":"Condition11 and not Condition13",
+			"comment":"",
+			"trigger":"Condition7 and not Condition8",
 			"conditionTotal":2,
-			"repetition":true,
-			"name":"behaviorUnderattack",
-			"actionTotal":4,
-			"repetitionTime":"4",
-			"conditions":[
-				{
-					"id":11,
-					"type":"unit_underAttack",
-					"name":"Condition11",
-					"params":{
-						"unit":9055
-					}
-				},
-				{
-					"id":13,
-					"type":"unit_order",
-					"name":"Condition13",
-					"params":{
-						"command":10,
-						"unit":9055
-					}
-				} 
-			],
-			"actions":[
-				{
-					"id":11,
-					"type":"bubbleUnit",
-					"name":"Action11",
-					"params":{
-						"message":[
-							"Aidez moi !!!",
-							"S'il vous plait...",
-							"AAaarghh",
-							"J'ai besoin d'aide",
-							"Que faites vous ?",
-							"Je ne tiendrai\npas longtemps",
-							"Mon energie diminue",
-							"Il m'en met\nplein la gueule",
-							"Noooonnn" 
-						],
-						"time":3,
-						"unit":9055
-					}
-				},
-				{
-					"id":12,
-					"type":"unit_orderPosition",
-					"name":"Action12",
-					"params":{
-						"command":10,
-						"position":2,
-						"unit":9055
-					}
-				},
-				{
-					"id":14,
-					"type":"wait",
-					"name":"Action14",
-					"params":{
-						"time":3
-					}
-				},
-				{
-					"id":15,
-					"type":"bubbleUnit",
-					"name":"Action15",
-					"params":{
-						"message":[
-							"Muhahah",
-							"C'est presque trop facile !",
-							"Tu peux courir ; mais m'échapper tu ne peux",
-							"Quelle aubaine !",
-							"C'est bientôt la fin cher ami",
-							"Je suis un tueur né",
-							"Je me délecte de ton désespoir",
-							"Où est ton berger petite brebis égarée ?" 
-						],
-						"time":2,
-						"unit":14439
-					}
-				} 
-			],
-			"id":7
-		},
-		{
-			"actions":[
-				{
-					"id":16,
-					"type":"unit_order",
-					"name":"Action16",
-					"params":{
-						"command":45,
-						"unit":7090,
-						"parameters":[
-							0 
-						]
-					}
-				} 
-			],
-			"actionTotal":1,
-			"name":"noAttack",
+			"name":"Event4",
 			"repetition":false,
-			"id":8,
+			"actionTotal":1,
 			"conditions":[
 				{
-					"id":15,
+					"id":7,
 					"type":"start",
-					"name":"Condition15",
+					"name":"Condition7",
 					"params":[
 						 
 					]
-				} 
-			],
-			"conditionTotal":1,
-			"trigger":""
-		},
-		{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"allydead",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[
+				},
 				{
-					"id":16,
-					"type":"unit_dead",
-					"name":"Condition16",
+					"id":8,
+					"type":"booleanVariable",
+					"name":"Condition8",
 					"params":{
-						"unit":9055
+						"variable":"hasmoved"
 					}
 				} 
 			],
 			"actions":[
 				{
-					"id":17,
-					"type":"lose",
-					"name":"Action17",
+					"id":11,
+					"type":"script",
+					"name":"Action11",
 					"params":{
-						"team":0,
-						"outputState":"allyDead"
+						"script":"writeCompassOnUnit(armySpring[groupOfUnits[\"team_0\"][1]])"
 					}
 				} 
 			],
-			"id":9
+			"id":4
+		},
+		{
+			"comment":"",
+			"trigger":"Condition9",
+			"conditionTotal":1,
+			"name":"Event5",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":9,
+					"type":"booleanVariable",
+					"name":"Condition9",
+					"params":{
+						"variable":"hasmoved"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":12,
+					"type":"script",
+					"name":"Action12",
+					"params":{
+						"script":"Spring.MarkerErasePosition(Spring.GetUnitPosition(armySpring[groupOfUnits[\"team_0\"][1]]))"
+					}
+				} 
+			],
+			"id":5
 		} 
 	],
 	"variables":[
@@ -577,7 +536,7 @@
 			"control":"computer"
 		},
 		"2":{
-			"enabled":true,
+			"enabled":false,
 			"color":{
 				"green":0,
 				"blue":0,
@@ -673,42 +632,29 @@
 	"units":[
 		{
 			"type":"byte",
-			"id":9055,
+			"id":253,
 			"position":{
 				"y":130,
-				"x":1024,
-				"z":1816
+				"x":1010,
+				"z":1723
 			},
 			"orientation":0,
 			"autoHeal":"global",
-			"hp":40,
+			"hp":100,
 			"team":1
 		},
 		{
 			"type":"bit",
-			"id":7090,
+			"id":7921,
 			"position":{
 				"y":116,
-				"x":1034,
-				"z":1942
-			},
-			"orientation":-2.25341796875,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":14439,
-			"position":{
-				"y":270.39453125,
-				"x":1032,
-				"z":1226
+				"x":1804,
+				"z":1070
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
-			"team":2
+			"team":0
 		} 
 	]
 }

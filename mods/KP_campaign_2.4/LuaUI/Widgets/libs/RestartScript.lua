@@ -1,4 +1,5 @@
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99) -- nil test is made because prior to v92 Game.Version is an ugly string (e.g 0.82)
 
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
@@ -125,7 +126,10 @@ local function createFromScratch(editorTables)
         local sectionName="AI"..tostring(indexIA)
         indexIA=indexIA+1
         local name=teamInformations.name or string.lower(sectionName)
-        local shortName=teamInformations.shortname or "NullAI"
+        local shortName="NullAI"
+        if(teamInformations.ai~=nil and teamInformations.ai~="")then
+          shortName=teamInformations.ai
+        end
         
         local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
         file=writeAttributesAndSection(file,sectionName, 1, tableController) 
@@ -155,8 +159,12 @@ end
 
 function restartWithEditorFile(editorTables)
   local txtFileContent=createFromScratch(editorTables)
-  Spring.Echo(txtFileContent)--comment the next line to see this output
-  Spring.Restart("-s",txtFileContent)--(this line, yes)
+  Spring.Echo(txtFileContent)--comment the next lines to see this output
+  if(reloadAvailable) then
+    Spring.Reload(txtFileContent) --(this line, yes)
+  else
+    Spring.Restart("-s",txtFileContent)--( and this line too)
+  end
 end
 
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
@@ -169,7 +177,8 @@ function genericRestart(missionName,operations,contextFile)
         local tableEditor=json.decode(sf)
         local txtFileContent=createFromScratch(tableEditor)
         updatedTxtFileContent=updateValues(txtFileContent, operations)
-        Spring.Restart("-s",updatedTxtFileContent)
+        --Spring.Restart("-s",updatedTxtFileContent)
+        Spring.Reload(updatedTxtFileContent)
      else
         DoTheRestart("Missions/"..Game.modShortName.."/"..missionName.."txt", operations)  
      end
@@ -183,10 +192,34 @@ function genericRestart(missionName,operations,contextFile)
       Spring.Echo("decoded with success")
       local txtFileContent=createFromScratch(tableEditor)
       updatedTxtFileContent=updateValues(txtFileContent, operations)
-      Spring.Restart("-s",updatedTxtFileContent)
+      --Spring.Restart("-s",updatedTxtFileContent)
+        if(reloadAvailable) then
+          Spring.Reload(updatedTxtFileContent) --(this line, yes)
+        else
+          Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+        end
     else
       Spring.Echo("Warning, pbm in restart script")
     end   
   end
 end   
+
+
+function restartToConnect(playerName,IP)
+  local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
+  local file=writeAttributesAndSection("","GAME", 0, table2)
+  Spring.Reload(file)--(this line, yes)
+  --  Spring.Restart("-s",file)--(this line, yes)
+--[[
+[GAME]
+{
+  HostIP=132.227.207.137;
+  Hostport=8451;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
+  IsHost=0;           // 0: no server will be started in this instance
+                      // 1: start a server
+  
+  MyPlayerName=Player2; // our ingame-name (needs to match one players Name= field)
+}
+--]]
+end 
       
