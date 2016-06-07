@@ -232,6 +232,7 @@ function gadget:GameFrame( frameNumber )
 			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
 			loadMap = false
 		end
+	-- INITIALIZE COMMANDS LIST
 	elseif initialize then
 		initialize = false
 		local cmdList = {}

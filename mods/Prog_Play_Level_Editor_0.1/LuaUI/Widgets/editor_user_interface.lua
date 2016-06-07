@@ -17,17 +17,9 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
--- \\\\ TODO LIST ////
--- \/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\
--- Ajouter nom ia à coté d'un computer forces
--- Possibilités de modifier le terrain (voir vidéo)
--- Traduction des strings des déclencheurs
--- Personnalisation de l'éditeur (raccourcis etc.)
--- /\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\//\/
-
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
---			Variables
+--			UI Variables
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -261,6 +253,7 @@ function initChili() -- Initialize Chili variables
 	Chili = WG.Chili
 	Screen0 = Chili.Screen0
 end
+
 function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	local window = Chili.Window:New{
 		parent = _parent,
@@ -273,6 +266,7 @@ function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	}
 	return window
 end
+
 function addPanel(_parent, _x, _y, _w, _h)
 	local panel = Chili.Panel:New{
 		parent = _parent,
@@ -285,6 +279,7 @@ function addPanel(_parent, _x, _y, _w, _h)
 	}
 	return panel
 end
+
 function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	local button = Chili.Button:New {
 		parent = _parent,
@@ -301,6 +296,7 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 	table.insert(UIelements, button)
 	return button
 end
+
 function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 	local label = Chili.Label:New {
 		parent = _parent,
@@ -320,6 +316,7 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 	table.insert(UIelements, label)
 	return label
 end
+
 function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 	local textBox = Chili.TextBox:New {
 		parent = _parent,
@@ -337,6 +334,7 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 	table.insert(UIelements, textBox)
 	return textBox
 end
+
 function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 	local image = Chili.Image:New {
 		parent = _parent,
@@ -350,6 +348,7 @@ function addImage(_parent, _x, _y, _w, _h, imagePath, _keepAspect, _color)
 	}
 	return image
 end
+
 function addRect(_parent, x1, y1, x2, y2, _color)
 	local rect = Chili.Image:New {
 		parent = _parent,
@@ -363,6 +362,7 @@ function addRect(_parent, x1, y1, x2, y2, _color)
 	}
 	return rect
 end
+
 function addScrollPanel(_parent, _x, _y, _w, _h)
 	local scrollPanel = Chili.ScrollPanel:New {
 		parent = _parent,
@@ -373,6 +373,7 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 	}
 	return scrollPanel
 end
+
 function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	local editBox = Chili.EditBox:New {
 		parent = _parent,
@@ -395,6 +396,7 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	table.insert(UIelements, editBox)
 	return editBox
 end
+
 function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 	local checkBox = Chili.Checkbox:New {
 		parent = _parent,
@@ -410,6 +412,7 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 	table.insert(UIelements, checkBox)
 	return checkBox
 end
+
 function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
 	local trackbar = Chili.Trackbar:New {
 		parent = _parent,
@@ -424,6 +427,7 @@ function addTrackbar(_parent, _x, _y, _w, _h, _min, _max, _value, _step)
 	}
 	return trackbar
 end
+
 function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 	local comboBox = Chili.ComboBox:New {
 		parent = _parent,
@@ -440,6 +444,7 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 	table.insert(UIelements, comboBox)
 	return comboBox
 end
+
 function removeElements(parent, elementsTable, dispose) -- Remove UI elements from a parent and eventually dispose them
 	for k, e in pairs(elementsTable) do
 		parent:RemoveChild(e)
@@ -455,7 +460,7 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function clearUI() -- remove every windows except topbar and clear current selection
+function clearUI() -- remove every windows except topbar and clear current selection (units and events)
 	for key, w in pairs(windows) do
 		if (key ~= "topBar") then
 			Screen0:RemoveChild(w)
@@ -486,12 +491,14 @@ function clearUI() -- remove every windows except topbar and clear current selec
 		windows['zonesAttributes'] = nil
 	end
 end
+
 function clearTemporaryWindows()
 	Screen0:RemoveChild(unitContextualMenu)
 	Screen0:RemoveChild(unitGroupsAttributionWindow)
 	Screen0:RemoveChild(unitGroupsRemovalWindow)
 	Screen0:RemoveChild(unitAttributesWindow)
 end
+
 function fileFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
 		clearUI()
@@ -501,6 +508,7 @@ function fileFrame()
 		Screen0:AddChild(windows["fileWindow"])
 	end
 end
+
 function unitFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		clearUI()
@@ -513,6 +521,7 @@ function unitFrame()
 		Screen0:AddChild(windows["unitListWindow"])
 	end
 end
+
 function zoneFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
 		clearUI()
@@ -525,6 +534,7 @@ function zoneFrame()
 		zonesAttributesButton:InvalidateSelf()
 	end
 end
+
 function forcesFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		clearUI()
@@ -539,6 +549,7 @@ function forcesFrame()
 		end
 	end
 end
+
 function triggerFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		clearUI()
@@ -550,6 +561,7 @@ function triggerFrame()
 		editVariablesButton:InvalidateSelf()
 	end
 end
+
 function mapSettingsFrame()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		clearUI()
@@ -584,6 +596,7 @@ function mapSettingsFrame()
 		widgetsButton:InvalidateSelf()
 	end
 end
+
 function testLevel()
 
 end
@@ -598,6 +611,7 @@ function clearForceWindow()
 	windows['forceWindow']:RemoveChild(forcesWindows.teamConfigWindow)
 	windows['forceWindow']:RemoveChild(forcesWindows.allyTeamsWindow)
 end
+
 function teamConfig() -- Show the team config panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
@@ -625,6 +639,7 @@ function teamConfig() -- Show the team config panel
 		teamAIElements.teamAIEditBoxes[t]:SetText(teamAIElements.teamAI[t])
 	end
 end
+
 function allyTeam() -- Show the allyteam panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
@@ -648,6 +663,7 @@ function hideDefaultGUI()
 	-- a hitbox remains for the minimap, unless you do this
 	gl.ConfigMiniMap(0,0,0,0)
 end
+
 function initTopBar()
 	-- Top bar
 	windows['topBar'] = addWindow(Screen0, '0%', '0%', '100%', '5%')
@@ -662,6 +678,7 @@ function initTopBar()
 	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
+
 function initWindows()
 	initFileWindow()
 	initForcesWindow()
@@ -671,6 +688,7 @@ function initWindows()
 	initTriggerWindow()
 	initMapSettingsWindow()
 end
+
 function initFileWindow()
 	windows['fileWindow'] = addWindow(Screen0, '0%', '5%', '10%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '5%', EDITOR_FILE, 20, "center", nil, "center")
@@ -682,6 +700,7 @@ function initFileWindow()
 	fileButtons['quit'].backgroundColor = { 0.8, 0, 0.2, 1 }
 	fileButtons['quit'].focusColor = { 0.8, 0.6, 0.2, 1 }
 end
+
 function initUnitWindow()
 	-- Left Panel
 	windows['unitWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -732,12 +751,14 @@ function initUnitWindow()
 	local closeButton = addButton(windows["unitGroupsWindow"], "95%", "0%", "5%", "5%", EDITOR_X, closeGroupsWindow)
 	closeButton.font.color = {1, 0, 0, 1}
 end
+
 function initUnitContextualMenu()
 	unitContextualMenu = addWindow(nil, 0, 0, 200, 200)
 	addButton(unitContextualMenu, '0%', "0%", '100%', tostring(100/3).."%", EDITOR_UNITS_EDIT_ATTRIBUTES_EDIT, showUnitAttributes)
 	addButton(unitContextualMenu, '0%', tostring(100/3).."%", '100%', tostring(100/3).."%", EDITOR_UNITS_GROUPS_ADDTO, showUnitGroupsAttributionWindow)
 	addButton(unitContextualMenu, '0%', tostring(200/3).."%", '100%', tostring(100/3).."%", EDITOR_UNITS_GROUPS_REMOVEFROM, showUnitGroupsRemovalWindow)
 end
+
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
 	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', EDITOR_ZONES)
@@ -766,6 +787,7 @@ function initZoneWindow()
 	
 	zonesAttributesButton = addButton(windows['zoneWindow'], '0%', '90%', '100%', '10%', EDITOR_ZONES_ATTRIBUTES, showZonesSpecialAttributesWindow)
 end
+
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
 	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_TEAMCONFIG, teamConfig)
@@ -867,6 +889,7 @@ function initForcesWindow()
 		allyTeamsSize[team] = 0
 	end
 end
+
 function initTriggerWindow()
 	-- Left Panel
 	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
@@ -1015,6 +1038,7 @@ function initTriggerWindow()
 	variablesScrollPanel = addScrollPanel(windows["variablesWindow"], '2%', '7%', '96%', '91%')
 	newVariableButton = addButton(variablesScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
+
 function initMapSettingsWindow()
 	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '25%', '60%', '50%', true)
 	local closeButton = addButton(windows['mapSettingsWindow'], '95%', '0%', '5%', '7%', "X", mapSettingsFrame)
@@ -1111,6 +1135,7 @@ function initMapSettingsWindow()
 	
 	widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
+
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
@@ -1120,6 +1145,7 @@ function initUnitFunctions() -- Creates a function for every unitState to change
 		end
 	end
 end
+
 function initTeamFunctions() -- Creates a function for every teamState to change state and handle selection feedback
 	for k, t in pairs(teamStateMachine.states) do
 		teamFunctions[t] = function()
@@ -1151,6 +1177,7 @@ function updateUnitWindow()
 		end
 	end
 end
+
 function applyChangesToSelectedUnits() -- Apply changes to units attributes
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
@@ -1171,6 +1198,7 @@ function applyChangesToSelectedUnits() -- Apply changes to units attributes
 	end
 	clearTemporaryWindows()
 end
+
 function drawSelectionRect() -- Draw the selection feedback rectangle
 	if selectionRect ~= nil then
 		Screen0:RemoveChild(selectionRect)
@@ -1204,6 +1232,7 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 		selectionRect = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
 end
+
 function previewUnit()-- Draw units before placing them
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() ~= unitStateMachine.states.UNITGROUPS and unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and not Screen0.hoveredControl then
 		local mx, my = Spring.GetMouseState()
@@ -1223,6 +1252,7 @@ function previewUnit()-- Draw units before placing them
 		end
 	end
 end
+
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
 	clearTemporaryWindows()
 	local unitSelection = Spring.GetSelectedUnits()
@@ -1280,6 +1310,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	-- Apply
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
+
 function showUnitsInformation() -- Show information about selected and hovered units
 	gl.BeginText()
 	local unitSelection = Spring.GetSelectedUnits()
@@ -1297,6 +1328,7 @@ function showUnitsInformation() -- Show information about selected and hovered u
 	end
 	gl.EndText()
 end
+
 function showUnitGroupsAttributionWindow() -- Show a small window allowing to add the current selection to an existing or new group
 	clearTemporaryWindows()
 	unitGroupsAttributionWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
@@ -1323,6 +1355,7 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	end
 	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '80%', count * 40, '20%', 40, EDITOR_OK, newGroup)
 end
+
 function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove the current selection from a group
 	clearTemporaryWindows()
 	unitGroupsRemovalWindow = addWindow(Screen0, '75%', '5%', '10%', '40%', true)
@@ -1360,6 +1393,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 		addTextBox(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%', text, 20, {1, 0, 0, 1})
 	end
 end
+
 function updateSelectTeamButtons()
 	if updateTeamButtons then
 		removeElements(windows["unitWindow"], teamButtons, true)
@@ -1386,6 +1420,7 @@ function updateSelectTeamButtons()
 		updateTeamButtons = false
 	end
 end
+
 function updateUnitList(forceUpdate) -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal or forceUpdate then
@@ -1424,6 +1459,7 @@ function updateUnitList(forceUpdate) -- When a unit is created, update the two u
 		unitTotal = units.n
 	end
 end
+
 function updateGroupListUnitList()
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitGroupsUnitTotal then
@@ -1459,6 +1495,7 @@ function updateGroupListUnitList()
 		unitGroupsUnitTotal = units.n
 	end
 end
+
 function updateUnitHighlights() -- Visual feedback on the units list to see what units are selected
 	local units = Spring.GetAllUnits()
 	for i, u in ipairs(units) do
@@ -1473,6 +1510,7 @@ function updateUnitHighlights() -- Visual feedback on the units list to see what
 		end
 	end
 end
+
 function updateUnitGroupPanels() -- Update groups when a group is created/removed or a unit is added to/removed from a group
 	-- Check if update is mandatory
 	local updatePanels = false
@@ -1580,6 +1618,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		end
 	end
 end
+
 function showGroupsWindow()
 	Screen0:AddChild(windows["unitGroupsWindow"])
 	for k, p in pairs(groupPanels) do
@@ -1590,6 +1629,7 @@ function showGroupsWindow()
 	updateGroupListUnitList()
 	unitStateMachine:setCurrentState(unitStateMachine.states.UNITGROUPS)
 end
+
 function addUnitToGroup(group, unit)
 	if group ~= nil then
 		if not findInTable(group.units, unit) then
@@ -1598,6 +1638,7 @@ function addUnitToGroup(group, unit)
 		end
 	end
 end
+
 function addSelectedUnitsToGroup(group)
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
@@ -1605,6 +1646,7 @@ function addSelectedUnitsToGroup(group)
 	end
 	saveState()
 end
+
 function addChosenUnitsToSelectedGroups() -- Add selected units to the selected groups (in the groups frame)
 	for groupKey, groupButton in pairs(selectGroupButtons) do
 		if groupButton.state.chosen then
@@ -1623,6 +1665,7 @@ function addChosenUnitsToSelectedGroups() -- Add selected units to the selected 
 	end
 	saveState()
 end
+
 function removeSelectedUnitsFromGroup(group)
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
@@ -1630,6 +1673,7 @@ function removeSelectedUnitsFromGroup(group)
 	end
 	saveState()
 end
+
 function removeUnitFromGroup(group, unit)
 	local units = group.units
 	for i, u in ipairs(units) do
@@ -1640,6 +1684,7 @@ function removeUnitFromGroup(group, unit)
 	end
 	saveState()
 end
+
 function addUnitGroup(name)
 	local unitSelection = Spring.GetSelectedUnits()
 	unitGroups[groupNumber] = {}
@@ -1655,6 +1700,7 @@ function addUnitGroup(name)
 	groupNumber = groupNumber + 1
 	saveState()
 end
+
 function addEmptyUnitGroup()
 	unitGroups[groupNumber] = {}
 	unitGroups[groupNumber].name = EDITOR_UNITS_GROUPS_DEFAULT_NAME..groupNumber
@@ -1666,6 +1712,7 @@ function addEmptyUnitGroup()
 	groupNumber = groupNumber + 1
 	saveState()
 end
+
 function deleteUnitGroup(id)
 	unitGroups[id] = nil
 	saveState()
@@ -1704,6 +1751,7 @@ function computeZoneWorldCoords()
 		end
 	end
 end
+
 function drawZoneRect() -- Draw the zone feedback rectangle
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
 		local _, _, leftPressed = Spring.GetMouseState()
@@ -1717,6 +1765,7 @@ function drawZoneRect() -- Draw the zone feedback rectangle
 		end
 	end
 end
+
 function drawZoneDisk() -- Draw the zone feedback ellipsis
 	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
 		local _, _, leftPressed = Spring.GetMouseState()
@@ -1732,6 +1781,7 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 		end
 	end
 end
+
 function displayZones()
 	for i, z in ipairs(zoneList) do -- render every other zones that are displayed
 		if z.shown and z.type == "Rectangle" then
@@ -1745,6 +1795,7 @@ function displayZones()
 		end
 	end
 end
+
 function displaySelectedZoneAnchors()
 	if selectedZone ~= nil then -- if a zone is selected, render its border
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
@@ -1758,6 +1809,7 @@ function displaySelectedZoneAnchors()
 		end
 	end
 end
+
 function showZoneInformation() -- Show each displayed zone name and top-left/bottom-right positions of selected zone
 	gl.BeginText()
 	if selectedZone ~= nil then
@@ -1804,6 +1856,7 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 	end
 	gl.EndText()
 end
+
 function updateZoneInformation() -- Change the name and the shown state of a zone
 	for i, z in ipairs(zoneList) do
 		if z.name ~= zoneBoxes[z.id].editBox.text then
@@ -1812,6 +1865,7 @@ function updateZoneInformation() -- Change the name and the shown state of a zon
 		z.shown = zoneBoxes[z.id].checkbox.checked
 	end
 end
+
 function getClickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
 	local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 	if var ~= nil then
@@ -1834,6 +1888,7 @@ function getClickedZone(mx, my) -- Returns the clicked zone if it exists, else n
 	end
 	return nil
 end
+
 function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	local side = ""
 	if selectedZone.type == "Rectangle" then
@@ -1883,6 +1938,7 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 	end
 	return side
 end
+
 function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 	if dx == 0 and dz == 0 then return end
 	if selectedZone.type == "Rectangle" then
@@ -2052,6 +2108,7 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 		end
 	end
 end
+
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
 	if totalZones ~= #zoneList then
 		for k, zb in pairs(zoneBoxes) do
@@ -2073,6 +2130,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		showZonesSpecialAttributesWindow()
 	end
 end
+
 function showZonesSpecialAttributesWindow() -- Show the window to change some special attributes concerning zones
 	if windows['zonesAttributes'] then -- if the window is already opened, close it
 		zonesAttributesButton.state.chosen = false
@@ -2154,6 +2212,7 @@ function updateAllyTeamPanels()
 		updateAllyTeam = false
 	end
 end
+
 function addTeamToSelectedAllyTeam(team)
 	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
 		table.insert(allyTeams[selectedAllyTeam], team)
@@ -2161,6 +2220,7 @@ function addTeamToSelectedAllyTeam(team)
 	end
 	saveState()
 end
+
 function removeTeamFromAllyTeam(allyTeam, team)
 	local at = allyTeams[allyTeam]
 	for i, t in ipairs(at) do
@@ -2172,11 +2232,13 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	table.sort(at)
 	saveState()
 end
+
 function removeTeamFromTables(team)
 	for k, at in pairs(allyTeams) do
 		removeTeamFromAllyTeam(k, team)
 	end
 end
+
 function updateTeamsWindows()
 	local enabledTeamsCount = 0 -- count the number of enabled teams
 	for k, enabled in pairs(enabledTeams) do
@@ -2192,6 +2254,7 @@ function updateTeamsWindows()
 		enabledTeamsTotal = enabledTeamsCount
 	end
 end
+
 function updateTeamConfigPanels()
 	if updateTeamConfig then
 		for k, l in pairs(teamControlLabels) do
@@ -2275,6 +2338,7 @@ function createNewEvent()
 	editEvent(#events) -- edit this event
 	saveState()
 end
+
 function editEvent(i)
 	removeSecondWindows()
 	removeThirdWindows()
@@ -2290,6 +2354,7 @@ function editEvent(i)
 		currentEvent = nil
 	end
 end
+
 function removeEvent(i)
 	table.remove(events, i)
 	removeSecondWindows() -- close windows to prevent bugs
@@ -2297,6 +2362,7 @@ function removeEvent(i)
 	currentEvent = nil
 	saveState()
 end
+
 function createNewCondition()
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2311,6 +2377,7 @@ function createNewCondition()
 		saveState()
 	end
 end
+
 function editCondition(i)
 	removeThirdWindows()
 	currentAction = nil
@@ -2323,6 +2390,7 @@ function editCondition(i)
 		currentCondition = nil
 	end
 end
+
 function removeCondition(i)
 	if currentEvent then
 		table.remove(events[currentEvent].conditions, i)
@@ -2332,6 +2400,7 @@ function removeCondition(i)
 		saveState()
 	end
 end
+
 function createNewAction()
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2347,6 +2416,7 @@ function createNewAction()
 		saveState()
 	end
 end
+
 function editAction(i)
 	removeThirdWindows()
 	currentCondition = nil
@@ -2359,6 +2429,7 @@ function editAction(i)
 		currentAction = nil
 	end
 end
+
 function removeAction(i)
 	if currentEvent then
 		table.remove(events[currentEvent].actions, i)
@@ -2368,6 +2439,7 @@ function removeAction(i)
 		saveState()
 	end
 end
+
 function removeSecondWindows() -- Removes the middle window
 	Screen0:RemoveChild(windows['eventWindow'])
 	Screen0:RemoveChild(windows["importWindow"])
@@ -2375,6 +2447,7 @@ function removeSecondWindows() -- Removes the middle window
 	editVariablesButton.state.chosen = false
 	editVariablesButton:InvalidateSelf()
 end
+
 function removeThirdWindows() -- Removes the rightmost window
 	if eventCommentEditBox then
 		windows["configureEvent"]:RemoveChild(eventCommentEditBox)
@@ -2387,6 +2460,7 @@ function removeThirdWindows() -- Removes the rightmost window
 	configureEventButton.state.chosen = false
 	configureEventButton:InvalidateSelf()
 end
+
 function updateEventList() -- When a new event is created or the name of an event is changed, update the list
 	if eventTotal ~= #events then
 		removeElements(eventScrollPanel, eventButtons, true)
@@ -2411,6 +2485,7 @@ function updateEventList() -- When a new event is created or the name of an even
 		end
 	end
 end
+
 function updateEventFrame() -- When a new condition or action is created or its name is changed, update lists
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2466,6 +2541,7 @@ function updateEventFrame() -- When a new condition or action is created or its 
 		end
 	end
 end
+
 function currentEventFrame() -- Force update on the event frame when switching event
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2505,6 +2581,7 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		newEventActionButton.y = 40 * count
 	end
 end
+
 function currentConditionFrame() -- Force update on the condition frame when switching condition
 	if currentCondition then
 		dontUpdateComboBox = true
@@ -2525,6 +2602,7 @@ function currentConditionFrame() -- Force update on the condition frame when swi
 		dontUpdateComboBox = false
 	end
 end
+
 function currentActionFrame() -- Force update on the action frame when switching action
 	if currentAction then
 		dontUpdateComboBox = true
@@ -2545,6 +2623,7 @@ function currentActionFrame() -- Force update on the action frame when switching
 		dontUpdateComboBox = false
 	end
 end
+
 function selectFilter() -- Only show some conditions/actions in the combobox
 	if currentCondition then
 		local conditionTypesList = {}
@@ -2582,6 +2661,7 @@ function selectFilter() -- Only show some conditions/actions in the combobox
 		end
 	end
 end
+
 function selectConditionType() -- Callback when selecting a condition
 	if currentEvent and currentCondition then
 		local selectedItem = conditionTypeComboBox.items[conditionTypeComboBox.selected]
@@ -2600,6 +2680,7 @@ function selectConditionType() -- Callback when selecting a condition
 		end
 	end
 end
+
 function selectActionType() -- Callback when selecting an action
 	if currentEvent and currentAction then
 		local selectedItem = actionTypeComboBox.items[actionTypeComboBox.selected]
@@ -2618,6 +2699,7 @@ function selectActionType() -- Callback when selecting an action
 		end
 	end
 end
+
 function drawConditionFrame(reset) -- Display specific condition with its parameters
 	if currentEvent and currentCondition then
 		local a = events[currentEvent].conditions[currentCondition]
@@ -2647,6 +2729,7 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 		end
 	end
 end
+
 function drawActionFrame(reset) -- Display specific action with its parameters
 	if currentEvent and currentAction then
 		local a = events[currentEvent].actions[currentAction]
@@ -2676,6 +2759,7 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 		end
 	end
 end
+
 function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according to its type
 	local y = yref[1]
 	local feature = {}
@@ -3119,6 +3203,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 	end
 	return feature
 end
+
 function configureEvent() -- Show the event configuration window
 	if currentEvent then
 		if not configureEventButton.state.chosen or updateActionSequence then -- force update when changing the action sequence
@@ -3247,6 +3332,7 @@ function configureEvent() -- Show the event configuration window
 		end
 	end
 end
+
 function updateImportWindow()
 		local eventList = {}
 		for i, ev in ipairs(events) do
@@ -3255,6 +3341,7 @@ function updateImportWindow()
 		importEventComboBox.items = eventList
 		importEventComboBox:Select(1)
 end
+
 function updateImportComboBoxes()
 	local e = events[importEventComboBox.selected]
 	local conditionList = {}
@@ -3276,6 +3363,7 @@ function updateImportComboBoxes()
 		importActionComboBox:Select(1)
 	end
 end
+
 function importCondition()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
@@ -3304,6 +3392,7 @@ function importCondition()
 	
 	saveState()
 end
+
 function importAction()
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
@@ -3334,6 +3423,7 @@ function importAction()
 	
 	saveState()
 end
+
 function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
 	if currentEvent then
 		if string.find(eventNameEditBox.text, " ") then
@@ -3360,6 +3450,7 @@ function preventSpaces() -- Prevent user to use spaces in names (would bug with 
 		end
 	end
 end
+
 function showVariablesFrame()
 	if not editVariablesButton.state.chosen then
 		removeSecondWindows()
@@ -3377,6 +3468,7 @@ function showVariablesFrame()
 		currentEvent = nil
 	end
 end
+
 function addVariable()
 	local variable = {}
 	variable.id = variablesNumber
@@ -3390,6 +3482,7 @@ function addVariable()
 	
 	saveState()
 end
+
 function removeVariable(var)
 	for i, v in ipairs(triggerVariables) do
 		if var == v then
@@ -3399,6 +3492,7 @@ function removeVariable(var)
 		end
 	end
 end
+
 function updateVariables()
 	if editVariablesButton.state.chosen then
 		for i, vf in ipairs(variablesFeatures) do
@@ -3427,6 +3521,7 @@ function updateVariables()
 		forceUpdateVariables = false
 	end
 end
+
 function drawVariableFeature(var, y)
 	local feature = {}
 	local nameLabel = addLabel(variablesScrollPanel, '0%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_NAME, 16, "center", nil, "center")
@@ -3483,6 +3578,7 @@ function drawVariableFeature(var, y)
 	
 	return feature
 end
+
 function showPickText()
 	local text = ""
 	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
@@ -3507,6 +3603,7 @@ function showPickText()
 		gl.Text(text, mx, my, 16, "s")
 	end
 end
+
 function updateEditBoxesParams() -- update some attributes if they require editboxes
 	if currentAction then
 		for i, af in ipairs(actionFeatures) do
@@ -3526,11 +3623,13 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 		end
 	end
 end
+
 function getCommandsList()
 	local commandList = Spring.GetModOptions().commands
 	commandList = splitString(commandList, "++")
 	commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
 end
+
 function showCreatedUnitsWindow()
 	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
 	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
@@ -3570,6 +3669,7 @@ function showCreatedUnitsWindow()
 		selectCreatedUnitsWindow:Dispose()
 	end
 end
+
 function showRandomPositionInZoneWindow()
 	randomInZoneWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
 	addLabel(randomInZoneWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_RANDOM_ZONE, 20, "center", nil, "center")
@@ -3637,6 +3737,7 @@ function updateMapSettings()
 	end
 	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
+
 function initWidgetList()
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
@@ -3662,6 +3763,7 @@ function initWidgetList()
 		end
 	end
 end
+
 function showWidgetsWindow()
 	if windows['widgetsWindow'] then
 		widgetsButton.state.chosen = false
@@ -3688,6 +3790,7 @@ function showWidgetsWindow()
 		count = count + 1
 	end
 end
+
 function updateWidgetsWindowPosition()
 	if windows['widgetsWindow'] then
 		windows['widgetsWindow']:SetPos(windows['mapSettingsWindow'].x + windows['mapSettingsWindow'].width, windows['mapSettingsWindow'].y, '15%', '50%')
@@ -3792,6 +3895,7 @@ function newMap()
 	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
+
 function newMapInitialize()
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
@@ -3810,6 +3914,7 @@ function newMapInitialize()
 	end
 	saveState()
 end
+
 function loadMap(name)
 	if loading then return end
 	loading = true
@@ -3829,6 +3934,7 @@ function loadMap(name)
 		loading = false
 	end
 end
+
 function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	local uIDs = json.decode(unitIDs)
 	for i, u in ipairs(loadedTable.units) do
@@ -4011,6 +4117,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	loading = false
 	NeedToBeSaved = true
 end
+
 function saveMap()
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
@@ -4056,6 +4163,7 @@ function saveMap()
 	file:close()
 	NeedToBeSaved = false
 end
+
 function newMapFrame()
 	if windows["newMapWindow"] then
 		Screen0:RemoveChild(windows["newMapWindow"])
@@ -4077,6 +4185,7 @@ function newMapFrame()
 		end
 	end
 end
+
 function loadMapFrame()
 	if windows["loadWindow"] then
 		Screen0:RemoveChild(windows["loadWindow"])
@@ -4120,6 +4229,7 @@ function loadMapFrame()
 		showLoadWindow()
 	end
 end
+
 function saveMapFrame()
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
@@ -4153,6 +4263,7 @@ function saveMapFrame()
 		end
 	end
 end
+
 function backToMenuFrame()
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
@@ -4164,6 +4275,7 @@ function backToMenuFrame()
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
+
 function quitFrame()
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
@@ -4175,9 +4287,11 @@ function quitFrame()
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() Spring.SendCommands("quit") Spring.SendCommands("quitforce") end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
+
 function beginLoadLevel(name)
 	loadMap(name)
 end
+
 function loadLevelWithRightMap(name)
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
@@ -4219,6 +4333,7 @@ function loadLevelWithRightMap(name)
 		end
 	end
 end
+
 function newLevelWithRightMap(name)
 	if name == Game.mapName then
 		newMap()
@@ -4347,6 +4462,7 @@ function encodeSaveTable()
 	
 	return savedTable
 end
+
 function saveState()
 	NeedToBeSaved = true
 	if loadLock and not initialize then
@@ -4359,6 +4475,7 @@ function saveState()
 		table.insert(saveStates, 1, savedTable)
 	end
 end
+
 function loadState(direction)
 	NeedToBeSaved = true
 	loadLock = false
@@ -4377,6 +4494,7 @@ function loadState(direction)
 		loadMap("")
 	end
 end
+
 function continueLoadState()
 	if saveCurrentEvent and events[saveCurrentEvent] then
 		editEvent(saveCurrentEvent)
@@ -4397,6 +4515,7 @@ function continueLoadState()
 	
 	loadLock = true
 end
+
 function requestSave()
 	toSave = true
 end
@@ -4417,6 +4536,7 @@ function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
 		end
 	end)
 end
+
 function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
 	local divs = d or 25
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
@@ -4428,12 +4548,14 @@ function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
 		end
 	end)
 end
+
 function initMouseCursors()
 	Spring.AssignMouseCursor("cursor-resize-x-y-1", "cursor-resize-x-y-1", false)
 	Spring.AssignMouseCursor("cursor-resize-x-y-2", "cursor-resize-x-y-2", false)
 	Spring.AssignMouseCursor("cursor-resize-x", "cursor-resize-x", false)
 	Spring.AssignMouseCursor("cursor-resize-y", "cursor-resize-y", false)
 end
+
 function changeMouseCursor()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
 		local mx, my, leftPressed = Spring.GetMouseState()
@@ -4469,6 +4591,7 @@ function changeMouseCursor()
 		Spring.SetMouseCursor("normalcursor")
 	end
 end
+
 function recursiveResize(obj, textSize)
 	if obj.children then
 		for i, child in ipairs(obj.children) do
@@ -4480,6 +4603,7 @@ function recursiveResize(obj, textSize)
 		obj:InvalidateSelf()
 	end
 end
+
 function updateButtonVisualFeedback() -- Show current states on GUI
 	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
 	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
@@ -4496,6 +4620,7 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 		markButtonWithinSet(conditionButtons[events[currentEvent].id], currentCondition)
 	end
 end
+
 function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
 	local specificCondition = true
 	if condition ~= nil then
@@ -4517,6 +4642,7 @@ function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual fee
 		end
 	end
 end
+
 function widget:DrawScreen()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 		showUnitsInformation()
@@ -4531,6 +4657,7 @@ function widget:DrawScreen()
 	end
 	showZoneInformation()
 end
+
 function widget:DrawWorld()
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		previewUnit()
@@ -4568,6 +4695,7 @@ function widget:Initialize()
 	initialize = false
 	saveState()
 end
+
 function widget:Update(delta)
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local unitSelection = Spring.GetSelectedUnits()
@@ -4635,10 +4763,12 @@ function widget:Update(delta)
 		end
 	end
 	
+	-- Add a cooldown to ctrl+z/y 
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
 	
+	-- Remove UI elements that do not have a parent from the table so their text size is not updated
 	local toBeRemoved = {}
 	for i, obj in ipairs(UIelements) do
 		if not obj.parent then
@@ -4649,6 +4779,7 @@ function widget:Update(delta)
 		table.remove(UIelements, i)
 	end
 end
+
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
 		local textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
@@ -4662,6 +4793,7 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 		screenSizeX, screenSizeY = dse_vsx, dse_vsy
 	end
 end
+
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
 end
@@ -4839,6 +4971,7 @@ function widget:MousePress(mx, my, button)
 		end
 	end
 end
+
 function widget:MouseRelease(mx, my, button)
 	if button == 1 then
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
@@ -4910,6 +5043,7 @@ function widget:MouseRelease(mx, my, button)
 	end
 	return true
 end
+
 function widget:MouseMove(mx, my, dmx, dmy, button)	
 	-- disable click to select and double click if mousemove
 	clickToSelect = false
@@ -4979,6 +5113,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 		end
 	end
 end
+
 function widget:KeyPress(key, mods)
 	-- Global 
 	-- CTRL + S : save the current map

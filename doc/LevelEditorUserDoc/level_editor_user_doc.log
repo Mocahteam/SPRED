@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  23 MAY 2016 13:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  6 JUN 2016 17:44
 entering extended mode
 **./level_editor_user_doc.tex
 (level_editor_user_doc.tex
@@ -25,11 +25,51 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grap
+hics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grap
+hics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grap
+hics\graphics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grap
+hics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00mi
+ktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdft
+ex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ob
+erdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ob
+erdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base
 \inputenc.sty"
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base
 \utf8.def"
@@ -295,36 +335,31 @@ Language: frenchb 2016/01/01 v3.1k French support from the babel system
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ba
 bel\babel.def"
 File: babel.def 2016/01/08 3.9n Babel common definitions
-\babel@savecnt=\count87
-\U@D=\dimen103
+\babel@savecnt=\count88
+\U@D=\dimen105
 )
 \l@acadian = a dialect from \language\l@french 
 \l@canadien = a dialect from \language\l@french 
 \FBcolonskip=\skip43
 \FBthinskip=\skip44
-\FB@interchartokenstateORI=\count88
+\FB@interchartokenstateORI=\count89
 Package babel Info: Making : an active character on input line 372.
 Package babel Info: Making ; an active character on input line 373.
 Package babel Info: Making ! an active character on input line 374.
 Package babel Info: Making ? an active character on input line 375.
 \FBguillskip=\skip45
-\FBguill@level=\count89
-\FB@everypar=\toks16
-\FB@Mht=\dimen104
-\std@mcc=\count90
-\dec@mcc=\count91
+\FBguill@level=\count90
+\FB@everypar=\toks17
+\FB@Mht=\dimen106
+\std@mcc=\count91
+\dec@mcc=\count92
 \listindentFB=\skip46
 \labelwidthFB=\skip47
 \leftmarginFB=\skip48
-\parindentFFN=\dimen105
+\parindentFFN=\dimen107
 ))
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\carl
 isle\scalefnt.sty")
-("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grap
-hics\keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
-)
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geom
 etry\geometry.sty"
 Package: geometry 2010/09/12 v5.6 Page Geometry
@@ -343,38 +378,63 @@ Package ifvtex Info: VTeX not detected.
 xetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count92
-\Gm@cntv=\count93
-\c@Gm@tempcnt=\count94
-\Gm@bindingoffset=\dimen106
-\Gm@wd@mp=\dimen107
-\Gm@odd@mp=\dimen108
-\Gm@even@mp=\dimen109
-\Gm@layoutwidth=\dimen110
-\Gm@layoutheight=\dimen111
-\Gm@layouthoffset=\dimen112
-\Gm@layoutvoffset=\dimen113
+\Gm@cnth=\count93
+\Gm@cntv=\count94
+\c@Gm@tempcnt=\count95
+\Gm@bindingoffset=\dimen108
+\Gm@wd@mp=\dimen109
+\Gm@odd@mp=\dimen110
+\Gm@even@mp=\dimen111
+\Gm@layoutwidth=\dimen112
+\Gm@layoutheight=\dimen113
+\Gm@layouthoffset=\dimen114
+\Gm@layoutvoffset=\dimen115
 \Gm@dimlist=\toks18
 
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geom
-etry\geometry.cfg")) (level_editor_user_doc.aux)
+etry\geometry.cfg"))
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\floa
+t\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count96
+\float@exts=\toks19
+\float@box=\box26
+\@float@everytoks=\toks20
+\@floatcapt=\box27
+) (level_editor_user_doc.aux)
 \openout1 = `level_editor_user_doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Info: Redefining \degres on input line 13.
-LaTeX Info: Redefining \dots on input line 13.
-LaTeX Info: Redefining \up on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\context\ba
+se\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count97
+\scratchdimen=\dimen116
+\scratchbox=\box28
+\nofMPsegments=\count98
+\nofMParguments=\count99
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count100
+\MPscratchDim=\dimen117
+\MPnumerator=\count101
+\makeMPintoPDFobject=\count102
+\everyMPtoPDFconversion=\toks22
+)
+LaTeX Info: Redefining \degres on input line 15.
+LaTeX Info: Redefining \dots on input line 15.
+LaTeX Info: Redefining \up on input line 15.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -411,17 +471,12 @@ LaTeX Info: Redefining \up on input line 13.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 15.
+(Font)              <12> on input line 17.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 15.
+(Font)              <8> on input line 17.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 15.
-(level_editor_user_doc.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 8.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 8.
-)
+(Font)              <6> on input line 17.
+(level_editor_user_doc.toc)
 \tf@toc=\write3
 \openout3 = `level_editor_user_doc.toc'.
 
@@ -429,39 +484,130 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {C:/Users/Benjamin-Zigaroula-/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map
 }]
-Underfull \hbox (badness 2376) in paragraph at lines 42--43
+<pre-launcher.png, id=9, 1445.4pt x 782.925pt>
+File: pre-launcher.png Graphic file (type png)
+ <use pre-launcher.png>
+Package pdftex.def Info: pre-launcher.png used on input line 37.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+<launcher-main.png, id=11, 1445.4pt x 782.925pt>
+File: launcher-main.png Graphic file (type png)
+ <use launcher-main.png>
+Package pdftex.def Info: launcher-main.png used on input line 46.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+[2 <./pre-launcher.png>]
+Underfull \hbox (badness 2376) in paragraph at lines 55--56
   [] \T1/cmr/m/n/10 Ce menu per-met de choi-sir une mis-sion préa-la-ble-ment c
 réée via l'édi-teur. L'en-
  []
 
 
-Underfull \hbox (badness 3407) in paragraph at lines 42--43
+Underfull \hbox (badness 3407) in paragraph at lines 55--56
 \T1/cmr/m/n/10 semble des mis-sions pro-po-sées cor-res-pond aux mis-sions pré-
 sentes dans le ré-per-toire
  []
 
-[2] [3] (level_editor_user_doc.aux) ) 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 58.
+<launcher-scenario.png, id=18, 1445.4pt x 782.925pt>
+File: launcher-scenario.png Graphic file (type png)
+
+<use launcher-scenario.png>
+Package pdftex.def Info: launcher-scenario.png used on input line 61.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [3 <./launcher-main.png>]
+<editor-units.png, id=27, 1445.4pt x 782.925pt>
+File: editor-units.png Graphic file (type png)
+ <use editor-units.png>
+Package pdftex.def Info: editor-units.png used on input line 83.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [4 <./launcher-scenario.png>] <editor-groups.png, id=33, 1445.4pt x 782.925pt>
+File: editor-groups.png Graphic file (type png)
+
+<use editor-groups.png>
+Package pdftex.def Info: editor-groups.png used on input line 100.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [5 <./editor-units.png>]
+<editor-zones.png, id=38, 1445.4pt x 782.925pt>
+File: editor-zones.png Graphic file (type png)
+ <use editor-zones.png>
+Package pdftex.def Info: editor-zones.png used on input line 109.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [6 <./editor-groups.png> <./editor-zones.png>]
+<editor-teamconfig.png, id=44, 1445.4pt x 782.925pt>
+File: editor-teamconfig.png Graphic file (type png)
+
+<use editor-teamconfig.png>
+Package pdftex.def Info: editor-teamconfig.png used on input line 122.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ <editor-allyteam.png, id=45, 1445.4pt x 782.925pt>
+File: editor-allyteam.png Graphic file (type png)
+
+<use editor-allyteam.png>
+Package pdftex.def Info: editor-allyteam.png used on input line 130.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [7 <./editor-teamconfig.png>]
+<editor-trigger.png, id=51, 1445.4pt x 782.925pt>
+File: editor-trigger.png Graphic file (type png)
+ <use editor-trigger.png>
+Package pdftex.def Info: editor-trigger.png used on input line 146.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+<editor-eventconfig.png, id=52, 1445.4pt x 782.925pt>
+File: editor-eventconfig.png Graphic file (type png)
+
+<use editor-eventconfig.png>
+Package pdftex.def Info: editor-eventconfig.png used on input line 152.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [8 <./editor-allyteam.png>]
+<editor-variables.png, id=57, 1445.4pt x 782.925pt>
+File: editor-variables.png Graphic file (type png)
+ <use editor-variables.png>
+Package pdftex.def Info: editor-variables.png used on input line 161.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+[9 <./editor-trigger.png> <./editor-eventconfig.png>] [10 <./editor-variables.p
+ng>] <editor-mapsettings.png, id=67, 1445.4pt x 782.925pt>
+File: editor-mapsettings.png Graphic file (type png)
+
+<use editor-mapsettings.png>
+Package pdftex.def Info: editor-mapsettings.png used on input line 190.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [11 <./editor-mapsettings.png>]
+(level_editor_user_doc.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2271 strings out of 493634
- 31080 string characters out of 3129527
- 96260 words of memory out of 3000000
- 5663 multiletter control sequences out of 15000+200000
- 12452 words of font info for 31 fonts, out of 3000000 for 9000
+ 3275 strings out of 493634
+ 45910 string characters out of 3129527
+ 111799 words of memory out of 3000000
+ 6620 multiletter control sequences out of 15000+200000
+ 15343 words of font info for 35 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,6n,30p,675b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Benjamin-Zigaroula-\AppData\Loc
-al\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Benjami
-n-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti10
-00.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
-knappen\ec\dpi600\ecrm1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKT
-eX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\Benjamin-Zigar
-oula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> 
-<C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
-\ec\dpi600\ecrm1200.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\
-fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk>
-Output written on level_editor_user_doc.pdf (3 pages, 78414 bytes).
+ 28i,6n,30p,900b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ecbx1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2
+.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0800.pk> <C:\Users\Benjamin-Zigaroula
+-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\
+Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
+dpi600\ecrm0700.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\font
+s\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Benjamin-Zigaroula-\AppDa
+ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\B
+enjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Loca
+l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin
+-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm120
+0.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
+nappen\ec\dpi600\ecrm1728.pk>
+Output written on level_editor_user_doc.pdf (11 pages, 4243332 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
+ 434 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
