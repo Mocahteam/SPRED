@@ -173,14 +173,14 @@ function genericRestart(missionName,operations,contextFile)
    local updatedTxtFileContent=""
    if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
      if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
-        local sf=VFS.LoadFile("Missions/"..Game.modShortName.."/"..missionName..".editor")-- because we are in the context : Ingame
+        local sf=VFS.LoadFile("Missions/"..missionName..".editor")-- because we are in the context : Ingame
         local tableEditor=json.decode(sf)
         local txtFileContent=createFromScratch(tableEditor)
         updatedTxtFileContent=updateValues(txtFileContent, operations)
         --Spring.Restart("-s",updatedTxtFileContent)
         Spring.Reload(updatedTxtFileContent)
      else
-        DoTheRestart("Missions/"..Game.modShortName.."/"..missionName.."txt", operations)  
+        DoTheRestart("Missions/"..missionName.."txt", operations)  
      end
    else -- meaning Not in game, we just have access to the file name
     if (string.sub(missionName, -3, -1)=="txt")then      
