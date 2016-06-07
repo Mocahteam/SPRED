@@ -113,7 +113,7 @@ function Control:New(obj)
 	local fmtStr = [[You are using a custom %s::DrawControl in widget "%s".
 	Please note that with Chili 2.1 the (self.x, self.y) translation is moved a level up and does not need to be done in DrawControl anymore.
 	When you adjusted your code set `drawcontrolv2 = true` in the respective control to disable this message.]]
-	Spring.Log("Chili", "warning", fmtStr:format(obj.name, w.whInfo.name))
+	Spring.Echo("Chili", "warning", fmtStr:format(obj.name, w.whInfo.name))
     else
 	obj._hasCustomDrawControl = false
     end
@@ -172,7 +172,9 @@ function Control:Dispose(...)
   end
 
   inherited.Dispose(self,...)
-  self.font:SetParent()
+  if self.font.SetParent then
+	self.font:SetParent()
+  end
 end
 
 --//=============================================================================

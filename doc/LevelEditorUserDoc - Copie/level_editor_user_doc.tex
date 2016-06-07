@@ -1,0 +1,199 @@
+\documentclass[a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[a4paper]{geometry}
+\usepackage{float}
+
+\title{Editeur de niveaux Prog \& Play\\ Documentation Utilisateur}
+\author{Benjamin BONTEMPS}
+
+\sloppy
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Lancement de l'éditeur}
+\paragraph{ }
+Pour démarrer l'éditeur de niveaux de Prog \& Play, il faut tout d'abord s'assurer que tous les fichiers nécessaires à son bon fonctionnement sont présents :
+\begin{itemize}
+\item L'archive \textit{PPLE\_Launcher.sdz} doit être présente dans le répertoire \textit{<Spring>/mods/} (82.5.1) ou \textit{<Spring>/games/} (98+). Cette archive constitue le mod "Launcher", qui permet donc de lancer l'éditeur dans de bonnes conditions.
+\item Le dossier \textit{pp\_editor} doit être présent à la racine de Spring. Il contient des fichiers nécessaires au lancement de l'éditeur (dans \textit{editor\_files}), des fichiers nécessaires à la création de l'archive finale (dans \textit{game\_files}) et les niveaux et scénarios créés (respectivement dans \textit{missions} et \textit{scenarios}). Il est à noter que les dossiers \textit{editor\_files} et \textit{game\_files} ne sont pas nécessaires dans la version 82.5.1.
+\item Au moins un mod pour Spring (\textit{Kernel Panic 4.1} par exemple) doit être présent dans le répertoire \textit{<Spring>/mods/} (82.5.1) ou \textit{<Spring>/games/} (98+). Celui-ci servira de base pour créer les niveaux.
+\end{itemize}
+\paragraph{ }
+Une fois que ceci est fait, il suffit de lancer Spring, puis de lancer le mod \textit{Prog \& Play Level Editor Launcher 1.0}. (Il vous sera demandé de choisir une carte et une IA. Ces dernières n'ayant aucune influence sur la suite, n'importe lesquelles feront l'affaire.)
+\paragraph{ }
+Enfin, il vous sera demandé de sélectionner un mod parmi ceux présents dans le dossier \textit{<Spring>/mods/} (82.5.1) ou \textit{<Spring>/games/} (98+) et qui ne sont pas en lien avec Prog \& Play. Ce mod sert à définir le jeu de base sur lequel seront créés les niveaux pour Prog \& Play (définition des unités et de leur comportement). Une fois ce mod sélectionné, Spring redémarrera sur l'éditeur à proprement parler.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{pre-launcher.png}
+\caption{Choix du mod de base pour l'éditeur.}
+\label{fig:pre-launcher}
+\end{figure}
+\section{Launcher propre au mod sélectionné}
+\paragraph{ }
+Le launcher se divise en 3 menus distincts : Création d'un nouveau niveau, Modification d'un niveau existant et Éditeur de scénario.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{launcher-main.png}
+\caption{Launcher de l'éditeur.}
+\label{fig:launcher-main}
+\end{figure}
+\subsection{Création d'un nouveau niveau}
+\paragraph{ }
+Ce menu permet de choisir la carte sur laquelle on veut créer un nouveau niveau. L'ensemble des cartes disponibles correspond aux cartes présentes dans le répertoire \textit{<Spring>/maps}.
+\subsection{Modification d'un niveau existant}
+\paragraph{ }
+Ce menu permet de choisir une mission préalablement créée via l'éditeur. L'ensemble des missions proposées correspond aux missions présentes dans le répertoire \textit{<Spring>/pp\_editor/missions}. Les missions recensées sont celles ayant été créées pour le mod de base préalablement choisi.
+\subsection{Éditeur de scénario}
+\paragraph{ }
+L'éditeur de scénario permet de scénariser les missions créées avec l'éditeur de niveaux. Chaque niveau est représenté par une fenêtre contenant le nom du niveau, un état d'entrée et un ou plusieurs états de sortie en fonction de ce qui a été défini dans l'éditeur. Les états de sortie peuvent être connectés à des états d'entrée. Il est possible de sauvegarder et de charger des scénarios (ces derniers se trouvant dans le répertoire \textit{<Spring>/pp\_editor/scenarios}). Enfin, la génération de l'archive finale du jeu créé avec les différentes missions et la scénarisation se fait dans ce menu.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{launcher-scenario.png}
+\caption{Exemple d'édition d'un scénario à 3 missions.}
+\label{fig:launcher-scenario}
+\end{figure}
+\section{Éditeur de niveaux}
+\paragraph{ }
+L'éditeur se décompose en plusieurs menus distincts. Les parties suivantes s'attachent à décrire le fonctionnement et l'intérêt de chacun des menus.
+\subsection{Fichier}
+\paragraph{ }
+Les fonctions de ce menu sont assez classiques :
+\begin{itemize}
+\item \textbf{Nouveau} - Permet de créer un nouveau niveau sur une carte sélectionnée parmi une liste déroulante.
+\item \textbf{Ouvrir} - Permet de modifier un niveau ayant déjà été créé. Seuls les niveaux ayant été créés pour le mod de base sélectionné dans le launcher apparaitront dans la liste déroulante.
+\item \textbf{Enregistrer} - Permet de sauvegarder le niveau dans le fichier \textit{<Spring>/pp\_editor/ missions/<Nom du niveau>.editor}.
+\item \textbf{Menu principal} - Permet de retourner au launcher propre au mod sélectionné (voir 2).
+\item \textbf{Quitter} - Permet de quitter l'éditeur et Spring.
+\end{itemize}
+\subsection{Unités}
+\paragraph{ }
+Ce menu permet d'ajouter, de déplacer et de supprimer des unités, ainsi que de modifier certains de leurs attributs. Il est également possible de les ajouter à des groupes d'unités pour une utilisation ultérieure dans les évènements.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-units.png}
+\caption{Interface de gestion des unités.}
+\label{fig:editor-units}
+\end{figure}
+\paragraph{ }
+Le menu de gauche permet de sélectionner un type d'unité et une équipe, et il est ensuite possible d'instancier une unité du type sélectionné qui appartient à l'équipe sélectionnée. Les types d'unité sont classés par faction. Une fois que des unités se trouvent sur le terrain, il est possible de les sélectionner pour :
+\begin{itemize}
+\item les déplacer par cliquer-glisser ou en utilisant les flèches directionnelles.
+\item les pivoter par cliquer-glisser en laissant enfoncer CTRL ou ALT. 
+\item les supprimer en appuyant sur SUPPR.
+\item modifier certains de leurs attributs (appartenance à une équipe, nombre de points de vie initiaux, activation ou désactivation des soins automatiques) en accédant au menu contextuel via un clic droit.
+\item les ajouter ou les retirer d'un groupe d'unités.
+\end{itemize}
+\paragraph{ }
+Les groupes d'unités peuvent être gérés plus précisément en utilisant l'interface accessible par le menu de droite. Ces groupes sont purement logiques et servent à effectuer des actions ou à tester des conditions sur plusieurs unités en même temps.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-groups.png}
+\caption{Interface de gestion des groupes d'unités.}
+\label{fig:editor-groups}
+\end{figure}
+\subsection{Zones}
+\paragraph{ }
+Ce menu permet de définir des zones logiques pour une utilisation ultérieure dans les évènements.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-zones.png}
+\caption{Interface de gestion des zones logiques.}
+\label{fig:editor-zones}
+\end{figure}
+\paragraph{ }
+Les zones peuvent être rectangulaires ou elliptiques en fonction des besoins. De façon similaire aux unités, il est possible de les tracer, de les déplacer, de les redimensionner, de les renommer et de les supprimer. Chaque zone possède également des attributs spéciaux qui permettent d'afficher un marqueur portant le nom de la zone pendant l'exécution du jeu ou d'afficher en permanence le centre de la zone dans le champ de la caméra (dans le cas d'une caméra automatique).
+\subsection{Forces}
+\paragraph{ }
+Ce menu permet de gérer le statut des différentes équipes et les alliances.
+\paragraph{ }
+Chaque équipe peut être activée ou désactivée et contrôlée par un joueur ou par l'ordinateur selon les besoins. Il est également possible de changer le nom de l'équipe ainsi que sa couleur pendant l'exécution du jeu (la couleur dans l'éditeur restera la même). Dans le cas d'une équipe contrôlée par l'ordinateur, il est possible de spécifier le nom d'une intelligence artificielle pour la contrôler (optionnel).
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-teamconfig.png}
+\caption{Interface de configuration des équipes.}
+\label{fig:editor-teamconfig}
+\end{figure}
+\paragraph{ }
+Les équipes peuvent être alliées entre elles. Il faut néanmoins noter que la notion d'alliance n'est pas réciproque : l'équipe 1 peut considérer l'équipe 2 comme son alliée tandis que l'équipe 2 considère l'équipe 1 comme ennemie.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-allyteam.png}
+\caption{Interface de gestion des alliances.}
+\label{fig:editor-allyteam}
+\end{figure}
+\subsection{Évènements}
+\paragraph{ }
+Ce menu permet de gérer les différents évènements s'effectuant au cours de la mission.
+\subsubsection{Évènements, conditions et actions}
+\paragraph{ }
+Un évènement correspond à un couple ensemble de conditions / ensemble d'actions. Il est possible d'ajouter des conditions et des actions puis de les paramétrer en utilisant les boutons et fenêtres appropriés.
+\paragraph{ }
+Ensuite, il est possible de paramétrer l'évènement en définissant un déclencheur qui correspond à une expression logique entre toutes les conditions. Par défaut, le déclencheur est un ET logique global.\footnote{Par exemple, pour un évènement possédant 3 conditions C1, C2 et C3, le déclencheur par défaut sera (C1 ET C2 ET C3).} Lorsque le déclencheur renvoie \textit{"true"}, les actions s'effectuent l'une après l'autre, dans l'ordre où elles ont été définies. Cet ordre est paramétrable dans la même fenêtre que la définition du déclencheur.
+\paragraph{ }
+Il est également possible de changer les paramètres de répétition d'un évènement, ainsi que d'ajouter un commentaire qui pourra servir lors de la modification ultérieure du niveau.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-trigger.png}
+\caption{Exemple d'édition de la condition \textit{BitsInZone} de l'événement \textit{WinCondition}.}
+\label{fig:editor-trigger}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-eventconfig.png}
+\caption{Interface de gestion d'un événement.}
+\label{fig:editor-eventconfig}
+\end{figure}
+\subsubsection{Variables}
+\paragraph{ }
+L'éditeur d'évènements permet de définir des variables numériques ou booléennes. On accède à l'interface d'édition des variables en utilisant le bouton situé en dessous de la liste des évènements. Ces variables permettent d'avoir plus de contrôle sur la façon dont s'enchaînent les différents évènements. Leurs valeurs peuvent être modifiées en utilisant des actions spécifiques aux variables.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-variables.png}
+\caption{Interface de gestion des variables.}
+\label{fig:editor-variables}
+\end{figure}
+\subsubsection{Paramètres particuliers}
+\paragraph{ }
+Certains paramètres définissables dans les conditions et dans les actions requièrent des explications supplémentaires :
+\begin{itemize}
+\item \textbf{Unité} - Une unité peut soit être une unité déjà présente sur le terrain, soit une ou plusieurs unités créées par le dernier appel à une action de création d'unité(s). Une fois qu'une unité a été sélectionnée, il est possible de zoomer dessus en cliquant sur le bouton avec l'œil.
+\item \textbf{Groupe d'unités} - Un groupe peut correspondre soit à un groupe défini dans l'interface des groupes d'unités, soit à l'ensemble des unités créées par l'ensemble des appels à une action de création d'unité(s).
+\item \textbf{Position} - Une position peut être soit un couple (x, y), soit une position aléatoire à l'intérieur d'une zone. Une fois qu'une position a été sélectionnée, il est possible de zoomer dessus en cliquant sur le bouton avec l'œil.
+\item \textbf{Script} - Les paramètres de ce type s'adressent à des utilisateurs avancés. Le champ texte permet d'écrire du code en Lua permettant de définir totalement une condition\footnote{Le script défini dans le cas d'une condition doit nécessairement renvoyer une valeur booléenne.} ou une action personnalisée.
+\end{itemize}
+\subsection{Paramètres de la carte}
+\paragraph{ }
+Ce menu permet de choisir un nom pour le niveau, d'écrire un briefing qui sera affiché au début de la mission, et de spécifier certains paramètres.
+\paragraph{ }
+Le briefing peut contenir du texte coloré. Il faut pour cela choisir une couleur grâce aux sliders, sélectionner le texte à colorer, puis appuyer sur le bouton correspondant.
+\paragraph{ }
+Il est également possible d'activer ou de désactiver :
+\begin{itemize}
+\item la caméra automatique (en jeu, cette caméra contient en permanence dans son champ de vision les unités visibles par le joueur ainsi que les zones définies comme toujours présentes dans le champ de vision)
+\item le soin automatique des unités
+\item la souris
+\item la minimap
+\item certains widgets propres au mod sélectionné ou à Prog \& Play
+\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{editor-mapsettings.png}
+\caption{Interface de modification des paramètres de la mission.}
+\label{fig:editor-mapsettings}
+\end{figure}
+\section{Lancement du jeu créé}
+\paragraph{ }
+Une fois que les niveaux ont été créés, que le scénario a été défini et que le jeu a été packagé, il devient jouable. Il suffit alors de le placer dans le répertoire \textit{<Spring>/mods/} (82.5.1) ou \textit{<Spring>/games/} (98+) accompagné du jeu duquel il dépend (Kernel Panic 4.1 par exemple). Ensuite, il suffit de lancer Spring et de sélectionner le mod correspondant.
+\paragraph{ }
+Pour jouer en utilisant l'API Prog \& Play (et contrôler les unités par des lignes de code), assurez-vous de bien posséder une version de Spring intégrant Prog \& Play\footnote{Disponible sur https://www.irit.fr/ProgAndPlay/.}.
+\end{document}

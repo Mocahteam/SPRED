@@ -27,7 +27,7 @@ setmetatable(DebugHandler.objectsOwnedByWidgets, {
     local st = {};
     setmetatable(st,{__mode="v"});
     if (not i) then
-      Spring.Log("Chili", "error", "WAAA",debug.traceback())
+      Spring.Echo("Chili", "error", "WAAA",debug.traceback())
     end
     t[i] = st;
     return st;
@@ -91,21 +91,21 @@ local function ChiliErrorHandler(msg,...)
     local w = control._widget
     if isindexable(w) then
       local wname = (w.whInfo and w.whInfo.name) or "unknown"
-      Spring.Log("Chili", "error", ("in `%s`:%s : %s"):format(wname, control.name, msg))
-      Spring.Log("Chili", "error", DebugHandler.Stacktrace())
+      Spring.Echo("Chili", "error", ("in `%s`:%s : %s"):format(wname, control.name, msg))
+      Spring.Echo("Chili", "error", DebugHandler.Stacktrace())
 
       --// this also unloads all owned chili objects
-      Spring.Log("Chili", "error", "Removed widget: " .. wname)
+      Spring.Echo("Chili", "error", "Removed widget: " .. wname)
       widgetHandler:RemoveWidget(w)
     else
-      Spring.Log("Chili", "error", ("in `%s` (couldn't detect the owner widget): %s"):format(control.name, msg))
-      Spring.Log("Chili", "error", DebugHandler.Stacktrace())
+      Spring.Echo("Chili", "error", ("in `%s` (couldn't detect the owner widget): %s"):format(control.name, msg))
+      Spring.Echo("Chili", "error", DebugHandler.Stacktrace())
       control:Dispose()
     end
   else
     --// error in Chili itself
-    Spring.Log("Chili", "error", ("%s"):format(msg))
-    Spring.Log("Chili", "error", DebugHandler.Stacktrace())
+    Spring.Echo("Chili", "error", ("%s"):format(msg))
+    Spring.Echo("Chili", "error", DebugHandler.Stacktrace())
 
     if (os.clock() - lastError < 5) then
       numChiliErrors = numChiliErrors + 1
@@ -116,7 +116,7 @@ local function ChiliErrorHandler(msg,...)
 
     --// unload Chili to avoid error spam
     if (numChiliErrors>=DebugHandler.maxChiliErrors) then
-      Spring.Log("Chili", "error", "Removed widget: " .. widget.whInfo.name)
+      Spring.Echo("Chili", "error", "Removed widget: " .. widget.whInfo.name)
       widgetHandler:RemoveWidget(widget)
     end
   end

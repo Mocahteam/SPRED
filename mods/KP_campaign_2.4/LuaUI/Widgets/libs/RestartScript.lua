@@ -93,7 +93,7 @@ local function createFromScratch(editorTables)
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
   local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype="Kernel Panic Campaign 2.4", MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
