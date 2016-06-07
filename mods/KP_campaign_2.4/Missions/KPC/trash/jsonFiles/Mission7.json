@@ -1,0 +1,142 @@
+{
+"armies" :
+	[
+		{
+		"faction" : "PLAYER",
+		"units" : 
+			[
+			{"id":"playerBit1","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit2","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit3","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit4","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit5","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit6","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerBit7","visibleAtStart":"yes","type":"bit","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte1","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte2","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerByte3","visibleAtStart":"yes","type":"byte","position":{"positionId":"positionArmy","validZone":"130"},"orientation" :"n"},
+			{"id":"playerAssembler","visibleAtStart":"yes","type":"assembler","position":{"positionId":"positionAssembler","validZone":"10"},"orientation" :"s"}		
+			]
+		}
+	],
+"groupOfUnits" :
+	[
+		{
+		"id" : "armyWithoutAssembler",
+		"units" : 
+			[
+			"playerBit1",
+			"playerBit2",
+			"playerBit3",
+			"playerBit4",
+			"playerBit5",
+			"playerBit6",
+			"playerBit7",
+			"playerByte1",
+			"playerByte2",
+			"playerByte3"			
+			]
+		}
+	],
+"settings":
+	{
+		"mouse":"disabled",
+		"globalAutoHeal":"disabled",
+		"health":{
+			"relativeValue":"0.25",
+			"autoHeal":"disabled"
+		},
+		"camera":
+		{
+			"auto":"enabled"
+		}	
+	},
+"messages":
+	[
+		{
+		"id":"BRIEFING",
+		"content":
+			{
+			"fr":"Mission 7\n \n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR (ASSEMBLER) du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \n..gray..Appuyez sur Echap pour continuer"
+			,
+			"en":"Mission 7\n \n \nYour army is now grouped together and you control the latest available ASSEMBLER.\n \nUse it to repair your weakened units.\n \n..gray..Press Escape to continue"
+			}
+		}
+	],
+"positions":
+	[
+		{
+		"id":"positionAssembler",
+		"coordinates":"absolute",
+		"x":"256",
+		"z":"811"
+		},
+		{
+		"id":"positionArmy",
+		"coordinates":"absolute",
+		"x":"256",
+		"z":"1024"
+		}
+	],
+"conditions":
+	[
+		{
+		"id":"deadPlayer",
+		"object":"PLAYER",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all",
+			}
+		},
+		{
+		"id":"fullHealthEveryone",
+		"object":"armyWithoutAssembler",
+		"attribute":"health",
+		"value":
+			{
+			"group":"all",
+			"mode":"upTo",
+			"tresholdRatio":"1"
+			}
+		}
+	],
+"actions":
+	[
+		{
+		"id":"defeat",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"end",
+		"outputState":"1111",
+		"result":"defeat"
+		},
+		{
+		"id":"victory",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"end",
+		"outputState":"1111",
+		"result":"success"
+		}
+	],
+"events":
+	[
+		{
+		"idEvent":"fullHealthEveryoneEvent",
+		"trigger":"fullHealthEveryone",
+		"actions":
+			[
+			{"actionId":"victory"}
+			]
+		},
+		{
+		"idEvent":"deadPlayerEvent",
+		"trigger":"deadPlayer",
+		"actions":
+			[
+			{"actionId":"defeat"}
+			]
+		}
+	]
+}

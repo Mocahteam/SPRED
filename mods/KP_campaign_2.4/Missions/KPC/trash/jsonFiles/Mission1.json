@@ -1,0 +1,150 @@
+{
+"armies" :
+	[
+		{
+		"faction" : "PLAYER",
+		"units" : 
+			[
+				{
+				"id":"unitID",
+				"visibleAtStart":"yes",
+				"type":"bit",
+				"position":
+					{
+					"positionId":"start",
+					"validZone":"no"
+					},
+				"orientation" :"n",
+				"health":{
+					"relativeValue":"0.25",
+					"autoHeal":"disabled"
+					}
+				}
+			]
+		}
+	],
+"settings":
+	{
+		"mouse":"disabled",
+		"health":{
+			"relativeValue":"0.25",
+			"autoHeal":"disabled"
+		},
+		"camera":
+		{
+			"auto":"enabled",
+			"specialPositions":
+			[
+				{
+				"positionId":"arrival"
+				}
+			]
+		}	
+	},
+"messages":
+	[
+		{
+		"id":"rallying",
+		"content":
+			{
+			"fr":"Point de ralliement",
+			"en":"Rallying point"
+			}
+		},
+		{
+		"id":"BRIEFING",
+		"content":
+			{
+			"fr":"Mission 1\n \n \nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final, nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la  \"guerre numérique\".\n \nUn rapport vous est parvenu vous indiquant qu'un BYTE (OCTET) se trouverait au point de ralliement (1983, 1279). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage...\n \n..gray..Appuyez sur Echap pour continuer",
+			"en":"Mission 1\n \n \nYou have to form and command a rapid deployment force in order to lightning strike an ennemy headquarters weakly defended. If you reach this final objective, ennemies will be desoriented and we will use this advantage to end this \"digital war\".\n \nYou received a report that indicates that a BYTE would be at the rallying point (1983, 1279). Move your single unit to this position for trying to rallying the solitary BYTE to our cause. Good luck...\n \n..gray..Press Escape to continue"	
+			}
+		}
+	],
+"positions":
+	[
+		{
+		"id":"arrival",
+		"coordinates":"absolute",
+		"x":"1983",
+		"z":"1279"
+		},
+		{
+		"id":"start",
+		"coordinates":"absolute",
+		"x":"1792",
+		"z":"1792"
+		}
+	],
+"conditions":
+	[
+		{
+		"id":"WellPlaced",
+		"object":"unitID",
+		"attribute":"position",
+		"value":
+			{
+			"positionId":"arrival",
+			"validZone":"100"
+			}
+		}
+	],
+"actions":
+	[
+		{
+		"id":"deadPlayer",
+		"object":"PLAYER",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all"
+			}
+		},
+		{
+		"id":"victory",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"end",
+		"outputState":"1111",
+		"result":"success"
+		},
+		{
+		"id":"arrivalMarker",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"marker",
+		"position":
+			{
+			"positionId":"arrival",
+			"validZone":"no"
+			},
+		"messageId":"rallying"
+		}	
+	],
+"events":
+	[
+		{
+		"idEvent":"WellPlacedEvent",
+		"trigger":"WellPlaced",
+		"actions":
+			[
+			{"actionId":"victory"}
+			]
+		},
+		{
+		"idEvent":"STARTEvent",
+		"trigger":"START",
+		"actions":
+			[
+			{"actionId":"arrivalMarker"}
+			]
+		},
+		{
+		"idEvent":"deadPlayerEvent",
+		"trigger":"deadPlayer",
+		"actions":
+			[
+			{"actionId":"defeat"}
+			]
+		}
+	]
+}

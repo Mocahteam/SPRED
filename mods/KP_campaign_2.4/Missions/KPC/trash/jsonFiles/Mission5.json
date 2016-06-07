@@ -1,0 +1,152 @@
+{
+"armies" :
+	[
+		{
+		"faction" : "PLAYER",
+		"units" : 
+			[
+			{"id":"playerBit1","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit2","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit3","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit4","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit5","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit6","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerBit7","visibleAtStart":"yes","type":"bit","position":{"positionId":"arrivalBit","validZone":"40"},"orientation" :"n"},
+			{"id":"playerByte1","visibleAtStart":"yes","type":"byte","position":{"positionId":"arrivalByte","validZone":"100"},"orientation" :"n"},
+			{"id":"playerByte2","visibleAtStart":"yes","type":"byte","position":{"positionId":"arrivalByte","validZone":"100"},"orientation" :"n"},
+			{"id":"playerByte3","visibleAtStart":"yes","type":"byte","position":{"positionId":"arrivalByte","validZone":"100"},"orientation" :"n"}		
+			]
+		}
+	],
+"settings":
+	{
+		"mouse":"disabled",
+		"globalAutoHeal":"disabled",
+		"health":{
+			"relativeValue":"0.25",
+			"autoHeal":"disabled"
+		},
+		"camera":
+		{
+			"auto":"enabled",
+			"specialPositions":
+			[
+				{"positionId":"positionAssembler"}
+			]
+		}	
+	},
+"messages":
+	[
+		{
+		"id":"rallyingTowardsAssembler",
+		"content":
+			{
+			"fr":"Point de ralliement\n(256, 1024)",
+			"en":"Rallying point\n(256, 1024)"
+			}
+		},
+		{
+		"id":"BRIEFING",
+		"content":
+			{
+			"fr":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \n..gray..Appuyez sur Echap pour continuer"
+			,
+			"en":"Mission 5\n \n \nAll units you control are weakened. You must repair them before starting a counter attack.\nThe latest ASSEMBLER available to repair your units is moving to the rallying point (256, 1024).\n \nMove all units to this position.\n \n..gray..Press Escape to continue"
+			}
+		}
+	],
+"positions":
+	[
+		{
+		"id":"arrivalBit",
+		"coordinates":"absolute",
+		"x":"1400",
+		"z":"1371"
+		},
+		{
+		"id":"arrivalByte",
+		"coordinates":"absolute",
+		"x":"479",
+		"z":"1825"
+		},
+		{
+		"id":"positionAssembler",
+		"coordinates":"absolute",
+		"x":"256",
+		"z":"1024"
+		}
+	],
+"conditions":
+	[
+		{
+		"id":"deadPlayer",
+		"object":"PLAYER",
+		"attribute":"dead",
+		"value":
+			{
+			"group":"all",
+			}
+		},
+		{
+		"id":"teamWellPlaced",
+		"object":"PLAYER",
+		"attribute":"position",
+		"value":
+			{
+			"group":"all",
+			"positionId":"positionAssembler",
+			"validZone":"200"
+			}
+		}
+	],
+"actions":
+	[
+		{
+		"id":"victory",
+		"toBeRepeated":"no",
+		"delay":"0",
+		"type":"end",
+		"outputState":"1111",
+		"result":"success"
+		},
+		{
+		"id":"arrivalAssemblerMarker",
+		"toBeRepeated":"no",
+		"delay":"1.5",
+		"type":"marker",
+		"position":
+			{
+			"positionId":"positionAssembler",
+			"validZone":"no"
+			},
+		"messageId":"rallyingTowardsAssembler"
+		}
+	]
+"events":
+	[
+		{
+		"idEvent":"WellPlacedEvent",
+		"trigger":"teamWellPlaced",
+		"actions":
+			[
+			{"actionId":"victory"}
+			]
+		},
+		{
+		"idEvent":"STARTEvent",
+		"trigger":"START",
+		"actions":
+			[
+			{"actionId":"arrivalAssemblerMarker"}
+			]
+		},
+		{
+		"idEvent":"deadPlayerEvent",
+		"trigger":"deadPlayer",
+		"actions":
+			[
+			{"actionId":"defeat"}
+			]
+		}
+	]
+}
