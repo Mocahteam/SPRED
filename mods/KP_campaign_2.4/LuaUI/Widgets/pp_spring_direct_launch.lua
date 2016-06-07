@@ -132,7 +132,7 @@ local function RunScenario(i)
       }
     }
     local contextFile=true
-    genericRestart("Missions/"..Game.modShortName.."/"..mission..".editor",options,contextFile)
+    genericRestart("Missions/"..mission..".editor",options,contextFile)
   else
     NoRestart()
   end
@@ -304,7 +304,7 @@ function missionMenu()
     file = "bitmaps/launcher/arrow.png"
   }
   UI.MapButtons = {}
-  local MissionsList=VFS.DirList("Missions/"..Game.modShortName)
+  local MissionsList=VFS.DirList("Missions")
   for i,MissionFileName in ipairs(MissionsList) do 
     local userMissionName=string.match(MissionFileName, '/([^/]*)%.')--match string between the last "/" and the "." of .editor 
     local mapButton = Chili.Button:New{
