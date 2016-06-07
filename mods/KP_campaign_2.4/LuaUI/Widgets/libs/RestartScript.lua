@@ -177,8 +177,8 @@ function genericRestart(missionName,operations,contextFile)
         local tableEditor=json.decode(sf)
         local txtFileContent=createFromScratch(tableEditor)
         updatedTxtFileContent=updateValues(txtFileContent, operations)
-        --Spring.Restart("-s",updatedTxtFileContent)
-        Spring.Reload(updatedTxtFileContent)
+        Spring.Restart("-s",updatedTxtFileContent)
+        --Spring.Reload(updatedTxtFileContent)
      else
         DoTheRestart("Missions/"..missionName.."txt", operations)  
      end
@@ -188,6 +188,7 @@ function genericRestart(missionName,operations,contextFile)
     elseif (string.sub(missionName, -6, -1)=="editor")then
       local sf=VFS.LoadFile(missionName)
       Spring.Echo("try to decode")
+      Spring.Echo(missionName)
       local tableEditor=json.decode(sf)
       Spring.Echo("decoded with success")
       local txtFileContent=createFromScratch(tableEditor)
@@ -196,7 +197,8 @@ function genericRestart(missionName,operations,contextFile)
         if(reloadAvailable) then
           Spring.Reload(updatedTxtFileContent) --(this line, yes)
         else
-          Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+        --Spring.Echo(updatedTxtFileContent)
+        Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
         end
     else
       Spring.Echo("Warning, pbm in restart script")

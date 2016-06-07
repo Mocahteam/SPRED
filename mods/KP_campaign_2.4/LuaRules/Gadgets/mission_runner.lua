@@ -76,7 +76,7 @@ function gadget:GamePreload()
     missionScript.parseJson()
   end
   if Spring.GetModOptions()["jsonlocation"]=="editor" then
-    local da=VFS.LoadFile("Missions/KPC/"..missionName..".editor")
+    local da=VFS.LoadFile("Missions/"..missionName..".editor")
     Spring.Echo("try to parse"..missionName)
     missionScript.parseJson(da)
   end

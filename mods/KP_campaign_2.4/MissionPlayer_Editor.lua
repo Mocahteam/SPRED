@@ -1285,6 +1285,7 @@ end
 
 -- shorthand for parseJson + StartAfterJson.
 local function Start(jsonFile) 
+  Spring.Echo(jsonFile)
   parseJson(jsonFile)
   StartAfterJson ()
 end
