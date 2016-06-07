@@ -116,7 +116,7 @@ local function RunScenario(i)
     AppliqManager:selectScenario(i)
     AppliqManager:startRoute()
     Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))    
-    local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
+    local mission=AppliqManager.currentActivityID
     local currentInput=AppliqManager:getCurrentInputName()
     Spring.Echo(currentInput)
     local options={
