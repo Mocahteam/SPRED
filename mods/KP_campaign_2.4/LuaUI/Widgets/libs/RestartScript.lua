@@ -1,5 +1,5 @@
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
-local reloadAvailable=tonumber(Game.version)>=99
+local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99) -- nil test is made because prior to v92 Game.Version is an ugly string (e.g 0.82)
 
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
