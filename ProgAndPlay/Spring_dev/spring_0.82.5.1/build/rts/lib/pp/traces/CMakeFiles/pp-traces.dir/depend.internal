@@ -774,10 +774,37 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj
  ../mingwlibs/include/boost/type_traits/remove_cv.hpp
  ../mingwlibs/include/boost/type_traits/remove_reference.hpp
  ../mingwlibs/include/boost/type_traits/type_with_alignment.hpp
+ ../mingwlibs/include/rapidjson/allocators.h
+ ../mingwlibs/include/rapidjson/document.h
+ ../mingwlibs/include/rapidjson/encodedstream.h
+ ../mingwlibs/include/rapidjson/encodings.h
+ ../mingwlibs/include/rapidjson/error/error.h
+ ../mingwlibs/include/rapidjson/internal/../allocators.h
+ ../mingwlibs/include/rapidjson/internal/../msinttypes/inttypes.h
+ ../mingwlibs/include/rapidjson/internal/../msinttypes/stdint.h
+ ../mingwlibs/include/rapidjson/internal/../rapidjson.h
+ ../mingwlibs/include/rapidjson/internal/../stream.h
+ ../mingwlibs/include/rapidjson/internal/biginteger.h
+ ../mingwlibs/include/rapidjson/internal/diyfp.h
+ ../mingwlibs/include/rapidjson/internal/ieee754.h
+ ../mingwlibs/include/rapidjson/internal/meta.h
+ ../mingwlibs/include/rapidjson/internal/pow10.h
+ ../mingwlibs/include/rapidjson/internal/stack.h
+ ../mingwlibs/include/rapidjson/internal/strfunc.h
+ ../mingwlibs/include/rapidjson/internal/strtod.h
+ ../mingwlibs/include/rapidjson/internal/swap.h
+ ../mingwlibs/include/rapidjson/memorystream.h
+ ../mingwlibs/include/rapidjson/rapidjson.h
+ ../mingwlibs/include/rapidjson/reader.h
+ ../mingwlibs/include/rapidjson/stream.h
+ ../mingwlibs/include/rapidxml-1.13/rapidxml.hpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Call.h
  C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Event.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/EventDef.h
  C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.cpp
  C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
  C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.h
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Trace.cpp.obj
  ../mingwlibs/include/boost/assert.hpp
  ../mingwlibs/include/boost/checked_delete.hpp

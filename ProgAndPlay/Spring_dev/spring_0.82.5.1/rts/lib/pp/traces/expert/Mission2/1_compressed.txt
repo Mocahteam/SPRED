@@ -1,0 +1,11 @@
+mission name : Mission2
+mission start time : 1463495024
+	execution start time : 1463495029
+		PP_Open
+		PP_GetUnitAt 0 0 - 1525
+		PP_Unit_GetPosition 1525_4 - 1983 1279
+		PP_Unit_ActionOnPosition 1525_4 10 1056 1792
+		PP_Close
+	execution end time : 1463495029
+status : won
+mission end time : 1463495041

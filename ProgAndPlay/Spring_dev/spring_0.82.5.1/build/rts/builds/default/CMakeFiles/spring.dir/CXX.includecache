@@ -16769,10 +16769,14 @@ GameController.h
 ../rts/Game/ProgAndPlay.h
 Sim/Units/Unit.h
 ../rts/Game/Sim/Units/Unit.h
+Sim/Misc/GlobalConstants.h
+../rts/Game/Sim/Misc/GlobalConstants.h
 ctime
 -
 lib/pp/traces/TracesParser.h
 ../rts/Game/lib/pp/traces/TracesParser.h
+lib/pp/traces/TracesAnalyser.h
+../rts/Game/lib/pp/traces/TracesAnalyser.h
 boost/thread.hpp
 -
 
@@ -19857,8 +19861,6 @@ Sequence.h
 ../rts/lib/pp/traces/Sequence.h
 
 ../rts/lib/pp/traces/CallDef.h
-stdarg.h
--
 cmath
 -
 boost/lexical_cast.hpp
@@ -19881,6 +19883,8 @@ boost/lexical_cast.hpp
 ../rts/lib/pp/traces/Sequence.h
 iostream
 -
+sstream
+-
 stack
 -
 vector
@@ -19888,6 +19892,8 @@ vector
 algorithm
 -
 map
+-
+cmath
 -
 boost/lexical_cast.hpp
 -
@@ -19907,6 +19913,38 @@ boost/shared_ptr.hpp
 -
 boost/make_shared.hpp
 -
+
+../rts/lib/pp/traces/TracesAnalyser.h
+iostream
+-
+cstdlib
+-
+ctime
+-
+dirent.h
+-
+vector
+-
+map
+-
+stack
+-
+limits
+-
+algorithm
+-
+rapidxml-1.13/rapidxml.hpp
+-
+Trace.h
+../rts/lib/pp/traces/Trace.h
+Call.h
+../rts/lib/pp/traces/Call.h
+Sequence.h
+../rts/lib/pp/traces/Sequence.h
+Event.h
+../rts/lib/pp/traces/Event.h
+EventDef.h
+../rts/lib/pp/traces/EventDef.h
 
 ../rts/lib/pp/traces/TracesParser.h
 iostream
@@ -22251,10 +22289,14 @@ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/G
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/ProgAndPlay.h
 Sim/Units/Unit.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Sim/Units/Unit.h
+Sim/Misc/GlobalConstants.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Sim/Misc/GlobalConstants.h
 ctime
 -
 lib/pp/traces/TracesParser.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/lib/pp/traces/TracesParser.h
+lib/pp/traces/TracesAnalyser.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/lib/pp/traces/TracesAnalyser.h
 boost/thread.hpp
 -
 

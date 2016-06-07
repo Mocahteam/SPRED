@@ -234,7 +234,6 @@ function gadget:GameFrame( frameNumber )
 		end
 	elseif initialize then
 		initialize = false
-		Spring.Echo('salut')
 		local cmdList = {}
 		local cmdListUnit = {}
 		for id, unitDef in pairs(UnitDefs) do
@@ -256,6 +255,7 @@ function gadget:GameFrame( frameNumber )
 			Spring.DestroyUnit(id, true, true)
 		end
 		SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
+		SendToUnsynced("finishedLoading")
 	end
 end
 --------------------------------------------------------------------------------
@@ -279,7 +279,7 @@ function gadget:RecvFromSynced(msg)
 		Script.LuaUI.requestSave()
 	end
 	if msgContents[1] == "commands" then
-		Script.LuaUI.getCommandsList(msgContents[2], msgContents[3])
+		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3])
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2])

@@ -16,47 +16,65 @@
 #include "Trace.h"
 #include "Sequence.h"
 
-typedef std::vector<std::string> string_vector;
+#define PARAMS_FILENAME "params.json"
+#define IN_GAME_DATA_DIRNAME "traces\\data\\"
+
+#define EDIT_MATCH_SCORE 0
+#define EDIT_MISMATCH_SCORE 1
+#define EDIT_GAP_SCORE 1
 
 class ParamsMap {
-	
-	std::map<std::string,string_vector> map;
 		
 public:
 
-	ParamsMap() {
-		std::ifstream ifs("params.json", std::ios::binary);
-		if (ifs.good()) {
-			std::stringstream ss;
-			ss << ifs.rdbuf();
-			rapidjson::Document doc;
-			doc.Parse(ss.str().c_str());
-			if (doc.IsObject()) {
-				for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
-					string_vector v;
-					for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
-						if (_it->value.GetType() == 2) {
-							//_it->value.GetType() is equal to true
-							v.push_back(_it->name.GetString());
+	ParamsMap() : loaded(false) {}
+	
+	void initMap(bool in_game) {
+		if (!loaded) {
+			std::string filename = PARAMS_FILENAME;
+			if (in_game)
+				filename.insert(0,IN_GAME_DATA_DIRNAME);
+			std::ifstream ifs(filename.c_str(), std::ios::binary);
+			if (ifs.good()) {
+				std::stringstream ss;
+				ss << ifs.rdbuf();
+				rapidjson::Document doc;
+				doc.Parse(ss.str().c_str());
+				if (doc.IsObject()) {
+					for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
+						string_vector v;
+						for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
+							if (_it->value.IsBool() && _it->value.GetBool())
+								v.push_back(_it->name.GetString());
 						}
+						map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
 					}
-					map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
+					loaded = true;
 				}
 			}
+			else
+				throw std::runtime_error("cannot open JSON params file");
 		}
-		else
-			throw std::runtime_error("cannot open JSON params file");
 	}
 	
 	bool contains(std::string label, std::string param) const {
 		return map.find(label) != map.end() && std::find(map.at(label).begin(), map.at(label).end(), param) != map.at(label).end();
 	}
 	
+private:
+
+	typedef std::vector<std::string> string_vector;
+	std::map<std::string,string_vector> map;
+	bool loaded;
+	
 };
 
 class Call : public Trace {
 	
 public:
+
+	typedef boost::shared_ptr<Call> sp_call;
+	typedef std::vector<sp_call> call_vector;
 
 	enum ErrorType {
 		NONE = -1,
@@ -67,29 +85,37 @@ public:
 		WRONG_POSITION
 	};
 		
-	Call(std::string label, ErrorType err = NONE);
+	Call(std::string label, ErrorType err);
 	
-	static const char* errorsArr[6];
-	static const ParamsMap paramsMap;
+	static const char* errorsArr[];
+	static const char* noParamCallLabelsArr[];
+	static const char* unitCallLabelsArr[];
+	static ParamsMap paramsMap;
 	
 	static ErrorType getErrorType(const char *ch);
 	static const char* getErrorLabel(ErrorType err);
+	static call_vector getCalls(const std::vector<Trace::sp_trace>& traces, bool setMod = false);
 	
 	virtual unsigned int length() const;
-	virtual bool operator==(Trace* t);
+	virtual bool operator==(Trace *t) const;
+	virtual void filterCall(const Call *c);
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual std::string getParams() const = 0;
+	
+	double getEditDistance(const Call *c) const;
 	
 	std::string getLabel() const;
 	ErrorType getError() const;
 	bool addReturnCode(float code);
 	std::string getReturn() const;
-	bool compareReturn(Call *c) const;
-	void setIndRet();
+	bool compareReturn(const Call *c) const;
+	void setNoReturn();
 	
 protected:
 
-	virtual bool compare(Call *c) = 0;
+	virtual bool compare(const Call *c) const = 0;
+	virtual void filter(const Call *c) = 0;
+	virtual std::pair<int,int> distance(const Call *c) const = 0;
 	
 	std::string label;
 	ErrorType error;

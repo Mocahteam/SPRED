@@ -1,4 +1,5 @@
 #include "Sequence.h"
+#include "TracesAnalyser.h"
 
 Sequence::Sequence(): Trace(SEQUENCE), num(0), pt(0), valid(false), endReached(false), shared(false) {}
 
@@ -17,7 +18,7 @@ Sequence::Sequence(sp_sequence sps_up, sp_sequence sps_down): Trace(SEQUENCE), p
 	updateNumMap(sps_down->getNumMap());
 }
 
-bool Sequence::operator==(Trace *t) {
+bool Sequence::operator==(Trace *t) const {
 	bool res = false;
 	if (t->isSequence()) {
 		Sequence *s = dynamic_cast<Sequence*>(t);
@@ -30,6 +31,12 @@ bool Sequence::operator==(Trace *t) {
 		}
 	}
 	return res;
+}
+
+void Sequence::resetAligned() {
+	Trace::resetAligned();
+	for (unsigned int i = 0; i < traces.size(); i++)
+		traces.at(i)->resetAligned();
 }
 
 bool Sequence::compare(Trace* t) {
@@ -94,13 +101,31 @@ bool Sequence::compare(Trace* t) {
 	return res;
 }
 
+//Version alternative de compare
+// bool Sequence::compare(Trace* t) {
+	// bool res = false;
+	// if (t->isSequence()) {
+		// Sequence *s = dynamic_cast<Sequence*>(t);
+		// Call::call_vector calls = Call::getCalls(getTraces());
+		// Call::call_vector s_calls = Call::getCalls(s->getTraces());
+		// if (calls.size() == s_calls.size()) {
+			// res = true;
+			// for (unsigned int i = 0; res && i < calls.size(); i++) {
+				// if (!calls.at(i)->operator==(s_calls.at(i).get()))
+					// res = false;
+			// }
+		// }
+	// }
+	// return res;
+// }
+
 void Sequence::display(std::ostream &os) const {
 	numTab++;
 	for (int i = 0; i < numTab; i++)
 		os << "\t";
 	if (delayed)
 		os << "delayed ";
-	os << "Sequence < " << getNumMapString() << " >" << std::endl;
+	os << "Sequence < " << getNumMapString(getPercentageNumMap()) << " >" << std::endl;
 	for (unsigned int i = 0; i < traces.size(); i++)
 		traces.at(i)->display(os);
 	numTab--;
@@ -113,34 +138,7 @@ unsigned int Sequence::length() const {
 	return len;
 }
 
-void Sequence::removeRedundancies(std::vector<sp_trace>& traces) {
-	int cpt;
-	sp_sequence sps;
-	std::vector<sp_trace>::iterator it = traces.begin();
-	while (it != traces.end()) {
-		if ((*it)->isSequence()) {
-			sps = boost::dynamic_pointer_cast<Sequence>(*it);
-			sps->removeRedundancies(sps->getTraces());
-		}
-		else if (!(*it)->isEvent() || Trace::inArray(boost::dynamic_pointer_cast<Event>(*it)->getLabel().c_str(), Event::noConcatEventsArr) == -1) {
-			std::vector<sp_trace>::iterator _it = it+1;
-			cpt = 1;
-			while (_it != traces.end() && (*it)->operator==((*_it).get())) {
-				cpt++;
-				_it++;
-			}
-			if (cpt > 1) {
-				sps = boost::make_shared<Sequence>(cpt);
-				sps->addTrace(*it);
-				traces.erase(it,_it);
-				it = traces.insert(it,sps);
-			}
-		}
-		it++;
-	}
-}
-
-std::vector<sp_trace>& Sequence::getTraces() {
+std::vector<Trace::sp_trace>& Sequence::getTraces() {
 	return traces;
 }
 
@@ -157,16 +155,16 @@ unsigned int Sequence::size() const {
 	return traces.size();
 }
 
-const sp_trace& Sequence::at(unsigned int i) const {
+const Trace::sp_trace& Sequence::at(unsigned int i) const {
 	return traces.at(i);
 }
 
-void Sequence::addTrace(const sp_trace& spt) {
+void Sequence::addTrace(const Trace::sp_trace& spt) {
 	traces.push_back(spt);
 }
 
-const sp_trace& Sequence::next() {
-	const sp_trace& spt = traces.at(pt++);
+const Trace::sp_trace& Sequence::next() {
+	const Trace::sp_trace& spt = traces.at(pt++);
 	if (pt == traces.size()) {
 		pt = 0;
 		endReached = true;
@@ -260,16 +258,18 @@ const std::map<unsigned int,unsigned int>& Sequence::getNumMap() const {
 	return numMap;
 }
 
-std::string Sequence::getNumMapString() const {
-	std::string s = "";
+std::map<unsigned int,double> Sequence::getPercentageNumMap() const {
+	std::map<unsigned int,double> pNumMap;
 	std::map<unsigned int,unsigned int>::const_iterator it = numMap.begin();
-	while (it != numMap.end()) {
-		if (it != numMap.begin())
-			s += " ";
-		s += boost::lexical_cast<std::string>(it->first) + ":" + boost::lexical_cast<std::string>(it->second);
+	double sum = 0;
+	while(it != numMap.end())
+		sum += (it++)->second;
+	it = numMap.begin();
+	while(it != numMap.end()) {
+		pNumMap.insert(std::make_pair<unsigned int,double>(it->first,it->second/sum));
 		it++;
 	}
-	return s;
+	return pNumMap;
 }
 
 void Sequence::updateNumMap(unsigned int num, int update) {
@@ -288,4 +288,25 @@ void Sequence::updateNumMap(const std::map<unsigned int,unsigned int>& numMap) {
 		updateNumMap(it->first,it->second);
 		it++;
 	}
+}
+
+void Sequence::completeNumMap(const Sequence::sp_sequence& sps) {
+	unsigned int num = 0;
+	std::map<unsigned int,unsigned int>::const_iterator it = sps->getNumMap().begin();
+	while(it != sps->getNumMap().end()) {
+		num += it->first * it->second;
+		it++;
+	}
+	if (numMap.find(1) != numMap.end()) {
+		it = numMap.begin();
+		while (it != numMap.end()) {
+			num -= it->second;
+			it++;
+		}
+		updateNumMap(1,num);
+	}
+}
+
+bool Sequence::isImplicit() {
+	return numMap.size() == 1 && numMap.find(1) != numMap.end() && numMap.at(1) == 1;
 }

@@ -1017,7 +1017,7 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
 						ret = -1;
-						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParams " << idCmd;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetNumParams " << idCmd;
 					}
 				}
 				else {

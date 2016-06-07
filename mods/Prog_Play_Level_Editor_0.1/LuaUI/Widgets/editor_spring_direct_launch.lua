@@ -59,6 +59,9 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
+	if not Spring.GetModOptions().editor then
+		widgetHandler:EnableWidget("Editor Loading Screen")
+	end
 	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
@@ -202,16 +205,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 end
 
 function InitializeMapList() -- Initialization of maps
-	if Game.version == "0.82.5.1" then -- In the older version, the maps are read in the maps/ directory and their names are written in the list
-		MapList = VFS.DirList("maps/", "*.sd*", VFS.RAW)
-		for i, map in ipairs(MapList) do
-			map = string.gsub(map, "maps\\", "")
-			map = string.gsub(map, "%.sd.*", "")
-			MapList[i] = map
-		end
-	else
-		MapList = VFS.GetMaps()
-	end
+	MapList = VFS.GetMaps()
 end
 
 function InitializeLevelList() -- Initialization of levels
@@ -1070,19 +1064,23 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
-				["Mapname"] = map
+				["Mapname"] = map,
+				["Gametype"] = Game.modName
 			}
 		}
+		Spring.Echo(Game.modName)
 		DoTheRestart("LevelEditor.txt", operations)
 	else
 		local operations = {
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
 			},
 			["GAME"] = {
 				["Mapname"] = map,
@@ -1103,10 +1101,12 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
-					["Mapname"] = levelFile.description.map
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
 			}
 			DoTheRestart("LevelEditor.txt", operations)
@@ -1116,7 +1116,8 @@ function EditMission(level) -- Start editor with selected mission
 					["language"] = Language,
 					["scenario"] = "noScenario",
 					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = Script.LuaUI.getCommandsList()
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -1444,13 +1445,15 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage:Dispose()
 		UI.Scenario.BeginExportationMessage = nil
 	end
+	
+	-- Generate name
 	local name = generateSaveName(ScenarioName)
 	local alreadyExists = false
-	if VFS.FileExists("games/"..name..".sdz") then
+	if VFS.FileExists("games/"..name..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..name..".sdz")) then
 		alreadyExists = true
 		local count = 1
 		local newName = name.."(1)"
-		while VFS.FileExists("games/"..newName..".sdz") do
+		while VFS.FileExists("games/"..newName..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..newName..".sdz")) do
 			count = count + 1
 			newName = name.."("..tostring(count)..")"
 		end
@@ -1470,55 +1473,96 @@ function BeginExportGame()
 			end
 		end
 	end
-	-- Add levels and scenario
-	os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
-	for i, level in ipairs(levelList) do
-		os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
-	end
-	-- Compress
-	VFS.CompressFolder("pp_editor/game_files")
-	os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
-	-- Remove levels and scenario
-	os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
-	for i, level in ipairs(levelList) do
-		os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
-	end
-		
-	-- Show message
-	if not alreadyExists then
-		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
-		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-		UI.Scenario.ConfirmationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = message,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				color = { 0.2, 1, 0.2, 1 }
+	
+	local exportSuccess = false
+	
+	if Game.version == "0.82.5.1" then
+		if VFS.BuildPPGame then
+			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList)
+			exportSuccess = true
+		else
+			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
 			}
-		}
+		end
 	else
-		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
-		message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-		UI.Scenario.ConfirmationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = message,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				color = { 1, 0.2, 0.2, 1 }
+		-- Change Modinfo.lua
+		local maingame = Spring.GetModOptions().maingame
+		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
+		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
+		file:write(modInfo)
+		file:close()
+		
+		-- Add levels and scenario
+		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
+		for i, level in ipairs(levelList) do
+			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+		end
+		
+		-- Compress
+		if not VFS.FileExists("pp_editor/game_files.sdz") then
+			VFS.CompressFolder("pp_editor/game_files")
+			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+		end
+		
+		-- Remove levels and scenario
+		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		for i, level in ipairs(levelList) do
+			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+		end
+		
+		exportSuccess = true
+	end
+	
+	if exportSuccess then
+		-- Show message
+		if not alreadyExists then
+			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 0.2, 1, 0.2, 1 }
+				}
 			}
-		}
+		else
+			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			UI.Scenario.ConfirmationMessage = Chili.Label:New{
+				parent = UI.MainWindow,
+				x = "20%",
+				y = "95%",
+				width = "60%",
+				height = "5%",
+				caption = message,
+				align = "center",
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 25,
+					color = { 1, 0.2, 0.2, 1 }
+				}
+			}
+		end
 	end
 end
 
