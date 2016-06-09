@@ -59,6 +59,7 @@ local victory = "You won the mission"
 local victoryCampaign = "Congratulations !!! You complete the campaign"
 local loss = "You lost the mission"
 local continue = "continue"
+local saveProgression="Save progression"
 if lang == "fr" then
   continue= "continuer"
 	previousMission = "Mission précédente"
@@ -71,9 +72,13 @@ if lang == "fr" then
 	victory = "Vous avez gagné la mission"
 	victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
 	loss = "Vous avez perdu la mission"
+  saveProgression="Sauvegarder"
 end
 
-
+local activateSave=false
+if mode=="appliq" and AppliqManager~=nil then
+  activateSave=true
+end
 -- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
 local function createTmpFile()
 	if not VFS.FileExists("mission_ended.conf") then
@@ -164,6 +169,15 @@ local template_endMission = {
 				end
 			end
 		},
+		-- the save progression Tab
+    {preset = function(tab)
+        tab.title = saveProgression
+        tab.position = "right"
+        tab.OnClick = function()
+          Spring.Echo("try to save")
+        end
+      end
+    },
 		-- The closeMenu tab
 		{preset = function(tab)
 				tab.title = closeMenu
@@ -219,6 +233,7 @@ local briefing = nil
 local tutoPopup = false
 
 function MissionEvent(e)
+  Spring.Echo("try event")
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
 		if tutoPopup then
@@ -420,6 +435,9 @@ end
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
+	  Spring.Echo("escape pushed")
+	  Spring.Echo(briefing)
+	  Spring.Echo(winPopup)
 		if not WG.rooms.Video.closed then
 			WG.rooms.Video:Close()
 			if briefing ~= nil then
@@ -430,6 +448,7 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 				WG.rooms.TutoView:Close()
 			end
 			if winPopup == nil then
+			 Spring.Echo("launch event")
 				local event = {logicType = "ShowMissionMenu",
 								state = "menu"}
 				MissionEvent (event)
