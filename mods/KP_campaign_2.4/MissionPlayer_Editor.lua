@@ -1090,19 +1090,20 @@ local function parseJson(jsonFile)
   ctx.canUpdate=true
   ctx.mission=json.decode(jsonFile)
   -- desactivate widget
+  local widgetWithForcedState={["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true}
+  
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
-    local activation=ctx.mission.description.widgets[i].active
-    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+    if(widgetWithForcedState.widgetName==nil)then
+      local activation=ctx.mission.description.widgets[i].active
+      SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+    end
   end
   
   -- Required widgets for Prog&Play   
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="Display Message",activation=true}))
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="Hide commands",activation=true}))
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="Messenger",activation=true})) 
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="Mission GUI",activation=true}))
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="Spring Direct Launch 2 for Prog&Play",activation=true}))
-  SendToUnsynced("changeWidgetState", json.encode({widgetName="CA Interface",activation=true}))
+  for name, activ in pairs(widgetWithForcedState) do
+    SendToUnsynced("changeWidgetState", json.encode({widgetName=name,activation=activ}))
+  end
   
   
   return true
