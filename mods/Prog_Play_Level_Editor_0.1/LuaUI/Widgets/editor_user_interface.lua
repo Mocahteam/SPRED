@@ -1166,7 +1166,9 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function updateUnitWindow()
+
+
+function updateUnitWindow() -- Display buttons to choose the type of the unit the user wants to instanciate.
 	removeElements(unitScrollPanel, unitButtons, true)
 	local button_size = 40
 	local y = 0
@@ -1209,7 +1211,8 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 		selectionRect:Dispose()
 	end
 	if plotSelection then -- only draw it when mouse button 1 is down and global state is selection
-		-- compute good values for x1, x2, y1, y2, regarding respective anchors
+		-- to draw the rectangle, we need the x and y of the top-left corner and the x and y of the bottom-right corner of the rectangle
+		-- be careful about anchors : spring's and openGL's (0,0) is bottom-left corner whereas Chili's (0,0) is top-left corner !
 		local x1, x2, y1, y2 = 0, 0, screenSizeY, screenSizeY
 		if (drawStartX <= drawEndX and drawStartY <= drawEndY) then
 			x1 = drawStartX
@@ -1269,7 +1272,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 		if i == 1 and unitHP[u] then
 			hpPercent = tostring(unitHP[u])
 		end
-		if hpPercent ~= tostring(unitHP[u]) then
+		if hpPercent ~= tostring(unitHP[u]) then -- only initialize this field if every unit of the selection have the same value
 			hpPercent = ""
 			break
 		end
@@ -1283,7 +1286,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 		if i == 1 and unitAutoHeal[u] then
 			autoHealStatus = unitAutoHeal[u]
 		end
-		if autoHealStatus ~= unitAutoHeal[u] then
+		if autoHealStatus ~= unitAutoHeal[u] then -- only initialize this field if every unit of the selection have the same value
 			autoHealStatus = ""
 			break
 		end
@@ -1307,7 +1310,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	local team = Spring.GetUnitTeam(unitSelection[1])
 	for i, t in ipairs(comboBoxItems) do
 		if t == teamName[team] then
-			teamComboBox:Select(i)
+			teamComboBox:Select(i) -- initialize this field to the team of the first unit
 			break
 		end
 	end
@@ -1315,7 +1318,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
 
-function showUnitsInformation() -- Show information about selected and hovered units
+function showUnitsInformation() -- Show information (ID and position) about selected and hovered units
 	gl.BeginText()
 	local unitSelection = Spring.GetSelectedUnits()
 	for i, u in ipairs(unitSelection) do
@@ -1398,7 +1401,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 	end
 end
 
-function updateSelectTeamButtons()
+function updateSelectTeamButtons() -- Update the buttons used to select a team before instanciating a unit
 	if updateTeamButtons then
 		removeElements(windows["unitWindow"], teamButtons, true)
 		local count = 0
@@ -1425,7 +1428,7 @@ function updateSelectTeamButtons()
 	end
 end
 
-function updateUnitList(forceUpdate) -- When a unit is created, update the two units lists (on the screen and in the unit groups frame)
+function updateUnitList(forceUpdate) -- When a unit is created, update the left unit list
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitTotal or forceUpdate then
 		-- Clear UI elements
@@ -1464,7 +1467,7 @@ function updateUnitList(forceUpdate) -- When a unit is created, update the two u
 	end
 end
 
-function updateGroupListUnitList()
+function updateGroupListUnitList() -- When a unit is created, update group frame unit list
 	local units = Spring.GetAllUnits()
 	if units.n ~= unitGroupsUnitTotal then
 		-- Clear UI elements
@@ -1540,6 +1543,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		for k, group in pairs(unitGroups) do
 			local x, y
 			-- Compute x and y depending on the number of groups
+			-- Place the first four groups next to each other, and then place the following under the column with the least height
 			if count < 4 then
 				x = 300 * count
 				y = 0
@@ -1728,7 +1732,7 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function computeZoneWorldCoords()
+function computeZoneWorldCoords() -- Compute world coordinates of the mouse when drawing a zone
 	local _,varA = Spring.TraceScreenRay(drawStartX, drawStartY, true, true) -- compute world's coords of the beginning of the draw
 	local _, varB = Spring.TraceScreenRay(drawEndX, drawEndY, true, true) -- compute world's coords of the end of the draw
 	if varA ~= nil and varB ~= nil then
@@ -1786,8 +1790,8 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 	end
 end
 
-function displayZones()
-	for i, z in ipairs(zoneList) do -- render every other zones that are displayed
+function displayZones() -- Render every zones that are displayed
+	for i, z in ipairs(zoneList) do 
 		if z.shown and z.type == "Rectangle" then
 			gl.Color(z.red, z.green, z.blue, 0.5)
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
@@ -1795,13 +1799,13 @@ function displayZones()
 			gl.Color(z.red, z.green, z.blue, 0.5)
 			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 50)
 		elseif not z.shown and z == selectedZone then
-			selectedZone = nil
+			selectedZone = nil -- Deselect hidden zone
 		end
 	end
 end
 
-function displaySelectedZoneAnchors()
-	if selectedZone ~= nil then -- if a zone is selected, render its border
+function displaySelectedZoneAnchors() -- Render the border of the selected zone (in order to change its size)
+	if selectedZone ~= nil then
 		gl.Color(selectedZone.red, selectedZone.green, selectedZone.blue, 0.7)
 		if selectedZone.type == "Rectangle" then
 			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z1, selectedZone.x1+8, selectedZone.z2)
@@ -1816,7 +1820,7 @@ end
 
 function showZoneInformation() -- Show each displayed zone name and top-left/bottom-right positions of selected zone
 	gl.BeginText()
-	if selectedZone ~= nil then
+	if selectedZone ~= nil then -- Selected zone (coordinates)
 		if selectedZone.type == "Rectangle" then
 			local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
 			local text =  "("..tostring(selectedZone.x1)..", "..tostring(selectedZone.z1)..")"
@@ -1843,7 +1847,7 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 			gl.Text(text, x, y, 15, "s")
 		end
 	end
-	for i, z in ipairs(zoneList) do
+	for i, z in ipairs(zoneList) do -- Every zones (name)
 		if z.shown then
 			local x, y
 			if z.type == "Rectangle" then
@@ -1875,7 +1879,7 @@ function getClickedZone(mx, my) -- Returns the clicked zone if it exists, else n
 	if var ~= nil then
 		local x, _, z = unpack(var)
 		for i, _ in ipairs(zoneList) do
-			local index = 1 + ((i - 1 + zoneIndex) % #zoneList)
+			local index = 1 + ((i - 1 + zoneIndex) % #zoneList) -- circular selection (if the user clicks on a zone masked by the selected zone, select the first zone)
 			local zone = zoneList[index]
 			if zone.type == "Rectangle" then
 				if x >= zone.x1 and x <= zone.x2 and z >= zone.z1 and z <= zone.z2 then -- check if we clicked in a zone
@@ -1899,7 +1903,7 @@ function getZoneSide(x, z) -- Returns the clicked side of the selected zone
 		local left = x - selectedZone.x1
 		local right = selectedZone.x2 - x
 		local top = z - selectedZone.z1
-		local bottom = selectedZone.z2 - z -- these variable represent the distance between where the user clicked and the borders of the selected zone
+		local bottom = selectedZone.z2 - z -- these variables represent the distance between where the user clicked and the borders of the selected zone
 		if left >= 0 and left <= 8 then -- if this distance is less than 8, return the clicked border
 			if top >= 0 and top <= 8 then
 				side = "TOPLEFT"
@@ -1953,7 +1957,7 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 				selectedZone.x2 = selectedZone.x2 + dx
 				zoneAnchorX = zoneAnchorX + dx
 			else
-				applyChangesToSelectedZone(dx-sign(dx)*8, 0)
+				applyChangesToSelectedZone(dx-sign(dx)*8, 0) 	-- This recursive call has been made in order to make moving and resizing feel better user-wise (even if the user moves the mouse too fast). It also allows the zones to be expanded to the border of the map.
 			end
 			if selectedZone.z1 + dz > 0 and selectedZone.z2 + dz < Game.mapSizeZ then
 				selectedZone.z1 = selectedZone.z1 + dz
@@ -2131,7 +2135,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		zoneIndex = 0
 	end
 	if windows['zonesAttributes'] and zoneStateMachine:getCurrentState() ~= zoneStateMachine.states.ATTR then
-		showZonesSpecialAttributesWindow()
+		showZonesSpecialAttributesWindow() -- Remove the zone attributes window when not in right state
 	end
 end
 
@@ -2182,7 +2186,7 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function updateAllyTeamPanels()
+function updateAllyTeamPanels() -- Update the ally team window
 	for k, at in pairs(allyTeams) do
 		if tableLength(at) ~= allyTeamsSize[k] then -- Update panel when the size of an allyteam changed
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamButtons[k], true)
@@ -2200,7 +2204,7 @@ function updateAllyTeamPanels()
 		end
 	end
 	
-	if updateAllyTeam then
+	if updateAllyTeam then -- Update left list
 		removeElements(forcesWindows.allyTeamsWindow, allyTeamPanels, false)
 		removeElements(teamListScrollPanel, allyTeamsListButtons, true)
 		removeElements(teamListScrollPanel, allyTeamsListLabels, true)
@@ -2237,13 +2241,13 @@ function removeTeamFromAllyTeam(allyTeam, team)
 	saveState()
 end
 
-function removeTeamFromTables(team)
+function removeTeamFromTables(team) -- Remove disabled team from allyteams
 	for k, at in pairs(allyTeams) do
 		removeTeamFromAllyTeam(k, team)
 	end
 end
 
-function updateTeamsWindows()
+function updateTeamsWindows() -- When the number of enabled teams changes, ask other windows to update themselves the next time they are shown
 	local enabledTeamsCount = 0 -- count the number of enabled teams
 	for k, enabled in pairs(enabledTeams) do
 		if enabled then
@@ -2252,14 +2256,14 @@ function updateTeamsWindows()
 	end
 	
 	if enabledTeamsCount ~= enabledTeamsTotal then -- update every windows
-		updateTeamButtons = true
-		updateTeamConfig = true
-		updateAllyTeam = true
+		updateTeamButtons = true -- Team selection when instanciating units
+		updateTeamConfig = true -- Team settings
+		updateAllyTeam = true -- Ally teams
 		enabledTeamsTotal = enabledTeamsCount
 	end
 end
 
-function updateTeamConfigPanels()
+function updateTeamConfigPanels() -- Update panels when teams become enabled/disabled
 	if updateTeamConfig then
 		for k, l in pairs(teamControlLabels) do
 			teamConfigPanels[k]:RemoveChild(l)
@@ -2304,11 +2308,11 @@ function updateTeamConfigPanels()
 		updateTeamConfig = false
 	end
 	for i, t in ipairs(teamStateMachine.states) do
-		if teamName[t] ~= teamNameEditBoxes[t].text then
+		if teamName[t] ~= teamNameEditBoxes[t].text then -- Update the name of the teams
 			teamName[t] = teamNameEditBoxes[t].text
 			updateAllyTeam = true
 		end
-		if teamAIElements.teamAI[t] ~= teamAIElements.teamAIEditBoxes[t].text then
+		if teamAIElements.teamAI[t] ~= teamAIElements.teamAIEditBoxes[t].text then -- Update the AI of the computer controlled teams
 			teamAIElements.teamAI[t] = teamAIElements.teamAIEditBoxes[t].text
 		end
 	end
@@ -2333,7 +2337,7 @@ function createNewEvent()
 	event.comment = ""
 	table.insert(events, event)
 	
-	eventNumber = eventNumber + 1
+	eventNumber = eventNumber + 1 -- increment id for future events
 	conditionButtons[event.id] = {}
 	deleteConditionButtons[event.id] = {}
 	actionButtons[event.id] = {}
@@ -2588,10 +2592,10 @@ end
 
 function currentConditionFrame() -- Force update on the condition frame when switching condition
 	if currentCondition then
-		dontUpdateComboBox = true
+		dontUpdateComboBox = true -- Lock to prevent the callback of some comboboxes
 		local c = events[currentEvent].conditions[currentCondition]
 		conditionNameEditBox:SetText(c.name)
-		if c.type then
+		if c.type then -- if the condition already exists and has a type, select this type in the combobox
 			for i, condition in ipairs(conditions_list) do
 				if condition.type == c.type then
 					conditionFilterComboBox:Select(1)
@@ -2710,12 +2714,12 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 		local condition_template
 		for i, condition in pairs(conditions_list) do
 			if condition.type == a.type then
-				condition_template = condition
+				condition_template = condition -- get the template of the selected condition
 				break
 			end
 		end
 		conditionTextBox:SetText(condition_template.text)
-		if reset then
+		if reset then -- if reset is true, reset the parameters
 			a.params = {}
 		end
 		for i, cf in ipairs(conditionFeatures) do
@@ -3229,7 +3233,7 @@ function configureEvent() -- Show the event configuration window
 			for i, a in ipairs(act) do
 				local lab = addLabel(actionSequenceScrollPanel, '20%', (i - 1) * 40, '60%', 40, a.name, 16, "center", nil, "center")
 				table.insert(actionSequenceItems, lab)
-				if i ~= 1 then
+				if i ~= 1 then -- do not show this arrow for the first element
 					local moveUpAction = function()
 						table.remove(act, i)
 						table.insert(act, i-1, a)
@@ -3256,7 +3260,7 @@ function configureEvent() -- Show the event configuration window
 					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
 					table.insert(actionSequenceItems, but)
 				end
-				if i ~= #(events[currentEvent].actions) then
+				if i ~= #(events[currentEvent].actions) then -- do not show this arrow for the last element
 					local moveDownAction = function()
 						table.remove(act, i)
 						table.insert(act, i+1, a)
@@ -3337,7 +3341,7 @@ function configureEvent() -- Show the event configuration window
 	end
 end
 
-function updateImportWindow()
+function updateImportWindow() -- Update the event combobox in the import window
 		local eventList = {}
 		for i, ev in ipairs(events) do
 			table.insert(eventList, ev.name)
@@ -3346,7 +3350,7 @@ function updateImportWindow()
 		importEventComboBox:Select(1)
 end
 
-function updateImportComboBoxes()
+function updateImportComboBoxes() -- Update the condition and action comboboxes in the import window
 	local e = events[importEventComboBox.selected]
 	local conditionList = {}
 	for i, c in ipairs(e.conditions) do
@@ -3368,7 +3372,7 @@ function updateImportComboBoxes()
 	end
 end
 
-function importCondition()
+function importCondition() -- Import a condition to the current event, renaming it if necessary
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedCondition = e.conditions[importConditionComboBox.selected]
@@ -3397,7 +3401,7 @@ function importCondition()
 	saveState()
 end
 
-function importAction()
+function importAction() -- Import an action to the current event, renaming it if necessary
 	local e = events[importEventComboBox.selected]
 	local ce = events[currentEvent]
 	local importedAction = e.actions[importActionComboBox.selected]
@@ -3455,7 +3459,7 @@ function preventSpaces() -- Prevent user to use spaces in names (would bug with 
 	end
 end
 
-function showVariablesFrame()
+function showVariablesFrame() -- Display the edit variables window or hide it if already displayed
 	if not editVariablesButton.state.chosen then
 		removeSecondWindows()
 		removeThirdWindows()
@@ -3500,13 +3504,13 @@ end
 function updateVariables()
 	if editVariablesButton.state.chosen then
 		for i, vf in ipairs(variablesFeatures) do
-			vf.var.name = vf.nameEditBox.text
+			vf.var.name = vf.nameEditBox.text -- Update variables value
 			if vf.var.type == "number" then
 				vf.var.initValue = tonumber(vf.initValueEditBox.text)
 			end
 		end
 	end
-	if variablesTotal ~= #triggerVariables or forceUpdateVariables then
+	if variablesTotal ~= #triggerVariables or forceUpdateVariables then -- When a variable is added or deleted, update the window
 		for i, vf in ipairs(variablesFeatures) do
 			for k, f in pairs(vf) do
 				if k ~= "var" then
@@ -3526,7 +3530,7 @@ function updateVariables()
 	end
 end
 
-function drawVariableFeature(var, y)
+function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	local feature = {}
 	local nameLabel = addLabel(variablesScrollPanel, '0%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_NAME, 16, "center", nil, "center")
 	local nameEditBox = addEditBox(variablesScrollPanel, '5%', y+5, '30%', 30, "left", var.name)
@@ -3583,7 +3587,7 @@ function drawVariableFeature(var, y)
 	return feature
 end
 
-function showPickText()
+function showPickText() -- Show text next to the mouse and in the middle of the screen when picking a unit or a position for a condition or an event
 	local text = ""
 	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 		text = EDITOR_TRIGGERS_EVENTS_PICK_UNIT
@@ -3628,7 +3632,7 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 	end
 end
 
-function getCommandsList()
+function getCommandsList() -- Get the list of the commands of the units as read in the appropriate widget
 	local commandList = Spring.GetModOptions().commands
 	if commandList then
 		commandList = splitString(commandList, "++")
@@ -3636,7 +3640,7 @@ function getCommandsList()
 	end
 end
 
-function showCreatedUnitsWindow()
+function showCreatedUnitsWindow() -- Allow the user to pick an action that created unit in order to use actions or conditions on this unit
 	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
 	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
 	local sp = addScrollPanel(selectCreatedUnitsWindow, '0%', '10%', '100%', '90%')
@@ -3676,7 +3680,7 @@ function showCreatedUnitsWindow()
 	end
 end
 
-function showRandomPositionInZoneWindow()
+function showRandomPositionInZoneWindow() -- Allow the user to pick a zone when picking a position (the position will then be random within the zone)
 	randomInZoneWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
 	addLabel(randomInZoneWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_RANDOM_ZONE, 20, "center", nil, "center")
 	local sp = addScrollPanel(randomInZoneWindow, '0%', '10%', '100%', '90%')
