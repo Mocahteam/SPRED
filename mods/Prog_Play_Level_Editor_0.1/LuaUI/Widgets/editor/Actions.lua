@@ -492,6 +492,76 @@ actions_list = {
 		}
 	},
 	{
+		type = "zone_order",
+		filter = "Order",
+		typeText = "Order units in zone (untargeted order)",
+		text = "Order units within <Zone> to begin <Command> with <Parameters>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
+			}
+		}
+	},
+	{
+		type = "zone_orderPosition",
+		filter = "Order",
+		typeText = "Order units in zone to position",
+		text = "Order units in <Zone> to begin <Command> towards <Position>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
+		type = "zone_orderTarget",
+		filter = "Order",
+		typeText = "Order units in zone to target",
+		text = "Order units in <Zone> to begin <Command> towards <Target>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Target>",
+				type = "unit",
+				id = "target"
+			}
+		}
+	},
+	{
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",

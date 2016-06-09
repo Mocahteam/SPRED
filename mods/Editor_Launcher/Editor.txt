@@ -15,7 +15,7 @@
 		gamemode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
 		fixedallies=0;			// enable in game alliance
 		language=en;			// en english, fr français
-		missionname=LevelEditor;	// mission name used to define script file and launcher file
+		missionname=EditorLauncher;	// mission name used to define script file and launcher file
 		scenario=noScenario;		// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
 	}
 

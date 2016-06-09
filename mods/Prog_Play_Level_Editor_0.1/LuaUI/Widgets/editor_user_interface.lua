@@ -828,7 +828,11 @@ function initForcesWindow()
 		teamControlButtons[team] = {}
 		teamControlButtons[team].player = addButton(teamConfigPanels[team], '35%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" updateTeamConfig = true saveState() end)
 		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '10%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" updateTeamConfig = true saveState() end)
-		teamControl[team] = "player"
+		teamControl[team] = "computer"
+		if team == 0 then
+			teamControl[team] = "player"
+			updateTeamConfig = true
+		end
 		-- Color
 		teamColor[team] = {}
 		teamColor[team].red = tonumber(teams[team].red)
@@ -3626,8 +3630,10 @@ end
 
 function getCommandsList()
 	local commandList = Spring.GetModOptions().commands
-	commandList = splitString(commandList, "++")
-	commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
+	if commandList then
+		commandList = splitString(commandList, "++")
+		commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
+	end
 end
 
 function showCreatedUnitsWindow()
