@@ -48,6 +48,7 @@ local Tab = rooms.Tab
 local ppTraces = nil -- File handler to store traces
 
 -- Set label
+local saveMessage="Your progression has been saved under the name : "
 local previousMission = "Previous mission"
 local replayMission = "Replay mission"
 local nextMission = "Next mission"
@@ -61,6 +62,7 @@ local loss = "You lost the mission"
 local continue = "continue"
 local saveProgression="Save progression"
 if lang == "fr" then
+  saveMessage="Votre progression a été sauvegardée sous le nom : "
   continue= "continuer"
 	previousMission = "Mission précédente"
 	replayMission = "Rejouer mission"
@@ -174,7 +176,15 @@ local template_endMission = {
         tab.title = saveProgression
         tab.position = "right"
         tab.OnClick = function()
-          Spring.Echo("try to save")
+          local fileName=os.date(missionName.."_%d_%m-%Hh",os.time())..".sav"
+          local gameName=Game.gameShortName or Game.modShortName
+          local file=io.open("Savegames/"..gameName.."/"..fileName,"wb")
+          local savingContent=VFS.LoadFile("Savegames/"..gameName.."/currentSave.sav")
+          file:write(savingContent)                    
+          file:flush()
+          file:close()
+          tab.parent:Close()
+          MissionEvent({logicType = "ShowMessage",message = saveMessage..fileName, width = 500,pause = false})
         end
       end
     },
