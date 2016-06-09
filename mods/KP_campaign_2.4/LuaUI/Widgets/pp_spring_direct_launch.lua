@@ -27,6 +27,8 @@ contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootD
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
+
+
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
 if(xmlFiles[1]~=nil)then
   AppliqManager=appliqManager:new(xmlFiles[1])
@@ -69,7 +71,7 @@ function initChili() -- Initialize Chili variables
   Screen0 = Chili.Screen0
 end
 
-local function removeWidgets(self)
+local function removeWidgets()
   for name, w in pairs(widgetHandler.knownWidgets) do
     if w.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
       widgetHandler:DisableWidget(name)
@@ -325,6 +327,17 @@ function missionMenu()
   end
 end
 
+function initGui()
+  hideView=true
+  hideDefaultGUI()
+  removeWidgets()
+  initChili()
+  InitializeMainMenu()
+  --EitherDrawScreen(1536,803)
+end
+
+WG.switchOnMenu = initGui
+
 function widget:Initialize()
   if not Spring.GetModOptions().hidemenu then
     if (not WG.Chili) then
@@ -332,10 +345,7 @@ function widget:Initialize()
       widgetHandler:RemoveWidget()
       return
     end
-    hideDefaultGUI()
-    removeWidgets(self)
-    initChili()
-    InitializeMainMenu()
+  initGui()
   else
     hideView=false
   end
