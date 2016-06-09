@@ -243,7 +243,7 @@ local briefing = nil
 local tutoPopup = false
 
 function MissionEvent(e)
-  Spring.Echo("try event")
+  --Spring.Echo("try event")
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
 		if tutoPopup then
