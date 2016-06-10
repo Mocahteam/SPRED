@@ -24,6 +24,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- units = unit, group, condition, action
+-- bug ctrlZ and events
+-- bug ctrlZ and groupframe
 
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
@@ -194,7 +196,7 @@ local commandsToID = {} -- Get the ID of a command knowing its name
 local idToCommands = {} -- Get the name of a command knowing its ID
 local sortedCommandsList = {} -- Sorted list of all the commands
 local sortedCommandsListUnit = {} -- Sorted list of all the commands filtered by unit
-local selectCreatedUnitsWindow -- Window to select units created through an action
+local selectSetOfUnitsWindows = {} -- Windows to select unit by groups, teams, actions which create units and conditions triggered by units
 local randomInZoneWindow -- Window to select a random position within a zone
 local repetitionUI = {} -- Contains repetition parameters elements
 local eventCommentEditBox -- Add a comment to an event
@@ -478,8 +480,11 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 	
 	-- Dispose some windows
-	if selectCreatedUnitsWindow then
-		selectCreatedUnitsWindow:Dispose()
+	if selectSetOfUnitsWindows.groupteam then
+		selectSetOfUnitsWindows.groupteam:Dispose()
+	end
+	if selectSetOfUnitsWindows.actcond then
+		selectSetOfUnitsWindows.actcond:Dispose()
 	end
 	if randomInZoneWindow then
 		randomInZoneWindow:Dispose()
@@ -1344,7 +1349,7 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	local attributionWindowScrollPanel = addScrollPanel(unitGroupsAttributionWindow, '0%', '0%', '100%', '100%')
 	
 	local count = 0
-	for k, group in pairs(unitGroups) do -- Show already created unit groups
+	for i, group in ipairs(unitGroups) do -- Show already created unit groups
 		local function addToGroup()
 			addSelectedUnitsToGroup(group)
 			clearTemporaryWindows()
@@ -1374,7 +1379,7 @@ function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove
 	local unitSelection = Spring.GetSelectedUnits()
 	
 	local count = 0
-	for k, group in pairs(unitGroups) do
+	for i, group in ipairs(unitGroups) do
 		local addUnitGroupButton = true
 		for i, u in ipairs(unitSelection) do
 			if not findInTable(group.units, u) then
@@ -1523,11 +1528,11 @@ end
 function updateUnitGroupPanels() -- Update groups when a group is created/removed or a unit is added to/removed from a group
 	-- Check if update is mandatory
 	local updatePanels = false
-	if tableLength(unitGroups) ~= groupTotal then -- Group count changed
+	if #unitGroups ~= groupTotal then -- Group count changed
 		updatePanels = true
 	end
-	for k, group in pairs(unitGroups) do
-		if tableLength(group.units) ~= groupSizes[k] then -- Unit count of a group changed
+	for i, group in ipairs(unitGroups) do
+		if tableLength(group.units) ~= groupSizes[group.id] then -- Unit count of a group changed
 			updatePanels = true
 			break
 		end
@@ -1542,7 +1547,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 		local count = 0
 		local heights = {0, 0, 0, 0} -- Stores heights to place groups on the lower
 		local widths = {0, 0, 0, 0} -- Stores corresponding widths
-		for k, group in pairs(unitGroups) do
+		for i, group in ipairs(unitGroups) do
 			local x, y
 			-- Compute x and y depending on the number of groups
 			-- Place the first four groups next to each other, and then place the following under the column with the least height
@@ -1559,11 +1564,11 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
 			end
 			-- Add panel, editbox, buttons
-			groupPanels[k] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
-			selectGroupButtons[k] = addButton(groupPanels[k], 0, 0, 30, 30, "", function() selectGroupButtons[k].state.chosen = not selectGroupButtons[k].state.chosen selectGroupButtons[k]:InvalidateSelf() end)
-			groupEditBoxes[k] = addEditBox(groupPanels[k], 35, 5, 220, 20, "left", group.name)
-			groupEditBoxes[k].font.size = 14
-			local deleteButton = addButton(groupPanels[k], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(k) end)
+			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
+			selectGroupButtons[group.id] = addButton(groupPanels[group.id], 0, 0, 30, 30, "", function() selectGroupButtons[group.id].state.chosen = not selectGroupButtons[group.id].state.chosen selectGroupButtons[group.id]:InvalidateSelf() end)
+			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], 35, 5, 220, 20, "left", group.name)
+			groupEditBoxes[group.id].font.size = 14
+			local deleteButton = addButton(groupPanels[group.id], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(group.id) end)
 			deleteButton.font.color = {1, 0, 0, 1}
 		end
 		-- Add a button to create an empty group
@@ -1577,30 +1582,30 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			y = heights[column]
 		end
 		addGroupButton = addButton(groupListScrollPanel, x, y, 300, 60, EDITOR_UNITS_GROUPS_ADD, addEmptyUnitGroup)
-		groupTotal = tableLength(unitGroups)
+		groupTotal = #unitGroups
 		
 		-- Update groups
-		for k, group in pairs(unitGroups) do
+		for i, group in ipairs(unitGroups) do
 			-- Clear UI elements
-			removeElements(groupPanels[k], unitGroupLabels[k], true)
-			removeElements(groupPanels[k], unitGroupViewButtons[k], true)
-			removeElements(groupPanels[k], unitGroupRemoveUnitButtons[k], true)
+			removeElements(groupPanels[group.id], unitGroupLabels[group.id], true)
+			removeElements(groupPanels[group.id], unitGroupViewButtons[group.id], true)
+			removeElements(groupPanels[group.id], unitGroupRemoveUnitButtons[group.id], true)
 			
 			local count = 0
-			unitGroupLabels[k] = {}
-			unitGroupViewButtons[k] = {}
+			unitGroupLabels[group.id] = {}
+			unitGroupViewButtons[group.id] = {}
 			for key, u in pairs(group.units) do
 				-- Remove button
-				local removeButton = addButton(groupPanels[k], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(unitGroups[k], u) end)
+				local removeButton = addButton(groupPanels[group.id], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(group, u) end)
 				removeButton.font.color = {1, 0, 0, 1}
-				table.insert(unitGroupRemoveUnitButtons[k], removeButton)
+				table.insert(unitGroupRemoveUnitButtons[group.id], removeButton)
 				
 				-- Label of unit
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[k], '20%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
-				table.insert(unitGroupLabels[k], label)
+				local label = addLabel(groupPanels[group.id], '20%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				table.insert(unitGroupLabels[group.id], label)
 				
 				-- Eye button to focus a specific unit
 				local function viewUnit()
@@ -1611,20 +1616,20 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 					Spring.SetCameraState(state, 2)
 					Spring.SelectUnitArray({u})
 				end
-				local but = addButton(groupPanels[k], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
+				local but = addButton(groupPanels[group.id], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
 				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-				table.insert(unitGroupViewButtons[k], but)
+				table.insert(unitGroupViewButtons[group.id], but)
 				
 				count = count + 1
 			end
-			groupSizes[k] = tableLength(group.units)
+			groupSizes[group.id] = tableLength(group.units)
 		end
 	end
 	
 	-- String in the editbox as name for the group
-	for k, group in pairs(unitGroups) do
-		if group.name ~= groupEditBoxes[k].text and groupEditBoxes[k].text ~= "" then
-			group.name = groupEditBoxes[k].text
+	for i, group in ipairs(unitGroups) do
+		if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
+			group.name = groupEditBoxes[group.id].text
 		end
 	end
 end
@@ -1697,12 +1702,14 @@ end
 
 function addUnitGroup(name)
 	local unitSelection = Spring.GetSelectedUnits()
-	unitGroups[groupNumber] = {}
-	unitGroups[groupNumber].name = name
-	unitGroups[groupNumber].units = {}
+	local group = {}
+	group.name = name
+	group.units = {}
+	group.id = groupNumber
 	for i, u in ipairs(unitSelection) do
-		addUnitToGroup(unitGroups[groupNumber], u)
+		addUnitToGroup(group, u)
 	end
+	table.insert(unitGroups, group)
 	groupSizes[groupNumber] = 0
 	unitGroupLabels[groupNumber] = {}
 	unitGroupViewButtons[groupNumber] = {}
@@ -1712,9 +1719,11 @@ function addUnitGroup(name)
 end
 
 function addEmptyUnitGroup()
-	unitGroups[groupNumber] = {}
-	unitGroups[groupNumber].name = EDITOR_UNITS_GROUPS_DEFAULT_NAME..groupNumber
-	unitGroups[groupNumber].units = {}
+	local group = {}
+	group.name = EDITOR_UNITS_GROUPS_DEFAULT_NAME..groupNumber
+	group.units = {}
+	group.id = groupNumber
+	table.insert(unitGroups, group)
 	groupSizes[groupNumber] = 0
 	unitGroupLabels[groupNumber] = {}
 	unitGroupViewButtons[groupNumber] = {}
@@ -1724,7 +1733,12 @@ function addEmptyUnitGroup()
 end
 
 function deleteUnitGroup(id)
-	unitGroups[id] = nil
+	for i, g in ipairs(unitGroups) do
+		if id == g.id then
+			table.remove(unitGroups, i)
+			break
+		end
+	end
 	saveState()
 end
 
@@ -2812,15 +2826,8 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 				end
 			end
 		elseif attr.type == "group" then
-			for k, g in pairs(unitGroups) do
+			for i, g in ipairs(unitGroups) do
 				table.insert(comboBoxItems, g.name)
-			end
-			for i, ev in ipairs(events) do
-				for ii, act in ipairs(ev.actions) do
-					if act.type == "createUnitAtPosition" or act.type == "createUnitsInZone" then
-						table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP..act.name)
-					end
-				end
 			end
 			if #comboBoxItems == 0 then
 				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
@@ -2895,17 +2902,10 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		elseif attr.type == "group" then
 			comboBox.OnSelect = {
 				function()
-					if not string.match(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP) then
-						a.params[attr.id] = comboBox.items[comboBox.selected]
-						return
-					end
-					local actionName = string.gsub(comboBox.items[comboBox.selected], EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "")
-					for i, ev in ipairs(events) do
-						for ii, act in ipairs(ev.actions) do
-							if act.name == actionName then
-								a.params[attr.id] = "id"..act.id
-								return
-							end
+					for i, g in ipairs(unitGroups) do
+						if g.name == comboBox.items[comboBox.selected] then
+							a.params[attr.id] = g.id
+							return
 						end
 					end
 				end
@@ -2935,33 +2935,17 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					end
 				end
 			elseif attr.type == "group" then
-				local found = false
-				for i, item in ipairs(comboBox.items) do
-					if a.params[attr.id] == item then
-						comboBox:Select(i)
-						found = true
+				local groupName
+				for i, g in ipairs(unitGroups) do
+					if g.id == a.params[attr.id] then
+						groupName = g.name
 						break
 					end
 				end
-				if not found then
-					local param = string.gsub(a.params[attr.id], "id", "")
-					param = tonumber(param)
-					local correspondingAction
-					for i, ev in ipairs(events) do
-						for ii, act in ipairs(ev.actions) do
-							if act.id == param then
-								correspondingAction = act.name
-								break
-							end
-						end
-					end
-					if correspondingAction then
-						for i, item in ipairs(comboBox.items) do
-							if correspondingAction == string.gsub(item, EDITOR_TRIGGERS_EVENTS_CREATED_GROUP, "") then
-								comboBox:Select(i)
-								break
-							end
-						end
+				for i, item in ipairs(comboBox.items) do
+					if item == groupName then
+						comboBox:Select(i)
+						break
 					end
 				end
 			elseif attr.type == "command" or attr.type == "commandUnit" then
@@ -3022,7 +3006,6 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 						state.px, state.py, state.pz = x, y, z
 						state.height = 500
 						Spring.SetCameraState(state, 2)
-						-- todo add temp marker
 						Spring.MarkerAddPoint(x, y, z, "("..tostring(x)..", "..tostring(z)..")")
 						table.insert(markerList, { x = x, y = y, z = z, timer = 2 })
 					end
@@ -3050,36 +3033,56 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 		if a.params[attr.id] then
 			local param = a.params[attr.id]
-			if type(param) == "string" then
-				param = string.gsub(param, "id", "")
-				param = tonumber(param)
-				for i, ev in ipairs(events) do
-					for ii, act in ipairs(ev.actions) do
-						if act.id == param then
+			if param.type and param.value then
+				if param.type == "unit" then
+					local u = param.value
+					local uDefID = Spring.GetUnitDefID(u)
+					if uDefID then
+						local name = UnitDefs[uDefID].humanName
+						local team = Spring.GetUnitTeam(u)
+						unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+						unitLabel:SetCaption(name.." ("..tostring(u)..")")
+						local function viewUnit()
+							local state = Spring.GetCameraState()
+							local x, y, z = Spring.GetUnitPosition(u)
+							state.px, state.py, state.pz = x, y, z
+							state.height = 500
+							Spring.SetCameraState(state, 2)
+						end
+						local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
+						addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+						table.insert(feature, viewButton)
+					end
+				elseif param.type == "group" then
+						unitLabel.font.color = {1, 1, 1, 1}
+						for i, g in ipairs(unitGroups) do
+							if g.id == param.value then
+								unitLabel:SetCaption(g.name)
+								break
+							end
+						end
+				elseif param.type == "team" then
+						unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
+						unitLabel:SetCaption(teamName[param.value])
+				elseif param.type == "action" then
+					for i, ev in ipairs(events) do
+						for ii, act in ipairs(ev.actions) do
+							if act.id == param.value then
+								unitLabel.font.color = {1, 1, 1, 1}
+								unitLabel:SetCaption(act.name)
+								break
+							end
+						end
+					end
+				elseif param.type == "condition" then
+					local ev = events[currentEvent]
+					for ii, cond in ipairs(ev.conditions) do
+						if cond.id == param.value then
 							unitLabel.font.color = {1, 1, 1, 1}
-							unitLabel:SetCaption(act.name)
+							unitLabel:SetCaption(cond.name)
 							break
 						end
 					end
-				end
-			else
-				local u = param
-				local uDefID = Spring.GetUnitDefID(u)
-				if uDefID then
-					local name = UnitDefs[uDefID].humanName
-					local team = Spring.GetUnitTeam(u)
-					unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-					unitLabel:SetCaption(name.." ("..tostring(u)..")")
-					local function viewUnit()
-						local state = Spring.GetCameraState()
-						local x, y, z = Spring.GetUnitPosition(u)
-						state.px, state.py, state.pz = x, y, z
-						state.height = 500
-						Spring.SetCameraState(state, 2)
-					end
-					local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
-					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-					table.insert(feature, viewButton)
 				end
 			end
 		end
@@ -3092,7 +3095,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			Screen0:RemoveChild(windows["conditionWindow"])
 			Screen0:RemoveChild(windows["actionWindow"])
 			Screen0:RemoveChild(windows["importWindow"])
-			showCreatedUnitsWindow()
+			showPickUnitWindow()
 		end
 		pickButton.OnClick = { pickUnit }
 		table.insert(feature, unitLabel)
@@ -3636,43 +3639,69 @@ function getCommandsList() -- Get the list of the commands of the units as read 
 	end
 end
 
-function showCreatedUnitsWindow() -- Allow the user to pick an action that created unit in order to use actions or conditions on this unit
-	selectCreatedUnitsWindow = addWindow(Screen0, "0%", "30%", "20%", "40%", true)
-	addLabel(selectCreatedUnitsWindow, '0%', '0%', '100%', '10%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 20, "center", nil, "center")
-	local sp = addScrollPanel(selectCreatedUnitsWindow, '0%', '10%', '100%', '90%')
+function showPickUnitWindow() -- Allow the user to pick a specific set of units
+	local pickFunction = function(t, v)
+		local ca = {}
+		if currentAction then
+			ca = events[currentEvent].actions[currentAction]
+		elseif currentCondition then
+			ca = events[currentEvent].conditions[currentCondition]
+		end
+		triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+		ca.params[changedParam] = {}
+		ca.params[changedParam].type = t
+		ca.params[changedParam].value = v
+		Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
+		Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
+		Screen0:AddChild(windows["triggerWindow"])
+		Screen0:AddChild(windows["eventWindow"])
+		Screen0:AddChild(windows["importWindow"])
+		if currentAction then
+			Screen0:AddChild(windows["actionWindow"])
+			drawActionFrame(false)
+		elseif currentCondition then
+			Screen0:AddChild(windows["conditionWindow"])
+			drawConditionFrame(false)
+		end
+	end
+	
+	selectSetOfUnitsWindows.groupteam = addWindow(Screen0, "0%", "5%", "15%", "80%")
+	
+	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '0%', '100%', '5%', "Teams", 20, "center", nil, "center")
+	local tsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '5%', '100%', '45%')
+	local tc = 0
+	for k, t in pairs(teamStateMachine.states) do
+		if enabledTeams[t] then
+			local but = addButton(tsp, "0%", tc * 40, "100%", 40, teamName[t], function() pickFunction("team", t) end)
+			but.font.color = {teamColor[t].red, teamColor[t].green, teamColor[t].blue, 1}
+			tc = tc + 1
+		end
+	end
+	
+	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '50%', '100%', '5%', "Groups", 20, "center", nil, "center")
+	local gsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '55%', '100%', '45%')
+	for i, g in ipairs(unitGroups) do
+		addButton(gsp, "0%", (i-1) * 40, "100%", 40, g.name, function() pickFunction("group", g.id) end)
+	end
+	
+	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "5%", "15%", "80%")
+	
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '5%', "Actions", 20, "center", nil, "center")
+	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '5%', '100%', '45%')
 	local count = 0
 	for i, e in ipairs(events) do
 		for ii, a in ipairs(e.actions) do
 			if a.type == "createUnitAtPosition" or a.type == "createUnitsInZone" then
-				local but = addButton(sp, "0%", count * 40, "100%", 40, a.name, nil)
-				local pickFunction = function()
-					local ca = {}
-					if currentAction then
-						ca = events[currentEvent].actions[currentAction]
-					elseif currentCondition then
-						ca = events[currentEvent].conditions[currentCondition]
-					end
-					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					ca.params[changedParam] = "id"..a.id
-					Screen0:RemoveChild(selectCreatedUnitsWindow)
-					Screen0:AddChild(windows["triggerWindow"])
-					Screen0:AddChild(windows["eventWindow"])
-					Screen0:AddChild(windows["importWindow"])
-					if currentAction then
-						Screen0:AddChild(windows["actionWindow"])
-						drawActionFrame(false)
-					elseif currentCondition then
-						Screen0:AddChild(windows["conditionWindow"])
-						drawConditionFrame(false)
-					end
-				end
-				but.OnClick = { pickFunction }
+				addButton(asp, "0%", count * 40, "100%", 40, a.name, function() pickFunction("action", a.id) end)
 				count = count + 1
 			end
 		end
 	end
-	if count == 0 then
-		selectCreatedUnitsWindow:Dispose()
+	
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '5%', "Conditions", 20, "center", nil, "center")
+	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '55%', '100%', '45%')
+	for i, c in ipairs(events[currentEvent].conditions) do
+		addButton(csp, "0%", (i-1) * 40, "100%", 40, c.name, function() pickFunction("condition", c.id) end)
 	end
 end
 
@@ -3950,9 +3979,10 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	
 	-- Unit Groups
 	for i, g in ipairs(loadedTable.groups) do
+		groupNumber = g.id
 		addUnitGroup(g.name)
 		for ii, u in ipairs(g.units) do
-			addUnitToGroup(unitGroups[groupNumber-1], uIDs[tostring(u)])
+			addUnitToGroup(unitGroups[#unitGroups], uIDs[tostring(u)])
 		end
 	end
 	
@@ -4426,10 +4456,11 @@ function encodeSaveTable()
 	
 	-- Unit groups
 	savedTable.groups = {}
-	for k, g in pairs(unitGroups) do
+	for i, g in ipairs(unitGroups) do
 		local group = {}
 		group.name = g.name
 		group.units = g.units
+		group.id = g.id
 		table.insert(savedTable.groups, group)
 	end
 	
@@ -4933,11 +4964,14 @@ function widget:MousePress(mx, my, button)
 			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					e.params[changedParam] = var
+					e.params[changedParam] = {}
+					e.params[changedParam].type = "unit"
+					e.params[changedParam].value = var
 					Screen0:AddChild(windows["triggerWindow"])
 					Screen0:AddChild(windows["eventWindow"])
 					Screen0:AddChild(windows["importWindow"])
-					Screen0:RemoveChild(selectCreatedUnitsWindow)
+					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
+					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -5171,7 +5205,7 @@ function widget:KeyPress(key, mods)
 			return true
 		-- DELETE : delete selected units
 		elseif key == Spring.GetKeyCode("delete") then
-			for k, g in pairs(unitGroups) do
+			for i, g in ipairs(unitGroups) do
 				for i, u in ipairs(unitSelection) do
 					if findInTable(g.units, u) then
 						removeUnitFromGroup(g, u)
