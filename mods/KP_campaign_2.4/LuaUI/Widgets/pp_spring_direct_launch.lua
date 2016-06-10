@@ -46,7 +46,8 @@ local tableCaptions={
   {el="Title",fr="campagne",en="campaign"},
   {el="NewPartyButton",fr="Nouvelle Partie",en="Start Campaign"},
   {el="ListMissionButtons",fr="Liste Des Missions",en="Missions List"},
-  {el="QuitButton",fr="Quitter",en="Quit"}
+  {el="QuitButton",fr="Quitter",en="Quit"},
+  {el="continueGameButton",fr="Continuer",en="Continue"}
 }
 local UI = {} -- Contains each UI element
 
@@ -211,7 +212,7 @@ local function commonElements()
     y = "0%",
     width = "15%",
     height = "7%",
-    items = { "English", "French" },
+    items = { "French","English" },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 40,
@@ -283,7 +284,7 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
     y = "50%",
     width = "40%",
     height = "10%",
-    caption = "continuer",
+    caption = "Continuer",
     OnClick = { continue },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",

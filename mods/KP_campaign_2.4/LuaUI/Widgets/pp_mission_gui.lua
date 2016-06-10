@@ -243,6 +243,7 @@ local briefing = nil
 local tutoPopup = false
 
 function MissionEvent(e)
+  
   --Spring.Echo("try event")
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
@@ -436,6 +437,9 @@ function MissionEvent(e)
 end
 
 function TutorialEvent()
+  if not WG.rooms.Video.closed then
+    WG.rooms.Video:Close()
+  end
 	if not tutoPopup then	
 		tutoPopup = true
 		WG.rooms.TutoView:Open()
