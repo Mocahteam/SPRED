@@ -1090,7 +1090,8 @@ local function parseJson(jsonFile)
   ctx.canUpdate=true
   ctx.mission=json.decode(jsonFile)
   -- desactivate widget
-  local widgetWithForcedState={["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true}
+  local widgetWithForcedState={["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
+  ,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true,["Camera Auto"]=true}
   
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
@@ -1203,6 +1204,10 @@ end
     _G.cameraAuto = nil
   end
   local isautoHealGlobal=(ctx.mission.description.autoHeal=="enabled")
+  
+  if(ctx.mission.description.minimap and ctx.mission.description.minimap=="disabled") then
+    Spring.SendCommands("minimap min")
+  end
   
  -------------------------------
  ----------ARMIES---------------
