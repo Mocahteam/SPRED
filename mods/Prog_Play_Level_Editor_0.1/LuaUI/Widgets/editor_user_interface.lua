@@ -23,6 +23,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
+-- units = unit, group, condition, action
+
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
@@ -3112,15 +3114,9 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					text = a.params[attr.id]
 				end
 				editBox:SetText(text)
-			else
-				editBox:SetText(tostring(a.params[attr.id]))
 			end
 		end
-		if attr.type == "number" then
-			editBox.updateFunction = function()
-				a.params[attr.id] = tonumber(editBox.text)
-			end
-		elseif attr.type == "text" then
+		if attr.type == "text" or attr.type == "number" then
 			editBox.updateFunction = function()
 				a.params[attr.id] = editBox.text
 			end
@@ -3181,7 +3177,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		}
 		editBox.font.size = 13
 		editBox.updateFunction = function()
-			a.params[attr.id].number = tonumber(editBox.text)
+			a.params[attr.id].number = editBox.text
 		end
 		editBox.isEditBox = true
 		if a.params[attr.id].comparison then
@@ -3199,7 +3195,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 			comboBox:Select(1)
 		end
 		if a.params[attr.id].number then
-			editBox:SetText(tostring(a.params[attr.id].number))
+			editBox:SetText(a.params[attr.id].number)
 		end
 		table.insert(feature, comboBox)
 		table.insert(feature, editBox)
@@ -3720,13 +3716,13 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function updateMapSettings()
-	mapDescription.mapName = mapNameEditBox.text
-	mapDescription.mapBriefingRaw = mapBriefingEditBox.text
+function updateMapSettings() -- Update the settings of the map according to what is written/chosen
+	mapDescription.mapName = mapNameEditBox.text -- update name
+	mapDescription.mapBriefingRaw = mapBriefingEditBox.text -- update briefing (without colors and returns)
 	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
 		local text = mapBriefingEditBox.text
 		local newText = text
-		for word in string.gmatch(text, "/#%w*#.-/") do
+		for word in string.gmatch(text, "/#%w*#.-/") do -- for each /#XXXXXX#ABC/ sequence where X is a hexadecimal number and ABC a string, surround ABC with color tags to color this part of the string
 			local color = string.gsub(word, "#[^#]+$", "")
 			color = string.gsub(color, "/#", "")
 			local red = tonumber(string.sub(color, 1, 2), 16)
@@ -3748,7 +3744,7 @@ function updateMapSettings()
 	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
 
-function initWidgetList()
+function initWidgetList() -- Remove some widgets linked directly to prog&play from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
 		if 	k ~= "Spring Direct Launch 2 for Prog&Play" and
@@ -3774,7 +3770,7 @@ function initWidgetList()
 	end
 end
 
-function showWidgetsWindow()
+function showWidgetsWindow() -- Show the window that allows the user to change widgets status for his level
 	if windows['widgetsWindow'] then
 		widgetsButton.state.chosen = false
 		widgetsButton:InvalidateSelf()
@@ -3801,7 +3797,7 @@ function showWidgetsWindow()
 	end
 end
 
-function updateWidgetsWindowPosition()
+function updateWidgetsWindowPosition() -- Stick the widget window to the mapsettings window
 	if windows['widgetsWindow'] then
 		windows['widgetsWindow']:SetPos(windows['mapSettingsWindow'].x + windows['mapSettingsWindow'].width, windows['mapSettingsWindow'].y, '15%', '50%')
 	end
