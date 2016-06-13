@@ -10,32 +10,45 @@ local jsonPartName = Spring.GetModOptions()["missionname"]
 local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
-local positions={}--table to store positions
-local armySpring={}--table to store created spring units externalId->SpringId
-local armyExternal={}--table to store created spring units SpringId->externalId
-local groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
-local armyInformations={}--table to store information on units externalId->Informations
-local messages={}--associative array messageId->message type
-local conditions={}--associative array idCond->condition
-local conditionsShortNamesToId={}--associative array idCond->condition
-local actions={}--associative array idActions->actions
-local events={}--associative array idCond->event
-local variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
-local zones={}
-local killByTeams={}
-local attackedUnits={}
-local recordCreatedUnits=false
+local ctx={}
+ctx.armySpring={}--table to store created spring units externalId->SpringId
+ctx.armyExternal={}--table to store created spring units SpringId->externalId
+ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
+ctx.armyInformations={}--table to store information on units externalId->Informations
+ctx.messages={}--associative array messageId->message type
+ctx.conditions={}--associative array idCond->condition
+ctx.events={}--associative array idCond->event
+ctx.variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
+ctx.zones={}
+ctx.killByTeams={}
+ctx.attackedUnits={}
+ctx.recordCreatedUnits=false
+ctx.refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
+ctx.actionStack={} -- action to be applied on game state, allows to handle table composed by the indexes delay and actId
+ctx.success=nil -- when this global variable change (with event of type "end"), the game ends (= victory or defeat)
+ctx.outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
+ctx.canUpdate=false
+ctx.mission={}
+ctx.startingFrame=5
+ctx.globalIndexOfCreatedUnits=0
+ctx.speedFactor=1
+ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
-local refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
-local frameIndex=0 -- related to refresh
-local actionStack={} -- action to be applied on game state, allows to handle table composed by the indexes delay and actId
-local success=nil -- when this global variable change (with event of type "end"), the game ends (= victory or defeat)
-local outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
-local canUpdate=false
-local mission
-local startingFrame=5
-local globalIndexOfCreatedUnits=0
-
+-------------------------------------
+-- Load codegiven an environnement (table of variables that can be accessed and changed)
+-- This function ensure compatibility (setfenv is dropped from lua 5.2)
+-- Shamelessly taken from http://stackoverflow.com/questions/9268954/lua-pass-context-into-loadstring
+-------------------------------------
+local function load_code(code)
+    if setfenv and loadstring then
+        local f = assert(loadstring(code))
+        setfenv(f,ctx)
+        return f()
+    else
+        local f=assert(load(code, nil,"t",ctx))
+        return f()
+    end
+end
 
 -------------------------------------
 -- Compare numerical values, a verbal "mode" being given 
@@ -100,6 +113,10 @@ local function makeOperation(v1,v2,operation)
   if(operation=="%")then return v1 - math.floor(v1/v2)*v1 end
 end
 
+-------------------------------------
+-- Deep copy of tables 
+-- @return table
+-------------------------------------
 local function deepcopy(orig)
     local orig_type = type(orig)
     local copy
@@ -166,21 +183,11 @@ end
 -- @return boolean
 -------------------------------------
 local function isXZInsideZone(x,z,zoneId)
-  local zone=zones[zoneId]
+  local zone=ctx.zones[zoneId]
   if(zone==nil)then
-    Spring.Echo("not found")
-    Spring.Echo(zoneId)
-    Spring.Echo(json.encode(zones))
+    Spring.Echo(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)))
   end
   if(zone.type=="Rectangle") then
-  --[[
-    Spring.Echo("debug : x,z,centerx,centerz,demL,deml")
-    Spring.Echo(x)
-    Spring.Echo(z)
-    Spring.Echo(zone.center_xz.x)
-    Spring.Echo(zone.center_xz.z)
-    Spring.Echo(zone.demiLongueur)
-    Spring.Echo(zone.demiLargeur)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
@@ -189,14 +196,6 @@ local function isXZInsideZone(x,z,zoneId)
     if(center_z-zone.demiLongueur>z)then return false end
     return true
   elseif(zone.type=="Disk") then
-   --[[
-    Spring.Echo("debug : x,z,centerx,centerz,a,b")
-    Spring.Echo(x)
-    Spring.Echo(z)
-    Spring.Echo(zone.center_xz.x)
-    Spring.Echo(zone.center_xz.z)
-    Spring.Echo(zone.a)
-    Spring.Echo(zone.b)--]]
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
     local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
@@ -216,10 +215,11 @@ end
 
 -------------------------------------
 -- draw a position randomly drawn within a zone
+-- @return table with x,z attributes 
 -------------------------------------
 local function getARandomPositionInZone(idZone)
-  if(zones[idZone]~=nil) then
-    local zone=zones[idZone]
+  if(ctx.zones[idZone]~=nil) then
+    local zone=ctx.zones[idZone]
     local posit={}
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
@@ -250,10 +250,10 @@ end
 -- Sometimes a zone is given and getARandomPositionInZone will be called
 -------------------------------------
 local function extractPosition(tablePosOrMaybeJustZoneId)
-  if(type(tablePosOrMaybeJustZoneId)~="number")then
-    return tablePosOrMaybeJustZoneId
-  else
+  if(type(tablePosOrMaybeJustZoneId)=="number")then
     return getARandomPositionInZone(tablePosOrMaybeJustZoneId)
+  else
+    return tablePosOrMaybeJustZoneId
   end
 end
 -------------------------------------
@@ -331,7 +331,7 @@ end
 -------------------------------------
 local function ShowBriefing ()
   --Spring.Echo(json.encode(mission))
-  showMessage(getAMessage(messages["briefing"]))-- convention all json files have briefing attribute
+  showMessage(getAMessage(ctx.messages["briefing"]))-- convention all json files have briefing attribute
 end
 
 -------------------------------------
@@ -349,7 +349,7 @@ local function isTriggerable(event)
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
-    local valueCond=conditions[cond..tostring(event.id)]
+    local valueCond=ctx.conditions[cond..tostring(event.id)]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
   -- third step : turn the string in return statement
@@ -369,8 +369,8 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
   
   -- special case here, processed in a sadly ugly manner : unitTYpe t of Team X must be an intersection
   if(conditionParams.unitType~=nil)and(conditionParams.team~=nil)then
-    local l1=groupOfUnits["team_"..conditionParams.team]
-    local l2=groupOfUnits["type_"..conditionParams.unitType]
+    local l1=ctx.groupOfUnits["team_"..conditionParams.team]
+    local l2=ctx.groupOfUnits["type_"..conditionParams.unitType]
     return intersection(l1,l2) 
   end
   for idx,tableT in ipairs(tableLookup)do
@@ -383,8 +383,8 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
       --Spring.Echo("this group is selected")
       --Spring.Echo(conditionTerm)
      -- Spring.Echo(groupIndex)
-      --Spring.Echo(json.encode(groupOfUnits))
-      return groupOfUnits[groupIndex]
+      --Spring.Echo(json.encode(ctx.groupOfUnits))
+      return ctx.groupOfUnits[groupIndex]
     end
   end
 end
@@ -395,18 +395,18 @@ end
 -------------------------------------
 local function createUnit(unitTable)
     local posit=unitTable.position
-    armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
-    armyExternal[armySpring[unitTable.id]]=unitTable.id
-    armyInformations[unitTable.id]={}
-    local springUnit=armySpring[unitTable.id]    
-    armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
-    Spring.SetUnitHealth(springUnit,armyInformations[unitTable.id].health)
-    armyInformations[unitTable.id].previousHealth=armyInformations[unitTable.id].health
-    armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["autoHeal"]
-    armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(armySpring[unitTable.id])]["idleAutoHeal"]
-    armyInformations[unitTable.id].autoHealStatus=unitTable.autoHeal
-    --Spring.Echo(armyInformations[unitTable.id].autoHealStatus)
-    armyInformations[unitTable.id].isUnderAttack=false
+    ctx.armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
+    ctx.armyExternal[ctx.armySpring[unitTable.id]]=unitTable.id
+    ctx.armyInformations[unitTable.id]={}
+    local springUnit=ctx.armySpring[unitTable.id]    
+    ctx.armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
+    Spring.SetUnitHealth(springUnit,ctx.armyInformations[unitTable.id].health)
+    ctx.armyInformations[unitTable.id].previousHealth=ctx.armyInformations[unitTable.id].health
+    ctx.armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(ctx.armySpring[unitTable.id])]["autoHeal"]
+    ctx.armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(ctx.armySpring[unitTable.id])]["idleAutoHeal"]
+    ctx.armyInformations[unitTable.id].autoHealStatus=unitTable.autoHeal
+    --Spring.Echo(ctx.armyInformations[unitTable.id].autoHealStatus)
+    ctx.armyInformations[unitTable.id].isUnderAttack=false
     --Spring.Echo("try to create unit with these informations")
     Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
     
@@ -414,15 +414,15 @@ local function createUnit(unitTable)
 
     local teamIndex="team_"..tostring(unitTable.team)
     local typeIndex="type_"..tostring(unitTable.type)
-    if(groupOfUnits[teamIndex]==nil) then
-      groupOfUnits[teamIndex]={}
+    if(ctx.groupOfUnits[teamIndex]==nil) then
+      ctx.groupOfUnits[teamIndex]={}
     end
-    table.insert(groupOfUnits[teamIndex],unitTable.id)
+    table.insert(ctx.groupOfUnits[teamIndex],unitTable.id)
     -- update group units (type related)
-    if(groupOfUnits[typeIndex]==nil) then
-      groupOfUnits[typeIndex]={}
+    if(ctx.groupOfUnits[typeIndex]==nil) then
+      ctx.groupOfUnits[typeIndex]={}
     end
-    table.insert(groupOfUnits[typeIndex],unitTable.id)
+    table.insert(ctx.groupOfUnits[typeIndex],unitTable.id)
 
 end
 
@@ -470,8 +470,9 @@ local function ApplyGroupableAction(unit,act)
     elseif(act.attribute=="teleport")then
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
+      Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
     elseif(act.attribute=="group")then
-      table.insert(groupOfUnits["group_"..act.params.group],unit)
+      table.insert(ctx.groupOfUnits["group_"..act.params.group],unit)
     elseif(act.attribute=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.attribute=="orderPosition")then
@@ -479,7 +480,7 @@ local function ApplyGroupableAction(unit,act)
       Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
     elseif(act.attribute=="orderTarget")then
       local u=act.params.target
-      local spUnit=armySpring[u]
+      local spUnit=ctx.armySpring[u]
       --Spring.GiveOrderToUnit(unit, act.params.command,{spUnit}, {})
       --Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
       Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {}) 
@@ -498,41 +499,41 @@ end
 local function createUnitAtPosition(act,position)
     local y=Spring.GetGroundHeight(position.x,position.z)
     local spId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
-    armySpring[act.name]=spId
-    armyExternal[spId]=act.name
-    -- armySpring[act.name] will be override each time this action is called
+    ctx.armySpring[act.name]=spId
+    ctx.armyExternal[spId]=act.name
+    -- ctx.armySpring[act.name] will be override each time this action is called
     -- this is on purpose as some actions can take the last unit created by this unit creation action
-    local realId=act.name..tostring(globalIndexOfCreatedUnits)
-    armySpring[realId]=spId 
+    local realId=act.name..tostring(ctx.globalIndexOfCreatedUnits)
+    ctx.armySpring[realId]=spId 
     -- in order to keep to track of all created units
-    globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
+    ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
     local gpIndex="group_"..act.name
-    if(groupOfUnits[gpIndex]==nil) then
-      groupOfUnits[gpIndex]={}
+    if(ctx.groupOfUnits[gpIndex]==nil) then
+      ctx.groupOfUnits[gpIndex]={}
     end
-    table.insert(groupOfUnits[gpIndex],realId)
+    table.insert(ctx.groupOfUnits[gpIndex],realId)
     
     -- Nasty copy pasta from the other function to create unit
 
     local teamIndex="team_"..tostring(act.params.team)
     local typeIndex="type_"..tostring(act.params.unitType)
-    if(groupOfUnits[teamIndex]==nil) then
-      groupOfUnits[teamIndex]={}
+    if(ctx.groupOfUnits[teamIndex]==nil) then
+      ctx.groupOfUnits[teamIndex]={}
     end
-    table.insert(groupOfUnits[teamIndex],realId)
+    table.insert(ctx.groupOfUnits[teamIndex],realId)
     -- update group units (type related)
-    if(groupOfUnits[typeIndex]==nil) then
-      groupOfUnits[typeIndex]={}
+    if(ctx.groupOfUnits[typeIndex]==nil) then
+      ctx.groupOfUnits[typeIndex]={}
     end
-    table.insert(groupOfUnits[typeIndex],realId)
+    table.insert(ctx.groupOfUnits[typeIndex],realId)
 
-    armyInformations[realId]={}
-    armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
-    armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
-    armyInformations[realId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["autoHeal"]
-    armyInformations[realId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["idleAutoHeal"]
-    armyInformations[realId]["autoHealStatus"]=(mission.description.autoHeal=="enabled")
-    armyInformations[realId]["isUnderAttack"]=false
+    ctx.armyInformations[realId]={}
+    ctx.armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
+    ctx.armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
+    ctx.armyInformations[realId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["autoHeal"]
+    ctx.armyInformations[realId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["idleAutoHeal"]
+    ctx.armyInformations[realId]["autoHealStatus"]=(ctx.mission.description.autoHeal=="enabled")
+    ctx.armyInformations[realId]["isUnderAttack"]=false
 end
 
 -------------------------------------
@@ -574,14 +575,10 @@ local function ApplyNonGroupableAction(act)
     
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
     --bubbleUnit
-      local springUnitId=armySpring[act.params.unit]
+      local springUnitId=ctx.armySpring[act.params.unit]
       if Spring.ValidUnitID(springUnitId) then
-        local factor=Spring.GetGameSpeed()
         --Spring.Echo("try to send : DisplayMessageAboveUnit")
-        if(act.type=="bubbleUnit")then
-          Spring.Echo("dddddddddddddddddd")
-        end
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/factor,bubble=(act.type=="bubbleUnit")}))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -591,12 +588,11 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="messagePosition") then
     --Spring.Echo("try to send : DisplayMessagePosition")
   --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
-    local factor=Spring.GetGameSpeed()
     local posFound=extractPosition(act.params.position)   
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/factor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/ctx.speedFactor}))
     
     
    --[[ Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -609,29 +605,29 @@ local function ApplyNonGroupableAction(act)
   
    -- WIN/LOSE
    
-  elseif((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="player"))
-      or((act.type=="lose")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
-    outputstate=act.params.outputState
-    success=1
+  elseif((act.type=="win")and(ctx.mission.teams[tostring(act.params.team)]["control"]=="player"))
+      or((act.type=="lose")and(ctx.mission.teams[tostring(act.params.team)]["control"]=="computer"))then
+    ctx.outputstate=act.params.outputState
+    ctx.success=1
   -- Note : this is binary, it needs to be improved if multiplayer is enabled
-  elseif((act.type=="lose")and(mission.teams[tostring(act.params.team)]["control"]=="player"))
-      or((act.type=="win")and(mission.teams[tostring(act.params.team)]["control"]=="computer"))then
-    outputstate=act.params.outputState
-    success=-1
+  elseif((act.type=="lose")and(ctx.mission.teams[tostring(act.params.team)]["control"]=="player"))
+      or((act.type=="win")and(ctx.mission.teams[tostring(act.params.team)]["control"]=="computer"))then
+    ctx.outputstate=act.params.outputState
+    ctx.success=-1
    
    -- VARIABLES
     
   elseif(act.type=="changeVariable")then
-    variables[act.params.variable]=act.params.number   
+    ctx.variables[act.params.variable]=act.params.number   
   elseif(act.type=="changeVariableNumber")then
-    variables[act.params.variable1]=makeOperation(variables[act.params.variable2],act.params.number,act.params.operator)   
+    ctx.variables[act.params.variable1]=makeOperation(ctx.variables[act.params.variable2],act.params.number,act.params.operator)   
   elseif(act.type=="setBooleanVariable")then
-    variables[act.params.variable]=(act.params.boolean=="true")
+    ctx.variables[act.params.variable]=(act.params.boolean=="true")
   elseif(act.type=="changeVariableVariable")then
-    variables[act.params.variable1]=makeOperation(variables[act.params.variable2],variables[act.params.variable3],act.params.operator)           
+    ctx.variables[act.params.variable1]=makeOperation(ctx.variables[act.params.variable2],ctx.variables[act.params.variable3],act.params.operator)           
         
   elseif(act.type=="createUnitAtPosition") then
-    --globalIndexOfCreatedUnits
+    --ctx.globalIndexOfCreatedUnits
     local posFound=extractPosition(act.params.position)
      createUnitAtPosition(act,posFound)
   elseif(act.type=="createUnitsInZone") then
@@ -643,7 +639,14 @@ local function ApplyNonGroupableAction(act)
     local v=math.random(act.params.min,act.params.max)
     Spring.Echo("drawn variable")
     Spring.Echo(v)
-    variables[act.params.variable]=v
+    ctx.variables[act.params.variable]=v   
+  elseif(act.type=="script") then
+    load_code(act.params.script)
+ 
+  elseif(act.type=="enableWidget")or(act.type=="enableWidget") then
+    local widgetName=act.params.widget
+    local activation=(act.type=="enableWidget")
+    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
   end
 end
 
@@ -661,7 +664,7 @@ function ApplyAction (a)
   if(groupable) then
     --extract units
     if(a.params.unit~=nil)then
-      local u=armySpring[a.params.unit]
+      local u=ctx.armySpring[a.params.unit]
       ApplyGroupableAction(u,a)
     else   
       local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
@@ -675,7 +678,7 @@ function ApplyAction (a)
       
       if(listOfUnits~=nil)then
         for i, externalUnitId in ipairs(listOfUnits) do
-          local unit=armySpring[externalUnitId]
+          local unit=ctx.armySpring[externalUnitId]
           ApplyGroupableAction(unit,a)
           --
         end
@@ -693,7 +696,7 @@ end
 -- For debugging purpose
 -------------------------------------
 local function printMyStack()
-  for i,el in pairs(actionStack) do
+  for i,el in pairs(ctx.actionStack) do
     --Spring.Echo("action "..el.actId.." is planned with delay : "..el.delay)
   end
 end 
@@ -702,7 +705,7 @@ end
 -- Check if an action is already in the stack of actions
 -------------------------------------
 local function alreadyInStack(actId)
-  for index,el in pairs(actionStack) do
+  for index,el in pairs(ctx.actionStack) do
     if(el.actId==actId)then
       return true
     end
@@ -716,21 +719,20 @@ end
 -- At the beginning of table if the quickest action to be applied
 -- At the end if the action with the biggest delay
 -------------------------------------
-function AddActionInStack(action, delSeconds)
-  local delay=secondesToFrames(delSeconds)
+function AddActionInStack(action, delayFrame)
   local element={}
-  element["delay"]=delay
+  element["delay"]=delayFrame
   element["action"]=action
   --Spring.Echo(actId.." is added with delay : "..delay)
-  for index,el in pairs(actionStack) do
+  for index,el in pairs(ctx.actionStack) do
     local del=el.delay
     local act=el.actId
-    if(del>delay) then
-      table.insert(actionStack,index,element)
+    if(del>delayFrame) then
+      table.insert(ctx.actionStack,index,element)
       return
     end
   end
-  table.insert(actionStack,element)
+  table.insert(ctx.actionStack,element)
 end 
 
 -------------------------------------
@@ -739,7 +741,7 @@ end
 -------------------------------------
 local function updateStack(timeLapse)
   local updatedStack={}
-  for index,el in pairs(actionStack) do
+  for index,el in pairs(ctx.actionStack) do
     el.delay=el.delay-timeLapse -- updating the delay
     table.insert(updatedStack,el)
   end
@@ -751,10 +753,10 @@ end
 -- and removed from the stack
 -------------------------------------
 local function applyCurrentActions()
-  for index,el in pairs(actionStack) do
+  for index,el in pairs(ctx.actionStack) do
     if(el.delay<0)then
       ApplyAction(el.action, nil)
-      table.remove(actionStack,index)
+      table.remove(ctx.actionStack,index)
     end
   end
 end 
@@ -768,26 +770,26 @@ end
 local function watchHeal(frameNumber)
 --attackedUnits
   -- for attacked TODO: for loop here and stuff
-  for attacked,tableInfo in pairs(attackedUnits) do
-    local idAttacked=armyExternal[attacked]
-    if(idAttacked~=nil)and (armyInformations[idAttacked]~=nil)then
+  for attacked,tableInfo in pairs(ctx.attackedUnits) do
+    local idAttacked=ctx.armyExternal[attacked]
+    if(idAttacked~=nil)and (ctx.armyInformations[idAttacked]~=nil)then
       --Spring.Echo(json.encode(tableInfo))
       if(tableInfo.frame==-1)then
-        attackedUnits[attacked].frame=frameNumber
-        armyInformations[idAttacked].isUnderAttack=true
+        ctx.attackedUnits[attacked].frame=frameNumber
+        ctx.armyInformations[idAttacked].isUnderAttack=true
         --Spring.Echo("under attack")
       elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(5))then
-        armyInformations[idAttacked].isUnderAttack=true
+        ctx.armyInformations[idAttacked].isUnderAttack=true
         --Spring.Echo("still under attack")
       else
        -- Spring.Echo("no more under attack")
-        armyInformations[idAttacked].isUnderAttack=false
+        ctx.armyInformations[idAttacked].isUnderAttack=false
       end
     end
   end
-  for idUnit,infos in pairs(armyInformations) do
-    local springUnit=armySpring[idUnit]
-  -- armyInformations
+  for idUnit,infos in pairs(ctx.armyInformations) do
+    local springUnit=ctx.armySpring[idUnit]
+  -- ctx.armyInformations
     if(not infos.autoHealStatus)and(Spring.ValidUnitID(springUnit)) then
       --Spring.Echo("try to fix autoheal")
       --Spring.Echo(springUnit)
@@ -803,7 +805,7 @@ local function watchHeal(frameNumber)
         infos.previousHealth = currentHealth
       end
     end
-    armyInformations[idUnit]=infos
+    ctx.armyInformations[idUnit]=infos
   end
 end
 
@@ -816,7 +818,7 @@ end
 local function processEvents(frameNumber)
   local creationOfNewEvent=false
   local newevent
-  for idEvent,event in pairs(events) do
+  for idEvent,event in pairs(ctx.events) do
     if isTriggerable(event) then
       if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
         -- Handle repetition
@@ -839,25 +841,35 @@ local function processEvents(frameNumber)
             table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
             newevent.conditions={}
             newevent.id=tostring(frameNumber)
-            newevent.conditions[a.params.condition..newevent.id]=conditions[a.params.condition..tostring(event.id)]
+            newevent.conditions[a.params.condition..newevent.id]=ctx.conditions[a.params.condition..tostring(event.id)]
             --Spring.Echo("this event is created")
             --Spring.Echo(json.encode(newevent))                      
           else
             if creationOfNewEvent==false then
               AddActionInStack(a,frameDelay)
-              Spring.Echo(a.name.." added to stack")
+              Spring.Echo(a.name.." added to stack with delay"..tostring(frameDelay))
             else
               table.insert(newevent["actions"],a)
             end
           end
         end
         if creationOfNewEvent then
-          events[tostring(frameNumber+100)]=newevent -- dirty trick to generate an unique id for this new event
+          ctx.events[tostring(frameNumber+100)]=newevent -- dirty trick to generate an unique id for this new event
           --Spring.Echo(json.encode(events))
         end
       end
     end
   end
+end
+
+-------------------------------------
+-- update values which are available in unsync only
+-- It justs request unsync code by sendMessage
+-- Values are sent back to sync code (check RecvLuaMsg(msg, player))
+-------------------------------------
+local function  UpdateUnsyncValues(frameNumber)
+  if(frameNumber%10~=0)then return end
+  SendToUnsynced("requestUnsyncVals")
 end
 
 -------------------------------------
@@ -874,13 +886,18 @@ end
 -- Actions are in a queue list available by GetCommandQueue
 -------------------------------------
 local function GetCurrentUnitAction(unit)
-  local q=Spring.GetCommandQueue(unit,1) -- 1 means the only the first action in the stack
-  local action=""
-  if(q~=nil)and(q[1]~=nil) then
-    action=q[1].id
-    -- get the string describing the action by CMD[q[1].id] if you want
+if(Spring.ValidUnitID(unit))then
+    local q=Spring.GetCommandQueue(unit,1) -- 1 means the only the first action in the stack
+    local action=""
+    if(q~=nil)and(q[1]~=nil) then
+      action=q[1].id
+      -- get the string describing the action by CMD[q[1].id] if you want
+    end
+    return action
+  else
+    Spring.Echo("GetCurrentUnitAction called with invalid unit it")
+    return nil
   end
-  return action
 end
 
 
@@ -889,7 +906,7 @@ end
 -- Two modes are possible depending on the mode of comparison (at least, at most ...)
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
-  local internalUnitId=armySpring[externalUnitId]
+  local internalUnitId=ctx.armySpring[externalUnitId]
   if(c.attribute=="dead") then --untested yet
     --Spring.Echo("is it dead ?")
     --Spring.Echo(externalUnitId)
@@ -913,8 +930,8 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       return i  
     elseif(c.attribute=="underAttack")then --untested yet
       --Spring.Echo("is it working")
-      --Spring.Echo(armyInformations[externalUnitId].isUnderAttack)
-      return armyInformations[externalUnitId].isUnderAttack
+      --Spring.Echo(ctx.armyInformations[externalUnitId].isUnderAttack)
+      return ctx.armyInformations[externalUnitId].isUnderAttack
     elseif(c.attribute=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==c.params.command) 
@@ -930,32 +947,35 @@ end
 -- Update the truthfulness of a condition
 -------------------------------------
 local function UpdateConditionsTruthfulness (frameNumber)
-  for idCond,c in pairs(conditions) do
+  for idCond,c in pairs(ctx.conditions) do
     local object=c["object"]
     if(object=="unit")then
-      conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
+      ctx.conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
     elseif(object=="other")then  
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
       local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
-      conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+      ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
       elseif(c.type=="repeat") then
         local framePeriod=secondesToFrames(c.params.number)
-        conditions[idCond]["currentlyValid"]=((frameNumber-startingFrame) % framePeriod==0)
+        ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
       elseif(c.type=="start") then
-        conditions[idCond]["currentlyValid"]=(frameNumber==startingFrame)--frame 5 is the new frame 0
+        ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
       -- Time related conditions [END]
       -- Variable related conditions [START]
       elseif(c.type=="variableVSnumber") then
-        local v1=variables[c.params.variable]
+        local v1=ctx.variables[c.params.variable]
         local v2=c.params.number
-        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
+        ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="variableVSvariable") then
-        local v1=variables[c.params.variable1]
-        local v2=variables[c.params.variable2]
-        conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
+        local v1=ctx.variables[c.params.variable1]
+        local v2=ctx.variables[c.params.variable2]
+        ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="booleanVariable") then
-        conditions[idCond]["currentlyValid"]=variables[c.params.variable] -- very simple indeed 
+        ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
+      elseif(c.type=="script") then
+        ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script) --TODO (vérifier)
+        --Spring.Echo(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])))
       end
       
     elseif(object=="group")then  
@@ -972,7 +992,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
           end 
         end
       end
-      conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
+      ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
         local tlkup={[1]={"targetTeam","team"},[2]={"unitType","type"},[3]={"group","group"}}
@@ -980,10 +1000,10 @@ local function UpdateConditionsTruthfulness (frameNumber)
         --Spring.Echo(json.encode(externalUnitList))
         local total=table.getn(externalUnitList)
         local count=0
-        if(killByTeams[c.params.team]~=nil)then
+        if(ctx.killByTeams[c.params.team]~=nil)then
           for u,unit in ipairs(externalUnitList) do
-            local spUnit=armySpring[unit]
-            for u2,killInformation in ipairs(killByTeams[c.params.team]) do
+            local spUnit=ctx.armySpring[unit]
+            for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do
               if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
                 count=count+1
                 break
@@ -991,28 +1011,28 @@ local function UpdateConditionsTruthfulness (frameNumber)
             end
           end
         end
-        conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
+        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
       elseif (c.type=="killed_unit") then
         local numberOfKill=0
-        if(killByTeams[c.params.team]~=nil)then
-          local numberOfKill=table.getn(killByTeams[c.params.team])
+        if(ctx.killByTeams[c.params.team]~=nil)then
+          local numberOfKill=table.getn(ctx.killByTeams[c.params.team])
         end
-        conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
+        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
         -- For the moment the "killed all" is not implemented 
       elseif (c.type=="killed") then
         local found=false
-        local targetedUnit=armySpring[c.params.unit]
-        local kills=killByTeams[c.params.team]
+        local targetedUnit=ctx.armySpring[c.params.unit]
+        local kills=ctx.killByTeams[c.params.team]
         if(kills~=nil)then
           for u2,killInformation in ipairs(kills) do
             if targetedUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
-              conditions[idCond]["currentlyValid"]=true
+              ctx.conditions[idCond]["currentlyValid"]=true
               found=true
               break
             end
           end
         end
-        if(not found)then conditions[idCond]["currentlyValid"]=false end 
+        if(not found)then ctx.conditions[idCond]["currentlyValid"]=false end 
       end
     end
   end 
@@ -1058,40 +1078,44 @@ local function writeCompassOnUnit(springUnitId)
     writeSign(x+18, y, z+48, "+")
 end
 
+-------------------------------------
+-- Parse the editor file
+-- enable/deactivate widgets according to the settings
+-------------------------------------
 local function parseJson(jsonFile)
-  Spring.Echo(jsonFile)
+  --Spring.Echo(jsonFile)
   if(jsonFile==nil) then
     return nil
   end
-  canUpdate=true
-  --Spring.Echo(jsonName)
-  --Spring.Echo("we try to decode"..jsonFile)
-  mission=json.decode(jsonFile)
-  
+  ctx.canUpdate=true
+  ctx.mission=json.decode(jsonFile)
   -- desactivate widget
-  -- This should be done ASAP
-  for i=1, table.getn(mission.description.widgets) do
-    local widgetName=mission.description.widgets[i].name
-    local activation=mission.description.widgets[i].active
+  for i=1, table.getn(ctx.mission.description.widgets) do
+    local widgetName=ctx.mission.description.widgets[i].name
+    local activation=ctx.mission.description.widgets[i].active
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
-  end 
+  end
+  
+  -- Required widgets for Prog&Play   
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Display Message",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Hide commands",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Messenger",activation=true})) 
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Mission GUI",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="Spring Direct Launch 2 for Prog&Play",activation=true}))
+  SendToUnsynced("changeWidgetState", json.encode({widgetName="CA Interface",activation=true}))
+  
   
   return true
 end
 
 local function returnEventsTriggered()
   local eventsTriggered={}
-  for idEv,ev in pairs(events) do   
+  for idEv,ev in pairs(ctx.events) do   
     if(ev.hasTakenPlace) then
       table.insert(eventsTriggered,idEv)
     end
   end
   return eventsTriggered
-end
-
-local function returnTestsToPlay()
-  --Spring.Echo(json.encode(mission.tests))
-  return mission.tests
 end
 
 -------------------------------------
@@ -1100,14 +1124,7 @@ end
 -- @todo This function does too many things
 -------------------------------------
 local function StartAfterJson ()
-  -- Delete all the stuff (required as team kernel are placed by spring since the beginnning)
   
-
-  --[[ 
-
-  --]]
-
-  -- COMMENTED OUT for the moment, avoid unsage attempt to modify gamestate
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
     --Spring.Echo("I am Totally Deleting Stuff")
@@ -1119,19 +1136,19 @@ local function StartAfterJson ()
  -------------------------------
  -------ZONES-------------------
  -------------------------------
- if(mission.zones~=nil)then   
-  for i=1, table.getn(mission.zones) do
+ if(ctx.mission.zones~=nil)then   
+  for i=1, table.getn(ctx.mission.zones) do
     local center_xz
-     local cZ=mission.zones[i]
+     local cZ=ctx.mission.zones[i]
      local idZone=cZ.id
      if(cZ.type=="Disk") then
       center_xz={x=cZ.x, z=cZ.z}
-      zones[idZone]={type="Disk",center_xz=center_xz,a=cZ.a,b=cZ.b}
+      ctx.zones[idZone]={type="Disk",center_xz=center_xz,a=cZ.a,b=cZ.b}
      elseif(cZ.type=="Rectangle") then
       local demiLargeur=(cZ.x2-cZ.x1)/2
       local demiLongueur=(cZ.z2-cZ.z1)/2
       center_xz={x=cZ.x1+demiLargeur, z=cZ.z1+demiLongueur}
-      zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
+      ctx.zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
      else
       Spring.Echo(cZ.type.." not implemented yet")
       end
@@ -1143,57 +1160,56 @@ local function StartAfterJson ()
     end 
   end
 end
- 
- -------------------------------
- -------VARIABLES---------------
- -------------------------------
-if(mission.variables~=nil)then
-  for i=1,table.getn(mission.variables) do
-    local missionVar=mission.variables[i]
-    local initValue=missionVar.initValue
-    local name=missionVar.name
-    if(missionVar.type=="number") then
-      initValue=initValue
-    elseif(missionVar.type=="boolean") then
-      initValue=(initValue=="true")
+   
+   -------------------------------
+   -------VARIABLES---------------
+   -------------------------------
+  if(ctx.mission.variables~=nil)then
+    for i=1,table.getn(ctx.mission.variables) do
+      local missionVar=ctx.mission.variables[i]
+      local initValue=missionVar.initValue
+      local name=missionVar.name
+      if(missionVar.type=="number") then
+        initValue=initValue
+      elseif(missionVar.type=="boolean") then
+        initValue=(initValue=="true")
+      end
+      ctx.variables[name]=initValue
     end
-    variables[name]=initValue
+  end  
+  Spring.Echo(json.encode(ctx.variables))
+  
+  
+  
+    -- specialPositionTables[i]={positions[id].x,positions[id].z}
+    -- 
+  
+   -------------------------------
+   -------SETTINGS----------------
+   -------------------------------
+  ctx.messages["briefing"]=ctx.mission.description.briefing
+  Spring.Echo(ctx.messages["briefing"])
+  --  if(mission.description.mouse=="disabled") then
+  --   SendToUnsynced("mouseDisabled", true)
+  --  end
+  
+  if(ctx.mission.description.cameraAuto=="enabled") then
+    _G.cameraAuto = {
+      enable = true,
+      specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
+    }
+    SendToUnsynced("enableCameraAuto")
+    _G.cameraAuto = nil
   end
-end  
-Spring.Echo(json.encode(variables))
-
-
-
-  -- specialPositionTables[i]={positions[id].x,positions[id].z}
-  -- 
-
- -------------------------------
- -------SETTINGS----------------
- -------------------------------
-messages["briefing"]=mission.description.briefing
-Spring.Echo(messages["briefing"])
---  if(mission.description.mouse=="disabled") then
---   SendToUnsynced("mouseDisabled", true)
---  end
-
-if(mission.description.cameraAuto=="enabled") then
-  _G.cameraAuto = {
-    enable = true,
-    specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
-  }
-  SendToUnsynced("enableCameraAuto")
-  _G.cameraAuto = nil
-end
-local isautoHealGlobal=(mission.description.autoHeal=="enabled")
-
- 
+  local isautoHealGlobal=(ctx.mission.description.autoHeal=="enabled")
+  
  -------------------------------
  ----------ARMIES---------------
  -------------------------------
   local isAutoHeal
-  if(mission.units~=nil)then
-    for i=1,table.getn(mission.units) do
-      local armyTable=mission.units[i]
+  if(ctx.mission.units~=nil)then
+    for i=1,table.getn(ctx.mission.units) do
+      local armyTable=ctx.mission.units[i]
       if(armyTable.autoHeal=="global") then
         isAutoHeal=isautoHealGlobal
       else
@@ -1210,146 +1226,93 @@ local isautoHealGlobal=(mission.description.autoHeal=="enabled")
  -------------------------------
  ------GROUP OF ARMIES----------
  -------------------------------
-  if(mission["groups"]~=nil) then
-    for i=1, table.getn(mission.groups) do
-      local groupname=mission.groups[i].name
+  if(ctx.mission["groups"]~=nil) then
+    for i=1, table.getn(ctx.mission.groups) do
+      local groupname=ctx.mission.groups[i].name
       local groupIndex="group_"..groupname
-      groupOfUnits[groupIndex]={}
-      for i,unit in ipairs(mission.groups[i].units) do
-        table.insert(groupOfUnits[groupIndex],unit)
+      ctx.groupOfUnits[groupIndex]={}
+      for i,unit in ipairs(ctx.mission.groups[i].units) do
+        table.insert(ctx.groupOfUnits[groupIndex],unit)
       end
     end
   end 
-  Spring.Echo(json.encode(groupOfUnits))
+  Spring.Echo(json.encode(ctx.groupOfUnits))
    
 
 
- ---------------------------------------------
- -------EVENTS  AND  CONDITIONS--------------
- ---------------------------------------------
-if(mission.events~=nil)then
-    for i=1, table.getn(mission.events) do
-     local currentEvent=mission.events[i]
-     local idEvent=mission.events[i].id
-     events[idEvent]={}
-     events[idEvent]=mission.events[i]
-     events[idEvent].hasTakenPlace=false
-     events[idEvent].listOfInvolvedConditions={}
-     for j=1, table.getn(currentEvent.conditions)do
-       local currentCond=currentEvent.conditions[j]
-       local id=currentCond.name
-       table.insert(events[idEvent].listOfInvolvedConditions,id)
-       conditions[id..tostring(events[idEvent].id)]=currentEvent.conditions[j]
-       conditions[id..tostring(events[idEvent].id)]["currentlyValid"]=false
-       local type=currentCond.type
-       local cond_object="other"
-       local attribute=type
-       if(string.sub(type, 1, 5)=="type_") then
-        cond_object="group" -- group is the generic thing
-        attribute=string.sub(type, 6, -1)
-       elseif(string.sub(type, 1, 6)=="killed") then
-        cond_object="killed" -- very special group (not working like others)
-       elseif(string.sub(type, 1, 5)=="unit_") then
-        cond_object="unit"
-        attribute=string.sub(type, 6, -1)
-       elseif(string.sub(type, 1, 6)=="group_") then
-        cond_object="group"
-        attribute=string.sub(type, 7, -1)
-       elseif(string.sub(type, 1, 5)=="team_") then
-        cond_object="group"
-        attribute=string.sub(type, 6, -1)
-      end
-      conditions[id..tostring(events[idEvent].id)]["object"]=cond_object
-      conditions[id..tostring(events[idEvent].id)]["attribute"]=attribute
-    end 
-  end
-end
-
-
-
-
-
-
-
- --[[  
-   
-   -------------------------------
-   -------START------------------
-   -------------------------------   
-  
-  --Spring.DestroyUnit(armySpring["ahah"],false,false)
-  
-  conditions["START"]={}
-  for idEvent,event in pairs(events) do
-    if(event.trigger=="START") then -- CONVENTION : Id Condition for start is START, does not recquired to get a definition
-      for j=1, table.getn(event.actions) do
-        local actId=event.actions[j].actionId
-        --Spring.Echo("try to apply"..actId)
-        AddActionInStack(actId,tonumber(actions[actId].delay))
-      end
+   ---------------------------------------------
+   -------EVENTS  AND  CONDITIONS--------------
+   ---------------------------------------------
+  if(ctx.mission.events~=nil)then
+      for i=1, table.getn(ctx.mission.events) do
+       local currentEvent=ctx.mission.events[i]
+       local idEvent=ctx.mission.events[i].id
+       ctx.events[idEvent]={}
+       ctx.events[idEvent]=ctx.mission.events[i]
+       ctx.events[idEvent].hasTakenPlace=false
+       ctx.events[idEvent].listOfInvolvedConditions={}
+       for j=1, table.getn(currentEvent.conditions)do
+         local currentCond=currentEvent.conditions[j]
+         local id=currentCond.name
+         table.insert(ctx.events[idEvent].listOfInvolvedConditions,id)
+         ctx.conditions[id..tostring(ctx.events[idEvent].id)]=currentEvent.conditions[j]
+         ctx.conditions[id..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
+         local type=currentCond.type
+         local cond_object="other"
+         local attribute=type
+         if(string.sub(type, 1, 5)=="type_") then
+          cond_object="group" -- group is the generic thing
+          attribute=string.sub(type, 6, -1)
+         elseif(string.sub(type, 1, 6)=="killed") then
+          cond_object="killed" -- very special group (not working like others)
+         elseif(string.sub(type, 1, 5)=="unit_") then
+          cond_object="unit"
+          attribute=string.sub(type, 6, -1)
+         elseif(string.sub(type, 1, 6)=="group_") then
+          cond_object="group"
+          attribute=string.sub(type, 7, -1)
+         elseif(string.sub(type, 1, 5)=="team_") then
+          cond_object="group"
+          attribute=string.sub(type, 6, -1)
+        end
+        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["object"]=cond_object
+        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
+      end 
     end
-  end
-  conditions["START"]["currentlyValid"]=false
-  ShowBriefing()    
---]]        
+  end     
 end
--------------------------------------
--- Update the game state of the mission 
--- Called externally by the gadget mission_runner.lua 
--- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
--------------------------------------
 
-local function Start(jsonFile) -- shorthand for parseJson + StartAfterJson.
+
+-- shorthand for parseJson + StartAfterJson.
+local function Start(jsonFile) 
+  Spring.Echo(jsonFile)
   parseJson(jsonFile)
   StartAfterJson ()
 end
 
+-------------------------------------
+-- The main function of Mission Player
+-- Update the game state of the mission 
+-- Called externally by the gadget mission_runner.lua 
+-- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
+-------------------------------------
 local function Update (frameNumber)
   UpdateConditionsTruthfulness(frameNumber) 
   UpdateGameState(frameNumber)
-  actionStack=updateStack(refreshPeriod)
+  ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)
   applyCurrentActions() 
-  if(frameNumber>10)then recordCreatedUnits=true end
-
-  if(success==1) then
-    return success,outputstate
-  elseif(success==-1) then
-    return success,outputstate
+  if(frameNumber>10)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
+  UpdateUnsyncValues(frameNumber)
+  if(ctx.success==1) then
+    return ctx.success,ctx.outputstate
+  elseif(ctx.success==-1) then
+    return ctx.success,ctx.outputstate
   else
     return 0 -- means continue
   end
   -- Trigger Events
 end  
   
-  
-  
-  
-  
-  --[[
-  if(not canUpdate)then
-    return 0
-  end
-  frameIndex=frameIndex+1
-  if(frameIndex>=refreshPeriod) then
-    --printMyStack()
-    frameIndex=0  
-    actionStack=updateStack(refreshPeriod)
-    applyCurrentActions() 
-    UpdateDynamicVariables() -- update knowledge on the game situation
-    UpdateConditionsTruthfulness(frameNumber)-- update truthfulness of conditions
-    UpdateGameState()-- act upon the situation
-    if(success~=nil) then
-      return success,outputstate
-    else
-      return 0 -- means continue
-    end
-  else
-    return 0 -- means continue
-  end
- 
-  return 0
-end
- --]]
 -------------------------------------
 -- Called by mission_runner at the end of the mission
 -------------------------------------
@@ -1361,6 +1324,10 @@ local function Stop ()
 	end
 end
 
+-------------------------------------
+-- Information received from Unsynced Code 
+-- Executed in mission_runner.lua
+-------------------------------------
 function gadget:RecvLuaMsg(msg, player)
   if((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,4)=="kill")) then
     -- comes from mission runner unit destroyed
@@ -1369,12 +1336,12 @@ function gadget:RecvLuaMsg(msg, player)
     local jsonfile=string.sub(msg,5,-1)
     local killTable=json.decode(jsonfile)
     local attackerTeam=killTable.attackerTeam
-    if killByTeams[attackerTeam]==nil then
-      killByTeams[attackerTeam]={} 
+    if ctx.killByTeams[attackerTeam]==nil then
+      ctx.killByTeams[attackerTeam]={} 
     end
-    table.insert(killByTeams[attackerTeam],killTable)
-    Spring.Echo(json.encode(killByTeams))
-    --Spring.Echo(json.encode(killByTeams))
+    table.insert(ctx.killByTeams[attackerTeam],killTable)
+    Spring.Echo(json.encode(ctx.killByTeams))
+    --Spring.Echo(json.encode(ctx.killByTeams))
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,6)=="damage")) then
     -- comes from mission runner unit destroyed
     -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
@@ -1384,14 +1351,14 @@ function gadget:RecvLuaMsg(msg, player)
     local damageTable=json.decode(jsonfile)
     local attackedUnit=damageTable.attackedUnit
     damageTable.frame=tonumber(damageTable.frame)
-    if attackedUnits[attackedUnit]==nil then
-      attackedUnits[attackedUnit]={} 
+    if ctx.attackedUnits[attackedUnit]==nil then
+      ctx.attackedUnits[attackedUnit]={} 
     end
-    attackedUnits[attackedUnit]=damageTable
+    ctx.attackedUnits[attackedUnit]=damageTable
     --Spring.Echo(json.encode(attackedUnits))
     
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
-    if(recordCreatedUnits)then -- this avoid to store starting bases in the tables
+    if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
       local jsonfile=string.sub(msg,13,-1)
       Spring.Echo(jsonfile)
       local creationTable=json.decode(jsonfile)
@@ -1399,27 +1366,33 @@ function gadget:RecvLuaMsg(msg, player)
       --local attackedUnit=damageTable.attackedUnit
       local teamIndex="team_"..tostring(creationTable.unitTeam)
       local typeIndex="type_"..tostring(UnitDefs[creationTable.unitDefID].name)
-      globalIndexOfCreatedUnits=globalIndexOfCreatedUnits+1
-      local realId="createdUnit"..tostring(globalIndexOfCreatedUnits)
-      armySpring[realId]=creationTable.unitID 
+      ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
+      local realId="createdUnit"..tostring(ctx.globalIndexOfCreatedUnits)
+      ctx.armySpring[realId]=creationTable.unitID 
       Spring.Echo("this unit is created")
       Spring.Echo(creationTable.unitID)
-      if(groupOfUnits[teamIndex]==nil) then
-        groupOfUnits[teamIndex]={}
+      if(ctx.groupOfUnits[teamIndex]==nil) then
+        ctx.groupOfUnits[teamIndex]={}
       end
       local isAlreadyStored=false
-      for i = 1,table.getn(groupOfUnits[teamIndex]) do
-        if(realId==groupOfUnits[teamIndex][i]) then isAlreadyStored=true end
+      for i = 1,table.getn(ctx.groupOfUnits[teamIndex]) do
+        if(realId==ctx.groupOfUnits[teamIndex][i]) then isAlreadyStored=true end
       end
       if(not isAlreadyStored)then   
-        table.insert(groupOfUnits[teamIndex],realId)
+        table.insert(ctx.groupOfUnits[teamIndex],realId)
       end
       -- update group units (type related)
-      if(groupOfUnits[typeIndex]==nil) then
-        groupOfUnits[typeIndex]={}
+      if(ctx.groupOfUnits[typeIndex]==nil) then
+        ctx.groupOfUnits[typeIndex]={}
       end
-      table.insert(groupOfUnits[typeIndex],realId)
+      table.insert(ctx.groupOfUnits[typeIndex],realId)
     end 
+  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,16)=="returnUnsyncVals")) then
+    local jsonfile=string.sub(msg,17,-1)
+    local values=json.decode(jsonfile)
+    for ind,val in pairs(values)do
+      ctx[ind]=val
+    end
   end
 end
 
@@ -1436,5 +1409,8 @@ Mission.ShowBriefing = ShowBriefing
 Mission.Update = Update
 Mission.Stop = Stop
 Mission.ApplyAction = ApplyAction
+
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction=ApplyGroupableAction ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ;
+ctx.Spring=Spring 
 
 return Mission

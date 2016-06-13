@@ -1,0 +1,681 @@
+{
+	"zones":[
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":1200,
+			"z1":1176,
+			"z2":1384,
+			"x1":864,
+			"marker":false,
+			"name":"spawn",
+			"green":0.55862176418304,
+			"id":1,
+			"shown":true,
+			"alwaysInView":false,
+			"red":0.51526319980621
+		},
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":1256,
+			"z1":1664,
+			"z2":1896,
+			"x1":816,
+			"marker":false,
+			"name":"randomMove",
+			"green":0.55862176418304,
+			"id":2,
+			"shown":true,
+			"alwaysInView":false,
+			"red":0.51526319980621
+		} 
+	],
+	"allyteams":{
+		"1":[
+			0,
+			2 
+		],
+		"2":[
+			0 
+		],
+		"3":[
+			 
+		],
+		"4":[
+			 
+		],
+		"5":[
+			 
+		],
+		"6":[
+			 
+		],
+		"7":[
+			 
+		],
+		"8":[
+			1 
+		],
+		"9":[
+			 
+		],
+		"0":[
+			1 
+		]
+	},
+	"description":{
+		"map":"Marble_Madness_Map",
+		"cameraAuto":"enabled",
+		"briefingRaw":"Mission 3\\n \\n \\nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"minimap":"disabled",
+		"name":"_missi",
+		"widgets":[
+			{
+				"desc":"Teach you to play the game,
+				 one tip at a time",
+				"name":"Kernel Panic Automatic Tip Dispenser",
+				"active":false
+			},
+			{
+				"desc":"Hides all commands",
+				"name":"Hide commands",
+				"active":true
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},
+			{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},
+			{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},
+			{
+				"desc":"Control the rest of your army while in Hero mode",
+				"name":"Heroes Right Click",
+				"active":false
+			},
+			{
+				"desc":"Prints a message when a team die",
+				"name":"TeamDiedMessages",
+				"active":false
+			},
+			{
+				"desc":"Show the mission title and briefing",
+				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},
+			{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},
+			{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
+				"active":false
+			},
+			{
+				"desc":"Prettier background for the tooltip",
+				"name":"Kernel Panic MidKnight's tooltip background",
+				"active":false
+			},
+			{
+				"desc":"Replace the default Spring tooltip by one customised for K.P.",
+				"name":"Kernel Panic Tooltip",
+				"active":false
+			},
+			{
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
+				"active":false
+			},
+			{
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":false
+			},
+			{
+				"desc":"Highlight the Geovents when placing Buildings,
+				 or when in metal view",
+				"name":"Kernel Panic Geos Highlight",
+				"active":false
+			},
+			{
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},
+			{
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},
+			{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
+				"active":false
+			},
+			{
+				"desc":"Remove the need to add /luarules in front of some gadgets command",
+				"name":"Kernel Panic Console Commands",
+				"active":false
+			} 
+		],
+		"briefing":"Mission 3\n \n \nATTENTION !!! Cet OCTET (BYTE) tentait de semer un éclaireur ennemi qui ne doit pas être loin. Protégez le avant qu'il ne soit trop tard.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"mouse":"disabled",
+		"saveName":"_missi",
+		"autoHeal":"disabled"
+	},
+	"events":[
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"firstAgression",
+			"repetition":false,
+			"actionTotal":3,
+			"conditions":[
+				{
+					"id":5,
+					"type":"start",
+					"name":"Condition5",
+					"params":[
+						 
+					]
+				} 
+			],
+			"actions":[
+				{
+					"id":18,
+					"type":"unit_orderPosition",
+					"name":"Action18",
+					"params":{
+						"command":10,
+						"position":{
+							"x":1030,
+							"z":1594
+						},
+						"unit":1952
+					}
+				},
+				{
+					"id":19,
+					"type":"wait",
+					"name":"Action19",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":6,
+					"type":"unit_orderTarget",
+					"name":"Action6",
+					"params":{
+						"target":5069,
+						"command":20,
+						"unit":1952
+					}
+				} 
+			],
+			"id":3
+		},
+		{
+			"actions":[
+				{
+					"id":7,
+					"type":"createUnitsInZone",
+					"name":"Action7",
+					"params":{
+						"team":2,
+						"number":1,
+						"unitType":"bit",
+						"zone":1
+					}
+				},
+				{
+					"id":9,
+					"type":"unit_orderTarget",
+					"name":"Action9",
+					"params":{
+						"command":20,
+						"target":5069,
+						"unit":"Action7"
+					}
+				} 
+			],
+			"name":"Moreagressions",
+			"actionTotal":2,
+			"id":4,
+			"conditions":[
+				{
+					"id":6,
+					"type":"elapsedTime",
+					"name":"Condition6",
+					"params":{
+						"number":{
+							"number":4,
+							"comparison":"atleast"
+						}
+					}
+				},
+				{
+					"id":14,
+					"type":"elapsedTime",
+					"name":"conditiontonullifythisevent",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atmost"
+						}
+					}
+				} 
+			],
+			"conditionTotal":2,
+			"trigger":""
+		},
+		{
+			"actions":[
+				{
+					"id":8,
+					"type":"bubbleUnit",
+					"name":"Action_message",
+					"params":{
+						"message":[
+							"Merci !" 
+						],
+						"time":5,
+						"unit":5069
+					}
+				},
+				{
+					"id":13,
+					"type":"win",
+					"name":"Action13",
+					"params":{
+						"team":0,
+						"outputState":"ennemyKilled"
+					}
+				} 
+			],
+			"name":"Event5",
+			"actionTotal":2,
+			"id":5,
+			"conditions":[
+				{
+					"id":7,
+					"type":"team_dead",
+					"name":"Condition7",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":2
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"actions":[
+				{
+					"id":10,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_3"
+					}
+				} 
+			],
+			"name":"teamOIsDead",
+			"actionTotal":1,
+			"id":6,
+			"conditions":[
+				{
+					"id":10,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"trigger":"Condition11 and not Condition13",
+			"conditionTotal":2,
+			"repetition":true,
+			"name":"behaviorUnderattack",
+			"actionTotal":4,
+			"repetitionTime":"4",
+			"conditions":[
+				{
+					"id":11,
+					"type":"unit_underAttack",
+					"name":"Condition11",
+					"params":{
+						"unit":5069
+					}
+				},
+				{
+					"id":13,
+					"type":"unit_order",
+					"name":"Condition13",
+					"params":{
+						"command":10,
+						"unit":5069
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":11,
+					"type":"bubbleUnit",
+					"name":"Action11",
+					"params":{
+						"message":[
+							"Aidez moi !!!",
+							"S'il vous plait...",
+							"AAaarghh",
+							"J'ai besoin d'aide",
+							"Que faites vous ?",
+							"Je ne tiendrai\npas longtemps",
+							"Mon energie diminue",
+							"Il m'en met\nplein la gueule",
+							"Noooonnn" 
+						],
+						"time":3,
+						"unit":5069
+					}
+				},
+				{
+					"id":12,
+					"type":"unit_orderPosition",
+					"name":"Action12",
+					"params":{
+						"command":10,
+						"position":2,
+						"unit":5069
+					}
+				},
+				{
+					"id":14,
+					"type":"wait",
+					"name":"Action14",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":15,
+					"type":"bubbleUnit",
+					"name":"Action15",
+					"params":{
+						"message":[
+							"Muhahah",
+							"C'est presque trop facile !",
+							"Tu peux courir ; mais m'échapper tu ne peux",
+							"Quelle aubaine !",
+							"C'est bientôt la fin cher ami",
+							"Je suis un tueur né",
+							"Je me délecte de ton désespoir",
+							"Où est ton berger petite brebis égarée ?" 
+						],
+						"time":2,
+						"unit":1952
+					}
+				} 
+			],
+			"id":7
+		},
+		{
+			"actions":[
+				{
+					"id":16,
+					"type":"unit_order",
+					"name":"Action16",
+					"params":{
+						"command":45,
+						"unit":4303,
+						"parameters":[
+							0 
+						]
+					}
+				} 
+			],
+			"actionTotal":1,
+			"name":"noAttack",
+			"repetition":false,
+			"id":8,
+			"conditions":[
+				{
+					"id":15,
+					"type":"start",
+					"name":"Condition15",
+					"params":[
+						 
+					]
+				} 
+			],
+			"conditionTotal":1,
+			"trigger":""
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"allydead",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":16,
+					"type":"unit_dead",
+					"name":"Condition16",
+					"params":{
+						"unit":5069
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":17,
+					"type":"lose",
+					"name":"Action17",
+					"params":{
+						"team":0,
+						"outputState":"allyDead"
+					}
+				} 
+			],
+			"id":9
+		} 
+	],
+	"variables":[
+		{
+			"id":0,
+			"type":"boolean",
+			"name":"hasmoved",
+			"initValue":"false"
+		} 
+	],
+	"teams":{
+		"1":{
+			"ai":"",
+			"name":"Team 1",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":0,
+				"red":0
+			},
+			"enabled":true
+		},
+		"2":{
+			"ai":"",
+			"name":"Team 2",
+			"control":"computer",
+			"color":{
+				"green":0,
+				"blue":0,
+				"red":1
+			},
+			"enabled":true
+		},
+		"3":{
+			"ai":"",
+			"name":"Team 3",
+			"control":"player",
+			"color":{
+				"green":0,
+				"blue":0.5,
+				"red":0.5
+			},
+			"enabled":false
+		},
+		"4":{
+			"ai":"",
+			"name":"Team 4",
+			"control":"player",
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":1
+			},
+			"enabled":false
+		},
+		"5":{
+			"ai":"",
+			"name":"Team 5",
+			"control":"player",
+			"color":{
+				"green":1,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"6":{
+			"ai":"",
+			"name":"Team 6",
+			"control":"player",
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"7":{
+			"ai":"",
+			"name":"Team 7",
+			"control":"player",
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0
+			},
+			"enabled":false
+		},
+		"8":{
+			"ai":"",
+			"name":"Team 8",
+			"control":"player",
+			"color":{
+				"green":1,
+				"blue":0.5,
+				"red":0
+			},
+			"enabled":false
+		},
+		"9":{
+			"ai":"",
+			"name":"Team 9",
+			"control":"player",
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":0.5
+			},
+			"enabled":false
+		},
+		"0":{
+			"ai":"",
+			"name":"Team 0",
+			"control":"player",
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0.5
+			},
+			"enabled":true
+		}
+	},
+	"groups":[
+		 
+	],
+	"units":[
+		{
+			"type":"bit",
+			"id":1952,
+			"position":{
+				"y":254.39453125,
+				"x":1033,
+				"z":1312
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":2
+		},
+		{
+			"type":"byte",
+			"id":5069,
+			"position":{
+				"y":100,
+				"x":1024,
+				"z":1816
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":1
+		},
+		{
+			"type":"bit",
+			"id":4303,
+			"position":{
+				"y":100,
+				"x":1034,
+				"z":1942
+			},
+			"orientation":-2.25341796875,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		} 
+	]
+}

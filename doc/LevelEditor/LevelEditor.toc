@@ -1,96 +1,53 @@
 \select@language {french}
-\contentsline {section}{\numberline {1}Architecture}{2}
-\contentsline {paragraph}{}{2}
-\contentsline {paragraph}{}{2}
-\contentsline {section}{\numberline {2}Description d\IeC {\'e}taill\IeC {\'e}e des modules}{2}
-\contentsline {subsection}{\numberline {2.1}Widget}{2}
-\contentsline {paragraph}{}{2}
-\contentsline {subsubsection}{\numberline {2.1.1}Chili UI}{2}
+\contentsline {section}{\numberline {1}Architecture globale}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {section}{\numberline {2}Chili UI}{2}
+\contentsline {paragraph}{}{2}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {subsubsection}{\numberline {2.1.2}Initialisation}{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
+\contentsline {section}{\numberline {3}Le pr\IeC {\'e}-launcher}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {subsubsection}{\numberline {2.1.3}Unit\IeC {\'e}s et groupes d'unit\IeC {\'e}s}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {paragraph}{updateUnitWindow}{3}
-\contentsline {paragraph}{applyChangesToSelectedUnits}{3}
-\contentsline {paragraph}{drawSelectionRect}{4}
-\contentsline {paragraph}{previewUnit}{4}
-\contentsline {paragraph}{showUnitAttributes}{4}
-\contentsline {paragraph}{showUnitsInformation}{4}
-\contentsline {paragraph}{showUnitGroupsAttributionWindow}{4}
-\contentsline {paragraph}{showUnitGroupsRemovalWindow}{4}
-\contentsline {paragraph}{updateSelectTeamButtons}{4}
-\contentsline {paragraph}{updateUnitList}{4}
-\contentsline {paragraph}{updateGroupListUnitList}{4}
-\contentsline {paragraph}{updateUnitHighlights}{4}
-\contentsline {paragraph}{updateUnitGroupPanels}{5}
-\contentsline {paragraph}{addUnitToGroup}{5}
-\contentsline {paragraph}{addSelectedUnitsToGroup}{5}
-\contentsline {paragraph}{addChosenUnitsToSelectedGroups}{5}
-\contentsline {paragraph}{removeSelectedUnitsFromGroup}{5}
-\contentsline {paragraph}{removeUnitFromGroup}{5}
-\contentsline {paragraph}{addUnitGroup}{5}
-\contentsline {paragraph}{addEmptyUnitGroup}{5}
-\contentsline {paragraph}{deleteUnitGroup}{5}
+\contentsline {section}{\numberline {4}Le launcher}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {subsection}{\numberline {4.1}Cr\IeC {\'e}ation d'un nouveau niveau}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {4.2}Edition d'un niveau existant}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {4.3}Editeur de sc\IeC {\'e}nario}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {5}L'\IeC {\'e}diteur de niveaux}{4}
+\contentsline {subsection}{\numberline {5.1}Editor User Interface}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsubsection}{\numberline {5.1.1}Initialisation}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsubsection}{\numberline {2.1.4}Zones}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {paragraph}{computeZoneWorldCoords}{5}
-\contentsline {paragraph}{drawZoneRect}{5}
-\contentsline {paragraph}{drawZoneDisk}{5}
-\contentsline {paragraph}{displayZones}{6}
-\contentsline {paragraph}{displaySelectedZoneAnchors}{6}
-\contentsline {paragraph}{showZoneInformation}{6}
-\contentsline {paragraph}{updateZoneInformation}{6}
-\contentsline {paragraph}{getClickedZone}{6}
-\contentsline {paragraph}{getZoneSide}{6}
-\contentsline {paragraph}{applyChangesToSelectedZone}{6}
-\contentsline {paragraph}{updateZonePanel}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {subsubsection}{\numberline {2.1.5}Forces}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {paragraph}{updateAllyTeamPanels}{6}
-\contentsline {paragraph}{addTeamToSelectedAllyTeam}{7}
-\contentsline {paragraph}{removeTeamFromAllyTeam}{7}
-\contentsline {paragraph}{removeTeamFromTables}{7}
-\contentsline {paragraph}{updateTeamsWindows}{7}
-\contentsline {paragraph}{updateTeamConfigPanels}{7}
-\contentsline {subsubsection}{\numberline {2.1.6}D\IeC {\'e}clencheurs}{7}
-\contentsline {paragraph}{}{7}
-\contentsline {paragraph}{createNewEvent}{7}
-\contentsline {paragraph}{editEvent}{7}
-\contentsline {paragraph}{removeEvent}{7}
-\contentsline {paragraph}{createNewCondition, editCondition, removeCondition, createNewAction, editAction, removeAction}{7}
-\contentsline {paragraph}{removeSecondWindows, removeThirdWindows}{7}
-\contentsline {paragraph}{updateEventList}{7}
-\contentsline {paragraph}{updateEventFrame}{7}
-\contentsline {paragraph}{currentEventFrame}{7}
-\contentsline {paragraph}{currentConditionFrame, currentActionFrame}{8}
-\contentsline {paragraph}{selectFilter}{8}
-\contentsline {paragraph}{selectConditionType, selectActionType}{8}
-\contentsline {paragraph}{drawConditionFrame, drawActionFrame}{8}
-\contentsline {paragraph}{drawFeature}{8}
-\contentsline {paragraph}{configureEvent}{8}
-\contentsline {paragraph}{updateImportComboBoxes}{8}
-\contentsline {paragraph}{importCondition, importAction}{8}
-\contentsline {paragraph}{preventSpaces}{8}
-\contentsline {paragraph}{showVariablesFrame}{8}
-\contentsline {paragraph}{addVariable}{9}
-\contentsline {paragraph}{removeVariable}{9}
-\contentsline {paragraph}{updateVariables}{9}
-\contentsline {paragraph}{drawVariableFeature}{9}
-\contentsline {paragraph}{showPickText}{9}
-\contentsline {subsubsection}{\numberline {2.1.7}Param\IeC {\`e}tres de la carte}{9}
-\contentsline {subsubsection}{\numberline {2.1.8}Entr\IeC {\'e}es / Sorties}{9}
-\contentsline {subsubsection}{\numberline {2.1.9}Fonctions de dessin}{9}
-\contentsline {subsubsection}{\numberline {2.1.10}Listeners}{9}
-\contentsline {subsection}{\numberline {2.2}Gadget}{9}
-\contentsline {subsection}{\numberline {2.3}Machines \IeC {\`a} \IeC {\'e}tats}{9}
-\contentsline {subsection}{\numberline {2.4}Fonctions utilitaires}{9}
-\contentsline {subsection}{\numberline {2.5}Fichiers de description}{9}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.2}Unit\IeC {\'e}s et groupes d'unit\IeC {\'e}s}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.3}Zones}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.4}Forces}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.5}D\IeC {\'e}clencheurs}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.6}Param\IeC {\`e}tres de la carte}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.7}Entr\IeC {\'e}es / Sorties}{6}
+\contentsline {subsubsection}{\numberline {5.1.8}Fonctions de dessin}{6}
+\contentsline {subsubsection}{\numberline {5.1.9}Listeners}{6}
+\contentsline {subsection}{\numberline {5.2}Gadget}{6}
+\contentsline {subsection}{\numberline {5.3}Machines \IeC {\`a} \IeC {\'e}tats}{6}
+\contentsline {subsection}{\numberline {5.4}Fonctions utilitaires}{6}
+\contentsline {subsection}{\numberline {5.5}Fichiers de description}{6}

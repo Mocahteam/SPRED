@@ -76,7 +76,7 @@ function gadget:GamePreload()
     missionScript.parseJson()
   end
   if Spring.GetModOptions()["jsonlocation"]=="editor" then
-    local da=VFS.LoadFile("Missions/KPC/"..missionName..".editor")
+    local da=VFS.LoadFile("Missions/"..missionName..".editor")
     Spring.Echo("try to parse"..missionName)
     missionScript.parseJson(da)
   end
@@ -181,6 +181,13 @@ end
 else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+Spring.SendCommands("resbar 0","fps 1","console 0","info 0") -- TODO : change fps 1 to fps 0 in release
+-- leaves rendering duty to widget (we won't)
+gl.SlaveMiniMap(true)
+-- a hitbox remains for the minimap, unless you do this
+gl.ConfigMiniMap(0,0,0,0)
+  
 local mouseDisabled = false
 
 function gadget:RecvFromSynced(...)
@@ -252,6 +259,10 @@ function gadget:RecvFromSynced(...)
     Spring.Echo(p.activation)
     if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
     if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
+  elseif arg1 == "requestUnsyncVals" then
+    local valsToSend={}
+    valsToSend["speedFactor"]=Spring.GetGameSpeed()
+    Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
   end
 end
 

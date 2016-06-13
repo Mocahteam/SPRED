@@ -63,7 +63,8 @@ actions_list = {
 			{
 				text = "<Condition>",
 				type = "condition",
-				id = "condition"
+				id = "condition",
+				hint = "The condition can be chosen within the conditions of this event, which may not be part of the trigger of this event."
 			}
 		}
 	},
@@ -76,7 +77,8 @@ actions_list = {
 			{
 				text = "<Trigger>",
 				type = "text",
-				id = "trigger"
+				id = "trigger",
+				hint = "This field must be filled with an boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\"."
 			}
 		}
 	},
@@ -492,6 +494,76 @@ actions_list = {
 		}
 	},
 	{
+		type = "zone_order",
+		filter = "Order",
+		typeText = "Order units in zone (untargeted order)",
+		text = "Order units within <Zone> to begin <Command> with <Parameters>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Parameters>",
+				type = "parameters",
+				id = "parameters",
+				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
+			}
+		}
+	},
+	{
+		type = "zone_orderPosition",
+		filter = "Order",
+		typeText = "Order units in zone to position",
+		text = "Order units in <Zone> to begin <Command> towards <Position>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
+		type = "zone_orderTarget",
+		filter = "Order",
+		typeText = "Order units in zone to target",
+		text = "Order units in <Zone> to begin <Command> towards <Target>.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			},
+			{
+				text = "<Command>",
+				type = "command",
+				id = "command"
+			},
+			{
+				text = "<Target>",
+				type = "unit",
+				id = "target"
+			}
+		}
+	},
+	{
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",
@@ -757,6 +829,24 @@ actions_list = {
 		filter = "Group",
 		typeText = "Add unit to group",
 		text = "Add <Unit> to <Group>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			}
+		}
+	},
+	{
+		type = "unit_removeFromGroup",
+		filter = "Group",
+		typeText = "Remove unit from group",
+		text = "Remove <Unit> from <Group>.",
 		attributes = {
 			{
 				text = "<Unit>",

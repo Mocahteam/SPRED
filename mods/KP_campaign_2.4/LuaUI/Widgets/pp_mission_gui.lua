@@ -290,7 +290,7 @@ function MissionEvent(e)
 							-- set nextLauncher depending on type of scenario
 							local nextLauncher = ""
 							if scenarioType == "default" then
-								nextLauncher = "Missions/"..Game.modShortName.."/"..campaign[missionName].nextMission..".txt"
+								nextLauncher = "Missions/"..campaign[missionName].nextMission..".txt"
 							else
 								-- TODO: define nextLauncher with appliqManager
 							end
@@ -315,7 +315,7 @@ function MissionEvent(e)
         local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
         --Spring.Echo(pickle(outputs))  
         local nextMiss=AppliqManager:next(e.outputstate)   
-        local mission=AppliqManager:getActivityNameFromId(AppliqManager.currentActivityID)
+        local mission=AppliqManager.currentActivityID
         if(nextMiss==nil) then     
           Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
           local selectedOutput=outputs[math.random(#outputs)]
