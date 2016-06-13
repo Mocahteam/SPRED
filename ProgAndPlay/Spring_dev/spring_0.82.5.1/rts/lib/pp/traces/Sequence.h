@@ -19,7 +19,7 @@ public:
 
 	typedef boost::shared_ptr<Sequence> sp_sequence;
 	
-	Sequence();
+	Sequence(std::string info);
 	Sequence(unsigned int num);
 	Sequence(sp_sequence sps);
 	Sequence(sp_sequence sps_up, sp_sequence sps_down);
@@ -29,27 +29,6 @@ public:
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual void resetAligned();
 	bool compare(Trace *t);
-
-	template <typename T>
-	static double getNumMapsCosDistance(const std::map<unsigned int,T>& fm, const std::map<unsigned int,T>& sm) {
-		double res = 0;
-		typename std::map<unsigned int,T>::const_iterator it = fm.begin();
-		while (it != fm.end()) {
-			if (sm.find(it->first) != sm.end())
-				res += it->second * sm.at(it->first);
-			it++;
-		}
-		return res / (getNumMapMagnitude(fm) * getNumMapMagnitude(sm));
-	}
-	
-	template <typename T>
-	static double getNumMapMagnitude(const std::map<unsigned int,T>& m) {
-		double res = 0;
-		typename std::map<unsigned int,T>::const_iterator it = m.begin();
-		while (it != m.end())
-			res += std::pow((it++)->second,2);
-		return std::sqrt(res);
-	}
 	
 	template<typename T>
 	static std::string getNumMapString(const std::map<unsigned int,T>& numMap) {
@@ -66,6 +45,7 @@ public:
 	
 	std::vector<Trace::sp_trace>& getTraces();
 	unsigned int getNum() const;
+	std::string getInfo() const;
 	const std::map<unsigned int,unsigned int>& getNumMap() const;
 	unsigned int getPt() const;
 	bool isEndReached() const;
@@ -87,10 +67,12 @@ public:
 	void updateNumMap(const std::map<unsigned int,unsigned int>& numMap);
 	void completeNumMap(const sp_sequence& sps);
 	std::map<unsigned int,double> getPercentageNumMap() const;
+	double getNumMapMeanDistance(const sp_sequence& sps) const;
 	bool isImplicit();
 	
 protected:
 
+	std::string info;
 	std::vector<Trace::sp_trace> traces;
 	unsigned int num;
 	std::map<unsigned int,unsigned int> numMap;

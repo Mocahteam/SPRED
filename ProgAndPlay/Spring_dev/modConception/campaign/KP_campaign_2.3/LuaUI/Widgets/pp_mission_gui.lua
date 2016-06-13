@@ -183,6 +183,17 @@ local winPopup = nil
 local briefing = nil
 local tutoPopup = false
 
+function split(str,sep)
+    if div == '' then return str end
+    local pos, arr = 1, {}
+    for s, e in function() return string.find(str,sep,pos,true) end do
+        table.insert(arr,string.sub(str,pos,s-1))
+        pos = e + 1
+    end
+    table.insert(arr,string.sub(str,pos))
+    return arr
+end
+
 function MissionEvent(e)
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
@@ -214,6 +225,14 @@ function MissionEvent(e)
 			else
 				popup.lineArray = {loss}
 				victoryState = "loss"
+			end
+			
+			if e.feedback ~= nil then
+				local arr = split(e.feedback,"\n")
+				table.insert(popup.lineArray,"")
+				for i = 1,#arr do
+					table.insert(popup.lineArray,arr[i])
+				end
 			end
 			
 			-- Enable PreviousMission and NextMission tabs
@@ -255,7 +274,9 @@ function MissionEvent(e)
 			-- disable "Close tab" and "Show briefing"
 			popup.tabs[6] = nil
 			-- inform the game that mission is over with a temporary file
-			Script.LuaUI.CreateMissionEndedFile(victoryState)
+			if e.feedback == nil then
+				Script.LuaUI.CreateMissionEndedFile(victoryState)
+			end
 		else
 			popup.lineArray = {"Menu"}
 		end
