@@ -24,7 +24,7 @@ function StateMachine.getCurrentState(self) return self.currentState end
 -- Initialize global state machine
 ------------------------------
 local globalStates = { NONE = "none", FILE = "file", UNIT = "unit", ZONE = "zone", FORCES = "forces", TRIGGER = "trigger", MAPSETTINGS = "mapsettings" }
-globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
+globalStateMachine = StateMachine.new(globalStates, globalStates.NONE)
 
 ------------------------------
 -- Initialize unit state machine
@@ -66,5 +66,5 @@ forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)
 ------------------------------
 -- Initialize triggers state machine
 ------------------------------
-local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit" }
+local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit", PICKUNITSET = "pickUnitset" }
 triggerStateMachine = StateMachine.new(triggerStates, triggerStates.DEFAULT)
