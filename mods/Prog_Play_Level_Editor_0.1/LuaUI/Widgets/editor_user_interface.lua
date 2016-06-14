@@ -3339,7 +3339,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 				if uDefID then
 					local name = UnitDefs[uDefID].humanName
 					local team = Spring.GetUnitTeam(u)
-					local r, g, b = round(teams[team].red*255), round(teams[team].green*255), round(teams[team].blue*255)
+					local r, g, b = round(teams[team].red*255)+1, round(teams[team].green*255)+1, round(teams[team].blue*255)+1
 					unitLabel.font.color = { 1, 1, 1, 1 }
 					unitLabel:SetCaption("\255\255\255\255[ \255"..colorTable[r]..colorTable[g]..colorTable[b]..name.." ("..tostring(u)..")\255\255\255\255 ]")
 					local function viewUnit()
