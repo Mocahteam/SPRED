@@ -4028,7 +4028,8 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	
 	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "5%", "15%", "80%")
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '3%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 13, "center", nil, "center")
 	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '5%', '100%', '45%')
 	local count = 0
 	for i, e in ipairs(events) do
@@ -4040,7 +4041,8 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		end
 	end
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '53%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING, 13, "center", nil, "center")
 	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '55%', '100%', '45%')
 	for i, c in ipairs(events[currentEvent].conditions) do
 		addButton(csp, "0%", (i-1) * 40, "100%", 40, c.name, function() pickFunction("condition", c.id) end)
