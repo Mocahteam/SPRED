@@ -306,7 +306,7 @@ actions_list = {
 			},
 			{
 				text = "<Target>",
-				type = "unit",
+				type = "unitset",
 				id = "target"
 			}
 		}

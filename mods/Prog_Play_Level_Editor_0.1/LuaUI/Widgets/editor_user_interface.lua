@@ -23,10 +23,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- bug ctrlZ and events
--- bug ctrlZ and groupframe
--- refactor horrible drawfeature
-
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
@@ -1484,6 +1480,7 @@ function updateGroupListUnitList() -- When a unit is created, update group frame
 		-- Add labels and buttons to both lists
 		local count = 0
 		for i, u in ipairs(units) do
+			Spring.Echo(u)
 			-- Unit label (type, team and id)
 			local uDefID = Spring.GetUnitDefID(u)
 			local name = UnitDefs[uDefID].humanName
@@ -4215,7 +4212,10 @@ function newMap()
 	-- TeamConfig
 	teamControl = {}
 	for k, t in pairs(teamStateMachine.states) do
-		teamControl[t] = "player"
+		teamControl[t] = "computer"
+		if t == 0 then
+			teamControl[t] = "player"
+		end
 	end
 	enabledTeams = {}
 	for k, t in pairs(teamStateMachine.states) do
@@ -4279,17 +4279,24 @@ end
 function newMapInitialize()
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
+	updateTeamConfig = true
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
+		fileFrame() -- double to close the frame and open it again (to refresh)
 		fileFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		unitFrame()
+		unitFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		zoneFrame()
 		zoneFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		forcesFrame()
+		forcesFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		triggerFrame()
+		triggerFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
+		mapSettingsFrame()
 		mapSettingsFrame()
 	end
 	saveState()
@@ -4299,7 +4306,6 @@ function loadMap(name)
 	if loading then return end
 	loading = true
 	newMap()
-	newMapInitialize()
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
@@ -4490,20 +4496,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	loadedTable = nil
 	
 	-- Initialize
-	updateTeamButtons = true -- prevents requiring to go to the forces menu
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
-		fileFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		unitFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		zoneFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		forcesFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-		triggerFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
-		mapSettingsFrame()
-	end
+	newMapInitialize()
 	
 	if not loadLock then
 		continueLoadState()
@@ -5116,6 +5109,7 @@ function widget:Update(delta)
 		updateUnitHighlights()
 		if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
 			updateUnitGroupPanels()
+			updateGroupListUnitList()
 		end
 	end
 	
