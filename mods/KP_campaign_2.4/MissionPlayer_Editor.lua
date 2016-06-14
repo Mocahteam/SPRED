@@ -349,6 +349,9 @@ local function isTriggerable(event)
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
+    Spring.Echo(c)
+    Spring.Echo(cond..tostring(event.id))
+    Spring.Echo(json.encode(ctx.conditions))
     local valueCond=ctx.conditions[cond..tostring(event.id)]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
@@ -810,6 +813,7 @@ local function watchHeal(frameNumber)
 end
 
 -------------------------------------
+--
 -- If an event must be triggered, then shall be it
 -- All the actions will be put in stack unless some specific options related to repetition
 -- forbide to do so, such as allowMultipleInStack
@@ -831,17 +835,34 @@ local function processEvents(frameNumber)
           local a=event.actions[j]
           if(a.type=="wait")then
             frameDelay=frameDelay+secondesToFrames(a.params.time) 
-          elseif(a.type=="waitCondition")then
+          elseif(a.type=="waitCondition") or(a.type=="waitTrigger")then
             creationOfNewEvent=true
             newevent=deepcopy(event)
             newevent["actions"]={}
             newevent.hasTakenPlace=false
             newevent.lastExecution=nil
-            newevent.listOfInvolvedConditions={}
-            table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
             newevent.conditions={}
             newevent.id=tostring(frameNumber)
-            newevent.conditions[a.params.condition..newevent.id]=ctx.conditions[a.params.condition..tostring(event.id)]
+            if(a.type=="waitCondition") then
+              newevent.listOfInvolvedConditions={}
+              table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
+              newevent.conditions[a.params.condition..newevent.id]=ctx.conditions[a.params.condition..tostring(event.id)]
+            end
+            if(a.type=="waitTrigger")then 
+              newevent.trigger=a.params.trigger 
+              for cond in pairs(newevent.listOfInvolvedConditions) do
+                ctx.conditions[cond..tostring(newevent.id)]=deepcopy(ctx.conditions[cond..tostring(event.id)])
+                newevent.conditions[cond..newevent.id]=ctx.conditions[cond..tostring(newevent.id)]
+              end
+              --[[
+                        "id":8,
+          "type":"waitTrigger",
+          "name":"waittrig",
+          "params":{
+            "trigger":"true"
+          }
+              ]]--
+            end
             --Spring.Echo("this event is created")
             --Spring.Echo(json.encode(newevent))                      
           else
@@ -1208,7 +1229,6 @@ end
   if(ctx.mission.description.minimap and ctx.mission.description.minimap=="disabled") then
     Spring.SendCommands("minimap min")
   end
-  
  -------------------------------
  ----------ARMIES---------------
  -------------------------------
@@ -1416,7 +1436,7 @@ Mission.Update = Update
 Mission.Stop = Stop
 Mission.ApplyAction = ApplyAction
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction=ApplyGroupableAction ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ;
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction=ApplyGroupableAction ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
 ctx.Spring=Spring 
 
 return Mission
