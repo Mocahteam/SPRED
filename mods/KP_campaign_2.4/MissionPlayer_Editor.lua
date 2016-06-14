@@ -349,7 +349,7 @@ local function isTriggerable(event)
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
-    local valueCond=ctx.conditions[cond..tostring(event.id)]
+    local valueCond=ctx.conditions[cond.."_"..tostring(event.id)]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
   -- third step : turn the string in return statement
@@ -843,14 +843,14 @@ local function processEvents(frameNumber)
             if(a.type=="waitCondition") then
               newevent.listOfInvolvedConditions={}
               table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
-              newevent.conditions[a.params.condition..tostring(newevent.id)]=ctx.conditions[a.params.condition..tostring(event.id)]
+              newevent.conditions[a.params.condition.."_"..tostring(newevent.id)]=ctx.conditions[a.params.condition.."_"..tostring(event.id)]
             end
             if(a.type=="waitTrigger")then 
               newevent.trigger=a.params.trigger 
               Spring.Echo("update ctx Conditions")
               for c,cond in pairs(newevent.listOfInvolvedConditions) do
-                ctx.conditions[cond..tostring(newevent.id)]=deepcopy(ctx.conditions[cond..tostring(event.id)])
-                newevent.conditions[cond..tostring(newevent.id)]=ctx.conditions[cond..tostring(newevent.id)]
+                ctx.conditions[cond.."_"..tostring(newevent.id)]=deepcopy(ctx.conditions[cond.."_"..tostring(event.id)])
+                newevent.conditions[cond.."_"..tostring(newevent.id)]=ctx.conditions[cond.."_"..tostring(newevent.id)]
               end
             end                     
           else
@@ -1269,8 +1269,8 @@ end
          local currentCond=currentEvent.conditions[j]
          local id=currentCond.name
          table.insert(ctx.events[idEvent].listOfInvolvedConditions,id)
-         ctx.conditions[id..tostring(ctx.events[idEvent].id)]=currentEvent.conditions[j]
-         ctx.conditions[id..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
+         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]=currentEvent.conditions[j]
+         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
          local type=currentCond.type
          local cond_object="other"
          local attribute=type
@@ -1289,8 +1289,8 @@ end
           cond_object="group"
           attribute=string.sub(type, 6, -1)
         end
-        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["object"]=cond_object
-        ctx.conditions[id..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
+        ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
+        ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
       end 
     end
   end     
