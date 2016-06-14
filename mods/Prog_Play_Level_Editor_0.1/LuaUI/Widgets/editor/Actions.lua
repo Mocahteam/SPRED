@@ -63,7 +63,8 @@ actions_list = {
 			{
 				text = "<Condition>",
 				type = "condition",
-				id = "condition"
+				id = "condition",
+				hint = "The condition can be chosen within the conditions of this event, which may not be part of the trigger of this event."
 			}
 		}
 	},
@@ -76,7 +77,8 @@ actions_list = {
 			{
 				text = "<Trigger>",
 				type = "text",
-				id = "trigger"
+				id = "trigger",
+				hint = "This field must be filled with an boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\"."
 			}
 		}
 	},
@@ -827,6 +829,24 @@ actions_list = {
 		filter = "Group",
 		typeText = "Add unit to group",
 		text = "Add <Unit> to <Group>.",
+		attributes = {
+			{
+				text = "<Unit>",
+				type = "unit",
+				id = "unit"
+			},
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			}
+		}
+	},
+	{
+		type = "unit_removeFromGroup",
+		filter = "Group",
+		typeText = "Remove unit from group",
+		text = "Remove <Unit> from <Group>.",
 		attributes = {
 			{
 				text = "<Unit>",

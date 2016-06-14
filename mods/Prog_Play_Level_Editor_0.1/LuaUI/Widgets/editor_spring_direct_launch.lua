@@ -1530,7 +1530,11 @@ function BeginExportGame()
 		-- Show message
 		if not alreadyExists then
 			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			if Spring.version == "0.82.5.1" then
+				message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/mods/"..name..".sdz")
+			else
+				message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			end
 			UI.Scenario.ConfirmationMessage = Chili.Label:New{
 				parent = UI.MainWindow,
 				x = "20%",

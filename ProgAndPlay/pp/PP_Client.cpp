@@ -490,7 +490,7 @@ PP_Unit PP_GetUnitAt(PP_Coalition c, int index){
 		enterCriticalSection();
 			std::ostringstream oss(std::ostringstream::out);
 			if (ret != 0)
-				oss << errorsArr[1] << "PP_GetUnitAt " << c;
+				oss << errorsArr[1] << "PP_GetUnitAt " << c << " " << index;
 			else {
 				try{
 					// Returns directly data. If index is inaccurate, an exception
@@ -712,16 +712,16 @@ int PP_Unit_SetGroup(PP_Unit unit, int group){
 					PP_SetError("PP_Unit_SetGroup : invalid group, must be \
 greater than or equal -1\n");
 					ret = -1;
-					oss << errorsArr[0] << "PP_Unit_SetGroup " << group;
+					oss << errorsArr[0];
 				}
 				else {
 					std::vector<float> unused; // only to pass a parameter
 					addCommand(unit, -1, unused, -1, group);
-					oss << "PP_Unit_SetGroup " << unit << "_" << u->second.type << " " << group;
 				}
+				oss << "PP_Unit_SetGroup " << unit << "_" << u->second.type << " " << group;
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_SetGroup " << unit;
+				oss << errorsArr[2] << "PP_Unit_SetGroup " << unit << " " << group;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -739,7 +739,7 @@ int PP_Unit_ActionOnUnit(PP_Unit unit, int action, PP_Unit target){
 			ShMapUnits::iterator t = shd.units->find(target);
 			ret = checkParams("PP_Unit_ActionOnUnit", &u, true);
 			if (ret != 0)
-				oss << errorsArr[2] << "PP_Unit_ActionOnUnit " << unit;
+				oss << errorsArr[2] << "PP_Unit_ActionOnUnit " << unit << " " << action << " " << target ;
 			else {
 				ret = checkParams("PP_Unit_ActionOnUnit", &t);
 				if (ret == 0){
@@ -750,7 +750,7 @@ int PP_Unit_ActionOnUnit(PP_Unit unit, int action, PP_Unit target){
 					oss << "PP_Unit_ActionOnUnit " << unit << "_" << u->second.type << " " << action << " " << target << "_" << t->second.type;
 				}
 				else
-					oss << errorsArr[3] << "PP_Unit_ActionOnUnit " << target;
+					oss << errorsArr[3] << "PP_Unit_ActionOnUnit " << unit << "_" << u->second.type << " " << action << " " << target;
 			}
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
@@ -776,7 +776,7 @@ int PP_Unit_ActionOnPosition(PP_Unit unit, int action, PP_Pos pos){
 					PP_SetError("PP_Unit_ActionOnPosition : position is out of \
 bounds\n");
 					ret = -1;
-					oss << errorsArr[4] << "PP_Unit_ActionOnPosition " << pos.x << " " << pos.y;
+					oss << errorsArr[4];
 					
 					// compute target position on map border
 					activeTrace = false;
@@ -832,8 +832,7 @@ bounds\n");
 					if (pos.x == max.x) pos.x -= 1.0; 
 					if (pos.y == max.y) pos.y -= 1.0;
 				}
-				else
-					oss << "PP_Unit_ActionOnPosition " << unit << "_" << u->second.type << " " << action << " " << pos.x << " " << pos.y;
+				oss << "PP_Unit_ActionOnPosition " << unit << "_" << u->second.type << " " << action << " " << pos.x << " " << pos.y;
 				// stores command
 				std::vector<float> params (3, 0);
 				params[0] = pos.x;
@@ -844,7 +843,7 @@ bounds\n");
 				addCommand(unit, action, params, 0);
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_ActionOnPosition " << unit;
+				oss << errorsArr[2] << "PP_Unit_ActionOnPosition " << unit << " " << action << " " << pos.x << " " << pos.y;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -867,7 +866,7 @@ int PP_Unit_UntargetedAction(PP_Unit unit, int action, float param){
 				oss << "PP_Unit_UntargetedAction " << unit << "_" << u->second.type << " " << action << " " << param;
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_UntargetedAction " << unit;
+				oss << errorsArr[2] << "PP_Unit_UntargetedAction " << unit << " " << action << " " << param;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		exitCriticalSection();
@@ -952,7 +951,7 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetCode : idCmd out of range\n");
 						ret = -1;
-						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetCode " << idCmd;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetCode " << unit << "_" << u->second.type << " " << idCmd;
 					}
 				}
 				else {
@@ -961,7 +960,7 @@ int PP_Unit_PdgCmd_GetCode(PP_Unit unit, int idCmd){
 				}
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetCode " << unit;
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetCode " << unit << " " << idCmd;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		}
@@ -1017,7 +1016,7 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetNumParams : idCmd out of range\n");
 						ret = -1;
-						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetNumParams " << idCmd;
+						oss << errorsArr[0] << "PP_Unit_PdgCmd_GetNumParams " << unit << "_" << u->second.type << " " << idCmd;
 					}
 				}
 				else {
@@ -1026,7 +1025,7 @@ int PP_Unit_PdgCmd_GetNumParams(PP_Unit unit, int idCmd){
 				}
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetNumParams " << unit;
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetNumParams " << unit << " " << idCmd;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		}
@@ -1080,7 +1079,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 							} catch (std::out_of_range e) {
 								PP_SetError("PP_Unit_PdgCmd_GetParam : idParam out of range\n");
 								ret = -1;
-								oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idParam;
+								oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << unit << "_" << u->second.type << " " << idCmd << " " << idParam;
 							}
 						}
 						else {
@@ -1090,7 +1089,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 					} catch (std::out_of_range e) {
 						PP_SetError("PP_Unit_PdgCmd_GetParam : idCmd out of range\n");
 						ret = -1;
-						//oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << idCmd;
+						//oss << errorsArr[0] << "PP_Unit_PdgCmd_GetParam " << unit << "_" << u->second.type << " " << idCmd << " " << idParam;
 					}
 				}
 				else {
@@ -1099,7 +1098,7 @@ float PP_Unit_PdgCmd_GetParam(PP_Unit unit, int idCmd, int idParam){
 				}
 			}
 			else
-				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetParam " << unit;
+				oss << errorsArr[2] << "PP_Unit_PdgCmd_GetParam " << unit << " " << idCmd << " " << idParam;
 			// notify function call to Spring
 			PP_PushMessage(oss.str().c_str());
 		}

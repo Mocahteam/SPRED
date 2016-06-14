@@ -88,12 +88,24 @@ public:
 	Call(std::string label, ErrorType err);
 	
 	static const char* errorsArr[];
+	static const char* coalitionsArr[];
 	static const char* noParamCallLabelsArr[];
 	static const char* unitCallLabelsArr[];
 	static ParamsMap paramsMap;
+		
+	template<typename E>
+	static E getEnumType(const char *ch, const char **arr) {
+		return static_cast<E>(Trace::inArray(ch,arr));
+	}
+
+	template<typename E>
+	static const char* getEnumLabel(E e, const char **arr) {
+		int ind = static_cast<int>(e);
+		if (ind > -1)
+			return arr[ind];
+		return NULL;
+	}
 	
-	static ErrorType getErrorType(const char *ch);
-	static const char* getErrorLabel(ErrorType err);
 	static call_vector getCalls(const std::vector<Trace::sp_trace>& traces, bool setMod = false);
 	
 	virtual unsigned int length() const;
@@ -101,6 +113,7 @@ public:
 	virtual void filterCall(const Call *c);
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual std::string getParams() const = 0;
+	virtual std::string getReadableParams() const = 0;
 	
 	double getEditDistance(const Call *c) const;
 	
@@ -109,7 +122,8 @@ public:
 	bool addReturnCode(float code);
 	std::string getReturn() const;
 	bool compareReturn(const Call *c) const;
-	void setNoReturn();
+	void setReturn();
+	bool hasReturn() const;
 	
 protected:
 

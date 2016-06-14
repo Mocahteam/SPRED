@@ -22,24 +22,36 @@ Ce document a pour objectifs de récapituler l'essentiel du travail réalisé da
 
 \newpage
 
-\section{Architecture}
+\section{Architecture globale}
 \paragraph{}
-Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de niveux.
+Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de niveaux.
 \paragraph{}
-Ce dernier est composé de :
+Le pré-launcher est composé d'un unique widget (launcher.lua) permettant de sélectionner le jeu de base sur lequel les niveaux vont être créés.
+\paragraph{}
+Le launcher est composé d'un widget central permettant d'afficher l'interface du launcher et de réagir en fonction des boutons sur lesquels l'utilisateur clique (editor\_spring\_direct\_launch.lua). A noter que ce widget communique également avec les autres widgets et gadgets définis ci-dessous.
+\paragraph{}
+L'éditeur à proprement parler est composé de :
 \begin{itemize}
 \item Un widget central permettant d'afficher les éléments de l'interface utilisateur et de capter les interactions avec cette dernière ou avec le moteur pour effectuer des actions en conséquence. (editor\_user\_interface.lua)
+\item Un widget permettant de récupérer la liste des commandes que les différentes unités du jeu sélectionné dans le pré-launcher peuvent exécuter. (editor\_commands\_list.lua)
+\item Un widget permettant de récupérer la liste de tous les widgets présents. (editor\_widget\_list.lua)
+\item Un widget affichant un écran de chargement pour empêcher l'utilisateur d'interagir avec l'interface lorsqu'elle n'est pas complètement chargée (editor\_loading\_screen.lua)
+\item Un widget permettant de ne pas afficher les boutons permettant de donner des ordres aux unités. (hide\_commands.lua)
 \item Un gadget permettant l'utilisation de code synchronisé\footnote{Par exemple, la création d'une unité sur le terrain.}. (editor\_gadget.lua)
-\item Un fichier contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua)
+\item Deux fichiers contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua et LauncherStrings.lua)
 \item Un fichier définissant une classe\footnote{Au sens de Lua.} machine à états. (StateMachine.lua)
 \item Un fichier contenant des fonctions utilitaires. (Misc.lua)
-\item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua, Filters.lua)
+\item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua)
 \end{itemize}
-\section{Description détaillée des modules}
-\subsection{Widget}
 \paragraph{}
-Le widget est l'élément central de l'éditeur des niveaux autour duquel s'articulent les autres modules. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts.
-\subsubsection{Chili UI}
+Ces modules dépendent pour la plupart des bibliothèques suivantes :
+\begin{itemize}
+\item \textbf{Chili UI} - Framework d'interface graphique
+\item \textbf{dkjson.lua} - Permet de convertir une table lua en string au format json et inversement.
+\item \textbf{xml-serde.lua} - Permet de convertir une table lua possédant une syntaxe spécifique en string au format xml et inversement.
+\item \textbf{RestartScript.lua} - Permet de redémarrer le jeu avec certains paramètres supplémentaires.
+\end{itemize}
+\section{Chili UI}
 \paragraph{}
 Afin de simplifier le développement de l'interface graphique, j'ai choisi d'utiliser un framework d'interface graphique développé spécifiquement pour Spring dénommé Chili UI. 
 \paragraph{}
@@ -50,9 +62,36 @@ Les modifications que j'y ai personnellement apporté concernent les boutons, qu
 Le widget comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans la catégorie \textit{Chili UI functions}.
 \paragraph{}
 Il faut faire extrêmement attention à une chose en particulier en ce qui concerne le framework : il ne faut surtout pas modifier les éléments d'interface qui ne sont pas affichés à l'écran (c'est-à-dire les éléments d'interface qui n'ont ni Screen0, ni un descendant de Screen0 en tant que parent). Ceci ne produit pas d'erreur lors de l'exécution, mais les éléments d'interface concernés ne s'actualiseront plus correctement, ce qui est très gênant d'un point de vue utilisateur (les opérations seront effectuées, mais l'utilisateur n'aura aucun feedback visuel).
+\section{Le pré-launcher}
+\paragraph{}
+Le pré-launcher est la base de l'éditeur. Il permet de sélectionner un jeu de base sur lequel l'utilisateur va ensuite créer ses niveaux. Lorsque le jeu en question est sélectionné, le pré-launcher va s'occuper de créer une archive contenant les fichiers permettant le fonctionnement de l'éditeur tout en y modifiant le fichier ModInfo.lua contenant les informations de dépendance pour y ajouter le jeu sélectionné. Ensuite, il va redémarrer Spring avec l'archive nouvellement créée.
+\paragraph{}
+Si l'archive correspondant à l'éditeur pour un certain mod est déjà créée, il va simplement redémarrer Spring en utilisant cette archive. Ceci ne pose pas de problèmes d'un point de vue utilisateur, mais pendant une phase de développement, il ne faut pas oublier de supprimer l'archive créée à chaque modification.
+\section{Le launcher}
+\paragraph{}
+La launcher se présente en 3 menus distincts : Création d'un nouveau niveau, Edition d'un niveau existant et Edition d'un scénario. Pendant l'écran de chargement du launcher, le gadget instancie chacune des unités du mod de base, récupère la liste de leurs commandes et la transfère au widget editor\_commands\_list.lua qui effectue un tri dessus. Les commandes seront ensuite passées à l'éditeur grâce au ModOptions.
+\subsection{Création d'un nouveau niveau}
+\paragraph{}
+Rien de très compliqué ici : on s'occupe simplement de lister les cartes présentes dans le répertoire maps/ à la racine de Spring. Lorsque l'utilisateur clique sur le nom d'une carte, Spring redémarre sur la carte sélectionnée.
+\subsection{Edition d'un niveau existant}
+\paragraph{}
+De même, on liste ici les niveaux correspondant au jeu sélectionné qui sont dans le répertoire pp\_editor/missions/. Lorsque l'utilisateur clique sur le nom d'un niveau, on va chercher dans la description de ce niveau la carte sur laquelle le niveau a été créé, puis on redémarre Spring sur la bonne carte et on indique dans le ModOptions que l'éditeur va devoir charger ce niveau.
+\subsection{Editeur de scénario}
+\paragraph{}
+Pour chaque niveau créé correspondant au jeu sélectionné, on créé une fenêtre contenant le nom du niveau, un bouton pour l'état d'entrée et n boutons pour les n états de sortie. En cliquant sur un bouton correspondant à un état de sortie, on stocke dans les variables \textit{selectedOutputMission} et \textit{selectedOutput} l'état de sortie sur lequel on vient de cliquer. Si ces variables ne sont pas nil et que l'on clique sur un état d'entrée, on le stocke dans \textit{selectedInput}.
+\paragraph{}
+La fonction MakeLink() s'effectue à chaque frame et s'occupe de répertorier un lien dans la table Links si selectedOutputMission, selectedOutput et selectedInput ne sont pas nil. Un objet Chili personnalisé permet d'afficher ces liens lorsqu'ils existent.
+\paragraph{}
+En ce qui concerne la sauvegarde et le chargement des scénarios, ceci se fait en utilisant la bibliothèque xml-serde qui nous permet de transformer la table Links en fichier xml et vice-versa.
+\paragraph{}
+Pour l'exportation de l'archive du jeu final, on lit le contenu de la table Links pour définir les niveaux à exporter, puis on créé une archive contenant les fichiers nécessaires au fonctionnement du jeu ainsi que le scénario et les niveaux qui le composent.
+\section{L'éditeur de niveaux}
+\subsection{Editor User Interface}
+\paragraph{}
+Ce widget est l'élément central de l'éditeur de niveaux. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts.
 \subsubsection{Initialisation}
 \paragraph{}
-L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation appelées dans la méthode \textit{widget:Initialize()}, et décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées précedemment), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
+L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées précédemment), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
 \paragraph{}
 Sont présentes également deux fonctions s'occupant de l'initialisation de fonctions liées aux changements d'état lors de la sélection d'un type et d'une équipe d'une unité pour la placer ensuite sur le terrain.
 \paragraph{}
@@ -60,80 +99,21 @@ Les fonctions des catégories \textit{Top bar functions} et \textit{Forces windo
 \subsubsection{Unités et groupes d'unités}
 \paragraph{}
 Les fonctions présentes dans la section \textit{Unit/Selection state functions} gèrent à la  fois le placement des unités (choix du type et de l'équipe), la sélection, le positionnement, l'orientation, les attributs et l'appartenance à un groupe d'une ou plusieurs unités.
-\paragraph{updateUnitWindow} Fonction s'occupant d'afficher les boutons permettant de sélectionner le type de l'unité que l'on veut placer sur le terrain. Elle n'affiche que les boutons des unités appartenant à une faction dont le bouton est dans l'état \textit{chosen}, ce qui permet de n'afficher que les unités de certaines factions.
-\paragraph{applyChangesToSelectedUnits} Callback lors de la validation de la modification de certains attributs des instances d'unité sélectionnées : applique et sauvegarde ces changements (le nombre de points de vie est sauvegardé dans un tableau, l'orientation est directement appliquée).
-\paragraph{drawSelectionRect} Affiche le rectangle de sélection d'unités. On dispose ici des coordonnées de la position initiale et de la position actuelle de la souris lors du cliquer-glisser pour sélectionner les unités. Or, dessiner un rectangle requiert d'avoir les coordonnées du point en haut à gauche ainsi que la longueur et la largeur, ce qui nécessite des calculs intermédiaires en fonction de la position actuelle par rapport à la position initiale de la souris, d'autant plus que l'ancrage de Chili se trouve en haut à gauche alors que l'ancrage en Spring (et en OpenGL) se trouve en bas à gauche.
-\paragraph{previewUnit} Affiche une unité en transparence lors de son placement sur le terrain. Cette fonction utilise des fonctions OpenGL pour modifier la matrice de transformation (et afficher l'unité sous le curseur), la couleur utilisée (ajouter de la transparence) et afficher l'unité en fonction de son ID. La modification du masque de profondeur est nécessaire pour éviter un bug d'affichage (comparable à une inversion des normales du modèle 3D).
-\paragraph{showUnitAttributes} Affiche la fenêtre permettant de modifier les attributs des unités sélectionnées. Les valeurs des attributs sont initialement affichées si elles sont partagées entre toutes les unités sélectionnées.
-\paragraph{showUnitsInformation} Affiche l'ID et la position des unités sélectionnées et de l'unité sur laquelle se trouve le curseur de l'utilisateur.
-\paragraph{showUnitGroupsAttributionWindow} Affiche la fenêtre permettant d'assigner les unités sélectionnées à un groupe d'unités déjà existant (en récupérant la liste et en créant les boutons correspondants) ou à un nouveau groupe en entrant un nom de groupe.
-\paragraph{showUnitGroupsRemovalWindow} De même que précédemment, mais pour retirer les unités sélectionnées d'un groupe auquel elles appartiennent. Si elles n'appartiennent à aucun groupe ou qu'elles n'ont aucun groupe en commun, un message apparaît, et il n'est donc pas possible de les retirer d'un groupe.
-\paragraph{updateSelectTeamButtons} Met à jour les boutons de sélection d'une équipe lors du placement d'une unité en fonction des équipes activées dans la fenêtre de configuration des équipes.
-\paragraph{updateUnitList} Met à jour la liste des unités sur la droite de l'écran lorsqu'une unité est ajoutée ou retirée du terrain. Pour chaque unité, ajouter un bouton permettant de centrer la caméra sur cette unité et une image permettant de savoir si l'unité est sélectionnée ou non.
-\paragraph{updateGroupListUnitList} De même que précédemment mais la liste qui est mise à jour est celle présente dans la fenêtre des groupes d'unités. Les deux listes se trouvent dans des méthodes distinctes pour éviter de mettre à jour la liste de la fenêtre des groupes d'unités alors qu'elle n'est pas affichée (et ainsi ne pas faire planter l'interface).
-\paragraph{updateUnitHighlights} Affiche un halo jaune autour des unités sélectionnées dans la liste des unités.
-\paragraph{updateUnitGroupPanels} Regarde si il faut update la liste des groupes (c'est-à-dire si le nombre de groupe a changé ou si le nombre d'unités dans un groupe a changé). Si oui, affiche et positionne un panneau par groupe (les panneaux sont positionnés cote-à-cote sur la première ligne pour les 4 premiers, puis sous la colonne de plus faible hauteur pour les suivants). La taille des panneaux est pré-calculée en fonction du nombre d'unités dans le groupe. Ensuite, on actualise les groupes en affichant des boutons pour chaque unité du groupe afin de pouvoir les retirer du groupe ou les visualiser sur le terrain. Cette fonction s'occupe également d'actualiser le nom des groupes en fonction de ce qui est écrit dans l'editbox.
-\paragraph{addUnitToGroup} Ajoute une unité à un groupe si elle n'y est pas déjà.
-\paragraph{addSelectedUnitsToGroup} Ajoute les unités sélectionnées à un groupe.
-\paragraph{addChosenUnitsToSelectedGroups} Ajoute les unités dont le bouton dans la fenêtre de gestion des groupes d'unités est dans l'état \textit{chosen} aux groupes dont le bouton est dans l'état \textit{chosen}. Il s'agit de la fonction appelée lorsque l'utilisateur appuie sur le bouton \textbf{[>>]} de la fenêtre de gestion des groupes d'unités.
-\paragraph{removeSelectedUnitsFromGroup} Enlève les unités sélectionnées d'un groupe.
-\paragraph{removeUnitFromGroup} Enlève une unité d'un groupe.
-\paragraph{addUnitGroup} Ajoute un nouveau groupe.
-\paragraph{addEmptyUnitGroup} Ajoute un groupe vide avec un nom générique.
-\paragraph{deleteUnitGroup} Supprime un groupe.
-\paragraph{} Les états de la machine à états des unités permettent d'adapter le comportement des fonctions listeners d'évènements souris ou clavier. Ainsi, les fonctionnalités de sélection, rotation, déplacement... des unités se font par exemple dans \textit{widget:MousePress} et \textit{widget:MouseMove}. Ces fonctionnalités sont donc détaillées dans \ref{listeners}.
+\paragraph{} Les états de la machine à états des unités permettent d'adapter le comportement des fonctions listeners d'évènements souris ou clavier. Ainsi, les fonctionnalités de sélection, rotation, déplacement... des unités se font dans les fonctions de callback des événements souris.
 \subsubsection{Zones}
 \paragraph{}
 Les fonctions de cette section concernent la création, suppression, affichage, sélection et déplacement des zones logiques. Ces zones sont utilisées dans les déclencheurs.
-\paragraph{computeZoneWorldCoords} Cette fonction calcule les coordonnées dans l'espace de la zone en train d'être tracée en utilisant des raycasts et en triant les valeurs obtenues. Elle s'occupe également de forcer les zones à être carrées ou circulaires en appuyant sur alt.
-\paragraph{drawZoneRect} Dessine une zone rectangulaire aux coordonnées calculées par la fonction précédente.
-\paragraph{drawZoneDisk} De même, mais pour une zone elliptique.
-\paragraph{displayZones} Affiche les zones sélectionnées par l'utilisateur. Cette fonction s'occupe aussi de désélectionner une zone qui n'est plus affichée.
-\paragraph{displaySelectedZoneAnchors} Affiche les bords de la zone sélectionnée pour permettre à l'utilisateur de la redimensionner.
-\paragraph{showZoneInformation} Affiche les coordonnées des points importants de la zone sélectionnée ainsi que le nom de toutes les zones affichées.
-\paragraph{updateZoneInformation} Actualise le nom et l'état affiché des différentes zones.
-\paragraph{getClickedZone} Cette fonction parcours la liste de toutes les zones de façon circulaire\footnote{La dernière zone pointe vers la première.} et renvoie la première zone se trouvant sous la souris. Ceci permet de cycler les zones et pouvoir ainsi toutes les sélectionner même si elles sont superposées.
-\paragraph{getZoneSide} Renvoie le côté de la zone sélectionnée sur lequel l'utilisateur a cliqué pour lui permettre de redimensionner la zone ou de la déplacer. Le côté est codé sous forme d'une chaîne de caractères. Les variables \textit{left}, \textit{right}, \textit{top} et \textit{bottom} correspondent à la distance entre l'endroit cliqué et l'un des bords du rectangle, tandis que \textit{outer} et \textit{inner} correspondent respectivement à l'appartenance de l'endroit cliqué à l'ellipse extérieure et intérieure (en fonction de leurs valeurs par rapport à 1).
-\paragraph{applyChangesToSelectedZone} Applique les déformations à la zone sélectionnée. Pour un rectangle, cela revient à changer les coordonnées des points correspondant à ce qui a été renvoyé par la méthode précédente. Pour une ellipse, cela revient à modifier les longueurs des petit et grand axes. La méthode est appelée récursivement dans le cas où la souris sortirai du terrain : ainsi, la zone peut s'étendre jusqu'au bord de la carte\footnote{Si on ne prends pas ces précautions, la zone s'arrête à l'endroit où était la souris à la frame qui précède la frame où la souris se trouve en dehors du terrain, ce qui rendait impossible le fait d'étendre la zone jusqu'au bord à moins d'aller très lentement.}.
-\paragraph{updateZonePanel} Si le nombre de zones a changé, mettre à jour la liste des zones avec le nom et une checkbox pour choisir ou non de l'afficher.
 \paragraph{}
 De même que précédemment, les états de la machine à états régissent les interactions souris, qui sont donc gérées dans les listeners du widget.
 \subsubsection{Forces}
 \paragraph{}
 Les fonctions de cette section s'occupent d'afficher les paramètres liés aux équipes et de gérer les alliances entre les différentes équipes actives.
-\paragraph{updateAllyTeamPanels} Cette fonction s'occupe de l'affichage des alliances entre les équipes. La première partie concerne l'affichage des alliés de chaque équipe ainsi que d'un bouton permettant de supprimer un allié. La seconde partie s'attache à n'afficher que les panneaux des équipes activées.
-\paragraph{addTeamToSelectedAllyTeam} Défini une équipe en tant qu'alliée d'une autre.
-\paragraph{removeTeamFromAllyTeam} Supprime l'allié d'une équipe.
-\paragraph{removeTeamFromTables} Supprime une équipe de toutes les alliances. Ceci assure qu'une équipe inactive n'apparaisse pas dans une alliance.
-\paragraph{updateTeamsWindows} Lorsque le nombre d'équipes actives est modifié, on met des switchs sur true pour actualiser certaines fenêtres lors de la prochaine ouverture de ces dernières. Ces actualisations concernent les boutons sélection de l'équipe lors du placement d'une unité, les paramètres des équipes et les alliances entre les équipes.
-\paragraph{updateTeamConfigPanels} Permet de n'afficher les modifications liées aux équipes (couleur en jeu, contrôle) que lorsque l'équipe en question est activée.
 \subsubsection{Déclencheurs}
 \paragraph{}
 Les fonctions de cette partie concernent la gestion du système de déclencheurs (création, édition, suppression des évènements, conditions et actions ainsi que la gestion des variables).
-\paragraph{createNewEvent} Création d'un nouvel évènement vide. Les IDs sont attribués aux évènements en commençant par 1 et en étant incrémentés à chaque nouvel évènement. Cette fonction instancie également les tableaux qui contiendront les boutons pour modifier et supprimer les conditions et les actions de cet évènement.
-\paragraph{editEvent} Cette fonction ouvre la fenêtre de gestion d'un évènement, la génère en fonction des paramètres de l'évènement et l'assigne à l'évènement courant.
-\paragraph{removeEvent} Supprime l'évènement. Par mesure de sécurité, les fenêtres sont fermées.
-\paragraph{createNewCondition, editCondition, removeCondition, createNewAction, editAction, removeAction} Il s'agit des mêmes fonctions que celles décrites précédemment mais pour les conditions et les actions.
-\paragraph{removeSecondWindows, removeThirdWindows} Cache respectivement les fenêtres en "deuxième" et "troisème" position, en allant de gauche à droite.
-\paragraph{updateEventList} Actualise la liste des évènements (fenêtre la plus à gauche) lorsque le nombre d'évènements change. Cette fonction s'occupe également d'actualiser le nom de l'évènement courant lorsque la valeur de l'editbox change. 
-\paragraph{updateEventFrame} Actualise l'évènement courant : lorsque le nombre de conditions ou d'actions change, on actualise les boutons qui permettent de les modifier ou de les supprimer. Cette fonction s'occupe également d'actualiser le nom de la condition ou de l'action courante lorsque la valeur de l'editbox change.
-\paragraph{currentEventFrame} Génère la fenêtre d'édition de l'évènement courant en fonction de son nom, de ses conditions et de ses actions.
-\paragraph{currentConditionFrame, currentActionFrame} Démarre le processus de génération de la fenêtre d'édition de la condition ou de l'action courante. Un point notable : si l'action ou la condition a déjà été définie et possède donc un type, on sélectionne dans la combobox l'action correspondante pour faciliter l'édition. Sinon, on sélectionne le premier élément. La fonction de callback liée à la sélection d'un item de la combobox s'occupe de générer les paramètres restants (cf fonctions suivantes). La variable \textit{dontUpdateComboBox} est un verrou permettant de sélectionner les items de certaines combobox sans appeler une partie de la fonction de callback de celles-ci.
-\paragraph{selectFilter} Fonction de callback liée à la sélection d'un item dans la combobox liée au filtre sur les types de conditions ou d'actions. Cette fonction génère la liste des conditions ou des actions correspondantes au filtre sélectionné.
-\paragraph{selectConditionType, selectActionType} Fonction de callback liée à la sélection d'un item dans la combobox correspondant au choix du type de condition (resp. action) pour la condition (resp. action) courante. Elle récupère le type de la condition (resp. action) sélectionnée et affiche le texte et les différents paramètres pour ce type.
-\paragraph{drawConditionFrame, drawActionFrame} Cette fonction récupère le template du type de la condition (resp. action) sélectionnée, affiche son texte et trace chacun de ses attributs en fonction du type de l'attribut. Ces tracés sont appelés \textit{features} par la suite. L'argument \textit{reset} permet de réinitialiser les valeurs des paramètres de la condition (resp. action) courante, dans le cas où le type serait changé.
-\paragraph{drawFeature} Cette fonction trace une feature correspondant au type de l'attribut actuellement étudié. Par exemple, si il s'agit d'un attribut de type "groupe", il faut afficher une combobox permettant de choisir le groupe parmi tous les groups disponibles.
-\paragraph{configureEvent} Cette fonction ouvre et génère la fenêtre de configuration de l'évènement courant. Cette fenêtre est composée d'une editbox permettant de modifier le déclencheur de l'évènement en utilisant des opérateurs logiques (not, and, or), d'un panneau permettant de changer l'ordre d'exécution des actions et d'un gestionnaire d'importation de conditions ou d'actions provenant d'autres évènements.
-\paragraph{updateImportComboBoxes} Fonction de callback de la combobox permettant de choisir de quel évènement on veut importer les conditions ou actions. Cette fonction génère donc les items des combobox permettant de choisir quel condition ou action on veut importer.
-\paragraph{importCondition, importAction} Créer une nouvelle condition (resp. action) possédant les mêmes paramètres que la condition (resp. action) importée sauf l'id qui continue à être incrémentée classiquement.
-\paragraph{preventSpaces} Empêche l'utilisateur de mettre des espaces dans les noms des évènements, conditions et actions.
-\paragraph{showVariablesFrame} Affiche la fenêtre permettant d'ajouter, supprimer et modifier des variables pouvant être utilisées dans les évènements.
-\paragraph{addVariable} Ajoute une nouvelle variable.
-\paragraph{removeVariable} Supprime une variable.
-\paragraph{updateVariables} Actualise le nom et les paramètres des différentes variables.
-\paragraph{drawVariableFeature} Affiche les éléments d'interface permettant de modifier les variables. Si une variable possède déjà des arguments (type, valeur initiale) les sélectionne lors de la génération des éléments d'interface.
-\paragraph{showPickText} Affiche un texte lorsque l'on choisi une unité ou une position.
 \subsubsection{Paramètres de la carte}
+\paragraph{}
+Les fonctions de cette partie sauvegardent les paramètres globaux du niveau, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
 \subsubsection{Entrées / Sorties}
 \subsubsection{Fonctions de dessin}
 \subsubsection{Listeners\label{listeners}}

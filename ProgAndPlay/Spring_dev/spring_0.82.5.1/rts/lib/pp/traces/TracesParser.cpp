@@ -236,17 +236,19 @@ void TracesParser::readTracesOfflineInGame() {
 	bool change = false;
 	while (!end) {
 		while (std::getline(ifs, line)) {
-			change = true;
 			lineNum++;
 			Trace::sp_trace spt = handleLine(line);
 			if (spt) {
 				Event::sp_event spe;
 				if (spt->isEvent())
 					spe = boost::dynamic_pointer_cast<Event>(spt);
+				if (!spe)
+					change = true;
 				if (spe && Trace::inArray(spe->getLabel().c_str(), Event::noConcatEventsArr) > -1) {
 					detectSequences();
 					traces.push_back(spe);
 					start = traces.size();
+					change = true;
 				}
 				else
 					handleTraceOffline(spt);
@@ -314,112 +316,73 @@ Trace::sp_trace TracesParser::handleLine(const std::string& s) {
 			t = new NoParamCall(tokens[ind]);
 		}
 		else {
-			Call::ErrorType err = Call::getErrorType(tokens[ind].c_str());
+			Call::ErrorType err = Call::getEnumType<Call::ErrorType>(tokens[ind].c_str(),Call::errorsArr);
 			if (err != Call::NONE) {
 				ind++;
 			}
 			if (tokens[ind].compare("PP_GetSpecialAreaPosition") == 0) {
-				int g = (ind < numTokens-1) ? stoi(tokens[ind+1]) : -1;
+				int g = (ind+1 <= numTokens-1) ? stoi(tokens[ind+1]) : -1;
 				t = new GetSpecialAreaPositionCall(err,g);
 			}
 			else if (tokens[ind].compare("PP_GetResource") == 0) {
-				int id = (ind < numTokens-1) ? stoi(tokens[ind+1]) : -1;
+				int id = (ind+1 <= numTokens-1) ? stoi(tokens[ind+1]) : -1;
 				t = new GetResourceCall(err,id);
 			}
 			else if (tokens[ind].compare("PP_GetNumUnits") == 0) {
-				int id = (ind < numTokens-1) ? stoi(tokens[ind+1]) : -1;
+				int id = (ind+1 <= numTokens-1) ? stoi(tokens[ind+1]) : -1;
 				t = new GetNumUnitsCall(err,static_cast<CallMisc::Coalition>(id));
 			}
 			else if (tokens[ind].compare("PP_GetUnitAt") == 0) {
-				int id = -1, index = -1;
-				if (err != Call::NONE) {
-					id = stoi(tokens[ind+1]);
-					if (err == Call::OUT_OF_RANGE)
-						index = stoi(tokens[ind+2]);
-				}
-				else if (ind < numTokens-1) {
-					id = stoi(tokens[ind+1]);
-					index = stoi(tokens[ind+2]);
-				}
+				int id = (ind+1 <= numTokens-1) ? stoi(tokens[ind+1]) : -1;
+				int index = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
 				t = new GetUnitAtCall(err,static_cast<CallMisc::Coalition>(id),index);
 			}
 			else {
-				std::vector<std::string> unitParamTokens;
-				if (ind < numTokens-1)
-					unitParamTokens = splitLine(tokens[ind+1],'_');
-				int unitId = (unitParamTokens.size() > 0) ? stoi(unitParamTokens[0]) : -1;
-				int unitType = (unitParamTokens.size() > 1) ? stoi(unitParamTokens[1]) : -1;
+				int unitId = -1, unitType = -1;
+				if (ind+1 <= numTokens-1) {
+					std::vector<std::string> unitParamTokens = splitLine(tokens[ind+1],'_');
+					unitId = stoi(unitParamTokens[0]);
+					if (unitParamTokens.size() == 2)
+						unitType = stoi(unitParamTokens[1]);
+				}
 				if (Trace::inArray(tokens[ind].c_str(), Call::unitCallLabelsArr) > -1) {
 					t = new UnitCall(err,tokens[ind],unitId,unitType);
 				}
 				else if (tokens[ind].compare("PP_Unit_SetGroup") == 0) {
-					int group = -1;
-					if (err == Call::OUT_OF_RANGE)
-						group = stoi(tokens[ind+1]);
-					else if (ind+1 < numTokens-1)
-						group = stoi(tokens[ind+2]);
+					int group = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
 					t = new SetGroupCall(err,unitId,unitType,group);
 				}
 				else if (tokens[ind].compare("PP_Unit_ActionOnUnit") == 0) {
-					int action = -1, targetId = -1, targetType = -1;
+					int action = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1, targetId = -1, targetType = -1;
 					std::vector<std::string> targetParamTokens;
-					if (err == Call::WRONG_TARGET)
-						targetParamTokens = splitLine(tokens[ind+1],'_');
-					else if (ind+1 < numTokens-1) {
-						action = stoi(tokens[ind+2]);
+					if (ind+3 <= numTokens-1) {
 						targetParamTokens = splitLine(tokens[ind+3],'_');
+						targetId = stoi(targetParamTokens[0]);
+						if (targetParamTokens.size() == 2)
+							targetType = stoi(targetParamTokens[1]);
 					}
-					targetId = (targetParamTokens.size() > 0) ? stoi(targetParamTokens[0]) : -1;
-					targetType = (targetParamTokens.size() > 1) ? stoi(targetParamTokens[1]) : -1;
 					t = new ActionOnUnitCall(err,unitId,unitType,action,targetId,targetType);
 				}
 				else if (tokens[ind].compare("PP_Unit_ActionOnPosition") == 0) {
-					int action = -1;
-					float x = -1, y = -1;
-					if (err == Call::WRONG_POSITION) {
-						x = stof(tokens[ind+1]);
-						y = stof(tokens[ind+2]);
-					}
-					else if (ind+1 < numTokens-1) {
-						action = stoi(tokens[ind+2]);
-						x = stof(tokens[ind+3]);
-						y = stof(tokens[ind+4]);
-					}
+					int action = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
+					float x = (ind+3 <= numTokens-1) ? stof(tokens[ind+3]) : -1, y = (ind+4 <= numTokens-1) ? stof(tokens[ind+4]) : -1;
 					t = new ActionOnPositionCall(err,unitId,unitType,action,x,y);
 				}
 				else if (tokens[ind].compare("PP_Unit_UntargetedAction") == 0) {
-					int action = -1;
-					float param = -1;
-					if (ind+1 < numTokens-1) {
-						action = stoi(tokens[ind+2]);
-						param = stof(tokens[ind+3]);
-					}
+					int action = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
+					float param = (ind+3 <= numTokens-1) ? stof(tokens[ind+3]) : -1;
 					t = new UntargetedActionCall(err,unitId,unitType,action,param);
 				}
 				else if (tokens[ind].compare("PP_Unit_PdgCmd_GetCode") == 0) {
-					int idCmd = -1;
-					if (err == Call::OUT_OF_RANGE)
-						idCmd = stoi(tokens[ind+1]);
-					else if (ind+1 < numTokens-1)
-						idCmd = stoi(tokens[ind+2]);
+					int idCmd = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
 					t = new GetCodePdgCmdCall(err,unitId,unitType,idCmd);
 				}
 				else if (tokens[ind].compare("PP_Unit_PdgCmd_GetNumParams") == 0) {
-					int idCmd = -1;
-					if (err == Call::OUT_OF_RANGE)
-						idCmd = stoi(tokens[ind+1]);
-					else if (ind+1 < numTokens-1)
-						idCmd = stoi(tokens[ind+2]);
+					int idCmd = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1;
 					t = new GetNumParamsPdgCmdCall(err,unitId,unitType,idCmd);
 				}
 				else if (tokens[ind].compare("PP_Unit_PdgCmd_GetParam") == 0) {
-					int idCmd = -1, idParam = -1;
-					if (err == Call::OUT_OF_RANGE)
-						idParam = stof(tokens[ind+1]);
-					else if (ind+1 < numTokens-1) {
-						idCmd = stoi(tokens[ind+2]);
-						idParam = stof(tokens[ind+3]);
-					}
+					int idCmd = (ind+2 <= numTokens-1) ? stoi(tokens[ind+2]) : -1, idParam = (ind+3 <= numTokens-1) ? stoi(tokens[ind+3]) : -1;
 					t = new GetParamPdgCmdCall(err,unitId,unitType,idCmd,idParam);
 				}
 			}
@@ -433,7 +396,7 @@ Trace::sp_trace TracesParser::handleLine(const std::string& s) {
 				if (it != tokens.end()) {
 					while (++it != tokens.end())
 						if ((*it).compare("?") == 0)
-							c->setNoReturn();
+							c->setReturn();
 						else
 							c->addReturnCode(stof(*it));
 				}
@@ -1149,7 +1112,10 @@ void TracesParser::importTraceFromNode(rapidxml::xml_node<> *node, std::vector<T
 				node = node->first_node();
 			}
 			else if (node_name.compare("sequence") == 0) {
-				sps = boost::make_shared<Sequence>();
+				std::string info;
+				if (node->first_attribute("info") != 0)
+					info = node->first_attribute("info")->value();
+				sps = boost::make_shared<Sequence>(info);
 				if (!seq_stack.empty())
 					sps->setParent(seq_stack.top());
 				if (node->first_attribute("num_map") != 0) {
@@ -1271,7 +1237,7 @@ void TracesParser::exportTraceToXml() {
 				node = doc.allocate_node(rapidxml::node_element, "call");
 				node->append_attribute(doc.allocate_attribute("label", doc.allocate_string(c->getLabel().c_str())));
 				if (c->getError() != Call::NONE)
-					node->append_attribute(doc.allocate_attribute("error", doc.allocate_string(Call::getErrorLabel(c->getError()))));
+					node->append_attribute(doc.allocate_attribute("error", doc.allocate_string(Call::getEnumLabel<Call::ErrorType>(c->getError(),Call::errorsArr))));
 				s = c->getParams();
 				if (s.compare("") != 0)
 					node->append_attribute(doc.allocate_attribute("params", doc.allocate_string(s.c_str())));
@@ -1285,6 +1251,8 @@ void TracesParser::exportTraceToXml() {
 				sps->reset();
 				node = doc.allocate_node(rapidxml::node_element, "sequence");
 				node->append_attribute(doc.allocate_attribute("num_map", doc.allocate_string(Sequence::getNumMapString(sps->getNumMap()).c_str())));
+				if (!sps->getInfo().empty())
+					node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(sps->getInfo().c_str())));
 				node_stack.top()->append_node(node);
 				node_stack.push(node);
 				seq_stack.push(sps);

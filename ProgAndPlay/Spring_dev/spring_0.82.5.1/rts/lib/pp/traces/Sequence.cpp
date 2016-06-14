@@ -1,7 +1,7 @@
 #include "Sequence.h"
 #include "TracesAnalyser.h"
 
-Sequence::Sequence(): Trace(SEQUENCE), num(0), pt(0), valid(false), endReached(false), shared(false) {}
+Sequence::Sequence(std::string info): Trace(SEQUENCE), info(info), num(0), pt(0), valid(false), endReached(false), shared(false) {}
 
 Sequence::Sequence(unsigned int num): Trace(SEQUENCE), num(num), pt(0), valid(false), endReached(false), shared(false) {
 	updateNumMap(num);
@@ -18,6 +18,7 @@ Sequence::Sequence(sp_sequence sps_up, sp_sequence sps_down): Trace(SEQUENCE), p
 	updateNumMap(sps_down->getNumMap());
 }
 
+// deprecated. A remplacer par le code de la fonction compare
 bool Sequence::operator==(Trace *t) const {
 	bool res = false;
 	if (t->isSequence()) {
@@ -144,6 +145,10 @@ std::vector<Trace::sp_trace>& Sequence::getTraces() {
 
 unsigned int Sequence::getNum() const {
 	return num;
+}
+
+std::string Sequence::getInfo() const {
+	return info;
 }
 
 void Sequence::addOne() {
@@ -305,6 +310,23 @@ void Sequence::completeNumMap(const Sequence::sp_sequence& sps) {
 		}
 		updateNumMap(1,num);
 	}
+}
+
+double Sequence::getNumMapMeanDistance(const Sequence::sp_sequence& sps) const {
+	std::map<unsigned int,double> fmap = getPercentageNumMap();
+	std::map<unsigned int,double> smap = sps->getPercentageNumMap();
+	double fm = 0, sm = 0;
+	std::map<unsigned int,double>::const_iterator it = fmap.begin();
+	while (it != fmap.end()) {
+		fm += it->first * it->second;
+		it++;
+	}
+	it = smap.begin();
+	while (it != smap.end()) {
+		sm += it->first * it->second;
+		it++;
+	}
+	return std::abs(fm - sm) / (fm + sm);
 }
 
 bool Sequence::isImplicit() {
