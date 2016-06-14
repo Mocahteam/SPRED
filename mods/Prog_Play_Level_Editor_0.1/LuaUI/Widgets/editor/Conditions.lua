@@ -30,14 +30,14 @@ conditions_list = {
 		attributes = {
 			{
 				text = "<Number>",
-				type = "number",
+				type = "text",
 				id = "number"
 			}
 		}
 	},
 	{
 		type = "zone",
-		filter = "Zone",
+		filter = "Unit",
 		typeText = "Units are in a zone",
 		text = "<Number> units of <UnitSet> are in <Zone>.",
 		attributes = {
@@ -60,7 +60,7 @@ conditions_list = {
 	},
 	{
 		type = "underAttack",
-		filter = "Attacked",
+		filter = "Unit",
 		typeText = "Units are under attack",
 		text = "<Number> units of <UnitSet> are under attack.",
 		attributes = {
@@ -78,7 +78,7 @@ conditions_list = {
 	},
 	{
 		type = "dead",
-		filter = "Dead",
+		filter = "Unit",
 		typeText = "Units are dead",
 		text = "<Number> units of <UnitSet> are dead.",
 		attributes = {
@@ -96,7 +96,7 @@ conditions_list = {
 	},
 	{
 		type = "killed",
-		filter = "Kill",
+		filter = "Unit",
 		typeText = "Team killed specific units",
 		text = "<Team> killed <Number> units of <UnitSet>.",
 		attributes = {
@@ -119,7 +119,7 @@ conditions_list = {
 	},
 	{
 		type = "hp",
-		filter = "HP",
+		filter = "Unit",
 		typeText = "HP of units",
 		text = "Hit points of <Number> units of <UnitSet> are at <Percentage> %.",
 		attributes = {
@@ -135,14 +135,14 @@ conditions_list = {
 			},
 			{
 				text = "<Percentage>",
-				type = "number",
+				type = "text",
 				id = "hp"
 			}
 		}
 	},
 	{
 		type = "order",
-		filter = "Order",
+		filter = "Unit",
 		typeText = "Units are doing command",
 		text = "<Number> units of <UnitSet> are doing <Command>.",
 		attributes = {
@@ -158,7 +158,7 @@ conditions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "commandUnit",
+				type = "command",
 				id = "command"
 			}
 		}
@@ -182,7 +182,7 @@ conditions_list = {
 			},
 			{
 				text = "<Number>",
-				type = "number",
+				type = "text",
 				id = "number",
 				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")"
 			}
