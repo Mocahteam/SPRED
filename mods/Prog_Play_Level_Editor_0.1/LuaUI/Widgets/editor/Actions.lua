@@ -5,7 +5,7 @@ actions_list = {
 	{
 		type = "win",
 		filter = "Game",
-		typeText = "Team wins",
+		typeText = "Player wins",
 		text = "<Player> wins with state <State>.",
 		attributes = {
 			{
@@ -24,7 +24,7 @@ actions_list = {
 	{
 		type = "lose",
 		filter = "Game",
-		typeText = "Team loses",
+		typeText = "Player loses",
 		text = "<Player> loses with <State>.",
 		attributes = {
 			{
@@ -49,8 +49,7 @@ actions_list = {
 			{
 				text = "<Time>",
 				type = "number",
-				id = "time",
-				hint = "You can put 0 in this field for an infinite duration."
+				id = "time"
 			}
 		}
 	},
@@ -125,10 +124,10 @@ actions_list = {
 		type = "cameraAuto",
 		filter = "Control",
 		typeText = "Change camera auto state",
-		text = "<Toggle> camera auto.",
+		text = "Camera auto is now <State>.",
 		attributes = {
 			{
-				text = "<Toggle>",
+				text = "<State>",
 				type = "toggle",
 				id = "toggle"
 			}
@@ -138,40 +137,17 @@ actions_list = {
 		type = "mouse",
 		filter = "Control",
 		typeText = "Change mouse state",
-		text = "<Toggle> mouse control.",
+		text = "Mouse is now <State>",
 		attributes = {
 			{
-				text = "<Toggle>",
+				text = "<State>",
 				type = "toggle",
 				id = "toggle"
 			}
 		}
 	},
 	{
-		type = "createUnitAtPosition",
-		filter = "Unit",
-		typeText = "Create Unit at Position",
-		text = "Create unit of type <UnitType> for <Team> at <Position>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
-		type = "createUnitsInZone",
+		type = "createUnits",
 		filter = "Unit",
 		typeText = "Create Units in Zone",
 		text = "Create <Number> units of type <UnitType> for <Team> within <Zone>.",
@@ -199,15 +175,15 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_order",
+		type = "order",
 		filter = "Order",
-		typeText = "Order unit (untargeted order)",
-		text = "Order <Unit> to begin <Command> with <Parameters>.",
+		typeText = "Order units (untargeted order)",
+		text = "Order <UnitSet> to begin <Command> with <Parameters>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Command>",
@@ -223,15 +199,15 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_orderPosition",
+		type = "orderPosition",
 		filter = "Order",
-		typeText = "Order unit to position",
-		text = "Order <Unit> to begin <Command> towards <Position>.",
+		typeText = "Order units to position",
+		text = "Order <UnitSet> to begin <Command> towards <Position>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Command>",
@@ -246,314 +222,19 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_orderTarget",
+		type = "orderTarget",
 		filter = "Order",
-		typeText = "Order unit to target",
-		text = "Order <Unit> to begin <Command> towards <Target>.",
+		typeText = "Order units to target",
+		text = "Order <UnitSet> to begin <Command> towards <Target>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Command>",
 				type = "commandUnit",
-				id = "command"
-			},
-			{
-				text = "<Target>",
-				type = "unit",
-				id = "target"
-			}
-		}
-	},
-	{
-		type = "group_order",
-		filter = "Order",
-		typeText = "Order units of group (untargeted order)",
-		text = "Order units of <Group> to begin <Command> with <Parameters>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Parameters>",
-				type = "parameters",
-				id = "parameters",
-				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
-			}
-		}
-	},
-	{
-		type = "group_orderPosition",
-		filter = "Order",
-		typeText = "Order units of group to position",
-		text = "Order units of <Group> to begin <Command> towards <Position>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
-		type = "group_orderTarget",
-		filter = "Order",
-		typeText = "Order units of group to target",
-		text = "Order units of <Group> to begin <Command> towards <Target>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Target>",
-				type = "unit",
-				id = "target"
-			}
-		}
-	},
-	{
-		type = "team_order",
-		filter = "Order",
-		typeText = "Order units of team (untargeted order)",
-		text = "Order units of <Team> to begin <Command> with <Parameters>.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Parameters>",
-				type = "parameters",
-				id = "parameters",
-				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
-			}
-		}
-	},
-	{
-		type = "team_orderPosition",
-		filter = "Order",
-		typeText = "Order units of team to position",
-		text = "Order units of <Team> to begin <Command> towards <Position>.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
-		type = "team_orderTarget",
-		filter = "Order",
-		typeText = "Order units of team to target",
-		text = "Order units of <Team> to begin <Command> towards <Target>.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Target>",
-				type = "unit",
-				id = "target"
-			}
-		}
-	},
-	{
-		type = "type_order",
-		filter = "Order",
-		typeText = "Order units of type (untargeted order)",
-		text = "Order units of type <UnitType> of <Team> to begin <Command> with <Parameters>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Parameters>",
-				type = "parameters",
-				id = "parameters",
-				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
-			}
-		}
-	},
-	{
-		type = "type_orderPosition",
-		filter = "Order",
-		typeText = "Order units of type to position",
-		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Position>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
-		type = "type_orderTarget",
-		filter = "Order",
-		typeText = "Order units of type to target",
-		text = "Order units of type <UnitType> of <Team> to begin <Command> towards <Target>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Target>",
-				type = "unit",
-				id = "target"
-			}
-		}
-	},
-	{
-		type = "zone_order",
-		filter = "Order",
-		typeText = "Order units in zone (untargeted order)",
-		text = "Order units within <Zone> to begin <Command> with <Parameters>.",
-		attributes = {
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Parameters>",
-				type = "parameters",
-				id = "parameters",
-				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
-			}
-		}
-	},
-	{
-		type = "zone_orderPosition",
-		filter = "Order",
-		typeText = "Order units in zone to position",
-		text = "Order units in <Zone> to begin <Command> towards <Position>.",
-		attributes = {
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			},
-			{
-				text = "<Command>",
-				type = "command",
-				id = "command"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
-		type = "zone_orderTarget",
-		filter = "Order",
-		typeText = "Order units in zone to target",
-		text = "Order units in <Zone> to begin <Command> towards <Target>.",
-		attributes = {
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			},
-			{
-				text = "<Command>",
-				type = "command",
 				id = "command"
 			},
 			{
@@ -605,8 +286,8 @@ actions_list = {
 	{
 		type = "messageUnit",
 		filter = "Message",
-		typeText = "Display message above unit",
-		text = "Display <Message> over <Unit> for <Time> seconds",
+		typeText = "Display message above units",
+		text = "Display <Message> over units of <UnitSet> for <Time> seconds",
 		attributes = {
 			{
 				text = "<Message>",
@@ -615,9 +296,9 @@ actions_list = {
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Time>",
@@ -630,8 +311,8 @@ actions_list = {
 	{
 		type = "bubbleUnit",
 		filter = "Message",
-		typeText = "Display message in a bubble above unit",
-		text = "Display <Message> in a bubble over <Unit> for <Time> seconds",
+		typeText = "Display message in a bubble above units",
+		text = "Display <Message> in a bubble over <UnitSet> for <Time> seconds",
 		attributes = {
 			{
 				text = "<Message>",
@@ -640,9 +321,9 @@ actions_list = {
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Time>",
@@ -678,85 +359,28 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_kill",
+		type = "kill",
 		filter = "Kill",
-		typeText = "Kill unit",
-		text = "Kill <Unit>.",
+		typeText = "Kill units",
+		text = "Kill <UnitSet>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			}
 		}
 	},
 	{
-		type = "group_kill",
-		filter = "Kill",
-		typeText = "Kill group",
-		text = "Kill units of <Group>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			}
-		}
-	},
-	{
-		type = "team_kill",
-		filter = "Kill",
-		typeText = "Kill team",
-		text = "Kill units of <Team>.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "type_kill",
-		filter = "Kill",
-		typeText = "Kill units of type of team",
-		text = "Kill units of type <UnitType> of <Team>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "zone_kill",
-		filter = "Kill",
-		typeText = "Kill units in zone",
-		text = "Kill units in <Zone>",
-		attributes = {
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			}
-		}
-	},
-	{
-		type = "unit_hp",
+		type = "hp",
 		filter = "HP",
-		typeText = "Set HP of unit",
-		text = "Set hit points of <Unit> to <Percentage> %.",
+		typeText = "Set HP of units",
+		text = "Set hit points of <UnitSet> to <Percentage> %.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Percentage>",
@@ -766,74 +390,15 @@ actions_list = {
 		}
 	},
 	{
-		type = "group_hp",
-		filter = "HP",
-		typeText = "Set HP of group",
-		text = "Set hit points of units of <Group> to <Percentage> %.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Percentage>",
-				type = "number",
-				id = "percentage"
-			}
-		}
-	},
-	{
-		type = "team_hp",
-		filter = "HP",
-		typeText = "Set HP of team",
-		text = "Set hit points of units of <Team> to <Percentage> %.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Percentage>",
-				type = "number",
-				id = "percentage"
-			}
-		}
-	},
-	{
-		type = "type_hp",
-		filter = "HP",
-		typeText = "Set HP of type of team",
-		text = "Set hit points of units of type <UnitType> of <Team> to <Percentage> %.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Percentage>",
-				type = "number",
-				id = "percentage"
-			}
-		}
-	},
-	{
-		type = "unit_addToGroup",
+		type = "addToGroup",
 		filter = "Group",
-		typeText = "Add unit to group",
-		text = "Add <Unit> to <Group>.",
+		typeText = "Add units to group",
+		text = "Add <UnitSet> to <Group>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Group>",
@@ -843,15 +408,15 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_removeFromGroup",
+		type = "removeFromGroup",
 		filter = "Group",
-		typeText = "Remove unit from group",
-		text = "Remove <Unit> from <Group>.",
+		typeText = "Remove units from group",
+		text = "Remove <UnitSet> from <Group>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Group>",
@@ -861,15 +426,15 @@ actions_list = {
 		}
 	},
 	{
-		type = "unit_transfer",
+		type = "transfer",
 		filter = "Transfer",
-		typeText = "Transfer unit",
-		text = "Transfer <Unit> to <Team>.",
+		typeText = "Transfer units",
+		text = "Transfer <UnitSet> to <Team>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Team>",
@@ -879,143 +444,20 @@ actions_list = {
 		}
 	},
 	{
-		type = "group_transfer",
-		filter = "Transfer",
-		typeText = "Transfer units from group",
-		text = "Transfer units of <Group> to <Team>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "team_transfer",
-		filter = "Transfer",
-		typeText = "Transfer units from team",
-		text = "Transfer units of <CurrentTeam> to <Team>.",
-		attributes = {
-			{
-				text = "<CurrentTeam>",
-				type = "team",
-				id = "currentTeam"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "type_transfer",
-		filter = "Transfer",
-		typeText = "Transfer units of type",
-		text = "Transfer units of type <UnitType> of <CurrentTeam> to <Team>.",
-		attributes = {
-			{
-				text = "<Number>",
-				type = "number",
-				id = "number"
-			},
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<CurrentTeam>",
-				type = "team",
-				id = "currentTeam"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "unit_teleport",
+		type = "teleport",
 		filter = "Teleport",
-		typeText = "Teleport unit",
-		text = "Teleport <Unit> to <Position>.",
+		typeText = "Teleport units",
+		text = "Teleport <UnitSet> to <Position>.",
 		attributes = {
 			{
-				text = "<Unit>",
-				type = "unit",
-				id = "unit"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Position>",
 				type = "position",
 				id = "position"
-			}
-		}
-	},
-	{
-		type = "group_teleport",
-		filter = "Teleport",
-		typeText = "Teleport units of group",
-		text = "Teleport units of <Group> to somewhere within <Zone>.",
-		attributes = {
-			{
-				text = "<Group>",
-				type = "group",
-				id = "group"
-			},
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			}
-		}
-	},
-	{
-		type = "team_teleport",
-		filter = "Teleport",
-		typeText = "Teleport units of team",
-		text = "Teleport units of <Team> to somewhere within <Zone>.",
-		attributes = {
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
-			}
-		}
-	},
-	{
-		type = "type_teleport",
-		filter = "Teleport",
-		typeText = "Teleport units of type of team",
-		text = "Teleport units of type <UnitType> of <Team> to somewhere within <Zone>.",
-		attributes = {
-			{
-				text = "<UnitType>",
-				type = "unitType",
-				id = "unitType"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			},
-			{
-				text = "<Zone>",
-				type = "zone",
-				id = "zone"
 			}
 		}
 	},
@@ -1034,65 +476,8 @@ actions_list = {
 			{
 				text = "<Number>",
 				type = "number",
-				id = "number"
-			}
-		}
-	},
-	{
-		type = "changeVariableNumber",
-		filter = "Variable",
-		typeText = "Change number variable",
-		text = "Set <Variable1> to <Variable2> <Operator> <Number>",
-		attributes = {
-			{
-				text = "<Variable1>",
-				type = "numberVariable",
-				id = "variable1",
-				hint = "Variables can be defined by going to the menu available through the event panel"
-			},
-			{
-				text = "<Variable2>",
-				type = "numberVariable",
-				id = "variable2"
-			},
-			{
-				text = "<Operator>",
-				type = "operator",
-				id = "operator"
-			},
-			{
-				text = "<Number>",
-				type = "number",
-				id = "number"
-			}
-		}
-	},
-	{
-		type = "changeVariableVariable",
-		filter = "Variable",
-		typeText = "Change number variable using other variables",
-		text = "Set <Variable1> to <Variable2> <Operator> <Variable3>",
-		attributes = {
-			{
-				text = "<Variable1>",
-				type = "numberVariable",
-				id = "variable1",
-				hint = "Variables can be defined by going to the menu available through the event panel"
-			},
-			{
-				text = "<Variable2>",
-				type = "numberVariable",
-				id = "variable2"
-			},
-			{
-				text = "<Operator>",
-				type = "operator",
-				id = "operator"
-			},
-			{
-				text = "<Variable3>",
-				type = "numberVariable",
-				id = "variable3"
+				id = "number",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")"
 			}
 		}
 	},
@@ -1100,7 +485,7 @@ actions_list = {
 		type = "changeVariableRandom",
 		filter = "Variable",
 		typeText = "Change the value of a variable randomly",
-		text = "Set <Variable> to a random number between <Min> and <Max>.",
+		text = "Set <Variable> to a random integer between <Min> and <Max>.",
 		attributes = {
 			{
 				text = "<Variable>",
