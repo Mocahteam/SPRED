@@ -349,9 +349,6 @@ local function isTriggerable(event)
   end
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
-    Spring.Echo(c)
-    Spring.Echo(cond..tostring(event.id))
-    Spring.Echo(json.encode(ctx.conditions))
     local valueCond=ctx.conditions[cond..tostring(event.id)]
     trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
   end
@@ -846,25 +843,16 @@ local function processEvents(frameNumber)
             if(a.type=="waitCondition") then
               newevent.listOfInvolvedConditions={}
               table.insert(newevent.listOfInvolvedConditions,a.params.condition)   
-              newevent.conditions[a.params.condition..newevent.id]=ctx.conditions[a.params.condition..tostring(event.id)]
+              newevent.conditions[a.params.condition..tostring(newevent.id)]=ctx.conditions[a.params.condition..tostring(event.id)]
             end
             if(a.type=="waitTrigger")then 
               newevent.trigger=a.params.trigger 
-              for cond in pairs(newevent.listOfInvolvedConditions) do
+              Spring.Echo("update ctx Conditions")
+              for c,cond in pairs(newevent.listOfInvolvedConditions) do
                 ctx.conditions[cond..tostring(newevent.id)]=deepcopy(ctx.conditions[cond..tostring(event.id)])
-                newevent.conditions[cond..newevent.id]=ctx.conditions[cond..tostring(newevent.id)]
+                newevent.conditions[cond..tostring(newevent.id)]=ctx.conditions[cond..tostring(newevent.id)]
               end
-              --[[
-                        "id":8,
-          "type":"waitTrigger",
-          "name":"waittrig",
-          "params":{
-            "trigger":"true"
-          }
-              ]]--
-            end
-            --Spring.Echo("this event is created")
-            --Spring.Echo(json.encode(newevent))                      
+            end                     
           else
             if creationOfNewEvent==false then
               AddActionInStack(a,frameDelay)
