@@ -66,5 +66,5 @@ forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)
 ------------------------------
 -- Initialize triggers state machine
 ------------------------------
-local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit" }
+local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit", PICKUNITSET = "pickUnitset" }
 triggerStateMachine = StateMachine.new(triggerStates, triggerStates.DEFAULT)

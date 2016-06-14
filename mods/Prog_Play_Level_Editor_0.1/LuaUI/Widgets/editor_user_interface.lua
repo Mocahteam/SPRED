@@ -23,9 +23,9 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- units = unit, group, condition, action
 -- bug ctrlZ and events
 -- bug ctrlZ and groupframe
+-- refactor horrible drawfeature
 
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
@@ -3032,6 +3032,41 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 	elseif attr.type == "unit" then
 		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 		if a.params[attr.id] then
+			local u = a.params[attr.id]
+			local uDefID = Spring.GetUnitDefID(u)
+			if uDefID then
+				local name = UnitDefs[uDefID].humanName
+				local team = Spring.GetUnitTeam(u)
+				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+				unitLabel:SetCaption(name.." ("..tostring(u)..")")
+				local function viewUnit()
+					local state = Spring.GetCameraState()
+					local x, y, z = Spring.GetUnitPosition(u)
+					state.px, state.py, state.pz = x, y, z
+					state.height = 500
+					Spring.SetCameraState(state, 2)
+				end
+				local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
+				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(feature, viewButton)
+			end
+		end
+		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+		local pickUnit = function()
+			changedParam = attr.id 
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
+			Screen0:RemoveChild(windows["triggerWindow"])
+			Screen0:RemoveChild(windows["eventWindow"])
+			Screen0:RemoveChild(windows["conditionWindow"])
+			Screen0:RemoveChild(windows["actionWindow"])
+			Screen0:RemoveChild(windows["importWindow"])
+		end
+		pickButton.OnClick = { pickUnit }
+		table.insert(feature, unitLabel)
+		table.insert(feature, pickButton)
+	elseif attr.type == "unitset" then
+		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "[ ]", 16, "center", nil, "center")
+		if a.params[attr.id] then
 			local param = a.params[attr.id]
 			if param.type and param.value then
 				if param.type == "unit" then
@@ -3040,8 +3075,9 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					if uDefID then
 						local name = UnitDefs[uDefID].humanName
 						local team = Spring.GetUnitTeam(u)
-						unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-						unitLabel:SetCaption(name.." ("..tostring(u)..")")
+						local r, g, b = round(teams[team].red*255), round(teams[team].green*255), round(teams[team].blue*255)
+						unitLabel.font.color = { 1, 1, 1, 1 }
+						unitLabel:SetCaption("\255\255\255\255[ \255"..colorTable[r]..colorTable[g]..colorTable[b]..name.." ("..tostring(u)..")\255\255\255\255 ]")
 						local function viewUnit()
 							local state = Spring.GetCameraState()
 							local x, y, z = Spring.GetUnitPosition(u)
@@ -3054,16 +3090,21 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 						table.insert(feature, viewButton)
 					end
 				elseif param.type == "group" then
-						unitLabel.font.color = {1, 1, 1, 1}
-						for i, g in ipairs(unitGroups) do
-							if g.id == param.value then
-								unitLabel:SetCaption(g.name)
-								break
-							end
+					unitLabel.font.color = {1, 1, 1, 1}
+					for i, g in ipairs(unitGroups) do
+						if g.id == param.value then
+							unitLabel:SetCaption(g.name)
+							break
 						end
+					end
 				elseif param.type == "team" then
+					if param.value == "all" then
+						unitLabel.font.color = {1, 1, 1, 1}
+						unitLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ALL)
+					else
 						unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
 						unitLabel:SetCaption(teamName[param.value])
+					end
 				elseif param.type == "action" then
 					for i, ev in ipairs(events) do
 						for ii, act in ipairs(ev.actions) do
@@ -3089,7 +3130,7 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
 		local pickUnit = function()
 			changedParam = attr.id 
-			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNITSET)
 			Screen0:RemoveChild(windows["triggerWindow"])
 			Screen0:RemoveChild(windows["eventWindow"])
 			Screen0:RemoveChild(windows["conditionWindow"])
@@ -3117,6 +3158,8 @@ function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according 
 					text = a.params[attr.id]
 				end
 				editBox:SetText(text)
+			else
+				editBox:SetText(a.params[attr.id])
 			end
 		end
 		if attr.type == "text" or attr.type == "number" then
@@ -3588,7 +3631,7 @@ end
 
 function showPickText() -- Show text next to the mouse and in the middle of the screen when picking a unit or a position for a condition or an event
 	local text = ""
-	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+	if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 		text = EDITOR_TRIGGERS_EVENTS_PICK_UNIT
 	elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
 		text = EDITOR_TRIGGERS_EVENTS_PICK_POSITION
@@ -3667,9 +3710,11 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	
 	selectSetOfUnitsWindows.groupteam = addWindow(Screen0, "0%", "5%", "15%", "80%")
 	
-	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '0%', '100%', '5%', "Teams", 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '0%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM, 20, "center", nil, "center")
 	local tsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '5%', '100%', '45%')
 	local tc = 0
+	local allBut = addButton(tsp, "0%", tc * 40, "100%", 40, EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM_ALL, function() pickFunction("team", "all") end)
+	tc = tc + 1
 	for k, t in pairs(teamStateMachine.states) do
 		if enabledTeams[t] then
 			local but = addButton(tsp, "0%", tc * 40, "100%", 40, teamName[t], function() pickFunction("team", t) end)
@@ -3678,7 +3723,7 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		end
 	end
 	
-	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '50%', '100%', '5%', "Groups", 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '50%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_GROUP, 20, "center", nil, "center")
 	local gsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '55%', '100%', '45%')
 	for i, g in ipairs(unitGroups) do
 		addButton(gsp, "0%", (i-1) * 40, "100%", 40, g.name, function() pickFunction("group", g.id) end)
@@ -3686,19 +3731,19 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	
 	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "5%", "15%", "80%")
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '5%', "Actions", 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION, 20, "center", nil, "center")
 	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '5%', '100%', '45%')
 	local count = 0
 	for i, e in ipairs(events) do
 		for ii, a in ipairs(e.actions) do
-			if a.type == "createUnitAtPosition" or a.type == "createUnitsInZone" then
+			if a.type == "createUnits" then
 				addButton(asp, "0%", count * 40, "100%", 40, a.name, function() pickFunction("action", a.id) end)
 				count = count + 1
 			end
 		end
 	end
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '5%', "Conditions", 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION, 20, "center", nil, "center")
 	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '55%', '100%', '45%')
 	for i, c in ipairs(events[currentEvent].conditions) do
 		addButton(csp, "0%", (i-1) * 40, "100%", 40, c.name, function() pickFunction("condition", c.id) end)
@@ -4057,7 +4102,10 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				for iii, cond in ipairs(conditions_list) do
 					for iiii, attr in ipairs(cond.attributes) do
 						if attr.id == k and attr.type == "unit" and type(c.params[attr.id]) == "number" then
-							updateUnitID = true
+							updateUnitID = "unit"
+							break
+						elseif attr.id == k and attr.type == "unitset" and type(c.params[attr.id]) == "number" then
+							updateUnitID = "unitset"
 							break
 						end
 					end
@@ -4065,8 +4113,12 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID then
+				if updateUnitID == "unit" then
 					condition.params[k] = uIDs[tostring(p)]
+				elseif updateUnitID == "unitset" then
+					condition.params[k] = {}
+					condition.params[k].type = p.type
+					condition.params[k].value = uIDs[tostring(p.value)]
 				else
 					condition.params[k] = p
 				end
@@ -4087,8 +4139,11 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, act in ipairs(actions_list) do
 					for iiii, attr in ipairs(act.attributes) do
-						if attr.id == k and attr.type == "unit" and type(a.params[attr.id]) == "number" then
-							updateUnitID = true
+						if attr.id == k and attr.type == "unit" then
+							updateUnitID = "unit"
+							break
+						elseif attr.id == k and attr.type == "unitset" then
+							updateUnitID = "unitset"
 							break
 						end
 					end
@@ -4096,8 +4151,12 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID then
+				if updateUnitID == "unit" then
 					action.params[k] = uIDs[tostring(p)]
+				elseif updateUnitID == "unitset" and p.type == "unit" then
+					action.params[k] = {}
+					action.params[k].type = p.type
+					action.params[k].value = uIDs[tostring(p.value)]
 				else
 					action.params[k] = p
 				end
@@ -4688,7 +4747,7 @@ function widget:DrawScreen()
 		updateZoneInformation()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		showPickText()
-		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 			showUnitsInformation()
 		end
 	end
@@ -4961,7 +5020,7 @@ function widget:MousePress(mx, my, button)
 						drawConditionFrame(false)
 					end
 				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					e.params[changedParam] = {}
@@ -4972,6 +5031,21 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["importWindow"])
 					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
+					if currentAction then
+						Screen0:AddChild(windows["actionWindow"])
+						drawActionFrame(false)
+					elseif currentCondition then
+						Screen0:AddChild(windows["conditionWindow"])
+						drawConditionFrame(false)
+					end
+				end
+			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+				if kind == "unit" and currentEvent then
+					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+					e.params[changedParam] = var
+					Screen0:AddChild(windows["triggerWindow"])
+					Screen0:AddChild(windows["eventWindow"])
+					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
