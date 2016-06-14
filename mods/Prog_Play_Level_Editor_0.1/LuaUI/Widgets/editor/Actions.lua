@@ -48,7 +48,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Time>",
-				type = "number",
+				type = "text",
 				id = "time"
 			}
 		}
@@ -154,7 +154,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Number>",
-				type = "number",
+				type = "text",
 				id = "number"
 			},
 			{
@@ -175,6 +175,73 @@ actions_list = {
 		}
 	},
 	{
+		type = "kill",
+		filter = "Unit",
+		typeText = "Kill units",
+		text = "Kill <UnitSet>.",
+		attributes = {
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			}
+		}
+	},
+	{
+		type = "hp",
+		filter = "Unit",
+		typeText = "Set HP of units",
+		text = "Set hit points of <UnitSet> to <Percentage> %.",
+		attributes = {
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<Percentage>",
+				type = "text",
+				id = "percentage"
+			}
+		}
+	},
+	{
+		type = "transfer",
+		filter = "Unit",
+		typeText = "Transfer units",
+		text = "Transfer <UnitSet> to <Team>.",
+		attributes = {
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<Team>",
+				type = "team",
+				id = "team"
+			}
+		}
+	},
+	{
+		type = "teleport",
+		filter = "Unit",
+		typeText = "Teleport units",
+		text = "Teleport <UnitSet> to <Position>.",
+		attributes = {
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<Position>",
+				type = "position",
+				id = "position"
+			}
+		}
+	},
+	{
 		type = "order",
 		filter = "Order",
 		typeText = "Order units (untargeted order)",
@@ -187,12 +254,12 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "commandUnit",
+				type = "command",
 				id = "command"
 			},
 			{
 				text = "<Parameters>",
-				type = "parameters",
+				type = "textSplit",
 				id = "parameters",
 				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
 			}
@@ -211,7 +278,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "commandUnit",
+				type = "command",
 				id = "command"
 			},
 			{
@@ -234,7 +301,7 @@ actions_list = {
 			},
 			{
 				text = "<Command>",
-				type = "commandUnit",
+				type = "command",
 				id = "command"
 			},
 			{
@@ -252,7 +319,7 @@ actions_list = {
 		attributes = {
 			{
 				text = '<Message>',
-				type = "message",
+				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			}
@@ -266,7 +333,7 @@ actions_list = {
 		attributes = {
 			{
 				text = '<Message>',
-				type = "message",
+				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
@@ -277,7 +344,7 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "text",
 				id = "time",
 				hint = "You can put 0 in this field for an infinite duration."
 			}
@@ -291,7 +358,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Message>",
-				type = "message",
+				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
@@ -302,7 +369,7 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "text",
 				id = "time",
 				hint = "You can put 0 in this field for an infinite duration."
 			}
@@ -316,7 +383,7 @@ actions_list = {
 		attributes = {
 			{
 				text = "<Message>",
-				type = "message",
+				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
@@ -327,7 +394,7 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "text",
 				id = "time",
 				hint = "You can put 0 in this field for an infinite duration."
 			}
@@ -341,7 +408,7 @@ actions_list = {
 		attributes = {
 			{
 				text = '<Message>',
-				type = "message",
+				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
 			},
@@ -352,40 +419,9 @@ actions_list = {
 			},
 			{
 				text = "<Time>",
-				type = "number",
+				type = "text",
 				id = "time",
 				hint = "You can put 0 in this field for an infinite duration."
-			}
-		}
-	},
-	{
-		type = "kill",
-		filter = "Kill",
-		typeText = "Kill units",
-		text = "Kill <UnitSet>.",
-		attributes = {
-			{
-				text = "<UnitSet>",
-				type = "unitset",
-				id = "unitset"
-			}
-		}
-	},
-	{
-		type = "hp",
-		filter = "HP",
-		typeText = "Set HP of units",
-		text = "Set hit points of <UnitSet> to <Percentage> %.",
-		attributes = {
-			{
-				text = "<UnitSet>",
-				type = "unitset",
-				id = "unitset"
-			},
-			{
-				text = "<Percentage>",
-				type = "number",
-				id = "percentage"
 			}
 		}
 	},
@@ -426,42 +462,6 @@ actions_list = {
 		}
 	},
 	{
-		type = "transfer",
-		filter = "Transfer",
-		typeText = "Transfer units",
-		text = "Transfer <UnitSet> to <Team>.",
-		attributes = {
-			{
-				text = "<UnitSet>",
-				type = "unitset",
-				id = "unitset"
-			},
-			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
-			}
-		}
-	},
-	{
-		type = "teleport",
-		filter = "Teleport",
-		typeText = "Teleport units",
-		text = "Teleport <UnitSet> to <Position>.",
-		attributes = {
-			{
-				text = "<UnitSet>",
-				type = "unitset",
-				id = "unitset"
-			},
-			{
-				text = "<Position>",
-				type = "position",
-				id = "position"
-			}
-		}
-	},
-	{
 		type = "changeVariable",
 		filter = "Variable",
 		typeText = "Set number variable",
@@ -475,7 +475,7 @@ actions_list = {
 			},
 			{
 				text = "<Number>",
-				type = "number",
+				type = "text",
 				id = "number",
 				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")"
 			}
@@ -495,12 +495,12 @@ actions_list = {
 			},
 			{
 				text = "<Min>",
-				type = "number",
+				type = "text",
 				id = "min"
 			},
 			{
 				text = "<Max>",
-				type = "number",
+				type = "text",
 				id = "max"
 			}
 		}

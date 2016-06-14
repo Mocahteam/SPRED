@@ -2784,473 +2784,773 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 	end
 end
 
-function drawFeature(attr, yref, a, scrollPanel) -- Display parameter according to its type
+drawFeatureFunctions = {}
+
+drawFeatureFunctions["unitType"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
-	local feature = {}
-	local text = addLabel(scrollPanel, '0%', y, '30%', 30, attr.text, 16, "center", nil, "center")
-	text.font.shadow = false
-	table.insert(feature, text)
-	if attr.type == "unitType" 
-		or attr.type == "team"
-		or attr.type == "player"
-		or attr.type == "group" 
-		or attr.type == "zone" 
-		or attr.type == "numberVariable" 
-		or attr.type == "booleanVariable" 
-		or attr.type == "comparison"
-		or attr.type == "condition"
-		or attr.type == "toggle"
-		or attr.type == "command"
-		or attr.type == "commandUnit"
-		or attr.type == "boolean"
-		or attr.type == "operator"
-		or attr.type == "widget"
-	then
-		local comboBoxItems = {}
-		if attr.type == "unitType" then
-			for i, fu in ipairs(factionUnits) do
-				for i, u in ipairs(fu) do
-					table.insert(comboBoxItems, u)
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, fu in ipairs(factionUnits) do
+		for i, u in ipairs(fu) do
+			table.insert(comboBoxItems, u)
+		end
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[attr.id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for k, t in pairs(teamStateMachine.states) do
+		if enabledTeams[t] then
+			table.insert(comboBoxItems, teamName[t])
+		end
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = {
+		function()
+			for k, n in pairs(teamName) do
+				if comboBox.items[comboBox.selected] == n then
+					a.params[attr.id] = k
+					break
 				end
 			end
-		elseif attr.type == "team" then
-			for k, t in pairs(teamStateMachine.states) do
-				if enabledTeams[t] then
-					table.insert(comboBoxItems, teamName[t])
+		end
+	}
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if teamName[a.params[attr.id]] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["player"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for k, t in pairs(teamStateMachine.states) do
+		if enabledTeams[t] and teamControl[t] == "player" then
+			table.insert(comboBoxItems, teamName[t])
+		end
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = {
+		function()
+			for k, n in pairs(teamName) do
+				if comboBox.items[comboBox.selected] == n then
+					a.params[attr.id] = k
+					break
 				end
 			end
-		elseif attr.type == "player" then
-			for k, t in pairs(teamStateMachine.states) do
-				if enabledTeams[t] and teamControl[t] == "player" then
-					table.insert(comboBoxItems, teamName[t])
-				end
+		end
+	}
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if teamName[a.params[attr.id]] == item then
+				comboBox:Select(i)
+				break
 			end
-		elseif attr.type == "group" then
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, g in ipairs(unitGroups) do
+		table.insert(comboBoxItems, g.name)
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = {
+		function()
 			for i, g in ipairs(unitGroups) do
-				table.insert(comboBoxItems, g.name)
-			end
-			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
-			end
-		elseif attr.type == "zone" then
-			for k, z in pairs(zoneList) do
-				table.insert(comboBoxItems, z.name)
-			end
-			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_ZONE_NOT_FOUND)
-			end
-		elseif attr.type == "numberVariable" then
-			for i, v in ipairs(triggerVariables) do
-				if v.type == "number" then
-					table.insert(comboBoxItems, v.name)
+				if g.name == comboBox.items[comboBox.selected] then
+					a.params[attr.id] = g.id
+					return
 				end
 			end
-		elseif attr.type == "booleanVariable" then
-			for i, v in ipairs(triggerVariables) do
-				if v.type == "boolean" then
-					table.insert(comboBoxItems, v.name)
+		end
+	}
+	
+	-- Parameters check
+	if a.params[id] then
+		local groupName
+		for i, g in ipairs(unitGroups) do
+			if g.id == a.params[attr.id] then
+				groupName = g.name
+				break
+			end
+		end
+		for i, item in ipairs(comboBox.items) do
+			if item == groupName then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for k, z in pairs(zoneList) do
+		table.insert(comboBoxItems, z.name)
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_ZONE_NOT_FOUND)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { 
+		function() 
+			for i, zone in ipairs(zoneList) do
+				if zone.name == comboBox.items[comboBox.selected] then
+					a.params[attr.id] = zone.id
+					break
 				end
 			end
-		elseif attr.type == "comparison" then
-			comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
-		elseif attr.type == "condition" then
-			for i, e in ipairs(events) do
-				for ii, c in ipairs(e.conditions) do
-					table.insert(comboBoxItems, c.name)
-				end
+		end
+	}
+	
+	-- Parameters check
+	if a.params[id] then
+		chosenZone = ""
+		for i, zone in ipairs(zoneList) do
+			if zone.id == a.params[attr.id] then
+				chosenZone = zone.name
 			end
-			if #comboBoxItems == 0 then
-				table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CONDITION_NOT_FOUND)
+		end
+		for i, item in ipairs(comboBox.items) do
+			if chosenZone == item then
+				comboBox:Select(i)
+				break
 			end
-		elseif attr.type == "toggle" then
-			comboBoxItems = { "enabled", "disabled" }
-		elseif attr.type == "command" then
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, v in ipairs(triggerVariables) do
+		if v.type == "number" then
+			table.insert(comboBoxItems, v.name)
+		end
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARNUM_NOT_FOUND)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, v in ipairs(triggerVariables) do
+		if v.type == "boolean" then
+			table.insert(comboBoxItems, v.name)
+		end
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_VARBOOL_NOT_FOUND)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, e in ipairs(events) do
+		for ii, c in ipairs(e.conditions) do
+			table.insert(comboBoxItems, c.name)
+		end
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_CONDITION_NOT_FOUND)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = { "enabled", "disabled" }
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	if a.params["unitset"] then
+		if a.params["unitset"].type == "unit" then
+			local uDefID = Spring.GetUnitDefID(a.params["unitset"].value)
+			local unitType = UnitDefs[uDefID].name
+			comboBoxItems = sortedCommandsListUnit[unitType] or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+		else
 			comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
-		elseif attr.type == "commandUnit" then
-			if a.params["unit"] then
-				if type(a.params["unit"]) == "number" then
-					local uDefID = Spring.GetUnitDefID(a.params["unit"])
-					local unitType = UnitDefs[uDefID].name
-					comboBoxItems = sortedCommandsListUnit[unitType] or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
-				else
-					comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
-				end
-			else
-				comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
-			end
-		elseif attr.type == "boolean" then
-			comboBoxItems = { "true", "false" }
-		elseif attr.type == "operator" then
-			comboBoxItems = { "+", "-", "*", "/", "%" }
-		elseif attr.type == "widget" then
-			for i, w in ipairs(customWidgets) do
-				table.insert(comboBoxItems, w.name)
+		end
+	else
+		comboBoxItems = sortedCommandsList or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if idToCommands[tostring(a.params[attr.id])] == item then
+				comboBox:Select(i)
+				break
 			end
 		end
-		local comboBox = addComboBox(scrollPanel, '30%', y, '40%', 30, comboBoxItems)
-		if attr.type == "team" or attr.type == "player" then
-			comboBox.OnSelect = {
-				function()
-					for k, n in pairs(teamName) do
-						if comboBox.items[comboBox.selected] == n then
-							a.params[attr.id] = k
-							break
-						end
-					end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = { "true", "false" }
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Items generation
+	local comboBoxItems = {}
+	for i, w in ipairs(customWidgets) do
+		table.insert(comboBoxItems, w.name)
+	end
+	
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	
+	-- Parameters check
+	if a.params[id] then
+		for i, item in ipairs(comboBox.items) do
+			if a.params[attr.id] == item then
+				comboBox:Select(i)
+				break
+			end
+		end
+	else
+		comboBox:Select(1)
+	end
+	
+	table.insert(feature, comboBox)
+end
+
+drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Parameters check
+	local positionLabel = addLabel(panel, '30%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
+	if a.params[attr.id] then
+		local param = a.params[attr.id]
+		if type(param) == "number" then
+			local zoneName = ""
+			local r, g, b = 255, 255, 255
+			for i, z in ipairs(zoneList) do
+				if z.id == param then
+					zoneName = z.name
+					r, g, b = round(z.red*255)+1, round(z.green*255)+1, round(z.blue*255)+1
+					break
 				end
-			}
-		elseif attr.type == "group" then
-			comboBox.OnSelect = {
-				function()
-					for i, g in ipairs(unitGroups) do
-						if g.name == comboBox.items[comboBox.selected] then
-							a.params[attr.id] = g.id
-							return
-						end
-					end
-				end
-			}
-		elseif attr.type == "command" or attr.type == "commandUnit" then
-			comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
-		elseif attr.type == "zone" then
-			comboBox.OnSelect = { 
-				function() 
-					for i, zone in ipairs(zoneList) do
-						if zone.name == comboBox.items[comboBox.selected] then
-							a.params[attr.id] = zone.id
-							break
-						end
-					end
-				end
-			}
+			end
+			positionLabel.font.color = {1, 1, 1, 1}
+			positionLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_RANDOM_ZONE.." \255"..colorTable[r]..colorTable[g]..colorTable[b]..zoneName)
 		else
-			comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
-		end
-		if a.params[attr.id] then
-			if attr.type == "team" or attr.type == "player" then
-				for i, item in ipairs(comboBox.items) do
-					if teamName[a.params[attr.id]] == item then
-						comboBox:Select(i)
-						break
-					end
-				end
-			elseif attr.type == "group" then
-				local groupName
-				for i, g in ipairs(unitGroups) do
-					if g.id == a.params[attr.id] then
-						groupName = g.name
-						break
-					end
-				end
-				for i, item in ipairs(comboBox.items) do
-					if item == groupName then
-						comboBox:Select(i)
-						break
-					end
-				end
-			elseif attr.type == "command" or attr.type == "commandUnit" then
-				for i, item in ipairs(comboBox.items) do
-					if idToCommands[tostring(a.params[attr.id])] == item then
-						comboBox:Select(i)
-						break
-					end
-				end
-			elseif attr.type == "zone" then
-				chosenZone = ""
-				for i, zone in ipairs(zoneList) do
-					if zone.id == a.params[attr.id] then
-						chosenZone = zone.name
-					end
-				end
-				for i, item in ipairs(comboBox.items) do
-					if chosenZone == item then
-						comboBox:Select(i)
-						break
-					end
-				end
-			else
-				for i, item in ipairs(comboBox.items) do
-					if a.params[attr.id] == item then
-						comboBox:Select(i)
-						break
-					end
-				end
-			end
-		else
-			comboBox:Select(1)
-		end
-		table.insert(feature, comboBox)
-	elseif attr.type == "position" then
-		local positionLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "X: ?   Z: ?", 16, "center", nil, "center")
-		if a.params[attr.id] then
-			local param = a.params[attr.id]
-			if type(param) == "number" then
-				local zoneName = ""
-				local r, g, b = 255, 255, 255
-				for i, z in ipairs(zoneList) do
-					if z.id == param then
-						zoneName = z.name
-						r, g, b = round(z.red*255)+1, round(z.green*255)+1, round(z.blue*255)+1
-						break
-					end
-				end
-				positionLabel.font.color = {1, 1, 1, 1}
-				positionLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_RANDOM_ZONE.." \255"..colorTable[r]..colorTable[g]..colorTable[b]..zoneName)
-			else
-				if a.params[attr.id].x and a.params[attr.id].z then
-					positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
-					local function viewPosition()
-						local state = Spring.GetCameraState()
-						local x, z = a.params[attr.id].x, a.params[attr.id].z
-						local y = Spring.GetGroundHeight(x, z)
-						state.px, state.py, state.pz = x, y, z
-						state.height = 500
-						Spring.SetCameraState(state, 2)
-						Spring.MarkerAddPoint(x, y, z, "("..tostring(x)..", "..tostring(z)..")")
-						table.insert(markerList, { x = x, y = y, z = z, timer = 2 })
-					end
-					local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewPosition)
-					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-					table.insert(feature, viewButton)
-				end
-			end
-		end
-		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
-		local pickPosition = function()
-			changedParam = attr.id
-			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
-			Screen0:RemoveChild(windows["triggerWindow"])
-			Screen0:RemoveChild(windows["eventWindow"])
-			Screen0:RemoveChild(windows["conditionWindow"])
-			Screen0:RemoveChild(windows["actionWindow"])
-			Screen0:RemoveChild(windows["importWindow"])
-			showRandomPositionInZoneWindow()
-		end
-		pickButton.OnClick = { pickPosition }
-		table.insert(feature, positionLabel)
-		table.insert(feature, pickButton)
-	elseif attr.type == "unit" then
-		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
-		if a.params[attr.id] then
-			local u = a.params[attr.id]
-			local uDefID = Spring.GetUnitDefID(u)
-			if uDefID then
-				local name = UnitDefs[uDefID].humanName
-				local team = Spring.GetUnitTeam(u)
-				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-				unitLabel:SetCaption(name.." ("..tostring(u)..")")
-				local function viewUnit()
+			if a.params[attr.id].x and a.params[attr.id].z then
+				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+				local function viewPosition()
 					local state = Spring.GetCameraState()
-					local x, y, z = Spring.GetUnitPosition(u)
+					local x, z = a.params[attr.id].x, a.params[attr.id].z
+					local y = Spring.GetGroundHeight(x, z)
 					state.px, state.py, state.pz = x, y, z
 					state.height = 500
 					Spring.SetCameraState(state, 2)
+					Spring.MarkerAddPoint(x, y, z, "("..tostring(x)..", "..tostring(z)..")")
+					table.insert(markerList, { x = x, y = y, z = z, timer = 2 })
 				end
-				local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
+				local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewPosition)
 				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 				table.insert(feature, viewButton)
 			end
 		end
-		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
-		local pickUnit = function()
-			changedParam = attr.id 
-			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
-			Screen0:RemoveChild(windows["triggerWindow"])
-			Screen0:RemoveChild(windows["eventWindow"])
-			Screen0:RemoveChild(windows["conditionWindow"])
-			Screen0:RemoveChild(windows["actionWindow"])
-			Screen0:RemoveChild(windows["importWindow"])
-		end
-		pickButton.OnClick = { pickUnit }
-		table.insert(feature, unitLabel)
-		table.insert(feature, pickButton)
-	elseif attr.type == "unitset" then
-		local unitLabel = addLabel(scrollPanel, '30%', y, '40%', 30, "[ ]", 16, "center", nil, "center")
-		if a.params[attr.id] then
-			local param = a.params[attr.id]
-			if param.type and param.value then
-				if param.type == "unit" then
-					local u = param.value
-					local uDefID = Spring.GetUnitDefID(u)
-					if uDefID then
-						local name = UnitDefs[uDefID].humanName
-						local team = Spring.GetUnitTeam(u)
-						local r, g, b = round(teams[team].red*255), round(teams[team].green*255), round(teams[team].blue*255)
-						unitLabel.font.color = { 1, 1, 1, 1 }
-						unitLabel:SetCaption("\255\255\255\255[ \255"..colorTable[r]..colorTable[g]..colorTable[b]..name.." ("..tostring(u)..")\255\255\255\255 ]")
-						local function viewUnit()
-							local state = Spring.GetCameraState()
-							local x, y, z = Spring.GetUnitPosition(u)
-							state.px, state.py, state.pz = x, y, z
-							state.height = 500
-							Spring.SetCameraState(state, 2)
-						end
-						local viewButton = addButton(scrollPanel, '90%', y, '10%', 30, "", viewUnit)
-						addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-						table.insert(feature, viewButton)
-					end
-				elseif param.type == "group" then
-					unitLabel.font.color = {1, 1, 1, 1}
-					for i, g in ipairs(unitGroups) do
-						if g.id == param.value then
-							unitLabel:SetCaption(g.name)
-							break
-						end
-					end
-				elseif param.type == "team" then
-					if param.value == "all" then
-						unitLabel.font.color = {1, 1, 1, 1}
-						unitLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ALL)
-					else
-						unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
-						unitLabel:SetCaption(teamName[param.value])
-					end
-				elseif param.type == "action" then
-					for i, ev in ipairs(events) do
-						for ii, act in ipairs(ev.actions) do
-							if act.id == param.value then
-								unitLabel.font.color = {1, 1, 1, 1}
-								unitLabel:SetCaption(act.name)
-								break
-							end
-						end
-					end
-				elseif param.type == "condition" then
-					local ev = events[currentEvent]
-					for ii, cond in ipairs(ev.conditions) do
-						if cond.id == param.value then
-							unitLabel.font.color = {1, 1, 1, 1}
-							unitLabel:SetCaption(cond.name)
-							break
-						end
-					end
-				end
-			end
-		end
-		local pickButton = addButton(scrollPanel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
-		local pickUnit = function()
-			changedParam = attr.id 
-			triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNITSET)
-			Screen0:RemoveChild(windows["triggerWindow"])
-			Screen0:RemoveChild(windows["eventWindow"])
-			Screen0:RemoveChild(windows["conditionWindow"])
-			Screen0:RemoveChild(windows["actionWindow"])
-			Screen0:RemoveChild(windows["importWindow"])
-			showPickUnitWindow()
-		end
-		pickButton.OnClick = { pickUnit }
-		table.insert(feature, unitLabel)
-		table.insert(feature, pickButton)
-	elseif attr.type == "number" or attr.type == "text" or attr.type == "message" or attr.type == "parameters" then
-		local editBox = addEditBox(scrollPanel, '30%', y, '40%', 30)
-		editBox.font.size = 13
-		if a.params[attr.id] then
-			if attr.type == "message" or attr.type == "parameters" then
-				local text = ""
-				if type(a.params[attr.id]) == "table" then
-					for i, msg in ipairs(a.params[attr.id]) do
-						text = text .. msg
-						if i ~= #a.params[attr.id] then
-							text = text .. " || "
-						end
-					end
-				else
-					text = a.params[attr.id]
-				end
-				editBox:SetText(text)
-			else
-				editBox:SetText(a.params[attr.id])
-			end
-		end
-		if attr.type == "text" or attr.type == "number" then
-			editBox.updateFunction = function()
-				a.params[attr.id] = editBox.text
-			end
-		elseif attr.type == "message" or attr.type == "parameters" then
-			editBox.updateFunction = function()
-				local msgs = splitString(editBox.text, "||")
-				for i in ipairs(msgs) do
-					msgs[i] = string.gsub(msgs[i], "^%s+", "")
-					msgs[i] = string.gsub(msgs[i], "%s+$", "")
-					if attr.type == "parameters" then
-						msgs[i] = tonumber(msgs[i])
-					end
-				end
-				a.params[attr.id] = msgs
-			end
-		end
-		editBox.isEditBox = true
-		table.insert(feature, editBox)
-	elseif attr.type == "numberComparison" then
-		if not a.params[attr.id] then
-			a.params[attr.id] = {}
-		end
-		local comboBoxItems = {
-			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_EXACTLY,
-			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
-			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
-			EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
-		}
-		local comboBox = addComboBox(scrollPanel, '30%', y, '30%', 30, comboBoxItems)
-		local editBox = addEditBox(scrollPanel, '60%', y, '30%', 30)
-		editBox.toShow = true
-		comboBox.OnSelect = {
-			function()
-				if comboBox.selected == 1 then
-					a.params[attr.id].comparison = "exactly"
-					if not editBox.toShow then
-						scrollPanel:AddChild(editBox)
-						editBox.toShow = true
-					end
-				elseif comboBox.selected == 2 then
-					a.params[attr.id].comparison = "atleast"
-					if not editBox.toShow then
-						scrollPanel:AddChild(editBox)
-						editBox.toShow = true
-					end
-				elseif comboBox.selected == 3 then
-					a.params[attr.id].comparison = "atmost"
-					if not editBox.toShow then
-						scrollPanel:AddChild(editBox)
-						editBox.toShow = true
-					end
-				elseif comboBox.selected == 4 then
-					a.params[attr.id].comparison = "all"
-					scrollPanel:RemoveChild(editBox)
-					editBox.toShow = false
-				end
-			end
-		}
-		editBox.font.size = 13
-		editBox.updateFunction = function()
-			a.params[attr.id].number = editBox.text
-		end
-		editBox.isEditBox = true
-		if a.params[attr.id].comparison then
-			local comp = a.params[attr.id].comparison
-			if comp == "exactly" then
-				comboBox:Select(1)
-			elseif comp == "atleast" then
-				comboBox:Select(2)
-			elseif comp == "atmost" then
-				comboBox:Select(3)
-			elseif comp == "all" then
-				comboBox:Select(4)
-			end
-		else
-			comboBox:Select(1)
-		end
-		if a.params[attr.id].number then
-			editBox:SetText(a.params[attr.id].number)
-		end
-		table.insert(feature, comboBox)
-		table.insert(feature, editBox)
 	end
+	
+	-- Pick process
+	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickPosition = function()
+		changedParam = attr.id
+		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
+		Screen0:RemoveChild(windows["triggerWindow"])
+		Screen0:RemoveChild(windows["eventWindow"])
+		Screen0:RemoveChild(windows["conditionWindow"])
+		Screen0:RemoveChild(windows["actionWindow"])
+		Screen0:RemoveChild(windows["importWindow"])
+		showRandomPositionInZoneWindow()
+	end
+	pickButton.OnClick = { pickPosition }
+	
+	table.insert(feature, positionLabel)
+	table.insert(feature, pickButton)
+end
+
+drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Parameters check
+	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
+	if a.params[attr.id] then
+		local u = a.params[attr.id]
+		local uDefID = Spring.GetUnitDefID(u)
+		if uDefID then
+			local name = UnitDefs[uDefID].humanName
+			local team = Spring.GetUnitTeam(u)
+			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+			unitLabel:SetCaption(name.." ("..tostring(u)..")")
+			local function viewUnit()
+				local state = Spring.GetCameraState()
+				local x, y, z = Spring.GetUnitPosition(u)
+				state.px, state.py, state.pz = x, y, z
+				state.height = 500
+				Spring.SetCameraState(state, 2)
+			end
+			local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
+			addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			table.insert(feature, viewButton)
+		end
+	end
+	
+	-- Pick process
+	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickUnit = function()
+		changedParam = attr.id 
+		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
+		Screen0:RemoveChild(windows["triggerWindow"])
+		Screen0:RemoveChild(windows["eventWindow"])
+		Screen0:RemoveChild(windows["conditionWindow"])
+		Screen0:RemoveChild(windows["actionWindow"])
+		Screen0:RemoveChild(windows["importWindow"])
+	end
+	pickButton.OnClick = { pickUnit }
+	
+	table.insert(feature, unitLabel)
+	table.insert(feature, pickButton)
+end
+
+drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Parameters check
+	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "[ ]", 16, "center", nil, "center")
+	if a.params[attr.id] then
+		local param = a.params[attr.id]
+		if param.type and param.value then
+			if param.type == "unit" then
+				local u = param.value
+				local uDefID = Spring.GetUnitDefID(u)
+				if uDefID then
+					local name = UnitDefs[uDefID].humanName
+					local team = Spring.GetUnitTeam(u)
+					local r, g, b = round(teams[team].red*255)+1, round(teams[team].green*255)+1, round(teams[team].blue*255)+1
+					unitLabel.font.color = { 1, 1, 1, 1 }
+					unitLabel:SetCaption("\255\255\255\255[ \255"..colorTable[r]..colorTable[g]..colorTable[b]..name.." ("..tostring(u)..")\255\255\255\255 ]")
+					local function viewUnit()
+						local state = Spring.GetCameraState()
+						local x, y, z = Spring.GetUnitPosition(u)
+						state.px, state.py, state.pz = x, y, z
+						state.height = 500
+						Spring.SetCameraState(state, 2)
+					end
+					local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
+					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+					table.insert(feature, viewButton)
+				end
+			elseif param.type == "group" then
+				unitLabel.font.color = {1, 1, 1, 1}
+				for i, g in ipairs(unitGroups) do
+					if g.id == param.value then
+						unitLabel:SetCaption(g.name)
+						break
+					end
+				end
+			elseif param.type == "team" then
+				if param.value == "all" then
+					unitLabel.font.color = {1, 1, 1, 1}
+					unitLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ALL)
+				else
+					unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
+					unitLabel:SetCaption(teamName[param.value])
+				end
+			elseif param.type == "action" then
+				for i, ev in ipairs(events) do
+					for ii, act in ipairs(ev.actions) do
+						if act.id == param.value then
+							unitLabel.font.color = {1, 1, 1, 1}
+							unitLabel:SetCaption(act.name)
+							break
+						end
+					end
+				end
+			elseif param.type == "condition" then
+				local ev = events[currentEvent]
+				for ii, cond in ipairs(ev.conditions) do
+					if cond.id == param.value then
+						unitLabel.font.color = {1, 1, 1, 1}
+						unitLabel:SetCaption(cond.name)
+						break
+					end
+				end
+			end
+		end
+	end
+	
+	-- Pick process
+	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickUnit = function()
+		changedParam = attr.id 
+		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNITSET)
+		Screen0:RemoveChild(windows["triggerWindow"])
+		Screen0:RemoveChild(windows["eventWindow"])
+		Screen0:RemoveChild(windows["conditionWindow"])
+		Screen0:RemoveChild(windows["actionWindow"])
+		Screen0:RemoveChild(windows["importWindow"])
+		showPickUnitWindow()
+	end
+	pickButton.OnClick = { pickUnit }
+	
+	table.insert(feature, unitLabel)
+	table.insert(feature, pickButton)
+end
+
+drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Editbox
+	local editBox = addEditBox(panel, '30%', y, '40%', 30)
+	editBox.font.size = 13
+	editBox.updateFunction = function()
+		a.params[attr.id] = editBox.text
+	end
+	editBox.isEditBox = true
+	
+	-- Parameters check
+	if a.params[attr.id] then
+		editBox:SetText(a.params[attr.id])
+	end
+	
+	table.insert(feature, editBox)
+end
+
+drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Editbox
+	local editBox = addEditBox(panel, '30%', y, '40%', 30)
+	editBox.font.size = 13
+	editBox.updateFunction = function()
+		local msgs = splitString(editBox.text, "||")
+		for i in ipairs(msgs) do
+			msgs[i] = string.gsub(msgs[i], "^%s+", "")
+			msgs[i] = string.gsub(msgs[i], "%s+$", "")
+		end
+		a.params[attr.id] = msgs
+	end
+	editBox.isEditBox = true
+	
+	-- Parameters check
+	if a.params[attr.id] then
+		local text = ""
+		for i, msg in ipairs(a.params[attr.id]) do
+			text = text .. msg
+			if i ~= #a.params[attr.id] then
+				text = text .. " || "
+			end
+		end
+		editBox:SetText(text)
+	end
+	
+	table.insert(feature, editBox)
+end
+
+drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, feature)
+	local y = yref[1]
+	
+	-- Initialize parameters table
+	if not a.params[attr.id] then
+		a.params[attr.id] = {}
+	end
+	
+	-- Combobox
+	local comboBoxItems = {
+		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_EXACTLY,
+		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
+		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
+		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
+	}
+	local comboBox = addComboBox(panel, '30%', y, '30%', 30, comboBoxItems)
+	
+	-- Editbox
+	local editBox = addEditBox(panel, '60%', y, '30%', 30)
+	editBox.toShow = true
+	comboBox.OnSelect = {
+		function()
+			if comboBox.selected == 1 then
+				a.params[attr.id].comparison = "exactly"
+				if not editBox.toShow then
+					panel:AddChild(editBox)
+					editBox.toShow = true
+				end
+			elseif comboBox.selected == 2 then
+				a.params[attr.id].comparison = "atleast"
+				if not editBox.toShow then
+					panel:AddChild(editBox)
+					editBox.toShow = true
+				end
+			elseif comboBox.selected == 3 then
+				a.params[attr.id].comparison = "atmost"
+				if not editBox.toShow then
+					panel:AddChild(editBox)
+					editBox.toShow = true
+				end
+			elseif comboBox.selected == 4 then
+				a.params[attr.id].comparison = "all"
+				panel:RemoveChild(editBox)
+				editBox.toShow = false
+			end
+		end
+	}
+	editBox.font.size = 13
+	editBox.updateFunction = function()
+		a.params[attr.id].number = editBox.text
+	end
+	editBox.isEditBox = true
+	
+	-- Parameters check
+	if a.params[attr.id].comparison then
+		local comp = a.params[attr.id].comparison
+		if comp == "exactly" then
+			comboBox:Select(1)
+		elseif comp == "atleast" then
+			comboBox:Select(2)
+		elseif comp == "atmost" then
+			comboBox:Select(3)
+		elseif comp == "all" then
+			comboBox:Select(4)
+		end
+	else
+		comboBox:Select(1)
+	end
+	if a.params[attr.id].number then
+		editBox:SetText(a.params[attr.id].number)
+	end
+	
+	table.insert(feature, comboBox)
+	table.insert(feature, editBox)
+end
+
+function drawFeature(attr, yref, a, panel) -- Display parameter according to its type
+	local feature = {}
+	
+	local textLabel = addLabel(panel, '0%', yref[1], '30%', 30, attr.text, 16, "center", nil, "center")
+	textLabel.font.shadow = false
+	table.insert(feature, textLabel)
+	
+	drawFeatureFunctions[attr.type](attr, yref, a, panel, feature)
+	
 	if attr.hint then
-		local variableHint = addTextBox(scrollPanel, '5%', y+35, '90%', 35, attr.hint, 14, { 0.6, 1, 1, 1 })
+		local variableHint = addTextBox(panel, '5%', yref[1]+35, '90%', 35, attr.hint, 14, { 0.6, 1, 1, 1 })
 		table.insert(feature, variableHint)
 		yref[1] = yref[1] + 40
 	end
+	
 	return feature
 end
 
