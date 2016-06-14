@@ -39,9 +39,9 @@ local showBriefing = false
 local PP = false
 
 local white = "\255\255\255\255"
-local red = "\255\142\068\255"
-local green = "\0\255\0\255"
-local blue = "\0\0\255\255"
+local red = "\255\255\0\0"
+local green = "\255\0\255\0"
+local blue = "\255\0\0\255"
 
 function gadget:GamePreload()
 	if missionName ~= nil then
@@ -96,17 +96,21 @@ end
 
 function getFeedbackMessage(json_obj)
 	local s = ""
-	local score = json_obj.score
-	local color = nil
-	if score < 25 then
-		color = red
-	elseif score >= 25 and score < 75 then
-		color = blue
-	else
-		color = green
+	local color = ""
+	if json_obj.score ~= nil then
+		local score = json_obj.score
+		if score < 25 then
+			color = red
+		elseif score >= 25 and score < 75 then
+			color = blue
+		else
+			color = green
+		end
+		s = s.."Votre score : "..color..score.." / 100"..white.."\n"
 	end
-	s = s.."Votre score : "..color.." "..score.." / 100"..white.."\n"
-	s = s.."Nombre de de tentatives de résolution de la mission : "..json_obj.num_attempts.."\n"
+	if json_obj.num_attempts ~= nil then
+		s = s.."Nombre de de tentatives de résolution de la mission : "..json_obj.num_attempts.."\n"
+	end
 	if json_obj.execution_time ~= nil then
 		s = s.."Temps d'éxecution de ton programme : "..json_obj.execution_time.." s\n"
 		s = s.."Temps d'éxecution référence : "..json_obj.ref_execution_time.." s\n"
@@ -118,16 +122,20 @@ function getFeedbackMessage(json_obj)
 		s = s.."Temps de résolution de la mission : "..json_obj.resolution_time.." s\n"
 		s = s.."Temps de résolution référence : "..json_obj.ref_resolution_time.." s\n"
 	end
-	s = s.."\n"
-	if #json_obj.feedbacks > 0 then
+	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
 		if #json_obj.feedbacks == 1 then
-			s = s.."Un conseil pour améliorer votre programme :\n\n"
+			s = s.."\nUn conseil pour améliorer votre programme :\n\n"
 		else
-			s = s.."Quelques conseils pour améliorer votre programme :\n\n"
+			s = s.."\nQuelques conseils pour améliorer votre programme :\n\n"
 		end
 		for i = 1,#json_obj.feedbacks do
-			s = s..color
-			s = s..json_obj.feedbacks[i]..white.."\n"
+			s = s..color.."- "..json_obj.feedbacks[i]..white.."\n"
+		end
+	end
+	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
+		s = s.."\nAttention :\n\n"
+		for i = 1,#json_obj.warnings do
+			s = s..red.."- "..json_obj.warnings[i]..white.."\n"
 		end
 	end
 	return s

@@ -60,6 +60,7 @@ CProgAndPlay::CProgAndPlay() : tp(true) {
 	missionEnded = false;
 	tracePlayer = false;
 	launchAnalysis = true; //get value from editor
+	unitsWereIdled = true;
 	
 	// initialisation of Prog&Play
 	if (PP_Init() == -1) {
@@ -108,13 +109,19 @@ void CProgAndPlay::Update(void) {
 		
 	// Store log messages
 	if (ppTraces.good()) {
-		logMessages(); 
-		tp.setProceed(allUnitsIdled() || (missionEnded && frame_counter++ > 2 * UNIT_SLOWUPDATE_RATE));
+		logMessages();
+		bool unitsIdled = allUnitsIdled();
+		if (unitsWereIdled && !unitsIdled)
+			unitsWereIdled = false;
+		bool endlessLoop = missionEnded && frame_counter++ > ENDLESS_LOOP_THRESHOLD * UNIT_SLOWUPDATE_RATE;
+		tp.setProceed((!unitsWereIdled && unitsIdled) || endlessLoop);
 		if (tp.compressionDone()) {
 			log("compression done");
+			if (!unitsWereIdled && unitsIdled)
+				unitsWereIdled = true;
 			if (launchAnalysis) {
 				// Launch analysis of player's traces
-				TracesAnalyser ta(true);
+				TracesAnalyser ta(true,endlessLoop,lang);
 				std::string feedback = ta.getFeedback(tracesDirname, missionName + "_compressed.xml");
 				log("feedback determined");
 				// Write into file
@@ -612,13 +619,12 @@ void CProgAndPlay::logMessages() {
 
 void CProgAndPlay::openTracesFile() {
 	log("ProgAndPLay::openTracesFile begin");
-	const std::map<std::string, std::string>& modOpts = gameSetup->modOptions;
-	std::map<std::string,std::string>::const_iterator it;
-	it = modOpts.find("tracesfilename");
-	if (it != modOpts.end()) {
+	const std::map<std::string,std::string>& modOpts = gameSetup->modOptions;
+	if (modOpts.find("tracesfilename") != modOpts.end()) {
 		bool dirExists = FileSystemHandler::mkdir(tracesDirname);
 		if (dirExists) {
 			missionName = modOpts.at("tracesfilename");
+			lang = (modOpts.find("language") != modOpts.end()) ? modOpts.at("language") : "en";
 			std::stringstream ss;
 			ss << tracesDirname << "\\" << missionName << ".log";
 			ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);

@@ -27,10 +27,11 @@
 
 #define USELESS_FREQ 0					// threshold value in [0,1] used to determine if we have to make a USELESS_CALL feedback
 #define USEFUL_FREQ 1					// threshold value in [0,1] used to determine if we have to make a USEFUL_CALL feedback
-#define FEEDBACK_SEQ_NUM_THRESHOLD 0.5 	// threshold value in [0,1] used to determine if we have to make a SEQ_NUM feedback
-#define NUM_DOWNGRADS_THRESHOLD 2 		// threshold value used to determine the number of priority downgrads accepted
+#define DIST_SEQ_NUM_THRES 0.5 			// threshold value in [0,1] used to determine if we have to make a SEQ_NUM feedback
+#define NUM_DOWNGRADS 2		 			// this value is used to determine the number of priority downgrads accepted
 #define SEQ_LACK_INFO_RATIO 1			// the proportion in [0,1] of labels given to the player for SEQ_LACK feedbacks
-#define NUM_CALL_APPEAR_THRESHOLD 2		// if the number of appearances of a call is less than this value in the trace, we can keep the associated CALL_EXTRA/CALL_LACK feedbacks
+#define NUM_CALL_APPEARS_THRES 2		// if the number of appearances of a call is less than this value in the trace, we can keep the associated CALL_EXTRA/CALL_LACK feedbacks
+#define IND_SEQ_NUM_CONST 4				// this value in [1,inf] is used to set the range of the bonus added to the similarity score in the case of the alignment of two sequences
 
 // scores used for alignment
 #define ALIGN_MATCH_SCORE 1
@@ -50,16 +51,17 @@ public:
 
 	enum FeedbackType {
 		NONE = -1,
-		USEFUL_CALL, 	// most experts have used this call but the player hasn't
-		USELESS_CALL, 	// the player has used this call but only a few expert has used it
-		SEQ_EXTRA, 		// the player has a sequence than the chosen expert hasn't
-		SEQ_LACK, 		// the chosen expert has a sequence than the player hasn't
-		IND_SEQ_NUM,	// the level of the aligned sequences is 0 and their indexes are not the same
-		DIST_SEQ_NUM,   // notable difference between the indexes of the aligned sequences
-		CALL_EXTRA,		// the player has a call than the chosen expert hasn't
-		CALL_LACK,		// the chosen expert has a call than the player hasn't
-		CALL_PARAMS,	// notable difference between the parameters of the aligned calls
-		CALL_INCLUDE
+		USEFUL_CALL, 			// most experts have used this call but the player hasn't
+		USELESS_CALL, 			// the player has used this call but only a few expert has used it
+		SEQ_EXTRA, 				// the player has a sequence than the chosen expert hasn't
+		SEQ_LACK, 				// the chosen expert has a sequence than the player hasn't
+		IND_SEQ_NUM,			// the level of the aligned sequences is 0 and their indexes are not the same
+		DIST_SEQ_NUM,   		// notable difference between the indexes of the aligned sequences
+		CALL_EXTRA,				// the player has a call than the chosen expert hasn't
+		CALL_LACK,				// the chosen expert has a call than the player hasn't
+		CALL_PARAMS,			// notable difference between the parameters of the aligned calls
+		INCLUDE_CALL_IN_SEQ,	// the player should include a call in a sequence
+		EXCLUDE_CALL_FROM_SEQ 	// the player should take a call out from a sequence
 	};
 		
 	static const char* feedbackTypesArr[];
@@ -176,7 +178,7 @@ public:
 		
 	};
 
-	TracesAnalyser(bool in_game, std::string lang = "fr");
+	TracesAnalyser(bool in_game, bool endless_loop = false, std::string lang = "fr");
 
 	std::string getFeedback(const std::string& dir_path, const std::string& filename, int ind_mission = -1, int ind_execution = -1);
 	static int getRandomIntInRange(int min, int max);
@@ -184,6 +186,7 @@ public:
 private:
 
 	bool in_game;
+	bool endless_loop;
 	std::string lang;
 	std::string expert_traces_dirname;
 	rapidxml::xml_document<> doc;
@@ -202,7 +205,7 @@ private:
 	std::vector<Call::call_vector> getPatterns(const std::vector<Trace::sp_trace>& traces, const Call::call_vector& pattern) const;
 	const Sequence::sp_sequence getClosestCommonParent(const Call::call_vector& pattern) const;
 	
-	std::pair<double,unsigned int> findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align = true) const;
+	std::pair<double,double> findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align = true) const;
 	void displayAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const;
 	
 	void listGlobalFeedbacks(const std::vector<Trace::sp_trace>& l, std::vector<Feedback>& feedbacks) const;

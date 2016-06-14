@@ -114,6 +114,7 @@ public:
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual std::string getParams() const = 0;
 	virtual std::string getReadableParams() const = 0;
+	virtual std::vector<std::string> getListIdWrongParams(Call *c = NULL) const;
 	
 	double getEditDistance(const Call *c) const;
 	
@@ -130,6 +131,7 @@ protected:
 	virtual bool compare(const Call *c) const = 0;
 	virtual void filter(const Call *c) = 0;
 	virtual std::pair<int,int> distance(const Call *c) const = 0;
+	virtual std::vector<std::string> id_wrong_params(Call *c) const = 0;
 	
 	std::string label;
 	ErrorType error;
