@@ -5,6 +5,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "Call.h"
+#include "TracesAnalyser.h"
 
 namespace CallMisc {
 
@@ -57,13 +58,17 @@ private:
 		return "";
 	}
 	
+	virtual std::string getReadableParams() const {
+		return "";
+	}
+	
 };
 
 class GetSpecialAreaPositionCall : public Call {
 
 public:
 
-	GetSpecialAreaPositionCall(ErrorType err, int specialAreaId): Call("PP_GetSpecialAreaPosition",err), specialAreaId(specialAreaId) {}
+	GetSpecialAreaPositionCall(ErrorType error, int specialAreaId): Call("PP_GetSpecialAreaPosition",error), specialAreaId(specialAreaId) {}
 	
 private:
 	
@@ -95,13 +100,17 @@ private:
 		return boost::lexical_cast<std::string>(specialAreaId);
 	}
 	
+	virtual std::string getReadableParams() const {
+		return "(" + ((error == Call::NONE && specialAreaId != -1) ? boost::lexical_cast<std::string>(specialAreaId) : "_") + ")";
+	}
+	
 };
 
 class GetResourceCall : public Call {
 	
 public:
 
-	GetResourceCall(ErrorType err, int resourceId): Call("PP_GetResource",err), resourceId(resourceId) {}
+	GetResourceCall(ErrorType error, int resourceId): Call("PP_GetResource",error), resourceId(resourceId) {}
 	
 private:
 	
@@ -133,13 +142,17 @@ private:
 		return boost::lexical_cast<std::string>(resourceId);
 	}
 	
+	virtual std::string getReadableParams() const {
+		return "(" + ((TracesAnalyser::resources_map.find(resourceId) != TracesAnalyser::resources_map.end()) ? TracesAnalyser::resources_map.at(resourceId) : "_") + ")";
+	}
+	
 };
 
 class GetNumUnitsCall : public Call {
 
 public:
 
-	GetNumUnitsCall(ErrorType err, CallMisc::Coalition coalition): Call("PP_GetNumUnits",err), coalition(coalition) {}
+	GetNumUnitsCall(ErrorType error, CallMisc::Coalition coalition): Call("PP_GetNumUnits",error), coalition(coalition) {}
 	
 private:
 
@@ -170,6 +183,10 @@ private:
 			return "?";
 		return boost::lexical_cast<std::string>(static_cast<int>(coalition));
 	}
+	
+	virtual std::string getReadableParams() const {
+		return "(" + ((error == Call::NONE && coalition != CallMisc::NONE) ? std::string(Call::getEnumLabel<CallMisc::Coalition>(coalition,Call::coalitionsArr)) : "_") + ")";
+	}
 
 };
 
@@ -177,7 +194,7 @@ class GetUnitAtCall : public Call {
 	
 public:
 
-	GetUnitAtCall(ErrorType err, CallMisc::Coalition coalition, int index): Call("PP_GetUnitAt",err), coalition(coalition), index(index) {}
+	GetUnitAtCall(ErrorType error, CallMisc::Coalition coalition, int index): Call("PP_GetUnitAt",error), coalition(coalition), index(index) {}
 	
 private:
 
@@ -217,13 +234,22 @@ private:
 		return s;
 	}
 	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (error != Call::WRONG_COALITION && coalition != CallMisc::NONE) ? Call::getEnumLabel<CallMisc::Coalition>(coalition,Call::coalitionsArr) : "_";
+		s += ",";
+		s += (index != -1) ? boost::lexical_cast<std::string>(index) : "_";
+		s += ")";
+		return s;
+	}
+	
 };
 
 class UnitCall : public Call {
 
 public:
 
-	UnitCall(ErrorType err, std::string label, int unitId, int unitType): Call(label,err) {
+	UnitCall(ErrorType error, std::string label, int unitId, int unitType): Call(label,error) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -261,6 +287,10 @@ private:
 		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
 		return s;		
 	}
+	
+	virtual std::string getReadableParams() const {
+		return "(" + ((TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_") + ")";
+	}
 
 };
 
@@ -268,7 +298,7 @@ class SetGroupCall : public Call {
 
 public:
 
-	SetGroupCall(ErrorType err, int unitId, int unitType, int groupId): Call("PP_Unit_SetGroup",err), groupId(groupId) {
+	SetGroupCall(ErrorType error, int unitId, int unitType, int groupId): Call("PP_Unit_SetGroup",error), groupId(groupId) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -315,13 +345,22 @@ private:
 		return s;
 	}
 	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (groupId != -1) ? boost::lexical_cast<std::string>(groupId) : "_";
+		s += ")";
+		return s;
+	}
+	
 };
 
 class ActionOnUnitCall : public Call {
 	
 public:
 		
-	ActionOnUnitCall(ErrorType err, int unitId, int unitType, int action, int targetId, int targetType): Call("PP_Unit_ActionOnUnit",err), action(action) {
+	ActionOnUnitCall(ErrorType error, int unitId, int unitType, int action, int targetId, int targetType): Call("PP_Unit_ActionOnUnit",error), action(action) {
 		unit.id = unitId;
 		unit.type = unitType;
 		target.id = targetId;
@@ -380,6 +419,17 @@ private:
 		s += (target.type == -1) ? "?" : boost::lexical_cast<std::string>(target.type);
 		return s;
 	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (TracesAnalyser::orders_map.find(action) != TracesAnalyser::orders_map.end()) ? TracesAnalyser::orders_map.at(action) : "_";
+		s += ",";
+		s += (TracesAnalyser::units_id_map.find(target.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(target.type) : "_";
+		s += ")";
+		return s;
+	}
 
 };
 
@@ -387,7 +437,7 @@ class ActionOnPositionCall : public Call {
 
 public:
 		
-	ActionOnPositionCall(ErrorType err, int unitId, int unitType, int action, float x, float y): Call("PP_Unit_ActionOnPosition",err), action(action) {
+	ActionOnPositionCall(ErrorType error, int unitId, int unitType, int action, float x, float y): Call("PP_Unit_ActionOnPosition",error), action(action) {
 		unit.id = unitId;
 		unit.type = unitType;
 		pos.x = x;
@@ -446,6 +496,19 @@ private:
 		s += (pos.y == -1) ? "?" : boost::lexical_cast<std::string>(pos.y);
 		return s;
 	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (TracesAnalyser::orders_map.find(action) != TracesAnalyser::orders_map.end()) ? TracesAnalyser::orders_map.at(action) : "_";
+		s += ",";
+		s += (error != WRONG_POSITION && pos.x != -1) ? boost::lexical_cast<std::string>(pos.x) : "_";
+		s += ",";
+		s += (error != WRONG_POSITION && pos.y != -1) ? boost::lexical_cast<std::string>(pos.y) : "_";
+		s += ")";
+		return s;
+	}
 
 };
 
@@ -453,7 +516,7 @@ class UntargetedActionCall : public Call {
 
 public:
 		
-	UntargetedActionCall(ErrorType err, int unitId, int unitType, int action, float param): Call("PP_Unit_UntargetedAction",err), action(action), param(param) {
+	UntargetedActionCall(ErrorType error, int unitId, int unitType, int action, float param): Call("PP_Unit_UntargetedAction",error), action(action), param(param) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -506,6 +569,17 @@ private:
 		s += (param == -1) ? "?" : boost::lexical_cast<std::string>(param);
 		return s;
 	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (TracesAnalyser::orders_map.find(action) != TracesAnalyser::orders_map.end()) ? TracesAnalyser::orders_map.at(action) : "_";
+		s += ",";
+		s += (param != -1) ? boost::lexical_cast<std::string>(param) : "_";
+		s += ")";
+		return s;
+	}
 
 };
 
@@ -513,7 +587,7 @@ class GetCodePdgCmdCall : public Call {
 
 public:
 		
-	GetCodePdgCmdCall(ErrorType err, int unitId, int unitType, int idCmd): Call("PP_Unit_PdgCmd_GetCode",err), idCmd(idCmd) {
+	GetCodePdgCmdCall(ErrorType error, int unitId, int unitType, int idCmd): Call("PP_Unit_PdgCmd_GetCode",error), idCmd(idCmd) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -557,6 +631,15 @@ private:
 		s += (unit.type == -1) ? "?" : boost::lexical_cast<std::string>(unit.type);
 		s += " ";
 		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
+		return s;
+	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (idCmd != -1) ? boost::lexical_cast<std::string>(idCmd) : "_";
+		s += ")";
 		return s;
 	}
 	
@@ -566,7 +649,7 @@ class GetNumParamsPdgCmdCall : public Call {
 
 public:
 		
-	GetNumParamsPdgCmdCall(ErrorType err, int unitId, int unitType, int idCmd): Call("PP_Unit_PdgCmd_GetNumParams",err), idCmd(idCmd) {
+	GetNumParamsPdgCmdCall(ErrorType error, int unitId, int unitType, int idCmd): Call("PP_Unit_PdgCmd_GetNumParams",error), idCmd(idCmd) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -612,6 +695,15 @@ private:
 		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
 		return s;
 	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (idCmd != -1) ? boost::lexical_cast<std::string>(idCmd) : "_";
+		s += ")";
+		return s;
+	}
 
 };
 
@@ -619,7 +711,7 @@ class GetParamPdgCmdCall : public Call {
 
 public:
 		
-	GetParamPdgCmdCall(ErrorType err, int unitId, int unitType, int idCmd, int idParam): Call("PP_Unit_PdgCmd_GetParam",err), idCmd(idCmd), idParam(idParam) {
+	GetParamPdgCmdCall(ErrorType error, int unitId, int unitType, int idCmd, int idParam): Call("PP_Unit_PdgCmd_GetParam",error), idCmd(idCmd), idParam(idParam) {
 		unit.id = unitId;
 		unit.type = unitType;
 	}
@@ -670,6 +762,17 @@ private:
 		s += (idCmd == -1) ? "?" : boost::lexical_cast<std::string>(idCmd);
 		s += " ";
 		s += (idParam == -1) ? "?" : boost::lexical_cast<std::string>(idParam);
+		return s;
+	}
+	
+	virtual std::string getReadableParams() const {
+		std::string s = "(";
+		s += (TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_";
+		s += ",";
+		s += (idCmd != -1) ? boost::lexical_cast<std::string>(idCmd) : "_";
+		s += ",";
+		s += (idParam != -1) ? boost::lexical_cast<std::string>(idParam) : "_";
+		s += ")";
 		return s;
 	}
 	

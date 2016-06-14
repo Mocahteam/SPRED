@@ -16220,7 +16220,19 @@ intrin.h
 intrin.h
 -
 
+../mingwlibs/include/rapidjson/internal/dtoa.h
+itoa.h
+../mingwlibs/include/rapidjson/internal/itoa.h
+diyfp.h
+../mingwlibs/include/rapidjson/internal/diyfp.h
+ieee754.h
 ../mingwlibs/include/rapidjson/internal/ieee754.h
+
+../mingwlibs/include/rapidjson/internal/ieee754.h
+../rapidjson.h
+../mingwlibs/include/rapidjson/internal/../rapidjson.h
+
+../mingwlibs/include/rapidjson/internal/itoa.h
 ../rapidjson.h
 ../mingwlibs/include/rapidjson/internal/../rapidjson.h
 
@@ -16261,6 +16273,10 @@ pow10.h
 ../mingwlibs/include/rapidjson/memorystream.h
 stream.h
 ../mingwlibs/include/rapidjson/stream.h
+
+../mingwlibs/include/rapidjson/prettywriter.h
+writer.h
+../mingwlibs/include/rapidjson/writer.h
 
 ../mingwlibs/include/rapidjson/rapidjson.h
 cstdlib
@@ -16319,6 +16335,38 @@ rapidjson.h
 ../mingwlibs/include/rapidjson/rapidjson.h
 encodings.h
 ../mingwlibs/include/rapidjson/encodings.h
+
+../mingwlibs/include/rapidjson/stringbuffer.h
+stream.h
+../mingwlibs/include/rapidjson/stream.h
+internal/stack.h
+../mingwlibs/include/rapidjson/internal/stack.h
+utility
+-
+internal/stack.h
+../mingwlibs/include/rapidjson/internal/stack.h
+
+../mingwlibs/include/rapidjson/writer.h
+stream.h
+../mingwlibs/include/rapidjson/stream.h
+internal/stack.h
+../mingwlibs/include/rapidjson/internal/stack.h
+internal/strfunc.h
+../mingwlibs/include/rapidjson/internal/strfunc.h
+internal/dtoa.h
+../mingwlibs/include/rapidjson/internal/dtoa.h
+internal/itoa.h
+../mingwlibs/include/rapidjson/internal/itoa.h
+stringbuffer.h
+../mingwlibs/include/rapidjson/stringbuffer.h
+new
+-
+intrin.h
+-
+nmmintrin.h
+-
+emmintrin.h
+-
 
 ../mingwlibs/include/rapidxml-1.13/rapidxml.hpp
 cstdlib
@@ -16777,6 +16825,8 @@ lib/pp/traces/TracesParser.h
 ../rts/Game/lib/pp/traces/TracesParser.h
 lib/pp/traces/TracesAnalyser.h
 ../rts/Game/lib/pp/traces/TracesAnalyser.h
+Lua/LuaHandle.h
+../rts/Game/Lua/LuaHandle.h
 boost/thread.hpp
 -
 
@@ -19867,6 +19917,8 @@ boost/lexical_cast.hpp
 -
 Call.h
 ../rts/lib/pp/traces/Call.h
+TracesAnalyser.h
+../rts/lib/pp/traces/TracesAnalyser.h
 
 ../rts/lib/pp/traces/Event.h
 iostream
@@ -19934,6 +19986,12 @@ limits
 algorithm
 -
 rapidxml-1.13/rapidxml.hpp
+-
+rapidjson/document.h
+-
+rapidjson/stringbuffer.h
+-
+rapidjson/prettywriter.h
 -
 Trace.h
 ../rts/lib/pp/traces/Trace.h
@@ -22297,6 +22355,8 @@ lib/pp/traces/TracesParser.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/lib/pp/traces/TracesParser.h
 lib/pp/traces/TracesAnalyser.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/lib/pp/traces/TracesAnalyser.h
+Lua/LuaHandle.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Lua/LuaHandle.h
 boost/thread.hpp
 -
 

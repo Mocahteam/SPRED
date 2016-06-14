@@ -36,6 +36,7 @@
 #include "LogOutput.h"
 
 const std::string tracesDirname = "traces";
+const std::string feedbackFilename = tracesDirname + "\\data\\feedback.json";
 const bool traceOnline = false;
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
@@ -58,6 +59,7 @@ CProgAndPlay::CProgAndPlay() : tp(true) {
 	updated = false;
 	missionEnded = false;
 	tracePlayer = false;
+	launchAnalysis = true; //get value from editor
 	
 	// initialisation of Prog&Play
 	if (PP_Init() == -1) {
@@ -106,29 +108,29 @@ void CProgAndPlay::Update(void) {
 		
 	// Store log messages
 	if (ppTraces.good()) {
-		logMessages();
-		bool proceed = allUnitsIdled() || (missionEnded && frame_counter++ > 2 * UNIT_SLOWUPDATE_RATE); 
-		tp.setProceed(proceed);
-		if (proceed)
-			log("proceed is true");
-		else
-			log("proceed is false");
+		logMessages(); 
+		tp.setProceed(allUnitsIdled() || (missionEnded && frame_counter++ > 2 * UNIT_SLOWUPDATE_RATE));
 		if (tp.compressionDone()) {
 			log("compression done");
-			
-			// std::vector<Trace::sp_trace> traces = TracesParser::importTraceFromXml(tracesDirname, missionName + "_compressed.xml");
-			// for (unsigned int i = 0; i < traces.size(); i++)
-				// traces.at(i)->display(logFile);
-			
-			// Launch analysis of player's traces
-			TracesAnalyser ta(true);
-			std::string feedback = ta.getFeedback(tracesDirname, missionName + "_compressed.xml");
-			if (feedback.compare("") != 0) {
-				std::string s = "feedback : " + feedback;
-				log(s);
+			if (launchAnalysis) {
+				// Launch analysis of player's traces
+				TracesAnalyser ta(true);
+				std::string feedback = ta.getFeedback(tracesDirname, missionName + "_compressed.xml");
+				log("feedback determined");
+				// Write into file
+				std::ofstream jsonFile;
+				jsonFile.open(feedbackFilename.c_str());
+				if (jsonFile.good()) {
+					jsonFile << feedback;
+					jsonFile.close();
+				}
+				// Add prefix to json string
+				feedback.insert(0,"Feedback_");
+				// Send feedback to Lua (SendLuaRulesMsg function in LuaUnsyncedCtrl)
+				std::vector<boost::uint8_t> data(feedback.size());
+				std::copy(feedback.begin(), feedback.end(), data.begin());
+				net->Send(CBaseNetProtocol::Get().SendLuaMsg(gu->myPlayerNum, LUA_HANDLE_ORDER_RULES, 0, data));
 			}
-			else
-				log("no feedback");
 		}
 	}
 		
@@ -622,6 +624,13 @@ void CProgAndPlay::openTracesFile() {
 			ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);
 			if (ppTraces.is_open()) {
 				tracePlayer = true;
+				if (launchAnalysis) {
+					// Inform Lua that ProgAndPlay is active - used to display the feedback to the user properly
+					std::string msg = "PP";
+					std::vector<boost::uint8_t> data(msg.size());
+					std::copy(msg.begin(), msg.end(), data.begin());
+					net->Send(CBaseNetProtocol::Get().SendLuaMsg(gu->myPlayerNum, LUA_HANDLE_ORDER_RULES, 0, data));
+				}
 				startTime = std::time(NULL);
 				ppTraces << "start " << missionName << std::endl;
 				ppTraces << "mission_start_time " << startTime << std::endl;

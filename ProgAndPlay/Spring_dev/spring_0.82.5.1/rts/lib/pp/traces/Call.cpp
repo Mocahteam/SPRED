@@ -3,6 +3,7 @@
 const char* Call::noParamCallLabelsArr[] = {"PP_Open", "PP_Close", "PP_IsGameOver", "PP_GetMapSize", "PP_GetStartPosition", "PP_GetNumSpecialAreas", NULL};
 const char* Call::unitCallLabelsArr[] = {"PP_Unit_GetCoalition", "PP_Unit_GetType", "PP_Unit_GetPosition", "PP_Unit_GetHealth", "PP_Unit_GetMaxHealth", "PP_Unit_GetPendingCommands", "PP_Unit_GetGroup", "PP_Unit_GetNumPdgCmds", NULL};
 const char* Call::errorsArr[] = {"out_of_range", "wrong_coalition", "wrong_unit", "wrong_target", "wrong_position", NULL};
+const char* Call::coalitionsArr[] = {"MY_COALITION", "ALLY_COALITION", "ENEMY_COALITION", NULL};
 ParamsMap Call::paramsMap;
 
 Call::Call(std::string label, ErrorType err): Trace(), label(label), error(err), ind_ret(0) {}
@@ -12,7 +13,7 @@ bool Call::operator==(Trace *t) const {
 	if (t->isCall()) {
 		const Call *c = dynamic_cast<const Call*>(t);
 		if (label.compare(c->label) == 0 && error == c->error) {
-			if (ind_ret <= 0 || !Call::paramsMap.contains(label,"return") || compareReturn(c))
+			if (!hasReturn() || !c->hasReturn() || !Call::paramsMap.contains(label,"return") || compareReturn(c))
 				res = compare(c);
 		}
 	}
@@ -104,22 +105,12 @@ bool Call::compareReturn(const Call *c) const {
 	return false;
 }
 
-void Call::setNoReturn() {
+void Call::setReturn() {
 	ind_ret = -1;
 }
 
-Call::ErrorType Call::getErrorType(const char *ch) {
-	Call::ErrorType err = Call::NONE;
-	int ind = Trace::inArray(ch, Call::errorsArr);
-	if (ind > -1)
-		err = static_cast<Call::ErrorType>(ind);
-	return err;
-}
-
-const char* Call::getErrorLabel(Call::ErrorType err) {
-	if (err != Call::NONE)
-		return Call::errorsArr[static_cast<int>(err)];
-	return NULL;
+bool Call::hasReturn() const {
+	return ind_ret != 0;
 }
 
 /**

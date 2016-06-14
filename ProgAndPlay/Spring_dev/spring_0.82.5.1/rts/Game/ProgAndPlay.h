@@ -10,6 +10,7 @@
 #include <ctime>
 #include "lib/pp/traces/TracesParser.h"
 #include "lib/pp/traces/TracesAnalyser.h"
+#include "Lua/LuaHandle.h"
 #include <boost/thread.hpp>
 
 class CProgAndPlay
@@ -34,6 +35,7 @@ private:
 	bool updated;
 	bool missionEnded;
 	bool tracePlayer;
+	bool launchAnalysis;
 	std::string missionName;
 	std::time_t startTime;
 	boost::thread tracesThread;

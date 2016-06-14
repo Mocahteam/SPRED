@@ -19,7 +19,7 @@ all: $(EXE)      # all is dependent on $(EXE) to be complete
 $(EXE): $(OBJ)   # $(EXE) is dependent on all of the files in $(OBJ) to exist
 	$(CC) $(OBJ) -o $@
 
-install: $(REP_TRACES)/params.json $(REP_TRACES)/feedbacks.xml $(REP_TRACES)/expert $(REP_TRACES)/TracesParser.cpp $(REP_TRACES)/TracesParser.h $(REP_TRACES)/TracesAnalyser.cpp $(REP_TRACES)/TracesAnalyser.h $(REP_TRACES)/Trace.cpp $(REP_TRACES)/Trace.h $(REP_TRACES)/Sequence.cpp $(REP_TRACES)/Sequence.h $(REP_TRACES)/Call.cpp $(REP_TRACES)/Call.h $(REP_TRACES)/CallDef.h $(REP_TRACES)/Event.cpp $(REP_TRACES)/Event.h $(REP_TRACES)/EventDef.h
+install: $(REP_TRACES)/params.json $(REP_TRACES)/feedbacks.xml $(REP_TRACES)/expert $(REP_TRACES)/TracesParser.cpp $(REP_TRACES)/TracesParser.h $(REP_TRACES)/TracesAnalyser.cpp $(REP_TRACES)/TracesAnalyser.h $(REP_TRACES)/Trace.cpp $(REP_TRACES)/Trace.h $(REP_TRACES)/Sequence.cpp $(REP_TRACES)/Sequence.h $(REP_TRACES)/Call.cpp $(REP_TRACES)/Call.h $(REP_TRACES)/CallDef.h $(REP_TRACES)/Event.cpp $(REP_TRACES)/Event.h $(REP_TRACES)/EventDef.h $(REP_TRACES)/constantList_KP4.4.h
 
 $(REP_TRACES)/params.json: ./params.json
 	cp ./params.json $(REP_TRACES)
@@ -29,6 +29,9 @@ $(REP_TRACES)/feedbacks.xml: ./feedbacks.xml
 	
 $(REP_TRACES)/expert: ./expert
 	cp -r ./expert $(REP_TRACES)
+	
+$(REP_TRACES)/constantList_KP4.4.h: src/constantList_KP4.4.h
+	cp src/constantList_KP4.4.h $(REP_TRACES)
 
 $(REP_TRACES)/TracesParser.cpp: src/TracesParser.cpp
 	cp src/TracesParser.cpp $(REP_TRACES)
