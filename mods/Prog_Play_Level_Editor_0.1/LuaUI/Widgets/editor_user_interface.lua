@@ -940,7 +940,7 @@ function initTriggerWindow()
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionFilterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
-	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
+	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '85%')
 	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
 	conditionTextBox.font.shadow = false
 	
@@ -953,7 +953,7 @@ function initTriggerWindow()
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionFilterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
-	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
+	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '85%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 	actionTextBox.font.shadow = false
 	

@@ -170,8 +170,8 @@ end
 -- Select units or add them to the current selection if shift is pressed
 -----------------------
 function proceedSelection(units)
-	local _, _, _, shiftPressed = Spring.GetModKeyState()
-	if shiftPressed then
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
 		local selectedUnits = Spring.GetSelectedUnits()
 		for i, u in ipairs(units) do
 			table.insert(selectedUnits, u) -- add units to selection
@@ -187,8 +187,8 @@ end
 -- @return to disable click to select
 -----------------------
 function proceedDeselection(unit)
-	local _, _, _, shiftPressed = Spring.GetModKeyState()
-	if shiftPressed then
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
 		local selectedUnits = Spring.GetSelectedUnits()
 		for i, u in ipairs(selectedUnits) do
 			if u == unit then
