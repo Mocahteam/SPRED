@@ -142,8 +142,11 @@ local eventTotal -- Number of events
 local eventScrollPanel -- scroll panel containing each event
 local eventConditionsScrollPanel -- scroll panel containing each condition of an event
 local eventActionsScrollPanel -- scroll panel containing each action of an event
-local eventButtons = {} -- buttons for each event
-local deleteEventButtons = {} -- buttons to delete an event
+local eventUI = {}
+eventUI.eventButtons = {} -- buttons for each event
+eventUI.deleteEventButtons = {} -- buttons to delete an event
+eventUI.upEventButtons = {} -- buttons to change the sequence of events
+eventUI.downEventButtons = {}
 local currentEvent -- index of the current inspected event
 local currentCondition -- index of the current inspected condition of the current inspected event
 local currentAction -- index of the current inspected action of the current inspected event
@@ -899,14 +902,14 @@ end
 
 function initTriggerWindow()
 	-- Left Panel
-	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '30%', '80%')
 	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS)
 	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '85%')
 	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
 	editVariablesButton = addButton(windows['triggerWindow'], '0%', '90%', '100%', '10%', EDITOR_TRIGGERS_VARIABLES_EDIT, showVariablesFrame)
 	
 	-- Event window
-	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	windows['eventWindow'] = addWindow(Screen0, '30%', '5%', '30%', '80%')
 	local closeEvent = addButton(windows['eventWindow'], '93%', '0%', '7%', '4%', "X", function() editEvent(currentEvent) end)
 	closeEvent.font.color = { 1, 0, 0, 1 }
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -932,7 +935,7 @@ function initTriggerWindow()
 	end
 	
 	-- Condition window
-	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['conditionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeCondition = addButton(windows['conditionWindow'], '93%', '0%', '7%', '4%', "X", function() editCondition(currentCondition) end)
 	closeCondition.font.color = { 1, 0, 0, 1 }
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -940,12 +943,12 @@ function initTriggerWindow()
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionFilterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
-	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
+	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '85%')
 	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
 	conditionTextBox.font.shadow = false
 	
 	-- Action window
-	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['actionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeAction = addButton(windows['actionWindow'], '93%', '0%', '7%', '4%', "X", function() editAction(currentAction) end)
 	closeAction.font.color = { 1, 0, 0, 1 }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -953,12 +956,12 @@ function initTriggerWindow()
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionFilterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
-	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
+	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '85%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 	actionTextBox.font.shadow = false
 	
 	-- Configure event window
-	windows['configureEvent'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['configureEvent'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeConfigure = addButton(windows['configureEvent'], '93%', '0%', '7%', '4%', "X", configureEvent)
 	closeConfigure.font.color = { 1, 0, 0, 1 }
 	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE, 20, "center", nil, "center")
@@ -1028,7 +1031,7 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '5%', '90%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
-	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
+	windows["importWindow"] = addWindow(Screen0, "30%", "86%", "30%", "10%")
 	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 16, "left", nil, "center")
 	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
 	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
@@ -1038,7 +1041,7 @@ function initTriggerWindow()
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 
 	-- Variables window
-	windows["variablesWindow"] = addWindow(Screen0, '15%', '5%', '60%', '80%')
+	windows["variablesWindow"] = addWindow(Screen0, '30%', '5%', '60%', '80%')
 	local closeVariables = addButton(windows['variablesWindow'], '97%', '0%', '3%', '4%', "X", showVariablesFrame)
 	closeVariables.font.color = { 1, 0, 0, 1 }
 	addLabel(windows["variablesWindow"], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_VARIABLES, 20, "center", nil, "center")
@@ -2482,16 +2485,46 @@ function removeThirdWindows() -- Removes the rightmost window
 	configureEventButton:InvalidateSelf()
 end
 
-function updateEventList() -- When a new event is created or the name of an event is changed, update the list
-	if eventTotal ~= #events then
-		removeElements(eventScrollPanel, eventButtons, true)
-		removeElements(eventScrollPanel, deleteEventButtons, true)
+function updateEventList(forceEventListUpdate) -- When a new event is created or the name of an event is changed, update the list
+	if eventTotal ~= #events or forceEventListUpdate then
+		removeElements(eventScrollPanel, eventUI.eventButtons, true)
+		removeElements(eventScrollPanel, eventUI.deleteEventButtons, true)
+		removeElements(eventScrollPanel, eventUI.upEventButtons, true)
+		removeElements(eventScrollPanel, eventUI.downEventButtons, true)
 		local count = 0
 		for i, e in ipairs(events) do
-			eventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '80%', 40, e.name, function() editEvent(i) end)
-			deleteEventButtons[i] = addButton(eventScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeEvent(i) end)
-			deleteEventButtons[i].font.color = {1, 0, 0, 1}
-			deleteEventButtons[i].font.size = 20
+			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', 40 * count, '60%', 40, e.name, function() editEvent(i) end)
+			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, EDITOR_X, function() removeEvent(i) end)
+			eventUI.deleteEventButtons[i].font.color = {1, 0, 0, 1}
+			eventUI.deleteEventButtons[i].font.size = 20
+			if i ~= 1 then
+				local moveUpEvent = function()
+					removeSecondWindows() -- close windows to prevent bugs
+					removeThirdWindows() 
+					currentEvent = nil
+					local e = events[i]
+					table.remove(events, i)
+					table.insert(events, i-1, e)
+					updateEventList(true)
+					saveState()
+				end
+				eventUI.upEventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '15%', 40, "", moveUpEvent)
+				addImage(eventUI.upEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
+			end
+			if i ~= #events then
+				local moveDownEvent = function()
+					removeSecondWindows() -- close windows to prevent bugs
+					removeThirdWindows() 
+					currentEvent = nil
+					local e = events[i]
+					table.remove(events, i)
+					table.insert(events, i+1, e)
+					updateEventList(true)
+					saveState()
+				end
+				eventUI.downEventButtons[i] = addButton(eventScrollPanel, '75%', 40 * count, '15%', 40, "", moveDownEvent)
+				addImage(eventUI.downEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
+			end
 			count = count + 1
 		end
 		newEventButton.y = 40 * count
@@ -2500,9 +2533,9 @@ function updateEventList() -- When a new event is created or the name of an even
 	
 	if currentEvent then
 		events[currentEvent].name = eventNameEditBox.text
-		if events[currentEvent].name ~= eventButtons[currentEvent].caption then
-			eventButtons[currentEvent].caption = events[currentEvent].name
-			eventButtons[currentEvent]:InvalidateSelf()
+		if events[currentEvent].name ~= eventUI.eventButtons[currentEvent].caption then
+			eventUI.eventButtons[currentEvent].caption = events[currentEvent].name
+			eventUI.eventButtons[currentEvent]:InvalidateSelf()
 		end
 	end
 end
@@ -3285,23 +3318,25 @@ drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
 	-- Parameters check
 	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 	if a.params[attr.id] then
-		local u = a.params[attr.id]
-		local uDefID = Spring.GetUnitDefID(u)
-		if uDefID then
-			local name = UnitDefs[uDefID].humanName
-			local team = Spring.GetUnitTeam(u)
-			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-			unitLabel:SetCaption(name.." ("..tostring(u)..")")
-			local function viewUnit()
-				local state = Spring.GetCameraState()
-				local x, y, z = Spring.GetUnitPosition(u)
-				state.px, state.py, state.pz = x, y, z
-				state.height = 500
-				Spring.SetCameraState(state, 2)
+		if a.params[attr.id].type and a.params[attr.id].value then
+			local u = a.params[attr.id].value
+			local uDefID = Spring.GetUnitDefID(u)
+			if uDefID then
+				local name = UnitDefs[uDefID].humanName
+				local team = Spring.GetUnitTeam(u)
+				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+				unitLabel:SetCaption(name.." ("..tostring(u)..")")
+				local function viewUnit()
+					local state = Spring.GetCameraState()
+					local x, y, z = Spring.GetUnitPosition(u)
+					state.px, state.py, state.pz = x, y, z
+					state.height = 500
+					Spring.SetCameraState(state, 2)
+				end
+				local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
+				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(feature, viewButton)
 			end
-			local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
-			addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-			table.insert(feature, viewButton)
 		end
 	end
 	
@@ -5005,7 +5040,7 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	for i, team in ipairs(teamStateMachine.states) do
 		markButtonWithinSet(teamControlButtons[team], teamControl[team])
 	end
-	markButtonWithinSet(eventButtons, currentEvent)
+	markButtonWithinSet(eventUI.eventButtons, currentEvent)
 	if currentEvent then
 		markButtonWithinSet(actionButtons[events[currentEvent].id], currentAction)
 		markButtonWithinSet(conditionButtons[events[currentEvent].id], currentCondition)
@@ -5316,7 +5351,7 @@ function widget:MousePress(mx, my, button)
 						drawConditionFrame(false)
 					end
 				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
+			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					e.params[changedParam] = {}
@@ -5327,21 +5362,6 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["importWindow"])
 					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
-					if currentAction then
-						Screen0:AddChild(windows["actionWindow"])
-						drawActionFrame(false)
-					elseif currentCondition then
-						Screen0:AddChild(windows["conditionWindow"])
-						drawConditionFrame(false)
-					end
-				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
-				if kind == "unit" and currentEvent then
-					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					e.params[changedParam] = var
-					Screen0:AddChild(windows["triggerWindow"])
-					Screen0:AddChild(windows["eventWindow"])
-					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
