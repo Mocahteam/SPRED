@@ -431,26 +431,26 @@ end
 local function ApplyGroupableAction(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
     Spring.Echo("valid")
-    if(act.attribute=="transfer") then
+    if(act.type=="transfer") then
       Spring.Echo("try to apply transfert")
       Spring.TransferUnit(unit,act.params.team)
-    elseif(act.attribute=="kill")then
+    elseif(act.type=="kill")then
       Spring.DestroyUnit(unit)
-    elseif(act.attribute=="hp")then
+    elseif(act.type=="hp")then
       local health,maxhealth=Spring.GetUnitHealth(unit)
       Spring.SetUnitHealth(unit,maxhealth*(act.params.percentage)/100)
-    elseif(act.attribute=="teleport")then
+    elseif(act.type=="teleport")then
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
       Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
-    elseif(act.attribute=="group")then
+    elseif(act.type=="group")then
       table.insert(ctx.groupOfUnits["group_"..act.params.group],unit)
-    elseif(act.attribute=="order")then
+    elseif(act.type=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
-    elseif(act.attribute=="orderPosition")then
+    elseif(act.type=="orderPosition")then
       local posFound=extractPosition(act.params.position)
       Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
-    elseif(act.attribute=="orderTarget")then
+    elseif(act.type=="orderTarget")then
       local u=act.params.target
       local spUnit=ctx.armySpring[u]
       --Spring.GiveOrderToUnit(unit, act.params.command,{spUnit}, {})
@@ -643,7 +643,7 @@ function ApplyAction (a)
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
-      if(a.attribute=="transfer")then
+      if(a.type=="transfer")then
         Spring.Echo("about to transfer")
         Spring.Echo(json.encode(listOfUnits))
       end
@@ -888,7 +888,7 @@ end
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=ctx.armySpring[externalUnitId]
-  if(c.attribute=="dead") then --untested yet
+  if(c.type=="dead") then --untested yet
     --Spring.Echo("is it dead ?")
     --Spring.Echo(externalUnitId)
     local alive=Spring.ValidUnitID(internalUnitId)
@@ -896,7 +896,7 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
     return not(alive)
   elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
-    if(c.attribute=="zone") then
+    if(c.type=="zone") then
       local i=isUnitInZone(internalUnitId,c.params.zone)
      --[[Spring.Echo("we check an unit in a zone")
       Spring.Echo(internalUnitId)
@@ -909,14 +909,14 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
         Spring.Echo("condition validated")
       end--]]
       return i  
-    elseif(c.attribute=="underAttack")then --untested yet
+    elseif(c.type=="underAttack")then --untested yet
       --Spring.Echo("is it working")
       --Spring.Echo(ctx.armyInformations[externalUnitId].isUnderAttack)
       return ctx.armyInformations[externalUnitId].isUnderAttack
-    elseif(c.attribute=="order") then
+    elseif(c.type=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==c.params.command) 
-    elseif(c.attribute=="hp") then 
+    elseif(c.type=="hp") then 
       local tresholdRatio=c.params.hp.number/100
       local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
       return compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
