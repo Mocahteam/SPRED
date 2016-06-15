@@ -1245,7 +1245,7 @@ end
          ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
          local type=currentCond.type
          local cond_object="other"
-         if(ctx.events[idEvent].params.uniset~=nil)then
+         if(currentCond.params.unitset~=nil)then
           local cond_object="group"
         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
