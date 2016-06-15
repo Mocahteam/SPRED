@@ -383,35 +383,30 @@ end
 -------------------------------------
 local function createUnit(unitTable)
     local posit=unitTable.position
-    ctx.armySpring[unitTable.id] = Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
-    ctx.armyExternal[ctx.armySpring[unitTable.id]]=unitTable.id
-    ctx.armyInformations[unitTable.id]={}
-    local springUnit=ctx.armySpring[unitTable.id]    
-    ctx.armyInformations[unitTable.id].health=Spring.GetUnitHealth(springUnit)*(unitTable.hp/100)
-    Spring.SetUnitHealth(springUnit,ctx.armyInformations[unitTable.id].health)
-    ctx.armyInformations[unitTable.id].previousHealth=ctx.armyInformations[unitTable.id].health
-    ctx.armyInformations[unitTable.id].autoHeal = UnitDefs[Spring.GetUnitDefID(ctx.armySpring[unitTable.id])]["autoHeal"]
-    ctx.armyInformations[unitTable.id].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(ctx.armySpring[unitTable.id])]["idleAutoHeal"]
-    ctx.armyInformations[unitTable.id].autoHealStatus=unitTable.autoHeal
-    --Spring.Echo(ctx.armyInformations[unitTable.id].autoHealStatus)
-    ctx.armyInformations[unitTable.id].isUnderAttack=false
-    --Spring.Echo("try to create unit with these informations")
-    Spring.SetUnitRotation(springUnit,0,-1*unitTable.orientation,0)
-    
-    -- update group units (team related)
+    local externalId=unitTable.id
+    local springId=Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
 
+    ctx.armyInformations[externalId]={}
+    ctx.armyInformations[externalId].health=Spring.GetUnitHealth(springId)*(unitTable.hp/100)
+    Spring.SetUnitHealth(springId,ctx.armyInformations[externalId].health)
+    ctx.armyInformations[externalId].previousHealth=ctx.armyInformations[externalId].health
+    ctx.armyInformations[externalId].autoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["autoHeal"]
+    ctx.armyInformations[externalId].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["idleAutoHeal"]
+    ctx.armyInformations[externalId].autoHealStatus=unitTable.autoHeal
+    --Spring.Echo(ctx.armyInformations[externalId].autoHealStatus)
+    ctx.armyInformations[externalId].isUnderAttack=false
+    --Spring.Echo("try to create unit with these informations")
+    Spring.SetUnitRotation(springId,0,-1*unitTable.orientation,0)
+    
+    -- <REGISTER>
+    ctx.armySpring[externalId]=springId  
+    ctx.armyExternal[springId]=externalId
     local teamIndex="team_"..tostring(unitTable.team)
-    local typeIndex="type_"..tostring(unitTable.type)
     if(ctx.groupOfUnits[teamIndex]==nil) then
       ctx.groupOfUnits[teamIndex]={}
     end
-    table.insert(ctx.groupOfUnits[teamIndex],unitTable.id)
-    -- update group units (type related)
-    if(ctx.groupOfUnits[typeIndex]==nil) then
-      ctx.groupOfUnits[typeIndex]={}
-    end
-    table.insert(ctx.groupOfUnits[typeIndex],unitTable.id)
-
+    table.insert(ctx.groupOfUnits[teamIndex],externalId)
+    -- </REGISTER>
 end
 
 -------------------------------------
