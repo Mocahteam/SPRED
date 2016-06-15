@@ -146,7 +146,7 @@ Chaque équipe peut être activée ou désactivée et contrôlée par un joueur 
 \label{fig:editor-teamconfig}
 \end{figure}
 \paragraph{ }
-Les équipes peuvent être alliées entre elles. Il faut néanmoins noter que la notion d'alliance n'est pas réciproque : l'équipe 1 peut considérer l'équipe 2 comme son alliée tandis que l'équipe 2 considère l'équipe 1 comme ennemie.
+Les équipes peuvent être alliées entre elles. Il faut néanmoins noter que la notion d'alliance n'est pas réciproque : l'équipe 1 peut considérer l'équipe 2 comme son alliée tandis que l'équipe 2 considère l'équipe 1 comme ennemie. Initialement, les équipes ne sont pas alliées entre elles.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{editor-allyteam.png}
@@ -158,7 +158,7 @@ Les équipes peuvent être alliées entre elles. Il faut néanmoins noter que la
 Ce menu permet de gérer les différents évènements s'effectuant au cours de la mission.
 \subsubsection{Évènements, conditions et actions}
 \paragraph{ }
-Un évènement correspond à un couple ensemble de conditions / ensemble d'actions. Il est possible d'ajouter des conditions et des actions puis de les paramétrer en utilisant les boutons et fenêtres appropriés. Un exemple est disponible Figure \ref{fig:editor-trigger}.
+Un évènement correspond à un couple ensemble de conditions / ensemble d'actions. Il est possible d'ajouter des conditions et des actions puis de les paramétrer en utilisant les boutons et fenêtres appropriés. Un exemple est disponible Figure \ref{fig:editor-trigger}. Les actions et les conditions peuvent être plus facilement retrouvées dans la liste en choisissant un filtre correspondant au type de l'action ou de la condition (par exemple, si on veut définir une action portant sur des unités, on peut sélectionner le filtre "Unités" pour n'afficher que les actions portant sur des unités).
 \paragraph{ }
 Ensuite, il est possible de paramétrer l'évènement en définissant un déclencheur qui correspond à une expression logique entre toutes les conditions. Par défaut, le déclencheur est un ET logique global\footnote{Par exemple, pour un évènement possédant 3 conditions C1, C2 et C3, le déclencheur par défaut sera (C1 ET C2 ET C3).}. Lorsque le déclencheur renvoie \textit{"true"}, les actions s'effectuent l'une après l'autre, dans l'ordre où elles ont été définies. Cet ordre est paramétrable dans la même fenêtre que la définition du déclencheur (voir Figure \ref{fig:editor-eventconfig}).
 \paragraph{ }
