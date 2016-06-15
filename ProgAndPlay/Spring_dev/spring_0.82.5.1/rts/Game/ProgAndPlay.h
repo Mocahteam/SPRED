@@ -3,6 +3,9 @@
 #ifndef __PROG_AND_PLAY_H__
 #define __PROG_AND_PLAY_H__
 
+// threshold used to detect if player's program is endless
+#define ENDLESS_LOOP_THRESHOLD 50
+
 // Muratet (Define Class CProgAndPlay) ---
 
 #include "Sim/Units/Unit.h"
@@ -36,7 +39,9 @@ private:
 	bool missionEnded;
 	bool tracePlayer;
 	bool launchAnalysis;
+	bool unitsWereIdled;
 	std::string missionName;
+	std::string lang;
 	std::time_t startTime;
 	boost::thread tracesThread;
 	TracesParser tp;

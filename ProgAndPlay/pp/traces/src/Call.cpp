@@ -43,6 +43,15 @@ void Call::filterCall(const Call *c) {
 	filter(c);
 }
 
+std::vector<std::string> Call::getListIdWrongParams(Call *c) const {
+	std::vector<std::string> ids;
+	if (c != NULL && !compareReturn(c))
+		ids.push_back("return");
+	std::vector<std::string> _ids = id_wrong_params(c);
+	ids.insert(ids.end(), _ids.begin(), _ids.end());
+	return ids;
+}
+
 void Call::display(std::ostream &os) const {
 	for (int i = 0; i <= numTab; i++)
 		os << "\t";

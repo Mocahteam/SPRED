@@ -25,11 +25,11 @@ namespace CallMisc {
 		}
 	};
 
-	struct Pos {
+	struct Position {
 		float x;
 		float y;
 		
-		bool operator!=(const Pos& p) const {
+		bool operator!=(const Position& p) const {
 			return x != p.x || y != p.y;
 		}
 	};
@@ -60,6 +60,11 @@ private:
 	
 	virtual std::string getReadableParams() const {
 		return "";
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		return ids;
 	}
 	
 };
@@ -101,7 +106,17 @@ private:
 	}
 	
 	virtual std::string getReadableParams() const {
-		return "(" + ((error == Call::NONE && specialAreaId != -1) ? boost::lexical_cast<std::string>(specialAreaId) : "_") + ")";
+		return "(" + ((specialAreaId != -1) ? boost::lexical_cast<std::string>(specialAreaId) : "_") + ")";
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetSpecialAreaPositionCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetSpecialAreaPositionCall*>(c);
+		if (error == Call::OUT_OF_RANGE || (c != NULL && specialAreaId != cc->specialAreaId))
+			ids.push_back("specialAreaId");
+		return ids;
 	}
 	
 };
@@ -146,6 +161,16 @@ private:
 		return "(" + ((TracesAnalyser::resources_map.find(resourceId) != TracesAnalyser::resources_map.end()) ? TracesAnalyser::resources_map.at(resourceId) : "_") + ")";
 	}
 	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetResourceCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetResourceCall*>(c);
+		if (error == Call::OUT_OF_RANGE || (c != NULL && resourceId != cc->resourceId))
+			ids.push_back("resourceId");
+		return ids;
+	}
+	
 };
 
 class GetNumUnitsCall : public Call {
@@ -186,6 +211,16 @@ private:
 	
 	virtual std::string getReadableParams() const {
 		return "(" + ((error == Call::NONE && coalition != CallMisc::NONE) ? std::string(Call::getEnumLabel<CallMisc::Coalition>(coalition,Call::coalitionsArr)) : "_") + ")";
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetNumUnitsCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetNumUnitsCall*>(c);
+		if (error == Call::WRONG_COALITION || (c != NULL && coalition != cc->coalition))
+			ids.push_back("coalition");
+		return ids;
 	}
 
 };
@@ -243,6 +278,18 @@ private:
 		return s;
 	}
 	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetUnitAtCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetUnitAtCall*>(c);
+		if (c != NULL && coalition != cc->coalition)
+			ids.push_back("coalition");
+		if (error == Call::OUT_OF_RANGE || (c != NULL && index != cc->index))
+			ids.push_back("index");
+		return ids;
+	}
+	
 };
 
 class UnitCall : public Call {
@@ -290,6 +337,16 @@ private:
 	
 	virtual std::string getReadableParams() const {
 		return "(" + ((TracesAnalyser::units_id_map.find(unit.type) != TracesAnalyser::units_id_map.end()) ? TracesAnalyser::units_id_map.at(unit.type) : "_") + ")";
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		UnitCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<UnitCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		return ids;
 	}
 
 };
@@ -352,6 +409,18 @@ private:
 		s += (groupId != -1) ? boost::lexical_cast<std::string>(groupId) : "_";
 		s += ")";
 		return s;
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		SetGroupCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<SetGroupCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (error == Call::OUT_OF_RANGE || (c != NULL && groupId != cc->groupId))
+			ids.push_back("groupId");
+		return ids;
 	}
 	
 };
@@ -430,6 +499,20 @@ private:
 		s += ")";
 		return s;
 	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		ActionOnUnitCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<ActionOnUnitCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (c != NULL && action != cc->action)
+			ids.push_back("action");
+		if (c != NULL && target.type != cc->target.type)
+			ids.push_back("targetType");
+		return ids;
+	}
 
 };
 
@@ -448,7 +531,7 @@ private:
 		
 	CallMisc::Unit unit;
 	int action;
-	CallMisc::Pos pos;
+	CallMisc::Position pos;
 	
 	virtual bool compare(const Call *c) const {
 		const ActionOnPositionCall *cc = dynamic_cast<const ActionOnPositionCall*>(c);
@@ -503,11 +586,25 @@ private:
 		s += ",";
 		s += (TracesAnalyser::orders_map.find(action) != TracesAnalyser::orders_map.end()) ? TracesAnalyser::orders_map.at(action) : "_";
 		s += ",";
-		s += (error != WRONG_POSITION && pos.x != -1) ? boost::lexical_cast<std::string>(pos.x) : "_";
+		s += (pos.x != -1) ? boost::lexical_cast<std::string>(pos.x) : "_";
 		s += ",";
-		s += (error != WRONG_POSITION && pos.y != -1) ? boost::lexical_cast<std::string>(pos.y) : "_";
+		s += (pos.y != -1) ? boost::lexical_cast<std::string>(pos.y) : "_";
 		s += ")";
 		return s;
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		ActionOnPositionCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<ActionOnPositionCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (c != NULL && action != cc->action)
+			ids.push_back("action");
+		if (c != NULL && pos != cc->pos)
+			ids.push_back("position");
+		return ids;
 	}
 
 };
@@ -580,6 +677,20 @@ private:
 		s += ")";
 		return s;
 	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		UntargetedActionCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<UntargetedActionCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (c != NULL && action != cc->action)
+			ids.push_back("action");
+		if (c != NULL && param != cc->param)
+			ids.push_back("param");
+		return ids;
+	}
 
 };
 
@@ -643,6 +754,18 @@ private:
 		return s;
 	}
 	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetCodePdgCmdCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetCodePdgCmdCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (error == Call::OUT_OF_RANGE || (c != NULL && idCmd != cc->idCmd))
+			ids.push_back("idCmd");
+		return ids;
+	}
+	
 };
 
 class GetNumParamsPdgCmdCall : public Call {
@@ -703,6 +826,18 @@ private:
 		s += (idCmd != -1) ? boost::lexical_cast<std::string>(idCmd) : "_";
 		s += ")";
 		return s;
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetNumParamsPdgCmdCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetNumParamsPdgCmdCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (error == Call::OUT_OF_RANGE || (c != NULL && idCmd != cc->idCmd))
+			ids.push_back("idCmd");
+		return ids;
 	}
 
 };
@@ -774,6 +909,20 @@ private:
 		s += (idParam != -1) ? boost::lexical_cast<std::string>(idParam) : "_";
 		s += ")";
 		return s;
+	}
+	
+	virtual std::vector<std::string> id_wrong_params(Call *c) const {
+		std::vector<std::string> ids;
+		GetParamPdgCmdCall *cc;
+		if (c != NULL)
+			cc = dynamic_cast<GetParamPdgCmdCall*>(c);
+		if (c != NULL && unit.type != cc->unit.type)
+			ids.push_back("unitType");
+		if (c != NULL && idCmd != cc->idCmd)
+			ids.push_back("idCmd");
+		if (error == Call::OUT_OF_RANGE || (c != NULL && idParam != cc->idParam))
+			ids.push_back("idParam");
+		return ids;
 	}
 	
 };
