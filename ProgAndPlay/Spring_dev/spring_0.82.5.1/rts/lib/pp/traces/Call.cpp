@@ -45,7 +45,7 @@ void Call::filterCall(const Call *c) {
 
 std::vector<std::string> Call::getListIdWrongParams(Call *c) const {
 	std::vector<std::string> ids;
-	if (c != NULL && !compareReturn(c))
+	if (ind_ret != 0 && c->ind_ret != 0 && label.compare("PP_GetUnitAt") != 0 && !compareReturn(c))
 		ids.push_back("return");
 	std::vector<std::string> _ids = id_wrong_params(c);
 	ids.insert(ids.end(), _ids.begin(), _ids.end());

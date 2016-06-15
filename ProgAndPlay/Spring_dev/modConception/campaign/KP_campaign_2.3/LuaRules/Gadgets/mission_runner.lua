@@ -129,13 +129,19 @@ function getFeedbackMessage(json_obj)
 			s = s.."\nQuelques conseils pour améliorer votre programme :\n\n"
 		end
 		for i = 1,#json_obj.feedbacks do
-			s = s..color.."- "..json_obj.feedbacks[i]..white.."\n"
+			s = s..color..json_obj.feedbacks[i]..white.."\n"
+			if #json_obj.feedbacks > 1 and i < #json_obj.feedbacks then
+				s = s.."\n"
+			end
 		end
 	end
 	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
 		s = s.."\nAttention :\n\n"
 		for i = 1,#json_obj.warnings do
-			s = s..red.."- "..json_obj.warnings[i]..white.."\n"
+			s = s..red..json_obj.warnings[i]..white.."\n"
+			if #json_obj.warnings > 1 and i < #json_obj.warnings then
+				s = s.."\n"
+			end
 		end
 	end
 	return s
@@ -165,7 +171,7 @@ function gadget:RecvLuaMsg(msg, player)
 					SendToUnsynced("MissionEvent")
 					_G.event = nil
 				else -- the mission is not over yet
-					showMessage(json_string, true, 1000)
+					showMessage(json_string, true, -1)
 				end
 			end
 		end
