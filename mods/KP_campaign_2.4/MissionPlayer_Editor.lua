@@ -339,6 +339,7 @@ end
 -- are related to conditions in the json files.
 -------------------------------------
 local function isTriggerable(event)
+  Spring.Echo(json.encode(ctx.conditions))
   local trigger=event.trigger
   if(trigger=="")then   -- empty string => create trigger by cunjunction (ands) of all conditions
   -- step 1 : write the trigger
@@ -361,31 +362,18 @@ end
 
 -------------------------------------
 -- Extract the list of units related to a condition
--- tableLookup represent a list of attributes to look up in the condition
--- When one is found the search is interrupted
 -------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams,tableLookup)
-  --Spring.Echo(json.encode(condition))
-  
-  -- special case here, processed in a sadly ugly manner : unitTYpe t of Team X must be an intersection
-  if(conditionParams.unitType~=nil)and(conditionParams.team~=nil)then
-    local l1=ctx.groupOfUnits["team_"..conditionParams.team]
-    local l2=ctx.groupOfUnits["type_"..conditionParams.unitType]
-    return intersection(l1,l2) 
-  end
-  for idx,tableT in ipairs(tableLookup)do
-    local conditionTerm=tableT[1]
-    local prefixTerm=tableT[2]   
-    --Spring.Echo("we look for this term in the conditions")
-    --Spring.Echo(conditionTerm) 
-    if(conditionParams[conditionTerm]~=nil)then
-      local groupIndex=prefixTerm.."_"..tostring(conditionParams[conditionTerm])--gives stuff like team_1
-      --Spring.Echo("this group is selected")
-      --Spring.Echo(conditionTerm)
-     -- Spring.Echo(groupIndex)
-      --Spring.Echo(json.encode(ctx.groupOfUnits))
-      return ctx.groupOfUnits[groupIndex]
-    end
+local function extractListOfUnitsImpliedByCondition(conditionParams)
+  Spring.Echo("extract process")
+  Spring.Echo(json.encode(conditionParams))
+  Spring.Echo(json.encode(ctx.groupOfUnits))
+  if(conditionParams.unitset~=nil)then
+     -- gives something like action_1, condition_3, groupe_2, team_0
+     local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
+     if(ctx.groupOfUnits[index]==nil)then
+      Spring.Echo("warning. This index gave nothing : "..index)
+     end
+     return ctx.groupOfUnits[index]
   end
 end
 
@@ -433,23 +421,7 @@ end
 -- return a boolean indicating if it's groupable
 -------------------------------------
 local function isAGroupableTypeOfAction(a)
- local groupable=true
- if(string.sub(a.type, 1, 5)=="type_") then
-    a["cond_object"]="group" -- group is the generic thing
-    a["attribute"]=string.sub(a.type, 6, -1)
- elseif(string.sub(a.type, 1, 5)=="unit_") then
-    a["cond_object"]="unit"
-    a["attribute"]=string.sub(a.type, 6, -1)
- elseif(string.sub(a.type, 1, 6)=="group_") then
-    a["cond_object"]="group"
-    a["attribute"]=string.sub(a.type, 7, -1)
-  return a,true
- elseif(string.sub(a.type, 1, 5)=="team_") then
-    a["cond_object"]="group"
-    a["attribute"]=string.sub(a.type, 6, -1)
-  else
-    groupable=false
-  end 
+ local groupable=(a.params.unitset~=nil)
   return a,groupable
 end
 
@@ -667,8 +639,8 @@ function ApplyAction (a)
       local u=ctx.armySpring[a.params.unit]
       ApplyGroupableAction(u,a)
     else   
-      local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
-      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,tl)
+      --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
+      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
       if(a.attribute=="transfer")then
@@ -972,7 +944,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
         ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
       -- Time related conditions [END]
       -- Variable related conditions [START]
-      elseif(c.type=="variableVSnumber") then
+      elseif(c.type=="variableVSnumber") then --TODO new simpler way to deal with variables
         local v1=ctx.variables[c.params.variable]
         local v2=c.params.number
         ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
@@ -983,13 +955,13 @@ local function UpdateConditionsTruthfulness (frameNumber)
       elseif(c.type=="booleanVariable") then
         ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
       elseif(c.type=="script") then
-        ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script) --TODO (vérifier)
+        ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script) 
         --Spring.Echo(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])))
       end
       
     elseif(object=="group")then  
-      local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
-      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tl)
+      --local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
       local count=0
       local total=0
       if(externalUnitList~=nil)then
@@ -1273,24 +1245,10 @@ end
          ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
          local type=currentCond.type
          local cond_object="other"
-         local attribute=type
-         if(string.sub(type, 1, 5)=="type_") then
-          cond_object="group" -- group is the generic thing
-          attribute=string.sub(type, 6, -1)
-         elseif(string.sub(type, 1, 6)=="killed") then
-          cond_object="killed" -- very special group (not working like others)
-         elseif(string.sub(type, 1, 5)=="unit_") then
-          cond_object="unit"
-          attribute=string.sub(type, 6, -1)
-         elseif(string.sub(type, 1, 6)=="group_") then
-          cond_object="group"
-          attribute=string.sub(type, 7, -1)
-         elseif(string.sub(type, 1, 5)=="team_") then
-          cond_object="group"
-          attribute=string.sub(type, 6, -1)
+         if(ctx.events[idEvent].params.uniset~=nil)then
+          local cond_object="group"
         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
-        ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["attribute"]=attribute
       end 
     end
   end     
