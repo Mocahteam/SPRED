@@ -334,6 +334,48 @@ local function ShowBriefing ()
   showMessage(getAMessage(ctx.messages["briefing"]))-- convention all json files have briefing attribute
 end
 
+local function registerUnit(springId,externalId,reduction,autoHeal)
+    ctx.armySpring[externalId]=springId
+    ctx.armyExternal[springId]=externalId
+    -- default values if not given
+    local reduction=reduction or 1
+    local autoHeal=autoHeal or (ctx.mission.description.autoHeal=="enabled")
+    
+    ctx.armyInformations[externalId]={}
+    local h=Spring.GetUnitHealth(springId)*reduction
+    ctx.armyInformations[externalId].health=h
+    if(reduction~=1)then
+      Spring.SetUnitHealth(springId,h)
+    end
+    ctx.armyInformations[externalId].previousHealth=ctx.armyInformations[externalId].health
+    ctx.armyInformations[externalId].autoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["autoHeal"]
+    ctx.armyInformations[externalId].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["idleAutoHeal"]
+    ctx.armyInformations[externalId].autoHealStatus=autoHeal
+    --Spring.Echo(ctx.armyInformations[externalId].autoHealStatus)
+    ctx.armyInformations[externalId].isUnderAttack=false
+end
+
+
+local function addUnitToGroups(externalId,groups) 
+  for g,group in pairs(groups) do
+  
+      -- create group if not existing
+    if(ctx.groupOfUnits[group]==nil) then
+      ctx.groupOfUnits[group]={}
+    end
+    
+    -- store in group if not already stored
+    local isAlreadyStored=false
+    for i = 1,table.getn(ctx.groupOfUnits[group]) do
+      if(externalId==ctx.groupOfUnits[group][i]) then isAlreadyStored=true end
+    end
+    if(not isAlreadyStored)then   
+      table.insert(ctx.groupOfUnits[group],externalId)
+    end
+  end
+end  
+   
+
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
 -- are related to conditions in the json files.
@@ -382,31 +424,15 @@ end
 -- Also add unit in group tables (team, type) 
 -------------------------------------
 local function createUnit(unitTable)
-    local posit=unitTable.position
-    local externalId=unitTable.id
-    local springId=Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
-
-    ctx.armyInformations[externalId]={}
-    ctx.armyInformations[externalId].health=Spring.GetUnitHealth(springId)*(unitTable.hp/100)
-    Spring.SetUnitHealth(springId,ctx.armyInformations[externalId].health)
-    ctx.armyInformations[externalId].previousHealth=ctx.armyInformations[externalId].health
-    ctx.armyInformations[externalId].autoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["autoHeal"]
-    ctx.armyInformations[externalId].idleAutoHeal = UnitDefs[Spring.GetUnitDefID(springId)]["idleAutoHeal"]
-    ctx.armyInformations[externalId].autoHealStatus=unitTable.autoHeal
-    --Spring.Echo(ctx.armyInformations[externalId].autoHealStatus)
-    ctx.armyInformations[externalId].isUnderAttack=false
-    --Spring.Echo("try to create unit with these informations")
-    Spring.SetUnitRotation(springId,0,-1*unitTable.orientation,0)
-    
-    -- <REGISTER>
-    ctx.armySpring[externalId]=springId  
-    ctx.armyExternal[springId]=externalId
-    local teamIndex="team_"..tostring(unitTable.team)
-    if(ctx.groupOfUnits[teamIndex]==nil) then
-      ctx.groupOfUnits[teamIndex]={}
-    end
-    table.insert(ctx.groupOfUnits[teamIndex],externalId)
-    -- </REGISTER>
+  local posit=unitTable.position
+  local externalId=unitTable.id
+  local springId=Spring.CreateUnit(unitTable.type, posit.x, posit.y,posit.z, "n", unitTable.team)
+  local reduction=(unitTable.hp/100) 
+  registerUnit(springId,externalId,reduction,unitTable.autoHeal)
+  --Spring.Echo("try to create unit with these informations")
+  Spring.SetUnitRotation(springId,0,-1*unitTable.orientation,0)
+  local teamIndex="team_"..tostring(unitTable.team)
+  addUnitToGroups(externalId,{teamIndex}) 
 end
 
 -------------------------------------
@@ -464,44 +490,16 @@ end
 -- created by an action 
 -------------------------------------
 local function createUnitAtPosition(act,position)
-    local y=Spring.GetGroundHeight(position.x,position.z)
-    local springId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
-    local actionName=act.name
-
-    -- ctx.armySpring[externalId] will be override each time this action is called
-    -- this is on purpose as some actions can take the last unit created by this unit creation action
-    local externalId=actionName.."_"..tostring(ctx.globalIndexOfCreatedUnits)
-    ctx.armySpring[externalId]=springId 
-    -- in order to keep to track of all created units
-    ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
-
-    
-    -- Nasty copy pasta from the other function to create unit
-    
-    --<REGISTER>
-    local gpIndex="group_"..actionName
-    if(ctx.groupOfUnits[gpIndex]==nil) then
-      ctx.groupOfUnits[gpIndex]={}
-    end
-    table.insert(ctx.groupOfUnits[gpIndex],externalId)
-    ctx.armySpring[externalId]=springId
-    ctx.armyExternal[springId]=externalId
-    local teamIndex="team_"..tostring(act.params.team)
-    if(ctx.groupOfUnits[teamIndex]==nil) then
-      ctx.groupOfUnits[teamIndex]={}
-    end
-    table.insert(ctx.groupOfUnits[teamIndex],externalId)
-    --</REGISTER>
-
-    ctx.armyInformations[externalId]={}
-    
-    --<set Heal and underAttack>
-    ctx.armyInformations[externalId]["health"]=Spring.GetUnitHealth(springId)
-    ctx.armyInformations[externalId]["previousHealth"]=Spring.GetUnitHealth(springId)
-    ctx.armyInformations[externalId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(springId)]["autoHeal"]
-    ctx.armyInformations[externalId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(springId)]["idleAutoHeal"]
-    ctx.armyInformations[externalId]["autoHealStatus"]=(ctx.mission.description.autoHeal=="enabled")
-    ctx.armyInformations[externalId]["isUnderAttack"]=false
+  local y=Spring.GetGroundHeight(position.x,position.z)
+  local springId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
+  local externalId=actionName.."_"..tostring(ctx.globalIndexOfCreatedUnits)
+  -- in order to keep to track of all created units
+  ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1 
+  local gpIndex="group_"..act.name
+  ctx.groupOfUnits[gpIndex]={} -- Implementation choice : only the last unit action-created is stored in the action-group, hence the deletion.
+  local teamIndex="team_"..tostring(act.params.team)
+  addUnitToGroups(externalId,{gpIndex,teamIndex}) 
+  registerUnit(springId,externalId)
     --<set Heal and underAttack>
 end
 
@@ -1333,26 +1331,15 @@ function gadget:RecvLuaMsg(msg, player)
       local creationTable=json.decode(jsonfile)
       -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
       --local attackedUnit=damageTable.attackedUnit
-      ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
       local realId="createdUnit_"..tostring(ctx.globalIndexOfCreatedUnits)
+      ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
       local springId=creationTable.unitID 
       
       -- <Register>
       local teamIndex="team_"..tostring(creationTable.unitTeam)
-      ctx.armySpring[realId]=springId
-      ctx.armyExternal[springId]=realId
-      --Spring.Echo("this unit is created")
-      --Spring.Echo(creationTable.unitID)
-      if(ctx.groupOfUnits[teamIndex]==nil) then
-        ctx.groupOfUnits[teamIndex]={}
-      end
-      local isAlreadyStored=false
-      for i = 1,table.getn(ctx.groupOfUnits[teamIndex]) do
-        if(realId==ctx.groupOfUnits[teamIndex][i]) then isAlreadyStored=true end
-      end
-      if(not isAlreadyStored)then   
-        table.insert(ctx.groupOfUnits[teamIndex],realId)
-      end
+
+      registerUnit(springId,realId)
+      addUnitToGroups(realId,{teamIndex})
       -- </Register>
       
     end 
