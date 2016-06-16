@@ -11,15 +11,15 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
-ctx.armySpring={}--table to store created spring units externalId->SpringId
-ctx.armyExternal={}--table to store created spring units SpringId->externalId
+ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
+ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
 ctx.armyInformations={}--table to store information on units externalId->Informations
 ctx.messages={}--associative array messageId->message type
 ctx.conditions={}--associative array idCond->condition
 ctx.events={}--associative array idCond->event
 ctx.variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
-ctx.zones={}
+ctx.zones={}--associative array idZone->zone
 ctx.killByTeams={}
 ctx.attackedUnits={}
 ctx.recordCreatedUnits=false
@@ -28,10 +28,10 @@ ctx.actionStack={} -- action to be applied on game state, allows to handle table
 ctx.success=nil -- when this global variable change (with event of type "end"), the game ends (= victory or defeat)
 ctx.outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 ctx.canUpdate=false
-ctx.mission={}
-ctx.startingFrame=5
+ctx.mission={} -- the full json describing the mission
+ctx.startingFrame=5 -- added delay before starting game. Used to avoid counting twice units placed at start
 ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
-ctx.speedFactor=1
+ctx.speedFactor=1 -- placeHolder to store current speed
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
 -------------------------------------
@@ -410,12 +410,16 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
   Spring.Echo(json.encode(conditionParams))
   Spring.Echo(json.encode(ctx.groupOfUnits))
   if(conditionParams.unitset~=nil)then
-     -- gives something like action_1, condition_3, groupe_2, team_0
-     local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
-     if(ctx.groupOfUnits[index]==nil)then
-      Spring.Echo("warning. This index gave nothing : "..index)
+     -- gives something like action_1, condition_3, groupe_2, team_0*
+     if (conditionParams.unitset.type=="unit") then
+      return {ctx.armySpring[conditionParams.unitset.value]}
+     else
+       local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
+       if(ctx.groupOfUnits[index]==nil)then
+        Spring.Echo("warning. This index gave nothing : "..index)
+       end
+       return ctx.groupOfUnits[index]
      end
-     return ctx.groupOfUnits[index]
   end
 end
 
