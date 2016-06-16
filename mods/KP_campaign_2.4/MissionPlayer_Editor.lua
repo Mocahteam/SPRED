@@ -465,42 +465,44 @@ end
 -------------------------------------
 local function createUnitAtPosition(act,position)
     local y=Spring.GetGroundHeight(position.x,position.z)
-    local spId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
-    ctx.armySpring[act.name]=spId
-    ctx.armyExternal[spId]=act.name
-    -- ctx.armySpring[act.name] will be override each time this action is called
+    local springId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
+    local actionName=act.name
+
+    -- ctx.armySpring[externalId] will be override each time this action is called
     -- this is on purpose as some actions can take the last unit created by this unit creation action
-    local realId=act.name..tostring(ctx.globalIndexOfCreatedUnits)
-    ctx.armySpring[realId]=spId 
+    local externalId=actionName..tostring(ctx.globalIndexOfCreatedUnits)
+    ctx.armySpring[externalId]=springId 
     -- in order to keep to track of all created units
     ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
-    local gpIndex="group_"..act.name
+
+    
+    -- Nasty copy pasta from the other function to create unit
+    
+    --<REGISTER>
+    local gpIndex="group_"..actionName
     if(ctx.groupOfUnits[gpIndex]==nil) then
       ctx.groupOfUnits[gpIndex]={}
     end
-    table.insert(ctx.groupOfUnits[gpIndex],realId)
-    
-    -- Nasty copy pasta from the other function to create unit
-
+    table.insert(ctx.groupOfUnits[gpIndex],externalId)
+    ctx.armySpring[externalId]=springId
+    ctx.armyExternal[springId]=externalId
     local teamIndex="team_"..tostring(act.params.team)
-    local typeIndex="type_"..tostring(act.params.unitType)
     if(ctx.groupOfUnits[teamIndex]==nil) then
       ctx.groupOfUnits[teamIndex]={}
     end
-    table.insert(ctx.groupOfUnits[teamIndex],realId)
-    -- update group units (type related)
-    if(ctx.groupOfUnits[typeIndex]==nil) then
-      ctx.groupOfUnits[typeIndex]={}
-    end
-    table.insert(ctx.groupOfUnits[typeIndex],realId)
+    table.insert(ctx.groupOfUnits[teamIndex],externalId)
+    --</REGISTER>
 
-    ctx.armyInformations[realId]={}
-    ctx.armyInformations[realId]["health"]=Spring.GetUnitHealth(spId)
-    ctx.armyInformations[realId]["previousHealth"]=Spring.GetUnitHealth(spId)
-    ctx.armyInformations[realId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["autoHeal"]
-    ctx.armyInformations[realId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(spId)]["idleAutoHeal"]
-    ctx.armyInformations[realId]["autoHealStatus"]=(ctx.mission.description.autoHeal=="enabled")
-    ctx.armyInformations[realId]["isUnderAttack"]=false
+    ctx.armyInformations[externalId]={}
+    
+    --<set Heal and underAttack>
+    ctx.armyInformations[externalId]["health"]=Spring.GetUnitHealth(springId)
+    ctx.armyInformations[externalId]["previousHealth"]=Spring.GetUnitHealth(springId)
+    ctx.armyInformations[externalId]["autoHeal"] = UnitDefs[Spring.GetUnitDefID(springId)]["autoHeal"]
+    ctx.armyInformations[externalId]["idleAutoHeal"] = UnitDefs[Spring.GetUnitDefID(springId)]["idleAutoHeal"]
+    ctx.armyInformations[externalId]["autoHealStatus"]=(ctx.mission.description.autoHeal=="enabled")
+    ctx.armyInformations[externalId]["isUnderAttack"]=false
+    --<set Heal and underAttack>
 end
 
 -------------------------------------
@@ -1200,7 +1202,7 @@ end
         createUnit(armyTable)
     end
   end
-  
+ 
   ShowBriefing()
    
 
