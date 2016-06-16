@@ -30,7 +30,7 @@ ctx.outputstate=nil -- if various success or defeat states exist, outputstate ca
 ctx.canUpdate=false
 ctx.mission={}
 ctx.startingFrame=5
-ctx.globalIndexOfCreatedUnits=0
+ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
 ctx.speedFactor=1
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
@@ -470,7 +470,7 @@ local function createUnitAtPosition(act,position)
 
     -- ctx.armySpring[externalId] will be override each time this action is called
     -- this is on purpose as some actions can take the last unit created by this unit creation action
-    local externalId=actionName..tostring(ctx.globalIndexOfCreatedUnits)
+    local externalId=actionName.."_"..tostring(ctx.globalIndexOfCreatedUnits)
     ctx.armySpring[externalId]=springId 
     -- in order to keep to track of all created units
     ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
@@ -1333,13 +1333,16 @@ function gadget:RecvLuaMsg(msg, player)
       local creationTable=json.decode(jsonfile)
       -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
       --local attackedUnit=damageTable.attackedUnit
-      local teamIndex="team_"..tostring(creationTable.unitTeam)
-      local typeIndex="type_"..tostring(UnitDefs[creationTable.unitDefID].name)
       ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
-      local realId="createdUnit"..tostring(ctx.globalIndexOfCreatedUnits)
-      ctx.armySpring[realId]=creationTable.unitID 
-      Spring.Echo("this unit is created")
-      Spring.Echo(creationTable.unitID)
+      local realId="createdUnit_"..tostring(ctx.globalIndexOfCreatedUnits)
+      local springId=creationTable.unitID 
+      
+      -- <Register>
+      local teamIndex="team_"..tostring(creationTable.unitTeam)
+      ctx.armySpring[realId]=springId
+      ctx.armyExternal[springId]=realId
+      --Spring.Echo("this unit is created")
+      --Spring.Echo(creationTable.unitID)
       if(ctx.groupOfUnits[teamIndex]==nil) then
         ctx.groupOfUnits[teamIndex]={}
       end
@@ -1350,11 +1353,8 @@ function gadget:RecvLuaMsg(msg, player)
       if(not isAlreadyStored)then   
         table.insert(ctx.groupOfUnits[teamIndex],realId)
       end
-      -- update group units (type related)
-      if(ctx.groupOfUnits[typeIndex]==nil) then
-        ctx.groupOfUnits[typeIndex]={}
-      end
-      table.insert(ctx.groupOfUnits[typeIndex],realId)
+      -- </Register>
+      
     end 
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,16)=="returnUnsyncVals")) then
     local jsonfile=string.sub(msg,17,-1)
