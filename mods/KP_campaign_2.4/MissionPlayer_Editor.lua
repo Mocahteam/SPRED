@@ -398,6 +398,11 @@ local function addUnitToGroups(externalId,groups)
   end
 end  
    
+local function addManyUnitsToGroups(unitSet,groups) 
+  for u,unit in pairs(unitSet)do
+    addUnitToGroups(unit,groups)  
+  end
+end
 
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
@@ -427,23 +432,30 @@ end
 
 -------------------------------------
 -- Extract the list of units related to a condition
+-- Side Effect : update condition-specific group in order to be used later, in the context of actions
 -------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams)
+local function extractListOfUnitsImpliedByCondition(conditionParams,context)
+  local context=context or "condition"
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
   --Spring.Echo(json.encode(ctx.groupOfUnits))
+  local groupToReturn={}
   if(conditionParams.unitset~=nil)then
      -- gives something like action_1, condition_3, groupe_2, team_0*
      if (conditionParams.unitset.type=="unit") then
-      return {ctx.armySpring[conditionParams.unitset.value]}
+      groupToReturn={ctx.armySpring[conditionParams.unitset.value]}
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
        if(ctx.groupOfUnits[index]==nil)then
           Spring.Echo("warning. This index gave nothing : "..index)
        end
-       return ctx.groupOfUnits[index]
+       groupToReturn={ctx.armySpring[conditionParams.unitset.value]}
      end
   end
+  if(context=="condition")then
+    addManyUnitsToGroups(groupToReturn,{"condtion_"..tostring(conditionParams.id)})
+  end
+  return groupToReturn
 end
 
 -------------------------------------
@@ -662,7 +674,7 @@ function ApplyAction (a)
       ApplyGroupableAction(u,a)
     else   
       --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
-      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
+      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,"action")
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
       if(a.type=="transfer")then
@@ -953,7 +965,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(ctx.conditions) do
     local object=c["object"]
     if(object=="unit")then
-      ctx.conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
+      EchoDebug("this should not occur anymore")
+      --ctx.conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
     elseif(object=="other")then  
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
