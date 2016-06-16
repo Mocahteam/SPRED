@@ -107,7 +107,7 @@ local function makeOperation(v1,v2,operation)
   if(operation=="/")then
     if(v2~=0)then return v1/v2 end
     else
-      Spring.Echo("division by 0 replaced by division by 1")
+      --Spring.Echo("division by 0 replaced by division by 1")
       return v1
     end
   if(operation=="%")then return v1 - math.floor(v1/v2)*v1 end
@@ -185,7 +185,7 @@ end
 local function isXZInsideZone(x,z,zoneId)
   local zone=ctx.zones[zoneId]
   if(zone==nil)then
-    Spring.Echo(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)))
+    --Spring.Echo(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)))
   end
   if(zone.type=="Rectangle") then
     local center_x=zone.center_xz.x
@@ -241,7 +241,7 @@ local function getARandomPositionInZone(idZone)
       return posit
     end 
   else
-    Spring.Echo("zone not found")
+    --Spring.Echo("zone not found")
   end   
 end
 
@@ -381,7 +381,7 @@ end
 -- are related to conditions in the json files.
 -------------------------------------
 local function isTriggerable(event)
-  Spring.Echo(json.encode(ctx.conditions))
+  --Spring.Echo(json.encode(ctx.conditions))
   local trigger=event.trigger
   if(trigger=="")then   -- empty string => create trigger by cunjunction (ands) of all conditions
   -- step 1 : write the trigger
@@ -406,9 +406,9 @@ end
 -- Extract the list of units related to a condition
 -------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams)
-  Spring.Echo("extract process")
-  Spring.Echo(json.encode(conditionParams))
-  Spring.Echo(json.encode(ctx.groupOfUnits))
+  --Spring.Echo("extract process")
+  --Spring.Echo(json.encode(conditionParams))
+  --Spring.Echo(json.encode(ctx.groupOfUnits))
   if(conditionParams.unitset~=nil)then
      -- gives something like action_1, condition_3, groupe_2, team_0*
      if (conditionParams.unitset.type=="unit") then
@@ -416,7 +416,7 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
        if(ctx.groupOfUnits[index]==nil)then
-        Spring.Echo("warning. This index gave nothing : "..index)
+        --Spring.Echo("warning. This index gave nothing : "..index)
        end
        return ctx.groupOfUnits[index]
      end
@@ -455,9 +455,9 @@ end
 -------------------------------------
 local function ApplyGroupableAction(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
-    Spring.Echo("valid")
+    --Spring.Echo("valid")
     if(act.type=="transfer") then
-      Spring.Echo("try to apply transfert")
+      --Spring.Echo("try to apply transfert")
       Spring.TransferUnit(unit,act.params.team)
     elseif(act.type=="kill")then
       Spring.DestroyUnit(unit)
@@ -608,8 +608,8 @@ local function ApplyNonGroupableAction(act)
     end 
   elseif(act.type=="changeVariableRandom") then
     local v=math.random(act.params.min,act.params.max)
-    Spring.Echo("drawn variable")
-    Spring.Echo(v)
+    --Spring.Echo("drawn variable")
+    --Spring.Echo(v)
     ctx.variables[act.params.variable]=v   
   elseif(act.type=="script") then
     load_code(act.params.script)
@@ -629,7 +629,7 @@ end
 function ApplyAction (a)
   --Spring.Echo("try to apply "..actionId)
   --Spring.Echo(json.encode(actions))
-  Spring.Echo("we try to apply action :"..tostring(a.name))
+  --Spring.Echo("we try to apply action :"..tostring(a.name))
   local a, groupable=isAGroupableTypeOfAction(a)
   --if(groupable)then
   if(groupable) then
@@ -643,8 +643,8 @@ function ApplyAction (a)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
       if(a.type=="transfer")then
-        Spring.Echo("about to transfer")
-        Spring.Echo(json.encode(listOfUnits))
+        --Spring.Echo("about to transfer")
+        --Spring.Echo(json.encode(listOfUnits))
       end
       
       if(listOfUnits~=nil)then
@@ -654,7 +654,7 @@ function ApplyAction (a)
           --
         end
       else
-        Spring.Echo("no units available for this action")
+        --Spring.Echo("no units available for this action")
       end
     end
   else
@@ -753,7 +753,7 @@ local function watchHeal(frameNumber)
         ctx.armyInformations[idAttacked].isUnderAttack=true
         --Spring.Echo("still under attack")
       else
-       -- Spring.Echo("no more under attack")
+       -- --Spring.Echo("no more under attack")
         ctx.armyInformations[idAttacked].isUnderAttack=false
       end
     end
@@ -796,8 +796,8 @@ local function processEvents(frameNumber)
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
-        Spring.Echo("try to apply the event with the following actions")
-        Spring.Echo(json.encode(event.actions))          
+        --Spring.Echo("try to apply the event with the following actions")
+        --Spring.Echo(json.encode(event.actions))          
         for j=1,table.getn(event.actions) do
           frameDelay=frameDelay+1
           local a=event.actions[j]
@@ -818,7 +818,7 @@ local function processEvents(frameNumber)
             end
             if(a.type=="waitTrigger")then 
               newevent.trigger=a.params.trigger 
-              Spring.Echo("update ctx Conditions")
+              --Spring.Echo("update ctx Conditions")
               for c,cond in pairs(newevent.listOfInvolvedConditions) do
                 ctx.conditions[cond.."_"..tostring(newevent.id)]=deepcopy(ctx.conditions[cond.."_"..tostring(event.id)])
                 newevent.conditions[cond.."_"..tostring(newevent.id)]=ctx.conditions[cond.."_"..tostring(newevent.id)]
@@ -827,7 +827,7 @@ local function processEvents(frameNumber)
           else
             if creationOfNewEvent==false then
               AddActionInStack(a,frameDelay)
-              Spring.Echo(a.name.." added to stack with delay"..tostring(frameDelay))
+              --Spring.Echo(a.name.." added to stack with delay"..tostring(frameDelay))
             else
               table.insert(newevent["actions"],a)
             end
@@ -875,7 +875,7 @@ if(Spring.ValidUnitID(unit))then
     end
     return action
   else
-    Spring.Echo("GetCurrentUnitAction called with invalid unit it")
+    --Spring.Echo("GetCurrentUnitAction called with invalid unit it")
     return nil
   end
 end
@@ -897,15 +897,15 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
     if(c.type=="zone") then
       local i=isUnitInZone(internalUnitId,c.params.zone)
-     --[[Spring.Echo("we check an unit in a zone")
-      Spring.Echo(internalUnitId)
-      Spring.Echo(c.params.zone)
+     --[[--Spring.Echo("we check an unit in a zone")
+      --Spring.Echo(internalUnitId)
+      --Spring.Echo(c.params.zone)
       if(i)then
-        Spring.Echo("IN DA ZONE :")
-        Spring.Echo(c.name)
+        --Spring.Echo("IN DA ZONE :")
+        --Spring.Echo(c.name)
       end
       if(i and c.name=="enterda")then
-        Spring.Echo("condition validated")
+        --Spring.Echo("condition validated")
       end--]]
       return i  
     elseif(c.type=="underAttack")then --untested yet
@@ -1132,7 +1132,7 @@ local function StartAfterJson ()
       center_xz={x=cZ.x1+demiLargeur, z=cZ.z1+demiLongueur}
       ctx.zones[idZone]={type="Rectangle",center_xz=center_xz,demiLargeur=demiLargeur,demiLongueur=demiLongueur} 
      else
-      Spring.Echo(cZ.type.." not implemented yet")
+      --Spring.Echo(cZ.type.." not implemented yet")
       end
     if(cZ.alwaysInView)then
       table.insert(specialPositionTables,{center_xz.x,center_xz.z})
@@ -1159,7 +1159,7 @@ end
       ctx.variables[name]=initValue
     end
   end  
-  Spring.Echo(json.encode(ctx.variables))
+  --Spring.Echo(json.encode(ctx.variables))
   
   
   
@@ -1170,7 +1170,7 @@ end
    -------SETTINGS----------------
    -------------------------------
   ctx.messages["briefing"]=ctx.mission.description.briefing
-  Spring.Echo(ctx.messages["briefing"])
+  --Spring.Echo(ctx.messages["briefing"])
   --  if(mission.description.mouse=="disabled") then
   --   SendToUnsynced("mouseDisabled", true)
   --  end
@@ -1221,7 +1221,7 @@ end
       end
     end
   end 
-  Spring.Echo(json.encode(ctx.groupOfUnits))
+  --Spring.Echo(json.encode(ctx.groupOfUnits))
    
 
 
@@ -1245,7 +1245,7 @@ end
          local type=currentCond.type
          local cond_object="other"
          if(currentCond.params.unitset~=nil)then
-          local cond_object="group"
+          cond_object="group"
         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
       end 
@@ -1256,7 +1256,7 @@ end
 
 -- shorthand for parseJson + StartAfterJson.
 local function Start(jsonFile) 
-  Spring.Echo(jsonFile)
+  --Spring.Echo(jsonFile)
   parseJson(jsonFile)
   StartAfterJson ()
 end
@@ -1311,7 +1311,7 @@ function gadget:RecvLuaMsg(msg, player)
       ctx.killByTeams[attackerTeam]={} 
     end
     table.insert(ctx.killByTeams[attackerTeam],killTable)
-    Spring.Echo(json.encode(ctx.killByTeams))
+    --Spring.Echo(json.encode(ctx.killByTeams))
     --Spring.Echo(json.encode(ctx.killByTeams))
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,6)=="damage")) then
     -- comes from mission runner unit destroyed
@@ -1331,7 +1331,7 @@ function gadget:RecvLuaMsg(msg, player)
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
       local jsonfile=string.sub(msg,13,-1)
-      Spring.Echo(jsonfile)
+      --Spring.Echo(jsonfile)
       local creationTable=json.decode(jsonfile)
       -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
       --local attackedUnit=damageTable.attackedUnit
