@@ -157,96 +157,96 @@ int TracesAnalyser::getRandomIntInRange(int min, int max) {
 std::string TracesAnalyser::getFeedback(const std::string& dir_path, const std::string& filename, int ind_mission, int ind_execution) {
 	rapidjson::Document doc;
 	rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-	doc.SetObject();
-	if (endless_loop && messages_map.find("endless_loop") != messages_map.end()) {
-		rapidjson::Value arrWarnings(rapidjson::kArrayType);
-		std::string msg = messages_map.at("endless_loop");
-		rapidjson::Value f(msg.c_str(), msg.size(), allocator);
-		arrWarnings.PushBack(f, allocator);
-		doc.AddMember("warnings", arrWarnings, allocator);
-	}
-	else if (!endless_loop) {
-		int ind_best = -1;
-		double best_score = 0;
-		std::vector<Trace::sp_trace> learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
-		if (getInfosOnMission(learner_traces, learner_gi, ind_mission) && getInfosOnExecution(learner_gi, ind_execution)) {	
-			std::vector<std::string> files = findExpertTracesFilenames();
-			bool reimport = false;
-			for(unsigned int i = 0; i < files.size(); i++) {
+	doc.SetObject();	
+	int ind_best = -1;
+	double best_score = 0;
+	std::vector<Trace::sp_trace> learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
+	if (getInfosOnMission(learner_traces, learner_gi, ind_mission) && getInfosOnExecution(learner_gi, ind_execution)) {
+		std::vector<std::string> files = findExpertTracesFilenames();
+		bool reimport = false;
+		for(unsigned int i = 0; i < files.size(); i++) {
+			if (reimport) {
+				learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
+				getInfosOnMission(learner_traces, learner_gi, ind_mission);
+				getInfosOnExecution(learner_gi, ind_execution);
+			}
+			std::vector<Trace::sp_trace> expert_traces = TracesParser::importTraceFromXml(expert_traces_dirname + "\\" + learner_gi.sme->getMissionName(), files.at(i));
+			if (getInfosOnMission(expert_traces, expert_gi) && getInfosOnExecution(expert_gi)) {
+				if (!learner_gi.exec_traces.empty() && !expert_gi.exec_traces.empty()) {
+					Call::call_vector expert_calls = Call::getCalls(expert_gi.exec_traces,true);
+					for (unsigned int j = 0; j < expert_calls.size(); j++) {
+						if (experts_calls_freq.find(expert_calls.at(j)->getLabel()) != experts_calls_freq.end())
+							experts_calls_freq.at(expert_calls.at(j)->getLabel())++;
+						else
+							experts_calls_freq.insert(std::make_pair<std::string,double>(expert_calls.at(j)->getLabel(),1));
+					}
+					reimport = addImplicitSequences(learner_gi.exec_traces, expert_gi.exec_traces);
+					if (reimport) {
+						std::cout << "learner traces have been modified" << std::endl;
+						for (unsigned int j = 0; j < learner_gi.exec_traces.size(); j++)
+							learner_gi.exec_traces.at(j)->display();
+					}
+					else
+						std::cout << "learner traces have not been modified" << std::endl;
+					if (addImplicitSequences(expert_gi.exec_traces, learner_gi.exec_traces)) {
+						std::cout << "expert traces have been modified" << std::endl;
+						for (unsigned int j = 0; j < expert_gi.exec_traces.size(); j++)
+							expert_gi.exec_traces.at(j)->display();
+					}
+					else
+						std::cout << "expert traces have not been modified" << std::endl;
+					std::pair<double,double> res = findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
+					double score = res.first / res.second;
+					std::cout << "norm : " << res.second << std::endl;
+					displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
+					std::cout << "similarity score : " << score << std::endl;
+					if (score >= best_score) {
+						best_score = score;
+						ind_best = i;
+					}
+				}
+			}
+		}
+		if (ind_best > -1) {
+			std::map<std::string,double>::iterator it = experts_calls_freq.begin();
+			while (it != experts_calls_freq.end())
+				(it++)->second /= files.size();
+			std::cout << files.at(ind_best) << " has been chosen for alignment with learner traces" << std::endl;
+			std::cout << "similarity score : " << best_score << std::endl;
+			std::vector<Trace::sp_trace> expert_traces = TracesParser::importTraceFromXml(expert_traces_dirname + "\\" + learner_gi.sme->getMissionName(), files.at(ind_best));
+			if (getInfosOnMission(expert_traces, expert_gi) && getInfosOnExecution(expert_gi)) {
 				if (reimport) {
 					learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
 					getInfosOnMission(learner_traces, learner_gi, ind_mission);
 					getInfosOnExecution(learner_gi, ind_execution);
 				}
-				std::vector<Trace::sp_trace> expert_traces = TracesParser::importTraceFromXml(expert_traces_dirname + "\\" + learner_gi.sme->getMissionName(), files.at(i));
-				if (getInfosOnMission(expert_traces, expert_gi) && getInfosOnExecution(expert_gi)) {
-					if (!learner_gi.exec_traces.empty() && !expert_gi.exec_traces.empty()) {
-						Call::call_vector expert_calls = Call::getCalls(expert_gi.exec_traces,true);
-						for (unsigned int j = 0; j < expert_calls.size(); j++) {
-							if (experts_calls_freq.find(expert_calls.at(j)->getLabel()) != experts_calls_freq.end())
-								experts_calls_freq.at(expert_calls.at(j)->getLabel())++;
-							else
-								experts_calls_freq.insert(std::make_pair<std::string,double>(expert_calls.at(j)->getLabel(),1));
-						}
-						reimport = addImplicitSequences(learner_gi.exec_traces, expert_gi.exec_traces);
-						if (reimport) {
-							std::cout << "learner traces have been modified" << std::endl;
-							for (unsigned int j = 0; j < learner_gi.exec_traces.size(); j++)
-								learner_gi.exec_traces.at(j)->display();
-						}
-						else
-							std::cout << "learner traces have not been modified" << std::endl;
-						if (addImplicitSequences(expert_gi.exec_traces, learner_gi.exec_traces)) {
-							std::cout << "expert traces have been modified" << std::endl;
-							for (unsigned int j = 0; j < expert_gi.exec_traces.size(); j++)
-								expert_gi.exec_traces.at(j)->display();
-						}
-						else
-							std::cout << "expert traces have not been modified" << std::endl;
-						std::pair<double,double> res = findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
-						double score = res.first / res.second;
-						std::cout << "norm : " << res.second << std::endl;
-						displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
-						std::cout << "similarity score : " << score << std::endl;
-						if (score >= best_score) {
-							best_score = score;
-							ind_best = i;
-						}
-					}
+				addImplicitSequences(learner_gi.exec_traces, expert_gi.exec_traces);
+				addImplicitSequences(expert_gi.exec_traces, learner_gi.exec_traces);
+				findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
+				displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
+
+				int num_attempts = learner_gi.getNumExecutions();
+				doc.AddMember("num_attempts", num_attempts, allocator); // nombre de tentatives
+				if (learner_gi.eee != NULL) {
+					doc.AddMember("execution_time", learner_gi.getExecutionTime(), allocator); // temps d'execution de la derniere tentative
+					doc.AddMember("ref_execution_time", expert_gi.getExecutionTime(), allocator); // temps d'execution reference
 				}
-			}
-			if (ind_best > -1) {
-				std::map<std::string,double>::iterator it = experts_calls_freq.begin();
-				while (it != experts_calls_freq.end())
-					(it++)->second /= files.size();
-				std::cout << files.at(ind_best) << " has been chosen for alignment with learner traces" << std::endl;
-				std::cout << "similarity score : " << best_score << std::endl;
-				std::vector<Trace::sp_trace> expert_traces = TracesParser::importTraceFromXml(expert_traces_dirname + "\\" + learner_gi.sme->getMissionName(), files.at(ind_best));
-				if (getInfosOnMission(expert_traces, expert_gi) && getInfosOnExecution(expert_gi)) {
-					if (reimport) {
-						learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
-						getInfosOnMission(learner_traces, learner_gi, ind_mission);
-						getInfosOnExecution(learner_gi, ind_execution);
-					}
-					addImplicitSequences(learner_gi.exec_traces, expert_gi.exec_traces);
-					addImplicitSequences(expert_gi.exec_traces, learner_gi.exec_traces);
-					findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
-					displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
-					
-					int num_attempts = learner_gi.getNumExecutions();
-					doc.AddMember("num_attempts", num_attempts, allocator); // nombre de tentatives
-					if (learner_gi.eee != NULL) {
-						doc.AddMember("execution_time", learner_gi.getExecutionTime(), allocator); // temps d'execution de la derniere tentative
-						doc.AddMember("ref_execution_time", expert_gi.getExecutionTime(), allocator); // temps d'execution reference
-					}
-					if (learner_gi.eme != NULL) {
-						double wait_time = learner_gi.getAverageWaitTime();
-						if (wait_time != -1)
-							doc.AddMember("exec_mean_wait_time", wait_time, allocator); // temps d'attente moyen entre deux tentatives
-						doc.AddMember("resolution_time", learner_gi.getResolutionTime(), allocator); // temps de resolution de la mission
-						doc.AddMember("ref_resolution_time", expert_gi.getResolutionTime(), allocator); // temps de resolution reference
-						doc.AddMember("won", learner_gi.eme->getStatus().compare("won") == 0, allocator); // victoire / defaite
-					}
+				if (learner_gi.eme != NULL) {
+					double wait_time = learner_gi.getAverageWaitTime();
+					if (wait_time != -1)
+						doc.AddMember("exec_mean_wait_time", wait_time, allocator); // temps d'attente moyen entre deux tentatives
+					doc.AddMember("resolution_time", learner_gi.getResolutionTime(), allocator); // temps de resolution de la mission
+					doc.AddMember("ref_resolution_time", expert_gi.getResolutionTime(), allocator); // temps de resolution reference
+					doc.AddMember("won", learner_gi.eme->getStatus().compare("won") == 0, allocator); // victoire / defaite
+				}
+				if (endless_loop && messages_map.find("endless_loop") != messages_map.end()) {
+					rapidjson::Value arrWarnings(rapidjson::kArrayType);
+					std::string msg = messages_map.at("endless_loop");
+					rapidjson::Value f(msg.c_str(), msg.size(), allocator);
+					arrWarnings.PushBack(f, allocator);
+					doc.AddMember("warnings", arrWarnings, allocator);
+				}
+				else if (!endless_loop) {
 					doc.AddMember("score", std::floor(best_score * 100), allocator);
 					std::vector<Feedback> feedbacks;
 					if (!ref_feedbacks.empty()) {
