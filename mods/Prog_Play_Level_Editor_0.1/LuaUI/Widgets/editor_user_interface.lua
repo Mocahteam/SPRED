@@ -2871,7 +2871,7 @@ drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if teamName[a.params[attr.id]] == item then
 				comboBox:Select(i)
@@ -2910,7 +2910,7 @@ drawFeatureFunctions["player"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if teamName[a.params[attr.id]] == item then
 				comboBox:Select(i)
@@ -2950,7 +2950,7 @@ drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		local groupName
 		for i, g in ipairs(unitGroups) do
 			if g.id == a.params[attr.id] then
@@ -2997,7 +2997,7 @@ drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		chosenZone = ""
 		for i, zone in ipairs(zoneList) do
 			if zone.id == a.params[attr.id] then
@@ -3036,7 +3036,7 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3069,7 +3069,7 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3094,7 +3094,7 @@ drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3127,7 +3127,7 @@ drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3152,7 +3152,7 @@ drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3188,7 +3188,7 @@ drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if idToCommands[tostring(a.params[attr.id])] == item then
 				comboBox:Select(i)
@@ -3213,7 +3213,7 @@ drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3241,7 +3241,7 @@ drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
