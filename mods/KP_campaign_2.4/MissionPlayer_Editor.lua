@@ -11,6 +11,8 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
+ctx.debugLevel=10 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ 
 ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
@@ -33,6 +35,14 @@ ctx.startingFrame=5 -- added delay before starting game. Used to avoid counting 
 ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
 ctx.speedFactor=1 -- placeHolder to store current speed
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
+
+
+local function EchoDebug(message,level)
+  local level=level or 10
+  if(level >= ctx.debugLevel)then
+    Spring.Echo(message)
+  end
+end
 
 -------------------------------------
 -- Load codegiven an environnement (table of variables that can be accessed and changed)
@@ -71,11 +81,24 @@ local function intersection(list1,list2)
   return inters
 end
 
+-- must give a number, string under the form of "8", "3" or v1+v2-3
+local function computeReference(expression)
+  local n1=tonumber(expression)
+  if(n1~=nil)then return n1 end
+
+  for v,value in pairs(ctx.variables)do
+    expression=string.gsub(expression, v, tostring(value))
+  end
+  local executableStatement="return("..expression..")"
+  return load_code(executableStatement)
+end
+
 -------------------------------------
--- Compare numerical values, a verbal "mode" being given 
+-- Compare an expression to a numerical value, a verbal "mode" being given 
 -- @return boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
+  reference=computeReference(reference)
   if(mode=="atmost")then return (value<=reference)      
   elseif(mode=="atleast")then  return (value>=reference)    
   elseif(mode=="exactly")then return (reference==value)  
@@ -416,7 +439,7 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
        if(ctx.groupOfUnits[index]==nil)then
-        --Spring.Echo("warning. This index gave nothing : "..index)
+          Spring.Echo("warning. This index gave nothing : "..index)
        end
        return ctx.groupOfUnits[index]
      end
@@ -627,9 +650,9 @@ end
 -- Handle group of units
 -------------------------------------
 function ApplyAction (a)
-  --Spring.Echo("try to apply "..actionId)
-  --Spring.Echo(json.encode(actions))
-  --Spring.Echo("we try to apply action :"..tostring(a.name))
+  EchoDebug("try to apply "..a.id,7)
+  EchoDebug(json.encode(a),7)
+  EchoDebug("we try to apply action :"..tostring(a.name),7)
   local a, groupable=isAGroupableTypeOfAction(a)
   --if(groupable)then
   if(groupable) then
@@ -796,8 +819,8 @@ local function processEvents(frameNumber)
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
-        --Spring.Echo("try to apply the event with the following actions")
-        --Spring.Echo(json.encode(event.actions))          
+        EchoDebug("try to apply the event with the following actions")
+        EchoDebug(json.encode(event.actions))          
         for j=1,table.getn(event.actions) do
           frameDelay=frameDelay+1
           local a=event.actions[j]
@@ -972,6 +995,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
           end 
         end
       end
+      --Spring.Echo(json.encode({idCond,c.params.number.number,total,count,c.params.number.comparison}))
       ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
@@ -1248,6 +1272,7 @@ end
           cond_object="group"
         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
+        Spring.Echo(json.encode(ctx.conditions))
       end 
     end
   end     
