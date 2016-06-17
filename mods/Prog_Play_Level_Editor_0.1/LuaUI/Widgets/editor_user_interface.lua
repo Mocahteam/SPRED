@@ -209,15 +209,12 @@ mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw c
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
-local cameraAutoButton -- Button to toggle camera auto state
+local mapSettingsButtons = {} -- Buttons in the mapsettings frame
 local cameraAutoState = "enabled" -- Current state of camera auto
-local autoHealButton -- Button to toggle auto heal state 
 local autoHealState = "disabled" -- Current state of auto heal
-local minimapButton -- Button to toggle minimap state
 local minimapState = "disabled" -- Current minimap state
-local mouseStateButton -- Button to toggle mouse state
 local mouseState = "disabled" -- Current state of the mouse
-local widgetsButton -- Button to show the widget window
+local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 
 -- Save states variables
@@ -579,27 +576,32 @@ function mapSettingsFrame()
 		mapNameEditBox:SetText(mapDescription.mapName)
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
 		if cameraAutoState == "enabled" then
-			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+			mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 		elseif cameraAutoState == "disabled" then
-			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+			mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 		end
 		if autoHealState == "enabled" then
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+			mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
 		elseif autoHealState == "disabled" then
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+			mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 		end
 		if mouseState == "enabled" then
-			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+			mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
 		elseif mouseState == "disabled" then
-			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+			mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 		end
 		if minimapState == "enabled" then
-			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 		elseif minimapState == "disabled" then
-			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 		end
-		widgetsButton.state.chosen = false -- Reset the state of this button
-		widgetsButton:InvalidateSelf()
+		if feedbackState == "enabled" then
+			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+		elseif feedbackState == "disabled" then
+			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+		end
+		mapSettingsButtons.widgetsButton.state.chosen = false -- Reset the state of this button
+		mapSettingsButtons.widgetsButton:InvalidateSelf()
 	end
 end
 
@@ -1091,59 +1093,72 @@ function initMapSettingsWindow()
 	end
 	colorUI.button.OnClick = {applyColor}
 	
-	cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	cameraAutoButton.OnClick = {
+	mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	mapSettingsButtons.cameraAutoButton.OnClick = {
 		function()
-			if cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
-				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+			if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 				cameraAutoState = "disabled"
 			else
-				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 				cameraAutoState = "enabled"
 			end
 		end
 	}
 	
-	autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
-	autoHealButton.OnClick = {
+	mapSettingsButtons.autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+	mapSettingsButtons.autoHealButton.OnClick = {
 		function()
-			if autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
-				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+			if mapSettingsButtons.autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
+				mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 				autoHealState = "disabled"
 			else
-				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+				mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
 				autoHealState = "enabled"
 			end
 		end
 	}
 	
-	mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	mouseStateButton.OnClick = {
+	mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+	mapSettingsButtons.mouseStateButton.OnClick = {
 		function()
-			if mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
-				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+			if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 				mouseState = "disabled"
 			else
-				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
 				mouseState = "enabled"
 			end
 		end
 	}
 	
-	minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
-	minimapButton.OnClick = {
+	mapSettingsButtons.minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+	mapSettingsButtons.minimapButton.OnClick = {
 		function()
-			if minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
-				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+			if mapSettingsButtons.minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
+				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 				minimapState = "disabled"
 			else
-				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 				minimapState = "enabled"
 			end
 		end
 	}
 	
-	widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
+	mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+	mapSettingsButtons.feedbackButton.OnClick = {
+		function()
+			if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
+				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+				feedbackState = "disabled"
+			else
+				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+				feedbackState = "enabled"
+			end
+		end
+	}
+	
+	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
 
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -3733,19 +3748,21 @@ function updateImportComboBoxes() -- Update the condition and action comboboxes 
 		table.insert(conditionList, c.name)
 	end
 	importConditionComboBox.items = conditionList
-	importConditionComboBox:InvalidateSelf()
-	if #conditionList > 0 then
-		importConditionComboBox:Select(1)
+	if #conditionList == 0 then
+		importConditionComboBox.items = { EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION_NO }
 	end
+	importConditionComboBox:InvalidateSelf()
+	importConditionComboBox:Select(1)
 	local actionList = {}
 	for i, a in ipairs(e.actions) do
 		table.insert(actionList, a.name)
 	end
 	importActionComboBox.items = actionList
-	importActionComboBox:InvalidateSelf()
-	if #actionList > 0 then
-		importActionComboBox:Select(1)
+	if #actionList == 0 then
+		importActionComboBox.items = { EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION_NO }
 	end
+	importActionComboBox:InvalidateSelf()
+	importActionComboBox:Select(1)
 end
 
 function importCondition() -- Import a condition to the current event, renaming it if necessary
@@ -4182,14 +4199,14 @@ end
 
 function showWidgetsWindow() -- Show the window that allows the user to change widgets status for his level
 	if windows['widgetsWindow'] then
-		widgetsButton.state.chosen = false
-		widgetsButton:InvalidateSelf()
+		mapSettingsButtons.widgetsButton.state.chosen = false
+		mapSettingsButtons.widgetsButton:InvalidateSelf()
 		windows['widgetsWindow']:Dispose()
 		windows['widgetsWindow'] = nil
 		return
 	end
-	widgetsButton.state.chosen = true
-	widgetsButton:InvalidateSelf()
+	mapSettingsButtons.widgetsButton.state.chosen = true
+	mapSettingsButtons.widgetsButton:InvalidateSelf()
 	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '50%')
 	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS, 20, "center", nil, "center")
 	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
@@ -4301,6 +4318,7 @@ function newMap() -- Set each parameter to its default value
 	autoHealState = "disabled"
 	mouseState = "disabled"
 	minimapState = "disabled"
+	feedbackState = "disabled"
 	initWidgetList()
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
@@ -4513,6 +4531,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
 	minimapState = loadedTable.description.minimap
+	feedbackState = loadedTable.description.feedback
 	for i, w in ipairs(loadedTable.description.widgets) do
 		for ii, wid in ipairs(customWidgets) do
 			if wid.name == w.name then
@@ -4805,6 +4824,7 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
 	savedTable.description.minimap = minimapState
+	savedTable.description.feedback = feedbackState
 	savedTable.description.widgets = {}
 	for i, w in ipairs(customWidgets) do
 		local widget = {}
