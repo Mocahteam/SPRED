@@ -510,7 +510,19 @@ local function ApplyGroupableAction(unit,act)
       local spUnit=ctx.armySpring[u]
       --Spring.GiveOrderToUnit(unit, act.params.command,{spUnit}, {})
       --Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
-      Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {}) 
+      Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {})   
+   elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
+    --bubbleUnit
+      local springUnitId=ctx.armySpring[act.params.unit]
+      if Spring.ValidUnitID(springUnitId) then
+        --Spring.Echo("try to send : DisplayMessageAboveUnit")
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
+        --[[
+        local x,y,z=Spring.GetUnitPosition(springUnitId)
+        Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
+        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
+        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))--]]
+      end
     end
 
     --Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
@@ -573,19 +585,7 @@ local function ApplyNonGroupableAction(act)
   
   elseif(act.type=="messageGlobal") then
     Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
-    
-   elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
-    --bubbleUnit
-      local springUnitId=ctx.armySpring[act.params.unit]
-      if Spring.ValidUnitID(springUnitId) then
-        --Spring.Echo("try to send : DisplayMessageAboveUnit")
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
-        --[[
-        local x,y,z=Spring.GetUnitPosition(springUnitId)
-        Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
-        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
-        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))--]]
-      end
+
   elseif(act.type=="messagePosition") then
     --Spring.Echo("try to send : DisplayMessagePosition")
   --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
@@ -657,9 +657,9 @@ end
 -- Handle group of units
 -------------------------------------
 function ApplyAction (a)
-  EchoDebug("try to apply "..a.id,7)
-  EchoDebug(json.encode(a),7)
+  
   EchoDebug("we try to apply action :"..tostring(a.name),7)
+  EchoDebug(json.encode(a),7)
   local a, groupable=isAGroupableTypeOfAction(a)
   --if(groupable)then
   if(groupable) then
@@ -671,7 +671,7 @@ function ApplyAction (a)
       --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
       --Spring.Echo("we try to apply the groupable action to this group")
-      --Spring.Echo(json.encode(listOfUnits))
+      EchoDebug("Units selected : "..json.encode(listOfUnits),7)
       if(a.type=="transfer")then
         --Spring.Echo("about to transfer")
         --Spring.Echo(json.encode(listOfUnits))
