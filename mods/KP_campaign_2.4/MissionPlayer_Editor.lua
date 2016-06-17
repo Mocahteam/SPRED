@@ -483,7 +483,7 @@ end
 -------------------------------------
 -- Apply a groupable action on a single unit
 -------------------------------------
-local function ApplyGroupableAction(unit,act)
+local function ApplyGroupableAction_onSpUnit(unit,act)
   if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
     --Spring.Echo("valid")
     if(act.type=="transfer") then
@@ -512,11 +512,9 @@ local function ApplyGroupableAction(unit,act)
       --Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
       Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {})   
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
-    --bubbleUnit
-      local springUnitId=ctx.armySpring[act.params.unit]
-      if Spring.ValidUnitID(springUnitId) then
-        --Spring.Echo("try to send : DisplayMessageAboveUnit")
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=springUnitId,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
+      if Spring.ValidUnitID(unit) then
+        EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitPosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -666,7 +664,7 @@ function ApplyAction (a)
     --extract units
     if(a.params.unit~=nil)then
       local u=ctx.armySpring[a.params.unit]
-      ApplyGroupableAction(u,a)
+      ApplyGroupableAction_onSpUnit(u,a)
     else   
       --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
       local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
@@ -680,7 +678,7 @@ function ApplyAction (a)
       if(listOfUnits~=nil)then
         for i, externalUnitId in ipairs(listOfUnits) do
           local unit=ctx.armySpring[externalUnitId]
-          ApplyGroupableAction(unit,a)
+          ApplyGroupableAction_onSpUnit(unit,a)
           --
         end
       else
@@ -1411,7 +1409,7 @@ Mission.Update = Update
 Mission.Stop = Stop
 Mission.ApplyAction = ApplyAction
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction=ApplyGroupableAction ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
 ctx.Spring=Spring 
 
 return Mission
