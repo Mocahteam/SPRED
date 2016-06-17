@@ -11,7 +11,7 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
-ctx.debugLevel=7 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ctx.debugLevel=4 -- in order to filter Spring Echo between 0 (all) and 10 (none)
  
 ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
@@ -400,12 +400,12 @@ end
    
 local function addManyUnitsToGroups(unitSet,groups) 
   for u,unit in pairs(unitSet)do
-    EchoDebug(unit,7)
-    EchoDebug(json.encode(groups),7)
+    EchoDebug(unit,1)
+    EchoDebug(json.encode(groups),1)
     addUnitToGroups(unit,groups)  
   end
-  EchoDebug("state of groupOfUnits after insertion",7)
-  EchoDebug(json.encode(ctx.groupOfUnits),7)
+  EchoDebug("state of groupOfUnits after insertion",6)
+  EchoDebug(json.encode(ctx.groupOfUnits),6)
 end
 
 -------------------------------------
@@ -438,9 +438,8 @@ end
 -- Extract the list of units related to a condition
 -- Side Effect : update condition-specific group in order to be used later, in the context of actions
 -------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams,context,id)
+local function extractListOfUnitsImpliedByCondition(conditionParams)
   --EchoDebug("debug : "..tostring(id))
-  local context=context or "condition"
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
   --Spring.Echo(json.encode(ctx.groupOfUnits))
@@ -461,7 +460,9 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,context,id)
     local groupCond="condition_"..tostring(id)
     EchoDebug("add units to : "..groupCond,5)
     EchoDebug(json.encode(conditionParams),5)
-    addManyUnitsToGroups(groupToReturn,{groupCond})
+    if(groupToReturn~=nil)then
+      addManyUnitsToGroups(groupToReturn,{groupCond})
+    end
   end
   return groupToReturn
 end
@@ -682,7 +683,7 @@ function ApplyAction (a)
       ApplyGroupableAction(u,a)
     else   
       --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
-      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params,"action")
+      local listOfUnits=extractListOfUnitsImpliedByCondition(a.params)
       --Spring.Echo("we try to apply the groupable action to this group")
       --Spring.Echo(json.encode(listOfUnits))
       if(a.type=="transfer")then
@@ -1005,8 +1006,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="group")then  
       --local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
       
-      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,"condition",c.id)
-      EchoDebug(json.encode(externalUnitList),2)
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
+      --EchoDebug(json.encode(externalUnitList),6)
       local count=0
       local total=0
       if(externalUnitList~=nil)then
@@ -1014,7 +1015,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
         --Spring.Echo(json.encode(externalUnitList))
         for u,unit in ipairs(externalUnitList) do
           if(UpdateConditionOnUnit(unit,c)) then
-           count=count+1
+            addUnitToGroups(unit,{"condition_"..c.id}) 
+            count=count+1
           end 
         end
       end
@@ -1023,7 +1025,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
         local tlkup={[1]={"targetTeam","team"},[2]={"unitType","type"},[3]={"group","group"}}
-        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,"condition",c.id)
+        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
         --Spring.Echo(json.encode(externalUnitList))
         local total=table.getn(externalUnitList)
         local count=0
