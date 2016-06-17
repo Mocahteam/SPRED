@@ -11,7 +11,7 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
-ctx.debugLevel=10 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ctx.debugLevel=0 -- in order to filter Spring Echo between 0 (all) and 10 (none)
  
 ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
@@ -449,7 +449,7 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,context)
        if(ctx.groupOfUnits[index]==nil)then
           Spring.Echo("warning. This index gave nothing : "..index)
        end
-       groupToReturn={ctx.armySpring[conditionParams.unitset.value]}
+       groupToReturn={ctx.groupOfUnits[index]}
      end
   end
   if(context=="condition")then
@@ -997,6 +997,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="group")then  
       --local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
       local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
+      EchoDebug(json.encode(externalUnitList),2)
       local count=0
       local total=0
       if(externalUnitList~=nil)then
@@ -1052,6 +1053,10 @@ local function UpdateConditionsTruthfulness (frameNumber)
         if(not found)then ctx.conditions[idCond]["currentlyValid"]=false end 
       end
     end
+    Spring.Echo("debuuuuuug")
+    EchoDebug("state of condition :",2)
+    EchoDebug(idCond,2)
+    EchoDebug(ctx.conditions[idCond]["currentlyValid"],2)
   end 
 end
 
