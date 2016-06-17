@@ -37,9 +37,9 @@ L'éditeur à proprement parler est composé de :
 \item Un widget permettant de récupérer la liste de tous les widgets présents. (editor\_widget\_list.lua)
 \item Un widget affichant un écran de chargement pour empêcher l'utilisateur d'interagir avec l'interface lorsqu'elle n'est pas complètement chargée (editor\_loading\_screen.lua)
 \item Un widget permettant de ne pas afficher les boutons permettant de donner des ordres aux unités. (hide\_commands.lua)
-\item Un gadget permettant l'utilisation de code synchronisé\footnote{Par exemple, la création d'une unité sur le terrain.}. (editor\_gadget.lua)
+\item Un gadget permettant l'utilisation de code synchronisé (Par exemple, la création d'une unité sur le terrain). (editor\_gadget.lua)
 \item Deux fichiers contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua et LauncherStrings.lua)
-\item Un fichier définissant une classe\footnote{Au sens de Lua.} machine à états. (StateMachine.lua)
+\item Un fichier définissant une classe "machine à états" et ses différentes instances. (StateMachine.lua)
 \item Un fichier contenant des fonctions utilitaires. (Misc.lua)
 \item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua)
 \end{itemize}
@@ -114,7 +114,7 @@ Les fonctions de cette partie concernent la gestion du système de déclencheurs
 \subsubsection{Paramètres de la carte}
 \paragraph{}
 Les fonctions de cette partie sauvegardent les paramètres globaux du niveau, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
-\subsubsection{Entrées / Sorties}
+\subsubsection{Sauvegarde / Chargement}
 \subsubsection{Fonctions de dessin}
 \subsubsection{Listeners\label{listeners}}
 \subsection{Gadget}

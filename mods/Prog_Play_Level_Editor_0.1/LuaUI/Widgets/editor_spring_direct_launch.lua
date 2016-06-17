@@ -1803,4 +1803,7 @@ function widget:KeyPress(key, mods)
 		LoadState(-1)
 		return true
 	end
+	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+		return true
+	end
 end

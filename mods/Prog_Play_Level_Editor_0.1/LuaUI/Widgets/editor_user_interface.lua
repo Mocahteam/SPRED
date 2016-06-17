@@ -663,7 +663,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
+	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0", "unbindkeyset backspace") -- TODO : change fps 1 to fps 0 in release
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -2384,6 +2384,8 @@ function removeEvent(i)
 	removeSecondWindows() -- close windows to prevent bugs
 	removeThirdWindows() 
 	currentEvent = nil
+	currentCondition = nil
+	currentAction = nil
 	saveState()
 end
 
@@ -4213,11 +4215,11 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
---			I/O functions
+--			Save/load functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function newMap()
+function newMap() -- Set each parameter to its default value
 	-- Units
 	unitHP = {}
 	unitAutoHeal = {}
@@ -4313,7 +4315,7 @@ function newMap()
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
 
-function newMapInitialize()
+function newMapInitialize() -- Open the window of the state you were in before load/new
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
 	updateTeamConfig = true
@@ -4339,8 +4341,8 @@ function newMapInitialize()
 	saveState()
 end
 
-function loadMap(name)
-	if loading then return end
+function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
+	if loading then return end -- Don't load if already loading
 	loading = true
 	newMap()
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
@@ -4351,16 +4353,16 @@ function loadMap(name)
 	end
 	if loadedTable then
 		-- Units
-		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
+		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
 		-- See next method
 	else
 		loading = false
 	end
 end
 
-function GetNewUnitIDsAndContinueLoadMap(unitIDs)
-	local uIDs = json.decode(unitIDs)
-	for i, u in ipairs(loadedTable.units) do
+function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once the units have been instanciated with new ids
+	local uIDs = json.decode(unitIDs) -- get the associative table between old ids and new ids
+	for i, u in ipairs(loadedTable.units) do -- set up unit parameters
 		unitHP[uIDs[tostring(u.id)]] = u.hp
 		unitAutoHeal[uIDs[tostring(u.id)]] = u.autoHeal
 	end
@@ -4444,11 +4446,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, cond in ipairs(conditions_list) do
 					for iiii, attr in ipairs(cond.attributes) do
-						if attr.id == k and attr.type == "unit" and type(c.params[attr.id]) == "number" then
-							updateUnitID = "unit"
-							break
-						elseif attr.id == k and attr.type == "unitset" and type(c.params[attr.id]) == "number" then
-							updateUnitID = "unitset"
+						if attr.id == k and (attr.type == "unit" or attr.type == "unitset") and p.type == "unit" then -- if the condition has a unit as parameter, ask to update the old id to the new id
+							updateUnitID = true
 							break
 						end
 					end
@@ -4456,9 +4455,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID == "unit" then
-					condition.params[k] = uIDs[tostring(p)]
-				elseif updateUnitID == "unitset" then
+				if updateUnitID then
 					condition.params[k] = {}
 					condition.params[k].type = p.type
 					condition.params[k].value = uIDs[tostring(p.value)]
@@ -4482,11 +4479,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, act in ipairs(actions_list) do
 					for iiii, attr in ipairs(act.attributes) do
-						if attr.id == k and attr.type == "unit" then
-							updateUnitID = "unit"
-							break
-						elseif attr.id == k and attr.type == "unitset" then
-							updateUnitID = "unitset"
+						if attr.id == k and (attr.type == "unit" or attr.type == "unitset") and p.type == "unit" then
+							updateUnitID = true
 							break
 						end
 					end
@@ -4494,9 +4488,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID == "unit" then
-					action.params[k] = uIDs[tostring(p)]
-				elseif updateUnitID == "unitset" and p.type == "unit" then
+				if updateUnitID then
 					action.params[k] = {}
 					action.params[k].type = p.type
 					action.params[k].value = uIDs[tostring(p.value)]
@@ -4543,7 +4535,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	NeedToBeSaved = true
 end
 
-function saveMap()
+function saveMap() -- Save the table containing the data of the mission into a file
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
@@ -4553,43 +4545,46 @@ function saveMap()
 	local saveName = savedTable.description.saveName
 	
 	-- Write
-	local jsonfile = json.encode(savedTable) -- TODO remove format
-	jsonfile = string.gsub(jsonfile, ",", ",\n")
-	jsonfile = string.gsub(jsonfile, "}", "\n}")
-	jsonfile = string.gsub(jsonfile, "{", "{\n")
-	jsonfile = string.gsub(jsonfile, "%[", "[\n")
-	jsonfile = string.gsub(jsonfile, "%]", " \n]")
-	local count = 0
-	jsonfile = string.gsub(
-		jsonfile,
-		".",
-		function(c)
-			if c == "\n" then
-				local rtr = "\n"
-				for i = 1, count, 1 do
-					rtr = rtr.."\t"
+	local jsonfile = json.encode(savedTable)
+	local DBG_formatString = true -- TODO remove format
+	if DBG_formatString then
+		jsonfile = string.gsub(jsonfile, ",", ",\n")
+		jsonfile = string.gsub(jsonfile, "}", "\n}")
+		jsonfile = string.gsub(jsonfile, "{", "{\n")
+		jsonfile = string.gsub(jsonfile, "%[", "[\n")
+		jsonfile = string.gsub(jsonfile, "%]", " \n]")
+		local count = 0
+		jsonfile = string.gsub(
+			jsonfile,
+			".",
+			function(c)
+				if c == "\n" then
+					local rtr = "\n"
+					for i = 1, count, 1 do
+						rtr = rtr.."\t"
+					end
+					return rtr
 				end
-				return rtr
+				if c == "[" or c == "{" then
+					count = count + 1
+					return c
+				end
+				if c == "]" or c == "}" then
+					count = count - 1
+					return c
+				end
 			end
-			if c == "[" or c == "{" then
-				count = count + 1
-				return c
-			end
-			if c == "]" or c == "}" then
-				count = count - 1
-				return c
-			end
-		end
-	)
-	jsonfile = string.gsub(jsonfile, "\t}", "}")
-	jsonfile = string.gsub(jsonfile, "\t%]", "]")
+		)
+		jsonfile = string.gsub(jsonfile, "\t}", "}")
+		jsonfile = string.gsub(jsonfile, "\t%]", "]")
+	end
 	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 	NeedToBeSaved = false
 end
 
-function newMapFrame()
+function newMapFrame() -- Show a window when the user clicks on the new button
 	if windows["newMapWindow"] then
 		Screen0:RemoveChild(windows["newMapWindow"])
 		windows["newMapWindow"]:Dispose()
@@ -4611,7 +4606,7 @@ function newMapFrame()
 	end
 end
 
-function loadMapFrame()
+function loadMapFrame() -- Show a window when the user clicks on the load button
 	if windows["loadWindow"] then
 		Screen0:RemoveChild(windows["loadWindow"])
 		windows["loadWindow"]:Dispose()
@@ -4655,7 +4650,7 @@ function loadMapFrame()
 	end
 end
 
-function saveMapFrame()
+function saveMapFrame() -- Show a window when the user clicks on the save button
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
@@ -4689,7 +4684,7 @@ function saveMapFrame()
 	end
 end
 
-function backToMenuFrame()
+function backToMenuFrame() -- Show a window when the user clicks on the main menu button
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
 		windows["backToMenu"]:Dispose()
@@ -4701,7 +4696,7 @@ function backToMenuFrame()
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 
-function quitFrame()
+function quitFrame() -- Show a window when the user clicks on the quit button
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
 		windows["backToMenu"]:Dispose()
@@ -4713,11 +4708,11 @@ function quitFrame()
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 
-function beginLoadLevel(name)
+function beginLoadLevel(name) -- Callback used to load a map directly from the launcher
 	loadMap(name)
 end
 
-function loadLevelWithRightMap(name)
+function loadLevelWithRightMap(name) -- Load a level in the map associated to the level if the map is different
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
@@ -4759,7 +4754,7 @@ function loadLevelWithRightMap(name)
 	end
 end
 
-function newLevelWithRightMap(name)
+function newLevelWithRightMap(name) -- Creates a new level on the selected map
 	if name == Game.mapName then
 		newMap()
 		newMapInitialize()
@@ -4796,13 +4791,7 @@ function newLevelWithRightMap(name)
 	end
 end
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
---
---			Save/load functions
---
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-function encodeSaveTable()
+function encodeSaveTable() -- Transforms parameters to a table containing all the information needed to store the level
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
@@ -4889,7 +4878,7 @@ function encodeSaveTable()
 	return savedTable
 end
 
-function saveState()
+function saveState() -- Save the state and put it in the stack
 	NeedToBeSaved = true
 	if loadLock and not initialize then
 		local savedTable = encodeSaveTable()
@@ -4902,7 +4891,7 @@ function saveState()
 	end
 end
 
-function loadState(direction)
+function loadState(direction) -- Load a state from the stack depending on the direction (CTRL + Y or Z)
 	NeedToBeSaved = true
 	loadLock = false
 	saveCurrentEvent = currentEvent
@@ -4921,7 +4910,7 @@ function loadState(direction)
 	end
 end
 
-function continueLoadState()
+function continueLoadState() -- Open windows that were opened before ctrl + z or y
 	if saveCurrentEvent and events[saveCurrentEvent] then
 		editEvent(saveCurrentEvent)
 		if saveCurrentAction and events[saveCurrentEvent].actions[saveCurrentAction] then
@@ -4942,7 +4931,7 @@ function continueLoadState()
 	loadLock = true
 end
 
-function requestSave()
+function requestSave() -- Save only after everything required has been done
 	toSave = true
 end
 
@@ -5326,10 +5315,12 @@ function widget:MousePress(mx, my, button)
 		-- STATE TRIGGER
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 			local e = {}
-			if currentAction then
-				e = events[currentEvent].actions[currentAction]
-			elseif currentCondition then
-				e = events[currentEvent].conditions[currentCondition]
+			if currentEvent then
+				if currentAction then
+					e = events[currentEvent].actions[currentAction]
+				elseif currentCondition then
+					e = events[currentEvent].conditions[currentCondition]
+				end
 			end
 			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
 				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
@@ -5582,9 +5573,9 @@ function widget:KeyPress(key, mods)
 			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
 				addUnitGroup(newUnitGroupEditBox.text)
 				clearTemporaryWindows()
-				return true
 			end
 		end
+		return true
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
