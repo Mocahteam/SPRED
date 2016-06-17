@@ -11,7 +11,7 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
-ctx.debugLevel=0 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ctx.debugLevel=7 -- in order to filter Spring Echo between 0 (all) and 10 (none)
  
 ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
@@ -400,8 +400,12 @@ end
    
 local function addManyUnitsToGroups(unitSet,groups) 
   for u,unit in pairs(unitSet)do
+    EchoDebug(unit,7)
+    EchoDebug(json.encode(groups),7)
     addUnitToGroups(unit,groups)  
   end
+  EchoDebug("state of groupOfUnits after insertion",7)
+  EchoDebug(json.encode(ctx.groupOfUnits),7)
 end
 
 -------------------------------------
@@ -434,7 +438,8 @@ end
 -- Extract the list of units related to a condition
 -- Side Effect : update condition-specific group in order to be used later, in the context of actions
 -------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams,context)
+local function extractListOfUnitsImpliedByCondition(conditionParams,context,id)
+  --EchoDebug("debug : "..tostring(id))
   local context=context or "condition"
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
@@ -449,11 +454,14 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,context)
        if(ctx.groupOfUnits[index]==nil)then
           Spring.Echo("warning. This index gave nothing : "..index)
        end
-       groupToReturn={ctx.groupOfUnits[index]}
+       groupToReturn=ctx.groupOfUnits[index]
      end
   end
   if(context=="condition")then
-    addManyUnitsToGroups(groupToReturn,{"condtion_"..tostring(conditionParams.id)})
+    local groupCond="condition_"..tostring(id)
+    EchoDebug("add units to : "..groupCond,5)
+    EchoDebug(json.encode(conditionParams),5)
+    addManyUnitsToGroups(groupToReturn,{groupCond})
   end
   return groupToReturn
 end
@@ -831,8 +839,8 @@ local function processEvents(frameNumber)
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
-        EchoDebug("try to apply the event with the following actions")
-        EchoDebug(json.encode(event.actions))          
+        EchoDebug("try to apply the event with the following actions",7)
+        EchoDebug(json.encode(event.actions),7)          
         for j=1,table.getn(event.actions) do
           frameDelay=frameDelay+1
           local a=event.actions[j]
@@ -996,7 +1004,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
       
     elseif(object=="group")then  
       --local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
-      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
+      
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,"condition",c.id)
       EchoDebug(json.encode(externalUnitList),2)
       local count=0
       local total=0
@@ -1014,7 +1023,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="killed")then 
       if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
         local tlkup={[1]={"targetTeam","team"},[2]={"unitType","type"},[3]={"group","group"}}
-        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,tlkup)
+        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params,"condition",c.id)
         --Spring.Echo(json.encode(externalUnitList))
         local total=table.getn(externalUnitList)
         local count=0
@@ -1053,7 +1062,6 @@ local function UpdateConditionsTruthfulness (frameNumber)
         if(not found)then ctx.conditions[idCond]["currentlyValid"]=false end 
       end
     end
-    Spring.Echo("debuuuuuug")
     EchoDebug("state of condition :",2)
     EchoDebug(idCond,2)
     EchoDebug(ctx.conditions[idCond]["currentlyValid"],2)
