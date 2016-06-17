@@ -11,8 +11,11 @@ local replacements={}
 replacements["gray"] = "\255\100\100\100"
 
 local ctx={}
-ctx.debugLevel=4 -- in order to filter Spring Echo between 0 (all) and 10 (none)
- 
+--ctx is a table containing main variables and functions (cf end of file). 
+--ctx passed as a "context" when loading custom code from the user (script actions). 
+--This way, the user can get and set values related to the game 
+
+ctx.debugLevel=0 -- in order to filter Spring Echo between 0 (all) and 10 (none)
 ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
@@ -398,16 +401,6 @@ local function addUnitToGroups(externalId,groups)
   end
 end  
    
-local function addManyUnitsToGroups(unitSet,groups) 
-  for u,unit in pairs(unitSet)do
-    EchoDebug(unit,1)
-    EchoDebug(json.encode(groups),1)
-    addUnitToGroups(unit,groups)  
-  end
-  EchoDebug("state of groupOfUnits after insertion",6)
-  EchoDebug(json.encode(ctx.groupOfUnits),6)
-end
-
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
 -- are related to conditions in the json files.
@@ -447,22 +440,15 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
   if(conditionParams.unitset~=nil)then
      -- gives something like action_1, condition_3, groupe_2, team_0*
      if (conditionParams.unitset.type=="unit") then
-      groupToReturn={ctx.armySpring[conditionParams.unitset.value]}
+      groupToReturn={conditionParams.unitset.value}
+      EchoDebug(json.encode({conditionParams,groupToReturn}),2)
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
        if(ctx.groupOfUnits[index]==nil)then
-          Spring.Echo("warning. This index gave nothing : "..index)
+         EchoDebug("warning. This index gave nothing : "..index)
        end
        groupToReturn=ctx.groupOfUnits[index]
      end
-  end
-  if(context=="condition")then
-    local groupCond="condition_"..tostring(id)
-    EchoDebug("add units to : "..groupCond,5)
-    EchoDebug(json.encode(conditionParams),5)
-    if(groupToReturn~=nil)then
-      addManyUnitsToGroups(groupToReturn,{groupCond})
-    end
   end
   return groupToReturn
 end
@@ -513,7 +499,7 @@ local function ApplyGroupableAction(unit,act)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
       Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
     elseif(act.type=="group")then
-      table.insert(ctx.groupOfUnits["group_"..act.params.group],unit)
+      table.insert(ctx.groupOfUnits["group_"..act.params.group],unit) --TODO: check this one
     elseif(act.type=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.type=="orderPosition")then
@@ -543,7 +529,7 @@ local function createUnitAtPosition(act,position)
   local externalId=actionName.."_"..tostring(ctx.globalIndexOfCreatedUnits)
   -- in order to keep to track of all created units
   ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1 
-  local gpIndex="group_"..act.name
+  local gpIndex="group_"..act.id
   ctx.groupOfUnits[gpIndex]={} -- Implementation choice : only the last unit action-created is stored in the action-group, hence the deletion.
   local teamIndex="team_"..tostring(act.params.team)
   addUnitToGroups(externalId,{gpIndex,teamIndex}) 
@@ -1067,6 +1053,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     EchoDebug("state of condition :",2)
     EchoDebug(idCond,2)
     EchoDebug(ctx.conditions[idCond]["currentlyValid"],2)
+    EchoDebug("current group of units",2)
+    EchoDebug(json.encode(ctx.groupOfUnits),2)
   end 
 end
 
@@ -1265,8 +1253,8 @@ end
  -------------------------------
   if(ctx.mission["groups"]~=nil) then
     for i=1, table.getn(ctx.mission.groups) do
-      local groupname=ctx.mission.groups[i].name
-      local groupIndex="group_"..groupname
+      local groupId=ctx.mission.groups[i].id
+      local groupIndex="group_"..groupId
       ctx.groupOfUnits[groupIndex]={}
       for i,unit in ipairs(ctx.mission.groups[i].units) do
         table.insert(ctx.groupOfUnits[groupIndex],unit)
@@ -1300,7 +1288,7 @@ end
           cond_object="group"
         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
-        Spring.Echo(json.encode(ctx.conditions))
+       EchoDebug(json.encode(ctx.conditions))
       end 
     end
   end     
