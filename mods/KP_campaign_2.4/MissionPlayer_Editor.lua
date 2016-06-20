@@ -536,7 +536,7 @@ end
 local function createUnitAtPosition(act,position)
   local y=Spring.GetGroundHeight(position.x,position.z)
   local springId= Spring.CreateUnit(act.params.unitType, position.x,y,position.z, "n",act.params.team)
-  local externalId=actionName.."_"..tostring(ctx.globalIndexOfCreatedUnits)
+  local externalId=act.name.."_"..tostring(ctx.globalIndexOfCreatedUnits)
   -- in order to keep to track of all created units
   ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1 
   local gpIndex="group_"..act.id
@@ -624,12 +624,7 @@ local function ApplyNonGroupableAction(act)
     ctx.variables[act.params.variable]=(act.params.boolean=="true")
   elseif(act.type=="changeVariableVariable")then
     ctx.variables[act.params.variable1]=makeOperation(ctx.variables[act.params.variable2],ctx.variables[act.params.variable3],act.params.operator)           
-        
-  elseif(act.type=="createUnitAtPosition") then
-    --ctx.globalIndexOfCreatedUnits
-    local posFound=extractPosition(act.params.position)
-     createUnitAtPosition(act,posFound)
-  elseif(act.type=="createUnitsInZone") then
+  elseif(act.type=="createUnits") then
     for var=1,act.params.number do
       local position=getARandomPositionInZone(act.params.zone)
       createUnitAtPosition(act,position)
@@ -646,6 +641,8 @@ local function ApplyNonGroupableAction(act)
     local widgetName=act.params.widget
     local activation=(act.type=="enableWidget")
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+  else
+    EchoDebug("this action is not recognized : "..act.type,8)  
   end
 end
 
