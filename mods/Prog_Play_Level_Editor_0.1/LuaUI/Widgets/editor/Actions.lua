@@ -108,6 +108,19 @@ actions_list = {
 		}
 	},
 	{
+		type = "feedback",
+		filter = "Game",
+		typeText = "Change feedback state",
+		text = "Feedback is now <State>.",
+		attributes = {
+			{
+				text = "<State>",
+				type = "toggle",
+				id = "toggle"
+			}
+		}
+	},
+	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
@@ -306,7 +319,7 @@ actions_list = {
 			},
 			{
 				text = "<Target>",
-				type = "unit",
+				type = "unitset",
 				id = "target"
 			}
 		}

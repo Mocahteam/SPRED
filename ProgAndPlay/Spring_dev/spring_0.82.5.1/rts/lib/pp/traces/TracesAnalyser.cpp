@@ -2,13 +2,13 @@
 #include "TracesParser.h"
 #include "constantList_KP4.4.h"
 
-const char* TracesAnalyser::feedbackTypesArr[] = {"useful_call", "useless_call", "seq_extra", "seq_lack", "ind_seq_num", "dist_seq_num", "call_extra", "call_lack", "call_params", "call_include", NULL};
+const char* TracesAnalyser::feedbackTypesArr[] = {"useful_call", "useless_call", "seq_extra", "seq_lack", "ind_seq_num", "dist_seq_num", "call_extra", "call_lack", "call_params", "include_call_in_seq", "exclude_call_from_seq", NULL};
 std::map<int,std::string> TracesAnalyser::units_id_map;
 std::map<int,std::string> TracesAnalyser::orders_map;
 std::map<int,std::string> TracesAnalyser::resources_map;
 std::map<std::string,std::string> TracesAnalyser::messages_map;
 
-TracesAnalyser::TracesAnalyser(bool in_game, std::string lang) : in_game(in_game), lang(lang) {
+TracesAnalyser::TracesAnalyser(bool in_game, bool endless_loop, std::string lang) : in_game(in_game), endless_loop(endless_loop), lang(lang) {
 	expert_traces_dirname = (in_game) ? IN_GAME_EXPERT_TRACES_DIRNAME : EXPERT_TRACES_DIRNAME;
 	
 	//Initialise units_id_map
@@ -155,10 +155,13 @@ int TracesAnalyser::getRandomIntInRange(int min, int max) {
 }
 
 std::string TracesAnalyser::getFeedback(const std::string& dir_path, const std::string& filename, int ind_mission, int ind_execution) {
+	rapidjson::Document doc;
+	rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+	doc.SetObject();	
 	int ind_best = -1;
 	double best_score = 0;
 	std::vector<Trace::sp_trace> learner_traces = TracesParser::importTraceFromXml(dir_path, filename);
-	if (getInfosOnMission(learner_traces, learner_gi, ind_mission) && getInfosOnExecution(learner_gi, ind_execution)) {	
+	if (getInfosOnMission(learner_traces, learner_gi, ind_mission) && getInfosOnExecution(learner_gi, ind_execution)) {
 		std::vector<std::string> files = findExpertTracesFilenames();
 		bool reimport = false;
 		for(unsigned int i = 0; i < files.size(); i++) {
@@ -192,7 +195,7 @@ std::string TracesAnalyser::getFeedback(const std::string& dir_path, const std::
 					}
 					else
 						std::cout << "expert traces have not been modified" << std::endl;
-					std::pair<double,unsigned int> res = findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
+					std::pair<double,double> res = findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
 					double score = res.first / res.second;
 					std::cout << "norm : " << res.second << std::endl;
 					displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
@@ -221,10 +224,7 @@ std::string TracesAnalyser::getFeedback(const std::string& dir_path, const std::
 				addImplicitSequences(expert_gi.exec_traces, learner_gi.exec_traces);
 				findBestAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
 				displayAlignment(learner_gi.exec_traces, expert_gi.exec_traces);
-				
-				rapidjson::Document doc;
-				rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-				doc.SetObject();
+
 				int num_attempts = learner_gi.getNumExecutions();
 				doc.AddMember("num_attempts", num_attempts, allocator); // nombre de tentatives
 				if (learner_gi.eee != NULL) {
@@ -239,37 +239,46 @@ std::string TracesAnalyser::getFeedback(const std::string& dir_path, const std::
 					doc.AddMember("ref_resolution_time", expert_gi.getResolutionTime(), allocator); // temps de resolution reference
 					doc.AddMember("won", learner_gi.eme->getStatus().compare("won") == 0, allocator); // victoire / defaite
 				}
-				doc.AddMember("score", std::floor(best_score * 100), allocator);
-				std::vector<Feedback> feedbacks;
-				if (!ref_feedbacks.empty()) {
-					listAlignmentFeedbacks(learner_gi.exec_traces, expert_gi.exec_traces, feedbacks);
-					listGlobalFeedbacks(learner_gi.exec_traces, feedbacks);
-					sortFeedbacks(feedbacks);
-					filterFeedbacks(feedbacks, learner_gi.exec_traces, expert_gi.exec_traces);
+				if (endless_loop && messages_map.find("endless_loop") != messages_map.end()) {
+					rapidjson::Value arrWarnings(rapidjson::kArrayType);
+					std::string msg = messages_map.at("endless_loop");
+					rapidjson::Value f(msg.c_str(), msg.size(), allocator);
+					arrWarnings.PushBack(f, allocator);
+					doc.AddMember("warnings", arrWarnings, allocator);
 				}
-				unsigned int num_downgrads = num_attempts / NUM_DOWNGRADS_THRESHOLD, cpt_downgrads = 0;
-				rapidjson::Value arrInfos(rapidjson::kArrayType);
-				std::cout << "complete list of feedbacks" << std::endl;
-				std::cout << "_________" << std::endl;
-				for(unsigned int i = 0; i < feedbacks.size(); i++) {
-					if (i > 1 && feedbacks.at(i).priority > feedbacks.at(i-1).priority)
-						cpt_downgrads++;
-					if (cpt_downgrads <= num_downgrads) {
-						rapidjson::Value f(feedbacks.at(i).info.c_str(), feedbacks.at(i).info.size(), allocator);
-						arrInfos.PushBack(f, allocator);
+				else if (!endless_loop) {
+					doc.AddMember("score", std::floor(best_score * 100), allocator);
+					std::vector<Feedback> feedbacks;
+					if (!ref_feedbacks.empty()) {
+						listAlignmentFeedbacks(learner_gi.exec_traces, expert_gi.exec_traces, feedbacks);
+						listGlobalFeedbacks(learner_gi.exec_traces, feedbacks);
+						sortFeedbacks(feedbacks);
+						filterFeedbacks(feedbacks, learner_gi.exec_traces, expert_gi.exec_traces);
 					}
-					feedbacks.at(i).display();
+					unsigned int num_downgrads = num_attempts / NUM_DOWNGRADS, cpt_downgrads = 0;
+					rapidjson::Value arrInfos(rapidjson::kArrayType);
+					std::cout << "complete list of feedbacks" << std::endl;
+					std::cout << "_________" << std::endl;
+					for(unsigned int i = 0; i < feedbacks.size(); i++) {
+						if (i > 1 && feedbacks.at(i).priority > feedbacks.at(i-1).priority)
+							cpt_downgrads++;
+						if (cpt_downgrads <= num_downgrads) {
+							rapidjson::Value f(feedbacks.at(i).info.c_str(), feedbacks.at(i).info.size(), allocator);
+							arrInfos.PushBack(f, allocator);
+						}
+						feedbacks.at(i).display();
+					}
+					std::cout << "_________" << std::endl;
+					doc.AddMember("feedbacks", arrInfos, allocator);
+					//doc.AddMember("publish", false, allocator);
 				}
-				std::cout << "_________" << std::endl;
-				doc.AddMember("feedbacks", arrInfos, allocator);
-				rapidjson::StringBuffer s;
-				rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(s);
-				doc.Accept(writer);
-				return s.GetString();
 			}
 		}
 	}
-	return "";
+	rapidjson::StringBuffer s;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(s);
+	doc.Accept(writer);
+	return s.GetString();
 }
 
 bool TracesAnalyser::getInfosOnMission(const std::vector<Trace::sp_trace>& traces, GameInfos& gi, int ind_mission) {
@@ -521,10 +530,10 @@ const Sequence::sp_sequence TracesAnalyser::getClosestCommonParent(const Call::c
 	return parents[0];
 }
 
-std::pair<double,unsigned int> TracesAnalyser::findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align) const {
+std::pair<double,double> TracesAnalyser::findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align) const {
 	int cpt_path = 0;
-	unsigned int lsize = l.size()+1, esize = e.size()+1, norm = 0;
-	double score = 0;
+	unsigned int lsize = l.size()+1, esize = e.size()+1;
+	double score = 0, norm = 0;
 	std::pair<double,double>** val = new std::pair<double,double>*[lsize];
 	std::pair<int,int>** ind = new std::pair<int,int>*[lsize];
 	char** help = new char*[lsize];
@@ -583,10 +592,10 @@ std::pair<double,unsigned int> TracesAnalyser::findBestAlignment(const std::vect
 			else if (l.at(i-1)->isSequence() && e.at(j-1)->isSequence()) {
 				Sequence::sp_sequence learner_sps = boost::dynamic_pointer_cast<Sequence>(l.at(i-1));
 				Sequence::sp_sequence expert_sps = boost::dynamic_pointer_cast<Sequence>(e.at(j-1));
-				std::pair<double,unsigned int> res = findBestAlignment(learner_sps->getTraces(),expert_sps->getTraces(),align);
+				std::pair<double,double> res = findBestAlignment(learner_sps->getTraces(),expert_sps->getTraces(),align);
 				match_score = res.first;
 				double mean_dis = learner_sps->getNumMapMeanDistance(expert_sps);
-				val[i][j].second = match_score + (1 - mean_dis);
+				val[i][j].second = match_score + (1 - mean_dis) * (res.second / IND_SEQ_NUM_CONST);
 				match_score /= res.second;
 				match_score = TRANSFORM_SCORE(match_score);
 			}
@@ -643,7 +652,7 @@ std::pair<double,unsigned int> TracesAnalyser::findBestAlignment(const std::vect
 	std::cout << std::endl;
 	
 	for (unsigned int i = 0; i < p.size(); i++) {
-		unsigned int norm_val = 1;
+		double norm_val = 1;
 		int indi = p.at(i).first, indj = p.at(i).second;
 		if ((i < p.size()-1 && indi == p.at(i+1).first) || indi >= (int)l.size()) {
 			if (align)
@@ -655,8 +664,8 @@ std::pair<double,unsigned int> TracesAnalyser::findBestAlignment(const std::vect
 		}
 		else {
 			if (l.at(indi)->isSequence() && e.at(indj)->isSequence()) {
-				std::pair<double,unsigned int> res = findBestAlignment(dynamic_cast<Sequence*>(l.at(indi).get())->getTraces(), dynamic_cast<Sequence*>(e.at(indj).get())->getTraces(),align);
-				norm_val = res.second + 1;
+				std::pair<double,double> res = findBestAlignment(dynamic_cast<Sequence*>(l.at(indi).get())->getTraces(), dynamic_cast<Sequence*>(e.at(indj).get())->getTraces(),align);
+				norm_val = res.second + (res.second / IND_SEQ_NUM_CONST);
 			}
 			if (align) {
 				l.at(indi)->setAligned(e.at(indj));
@@ -679,7 +688,7 @@ std::pair<double,unsigned int> TracesAnalyser::findBestAlignment(const std::vect
 	delete[] ind;
 	delete[] help;
 	std::cout << "end findBestAlignment" << std::endl;
-	return std::make_pair<double,unsigned int>(score,norm);
+	return std::make_pair<double,double>(score,norm);
 }
 
 void TracesAnalyser::displayAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const {
@@ -763,7 +772,7 @@ double TracesAnalyser::getFeedbackScore(const Feedback& f, int j) {
 				Sequence::sp_sequence ref_sps = boost::dynamic_pointer_cast<Sequence>(ref_t[i]);
 				bool reimport = addImplicitSequences(ref_sps->getTraces(),sps->getTraces());
 				if (feedbackSequencesMatch(sps,ref_sps)) {
-					std::pair<double,unsigned int> res = findBestAlignment(sps->getTraces(),ref_sps->getTraces(),false);
+					std::pair<double,double> res = findBestAlignment(sps->getTraces(),ref_sps->getTraces(),false);
 					score[i] = res.first / res.second;
 				}
 				if (reimport) 
@@ -857,8 +866,12 @@ void TracesAnalyser::filterFeedbacks(std::vector<Feedback>& feedbacks, const std
 	for (unsigned int i = 0; i < feedbacks.size(); i++) {
 		if (std::find(to_del.begin(), to_del.end(), &feedbacks.at(i)) == to_del.end()) {
 			// Remove not defined feedbacks with sequence of length 1
-			if (!feedbacks.at(i).defined && feedbacks.at(i).type == SEQ_LACK) {
-				Sequence::sp_sequence sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).expert_spt);
+			if (!feedbacks.at(i).defined && (feedbacks.at(i).type == SEQ_LACK || feedbacks.at(i).type == SEQ_EXTRA)) {
+				Sequence::sp_sequence sps;
+				if (feedbacks.at(i).type == SEQ_LACK)
+					sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).expert_spt);
+				else
+					sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).learner_spt);
 				if (sps->length() == 1) {
 					to_del.push_back(&feedbacks.at(i));
 					feedbacks.at(i).display();
@@ -875,7 +888,7 @@ void TracesAnalyser::filterFeedbacks(std::vector<Feedback>& feedbacks, const std
 						if (calls.at(j)->getLabel().compare(spc->getLabel()) == 0)
 							cpt++;
 					}
-					if (cpt >= NUM_CALL_APPEAR_THRESHOLD) {
+					if (cpt >= NUM_CALL_APPEARS_THRES) {
 						to_del.push_back(&feedbacks.at(i));
 						feedbacks.at(i).display();
 						std::cout << "filter 3" << std::endl;
@@ -904,14 +917,8 @@ void TracesAnalyser::filterFeedbacks(std::vector<Feedback>& feedbacks, const std
 }
 
 void TracesAnalyser::setFeedbackInfo(Feedback& f, Feedback& ref_f) const {
-	// we can use the info added by the expert to the sequence
-	if (f.type == SEQ_LACK) {
-		Sequence::sp_sequence sps = boost::dynamic_pointer_cast<Sequence>(f.expert_spt);
-		if (!sps->getInfo().empty())
-			ref_f.info = sps->getInfo();
-	}
 	// if f is a CALL_EXTRA feedback and the call has an associated error
-	else if (f.type == CALL_EXTRA) {
+	if (f.type == CALL_EXTRA) {
 		Call::sp_call spc = boost::dynamic_pointer_cast<Call>(f.learner_spt);
 		if (spc->getError() != Call::NONE) {
 			ref_f.info = messages_map.at(Call::getEnumLabel<Call::ErrorType>(spc->getError(),Call::errorsArr));
@@ -922,7 +929,6 @@ void TracesAnalyser::setFeedbackInfo(Feedback& f, Feedback& ref_f) const {
 	std::vector<std::string> tokens = TracesParser::splitLine(ref_f.info,'*');
 	for (unsigned int i = 0; i < tokens.size(); i++) {
 		std::string& s = tokens.at(i);
-		// *call* -> call.label + call.params
 		if (s.compare("learner_call") == 0 && (f.type == CALL_EXTRA || f.type == CALL_PARAMS || f.type == USELESS_CALL)) {
 			Call::sp_call spc = boost::dynamic_pointer_cast<Call>(f.learner_spt);
 			s = spc->getLabel() + spc->getReadableParams();
@@ -931,19 +937,18 @@ void TracesAnalyser::setFeedbackInfo(Feedback& f, Feedback& ref_f) const {
 			Call::sp_call spc = boost::dynamic_pointer_cast<Call>(f.expert_spt);
 			s = spc->getLabel() + spc->getReadableParams();
 		}
-		// *label* -> call.label
 		else if (s.compare("label") == 0 && (f.type == CALL_EXTRA || f.type == CALL_LACK || f.type == CALL_PARAMS || f.type == USEFUL_CALL || f.type == USELESS_CALL)) {
 			Call::sp_call spc = f.learner_spt ? boost::dynamic_pointer_cast<Call>(f.learner_spt) : boost::dynamic_pointer_cast<Call>(f.expert_spt);
 			s = spc->getLabel();
 		}
-		// else if (s.compare("diff_params") == 0 && f.type == CALL_PARAM) {
-			// Call::sp_call learner_spc = boost::dynamic_pointer_cast<Call>(f.learner_spt);
-			// Call::sp_call expert_spc = boost::dynamic_pointer_cast<Call>(f.expert_spt);
-			// std::vector<std::string> listId = learner_spt->getListDiffParams(expert_spc);
-			// s = "";
-			// for (unsigned int j = 0; j < listId; j++)
-				// s += messages_map.at(listId.at(j)) + "\n";
-		// }
+		else if (s.compare("diff_params") == 0 && f.type == CALL_PARAMS) {
+			Call::sp_call learner_spc = boost::dynamic_pointer_cast<Call>(f.learner_spt);
+			Call::sp_call expert_spc = boost::dynamic_pointer_cast<Call>(f.expert_spt);
+			std::vector<std::string> ids = learner_spc->getListIdWrongParams(expert_spc.get());
+			s = "";
+			for (unsigned int j = 0; j < ids.size(); j++)
+				s += "\t" + messages_map.at(ids.at(j)) + "\n";
+		}
 		else if (s.compare("list_calls") == 0) {
 			if (f.type == SEQ_EXTRA || f.type == IND_SEQ_NUM || f.type == DIST_SEQ_NUM) {
 				Sequence::sp_sequence sps = boost::dynamic_pointer_cast<Sequence>(f.learner_spt);
@@ -958,7 +963,7 @@ void TracesAnalyser::setFeedbackInfo(Feedback& f, Feedback& ref_f) const {
 			else if (f.type == SEQ_LACK) {
 				Sequence::sp_sequence sps = boost::dynamic_pointer_cast<Sequence>(f.expert_spt);
 				Call::call_vector calls = Call::getCalls(sps->getTraces(),true);
-				unsigned int nb = std::max(2,(int)(calls.size()*SEQ_LACK_INFO_RATIO));
+				unsigned int nb = std::max(2,(int)(calls.size() * SEQ_LACK_INFO_RATIO));
 				s = "";
 				for (unsigned int j = 0; j < nb; j++) {
 					s += calls.at(j)->getLabel();
@@ -974,6 +979,21 @@ void TracesAnalyser::setFeedbackInfo(Feedback& f, Feedback& ref_f) const {
 		else if (s.compare("expert_ind_seq_num") == 0 && f.type == IND_SEQ_NUM) {
 			Sequence::sp_sequence expert_sps = boost::dynamic_pointer_cast<Sequence>(f.expert_spt);
 			s = boost::lexical_cast<std::string>(expert_sps->getNumMap().begin()->first);
+		}
+		else if (s.compare("seq_info") == 0 && (f.type == SEQ_LACK || f.type == INCLUDE_CALL_IN_SEQ || f.type == EXCLUDE_CALL_FROM_SEQ)) {
+			// we can use the info added by the expert to the sequence
+			if (f.expert_spt) {
+				Sequence::sp_sequence sps = boost::dynamic_pointer_cast<Sequence>(f.expert_spt);
+				if (!sps->getInfo().empty()) {
+					s = "(" + sps->getInfo() + ")";
+				}
+			}
+		}
+		else if (s.compare("out_of_range_param") == 0 && f.type == CALL_EXTRA) {
+			Call::sp_call learner_spc = boost::dynamic_pointer_cast<Call>(f.learner_spt);
+			std::vector<std::string> ids = learner_spc->getListIdWrongParams();
+			if (!ids.empty())
+				s = ids.at(0);
 		}
 		else if (s.compare("n") == 0) {
 			s = "\n";
@@ -1015,18 +1035,33 @@ void TracesAnalyser::listGlobalFeedbacks(const std::vector<Trace::sp_trace>& l, 
 		}
 		it++;
 	}
-	// add include call feedbacks
-	for (unsigned int i = 0; i < feedbacks.size(); i++) {
-		if (feedbacks.at(i).type == SEQ_LACK && feedbacks.at(i).learner_spt && feedbacks.at(i).learner_spt->isSequence()) {
-			Sequence::sp_sequence learner_sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).learner_spt);
-			Sequence::sp_sequence expert_sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).expert_spt);
-			if (learner_sps->isImplicit() && learner_sps->size() > 1 && learner_sps->at(0)->isCall() && feedbackSequencesMatch(learner_sps,expert_sps)) {
-				feedbacks.at(i).type = CALL_INCLUDE;
-				feedbacks.at(i).learner_spt = boost::dynamic_pointer_cast<Call>(learner_sps->at(0));
-				feedbacks.at(i).expert_spt.reset();
-			}
-		}
-	}
+	// add include call feedbacks - a revoir avec l'algo
+	// for (unsigned int i = 0; i < feedbacks.size(); i++) {
+		// if (feedbacks.at(i).type == SEQ_LACK && feedbacks.at(i).learner_spt && feedbacks.at(i).learner_spt->isSequence()) {
+			// Sequence::sp_sequence learner_sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).learner_spt);
+			// Sequence::sp_sequence expert_sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).expert_spt);
+			// if (learner_sps->isImplicit() && learner_sps->size() > 1 && learner_sps->at(0)->isCall() && feedbackSequencesMatch(learner_sps,expert_sps)) {
+				// feedbacks.at(i).type = CALL_INCLUDE;
+				// feedbacks.at(i).learner_spt = boost::dynamic_pointer_cast<Call>(learner_sps->at(0));
+				// feedbacks.at(i).expert_spt.reset();
+			// }
+		// }
+	// }
+	// for (unsigned int i = 0; i < feedbacks.size(); i++) {
+		// if (feedbacks.at(i).type == SEQ_EXTRA && feedbacks.at(i).expert_spt) {
+			// Sequence::sp_sequence learner_sps = boost::dynamic_pointer_cast<Sequence>(feedbacks.at(i).learner_spt);
+			// learner_sps->reset();
+			// while (!learner_sps->isEndReached()) {
+				// Trace::sp_trace spt = learner_sps->next();
+				// if (spt->isSequence()) {
+					// Sequence::sp_sequence sec_learner_sps = dynamic_pointer_cast<Sequence>(spt);
+					// if (sec_learner_sps->isImplicit()) {
+						
+					// }
+				// }
+			// }
+		// }
+	// }
 }
 
 void TracesAnalyser::listAlignmentFeedbacks(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, std::vector<Feedback>& feedbacks) const {
@@ -1050,7 +1085,7 @@ void TracesAnalyser::listAlignmentFeedbacks(const std::vector<Trace::sp_trace>& 
 					if (learner_numMap.size() == 1 && expert_numMap.size() == 1 && expert_numMap.find(learner_numMap.begin()->first) == expert_numMap.end())
 						f.type = IND_SEQ_NUM;
 				}
-				else if (learner_sps->getNumMapMeanDistance(expert_sps) >= FEEDBACK_SEQ_NUM_THRESHOLD)
+				else if (learner_sps->getNumMapMeanDistance(expert_sps) >= DIST_SEQ_NUM_THRES)
 					f.type = DIST_SEQ_NUM;
 				listAlignmentFeedbacks(learner_sps->getTraces(), expert_sps->getTraces(), feedbacks);
 			}

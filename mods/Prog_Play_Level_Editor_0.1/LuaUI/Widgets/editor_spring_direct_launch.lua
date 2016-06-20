@@ -1751,6 +1751,15 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
+	if not VFS.FileExists("pp_editor") then
+		Spring.CreateDir("pp_editor")
+	end
+	if not VFS.FileExists("pp_editor/missions") then
+		Spring.CreateDir("pp_editor/missions")
+	end
+	if not VFS.FileExists("pp_editor/scenarios") then
+		Spring.CreateDir("pp_editor/scenario")
+	end
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()
@@ -1792,6 +1801,9 @@ function widget:KeyPress(key, mods)
 	end
 	if key == Spring.GetKeyCode("y") and mods.ctrl then
 		LoadState(-1)
+		return true
+	end
+	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
 		return true
 	end
 end

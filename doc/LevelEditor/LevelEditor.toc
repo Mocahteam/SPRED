@@ -44,7 +44,7 @@
 \contentsline {paragraph}{}{5}
 \contentsline {subsubsection}{\numberline {5.1.6}Param\IeC {\`e}tres de la carte}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsubsection}{\numberline {5.1.7}Entr\IeC {\'e}es / Sorties}{6}
+\contentsline {subsubsection}{\numberline {5.1.7}Sauvegarde / Chargement}{6}
 \contentsline {subsubsection}{\numberline {5.1.8}Fonctions de dessin}{6}
 \contentsline {subsubsection}{\numberline {5.1.9}Listeners}{6}
 \contentsline {subsection}{\numberline {5.2}Gadget}{6}

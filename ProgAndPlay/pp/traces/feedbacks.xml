@@ -67,10 +67,10 @@
 		</feedback>
 		<feedback type="seq_lack" priority="1000">
 			<infos lang="fr">
-				<info>Essaye d'insérer une boucle contenant les appels *list_calls* dans votre programme</info>
+				<info>Essayez d'insérer une boucle contenant les appels *list_calls* dans votre programme*seq_info*</info>
 			</infos>
 			<infos lang="en">
-				<info>Think about inserting a loop containing the calls *list_calls* in your program</info>
+				<info>Think about inserting a loop containing the calls *list_calls* in your program*seq_info*</info>
 			</infos>
 		</feedback>
 		<feedback type="ind_seq_num" priority="1000">
@@ -107,22 +107,46 @@
 		</feedback>
 		<feedback type="call_params" priority="2100">
 			<infos lang="fr">
-				<info>Les paramètres que vous passez a la fonction *label* ne semblent pas être les bons :*n**t*Votre appel : *learner_call*</info>
+				<info>Les paramètres donnés à l'appel *learner_call* ne semblent pas être les bons :*n**diff_params*</info>
 			</infos>
 			<infos lang="en">
-				<info>The parameters given to the function *label* don't seem to be the correct ones :*n**t**Your call : *learner_call*</info>
+				<info>The parameters given to the call *learner_call* don't seem to be the correct ones :*n**diff_params*</info>
 			</infos>
 		</feedback>
-		<feedback type="call_include" priority="1000">
+		<feedback type="include_call_in_seq" priority="700">
 			<infos lang="fr">
-				<info>Vous pouvez faire mieux et utiliser l'appel *learner_call* dans la condition d'arrêt de la boucle contenant les appels *list_calls*</info>
+				<info></info>
 			</infos>
 			<infos lang="en">
-				<info>You can do better and use the call *learner_call* in the termination condition of the loop including the calls *list_calls*</info>
+				<info></info>
+			</infos>
+		</feedback>
+		<feedback type="exclude_call_from_seq" priority="700">
+			<infos lang="fr">
+				<info></info>
+			</infos>
+			<infos lang="en">
+				<info></info>
 			</infos>
 		</feedback>
 	</feedbacks>
 	<messages>
+		<message id="endless_loop">
+			<infos lang="fr">
+				<info>Votre programme ne se termine pas. Il doit contenir une boucle infinie. Vérifiez les conditions de terminaison de vos boucles.</info>
+			</infos>
+			<infos lang="en">
+				<info>Your program doesn't end. It certainly contains an infinite loop. Check the termination conditions of your loops.</info>
+			</infos>
+		</message>
+		<message id="return">
+			<infos lang="fr">
+				<info>La valeur retournée lors de l'appel *learner_call* n'est pas correct</info>
+			</infos>
+			<infos lang="en">
+				<info>The value returned after the call *learner_call* is not correct</info>
+			</infos>
+		</message>
 		<message id="specialAreaId">
 			<infos lang="fr">
 				<info>Vérifie l'identifiant de la zone spéciale</info>
@@ -237,10 +261,10 @@
 		</message>
 		<message id="out_of_range">
 			<infos lang="fr">
-				<info>L'appel *learner_call* a un paramètre qui provoque une erreur</info>
+				<info>Le paramètre *out_of_range_param* de l'appel *learner_call* ne peut pas prendre cette valeur dans cette configuration</info>
 			</infos>
 			<infos lang="en">
-				<info>The call *learner_call* has one parameter which is out_of_range</info>
+				<info>The parameter *out_of_range_param* of the call *learner_call* is out of range</info>
 			</infos>
 		</message>
 		<message id="wrong_position">

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  6 JUN 2016 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  16 JUN 2016 11:59
 entering extended mode
 **./level_editor_user_doc.tex
 (level_editor_user_doc.tex
@@ -401,21 +401,26 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box26
 \@float@everytoks=\toks20
 \@floatcapt=\box27
+)
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\
+url.sty"
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ) (level_editor_user_doc.aux)
 \openout1 = `level_editor_user_doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\context\ba
 se\supp-pdf.mkii"
@@ -432,9 +437,9 @@ se\supp-pdf.mkii"
 \makeMPintoPDFobject=\count102
 \everyMPtoPDFconversion=\toks22
 )
-LaTeX Info: Redefining \degres on input line 15.
-LaTeX Info: Redefining \dots on input line 15.
-LaTeX Info: Redefining \up on input line 15.
+LaTeX Info: Redefining \degres on input line 16.
+LaTeX Info: Redefining \dots on input line 16.
+LaTeX Info: Redefining \up on input line 16.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -471,12 +476,17 @@ LaTeX Info: Redefining \up on input line 15.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 17.
+(Font)              <12> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 17.
+(Font)              <8> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 17.
-(level_editor_user_doc.toc)
+(Font)              <6> on input line 18.
+(level_editor_user_doc.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 8.
+)
 \tf@toc=\write3
 \openout3 = `level_editor_user_doc.toc'.
 
@@ -484,130 +494,159 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {C:/Users/Benjamin-Zigaroula-/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map
 }]
-<pre-launcher.png, id=9, 1445.4pt x 782.925pt>
+<editor-spring-launcher.png, id=10, 1445.4pt x 782.925pt>
+File: editor-spring-launcher.png Graphic file (type png)
+
+<use editor-spring-launcher.png>
+Package pdftex.def Info: editor-spring-launcher.png used on input line 36.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+<pre-launcher.png, id=12, 1445.4pt x 782.925pt>
 File: pre-launcher.png Graphic file (type png)
  <use pre-launcher.png>
-Package pdftex.def Info: pre-launcher.png used on input line 37.
+Package pdftex.def Info: pre-launcher.png used on input line 44.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
-
-<launcher-main.png, id=11, 1445.4pt x 782.925pt>
+ [2 <./editor-spring-launcher.png>] <launcher-main.png, id=19, 1445.4pt x 782.9
+25pt>
 File: launcher-main.png Graphic file (type png)
- <use launcher-main.png>
-Package pdftex.def Info: launcher-main.png used on input line 46.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
 
-[2 <./pre-launcher.png>]
-Underfull \hbox (badness 2376) in paragraph at lines 55--56
+<use launcher-main.png>
+Package pdftex.def Info: launcher-main.png used on input line 53.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [3 <./pre-launcher.png> <./launcher-main.png>]
+Underfull \hbox (badness 2376) in paragraph at lines 62--63
   [] \T1/cmr/m/n/10 Ce menu per-met de choi-sir une mis-sion préa-la-ble-ment c
 réée via l'édi-teur. L'en-
  []
 
 
-Underfull \hbox (badness 3407) in paragraph at lines 55--56
+Underfull \hbox (badness 3407) in paragraph at lines 62--63
 \T1/cmr/m/n/10 semble des mis-sions pro-po-sées cor-res-pond aux mis-sions pré-
 sentes dans le ré-per-toire
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 58.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 58.
-<launcher-scenario.png, id=18, 1445.4pt x 782.925pt>
-File: launcher-scenario.png Graphic file (type png)
+<editor-topbar.png, id=25, 1008.76875pt x 28.60687pt>
+File: editor-topbar.png Graphic file (type png)
+ <use editor-topbar.png>
+Package pdftex.def Info: editor-topbar.png used on input line 71.
+(pdftex.def)             Requested size: 418.25368pt x 11.8607pt.
 
-<use launcher-scenario.png>
-Package pdftex.def Info: launcher-scenario.png used on input line 61.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [3 <./launcher-main.png>]
-<editor-units.png, id=27, 1445.4pt x 782.925pt>
+<editor-units.png, id=26, 1445.4pt x 782.925pt>
 File: editor-units.png Graphic file (type png)
  <use editor-units.png>
-Package pdftex.def Info: editor-units.png used on input line 83.
+Package pdftex.def Info: editor-units.png used on input line 90.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [4 <./launcher-scenario.png>] <editor-groups.png, id=33, 1445.4pt x 782.925pt>
+ [4 <./editor-topbar.png>] <editor-groups.png, id=32, 1445.4pt x 782.925pt>
 File: editor-groups.png Graphic file (type png)
 
 <use editor-groups.png>
-Package pdftex.def Info: editor-groups.png used on input line 100.
+Package pdftex.def Info: editor-groups.png used on input line 107.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
  [5 <./editor-units.png>]
-<editor-zones.png, id=38, 1445.4pt x 782.925pt>
+<editor-zones.png, id=39, 1445.4pt x 782.925pt>
 File: editor-zones.png Graphic file (type png)
  <use editor-zones.png>
-Package pdftex.def Info: editor-zones.png used on input line 109.
+Package pdftex.def Info: editor-zones.png used on input line 116.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+<editor-zones-special.png, id=40, 1445.4pt x 670.00313pt>
+File: editor-zones-special.png Graphic file (type png)
+
+<use editor-zones-special.png>
+Package pdftex.def Info: editor-zones-special.png used on input line 124.
+(pdftex.def)             Requested size: 418.25368pt x 193.87677pt.
  [6 <./editor-groups.png> <./editor-zones.png>]
-<editor-teamconfig.png, id=44, 1445.4pt x 782.925pt>
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 135.
+
+
+("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base
+\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) <editor-teamconfig.png, id=46, 1445.4pt x 782.925pt>
 File: editor-teamconfig.png Graphic file (type png)
 
 <use editor-teamconfig.png>
-Package pdftex.def Info: editor-teamconfig.png used on input line 122.
+Package pdftex.def Info: editor-teamconfig.png used on input line 139.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- <editor-allyteam.png, id=45, 1445.4pt x 782.925pt>
+ [7 <./editor-zones-special.png>]
+<editor-allyteam.png, id=53, 1445.4pt x 782.925pt>
 File: editor-allyteam.png Graphic file (type png)
-
-<use editor-allyteam.png>
-Package pdftex.def Info: editor-allyteam.png used on input line 130.
+ <use editor-allyteam.png>
+Package pdftex.def Info: editor-allyteam.png used on input line 147.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [7 <./editor-teamconfig.png>]
-<editor-trigger.png, id=51, 1445.4pt x 782.925pt>
+
+[8 <./editor-teamconfig.png> <./editor-allyteam.png>]
+<editor-trigger.png, id=59, 1445.4pt x 782.925pt>
 File: editor-trigger.png Graphic file (type png)
  <use editor-trigger.png>
-Package pdftex.def Info: editor-trigger.png used on input line 146.
+Package pdftex.def Info: editor-trigger.png used on input line 163.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
 
-<editor-eventconfig.png, id=52, 1445.4pt x 782.925pt>
+<editor-eventconfig.png, id=60, 1445.4pt x 782.925pt>
 File: editor-eventconfig.png Graphic file (type png)
 
 <use editor-eventconfig.png>
-Package pdftex.def Info: editor-eventconfig.png used on input line 152.
+Package pdftex.def Info: editor-eventconfig.png used on input line 169.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [8 <./editor-allyteam.png>]
-<editor-variables.png, id=57, 1445.4pt x 782.925pt>
+ [9 <./editor-trigger.png>]
+<editor-variables.png, id=65, 1445.4pt x 782.925pt>
 File: editor-variables.png Graphic file (type png)
  <use editor-variables.png>
-Package pdftex.def Info: editor-variables.png used on input line 161.
+Package pdftex.def Info: editor-variables.png used on input line 178.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
 
-[9 <./editor-trigger.png> <./editor-eventconfig.png>] [10 <./editor-variables.p
-ng>] <editor-mapsettings.png, id=67, 1445.4pt x 782.925pt>
+[10 <./editor-eventconfig.png>]
+<editor-pickunit.png, id=70, 1445.4pt x 782.925pt>
+File: editor-pickunit.png Graphic file (type png)
+ <use editor-pickunit.png>
+Package pdftex.def Info: editor-pickunit.png used on input line 192.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+
+[11 <./editor-variables.png>]
+<editor-mapsettings.png, id=75, 1445.4pt x 782.925pt>
 File: editor-mapsettings.png Graphic file (type png)
 
 <use editor-mapsettings.png>
-Package pdftex.def Info: editor-mapsettings.png used on input line 190.
+Package pdftex.def Info: editor-mapsettings.png used on input line 212.
 (pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [11 <./editor-mapsettings.png>]
-(level_editor_user_doc.aux)
+ [12 <./editor-pickunit.png>]
+<launcher-scenario.png, id=80, 1445.4pt x 782.925pt>
+File: launcher-scenario.png Graphic file (type png)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+<use launcher-scenario.png>
+Package pdftex.def Info: launcher-scenario.png used on input line 226.
+(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+ [13 <./editor-mapsettings.png>] [14 <./launcher-scenario.png>] (level_editor_u
+ser_doc.aux) ) 
 Here is how much of TeX's memory you used:
- 3275 strings out of 493634
- 45910 string characters out of 3129527
- 111799 words of memory out of 3000000
- 6620 multiletter control sequences out of 15000+200000
- 15343 words of font info for 35 fonts, out of 3000000 for 9000
+ 3396 strings out of 493634
+ 48224 string characters out of 3129527
+ 114150 words of memory out of 3000000
+ 6728 multiletter control sequences out of 15000+200000
+ 15969 words of font info for 37 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,6n,30p,900b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ecbx1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2
-.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0800.pk> <C:\Users\Benjamin-Zigaroula
--\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\
-Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecrm0700.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Benjamin-Zigaroula-\AppDa
-ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\B
-enjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\lj
-four\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin
--Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm120
-0.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
-nappen\ec\dpi600\ecrm1728.pk>
-Output written on level_editor_user_doc.pdf (11 pages, 4243332 bytes).
+ 28i,6n,30p,889b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\
+ljfour\jknappen\ec\dpi600\ectt0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0800.pk> <C:\Users\Benjam
+in-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1
+000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiK
+TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Benjamin-Ziga
+roula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk>
+ <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
+n\ec\dpi600\eccc1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\
+AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Us
+ers\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
+i600\ecbx1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\
+pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin-Zigaroula-\AppData
+\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Ben
+jamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
+rm1728.pk>
+Output written on level_editor_user_doc.pdf (14 pages, 7689947 bytes).
 PDF statistics:
- 434 PDF objects out of 1000 (max. 8388607)
+ 531 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

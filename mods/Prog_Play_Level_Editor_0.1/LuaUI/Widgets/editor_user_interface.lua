@@ -23,10 +23,6 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- bug ctrlZ and events
--- bug ctrlZ and groupframe
--- refactor horrible drawfeature
-
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
@@ -146,8 +142,11 @@ local eventTotal -- Number of events
 local eventScrollPanel -- scroll panel containing each event
 local eventConditionsScrollPanel -- scroll panel containing each condition of an event
 local eventActionsScrollPanel -- scroll panel containing each action of an event
-local eventButtons = {} -- buttons for each event
-local deleteEventButtons = {} -- buttons to delete an event
+local eventUI = {}
+eventUI.eventButtons = {} -- buttons for each event
+eventUI.deleteEventButtons = {} -- buttons to delete an event
+eventUI.upEventButtons = {} -- buttons to change the sequence of events
+eventUI.downEventButtons = {}
 local currentEvent -- index of the current inspected event
 local currentCondition -- index of the current inspected condition of the current inspected event
 local currentAction -- index of the current inspected action of the current inspected event
@@ -210,15 +209,12 @@ mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw c
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
-local cameraAutoButton -- Button to toggle camera auto state
+local mapSettingsButtons = {} -- Buttons in the mapsettings frame
 local cameraAutoState = "enabled" -- Current state of camera auto
-local autoHealButton -- Button to toggle auto heal state 
 local autoHealState = "disabled" -- Current state of auto heal
-local minimapButton -- Button to toggle minimap state
 local minimapState = "disabled" -- Current minimap state
-local mouseStateButton -- Button to toggle mouse state
 local mouseState = "disabled" -- Current state of the mouse
-local widgetsButton -- Button to show the widget window
+local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 
 -- Save states variables
@@ -580,27 +576,32 @@ function mapSettingsFrame()
 		mapNameEditBox:SetText(mapDescription.mapName)
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
 		if cameraAutoState == "enabled" then
-			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+			mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 		elseif cameraAutoState == "disabled" then
-			cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+			mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 		end
 		if autoHealState == "enabled" then
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+			mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
 		elseif autoHealState == "disabled" then
-			autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+			mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 		end
 		if mouseState == "enabled" then
-			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+			mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
 		elseif mouseState == "disabled" then
-			mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+			mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 		end
 		if minimapState == "enabled" then
-			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 		elseif minimapState == "disabled" then
-			minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 		end
-		widgetsButton.state.chosen = false -- Reset the state of this button
-		widgetsButton:InvalidateSelf()
+		if feedbackState == "enabled" then
+			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+		elseif feedbackState == "disabled" then
+			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+		end
+		mapSettingsButtons.widgetsButton.state.chosen = false -- Reset the state of this button
+		mapSettingsButtons.widgetsButton:InvalidateSelf()
 	end
 end
 
@@ -664,7 +665,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0") -- TODO : change fps 1 to fps 0 in release
+	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0", "unbindkeyset backspace") -- TODO : change fps 1 to fps 0 in release
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -903,14 +904,14 @@ end
 
 function initTriggerWindow()
 	-- Left Panel
-	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '30%', '80%')
 	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS)
 	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '85%')
 	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
 	editVariablesButton = addButton(windows['triggerWindow'], '0%', '90%', '100%', '10%', EDITOR_TRIGGERS_VARIABLES_EDIT, showVariablesFrame)
 	
 	-- Event window
-	windows['eventWindow'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	windows['eventWindow'] = addWindow(Screen0, '30%', '5%', '30%', '80%')
 	local closeEvent = addButton(windows['eventWindow'], '93%', '0%', '7%', '4%', "X", function() editEvent(currentEvent) end)
 	closeEvent.font.color = { 1, 0, 0, 1 }
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -936,7 +937,7 @@ function initTriggerWindow()
 	end
 	
 	-- Condition window
-	windows['conditionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['conditionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeCondition = addButton(windows['conditionWindow'], '93%', '0%', '7%', '4%', "X", function() editCondition(currentCondition) end)
 	closeCondition.font.color = { 1, 0, 0, 1 }
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -944,12 +945,12 @@ function initTriggerWindow()
 	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE, 20, "center", nil, "center")
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionFilterList, selectFilter)
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
-	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '90%')
+	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '85%')
 	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
 	conditionTextBox.font.shadow = false
 	
 	-- Action window
-	windows['actionWindow'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['actionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeAction = addButton(windows['actionWindow'], '93%', '0%', '7%', '4%', "X", function() editAction(currentAction) end)
 	closeAction.font.color = { 1, 0, 0, 1 }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -957,12 +958,12 @@ function initTriggerWindow()
 	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type", 20, "center", nil, "center")
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionFilterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
-	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '90%')
+	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '85%')
 	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
 	actionTextBox.font.shadow = false
 	
 	-- Configure event window
-	windows['configureEvent'] = addWindow(Screen0, '45%', '5%', '30%', '80%')
+	windows['configureEvent'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
 	local closeConfigure = addButton(windows['configureEvent'], '93%', '0%', '7%', '4%', "X", configureEvent)
 	closeConfigure.font.color = { 1, 0, 0, 1 }
 	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE, 20, "center", nil, "center")
@@ -1032,7 +1033,7 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '5%', '90%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left", nil, "center")
 	
 	-- Import Actions/Conditions window
-	windows["importWindow"] = addWindow(Screen0, "15%", "86%", "30%", "10%")
+	windows["importWindow"] = addWindow(Screen0, "30%", "86%", "30%", "10%")
 	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 16, "left", nil, "center")
 	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
 	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
@@ -1042,7 +1043,7 @@ function initTriggerWindow()
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 
 	-- Variables window
-	windows["variablesWindow"] = addWindow(Screen0, '15%', '5%', '60%', '80%')
+	windows["variablesWindow"] = addWindow(Screen0, '30%', '5%', '60%', '80%')
 	local closeVariables = addButton(windows['variablesWindow'], '97%', '0%', '3%', '4%', "X", showVariablesFrame)
 	closeVariables.font.color = { 1, 0, 0, 1 }
 	addLabel(windows["variablesWindow"], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_VARIABLES, 20, "center", nil, "center")
@@ -1092,59 +1093,72 @@ function initMapSettingsWindow()
 	end
 	colorUI.button.OnClick = {applyColor}
 	
-	cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	cameraAutoButton.OnClick = {
+	mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+	mapSettingsButtons.cameraAutoButton.OnClick = {
 		function()
-			if cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
-				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+			if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
 				cameraAutoState = "disabled"
 			else
-				cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
 				cameraAutoState = "enabled"
 			end
 		end
 	}
 	
-	autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
-	autoHealButton.OnClick = {
+	mapSettingsButtons.autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+	mapSettingsButtons.autoHealButton.OnClick = {
 		function()
-			if autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
-				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
+			if mapSettingsButtons.autoHealButton.caption == EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED then
+				mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 				autoHealState = "disabled"
 			else
-				autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
+				mapSettingsButtons.autoHealButton:SetCaption(EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED)
 				autoHealState = "enabled"
 			end
 		end
 	}
 	
-	mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	mouseStateButton.OnClick = {
+	mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+	mapSettingsButtons.mouseStateButton.OnClick = {
 		function()
-			if mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
-				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+			if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
 				mouseState = "disabled"
 			else
-				mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
 				mouseState = "enabled"
 			end
 		end
 	}
 	
-	minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
-	minimapButton.OnClick = {
+	mapSettingsButtons.minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+	mapSettingsButtons.minimapButton.OnClick = {
 		function()
-			if minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
-				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
+			if mapSettingsButtons.minimapButton.caption == EDITOR_MAPSETTINGS_MINIMAP_ENABLED then
+				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 				minimapState = "disabled"
 			else
-				minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
+				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 				minimapState = "enabled"
 			end
 		end
 	}
 	
-	widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
+	mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+	mapSettingsButtons.feedbackButton.OnClick = {
+		function()
+			if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
+				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+				feedbackState = "disabled"
+			else
+				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+				feedbackState = "enabled"
+			end
+		end
+	}
+	
+	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
 
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -1484,6 +1498,7 @@ function updateGroupListUnitList() -- When a unit is created, update group frame
 		-- Add labels and buttons to both lists
 		local count = 0
 		for i, u in ipairs(units) do
+			Spring.Echo(u)
 			-- Unit label (type, team and id)
 			local uDefID = Spring.GetUnitDefID(u)
 			local name = UnitDefs[uDefID].humanName
@@ -2384,6 +2399,8 @@ function removeEvent(i)
 	removeSecondWindows() -- close windows to prevent bugs
 	removeThirdWindows() 
 	currentEvent = nil
+	currentCondition = nil
+	currentAction = nil
 	saveState()
 end
 
@@ -2485,16 +2502,46 @@ function removeThirdWindows() -- Removes the rightmost window
 	configureEventButton:InvalidateSelf()
 end
 
-function updateEventList() -- When a new event is created or the name of an event is changed, update the list
-	if eventTotal ~= #events then
-		removeElements(eventScrollPanel, eventButtons, true)
-		removeElements(eventScrollPanel, deleteEventButtons, true)
+function updateEventList(forceEventListUpdate) -- When a new event is created or the name of an event is changed, update the list
+	if eventTotal ~= #events or forceEventListUpdate then
+		removeElements(eventScrollPanel, eventUI.eventButtons, true)
+		removeElements(eventScrollPanel, eventUI.deleteEventButtons, true)
+		removeElements(eventScrollPanel, eventUI.upEventButtons, true)
+		removeElements(eventScrollPanel, eventUI.downEventButtons, true)
 		local count = 0
 		for i, e in ipairs(events) do
-			eventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '80%', 40, e.name, function() editEvent(i) end)
-			deleteEventButtons[i] = addButton(eventScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeEvent(i) end)
-			deleteEventButtons[i].font.color = {1, 0, 0, 1}
-			deleteEventButtons[i].font.size = 20
+			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', 40 * count, '60%', 40, e.name, function() editEvent(i) end)
+			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, EDITOR_X, function() removeEvent(i) end)
+			eventUI.deleteEventButtons[i].font.color = {1, 0, 0, 1}
+			eventUI.deleteEventButtons[i].font.size = 20
+			if i ~= 1 then
+				local moveUpEvent = function()
+					removeSecondWindows() -- close windows to prevent bugs
+					removeThirdWindows() 
+					currentEvent = nil
+					local e = events[i]
+					table.remove(events, i)
+					table.insert(events, i-1, e)
+					updateEventList(true)
+					saveState()
+				end
+				eventUI.upEventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '15%', 40, "", moveUpEvent)
+				addImage(eventUI.upEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
+			end
+			if i ~= #events then
+				local moveDownEvent = function()
+					removeSecondWindows() -- close windows to prevent bugs
+					removeThirdWindows() 
+					currentEvent = nil
+					local e = events[i]
+					table.remove(events, i)
+					table.insert(events, i+1, e)
+					updateEventList(true)
+					saveState()
+				end
+				eventUI.downEventButtons[i] = addButton(eventScrollPanel, '75%', 40 * count, '15%', 40, "", moveDownEvent)
+				addImage(eventUI.downEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
+			end
 			count = count + 1
 		end
 		newEventButton.y = 40 * count
@@ -2503,9 +2550,9 @@ function updateEventList() -- When a new event is created or the name of an even
 	
 	if currentEvent then
 		events[currentEvent].name = eventNameEditBox.text
-		if events[currentEvent].name ~= eventButtons[currentEvent].caption then
-			eventButtons[currentEvent].caption = events[currentEvent].name
-			eventButtons[currentEvent]:InvalidateSelf()
+		if events[currentEvent].name ~= eventUI.eventButtons[currentEvent].caption then
+			eventUI.eventButtons[currentEvent].caption = events[currentEvent].name
+			eventUI.eventButtons[currentEvent]:InvalidateSelf()
 		end
 	end
 end
@@ -2841,7 +2888,7 @@ drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if teamName[a.params[attr.id]] == item then
 				comboBox:Select(i)
@@ -2880,7 +2927,7 @@ drawFeatureFunctions["player"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if teamName[a.params[attr.id]] == item then
 				comboBox:Select(i)
@@ -2920,7 +2967,7 @@ drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		local groupName
 		for i, g in ipairs(unitGroups) do
 			if g.id == a.params[attr.id] then
@@ -2967,7 +3014,7 @@ drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
 	}
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		chosenZone = ""
 		for i, zone in ipairs(zoneList) do
 			if zone.id == a.params[attr.id] then
@@ -3006,7 +3053,7 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3039,7 +3086,7 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3064,7 +3111,7 @@ drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3097,7 +3144,7 @@ drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3122,7 +3169,7 @@ drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3158,7 +3205,7 @@ drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if idToCommands[tostring(a.params[attr.id])] == item then
 				comboBox:Select(i)
@@ -3183,7 +3230,7 @@ drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3211,7 +3258,7 @@ drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 	
 	-- Parameters check
-	if a.params[id] then
+	if a.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
 			if a.params[attr.id] == item then
 				comboBox:Select(i)
@@ -3288,23 +3335,25 @@ drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
 	-- Parameters check
 	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "? (?)", 16, "center", nil, "center")
 	if a.params[attr.id] then
-		local u = a.params[attr.id]
-		local uDefID = Spring.GetUnitDefID(u)
-		if uDefID then
-			local name = UnitDefs[uDefID].humanName
-			local team = Spring.GetUnitTeam(u)
-			unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-			unitLabel:SetCaption(name.." ("..tostring(u)..")")
-			local function viewUnit()
-				local state = Spring.GetCameraState()
-				local x, y, z = Spring.GetUnitPosition(u)
-				state.px, state.py, state.pz = x, y, z
-				state.height = 500
-				Spring.SetCameraState(state, 2)
+		if a.params[attr.id].type and a.params[attr.id].value then
+			local u = a.params[attr.id].value
+			local uDefID = Spring.GetUnitDefID(u)
+			if uDefID then
+				local name = UnitDefs[uDefID].humanName
+				local team = Spring.GetUnitTeam(u)
+				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
+				unitLabel:SetCaption(name.." ("..tostring(u)..")")
+				local function viewUnit()
+					local state = Spring.GetCameraState()
+					local x, y, z = Spring.GetUnitPosition(u)
+					state.px, state.py, state.pz = x, y, z
+					state.height = 500
+					Spring.SetCameraState(state, 2)
+				end
+				local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
+				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(feature, viewButton)
 			end
-			local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
-			addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-			table.insert(feature, viewButton)
 		end
 	end
 	
@@ -3699,19 +3748,21 @@ function updateImportComboBoxes() -- Update the condition and action comboboxes 
 		table.insert(conditionList, c.name)
 	end
 	importConditionComboBox.items = conditionList
-	importConditionComboBox:InvalidateSelf()
-	if #conditionList > 0 then
-		importConditionComboBox:Select(1)
+	if #conditionList == 0 then
+		importConditionComboBox.items = { EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION_NO }
 	end
+	importConditionComboBox:InvalidateSelf()
+	importConditionComboBox:Select(1)
 	local actionList = {}
 	for i, a in ipairs(e.actions) do
 		table.insert(actionList, a.name)
 	end
 	importActionComboBox.items = actionList
-	importActionComboBox:InvalidateSelf()
-	if #actionList > 0 then
-		importActionComboBox:Select(1)
+	if #actionList == 0 then
+		importActionComboBox.items = { EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION_NO }
 	end
+	importActionComboBox:InvalidateSelf()
+	importActionComboBox:Select(1)
 end
 
 function importCondition() -- Import a condition to the current event, renaming it if necessary
@@ -4031,7 +4082,8 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	
 	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "5%", "15%", "80%")
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '3%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 13, "center", nil, "center")
 	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '5%', '100%', '45%')
 	local count = 0
 	for i, e in ipairs(events) do
@@ -4043,7 +4095,8 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		end
 	end
 	
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION, 20, "center", nil, "center")
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '53%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING, 13, "center", nil, "center")
 	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '55%', '100%', '45%')
 	for i, c in ipairs(events[currentEvent].conditions) do
 		addButton(csp, "0%", (i-1) * 40, "100%", 40, c.name, function() pickFunction("condition", c.id) end)
@@ -4146,14 +4199,14 @@ end
 
 function showWidgetsWindow() -- Show the window that allows the user to change widgets status for his level
 	if windows['widgetsWindow'] then
-		widgetsButton.state.chosen = false
-		widgetsButton:InvalidateSelf()
+		mapSettingsButtons.widgetsButton.state.chosen = false
+		mapSettingsButtons.widgetsButton:InvalidateSelf()
 		windows['widgetsWindow']:Dispose()
 		windows['widgetsWindow'] = nil
 		return
 	end
-	widgetsButton.state.chosen = true
-	widgetsButton:InvalidateSelf()
+	mapSettingsButtons.widgetsButton.state.chosen = true
+	mapSettingsButtons.widgetsButton:InvalidateSelf()
 	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '50%')
 	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS, 20, "center", nil, "center")
 	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
@@ -4179,11 +4232,11 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
---			I/O functions
+--			Save/load functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function newMap()
+function newMap() -- Set each parameter to its default value
 	-- Units
 	unitHP = {}
 	unitAutoHeal = {}
@@ -4215,7 +4268,10 @@ function newMap()
 	-- TeamConfig
 	teamControl = {}
 	for k, t in pairs(teamStateMachine.states) do
-		teamControl[t] = "player"
+		teamControl[t] = "computer"
+		if t == 0 then
+			teamControl[t] = "player"
+		end
 	end
 	enabledTeams = {}
 	for k, t in pairs(teamStateMachine.states) do
@@ -4262,6 +4318,7 @@ function newMap()
 	autoHealState = "disabled"
 	mouseState = "disabled"
 	minimapState = "disabled"
+	feedbackState = "disabled"
 	initWidgetList()
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
@@ -4276,30 +4333,36 @@ function newMap()
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
 
-function newMapInitialize()
+function newMapInitialize() -- Open the window of the state you were in before load/new
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
+	updateTeamConfig = true
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
+		fileFrame() -- double to close the frame and open it again (to refresh)
 		fileFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
 		unitFrame()
+		unitFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		zoneFrame()
 		zoneFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		forcesFrame()
+		forcesFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		triggerFrame()
+		triggerFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
+		mapSettingsFrame()
 		mapSettingsFrame()
 	end
 	saveState()
 end
 
-function loadMap(name)
-	if loading then return end
+function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
+	if loading then return end -- Don't load if already loading
 	loading = true
 	newMap()
-	newMapInitialize()
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
@@ -4308,16 +4371,16 @@ function loadMap(name)
 	end
 	if loadedTable then
 		-- Units
-		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units))
+		Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
 		-- See next method
 	else
 		loading = false
 	end
 end
 
-function GetNewUnitIDsAndContinueLoadMap(unitIDs)
-	local uIDs = json.decode(unitIDs)
-	for i, u in ipairs(loadedTable.units) do
+function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once the units have been instanciated with new ids
+	local uIDs = json.decode(unitIDs) -- get the associative table between old ids and new ids
+	for i, u in ipairs(loadedTable.units) do -- set up unit parameters
 		unitHP[uIDs[tostring(u.id)]] = u.hp
 		unitAutoHeal[uIDs[tostring(u.id)]] = u.autoHeal
 	end
@@ -4401,11 +4464,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, cond in ipairs(conditions_list) do
 					for iiii, attr in ipairs(cond.attributes) do
-						if attr.id == k and attr.type == "unit" and type(c.params[attr.id]) == "number" then
-							updateUnitID = "unit"
-							break
-						elseif attr.id == k and attr.type == "unitset" and type(c.params[attr.id]) == "number" then
-							updateUnitID = "unitset"
+						if attr.id == k and (attr.type == "unit" or attr.type == "unitset") and p.type == "unit" then -- if the condition has a unit as parameter, ask to update the old id to the new id
+							updateUnitID = true
 							break
 						end
 					end
@@ -4413,9 +4473,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID == "unit" then
-					condition.params[k] = uIDs[tostring(p)]
-				elseif updateUnitID == "unitset" then
+				if updateUnitID then
 					condition.params[k] = {}
 					condition.params[k].type = p.type
 					condition.params[k].value = uIDs[tostring(p.value)]
@@ -4439,11 +4497,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 				local updateUnitID = false
 				for iii, act in ipairs(actions_list) do
 					for iiii, attr in ipairs(act.attributes) do
-						if attr.id == k and attr.type == "unit" then
-							updateUnitID = "unit"
-							break
-						elseif attr.id == k and attr.type == "unitset" then
-							updateUnitID = "unitset"
+						if attr.id == k and (attr.type == "unit" or attr.type == "unitset") and p.type == "unit" then
+							updateUnitID = true
 							break
 						end
 					end
@@ -4451,9 +4506,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 						break
 					end
 				end
-				if updateUnitID == "unit" then
-					action.params[k] = uIDs[tostring(p)]
-				elseif updateUnitID == "unitset" and p.type == "unit" then
+				if updateUnitID then
 					action.params[k] = {}
 					action.params[k].type = p.type
 					action.params[k].value = uIDs[tostring(p.value)]
@@ -4478,6 +4531,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	autoHealState = loadedTable.description.autoHeal
 	mouseState = loadedTable.description.mouse
 	minimapState = loadedTable.description.minimap
+	feedbackState = loadedTable.description.feedback
 	for i, w in ipairs(loadedTable.description.widgets) do
 		for ii, wid in ipairs(customWidgets) do
 			if wid.name == w.name then
@@ -4490,20 +4544,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	loadedTable = nil
 	
 	-- Initialize
-	updateTeamButtons = true -- prevents requiring to go to the forces menu
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.FILE then
-		fileFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		unitFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		zoneFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		forcesFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-		triggerFrame()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
-		mapSettingsFrame()
-	end
+	newMapInitialize()
 	
 	if not loadLock then
 		continueLoadState()
@@ -4513,7 +4554,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs)
 	NeedToBeSaved = true
 end
 
-function saveMap()
+function saveMap() -- Save the table containing the data of the mission into a file
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
@@ -4523,43 +4564,46 @@ function saveMap()
 	local saveName = savedTable.description.saveName
 	
 	-- Write
-	local jsonfile = json.encode(savedTable) -- TODO remove format
-	jsonfile = string.gsub(jsonfile, ",", ",\n")
-	jsonfile = string.gsub(jsonfile, "}", "\n}")
-	jsonfile = string.gsub(jsonfile, "{", "{\n")
-	jsonfile = string.gsub(jsonfile, "%[", "[\n")
-	jsonfile = string.gsub(jsonfile, "%]", " \n]")
-	local count = 0
-	jsonfile = string.gsub(
-		jsonfile,
-		".",
-		function(c)
-			if c == "\n" then
-				local rtr = "\n"
-				for i = 1, count, 1 do
-					rtr = rtr.."\t"
+	local jsonfile = json.encode(savedTable)
+	local DBG_formatString = true -- TODO remove format
+	if DBG_formatString then
+		jsonfile = string.gsub(jsonfile, ",", ",\n")
+		jsonfile = string.gsub(jsonfile, "}", "\n}")
+		jsonfile = string.gsub(jsonfile, "{", "{\n")
+		jsonfile = string.gsub(jsonfile, "%[", "[\n")
+		jsonfile = string.gsub(jsonfile, "%]", " \n]")
+		local count = 0
+		jsonfile = string.gsub(
+			jsonfile,
+			".",
+			function(c)
+				if c == "\n" then
+					local rtr = "\n"
+					for i = 1, count, 1 do
+						rtr = rtr.."\t"
+					end
+					return rtr
 				end
-				return rtr
+				if c == "[" or c == "{" then
+					count = count + 1
+					return c
+				end
+				if c == "]" or c == "}" then
+					count = count - 1
+					return c
+				end
 			end
-			if c == "[" or c == "{" then
-				count = count + 1
-				return c
-			end
-			if c == "]" or c == "}" then
-				count = count - 1
-				return c
-			end
-		end
-	)
-	jsonfile = string.gsub(jsonfile, "\t}", "}")
-	jsonfile = string.gsub(jsonfile, "\t%]", "]")
+		)
+		jsonfile = string.gsub(jsonfile, "\t}", "}")
+		jsonfile = string.gsub(jsonfile, "\t%]", "]")
+	end
 	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 	NeedToBeSaved = false
 end
 
-function newMapFrame()
+function newMapFrame() -- Show a window when the user clicks on the new button
 	if windows["newMapWindow"] then
 		Screen0:RemoveChild(windows["newMapWindow"])
 		windows["newMapWindow"]:Dispose()
@@ -4581,7 +4625,7 @@ function newMapFrame()
 	end
 end
 
-function loadMapFrame()
+function loadMapFrame() -- Show a window when the user clicks on the load button
 	if windows["loadWindow"] then
 		Screen0:RemoveChild(windows["loadWindow"])
 		windows["loadWindow"]:Dispose()
@@ -4625,7 +4669,7 @@ function loadMapFrame()
 	end
 end
 
-function saveMapFrame()
+function saveMapFrame() -- Show a window when the user clicks on the save button
 	if windows["saveWindow"] then
 		Screen0:RemoveChild(windows["saveWindow"])
 		windows["saveWindow"]:Dispose()
@@ -4659,7 +4703,7 @@ function saveMapFrame()
 	end
 end
 
-function backToMenuFrame()
+function backToMenuFrame() -- Show a window when the user clicks on the main menu button
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
 		windows["backToMenu"]:Dispose()
@@ -4671,7 +4715,7 @@ function backToMenuFrame()
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 
-function quitFrame()
+function quitFrame() -- Show a window when the user clicks on the quit button
 	if windows["backToMenu"] then
 		Screen0:RemoveChild(windows["backToMenu"])
 		windows["backToMenu"]:Dispose()
@@ -4683,11 +4727,11 @@ function quitFrame()
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
 
-function beginLoadLevel(name)
+function beginLoadLevel(name) -- Callback used to load a map directly from the launcher
 	loadMap(name)
 end
 
-function loadLevelWithRightMap(name)
+function loadLevelWithRightMap(name) -- Load a level in the map associated to the level if the map is different
 	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
@@ -4729,7 +4773,7 @@ function loadLevelWithRightMap(name)
 	end
 end
 
-function newLevelWithRightMap(name)
+function newLevelWithRightMap(name) -- Creates a new level on the selected map
 	if name == Game.mapName then
 		newMap()
 		newMapInitialize()
@@ -4766,13 +4810,7 @@ function newLevelWithRightMap(name)
 	end
 end
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
---
---			Save/load functions
---
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-function encodeSaveTable()
+function encodeSaveTable() -- Transforms parameters to a table containing all the information needed to store the level
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
@@ -4786,6 +4824,7 @@ function encodeSaveTable()
 	savedTable.description.autoHeal = autoHealState
 	savedTable.description.mouse = mouseState
 	savedTable.description.minimap = minimapState
+	savedTable.description.feedback = feedbackState
 	savedTable.description.widgets = {}
 	for i, w in ipairs(customWidgets) do
 		local widget = {}
@@ -4859,7 +4898,7 @@ function encodeSaveTable()
 	return savedTable
 end
 
-function saveState()
+function saveState() -- Save the state and put it in the stack
 	NeedToBeSaved = true
 	if loadLock and not initialize then
 		local savedTable = encodeSaveTable()
@@ -4872,7 +4911,7 @@ function saveState()
 	end
 end
 
-function loadState(direction)
+function loadState(direction) -- Load a state from the stack depending on the direction (CTRL + Y or Z)
 	NeedToBeSaved = true
 	loadLock = false
 	saveCurrentEvent = currentEvent
@@ -4891,7 +4930,7 @@ function loadState(direction)
 	end
 end
 
-function continueLoadState()
+function continueLoadState() -- Open windows that were opened before ctrl + z or y
 	if saveCurrentEvent and events[saveCurrentEvent] then
 		editEvent(saveCurrentEvent)
 		if saveCurrentAction and events[saveCurrentEvent].actions[saveCurrentAction] then
@@ -4912,7 +4951,7 @@ function continueLoadState()
 	loadLock = true
 end
 
-function requestSave()
+function requestSave() -- Save only after everything required has been done
 	toSave = true
 end
 
@@ -5010,7 +5049,7 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	for i, team in ipairs(teamStateMachine.states) do
 		markButtonWithinSet(teamControlButtons[team], teamControl[team])
 	end
-	markButtonWithinSet(eventButtons, currentEvent)
+	markButtonWithinSet(eventUI.eventButtons, currentEvent)
 	if currentEvent then
 		markButtonWithinSet(actionButtons[events[currentEvent].id], currentAction)
 		markButtonWithinSet(conditionButtons[events[currentEvent].id], currentCondition)
@@ -5116,6 +5155,7 @@ function widget:Update(delta)
 		updateUnitHighlights()
 		if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
 			updateUnitGroupPanels()
+			updateGroupListUnitList()
 		end
 	end
 	
@@ -5295,10 +5335,12 @@ function widget:MousePress(mx, my, button)
 		-- STATE TRIGGER
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 			local e = {}
-			if currentAction then
-				e = events[currentEvent].actions[currentAction]
-			elseif currentCondition then
-				e = events[currentEvent].conditions[currentCondition]
+			if currentEvent then
+				if currentAction then
+					e = events[currentEvent].actions[currentAction]
+				elseif currentCondition then
+					e = events[currentEvent].conditions[currentCondition]
+				end
 			end
 			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
 				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
@@ -5320,7 +5362,7 @@ function widget:MousePress(mx, my, button)
 						drawConditionFrame(false)
 					end
 				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
+			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 				if kind == "unit" and currentEvent then
 					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 					e.params[changedParam] = {}
@@ -5331,21 +5373,6 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["importWindow"])
 					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
-					if currentAction then
-						Screen0:AddChild(windows["actionWindow"])
-						drawActionFrame(false)
-					elseif currentCondition then
-						Screen0:AddChild(windows["conditionWindow"])
-						drawConditionFrame(false)
-					end
-				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
-				if kind == "unit" and currentEvent then
-					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					e.params[changedParam] = var
-					Screen0:AddChild(windows["triggerWindow"])
-					Screen0:AddChild(windows["eventWindow"])
-					Screen0:AddChild(windows["importWindow"])
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
@@ -5566,9 +5593,9 @@ function widget:KeyPress(key, mods)
 			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
 				addUnitGroup(newUnitGroupEditBox.text)
 				clearTemporaryWindows()
-				return true
 			end
 		end
+		return true
 	end
 	-- Selection state
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then

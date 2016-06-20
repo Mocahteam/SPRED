@@ -24,7 +24,7 @@ function StateMachine.getCurrentState(self) return self.currentState end
 -- Initialize global state machine
 ------------------------------
 local globalStates = { NONE = "none", FILE = "file", UNIT = "unit", ZONE = "zone", FORCES = "forces", TRIGGER = "trigger", MAPSETTINGS = "mapsettings" }
-globalStateMachine = StateMachine.new(globalStates, globalStates.FILE)
+globalStateMachine = StateMachine.new(globalStates, globalStates.NONE)
 
 ------------------------------
 -- Initialize unit state machine

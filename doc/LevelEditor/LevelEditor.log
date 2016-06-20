@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  9 JUN 2016 17:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  17 JUN 2016 11:01
 entering extended mode
 **./LevelEditor.tex
 (LevelEditor.tex
@@ -445,9 +445,9 @@ Here is how much of TeX's memory you used:
  28i,6n,30p,676b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Benjamin-Zigaroula-\AppData\L
 ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Benja
-min-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti
-1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
-\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\Mi
+min-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm
+0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
+\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\Mi
 KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Benjamin-Zig
 aroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
 > <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
@@ -458,9 +458,9 @@ sers\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
 pi600\ecbx0900.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts
 \pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Benjamin-Zigaroula-\AppDat
 a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk>
-Output written on LevelEditor.pdf (6 pages, 129740 bytes).
+Output written on LevelEditor.pdf (6 pages, 124576 bytes).
 PDF statistics:
- 398 PDF objects out of 1000 (max. 8388607)
+ 382 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

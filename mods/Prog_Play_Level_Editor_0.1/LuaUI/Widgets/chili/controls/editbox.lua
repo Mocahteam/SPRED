@@ -238,6 +238,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 
 	-- enter & return
 	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+		WG.Chili.Screen0:FocusControl()
 		return inherited.KeyPress(self, key, mods, isRepeat, label, unicode, ...) or false
 
 	-- deletions
@@ -289,6 +290,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		self.cursor = #txt + 1
 
 	-- copy & paste
+	--[[
 	elseif mods.ctrl and (key == Spring.GetKeyCode("c") or key == Spring.GetKeyCode("x")) then
 		local s = self.selStart
 		local e = self.selEnd
@@ -305,7 +307,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		cctext = string.gsub(cctext, "\r", "")
 		cctext = string.gsub(cctext, "\t", "")
 		self:TextInput(cctext)
-
+	]]
 	-- select all
 	elseif mods.ctrl and key == Spring.GetKeyCode("a") then
 		self.selStart = 1

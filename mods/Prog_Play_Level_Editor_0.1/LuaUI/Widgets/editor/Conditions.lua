@@ -62,7 +62,7 @@ conditions_list = {
 		type = "underAttack",
 		filter = "Unit",
 		typeText = "Units are under attack",
-		text = "<Number> units of <UnitSet> are under attack.",
+		text = "<Number> units of <UnitSet> are being attacked by <Attacker>.",
 		attributes = {
 			{
 				text = "<Number>",
@@ -73,6 +73,11 @@ conditions_list = {
 				text = "<UnitSet>",
 				type = "unitset",
 				id = "unitset"
+			},
+			{
+				text = "<Attacker>",
+				type = "unitset",
+				id = "attacker"
 			}
 		}
 	},
@@ -97,13 +102,13 @@ conditions_list = {
 	{
 		type = "killed",
 		filter = "Unit",
-		typeText = "Team killed specific units",
-		text = "<Team> killed <Number> units of <UnitSet>.",
+		typeText = "Units killed specific units",
+		text = "<UnitSet> killed <Number> units of <Target>.",
 		attributes = {
 			{
-				text = "<Team>",
-				type = "team",
-				id = "team"
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
 			},
 			{
 				text = "<Number>",
@@ -111,9 +116,9 @@ conditions_list = {
 				id = "number"
 			},
 			{
-				text = "<UnitSet>",
+				text = "<Target>",
 				type = "unitset",
-				id = "unitset"
+				id = "target"
 			}
 		}
 	},
@@ -121,7 +126,7 @@ conditions_list = {
 		type = "hp",
 		filter = "Unit",
 		typeText = "HP of units",
-		text = "Hit points of <Number> units of <UnitSet> are at <Percentage> %.",
+		text = "Hit points of <Number> units of <UnitSet> are <Comparison> <Percentage> %.",
 		attributes = {
 			{
 				text = "<Number>",
@@ -132,6 +137,11 @@ conditions_list = {
 				text = "<UnitSet>",
 				type = "unitset",
 				id = "unitset"
+			},
+			{
+				text = "<Comparison>",
+				type = "comparison",
+				id = "comparison"
 			},
 			{
 				text = "<Percentage>",
@@ -160,6 +170,29 @@ conditions_list = {
 				text = "<Command>",
 				type = "command",
 				id = "command"
+			}
+		}
+	},
+	{
+		type = "type",
+		filter = "Unit",
+		typeText = "Units are of specific type",
+		text = "<Number> units of <UnitSet> are of type <UnitType>",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<UnitType>",
+				type = "unitType",
+				id = "type"
 			}
 		}
 	},
