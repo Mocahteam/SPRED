@@ -80,10 +80,10 @@ end
 function findInTable(tab, e)
 	for k, el in pairs(tab) do
 		if e == el then
-			return true
+			return k
 		end
 	end
-	return false
+	return nil
 end
 
 -------------------------------------

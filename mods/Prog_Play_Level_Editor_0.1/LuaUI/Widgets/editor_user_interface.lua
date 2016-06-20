@@ -217,6 +217,12 @@ local mouseState = "disabled" -- Current state of the mouse
 local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 
+-- Traces variables
+local tracesUI = {}
+tracesUI.buttons = {}
+tracesUI.viewButtons = {}
+local chosenTraces = {}
+
 -- Save states variables
 local saveStates = {} -- States for CTRL+Z
 local loadLock = true -- Prevents saving states when loading a state
@@ -605,6 +611,58 @@ function mapSettingsFrame()
 	end
 end
 
+function tracesFrame()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRACES then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.TRACES)
+		Screen0:AddChild(windows["tracesWindow"])
+		removeElements(windows["tracesWindow"], tracesUI.buttons, true)
+		removeElements(windows["tracesWindow"], tracesUI.viewButtons, true)
+		if tracesUI.message then
+			tracesUI.message:Dispose()
+		end
+		local missionName = "mission" -- FIXME
+		local tracesList = VFS.DirList("traces/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
+		if #tracesList == 0 then
+			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
+		else
+			local count = 0
+			for i, trace in ipairs(tracesList) do
+				local name = string.gsub(trace, "traces\\"..missionName.."\\", "")
+				name = string.gsub(name, ".xml", "")
+				local but = addButton(tracesUI.scrollPanel, '0%', 40 * count, '90%', 40, name)
+				but.OnClick = {
+					function()
+						local index = findInTable(chosenTraces, name)
+						if index then
+							table.remove(chosenTraces, index)
+							but.state.chosen = false
+							but:InvalidateSelf()
+						else
+							table.insert(chosenTraces, name)
+							but.state.chosen = true
+							but:InvalidateSelf()
+						end
+						saveState()
+					end
+				}
+				if findInTable(chosenTraces, name) then
+					but.state.chosen = true
+				else
+					but.state.chosen = false
+				end
+				table.insert(tracesUI.buttons, but)
+				local viewBut = addButton(tracesUI.scrollPanel, '90%', 40 * count, '10%', 40, "", nil) --todo
+				addImage(viewBut, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(tracesUI.viewButtons, viewBut)
+				count = count + 1
+			end
+		end
+	end
+end
+
 function testLevel()
 -- todo
 end
@@ -678,11 +736,12 @@ function initTopBar()
 	
 	-- Menu buttons
 	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', EDITOR_FILE, fileFrame)
-	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
-	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
-	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
-	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
-	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '10%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '20%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '30%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
+	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
 	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
@@ -695,6 +754,7 @@ function initWindows()
 	initZoneWindow()
 	initTriggerWindow()
 	initMapSettingsWindow()
+	initTracesWindow()
 end
 
 function initFileWindow()
@@ -1159,6 +1219,14 @@ function initMapSettingsWindow()
 	}
 	
 	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
+end
+
+function initTracesWindow()
+	windows['tracesWindow'] = addWindow(Screen0, '30%', '25%', '40%', '50%', true)
+	local closeButton = addButton(windows['tracesWindow'], '95%', '0%', '5%', '7%', "X", tracesFrame)
+	closeButton.font.color = { 1, 0, 0, 1 }
+	addLabel(windows['tracesWindow'], '0%', '0%', '100%', '10%', EDITOR_TRACES_TITLE, 20, "center", nil, "center")
+	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '100%', '90%')
 end
 
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -4376,6 +4444,8 @@ function newMap() -- Set each parameter to its default value
 	minimapState = "disabled"
 	feedbackState = "disabled"
 	initWidgetList()
+	-- Traces
+	chosenTraces = {}
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -4411,6 +4481,9 @@ function newMapInitialize() -- Open the window of the state you were in before l
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
 		mapSettingsFrame()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRACES then
+		tracesFrame()
+		tracesFrame()
 	end
 	saveState()
 end
@@ -4595,6 +4668,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 				break
 			end
 		end
+	end
+	for i, t in ipairs(loadedTable.description.traces) do
+		table.insert(chosenTraces, t)
 	end
 	
 	loadedTable = nil
@@ -4888,6 +4964,10 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 		widget.active = w.active
 		widget.desc = w.desc
 		table.insert(savedTable.description.widgets, widget)
+	end
+	savedTable.description.traces = {}
+	for i, t in ipairs(chosenTraces) do
+		table.insert(savedTable.description.traces, t)
 	end
 	
 	-- Units
