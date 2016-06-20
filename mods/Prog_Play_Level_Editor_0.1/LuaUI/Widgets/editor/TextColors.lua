@@ -20,7 +20,7 @@ textColors = {
 	widget = "\255\128\255\255"
 }
 
-colorTable = {
+colorTable = { -- associative table between a number and its character
 	"\0",
 	"\1",
 	"\2",

@@ -45,9 +45,20 @@
 \contentsline {subsubsection}{\numberline {5.1.6}Param\IeC {\`e}tres de la carte}{5}
 \contentsline {paragraph}{}{5}
 \contentsline {subsubsection}{\numberline {5.1.7}Sauvegarde / Chargement}{6}
+\contentsline {paragraph}{ }{6}
 \contentsline {subsubsection}{\numberline {5.1.8}Fonctions de dessin}{6}
+\contentsline {paragraph}{ }{6}
 \contentsline {subsubsection}{\numberline {5.1.9}Listeners}{6}
 \contentsline {subsection}{\numberline {5.2}Gadget}{6}
+\contentsline {paragraph}{ }{6}
+\contentsline {paragraph}{RecvLuaMsg}{6}
+\contentsline {paragraph}{GameFrame}{6}
+\contentsline {paragraph}{RecvFromSynced}{6}
 \contentsline {subsection}{\numberline {5.3}Machines \IeC {\`a} \IeC {\'e}tats}{6}
-\contentsline {subsection}{\numberline {5.4}Fonctions utilitaires}{6}
-\contentsline {subsection}{\numberline {5.5}Fichiers de description}{6}
+\contentsline {paragraph}{ }{6}
+\contentsline {subsection}{\numberline {5.4}Fonctions utilitaires}{7}
+\contentsline {paragraph}{ }{7}
+\contentsline {subsection}{\numberline {5.5}Fichiers de description}{7}
+\contentsline {paragraph}{ }{7}
+\contentsline {paragraph}{ }{7}
+\contentsline {paragraph}{ }{7}

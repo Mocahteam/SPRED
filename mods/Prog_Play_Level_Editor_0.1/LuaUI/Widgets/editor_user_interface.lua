@@ -606,7 +606,7 @@ function mapSettingsFrame()
 end
 
 function testLevel()
-
+-- todo
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1187,8 +1187,6 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-
-
 function updateUnitWindow() -- Display buttons to choose the type of the unit the user wants to instanciate.
 	removeElements(unitScrollPanel, unitButtons, true)
 	local button_size = 40
@@ -1259,6 +1257,53 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 		-- draw the rectangle
 		selectionRect = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
+end
+
+function GetUnitsInScreenRectangle(x1, y1, x2, y2) -- Select every units in a rectangle
+	local units = Spring.GetAllUnits()
+	
+	local left, right = sort(x1, x2)
+	local bottom, top = sort(y1, y2)
+
+	local result = {}
+
+	for i=1, #units do
+		local uid = units[i]
+		x, y, z = Spring.GetUnitPosition(uid)
+		x, y = Spring.WorldToScreenCoords(x, y, z)
+		if (left <= x and x <= right) and (top >= y and y >= bottom) then
+			result[#result+1] = uid
+		end
+	end
+	return result
+end
+
+function proceedSelection(units) -- Select units or add them to the current selection if shift or ctrl is pressed
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
+		local selectedUnits = Spring.GetSelectedUnits()
+		for i, u in ipairs(units) do
+			table.insert(selectedUnits, u) -- add units to selection
+		end
+		Spring.SelectUnitArray(selectedUnits)
+	else
+		Spring.SelectUnitArray(units)
+	end
+end
+
+function proceedDeselection(unit) -- Remove a unit from the current selection if shift or ctrl is pressed
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
+		local selectedUnits = Spring.GetSelectedUnits()
+		for i, u in ipairs(selectedUnits) do
+			if u == unit then
+				table.remove(selectedUnits, i) -- remove unit from selection
+			end
+		end
+		Spring.SelectUnitArray(selectedUnits)
+		return true -- to disable click to select
+	end
+	return false
 end
 
 function previewUnit()-- Draw units before placing them
@@ -1337,6 +1382,17 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	end
 	-- Apply
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
+end
+
+function showUnitInformation(u) -- Shows units information above unit
+	local xU, yU, zU = Spring.GetUnitPosition(u)
+	local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+	local text1 = "ID:"..tostring(u)
+	local w1 = gl.GetTextWidth(text1)
+	gl.Text(text1, x - (15*w1/2), y, 15, "s")
+	local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
+	local w2 = gl.GetTextWidth(text2)
+	gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
 end
 
 function showUnitsInformation() -- Show information (ID and position) about selected and hovered units
@@ -4961,8 +5017,8 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
-	local divs = d or 25
+function drawGroundFilledEllipsis(centerX, centerZ, a, b, d) -- Draw an ellipsis
+	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
 		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
@@ -4972,8 +5028,8 @@ function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
 	end)
 end
 
-function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
-	local divs = d or 25
+function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d) -- Draw the border of an ellipsis
+	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
 		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
@@ -4984,14 +5040,14 @@ function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
 	end)
 end
 
-function initMouseCursors()
+function initMouseCursors() -- Add new mouse cursors (resize zones)
 	Spring.AssignMouseCursor("cursor-resize-x-y-1", "cursor-resize-x-y-1", false)
 	Spring.AssignMouseCursor("cursor-resize-x-y-2", "cursor-resize-x-y-2", false)
 	Spring.AssignMouseCursor("cursor-resize-x", "cursor-resize-x", false)
 	Spring.AssignMouseCursor("cursor-resize-y", "cursor-resize-y", false)
 end
 
-function changeMouseCursor()
+function changeMouseCursor() -- Change the cursor depending on the zone on which the user places his cursor on
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
 		local mx, my, leftPressed = Spring.GetMouseState()
 		local kind, var = Spring.TraceScreenRay(mx, my, true, true)
@@ -5027,7 +5083,7 @@ function changeMouseCursor()
 	end
 end
 
-function recursiveResize(obj, textSize)
+function recursiveResize(obj, textSize) -- May be used to resize the text of a control and all its children
 	if obj.children then
 		for i, child in ipairs(obj.children) do
 			recursiveResize(child, textSize)
@@ -5039,7 +5095,7 @@ function recursiveResize(obj, textSize)
 	end
 end
 
-function updateButtonVisualFeedback() -- Show current states on GUI
+function updateButtonVisualFeedback() -- Show current states on GUI (colored buttons)
 	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
 	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
 	markButtonWithinSet(teamButtons, teamStateMachine:getCurrentState(), unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION)
@@ -5056,14 +5112,14 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	end
 end
 
-function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
+function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen within a set of options
 	local specificCondition = true
 	if condition ~= nil then
 		specificCondition = condition
 	end
 	
 	for k, b in pairs(buttonTable) do
-		local requestUpdate = false
+		local requestUpdate = false -- If the state is changed 0 or 2 times, it means that the state didn't change, so there is no need to update
 		if b.state.chosen then
 			b.state.chosen = false
 			requestUpdate = not requestUpdate
@@ -5447,7 +5503,7 @@ function widget:MouseRelease(mx, my, button)
 										alwaysInView = false,
 										marker = false
 									}
-				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
+				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 					requestSave()
@@ -5466,7 +5522,7 @@ function widget:MouseRelease(mx, my, button)
 										alwaysInView = false,
 										marker = false
 									}
-				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drew zone is large enough, store it
+				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 					requestSave()
