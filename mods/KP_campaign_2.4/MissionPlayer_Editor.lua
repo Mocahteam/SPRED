@@ -16,7 +16,7 @@ local ctx={}
 --This way, the user can get and set values related to the game 
 
 ctx.debugLevel=0 -- in order to filter Spring Echo between 0 (all) and 10 (none)
-ctx.armySpring={}--table to store created spring units externalId (number)->SpringId (number)
+ctx.armySpring={}--table to store created spring units externalId (number or string)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
 ctx.armyInformations={}--table to store information on units externalId->Informations
@@ -382,7 +382,10 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
 end
 
 
-local function addUnitToGroups(externalId,groups) 
+local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
+  local testOnExternalsOnly=testOnExternalsOnly or true 
+  -- usefull to check redundancy at a deeper level because, when it comes about unit creation
+  -- units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
   
       -- create group if not existing
@@ -392,8 +395,15 @@ local function addUnitToGroups(externalId,groups)
     
     -- store in group if not already stored
     local isAlreadyStored=false
-    for i = 1,table.getn(ctx.groupOfUnits[group]) do
-      if(externalId==ctx.groupOfUnits[group][i]) then isAlreadyStored=true end
+    if(testOnExternalsOnly)then
+      for i = 1,table.getn(ctx.groupOfUnits[group]) do
+        if(externalId==ctx.groupOfUnits[group][i]) then isAlreadyStored=true end
+      end
+    else
+      local spId=ctx.armySpring[externalId]
+      for i = 1,table.getn(ctx.groupOfUnits[group]) do
+        if(spId==ctx.armySpring[ctx.groupOfUnits[group][i]]) then isAlreadyStored=true end
+      end    
     end
     if(not isAlreadyStored)then   
       table.insert(ctx.groupOfUnits[group],externalId)
@@ -539,11 +549,12 @@ local function createUnitAtPosition(act,position)
   local externalId=act.name.."_"..tostring(ctx.globalIndexOfCreatedUnits)
   -- in order to keep to track of all created units
   ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1 
-  local gpIndex="group_"..act.id
+  local gpIndex="action_"..act.id
   ctx.groupOfUnits[gpIndex]={} -- Implementation choice : only the last unit action-created is stored in the action-group, hence the deletion.
   local teamIndex="team_"..tostring(act.params.team)
-  addUnitToGroups(externalId,{gpIndex,teamIndex}) 
   registerUnit(springId,externalId)
+  addUnitToGroups(externalId,{gpIndex,teamIndex}) 
+
     --<set Heal and underAttack>
 end
 
@@ -1379,7 +1390,7 @@ function gadget:RecvLuaMsg(msg, player)
       local teamIndex="team_"..tostring(creationTable.unitTeam)
 
       registerUnit(springId,realId)
-      addUnitToGroups(realId,{teamIndex})
+      addUnitToGroups(realId,{teamIndex},false)
       -- </Register>
       
     end 
