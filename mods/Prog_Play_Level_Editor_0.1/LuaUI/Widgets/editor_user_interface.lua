@@ -217,6 +217,12 @@ local mouseState = "disabled" -- Current state of the mouse
 local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 
+-- Traces variables
+local tracesUI = {}
+tracesUI.buttons = {}
+tracesUI.viewButtons = {}
+local chosenTraces = {}
+
 -- Save states variables
 local saveStates = {} -- States for CTRL+Z
 local loadLock = true -- Prevents saving states when loading a state
@@ -605,8 +611,115 @@ function mapSettingsFrame()
 	end
 end
 
-function testLevel()
+function tracesFrame()
+	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRACES then
+		clearUI()
+	else
+		clearUI()
+		globalStateMachine:setCurrentState(globalStateMachine.states.TRACES)
+		Screen0:AddChild(windows["tracesWindow"])
+		removeElements(windows["tracesWindow"], tracesUI.buttons, true)
+		removeElements(windows["tracesWindow"], tracesUI.viewButtons, true)
+		if tracesUI.message then
+			tracesUI.message:Dispose()
+		end
+		local missionName = generateSaveName(mapDescription.mapName)
+		local tracesList = VFS.DirList("traces/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
+		tracesUI.textbox:SetText("")
+		if #tracesList == 0 then
+			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
+		else
+			local count = 0
+			for i, trace in ipairs(tracesList) do
+				local name = string.gsub(trace, "traces\\"..missionName.."\\", "")
+				name = string.gsub(name, ".xml", "")
+				local but = addButton(tracesUI.scrollPanel, '0%', 40 * count, '90%', 40, name)
+				but.OnClick = {
+					function()
+						local index = findInTable(chosenTraces, name)
+						if index then
+							table.remove(chosenTraces, index)
+							but.state.chosen = false
+							but:InvalidateSelf()
+						else
+							table.insert(chosenTraces, name)
+							but.state.chosen = true
+							but:InvalidateSelf()
+						end
+						saveState()
+					end
+				}
+				if findInTable(chosenTraces, name) then
+					but.state.chosen = true
+				else
+					but.state.chosen = false
+				end
+				table.insert(tracesUI.buttons, but)
+				local viewBut = addButton(tracesUI.scrollPanel, '90%', 40 * count, '10%', 40, "", function() tracesUI.textbox:SetText(VFS.LoadFile("traces/"..missionName.."/"..name..".xml")) end)
+				addImage(viewBut, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				table.insert(tracesUI.viewButtons, viewBut)
+				count = count + 1
+			end
+		end
+	end
+end
 
+function testLevel()
+	local levelFile = encodeSaveTable()
+	local goTest = function()
+		Screen0:RemoveChild(windows["testWindow"])
+		windows["testWindow"]:Dispose()
+		local saveName = generateSaveName(mapDescription.mapName)
+		if saveName == "Map" then
+			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
+			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
+			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
+		else
+			saveMap()
+			if Game.version == "0.82.5.1" then
+				local operations = {
+					["MODOPTIONS"] = {
+						["language"] = Language,
+						["scenario"] = "noScenario",
+						["maingame"] = Spring.GetModOptions().maingame,
+						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+						["testmap"] = levelFile.description.saveName
+					},
+					["GAME"] = {
+						["Mapname"] = levelFile.description.map,
+						["Gametype"] = Game.modName
+					}
+				}
+				DoTheRestart("LevelEditor.txt", operations)
+			else
+				local operations = {
+					["MODOPTIONS"] = {
+						["language"] = Language,
+						["scenario"] = "noScenario",
+						["maingame"] = Spring.GetModOptions().maingame,
+						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+						["testmap"] = levelFile.description.saveName
+					},
+					["GAME"] = {
+						["Mapname"] = levelFile.description.map,
+						["Gametype"] = Game.gameName.." "..Game.gameVersion
+					}
+				}
+				DoTheRestart("LevelEditor.txt", operations)
+			end
+		end
+	end
+	
+	if windows["testWindow"] then
+		Screen0:RemoveChild(windows["testWindow"])
+		windows["testWindow"]:Dispose()
+	end
+	windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
+	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "pp_editor/missions/"..levelFile.description.saveName..".editor")
+	addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text, 20, "center", nil, "center")
+	addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
+	addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -678,11 +791,12 @@ function initTopBar()
 	
 	-- Menu buttons
 	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', EDITOR_FILE, fileFrame)
-	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '15%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
-	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
-	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
-	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
-	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '10%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '20%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '30%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
+	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
 	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
@@ -695,6 +809,7 @@ function initWindows()
 	initZoneWindow()
 	initTriggerWindow()
 	initMapSettingsWindow()
+	initTracesWindow()
 end
 
 function initFileWindow()
@@ -1161,6 +1276,57 @@ function initMapSettingsWindow()
 	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '18%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
 end
 
+function initTracesWindow()
+	windows['tracesWindow'] = addWindow(Screen0, '5%', '15%', '90%', '70%', true)
+	local closeButton = addButton(windows['tracesWindow'], '95%', '0%', '5%', '7%', "X", tracesFrame)
+	closeButton.font.color = { 1, 0, 0, 1 }
+	addLabel(windows['tracesWindow'], '0%', '0%', '30%', '10%', EDITOR_TRACES_TITLE, 20, "center", nil, "center")
+	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '30%', '90%')
+	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '10%', '70%', '90%')
+	tracesUI.textbox = addTextBox(viewSP, '2%', '2%', '96%', '96%', "", 15)
+end
+
+function initTestLevelFrame()
+	local win = addWindow(Screen0, '80%', '0%', '20%', '10%', false)
+	local function returnToEditor()
+		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
+		levelFile = json.decode(levelFile)
+		if Game.version == "0.82.5.1" then
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["toBeLoaded"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		else
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["toBeLoaded"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.gameName.." "..Game.gameVersion
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		end
+	end
+	local but = addButton(win, '0%', '0%', '100%', '100%', EDITOR_TEST_LEVEL_BACK_TO_EDITOR, returnToEditor)
+	but.font.size = 20
+end
+
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
 	for k, u in pairs(unitStateMachine.states) do
 		unitFunctions[u] = function()
@@ -1186,8 +1352,6 @@ end
 --			Unit/Selection state functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-
 
 function updateUnitWindow() -- Display buttons to choose the type of the unit the user wants to instanciate.
 	removeElements(unitScrollPanel, unitButtons, true)
@@ -1259,6 +1423,53 @@ function drawSelectionRect() -- Draw the selection feedback rectangle
 		-- draw the rectangle
 		selectionRect = addRect(Screen0, x1, y1, x2, y2, {0, 1, 1, 0.3})
 	end
+end
+
+function GetUnitsInScreenRectangle(x1, y1, x2, y2) -- Select every units in a rectangle
+	local units = Spring.GetAllUnits()
+	
+	local left, right = sort(x1, x2)
+	local bottom, top = sort(y1, y2)
+
+	local result = {}
+
+	for i=1, #units do
+		local uid = units[i]
+		x, y, z = Spring.GetUnitPosition(uid)
+		x, y = Spring.WorldToScreenCoords(x, y, z)
+		if (left <= x and x <= right) and (top >= y and y >= bottom) then
+			result[#result+1] = uid
+		end
+	end
+	return result
+end
+
+function proceedSelection(units) -- Select units or add them to the current selection if shift or ctrl is pressed
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
+		local selectedUnits = Spring.GetSelectedUnits()
+		for i, u in ipairs(units) do
+			table.insert(selectedUnits, u) -- add units to selection
+		end
+		Spring.SelectUnitArray(selectedUnits)
+	else
+		Spring.SelectUnitArray(units)
+	end
+end
+
+function proceedDeselection(unit) -- Remove a unit from the current selection if shift or ctrl is pressed
+	local _, ctrlPressed, _, shiftPressed = Spring.GetModKeyState()
+	if shiftPressed or ctrlPressed then
+		local selectedUnits = Spring.GetSelectedUnits()
+		for i, u in ipairs(selectedUnits) do
+			if u == unit then
+				table.remove(selectedUnits, i) -- remove unit from selection
+			end
+		end
+		Spring.SelectUnitArray(selectedUnits)
+		return true -- to disable click to select
+	end
+	return false
 end
 
 function previewUnit()-- Draw units before placing them
@@ -1337,6 +1548,17 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	end
 	-- Apply
 	addButton(unitAttributesWindow, 0, "85%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
+end
+
+function showUnitInformation(u) -- Shows units information above unit
+	local xU, yU, zU = Spring.GetUnitPosition(u)
+	local x, y = Spring.WorldToScreenCoords(xU, yU+50, zU)
+	local text1 = "ID:"..tostring(u)
+	local w1 = gl.GetTextWidth(text1)
+	gl.Text(text1, x - (15*w1/2), y, 15, "s")
+	local text2 = "x:"..tostring(round(xU)).." z:"..tostring(round(zU))
+	local w2 = gl.GetTextWidth(text2)
+	gl.Text(text2, x - (15*w2/2), y-15, 15, "s")
 end
 
 function showUnitsInformation() -- Show information (ID and position) about selected and hovered units
@@ -4320,6 +4542,8 @@ function newMap() -- Set each parameter to its default value
 	minimapState = "disabled"
 	feedbackState = "disabled"
 	initWidgetList()
+	-- Traces
+	chosenTraces = {}
 	-- Gadget (units)
 	Spring.SendLuaRulesMsg("New Map")
 	-- Reset some chili elements
@@ -4355,6 +4579,9 @@ function newMapInitialize() -- Open the window of the state you were in before l
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
 		mapSettingsFrame()
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRACES then
+		tracesFrame()
+		tracesFrame()
 	end
 	saveState()
 end
@@ -4539,6 +4766,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 				break
 			end
 		end
+	end
+	for i, t in ipairs(loadedTable.description.traces) do
+		table.insert(chosenTraces, t)
 	end
 	
 	loadedTable = nil
@@ -4744,7 +4974,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
+					["toBeLoaded"] = name,
 					["maingame"] = Spring.GetModOptions().maingame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
@@ -4759,7 +4989,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
+					["toBeLoaded"] = name,
 					["maingame"] = Spring.GetModOptions().maingame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
@@ -4832,6 +5062,10 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 		widget.active = w.active
 		widget.desc = w.desc
 		table.insert(savedTable.description.widgets, widget)
+	end
+	savedTable.description.traces = {}
+	for i, t in ipairs(chosenTraces) do
+		table.insert(savedTable.description.traces, t)
 	end
 	
 	-- Units
@@ -4961,8 +5195,8 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
-	local divs = d or 25
+function drawGroundFilledEllipsis(centerX, centerZ, a, b, d) -- Draw an ellipsis
+	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
 		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
@@ -4972,8 +5206,8 @@ function drawGroundFilledEllipsis(centerX, centerZ, a, b, d)
 	end)
 end
 
-function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
-	local divs = d or 25
+function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d) -- Draw the border of an ellipsis
+	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
 		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
@@ -4984,14 +5218,14 @@ function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d)
 	end)
 end
 
-function initMouseCursors()
+function initMouseCursors() -- Add new mouse cursors (resize zones)
 	Spring.AssignMouseCursor("cursor-resize-x-y-1", "cursor-resize-x-y-1", false)
 	Spring.AssignMouseCursor("cursor-resize-x-y-2", "cursor-resize-x-y-2", false)
 	Spring.AssignMouseCursor("cursor-resize-x", "cursor-resize-x", false)
 	Spring.AssignMouseCursor("cursor-resize-y", "cursor-resize-y", false)
 end
 
-function changeMouseCursor()
+function changeMouseCursor() -- Change the cursor depending on the zone on which the user places his cursor on
 	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE and zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
 		local mx, my, leftPressed = Spring.GetMouseState()
 		local kind, var = Spring.TraceScreenRay(mx, my, true, true)
@@ -5027,7 +5261,7 @@ function changeMouseCursor()
 	end
 end
 
-function recursiveResize(obj, textSize)
+function recursiveResize(obj, textSize) -- May be used to resize the text of a control and all its children
 	if obj.children then
 		for i, child in ipairs(obj.children) do
 			recursiveResize(child, textSize)
@@ -5039,7 +5273,7 @@ function recursiveResize(obj, textSize)
 	end
 end
 
-function updateButtonVisualFeedback() -- Show current states on GUI
+function updateButtonVisualFeedback() -- Show current states on GUI (colored buttons)
 	markButtonWithinSet(topBarButtons, globalStateMachine:getCurrentState())
 	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
 	markButtonWithinSet(teamButtons, teamStateMachine:getCurrentState(), unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION)
@@ -5056,14 +5290,14 @@ function updateButtonVisualFeedback() -- Show current states on GUI
 	end
 end
 
-function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen in a set of options
+function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual feedback when an option is chosen within a set of options
 	local specificCondition = true
 	if condition ~= nil then
 		specificCondition = condition
 	end
 	
 	for k, b in pairs(buttonTable) do
-		local requestUpdate = false
+		local requestUpdate = false -- If the state is changed 0 or 2 times, it means that the state didn't change, so there is no need to update
 		if b.state.chosen then
 			b.state.chosen = false
 			requestUpdate = not requestUpdate
@@ -5111,6 +5345,12 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
+	initChili()
+	if Spring.GetModOptions().testmap then
+		initTestLevelFrame()
+		Script.LuaUI.finishedLoading()
+		return
+	end
 	initialize = true
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
@@ -5119,7 +5359,6 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("requestUnitListUpdate", function() updateUnitList(true) end)
 	getCommandsList()
 	hideDefaultGUI()
-	initChili()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
@@ -5132,6 +5371,9 @@ function widget:Initialize()
 end
 
 function widget:Update(delta)
+	if Spring.GetModOptions().testmap then
+		return
+	end
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local unitSelection = Spring.GetSelectedUnits()
 	local msg = "Select Units"
@@ -5241,6 +5483,10 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
+	if Spring.GetModOptions().testmap then
+		return false
+	end
+	
 	clearTemporaryWindows()
 	-- raycast
 	local kind,var = Spring.TraceScreenRay(mx,my)
@@ -5447,7 +5693,7 @@ function widget:MouseRelease(mx, my, button)
 										alwaysInView = false,
 										marker = false
 									}
-				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drew zone is large enough, store it
+				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 					requestSave()
@@ -5466,7 +5712,7 @@ function widget:MouseRelease(mx, my, button)
 										alwaysInView = false,
 										marker = false
 									}
-				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drew zone is large enough, store it
+				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
 					zoneNumber = zoneNumber + 1
 					requestSave()
@@ -5556,6 +5802,9 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 end
 
 function widget:KeyPress(key, mods)
+	if Spring.GetModOptions().testmap then
+		return false
+	end
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then

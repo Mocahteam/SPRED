@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  17 JUN 2016 11:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  20 JUN 2016 15:10
 entering extended mode
 **./LevelEditor.tex
 (LevelEditor.tex
@@ -434,33 +434,33 @@ Underfull \hbox (badness 1596) in paragraph at lines 37--38
 id-gets pré-sents. (edi-
  []
 
-[2] [3] [4] [5] [6] (LevelEditor.aux) ) 
+[2] [3] [4] [5] [6] [7] (LevelEditor.aux) ) 
 Here is how much of TeX's memory you used:
- 2281 strings out of 493634
- 31066 string characters out of 3129527
+ 2284 strings out of 493634
+ 31096 string characters out of 3129527
  98260 words of memory out of 3000000
- 5669 multiletter control sequences out of 15000+200000
+ 5672 multiletter control sequences out of 15000+200000
  15525 words of font info for 35 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,6n,30p,676b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Benjamin-Zigaroula-\AppData\L
-ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Benja
-min-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm
-0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
-\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\Mi
-KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Benjamin-Zig
-aroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
-> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
-en\ec\dpi600\ecbx1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin-Zigaroula-
-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\U
-sers\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
-pi600\ecbx0900.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Benjamin-Zigaroula-\AppDat
-a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk>
-Output written on LevelEditor.pdf (6 pages, 124576 bytes).
+ 28i,6n,30p,785b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Benjamin-Zigaroula-\AppDa
+ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\B
+enjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+ecrm0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Loca
+l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Benjamin
+-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm100
+0.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jk
+nappen\ec\dpi600\ecbx1000.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTe
+X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin-Zigaro
+ula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <
+C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
+ec\dpi600\ecbx0900.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\f
+onts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Benjamin-Zigaroula-\Ap
+pData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk>
+Output written on LevelEditor.pdf (7 pages, 135101 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
+ 404 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

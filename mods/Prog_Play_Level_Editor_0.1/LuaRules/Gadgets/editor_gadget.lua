@@ -135,6 +135,9 @@ function gadget:RecvLuaMsg(msg, player)
 end
 
 function gadget:GameFrame( frameNumber )
+	if Spring.GetModOptions().testmap then
+		return
+	end
 	-- EDITOR ONLY
 	if missionName == "LevelEditor" then
 		-- Delete units at the beginning
