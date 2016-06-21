@@ -1054,9 +1054,11 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==c.params.command) 
     elseif(c.type=="hp") then 
-      local tresholdRatio=c.params.hp.number/100
+      local tresholdRatio=c.params.hp.number/99.99
       local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
-      return compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)
+      return compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)      
+    elseif(c.type=="type") then
+      return(c.params.type==UnitDefs[Spring.GetUnitDefID(internalUnitId)]["name"])
     end
   end
 end
@@ -1073,8 +1075,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="other")then  
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
-      local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
-      ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+        local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
+        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
       elseif(c.type=="repeat") then
         local framePeriod=secondesToFrames(c.params.number)
         ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
@@ -1094,7 +1096,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
         ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
       elseif(c.type=="script") then
         ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script) 
-        --Spring.Echo(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])))
+        --Spring.Echo(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])))      
       end
       
     elseif(object=="group")then  
