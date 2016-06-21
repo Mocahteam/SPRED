@@ -788,7 +788,10 @@ end
 -------------------------------------
 function replaceDynamicUnitSet(action)
   local action2=deepcopy(action)
-  action2.params["units_extracted"]=extractListOfUnitsImpliedByCondition(action.params)
+  if(action.params.unitset~=nil)and(action.params.type~="action")then
+    -- we exclude action from this early extraction because the group do not exist when event is executed
+    action2.params["units_extracted"]=extractListOfUnitsImpliedByCondition(action.params)
+  end
   return action2
 end
 
