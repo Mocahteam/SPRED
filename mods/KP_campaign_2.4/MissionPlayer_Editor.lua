@@ -500,6 +500,13 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
   --Spring.Echo(json.encode(ctx.groupOfUnits))
+  
+  if(conditionParams["units_extracted"]~=nil)then 
+  -- when units_extracted exists, this means we are in the context of action.
+  -- and that uniset has been set at the moment of the execution of the event
+    return conditionParams["units_extracted"]
+  end
+  
   local groupToReturn={}
   if(conditionParams.unitset~=nil)then
      -- gives something like action_1, condition_3, groupe_2, team_0*
@@ -776,6 +783,16 @@ local function alreadyInStack(actId)
 end 
 
 -------------------------------------
+-- actions refer to unitsets which are subject to change over time 
+-- conditions, actions, and groups 
+-------------------------------------
+function replaceDynamicUnitSet(action)
+  local action2=deepcopy(action)
+  action2.params["units_extracted"]=extractListOfUnitsImpliedByCondition(action.params)
+  return action2
+end
+
+-------------------------------------
 -- Add an action to the stack, in a sorted manner
 -- The action is insert according its delay
 -- At the beginning of table if the quickest action to be applied
@@ -784,7 +801,7 @@ end
 function AddActionInStack(action, delayFrame)
   local element={}
   element["delay"]=delayFrame
-  element["action"]=action
+  element["action"]=replaceDynamicUnitSet(action)
   --Spring.Echo(actId.." is added with delay : "..delay)
   for index,el in pairs(ctx.actionStack) do
     local del=el.delay
