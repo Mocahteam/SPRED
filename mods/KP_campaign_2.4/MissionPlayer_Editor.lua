@@ -569,7 +569,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
       Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
-    elseif(act.type=="group")then
+    elseif(act.type=="addToGroup")then
       table.insert(ctx.groupOfUnits["group_"..act.params.group],unit) --TODO: check this one
     elseif(act.type=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
