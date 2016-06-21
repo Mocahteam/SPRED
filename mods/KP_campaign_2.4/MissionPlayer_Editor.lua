@@ -156,6 +156,7 @@ end
 -- @return boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
+  EchoDebug(json.encode{reference,maxRef,value,mode},1)
   reference=computeReference(reference)
   if(mode=="atmost")then return (value<=reference)      
   elseif(mode=="atleast")then  return (value>=reference)    
@@ -436,6 +437,27 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
     ctx.armyInformations[externalId].isUnderAttack=false
 end
 
+local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
+  local testOnExternalsOnly=testOnExternalsOnly or true 
+  for g,group in pairs(groups) do
+    if(ctx.groupOfUnits[group]~=nil) then -- ugly and can be refractored, same for addUnitToGroups
+      if(testOnExternalsOnly)then
+        for i = 1,table.getn(ctx.groupOfUnits[group]) do
+          if(externalId==ctx.groupOfUnits[group][i]) then 
+            table.remove(ctx.groupOfUnits[group],i)
+          end
+        end      
+      else
+         local spId=ctx.armySpring[externalId]
+         for i = 1,table.getn(ctx.groupOfUnits[group]) do
+          if(spId==ctx.armySpring[ctx.groupOfUnits[group][i]]) then 
+            table.remove(ctx.groupOfUnits[group],i)
+          end
+        end       
+      end
+    end
+  end
+end 
 
 local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
   local testOnExternalsOnly=testOnExternalsOnly or true 
@@ -571,7 +593,9 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
       Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
     elseif(act.type=="addToGroup")then
-      table.insert(ctx.groupOfUnits["group_"..act.params.group],ctx.armyExternal[unit])
+      addUnitToGroups(ctx.armyExternal[unit],{"group_"..act.params.group},false) 
+    elseif(act.type=="removeFromGroup")then
+      removeUnitFromGroups(ctx.armyExternal[unit],{"group_"..act.params.group},false) 
     elseif(act.type=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.type=="orderPosition")then
