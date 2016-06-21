@@ -82,6 +82,29 @@ conditions_list = {
 		}
 	},
 	{
+		type = "attacking",
+		filter = "Unit",
+		typeText = "Units are attacking",
+		text = "<Number> units of <UnitSet> are attacking <Target>.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<Target>",
+				type = "unitset",
+				id = "target"
+			}
+		}
+	},
+	{
 		type = "dead",
 		filter = "Unit",
 		typeText = "Units are dead",
