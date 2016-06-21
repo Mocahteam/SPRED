@@ -1474,11 +1474,21 @@ function BeginExportGame()
 		end
 	end
 	
+	-- Choose traces
+	local tracesList = {}
+	for i, level in ipairs(LevelList) do
+		if findInTable(levelList, level.description.saveName) and level.description.traces then
+			for ii, trace in ipairs(level.description.traces) do
+				table.insert(tracesList, level.description.saveName..","..trace)
+			end
+		end
+	end
+	
 	local exportSuccess = false
 	
 	if Game.version == "0.82.5.1" then
 		if VFS.BuildPPGame then
-			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList)
+			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList, tracesList)
 			exportSuccess = true
 		else
 			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
@@ -1758,7 +1768,7 @@ function widget:Initialize()
 		Spring.CreateDir("pp_editor/missions")
 	end
 	if not VFS.FileExists("pp_editor/scenarios") then
-		Spring.CreateDir("pp_editor/scenario")
+		Spring.CreateDir("pp_editor/scenarios")
 	end
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then

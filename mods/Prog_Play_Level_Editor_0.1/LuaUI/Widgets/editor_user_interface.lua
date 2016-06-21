@@ -623,8 +623,9 @@ function tracesFrame()
 		if tracesUI.message then
 			tracesUI.message:Dispose()
 		end
-		local missionName = "mission" -- FIXME
+		local missionName = generateSaveName(mapDescription.mapName)
 		local tracesList = VFS.DirList("traces/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
+		tracesUI.textbox:SetText("")
 		if #tracesList == 0 then
 			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
 		else
@@ -654,7 +655,7 @@ function tracesFrame()
 					but.state.chosen = false
 				end
 				table.insert(tracesUI.buttons, but)
-				local viewBut = addButton(tracesUI.scrollPanel, '90%', 40 * count, '10%', 40, "", nil) --todo
+				local viewBut = addButton(tracesUI.scrollPanel, '90%', 40 * count, '10%', 40, "", function() tracesUI.textbox:SetText(VFS.LoadFile("traces/"..missionName.."/"..name..".xml")) end)
 				addImage(viewBut, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 				table.insert(tracesUI.viewButtons, viewBut)
 				count = count + 1
@@ -1222,11 +1223,13 @@ function initMapSettingsWindow()
 end
 
 function initTracesWindow()
-	windows['tracesWindow'] = addWindow(Screen0, '30%', '25%', '40%', '50%', true)
+	windows['tracesWindow'] = addWindow(Screen0, '5%', '15%', '90%', '70%', true)
 	local closeButton = addButton(windows['tracesWindow'], '95%', '0%', '5%', '7%', "X", tracesFrame)
 	closeButton.font.color = { 1, 0, 0, 1 }
-	addLabel(windows['tracesWindow'], '0%', '0%', '100%', '10%', EDITOR_TRACES_TITLE, 20, "center", nil, "center")
-	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '100%', '90%')
+	addLabel(windows['tracesWindow'], '0%', '0%', '30%', '10%', EDITOR_TRACES_TITLE, 20, "center", nil, "center")
+	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '30%', '90%')
+	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '10%', '70%', '90%')
+	tracesUI.textbox = addTextBox(viewSP, '2%', '2%', '96%', '96%', "", 15)
 end
 
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
