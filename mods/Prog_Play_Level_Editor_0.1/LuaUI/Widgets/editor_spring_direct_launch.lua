@@ -1760,7 +1760,7 @@ function widget:DrawScreen()
 	end
 end
 
-function widget:Initialize()
+function CreateMissingDirectories()
 	if not VFS.FileExists("pp_editor") then
 		Spring.CreateDir("pp_editor")
 	end
@@ -1770,6 +1770,10 @@ function widget:Initialize()
 	if not VFS.FileExists("pp_editor/scenarios") then
 		Spring.CreateDir("pp_editor/scenarios")
 	end
+end
+
+function widget:Initialize()
+	CreateMissingDirectories()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()

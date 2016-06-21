@@ -665,7 +665,61 @@ function tracesFrame()
 end
 
 function testLevel()
--- todo
+	local levelFile = encodeSaveTable()
+	local goTest = function()
+		Screen0:RemoveChild(windows["testWindow"])
+		windows["testWindow"]:Dispose()
+		local saveName = generateSaveName(mapDescription.mapName)
+		if saveName == "Map" then
+			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
+			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
+			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
+			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
+		else
+			saveMap()
+			if Game.version == "0.82.5.1" then
+				local operations = {
+					["MODOPTIONS"] = {
+						["language"] = Language,
+						["scenario"] = "noScenario",
+						["maingame"] = Spring.GetModOptions().maingame,
+						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+						["testmap"] = levelFile.description.saveName
+					},
+					["GAME"] = {
+						["Mapname"] = levelFile.description.map,
+						["Gametype"] = Game.modName
+					}
+				}
+				DoTheRestart("LevelEditor.txt", operations)
+			else
+				local operations = {
+					["MODOPTIONS"] = {
+						["language"] = Language,
+						["scenario"] = "noScenario",
+						["maingame"] = Spring.GetModOptions().maingame,
+						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+						["testmap"] = levelFile.description.saveName
+					},
+					["GAME"] = {
+						["Mapname"] = levelFile.description.map,
+						["Gametype"] = Game.gameName.." "..Game.gameVersion
+					}
+				}
+				DoTheRestart("LevelEditor.txt", operations)
+			end
+		end
+	end
+	
+	if windows["testWindow"] then
+		Screen0:RemoveChild(windows["testWindow"])
+		windows["testWindow"]:Dispose()
+	end
+	windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
+	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "pp_editor/missions/"..levelFile.description.saveName..".editor")
+	addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text, 20, "center", nil, "center")
+	addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
+	addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1230,6 +1284,47 @@ function initTracesWindow()
 	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '30%', '90%')
 	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '10%', '70%', '90%')
 	tracesUI.textbox = addTextBox(viewSP, '2%', '2%', '96%', '96%', "", 15)
+end
+
+function initTestLevelFrame()
+	local win = addWindow(Screen0, '80%', '0%', '20%', '10%', false)
+	local function returnToEditor()
+		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
+		levelFile = json.decode(levelFile)
+		if Game.version == "0.82.5.1" then
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["toBeLoaded"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		else
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["toBeLoaded"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.gameName.." "..Game.gameVersion
+				}
+			}
+			DoTheRestart("LevelEditor.txt", operations)
+		end
+	end
+	local but = addButton(win, '0%', '0%', '100%', '100%', EDITOR_TEST_LEVEL_BACK_TO_EDITOR, returnToEditor)
+	but.font.size = 20
 end
 
 function initUnitFunctions() -- Creates a function for every unitState to change state and handle selection feedback
@@ -4879,7 +4974,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
+					["toBeLoaded"] = name,
 					["maingame"] = Spring.GetModOptions().maingame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
@@ -4894,7 +4989,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
+					["toBeLoaded"] = name,
 					["maingame"] = Spring.GetModOptions().maingame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 				},
@@ -5250,6 +5345,12 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
+	initChili()
+	if Spring.GetModOptions().testmap then
+		initTestLevelFrame()
+		Script.LuaUI.finishedLoading()
+		return
+	end
 	initialize = true
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
@@ -5258,7 +5359,6 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("requestUnitListUpdate", function() updateUnitList(true) end)
 	getCommandsList()
 	hideDefaultGUI()
-	initChili()
 	initTopBar()
 	initUnitFunctions()
 	initTeamFunctions()
@@ -5271,6 +5371,9 @@ function widget:Initialize()
 end
 
 function widget:Update(delta)
+	if Spring.GetModOptions().testmap then
+		return
+	end
 	-- Tell the gadget which units are selected (might be improved in terms of performance)
 	local unitSelection = Spring.GetSelectedUnits()
 	local msg = "Select Units"
@@ -5380,6 +5483,10 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
+	if Spring.GetModOptions().testmap then
+		return false
+	end
+	
 	clearTemporaryWindows()
 	-- raycast
 	local kind,var = Spring.TraceScreenRay(mx,my)
@@ -5695,6 +5802,9 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 end
 
 function widget:KeyPress(key, mods)
+	if Spring.GetModOptions().testmap then
+		return false
+	end
 	-- Global 
 	-- CTRL + S : save the current map
 	if key == Spring.GetKeyCode("s") and mods.ctrl then
