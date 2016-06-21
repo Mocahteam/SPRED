@@ -22,7 +22,8 @@ ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of ex
 ctx.armyInformations={}--table to store information on units externalId->Informations
 ctx.messages={}--associative array messageId->message type
 ctx.conditions={}--associative array idCond->condition
-ctx.events={}--associative array idCond->event
+ctx.events={}--associative array idEvent->event
+ctx.orderedEventsId={}--associative array order->idEvent
 ctx.variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 ctx.zones={}--associative array idZone->zone
 ctx.killByTeams={}
@@ -38,6 +39,59 @@ ctx.startingFrame=5 -- added delay before starting game. Used to avoid counting 
 ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
 ctx.speedFactor=1 -- placeHolder to store current speed
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
+
+-- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
+-- in order to sort events by order of execution
+-- 1/3
+local function __genOrderedIndex( t )
+    local orderedIndex = {}
+    for key in pairs(t) do
+        table.insert( orderedIndex, key )
+    end
+    table.sort( orderedIndex )
+    return orderedIndex
+end
+
+-- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
+-- in order to sort events by order of execution
+-- 2/3
+local function orderedNext(t, state)
+    -- Equivalent of the next function, but returns the keys in the alphabetic
+    -- order. We use a temporary ordered key table that is stored in the
+    -- table being iterated.
+
+    key = nil
+    --print("orderedNext: state = "..tostring(state) )
+    if state == nil then
+        -- the first time, generate the index
+        t.__orderedIndex = __genOrderedIndex( t )
+        key = t.__orderedIndex[1]
+    else
+        -- fetch the next value
+        for i = 1,table.getn(t.__orderedIndex) do
+            if t.__orderedIndex[i] == state then
+                key = t.__orderedIndex[i+1]
+            end
+        end
+    end
+
+    if key then
+        return key, t[key]
+    end
+
+    -- no more value to return, cleanup
+    t.__orderedIndex = nil
+    return
+end
+
+-- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
+-- in order to sort events by order of execution
+-- 3/3
+local function orderedPairs(t)
+    -- Equivalent of the pairs() function on tables. Allows to iterate
+    -- in order
+    return orderedNext, t, nil
+end
 
 
 local function EchoDebug(message,level)
@@ -514,6 +568,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.type=="orderPosition")then
       local posFound=extractPosition(act.params.position)
+      EchoDebug("orderPosition (posFound,unit,command) : "..json.encode({posFound,unit,act.params.command}),5)
       Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
     elseif(act.type=="orderTarget")then
       local u=act.params.target
@@ -526,7 +581,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
         EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit))
         SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
-        local x,y,z=Spring.GetUnitPosition(springUnitId)
+        local x,y,z=Spring.GetUnitePosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
         local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
         AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))--]]
@@ -826,7 +881,9 @@ end
 local function processEvents(frameNumber)
   local creationOfNewEvent=false
   local newevent
-  for idEvent,event in pairs(ctx.events) do
+  for order,idEvent  in orderedPairs(ctx.orderedEventsId) do
+  -- ctx.events
+    local event=ctx.events[idEvent]
     if isTriggerable(event) then
       if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
         -- Handle repetition
@@ -870,8 +927,10 @@ local function processEvents(frameNumber)
           end
         end
         if creationOfNewEvent then
-          ctx.events[tostring(frameNumber+100)]=newevent -- dirty trick to generate an unique id for this new event
-          --Spring.Echo(json.encode(events))
+          local newEvId=tostring(frameNumber+100)
+          ctx.events[newEvId]=newevent -- dirty trick to generate an unique id for this new event
+          ctx.indexOfLastEvent=ctx.indexOfLastEvent+1
+          ctx.orderedEventsId[ctx.indexOfLastEvent]=newEvId
         end
       end
     end
@@ -1275,9 +1334,9 @@ end
    -------EVENTS  AND  CONDITIONS--------------
    ---------------------------------------------
   if(ctx.mission.events~=nil)then
-      for i=1, table.getn(ctx.mission.events) do
-       local currentEvent=ctx.mission.events[i]
-       local idEvent=ctx.mission.events[i].id
+      for i,currentEvent in ipairs(ctx.mission.events) do
+       local idEvent=currentEvent.id
+       ctx.orderedEventsId[i]=idEvent
        ctx.events[idEvent]={}
        ctx.events[idEvent]=ctx.mission.events[i]
        ctx.events[idEvent].hasTakenPlace=false
@@ -1296,6 +1355,7 @@ end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
        EchoDebug(json.encode(ctx.conditions))
       end 
+      ctx.indexOfLastEvent=i
     end
   end     
 end
