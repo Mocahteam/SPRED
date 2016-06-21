@@ -27,7 +27,9 @@ ctx.orderedEventsId={}--associative array order->idEvent
 ctx.variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 ctx.zones={}--associative array idZone->zone
 ctx.killByTeams={}
+ctx.timeUntilPeace=5 -- how much time in seconds of inactivity to declare that an attack is no more
 ctx.attackedUnits={}
+ctx.attackingUnits={}
 ctx.recordCreatedUnits=false
 ctx.refreshPeriod=10 -- must be between 1 and 16. The higher the less cpu involved. 
 ctx.actionStack={} -- action to be applied on game state, allows to handle table composed by the indexes delay and actId
@@ -38,6 +40,7 @@ ctx.mission={} -- the full json describing the mission
 ctx.startingFrame=5 -- added delay before starting game. Used to avoid counting twice units placed at start
 ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
 ctx.speedFactor=1 -- placeHolder to store current speed
+-- the next one is a bit different
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
 -- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
@@ -435,6 +438,7 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
     ctx.armyInformations[externalId].autoHealStatus=autoHeal
     --Spring.Echo(ctx.armyInformations[externalId].autoHealStatus)
     ctx.armyInformations[externalId].isUnderAttack=false
+    ctx.armyInformations[externalId].isAttacking=false
 end
 
 local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
@@ -882,12 +886,29 @@ local function watchHeal(frameNumber)
         ctx.attackedUnits[attacked].frame=frameNumber
         ctx.armyInformations[idAttacked].isUnderAttack=true
         --Spring.Echo("under attack")
-      elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(5))then
+      elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(ctx.timeUntilPeace))then
         ctx.armyInformations[idAttacked].isUnderAttack=true
         --Spring.Echo("still under attack")
       else
        -- --Spring.Echo("no more under attack")
         ctx.armyInformations[idAttacked].isUnderAttack=false
+      end
+    end
+  end
+  for attacking,tableInfo in pairs(ctx.attackingUnits) do
+    local idAttacking=ctx.armyExternal[attacking]
+    if(idAttacking~=nil)and (ctx.armyInformations[idAttacking]~=nil)then
+      --Spring.Echo(json.encode(tableInfo))
+      if(tableInfo.frame==-1)then
+        ctx.attackedUnits[idAttacking].frame=frameNumber
+        ctx.armyInformations[idAttacking].isAttacking=true
+        --Spring.Echo("under attack")
+      elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(ctx.timeUntilPeace))then
+        ctx.armyInformations[idAttacking].isAttacking=true
+        --Spring.Echo("still under attack")
+      else
+       -- --Spring.Echo("no more under attack")
+        ctx.armyInformations[idAttacking].isAttacking=false
       end
     end
   end
@@ -1050,6 +1071,8 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       --Spring.Echo("is it working")
       --Spring.Echo(ctx.armyInformations[externalUnitId].isUnderAttack)
       return ctx.armyInformations[externalUnitId].isUnderAttack
+    elseif(c.type=="attacking")then --untested yet
+      return ctx.armyInformations[externalUnitId].isAttacking
     elseif(c.type=="order") then
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==c.params.command) 
@@ -1473,12 +1496,18 @@ function gadget:RecvLuaMsg(msg, player)
     local jsonfile=string.sub(msg,7,-1)
     local damageTable=json.decode(jsonfile)
     local attackedUnit=damageTable.attackedUnit
+    local attackingUnit=damageTable.attackerID
     damageTable.frame=tonumber(damageTable.frame)
+    
     if ctx.attackedUnits[attackedUnit]==nil then
       ctx.attackedUnits[attackedUnit]={} 
     end
     ctx.attackedUnits[attackedUnit]=damageTable
-    --Spring.Echo(json.encode(attackedUnits))
+
+    if ctx.attackingUnits[attackingUnit]==nil then
+      ctx.attackingUnits[attackingUnit]={} 
+    end
+    ctx.attackingUnits[attackingUnit]=damageTable
     
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
