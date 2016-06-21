@@ -583,11 +583,12 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
     if(act.type=="transfer") then
       --Spring.Echo("try to apply transfert")
       Spring.TransferUnit(unit,act.params.team)
+      addUnitToGroups(ctx.armyExternal[unit],{"team_"..tostring(act.params.team)}) 
     elseif(act.type=="kill")then
       Spring.DestroyUnit(unit)
     elseif(act.type=="hp")then
       local health,maxhealth=Spring.GetUnitHealth(unit)
-      Spring.SetUnitHealth(unit,maxhealth*(act.params.percentage)/100)
+      Spring.SetUnitHealth(unit,maxhealth*tonumber(act.params.percentage)/100)
     elseif(act.type=="teleport")then
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
@@ -715,13 +716,9 @@ local function ApplyNonGroupableAction(act)
    -- VARIABLES
     
   elseif(act.type=="changeVariable")then
-    ctx.variables[act.params.variable]=act.params.number   
-  elseif(act.type=="changeVariableNumber")then
-    ctx.variables[act.params.variable1]=makeOperation(ctx.variables[act.params.variable2],act.params.number,act.params.operator)   
+    ctx.variables[act.params.variable]=computeReference(act.params.number)   
   elseif(act.type=="setBooleanVariable")then
     ctx.variables[act.params.variable]=(act.params.boolean=="true")
-  elseif(act.type=="changeVariableVariable")then
-    ctx.variables[act.params.variable1]=makeOperation(ctx.variables[act.params.variable2],ctx.variables[act.params.variable3],act.params.operator)           
   elseif(act.type=="createUnits") then
     for var=1,act.params.number do
       local position=getARandomPositionInZone(act.params.zone)
@@ -1024,6 +1021,7 @@ end
 -------------------------------------
 -- Determine if an unit satisfies a condition
 -- Two modes are possible depending on the mode of comparison (at least, at most ...)
+-- Return boolean
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=ctx.armySpring[externalUnitId]
