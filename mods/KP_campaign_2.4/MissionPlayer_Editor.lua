@@ -140,6 +140,7 @@ end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
 local function computeReference(expression)
+  if(expression==nil or expression=="") then return expression end
   local n1=tonumber(expression)
   if(n1~=nil)then return n1 end
 
@@ -570,7 +571,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
       Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
     elseif(act.type=="addToGroup")then
-      table.insert(ctx.groupOfUnits["group_"..act.params.group],unit) --TODO: check this one
+      table.insert(ctx.groupOfUnits["group_"..act.params.group],ctx.armyExternal[unit])
     elseif(act.type=="order")then
       Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
     elseif(act.type=="orderPosition")then
