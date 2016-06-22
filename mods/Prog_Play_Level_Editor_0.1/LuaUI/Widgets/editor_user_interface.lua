@@ -17,6 +17,15 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
+-- return sur trigger
+-- or/and case insensitive
+-- afficher zone pendant jeu
+-- taille boutons groupes
+-- liste des games : ne pas lister les jeux générés + changer le nom (choose master game)
+-- maigame = récupérer depuis le modinfo
+-- return to main menu => message seulement si modifs
+-- export avec (1) dans le nom
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			UI Variables
@@ -203,9 +212,9 @@ local markerList = {}
 
 -- Map settings variables
 local mapDescription = {}
-mapDescription.mapName = "Map" -- Name of the map
-mapDescription.mapBriefing = "Map Briefing" -- Briefing of the map
-mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
+mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
+mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map
+mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map with raw color tags
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
@@ -670,7 +679,7 @@ function testLevel()
 		Screen0:RemoveChild(windows["testWindow"])
 		windows["testWindow"]:Dispose()
 		local saveName = generateSaveName(mapDescription.mapName)
-		if saveName == "Map" then
+		if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
@@ -1089,6 +1098,11 @@ function initTriggerWindow()
 		if currentEvent then
 			local e = events[currentEvent]
 			local validTrigger = false
+			local correctTrigger = customTriggerEditBox.text
+			correctTrigger = string.gsub(correctTrigger, "[Oo][Rr]", "or")
+			correctTrigger = string.gsub(correctTrigger, "[Aa][Nn][Dd]", "and")
+			correctTrigger = string.gsub(correctTrigger, "[Nn][Oo][Tt]", "not")
+			customTriggerEditBox:SetText(correctTrigger)
 			local checkingTrigger = customTriggerEditBox.text
 			local count = 0
 			for i, c in ipairs(e.conditions) do
@@ -1772,7 +1786,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], 35, 5, 220, 20, "left", group.name)
 			groupEditBoxes[group.id].font.size = 14
 			local deleteButton = addButton(groupPanels[group.id], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(group.id) end)
-			deleteButton.font.color = {1, 0, 0, 1}
+			addImage(deleteButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 		end
 		-- Add a button to create an empty group
 		local x, y
@@ -1800,7 +1814,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			for key, u in pairs(group.units) do
 				-- Remove button
 				local removeButton = addButton(groupPanels[group.id], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(group, u) end)
-				removeButton.font.color = {1, 0, 0, 1}
+				addImage(removeButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				table.insert(unitGroupRemoveUnitButtons[group.id], removeButton)
 				
 				-- Label of unit
@@ -2414,8 +2428,8 @@ function updateAllyTeamPanels() -- Update the ally team window
 			for i, t in ipairs(at) do
 				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, teamName[t], 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, EDITOR_X, function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
-				but.font.color = {1, 0, 0, 1}
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, "", function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
+				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
 				count = count + 1
 			end
@@ -2699,9 +2713,8 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 		local count = 0
 		for i, e in ipairs(events) do
 			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', 40 * count, '60%', 40, e.name, function() editEvent(i) end)
-			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, EDITOR_X, function() removeEvent(i) end)
-			eventUI.deleteEventButtons[i].font.color = {1, 0, 0, 1}
-			eventUI.deleteEventButtons[i].font.size = 20
+			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, "", function() removeEvent(i) end)
+			addImage(eventUI.deleteEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			if i ~= 1 then
 				local moveUpEvent = function()
 					removeSecondWindows() -- close windows to prevent bugs
@@ -2759,9 +2772,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 			local count = 0
 			for i, c in ipairs(e.conditions) do
 				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
-				deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
-				deleteConditionButtons[e.id][i].font.size = 20
+				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
+				addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				count = count + 1
 			end
 			newEventConditionButton.y = 40 * count
@@ -2774,9 +2786,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 			local count = 0
 			for i, c in ipairs(e.actions) do
 				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-				deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-				deleteActionButtons[e.id][i].font.size = 20
+				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+				addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				count = count + 1
 			end
 			newEventActionButton.y = 40 * count
@@ -2816,9 +2827,8 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		local count = 0
 		for i, c in ipairs(e.conditions) do
 			conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
-			deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
-			deleteConditionButtons[e.id][i].font.size = 20
+			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
+			addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			count = count + 1
 		end
 		newEventConditionButton.y = 40 * count
@@ -2832,9 +2842,8 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		local count = 0
 		for i, c in ipairs(e.actions) do
 			actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-			deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-			deleteActionButtons[e.id][i].font.size = 20
+			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+			addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			count = count + 1
 		end
 		newEventActionButton.y = 40 * count
@@ -3827,9 +3836,8 @@ function configureEvent() -- Show the event configuration window
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-							deleteActionButtons[e.id][i].font.size = 20
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+							addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
@@ -3854,9 +3862,8 @@ function configureEvent() -- Show the event configuration window
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-							deleteActionButtons[e.id][i].font.size = 20
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
@@ -4142,7 +4149,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y+5, '20%', 30, "left", tostring(var.initValue))
 	initValueEditBox.font.size = 16
 	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, EDITOR_X, function() removeVariable(var) end)
-	deleteVariableButton.font.color = {1, 0, 0, 1}
+	addImage(deleteVariableButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 	
 	feature.nameLabel = nameLabel
 	feature.nameEditBox = nameEditBox
@@ -4499,9 +4506,9 @@ function newMap() -- Set each parameter to its default value
 	variablesNumber = 0
 	variablesTotal = nil
 	-- Map
-	mapDescription.mapName = "Map"
-	mapDescription.mapBriefing = "Map Briefing"
-	mapDescription.mapBriefingRaw = "Map Briefing"
+	mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME
+	mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME
+	mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
@@ -4871,7 +4878,7 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 		windows["saveWindow"]:Dispose()
 	end
 	local saveName = generateSaveName(mapDescription.mapName)
-	if saveName == "Map" then
+	if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
