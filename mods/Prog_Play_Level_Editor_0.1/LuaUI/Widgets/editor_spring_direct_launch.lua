@@ -1059,73 +1059,40 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
-	if Game.version == "0.82.5.1" then
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = Script.LuaUI.getCommandsList()
-			},
-			["GAME"] = {
-				["Mapname"] = map,
-				["Gametype"] = Game.modName
-			}
+	local operations = {
+		["MODOPTIONS"] = {
+			["language"] = Language,
+			["scenario"] = "noScenario",
+			["maingame"] = Spring.GetModOptions().maingame,
+			["commands"] = Script.LuaUI.getCommandsList()
+		},
+		["GAME"] = {
+			["Mapname"] = map,
+			["Gametype"] = Game.modName
 		}
-		Spring.Echo(Game.modName)
-		DoTheRestart("LevelEditor.txt", operations)
-	else
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = Script.LuaUI.getCommandsList()
-			},
-			["GAME"] = {
-				["Mapname"] = map,
-				["Gametype"] = Game.gameName.." "..Game.gameVersion
-			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
-	end
+	}
+	Spring.Echo(Game.modName)
+	DoTheRestart("LevelEditor.txt", operations)
 end
 
 function EditMission(level) -- Start editor with selected mission
 	if VFS.FileExists("pp_editor/missions/"..level..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = Script.LuaUI.getCommandsList()
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["toBeLoaded"] = level,
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = Script.LuaUI.getCommandsList()
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = Script.LuaUI.getCommandsList()
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 end
 
@@ -1773,6 +1740,7 @@ function CreateMissingDirectories()
 end
 
 function widget:Initialize()
+	Spring.Echo(Game.modName)
 	CreateMissingDirectories()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then

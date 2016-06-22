@@ -677,37 +677,20 @@ function testLevel()
 			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
 		else
 			saveMap()
-			if Game.version == "0.82.5.1" then
-				local operations = {
-					["MODOPTIONS"] = {
-						["language"] = Language,
-						["scenario"] = "noScenario",
-						["maingame"] = Spring.GetModOptions().maingame,
-						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-						["testmap"] = levelFile.description.saveName
-					},
-					["GAME"] = {
-						["Mapname"] = levelFile.description.map,
-						["Gametype"] = Game.modName
-					}
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = Spring.GetModOptions().maingame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["testmap"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
-				DoTheRestart("LevelEditor.txt", operations)
-			else
-				local operations = {
-					["MODOPTIONS"] = {
-						["language"] = Language,
-						["scenario"] = "noScenario",
-						["maingame"] = Spring.GetModOptions().maingame,
-						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-						["testmap"] = levelFile.description.saveName
-					},
-					["GAME"] = {
-						["Mapname"] = levelFile.description.map,
-						["Gametype"] = Game.gameName.." "..Game.gameVersion
-					}
-				}
-				DoTheRestart("LevelEditor.txt", operations)
-			end
+			}
+			DoTheRestart("LevelEditor.txt", operations)
 		end
 	end
 	
@@ -1291,37 +1274,20 @@ function initTestLevelFrame()
 	local function returnToEditor()
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["toBeLoaded"] = levelFile.description.saveName
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+				["toBeLoaded"] = levelFile.description.saveName
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["toBeLoaded"] = levelFile.description.saveName
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 	local but = addButton(win, '0%', '0%', '100%', '100%', EDITOR_TEST_LEVEL_BACK_TO_EDITOR, returnToEditor)
 	but.font.size = 20
@@ -4969,37 +4935,20 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 			loadMap(name)
 			return
 		end
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = name,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["toBeLoaded"] = name,
+				["maingame"] = Spring.GetModOptions().maingame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = name,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 end
 
@@ -5009,35 +4958,19 @@ function newLevelWithRightMap(name) -- Creates a new level on the selected map
 		newMapInitialize()
 		return
 	end
-	if Game.version == "0.82.5.1" then
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-			},
-			["GAME"] = {
-				["Mapname"] = name,
-				["Gametype"] = Game.modName
-			}
+	local operations = {
+		["MODOPTIONS"] = {
+			["language"] = Language,
+			["scenario"] = "noScenario",
+			["maingame"] = Spring.GetModOptions().maingame,
+			["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
+		},
+		["GAME"] = {
+			["Mapname"] = name,
+			["Gametype"] = Game.modName
 		}
-		DoTheRestart("LevelEditor.txt", operations)
-	else
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-			},
-			["GAME"] = {
-				["Mapname"] = name,
-				["Gametype"] = Game.gameName.." "..Game.gameVersion
-			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
-	end
+	}
+	DoTheRestart("LevelEditor.txt", operations)
 end
 
 function encodeSaveTable() -- Transforms parameters to a table containing all the information needed to store the level
