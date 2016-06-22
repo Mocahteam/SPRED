@@ -878,6 +878,8 @@ end
 local function watchHeal(frameNumber)
 --attackedUnits
   -- for attacked TODO: for loop here and stuff
+  EchoDebug("attacking-->"..json.encode(ctx.attackingUnits),1)
+  EchoDebug("attacked-->"..json.encode(ctx.attackedUnits),1)
   for attacked,tableInfo in pairs(ctx.attackedUnits) do
     local idAttacked=ctx.armyExternal[attacked]
     if(idAttacked~=nil)and (ctx.armyInformations[idAttacked]~=nil)then
@@ -1142,46 +1144,19 @@ local function UpdateConditionsTruthfulness (frameNumber)
       --Spring.Echo(json.encode({idCond,c.params.number.number,total,count,c.params.number.comparison}))
       ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     elseif(object=="killed")then 
-      if((c.type=="killed_group")or(c.type=="killed_team")or(c.type=="killed_type"))then
-        local tlkup={[1]={"targetTeam","team"},[2]={"unitType","type"},[3]={"group","group"}}
-        local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
-        --Spring.Echo(json.encode(externalUnitList))
-        local total=table.getn(externalUnitList)
-        local count=0
-        if(ctx.killByTeams[c.params.team]~=nil)then
-          for u,unit in ipairs(externalUnitList) do
-            local spUnit=ctx.armySpring[unit]
-            for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do
-              if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
-                count=count+1
-                break
-              end
-            end
+      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
+      local total=table.getn(externalUnitList)
+      local count=0
+      for u,unit in ipairs(externalUnitList) do
+        local spUnit=ctx.armySpring[unit]
+        for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do
+          if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
+            count=count+1
+            break
           end
         end
-        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
-      elseif (c.type=="killed_unit") then
-        local numberOfKill=0
-        if(ctx.killByTeams[c.params.team]~=nil)then
-          local numberOfKill=table.getn(ctx.killByTeams[c.params.team])
-        end
-        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,nil,numberOfKill,c.params.number.comparison)
-        -- For the moment the "killed all" is not implemented 
-      elseif (c.type=="killed") then
-        local found=false
-        local targetedUnit=ctx.armySpring[c.params.unit]
-        local kills=ctx.killByTeams[c.params.team]
-        if(kills~=nil)then
-          for u2,killInformation in ipairs(kills) do
-            if targetedUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
-              ctx.conditions[idCond]["currentlyValid"]=true
-              found=true
-              break
-            end
-          end
-        end
-        if(not found)then ctx.conditions[idCond]["currentlyValid"]=false end 
       end
+      ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     end
     EchoDebug("state of condition :",2)
     EchoDebug(idCond,2)
@@ -1495,6 +1470,7 @@ function gadget:RecvLuaMsg(msg, player)
     --Spring.Echo("damage received")
     local jsonfile=string.sub(msg,7,-1)
     local damageTable=json.decode(jsonfile)
+    EchoDebug("damageTable-->"..json.encode(damageTable),1)
     local attackedUnit=damageTable.attackedUnit
     local attackingUnit=damageTable.attackerID
     damageTable.frame=tonumber(damageTable.frame)
@@ -1503,12 +1479,13 @@ function gadget:RecvLuaMsg(msg, player)
       ctx.attackedUnits[attackedUnit]={} 
     end
     ctx.attackedUnits[attackedUnit]=damageTable
-
-    if ctx.attackingUnits[attackingUnit]==nil then
-      ctx.attackingUnits[attackingUnit]={} 
+    --EchoDebug("attackingUnit:",0)
+    if(attackingUnit~=nil)then
+      if ctx.attackingUnits[attackingUnit]==nil then
+        ctx.attackingUnits[attackingUnit]={} 
+      end
+      ctx.attackingUnits[attackingUnit]=damageTable
     end
-    ctx.attackingUnits[attackingUnit]=damageTable
-    
   elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
       local jsonfile=string.sub(msg,13,-1)
