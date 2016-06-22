@@ -11,20 +11,20 @@
 \contentsline {paragraph}{ }{4}
 \contentsline {subsection}{\numberline {2.3}\IeC {\'E}diteur de sc\IeC {\'e}nario}{4}
 \contentsline {paragraph}{ }{4}
-\contentsline {section}{\numberline {3}\IeC {\'E}diteur de niveaux}{5}
+\contentsline {section}{\numberline {3}\IeC {\'E}diteur de niveaux}{4}
+\contentsline {paragraph}{ }{4}
+\contentsline {subsection}{\numberline {3.1}Fichier}{4}
+\contentsline {paragraph}{ }{4}
+\contentsline {subsection}{\numberline {3.2}Unit\IeC {\'e}s}{4}
+\contentsline {paragraph}{ }{4}
 \contentsline {paragraph}{ }{5}
-\contentsline {subsection}{\numberline {3.1}Fichier}{5}
 \contentsline {paragraph}{ }{5}
-\contentsline {subsection}{\numberline {3.2}Unit\IeC {\'e}s}{5}
-\contentsline {paragraph}{ }{5}
-\contentsline {paragraph}{ }{6}
-\contentsline {paragraph}{ }{6}
 \contentsline {subsection}{\numberline {3.3}Zones}{6}
 \contentsline {paragraph}{ }{6}
 \contentsline {paragraph}{ }{7}
-\contentsline {subsection}{\numberline {3.4}Forces}{8}
-\contentsline {paragraph}{ }{8}
-\contentsline {paragraph}{ }{8}
+\contentsline {subsection}{\numberline {3.4}Forces}{7}
+\contentsline {paragraph}{ }{7}
+\contentsline {paragraph}{ }{7}
 \contentsline {paragraph}{ }{8}
 \contentsline {subsection}{\numberline {3.5}\IeC {\'E}v\IeC {\`e}nements}{9}
 \contentsline {paragraph}{ }{9}
@@ -40,6 +40,11 @@
 \contentsline {paragraph}{ }{12}
 \contentsline {paragraph}{ }{12}
 \contentsline {paragraph}{ }{12}
-\contentsline {section}{\numberline {4}Lancement du jeu cr\IeC {\'e}\IeC {\'e}}{13}
+\contentsline {section}{\numberline {4}Cr\IeC {\'e}ation du jeu final}{13}
+\contentsline {subsection}{\numberline {4.1}Sc\IeC {\'e}nario et exportation}{13}
 \contentsline {paragraph}{ }{13}
 \contentsline {paragraph}{ }{13}
+\contentsline {paragraph}{ }{13}
+\contentsline {subsection}{\numberline {4.2}Lancement du jeu cr\IeC {\'e}\IeC {\'e}}{14}
+\contentsline {paragraph}{ }{14}
+\contentsline {paragraph}{ }{14}

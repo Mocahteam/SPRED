@@ -154,10 +154,10 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerD
     Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
   end
 end
-
-function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, projectileID, attackerID, attackerDefID, attackerTeam)
+--weaponDefID, projectileID, attackerID,
+function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
   if(unitID~=nil)then
-    local damageTable={attackedUnit=unitID,damage=damage, attacker=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+    local damageTable={attackedUnit=unitID,damage=damage, attackerID=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
     Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
     --Spring.Echo("damage sent")
   end

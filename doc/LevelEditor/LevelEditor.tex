@@ -37,9 +37,9 @@ L'éditeur à proprement parler est composé de :
 \item Un widget permettant de récupérer la liste de tous les widgets présents. (editor\_widget\_list.lua)
 \item Un widget affichant un écran de chargement pour empêcher l'utilisateur d'interagir avec l'interface lorsqu'elle n'est pas complètement chargée (editor\_loading\_screen.lua)
 \item Un widget permettant de ne pas afficher les boutons permettant de donner des ordres aux unités. (hide\_commands.lua)
-\item Un gadget permettant l'utilisation de code synchronisé\footnote{Par exemple, la création d'une unité sur le terrain.}. (editor\_gadget.lua)
+\item Un gadget permettant l'utilisation de code synchronisé (Par exemple, la création d'une unité sur le terrain). (editor\_gadget.lua)
 \item Deux fichiers contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua et LauncherStrings.lua)
-\item Un fichier définissant une classe\footnote{Au sens de Lua.} machine à états. (StateMachine.lua)
+\item Un fichier définissant une classe "machine à états" et ses différentes instances. (StateMachine.lua)
 \item Un fichier contenant des fonctions utilitaires. (Misc.lua)
 \item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua)
 \end{itemize}
@@ -51,7 +51,7 @@ Ces modules dépendent pour la plupart des bibliothèques suivantes :
 \item \textbf{xml-serde.lua} - Permet de convertir une table lua possédant une syntaxe spécifique en string au format xml et inversement.
 \item \textbf{RestartScript.lua} - Permet de redémarrer le jeu avec certains paramètres supplémentaires.
 \end{itemize}
-\section{Chili UI}
+\section{Chili UI} \label{chili}
 \paragraph{}
 Afin de simplifier le développement de l'interface graphique, j'ai choisi d'utiliser un framework d'interface graphique développé spécifiquement pour Spring dénommé Chili UI. 
 \paragraph{}
@@ -59,7 +59,7 @@ Ce framework a l'avantage de ne pas avoir à utiliser l'API OpenGL de Spring et 
 \paragraph{}
 Les modifications que j'y ai personnellement apporté concernent les boutons, qui possèdent un état supplémentaire \textit{chosen} permettant d'avoir un feedback visuel lorsqu'on les sélectionne (les modifications de cet état sont gérées "à la main", mais le feedback visuel est géré automatiquement par le framework).
 \paragraph{}
-Le widget comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans la catégorie \textit{Chili UI functions}.
+Le widget comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans le widget central de l'éditeur dans la catégorie \textit{Chili UI functions}.
 \paragraph{}
 Il faut faire extrêmement attention à une chose en particulier en ce qui concerne le framework : il ne faut surtout pas modifier les éléments d'interface qui ne sont pas affichés à l'écran (c'est-à-dire les éléments d'interface qui n'ont ni Screen0, ni un descendant de Screen0 en tant que parent). Ceci ne produit pas d'erreur lors de l'exécution, mais les éléments d'interface concernés ne s'actualiseront plus correctement, ce qui est très gênant d'un point de vue utilisateur (les opérations seront effectuées, mais l'utilisateur n'aura aucun feedback visuel).
 \section{Le pré-launcher}
@@ -88,10 +88,10 @@ Pour l'exportation de l'archive du jeu final, on lit le contenu de la table Link
 \section{L'éditeur de niveaux}
 \subsection{Editor User Interface}
 \paragraph{}
-Ce widget est l'élément central de l'éditeur de niveaux. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts.
+Ce widget est l'élément central de l'éditeur de niveaux. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts. Les sections suivantes expliquent rapidement le contenu de chacune des parties ; se référer au code et aux commentaires pour plus de précisions.
 \subsubsection{Initialisation}
 \paragraph{}
-L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées précédemment), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
+L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées à la section \ref{chili}), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
 \paragraph{}
 Sont présentes également deux fonctions s'occupant de l'initialisation de fonctions liées aux changements d'état lors de la sélection d'un type et d'une équipe d'une unité pour la placer ensuite sur le terrain.
 \paragraph{}
@@ -114,11 +114,64 @@ Les fonctions de cette partie concernent la gestion du système de déclencheurs
 \subsubsection{Paramètres de la carte}
 \paragraph{}
 Les fonctions de cette partie sauvegardent les paramètres globaux du niveau, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
-\subsubsection{Entrées / Sorties}
+\subsubsection{Sauvegarde / Chargement}
+\paragraph{ }
+Les fonctions de cette partie s'occupent de la gestion des fichiers de sauvegarde (.editor), de la transformation de l'état du niveau en une table lua, et des save states (ctrl+z).
 \subsubsection{Fonctions de dessin}
+\paragraph{ }
+Les fonctions de cette partie permettent de dessiner des ellipses sur le terrain, de gérer les différents curseurs et l'état de certains boutons.
 \subsubsection{Listeners\label{listeners}}
+Les fonctions de cette partie correspondent aux callbacks des événements souris et clavier.
 \subsection{Gadget}
+\paragraph{ }
+Le gadget permet surtout d'effectuer toutes les opérations nécessitant d'être en code synchronisé. Il se décompose en 3 méthodes :
+\paragraph{RecvLuaMsg} Cette fonction permet de recevoir les messages envoyés depuis les widgets vers le gadget et d'effectuer des opérations en adéquation. Globalement, elle récupère un message de la forme "\textit{operation++param1++param2++...}", split cette chaîne de caractères, effectue un switch sur "\textit{operation}", effectue éventuellement des calculs avec les paramètres, stocke les paramètres transmis et calculés dans des variables, puis mets un booléen à \textit{true}.
+\paragraph{GameFrame} Cette fonction est appelée à chaque frame. Elle s'occupe lorsque l'on est dans le launcher d'instancier toutes les unités du mod de base sélectionné et d'en récupérer leurs commandes. Lorsque l'on est dans l'éditeur, elle s'occupe de supprimer toutes les unités de base créées automatiquement à la première frame, puis à chaque frame suivante elle effectue un test sur les booléens mis à \textit{true} ou non par la méthode précédente. Si un des booléens est à \textit{true}, on effectue des opérations avec les variables stockées précédemment, et on remet le booléen à false.
+\paragraph{RecvFromSynced} Permet de récupérer les messages envoyés depuis la partie synchronisée du gadget vers la partie non synchronisée pour ensuite utiliser des méthodes des widgets.
 \subsection{Machines à états\label{statemachine}}
+\paragraph{ }
+Les machines à états servent à savoir les actions à effectuer lorsqu'une seule commande (clic souris par exemple) peut effectuer plusieurs actions distinctes. En réalité, il s'agit d'une metatable possédant plusieurs membres correspondant aux états ainsi que deux méthodes, un getter et un setter sur les états. Au final, les machines à états n'ont pas été bien exploitées puisqu'il s'agit ici juste de savoir dans quel état on se trouve (et une simple variable changeant de valeur à chaque changement d'état aurait fait le même travail). On pourrait augmenter l'intérêt d'avoir des machines à états en définissant des fonctions de transition à chaque fois que l'on appelle le setter, mais il n'y a pas d'utilité immédiate.
 \subsection{Fonctions utilitaires}
+\paragraph{ }
+Les fonctions implémentées dans ce fichier sont soit des fonctions classiques qui ne sont pas présentes de base en lua (arrondir un nombre, etc.) soit des fonctions utilisées à plusieurs endroits dans le projet (récupération des informations des équipes par exemple).
 \subsection{Fichiers de description}
+\paragraph{ } Les fichiers de description des actions et des conditions contiennent toutes les informations nécessaires pour définir les actions et les conditions présentes dans l'éditeur. Pour rajouter une action ou une condition, il faut donc ajouter un élément dans la table correspondante possédant les éléments suivants :
+\begin{itemize}
+\item \textbf{type} : id de l'action ou de la condition à ajouter.
+\item \textbf{filter} : catégorie à laquelle l'action ou la condition appartient (s'ajoute automatiquement à la liste des filtres de l'éditeur).
+\item \textbf{typeText} : description présente dans la combobox lors du choix du type de l'action ou de la condition.
+\item \textbf{text} : texte à trou de l'action ou de la condition.
+\item \textbf{attributes} : "trous" du texte à trou.
+\end{itemize}
+\paragraph{ }
+Chaque élément de la table \textbf{attributes} est composé de :
+\begin{itemize}
+\item \textbf{text} : identifiant dans le texte à trous
+\item \textbf{type} : type de paramètre. Les types disponibles sont :
+\begin{itemize}
+\item \textbf{unit} (une seule unité à pick dans la scène)
+\item \textbf{unitset} (un ensemble d'unités = une seule unité, un groupe, une équipe, les unités validant une condition ou les unités créées par le dernier appel à une action)
+\item \textbf{unitType} (un type d'unité)
+\item \textbf{team} (une équipe)
+\item \textbf{player} (une équipe contrôlée par un joueur
+\item \textbf{position} (une position = un couple x,z de coordonnées)
+\item \textbf{zone} (une zone logique)
+\item \textbf{group} (un groupe d'unités)
+\item \textbf{numberComparison} (un opérateur de comparaison (au moins, au plus, etc.) + un nombre)
+\item \textbf{numberVariable} (une variable numérique)
+\item \textbf{booleanVariable} (une variable booléenne)
+\item \textbf{comparison} (un opérateur de comparaison)
+\item \textbf{condition} (une condition parmi celles définies dans l'événement actuellement modifié)
+\item \textbf{toggle} (activé/désactivé)
+\item \textbf{command} (un ordre)
+\item \textbf{text} (une chaîne de caractères)
+\item \textbf{textSplit} (texte pouvant être transformé en table grâce au séparateur "||")
+\item \textbf{boolean} (true/false)
+\item \textbf{widget} (un widget parmi les widgets visibles)
+\end{itemize}
+\item \textbf{id} : case dans laquelle la valeur sélectionnée va être stockée.
+\item \textbf{hint} (optionnel) : message d'aide pour l'utilisateur.
+\end{itemize}
+\paragraph{ }
+Une fois qu'une nouvelle action ou condition a été définie dans l'éditeur, il ne faut pas oublier d'implémenter son comportement dans les fichiers s'occupant de l'exécution du jeu.
 \end{document}

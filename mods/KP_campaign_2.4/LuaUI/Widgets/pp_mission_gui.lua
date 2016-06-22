@@ -48,6 +48,7 @@ local Tab = rooms.Tab
 local ppTraces = nil -- File handler to store traces
 
 -- Set label
+local saveMessage="Your progression has been saved under the name : "
 local previousMission = "Previous mission"
 local replayMission = "Replay mission"
 local nextMission = "Next mission"
@@ -59,7 +60,9 @@ local victory = "You won the mission"
 local victoryCampaign = "Congratulations !!! You complete the campaign"
 local loss = "You lost the mission"
 local continue = "continue"
+local saveProgression="Save progression"
 if lang == "fr" then
+  saveMessage="Votre progression a été sauvegardée sous le nom : "
   continue= "continuer"
 	previousMission = "Mission précédente"
 	replayMission = "Rejouer mission"
@@ -71,9 +74,13 @@ if lang == "fr" then
 	victory = "Vous avez gagné la mission"
 	victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
 	loss = "Vous avez perdu la mission"
+  saveProgression="Sauvegarder"
 end
 
-
+local activateSave=false
+if mode=="appliq" and AppliqManager~=nil then
+  activateSave=true
+end
 -- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
 local function createTmpFile()
 	if not VFS.FileExists("mission_ended.conf") then
@@ -164,6 +171,23 @@ local template_endMission = {
 				end
 			end
 		},
+		-- the save progression Tab
+    {preset = function(tab)
+        tab.title = saveProgression
+        tab.position = "right"
+        tab.OnClick = function()
+          local fileName=os.date(missionName.."_%d_%m-%Hh",os.time())..".sav"
+          local gameName=Game.gameShortName or Game.modShortName
+          local file=io.open("Savegames/"..gameName.."/"..fileName,"wb")
+          local savingContent=VFS.LoadFile("Savegames/"..gameName.."/currentSave.sav")
+          file:write(savingContent)                    
+          file:flush()
+          file:close()
+          tab.parent:Close()
+          MissionEvent({logicType = "ShowMessage",message = saveMessage..fileName, width = 500,pause = false})
+        end
+      end
+    },
 		-- The closeMenu tab
 		{preset = function(tab)
 				tab.title = closeMenu
@@ -219,6 +243,8 @@ local briefing = nil
 local tutoPopup = false
 
 function MissionEvent(e)
+  
+  --Spring.Echo("try event")
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
 		if tutoPopup then
@@ -411,6 +437,9 @@ function MissionEvent(e)
 end
 
 function TutorialEvent()
+  if not WG.rooms.Video.closed then
+    WG.rooms.Video:Close()
+  end
 	if not tutoPopup then	
 		tutoPopup = true
 		WG.rooms.TutoView:Open()
@@ -420,6 +449,9 @@ end
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
+	  Spring.Echo("escape pushed")
+	  Spring.Echo(briefing)
+	  Spring.Echo(winPopup)
 		if not WG.rooms.Video.closed then
 			WG.rooms.Video:Close()
 			if briefing ~= nil then
@@ -430,6 +462,7 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 				WG.rooms.TutoView:Close()
 			end
 			if winPopup == nil then
+			 Spring.Echo("launch event")
 				local event = {logicType = "ShowMissionMenu",
 								state = "menu"}
 				MissionEvent (event)

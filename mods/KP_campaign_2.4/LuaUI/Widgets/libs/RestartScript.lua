@@ -1,5 +1,15 @@
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99) -- nil test is made because prior to v92 Game.Version is an ugly string (e.g 0.82)
+local gameName=Game.gameShortName or Game.modShortName
+
+local function saveTxt(txt)
+  Spring.Echo(gameName)
+  local file=io.open("Savegames/"..gameName.."/currentSave.sav","wb")
+  file:write(txt)
+  file:flush()
+  file:close()
+end
+
 
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
@@ -30,6 +40,7 @@ function DoTheRestart(startscriptfilename, tableOperation)
 		file:write(VFS.LoadFile("infolog.txt"))
 		file:flush()
 		file:close()
+		saveTxt(trimmed)
 		Spring.Restart(params,trimmed)
 		Spring.Echo(widget:GetInfo().name..": Just called Spring.Restart(\""..params.."\",\"[GAME]{..}\")")
 		Spring.Echo(widget:GetInfo().name..": Wait, we shouldn't be here, should have restarted or crashed or quitted by now.")
@@ -177,6 +188,7 @@ function genericRestart(missionName,operations,contextFile)
         local tableEditor=json.decode(sf)
         local txtFileContent=createFromScratch(tableEditor)
         updatedTxtFileContent=updateValues(txtFileContent, operations)
+        saveTxt(updatedTxtFileContent)
         Spring.Restart("-s",updatedTxtFileContent)
         --Spring.Reload(updatedTxtFileContent)
      else
@@ -193,6 +205,7 @@ function genericRestart(missionName,operations,contextFile)
       Spring.Echo("decoded with success")
       local txtFileContent=createFromScratch(tableEditor)
       updatedTxtFileContent=updateValues(txtFileContent, operations)
+      saveTxt(updatedTxtFileContent)
       --Spring.Restart("-s",updatedTxtFileContent)
         if(reloadAvailable) then
           Spring.Reload(updatedTxtFileContent) --(this line, yes)

@@ -42,39 +42,19 @@
 		"name":"_mission7",
 		"widgets":[
 			{
-				"desc":"User interface of the level editor",
-				"name":"Editor User Interface",
-				"active":false
-			},
-			{
 				"desc":"Teach you to play the game,
 				 one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
 				"active":false
 			},
 			{
-				"desc":"Maintain unit selection through morphing",
-				"name":"Keep Morpheds Selected",
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
 				"active":false
-			},
-			{
-				"desc":"Show some P&P menu when Spring.exe is run directly.",
-				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
-				"active":true
 			},
 			{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
-				"active":false
-			},
-			{
-				"desc":"Hot GUI Framework",
-				"name":"Chili Framework",
-				"active":true
-			},
-			{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
 				"active":false
 			},
 			{
@@ -134,12 +114,6 @@
 				"active":false
 			},
 			{
-				"desc":"Makes sockets or window automatically spam bits or bugs,
-				 and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
-				"active":false
-			},
-			{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
@@ -150,18 +124,23 @@
 				"active":false
 			},
 			{
-				"desc":"Buttons for the current selection (incomplete)",
-				"name":"SelectionButtons",
-				"active":false
-			},
-			{
 				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
 				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},
 			{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},
+			{
 				"desc":"Display info tips related to O.N.S. shields",
 				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
 				"active":false
 			},
 			{
@@ -180,8 +159,11 @@
 				"active":false
 			},
 			{
-				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
-				"name":"HighlightUnit",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},
 			{
@@ -190,8 +172,8 @@
 				"active":false
 			},
 			{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},
 			{
@@ -211,14 +193,14 @@
 				"active":false
 			},
 			{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},
 			{
-				"desc":"Returns the llist of known widgets",
-				"name":"Editor Widget List",
-				"active":true
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
 			},
 			{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
@@ -226,11 +208,9 @@
 				"active":false
 			},
 			{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
-				4,
-				6,
-				8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			} 
 		],
@@ -243,19 +223,18 @@
 		{
 			"actions":[
 				{
-					"id":1,
-					"type":"messageGlobal",
-					"name":"Action1",
+					"id":3,
+					"type":"win",
+					"name":"Action3",
 					"params":{
-						"message":[
-							"WIIIIIN" 
-						]
+						"team":0,
+						"outputState":""
 					}
 				} 
 			],
 			"name":"Event1",
-			"trigger":"",
 			"actionTotal":1,
+			"id":1,
 			"conditions":[
 				{
 					"id":4,
@@ -274,7 +253,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":1
+			"trigger":""
 		},
 		{
 			"actions":[
@@ -289,8 +268,8 @@
 				} 
 			],
 			"name":"teamOIsDead",
-			"trigger":"",
 			"actionTotal":1,
+			"id":2,
 			"conditions":[
 				{
 					"id":5,
@@ -305,7 +284,7 @@
 				} 
 			],
 			"conditionTotal":1,
-			"id":2
+			"trigger":""
 		} 
 	],
 	"variables":[
@@ -418,38 +397,12 @@
 	],
 	"units":[
 		{
-			"type":"assembler",
-			"id":3084,
-			"position":{
-				"y":116,
-				"x":272,
-				"z":906
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},
-		{
 			"type":"byte",
-			"id":5621,
+			"id":14247,
 			"position":{
 				"y":130,
-				"x":112,
-				"z":1094
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"byte",
-			"id":3188,
-			"position":{
-				"y":130,
-				"x":172,
-				"z":980
+				"x":255,
+				"z":1084
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -458,11 +411,11 @@
 		},
 		{
 			"type":"bit",
-			"id":8104,
+			"id":10215,
 			"position":{
 				"y":116,
-				"x":384,
-				"z":990
+				"x":429,
+				"z":997
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -471,46 +424,7 @@
 		},
 		{
 			"type":"bit",
-			"id":3537,
-			"position":{
-				"y":116,
-				"x":452,
-				"z":1056
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":7018,
-			"position":{
-				"y":116,
-				"x":379,
-				"z":1071
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":11847,
-			"position":{
-				"y":116,
-				"x":335,
-				"z":1012
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":40,
-			"team":0
-		},
-		{
-			"type":"bit",
-			"id":13568,
+			"id":1974,
 			"position":{
 				"y":116,
 				"x":359,
@@ -523,11 +437,50 @@
 		},
 		{
 			"type":"bit",
-			"id":5979,
+			"id":7632,
 			"position":{
 				"y":116,
-				"x":429,
-				"z":997
+				"x":335,
+				"z":1012
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":12693,
+			"position":{
+				"y":116,
+				"x":379,
+				"z":1071
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":862,
+			"position":{
+				"y":116,
+				"x":452,
+				"z":1056
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14340,
+			"position":{
+				"y":116,
+				"x":384,
+				"z":990
 			},
 			"orientation":0,
 			"autoHeal":"global",
@@ -536,15 +489,41 @@
 		},
 		{
 			"type":"byte",
-			"id":11811,
+			"id":9831,
 			"position":{
 				"y":130,
-				"x":255,
-				"z":1084
+				"x":172,
+				"z":980
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":8516,
+			"position":{
+				"y":130,
+				"x":112,
+				"z":1094
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"assembler",
+			"id":5142,
+			"position":{
+				"y":116,
+				"x":272,
+				"z":906
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
 			"team":0
 		} 
 	]
