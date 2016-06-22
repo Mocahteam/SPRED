@@ -1,18 +1,19 @@
 #include "Sequence.h"
 #include "TracesAnalyser.h"
 
-Sequence::Sequence(std::string info): Trace(SEQUENCE), info(info), num(0), pt(0), valid(false), endReached(false), shared(false) {}
+Sequence::Sequence(std::string info, bool index) : Trace(SEQUENCE,info), index(index), num(0), pt(0), valid(false), endReached(false), shared(false) {}
 
-Sequence::Sequence(unsigned int num): Trace(SEQUENCE), num(num), pt(0), valid(false), endReached(false), shared(false) {
+Sequence::Sequence(unsigned int num) : Trace(SEQUENCE), index(false), num(num), pt(0), valid(false), endReached(false), shared(false) {
 	updateNumMap(num);
 }
 
-Sequence::Sequence(sp_sequence sps): Trace(SEQUENCE), pt(0), valid(false), endReached(false), shared(false) {
+Sequence::Sequence(const_sp_sequence sps) : Trace(SEQUENCE,sps->getInfo()), pt(0), valid(false), endReached(false), shared(false) {
 	num = sps->getNum();
+	index = sps->hasIndex();
 	updateNumMap(sps->getNumMap());
 }
 
-Sequence::Sequence(sp_sequence sps_up, sp_sequence sps_down): Trace(SEQUENCE), pt(0), valid(false), endReached(false), shared(true) {
+Sequence::Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down) : Trace(SEQUENCE), index(false), pt(0), valid(false), endReached(false), shared(true) {
 	num = std::max(sps_up->getNum(),sps_down->getNum());
 	updateNumMap(sps_up->getNumMap());
 	updateNumMap(sps_down->getNumMap());
@@ -120,6 +121,13 @@ bool Sequence::compare(Trace* t) {
 	// return res;
 // }
 
+Trace::sp_trace Sequence::clone() const {
+	sp_sequence sps_clone = boost::make_shared<Sequence>(shared_from_this());
+	for (unsigned int i = 0; i < traces.size(); i++)
+		sps_clone->addTrace(traces.at(i)->clone());
+	return sps_clone;
+}
+
 void Sequence::display(std::ostream &os) const {
 	numTab++;
 	for (int i = 0; i < numTab; i++)
@@ -147,8 +155,8 @@ unsigned int Sequence::getNum() const {
 	return num;
 }
 
-std::string Sequence::getInfo() const {
-	return info;
+bool Sequence::hasIndex() const {
+	return index;
 }
 
 void Sequence::addOne() {

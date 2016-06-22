@@ -12,33 +12,6 @@
 				<info>"PP_Close" must be the last function called in your program</info>
 			</infos>
 		</feedback>
-		<feedback type="seq_lack" priority="0">
-			<expert>
-				<sequence>
-					<call label="PP_GetNumUnits" params="2"/>
-				</sequence>
-			</expert>
-			<infos lang="fr">
-				<info>Vous devriez attendre qu'il y ait au moins une unité ennemie sur la carte avant de donner des ordres à vos unités</info>
-			</infos>
-			<infos lang="en">
-				<info>You should wait until there is at least one enemy unit on the map before send orders to your units</info>
-			</infos>
-		</feedback>
-		<feedback type="seq_lack" priority="0">
-			<expert>
-				<sequence>
-					<call label="PP_Unit_GetHealth"/>
-					<call label="PP_Unit_GetMaxHealth"/>
-				</sequence>
-			</expert>
-			<infos lang="fr">
-				<info>N'oubliez pas de placer une boucle d'attente après avoir ordonné à un assembleur de soigner une unité, sinon elle ne récupérera pas toute sa santé</info>
-			</infos>
-			<infos lang="en">
-				<info>Don't forget the waiting loop after giving the order to an assembler to heal an unit, otherwise it won't fully recover its health</info>
-			</infos>
-		</feedback>
 		<feedback type="useful_call" priority="500">
 			<infos lang="fr">
 				<info>Vous n'avez pas utilisé la fonction *label* dans votre programme</info>
@@ -67,10 +40,10 @@
 		</feedback>
 		<feedback type="seq_lack" priority="1000">
 			<infos lang="fr">
-				<info>Essayez d'insérer une boucle contenant les appels *list_calls* dans votre programme*seq_info*</info>
+				<info>Essayez d'insérer une boucle contenant les appels *list_calls_labels* dans votre programme*info*</info>
 			</infos>
 			<infos lang="en">
-				<info>Think about inserting a loop containing the calls *list_calls* in your program*seq_info*</info>
+				<info>Think about inserting a loop containing the calls *list_calls_labels* in your program*info*</info>
 			</infos>
 		</feedback>
 		<feedback type="ind_seq_num" priority="1000">
@@ -99,7 +72,7 @@
 		</feedback>
 		<feedback type="call_lack" priority="2000">
 			<infos lang="fr">
-				<info>Essaye d'utiliser l'appel *expert_call* dans votre programme</info>
+				<info>Essayez d'utiliser l'appel *expert_call* dans votre programme</info>
 			</infos>
 			<infos lang="en">
 				<info>Think about using the call *expert_call* in your program</info>
@@ -115,28 +88,38 @@
 		</feedback>
 		<feedback type="include_call_in_seq" priority="700">
 			<infos lang="fr">
-				<info></info>
+				<info>Tu devrais inclure ton appel à la fonction *label* dans la boucle contenant les appels *list_calls*</info>
 			</infos>
 			<infos lang="en">
-				<info></info>
+				<info>You should include your call to the function *label* in the loop including the calls *list_calls*</info>
 			</infos>
 		</feedback>
 		<feedback type="exclude_call_from_seq" priority="700">
 			<infos lang="fr">
-				<info></info>
+				<info>Tu devrais exclure ton appel à la fonction *label* de la boucle contenant les appels *list_calls*</info>
 			</infos>
 			<infos lang="en">
-				<info></info>
+				<info>You should exlude your call to the function *label* from the loop including the calls *list_calls*</info>
 			</infos>
 		</feedback>
 	</feedbacks>
 	<messages>
+		<!-- This message is used when an endless loop has been detected and the mission is over. Then it is pretty sure than there is a problem in the running program -->
 		<message id="endless_loop">
 			<infos lang="fr">
-				<info>Votre programme ne se termine pas. Il doit contenir une boucle infinie. Vérifiez les conditions de terminaison de vos boucles.</info>
+				<info>La mission est terminée mais pas votre programme. Il doit contenir une boucle infinie. Vérifiez les conditions de terminaison de vos boucles.</info>
 			</infos>
 			<infos lang="en">
-				<info>Your program doesn't end. It certainly contains an infinite loop. Check the termination conditions of your loops.</info>
+				<info>The mission is over but your program isn't. It certainly contains an infinite loop. Check the termination conditions of your loops.</info>
+			</infos>
+		</message>
+		<!-- This message is used when an endless loop has been detected and the mission is not over yet -->
+		<message id="probable_endless_loop">
+			<infos lang="fr">
+				<info>Il ne se passe rien dans le jeu et pourtant votre programme s'éxecute encore.</info>
+			</infos>
+			<infos lang="en">
+				<info>Nothing happens in the game but you program is still running.</info>
 			</infos>
 		</message>
 		<message id="return">

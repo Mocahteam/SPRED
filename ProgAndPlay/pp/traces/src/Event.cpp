@@ -3,7 +3,11 @@
 const char* Event::concatEventsArr[] = {"game_paused", "game_unpaused", NULL};
 const char* Event::noConcatEventsArr[] = {"start_mission", "end_mission", "new_execution", "end_execution", "eof", NULL};
 
-Event::Event(std::string label): Trace(EVENT), label(label) {}
+Event::Event(std::string label, std::string info) : Trace(EVENT,info), label(label) {}
+
+Event::Event(const Event *e) : Trace(EVENT,e->info) {
+	label = e->getLabel();
+}
 
 bool Event::operator==(Trace *t) const {
 	bool res = false;
@@ -13,6 +17,10 @@ bool Event::operator==(Trace *t) const {
 			res = true;
 	}
 	return res;
+}
+
+Trace::sp_trace Event::clone() const {
+	return boost::make_shared<Event>(this);
 }
 
 void Event::display(std::ostream &os) const {

@@ -19925,8 +19925,6 @@ iostream
 -
 Trace.h
 ../rts/lib/pp/traces/Trace.h
-Sequence.h
-../rts/lib/pp/traces/Sequence.h
 
 ../rts/lib/pp/traces/EventDef.h
 boost/lexical_cast.hpp
@@ -19949,10 +19947,10 @@ cmath
 -
 boost/lexical_cast.hpp
 -
+boost/enable_shared_from_this.hpp
+-
 Trace.h
 ../rts/lib/pp/traces/Trace.h
-Event.h
-../rts/lib/pp/traces/Event.h
 
 ../rts/lib/pp/traces/Trace.h
 vector

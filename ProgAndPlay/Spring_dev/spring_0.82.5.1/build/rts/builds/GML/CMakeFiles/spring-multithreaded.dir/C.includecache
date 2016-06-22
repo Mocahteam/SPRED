@@ -4,7 +4,7 @@
 
 #IncludeRegexComplain: ^$
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/backtrace.c
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/backtrace.c
 execinfo.h
 -
 signal.h
@@ -18,7 +18,7 @@ bp-checks.h
 ldsodefs.h
 -
 
-C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/get_executable_name.c
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/System/Sync/get_executable_name.c
 windows.h
 -
 stdio.h

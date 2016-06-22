@@ -21,8 +21,8 @@
 #include "Event.h"
 #include "EventDef.h"
 
-#define EXPERT_TRACES_DIRNAME "xml\\expert"
-#define IN_GAME_EXPERT_TRACES_DIRNAME "traces\\data\\expert"
+#define EXPERT_DIRNAME "xml\\expert"
+#define IN_GAME_EXPERT_DIRNAME "traces\\data\\expert"
 #define FEEDBACKS_FILENAME "feedbacks.xml"
 
 #define USELESS_FREQ 0					// threshold value in [0,1] used to determine if we have to make a USELESS_CALL feedback
@@ -178,24 +178,30 @@ public:
 		
 	};
 
-	TracesAnalyser(bool in_game, bool endless_loop = false, std::string lang = "fr");
+	TracesAnalyser(bool in_game, std::string mission_name = "", std::string lang = "fr");
 
-	std::string getFeedback(const std::string& dir_path, const std::string& filename, int ind_mission = -1, int ind_execution = -1);
+	std::string constructFeedback(const std::string& dir_path, const std::string& filename, int ind_mission = -1, int ind_execution = -1, std::ostream &os = std::cout);
+	void setEndlessLoop(bool endless_loop);
+	void setLang(std::string lang);
+	void setMissionName(std::string mission_name);
+	
 	static int getRandomIntInRange(int min, int max);
 	
 private:
 
 	bool in_game;
 	bool endless_loop;
+	bool loaded;
+	std::string mission_name;
 	std::string lang;
-	std::string expert_traces_dirname;
-	rapidxml::xml_document<> doc;
+	std::string expert_dirname;
 	GameInfos learner_gi, expert_gi;
 	std::vector<Feedback> ref_feedbacks;
 	std::map<std::string,double> experts_calls_freq;
 	
-	void importFeedbacksFromXml(int ind_feedback = -1);
-	void importMessagesFromXml();
+	void loadXmlInfos();
+	void importFeedbacksFromXml(rapidxml::xml_document<> *doc);
+	void importMessagesFromXml(rapidxml::xml_document<> *doc);
 	
 	bool getInfosOnMission(const std::vector<Trace::sp_trace>& traces, GameInfos& gi, int ind_mission = -1);
 	bool getInfosOnExecution(GameInfos& gi, int ind_execution = -1);
@@ -206,11 +212,11 @@ private:
 	const Sequence::sp_sequence getClosestCommonParent(const Call::call_vector& pattern) const;
 	
 	std::pair<double,double> findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align = true) const;
-	void displayAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const;
+	void displayAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, std::ostream &os = std::cout) const;
 	
 	void listGlobalFeedbacks(const std::vector<Trace::sp_trace>& l, std::vector<Feedback>& feedbacks) const;
 	void listAlignmentFeedbacks(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, std::vector<Feedback>& feedbacks) const;
-	void sortFeedbacks(std::vector<Feedback>& feedbacks);
+	void bindFeedbacks(std::vector<Feedback>& feedbacks);
 	bool feedbackSequencesMatch(const Sequence::sp_sequence& sps, const Sequence::sp_sequence& ref_sps) const;
 	double getFeedbackScore(const Feedback& f, int j);
 	void filterFeedbacks(std::vector<Feedback>& feedbacks, const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const;

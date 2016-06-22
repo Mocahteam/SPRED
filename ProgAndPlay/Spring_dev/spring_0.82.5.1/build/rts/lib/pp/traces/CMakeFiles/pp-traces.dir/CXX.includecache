@@ -136,6 +136,10 @@ typeinfo
 boost/config.hpp
 -
 
+../mingwlibs/include/boost/enable_shared_from_this.hpp
+boost/smart_ptr/enable_shared_from_this.hpp
+-
+
 ../mingwlibs/include/boost/exception/exception.hpp
 
 ../mingwlibs/include/boost/integer_traits.hpp
@@ -1352,6 +1356,16 @@ sched.h
 time.h
 -
 
+../mingwlibs/include/boost/smart_ptr/enable_shared_from_this.hpp
+boost/smart_ptr/weak_ptr.hpp
+-
+boost/smart_ptr/shared_ptr.hpp
+-
+boost/assert.hpp
+-
+boost/config.hpp
+-
+
 ../mingwlibs/include/boost/smart_ptr/make_shared.hpp
 boost/config.hpp
 -
@@ -1400,6 +1414,14 @@ iosfwd
 ostream
 -
 boost/smart_ptr/detail/operator_bool.hpp
+-
+
+../mingwlibs/include/boost/smart_ptr/weak_ptr.hpp
+memory
+-
+boost/smart_ptr/detail/shared_count.hpp
+-
+boost/smart_ptr/shared_ptr.hpp
 -
 
 ../mingwlibs/include/boost/static_assert.hpp
@@ -2557,8 +2579,6 @@ iostream
 -
 Trace.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
-Sequence.h
-C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/EventDef.h
 boost/lexical_cast.hpp
@@ -2587,10 +2607,10 @@ cmath
 -
 boost/lexical_cast.hpp
 -
+boost/enable_shared_from_this.hpp
+-
 Trace.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
-Event.h
-C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Event.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.cpp
 Trace.h

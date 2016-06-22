@@ -36,7 +36,10 @@ public:
 	void display(std::ostream &os = std::cout);
 	void setEnd();
 	bool compressionDone();
+	bool hasLaunched();
+	void setChange();
 	void setProceed(bool proceed);
+	bool getProceed();
 	const std::vector<Trace::sp_trace>& getTraces() const;
 	
 	static Trace::sp_trace handleLine(const std::string& s);
@@ -56,10 +59,12 @@ private:
 	static Trace::sp_trace spe_eme;
 
 	bool in_game;
-	bool launched;
-	bool compress;
+	bool used;
+	bool compressed;
 	bool end;
 	bool proceed;
+	bool launched;
+	bool change;
 	
 	int start;
 	unsigned int pt;

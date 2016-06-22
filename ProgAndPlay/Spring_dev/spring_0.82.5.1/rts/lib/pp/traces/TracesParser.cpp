@@ -21,7 +21,7 @@ Trace::sp_trace TracesParser::spe_eme;
 	#endif
 #endif
 
-TracesParser::TracesParser(bool in_game): in_game(in_game), launched(false), compress(false), end(false), start(0), pt(0) {
+TracesParser::TracesParser(bool in_game): in_game(in_game), used(false), compressed(false), end(false), proceed(false), launched(false), change(false), start(0), pt(0) {
 	Call::paramsMap.initMap(in_game);
 }
 
@@ -34,7 +34,7 @@ TracesParser::~TracesParser() {
 }
 
 bool TracesParser::beginParse(const std::string& dir_path, const std::string& filename) {
-	if (launched) {
+	if (used) {
 		std::cout << "parsing of traces file already launched" << std::endl;
 		return false;
 	}
@@ -51,18 +51,19 @@ bool TracesParser::beginParse(const std::string& dir_path, const std::string& fi
 		ifs.open(s.c_str(), std::ios::in | std::ios::binary);
 	}
 	if (ifs.good())
-		launched = true;
+		used = true;
 	else
 		std::cout << "error opening file : " << strerror(errno) << std::endl;
-	return launched;
+	return used;
 }
 
 void TracesParser::endParse() {
 	start = 0;
-	launched = false;
+	used = false;
 	end = false;
-	compress = false;
+	compressed = false;
 	proceed = false;
+	launched = false;
 	if (ifs.is_open())
 		ifs.close();
 	#ifdef DEBUG
@@ -86,7 +87,7 @@ void TracesParser::writeFiles(bool online) {
 		ofs.close();
 	}
 	exportTraceToXml();
-	compress = true;
+	compressed = true;
 }
 
 /* 
@@ -233,7 +234,7 @@ void TracesParser::readTracesOffline() {
 
 void TracesParser::readTracesOfflineInGame() {
 	std::string line;
-	bool change = false;
+	change = false;
 	while (!end) {
 		while (std::getline(ifs, line)) {
 			lineNum++;
@@ -242,13 +243,15 @@ void TracesParser::readTracesOfflineInGame() {
 				Event::sp_event spe;
 				if (spt->isEvent())
 					spe = boost::dynamic_pointer_cast<Event>(spt);
-				if (!spe)
-					change = true;
 				if (spe && Trace::inArray(spe->getLabel().c_str(), Event::noConcatEventsArr) > -1) {
 					detectSequences();
 					traces.push_back(spe);
 					start = traces.size();
-					change = true;
+					if (spe->getLabel().compare("new_execution") == 0) {
+						change = true;
+						if (!launched)
+							launched = true;
+					}
 				}
 				else
 					handleTraceOffline(spt);
@@ -273,7 +276,7 @@ void TracesParser::readTracesOfflineInGame() {
 		if (!ifs.eof())
 			end = true; // Ensure end of read was EOF.
 		else
-			Sleep(500);
+			//Sleep(500);
 		ifs.clear();
 	}
 }
@@ -1053,22 +1056,27 @@ void TracesParser::display(std::ostream &os) {
 
 std::vector<Trace::sp_trace> TracesParser::importTraceFromXml(const std::string& dir_path, const std::string& filename) {
 	std::vector<Trace::sp_trace> traces;
-	if (filename.find(".xml") == std::string::npos) {
-		std::cout << "not a xml file" << std::endl;
-		return traces;
+	if (filename.find(".xml") != std::string::npos) {
+		std::string s = dir_path + "\\" + filename;
+		try {
+			rapidxml::file<> xmlFile(s.c_str());
+			rapidxml::xml_document<> doc;
+			doc.parse<0>(xmlFile.data());
+			rapidxml::xml_node<> *root_node = doc.first_node("trace");
+			if (root_node != 0) {
+				std::cout << "begin import from XML file " << s << std::endl;
+				importTraceFromNode(root_node->first_node(),traces);
+				for (unsigned int i = 0; i < traces.size(); i++)
+					traces.at(i)->display();
+				std::cout << "end import from XML" << std::endl;
+			}
+		}
+		catch (const std::runtime_error& e) {
+			std::cout << e.what() << std::endl;
+		}
 	}
-	std::string s = dir_path + "\\" + filename;
-	rapidxml::file<> xmlFile(s.c_str());
-    rapidxml::xml_document<> doc;
-    doc.parse<0>(xmlFile.data());
-	rapidxml::xml_node<> *root_node = doc.first_node("trace");
-	if (root_node != 0) {
-		std::cout << "begin import from XML file " << s << std::endl;
-		importTraceFromNode(root_node->first_node(),traces);
-		for (unsigned int i = 0; i < traces.size(); i++)
-			traces.at(i)->display();
-		std::cout << "end import from XML" << std::endl;
-	}
+	else
+		std::cout << "importTraceFromXml : not a xml file" << std::endl;
 	return traces;
 }
 
@@ -1115,7 +1123,10 @@ void TracesParser::importTraceFromNode(rapidxml::xml_node<> *node, std::vector<T
 				std::string info;
 				if (node->first_attribute("info") != 0)
 					info = node->first_attribute("info")->value();
-				sps = boost::make_shared<Sequence>(info);
+				bool index = false;
+				if (node->first_attribute("index") != 0)
+					index = std::string(node->first_attribute("index")->value()).compare("true") == 0;
+				sps = boost::make_shared<Sequence>(info,index);
 				if (!seq_stack.empty())
 					sps->setParent(seq_stack.top());
 				if (node->first_attribute("num_map") != 0) {
@@ -1145,6 +1156,8 @@ void TracesParser::importTraceFromNode(rapidxml::xml_node<> *node, std::vector<T
 				}
 				else
 					traces.push_back(spt);
+				if (node->first_attribute("info") != 0)
+					spt->setInfo(node->first_attribute("info")->value());
 				node = node->next_sibling();
 			}
 		}
@@ -1229,6 +1242,8 @@ void TracesParser::exportTraceToXml() {
 				else {
 					node = doc.allocate_node(rapidxml::node_element, "event");
 					node->append_attribute(doc.allocate_attribute("label", doc.allocate_string(e->getLabel().c_str())));
+					if (!e->getInfo().empty())
+						node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(e->getInfo().c_str())));
 					node_stack.top()->append_node(node);
 				}
 			}
@@ -1244,6 +1259,9 @@ void TracesParser::exportTraceToXml() {
 				s = c->getReturn();
 				if (s.compare("") != 0)
 					node->append_attribute(doc.allocate_attribute("return", doc.allocate_string(s.c_str())));
+				s = c->getInfo();
+				if (s.compare("") != 0)
+					node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(s.c_str())));
 				node_stack.top()->append_node(node);
 			}
 			else {
@@ -1253,6 +1271,8 @@ void TracesParser::exportTraceToXml() {
 				node->append_attribute(doc.allocate_attribute("num_map", doc.allocate_string(Sequence::getNumMapString(sps->getNumMap()).c_str())));
 				if (!sps->getInfo().empty())
 					node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(sps->getInfo().c_str())));
+				if (sps->hasIndex())
+					node->append_attribute(doc.allocate_attribute("index", doc.allocate_string("true")));
 				node_stack.top()->append_node(node);
 				node_stack.push(node);
 				seq_stack.push(sps);
@@ -1275,11 +1295,19 @@ void TracesParser::setEnd() {
 }
 
 bool TracesParser::compressionDone() {
-	if (compress) {
-		compress = false;
+	if (compressed) {
+		compressed = false;
 		return true;
 	}
 	return false;
+}
+
+bool TracesParser::hasLaunched() {
+	return launched;
+}
+
+void TracesParser::setChange() {
+	change = true;
 }
 
 /**
@@ -1288,6 +1316,10 @@ bool TracesParser::compressionDone() {
  */
 void TracesParser::setProceed(bool proceed) {
 	this->proceed = proceed;
+}
+
+bool TracesParser::getProceed() {
+	return proceed;
 }
 
 const std::vector<Trace::sp_trace>& TracesParser::getTraces() const {
