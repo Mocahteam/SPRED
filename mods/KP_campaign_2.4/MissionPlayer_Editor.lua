@@ -441,51 +441,47 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
     ctx.armyInformations[externalId].isAttacking=false
 end
 
+local function isInGroup(externalId,gp,testOnExternalsOnly)
+  EchoDebug("is in group ->"..json.encode(gp))
+  local isAlreadyStored=false
+  if(gp==nil)then
+    EchoDebug("group is nil in function isInGroup, this should not occur")
+    return false, nil
+  end
+  if(testOnExternalsOnly)then
+    for i = 1,table.getn(gp) do
+      if(externalId==gp[i]) then return true,i end
+    end
+  else
+    local spId=ctx.armySpring[externalId]
+    for i = 1,table.getn(gp) do
+      if(spId==ctx.armySpring[gp[i]]) then return true,i end
+    end    
+  end
+  return false,nil
+end
+ 
 local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
   local testOnExternalsOnly=testOnExternalsOnly or true 
   for g,group in pairs(groups) do
-    if(ctx.groupOfUnits[group]~=nil) then -- ugly and can be refractored, same for addUnitToGroups
-      if(testOnExternalsOnly)then
-        for i = 1,table.getn(ctx.groupOfUnits[group]) do
-          if(externalId==ctx.groupOfUnits[group][i]) then 
-            table.remove(ctx.groupOfUnits[group],i)
-          end
-        end      
-      else
-         local spId=ctx.armySpring[externalId]
-         for i = 1,table.getn(ctx.groupOfUnits[group]) do
-          if(spId==ctx.armySpring[ctx.groupOfUnits[group][i]]) then 
-            table.remove(ctx.groupOfUnits[group],i)
-          end
-        end       
-      end
+    if(ctx.groupOfUnits[group]~=nil) then 
+      local _,i=isInGroup(externalId,ctx.groupOfUnits[group],testOnExternalsOnly)
+    if(i~=nil)then table.remove(ctx.groupOfUnits[group],i) end
     end
   end
-end 
+end
 
 local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
   local testOnExternalsOnly=testOnExternalsOnly or true 
   -- usefull to check redundancy at a deeper level because, when it comes about unit creation
   -- units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
-  
       -- create group if not existing
     if(ctx.groupOfUnits[group]==nil) then
       ctx.groupOfUnits[group]={}
-    end
-    
+    end   
     -- store in group if not already stored
-    local isAlreadyStored=false
-    if(testOnExternalsOnly)then
-      for i = 1,table.getn(ctx.groupOfUnits[group]) do
-        if(externalId==ctx.groupOfUnits[group][i]) then isAlreadyStored=true end
-      end
-    else
-      local spId=ctx.armySpring[externalId]
-      for i = 1,table.getn(ctx.groupOfUnits[group]) do
-        if(spId==ctx.armySpring[ctx.groupOfUnits[group][i]]) then isAlreadyStored=true end
-      end    
-    end
+    local isAlreadyStored,_=isInGroup(externalId,ctx.groupOfUnits[group],testOnExternalsOnly)
     if(not isAlreadyStored)then   
       table.insert(ctx.groupOfUnits[group],externalId)
     end
@@ -901,8 +897,9 @@ local function watchHeal(frameNumber)
     local idAttacking=ctx.armyExternal[attacking]
     if(idAttacking~=nil)and (ctx.armyInformations[idAttacking]~=nil)then
       --Spring.Echo(json.encode(tableInfo))
-      if(tableInfo.frame==-1)then
-        ctx.attackedUnits[idAttacking].frame=frameNumber
+      if(tableInfo.frame==-1 or tableInfo.frame==nil)then
+        EchoDebug(json.encode(ctx.attackingUnits[attacking]),2)
+        ctx.attackingUnits[attacking]["frame"]=frameNumber
         ctx.armyInformations[idAttacking].isAttacking=true
         --Spring.Echo("under attack")
       elseif(frameNumber-tonumber(tableInfo.frame)<secondesToFrames(ctx.timeUntilPeace))then
@@ -1072,7 +1069,18 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
     elseif(c.type=="underAttack")then --untested yet
       --Spring.Echo("is it working")
       --Spring.Echo(ctx.armyInformations[externalUnitId].isUnderAttack)
-      return ctx.armyInformations[externalUnitId].isUnderAttack
+      if(not ctx.armyInformations[externalUnitId].isUnderAttack)then return false
+      else
+        EchoDebug(json.encode(c),2)
+        local spUnit=ctx.armySpring[externalUnitId]
+        local spAttacker=ctx.attackedUnits[spUnit].attackerID 
+        local externalAttacker=ctx.armyExternal[spAttacker]
+        local group=ctx.groupOfUnits[c.params.attacker.type.."_"..tostring(c.params.attacker.value)]
+        EchoDebug("group of attackers ->"..json.encode(group),1)
+        local is,i=isInGroup(externalAttacker,group,false)
+        EchoDebug(is,2)
+        return is
+      end
     elseif(c.type=="attacking")then --untested yet
       return ctx.armyInformations[externalUnitId].isAttacking
     elseif(c.type=="order") then
@@ -1149,7 +1157,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       local count=0
       for u,unit in ipairs(externalUnitList) do
         local spUnit=ctx.armySpring[unit]
-        for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do
+        for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do -- TODO: work required
           if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
             count=count+1
             break
