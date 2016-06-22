@@ -10,6 +10,7 @@ function widget:GetInfo()
     handler = true
   }
 end
+local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99)
 local hideView=true
 local lang="fr"
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
@@ -27,7 +28,12 @@ contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootD
 Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
+
+
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
+local gameName=Game.gameShortName or Game.modShortName
+
+
 if(xmlFiles[1]~=nil)then
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
@@ -40,7 +46,8 @@ local tableCaptions={
   {el="Title",fr="campagne",en="campaign"},
   {el="NewPartyButton",fr="Nouvelle Partie",en="Start Campaign"},
   {el="ListMissionButtons",fr="Liste Des Missions",en="Missions List"},
-  {el="QuitButton",fr="Quitter",en="Quit"}
+  {el="QuitButton",fr="Quitter",en="Quit"},
+  {el="continueGameButton",fr="Continuer",en="Continue"}
 }
 local UI = {} -- Contains each UI element
 
@@ -69,7 +76,7 @@ function initChili() -- Initialize Chili variables
   Screen0 = Chili.Screen0
 end
 
-local function removeWidgets(self)
+local function removeWidgets()
   for name, w in pairs(widgetHandler.knownWidgets) do
     if w.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
       widgetHandler:DisableWidget(name)
@@ -205,7 +212,7 @@ local function commonElements()
     y = "0%",
     width = "15%",
     height = "7%",
-    items = { "English", "French" },
+    items = { "French","English" },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 40,
@@ -271,8 +278,78 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
       color = { 0.2, 1, 0.8, 1 }
     }
   }
+  UI.continueGameButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "30%",
+    y = "50%",
+    width = "40%",
+    height = "10%",
+    caption = "Continuer",
+    OnClick = { continue },
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 40,
+      color = { 0.2, 1, 0.8, 1 }
+    }
+  }
 end
 
+function continue()
+  local saveFiles = VFS.DirList("Savegames/"..gameName.."/" ,"*.sav")
+  -- it's better to look for save files at this precise moment in order to include recent saved files.
+ clearUI()
+ commonElements()
+  UI.MapScrollPanel2 = Chili.ScrollPanel:New{
+    parent = UI.MainWindow,
+    x = "20%",
+    y = "20%",
+    width = "60%",
+    height = "60%"
+  }
+  
+  UI.BackButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "0%",
+    y = "0%",
+    width = "10%",
+    height = "10%",
+    backgroundColor = { 0, 0.2, 0.6, 1 },
+    focusColor = { 0, 0.6, 1, 1 },
+    OnClick = { InitializeMainMenu }
+  }
+  Chili.Image:New{ -- Image for the back button
+    parent = UI.BackButton,
+    x = "10%",
+    y = "10%",
+    width = "80%",
+    height = "80%",
+    keepAspect = false,
+    file = "bitmaps/launcher/arrow.png"
+  }
+  UI.ContButtons = {}
+  for i,MissionFileName in ipairs(saveFiles) do 
+    local userMissionName=string.match(MissionFileName, '\\([^\\]*)%.')--match string between the last "\" and the "." of .editor 
+    Spring.Echo(userMissionName)
+    local contButton = Chili.Button:New{
+      parent = UI.MapScrollPanel2,
+      x = "0%",
+      y = 80 * ( i - 1 ),
+      width = "100%",
+      height = 80,
+      caption = userMissionName,
+      OnClick = { function() 
+                local txt=VFS.LoadFile(MissionFileName) 
+                if(reloadAvailable)then Spring.Reload("-s",txt) else  Spring.Restart("-s",txt) end
+                end },
+      font = {
+        font = "LuaUI/Fonts/Asimov.otf",
+        size = 40,
+        color = { 0.2, 0.4, 0.8, 1 }
+      }
+    }
+    table.insert(UI.ContButtons, contButton)
+  end
+end
 function missionMenu()
  clearUI()
  commonElements()
@@ -306,6 +383,7 @@ function missionMenu()
   UI.MapButtons = {}
   local MissionsList=VFS.DirList("Missions")
   for i,MissionFileName in ipairs(MissionsList) do 
+    Spring.Echo(MissionFileName)
     local userMissionName=string.match(MissionFileName, '/([^/]*)%.')--match string between the last "/" and the "." of .editor 
     local mapButton = Chili.Button:New{
       parent = UI.MapScrollPanel,
@@ -325,6 +403,17 @@ function missionMenu()
   end
 end
 
+function initGui()
+  hideView=true
+  hideDefaultGUI()
+  removeWidgets()
+  initChili()
+  InitializeMainMenu()
+  --EitherDrawScreen(1536,803)
+end
+
+WG.switchOnMenu = initGui
+
 function widget:Initialize()
   if not Spring.GetModOptions().hidemenu then
     if (not WG.Chili) then
@@ -332,10 +421,7 @@ function widget:Initialize()
       widgetHandler:RemoveWidget()
       return
     end
-    hideDefaultGUI()
-    removeWidgets(self)
-    initChili()
-    InitializeMainMenu()
+  initGui()
   else
     hideView=false
   end

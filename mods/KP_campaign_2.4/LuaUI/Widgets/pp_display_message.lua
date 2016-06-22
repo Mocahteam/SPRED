@@ -87,6 +87,7 @@ end
 function widget:DrawScreen()
 	for i, mes in ipairs(UnitMessages) do
 		local u, m = mes.unit, mes.message
+		if(not Spring.ValidUnitID(u))then return end
 		local x, y, z = Spring.GetUnitPosition(u)
 		x, y = Spring.WorldToScreenCoords(x, y+50, z)
 		DisplayTextAtScreenPosition(x, y, m)
@@ -98,6 +99,7 @@ function widget:DrawScreen()
 	end
 	for i, mes in ipairs(BubbleMessages) do
 		local u, m = mes.unit, mes.message
+		if(not Spring.ValidUnitID(u))then return end
 		local x, y, z = Spring.GetUnitPosition(u)
 		x, y = Spring.WorldToScreenCoords(x, y+50, z)
 		DisplayBubbleAtScreenPosition(x, y, m, u)
