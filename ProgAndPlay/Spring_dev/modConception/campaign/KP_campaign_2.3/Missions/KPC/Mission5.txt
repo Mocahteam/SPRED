@@ -15,9 +15,10 @@
 		FixedAllies=0;				// enable in game alliance
 		HideMenu=1;					// set a value to avoid starting menu
 		language=en;				// en english, fr français
-		missionName=Mission5;		// mission name used to define script file and launcher file
+		missionName=Mission5;		// mission name used to define script file, launcher file and traces file
 		scenario=default;			// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
-		tracesFilename=Mission5; 	// name of the file where the traces will be logged
+		activeTraces=1;				// enable/disable traces module
+		testmap=0;					// true when the game is launched by the expert to generate compressed expert traces for a mission
 	}
 	
 	HostIP=localhost;

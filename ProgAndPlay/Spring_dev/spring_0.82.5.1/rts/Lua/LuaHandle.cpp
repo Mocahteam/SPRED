@@ -51,6 +51,10 @@ CLuaHandle* CLuaHandle::activeHandle = NULL;
 bool CLuaHandle::activeFullRead    = false;
 int CLuaHandle::activeReadAllyTeam = CEventClient::NoAccessTeam;
 
+// Meresse
+bool CLuaHandle::feedbacksWidgetEnabled = true;
+// --
+
 
 /******************************************************************************/
 /******************************************************************************/
@@ -1124,6 +1128,12 @@ bool CLuaHandle::RecvLuaMsg(const string& msg, int playerID)
 
 	lua_pushlstring(L, msg.data(), msg.size()); // allow embedded 0's
 	lua_pushnumber(L, playerID);
+	
+	// Meresse
+	int pos = msg.find("_");
+	if (pos != string::npos && msg.substr(0,pos).compare("Feedbacks Widget") == 0)
+		feedbacksWidgetEnabled = msg.substr(pos+1).compare("enabled") == 0;
+	// --
 
 	// call the routine
 	if (!RunCallIn(cmdStr, 2, 1)) {

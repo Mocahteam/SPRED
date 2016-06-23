@@ -6,7 +6,15 @@ const char* Call::errorsArr[] = {"out_of_range", "wrong_coalition", "wrong_unit"
 const char* Call::coalitionsArr[] = {"MY_COALITION", "ALLY_COALITION", "ENEMY_COALITION", NULL};
 ParamsMap Call::paramsMap;
 
-Call::Call(std::string label, ErrorType err): Trace(), label(label), error(err), ind_ret(0) {}
+Call::Call(std::string label, ErrorType err, std::string info) : Trace(CALL,info), label(label), error(err), ind_ret(0) {}
+
+Call::Call(const Call *c) : Trace(CALL,c->info) {
+	label = c->label;
+	error = c->error;
+	ind_ret = c->ind_ret;
+	for (int i = 0; i < ind_ret; i++)
+		ret[i] = c->ret[i];
+}
 
 bool Call::operator==(Trace *t) const {
 	bool res = false;

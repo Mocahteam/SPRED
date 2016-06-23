@@ -21,6 +21,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/bo
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/detail/ob_call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/detail/sp_typeinfo.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/detail/workaround.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/exception/exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/integer_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/lexical_cast.hpp
@@ -179,8 +180,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/bo
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_sync.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_w32.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/yield_k.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/make_shared.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/shared_ptr.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/smart_ptr/weak_ptr.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/static_assert.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/throw_exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/boost/type.hpp
@@ -272,12 +275,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/ra
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../mingwlibs/include/rapidjson/stream.h
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Call.cpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Call.h
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Event.h
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Sequence.h
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Call.cpp.obj: ../rts/lib/pp/traces/Trace.h
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/assert.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/checked_delete.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/config.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/config/no_tr1/memory.hpp
@@ -288,18 +289,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/b
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/config/select_stdlib_config.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/config/suffix.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/current_function.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/call_traits.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/endian.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/interlocked.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/lcast_precision.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/limits.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/ob_call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/sp_typeinfo.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/detail/workaround.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/exception/exception.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/integer_traits.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/lexical_cast.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/limits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/make_shared.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/memory_order.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/mpl/aux_/adl_barrier.hpp
@@ -459,13 +452,9 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/b
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/static_assert.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/throw_exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/add_const.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/add_reference.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/add_volatile.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/alignment_of.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/arithmetic_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/broken_compiler_spec.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/composite_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/config.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/detail/bool_trait_def.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/detail/bool_trait_undef.hpp
@@ -498,7 +487,6 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/b
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_enum.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_float.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_function.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_fundamental.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_integral.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_member_function_pointer.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_member_pointer.hpp
@@ -508,12 +496,9 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/b
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_reference.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_same.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_scalar.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_signed.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_union.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_unsigned.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_void.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/is_volatile.hpp
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/make_unsigned.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/msvc/remove_bounds.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/msvc/remove_cv.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/msvc/remove_reference.hpp
@@ -524,7 +509,6 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/b
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../mingwlibs/include/boost/type_traits/type_with_alignment.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../rts/lib/pp/traces/Event.cpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../rts/lib/pp/traces/Event.h
-rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../rts/lib/pp/traces/Sequence.h
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Event.cpp.obj: ../rts/lib/pp/traces/Trace.h
 
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/assert.hpp
@@ -547,6 +531,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/includ
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/detail/ob_call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/detail/sp_typeinfo.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/detail/workaround.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/exception/exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/integer_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/lexical_cast.hpp
@@ -705,8 +690,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/includ
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_sync.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_w32.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/yield_k.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/make_shared.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/shared_ptr.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/smart_ptr/weak_ptr.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/static_assert.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/throw_exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/Sequence.cpp.obj: ../mingwlibs/include/boost/type.hpp
@@ -1062,6 +1049,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/detail/ob_call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/detail/sp_typeinfo.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/detail/workaround.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/exception/exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/integer_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/lexical_cast.hpp
@@ -1220,8 +1208,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_sync.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_w32.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/yield_k.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/make_shared.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/shared_ptr.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/weak_ptr.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/static_assert.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/throw_exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesAnalyser.cpp.obj: ../mingwlibs/include/boost/type.hpp
@@ -1350,6 +1340,7 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/in
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/detail/ob_call_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/detail/sp_typeinfo.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/detail/workaround.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/exception/exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/integer_traits.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/lexical_cast.hpp
@@ -1508,8 +1499,10 @@ rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/in
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_sync.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/spinlock_w32.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/detail/yield_k.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/enable_shared_from_this.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/make_shared.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/shared_ptr.hpp
+rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/smart_ptr/weak_ptr.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/static_assert.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/throw_exception.hpp
 rts/lib/pp/traces/CMakeFiles/pp-traces.dir/TracesParser.cpp.obj: ../mingwlibs/include/boost/type.hpp

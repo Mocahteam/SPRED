@@ -42,6 +42,12 @@ public:
 		
 	NoParamCall(std::string label): Call(label,Call::NONE) {}
 	
+	NoParamCall(const NoParamCall *c) : Call(c) {}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<NoParamCall>(this);
+	}
+	
 private:
 
 	virtual bool compare(const Call *c) const {
@@ -74,6 +80,14 @@ class GetSpecialAreaPositionCall : public Call {
 public:
 
 	GetSpecialAreaPositionCall(ErrorType error, int specialAreaId): Call("PP_GetSpecialAreaPosition",error), specialAreaId(specialAreaId) {}
+	
+	GetSpecialAreaPositionCall(const GetSpecialAreaPositionCall *c) : Call(c) {
+		specialAreaId = c->specialAreaId;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetSpecialAreaPositionCall>(this);
+	}
 	
 private:
 	
@@ -127,6 +141,14 @@ public:
 
 	GetResourceCall(ErrorType error, int resourceId): Call("PP_GetResource",error), resourceId(resourceId) {}
 	
+	GetResourceCall(const GetResourceCall *c) : Call(c) {
+		resourceId = c->resourceId;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetResourceCall>(this);
+	}
+	
 private:
 	
 	int resourceId;
@@ -179,6 +201,14 @@ public:
 
 	GetNumUnitsCall(ErrorType error, CallMisc::Coalition coalition): Call("PP_GetNumUnits",error), coalition(coalition) {}
 	
+	GetNumUnitsCall(const GetNumUnitsCall *c) : Call(c) {
+		coalition = c->coalition;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetNumUnitsCall>(this);
+	}
+	
 private:
 
 	CallMisc::Coalition coalition;
@@ -230,6 +260,15 @@ class GetUnitAtCall : public Call {
 public:
 
 	GetUnitAtCall(ErrorType error, CallMisc::Coalition coalition, int index): Call("PP_GetUnitAt",error), coalition(coalition), index(index) {}
+	
+	GetUnitAtCall(const GetUnitAtCall *c) : Call(c) {
+		coalition = c->coalition;
+		index = c->index;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetUnitAtCall>(this);
+	}
 	
 private:
 
@@ -301,6 +340,15 @@ public:
 		unit.type = unitType;
 	}
 	
+	UnitCall(const UnitCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<UnitCall>(this);
+	}
+	
 private:
 
 	CallMisc::Unit unit;
@@ -358,6 +406,16 @@ public:
 	SetGroupCall(ErrorType error, int unitId, int unitType, int groupId): Call("PP_Unit_SetGroup",error), groupId(groupId) {
 		unit.id = unitId;
 		unit.type = unitType;
+	}
+	
+	SetGroupCall(const SetGroupCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		groupId = c->groupId;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<SetGroupCall>(this);
 	}
 	
 private:
@@ -434,6 +492,18 @@ public:
 		unit.type = unitType;
 		target.id = targetId;
 		target.type = targetType;
+	}
+	
+	ActionOnUnitCall(const ActionOnUnitCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		action = c->action;
+		target.id = c->target.id;
+		target.type = c->target.type;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<ActionOnUnitCall>(this);
 	}
 	
 private:
@@ -527,6 +597,18 @@ public:
 		pos.y = y;
 	}
 	
+	ActionOnPositionCall(const ActionOnPositionCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		action = c->action;
+		pos.x = c->pos.x;
+		pos.y = c->pos.y;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<ActionOnPositionCall>(this);
+	}
+	
 private:
 		
 	CallMisc::Unit unit;
@@ -618,6 +700,17 @@ public:
 		unit.type = unitType;
 	}
 	
+	UntargetedActionCall(const UntargetedActionCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		action = c->action;
+		param = c->param;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<UntargetedActionCall>(this);
+	}
+	
 private:
 		
 	CallMisc::Unit unit;
@@ -703,6 +796,16 @@ public:
 		unit.type = unitType;
 	}
 	
+	GetCodePdgCmdCall(const GetCodePdgCmdCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		idCmd = c->idCmd;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetCodePdgCmdCall>(this);
+	}
+	
 private:
 		
 	CallMisc::Unit unit;
@@ -777,6 +880,16 @@ public:
 		unit.type = unitType;
 	}
 	
+	GetNumParamsPdgCmdCall(const GetNumParamsPdgCmdCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		idCmd = c->idCmd;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetNumParamsPdgCmdCall>(this);
+	}
+	
 private:
 		
 	CallMisc::Unit unit;
@@ -849,6 +962,17 @@ public:
 	GetParamPdgCmdCall(ErrorType error, int unitId, int unitType, int idCmd, int idParam): Call("PP_Unit_PdgCmd_GetParam",error), idCmd(idCmd), idParam(idParam) {
 		unit.id = unitId;
 		unit.type = unitType;
+	}
+	
+	GetParamPdgCmdCall(const GetParamPdgCmdCall *c) : Call(c) {
+		unit.id = c->unit.id;
+		unit.type = c->unit.type;
+		idCmd = c->idCmd;
+		idParam = c->idParam;
+	}
+	
+	virtual Trace::sp_trace clone() const {
+		return boost::make_shared<GetParamPdgCmdCall>(this);
 	}
 	
 private:

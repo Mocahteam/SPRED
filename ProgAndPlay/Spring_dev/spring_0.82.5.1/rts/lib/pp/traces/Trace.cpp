@@ -2,7 +2,7 @@
 
 int Trace::numTab = 0;
 
-Trace::Trace(TraceType type): indSearch(-1), lenSearch(1), endSearch(0), type(type), delayed(false) {}
+Trace::Trace(TraceType type, std::string info): indSearch(-1), lenSearch(1), endSearch(0), type(type), info(info), delayed(false) {}
 
 bool Trace::isSequence() const {
 	return type == SEQUENCE;
@@ -22,6 +22,14 @@ bool Trace::isDelayed() const {
 
 void Trace::setDelayed() {
 	delayed = true;
+}
+
+std::string Trace::getInfo() const {
+	return info;
+}
+
+void Trace::setInfo(std::string info) {
+	this->info = info;
 }
 
 const Trace::sp_trace& Trace::getParent() const {
@@ -69,4 +77,21 @@ unsigned int Trace::getLength(const std::vector<sp_trace>& traces) {
 	for (unsigned int i = 0; i < traces.size(); i++)
 		len += traces.at(i)->length();
 	return len;
+}
+
+/**
+ * Get the neighbours of 'spt' in 'traces' in the range [ind_spt - sub_to_ind, ind_spt + add_to_ind] where ind_spt is the index of 'spt' in 'traces'. 'spt' have to be included in traces.
+ */
+Trace::sp_trace Trace::getNeighbour(std::vector<Trace::sp_trace>& traces, Trace::sp_trace& spt, int add_to_ind) {
+	Trace::sp_trace nbh;
+	int ind = -1;
+	for (unsigned int i = 0; i < traces.size(); i++) {
+		if (traces.at(i) == spt) {
+			ind = i;
+			break;
+		}
+	}
+	if (ind > -1 && ind + add_to_ind >= 0 && ind + add_to_ind < (int)traces.size())
+		nbh = traces.at(ind + add_to_ind);
+	return nbh;
 }

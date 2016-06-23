@@ -537,8 +537,14 @@ function widget:Initialize()
 	widgetHandler:DisableWidget("Kernel Panic Automatic Tip Dispenser")
 	-- widget named : Spring Direct Launch 2
 	widgetHandler:DisableWidget("Spring Direct Launch 2")
+	
+	-- enable a set of widgets
 	-- enable Traces Widget
 	widgetHandler:EnableWidget("Traces Widget")
+	-- enable Feedbacks Widget
+	widgetHandler:EnableWidget("Feedbacks Widget")
+	-- enable Widget Informer
+	widgetHandler:EnableWidget("Widget Informer")
 	
 	-- disable console
 	Spring.SendCommands("console 0")

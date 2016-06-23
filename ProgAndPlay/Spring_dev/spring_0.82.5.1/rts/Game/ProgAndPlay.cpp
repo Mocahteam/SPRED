@@ -36,8 +36,9 @@
 #include "LogOutput.h"
 
 const std::string tracesDirname = "traces";
-const std::string feedbackFilename = tracesDirname + "\\data\\feedback.json";
-const bool traceOnline = false;
+const std::string dataDirname = tracesDirname + "\\" + "data";
+const std::string expertDirname = dataDirname + "\\" + "expert";
+const std::string feedbackFilename = dataDirname + "\\feedback.json";
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
 
@@ -52,16 +53,9 @@ void log(std::string msg) {
 
 CProgAndPlay* pp;
 
-CProgAndPlay::CProgAndPlay() : tp(true) {
+CProgAndPlay::CProgAndPlay() : loaded(false), updated(false), missionEnded(false), tracePlayer(false), tp(true), ta(true) {
 	log("ProgAndPLay constructor begin");
-	
-	loaded = false;
-	updated = false;
-	missionEnded = false;
-	tracePlayer = false;
-	launchAnalysis = true; //get value from editor
-	unitsWereIdled = true;
-	
+		
 	// initialisation of Prog&Play
 	if (PP_Init() == -1) {
 		std::string tmp(PP_GetError());
@@ -109,20 +103,67 @@ void CProgAndPlay::Update(void) {
 		
 	// Store log messages
 	if (ppTraces.good()) {
-		logMessages();
+		std::stringstream ss;
+		
 		bool unitsIdled = allUnitsIdled();
-		if (unitsWereIdled && !unitsIdled)
-			unitsWereIdled = false;
-		bool endlessLoop = missionEnded && frame_counter++ > ENDLESS_LOOP_THRESHOLD * UNIT_SLOWUPDATE_RATE;
-		tp.setProceed((!unitsWereIdled && unitsIdled) || endlessLoop);
+		logMessages(unitsIdled);
+		
+		if (!unitsIdled) {
+			if (endless_loop_frame_counter != 0)
+				endless_loop_frame_counter = 0;
+			if (units_idled_frame_counter != 0)
+				units_idled_frame_counter = 0;
+		}
+		else if (units_idled_frame_counter > -1)
+			units_idled_frame_counter++;
+		
+		bool endlessLoop = endless_loop_frame_counter > UPDATE_RATE_MULTIPLIER * UNIT_SLOWUPDATE_RATE;
+		unitsIdled = units_idled_frame_counter > UPDATE_RATE_MULTIPLIER * UNIT_SLOWUPDATE_RATE;
+		
+		if (!tp.getProceed() && unitsIdled)
+			tp.setProceed(true);
+		
+		ss << "endless loop : " << endlessLoop << std::endl;
+		log(ss.str());
+		ss.str("");
+		ss << "unitsIdled : " << unitsIdled << std::endl;
+		log(ss.str());
+		ss.str("");
+		ss << "endless_loop_frame_counter : " << endless_loop_frame_counter << std::endl;
+		log(ss.str());
+		ss.str("");
+		ss << "units_idled_frame_counter : " << units_idled_frame_counter << std::endl;
+		log(ss.str());
+		ss.str("");
+		ss << "mission_ended : " << missionEnded << std::endl;
+		log(ss.str());
+		ss.str("");
+		ss << "proceed : " << tp.getProceed() << std::endl;
+		log(ss.str());
+		ss.str("");
+
 		if (tp.compressionDone()) {
 			log("compression done");
-			if (!unitsWereIdled && unitsIdled)
-				unitsWereIdled = true;
-			if (launchAnalysis) {
-				// Launch analysis of player's traces
-				TracesAnalyser ta(true,endlessLoop,lang);
-				std::string feedback = ta.getFeedback(tracesDirname, missionName + "_compressed.xml");
+			tp.setProceed(false);
+			endless_loop_frame_counter = -1;
+			units_idled_frame_counter = -1;
+			
+			ss << "feedbacksWidgetEnabled : " << CLuaHandle::feedbacksWidgetEnabled << std::endl;
+			log(ss.str());
+			ss.str("");
+
+			if (CLuaHandle::feedbacksWidgetEnabled) {
+				// The feedback widget is enabled : launch analysis of player's traces
+				ta.setEndlessLoop(endlessLoop);
+				std::string feedback = ta.constructFeedback(tracesDirname, missionName + "_compressed.xml", -1, -1, logFile);
+				
+				// A enlever
+				// std::vector<Trace::sp_trace> learner_traces = TracesParser::importTraceFromXml(tracesDirname, missionName + "_compressed.xml");
+				// for (unsigned int i = 0; i < learner_traces.size(); i++) {
+					// learner_traces.at(i)->display(logFile);
+				// }
+				// --
+				
 				log("feedback determined");
 				// Write into file
 				std::ofstream jsonFile;
@@ -131,12 +172,54 @@ void CProgAndPlay::Update(void) {
 					jsonFile << feedback;
 					jsonFile.close();
 				}
+				
 				// Add prefix to json string
 				feedback.insert(0,"Feedback_");
 				// Send feedback to Lua (SendLuaRulesMsg function in LuaUnsyncedCtrl)
 				std::vector<boost::uint8_t> data(feedback.size());
 				std::copy(feedback.begin(), feedback.end(), data.begin());
 				net->Send(CBaseNetProtocol::Get().SendLuaMsg(gu->myPlayerNum, LUA_HANDLE_ORDER_RULES, 0, data));
+			}
+			
+			const std::map<std::string,std::string>& modOpts = gameSetup->modOptions;
+			if (missionEnded && modOpts.find("testmap") != modOpts.end() && modOpts.at("testmap").compare("1") == 0) {
+				// mode test - l'expert génère une solution experte pour la mission
+				// déplacement des fichiers de traces brutes et de traces compressees dans le repertoire 'traces\data\expert\missionName'
+				std::string name = expertDirname + "\\" + missionName;
+				bool dirExists = FileSystemHandler::mkdir(name);
+				if (dirExists) {
+					// renommage avec le plus entier entier non utilisé dans le repertoire
+					int num = 1;
+					DIR *pdir;
+					struct dirent *pent;
+					pdir = opendir(name.c_str());
+					if (pdir) {
+						while ((pent = readdir(pdir))) {
+							name = pent->d_name;
+							if (name.find(".xml") != std::string::npos) {
+								name.replace(name.find(".xml"), 4, "");
+								int file_num = strtol(name.c_str(),NULL,10);
+								if (file_num > 0)
+									num = file_num + 1;
+							}
+						}
+					}
+					closedir(pdir);
+					
+					std::string oldName = tracesDirname + "\\" + missionName + ".log";
+					std::string newName = expertDirname + "\\" + missionName + "\\" + boost::lexical_cast<std::string>(num) + ".log";
+					if (rename(oldName.c_str(), newName.c_str()) == 0)
+						std::cout << "brute traces successfully renamed" << std::endl;
+					else
+						std::cout << "brute traces rename operation failed" << std::endl;
+					
+					oldName = tracesDirname + "\\" + missionName + "_compressed.xml";
+					newName = expertDirname + "\\" + missionName + "\\" + boost::lexical_cast<std::string>(num) + "_compressed.xml";
+					if (rename(oldName.c_str(), newName.c_str()) == 0)
+						std::cout << "compressed traces successfully renamed" << std::endl;
+					else
+						std::cout << "compressed traces rename operation failed" << std::endl;
+				}
 			}
 		}
 	}
@@ -168,6 +251,7 @@ void CProgAndPlay::GamePaused(bool paused) {
 	}
 }
 
+// this function is called in Game.cpp when the play starts
 void CProgAndPlay::TracePlayer() {
 	if (tracePlayer)
 		PP_SetTracePlayer();
@@ -572,7 +656,7 @@ bool CProgAndPlay::allUnitsIdled() {
 	return true;
 }
 
-void CProgAndPlay::logMessages() {
+void CProgAndPlay::logMessages(bool unitsIdled) {
 	log("ProgAndPLay::logMessages begin");
 	int i = 0;
 	if (!missionEnded) {
@@ -595,8 +679,10 @@ void CProgAndPlay::logMessages() {
 	}
 	// Get next message
 	char * msg = PP_PopMessage();
+	if (msg != NULL && (missionEnded || (unitsIdled && endless_loop_frame_counter > -1)))
+		endless_loop_frame_counter++;
 	while (msg != NULL) {
-		if (!missionEnded || frame_counter++ <= 2 * UNIT_SLOWUPDATE_RATE) {
+		if (!missionEnded || endless_loop_frame_counter <= UPDATE_RATE_MULTIPLIER * UNIT_SLOWUPDATE_RATE) {
 			if (missionEnded)
 				ppTraces << "delayed ";
 			// Write this message on traces file
@@ -620,32 +706,22 @@ void CProgAndPlay::logMessages() {
 void CProgAndPlay::openTracesFile() {
 	log("ProgAndPLay::openTracesFile begin");
 	const std::map<std::string,std::string>& modOpts = gameSetup->modOptions;
-	if (modOpts.find("tracesfilename") != modOpts.end()) {
+	if (modOpts.find("activetraces") != modOpts.end() && modOpts.at("activetraces").compare("1") == 0 && modOpts.find("missionname") != modOpts.end()) {
 		bool dirExists = FileSystemHandler::mkdir(tracesDirname);
 		if (dirExists) {
-			missionName = modOpts.at("tracesfilename");
-			lang = (modOpts.find("language") != modOpts.end()) ? modOpts.at("language") : "en";
+			missionName = modOpts.at("missionname");
+			ta.setMissionName(missionName);
+			ta.setLang((modOpts.find("language") != modOpts.end()) ? modOpts.at("language") : "en");
 			std::stringstream ss;
 			ss << tracesDirname << "\\" << missionName << ".log";
 			ppTraces.open(ss.str().c_str(), std::ios::out | std::ios::app | std::ios::ate);
 			if (ppTraces.is_open()) {
 				tracePlayer = true;
-				if (launchAnalysis) {
-					// Inform Lua that ProgAndPlay is active - used to display the feedback to the user properly
-					std::string msg = "PP";
-					std::vector<boost::uint8_t> data(msg.size());
-					std::copy(msg.begin(), msg.end(), data.begin());
-					net->Send(CBaseNetProtocol::Get().SendLuaMsg(gu->myPlayerNum, LUA_HANDLE_ORDER_RULES, 0, data));
-				}
 				startTime = std::time(NULL);
 				ppTraces << "start " << missionName << std::endl;
 				ppTraces << "mission_start_time " << startTime << std::endl;
 				// thread creation
-				if (traceOnline)
-					tracesThread = boost::thread(&TracesParser::parseTraceFileOnline, &tp, tracesDirname, missionName+".log");
-				else
-					tracesThread = boost::thread(&TracesParser::parseTraceFileOffline, &tp, tracesDirname, missionName+".log");
-				//***
+				tracesThread = boost::thread(&TracesParser::parseTraceFileOffline, &tp, tracesDirname, missionName+".log");
 			}
 		}
 		else {

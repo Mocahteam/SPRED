@@ -16,6 +16,13 @@
 #include "Trace.h"
 #include "Sequence.h"
 
+/* 
+	if DEFAULT_COMPRESSION_MOD == 1
+		none of attributes values are used during the compression
+	else
+		all attributes values are used during the compression
+*/
+#define DEFAULT_COMPRESSION_MOD 1
 #define PARAMS_FILENAME "params.json"
 #define IN_GAME_DATA_DIRNAME "traces\\data\\"
 
@@ -34,30 +41,44 @@ public:
 			std::string filename = PARAMS_FILENAME;
 			if (in_game)
 				filename.insert(0,IN_GAME_DATA_DIRNAME);
-			std::ifstream ifs(filename.c_str(), std::ios::binary);
-			if (ifs.good()) {
-				std::stringstream ss;
-				ss << ifs.rdbuf();
-				rapidjson::Document doc;
-				doc.Parse(ss.str().c_str());
-				if (doc.IsObject()) {
-					for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
-						string_vector v;
-						for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
-							if (_it->value.IsBool() && _it->value.GetBool())
-								v.push_back(_it->name.GetString());
+			try {
+				std::ifstream ifs(filename.c_str(), std::ios::binary);
+				if (ifs.good()) {
+					std::stringstream ss;
+					ss << ifs.rdbuf();
+					rapidjson::Document doc;
+					doc.Parse(ss.str().c_str());
+					if (doc.HasParseError())
+						throw std::runtime_error("parse error");
+					if (doc.IsObject()) {
+						for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
+							string_vector v;
+							for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
+								if (_it->value.IsBool() && _it->value.GetBool())
+									v.push_back(_it->name.GetString());
+							}
+							map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
 						}
-						map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
+						loaded = true;
 					}
-					loaded = true;
 				}
+				else
+					throw std::runtime_error("cannot open JSON params file");
 			}
-			else
-				throw std::runtime_error("cannot open JSON params file");
+			catch (const std::runtime_error& e) {
+				std::cout << e.what() << std::endl;
+			}
 		}
 	}
 	
 	bool contains(std::string label, std::string param) const {
+		if (!loaded) {
+			#if DEFAULT_COMPRESSION_MOD == 1
+				return false;
+			#else
+				return true;
+			#endif
+		}
 		return map.find(label) != map.end() && std::find(map.at(label).begin(), map.at(label).end(), param) != map.at(label).end();
 	}
 	
@@ -85,7 +106,8 @@ public:
 		WRONG_POSITION
 	};
 		
-	Call(std::string label, ErrorType err);
+	Call(std::string label, ErrorType err, std::string info = "");
+	Call(const Call *c);
 	
 	static const char* errorsArr[];
 	static const char* coalitionsArr[];
@@ -112,6 +134,7 @@ public:
 	virtual bool operator==(Trace *t) const;
 	virtual void filterCall(const Call *c);
 	virtual void display(std::ostream &os = std::cout) const;
+	virtual Trace::sp_trace clone() const = 0;
 	virtual std::string getParams() const = 0;
 	virtual std::string getReadableParams() const = 0;
 	virtual std::vector<std::string> getListIdWrongParams(Call *c = NULL) const;

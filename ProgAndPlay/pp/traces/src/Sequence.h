@@ -9,23 +9,25 @@
 #include <map>
 #include <cmath>
 #include <boost/lexical_cast.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #include "Trace.h"
-#include "Event.h"
 
-class Sequence : public Trace {
+class Sequence : public Trace, public boost::enable_shared_from_this<Sequence> {
 	
 public:
 
 	typedef boost::shared_ptr<Sequence> sp_sequence;
+	typedef boost::shared_ptr<const Sequence> const_sp_sequence;
 	
-	Sequence(std::string info);
+	Sequence(std::string info, bool index);
 	Sequence(unsigned int num);
-	Sequence(sp_sequence sps);
-	Sequence(sp_sequence sps_up, sp_sequence sps_down);
+	Sequence(const_sp_sequence sps);
+	Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down);
 	
 	virtual unsigned int length() const;
 	virtual bool operator==(Trace *t) const;
+	virtual Trace::sp_trace clone() const;
 	virtual void display(std::ostream &os = std::cout) const;
 	virtual void resetAligned();
 	bool compare(Trace *t);
@@ -45,7 +47,7 @@ public:
 	
 	std::vector<Trace::sp_trace>& getTraces();
 	unsigned int getNum() const;
-	std::string getInfo() const;
+	bool hasIndex() const;
 	const std::map<unsigned int,unsigned int>& getNumMap() const;
 	unsigned int getPt() const;
 	bool isEndReached() const;
@@ -71,14 +73,29 @@ public:
 	bool isImplicit();
 	
 protected:
-
-	std::string info;
+	
+	/// true if the indexes of the sequence must affect the score and the feedback results. Is set only if the sequence comes from XML import.
+	bool index;
+	
+	/// the vector of traces contained in the sequence
 	std::vector<Trace::sp_trace> traces;
+	
+	///
 	unsigned int num;
+	
+	/// the indexes of the sequence. An entry x:y means the sequence is repeated x times one after the other y times.
 	std::map<unsigned int,unsigned int> numMap;
+	
+	/// deprecated (online version)
 	unsigned int pt;
+	
+	/// deprecated (online version)
 	bool valid;
+	
+	///
 	bool endReached;
+	
+	///
 	bool shared;
 	
 };

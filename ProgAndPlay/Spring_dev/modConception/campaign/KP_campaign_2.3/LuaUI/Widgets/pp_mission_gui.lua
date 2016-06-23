@@ -21,10 +21,6 @@ include('keysym.h.lua')
 
 VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart function
 
--- Muratet
-local fontHandler = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua", VFS.ZIP_FIRST))()
---
-
 local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario
@@ -33,8 +29,6 @@ local missionName = Spring.GetModOptions()["missionname"] -- get the name of the
 local rooms = WG.rooms -- availabe in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
-
-local vsx = 0
 
 -- Set label
 local previousMission = "Previous mission"
@@ -189,57 +183,6 @@ local winPopup = nil
 local briefing = nil
 local tutoPopup = false
 
--- Meresse
-
-function widget:DrawScreenEffects(dse_vsx, dse_vsy)
-	vsx = dse_vsx
-end
-
-function splitLine(line,sep)
-    if div == '' then return line end
-    local pos, arr = 1, {}
-    for s, e in function() return string.find(line,sep,pos,true) end do
-        table.insert(arr,string.sub(line,pos,s-1))
-        pos = e + 1
-    end
-    table.insert(arr,string.sub(line,pos))
-    return arr
-end
-
--- breaks line to avoid text running off screen
-function breakLine(line,maxWidth)
-	Spring.Echo("maxWidth : "..maxWidth)
-	local arr = splitLine(line," ")
-	local res = {}
-	local j = 1
-	while j <= table.getn(arr) do
-		local l = ""
-		while j <= table.getn(arr) and fontHandler.GetTextWidth(fontHandler.StripColors(l), fontHandler.GetFontSize()) <= maxWidth do
-			Spring.Echo(l.." ("..fontHandler.GetTextWidth(fontHandler.StripColors(l), fontHandler.GetFontSize())..")")
-			Spring.Echo("element : "..arr[j])
-			local ind_s = string.find(arr[j],"\n")
-			if ind_s then
-				local ftok = string.sub(arr[j],1,ind_s-1)
-				local stok = string.sub(arr[j],ind_s+1)
-				l = l..ftok
-				table.remove(arr,j)
-				if stok ~= "" then
-					table.insert(arr,j,stok)
-				end
-				break
-			else
-				l = l..arr[j].." "
-				j = j + 1
-			end
-		end
-		table.insert(res,l)
-		Spring.Echo("l : "..l)
-	end
-    return table.concat(res,"\n")
-end
-
---
-
 function MissionEvent(e)
 	if e.logicType == "ShowMissionMenu" then
 		-- close tuto window if it oppened
@@ -275,19 +218,15 @@ function MissionEvent(e)
 			
 			if e.feedback ~= nil then
 				table.insert(popup.lineArray,"")
-				local line = breakLine(e.feedback, 0.5 * vsx)
-				--local arr = splitLine(line,"\n")
 				local ind_s = 1
-				for i = 1,#line do
-					if line:sub(i,i) == "\n" then
-						table.insert(popup.lineArray,string.sub(line,ind_s,i-1)
-						table.insert(popup.lineArray,"")
+				for i = 1,#e.feedback do
+					if e.feedback:sub(i,i) == "\n" then
+						table.insert(popup.lineArray,string.sub(e.feedback,ind_s,i-1))
 						ind_s = i+1
+					elseif i == #e.feedback then
+						table.insert(popup.lineArray,string.sub(e.feedback,ind_s))
 					end
 				end
-				--for i = 1,#arr do
-				--	table.insert(popup.lineArray,arr[i])
-				--end
 				table.insert(popup.lineArray,"")
 			end
 			
@@ -328,11 +267,29 @@ function MissionEvent(e)
 			end
 			
 			-- disable "Close tab" and "Show briefing"
-			popup.tabs[6] = nil
+			--popup.tabs[6] = nil
 			-- inform the game that mission is over with a temporary file
 			if e.feedback == nil then
+				popup.tabs[6] = nil
 				Script.LuaUI.CreateMissionEndedFile(victoryState)
+			else
+				popup.tabs[6] = {
+					preset = function(tab)
+						tab.title = "Publier sur facebook"
+						tab.position = "right"
+						tab.topLeftColor     = {0.23, 0.35, 0.6, 1}
+						tab.topRightColor    = {0.23, 0.35, 0.6, 1}
+						tab.bottomLeftColor  = {0.23, 0.35, 0.6, 1}
+						tab.bottomRightColor = {0.23, 0.35, 0.6, 1}
+						tab.OnClick = function()
+							Spring.Echo("publier")
+							Script.LuaUI.TraceAction("publish\n")
+						end
+					end
+				}
+				popup.tabs[7] = nil
 			end
+			
 		else
 			popup.lineArray = {"Menu"}
 		end
@@ -366,10 +323,6 @@ function MissionEvent(e)
 	        pause = e.pause,
 	      }
 	    else
-		  if e.width == -1 then
-			e.width = 0.7 * vsx
-			e.message = breakLine(e.message,e.width)
-		  end
 	      briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
 	    end
 		if not WG.rooms.Video.closed then

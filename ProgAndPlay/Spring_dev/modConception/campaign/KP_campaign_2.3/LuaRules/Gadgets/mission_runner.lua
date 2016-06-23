@@ -11,8 +11,6 @@ function gadget:GetInfo()
   }
 end
 
-local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -36,12 +34,7 @@ local gameOver = 0
 local showBriefing = false
 
 -- is set to true by the engine if Prog&Play is used by the player and if the trace and analysis modules are enabled
-local PP = false
-
-local white = "\255\255\255\255"
-local red = "\255\255\0\0"
-local green = "\255\0\255\0"
-local blue = "\255\0\0\255"
+local feedbacksEnabled = true
 
 function gadget:GamePreload()
 	if missionName ~= nil then
@@ -77,7 +70,7 @@ function gadget:GameFrame( frameNumber )
 			else
 				victoryState = "won"
 			end
-			if not PP then
+			if not feedbacksEnabled then
 				_G.event = {logicType = "ShowMissionMenu", state = victoryState}
 				SendToUnsynced("MissionEvent")
 				_G.event = nil
@@ -94,85 +87,19 @@ function gadget:GameFrame( frameNumber )
 	end
 end
 
-function getFeedbackMessage(json_obj)
-	local s = ""
-	local color = ""
-	if json_obj.score ~= nil then
-		local score = json_obj.score
-		if score < 25 then
-			color = red
-		elseif score >= 25 and score < 75 then
-			color = blue
-		else
-			color = green
-		end
-		s = s.."Votre score : "..color..score.." / 100"..white.."\n"
-	end
-	if json_obj.num_attempts ~= nil then
-		s = s.."Nombre de de tentatives de résolution de la mission : "..json_obj.num_attempts.."\n"
-	end
-	if json_obj.execution_time ~= nil then
-		s = s.."Temps d'éxecution de ton programme : "..json_obj.execution_time.." s\n"
-		s = s.."Temps d'éxecution référence : "..json_obj.ref_execution_time.." s\n"
-	end
-	if json_obj.exec_mean_wait_time ~= nil then
-		s = s.."Temps d'attente moyen entre deux tentatives : "..json_obj.exec_mean_wait_time.." s\n"
-	end
-	if json_obj.resolution_time ~= nil then
-		s = s.."Temps de résolution de la mission : "..json_obj.resolution_time.." s\n"
-		s = s.."Temps de résolution référence : "..json_obj.ref_resolution_time.." s\n"
-	end
-	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
-		if #json_obj.feedbacks == 1 then
-			s = s.."\nUn conseil pour améliorer votre programme :\n\n"
-		else
-			s = s.."\nQuelques conseils pour améliorer votre programme :\n\n"
-		end
-		for i = 1,#json_obj.feedbacks do
-			s = s..color..json_obj.feedbacks[i]..white.."\n"
-			if #json_obj.feedbacks > 1 and i < #json_obj.feedbacks then
-				s = s.."\n"
-			end
-		end
-	end
-	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
-		s = s.."\nAttention :\n\n"
-		for i = 1,#json_obj.warnings do
-			s = s..red..json_obj.warnings[i]..white.."\n"
-			if #json_obj.warnings > 1 and i < #json_obj.warnings then
-				s = s.."\n"
-			end
-		end
-	end
-	return s
-end
-
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
 	if msg == "Show briefing" then
 		showBriefing = true
-	elseif msg == "PP" then
-		PP = true
 	else
 		local ind_s = string.find(msg, "_")
 		if ind_s ~= nil then
 			local prefix = string.sub(msg, 1, ind_s-1)
-			if prefix == "Feedback" then
-				local json_obj = json.decode(string.sub(msg, ind_s+1))
-				local json_string = getFeedbackMessage(json_obj)
-				if json_obj.won ~= nil then -- the mission is over
-					local state = ""
-					if json_obj.won then
-						state = "won"
-					else
-						state = "lost"
-					end
-					_G.event = {logicType = "ShowMissionMenu", state = state, feedback = json_string}
-					SendToUnsynced("MissionEvent")
-					_G.event = nil
-				else -- the mission is not over yet
-					showMessage(json_string, true, -1)
-				end
+			local suffix = string.sub(msg, ind_s+1)
+			if prefix == "Feedbacks Widget" then -- the feedbacks widget active state has changed
+				feedbacksEnabled = suffix == "enabled"
+			elseif prefix == "Feedback" then -- a feedback has been received from the engine
+				SendToUnsynced(prefix, suffix)
 			end
 		end
 	end
@@ -220,6 +147,8 @@ function gadget:RecvFromSynced(...)
 		mouseDisabled = arg2
 	elseif arg1 == "createMissionEndedFile" then
 		Script.LuaUI.CreateMissionEndedFile(arg2) -- function defined and registered in mission_traces widget
+	elseif arg1 == "Feedback" then
+		Script.LuaUI.handleFeedback(arg2) -- function defined and registered in mission_feedback widget
 	elseif arg1 == "enableCameraAuto" then
 		if Script.LuaUI("CameraAuto") then
 			local specialPositions = {}

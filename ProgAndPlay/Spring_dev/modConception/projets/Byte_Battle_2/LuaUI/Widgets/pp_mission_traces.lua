@@ -10,7 +10,7 @@ function widget:GetInfo()
   }
 end
 
-local missionName = Spring.GetModOptions()["tracesfilename"] -- get the name of the file where traces will be logged (specific to the mission launched)
+local missionName = Spring.GetModOptions()["missionname"]
 local tracesDirname = "traces"
 local ppTraces = nil -- File handler to store traces
 

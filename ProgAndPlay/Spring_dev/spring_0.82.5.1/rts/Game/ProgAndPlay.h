@@ -4,7 +4,7 @@
 #define __PROG_AND_PLAY_H__
 
 // threshold used to detect if player's program is endless
-#define ENDLESS_LOOP_THRESHOLD 50
+#define UPDATE_RATE_MULTIPLIER 4
 
 // Muratet (Define Class CProgAndPlay) ---
 
@@ -38,23 +38,23 @@ private:
 	bool updated;
 	bool missionEnded;
 	bool tracePlayer;
-	bool launchAnalysis;
-	bool unitsWereIdled;
 	std::string missionName;
 	std::string lang;
 	std::time_t startTime;
 	boost::thread tracesThread;
 	TracesParser tp;
+	TracesAnalyser ta;
 		
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play
-	void logMessages(); // log messages from Prog&Play
+	void logMessages(bool unitsIdled); // log messages from Prog&Play
 	void openTracesFile(); // open the appropriate traces file based on the current mission
 	bool allUnitsIdled(); //returns true if all units' command queues are empty
 	
 };
 
-static int frame_counter = 0;
+static int endless_loop_frame_counter = -1;
+static int units_idled_frame_counter = -1;
 
 extern CProgAndPlay* pp;
 
