@@ -19,9 +19,8 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- taille boutons groupes
 -- liste des games : ne pas lister les jeux générés + changer le nom (choose master game)
--- maigame = récupérer depuis le modinfo
 -- return to main menu => message seulement si modifs
--- export avec (1) dans le nom
+-- message pour retour de edit scenario vers menu
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -222,6 +221,7 @@ local minimapState = "disabled" -- Current minimap state
 local mouseState = "disabled" -- Current state of the mouse
 local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
+local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 
 -- Traces variables
 local tracesUI = {}
@@ -687,7 +687,7 @@ function testLevel()
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["maingame"] = Spring.GetModOptions().maingame,
+					["maingame"] = MainGame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
 					["testmap"] = levelFile.description.saveName
 				},
@@ -1292,7 +1292,7 @@ function initTestLevelFrame()
 			["MODOPTIONS"] = {
 				["language"] = Language,
 				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
+				["maingame"] = MainGame,
 				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
 				["toBeLoaded"] = levelFile.description.saveName
 			},
@@ -4858,7 +4858,7 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 				local name = string.gsub(l, "pp_editor\\missions\\", "")
 				name = string.gsub(name, ".editor", "")
 				local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
-				if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
+				if levelDescription.description.mainGame == MainGame then
 					local displayedName = string.gsub(name, "_", " ")
 					addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
 					count = count + 1
@@ -4957,7 +4957,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 				["language"] = Language,
 				["scenario"] = "noScenario",
 				["toBeLoaded"] = name,
-				["maingame"] = Spring.GetModOptions().maingame,
+				["maingame"] = MainGame,
 				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 			},
 			["GAME"] = {
@@ -4979,7 +4979,7 @@ function newLevelWithRightMap(name) -- Creates a new level on the selected map
 		["MODOPTIONS"] = {
 			["language"] = Language,
 			["scenario"] = "noScenario",
-			["maingame"] = Spring.GetModOptions().maingame,
+			["maingame"] = MainGame,
 			["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
 		},
 		["GAME"] = {
@@ -4994,7 +4994,7 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
-	savedTable.description.mainGame = Spring.GetModOptions().maingame
+	savedTable.description.mainGame = MainGame
 	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapDescription.mapName
 	savedTable.description.saveName = generateSaveName(mapDescription.mapName)

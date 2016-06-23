@@ -214,3 +214,19 @@ function getFactionUnits()
 	
 	return factionUnits
 end
+
+-----------------------
+-- Get the game this version of the editor is based on
+-----------------------
+function getMasterGame()
+	local dependencies = VFS.GetArchiveDependencies(Game.modName)
+	local games = VFS.GetGames()
+	for i, d in ipairs(dependencies) do
+		for ii, g in ipairs(games) do
+			if d == g then
+				return g
+			end
+		end
+	end
+	return ""
+end

@@ -1,4 +1,0 @@
-Une seule action de création d'unités
-Renommer tous les unit_X en X
-Renommer l'action de comparaison de variable numérique et l'action de création d'unités
-Ajout d'un nouveau type de paramètre unitset (unit, group, type, team existent toujours)
