@@ -34,6 +34,9 @@ local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
 local selectedOutputMission -- Currently selected output mission
 local selectedOutput -- Currently selected output state
+local MainGame = Spring.GetModOptions().maingame or getMasterGame()
+local gameFolder = "games"
+if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
 -- CTRL+Z/Y
 local LoadLock = true -- Lock to prevent saving when loading
@@ -175,7 +178,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		height = "10%",
 		backgroundColor = { 0, 0.2, 0.6, 1 },
 		focusColor = { 0, 0.6, 1, 1 },
-		OnClick = { MainMenuFrame }
+		OnClick = { BackWarning }
 	}
 	Chili.Image:New{ -- Image for the back button
 		parent = UI.BackButton,
@@ -216,7 +219,7 @@ function InitializeLevelList() -- Initialization of levels
 		level = string.gsub(level, ".editor", "")
 		LevelListNames[i] = level -- This table contains the raw name of the levels
 		LevelList[i] = json.decode(VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
-		if LevelList[i].description.mainGame ~= Spring.GetModOptions().maingame then
+		if LevelList[i].description.mainGame ~= MainGame then
 			table.insert(toBeRemoved, level)
 		end
 	end
@@ -395,10 +398,10 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 	}
 	UI.Scenario.IncludeMissions = Chili.Checkbox:New{
 		parent = UI.MainWindow,
-		x = "61%",
-		y = "90%",
+		x = "71%",
+		y = "88%",
 		width = "20%",
-		height = "5%",
+		height = "7%",
 		boxsize = 30,
 		boxalign = "left",
 		checked = false,
@@ -410,10 +413,10 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 	}
 	UI.Scenario.ExportGame = Chili.Button:New{
 		parent = UI.MainWindow,
-		x = "40%",
-		y = "90%",
-		width = "20%",
-		height = "5%",
+		x = "30%",
+		y = "88%",
+		width = "40%",
+		height = "7%",
 		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
 		backgroundColor = { 0.4, 0, 0.6, 1 },
 		font = {
@@ -913,6 +916,7 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 end
 
 function ImportScenarioFrameWarning() -- Shows a warning if trying to load when changes have not been saved
+	ClearTemporaryUI()
 	if NeedToBeSaved then
 		local window = Chili.Window:New{
 			parent = UI.MainWindow,
@@ -1059,73 +1063,39 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
-	if Game.version == "0.82.5.1" then
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = Script.LuaUI.getCommandsList()
-			},
-			["GAME"] = {
-				["Mapname"] = map,
-				["Gametype"] = Game.modName
-			}
+	local operations = {
+		["MODOPTIONS"] = {
+			["language"] = Language,
+			["scenario"] = "noScenario",
+			["maingame"] = MainGame,
+			["commands"] = Script.LuaUI.getCommandsList()
+		},
+		["GAME"] = {
+			["Mapname"] = map,
+			["Gametype"] = Game.modName
 		}
-		Spring.Echo(Game.modName)
-		DoTheRestart("LevelEditor.txt", operations)
-	else
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = Script.LuaUI.getCommandsList()
-			},
-			["GAME"] = {
-				["Mapname"] = map,
-				["Gametype"] = Game.gameName.." "..Game.gameVersion
-			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
-	end
+	}
+	DoTheRestart("LevelEditor.txt", operations)
 end
 
 function EditMission(level) -- Start editor with selected mission
 	if VFS.FileExists("pp_editor/missions/"..level..".editor",  VFS.RAW) then
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = Script.LuaUI.getCommandsList()
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["toBeLoaded"] = level,
+				["maingame"] = MainGame,
+				["commands"] = Script.LuaUI.getCommandsList()
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = level,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = Script.LuaUI.getCommandsList()
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 end
 
@@ -1446,18 +1416,38 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage = nil
 	end
 	
+	if not VFS.FileExists(gameFolder.."/PPLE_Launcher.sdz") then
+		local message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND
+		UI.Scenario.ConfirmationMessage = Chili.Label:New{
+			parent = UI.MainWindow,
+			x = "20%",
+			y = "95%",
+			width = "60%",
+			height = "5%",
+			caption = message,
+			align = "center",
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				color = { 1, 0.2, 0.2, 1 }
+			}
+		}
+		return
+	end
 	-- Generate name
 	local name = generateSaveName(ScenarioName)
+	local scenarioName = ScenarioName
 	local alreadyExists = false
-	if VFS.FileExists("games/"..name..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..name..".sdz")) then
+	if VFS.FileExists(gameFolder.."/"..name..".sdz") then
 		alreadyExists = true
 		local count = 1
 		local newName = name.."(1)"
-		while VFS.FileExists("games/"..newName..".sdz") or (Game.version == "0.82.5.1" and VFS.FileExists("mods/"..newName..".sdz")) do
+		while VFS.FileExists(gameFolder.."/"..newName..".sdz") do
 			count = count + 1
 			newName = name.."("..tostring(count)..")"
 		end
 		name = newName
+		scenarioName = scenarioName.."("..tostring(count)..")"
 	end
 	
 	-- Choose levels
@@ -1488,7 +1478,7 @@ function BeginExportGame()
 	
 	if Game.version == "0.82.5.1" then
 		if VFS.BuildPPGame then
-			VFS.BuildPPGame(ScenarioName, ScenarioDesc, name, Spring.GetModOptions().maingame, levelList, tracesList)
+			VFS.BuildPPGame(scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
 			exportSuccess = true
 		else
 			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
@@ -1509,8 +1499,8 @@ function BeginExportGame()
 		end
 	else
 		-- Change Modinfo.lua
-		local maingame = Spring.GetModOptions().maingame
-		local modInfo = "return { game='PP', shortGame='PP', name='"..ScenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
+		local maingame = MainGame
+		local modInfo = "return { game='PP', shortGame='PP', name='"..scenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
 		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
@@ -1539,12 +1529,8 @@ function BeginExportGame()
 	if exportSuccess then
 		-- Show message
 		if not alreadyExists then
-			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", ScenarioName)
-			if Spring.version == "0.82.5.1" then
-				message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/mods/"..name..".sdz")
-			else
-				message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
-			end
+			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", scenarioName)
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
 			UI.Scenario.ConfirmationMessage = Chili.Label:New{
 				parent = UI.MainWindow,
 				x = "20%",
@@ -1561,7 +1547,7 @@ function BeginExportGame()
 			}
 		else
 			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/games/"..name..".sdz")
+			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
 			UI.Scenario.ConfirmationMessage = Chili.Label:New{
 				parent = UI.MainWindow,
 				x = "20%",
@@ -1642,7 +1628,66 @@ function FadeConfirmationMessage(delta)
 	end
 end
 
+function BackWarning()
+	ClearTemporaryUI()
+	if NeedToBeSaved then
+		local window = Chili.Window:New{
+			parent = UI.MainWindow,
+			x = '20%',
+			y = '45%',
+			width = '60%',
+			height = '10%',
+			draggable = true,
+			resizable = false
+		}
+		Chili.Label:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '50%',
+			align = "center",
+			valign = "center",
+			caption = LAUNCHER_SCENARIO_WARNING,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		Chili.Button:New{
+			parent = window,
+			x = '0%',
+			y = '50%',
+			width = '50%',
+			height = '50%',
+			caption = LAUNCHER_YES,
+			OnClick = { function() NeedToBeSaved = false MainMenuFrame() end },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		Chili.Button:New{
+			parent = window,
+			x = '50%',
+			y = '50%',
+			width = '50%',
+			height = '50%',
+			caption = LAUNCHER_NO,
+			OnClick = { ClearTemporaryUI },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25
+			}
+		}
+		UI.Scenario.Warning = window
+	else
+		MainMenuFrame()
+	end
+end
+
 function QuitWarning()
+	ClearTemporaryUI()
 	if NeedToBeSaved then
 		local window = Chili.Window:New{
 			parent = UI.MainWindow,
@@ -1773,6 +1818,7 @@ function CreateMissingDirectories()
 end
 
 function widget:Initialize()
+	Spring.Echo(Game.modName)
 	CreateMissingDirectories()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then

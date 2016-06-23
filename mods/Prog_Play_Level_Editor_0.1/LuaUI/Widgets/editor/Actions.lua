@@ -475,6 +475,32 @@ actions_list = {
 		}
 	},
 	{
+		type = "showZone",
+		filter = "Zone",
+		typeText = "Show zone in game",
+		text = "Show <Zone> in game.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			}
+		}
+	},
+	{
+		type = "hideZone",
+		filter = "Zone",
+		typeText = "Hide zone in game",
+		text = "Hide <Zone> in game.",
+		attributes = {
+			{
+				text = "<Zone>",
+				type = "zone",
+				id = "zone"
+			}
+		}
+	},
+	{
 		type = "changeVariable",
 		filter = "Variable",
 		typeText = "Set number variable",

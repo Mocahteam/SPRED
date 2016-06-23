@@ -1,9 +1,9 @@
 return
 {
-	game='PPLE',
-	shortGame='PPLE',
+	game='PP',
+	shortGame='PP',
 	name='Prog & Play Level Editor',
-	shortName='PPLE',
+	shortName='PP',
 	mutator='official',
 	version='0.1',
 	description='A level editor for Prog & Play.',

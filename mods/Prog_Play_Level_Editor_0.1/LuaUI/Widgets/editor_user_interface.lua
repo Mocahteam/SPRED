@@ -203,9 +203,9 @@ local markerList = {}
 
 -- Map settings variables
 local mapDescription = {}
-mapDescription.mapName = "Map" -- Name of the map
-mapDescription.mapBriefing = "Map Briefing" -- Briefing of the map
-mapDescription.mapBriefingRaw = "Map Briefing" -- Briefing of the map with raw color tags
+mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
+mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map
+mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map with raw color tags
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
@@ -216,6 +216,7 @@ local minimapState = "disabled" -- Current minimap state
 local mouseState = "disabled" -- Current state of the mouse
 local feedbackState = "disabled" -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
+local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 
 -- Traces variables
 local tracesUI = {}
@@ -670,44 +671,27 @@ function testLevel()
 		Screen0:RemoveChild(windows["testWindow"])
 		windows["testWindow"]:Dispose()
 		local saveName = generateSaveName(mapDescription.mapName)
-		if saveName == "Map" then
+		if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
 			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
 		else
 			saveMap()
-			if Game.version == "0.82.5.1" then
-				local operations = {
-					["MODOPTIONS"] = {
-						["language"] = Language,
-						["scenario"] = "noScenario",
-						["maingame"] = Spring.GetModOptions().maingame,
-						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-						["testmap"] = levelFile.description.saveName
-					},
-					["GAME"] = {
-						["Mapname"] = levelFile.description.map,
-						["Gametype"] = Game.modName
-					}
+			local operations = {
+				["MODOPTIONS"] = {
+					["language"] = Language,
+					["scenario"] = "noScenario",
+					["maingame"] = MainGame,
+					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+					["testmap"] = levelFile.description.saveName
+				},
+				["GAME"] = {
+					["Mapname"] = levelFile.description.map,
+					["Gametype"] = Game.modName
 				}
-				DoTheRestart("LevelEditor.txt", operations)
-			else
-				local operations = {
-					["MODOPTIONS"] = {
-						["language"] = Language,
-						["scenario"] = "noScenario",
-						["maingame"] = Spring.GetModOptions().maingame,
-						["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-						["testmap"] = levelFile.description.saveName
-					},
-					["GAME"] = {
-						["Mapname"] = levelFile.description.map,
-						["Gametype"] = Game.gameName.." "..Game.gameVersion
-					}
-				}
-				DoTheRestart("LevelEditor.txt", operations)
-			end
+			}
+			DoTheRestart("LevelEditor.txt", operations)
 		end
 	end
 	
@@ -1086,26 +1070,16 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left", nil, "center")
 	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '3%', "left", "")
 	customTriggerEditBox.hint = EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_EXAMPLE
-	local useDefaultTrigger = function()
-		if currentEvent then
-			local e = events[currentEvent]
-			local trig = ""
-			for i, c in ipairs(e.conditions) do
-				trig = trig..c.name
-				if i ~= #(e.conditions) then
-					trig = trig.." and "
-				end
-			end
-			e.trigger = trig
-			customTriggerEditBox:SetText(trig)
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
-		end
-		saveState()
-	end
-	local useCustomTrigger = function()
+	
+	local function useCustomTrigger()
 		if currentEvent then
 			local e = events[currentEvent]
 			local validTrigger = false
+			local correctTrigger = customTriggerEditBox.text
+			correctTrigger = string.gsub(correctTrigger, "[Oo][Rr]", "or")
+			correctTrigger = string.gsub(correctTrigger, "[Aa][Nn][Dd]", "and")
+			correctTrigger = string.gsub(correctTrigger, "[Nn][Oo][Tt]", "not")
+			customTriggerEditBox:SetText(correctTrigger)
 			local checkingTrigger = customTriggerEditBox.text
 			local count = 0
 			for i, c in ipairs(e.conditions) do
@@ -1133,6 +1107,24 @@ function initTriggerWindow()
 			else
 				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 			end
+		end
+		saveState()
+	end
+	customTriggerEditBox.onReturn = useCustomTrigger
+	
+	local useDefaultTrigger = function()
+		if currentEvent then
+			local e = events[currentEvent]
+			local trig = ""
+			for i, c in ipairs(e.conditions) do
+				trig = trig..c.name
+				if i ~= #(e.conditions) then
+					trig = trig.." and "
+				end
+			end
+			e.trigger = trig
+			customTriggerEditBox:SetText(trig)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
 		end
 		saveState()
 	end
@@ -1291,37 +1283,20 @@ function initTestLevelFrame()
 	local function returnToEditor()
 		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["toBeLoaded"] = levelFile.description.saveName
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["maingame"] = MainGame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+				["toBeLoaded"] = levelFile.description.saveName
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["toBeLoaded"] = levelFile.description.saveName
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 	local but = addButton(win, '0%', '0%', '100%', '100%', EDITOR_TEST_LEVEL_BACK_TO_EDITOR, returnToEditor)
 	but.font.size = 20
@@ -1597,6 +1572,7 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.font.size = 14
 	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
+	newUnitGroupEditBox.onReturn = function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end
 	local function newGroup()
 		if newUnitGroupEditBox.text ~= "" then
 			addUnitGroup(newUnitGroupEditBox.text)
@@ -1801,12 +1777,12 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
 			end
 			-- Add panel, editbox, buttons
-			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
+			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, 300, 60 + 40 * tableLength(group.units))
 			selectGroupButtons[group.id] = addButton(groupPanels[group.id], 0, 0, 30, 30, "", function() selectGroupButtons[group.id].state.chosen = not selectGroupButtons[group.id].state.chosen selectGroupButtons[group.id]:InvalidateSelf() end)
 			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], 35, 5, 220, 20, "left", group.name)
 			groupEditBoxes[group.id].font.size = 14
-			local deleteButton = addButton(groupPanels[group.id], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(group.id) end)
-			deleteButton.font.color = {1, 0, 0, 1}
+			local deleteButton = addButton(groupPanels[group.id], 250, 0, 40, 40, "", function() deleteUnitGroup(group.id) end)
+			addImage(deleteButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 		end
 		-- Add a button to create an empty group
 		local x, y
@@ -1833,15 +1809,15 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			unitGroupViewButtons[group.id] = {}
 			for key, u in pairs(group.units) do
 				-- Remove button
-				local removeButton = addButton(groupPanels[group.id], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(group, u) end)
-				removeButton.font.color = {1, 0, 0, 1}
+				local removeButton = addButton(groupPanels[group.id], '2%', 40 + 40 * count, '15%', 40, "", function() removeUnitFromGroup(group, u) end)
+				addImage(removeButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				table.insert(unitGroupRemoveUnitButtons[group.id], removeButton)
 				
 				-- Label of unit
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[group.id], '20%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				local label = addLabel(groupPanels[group.id], '20%', 40 + 40 * count, '75%', 40, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				table.insert(unitGroupLabels[group.id], label)
 				
 				-- Eye button to focus a specific unit
@@ -1853,7 +1829,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 					Spring.SetCameraState(state, 2)
 					Spring.SelectUnitArray({u})
 				end
-				local but = addButton(groupPanels[group.id], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
+				local but = addButton(groupPanels[group.id], '80%', 40 + 40 * count, '15%', 40, "", viewUnit)
 				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 				table.insert(unitGroupViewButtons[group.id], but)
 				
@@ -2406,12 +2382,12 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.ATTR)
 	zonesAttributesButton.state.chosen = true
 	zonesAttributesButton:InvalidateSelf()
-	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '60%', '80%')
 	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
 	local count = 0
 	for i, z in ipairs(zoneList) do -- Generate labels and buttons
-		addLabel(sp, '0%', count * 50, "20%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
-		local alwaysInViewButton = addButton(sp, "20%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
+		addLabel(sp, '0%', count * 50, "25%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
+		local alwaysInViewButton = addButton(sp, "25%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
 		alwaysInViewButton.state.chosen = z.alwaysInView -- Set to current value
 		alwaysInViewButton.OnClick = {
 			function()
@@ -2420,13 +2396,22 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				z.alwaysInView = not z.alwaysInView
 			end
 		}
-		local markerButton = addButton(sp, "60%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
+		local markerButton = addButton(sp, "50%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
 		markerButton.state.chosen = z.marker -- Set to current value
 		markerButton.OnClick = {
 			function()
 				markerButton.state.chosen = not markerButton.state.chosen
 				markerButton:InvalidateSelf()
 				z.marker = not z.marker
+			end
+		}
+		local showInGameButton = addButton(sp, "75%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
+		showInGameButton.state.chosen = z.showInGame or true
+		showInGameButton.OnClick = {
+			function()
+				showInGameButton.state.chosen = not showInGameButton.state.chosen
+				showInGameButton:InvalidateSelf()
+				z.showInGame = not z.showInGame
 			end
 		}
 		count = count + 1
@@ -2448,8 +2433,8 @@ function updateAllyTeamPanels() -- Update the ally team window
 			for i, t in ipairs(at) do
 				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, teamName[t], 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1}, "center")
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, EDITOR_X, function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
-				but.font.color = {1, 0, 0, 1}
+				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, "", function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
+				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
 				count = count + 1
 			end
@@ -2733,9 +2718,8 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 		local count = 0
 		for i, e in ipairs(events) do
 			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', 40 * count, '60%', 40, e.name, function() editEvent(i) end)
-			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, EDITOR_X, function() removeEvent(i) end)
-			eventUI.deleteEventButtons[i].font.color = {1, 0, 0, 1}
-			eventUI.deleteEventButtons[i].font.size = 20
+			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, "", function() removeEvent(i) end)
+			addImage(eventUI.deleteEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			if i ~= 1 then
 				local moveUpEvent = function()
 					removeSecondWindows() -- close windows to prevent bugs
@@ -2793,9 +2777,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 			local count = 0
 			for i, c in ipairs(e.conditions) do
 				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
-				deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
-				deleteConditionButtons[e.id][i].font.size = 20
+				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
+				addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				count = count + 1
 			end
 			newEventConditionButton.y = 40 * count
@@ -2808,9 +2791,8 @@ function updateEventFrame() -- When a new condition or action is created or its 
 			local count = 0
 			for i, c in ipairs(e.actions) do
 				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-				deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-				deleteActionButtons[e.id][i].font.size = 20
+				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+				addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				count = count + 1
 			end
 			newEventActionButton.y = 40 * count
@@ -2850,9 +2832,8 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		local count = 0
 		for i, c in ipairs(e.conditions) do
 			conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeCondition(i) end)
-			deleteConditionButtons[e.id][i].font.color = {1, 0, 0, 1}
-			deleteConditionButtons[e.id][i].font.size = 20
+			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
+			addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			count = count + 1
 		end
 		newEventConditionButton.y = 40 * count
@@ -2866,9 +2847,8 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		local count = 0
 		for i, c in ipairs(e.actions) do
 			actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-			deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-			deleteActionButtons[e.id][i].font.size = 20
+			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+			addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			count = count + 1
 		end
 		newEventActionButton.y = 40 * count
@@ -3861,9 +3841,8 @@ function configureEvent() -- Show the event configuration window
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-							deleteActionButtons[e.id][i].font.size = 20
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+							addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
@@ -3888,9 +3867,8 @@ function configureEvent() -- Show the event configuration window
 						local count = 0
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, EDITOR_X, function() removeAction(i) end)
-							deleteActionButtons[e.id][i].font.color = {1, 0, 0, 1}
-							deleteActionButtons[e.id][i].font.size = 20
+							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
+							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
@@ -4175,8 +4153,8 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	initValueComboBox.OnSelect = { selectInitValue }
 	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y+5, '20%', 30, "left", tostring(var.initValue))
 	initValueEditBox.font.size = 16
-	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, EDITOR_X, function() removeVariable(var) end)
-	deleteVariableButton.font.color = {1, 0, 0, 1}
+	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, "", function() removeVariable(var) end)
+	addImage(deleteVariableButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 	
 	feature.nameLabel = nameLabel
 	feature.nameEditBox = nameEditBox
@@ -4533,9 +4511,9 @@ function newMap() -- Set each parameter to its default value
 	variablesNumber = 0
 	variablesTotal = nil
 	-- Map
-	mapDescription.mapName = "Map"
-	mapDescription.mapBriefing = "Map Briefing"
-	mapDescription.mapBriefingRaw = "Map Briefing"
+	mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME
+	mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME
+	mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME
 	cameraAutoState = "enabled"
 	autoHealState = "disabled"
 	mouseState = "disabled"
@@ -4875,7 +4853,7 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 				local name = string.gsub(l, "pp_editor\\missions\\", "")
 				name = string.gsub(name, ".editor", "")
 				local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
-				if levelDescription.description.mainGame == Spring.GetModOptions().maingame then
+				if levelDescription.description.mainGame == MainGame then
 					local displayedName = string.gsub(name, "_", " ")
 					addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
 					count = count + 1
@@ -4905,7 +4883,7 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 		windows["saveWindow"]:Dispose()
 	end
 	local saveName = generateSaveName(mapDescription.mapName)
-	if saveName == "Map" then
+	if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 		windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 		addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 		addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
@@ -4940,7 +4918,9 @@ function backToMenuFrame() -- Show a window when the user clicks on the main men
 	end
 	windows["backToMenu"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
-	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	if NeedToBeSaved then
+		addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	end
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() WG.BackToMainMenu() end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
@@ -4952,7 +4932,9 @@ function quitFrame() -- Show a window when the user clicks on the quit button
 	end
 	windows["backToMenu"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 	addLabel(windows["backToMenu"], '0%', '0%', '100%', '35%', EDITOR_FILE_QUIT_CONFIRM, 20)
-	addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	if NeedToBeSaved then
+		addLabel(windows["backToMenu"], '0%', '30%', '100%', '15%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 14)
+	end
 	addButton(windows["backToMenu"], '0%', '50%', '50%', '50%', EDITOR_YES, function() Spring.SendCommands("quit") Spring.SendCommands("quitforce") end)
 	addButton(windows["backToMenu"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["backToMenu"]) windows["backToMenu"]:Dispose() end)
 end
@@ -4969,37 +4951,20 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 			loadMap(name)
 			return
 		end
-		if Game.version == "0.82.5.1" then
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = name,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
-				}
+		local operations = {
+			["MODOPTIONS"] = {
+				["language"] = Language,
+				["scenario"] = "noScenario",
+				["toBeLoaded"] = name,
+				["maingame"] = MainGame,
+				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
+			},
+			["GAME"] = {
+				["Mapname"] = levelFile.description.map,
+				["Gametype"] = Game.modName
 			}
-			DoTheRestart("LevelEditor.txt", operations)
-		else
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["toBeLoaded"] = name,
-					["maingame"] = Spring.GetModOptions().maingame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.gameName.." "..Game.gameVersion
-				}
-			}
-			DoTheRestart("LevelEditor.txt", operations)
-		end
+		}
+		DoTheRestart("LevelEditor.txt", operations)
 	end
 end
 
@@ -5009,42 +4974,26 @@ function newLevelWithRightMap(name) -- Creates a new level on the selected map
 		newMapInitialize()
 		return
 	end
-	if Game.version == "0.82.5.1" then
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-			},
-			["GAME"] = {
-				["Mapname"] = name,
-				["Gametype"] = Game.modName
-			}
+	local operations = {
+		["MODOPTIONS"] = {
+			["language"] = Language,
+			["scenario"] = "noScenario",
+			["maingame"] = MainGame,
+			["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
+		},
+		["GAME"] = {
+			["Mapname"] = name,
+			["Gametype"] = Game.modName
 		}
-		DoTheRestart("LevelEditor.txt", operations)
-	else
-		local operations = {
-			["MODOPTIONS"] = {
-				["language"] = Language,
-				["scenario"] = "noScenario",
-				["maingame"] = Spring.GetModOptions().maingame,
-				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
-			},
-			["GAME"] = {
-				["Mapname"] = name,
-				["Gametype"] = Game.gameName.." "..Game.gameVersion
-			}
-		}
-		DoTheRestart("LevelEditor.txt", operations)
-	end
+	}
+	DoTheRestart("LevelEditor.txt", operations)
 end
 
 function encodeSaveTable() -- Transforms parameters to a table containing all the information needed to store the level
 	local savedTable = {}
 	-- Global description
 	savedTable.description = {}
-	savedTable.description.mainGame = Spring.GetModOptions().maingame
+	savedTable.description.mainGame = MainGame
 	savedTable.description.map = Game.mapName
 	savedTable.description.name = mapDescription.mapName
 	savedTable.description.saveName = generateSaveName(mapDescription.mapName)
@@ -5691,7 +5640,8 @@ function widget:MouseRelease(mx, my, button)
 										type = "Rectangle",
 										shown = true,
 										alwaysInView = false,
-										marker = false
+										marker = false,
+										showInGame = true
 									}
 				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
@@ -5710,7 +5660,8 @@ function widget:MouseRelease(mx, my, button)
 										type = "Disk",
 										shown = true,
 										alwaysInView = false,
-										marker = false
+										marker = false,
+										showInGame = true
 									}
 				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
@@ -5838,12 +5789,6 @@ function widget:KeyPress(key, mods)
 		return true
 	-- ENTER
 	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
-		if newUnitGroupEditBox then
-			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
-				addUnitGroup(newUnitGroupEditBox.text)
-				clearTemporaryWindows()
-			end
-		end
 		return true
 	end
 	-- Selection state
