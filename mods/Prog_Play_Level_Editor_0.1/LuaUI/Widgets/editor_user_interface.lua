@@ -17,7 +17,6 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
--- afficher zone pendant jeu
 -- taille boutons groupes
 -- liste des games : ne pas lister les jeux générés + changer le nom (choose master game)
 -- maigame = récupérer depuis le modinfo
@@ -2388,12 +2387,12 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.ATTR)
 	zonesAttributesButton.state.chosen = true
 	zonesAttributesButton:InvalidateSelf()
-	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '30%', '80%')
+	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '60%', '80%')
 	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
 	local count = 0
 	for i, z in ipairs(zoneList) do -- Generate labels and buttons
-		addLabel(sp, '0%', count * 50, "20%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
-		local alwaysInViewButton = addButton(sp, "20%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
+		addLabel(sp, '0%', count * 50, "25%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 }, "center")
+		local alwaysInViewButton = addButton(sp, "25%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
 		alwaysInViewButton.state.chosen = z.alwaysInView -- Set to current value
 		alwaysInViewButton.OnClick = {
 			function()
@@ -2402,13 +2401,22 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				z.alwaysInView = not z.alwaysInView
 			end
 		}
-		local markerButton = addButton(sp, "60%", count * 50, "40%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
+		local markerButton = addButton(sp, "50%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
 		markerButton.state.chosen = z.marker -- Set to current value
 		markerButton.OnClick = {
 			function()
 				markerButton.state.chosen = not markerButton.state.chosen
 				markerButton:InvalidateSelf()
 				z.marker = not z.marker
+			end
+		}
+		local showInGameButton = addButton(sp, "75%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
+		showInGameButton.state.chosen = z.showInGame or true
+		showInGameButton.OnClick = {
+			function()
+				showInGameButton.state.chosen = not showInGameButton.state.chosen
+				showInGameButton:InvalidateSelf()
+				z.showInGame = not z.showInGame
 			end
 		}
 		count = count + 1
@@ -5633,7 +5641,8 @@ function widget:MouseRelease(mx, my, button)
 										type = "Rectangle",
 										shown = true,
 										alwaysInView = false,
-										marker = false
+										marker = false,
+										showInGame = true
 									}
 				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
@@ -5652,7 +5661,8 @@ function widget:MouseRelease(mx, my, button)
 										type = "Disk",
 										shown = true,
 										alwaysInView = false,
-										marker = false
+										marker = false,
+										showInGame = true
 									}
 				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
 					table.insert(zoneList, zone)
