@@ -238,6 +238,9 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 
 	-- enter & return
 	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+		if self.onReturn then
+			self.onReturn()
+		end
 		WG.Chili.Screen0:FocusControl()
 		return inherited.KeyPress(self, key, mods, isRepeat, label, unicode, ...) or false
 

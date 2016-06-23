@@ -17,8 +17,6 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
--- return sur trigger
--- or/and case insensitive
 -- afficher zone pendant jeu
 -- taille boutons groupes
 -- liste des games : ne pas lister les jeux générés + changer le nom (choose master game)
@@ -1078,23 +1076,8 @@ function initTriggerWindow()
 	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left", nil, "center")
 	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '3%', "left", "")
 	customTriggerEditBox.hint = EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_EXAMPLE
-	local useDefaultTrigger = function()
-		if currentEvent then
-			local e = events[currentEvent]
-			local trig = ""
-			for i, c in ipairs(e.conditions) do
-				trig = trig..c.name
-				if i ~= #(e.conditions) then
-					trig = trig.." and "
-				end
-			end
-			e.trigger = trig
-			customTriggerEditBox:SetText(trig)
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
-		end
-		saveState()
-	end
-	local useCustomTrigger = function()
+	
+	local function useCustomTrigger()
 		if currentEvent then
 			local e = events[currentEvent]
 			local validTrigger = false
@@ -1130,6 +1113,24 @@ function initTriggerWindow()
 			else
 				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 			end
+		end
+		saveState()
+	end
+	customTriggerEditBox.onReturn = useCustomTrigger
+	
+	local useDefaultTrigger = function()
+		if currentEvent then
+			local e = events[currentEvent]
+			local trig = ""
+			for i, c in ipairs(e.conditions) do
+				trig = trig..c.name
+				if i ~= #(e.conditions) then
+					trig = trig.." and "
+				end
+			end
+			e.trigger = trig
+			customTriggerEditBox:SetText(trig)
+			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
 		end
 		saveState()
 	end
@@ -1577,6 +1578,7 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', count * 40, '80%', 40, "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.font.size = 14
 	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
+	newUnitGroupEditBox.onReturn = function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end
 	local function newGroup()
 		if newUnitGroupEditBox.text ~= "" then
 			addUnitGroup(newUnitGroupEditBox.text)
@@ -5778,12 +5780,6 @@ function widget:KeyPress(key, mods)
 		return true
 	-- ENTER
 	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
-		if newUnitGroupEditBox then
-			if newUnitGroupEditBox.state.focused and newUnitGroupEditBox.text ~= "" then
-				addUnitGroup(newUnitGroupEditBox.text)
-				clearTemporaryWindows()
-			end
-		end
 		return true
 	end
 	-- Selection state
