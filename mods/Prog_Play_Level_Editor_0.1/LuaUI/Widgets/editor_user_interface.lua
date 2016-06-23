@@ -18,7 +18,6 @@ VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- taille boutons groupes
--- liste des games : ne pas lister les jeux générés + changer le nom (choose master game)
 -- return to main menu => message seulement si modifs
 -- message pour retour de edit scenario vers menu
 

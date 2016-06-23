@@ -1,10 +1,10 @@
 return
 {
 	-- The name is shown in the selection interface
-	game='KPC',
-	shortGame='KPC',
+	game='PP',
+	shortGame='PP',
 	name='Kernel Panic Campaign 2.4',
-	shortName='KPC',
+	shortName='PP',
 	mutator='official',
 	version='2.4',
 	-- These can be shown by the selection interface

@@ -1,9 +1,9 @@
 return
 {
-	game='EL',
-	shortGame='EL',
+	game='PP',
+	shortGame='PP',
 	name='Prog & Play Level Editor Launcher',
-	shortName='EL',
+	shortName='PP',
 	mutator='official',
 	version='1.0',
 	description='Launcher for the Prog & Play Level Editor',

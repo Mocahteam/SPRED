@@ -15,6 +15,8 @@ end
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 local Chili, Screen0
+local gameFolder = "games"
+if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
 function InitializeChili() 
 	if not WG.Chili then
@@ -36,16 +38,31 @@ function InitializeMenu()
 	Chili.Label:New{
 		parent = MainWindow,
 		x = "0%",
-		y = "10%",
+		y = "5%",
 		width = "100%",
 		height = "10%",
-		caption = "Choose a game",
+		caption = "Choose a master game",
 		align = "center",
 		valign = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 60,
 			color = { 0.2, 0.6, 0.8, 1 }
+		}
+	}
+	Chili.Label:New{
+		parent = MainWindow,
+		x = "0%",
+		y = "15%",
+		width = "100%",
+		height = "5%",
+		caption = "This game will be the base of the editor : it will define units and their behaviour, and will be required to play the created missions.",
+		align = "center",
+		valign = "center",
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			color = { 0.6, 0.6, 0.8, 1 }
 		}
 	}
 	local sp = Chili.ScrollPanel:New{
@@ -59,7 +76,8 @@ function InitializeMenu()
 	gameList = VFS.GetGames()
 	local count = 0
 	for i, game in ipairs(gameList) do
-		if not string.match(game, "Prog & Play") then
+		local infos = VFS.GetArchiveInfo(game)
+		if infos.shortname ~= "PP" then
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
@@ -126,7 +144,7 @@ function InitializeMenu()
 end
 
 function Launch(game)
-	if not VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") or (Game.version == "0.82.5.1" and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz")) then
+	if not VFS.FileExists(gameFolder.."/Prog & Play Level Editor for "..game..".sdz") then
 		if Game.version == "0.82.5.1" then
 			if VFS.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
 				VFS.BuildPPEditor(game)
@@ -147,7 +165,7 @@ function Launch(game)
 		end
 	end
 	
-	if VFS.FileExists("games/Prog & Play Level Editor for "..game..".sdz") or (VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") and Game.version == "0.82.5.1") then
+	if VFS.FileExists(gameFolder.."/Prog & Play Level Editor for "..game..".sdz") then
 		local operations = {
 			["MODOPTIONS"] = {
 				["maingame"] = game
