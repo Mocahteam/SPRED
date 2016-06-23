@@ -17,8 +17,6 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
--- taille boutons groupes
--- return to main menu => message seulement si modifs
 -- message pour retour de edit scenario vers menu
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1781,11 +1779,11 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				heights[column] = heights[column] + 65 + 30 * tableLength(group.units)
 			end
 			-- Add panel, editbox, buttons
-			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, 300, 60 + 30 * tableLength(group.units))
+			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, 300, 60 + 40 * tableLength(group.units))
 			selectGroupButtons[group.id] = addButton(groupPanels[group.id], 0, 0, 30, 30, "", function() selectGroupButtons[group.id].state.chosen = not selectGroupButtons[group.id].state.chosen selectGroupButtons[group.id]:InvalidateSelf() end)
 			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], 35, 5, 220, 20, "left", group.name)
 			groupEditBoxes[group.id].font.size = 14
-			local deleteButton = addButton(groupPanels[group.id], 260, 0, 30, 30, EDITOR_X, function() deleteUnitGroup(group.id) end)
+			local deleteButton = addButton(groupPanels[group.id], 250, 0, 40, 40, "", function() deleteUnitGroup(group.id) end)
 			addImage(deleteButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 		end
 		-- Add a button to create an empty group
@@ -1813,7 +1811,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			unitGroupViewButtons[group.id] = {}
 			for key, u in pairs(group.units) do
 				-- Remove button
-				local removeButton = addButton(groupPanels[group.id], '5%', 40 + 30 * count, '10%', 30, EDITOR_X, function() removeUnitFromGroup(group, u) end)
+				local removeButton = addButton(groupPanels[group.id], '2%', 40 + 40 * count, '15%', 40, "", function() removeUnitFromGroup(group, u) end)
 				addImage(removeButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 				table.insert(unitGroupRemoveUnitButtons[group.id], removeButton)
 				
@@ -1821,7 +1819,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[group.id], '20%', 40 + 30 * count, '75%', 30, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
+				local label = addLabel(groupPanels[group.id], '20%', 40 + 40 * count, '75%', 40, name.." ("..tostring(u)..")", 15, "left", {teams[team].red, teams[team].green, teams[team].blue, 1}, "center")
 				table.insert(unitGroupLabels[group.id], label)
 				
 				-- Eye button to focus a specific unit
@@ -1833,7 +1831,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 					Spring.SetCameraState(state, 2)
 					Spring.SelectUnitArray({u})
 				end
-				local but = addButton(groupPanels[group.id], '80%', 40 + 30 * count, '15%', 30, "", viewUnit)
+				local but = addButton(groupPanels[group.id], '80%', 40 + 40 * count, '15%', 40, "", viewUnit)
 				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 				table.insert(unitGroupViewButtons[group.id], but)
 				
@@ -4157,7 +4155,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	initValueComboBox.OnSelect = { selectInitValue }
 	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y+5, '20%', 30, "left", tostring(var.initValue))
 	initValueEditBox.font.size = 16
-	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, EDITOR_X, function() removeVariable(var) end)
+	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, "", function() removeVariable(var) end)
 	addImage(deleteVariableButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 	
 	feature.nameLabel = nameLabel
