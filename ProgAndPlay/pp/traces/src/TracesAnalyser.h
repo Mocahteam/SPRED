@@ -22,7 +22,6 @@
 #include "EventDef.h"
 
 #define EXPERT_DIRNAME "xml\\expert"
-#define IN_GAME_EXPERT_DIRNAME "traces\\data\\expert"
 #define FEEDBACKS_FILENAME "feedbacks.xml"
 
 #define USELESS_FREQ 0					// threshold value in [0,1] used to determine if we have to make a USELESS_CALL feedback
@@ -180,7 +179,8 @@ public:
 
 	TracesAnalyser(bool in_game, std::string mission_name = "", std::string lang = "fr");
 
-	std::string constructFeedback(const std::string& dir_path, const std::string& filename, int ind_mission = -1, int ind_execution = -1, std::ostream &os = std::cout);
+	std::string constructFeedback(const std::string& learner_xml, const std::vector<std::string>& experts_xml, int ind_mission = -1, int ind_execution = -1, std::ostream &os = std::cout);
+	void loadXmlInfos(const std::string& feedbacks_xml, const std::string& mission_feedbacks_xml);
 	void setEndlessLoop(bool endless_loop);
 	void setLang(std::string lang);
 	void setMissionName(std::string mission_name);
@@ -194,18 +194,15 @@ private:
 	bool loaded;
 	std::string mission_name;
 	std::string lang;
-	std::string expert_dirname;
 	GameInfos learner_gi, expert_gi;
 	std::vector<Feedback> ref_feedbacks;
 	std::map<std::string,double> experts_calls_freq;
 	
-	void loadXmlInfos();
 	void importFeedbacksFromXml(rapidxml::xml_document<> *doc);
 	void importMessagesFromXml(rapidxml::xml_document<> *doc);
 	
 	bool getInfosOnMission(const std::vector<Trace::sp_trace>& traces, GameInfos& gi, int ind_mission = -1);
 	bool getInfosOnExecution(GameInfos& gi, int ind_execution = -1);
-	std::vector<std::string> findExpertTracesFilenames();
 	
 	bool addImplicitSequences(std::vector<Trace::sp_trace>& mod, const std::vector<Trace::sp_trace>& ref) const;
 	std::vector<Call::call_vector> getPatterns(const std::vector<Trace::sp_trace>& traces, const Call::call_vector& pattern) const;

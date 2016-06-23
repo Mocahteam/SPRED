@@ -131,7 +131,7 @@ function handleFeedback(str)
 		e = {logicType = "ShowMissionMenu", state = state, feedback = json_string}
 	else -- the mission is not over yet
 		local width = 0.85 * vsx
-		json_string = breakLine(json_string,width)
+		--json_string = breakLine(json_string,width)
 		e = {logicType = "ShowMessage", message = json_string, width = width, pause = true}
 	end
 	Script.LuaUI.MissionEvent(e)

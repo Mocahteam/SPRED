@@ -33,11 +33,10 @@ public:
 	void parseTraceFileOnline(const std::string& dir_path, const std::string& filename);
 	void parseTraceFileOffline(const std::string& dir_path, const std::string& filename);
 	void parseTraceFile(const std::string& dir_path, const std::string& filename);
+	void initParamsMap(const std::string& json);
 	void display(std::ostream &os = std::cout);
 	void setEnd();
 	bool compressionDone();
-	bool hasLaunched();
-	void setChange();
 	void setProceed(bool proceed);
 	bool getProceed();
 	const std::vector<Trace::sp_trace>& getTraces() const;
@@ -45,7 +44,7 @@ public:
 	static Trace::sp_trace handleLine(const std::string& s);
 	static Sequence::sp_sequence mergeSequences(Sequence::sp_sequence sps_up, Sequence::sp_sequence sps_down);
 	static void removeRedundancies(std::vector<Trace::sp_trace>& traces);
-	static std::vector<Trace::sp_trace> importTraceFromXml(const std::string& dir_path, const std::string& filename);
+	static std::vector<Trace::sp_trace> importTraceFromXml(const std::string& xml);
 	static void importTraceFromNode(rapidxml::xml_node<> *node, std::vector<Trace::sp_trace>& traces);
 	static unsigned int getNodeChildCount(rapidxml::xml_node<> *node);
 	static std::vector<std::string> splitLine(const std::string& s, char delim = ' ');
@@ -63,8 +62,6 @@ private:
 	bool compressed;
 	bool end;
 	bool proceed;
-	bool launched;
-	bool change;
 	
 	int start;
 	unsigned int pt;

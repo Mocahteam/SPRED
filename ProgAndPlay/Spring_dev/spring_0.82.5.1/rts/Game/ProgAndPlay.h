@@ -14,6 +14,8 @@
 #include "lib/pp/traces/TracesParser.h"
 #include "lib/pp/traces/TracesAnalyser.h"
 #include "Lua/LuaHandle.h"
+#include "System/FileSystem/VFSHandler.h"
+#include "System/FileSystem/ArchiveScanner.h"
 #include <boost/thread.hpp>
 
 class CProgAndPlay
@@ -38,19 +40,22 @@ private:
 	bool updated;
 	bool missionEnded;
 	bool tracePlayer;
+	bool archiveLoaded;
 	std::string missionName;
 	std::string lang;
 	std::time_t startTime;
 	boost::thread tracesThread;
 	TracesParser tp;
 	TracesAnalyser ta;
-		
+	
 	int updatePP(); // update Prog&Play data if necessary
 	int execPendingCommands(); // execute pending command from Prog&Play
 	void logMessages(bool unitsIdled); // log messages from Prog&Play
 	void openTracesFile(); // open the appropriate traces file based on the current mission
 	bool allUnitsIdled(); //returns true if all units' command queues are empty
 	
+	const std::string loadFile(std::string full_path);
+	const std::string loadFileFromArchive(std::string full_path);
 };
 
 static int endless_loop_frame_counter = -1;

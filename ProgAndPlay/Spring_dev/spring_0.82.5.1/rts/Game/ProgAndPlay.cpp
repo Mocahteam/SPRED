@@ -39,6 +39,7 @@ const std::string tracesDirname = "traces";
 const std::string dataDirname = tracesDirname + "\\" + "data";
 const std::string expertDirname = dataDirname + "\\" + "expert";
 const std::string feedbackFilename = dataDirname + "\\feedback.json";
+
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
 
@@ -53,7 +54,7 @@ void log(std::string msg) {
 
 CProgAndPlay* pp;
 
-CProgAndPlay::CProgAndPlay() : loaded(false), updated(false), missionEnded(false), tracePlayer(false), tp(true), ta(true) {
+CProgAndPlay::CProgAndPlay() : loaded(false), updated(false), missionEnded(false), tracePlayer(false), archiveLoaded(false), tp(true), ta(true) {
 	log("ProgAndPLay constructor begin");
 		
 	// initialisation of Prog&Play
@@ -155,14 +156,19 @@ void CProgAndPlay::Update(void) {
 			if (CLuaHandle::feedbacksWidgetEnabled) {
 				// The feedback widget is enabled : launch analysis of player's traces
 				ta.setEndlessLoop(endlessLoop);
-				std::string feedback = ta.constructFeedback(tracesDirname, missionName + "_compressed.xml", -1, -1, logFile);
 				
-				// A enlever
-				// std::vector<Trace::sp_trace> learner_traces = TracesParser::importTraceFromXml(tracesDirname, missionName + "_compressed.xml");
-				// for (unsigned int i = 0; i < learner_traces.size(); i++) {
-					// learner_traces.at(i)->display(logFile);
-				// }
-				// --
+				const std::string learner_xml = loadFile(tracesDirname + "\\" + missionName + "_compressed.xml");
+				std::vector<std::string> experts_xml;
+				if (archiveLoaded) {
+					const std::string expert_dir_path = "traces\\expert\\" + missionName;
+					std::vector<std::string> files = vfsHandler->GetFilesInDir(expert_dir_path);
+					for (unsigned int i = 0; i < files.size(); i++) {
+						if (files.at(i).find(".xml") != std::string::npos)
+							experts_xml.push_back(loadFileFromArchive(expert_dir_path + "\\" + files.at(i)));
+					}
+				}
+				
+				std::string feedback = ta.constructFeedback(learner_xml, experts_xml, -1, -1, logFile);
 				
 				log("feedback determined");
 				// Write into file
@@ -237,6 +243,33 @@ void CProgAndPlay::Update(void) {
 	}
 		
 	log("ProgAndPLay::Update end");
+}
+
+/*
+ * Returns the content of the file identified by full_path as a string
+ */
+const std::string CProgAndPlay::loadFile(std::string full_path) {
+	std::string res;
+	std::ifstream in(full_path.c_str());
+	if (in.good()) {
+		std::string line;
+		while(std::getline(in,line))
+			res += line;
+	}
+	return res;
+}
+
+/*
+ * Returns the content of the file located in the mod archive and identified by full_path as a string. The mod archive has to be loaded when the function is called.
+ */
+const std::string CProgAndPlay::loadFileFromArchive(std::string full_path) {
+	std::string res;
+	if (archiveLoaded) {
+		std::vector<boost::uint8_t> data;
+		if (vfsHandler->LoadFile(full_path, data))
+			res.assign(data.begin(), data.end());
+	}
+	return res;
 }
 
 void CProgAndPlay::GamePaused(bool paused) {
@@ -710,6 +743,36 @@ void CProgAndPlay::openTracesFile() {
 		bool dirExists = FileSystemHandler::mkdir(tracesDirname);
 		if (dirExists) {
 			missionName = modOpts.at("missionname");
+			
+			if (vfsHandler->AddArchive("mods\\" + archiveScanner->ArchiveFromName(gameSetup->modName), false)) {
+				log("mod archive successfully loaded");
+				archiveLoaded = true;
+				
+				// compression parameters loading from JSON for TracesParser
+				// first check is in the archive
+				std::string params_json = loadFileFromArchive("traces\\params.json");
+				if (params_json == "") {
+					// second check is in Spring directory
+					params_json = loadFile("traces\\data\\params.json");
+				}
+				if (params_json.compare("") != 0)
+					tp.initParamsMap(params_json);
+				
+				// feedbacks loading from XML for TracesAnalyser
+				const std::string feedbacks_xml = loadFile(dataDirname + "\\feedbacks.xml");
+				std::string mission_feedbacks_xml;
+				const std::string expert_dir_path = "traces\\expert\\" + missionName;
+				std::vector<std::string> files = vfsHandler->GetFilesInDir(expert_dir_path);
+				for (unsigned int i = 0; i < files.size(); i++) {
+					if (files.at(i).compare("feedbacks.xml") == 0)
+						mission_feedbacks_xml = loadFileFromArchive(expert_dir_path + "\\" + files.at(i));
+				}
+				if (feedbacks_xml.compare("") != 0)
+					ta.loadXmlInfos(feedbacks_xml,mission_feedbacks_xml);
+			}
+			else
+				log("mod archive loading has failed");
+			
 			ta.setMissionName(missionName);
 			ta.setLang((modOpts.find("language") != modOpts.end()) ? modOpts.at("language") : "en");
 			std::stringstream ss;
