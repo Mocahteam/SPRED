@@ -2,8 +2,8 @@ function widget:GetInfo()
 	return {
 		name = "Editor User Interface",
 		desc = "User interface of the level editor",
-		author = "zigaroula",
-		date = "02/05/2016",
+		author = "mocahteam",
+		date = "June 24, 2016",
 		license = "GNU GPL v2",
 		layer = 0,
 		enabled = true
@@ -700,7 +700,7 @@ function testLevel()
 		windows["testWindow"]:Dispose()
 	end
 	windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
-	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "pp_editor/missions/"..levelFile.description.saveName..".editor")
+	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
 	addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text, 20, "center", nil, "center")
 	addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
 	addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
@@ -1311,7 +1311,7 @@ end
 function initTestLevelFrame()
 	local win = addWindow(Screen0, '80%', '0%', '20%', '10%', false)
 	local function returnToEditor()
-		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
+		local levelFile = VFS.LoadFile("SPRED/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		local operations = {
 			["MODOPTIONS"] = {
@@ -4401,23 +4401,10 @@ function updateMapSettings() -- Update the settings of the map according to what
 	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
 
-function initWidgetList() -- Remove some widgets linked directly to prog&play from the widget list
+function initWidgetList() -- Remove some widgets linked directly to SPRED from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
-		if 	k ~= "Spring Direct Launch 2 for Prog&Play" and
-			k ~= "Messenger" and
-			k ~= "Mission GUI" and
-			k ~= "CA Interface" and
-			k ~= "Files IO" and
-			k ~= "Display Message" and
-			k ~= "Camera Auto" and
-			k ~= "Chili Framework" and
-			k ~= "Editor Commands List" and
-			k ~= "Editor Loading Screen" and
-			k ~= "Spring Direct Launch 2 for Prog&Play Level Editor" and
-			k ~= "Editor User Interface" and
-			k ~= "Editor Widget List"
-		then
+		if w.author ~= "mocahteam" and k == "Chili Framework" then
 			local customWidget = {}
 			customWidget.name = k
 			customWidget.active = false
@@ -4598,8 +4585,8 @@ function loadMap(name) -- Load a map given a file name or if loadedTable is not 
 	if loading then return end -- Don't load if already loading
 	loading = true
 	newMap()
-	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -4835,7 +4822,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 		jsonfile = string.gsub(jsonfile, "\t}", "}")
 		jsonfile = string.gsub(jsonfile, "\t%]", "]")
 	end
-	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
+	local file = io.open("SPRED/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 	NeedToBeSaved = false
@@ -4873,16 +4860,16 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 		addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 		local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 		delbut.font.color = {1, 0, 0, 1}
-		local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
+		local levelList = VFS.DirList("SPRED/missions/", "*.editor", VFS.RAW)
 		if #levelList == 0 then
 			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 		else
 			local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
 			local count = 0
 			for i, l in ipairs(levelList) do
-				local name = string.gsub(l, "pp_editor\\missions\\", "")
+				local name = string.gsub(l, "SPRED\\missions\\", "")
 				name = string.gsub(name, ".editor", "")
-				local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
+				local levelDescription = json.decode(VFS.LoadFile("SPRED/missions/"..name..".editor"))
 				if levelDescription.description.mainGame == MainGame then
 					local displayedName = string.gsub(name, "_", " ")
 					addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
@@ -4925,10 +4912,10 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 				windows["saveWindow"]:Dispose()
 			end
 			windows["saveWindow"] = addWindow(Screen0, "25%", "45%", "50%", "10%")
-			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/pp_editor/levels/"..saveName..".editor)", 20)
+			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/SPRED/levels/"..saveName..".editor)", 20)
 			addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
 		end
-		if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
+		if VFS.FileExists("SPRED/missions/"..saveName..".editor", VFS.RAW) then
 			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM.." ("..saveName..".editor)", 20)
 			addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
@@ -4974,8 +4961,8 @@ function beginLoadLevel(name) -- Callback used to load a map directly from the l
 end
 
 function loadLevelWithRightMap(name) -- Load a level in the map associated to the level if the map is different
-	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if levelFile.description.map == Game.mapName then
 			loadMap(name)

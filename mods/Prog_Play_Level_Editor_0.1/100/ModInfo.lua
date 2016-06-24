@@ -1,12 +1,12 @@
 return
 {
-	game='PP',
-	shortGame='PP',
-	name='Prog & Play Level Editor',
-	shortName='PP',
+	game='SPRED',
+	shortGame='SPRED',
+	name='SPRED Editor',
+	shortName='SPRED',
 	mutator='official',
 	version='0.1',
-	description='A level editor for Prog & Play.',
+	description='SPRED Editor',
 	url='http://www.irit.fr/ProgAndPlay/index_en.php',
 	modtype=1,
 	depend= {

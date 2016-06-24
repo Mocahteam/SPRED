@@ -1,10 +1,10 @@
 function widget:GetInfo()
 	return {
-		name = "Launcher for Prog&Play Level Editor",
-		desc = "Launcher for Prog&Play Level Editor",
-		author = "zigaroula",
+		name = "SPRED Launcher",
+		desc = "Launcher for SPRED",
+		author = "mocahteam",
 		version = "1.0",
-		date = "May 03, 2016",
+		date = "June 24, 2016",
 		license = "Public Domain",
 		layer = 250,
 		enabled = true,
@@ -77,7 +77,7 @@ function InitializeMenu()
 	local count = 0
 	for i, game in ipairs(gameList) do
 		local infos = VFS.GetArchiveInfo(game)
-		if infos.shortname ~= "PP" then
+		if infos.shortname ~= "SPRED" then
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
@@ -144,34 +144,34 @@ function InitializeMenu()
 end
 
 function Launch(game)
-	if not VFS.FileExists(gameFolder.."/Prog & Play Level Editor for "..game..".sdz") then
+	if not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 		if Game.isPPEnabled then
-			if VFS.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
+			if VFS.BuildPPEditor and not VFS.FileExists("mods/SPRED for "..game..".sdz") then
 				VFS.BuildPPEditor(game)
 			else
 				ErrorMessage1:SetCaption("The editor does not work on the version of Spring you are using.")
 				ErrorMessage2:SetCaption("Please use the tweaked 0.82.5.1 or a 98+ version.")
 			end
 		else
-			local modInfo = "return { game='PPLE', shortGame='PPLE', name='Prog & Play Level Editor for "..game.."', shortName='PPLE', mutator='official', version='1.0', description='A level editor for Prog & Play.', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
-			local file = io.open("pp_editor/editor_files/ModInfo.lua", "w")
+			local modInfo = "return { game='SPRED', shortGame='SPRED', name='SPRED for "..game.."', shortName='SPRED', mutator='official', version='1.0', description='SPRED', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
+			local file = io.open("SPRED/editor_files/ModInfo.lua", "w")
 			file:write(modInfo)
 			file:close()
 			-- Compress Archive
-			if not VFS.FileExists("pp_editor/editor_files.sdz") then
-				VFS.CompressFolder("pp_editor/editor_files")
-				os.rename("pp_editor/editor_files.sdz", "games/Prog & Play Level Editor for "..game..".sdz")
+			if not VFS.FileExists("SPRED/editor_files.sdz") then
+				VFS.CompressFolder("SPRED/editor_files")
+				os.rename("SPRED/editor_files.sdz", "games/SPRED for "..game..".sdz")
 			end
 		end
 	end
 	
-	if VFS.FileExists(gameFolder.."/Prog & Play Level Editor for "..game..".sdz") then
+	if VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 		local operations = {
 			["MODOPTIONS"] = {
 				["maingame"] = game
 			},
 			["GAME"] = {
-				["Gametype"] = "Prog & Play Level Editor for "..game.." 1.0"
+				["Gametype"] = "SPRED for "..game.." 1.0"
 			}
 		}
 		DoTheRestart("Editor.txt", operations)
@@ -211,6 +211,7 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
+	widgetHandler:EnableWidget("Chili Framework")
 	InitializeChili()
 	InitializeMenu()
 end

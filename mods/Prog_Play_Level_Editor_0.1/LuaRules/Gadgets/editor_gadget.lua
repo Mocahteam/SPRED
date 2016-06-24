@@ -2,8 +2,8 @@ function gadget:GetInfo()
 	return {
 		name = "Editor Gadget",
 		desc = "Allows sync code for the level editor",
-		author = "zigaroula",
-		date = "02/05/2016",
+		author = "mocahteam",
+		date = "June 24, 2016",
 		license = "GPL v2 or later",
 		layer = 0,
 		enabled   = true
