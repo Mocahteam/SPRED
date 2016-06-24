@@ -34,6 +34,7 @@ local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
 local selectedOutputMission -- Currently selected output mission
 local selectedOutput -- Currently selected output state
+local IncludeAllMissions = false
 local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 local gameFolder = "games"
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
@@ -142,6 +143,20 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		height = "10%",
 		caption = LAUNCHER_SCENARIO,
 		OnClick = { EditScenarioFrame },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 40,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	UI.ExportGameButton = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "30%",
+		y = "60%",
+		width = "40%",
+		height = "10%",
+		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
+		OnClick = { ExportGameFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
@@ -395,35 +410,6 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		caption = LAUNCHER_SCENARIO_RESET,
 		OnClick = { ResetScenario },
 		backgroundColor = { 1, 0.8, 0.4, 1 }
-	}
-	UI.Scenario.IncludeMissions = Chili.Checkbox:New{
-		parent = UI.MainWindow,
-		x = "71%",
-		y = "88%",
-		width = "20%",
-		height = "7%",
-		boxsize = 30,
-		boxalign = "left",
-		checked = false,
-		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
-		}		
-	}
-	UI.Scenario.ExportGame = Chili.Button:New{
-		parent = UI.MainWindow,
-		x = "30%",
-		y = "88%",
-		width = "40%",
-		height = "7%",
-		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
-		backgroundColor = { 0.4, 0, 0.6, 1 },
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25
-		},
-		OnClick = { ExportGame }
 	}
 	UI.Scenario.Import = Chili.Button:New{
 		parent = UI.MainWindow,
@@ -740,6 +726,7 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
+	UI.MainWindow:RemoveChild(UI.ExportGameButton)
 	UI.MainWindow:RemoveChild(UI.BackButton)
 	
 	UI.MainWindow:RemoveChild(UI.NewLevel.Title)
@@ -752,8 +739,6 @@ function ClearUI() -- Remove UI elements from the screen
 	
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:RemoveChild(UI.Scenario.ExportGame)
-	UI.MainWindow:RemoveChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
@@ -769,6 +754,9 @@ function ClearTemporaryUI() -- Remove pop-ups
 	if UI.Scenario.Warning then
 		UI.Scenario.Warning:Dispose()
 	end
+	if UI.Scenario.ExportGame then
+		UI.Scenario.ExportGame:Dispose()
+	end
 end
 
 function MainMenuFrame() -- Shows the main menu
@@ -777,6 +765,7 @@ function MainMenuFrame() -- Shows the main menu
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
 	UI.MainWindow:AddChild(UI.EditScenarioButton)
+	UI.MainWindow:AddChild(UI.ExportGameButton)
 end
 
 function NewMissionFrame() -- Shows the new mission menu
@@ -804,8 +793,6 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:AddChild(UI.Scenario.ExportGame)
-	UI.MainWindow:AddChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
@@ -1033,6 +1020,104 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 	UI.Scenario.ImportScenario = window
 end
 
+function ExportGameFrame()
+	ClearTemporaryUI()
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '20%',
+		y = '20%',
+		width = '60%',
+		height = '60%',
+		draggable = false,
+		resizable = false
+	}
+	Chili.Label:New{
+		parent = window,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "10%",
+		caption = "Export game",
+		align = "center",
+		valing = "center",
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30
+		}
+	}
+	local scrollPanel = Chili.ScrollPanel:New{
+		parent = window,
+		x = '0%',
+		y = '10%',
+		width = '100%',
+		height = '80%'
+	}
+	local closeButton = Chili.Button:New{
+		parent = window,
+		x = '90%',
+		y = '0%',
+		width = '10%',
+		height = '10%',
+		caption = LAUNCHER_X,
+		OnClick = { function() window:Dispose() end }
+	}
+	closeButton.font.color = { 1, 0, 0, 1 }
+	local includeMissions = Chili.Checkbox:New{
+		parent = window,
+		x = "0%",
+		y = "90%",
+		width = "100%",
+		height = "10%",
+		boxsize = 30,
+		boxalign = "left",
+		checked = false,
+		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		}
+	}
+	local scenarioList = VFS.DirList("pp_editor/scenarios/", "*.xml", VFS.RAW)
+	if #scenarioList == 0 then
+		Chili.TextBox:New{
+			parent = scrollPanel,
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 30,
+				color = { 1, 0, 0, 1 }
+			}
+		}
+	else
+		for i, scen in ipairs(scenarioList) do
+			local name = string.gsub(scen, "pp_editor\\scenarios\\", "")
+			Chili.Button:New{
+				parent = scrollPanel,
+				x = '0%',
+				y = (i-1) * 60,
+				width = '100%',
+				height = 60,
+				caption = name,
+				OnClick = { function()
+					IncludeAllMissions = includeMissions.checked
+					LoadScenario(serde.deserialize(VFS.LoadFile("pp_editor/scenarios/"..name)))
+					ExportGame()
+					window:Dispose()
+				end },
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 20
+				}
+			}
+		end
+	end
+	UI.Scenario.ExportGame = window
+end
+
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
 	Language = lang
 	GetLauncherStrings(lang)
@@ -1041,6 +1126,7 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
+	UpdateCaption(UI.ExportGameButton, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.QuitButton, LAUNCHER_QUIT)
 	
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
@@ -1052,14 +1138,9 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
-	UpdateCaption(UI.Scenario.ExportGame, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
-	if UI.Scenario.IncludeMissions then -- no SetCaption method for checkbox
-		UI.Scenario.IncludeMissions.caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE
-		UI.Scenario.IncludeMissions:InvalidateSelf()
-	end
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
@@ -1452,7 +1533,7 @@ function BeginExportGame()
 	
 	-- Choose levels
 	local levelList = {}
-	if UI.Scenario.IncludeMissions.checked then
+	if IncludeAllMissions then
 		levelList = LevelListNames
 	else
 		for k, link in pairs(Links) do
