@@ -21,8 +21,8 @@ Trace::sp_trace TracesParser::spe_eme;
 	#endif
 #endif
 
-TracesParser::TracesParser(bool in_game): in_game(in_game), used(false), compressed(false), end(false), proceed(false), launched(false), change(false), start(0), pt(0) {
-	Call::paramsMap.initMap(in_game);
+TracesParser::TracesParser(bool in_game): in_game(in_game), used(false), compressed(false), end(false), proceed(false), start(0), pt(0) {
+	
 }
 
 /*
@@ -63,7 +63,6 @@ void TracesParser::endParse() {
 	end = false;
 	compressed = false;
 	proceed = false;
-	launched = false;
 	if (ifs.is_open())
 		ifs.close();
 	#ifdef DEBUG
@@ -88,6 +87,10 @@ void TracesParser::writeFiles(bool online) {
 	}
 	exportTraceToXml();
 	compressed = true;
+}
+
+void TracesParser::initParamsMap(const std::string& json) {
+	Call::paramsMap.initMap(json);
 }
 
 /* 
@@ -234,7 +237,7 @@ void TracesParser::readTracesOffline() {
 
 void TracesParser::readTracesOfflineInGame() {
 	std::string line;
-	change = false;
+	bool change = false;
 	while (!end) {
 		while (std::getline(ifs, line)) {
 			lineNum++;
@@ -249,8 +252,6 @@ void TracesParser::readTracesOfflineInGame() {
 					start = traces.size();
 					if (spe->getLabel().compare("new_execution") == 0) {
 						change = true;
-						if (!launched)
-							launched = true;
 					}
 				}
 				else
@@ -1054,29 +1055,25 @@ void TracesParser::display(std::ostream &os) {
 		Trace::numTab = 0;
 }
 
-std::vector<Trace::sp_trace> TracesParser::importTraceFromXml(const std::string& dir_path, const std::string& filename) {
+std::vector<Trace::sp_trace> TracesParser::importTraceFromXml(const std::string& xml) {
 	std::vector<Trace::sp_trace> traces;
-	if (filename.find(".xml") != std::string::npos) {
-		std::string s = dir_path + "\\" + filename;
-		try {
-			rapidxml::file<> xmlFile(s.c_str());
-			rapidxml::xml_document<> doc;
-			doc.parse<0>(xmlFile.data());
-			rapidxml::xml_node<> *root_node = doc.first_node("trace");
-			if (root_node != 0) {
-				std::cout << "begin import from XML file " << s << std::endl;
-				importTraceFromNode(root_node->first_node(),traces);
-				for (unsigned int i = 0; i < traces.size(); i++)
-					traces.at(i)->display();
-				std::cout << "end import from XML" << std::endl;
-			}
-		}
-		catch (const std::runtime_error& e) {
-			std::cout << e.what() << std::endl;
+	try {
+		std::vector<char> xml_content(xml.begin(), xml.end());
+		xml_content.push_back('\0');
+		rapidxml::xml_document<> doc;
+		doc.parse<0>(&xml_content[0]);
+		rapidxml::xml_node<> *root_node = doc.first_node("trace");
+		if (root_node != 0) {
+			std::cout << "begin import from XML file" << std::endl;
+			importTraceFromNode(root_node->first_node(),traces);
+			for (unsigned int i = 0; i < traces.size(); i++)
+				traces.at(i)->display();
+			std::cout << "end import from XML" << std::endl;
 		}
 	}
-	else
-		std::cout << "importTraceFromXml : not a xml file" << std::endl;
+	catch (const std::runtime_error& e) {
+		std::cout << e.what() << std::endl;
+	}
 	return traces;
 }
 
@@ -1300,14 +1297,6 @@ bool TracesParser::compressionDone() {
 		return true;
 	}
 	return false;
-}
-
-bool TracesParser::hasLaunched() {
-	return launched;
-}
-
-void TracesParser::setChange() {
-	change = true;
 }
 
 /**

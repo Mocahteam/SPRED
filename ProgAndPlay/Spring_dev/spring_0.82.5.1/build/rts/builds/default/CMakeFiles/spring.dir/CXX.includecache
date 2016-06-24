@@ -16827,6 +16827,10 @@ lib/pp/traces/TracesAnalyser.h
 ../rts/Game/lib/pp/traces/TracesAnalyser.h
 Lua/LuaHandle.h
 ../rts/Game/Lua/LuaHandle.h
+System/FileSystem/VFSHandler.h
+../rts/Game/System/FileSystem/VFSHandler.h
+System/FileSystem/ArchiveScanner.h
+../rts/Game/System/FileSystem/ArchiveScanner.h
 boost/thread.hpp
 -
 
@@ -22355,6 +22359,10 @@ lib/pp/traces/TracesAnalyser.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/lib/pp/traces/TracesAnalyser.h
 Lua/LuaHandle.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/Lua/LuaHandle.h
+System/FileSystem/VFSHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/FileSystem/VFSHandler.h
+System/FileSystem/ArchiveScanner.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/FileSystem/ArchiveScanner.h
 boost/thread.hpp
 -
 

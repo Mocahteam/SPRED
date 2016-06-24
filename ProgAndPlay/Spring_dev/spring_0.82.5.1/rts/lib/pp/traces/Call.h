@@ -36,34 +36,23 @@ public:
 
 	ParamsMap() : loaded(false) {}
 	
-	void initMap(bool in_game) {
+	void initMap(const std::string& json) {
 		if (!loaded) {
-			std::string filename = PARAMS_FILENAME;
-			if (in_game)
-				filename.insert(0,IN_GAME_DATA_DIRNAME);
 			try {
-				std::ifstream ifs(filename.c_str(), std::ios::binary);
-				if (ifs.good()) {
-					std::stringstream ss;
-					ss << ifs.rdbuf();
-					rapidjson::Document doc;
-					doc.Parse(ss.str().c_str());
-					if (doc.HasParseError())
-						throw std::runtime_error("parse error");
-					if (doc.IsObject()) {
-						for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
-							string_vector v;
-							for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
-								if (_it->value.IsBool() && _it->value.GetBool())
-									v.push_back(_it->name.GetString());
-							}
-							map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
+				rapidjson::Document doc;
+				if (doc.Parse<0>(json.c_str()).HasParseError())
+					throw std::runtime_error("parse error");
+				if (doc.IsObject()) {
+					for (rapidjson::Value::ConstMemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); it++) {
+						string_vector v;
+						for (rapidjson::Value::ConstMemberIterator _it = it->value.MemberBegin(); _it != it->value.MemberEnd(); _it++) {
+							if (_it->value.IsBool() && _it->value.GetBool())
+								v.push_back(_it->name.GetString());
 						}
-						loaded = true;
+						map.insert(std::make_pair<std::string,string_vector>(it->name.GetString(),v));
 					}
+					loaded = true;
 				}
-				else
-					throw std::runtime_error("cannot open JSON params file");
 			}
 			catch (const std::runtime_error& e) {
 				std::cout << e.what() << std::endl;
