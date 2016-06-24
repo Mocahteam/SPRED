@@ -602,9 +602,9 @@ function mapSettingsFrame()
 		elseif minimapState == "disabled" then
 			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 		end
-		if feedbackState == "enabled" then
+		if feedbackState == "enabled" and mapSettingsButtons.feedbackButton then
 			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
-		elseif feedbackState == "disabled" then
+		elseif feedbackState == "disabled" and mapSettingsButtons.feedbackButton then
 			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
 		end
 		mapSettingsButtons.widgetsButton.state.chosen = false -- Reset the state of this button
@@ -780,7 +780,9 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '30%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
 	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
 	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
-	topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
+	if Game.isPPEnabled then
+		topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
+	end
 	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
@@ -1200,18 +1202,72 @@ function initMapSettingsWindow()
 	end
 	colorUI.button.OnClick = {applyColor}
 	
-	mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	mapSettingsButtons.cameraAutoButton.OnClick = {
-		function()
-			if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
-				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
-				cameraAutoState = "disabled"
-			else
-				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-				cameraAutoState = "enabled"
+	if Game.isPPEnabled then
+		mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		mapSettingsButtons.cameraAutoButton.OnClick = {
+			function()
+				if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+					cameraAutoState = "disabled"
+				else
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+					cameraAutoState = "enabled"
+				end
 			end
-		end
-	}
+		}
+		
+		mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+		mapSettingsButtons.mouseStateButton.OnClick = {
+			function()
+				if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+					mouseState = "disabled"
+				else
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+					mouseState = "enabled"
+				end
+			end
+		}
+		
+		mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+		mapSettingsButtons.feedbackButton.OnClick = {
+			function()
+				if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
+					mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+					feedbackState = "disabled"
+				else
+					mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+					feedbackState = "enabled"
+				end
+			end
+		}
+	else
+		mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		mapSettingsButtons.cameraAutoButton.OnClick = {
+			function()
+				if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+					cameraAutoState = "disabled"
+				else
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+					cameraAutoState = "enabled"
+				end
+			end
+		}
+		
+		mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+		mapSettingsButtons.mouseStateButton.OnClick = {
+			function()
+				if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+					mouseState = "disabled"
+				else
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+					mouseState = "enabled"
+				end
+			end
+		}
+	end
 	
 	mapSettingsButtons.autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 	mapSettingsButtons.autoHealButton.OnClick = {
@@ -1226,19 +1282,6 @@ function initMapSettingsWindow()
 		end
 	}
 	
-	mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	mapSettingsButtons.mouseStateButton.OnClick = {
-		function()
-			if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
-				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-				mouseState = "disabled"
-			else
-				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
-				mouseState = "enabled"
-			end
-		end
-	}
-	
 	mapSettingsButtons.minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	mapSettingsButtons.minimapButton.OnClick = {
 		function()
@@ -1248,19 +1291,6 @@ function initMapSettingsWindow()
 			else
 				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 				minimapState = "enabled"
-			end
-		end
-	}
-	
-	mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
-	mapSettingsButtons.feedbackButton.OnClick = {
-		function()
-			if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
-				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
-				feedbackState = "disabled"
-			else
-				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
-				feedbackState = "enabled"
 			end
 		end
 	}

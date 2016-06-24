@@ -145,7 +145,7 @@ end
 
 function Launch(game)
 	if not VFS.FileExists(gameFolder.."/Prog & Play Level Editor for "..game..".sdz") then
-		if Game.version == "0.82.5.1" then
+		if Game.isPPEnabled then
 			if VFS.BuildPPEditor and not VFS.FileExists("mods/Prog & Play Level Editor for "..game..".sdz") then
 				VFS.BuildPPEditor(game)
 			else

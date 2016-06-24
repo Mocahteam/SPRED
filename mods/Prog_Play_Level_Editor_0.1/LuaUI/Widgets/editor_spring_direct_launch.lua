@@ -1557,7 +1557,7 @@ function BeginExportGame()
 	
 	local exportSuccess = false
 	
-	if Game.version == "0.82.5.1" then
+	if Game.isPPEnabled then
 		if VFS.BuildPPGame then
 			VFS.BuildPPGame(scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
 			exportSuccess = true
@@ -1899,7 +1899,6 @@ function CreateMissingDirectories()
 end
 
 function widget:Initialize()
-	Spring.Echo(Game.modName)
 	CreateMissingDirectories()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then
