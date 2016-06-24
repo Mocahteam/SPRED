@@ -475,6 +475,52 @@ actions_list = {
 		}
 	},
 	{
+		type = "union",
+		filter = "Group",
+		typeText = "Union between 2 Unitsets",
+		text = "Set <Group> to the union between <UnitSet1> and <UnitSet2>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<UnitSet1>",
+				type = "unitset",
+				id = "unitset1"
+			},
+			{
+				text = "<UnitSet2>",
+				type = "unitset",
+				id = "unitset2"
+			}
+		}
+	},
+	{
+		type = "intersection",
+		filter = "Group",
+		typeText = "Intersection between 2 Unitsets",
+		text = "Set <Group> to the intersection between <UnitSet1> and <UnitSet2>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<UnitSet1>",
+				type = "unitset",
+				id = "unitset1"
+			},
+			{
+				text = "<UnitSet2>",
+				type = "unitset",
+				id = "unitset2"
+			}
+		}
+	},
+	{
 		type = "showZone",
 		filter = "Zone",
 		typeText = "Show zone in game",
