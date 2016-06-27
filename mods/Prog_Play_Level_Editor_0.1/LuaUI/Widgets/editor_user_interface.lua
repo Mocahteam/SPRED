@@ -3865,7 +3865,7 @@ function configureEvent() -- Show the event configuration window
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
 							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-							addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count

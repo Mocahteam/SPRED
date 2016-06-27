@@ -624,6 +624,16 @@ actions_list = {
 	}
 }
 
+-- Disable PP actions when not in a PP version of Spring
+if not Game.isPPEnabled then
+	for i, a in ipairs(actions_list) do
+		if a.type == "feedback" then
+			table.remove(actions_list, i)
+			break
+		end
+	end
+end
+
 -- COLOR TEXT
 for i, a in ipairs(actions_list) do
 	for ii, attr in ipairs(a.attributes) do
