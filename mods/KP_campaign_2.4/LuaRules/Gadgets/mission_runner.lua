@@ -246,6 +246,12 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "displayMessageOnPosition" then
     --Spring.Echo("try to on pos")
     local p=json.decode(arg2)
+    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time)
+    
+  elseif arg1 == "displayZone" then
+    --Spring.Echo("try to on pos")
+    local zone=json.decode(arg2)
+    Script.LuaUI.AddZoneToDisplayList(zone)
     
   elseif arg1 == "changeWidgetState" then
     -- This may be not the better approach to activate/deactivate widgets

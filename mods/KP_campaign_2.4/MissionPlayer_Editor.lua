@@ -736,7 +736,7 @@ local function ApplyNonGroupableAction(act)
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/ctx.speedFactor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,y=y,z=z,time=act.params.time/ctx.speedFactor}))
     
     
    --[[ Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -1400,6 +1400,10 @@ local function StartAfterJson ()
     if(cZ.marker)then
       Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, cZ.name)
     end 
+    if cZ.showInGame==true then
+       SendToUnsynced("displayZone", json.encode(cZ))    
+    end
+    --displayZone
   end
 end
    
