@@ -448,7 +448,7 @@ end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
-	if key == KEYSYMS.ESCAPE then
+	if key == KEYSYMS.ESCAPE and Spring.GetModOptions()["testmap"]==nil then
 	  Spring.Echo("escape pushed")
 	  Spring.Echo(briefing)
 	  Spring.Echo(winPopup)

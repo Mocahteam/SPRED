@@ -112,7 +112,6 @@
 --@returns Returns a string representation of table
 
 local M = {}
-local stack = contx:Include("LuaXML/luaxml-stack.lua") -- require("luaxml-stack")
 
 local function showTable(t)
     local sep = ''
