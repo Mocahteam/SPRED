@@ -1,3 +1,16 @@
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99) -- nil test is made because prior to v92 Game.Version is an ugly string (e.g 0.82)
+local gameName=Game.gameShortName or Game.modShortName
+
+local function saveTxt(txt)
+  Spring.Echo(gameName)
+  local file=io.open("Savegames/"..gameName.."/currentSave.sav","wb")
+  file:write(txt)
+  file:flush()
+  file:close()
+end
+
+
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
   -- for exemple, as it happened, using a key such as mode when gamemode already exists.
@@ -27,11 +40,8 @@ function DoTheRestart(startscriptfilename, tableOperation)
 		file:write(VFS.LoadFile("infolog.txt"))
 		file:flush()
 		file:close()
-		if Game.version == "0.82.5.1" then
-			Spring.Restart(params,trimmed)
-		else
-			Spring.Reload(trimmed)
-		end
+		saveTxt(trimmed)
+		Spring.Restart(params,trimmed)
 		Spring.Echo(widget:GetInfo().name..": Just called Spring.Restart(\""..params.."\",\"[GAME]{..}\")")
 		Spring.Echo(widget:GetInfo().name..": Wait, we shouldn't be here, should have restarted or crashed or quitted by now.")
 	else
@@ -51,7 +61,6 @@ function replaceSection(fullfile,sectionName,replacement)
 end
 
 function updateValues(fullFile,tableOperation)
-	Spring.Echo(fullFile)
   -- works as follow : will replace the entire sections. 
   -- For each section concerned a copy is made and replacements are done within this section
   -- If the attribute is not present then it is added at the end of the section
@@ -91,16 +100,141 @@ end
 local function createFromScratch(editorTables)
   local file=""
   -- GLOBAL OPTIONS
-  file=file.."[GAME]\r\n" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
+  file=file.."[GAME]\r\n{" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
-  local name=editorTables.description.safename or "unamed"
+  local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype="Prog & Play Level Editor 0.1", MyPlayerName="Player"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
+  local indexPlayer=0
+  local indexIA=0
+  local nteam=0
+  
+  -- find max 
+  local max=0
   for teamNumber,teamInformations in pairs(editorTables.teams) do
-    local allyTeamInformation=pairs(editorTables.allyteams[teamNumber])
+    if teamInformations.enabled and (tonumber(teamNumber)>max)then max=tonumber(teamNumber) end
+  end
+  
+  
+  for teamNumber,teamInformations in pairs(editorTables.teams) do
+    local allyTeamInformation=editorTables.allyteams[teamNumber]
+    -- Write first section : who controls the team (player/IA)
+    if(tonumber(teamNumber)<=max)then 
+      nteam=nteam+1
+      if (teamInformations.control=="player" and teamInformations.enabled==true) then 
+-- if a team is player controled but disabled it should not be stored as a player  
+-- controled team to avoid bug "Player1 has name player which is already taken" 
+        local sectionName="PLAYER"..tostring(indexPlayer)
+        local name=teamInformations.name or string.lower(sectionName)
+        indexPlayer=indexPlayer+1
+        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
+        file=writeAttributesAndSection(file,sectionName, 1, tableController)   
+      else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
+      -- when max is attained, it's not necessary to add disabled teams anymore
+        local sectionName="AI"..tostring(indexIA)
+        indexIA=indexIA+1
+        local name=teamInformations.name or string.lower(sectionName)
+        local shortName="NullAI"
+        if(teamInformations.ai~=nil and teamInformations.ai~="")then
+          shortName=teamInformations.ai
+        end
+        
+        local tableController={Name=name ,ShortName=shortName,fixedallies="0",Team=tostring(teamNumber),Host="0"} 
+        file=writeAttributesAndSection(file,sectionName, 1, tableController) 
+      end  
+      -- Write Second section : information about the team (player/IA)
+      local teamSectionName="TEAM"..tostring(teamNumber)
+      local arbitraryPosition=tostring(teamNumber*200+100)
+      local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.green).." "..tostring(teamInformations.color.blue)
+      --local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.blue).." "..tostring(teamInformations.color.green)
+      local tableController={TeamLeader="0" ,AllyTeam=tostring(teamNumber),RGBColor=rGBColor,Side="System",StartPosX=arbitraryPosition,StartPosZ=arbitraryPosition} 
+      file=writeAttributesAndSection(file,teamSectionName, 1, tableController)
+      
+      -- Write Third section : information about the allyteam (1 allyteam by team)
+      local allyTeamSectionName="ALLYTEAM"..tostring(teamNumber)
+      local NumAllies=table.getn(allyTeamInformation)
+      local tableAllyTeam={NumAllies=NumAllies}    
+      for i,u in pairs(allyTeamInformation) do
+        local allyKey="Ally"..tostring(i-1)
+        tableAllyTeam[allyKey]=u
+      end
+      file=writeAttributesAndSection(file,allyTeamSectionName, 1, tableAllyTeam)  
+    end   
+  end
+  file=file.."\n}"
+  return file
+end
+
+function restartWithEditorFile(editorTables)
+  local txtFileContent=createFromScratch(editorTables)
+  Spring.Echo(txtFileContent)--comment the next lines to see this output
+  if(reloadAvailable) then
+    Spring.Reload(txtFileContent) --(this line, yes)
+  else
+    Spring.Restart("-s",txtFileContent)--( and this line too)
   end
 end
 
+-- restart can be used for .editor files or .txt files giving some (or none) updating operation
+-- a bit of copy pasta in this function, could be refractored easily
+function genericRestart(missionName,operations,contextFile)
+   local updatedTxtFileContent=""
+   if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
+     if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
+        local sf=VFS.LoadFile("Missions/"..missionName..".editor")-- because we are in the context : Ingame
+        local tableEditor=json.decode(sf)
+        local txtFileContent=createFromScratch(tableEditor)
+        updatedTxtFileContent=updateValues(txtFileContent, operations)
+        saveTxt(updatedTxtFileContent)
+        Spring.Restart("-s",updatedTxtFileContent)
+        --Spring.Reload(updatedTxtFileContent)
+     else
+        DoTheRestart("Missions/"..missionName.."txt", operations)  
+     end
+   else -- meaning Not in game, we just have access to the file name
+    if (string.sub(missionName, -3, -1)=="txt")then      
+      DoTheRestart(missionName, operations)  
+    elseif (string.sub(missionName, -6, -1)=="editor")then
+      local sf=VFS.LoadFile(missionName)
+      Spring.Echo("try to decode")
+      Spring.Echo(missionName)
+      local tableEditor=json.decode(sf)
+      Spring.Echo("decoded with success")
+      local txtFileContent=createFromScratch(tableEditor)
+      updatedTxtFileContent=updateValues(txtFileContent, operations)
+      saveTxt(updatedTxtFileContent)
+      --Spring.Restart("-s",updatedTxtFileContent)
+        if(reloadAvailable) then
+          Spring.Reload(updatedTxtFileContent) --(this line, yes)
+        else
+        --Spring.Echo(updatedTxtFileContent)
+        Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+        end
+    else
+      Spring.Echo("Warning, pbm in restart script")
+    end   
+  end
+end   
+
+
+function restartToConnect(playerName,IP)
+  local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
+  local file=writeAttributesAndSection("","GAME", 0, table2)
+  Spring.Reload(file)--(this line, yes)
+  --  Spring.Restart("-s",file)--(this line, yes)
+--[[
+[GAME]
+{
+  HostIP=132.227.207.137;
+  Hostport=8451;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
+  IsHost=0;           // 0: no server will be started in this instance
+                      // 1: start a server
+  
+  MyPlayerName=Player2; // our ingame-name (needs to match one players Name= field)
+}
+--]]
+end 
+      

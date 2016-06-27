@@ -17,7 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
 local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua") -- XML serializer/deserializer
-local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua") -- Json serializer/deserializer
+local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua") -- Json serializer/deserializer
 local Chili, Screen0 -- Chili
 local IsActive = false -- True if this widget has to be shown
 local HideView = false -- True if there is need for a black background

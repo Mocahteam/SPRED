@@ -684,14 +684,14 @@ function testLevel()
 					["scenario"] = "noScenario",
 					["maingame"] = MainGame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["testmap"] = levelFile.description.saveName
+					["testmap"] = json.encode(levelFile)
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
 					["Gametype"] = Game.modName
 				}
 			}
-			DoTheRestart("LevelEditor.txt", operations)
+			genericRestart("SPRED/missions/"..saveName..".editor", operations, true)
 		end
 	end
 	
@@ -1311,7 +1311,7 @@ end
 function initTestLevelFrame()
 	local win = addWindow(Screen0, '80%', '0%', '20%', '10%', false)
 	local function returnToEditor()
-		local levelFile = VFS.LoadFile("SPRED/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
+		local levelFile = VFS.LoadFile("SPRED/missions/"..Spring.GetModOptions().missionname..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		local operations = {
 			["MODOPTIONS"] = {
