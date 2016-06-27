@@ -12,11 +12,11 @@ cd ..\KP_campaign_2.4
 ..\7za.exe a -r -tzip -y -xr!.svn ..\editor_launcher_tmp\game_files.sdz *
 rem final archive
 cd ..\editor_launcher_tmp
-..\7za.exe a -r -tzip -y -xr!.svn ..\PPLE_Launcher.sdz *
+..\7za.exe a -r -tzip -y -xr!.svn ..\SPRED.sdz *
 cd ..
 rmdir /Q /S editor_launcher_tmp
 
-del ..\..\mods\PPLE_Launcher.sdz
-move PPLE_Launcher.sdz ..\..\mods\PPLE_Launcher.sdz
+del ..\..\mods\SPRED.sdz
+move SPRED.sdz ..\..\mods\SPRED.sdz
 cd ..\..
 spring.exe
