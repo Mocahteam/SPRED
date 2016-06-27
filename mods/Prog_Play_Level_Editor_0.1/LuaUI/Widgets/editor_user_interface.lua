@@ -29,7 +29,6 @@ local windows, topBarButtons = {}, {} -- references to UI elements
 local testLevelButton
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
-local UIelements = {}
 
 -- File Variables
 local fileButtons = {}
@@ -300,7 +299,6 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
-	table.insert(UIelements, button)
 	return button
 end
 
@@ -320,7 +318,6 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
-	table.insert(UIelements, label)
 	return label
 end
 
@@ -338,7 +335,6 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
-	table.insert(UIelements, textBox)
 	return textBox
 end
 
@@ -400,7 +396,6 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	else
 		editBox.font.size = 16
 	end
-	table.insert(UIelements, editBox)
 	return editBox
 end
 
@@ -416,7 +411,6 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		boxsize = _h or 10,
 		checked = _checked or false
 	}
-	table.insert(UIelements, checkBox)
 	return checkBox
 end
 
@@ -448,7 +442,6 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
-	table.insert(UIelements, comboBox)
 	return comboBox
 end
 
@@ -4404,7 +4397,7 @@ end
 function initWidgetList() -- Remove some widgets linked directly to SPRED from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
-		if w.author ~= "mocahteam" and k == "Chili Framework" then
+		if w.author ~= "mocahteam" and k ~= "Chili Framework" then
 			local customWidget = {}
 			customWidget.name = k
 			customWidget.active = false
@@ -5411,29 +5404,12 @@ function widget:Update(delta)
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
-	
-	-- Remove UI elements that do not have a parent from the table so their text size is not updated
-	local toBeRemoved = {}
-	for i, obj in ipairs(UIelements) do
-		if not obj.parent then
-			table.insert(toBeRemoved, i)
-		end
-	end
-	for _, i in ipairs(toBeRemoved) do
-		table.remove(UIelements, i)
-	end
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
 		local textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
-		--recursiveResize(Screen0, textSize)
-		for i, obj in ipairs(UIelements) do
-			if obj.font then
-				obj.font.size = obj.font.size * textSize
-				obj:InvalidateSelf()
-			end
-		end
+		-- todo
 		screenSizeX, screenSizeY = dse_vsx, dse_vsy
 	end
 end

@@ -33,7 +33,9 @@ function InitializeMenu()
 		x = "0%",
 		y = "0%",
 		width = "100%",
-		height = "100%"
+		height = "100%",
+		resizable = false,
+		draggable = false
 	}
 	Chili.Label:New{
 		parent = MainWindow,
@@ -41,7 +43,7 @@ function InitializeMenu()
 		y = "5%",
 		width = "100%",
 		height = "10%",
-		caption = "Choose a master game",
+		caption = "Choose the master game",
 		align = "center",
 		valign = "center",
 		font = {
@@ -50,27 +52,25 @@ function InitializeMenu()
 			color = { 0.2, 0.6, 0.8, 1 }
 		}
 	}
-	Chili.Label:New{
+	Chili.TextBox:New{
 		parent = MainWindow,
-		x = "0%",
+		x = "10%",
 		y = "15%",
-		width = "100%",
-		height = "5%",
-		caption = "This game will be the base of the editor : it will define units and their behaviour, and will be required to play the created missions.",
-		align = "center",
-		valign = "center",
+		width = "80%",
+		height = "10%",
+		text = "This game will be the base of the editor : it will define units and their behaviour, and will be required to play the created missions. Once a game has been chosen, a new archive corresponding to the editor for the chosen mod will be created. Spring will restart using this new archive. Afterwards, you will be able to launch the editor using the archive directly from the launcher.",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 23,
 			color = { 0.6, 0.6, 0.8, 1 }
 		}
 	}
 	local sp = Chili.ScrollPanel:New{
 		parent = MainWindow,
 		x = "20%",
-		y = "20%",
+		y = "25%",
 		width = "60%",
-		height = "60%"
+		height = "50%"
 	}
 	local gameList = {}
 	gameList = VFS.GetGames()
@@ -98,7 +98,7 @@ function InitializeMenu()
 	ErrorMessage1 = Chili.Label:New{
 		parent = MainWindow,
 		x = "0%",
-		y = "85%",
+		y = "90%",
 		width = "100%",
 		height = "5%",
 		caption = "",
@@ -113,7 +113,7 @@ function InitializeMenu()
 	ErrorMessage2 = Chili.Label:New{
 		parent = MainWindow,
 		x = "0%",
-		y = "90%",
+		y = "95%",
 		width = "100%",
 		height = "5%",
 		caption = "",
@@ -146,7 +146,7 @@ end
 function Launch(game)
 	if not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 		if Game.isPPEnabled then
-			if VFS.BuildPPEditor and not VFS.FileExists("mods/SPRED for "..game..".sdz") then
+			if VFS.BuildPPEditor and not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 				VFS.BuildPPEditor(game)
 			else
 				ErrorMessage1:SetCaption("The editor does not work on the version of Spring you are using.")
