@@ -4,6 +4,9 @@ local gameName=Game.gameShortName or Game.modShortName
 
 local function saveTxt(txt)
   Spring.Echo(gameName)
+  if(not VFS.FileExists("Savegames/"..gameName.."/"))then
+    Spring.CreateDir("Savegames/"..gameName.."/")
+  end
   local file=io.open("Savegames/"..gameName.."/currentSave.sav","wb")
   file:write(txt)
   file:flush()
@@ -41,7 +44,11 @@ function DoTheRestart(startscriptfilename, tableOperation)
 		file:flush()
 		file:close()
 		saveTxt(trimmed)
-		Spring.Restart(params,trimmed)
+		if reloadAvailable then
+			Spring.Reload(trimmed)
+		else
+			Spring.Restart(params,trimmed)
+		end
 		Spring.Echo(widget:GetInfo().name..": Just called Spring.Restart(\""..params.."\",\"[GAME]{..}\")")
 		Spring.Echo(widget:GetInfo().name..": Wait, we shouldn't be here, should have restarted or crashed or quitted by now.")
 	else
