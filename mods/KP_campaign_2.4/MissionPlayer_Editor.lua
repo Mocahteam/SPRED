@@ -120,10 +120,6 @@ local function load_code(code)
     end
 end
 
--------------------------------------
--- Compare numerical values, a verbal "mode" being given 
--- @return nil or list
--------------------------------------
 local function intersection(list1,list2)
   local inters={}
   if list1==nil then return nil end
@@ -136,9 +132,23 @@ local function intersection(list1,list2)
       end
     end
   end
-  --Spring.Echo("resuilt of interset")
-  --Spring.Echo(json.encode(inters))
   return inters
+end
+
+-- warning, if intersection is non void, duplicates will occur.
+local function union(list1,list2)
+  local union={}
+  if (list1~=nil) then
+    for i,el in pairs(list1)do
+      table.insert(union,el)
+    end
+  end  
+  if (list2~=nil) then
+    for i,el in pairs(list2)do
+      table.insert(union,el)
+    end
+  end
+  return union
 end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
@@ -498,6 +508,21 @@ local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
     end
   end
 end  
+
+local function addUnitsToGroups(units,groups,testOnExternalsOnly)
+  for u,unit in pairs(units) do
+    addUnitToGroups(unit,groups,testOnExternalsOnly)
+  end
+end
+
+local function unitSetParamsToUnitsExternal(param)
+  local index = param.type..'_'..tostring(param.value)
+  units = ctx.groupOfUnits[index]
+  if(ctx.groupOfUnits[index] == nil)then
+    EchoDebug("warning. This index gave nothing : "..index,7)
+  end
+  return units
+end
    
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
@@ -749,6 +774,21 @@ local function ApplyNonGroupableAction(act)
     local widgetName=act.params.widget
     local activation=(act.type=="enableWidget")
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+  
+  elseif (act.type == "intersection") or (act.type == "union") then
+    local g1=unitSetParamsToUnitsExternal(act.params.unitset1)
+    local g2=unitSetParamsToUnitsExternal(act.params.unitset2)
+    local g3
+    EchoDebug("act.params intersec/union -> "..json.encode(act.params),3 )
+    if(act.type == "intersection")then
+      g3=intersection(g1,g2)
+    elseif(act.type == "union")then
+      g3=union(g1,g2) -- at this point, duplicates will occur, but addUnitsToGroups for duplicates
+    end
+    EchoDebug("g3 -> "..json.encode(g3),3 )
+    EchoDebug("before -> "..json.encode(ctx.groupOfUnits) ,3 )
+    addUnitsToGroups(g3,{"group_"..tostring(act.params.group)},false)
+    EchoDebug("after -> "..json.encode(ctx.groupOfUnits) ,3 )
   else
     EchoDebug("this action is not recognized : "..act.type,8)  
   end
