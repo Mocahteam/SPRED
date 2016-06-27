@@ -20,8 +20,6 @@ end
 include('keysym.h.lua')
 
 VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart function
-VFS.Include("LuaUI/Widgets/libs/context.lua")
-contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
