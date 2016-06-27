@@ -10,7 +10,7 @@ function widget:GetInfo()
 	}
 end
 
-local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
+local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = {}, {}, {}, {}
 
 function generateCommandsList(encodedList, encodedUnitList)
