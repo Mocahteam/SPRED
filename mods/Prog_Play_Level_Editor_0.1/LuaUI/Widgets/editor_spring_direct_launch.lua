@@ -1577,26 +1577,26 @@ function BeginExportGame()
 		-- Change Modinfo.lua
 		local maingame = MainGame
 		local modInfo = "return { game='SPRED', shortGame='SPRED', name='"..scenarioName.."', shortName='SPRED', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
-		local file = io.open("SPRED/game_files/ModInfo.lua", "w")
+		local file = io.open("SPRED/game/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
 		
 		-- Add levels and scenario
-		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game_files/scenario/"..name..".xml")
+		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
-			os.rename("SPRED/missions/"..level..".editor", "SPRED/game_files/missions/"..level..".editor")
+			os.rename("SPRED/missions/"..level..".editor", "SPRED/game/missions/"..level..".editor")
 		end
 		
 		-- Compress
-		if not VFS.FileExists("SPRED/game_files.sdz") then
-			VFS.CompressFolder("SPRED/game_files")
-			os.rename("SPRED/game_files.sdz", "games/"..name..".sdz")
+		if not VFS.FileExists("SPRED/game.sdz") then
+			VFS.CompressFolder("SPRED/game")
+			os.rename("SPRED/game.sdz", "games/"..name..".sdz")
 		end
 		
 		-- Remove levels and scenario
-		os.rename("SPRED/game_files/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
+		os.rename("SPRED/game/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
-			os.rename("SPRED/game_files/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
+			os.rename("SPRED/game/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
 		end
 		
 		exportSuccess = true

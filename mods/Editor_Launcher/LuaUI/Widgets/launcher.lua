@@ -154,13 +154,13 @@ function Launch(game)
 			end
 		else
 			local modInfo = "return { game='SPRED', shortGame='SPRED', name='SPRED for "..game.."', shortName='SPRED', mutator='official', version='1.0', description='SPRED', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
-			local file = io.open("SPRED/editor_files/ModInfo.lua", "w")
+			local file = io.open("SPRED/editor/ModInfo.lua", "w")
 			file:write(modInfo)
 			file:close()
 			-- Compress Archive
-			if not VFS.FileExists("SPRED/editor_files.sdz") then
-				VFS.CompressFolder("SPRED/editor_files")
-				os.rename("SPRED/editor_files.sdz", "games/SPRED for "..game..".sdz")
+			if not VFS.FileExists("SPRED/editor.sdz") then
+				VFS.CompressFolder("SPRED/editor")
+				os.rename("SPRED/editor.sdz", "games/SPRED for "..game..".sdz")
 			end
 		end
 	end
