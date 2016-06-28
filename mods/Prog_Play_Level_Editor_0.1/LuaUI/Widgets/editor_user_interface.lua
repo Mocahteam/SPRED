@@ -2579,6 +2579,27 @@ function updateTeamConfigPanels() -- Update panels when teams become enabled/dis
 	end
 end
 
+function showWarningMultiplayerMessage()
+	local count = 0
+	for k, tc in pairs(teamControl) do
+		if tc == "player" then
+			count = count + 1
+		end
+	end
+	local text = nil
+	if count < 1 then
+		text = EDITOR_FORCES_TEAMCONFIG_WARNING_NO_PLAYER
+	elseif count > 1 then
+		text = EDITOR_FORCES_TEAMCONFIG_WARNING_MULTIPLAYER
+	end
+	if text then
+		local w = gl.GetTextWidth(text)
+		local x = screenSizeX * 0.5
+		local y = screenSizeY * 0.9
+		gl.Text("\255\255\56\0"..text, x - (30*w/2), y, 30, "s")
+	end
+end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
 --			Triggers state functions
@@ -5282,6 +5303,8 @@ function widget:DrawScreen()
 		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 			showUnitsInformation()
 		end
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES and forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+		showWarningMultiplayerMessage()
 	end
 	showZoneInformation()
 end
