@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  27 JUN 2016 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  28 JUN 2016 14:32
 entering extended mode
 **./level_editor_user_doc.tex
 (level_editor_user_doc.tex
@@ -616,7 +616,7 @@ Package pdftex.def Info: editor-mapsettings.png used on input line 222.
 File: launcher-scenario.png Graphic file (type png)
 
 <use launcher-scenario.png>
-Package pdftex.def Info: launcher-scenario.png used on input line 237.
+Package pdftex.def Info: launcher-scenario.png used on input line 239.
 (pdftex.def)             Requested size: 418.25368pt x 219.78036pt.
  [14 <./editor-mapsettings.png>] [15 <./launcher-scenario.png>] (level_editor_u
 ser_doc.aux) ) 
@@ -646,7 +646,7 @@ pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin-Zigaroula-\AppData
 \Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Ben
 jamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
 rm1728.pk>
-Output written on level_editor_user_doc.pdf (15 pages, 4866938 bytes).
+Output written on level_editor_user_doc.pdf (15 pages, 4867778 bytes).
 PDF statistics:
  539 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

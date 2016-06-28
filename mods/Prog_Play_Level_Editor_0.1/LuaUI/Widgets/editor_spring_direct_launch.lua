@@ -803,7 +803,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		width = '60%',
 		height = '20%',
 		draggable = true,
-		resizable = false
+		resizable = false,
+		color = {1, 1, 1, 1}
 	}
 	local closeButton = Chili.Button:New{
 		parent = window,
@@ -823,7 +824,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_NAME
@@ -836,7 +838,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		text = ScenarioName,
 		hint = LAUNCHER_SCENARIO_NAME_DEFAULT
@@ -849,7 +852,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_DESCRIPTION
@@ -862,7 +866,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 16
+			size = 16,
+			shadow = false
 		},
 		text = ScenarioDesc,
 		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
@@ -895,6 +900,16 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		window:Dispose()
 		ExportScenario(name, desc)
 	end }
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
 	UI.Scenario.ExportScenario = window
 end
 
@@ -949,6 +964,16 @@ function ImportScenarioFrameWarning() -- Shows a warning if trying to load when 
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 25
 			}
+		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
 		}
 		UI.Scenario.Warning = window
 	else
@@ -1013,6 +1038,16 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 			}
 		end
 	end
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
 	UI.Scenario.ImportScenario = window
 end
 
@@ -1038,7 +1073,8 @@ function ExportGameFrame()
 		valing = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30
+			size = 30,
+			shadow = false
 		}
 	}
 	local scrollPanel = Chili.ScrollPanel:New{
@@ -1111,6 +1147,16 @@ function ExportGameFrame()
 			}
 		end
 	end
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
 	UI.Scenario.ExportGame = window
 end
 
@@ -1756,6 +1802,16 @@ function BackWarning()
 				size = 25
 			}
 		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
+		}
 		UI.Scenario.Warning = window
 	else
 		MainMenuFrame()
@@ -1813,6 +1869,16 @@ function QuitWarning()
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 25
 			}
+		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
 		}
 		UI.Scenario.Warning = window
 	else

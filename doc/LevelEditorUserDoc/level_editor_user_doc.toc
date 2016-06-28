@@ -43,6 +43,7 @@
 \contentsline {paragraph}{ }{13}
 \contentsline {paragraph}{ }{13}
 \contentsline {subsection}{\numberline {3.7}Gestion des traces expertes}{14}
+\contentsline {paragraph}{ }{14}
 \contentsline {section}{\numberline {4}Cr\IeC {\'e}ation du jeu final}{14}
 \contentsline {paragraph}{ }{14}
 \contentsline {subsection}{\numberline {4.1}Sc\IeC {\'e}narisation}{14}

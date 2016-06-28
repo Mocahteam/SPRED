@@ -618,7 +618,7 @@ function tracesFrame()
 			tracesUI.message:Dispose()
 		end
 		local missionName = generateSaveName(mapDescription.mapName)
-		local tracesList = VFS.DirList("traces/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
+		local tracesList = VFS.DirList("traces/data/expert/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
 		tracesUI.textbox:SetText("")
 		if #tracesList == 0 then
 			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
