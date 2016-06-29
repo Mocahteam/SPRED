@@ -347,6 +347,19 @@ C-AIInterface/fast:
 .PHONY : C-AIInterface/fast
 
 #=============================================================================
+# Target rules for targets named Python-AIInterface
+
+# Build rule for target.
+Python-AIInterface: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 Python-AIInterface
+.PHONY : Python-AIInterface
+
+# fast build rule for target.
+Python-AIInterface/fast:
+	$(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build
+.PHONY : Python-AIInterface/fast
+
+#=============================================================================
 # Target rules for targets named AAI
 
 # Build rule for target.
@@ -686,6 +699,7 @@ help:
 	@$(CMAKE_COMMAND) -E echo "... LegacyCpp-AIWrapper"
 	@$(CMAKE_COMMAND) -E echo "... LegacyCpp-Creg-AIWrapper"
 	@$(CMAKE_COMMAND) -E echo "... C-AIInterface"
+	@$(CMAKE_COMMAND) -E echo "... Python-AIInterface"
 	@$(CMAKE_COMMAND) -E echo "... AAI"
 	@$(CMAKE_COMMAND) -E echo "... CppTestAI"
 	@$(CMAKE_COMMAND) -E echo "... E323AI"

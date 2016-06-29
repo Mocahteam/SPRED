@@ -138,18 +138,222 @@ depend:
 	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
+# Convenience name for target.
+AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/rule:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f CMakeFiles\Makefile2 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/rule
+.PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/rule
+
+# Convenience name for target.
+Python-AIInterface: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/rule
+.PHONY : Python-AIInterface
+
+# fast build rule for target.
+Python-AIInterface/fast:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build
+.PHONY : Python-AIInterface/fast
+
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.obj: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj
+
+# target to build an object file
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
+
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.i: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.i
+
+# target to preprocess a source file
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i
+
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.s: __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.s
+
+# target to generate assembly for a file
+__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+.PHONY : __/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s
+
+__/__/Wrappers/CUtils/SharedLibrary.obj: __/__/Wrappers/CUtils/SharedLibrary.c.obj
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.obj
+
+# target to build an object file
+__/__/Wrappers/CUtils/SharedLibrary.c.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.obj
+
+__/__/Wrappers/CUtils/SharedLibrary.i: __/__/Wrappers/CUtils/SharedLibrary.c.i
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.i
+
+# target to preprocess a source file
+__/__/Wrappers/CUtils/SharedLibrary.c.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.i
+
+__/__/Wrappers/CUtils/SharedLibrary.s: __/__/Wrappers/CUtils/SharedLibrary.c.s
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.s
+
+# target to generate assembly for a file
+__/__/Wrappers/CUtils/SharedLibrary.c.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s
+.PHONY : __/__/Wrappers/CUtils/SharedLibrary.c.s
+
+__/__/Wrappers/CUtils/SimpleLog.obj: __/__/Wrappers/CUtils/SimpleLog.c.obj
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.obj
+
+# target to build an object file
+__/__/Wrappers/CUtils/SimpleLog.c.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.c.obj
+
+__/__/Wrappers/CUtils/SimpleLog.i: __/__/Wrappers/CUtils/SimpleLog.c.i
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.i
+
+# target to preprocess a source file
+__/__/Wrappers/CUtils/SimpleLog.c.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.i
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.c.i
+
+__/__/Wrappers/CUtils/SimpleLog.s: __/__/Wrappers/CUtils/SimpleLog.c.s
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.s
+
+# target to generate assembly for a file
+__/__/Wrappers/CUtils/SimpleLog.c.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.s
+.PHONY : __/__/Wrappers/CUtils/SimpleLog.c.s
+
+__/__/Wrappers/CUtils/Util.obj: __/__/Wrappers/CUtils/Util.c.obj
+.PHONY : __/__/Wrappers/CUtils/Util.obj
+
+# target to build an object file
+__/__/Wrappers/CUtils/Util.c.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj
+.PHONY : __/__/Wrappers/CUtils/Util.c.obj
+
+__/__/Wrappers/CUtils/Util.i: __/__/Wrappers/CUtils/Util.c.i
+.PHONY : __/__/Wrappers/CUtils/Util.i
+
+# target to preprocess a source file
+__/__/Wrappers/CUtils/Util.c.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.i
+.PHONY : __/__/Wrappers/CUtils/Util.c.i
+
+__/__/Wrappers/CUtils/Util.s: __/__/Wrappers/CUtils/Util.c.s
+.PHONY : __/__/Wrappers/CUtils/Util.s
+
+# target to generate assembly for a file
+__/__/Wrappers/CUtils/Util.c.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.s
+.PHONY : __/__/Wrappers/CUtils/Util.c.s
+
+__/__/__/rts/Game/GameVersion.obj: __/__/__/rts/Game/GameVersion.cpp.obj
+.PHONY : __/__/__/rts/Game/GameVersion.obj
+
+# target to build an object file
+__/__/__/rts/Game/GameVersion.cpp.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj
+.PHONY : __/__/__/rts/Game/GameVersion.cpp.obj
+
+__/__/__/rts/Game/GameVersion.i: __/__/__/rts/Game/GameVersion.cpp.i
+.PHONY : __/__/__/rts/Game/GameVersion.i
+
+# target to preprocess a source file
+__/__/__/rts/Game/GameVersion.cpp.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.i
+.PHONY : __/__/__/rts/Game/GameVersion.cpp.i
+
+__/__/__/rts/Game/GameVersion.s: __/__/__/rts/Game/GameVersion.cpp.s
+.PHONY : __/__/__/rts/Game/GameVersion.s
+
+# target to generate assembly for a file
+__/__/__/rts/Game/GameVersion.cpp.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.s
+.PHONY : __/__/__/rts/Game/GameVersion.cpp.s
+
+src-generated/ai.obj: src-generated/ai.c.obj
+.PHONY : src-generated/ai.obj
+
+# target to build an object file
+src-generated/ai.c.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj
+.PHONY : src-generated/ai.c.obj
+
+src-generated/ai.i: src-generated/ai.c.i
+.PHONY : src-generated/ai.i
+
+# target to preprocess a source file
+src-generated/ai.c.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.i
+.PHONY : src-generated/ai.c.i
+
+src-generated/ai.s: src-generated/ai.c.s
+.PHONY : src-generated/ai.s
+
+# target to generate assembly for a file
+src-generated/ai.c.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.s
+.PHONY : src-generated/ai.c.s
+
+src/InterfaceExport.obj: src/InterfaceExport.c.obj
+.PHONY : src/InterfaceExport.obj
+
+# target to build an object file
+src/InterfaceExport.c.obj:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj
+.PHONY : src/InterfaceExport.c.obj
+
+src/InterfaceExport.i: src/InterfaceExport.c.i
+.PHONY : src/InterfaceExport.i
+
+# target to preprocess a source file
+src/InterfaceExport.c.i:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.i
+.PHONY : src/InterfaceExport.c.i
+
+src/InterfaceExport.s: src/InterfaceExport.c.s
+.PHONY : src/InterfaceExport.s
+
+# target to generate assembly for a file
+src/InterfaceExport.c.s:
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build && $(MAKE) -f AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\build.make AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.s
+.PHONY : src/InterfaceExport.c.s
+
 # Help Target
 help:
 	@$(CMAKE_COMMAND) -E echo "The following are some of the valid targets for this Makefile:"
 	@$(CMAKE_COMMAND) -E echo "... all (the default if no target is provided)"
 	@$(CMAKE_COMMAND) -E echo "... clean"
 	@$(CMAKE_COMMAND) -E echo "... depend"
+	@$(CMAKE_COMMAND) -E echo "... Python-AIInterface"
 	@$(CMAKE_COMMAND) -E echo "... edit_cache"
 	@$(CMAKE_COMMAND) -E echo "... install"
 	@$(CMAKE_COMMAND) -E echo "... install/local"
 	@$(CMAKE_COMMAND) -E echo "... install/strip"
 	@$(CMAKE_COMMAND) -E echo "... list_install_components"
 	@$(CMAKE_COMMAND) -E echo "... rebuild_cache"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SSkirmishAISpecifier.obj"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SSkirmishAISpecifier.i"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SSkirmishAISpecifier.s"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SharedLibrary.obj"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SharedLibrary.i"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SharedLibrary.s"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SimpleLog.obj"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SimpleLog.i"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/SimpleLog.s"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/Util.obj"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/Util.i"
+	@$(CMAKE_COMMAND) -E echo "... __/__/Wrappers/CUtils/Util.s"
+	@$(CMAKE_COMMAND) -E echo "... __/__/__/rts/Game/GameVersion.obj"
+	@$(CMAKE_COMMAND) -E echo "... __/__/__/rts/Game/GameVersion.i"
+	@$(CMAKE_COMMAND) -E echo "... __/__/__/rts/Game/GameVersion.s"
+	@$(CMAKE_COMMAND) -E echo "... src-generated/ai.obj"
+	@$(CMAKE_COMMAND) -E echo "... src-generated/ai.i"
+	@$(CMAKE_COMMAND) -E echo "... src-generated/ai.s"
+	@$(CMAKE_COMMAND) -E echo "... src/InterfaceExport.obj"
+	@$(CMAKE_COMMAND) -E echo "... src/InterfaceExport.i"
+	@$(CMAKE_COMMAND) -E echo "... src/InterfaceExport.s"
 .PHONY : help
 
 

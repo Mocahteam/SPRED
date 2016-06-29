@@ -166,6 +166,7 @@ SET(CMAKE_DEPEND_INFO_FILES
   "AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-AIWrapper.dir/DependInfo.cmake"
   "AI/Wrappers/LegacyCpp/CMakeFiles/LegacyCpp-Creg-AIWrapper.dir/DependInfo.cmake"
   "AI/Interfaces/C/CMakeFiles/C-AIInterface.dir/DependInfo.cmake"
+  "AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/DependInfo.cmake"
   "AI/Skirmish/AAI/CMakeFiles/AAI.dir/DependInfo.cmake"
   "AI/Skirmish/CppTestAI/CMakeFiles/CppTestAI.dir/DependInfo.cmake"
   "AI/Skirmish/E323AI/CMakeFiles/E323AI.dir/DependInfo.cmake"

@@ -16831,7 +16831,13 @@ System/FileSystem/VFSHandler.h
 ../rts/Game/System/FileSystem/VFSHandler.h
 System/FileSystem/ArchiveScanner.h
 ../rts/Game/System/FileSystem/ArchiveScanner.h
+System/ConfigHandler.h
+../rts/Game/System/ConfigHandler.h
 boost/thread.hpp
+-
+windows.h
+-
+boost/asio.hpp
 -
 
 ../rts/Game/SelectedUnits.h
@@ -19911,8 +19917,6 @@ boost/lexical_cast.hpp
 -
 Trace.h
 ../rts/lib/pp/traces/Trace.h
-Sequence.h
-../rts/lib/pp/traces/Sequence.h
 
 ../rts/lib/pp/traces/CallDef.h
 cmath
@@ -19955,6 +19959,8 @@ boost/enable_shared_from_this.hpp
 -
 Trace.h
 ../rts/lib/pp/traces/Trace.h
+Call.h
+../rts/lib/pp/traces/Call.h
 
 ../rts/lib/pp/traces/Trace.h
 vector
@@ -19986,6 +19992,8 @@ stack
 limits
 -
 algorithm
+-
+cstdarg
 -
 rapidxml-1.13/rapidxml.hpp
 -
@@ -22363,7 +22371,13 @@ System/FileSystem/VFSHandler.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/FileSystem/VFSHandler.h
 System/FileSystem/ArchiveScanner.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/FileSystem/ArchiveScanner.h
+System/ConfigHandler.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/System/ConfigHandler.h
 boost/thread.hpp
+-
+windows.h
+-
+boost/asio.hpp
 -
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/SelectedUnits.cpp

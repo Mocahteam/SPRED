@@ -4,6 +4,16 @@ int Trace::numTab = 0;
 
 Trace::Trace(TraceType type, std::string info): indSearch(-1), lenSearch(1), endSearch(0), type(type), info(info), delayed(false) {}
 
+// Constructeur utilisé pour cloner un objet Trace
+Trace::Trace(const Trace *t) {
+	type = t->type;
+	info = t->info;
+	delayed = t->delayed;
+	// aligned et parent ne peuvent pas être modifiés par le clone car getAligned() et getParent() retournent des references constantes
+	aligned = t->getAligned();
+	parent = t->getParent();
+}
+
 bool Trace::isSequence() const {
 	return type == SEQUENCE;
 }
@@ -72,17 +82,7 @@ int Trace::inArray(const char *ch, const char *arr[]) {
 	return -1;
 }
 
-unsigned int Trace::getLength(const std::vector<sp_trace>& traces) {
-	unsigned int len = 0;
-	for (unsigned int i = 0; i < traces.size(); i++)
-		len += traces.at(i)->length();
-	return len;
-}
-
-/**
- * Get the neighbours of 'spt' in 'traces' in the range [ind_spt - sub_to_ind, ind_spt + add_to_ind] where ind_spt is the index of 'spt' in 'traces'. 'spt' have to be included in traces.
- */
-Trace::sp_trace Trace::getNeighbour(std::vector<Trace::sp_trace>& traces, Trace::sp_trace& spt, int add_to_ind) {
+Trace::sp_trace Trace::getNeighbour(const std::vector<Trace::sp_trace>& traces, const Trace::sp_trace& spt, int add_to_ind) {
 	Trace::sp_trace nbh;
 	int ind = -1;
 	for (unsigned int i = 0; i < traces.size(); i++) {

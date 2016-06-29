@@ -118,6 +118,11 @@ end
 
 function handleFeedback(str)
 	local json_obj = json.decode(str)
+	--local valmeta = getmetatable(json_obj)
+	--if valmeta.__jsontype == "object" and table.getn(json_obj) == 0 then
+	--	Spring.Echo("empty json_obj")
+	--	return
+	--end
 	local json_string = getFeedbackMessage(json_obj)
 	if json_obj.won ~= nil then -- the mission is over
 		local state = ""
@@ -138,9 +143,11 @@ function handleFeedback(str)
 end
 
 function widget:Initialize()
+	Spring.SetConfigString("Feedbacks Widget", "enabled", 1) -- inform the engine and mission_runner
 	widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
 end
 
 function widget:Shutdown()
+	Spring.SetConfigString("Feedbacks Widget", "disabled", 1) -- inform the engine and mission_runner
 	widgetHandler:DeregisterGlobal("handleFeedback", handleFeedback)
 end

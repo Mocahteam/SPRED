@@ -2557,8 +2557,6 @@ boost/lexical_cast.hpp
 -
 Trace.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
-Sequence.h
-C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/CallDef.h
 cmath
@@ -2611,6 +2609,8 @@ boost/enable_shared_from_this.hpp
 -
 Trace.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
+Call.h
+C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Call.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.cpp
 Trace.h
@@ -2654,6 +2654,8 @@ stack
 limits
 -
 algorithm
+-
+cstdarg
 -
 rapidxml-1.13/rapidxml.hpp
 -

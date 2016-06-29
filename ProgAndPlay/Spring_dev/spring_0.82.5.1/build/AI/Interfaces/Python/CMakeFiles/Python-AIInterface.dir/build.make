@@ -34,10 +34,10 @@ RM = "C:\Program Files (x86)\CMake 2.6\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = C:\PROGRA~2\CMAKE2~1.6\bin\CMAKE-~1.EXE
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
+CMAKE_SOURCE_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
+CMAKE_BINARY_DIR = C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build
 
 # Include any dependencies generated for this target.
 include AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend.make
@@ -50,17 +50,17 @@ include AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj: ../AI/Interfaces/Python/src/InterfaceExport.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c > CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c > CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c -o CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python\src\InterfaceExport.c -o CMakeFiles\Python-AIInterface.dir\src\InterfaceExport.c.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj.requires
@@ -74,17 +74,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj: ../rts/Game/GameVersion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp > CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\rts\Game\GameVersion.cpp -o CMakeFiles\Python-AIInterface.dir\__\__\__\rts\Game\GameVersion.cpp.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj.requires
@@ -98,17 +98,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVer
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj: ../AI/Wrappers/CUtils/SharedLibrary.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SharedLibrary.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SharedLibrary.c.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj.requires
@@ -122,17 +122,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Sha
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj: ../AI/Wrappers/CUtils/SimpleLog.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SimpleLog.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SimpleLog.c.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj.requires
@@ -146,17 +146,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Sim
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj: ../AI/Wrappers/CUtils/Util.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\Util.c -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\Util.c.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj.requires
@@ -170,17 +170,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Uti
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj: ../AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.obj -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp > CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Wrappers\CUtils\SSkirmishAISpecifier.cpp -o CMakeFiles\Python-AIInterface.dir\__\__\Wrappers\CUtils\SSkirmishAISpecifier.cpp.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj.requires
@@ -194,17 +194,17 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSk
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/flags.make
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj: AI/Interfaces/Python/src-generated/ai.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.obj   -c C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.obj   -c C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.i"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c > CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.i
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -E C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c > CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.i
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.s"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c -o CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.s
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && C:\MinGW-gcc4.4\bin\gcc.exe  $(C_DEFINES) $(C_FLAGS) -S C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated\ai.c -o CMakeFiles\Python-AIInterface.dir\src-generated\ai.c.s
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj.requires:
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj.requires
@@ -238,9 +238,9 @@ AI/Interfaces/Python/src-generated/ai.c: ../rts/ExternalAI/Interface/SSkirmishAI
 AI/Interfaces/Python/src-generated/ai.c: ../rts/ExternalAI/Interface/AISEvents.h
 AI/Interfaces/Python/src-generated/ai.c: ../rts/ExternalAI/Interface/AISCommands.h
 AI/Interfaces/Python/src-generated/ai.c: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build.make
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold " Generating Python Interface"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated-builder && C:\Python27\python.exe C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder/generator.py C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1 C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder/templates C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\src-generated-builder && C:\Python27\python.exe C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder/generator.py C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder/templates C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated
 
 AI/Interfaces/Python/src-generated/PyAI/interface.py: AI/Interfaces/Python/src-generated/ai.c
 
@@ -263,9 +263,9 @@ AI/Interfaces/Python/src-generated-builder/template/__init__.py: ../AI/Interface
 AI/Interfaces/Python/src-generated-builder/template/__init__.py: ../AI/Interfaces/Python/builder/event_parser.py
 AI/Interfaces/Python/src-generated-builder/template/__init__.py: ../AI/Interfaces/Python/builder/callback_parser.py
 AI/Interfaces/Python/src-generated-builder/template/__init__.py: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build.make
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "copying builder/ files to C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python && cmake -E copy_directory builder C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "copying builder/ files to C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder"
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python && cmake -E copy_directory builder C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated-builder
 
 AI/Interfaces/Python/src-generated-builder/template/context.py: AI/Interfaces/Python/src-generated-builder/template/__init__.py
 
@@ -324,7 +324,7 @@ AI/Interfaces/Python/AIInterface.dll: AI/Interfaces/Python/CMakeFiles/Python-AII
 AI/Interfaces/Python/AIInterface.dll: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build.make
 AI/Interfaces/Python/AIInterface.dll: AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared module AIInterface.dll"
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Python-AIInterface.dir\link.txt --verbose=$(VERBOSE)
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Python-AIInterface.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/build: AI/Interfaces/Python/AIInterface.dll
@@ -340,7 +340,7 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/requires: AI/Interfaces/P
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/requires
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/clean:
-	cd C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && $(CMAKE_COMMAND) -P CMakeFiles\Python-AIInterface.dir\cmake_clean.cmake
+	cd C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python && $(CMAKE_COMMAND) -P CMakeFiles\Python-AIInterface.dir\cmake_clean.cmake
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/clean
 
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend: AI/Interfaces/Python/src-generated/ai.c
@@ -363,6 +363,6 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend: AI/Interfaces/Pyt
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend: AI/Interfaces/Python/src-generated-builder/generator.py
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend: AI/Interfaces/Python/src-generated-builder/event_parser.py
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend: AI/Interfaces/Python/src-generated-builder/callback_parser.py
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python C:\Users\StephaneMeresse\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1 C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\AI\Interfaces\Python C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python C:\Users\Stephane\Desktop\mocahteam\ProgAndPlay\Spring_dev\spring_0.82.5.1\build\AI\Interfaces\Python\CMakeFiles\Python-AIInterface.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/depend
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feedbacks>
+	<feedback type="seq_lack" priority="0">
+		<expert>
+			<sequence>
+				<call label="PP_Unit_GetHealth"/>
+				<call label="PP_Unit_GetMaxHealth"/>
+			</sequence>
+		</expert>
+		<infos lang="fr">
+			<info>N'oubliez pas de placer une boucle d'attente après avoir ordonné à un assembleur de soigner une unité, sinon elle ne récupérera pas toute sa santé</info>
+		</infos>
+		<infos lang="en">
+			<info>Don't forget the waiting loop after giving the order to an assembler to heal an unit, otherwise it won't fully recover its health</info>
+		</infos>
+	</feedback>
+</feedbacks>

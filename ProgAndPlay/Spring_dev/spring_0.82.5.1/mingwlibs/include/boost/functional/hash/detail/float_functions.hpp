@@ -93,55 +93,49 @@ namespace boost
 
         inline float call_ldexp(float v, int exp)
         {
-            using namespace std;
 #if defined(BOOST_HASH_USE_OVERLOAD_FLOAT_FUNCS) || \
     defined(BOOST_HASH_C99_NO_FLOAT_FUNCS)
-            return ldexp(v, exp);
+            return std::ldexp(v, exp);
 #else
-            return ldexpf(v, exp);
+            return std::ldexpf(v, exp);
 #endif
         }
 
         inline double call_ldexp(double v, int exp)
         {
-            using namespace std;
-            return ldexp(v, exp);
+            return std::ldexp(v, exp);
         }
 
         inline long double call_ldexp(long double v, int exp)
         {
-            using namespace std;
 #if defined(BOOST_HASH_USE_OVERLOAD_FLOAT_FUNCS)
-            return ldexp(v, exp);
+            return std::ldexp(v, exp);
 #else
-            return ldexpl(v, exp);
+            return std::ldexpl(v, exp);
 #endif
         }
 
         inline float call_frexp(float v, int* exp)
         {
-            using namespace std;
 #if defined(BOOST_HASH_USE_OVERLOAD_FLOAT_FUNCS) || \
     defined(BOOST_HASH_C99_NO_FLOAT_FUNCS)
-            return frexp(v, exp);
+            return std::frexp(v, exp);
 #else
-            return frexpf(v, exp);
+            return std::frexpf(v, exp);
 #endif
         }
 
         inline double call_frexp(double v, int* exp)
         {
-            using namespace std;
-            return frexp(v, exp);
+            return std::frexp(v, exp);
         }
 
         inline long double call_frexp(long double v, int* exp)
         {
-            using namespace std;
 #if defined(BOOST_HASH_USE_OVERLOAD_FLOAT_FUNCS)
-            return frexp(v, exp);
+            return std::frexp(v, exp);
 #else
-            return frexpl(v, exp);
+            return std::frexpl(v, exp);
 #endif
         }
     }

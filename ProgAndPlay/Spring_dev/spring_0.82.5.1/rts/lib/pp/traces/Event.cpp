@@ -5,7 +5,7 @@ const char* Event::noConcatEventsArr[] = {"start_mission", "end_mission", "new_e
 
 Event::Event(std::string label, std::string info) : Trace(EVENT,info), label(label) {}
 
-Event::Event(const Event *e) : Trace(EVENT,e->info) {
+Event::Event(const Event *e) : Trace(e) {
 	label = e->getLabel();
 }
 

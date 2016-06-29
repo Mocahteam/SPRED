@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "Widget Informer",
-    desc      = "Used to inform other components about states of widgets",
+    desc      = "Used to inform about states of widgets by setting a ConfigString (see Spring.SetConfigString())",
     author    = "meresse",
     date      = "Jun 20, 2016",
     license   = "GPL v2 or later",
@@ -32,13 +32,13 @@ function widget:Update()
 				Spring.Echo(name.." was disabled and is now enabled")
 			end
 			if informAboutWidget(name) then
-				msg = name.."_"
-				if data.active then 
-					msg = msg.."enabled"
+				local value = ""
+				if data.active then
+					value = "enabled"
 				else
-					msg = msg.."disabled"
+					value = "disabled"
 				end
-				Spring.SendLuaRulesMsg(msg)
+				Spring.SetConfigString(name, value, 1)
 			end
 			savedActiveStates[name] = data.active
 		end

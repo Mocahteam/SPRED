@@ -1,3 +1,10 @@
+/**
+ * \file Sequence.h
+ * \brief Déclaration de la classe Sequence
+ * \author meresse
+ * \version 0.1
+ */
+
 #ifndef __SEQUENCE_H__
 #define __SEQUENCE_H__
 
@@ -12,16 +19,22 @@
 #include <boost/enable_shared_from_this.hpp>
 
 #include "Trace.h"
+#include "Call.h"
 
+/** 
+ * \class Sequence
+ * \brief La classe Sequence hérite de la classe @see Trace. Une séquence possède un vecteur d'objets Trace.
+ */
 class Sequence : public Trace, public boost::enable_shared_from_this<Sequence> {
 	
 public:
 
 	typedef boost::shared_ptr<Sequence> sp_sequence;
 	typedef boost::shared_ptr<const Sequence> const_sp_sequence;
+	typedef std::vector<sp_sequence> sequence_vector;
 	
-	Sequence(std::string info, bool index);
-	Sequence(unsigned int num);
+	Sequence(std::string info, bool num_fixed);
+	Sequence(unsigned int num, bool root = false);
 	Sequence(const_sp_sequence sps);
 	Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down);
 	
@@ -46,15 +59,19 @@ public:
 	}
 	
 	std::vector<Trace::sp_trace>& getTraces();
+	Call::call_vector getCalls(bool setMod = false);
+	sequence_vector getSequences();
+	int getIndex(const Trace::sp_trace& spt) const;
 	unsigned int getNum() const;
-	bool hasIndex() const;
+	bool hasNumberIterationFixed() const;
 	const std::map<unsigned int,unsigned int>& getNumMap() const;
 	unsigned int getPt() const;
 	bool isEndReached() const;
 	bool isShared() const;
+	bool isRoot() const;
 	void addOne();
 	unsigned int size() const;
-	void addTrace(const Trace::sp_trace& spt);
+	bool addTrace(Trace::sp_trace spt, int ind = -1);
 	const Trace::sp_trace& at(unsigned int i) const;
 	const Trace::sp_trace& next();
 	void reset();
@@ -74,29 +91,31 @@ public:
 	
 protected:
 	
-	/// true if the indexes of the sequence must affect the score and the feedback results. Is set only if the sequence comes from XML import.
-	bool index;
+	/// Un booléen permettant d'indiquer si le nombre d'occurrences de la sequence doit être utilisé lors de l'analyse pour le calcul du score du joueur et pour la détermination des feedbacks. Cette variable est mise à vraie uniquement si l'expert a fixé la valeur de l'attribut 'nb_iteration_fixed' à 'true' pour la séquence dans le fichier XML utilisé pour l'import.
+	bool num_fixed;
 	
-	/// the vector of traces contained in the sequence
+	/// Le vecteur des traces de la séquence.
 	std::vector<Trace::sp_trace> traces;
 	
-	///
+	/// Un entier indiquant le nombre d'occurrences actuel de la séquence.
 	unsigned int num;
 	
-	/// the indexes of the sequence. An entry x:y means the sequence is repeated x times one after the other y times.
+	/// Permet de savoir comment la séquence se répète. Une entrée x:y signifie que la séquence de traces se répète y fois avec un nombre de répétitions contiguës égal à x.
 	std::map<unsigned int,unsigned int> numMap;
 	
-	/// deprecated (online version)
+	/// Un indice sur le vecteur des traces de la séquence. A chaque appel à Sequence::next, cette valeur est incrémentée et le prochain élément du vecteur est renvoyé.
 	unsigned int pt;
 	
-	/// deprecated (online version)
+	/// [deprecated - online version]
 	bool valid;
 	
-	///
+	/// Un booléen mis à vrai lorsque la dernière trace du vecteur de la séquence a été renvoyée suite à l'appel de Sequence::next.
 	bool endReached;
 	
-	///
+	/// Un booléen utilisé uniquement lors de la fusion de deux séquences TracesParser::mergeSequences.
 	bool shared;
+	
+	bool root;
 	
 };
 

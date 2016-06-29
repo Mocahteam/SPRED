@@ -3,7 +3,7 @@
 #ifndef __PROG_AND_PLAY_H__
 #define __PROG_AND_PLAY_H__
 
-// threshold used to detect if player's program is endless
+// used to define a delay to detect if player's program is endless or if units are idled
 #define UPDATE_RATE_MULTIPLIER 4
 
 // Muratet (Define Class CProgAndPlay) ---
@@ -16,7 +16,10 @@
 #include "Lua/LuaHandle.h"
 #include "System/FileSystem/VFSHandler.h"
 #include "System/FileSystem/ArchiveScanner.h"
+#include "System/ConfigHandler.h"
 #include <boost/thread.hpp>
+#include <windows.h>
+#include <boost/asio.hpp>
 
 class CProgAndPlay
 {
@@ -41,6 +44,7 @@ private:
 	bool missionEnded;
 	bool tracePlayer;
 	bool archiveLoaded;
+	std::string archivePath;
 	std::string missionName;
 	std::string lang;
 	std::time_t startTime;
@@ -60,6 +64,10 @@ private:
 
 static int endless_loop_frame_counter = -1;
 static int units_idled_frame_counter = -1;
+
+void publishOnFacebook();
+std::string sendIdRequest(bool post_request);
+void openFacebookUrl(std::string photoId);
 
 extern CProgAndPlay* pp;
 

@@ -1,19 +1,19 @@
 #include "Sequence.h"
 #include "TracesAnalyser.h"
 
-Sequence::Sequence(std::string info, bool index) : Trace(SEQUENCE,info), index(index), num(0), pt(0), valid(false), endReached(false), shared(false) {}
+Sequence::Sequence(std::string info, bool num_fixed) : Trace(SEQUENCE,info), num_fixed(num_fixed), num(0), pt(0), valid(false), endReached(false), shared(false), root(false) {}
 
-Sequence::Sequence(unsigned int num) : Trace(SEQUENCE), index(false), num(num), pt(0), valid(false), endReached(false), shared(false) {
+Sequence::Sequence(unsigned int num, bool root) : Trace(SEQUENCE), num_fixed(false), num(num), pt(0), valid(false), endReached(false), shared(false), root(root) {
 	updateNumMap(num);
 }
 
-Sequence::Sequence(const_sp_sequence sps) : Trace(SEQUENCE,sps->getInfo()), pt(0), valid(false), endReached(false), shared(false) {
+Sequence::Sequence(const_sp_sequence sps) : Trace(sps.get()), pt(0), valid(false), endReached(false), shared(false), root(false) {
 	num = sps->getNum();
-	index = sps->hasIndex();
+	num_fixed = sps->hasNumberIterationFixed();
 	updateNumMap(sps->getNumMap());
 }
 
-Sequence::Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down) : Trace(SEQUENCE), index(false), pt(0), valid(false), endReached(false), shared(true) {
+Sequence::Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down) : Trace(SEQUENCE), num_fixed(false), pt(0), valid(false), endReached(false), shared(true), root(false) {
 	num = std::max(sps_up->getNum(),sps_down->getNum());
 	updateNumMap(sps_up->getNumMap());
 	updateNumMap(sps_down->getNumMap());
@@ -134,7 +134,10 @@ void Sequence::display(std::ostream &os) const {
 		os << "\t";
 	if (delayed)
 		os << "delayed ";
-	os << "Sequence < " << getNumMapString(getPercentageNumMap()) << " >" << std::endl;
+	if (!root)
+		os << "Sequence < " << getNumMapString(getPercentageNumMap()) << " >" << std::endl;
+	else
+		os << "Root" << std::endl;
 	for (unsigned int i = 0; i < traces.size(); i++)
 		traces.at(i)->display(os);
 	numTab--;
@@ -151,12 +154,24 @@ std::vector<Trace::sp_trace>& Sequence::getTraces() {
 	return traces;
 }
 
+int Sequence::getIndex(const Trace::sp_trace& spt) const {
+	for (unsigned int i = 0; i < traces.size(); i++) {
+		if (traces.at(i) == spt)
+			return i;
+	}
+	return -1;
+}
+
+bool Sequence::isRoot() const {
+	return root;
+}
+
 unsigned int Sequence::getNum() const {
 	return num;
 }
 
-bool Sequence::hasIndex() const {
-	return index;
+bool Sequence::hasNumberIterationFixed() const {
+	return num_fixed;
 }
 
 void Sequence::addOne() {
@@ -172,8 +187,16 @@ const Trace::sp_trace& Sequence::at(unsigned int i) const {
 	return traces.at(i);
 }
 
-void Sequence::addTrace(const Trace::sp_trace& spt) {
-	traces.push_back(spt);
+bool Sequence::addTrace(Trace::sp_trace spt, int ind) {
+	if (ind >= -1 && ind <= (int)traces.size()) {
+		if (ind == -1)
+			traces.push_back(spt);
+		else
+			traces.insert(traces.begin()+ind, spt);
+		spt->setParent(shared_from_this());
+		return true;
+	}
+	return false;
 }
 
 const Trace::sp_trace& Sequence::next() {
@@ -339,4 +362,83 @@ double Sequence::getNumMapMeanDistance(const Sequence::sp_sequence& sps) const {
 
 bool Sequence::isImplicit() {
 	return numMap.size() == 1 && numMap.find(1) != numMap.end() && numMap.at(1) == 1;
+}
+
+
+/**
+ * \brief Extraction de l'ensemble des sequences contenus dans le vecteur de traces de la séquence. La séquence appelante est inclus dans le résultat.
+ * 
+ * \return un vecteur de sequences
+ */
+Sequence::sequence_vector Sequence::getSequences() {
+	Sequence::sequence_vector v;
+	Trace::sp_trace spt;
+	Sequence::sp_sequence sps = shared_from_this();
+	sps->reset();
+	std::stack<Sequence::sp_sequence> stack;
+	stack.push(sps);
+	v.push_back(sps);
+	while(!stack.empty()) {
+		while (!stack.empty() && sps->isEndReached()) {
+			stack.pop();
+			if (!stack.empty())
+				sps = stack.top();
+		}
+		if (!sps->isEndReached()) {
+			spt = sps->next();
+			if (spt->isSequence()) {
+				sps = boost::dynamic_pointer_cast<Sequence>(spt);
+				sps->reset();
+				stack.push(sps);
+				v.push_back(sps);
+			}
+		}
+	}
+	return v;
+}
+
+/**
+ * \brief Extraction de l'ensemble des calls contenus dans le vecteur de traces de la séquence
+ * 
+ * \param setMod : un booléen qui est à faux si on autorise les doublons, et à vrai sinon
+ *
+ * \return un vecteur de calls
+ */
+Call::call_vector Sequence::getCalls(bool setMod) {
+	Call::call_vector v;
+	Trace::sp_trace spt;
+	Sequence::sp_sequence sps = shared_from_this();
+	sps->reset();
+	std::stack<Sequence::sp_sequence> stack;
+	stack.push(sps);
+	while(!stack.empty()) {
+		while (!stack.empty() && sps->isEndReached()) {
+			stack.pop();
+			if (!stack.empty())
+				sps = stack.top();
+		}
+		if (!sps->isEndReached()) {
+			spt = sps->next();
+			if (spt->isSequence()) {
+				sps = boost::dynamic_pointer_cast<Sequence>(spt);
+				sps->reset();
+				stack.push(sps);
+			}
+			else if (spt->isCall()) {
+				Call::sp_call spc = boost::dynamic_pointer_cast<Call>(spt);
+				if (!setMod)
+					v.push_back(spc);
+				else {
+					bool found = false;
+					for (unsigned int j = 0; !found && j < v.size(); j++) {
+						if (v.at(j)->getLabel().compare(spc->getLabel()) == 0)
+							found = true;
+					}
+					if (!found)
+						v.push_back(spc);
+				}
+			}
+		}
+	}
+	return v;
 }

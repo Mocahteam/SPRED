@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feedbacks>
+	<feedback type="seq_lack" priority="0">
+		<expert>
+			<sequence>
+				<call label="PP_GetNumUnits" params="2"/>
+			</sequence>
+		</expert>
+		<infos lang="fr">
+			<info>Vous devriez attendre qu'il y ait au moins une unité ennemie sur la carte avant de donner des ordres à vos unités</info>
+		</infos>
+		<infos lang="en">
+			<info>You should wait until there is at least one enemy unit on the map before send orders to your units</info>
+		</infos>
+	</feedback>
+</feedbacks>

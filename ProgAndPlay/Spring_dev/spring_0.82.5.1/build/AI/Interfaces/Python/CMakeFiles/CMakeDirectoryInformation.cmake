@@ -15,6 +15,8 @@ SET(CMAKE_C_INCLUDE_PATH
   "../rts/System"
   "../rts/ExternalAI/Interface"
   "../AI/Wrappers"
+  "../mingwlibs/include/python2.5"
+  "../AI/Interfaces/Python/src"
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})
 SET(CMAKE_Fortran_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

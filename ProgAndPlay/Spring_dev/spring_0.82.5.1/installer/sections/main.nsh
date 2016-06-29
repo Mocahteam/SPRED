@@ -73,6 +73,13 @@
 	Delete "$INSTDIR\Luxi.ttf"
 	Delete "$INSTDIR\fonts\Luxi.ttf"
 
+	; Meresse
+	CreateDirectory "$INSTDIR\traces\data"
+	SetOutPath "$INSTDIR\traces\data"
+	File "${PP_TRACES_DIR}\params.json"
+	File "${PP_TRACES_DIR}\feedbacks.xml"
+	; ---
+
   ; AI Interfaces
 !macro InstallAIInterface aiIntName
 !ifdef INSTALL
@@ -183,6 +190,10 @@
 	; Fonts
 	Delete "$INSTDIR\fonts\FreeSansBold.otf"
 	RmDir "$INSTDIR\fonts"
+
+	; Meresse
+	RmDir /r "$INSTDIR\traces"
+	; --
 
 !macro DeleteSkirmishAI skirAiName
 !ifndef INSTALL

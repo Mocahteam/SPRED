@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# This file was generated 2016-2-8 10:10:58
+# This file was generated 2016-6-28 15:15:25
 
 import PyAI.team as teamModule
 

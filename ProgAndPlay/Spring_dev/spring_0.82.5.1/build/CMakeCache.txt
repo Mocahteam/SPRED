@@ -350,13 +350,16 @@ OPENGL_glu_LIBRARY:STRING=glu32
 PYTHON_DEBUG_LIBRARY:FILEPATH=PYTHON_DEBUG_LIBRARY-NOTFOUND
 
 //Path to a program.
-PYTHON_EXECUTABLE:FILEPATH=PYTHON_EXECUTABLE-NOTFOUND
+PYTHON_EXECUTABLE:FILEPATH=C:/Python27/python.exe
 
 //Path to a file.
 PYTHON_INCLUDE_PATH:PATH=C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/include/python2.5
 
 //Path to a library.
 PYTHON_LIBRARY:FILEPATH=C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/dll/python25.dll
+
+//Dependencies for target
+Python-AIInterface_LIB_DEPENDS:STATIC=
 
 //Dependencies for the target
 RAI_LIB_DEPENDS:STATIC=general;LegacyCpp-AIWrapper;
@@ -471,7 +474,7 @@ unitsync_LIB_DEPENDS:STATIC=general;C:/Users/Stephane/Desktop/mocahteam/ProgAndP
 7ZIP_BIN-ADVANCED:INTERNAL=1
 BUILD_C_AIINTERFACE:INTERNAL=TRUE
 BUILD_Java_AIINTERFACE:INTERNAL=FALSE
-BUILD_PYTHON_AIINTERFACE:INTERNAL=FALSE
+BUILD_PYTHON_AIINTERFACE:INTERNAL=TRUE
 BUILD__AIWRAPPER:INTERNAL=TRUE
 //Was the boost boost FILESYSTEM library found
 Boost_FILESYSTEM_FOUND:INTERNAL=ON
@@ -662,14 +665,16 @@ C_AIINTERFACE_TARGET:INTERNAL=C-AIInterface
 C_AIINTERFACE_VERS:INTERNAL=0.1
 Cpp_AIWRAPPER_GENERATED_SRC_DIR:INTERNAL=C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Wrappers/Cpp/src-generated
 Cpp_AIWRAPPER_TARGET:INTERNAL=Cpp-AIWrapper
-DEPS_AI_ALL:INTERNAL=C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI
-DEPS_AI_INTERFACES:INTERNAL=C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface
-DEPS_AI_SKIRMISH:INTERNAL=AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI
-DEPS_AI_WRAPPERS:INTERNAL=Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper
+DEPS_AI_ALL:INTERNAL=C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI
+DEPS_AI_INTERFACES:INTERNAL=C-AIInterface;Java-AIInterface;Python-AIInterface;C-AIInterface;Java-AIInterface;Python-AIInterface
+DEPS_AI_SKIRMISH:INTERNAL=AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI;AAI;CppTestAI;E323AI;HughAI;KAIK;NullAI;NullJavaAI;NullOOJavaAI;RAI
+DEPS_AI_WRAPPERS:INTERNAL=Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper;Cpp-AIWrapper;CUtils-AIWrapper;LegacyCpp-AIWrapper
 //Advanced flag for variable: DEVIL_IL_LIBRARY
 DEVIL_IL_LIBRARY-ADVANCED:INTERNAL=1
 //Advanced flag for variable: DEVIL_INCLUDE_DIR
 DEVIL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//Details about finding PythonInterp
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[C:/Python27/python.exe]
 //Details about finding PythonLibs
 FIND_PACKAGE_MESSAGE_DETAILS_PythonLibs:INTERNAL=[C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/dll/python25.dll][C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/include/python2.5]
 //Details about finding Windres
@@ -718,6 +723,8 @@ OGG_LIBRARY-ADVANCED:INTERNAL=1
 OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 //Advanced flag for variable: OPENGL_glu_LIBRARY
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
+PYTHON_AIINTERFACE_TARGET:INTERNAL=Python-AIInterface
+PYTHON_AIINTERFACE_VERS:INTERNAL=0.1
 //Advanced flag for variable: PYTHON_DEBUG_LIBRARY
 PYTHON_DEBUG_LIBRARY-ADVANCED:INTERNAL=1
 //Advanced flag for variable: PYTHON_EXECUTABLE
@@ -726,7 +733,7 @@ PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 PYTHON_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //Advanced flag for variable: PYTHON_LIBRARY
 PYTHON_LIBRARY-ADVANCED:INTERNAL=1
-SDL_LIBRARY_TEMP:INTERNAL=mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/dll/SDL.dll;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
+SDL_LIBRARY_TEMP:INTERNAL=mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;mingw32;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/lib/libSDLmain.a;C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/mingwlibs/dll/SDL.dll;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
 SKIRMISHAI_FIND_QUIETLY:INTERNAL=OFF
 SKIRMISH_AI_DATA:INTERNAL=./AI/Skirmish
 SKIRMISH_AI_LIBS:INTERNAL=./AI/Skirmish

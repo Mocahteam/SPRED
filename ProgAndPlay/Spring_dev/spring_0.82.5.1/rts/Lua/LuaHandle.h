@@ -84,9 +84,6 @@ class CLuaHandle : public CEventClient
 
 	public:
 		const bool userMode;
-		// Meresse
-		static bool feedbacksWidgetEnabled;
-		// --
 
 	public: // call-ins
 		virtual bool HasCallIn(const string& name) { return false; } // FIXME

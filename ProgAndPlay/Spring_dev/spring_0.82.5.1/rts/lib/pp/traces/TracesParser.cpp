@@ -25,10 +25,6 @@ TracesParser::TracesParser(bool in_game): in_game(in_game), used(false), compres
 	
 }
 
-/*
- * Destructor of the class. All the opened files are closed. Thanks to boost::shared_ptr, no need to call delete on dynamically allocated objects. 
- *
- */
 TracesParser::~TracesParser() {
 	endParse();
 }
@@ -969,7 +965,7 @@ Sequence::sp_sequence TracesParser::mergeSequences(Sequence::sp_sequence sps_up,
 	return sps;
 }
 
-void TracesParser::handleTraceOffline(const Trace::sp_trace& spt) {
+void TracesParser::handleTraceOffline(Trace::sp_trace& spt) {
 	bool add = false;
 	if (traces.size() > 0) {
 		Sequence::sp_sequence sps;
@@ -1120,12 +1116,13 @@ void TracesParser::importTraceFromNode(rapidxml::xml_node<> *node, std::vector<T
 				std::string info;
 				if (node->first_attribute("info") != 0)
 					info = node->first_attribute("info")->value();
-				bool index = false;
-				if (node->first_attribute("index") != 0)
-					index = std::string(node->first_attribute("index")->value()).compare("true") == 0;
-				sps = boost::make_shared<Sequence>(info,index);
-				if (!seq_stack.empty())
-					sps->setParent(seq_stack.top());
+				bool num_fixed = false;
+				if (node->first_attribute("nb_iteration_fixed") != 0)
+					num_fixed = std::string(node->first_attribute("nb_iteration_fixed")->value()).compare("true") == 0;
+				sps = boost::make_shared<Sequence>(info,num_fixed);
+				// if (!seq_stack.empty()) {
+					// sps->setParent(seq_stack.top());
+				// }
 				if (node->first_attribute("num_map") != 0) {
 					std::vector<std::string> tokens = splitLine(node->first_attribute("num_map")->value());
 					for (unsigned int i = 0; i < tokens.size(); i++) {
@@ -1149,7 +1146,7 @@ void TracesParser::importTraceFromNode(rapidxml::xml_node<> *node, std::vector<T
 				Trace::sp_trace spt = handleLine(s);
 				if (!seq_stack.empty()) {
 					sps->addTrace(spt);
-					spt->setParent(sps);
+					//spt->setParent(sps);
 				}
 				else
 					traces.push_back(spt);
@@ -1256,9 +1253,7 @@ void TracesParser::exportTraceToXml() {
 				s = c->getReturn();
 				if (s.compare("") != 0)
 					node->append_attribute(doc.allocate_attribute("return", doc.allocate_string(s.c_str())));
-				s = c->getInfo();
-				if (s.compare("") != 0)
-					node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(s.c_str())));
+				node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(c->getInfo().c_str())));
 				node_stack.top()->append_node(node);
 			}
 			else {
@@ -1266,10 +1261,9 @@ void TracesParser::exportTraceToXml() {
 				sps->reset();
 				node = doc.allocate_node(rapidxml::node_element, "sequence");
 				node->append_attribute(doc.allocate_attribute("num_map", doc.allocate_string(Sequence::getNumMapString(sps->getNumMap()).c_str())));
-				if (!sps->getInfo().empty())
-					node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(sps->getInfo().c_str())));
-				if (sps->hasIndex())
-					node->append_attribute(doc.allocate_attribute("index", doc.allocate_string("true")));
+				node->append_attribute(doc.allocate_attribute("info", doc.allocate_string(sps->getInfo().c_str())));
+				std::string nb_iteration_fixed = (sps->hasNumberIterationFixed()) ? "true" : "false";
+				node->append_attribute(doc.allocate_attribute("nb_iteration_fixed", doc.allocate_string(nb_iteration_fixed.c_str())));
 				node_stack.top()->append_node(node);
 				node_stack.push(node);
 				seq_stack.push(sps);

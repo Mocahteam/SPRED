@@ -282,8 +282,8 @@ function MissionEvent(e)
 						tab.bottomLeftColor  = {0.23, 0.35, 0.6, 1}
 						tab.bottomRightColor = {0.23, 0.35, 0.6, 1}
 						tab.OnClick = function()
-							Spring.Echo("publier")
 							Script.LuaUI.TraceAction("publish\n")
+							Spring.SetConfigString("publish", "true", 1) -- this value will be read by the engine to publish results on facebook
 						end
 					end
 				}

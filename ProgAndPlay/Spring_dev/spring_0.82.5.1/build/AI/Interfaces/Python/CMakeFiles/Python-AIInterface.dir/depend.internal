@@ -4,17 +4,17 @@
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SharedLibrary.c.obj
  ../rts/System/booldefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SharedLibrary.h
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SimpleLog.c.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SimpleLog.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Util.c.obj
  ../rts/ExternalAI/Interface/ELevelOfSupport.h
  ../rts/ExternalAI/Interface/SAIInterfaceLibrary.h
@@ -24,9 +24,9 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/Uti
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
  ../rts/lib/streflop/streflopC.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj
  ../AI/Interfaces/Python/src/InterfaceDefines.h
  ../AI/Interfaces/Python/src/InterfaceExport.h
@@ -93,7 +93,7 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src-generated/ai.c.obj
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated/ai.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/build/AI/Interfaces/Python/src-generated/ai.c
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj
  ../AI/Wrappers/CUtils/SharedLibrary.h
  ../AI/Wrappers/CUtils/SimpleLog.h
@@ -108,19 +108,19 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/src/InterfaceExport.c.obj
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceDefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceExport.c
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceExport.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/ai.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceDefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceExport.c
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/InterfaceExport.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Interfaces/Python/src/ai.h
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/Wrappers/CUtils/SSkirmishAISpecifier.cpp.obj
  ../rts/ExternalAI/Interface/aidefines.h
  ../rts/System/booldefines.h
  ../rts/System/exportdefines.h
  ../rts/System/maindefines.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/SSkirmishAISpecifier.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/Util.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/AI/Wrappers/CUtils/cutilsdefines.h
 AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVersion.cpp.obj
  ../mingwlibs/include/GL/glew.h
  ../mingwlibs/include/GL/glext.h
@@ -783,5 +783,5 @@ AI/Interfaces/Python/CMakeFiles/Python-AIInterface.dir/__/__/__/rts/Game/GameVer
  ../rts/lib/streflop/X87DenormalSquasher.h
  ../rts/lib/streflop/streflop.h
  ../rts/lib/streflop/streflop_cond.h
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
- C:/Users/StephaneMeresse/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.cpp
+ C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/Game/GameVersion.h

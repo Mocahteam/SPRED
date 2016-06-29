@@ -22,6 +22,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
+local testmap = Spring.GetModOptions()["testmap"]
 local missionScript = nil -- the lua script that define current mission
 
 -- variable to know the state of the mission
@@ -32,9 +33,6 @@ local gameOver = 0
 
 -- used to show briefing
 local showBriefing = false
-
--- is set to true by the engine if Prog&Play is used by the player and if the trace and analysis modules are enabled
-local feedbacksEnabled = true
 
 function gadget:GamePreload()
 	if missionName ~= nil then
@@ -70,7 +68,7 @@ function gadget:GameFrame( frameNumber )
 			else
 				victoryState = "won"
 			end
-			if not feedbacksEnabled then
+			if testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
 				_G.event = {logicType = "ShowMissionMenu", state = victoryState}
 				SendToUnsynced("MissionEvent")
 				_G.event = nil
@@ -96,9 +94,7 @@ function gadget:RecvLuaMsg(msg, player)
 		if ind_s ~= nil then
 			local prefix = string.sub(msg, 1, ind_s-1)
 			local suffix = string.sub(msg, ind_s+1)
-			if prefix == "Feedbacks Widget" then -- the feedbacks widget active state has changed
-				feedbacksEnabled = suffix == "enabled"
-			elseif prefix == "Feedback" then -- a feedback has been received from the engine
+			if prefix == "Feedback" then -- a feedback has been received from the engine
 				SendToUnsynced(prefix, suffix)
 			end
 		end

@@ -6,9 +6,9 @@ const char* Call::errorsArr[] = {"out_of_range", "wrong_coalition", "wrong_unit"
 const char* Call::coalitionsArr[] = {"MY_COALITION", "ALLY_COALITION", "ENEMY_COALITION", NULL};
 ParamsMap Call::paramsMap;
 
-Call::Call(std::string label, ErrorType err, std::string info) : Trace(CALL,info), label(label), error(err), ind_ret(0) {}
+Call::Call(std::string label, ErrorType error, std::string info) : Trace(CALL,info), label(label), error(error), ind_ret(0) {}
 
-Call::Call(const Call *c) : Trace(CALL,c->info) {
+Call::Call(const Call *c) : Trace(c) {
 	label = c->label;
 	error = c->error;
 	ind_ret = c->ind_ret;
@@ -128,61 +128,4 @@ void Call::setReturn() {
 
 bool Call::hasReturn() const {
 	return ind_ret != 0;
-}
-
-/**
- * Permet d'extraire l'ensemble des calls contenus dans le vecteur de traces donné en argument.
- * 
- * \param[in] traces le vecteur de traces dont l'on souhaite récupérer la liste de calls
- * \param[in] setMod un booléen qui est à faux si on autorise les doublons, et à vrai sinon
- *
- * \return un vecteur de calls
- */
-Call::call_vector Call::getCalls(const std::vector<Trace::sp_trace>& traces, bool setMod) {
-	Call::call_vector v;
-	std::stack<Sequence::sp_sequence> stack;
-	Trace::sp_trace spt;
-	Sequence::sp_sequence sps;
-	unsigned int i = 0;
-	bool pass = false;
-	while(i < traces.size() || !stack.empty()) {
-		if (!stack.empty()) {
-			while (!stack.empty() && sps->isEndReached()) {
-				stack.pop();
-				if (!stack.empty())
-					sps = stack.top();
-			}
-			if (!sps->isEndReached()) {
-				spt = sps->next();
-				pass = true;
-			}
-		}
-		if (stack.empty() && i < traces.size()) {
-			spt = traces.at(i++);
-			pass = true;
-		}
-		if (pass) {
-			pass = false;
-			if (spt->isSequence()) {
-				sps = boost::dynamic_pointer_cast<Sequence>(spt);
-				sps->reset();
-				stack.push(sps);
-			}
-			else if (spt->isCall()) {
-				sp_call spc = boost::dynamic_pointer_cast<Call>(spt);
-				if (!setMod)
-					v.push_back(spc);
-				else {
-					bool found = false;
-					for (unsigned int j = 0; !found && j < v.size(); j++) {
-						if (v.at(j)->getLabel().compare(spc->getLabel()) == 0)
-							found = true;
-					}
-					if (!found)
-						v.push_back(spc);
-				}
-			}
-		}
-	}
-	return v;
 }

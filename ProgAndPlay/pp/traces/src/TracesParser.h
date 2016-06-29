@@ -1,3 +1,10 @@
+/**
+ * \file TracesParser.h
+ * \brief Déclaration de la classe TracesParser
+ * \author meresse
+ * \version 0.1
+ */
+
 #ifndef __TRACES_PARSER_H__
 #define __TRACES_PARSER_H__
 
@@ -21,11 +28,27 @@
 #include "EventDef.h"
 #include "Sequence.h"
 
+/** 
+ * \class TracesParser
+ 
+ * \brief La classe TracesParser définit les méthodes de parsing de fichiers de traces brutes (que ce soit en cours de partie ou non), les méthodes de compression en-ligne et hors-ligne, et les fonctions d'export et d'import de traces à partir d'un fichier XML. 
+ */
 class TracesParser {
 
 public:
 	
+	/**
+	  * \brief Constructeur de TracesParser.
+	  *
+	  * \param in_game indique si la compression doit se faire en cours de jeu.
+	  */
 	TracesParser(bool in_game);
+	
+	/**
+	  * \brief Destructeur de TracesParser.
+	  *
+	  * Tous les fichiers ouverts sont fermés. L'utilisation de boost::shared_ptr évite d'avoir à appeler delete sur les objets alloués dynamiquement. 
+	  */
 	~TracesParser();
 	
 	static int lineNum;
@@ -98,7 +121,7 @@ private:
 	void compactHistory();
 	
 	//Offline
-	void handleTraceOffline(const Trace::sp_trace& spt);
+	void handleTraceOffline(Trace::sp_trace& spt);
 	bool checkFeasibility(unsigned int min_length, unsigned int ind_start);
 	void detectSequences();
 

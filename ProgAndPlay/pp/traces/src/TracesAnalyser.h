@@ -10,6 +10,7 @@
 #include <stack>
 #include <limits>
 #include <algorithm>
+#include <cstdarg>
 #include <rapidxml-1.13/rapidxml.hpp>
 #include <rapidjson/document.h>
 #include <rapidjson/stringbuffer.h>
@@ -20,9 +21,6 @@
 #include "Sequence.h"
 #include "Event.h"
 #include "EventDef.h"
-
-#define EXPERT_DIRNAME "xml\\expert"
-#define FEEDBACKS_FILENAME "feedbacks.xml"
 
 #define USELESS_FREQ 0					// threshold value in [0,1] used to determine if we have to make a USELESS_CALL feedback
 #define USEFUL_FREQ 1					// threshold value in [0,1] used to determine if we have to make a USEFUL_CALL feedback
@@ -70,11 +68,40 @@ public:
 	static std::map<std::string,std::string> messages_map;
 	
 	struct Feedback {
+		/**
+		 * Définition du type du feedback. Ce champ est obligatoire dans le fichier XML de définition de feedbacks.
+		 *
+		 * \see FeedbackType
+		 */
 		FeedbackType type;
+		
+		/**
+		  * Chaîne de caractères contenant le texte associé au feedback. Défini par la balise <info> dans un fichier XML de définition de feedbacks.
+		  *	A noter que la balise <infos lang="..."> doit contenir au moins une balise <info> pour la langue choisie. 
+		  */
 		std::string info;
+		
+		/**
+		  * Trace de l'apprenant pour ce feedback. Défini par la balise <learner> dans un fichier XML de définition de feedbacks.
+		  */
 		Trace::sp_trace learner_spt;
+		
+		/**
+		  * Trace de l'expert défini pour ce feedback. Défini par la balise <expert> dans un fichier XML de définition de feedbacks.
+		  */
 		Trace::sp_trace expert_spt;
+		/**
+		  * Priorité associée au feedback. Ce champ est obligatoire dans le fichier XML de définition de feedbacks.
+		  */
 		int priority;
+		/**
+		 * Variable prenant la valeur de l'attribut 'level' associé à la balise <feedback> dans le fichier XML de définition de feedbacks. Cet attribut est optionnel. S'il n'est pas défini,
+		 * cette variable prend la valeur -1 et ne sera pas utilisée lors de l'analyse. Dans le cas, où il est défini, sa valeur est utilisée pour associer un niveau aux traces \p learner_spt et \p expert_spt.
+		 */
+		int level;
+		/**
+		  * Booléen mis à vrai si un pattern a été défini pour le feedback dans le fichier XML de définition de feedbacks, i.e. si learner_spt OU (non exclusif) expert_spt est défini.
+		  */
 		bool defined;
 		
 		bool operator<(const Feedback& f) const {
@@ -103,7 +130,12 @@ public:
 		NewExecutionEvent *nee;
 		EndExecutionEvent *eee;
 		std::vector<Trace::sp_trace> mission_traces;
-		std::vector<Trace::sp_trace> exec_traces;
+		/**
+		  * The root Sequence :
+		  * 	Sequence<1:1>
+		  *			...
+		  */
+		Sequence::sp_sequence root_sps;
 		
 		GameInfos() : sme(NULL), eme(NULL), nee(NULL), eee(NULL) {}
 		
@@ -117,7 +149,7 @@ public:
 		void clearExecution() {
 			nee = NULL;
 			eee = NULL;
-			exec_traces.clear();
+			root_sps.reset();
 		}
 		
 		int getResolutionTime() {
@@ -177,24 +209,24 @@ public:
 		
 	};
 
-	TracesAnalyser(bool in_game, std::string mission_name = "", std::string lang = "fr");
+	TracesAnalyser(std::string lang = "fr");
 
 	std::string constructFeedback(const std::string& learner_xml, const std::vector<std::string>& experts_xml, int ind_mission = -1, int ind_execution = -1, std::ostream &os = std::cout);
 	void loadXmlInfos(const std::string& feedbacks_xml, const std::string& mission_feedbacks_xml);
 	void setEndlessLoop(bool endless_loop);
 	void setLang(std::string lang);
-	void setMissionName(std::string mission_name);
 	
 	static int getRandomIntInRange(int min, int max);
+	static bool feedbackTypeIn(FeedbackType type, int n, ...);
 	
 private:
 
-	bool in_game;
 	bool endless_loop;
 	bool loaded;
-	std::string mission_name;
 	std::string lang;
-	GameInfos learner_gi, expert_gi;
+	GameInfos learner_gi;
+	GameInfos expert_gi;
+	std::vector<Feedback> feedbacks;
 	std::vector<Feedback> ref_feedbacks;
 	std::map<std::string,double> experts_calls_freq;
 	
@@ -204,20 +236,22 @@ private:
 	bool getInfosOnMission(const std::vector<Trace::sp_trace>& traces, GameInfos& gi, int ind_mission = -1);
 	bool getInfosOnExecution(GameInfos& gi, int ind_execution = -1);
 	
-	bool addImplicitSequences(std::vector<Trace::sp_trace>& mod, const std::vector<Trace::sp_trace>& ref) const;
-	std::vector<Call::call_vector> getPatterns(const std::vector<Trace::sp_trace>& traces, const Call::call_vector& pattern) const;
+	bool addImplicitSequences(Sequence::sp_sequence& mod_sps, Sequence::sp_sequence& ref_sps) const;
+	std::vector<Call::call_vector> getPatterns(const Sequence::sp_sequence& mod_sps, const Call::call_vector& pattern) const;
 	const Sequence::sp_sequence getClosestCommonParent(const Call::call_vector& pattern) const;
 	
 	std::pair<double,double> findBestAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, bool align = true) const;
 	void displayAlignment(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, std::ostream &os = std::cout) const;
 	
-	void listGlobalFeedbacks(const std::vector<Trace::sp_trace>& l, std::vector<Feedback>& feedbacks) const;
-	void listAlignmentFeedbacks(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e, std::vector<Feedback>& feedbacks) const;
-	void bindFeedbacks(std::vector<Feedback>& feedbacks);
+	void listAlignmentFeedbacks(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e);
+	void listGlobalFeedbacks();
+	void bindFeedbacks();
 	bool feedbackSequencesMatch(const Sequence::sp_sequence& sps, const Sequence::sp_sequence& ref_sps) const;
 	double getFeedbackScore(const Feedback& f, int j);
-	void filterFeedbacks(std::vector<Feedback>& feedbacks, const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const;
+	void filterFeedbacks();
 	void setFeedbackInfo(Feedback &f, Feedback &ref_f) const;
+	path constructAlignmentPath(const std::vector<Trace::sp_trace>& l, const std::vector<Trace::sp_trace>& e) const;
+	int getFeedbackIndex(const Trace::sp_trace& t, FeedbackType type = NONE) const;
 	
 };
 
