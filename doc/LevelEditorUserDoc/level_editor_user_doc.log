@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  22 JUN 2016 10:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.25)  28 JUN 2016 14:32
 entering extended mode
 **./level_editor_user_doc.tex
 (level_editor_user_doc.tex
@@ -494,138 +494,140 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {C:/Users/Benjamin-Zigaroula-/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map
 }]
-<editor-spring-launcher.png, id=10, 1445.4pt x 782.925pt>
+<editor-spring-launcher.png, id=10, 1182.66844pt x 577.40718pt>
 File: editor-spring-launcher.png Graphic file (type png)
 
 <use editor-spring-launcher.png>
 Package pdftex.def Info: editor-spring-launcher.png used on input line 36.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+(pdftex.def)             Requested size: 418.25368pt x 204.20125pt.
 
-<pre-launcher.png, id=12, 1445.4pt x 782.925pt>
+<pre-launcher.png, id=12, 1192.455pt x 557.08125pt>
 File: pre-launcher.png Graphic file (type png)
  <use pre-launcher.png>
 Package pdftex.def Info: pre-launcher.png used on input line 44.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [2 <./editor-spring-launcher.png>] <launcher-main.png, id=19, 1445.4pt x 782.9
-25pt>
+(pdftex.def)             Requested size: 418.25368pt x 195.39787pt.
+
+[2 <./editor-spring-launcher.png>]
+<launcher-main.png, id=19, 1428.83812pt x 746.79pt>
 File: launcher-main.png Graphic file (type png)
-
-<use launcher-main.png>
+ <use launcher-main.png>
 Package pdftex.def Info: launcher-main.png used on input line 53.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [3 <./pre-launcher.png> <./launcher-main.png>]
-Underfull \hbox (badness 2376) in paragraph at lines 62--63
-  [] \T1/cmr/m/n/10 Ce menu per-met de choi-sir une mis-sion préa-la-ble-ment c
-réée via l'édi-teur. L'en-
- []
+(pdftex.def)             Requested size: 418.25368pt x 218.60327pt.
 
-
-Underfull \hbox (badness 3407) in paragraph at lines 62--63
-\T1/cmr/m/n/10 semble des mis-sions pro-po-sées cor-res-pond aux mis-sions pré-
-sentes dans le ré-per-toire
- []
-
-<editor-topbar.png, id=25, 1008.76875pt x 28.60687pt>
+[3 <./pre-launcher.png> <./launcher-main.png>]
+<editor-topbar.png, id=25, 1008.76875pt x 27.85406pt>
 File: editor-topbar.png Graphic file (type png)
  <use editor-topbar.png>
-Package pdftex.def Info: editor-topbar.png used on input line 71.
-(pdftex.def)             Requested size: 418.25368pt x 11.8607pt.
+Package pdftex.def Info: editor-topbar.png used on input line 74.
+(pdftex.def)             Requested size: 418.25368pt x 11.54858pt.
 
-<editor-units.png, id=26, 1445.4pt x 782.925pt>
+<editor-file.png, id=26, 130.98938pt x 293.59688pt>
+File: editor-file.png Graphic file (type png)
+ <use editor-file.png>
+Package pdftex.def Info: editor-file.png used on input line 90.
+(pdftex.def)             Requested size: 65.49452pt x 146.79807pt.
+
+[4 <./editor-topbar.png>] <editor-units.png, id=32, 1445.4pt x 614.295pt>
 File: editor-units.png Graphic file (type png)
- <use editor-units.png>
-Package pdftex.def Info: editor-units.png used on input line 90.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [4 <./editor-topbar.png>] <editor-groups.png, id=32, 1445.4pt x 782.925pt>
-File: editor-groups.png Graphic file (type png)
 
-<use editor-groups.png>
-Package pdftex.def Info: editor-groups.png used on input line 107.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [5 <./editor-units.png>]
-<editor-zones.png, id=39, 1445.4pt x 782.925pt>
+<use editor-units.png>
+Package pdftex.def Info: editor-units.png used on input line 99.
+(pdftex.def)             Requested size: 418.25368pt x 177.75667pt.
+ [5 <./editor-file.png> <./editor-units.png>]
+<editor-groups.png, id=40, 1312.905pt x 624.83438pt>
+File: editor-groups.png Graphic file (type png)
+ <use editor-groups.png>
+Package pdftex.def Info: editor-groups.png used on input line 116.
+(pdftex.def)             Requested size: 418.25368pt x 199.05487pt.
+
+<editor-zones.png, id=41, 1076.52188pt x 621.07031pt>
 File: editor-zones.png Graphic file (type png)
  <use editor-zones.png>
-Package pdftex.def Info: editor-zones.png used on input line 116.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+Package pdftex.def Info: editor-zones.png used on input line 125.
+(pdftex.def)             Requested size: 418.25368pt x 241.2972pt.
 
-<editor-zones-special.png, id=40, 1445.4pt x 670.00313pt>
+[6 <./editor-groups.png>]
+<editor-zones-special.png, id=46, 841.64438pt x 243.15843pt>
 File: editor-zones-special.png Graphic file (type png)
 
 <use editor-zones-special.png>
-Package pdftex.def Info: editor-zones-special.png used on input line 124.
-(pdftex.def)             Requested size: 418.25368pt x 193.87677pt.
- [6 <./editor-groups.png> <./editor-zones.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 135.
+Package pdftex.def Info: editor-zones-special.png used on input line 133.
+(pdftex.def)             Requested size: 418.25368pt x 120.83685pt.
+ [7 <./editor-zones.png> <./editor-zones-special.png>]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 144.
 
 
 ("C:\Users\Benjamin-Zigaroula-\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base
 \t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) <editor-teamconfig.png, id=46, 1445.4pt x 782.925pt>
+) <editor-teamconfig.png, id=53, 1160.83687pt x 615.0478pt>
 File: editor-teamconfig.png Graphic file (type png)
 
 <use editor-teamconfig.png>
-Package pdftex.def Info: editor-teamconfig.png used on input line 139.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [7 <./editor-zones-special.png>]
-<editor-allyteam.png, id=53, 1445.4pt x 782.925pt>
+Package pdftex.def Info: editor-teamconfig.png used on input line 148.
+(pdftex.def)             Requested size: 418.25368pt x 221.60474pt.
+
+<editor-allyteam.png, id=54, 1163.84813pt x 617.30624pt>
 File: editor-allyteam.png Graphic file (type png)
- <use editor-allyteam.png>
-Package pdftex.def Info: editor-allyteam.png used on input line 147.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
 
-[8 <./editor-teamconfig.png> <./editor-allyteam.png>]
-<editor-trigger.png, id=59, 1445.4pt x 782.925pt>
+<use editor-allyteam.png>
+Package pdftex.def Info: editor-allyteam.png used on input line 156.
+(pdftex.def)             Requested size: 418.25368pt x 221.83446pt.
+ [8 <./editor-teamconfig.png>]
+<editor-trigger.png, id=60, 1306.12968pt x 697.8572pt>
 File: editor-trigger.png Graphic file (type png)
- <use editor-trigger.png>
-Package pdftex.def Info: editor-trigger.png used on input line 163.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
 
-<editor-eventconfig.png, id=60, 1445.4pt x 782.925pt>
+<use editor-trigger.png>
+Package pdftex.def Info: editor-trigger.png used on input line 172.
+(pdftex.def)             Requested size: 418.25368pt x 223.46794pt.
+
+<editor-eventconfig.png, id=61, 435.87843pt x 614.295pt>
 File: editor-eventconfig.png Graphic file (type png)
 
 <use editor-eventconfig.png>
-Package pdftex.def Info: editor-eventconfig.png used on input line 169.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [9 <./editor-trigger.png>]
-<editor-variables.png, id=65, 1445.4pt x 782.925pt>
-File: editor-variables.png Graphic file (type png)
- <use editor-variables.png>
-Package pdftex.def Info: editor-variables.png used on input line 178.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+Package pdftex.def Info: editor-eventconfig.png used on input line 178.
+(pdftex.def)             Requested size: 418.25368pt x 589.45404pt.
+ [9 <./editor-allyteam.png>] [10 <./editor-trigger.png>]
+Overfull \vbox (21.86781pt too high) has occurred while \output is active []
 
-[10 <./editor-eventconfig.png>]
-<editor-pickunit.png, id=70, 1445.4pt x 782.925pt>
+
+[11 <./editor-eventconfig.png>]
+<editor-variables.png, id=74, 867.99281pt x 612.78937pt>
+File: editor-variables.png Graphic file (type png)
+
+<use editor-variables.png>
+Package pdftex.def Info: editor-variables.png used on input line 187.
+(pdftex.def)             Requested size: 418.25368pt x 295.28566pt.
+ [12 <./editor-variables.png>]
+<editor-pickunit.png, id=79, 1445.4pt x 615.80063pt>
 File: editor-pickunit.png Graphic file (type png)
  <use editor-pickunit.png>
-Package pdftex.def Info: editor-pickunit.png used on input line 192.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
+Package pdftex.def Info: editor-pickunit.png used on input line 201.
+(pdftex.def)             Requested size: 418.25368pt x 178.19235pt.
 
-[11 <./editor-variables.png>]
-<editor-mapsettings.png, id=75, 1445.4pt x 782.925pt>
+<editor-mapsettings.png, id=80, 1160.83687pt x 385.44pt>
 File: editor-mapsettings.png Graphic file (type png)
 
 <use editor-mapsettings.png>
-Package pdftex.def Info: editor-mapsettings.png used on input line 212.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [12 <./editor-pickunit.png>]
-<launcher-scenario.png, id=80, 1445.4pt x 782.925pt>
+Package pdftex.def Info: editor-mapsettings.png used on input line 222.
+(pdftex.def)             Requested size: 418.25368pt x 138.87592pt.
+ [13 <./editor-pickunit.png>]
+<launcher-scenario.png, id=86, 1432.60219pt x 752.8125pt>
 File: launcher-scenario.png Graphic file (type png)
 
 <use launcher-scenario.png>
-Package pdftex.def Info: launcher-scenario.png used on input line 226.
-(pdftex.def)             Requested size: 418.25368pt x 226.55263pt.
- [13 <./editor-mapsettings.png>] [14 <./launcher-scenario.png>] (level_editor_u
+Package pdftex.def Info: launcher-scenario.png used on input line 239.
+(pdftex.def)             Requested size: 418.25368pt x 219.78036pt.
+ [14 <./editor-mapsettings.png>] [15 <./launcher-scenario.png>] (level_editor_u
 ser_doc.aux) ) 
 Here is how much of TeX's memory you used:
- 3396 strings out of 493634
- 48224 string characters out of 3129527
- 114150 words of memory out of 3000000
- 6728 multiletter control sequences out of 15000+200000
+ 3403 strings out of 493634
+ 48348 string characters out of 3129527
+ 114184 words of memory out of 3000000
+ 6734 multiletter control sequences out of 15000+200000
  15969 words of font info for 37 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,6n,30p,889b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 28i,6n,30p,954b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Benjamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\
 ljfour\jknappen\ec\dpi600\ectt0800.pk> <C:\Users\Benjamin-Zigaroula-\AppData\Lo
 cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0800.pk> <C:\Users\Benjam
@@ -644,9 +646,9 @@ pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Benjamin-Zigaroula-\AppData
 \Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Ben
 jamin-Zigaroula-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
 rm1728.pk>
-Output written on level_editor_user_doc.pdf (14 pages, 7689946 bytes).
+Output written on level_editor_user_doc.pdf (15 pages, 4867778 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
+ 539 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

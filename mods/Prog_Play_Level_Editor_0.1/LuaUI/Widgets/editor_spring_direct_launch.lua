@@ -1,10 +1,10 @@
 function widget:GetInfo()
 	return {
-		name = "Spring Direct Launch 2 for Prog&Play Level Editor",
-		desc = "Show some P&P menu when Spring.exe is run directly.",
-		author = "zigaroula",
+		name = "Spring Direct Launch 2 for SPRED",
+		desc = "Show some SPRED menu when Spring.exe is run directly.",
+		author = "mocahteam",
 		version = "0.1",
-		date = "Apr 14, 2016",
+		date = "June 24, 2016",
 		license = "Public Domain",
 		layer = 250,
 		enabled = true,
@@ -17,7 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 VFS.Include("LuaUI/Widgets/editor/Misc.lua")
 
 local serde = VFS.Include("LuaUI/Widgets/libs/xml-serde.lua") -- XML serializer/deserializer
-local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua") -- Json serializer/deserializer
+local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua") -- Json serializer/deserializer
 local Chili, Screen0 -- Chili
 local IsActive = false -- True if this widget has to be shown
 local HideView = false -- True if there is need for a black background
@@ -25,7 +25,7 @@ local Language = "en" -- Current language
 local vsx, vsy -- Window size
 local UI = {} -- Contains each UI element
 local MapList = {} -- List of the maps as read in the maps/ directory
-local LevelList = {} -- List of the levels as read in the pp_editor/missions/ directory
+local LevelList = {} -- List of the levels as read in the SPRED/missions/ directory
 local LevelListNames = {} -- Names of the aforementioned levels
 local OutputStates = {} -- List of the output states of the levels
 local Links = {} -- Links betwenn output and input states
@@ -34,6 +34,7 @@ local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
 local selectedOutputMission -- Currently selected output mission
 local selectedOutput -- Currently selected output state
+local IncludeAllMissions = false
 local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 local gameFolder = "games"
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
@@ -91,20 +92,14 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		keepAspect = false,
 		file = "bitmaps/launcher/su.png"
 	}
-	UI.Title = Chili.Label:New{
+	UI.Title = Chili.Image:New{
 		parent = UI.MainWindow,
 		x = '0%',
-		y = '0%',
+		y = '5%',
 		width = '100%',
-		height = '10%',
-		align = "center",
-		valign = "center",
-		caption = LAUNCHER_TITLE,
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 60,
-			color = { 0.2, 0.6, 0.8, 1 }
-		}
+		height = '20%',
+		keepAspect = true,
+		file = "bitmaps/launcher/spred_logo.png"
 	}
 	UI.NewMissionButton = Chili.Button:New{
 		parent = UI.MainWindow,
@@ -142,6 +137,20 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		height = "10%",
 		caption = LAUNCHER_SCENARIO,
 		OnClick = { EditScenarioFrame },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 40,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	UI.ExportGameButton = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "30%",
+		y = "60%",
+		width = "40%",
+		height = "10%",
+		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
+		OnClick = { ExportGameFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
@@ -213,12 +222,12 @@ end
 
 function InitializeLevelList() -- Initialization of levels
 	local toBeRemoved = {} -- Remove levels not corresponding to the chosen game
-	LevelListNames = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
+	LevelListNames = VFS.DirList("SPRED/missions/", "*.editor", VFS.RAW)
 	for i, level in ipairs(LevelListNames) do
-		level = string.gsub(level, "pp_editor\\missions\\", "")
+		level = string.gsub(level, "SPRED\\missions\\", "")
 		level = string.gsub(level, ".editor", "")
 		LevelListNames[i] = level -- This table contains the raw name of the levels
-		LevelList[i] = json.decode(VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
+		LevelList[i] = json.decode(VFS.LoadFile("SPRED/missions/"..level..".editor",  VFS.RAW)) -- This table contains the whole description of the levels
 		if LevelList[i].description.mainGame ~= MainGame then
 			table.insert(toBeRemoved, level)
 		end
@@ -395,35 +404,6 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		caption = LAUNCHER_SCENARIO_RESET,
 		OnClick = { ResetScenario },
 		backgroundColor = { 1, 0.8, 0.4, 1 }
-	}
-	UI.Scenario.IncludeMissions = Chili.Checkbox:New{
-		parent = UI.MainWindow,
-		x = "71%",
-		y = "88%",
-		width = "20%",
-		height = "7%",
-		boxsize = 30,
-		boxalign = "left",
-		checked = false,
-		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
-		}		
-	}
-	UI.Scenario.ExportGame = Chili.Button:New{
-		parent = UI.MainWindow,
-		x = "30%",
-		y = "88%",
-		width = "40%",
-		height = "7%",
-		caption = LAUNCHER_SCENARIO_EXPORT_GAME,
-		backgroundColor = { 0.4, 0, 0.6, 1 },
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25
-		},
-		OnClick = { ExportGame }
 	}
 	UI.Scenario.Import = Chili.Button:New{
 		parent = UI.MainWindow,
@@ -736,10 +716,12 @@ end
 
 function ClearUI() -- Remove UI elements from the screen
 	ClearTemporaryUI()
+	UI.MainWindow:RemoveChild(UI.Title)
 	UI.MainWindow:RemoveChild(UI.Logo)
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
+	UI.MainWindow:RemoveChild(UI.ExportGameButton)
 	UI.MainWindow:RemoveChild(UI.BackButton)
 	
 	UI.MainWindow:RemoveChild(UI.NewLevel.Title)
@@ -752,8 +734,6 @@ function ClearUI() -- Remove UI elements from the screen
 	
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:RemoveChild(UI.Scenario.ExportGame)
-	UI.MainWindow:RemoveChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
 	UI.MainWindow:RemoveChild(UI.Scenario.Import)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
@@ -769,14 +749,19 @@ function ClearTemporaryUI() -- Remove pop-ups
 	if UI.Scenario.Warning then
 		UI.Scenario.Warning:Dispose()
 	end
+	if UI.Scenario.ExportGame then
+		UI.Scenario.ExportGame:Dispose()
+	end
 end
 
 function MainMenuFrame() -- Shows the main menu
 	ClearUI()
+	UI.MainWindow:AddChild(UI.Title)
 	UI.MainWindow:AddChild(UI.Logo)
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
 	UI.MainWindow:AddChild(UI.EditScenarioButton)
+	UI.MainWindow:AddChild(UI.ExportGameButton)
 end
 
 function NewMissionFrame() -- Shows the new mission menu
@@ -804,8 +789,6 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:AddChild(UI.Scenario.ExportGame)
-	UI.MainWindow:AddChild(UI.Scenario.IncludeMissions)
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
@@ -820,7 +803,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		width = '60%',
 		height = '20%',
 		draggable = true,
-		resizable = false
+		resizable = false,
+		color = {1, 1, 1, 1}
 	}
 	local closeButton = Chili.Button:New{
 		parent = window,
@@ -840,7 +824,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_NAME
@@ -853,7 +838,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		text = ScenarioName,
 		hint = LAUNCHER_SCENARIO_NAME_DEFAULT
@@ -866,7 +852,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			shadow = false
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_DESCRIPTION
@@ -879,7 +866,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		height = '20%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 16
+			size = 16,
+			shadow = false
 		},
 		text = ScenarioDesc,
 		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
@@ -912,6 +900,16 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		window:Dispose()
 		ExportScenario(name, desc)
 	end }
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
 	UI.Scenario.ExportScenario = window
 end
 
@@ -967,6 +965,16 @@ function ImportScenarioFrameWarning() -- Shows a warning if trying to load when 
 				size = 25
 			}
 		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
+		}
 		UI.Scenario.Warning = window
 	else
 		ImportScenarioFrame()
@@ -1001,7 +1009,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		OnClick = { function() window:Dispose() end }
 	}
 	closeButton.font.color = { 1, 0, 0, 1 }
-	local scenarioList = VFS.DirList("pp_editor/scenarios/", "*.xml", VFS.RAW)
+	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
 	if #scenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
@@ -1018,7 +1026,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		}
 	else
 		for i, scen in ipairs(scenarioList) do
-			local name = string.gsub(scen, "pp_editor\\scenarios\\", "")
+			local name = string.gsub(scen, "SPRED\\scenarios\\", "")
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
@@ -1026,21 +1034,140 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 				width = '100%',
 				height = 40,
 				caption = name,
-				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("pp_editor/scenarios/"..name))) window:Dispose() end }
+				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name))) window:Dispose() end }
 			}
 		end
 	end
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
 	UI.Scenario.ImportScenario = window
+end
+
+function ExportGameFrame()
+	ClearTemporaryUI()
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '20%',
+		y = '20%',
+		width = '60%',
+		height = '60%',
+		draggable = false,
+		resizable = false
+	}
+	Chili.Label:New{
+		parent = window,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "10%",
+		caption = "Export game",
+		align = "center",
+		valing = "center",
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			shadow = false
+		}
+	}
+	local scrollPanel = Chili.ScrollPanel:New{
+		parent = window,
+		x = '0%',
+		y = '10%',
+		width = '100%',
+		height = '80%'
+	}
+	local closeButton = Chili.Button:New{
+		parent = window,
+		x = '90%',
+		y = '0%',
+		width = '10%',
+		height = '10%',
+		caption = LAUNCHER_X,
+		OnClick = { function() window:Dispose() end }
+	}
+	closeButton.font.color = { 1, 0, 0, 1 }
+	local includeMissions = Chili.Checkbox:New{
+		parent = window,
+		x = "0%",
+		y = "90%",
+		width = "100%",
+		height = "10%",
+		boxsize = 30,
+		boxalign = "left",
+		checked = false,
+		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20
+		}
+	}
+	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
+	if #scenarioList == 0 then
+		Chili.TextBox:New{
+			parent = scrollPanel,
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 30,
+				color = { 1, 0, 0, 1 }
+			}
+		}
+	else
+		for i, scen in ipairs(scenarioList) do
+			local name = string.gsub(scen, "SPRED\\scenarios\\", "")
+			Chili.Button:New{
+				parent = scrollPanel,
+				x = '0%',
+				y = (i-1) * 60,
+				width = '100%',
+				height = 60,
+				caption = name,
+				OnClick = { function()
+					IncludeAllMissions = includeMissions.checked
+					LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))
+					ExportGame()
+					window:Dispose()
+				end },
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 20
+				}
+			}
+		end
+	end
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
+	UI.Scenario.ExportGame = window
 end
 
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
 	Language = lang
 	GetLauncherStrings(lang)
 	
-	UpdateCaption(UI.Title, LAUNCHER_TITLE)
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
+	UpdateCaption(UI.ExportGameButton, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.QuitButton, LAUNCHER_QUIT)
 	
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
@@ -1052,14 +1179,9 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
-	UpdateCaption(UI.Scenario.ExportGame, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
 	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
-	if UI.Scenario.IncludeMissions then -- no SetCaption method for checkbox
-		UI.Scenario.IncludeMissions.caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE
-		UI.Scenario.IncludeMissions:InvalidateSelf()
-	end
 end
 
 function NewMission(map) -- Start editor with empty mission on the selected map
@@ -1079,8 +1201,8 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 end
 
 function EditMission(level) -- Start editor with selected mission
-	if VFS.FileExists("pp_editor/missions/"..level..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("pp_editor/missions/"..level..".editor",  VFS.RAW)
+	if VFS.FileExists("SPRED/missions/"..level..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("SPRED/missions/"..level..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		local operations = {
 			["MODOPTIONS"] = {
@@ -1137,11 +1259,11 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 				["kids"] = {
 					{
 						["name"] = "title",
-						["text"] = "Prog & Play"
+						["text"] = "SPRED"
 					},
 					{
 						["name"] = "description",
-						["text"] = "Prog & Play est un jeu sérieux dans lequel le joueur doit programmer dans le langage de son choix les unités d'un jeu de stratégie en temps réel à l'aide d'une bibliothèque de fonctions."
+						["text"] = "Game made with SPRED"
 					},
 					{
 						["name"] = "activities",
@@ -1287,7 +1409,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 	local xmlString = string.gsub(serde.serialize(xmlScenario), "%>%<", ">\n<") -- Serialize as xml string and insert \n for a more readable file
 	xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"..xmlString -- Add the first line
 	local saveName = generateSaveName(name)
-	local file = io.open("pp_editor/scenarios/"..saveName..".xml", "w")
+	local file = io.open("SPRED/scenarios/"..saveName..".xml", "w")
 	file:write(xmlString)
 	file:close()
 end
@@ -1416,7 +1538,7 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage = nil
 	end
 	
-	if not VFS.FileExists(gameFolder.."/PPLE_Launcher.sdz") then
+	if not VFS.FileExists(gameFolder.."/SPRED.sdz") then
 		local message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND
 		UI.Scenario.ConfirmationMessage = Chili.Label:New{
 			parent = UI.MainWindow,
@@ -1452,7 +1574,7 @@ function BeginExportGame()
 	
 	-- Choose levels
 	local levelList = {}
-	if UI.Scenario.IncludeMissions.checked then
+	if IncludeAllMissions then
 		levelList = LevelListNames
 	else
 		for k, link in pairs(Links) do
@@ -1476,7 +1598,7 @@ function BeginExportGame()
 	
 	local exportSuccess = false
 	
-	if Game.version == "0.82.5.1" then
+	if Game.isPPEnabled then
 		if VFS.BuildPPGame then
 			VFS.BuildPPGame(scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
 			exportSuccess = true
@@ -1500,27 +1622,27 @@ function BeginExportGame()
 	else
 		-- Change Modinfo.lua
 		local maingame = MainGame
-		local modInfo = "return { game='PP', shortGame='PP', name='"..scenarioName.."', shortName='PP', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
-		local file = io.open("pp_editor/game_files/ModInfo.lua", "w")
+		local modInfo = "return { game='SPRED', shortGame='SPRED', name='"..scenarioName.."', shortName='SPRED', mutator='official', version='1.0', description='"..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
+		local file = io.open("SPRED/game/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
 		
 		-- Add levels and scenario
-		os.rename("pp_editor/scenarios/"..name..".xml", "pp_editor/game_files/scenario/"..name..".xml")
+		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
-			os.rename("pp_editor/missions/"..level..".editor", "pp_editor/game_files/missions/"..level..".editor")
+			os.rename("SPRED/missions/"..level..".editor", "SPRED/game/missions/"..level..".editor")
 		end
 		
 		-- Compress
-		if not VFS.FileExists("pp_editor/game_files.sdz") then
-			VFS.CompressFolder("pp_editor/game_files")
-			os.rename("pp_editor/game_files.sdz", "games/"..name..".sdz")
+		if not VFS.FileExists("SPRED/game.sdz") then
+			VFS.CompressFolder("SPRED/game")
+			os.rename("SPRED/game.sdz", "games/"..name..".sdz")
 		end
 		
 		-- Remove levels and scenario
-		os.rename("pp_editor/game_files/scenario/"..name..".xml", "pp_editor/scenarios/"..name..".xml")
+		os.rename("SPRED/game/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
-			os.rename("pp_editor/game_files/missions/"..level..".editor", "pp_editor/missions/"..level..".editor")
+			os.rename("SPRED/game/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
 		end
 		
 		exportSuccess = true
@@ -1680,6 +1802,16 @@ function BackWarning()
 				size = 25
 			}
 		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
+		}
 		UI.Scenario.Warning = window
 	else
 		MainMenuFrame()
@@ -1738,6 +1870,16 @@ function QuitWarning()
 				size = 25
 			}
 		}
+		Chili.Image:New{
+			parent = window,
+			x = '0%',
+			y = '0%',
+			width = '100%',
+			height = '100%',
+			keepAspect = false,
+			file = "bitmaps/editor/blank.png",
+			color = { 0, 0, 0, 1 }
+		}
 		UI.Scenario.Warning = window
 	else
 		Quit()
@@ -1751,7 +1893,7 @@ end
 
 function RemoveOtherWidgets() -- Disable other widgets
 	for name, w in pairs(widgetHandler.knownWidgets) do
-		if w.active and name ~= "Spring Direct Launch 2 for Prog&Play Level Editor" and name ~= "Chili Framework" then
+		if w.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" then
 			widgetHandler:DisableWidget(name)
 		end
 	end
@@ -1806,19 +1948,19 @@ function widget:DrawScreen()
 end
 
 function CreateMissingDirectories()
-	if not VFS.FileExists("pp_editor") then
-		Spring.CreateDir("pp_editor")
+	if not VFS.FileExists("SPRED") then
+		Spring.CreateDir("SPRED")
 	end
-	if not VFS.FileExists("pp_editor/missions") then
-		Spring.CreateDir("pp_editor/missions")
+	if not VFS.FileExists("SPRED/missions") then
+		Spring.CreateDir("SPRED/missions")
 	end
-	if not VFS.FileExists("pp_editor/scenarios") then
-		Spring.CreateDir("pp_editor/scenarios")
+	if not VFS.FileExists("SPRED/scenarios") then
+		Spring.CreateDir("SPRED/scenarios")
 	end
 end
 
 function widget:Initialize()
-	Spring.Echo(Game.modName)
+	widgetHandler:EnableWidget("Chili Framework")
 	CreateMissingDirectories()
 	InitializeChili()
 	if not Spring.GetModOptions().hidemenu then

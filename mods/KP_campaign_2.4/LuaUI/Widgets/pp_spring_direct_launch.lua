@@ -21,11 +21,6 @@ VFS.Include("LuaRules/Gadgets/libs/WriteScript.lua",nil)
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain DoTheRestart function
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
-
--- load Appliq XML
-VFS.Include("LuaUI/Widgets/libs/context.lua")
-contx=context:new("C:/Users/Bruno/Documents/ProgPlayLIP6/spring-0.82.5.1/",rootDirectory,"LuaUI/Widgets/libs/") -- Not sure that spring is working
-Spring.Echo(contx.springIsAvailable)
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 
@@ -129,6 +124,7 @@ local function RunScenario(i)
     local options={
     ["MODOPTIONS"]=
       {
+      ["testmap"]="true",
       ["scenariomode"]="appliq",
       ["language"]=lang,
       ["scenario"]=i, --Todo: Should be an id instead

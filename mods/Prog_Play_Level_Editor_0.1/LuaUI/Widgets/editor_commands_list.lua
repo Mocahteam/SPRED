@@ -2,15 +2,15 @@ function widget:GetInfo()
 	return {
 		name = "Editor Commands List",
 		desc = "Get and store the commands of the units of the selected mod",
-		author = "zigaroula",
-		date = "05/18/2016",
+		author = "mocahteam",
+		date = "June 24, 2016",
 		license = "GNU GPL v2",
 		layer = 0,
 		enabled = true
 	}
 end
 
-local json = VFS.Include("LuaUI/Widgets/libs/dkjson.lua")
+local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = {}, {}, {}, {}
 
 function generateCommandsList(encodedList, encodedUnitList)

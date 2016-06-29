@@ -2,9 +2,9 @@ function widget:GetInfo()
 	return {
 		name = "Editor Loading Screen",
 		desc = "Loading screen to prevent user from interacting with the interface.",
-		author = "zigaroula",
+		author = "mocahteam",
 		version = "0.1",
-		date = "May 17, 2016",
+		date = "June 24, 2016",
 		license = "Public Domain",
 		layer = -1250,
 		enabled = true

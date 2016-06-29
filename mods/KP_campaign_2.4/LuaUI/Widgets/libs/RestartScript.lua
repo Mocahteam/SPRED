@@ -4,6 +4,9 @@ local gameName=Game.gameShortName or Game.modShortName
 
 local function saveTxt(txt)
   Spring.Echo(gameName)
+  if(not VFS.FileExists("Savegames/"..gameName.."/"))then
+    Spring.CreateDir("Savegames/"..gameName.."/")
+  end
   local file=io.open("Savegames/"..gameName.."/currentSave.sav","wb")
   file:write(txt)
   file:flush()

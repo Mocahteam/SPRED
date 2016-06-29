@@ -123,7 +123,7 @@ conditions_list = {
 		}
 	},
 	{
-		type = "killed",
+		type = "kill",
 		filter = "Unit",
 		typeText = "Units killed specific units",
 		text = "<UnitSet> killed <Number> units of <Target>.",
@@ -142,6 +142,29 @@ conditions_list = {
 				text = "<Target>",
 				type = "unitset",
 				id = "target"
+			}
+		}
+	},
+	{
+		type = "killed",
+		filter = "Unit",
+		typeText = "Units have been killed by other units",
+		text = "<Number> units of <UnitSet> have been killed by <Attacker>.",
+		attributes = {
+			{
+				text = "<Number>",
+				type = "numberComparison",
+				id = "number"
+			},
+			{
+				text = "<UnitSet>",
+				type = "unitset",
+				id = "unitset"
+			},
+			{
+				text = "<Attacker>",
+				type = "unitset",
+				id = "attacker"
 			}
 		}
 	},

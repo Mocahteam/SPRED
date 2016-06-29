@@ -15,10 +15,11 @@ local ctx={}
 --ctx passed as a "context" when loading custom code from the user (script actions). 
 --This way, the user can get and set values related to the game 
 
-ctx.debugLevel=0 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ctx.debugLevel=1 -- in order to filter Spring Echo between 0 (all) and 10 (none)
 ctx.armySpring={}--table to store created spring units externalId (number or string)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
+ctx.groupOfUndeletedUnits={}--same as ctx.groupOfUnits except that units are never deleted (usefull to count kills)
 ctx.armyInformations={}--table to store information on units externalId->Informations
 ctx.messages={}--associative array messageId->message type
 ctx.conditions={}--associative array idCond->condition
@@ -26,7 +27,7 @@ ctx.events={}--associative array idEvent->event
 ctx.orderedEventsId={}--associative array order->idEvent
 ctx.variables={}--associative array variable->value Need to be global so that it can be updated by using loadstring
 ctx.zones={}--associative array idZone->zone
-ctx.killByTeams={}
+ctx.kills={}
 ctx.timeUntilPeace=5 -- how much time in seconds of inactivity to declare that an attack is no more
 ctx.attackedUnits={}
 ctx.attackingUnits={}
@@ -120,10 +121,6 @@ local function load_code(code)
     end
 end
 
--------------------------------------
--- Compare numerical values, a verbal "mode" being given 
--- @return nil or list
--------------------------------------
 local function intersection(list1,list2)
   local inters={}
   if list1==nil then return nil end
@@ -136,9 +133,23 @@ local function intersection(list1,list2)
       end
     end
   end
-  --Spring.Echo("resuilt of interset")
-  --Spring.Echo(json.encode(inters))
   return inters
+end
+
+-- warning, if intersection is non void, duplicates will occur.
+local function union(list1,list2)
+  local union={}
+  if (list1~=nil) then
+    for i,el in pairs(list1)do
+      table.insert(union,el)
+    end
+  end  
+  if (list2~=nil) then
+    for i,el in pairs(list2)do
+      table.insert(union,el)
+    end
+  end
+  return union
 end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
@@ -192,7 +203,7 @@ local function makeOperation(v1,v2,operation)
   if(operation=="/")then
     if(v2~=0)then return v1/v2 end
     else
-      --Spring.Echo("division by 0 replaced by division by 1")
+      EchoDebug("division by 0 replaced by division by 1",4)
       return v1
     end
   if(operation=="%")then return v1 - math.floor(v1/v2)*v1 end
@@ -270,7 +281,7 @@ end
 local function isXZInsideZone(x,z,zoneId)
   local zone=ctx.zones[zoneId]
   if(zone==nil)then
-    --Spring.Echo(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)))
+    EchoDebug(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)),5)
   end
   if(zone.type=="Rectangle") then
     local center_x=zone.center_xz.x
@@ -325,8 +336,6 @@ local function getARandomPositionInZone(idZone)
       posit["z"]=z
       return posit
     end 
-  else
-    --Spring.Echo("zone not found")
   end   
 end
 
@@ -442,7 +451,7 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
 end
 
 local function isInGroup(externalId,gp,testOnExternalsOnly)
-  EchoDebug("is in group ->"..json.encode(gp))
+  EchoDebug("is in group ->"..json.encode(gp),0)
   local isAlreadyStored=false
   if(gp==nil)then
     EchoDebug("group is nil in function isInGroup, this should not occur")
@@ -460,33 +469,65 @@ local function isInGroup(externalId,gp,testOnExternalsOnly)
   end
   return false,nil
 end
+
+local function getGroupsOfUnit(externalId, testOnExternalsOnly, groupToCheck)
+  local groupToCheck = groupToCheck or ctx.groupOfUnits
+  local groups={}
+  for indexGroup,g in pairs(groupToCheck)do
+    local inGp,_ = isInGroup(externalId,g,testOnExternalsOnly)
+    if(inGp)then
+      table.insert(groups,indexGroup)
+    end
+  end
+  return groups
+end
  
 local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
   local testOnExternalsOnly=testOnExternalsOnly or true 
   for g,group in pairs(groups) do
     if(ctx.groupOfUnits[group]~=nil) then 
       local _,i=isInGroup(externalId,ctx.groupOfUnits[group],testOnExternalsOnly)
-    if(i~=nil)then table.remove(ctx.groupOfUnits[group],i) end
+      if(i~=nil)then table.remove(ctx.groupOfUnits[group],i) end
     end
   end
 end
 
-local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
+local function addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,groupToStore)
   local testOnExternalsOnly=testOnExternalsOnly or true 
   -- usefull to check redundancy at a deeper level because, when it comes about unit creation
   -- units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
       -- create group if not existing
-    if(ctx.groupOfUnits[group]==nil) then
-      ctx.groupOfUnits[group]={}
+    if(groupToStore[group]==nil) then
+      groupToStore[group]={}
     end   
     -- store in group if not already stored
-    local isAlreadyStored,_=isInGroup(externalId,ctx.groupOfUnits[group],testOnExternalsOnly)
+    local isAlreadyStored,_=isInGroup(externalId,groupToStore[group],testOnExternalsOnly)
     if(not isAlreadyStored)then   
-      table.insert(ctx.groupOfUnits[group],externalId)
+      table.insert(groupToStore[group],externalId)
     end
   end
+end
+
+local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
+  addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUnits)
+  addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUndeletedUnits)
 end  
+
+local function addUnitsToGroups(units,groups,testOnExternalsOnly)
+  for u,unit in pairs(units) do
+    addUnitToGroups(unit,groups,testOnExternalsOnly)
+  end
+end
+
+local function unitSetParamsToUnitsExternal(param)
+  local index = param.type..'_'..tostring(param.value)
+  local units = ctx.groupOfUnits[index]
+  if(ctx.groupOfUnits[index] == nil)then
+    EchoDebug("warning. This index gave nothing : "..index,7)
+  end
+  return units
+end
    
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
@@ -516,9 +557,12 @@ end
 
 -------------------------------------
 -- Extract the list of units related to a condition
--- Side Effect : update condition-specific group in order to be used later, in the context of actions
+-- If we are in the context of action, it's possible that a list
+-- has already been compiled from previous condition checking process
+-- in this case, units_extracted is an index for this list
 -------------------------------------
-local function extractListOfUnitsImpliedByCondition(conditionParams)
+local function extractListOfUnitsImpliedByCondition(conditionParams,groupToCheck)
+  local groupToCheck = groupToCheck or ctx.groupOfUnits
   --EchoDebug("debug : "..tostring(id))
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
@@ -538,10 +582,10 @@ local function extractListOfUnitsImpliedByCondition(conditionParams)
       EchoDebug(json.encode({conditionParams,groupToReturn}),2)
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
-       if(ctx.groupOfUnits[index]==nil)then
+       if(groupToCheck[index]==nil)then
          EchoDebug("warning. This index gave nothing : "..index)
        end
-       groupToReturn=ctx.groupOfUnits[index]
+       groupToReturn=groupToCheck[index]
      end
   end
   return groupToReturn
@@ -690,7 +734,7 @@ local function ApplyNonGroupableAction(act)
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,z=z,time=act.params.time/ctx.speedFactor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,y=y,z=z,time=act.params.time/ctx.speedFactor}))
     
     
    --[[ Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -736,6 +780,21 @@ local function ApplyNonGroupableAction(act)
     local widgetName=act.params.widget
     local activation=(act.type=="enableWidget")
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+  
+  elseif (act.type == "intersection") or (act.type == "union") then
+    local g1=unitSetParamsToUnitsExternal(act.params.unitset1)
+    local g2=unitSetParamsToUnitsExternal(act.params.unitset2)
+    local g3
+    EchoDebug("act.params intersec/union -> "..json.encode(act.params),3 )
+    if(act.type == "intersection")then
+      g3=intersection(g1,g2)
+    elseif(act.type == "union")then
+      g3=union(g1,g2) -- at this point, duplicates will occur, but addUnitsToGroups for duplicates
+    end
+    EchoDebug("g3 -> "..json.encode(g3),3 )
+    EchoDebug("before -> "..json.encode(ctx.groupOfUnits) ,3 )
+    addUnitsToGroups(g3,{"group_"..tostring(act.params.group)},false)
+    EchoDebug("after -> "..json.encode(ctx.groupOfUnits) ,3 )
   else
     EchoDebug("this action is not recognized : "..act.type,8)  
   end
@@ -1009,6 +1068,19 @@ local function  UpdateUnsyncValues(frameNumber)
   SendToUnsynced("requestUnsyncVals")
 end
 
+local function UpdateGroups()
+  EchoDebug("before update-> "..json.encode(ctx.groupOfUnits),0)
+  for g,group in pairs(ctx.groupOfUnits) do
+    for u,unit in pairs(group) do
+      if(not Spring.ValidUnitID(ctx.armySpring[unit]))then
+        table.remove(group,u)
+        EchoDebug("remove ! -> "..json.encode(u),0)
+      end
+    end
+  end
+  EchoDebug("after update-> "..json.encode(ctx.groupOfUnits),0)
+end
+
 -------------------------------------
 -- wrapper for two main functions related to
 -- the main operations on the game
@@ -1149,21 +1221,49 @@ local function UpdateConditionsTruthfulness (frameNumber)
           end 
         end
       end
+      
       --Spring.Echo(json.encode({idCond,c.params.number.number,total,count,c.params.number.comparison}))
-      ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
-    elseif(object=="killed")then 
-      local externalUnitList=extractListOfUnitsImpliedByCondition(c.params)
-      local total=table.getn(externalUnitList)
+      ctx.conditions[idCond]["currentlyValid"] = compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
+    elseif(object=="kill")or(object=="killed")then  
+      EchoDebug("Condkills->"..json.encode(c.params),2)
+      EchoDebug("kills->"..json.encode(ctx.kills),2)
       local count=0
-      for u,unit in ipairs(externalUnitList) do
-        local spUnit=ctx.armySpring[unit]
-        for u2,killInformation in ipairs(ctx.killByTeams[c.params.team]) do -- TODO: work required
-          if spUnit==killInformation.unitID then -- means a unit from the searched group has been found amongst killed units
-            count=count+1
-            break
-          end
+      local total=table.getn(extractListOfUnitsImpliedByCondition(c.params,ctx.groupOfUndeletedUnits))
+      local killerGroupTofind
+      local targetGroupTofind
+      if(object=="kill")then   
+        killerGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)
+        targetGroupTofind=c.params.target.type.."_"..tostring(c.params.target.value)
+      elseif (object=="killed") then
+        killerGroupTofind=c.params.attacker.type.."_"..tostring(c.params.attacker.value)
+        targetGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)     
+      end 
+      EchoDebug('killerGroupTofind,targetGroupTofind,ctx.kills -> '..json.encode({killerGroupTofind,targetGroupTofind,ctx.kills}))
+      for killerUnit,killedUnit in pairs(ctx.kills) do
+        local killerUnit_groups = getGroupsOfUnit(killerUnit, false, ctx.groupOfUndeletedUnits)--, ctx.groupOfUndeletedUnits
+        EchoDebug('killerUnit_groups -> '..json.encode(killerUnit_groups))--
+        local killedUnit_groups = getGroupsOfUnit(killedUnit, false, ctx.groupOfUndeletedUnits)--
+        EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups))
+        for g,gpname_killer in pairs(killerUnit_groups) do
+          if(gpname_killer == killerGroupTofind) then
+            for g,gpname_killed in pairs(killedUnit_groups) do
+              if(gpname_killed == targetGroupTofind) then
+                count = count + 1     
+                EchoDebug("finally !")   
+                local unitToStore
+                if(object=="killed") then
+                  local unitToStore=killedUnit
+                else
+                  unitToStore=killerUnit
+                end
+                local unitToStore=killerUnit
+                addUnitToGroups(unitToStore,{"condition_"..c.id})        
+              end
+            end
+          end   
         end
       end
+      EchoDebug("final count : "..tostring(count),0)    
       ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
     end
     EchoDebug("state of condition :",2)
@@ -1171,6 +1271,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     EchoDebug(ctx.conditions[idCond]["currentlyValid"],2)
     EchoDebug("current group of units",2)
     EchoDebug(json.encode(ctx.groupOfUnits),2)
+     EchoDebug("current group of undeleted units",2)
+    EchoDebug(json.encode(ctx.groupOfUndeletedUnits),2)
   end 
 end
 
@@ -1218,16 +1320,19 @@ end
 -- Parse the editor file
 -- enable/deactivate widgets according to the settings
 -------------------------------------
-local function parseJson(jsonFile)
-  --Spring.Echo(jsonFile)
-  if(jsonFile==nil) then
+local function parseJson(jsonString)
+  --Spring.Echo(jsonString)
+  if(jsonString==nil) then
     return nil
   end
   ctx.canUpdate=true
-  ctx.mission=json.decode(jsonFile)
+  ctx.mission=json.decode(jsonString)
   -- desactivate widget
-  local widgetWithForcedState={["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
-  ,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true,["Camera Auto"]=true}
+  local widgetWithForcedState={
+    ["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
+    ,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true
+    ,["Camera Auto"]=true,["Chili Framework"]=true,["Display Zones"]=true
+  }
   
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
@@ -1296,6 +1401,10 @@ local function StartAfterJson ()
     if(cZ.marker)then
       Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, cZ.name)
     end 
+    if cZ.showInGame then
+       SendToUnsynced("displayZone", json.encode(cZ))    
+    end
+    --displayZone
   end
 end
    
@@ -1372,12 +1481,10 @@ end
       local groupId=ctx.mission.groups[i].id
       local groupIndex="group_"..groupId
       ctx.groupOfUnits[groupIndex]={}
-      for i,unit in ipairs(ctx.mission.groups[i].units) do
-        table.insert(ctx.groupOfUnits[groupIndex],unit)
-      end
+      ctx.groupOfUndeletedUnits[groupIndex]={}
+      addUnitsToGroups(ctx.mission.groups[i].units,{groupIndex},true)
     end
   end 
-  --Spring.Echo(json.encode(ctx.groupOfUnits))
    
 
 
@@ -1400,9 +1507,11 @@ end
          ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
          local type=currentCond.type
          local cond_object="other"
-         if(currentCond.params.unitset~=nil)then
+         if(currentCond.type=="killed")or(currentCond.type=="kill")then
+          cond_object=currentCond.type -- special case as related units are no more
+         elseif(currentCond.params.unitset~=nil)then
           cond_object="group"
-        end
+         end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
        EchoDebug(json.encode(ctx.conditions))
       end 
@@ -1413,10 +1522,10 @@ end
 
 
 -- shorthand for parseJson + StartAfterJson.
-local function Start(jsonFile) 
-  --Spring.Echo(jsonFile)
-  parseJson(jsonFile)
-  StartAfterJson ()
+local function Start(jsonString) 
+  EchoDebug("missionFile : "..jsonString,2)
+  parseJson(jsonString)
+  StartAfterJson()
 end
 
 -------------------------------------
@@ -1430,8 +1539,9 @@ local function Update (frameNumber)
   UpdateGameState(frameNumber)
   ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)
   applyCurrentActions() 
-  if(frameNumber>10)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
+  if(frameNumber>32)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
   UpdateUnsyncValues(frameNumber)
+  UpdateGroups()
   if(ctx.success==1) then
     return ctx.success,ctx.outputstate
   elseif(ctx.success==-1) then
@@ -1453,69 +1563,61 @@ local function Stop ()
 	end
 end
 
+
+local function isMessage(msg,target_msg)
+  local lengthTarget=string.len(target_msg)
+  return ((msg~=nil)and(string.len(msg)>lengthTarget)and(string.sub(msg,1,lengthTarget)==target_msg))
+end
+
 -------------------------------------
 -- Information received from Unsynced Code 
 -- Executed in mission_runner.lua
 -------------------------------------
 function gadget:RecvLuaMsg(msg, player)
-  if((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,4)=="kill")) then
-    -- comes from mission runner unit destroyed
-    -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
-    -- is encoded
-    local jsonfile=string.sub(msg,5,-1)
-    local killTable=json.decode(jsonfile)
-    local attackerTeam=killTable.attackerTeam
-    if ctx.killByTeams[attackerTeam]==nil then
-      ctx.killByTeams[attackerTeam]={} 
-    end
-    table.insert(ctx.killByTeams[attackerTeam],killTable)
-    --Spring.Echo(json.encode(ctx.killByTeams))
-    --Spring.Echo(json.encode(ctx.killByTeams))
-  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,6)=="damage")) then
-    -- comes from mission runner unit destroyed
-    -- local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}
-    -- is encoded
-    --Spring.Echo("damage received")
-    local jsonfile=string.sub(msg,7,-1)
-    local damageTable=json.decode(jsonfile)
+  if isMessage(msg,"kill") then
+    local jsonString=string.sub(msg,5,-1)
+    EchoDebug("killTable-->"..jsonString,3)
+    local killTable=json.decode(jsonString)
+    local killer=killTable.attackerID
+    local killerExternal=ctx.armyExternal[killer]
+    local killedExternal=ctx.armyExternal[killTable.unitID]
+    ctx.kills[killerExternal]=killedExternal
+    
+  elseif isMessage(msg,"damage") then
+    local jsonString=string.sub(msg,7,-1)
+    local damageTable=json.decode(jsonString)
     EchoDebug("damageTable-->"..json.encode(damageTable),1)
     local attackedUnit=damageTable.attackedUnit
     local attackingUnit=damageTable.attackerID
-    damageTable.frame=tonumber(damageTable.frame)
-    
+    damageTable.frame=tonumber(damageTable.frame)    
     if ctx.attackedUnits[attackedUnit]==nil then
       ctx.attackedUnits[attackedUnit]={} 
     end
     ctx.attackedUnits[attackedUnit]=damageTable
-    --EchoDebug("attackingUnit:",0)
     if(attackingUnit~=nil)then
       if ctx.attackingUnits[attackingUnit]==nil then
         ctx.attackingUnits[attackingUnit]={} 
       end
       ctx.attackingUnits[attackingUnit]=damageTable
     end
-  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,12)=="unitCreation")) then
+    
+  elseif isMessage(msg,"unitCreation") then
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
-      local jsonfile=string.sub(msg,13,-1)
-      --Spring.Echo(jsonfile)
-      local creationTable=json.decode(jsonfile)
-      -- {unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam,factID=factID,factDefID=factDefID,userOrders=userOrders}
-      --local attackedUnit=damageTable.attackedUnit
+      local jsonString=string.sub(msg,13,-1)
+      local creationTable=json.decode(jsonString)
       local realId="createdUnit_"..tostring(ctx.globalIndexOfCreatedUnits)
       ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
       local springId=creationTable.unitID 
       
-      -- <Register>
+      -- < Register>
       local teamIndex="team_"..tostring(creationTable.unitTeam)
-
       registerUnit(springId,realId)
       addUnitToGroups(realId,{teamIndex},false)
-      -- </Register>
-      
+      -- </ Register> 
     end 
-  elseif((msg~=nil)and(string.len(msg)>4)and(string.sub(msg,1,16)=="returnUnsyncVals")) then
-    local jsonfile=string.sub(msg,17,-1)
-    local values=json.decode(jsonfile)
+  elseif isMessage(msg,"returnUnsyncVals") then
+    local jsonString=string.sub(msg,17,-1)
+    local values=json.decode(jsonString)
     for ind,val in pairs(values)do
       ctx[ind]=val
     end
@@ -1527,7 +1629,6 @@ end
 local Mission = {}
 
 Mission.returnEventsTriggered=returnEventsTriggered
-Mission.returnTestsToPlay=returnTestsToPlay
 Mission.parseJson=parseJson
 Mission.StartAfterJson=StartAfterJson
 Mission.Start = Start

@@ -13,8 +13,8 @@ local rootDirectory="KP_campaign_2.4/LuaUI/Widgets/libs/" -- IMPORTANT EDIT THIS
 --local contx=context:new("AppliqManager/",rootDirectory) -- Not sure that spring is working
 
 --require("context") -- allows to work in local or int the context of Spring Runtime
-local xml = contx:Include("LuaXML/luaxml-mod-xml.lua")
-local handler = contx:Include("LuaXML/luaxml-mod-handler.lua")
+local xml = VFS.Include("LuaUI/Widgets/libs/LuaXML/luaxml-mod-xml.lua")
+local handler = VFS.Include("LuaUI/Widgets/libs/LuaXML/luaxml-mod-handler.lua")
 
 -------------------------------------
 -- Constructor
@@ -49,7 +49,6 @@ end
 -------------------------------------
 function appliqManager:parse()
   local loadedFile=VFS.LoadFile(self.xmldata)
-  --local loadedFile=contx:LoadFileFromSpringRoot(self.xmldata)
   if(loadedFile)==nil then
     self=nil
     return
@@ -113,7 +112,7 @@ function appliqManager:selectScenario(index)
     end
     return true
   else
-    contx:Echo("scenario index out of range, the selected scenario does not exist")
+    Spring.Echo("scenario index out of range, the selected scenario does not exist")
     return false
   end
 end

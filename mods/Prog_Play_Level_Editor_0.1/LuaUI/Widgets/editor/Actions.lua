@@ -475,6 +475,52 @@ actions_list = {
 		}
 	},
 	{
+		type = "union",
+		filter = "Group",
+		typeText = "Union between 2 Unitsets",
+		text = "Set <Group> to the union between <UnitSet1> and <UnitSet2>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<UnitSet1>",
+				type = "unitset",
+				id = "unitset1"
+			},
+			{
+				text = "<UnitSet2>",
+				type = "unitset",
+				id = "unitset2"
+			}
+		}
+	},
+	{
+		type = "intersection",
+		filter = "Group",
+		typeText = "Intersection between 2 Unitsets",
+		text = "Set <Group> to the intersection between <UnitSet1> and <UnitSet2>.",
+		attributes = {
+			{
+				text = "<Group>",
+				type = "group",
+				id = "group"
+			},
+			{
+				text = "<UnitSet1>",
+				type = "unitset",
+				id = "unitset1"
+			},
+			{
+				text = "<UnitSet2>",
+				type = "unitset",
+				id = "unitset2"
+			}
+		}
+	},
+	{
 		type = "showZone",
 		filter = "Zone",
 		typeText = "Show zone in game",
@@ -577,6 +623,16 @@ actions_list = {
 		}
 	}
 }
+
+-- Disable PP actions when not in a PP version of Spring
+if not Game.isPPEnabled then
+	for i, a in ipairs(actions_list) do
+		if a.type == "feedback" then
+			table.remove(actions_list, i)
+			break
+		end
+	end
+end
 
 -- COLOR TEXT
 for i, a in ipairs(actions_list) do

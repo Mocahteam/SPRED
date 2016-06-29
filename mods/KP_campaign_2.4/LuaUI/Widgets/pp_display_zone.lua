@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Display Zones",
     desc      = "Display zone at a specific position",
-    author    = "zigaroula,martinb",
+    author    = "mocahteam",
     date      = "Apr 29, 2016",
     license   = "GPL v2 or later",
     layer     = 0,
@@ -25,6 +25,14 @@ function RemoveZoneFromDisplayList(zone)
 	end
 end
 
+function DrawText(text, _x, _z)
+	local s = 20
+	local x, y = Spring.WorldToScreenCoords(_x, Spring.GetGroundHeight(_x, _z), _z)
+	local w, h = gl.GetTextWidth(text) * s, gl.GetTextHeight(text) * s
+	x, y = x - w/2, y - h/2
+	gl.Text(text, x, y, s, "s")
+end
+
 function DrawGroundFilledEllipsis(centerX, centerZ, a, b, r, g, b)
 	local divs = 25
 	gl.Color(r, g, b, 0.5)
@@ -35,11 +43,13 @@ function DrawGroundFilledEllipsis(centerX, centerZ, a, b, r, g, b)
 			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
 		end
 	end)
+	gl.Color(1, 1, 1, 1)
 end
 
 function DrawGroundRectangle(x1, x2, z1, z2, r, g, b)
 	gl.Color(r, g, b, 0.5)
 	gl.DrawGroundQuad(x1, z1, x2, z2)
+	gl.Color(1, 1, 1, 1)
 end
 
 function widget:DrawWorld()
@@ -48,6 +58,16 @@ function widget:DrawWorld()
 			DrawGroundRectangle(z.x1, z.x2, z.z1, z.z2, z.red, z.green, z.blue)
 		elseif z.type == "Disk" then
 			DrawGroundFilledEllipsis(z.x, z.z, z.a, z.b, z.red, z.green, z.blue)
+		end
+	end
+end
+
+function widget:DrawScreen()
+	for i, z in ipairs(Zones) do
+		if z.type == "Rectangle" then
+			DrawText(z.name, (z.x1+z.x2)/2, (z.z1+z.z2)/2)
+		elseif z.type == "Disk" then
+			DrawText(z.name, z.x, z.z)
 		end
 	end
 end

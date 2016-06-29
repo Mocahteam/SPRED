@@ -2,8 +2,8 @@ function widget:GetInfo()
 	return {
 		name = "Editor User Interface",
 		desc = "User interface of the level editor",
-		author = "zigaroula",
-		date = "02/05/2016",
+		author = "mocahteam",
+		date = "June 24, 2016",
 		license = "GNU GPL v2",
 		layer = 0,
 		enabled = true
@@ -29,7 +29,6 @@ local windows, topBarButtons = {}, {} -- references to UI elements
 local testLevelButton
 local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
-local UIelements = {}
 
 -- File Variables
 local fileButtons = {}
@@ -300,7 +299,6 @@ function addButton(_parent, _x, _y, _w, _h, text, onClickFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
-	table.insert(UIelements, button)
 	return button
 end
 
@@ -320,7 +318,6 @@ function addLabel(_parent, _x, _y, _w, _h, text, size, _align, _color, _valign)
 		}
 	}
 	label.font.color = _color or {1, 1, 1, 1}
-	table.insert(UIelements, label)
 	return label
 end
 
@@ -338,7 +335,6 @@ function addTextBox(_parent, _x, _y, _w, _h, _text, size, _color)
 		}
 	}
 	textBox.font.color = _color or {1, 1, 1, 1}
-	table.insert(UIelements, textBox)
 	return textBox
 end
 
@@ -400,7 +396,6 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	else
 		editBox.font.size = 16
 	end
-	table.insert(UIelements, editBox)
 	return editBox
 end
 
@@ -416,7 +411,6 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		boxsize = _h or 10,
 		checked = _checked or false
 	}
-	table.insert(UIelements, checkBox)
 	return checkBox
 end
 
@@ -448,7 +442,6 @@ function addComboBox(_parent, _x, _y, _w, _h, _items, onSelectFunction)
 			font = "LuaUI/Fonts/TruenoRg.otf"
 		}
 	}
-	table.insert(UIelements, comboBox)
 	return comboBox
 end
 
@@ -602,9 +595,9 @@ function mapSettingsFrame()
 		elseif minimapState == "disabled" then
 			mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 		end
-		if feedbackState == "enabled" then
+		if feedbackState == "enabled" and mapSettingsButtons.feedbackButton then
 			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
-		elseif feedbackState == "disabled" then
+		elseif feedbackState == "disabled" and mapSettingsButtons.feedbackButton then
 			mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
 		end
 		mapSettingsButtons.widgetsButton.state.chosen = false -- Reset the state of this button
@@ -625,7 +618,7 @@ function tracesFrame()
 			tracesUI.message:Dispose()
 		end
 		local missionName = generateSaveName(mapDescription.mapName)
-		local tracesList = VFS.DirList("traces/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
+		local tracesList = VFS.DirList("traces/data/expert/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
 		tracesUI.textbox:SetText("")
 		if #tracesList == 0 then
 			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
@@ -684,14 +677,14 @@ function testLevel()
 					["scenario"] = "noScenario",
 					["maingame"] = MainGame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["testmap"] = levelFile.description.saveName
+					["testmap"] = json.encode(levelFile)
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
 					["Gametype"] = Game.modName
 				}
 			}
-			DoTheRestart("LevelEditor.txt", operations)
+			genericRestart("SPRED/missions/"..saveName..".editor", operations, true)
 		end
 	end
 	
@@ -700,7 +693,7 @@ function testLevel()
 		windows["testWindow"]:Dispose()
 	end
 	windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
-	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "pp_editor/missions/"..levelFile.description.saveName..".editor")
+	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
 	addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text, 20, "center", nil, "center")
 	addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
 	addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
@@ -780,7 +773,9 @@ function initTopBar()
 	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '30%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
 	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
 	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '50%', '0%', '10%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
-	topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
+	if Game.isPPEnabled then
+		topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '60%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
+	end
 	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
@@ -1200,18 +1195,72 @@ function initMapSettingsWindow()
 	end
 	colorUI.button.OnClick = {applyColor}
 	
-	mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-	mapSettingsButtons.cameraAutoButton.OnClick = {
-		function()
-			if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
-				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
-				cameraAutoState = "disabled"
-			else
-				mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
-				cameraAutoState = "enabled"
+	if Game.isPPEnabled then
+		mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '76%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		mapSettingsButtons.cameraAutoButton.OnClick = {
+			function()
+				if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+					cameraAutoState = "disabled"
+				else
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+					cameraAutoState = "enabled"
+				end
 			end
-		end
-	}
+		}
+		
+		mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+		mapSettingsButtons.mouseStateButton.OnClick = {
+			function()
+				if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+					mouseState = "disabled"
+				else
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+					mouseState = "enabled"
+				end
+			end
+		}
+		
+		mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+		mapSettingsButtons.feedbackButton.OnClick = {
+			function()
+				if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
+					mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
+					feedbackState = "disabled"
+				else
+					mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
+					feedbackState = "enabled"
+				end
+			end
+		}
+	else
+		mapSettingsButtons.cameraAutoButton = addButton(windows['mapSettingsWindow'], '2%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+		mapSettingsButtons.cameraAutoButton.OnClick = {
+			function()
+				if mapSettingsButtons.cameraAutoButton.caption == EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED then
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_DISABLED)
+					cameraAutoState = "disabled"
+				else
+					mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
+					cameraAutoState = "enabled"
+				end
+			end
+		}
+		
+		mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+		mapSettingsButtons.mouseStateButton.OnClick = {
+			function()
+				if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
+					mouseState = "disabled"
+				else
+					mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
+					mouseState = "enabled"
+				end
+			end
+		}
+	end
 	
 	mapSettingsButtons.autoHealButton = addButton(windows['mapSettingsWindow'], '35%', '80%', '30%', '8%', EDITOR_MAPSETTINGS_HEAL_AUTO_DISABLED)
 	mapSettingsButtons.autoHealButton.OnClick = {
@@ -1226,19 +1275,6 @@ function initMapSettingsWindow()
 		end
 	}
 	
-	mapSettingsButtons.mouseStateButton = addButton(windows['mapSettingsWindow'], '2%', '84%', '30%', '8%', EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-	mapSettingsButtons.mouseStateButton.OnClick = {
-		function()
-			if mapSettingsButtons.mouseStateButton.caption == EDITOR_MAPSETTINGS_MOUSE_ENABLED then
-				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_DISABLED)
-				mouseState = "disabled"
-			else
-				mapSettingsButtons.mouseStateButton:SetCaption(EDITOR_MAPSETTINGS_MOUSE_ENABLED)
-				mouseState = "enabled"
-			end
-		end
-	}
-	
 	mapSettingsButtons.minimapButton = addButton(windows['mapSettingsWindow'], '35%', '90%', '30%', '8%', EDITOR_MAPSETTINGS_MINIMAP_DISABLED)
 	mapSettingsButtons.minimapButton.OnClick = {
 		function()
@@ -1248,19 +1284,6 @@ function initMapSettingsWindow()
 			else
 				mapSettingsButtons.minimapButton:SetCaption(EDITOR_MAPSETTINGS_MINIMAP_ENABLED)
 				minimapState = "enabled"
-			end
-		end
-	}
-	
-	mapSettingsButtons.feedbackButton = addButton(windows['mapSettingsWindow'], '2%', '92%', '30%', '8%', EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
-	mapSettingsButtons.feedbackButton.OnClick = {
-		function()
-			if mapSettingsButtons.feedbackButton.caption == EDITOR_MAPSETTINGS_FEEDBACK_ENABLED then
-				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_DISABLED)
-				feedbackState = "disabled"
-			else
-				mapSettingsButtons.feedbackButton:SetCaption(EDITOR_MAPSETTINGS_FEEDBACK_ENABLED)
-				feedbackState = "enabled"
 			end
 		end
 	}
@@ -1281,7 +1304,7 @@ end
 function initTestLevelFrame()
 	local win = addWindow(Screen0, '80%', '0%', '20%', '10%', false)
 	local function returnToEditor()
-		local levelFile = VFS.LoadFile("pp_editor/missions/"..Spring.GetModOptions().testmap..".editor",  VFS.RAW)
+		local levelFile = VFS.LoadFile("SPRED/missions/"..Spring.GetModOptions().missionname..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		local operations = {
 			["MODOPTIONS"] = {
@@ -2553,6 +2576,27 @@ function updateTeamConfigPanels() -- Update panels when teams become enabled/dis
 		if teamAIElements.teamAI[t] ~= teamAIElements.teamAIEditBoxes[t].text then -- Update the AI of the computer controlled teams
 			teamAIElements.teamAI[t] = teamAIElements.teamAIEditBoxes[t].text
 		end
+	end
+end
+
+function showWarningMultiplayerMessage()
+	local count = 0
+	for k, tc in pairs(teamControl) do
+		if tc == "player" then
+			count = count + 1
+		end
+	end
+	local text = nil
+	if count < 1 then
+		text = EDITOR_FORCES_TEAMCONFIG_WARNING_NO_PLAYER
+	elseif count > 1 then
+		text = EDITOR_FORCES_TEAMCONFIG_WARNING_MULTIPLAYER
+	end
+	if text then
+		local w = gl.GetTextWidth(text)
+		local x = screenSizeX * 0.5
+		local y = screenSizeY * 0.9
+		gl.Text("\255\255\56\0"..text, x - (30*w/2), y, 30, "s")
 	end
 end
 
@@ -3842,7 +3886,7 @@ function configureEvent() -- Show the event configuration window
 						for i, c in ipairs(e.actions) do -- update action list
 							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
 							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-							addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 							count = count + 1
 						end
 						newEventActionButton.y = 40 * count
@@ -4371,23 +4415,10 @@ function updateMapSettings() -- Update the settings of the map according to what
 	mapDescription.mapBriefing = mapBriefingTextBox.text
 end
 
-function initWidgetList() -- Remove some widgets linked directly to prog&play from the widget list
+function initWidgetList() -- Remove some widgets linked directly to SPRED from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
-		if 	k ~= "Spring Direct Launch 2 for Prog&Play" and
-			k ~= "Messenger" and
-			k ~= "Mission GUI" and
-			k ~= "CA Interface" and
-			k ~= "Files IO" and
-			k ~= "Display Message" and
-			k ~= "Camera Auto" and
-			k ~= "Chili Framework" and
-			k ~= "Editor Commands List" and
-			k ~= "Editor Loading Screen" and
-			k ~= "Spring Direct Launch 2 for Prog&Play Level Editor" and
-			k ~= "Editor User Interface" and
-			k ~= "Editor Widget List"
-		then
+		if w.author ~= "mocahteam" and k ~= "Chili Framework" then
 			local customWidget = {}
 			customWidget.name = k
 			customWidget.active = false
@@ -4568,8 +4599,8 @@ function loadMap(name) -- Load a map given a file name or if loadedTable is not 
 	if loading then return end -- Don't load if already loading
 	loading = true
 	newMap()
-	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
-		local mapfile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
+		local mapfile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	else
 		loading = false
@@ -4805,7 +4836,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 		jsonfile = string.gsub(jsonfile, "\t}", "}")
 		jsonfile = string.gsub(jsonfile, "\t%]", "]")
 	end
-	local file = io.open("pp_editor/missions/"..saveName..".editor", "w")
+	local file = io.open("SPRED/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
 	file:close()
 	NeedToBeSaved = false
@@ -4843,16 +4874,16 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 		addLabel(windows["loadWindow"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE, 20, "center", nil, "center")
 		local delbut = addButton(windows["loadWindow"], '90%', '0%', '10%', '10%', EDITOR_X, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() end)
 		delbut.font.color = {1, 0, 0, 1}
-		local levelList = VFS.DirList("pp_editor/missions/", "*.editor", VFS.RAW)
+		local levelList = VFS.DirList("SPRED/missions/", "*.editor", VFS.RAW)
 		if #levelList == 0 then
 			addTextBox(windows["loadWindow"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
 		else
 			local scrollPanel = addScrollPanel(windows["loadWindow"], '0%', '10%', '100%', '90%')
 			local count = 0
 			for i, l in ipairs(levelList) do
-				local name = string.gsub(l, "pp_editor\\missions\\", "")
+				local name = string.gsub(l, "SPRED\\missions\\", "")
 				name = string.gsub(name, ".editor", "")
-				local levelDescription = json.decode(VFS.LoadFile("pp_editor/missions/"..name..".editor"))
+				local levelDescription = json.decode(VFS.LoadFile("SPRED/missions/"..name..".editor"))
 				if levelDescription.description.mainGame == MainGame then
 					local displayedName = string.gsub(name, "_", " ")
 					addButton(scrollPanel, '0%', 40 * count, '100%', 40, displayedName, function() Screen0:RemoveChild(windows["loadWindow"]) windows["loadWindow"]:Dispose() loadLevelWithRightMap(name) end)
@@ -4895,10 +4926,10 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 				windows["saveWindow"]:Dispose()
 			end
 			windows["saveWindow"] = addWindow(Screen0, "25%", "45%", "50%", "10%")
-			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/pp_editor/levels/"..saveName..".editor)", 20)
+			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/SPRED/levels/"..saveName..".editor)", 20)
 			addButton(windows["saveWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["saveWindow"]) windows["saveWindow"]:Dispose() end)
 		end
-		if VFS.FileExists("pp_editor/missions/"..saveName..".editor", VFS.RAW) then
+		if VFS.FileExists("SPRED/missions/"..saveName..".editor", VFS.RAW) then
 			windows["saveWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["saveWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM.." ("..saveName..".editor)", 20)
 			addLabel(windows["saveWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CONFIRM_HELP, 14)
@@ -4944,8 +4975,8 @@ function beginLoadLevel(name) -- Callback used to load a map directly from the l
 end
 
 function loadLevelWithRightMap(name) -- Load a level in the map associated to the level if the map is different
-	if VFS.FileExists("pp_editor/missions/"..name..".editor",  VFS.RAW) then
-		local levelFile = VFS.LoadFile("pp_editor/missions/"..name..".editor",  VFS.RAW)
+	if VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
+		local levelFile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if levelFile.description.map == Game.mapName then
 			loadMap(name)
@@ -5272,6 +5303,8 @@ function widget:DrawScreen()
 		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 			showUnitsInformation()
 		end
+	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES and forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+		showWarningMultiplayerMessage()
 	end
 	showZoneInformation()
 end
@@ -5394,29 +5427,12 @@ function widget:Update(delta)
 	if saveLoadCooldown < 1 then
 		saveLoadCooldown = saveLoadCooldown + delta
 	end
-	
-	-- Remove UI elements that do not have a parent from the table so their text size is not updated
-	local toBeRemoved = {}
-	for i, obj in ipairs(UIelements) do
-		if not obj.parent then
-			table.insert(toBeRemoved, i)
-		end
-	end
-	for _, i in ipairs(toBeRemoved) do
-		table.remove(UIelements, i)
-	end
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
 		local textSize = ((dse_vsx/screenSizeX) + (dse_vsy/screenSizeY))/2
-		--recursiveResize(Screen0, textSize)
-		for i, obj in ipairs(UIelements) do
-			if obj.font then
-				obj.font.size = obj.font.size * textSize
-				obj:InvalidateSelf()
-			end
-		end
+		-- todo
 		screenSizeX, screenSizeY = dse_vsx, dse_vsy
 	end
 end

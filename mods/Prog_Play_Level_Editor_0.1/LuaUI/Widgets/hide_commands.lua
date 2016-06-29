@@ -3,8 +3,8 @@ function widget:GetInfo()
    version   = "1",
    name      = "Hide commands",
    desc      = "Hides all commands",
-   author    = "Regret",
-   date      = "February 19, 2010",
+   author    = "mocahteam",
+   date      = "June 24, 2016",
    license   = "Public Domain",
    layer     = 0,
    enabled   = true, --enabled by default
