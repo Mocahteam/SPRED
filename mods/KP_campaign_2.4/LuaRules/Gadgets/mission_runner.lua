@@ -24,6 +24,7 @@ if (gadgetHandler:IsSyncedCode()) then
 local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local missionIsHardcoded = (Spring.GetModOptions()["hardcoded"]=="yes") --indicate if the mission is hard coded (i.e described by a lua file)
+local testmap = Spring.GetModOptions()["testmap"]  --indicate if the mission is runned within the context of the editor ("test mission button")
 -- variable to know the state of the mission
 -- -1 => mission lost
 --  0 => mission running
@@ -35,7 +36,7 @@ local showBriefing = false
 local missionScript=nil
 local initializeUnits = true
 
-  
+local solutions = table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
@@ -45,6 +46,10 @@ function gadget:RecvLuaMsg(msg, player)
   if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="mission")) then
     local jsonfile=string.sub(msg,8,-1)
     missionScript.parseJson(jsonfile)
+  end
+  if((msg~=nil)and(string.len(msg)>8)and(string.sub(msg,1,8)=="Feedback")) then
+    local jsonfile=string.sub(msg,10,-1) -- not 9,-1 because an underscore is used as a separator
+    SendToUnsynced(jsonfile)
   end
 end
 
@@ -76,9 +81,14 @@ function gadget:GamePreload()
     missionScript.parseJson()
   end
   if Spring.GetModOptions()["jsonlocation"]=="editor" then
-    local da=VFS.LoadFile("Missions/"..missionName..".editor")
+    local miss = ""
+    if(Spring.GetModOptions()["testmap"])then
+      miss = Spring.GetModOptions()["testmap"]
+    else
+      miss=VFS.LoadFile("Missions/"..missionName..".editor")    
+    end
     Spring.Echo("try to parse"..missionName)
-    missionScript.parseJson(da)
+    missionScript.parseJson(miss)
   end
 end
 
@@ -108,8 +118,14 @@ function gadget:GameFrame( frameNumber )
         else
           _G.event.state = "won"
         end
-        SendToUnsynced("MissionEvent")
-        _G.event = nil
+        local victoryState = _G.event.state or ""
+        if not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
+          _G.event = {logicType = "ShowMissionMenu", state = victoryState}
+          SendToUnsynced("MissionEvent")
+          _G.event = nil
+        else
+          SendToUnsynced("MissionEnded", victoryState)
+        end
       end
     end
   end
@@ -269,6 +285,19 @@ function gadget:RecvFromSynced(...)
     local valsToSend={}
     valsToSend["speedFactor"]=Spring.GetGameSpeed()
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
+    
+  elseif arg1 == "MissionEnded" then
+    Script.LuaUI.MissionEnded(arg2) -- function defined and registered in mission_traces widget
+  elseif arg1 == "Feedback" then
+    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in mission_feedback widget
+  elseif arg1 == "MissionEvent" then
+    if Script.LuaUI("MissionEvent") then
+      local e = {}
+        for k, v in spairs(SYNCED.event) do
+        e[k] = v
+        end
+      Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
+    end
   end
 end
 

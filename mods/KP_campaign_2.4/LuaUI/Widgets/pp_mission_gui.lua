@@ -121,6 +121,7 @@ local template_endMission = {
 				tab.position = "bottom"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("replay "..missionName.."\n")
 					 local operations={
   ["MODOPTIONS"]=
     {
@@ -155,6 +156,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("quit_game\n")
 					Spring.SendCommands("quitforce")
 				end
 			end
@@ -165,6 +167,7 @@ local template_endMission = {
 				tab.position = "right"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("quit "..missionName.."\n")
 					WG.switchOnMenu()
 				end
 			end
@@ -182,6 +185,7 @@ local template_endMission = {
           file:flush()
           file:close()
           tab.parent:Close()
+          Script.LuaUI.TraceAction("save progression\n")
           MissionEvent({logicType = "ShowMessage",message = saveMessage..fileName, width = 500,pause = false})
         end
       end
@@ -204,6 +208,7 @@ local template_endMission = {
 				tab.position = "top"
 				tab.OnClick = function()
 					tab.parent:Close()
+					Script.LuaUI.TraceAction("show_briefing\n")
 					if tab.parent.launchTuto ~= nil then
 						tab.parent.launchTuto()
 					else
@@ -269,17 +274,23 @@ function MissionEvent(e)
 				--else
 					-- TODO: use appliqManager to define accurate popup.lineArray property
 				end
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." won\n")
-					ppTraces:flush()
-				end
 			else
 				popup.lineArray = {loss}
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." loss\n")
-					ppTraces:flush()
-				end
 			end
+			
+      if e.feedback ~= nil then
+        table.insert(popup.lineArray,"")
+        local ind_s = 1
+        for i = 1,#e.feedback do
+          if e.feedback:sub(i,i) == "\n" then
+            table.insert(popup.lineArray,string.sub(e.feedback,ind_s,i-1))
+            ind_s = i+1
+          elseif i == #e.feedback then
+            table.insert(popup.lineArray,string.sub(e.feedback,ind_s))
+          end
+        end
+        table.insert(popup.lineArray,"")
+      end
 			
 			-- Enable PreviousMission and NextMission tabs
 			-- PreviousMission tab is activated if we are on the default scenario and a previous mission is defined
@@ -290,6 +301,7 @@ function MissionEvent(e)
 				tab.position = "bottom"
 				tab.OnClick = function()
 				tab.parent:Close()
+        Script.LuaUI.TraceAction("previous "..campaign[missionName].previousMission.."\n")
 				local operations={
           ["MODOPTIONS"]=
             {
@@ -303,6 +315,7 @@ function MissionEvent(e)
 			end
 			-- Next tab is activated if we are on the default scenario and a next mission is defined OR if we interpret an Appliq scenario (TODO: use appliq manager to define next mission)
 			local activateNextMission = ( ((scenarioType == "default")or( AppliqManager==nil)) and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
+			
 			-- Of course, we can pass to the next mission if current mission is won
 			-- If AppliqManager is nil (mostly because xml is not found) then  scenarioType is considered to default even if appliq mode is activated
 			if e.state == "won" and activateNextMission then
@@ -315,6 +328,7 @@ function MissionEvent(e)
 							local nextLauncher = ""
 							if scenarioType == "default" then
 								nextLauncher = "Missions/"..campaign[missionName].nextMission..".txt"
+								Script.LuaUI.TraceAction("next "..campaign[missionName].nextMission.."\n")
 							else
 								-- TODO: define nextLauncher with appliqManager
 							end
@@ -322,6 +336,27 @@ function MissionEvent(e)
 						end
 					end
 			end
+      if e.feedback == nil then
+        popup.tabs[6] = nil -- disable "Close tab" and "Show briefing"
+        local vicState = e.state or ""
+        Script.LuaUI.MissionEnded(vicState)
+      else
+        popup.tabs[6] = {
+          preset = function(tab)
+            tab.title = "Publier sur facebook"
+            tab.position = "right"
+            tab.topLeftColor     = {0.23, 0.35, 0.6, 1}
+            tab.topRightColor    = {0.23, 0.35, 0.6, 1}
+            tab.bottomLeftColor  = {0.23, 0.35, 0.6, 1}
+            tab.bottomRightColor = {0.23, 0.35, 0.6, 1}
+            tab.OnClick = function()
+              Script.LuaUI.TraceAction("publish\n")
+              Spring.SetConfigString("publish", "true", 1) -- this value will be read by the engine to publish results on facebook
+            end
+          end
+        }
+        popup.tabs[7] = nil
+      end
 			
     -- Of course, we can pass to the next mission if current mission is won
       if mode=="appliq" and AppliqManager~=nil then     

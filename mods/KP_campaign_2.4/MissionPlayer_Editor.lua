@@ -37,7 +37,7 @@ ctx.actionStack={} -- action to be applied on game state, allows to handle table
 ctx.success=nil -- when this global variable change (with event of type "end"), the game ends (= victory or defeat)
 ctx.outputstate=nil -- if various success or defeat states exist, outputstate can store this information. May be used later such as in AppliqManager to enable adaptative scenarisation
 ctx.canUpdate=false
-ctx.mission={} -- the full json describing the mission
+ctx.mission=nil -- the full json describing the mission
 ctx.startingFrame=5 -- added delay before starting game. Used to avoid counting twice units placed at start
 ctx.globalIndexOfCreatedUnits=0 -- count the number of created units. Both in-game (constructor) and event-related (action of creation) 
 ctx.speedFactor=1 -- placeHolder to store current speed
@@ -1328,10 +1328,18 @@ local function parseJson(jsonString)
   ctx.canUpdate=true
   ctx.mission=json.decode(jsonString)
   -- desactivate widget
+  --[[
+    widgetHandler:EnableWidget("Traces Widget")
+  -- enable Feedbacks Widget
+  widgetHandler:EnableWidget("Feedbacks Widget")
+  -- enable Widget Informer
+  widgetHandler:EnableWidget("Widget Informer")
+  --]]
   local widgetWithForcedState={
     ["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
     ,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true
-    ,["Camera Auto"]=true,["Chili Framework"]=true,["Display Zones"]=true
+    ,["Camera Auto"]=true,["Chili Framework"]=true,["Display Zones"]=true,["Traces Widget"]=true
+    ,["Feedbacks Widget"]=true,["Widget Informer"]=true
   }
   
   for i=1, table.getn(ctx.mission.description.widgets) do
@@ -1367,7 +1375,7 @@ end
 -- @todo This function does too many things
 -------------------------------------
 local function StartAfterJson ()
-  
+  if ctx.mission==nil then return end
   local units = Spring.GetAllUnits()
   for i = 1,table.getn(units) do
     --Spring.Echo("I am Totally Deleting Stuff")
@@ -1535,6 +1543,7 @@ end
 -- @return success (0,1 or -1) for (nothing, success, fail) and outputstate (appliq related)
 -------------------------------------
 local function Update (frameNumber)
+  if ctx.mission==nil then return 0 end
   UpdateConditionsTruthfulness(frameNumber) 
   UpdateGameState(frameNumber)
   ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)

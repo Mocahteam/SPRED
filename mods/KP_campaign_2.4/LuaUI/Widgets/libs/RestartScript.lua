@@ -133,7 +133,7 @@ local function createFromScratch(editorTables)
         local sectionName="PLAYER"..tostring(indexPlayer)
         local name=teamInformations.name or string.lower(sectionName)
         indexPlayer=indexPlayer+1
-        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} 
+        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} -- "Player"..tostring(indexPlayer)
         file=writeAttributesAndSection(file,sectionName, 1, tableController)   
       else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
       -- when max is attained, it's not necessary to add disabled teams anymore
