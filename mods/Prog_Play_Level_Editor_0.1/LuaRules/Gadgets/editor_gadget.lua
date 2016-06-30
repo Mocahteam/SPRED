@@ -297,7 +297,9 @@ function gadget:RecvFromSynced(msg)
 end
 
 function gadget:MousePress(x, y, button)
-	return true
+	if not Spring.GetModOptions().testmap then
+		return true
+	end
 end
 
 --------------------------------------------------------------------------------

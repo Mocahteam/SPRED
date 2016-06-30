@@ -5,7 +5,7 @@
 \usepackage[francais]{babel}
 \usepackage[a4paper]{geometry}
 
-\title{Editeur de niveaux\\Prog \& Play}
+\title{SPRED}
 \author{Benjamin BONTEMPS}
 
 \sloppy
@@ -15,7 +15,7 @@
 \maketitle
 
 \begin{abstract}
-Ce document a pour objectifs de récapituler l'essentiel du travail réalisé dans le cadre du projet de conception d'un éditeur de niveaux pour le jeu sérieux Prog\&Play et de permettre sa maintenabilité en cas de nécessité. Il suppose acquis les concepts de base liés à Prog\&Play, à Spring (moteur sur lequel est basé le jeu) et au développement en Lua.
+Ce document a pour objectifs de récapituler l'essentiel du travail réalisé dans le cadre du projet de conception d'un éditeur de missions pour le jeu sérieux Prog\&Play et de permettre sa maintenabilité en cas de nécessité. Il suppose acquis les concepts de base liés à Prog\&Play, à Spring (moteur sur lequel est basé le jeu) et au développement en Lua.
 \end{abstract}
 
 \tableofcontents
@@ -24,9 +24,9 @@ Ce document a pour objectifs de récapituler l'essentiel du travail réalisé da
 
 \section{Architecture globale}
 \paragraph{}
-Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de niveaux.
+Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de missions.
 \paragraph{}
-Le pré-launcher est composé d'un unique widget (launcher.lua) permettant de sélectionner le jeu de base sur lequel les niveaux vont être créés.
+Le core est composé d'un unique widget (launcher.lua) permettant de sélectionner le jeu de base sur lequel les missions vont être créés, ainsi que deux archives permettant de générer les éditeurs spécifiques ainsi que d'exporter le jeu final.
 \paragraph{}
 Le launcher est composé d'un widget central permettant d'afficher l'interface du launcher et de réagir en fonction des boutons sur lesquels l'utilisateur clique (editor\_spring\_direct\_launch.lua). A noter que ce widget communique également avec les autres widgets et gadgets définis ci-dessous.
 \paragraph{}
@@ -57,38 +57,41 @@ Afin de simplifier le développement de l'interface graphique, j'ai choisi d'uti
 \paragraph{}
 Ce framework a l'avantage de ne pas avoir à utiliser l'API OpenGL de Spring et les différents listeners pour afficher et permettre l'interaction avec des fenêtres, boutons etc. Tout y est déjà implémenté, ce qui a permis de réduire considérablement le temps requis pour obtenir les premiers résultats. Le problème majeur est que le framework est extrêmement mal documenté, et la meilleure façon de comprendre son fonctionnement pour s'en servir correctement voire même le modifier pour l'adapter à des besoins particuliers est de se référer au code source présent sur github\footnote{https://github.com/jk3064/chiliui/}.
 \paragraph{}
-Les modifications que j'y ai personnellement apporté concernent les boutons, qui possèdent un état supplémentaire \textit{chosen} permettant d'avoir un feedback visuel lorsqu'on les sélectionne (les modifications de cet état sont gérées "à la main", mais le feedback visuel est géré automatiquement par le framework).
+Les modifications que j'y ai personnellement apporté concernent les boutons, qui possèdent un état supplémentaire \textit{chosen} permettant d'avoir un feedback visuel lorsqu'on les sélectionne (les modifications de cet état sont gérées "à la main", mais le feedback visuel est géré automatiquement par le framework). Une autre modification a également été réalisée : il s'agit de l'ajout d'un membre "onReturn" de type \textit{function} sur les editbox qui permet de donner un comportement à une pression sur la touche entrée lorsque l'utilisateur a le focus sur une editbox.
 \paragraph{}
-Le widget comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans le widget central de l'éditeur dans la catégorie \textit{Chili UI functions}.
+Le widget central de l'éditeur comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans le widget central de l'éditeur dans la catégorie \textit{Chili UI functions}.
 \paragraph{}
 Il faut faire extrêmement attention à une chose en particulier en ce qui concerne le framework : il ne faut surtout pas modifier les éléments d'interface qui ne sont pas affichés à l'écran (c'est-à-dire les éléments d'interface qui n'ont ni Screen0, ni un descendant de Screen0 en tant que parent). Ceci ne produit pas d'erreur lors de l'exécution, mais les éléments d'interface concernés ne s'actualiseront plus correctement, ce qui est très gênant d'un point de vue utilisateur (les opérations seront effectuées, mais l'utilisateur n'aura aucun feedback visuel).
-\section{Le pré-launcher}
+\section{Le core}
 \paragraph{}
-Le pré-launcher est la base de l'éditeur. Il permet de sélectionner un jeu de base sur lequel l'utilisateur va ensuite créer ses niveaux. Lorsque le jeu en question est sélectionné, le pré-launcher va s'occuper de créer une archive contenant les fichiers permettant le fonctionnement de l'éditeur tout en y modifiant le fichier ModInfo.lua contenant les informations de dépendance pour y ajouter le jeu sélectionné. Ensuite, il va redémarrer Spring avec l'archive nouvellement créée.
+Le core est la base de l'éditeur. Il permet de sélectionner un jeu de base sur lequel l'utilisateur va ensuite créer ses missions. Lorsque le jeu en question est sélectionné, le pré-launcher va s'occuper de créer une archive contenant les fichiers permettant le fonctionnement de l'éditeur tout en y modifiant le fichier ModInfo.lua contenant les informations de dépendance pour y ajouter le jeu sélectionné. Ensuite, il va redémarrer Spring avec l'archive nouvellement créée.
 \paragraph{}
 Si l'archive correspondant à l'éditeur pour un certain mod est déjà créée, il va simplement redémarrer Spring en utilisant cette archive. Ceci ne pose pas de problèmes d'un point de vue utilisateur, mais pendant une phase de développement, il ne faut pas oublier de supprimer l'archive créée à chaque modification.
+\paragraph{}
+Le core possède également une seconde archive qui contient toutes les données nécessaires pour faire fonctionner les missions créées avec l'éditeur. En effet, lorsque l'utilisateur exportera son scénario sous la forme d'un jeu, le launcher extraira du core l'archive \textit{game} et il y ajoutera les missions, le scénario ainsi que les traces expertes sélectionnées.
 \section{Le launcher}
 \paragraph{}
-La launcher se présente en 3 menus distincts : Création d'un nouveau niveau, Edition d'un niveau existant et Edition d'un scénario. Pendant l'écran de chargement du launcher, le gadget instancie chacune des unités du mod de base, récupère la liste de leurs commandes et la transfère au widget editor\_commands\_list.lua qui effectue un tri dessus. Les commandes seront ensuite passées à l'éditeur grâce au ModOptions.
-\subsection{Création d'un nouveau niveau}
+La launcher se présente en 4 menus distincts : Création d'une nouvelle mission, Edition d'une mission existante, Edition d'un scénario et Exportation d'un jeu. Pendant l'écran de chargement du launcher, le gadget de l'éditeur instancie chacune des unités du mod de base, récupère la liste de leurs commandes et la transfère au widget editor\_commands\_list.lua qui effectue un tri dessus. Les commandes seront ensuite passées à l'éditeur grâce au ModOptions.
+\subsection{Création d'une nouvelle mission}
 \paragraph{}
 Rien de très compliqué ici : on s'occupe simplement de lister les cartes présentes dans le répertoire maps/ à la racine de Spring. Lorsque l'utilisateur clique sur le nom d'une carte, Spring redémarre sur la carte sélectionnée.
-\subsection{Edition d'un niveau existant}
+\subsection{Edition d'une mission existante}
 \paragraph{}
-De même, on liste ici les niveaux correspondant au jeu sélectionné qui sont dans le répertoire pp\_editor/missions/. Lorsque l'utilisateur clique sur le nom d'un niveau, on va chercher dans la description de ce niveau la carte sur laquelle le niveau a été créé, puis on redémarre Spring sur la bonne carte et on indique dans le ModOptions que l'éditeur va devoir charger ce niveau.
+De même, on liste ici les missions correspondant au jeu sélectionné qui sont dans le répertoire pp\_editor/missions/. Lorsque l'utilisateur clique sur le nom d'une mission, on va chercher dans la description de cette mission la carte sur laquelle la mission a été créée, puis on redémarre Spring sur la bonne carte et on indique dans le ModOptions que l'éditeur va devoir charger cette mission.
 \subsection{Editeur de scénario}
 \paragraph{}
-Pour chaque niveau créé correspondant au jeu sélectionné, on créé une fenêtre contenant le nom du niveau, un bouton pour l'état d'entrée et n boutons pour les n états de sortie. En cliquant sur un bouton correspondant à un état de sortie, on stocke dans les variables \textit{selectedOutputMission} et \textit{selectedOutput} l'état de sortie sur lequel on vient de cliquer. Si ces variables ne sont pas nil et que l'on clique sur un état d'entrée, on le stocke dans \textit{selectedInput}.
+Pour chaque mission créée correspondant au jeu sélectionné, on créé une fenêtre contenant le nom de la mission, un bouton pour l'état d'entrée et n boutons pour les n états de sortie. En cliquant sur un bouton correspondant à un état de sortie, on stocke dans les variables \textit{selectedOutputMission} et \textit{selectedOutput} l'état de sortie sur lequel on vient de cliquer. Si ces variables ne sont pas nil et que l'on clique sur un état d'entrée, on le stocke dans \textit{selectedInput}.
 \paragraph{}
 La fonction MakeLink() s'effectue à chaque frame et s'occupe de répertorier un lien dans la table Links si selectedOutputMission, selectedOutput et selectedInput ne sont pas nil. Un objet Chili personnalisé permet d'afficher ces liens lorsqu'ils existent.
 \paragraph{}
 En ce qui concerne la sauvegarde et le chargement des scénarios, ceci se fait en utilisant la bibliothèque xml-serde qui nous permet de transformer la table Links en fichier xml et vice-versa.
+\subsection{Exportation du jeu}
 \paragraph{}
-Pour l'exportation de l'archive du jeu final, on lit le contenu de la table Links pour définir les niveaux à exporter, puis on créé une archive contenant les fichiers nécessaires au fonctionnement du jeu ainsi que le scénario et les niveaux qui le composent.
-\section{L'éditeur de niveaux}
+Pour l'exportation de l'archive du jeu final, l'utilisateur va simplement choisir un des scénarios qu'il a préalablement créé via l'éditeur de scénario. Il peut également spécifier s'il ne veut exporter que les missions liées au scénario ou bien toutes les missions du répertoire <Spring>/SPRED/missions. Une fois que le scénario en question a été sélectionné, on effectue la même opération que pour charger un scénario dans l'éditeur de scénario, puis on lit le contenu de la table Links pour définir les missions à exporter, et enfin on créé une archive contenant les fichiers nécessaires au fonctionnement du jeu ainsi que le scénario, les missions qui le composent (ou toutes les missions) et le cas échéant les traces sélectionnées par l'utilisateur.
+\section{L'éditeur de missions}
 \subsection{Editor User Interface}
 \paragraph{}
-Ce widget est l'élément central de l'éditeur de niveaux. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts. Les sections suivantes expliquent rapidement le contenu de chacune des parties ; se référer au code et aux commentaires pour plus de précisions.
+Ce widget est l'élément central de l'éditeur de missions. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts. Les sections suivantes expliquent rapidement le contenu de chacune des parties ; se référer au code et aux commentaires pour plus de précisions.
 \subsubsection{Initialisation}
 \paragraph{}
 L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées à la section \ref{chili}), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
@@ -111,12 +114,12 @@ Les fonctions de cette section s'occupent d'afficher les paramètres liés aux �
 \subsubsection{Déclencheurs}
 \paragraph{}
 Les fonctions de cette partie concernent la gestion du système de déclencheurs (création, édition, suppression des évènements, conditions et actions ainsi que la gestion des variables).
-\subsubsection{Paramètres de la carte}
+\subsubsection{Paramètres de la mission}
 \paragraph{}
-Les fonctions de cette partie sauvegardent les paramètres globaux du niveau, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
+Les fonctions de cette partie sauvegardent les paramètres globaux de la mission, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
 \subsubsection{Sauvegarde / Chargement}
 \paragraph{ }
-Les fonctions de cette partie s'occupent de la gestion des fichiers de sauvegarde (.editor), de la transformation de l'état du niveau en une table lua, et des save states (ctrl+z).
+Les fonctions de cette partie s'occupent de la gestion des fichiers de sauvegarde (.editor), de la transformation de l'état de la mission en une table lua, et des save states (ctrl+z).
 \subsubsection{Fonctions de dessin}
 \paragraph{ }
 Les fonctions de cette partie permettent de dessiner des ellipses sur le terrain, de gérer les différents curseurs et l'état de certains boutons.

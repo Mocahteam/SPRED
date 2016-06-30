@@ -11,11 +11,12 @@
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {section}{\numberline {3}Le pr\IeC {\'e}-launcher}{3}
+\contentsline {section}{\numberline {3}Le core}{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {section}{\numberline {4}Le launcher}{3}
 \contentsline {paragraph}{}{3}
+\contentsline {section}{\numberline {4}Le launcher}{4}
+\contentsline {paragraph}{}{4}
 \contentsline {subsection}{\numberline {4.1}Cr\IeC {\'e}ation d'un nouveau niveau}{4}
 \contentsline {paragraph}{}{4}
 \contentsline {subsection}{\numberline {4.2}Edition d'un niveau existant}{4}
@@ -24,10 +25,11 @@
 \contentsline {paragraph}{}{4}
 \contentsline {paragraph}{}{4}
 \contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {4.4}Exportation du jeu}{4}
 \contentsline {paragraph}{}{4}
-\contentsline {section}{\numberline {5}L'\IeC {\'e}diteur de niveaux}{4}
-\contentsline {subsection}{\numberline {5.1}Editor User Interface}{4}
-\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {5}L'\IeC {\'e}diteur de niveaux}{5}
+\contentsline {subsection}{\numberline {5.1}Editor User Interface}{5}
+\contentsline {paragraph}{}{5}
 \contentsline {subsubsection}{\numberline {5.1.1}Initialisation}{5}
 \contentsline {paragraph}{}{5}
 \contentsline {paragraph}{}{5}
@@ -40,10 +42,10 @@
 \contentsline {paragraph}{}{5}
 \contentsline {subsubsection}{\numberline {5.1.4}Forces}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsubsection}{\numberline {5.1.5}D\IeC {\'e}clencheurs}{5}
-\contentsline {paragraph}{}{5}
-\contentsline {subsubsection}{\numberline {5.1.6}Param\IeC {\`e}tres de la carte}{5}
-\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.5}D\IeC {\'e}clencheurs}{6}
+\contentsline {paragraph}{}{6}
+\contentsline {subsubsection}{\numberline {5.1.6}Param\IeC {\`e}tres de la carte}{6}
+\contentsline {paragraph}{}{6}
 \contentsline {subsubsection}{\numberline {5.1.7}Sauvegarde / Chargement}{6}
 \contentsline {paragraph}{ }{6}
 \contentsline {subsubsection}{\numberline {5.1.8}Fonctions de dessin}{6}
@@ -61,4 +63,4 @@
 \contentsline {subsection}{\numberline {5.5}Fichiers de description}{7}
 \contentsline {paragraph}{ }{7}
 \contentsline {paragraph}{ }{7}
-\contentsline {paragraph}{ }{7}
+\contentsline {paragraph}{ }{8}

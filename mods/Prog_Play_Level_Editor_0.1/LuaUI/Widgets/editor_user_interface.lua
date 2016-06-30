@@ -677,7 +677,7 @@ function testLevel()
 					["scenario"] = "noScenario",
 					["maingame"] = MainGame,
 					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["testmap"] = json.encode(levelFile)
+					["testmap"] = "yes"
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
@@ -3661,7 +3661,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 					unitLabel.font.color = {1, 1, 1, 1}
 					unitLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ALL)
 				else
-					unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
+					unitLabel.font.color = {teams[param.value].red, teams[param.value].green, teams[param.value].blue, 1}
 					unitLabel:SetCaption(teamName[param.value])
 				end
 			elseif param.type == "action" then
@@ -5331,6 +5331,8 @@ function widget:Initialize()
 	if Spring.GetModOptions().testmap then
 		initTestLevelFrame()
 		Script.LuaUI.finishedLoading()
+		local levelFile = VFS.LoadFile("SPRED/missions/"..Spring.GetModOptions().missionname..".editor",  VFS.RAW)
+		Spring.SendLuaRulesMsg("mission"..levelFile)
 		return
 	end
 	initialize = true

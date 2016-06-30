@@ -108,7 +108,7 @@ end
 function generateSaveName(name)
 	local saveName = name
 	saveName = string.gsub(name, " ", "_")
-	saveName = string.gsub(saveName, "[/\\%.%*:%?\"<>|]", "")
+	saveName = string.gsub(saveName, "[/;\\%.%*:%?\"<>|]", "")
 	return saveName
 end
 
