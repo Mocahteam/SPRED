@@ -6,7 +6,7 @@ function gadget:GetInfo()
     author    = "muratet",
     date      = "Sept 06, 2015",
     license   = "GPL v2 or later",
-    layer     = 10,
+    layer     = 0,
     enabled   = true --  loaded by default?
   }
 end
@@ -39,6 +39,7 @@ local initializeUnits = true
 local solutions = table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
+  missionScript.RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
     Spring.Echo("it is tried to Show briefing") 
     showBriefing=true  
@@ -69,6 +70,7 @@ function gadget:GamePreload()
     end
   end
   if VFS.FileExists(fileToLoad) then --TODO can't work anymore, need to be fixed in start
+
     local units = Spring.GetAllUnits()
     for i = 1,table.getn(units) do
       Spring.DestroyUnit(units[i], false, true)
@@ -80,7 +82,12 @@ function gadget:GamePreload()
     missionScript.parseJson()
   end
   if Spring.GetModOptions()["jsonlocation"]=="editor" then
-    local miss=VFS.LoadFile("Missions/"..missionName..".editor")
+    local miss = ""
+    if(Spring.GetModOptions()["testmap"])then
+      miss = Spring.GetModOptions()["testmap"]
+    else
+      miss=VFS.LoadFile("Missions/"..missionName..".editor")    
+    end
     Spring.Echo("try to parse"..missionName)
     missionScript.parseJson(miss)
   end
