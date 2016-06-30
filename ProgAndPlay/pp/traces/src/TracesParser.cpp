@@ -1285,6 +1285,10 @@ void TracesParser::setEnd() {
 	end = true;
 }
 
+bool TracesParser::getEnd() const {
+	return end;
+}
+
 bool TracesParser::compressionDone() {
 	if (compressed) {
 		compressed = false;

@@ -34,6 +34,9 @@ local gameOver = 0
 -- used to show briefing
 local showBriefing = false
 
+-- check if there is expert solutions in the archive for this mission
+local solutions = table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0
+
 function gadget:GamePreload()
 	if missionName ~= nil then
 		if VFS.FileExists(missionName..".lua") then
@@ -68,12 +71,12 @@ function gadget:GameFrame( frameNumber )
 			else
 				victoryState = "won"
 			end
-			if testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
+			if not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
 				_G.event = {logicType = "ShowMissionMenu", state = victoryState}
 				SendToUnsynced("MissionEvent")
 				_G.event = nil
 			else
-				SendToUnsynced("createMissionEndedFile", victoryState)
+				SendToUnsynced("MissionEnded", victoryState)
 			end
 		end
 	end
@@ -141,8 +144,8 @@ function gadget:RecvFromSynced(...)
 	local arg1, arg2 = ...
 	if arg1 == "mouseDisabled" then
 		mouseDisabled = arg2
-	elseif arg1 == "createMissionEndedFile" then
-		Script.LuaUI.CreateMissionEndedFile(arg2) -- function defined and registered in mission_traces widget
+	elseif arg1 == "MissionEnded" then
+		Script.LuaUI.MissionEnded(arg2) -- function defined and registered in mission_traces widget
 	elseif arg1 == "Feedback" then
 		Script.LuaUI.handleFeedback(arg2) -- function defined and registered in mission_feedback widget
 	elseif arg1 == "enableCameraAuto" then

@@ -7,6 +7,7 @@ CC = g++
 CFLAGS = -Wall
 SPRING_VERSION = spring_0.82.5.1
 REP_TRACES = ../../Spring_dev/$(SPRING_VERSION)/rts/lib/pp/traces
+REP_CONT = ../../Spring_dev/$(SPRING_VERSION)/cont/traces/data
 LDFLAGS = -I../../Spring_dev/$(SPRING_VERSION)/mingwlibs/include
 RM = rm
 
@@ -19,13 +20,13 @@ all: $(EXE)      # all is dependent on $(EXE) to be complete
 $(EXE): $(OBJ)   # $(EXE) is dependent on all of the files in $(OBJ) to exist
 	$(CC) $(OBJ) -o $@
 
-install: $(REP_TRACES)/params.json $(REP_TRACES)/feedbacks.xml $(REP_TRACES)/TracesParser.cpp $(REP_TRACES)/TracesParser.h $(REP_TRACES)/TracesAnalyser.cpp $(REP_TRACES)/TracesAnalyser.h $(REP_TRACES)/Trace.cpp $(REP_TRACES)/Trace.h $(REP_TRACES)/Sequence.cpp $(REP_TRACES)/Sequence.h $(REP_TRACES)/Call.cpp $(REP_TRACES)/Call.h $(REP_TRACES)/CallDef.h $(REP_TRACES)/Event.cpp $(REP_TRACES)/Event.h $(REP_TRACES)/EventDef.h $(REP_TRACES)/constantList_KP4.4.h
+install: $(REP_CONT)/params.json $(REP_CONT)/feedbacks.xml $(REP_TRACES)/TracesParser.cpp $(REP_TRACES)/TracesParser.h $(REP_TRACES)/TracesAnalyser.cpp $(REP_TRACES)/TracesAnalyser.h $(REP_TRACES)/Trace.cpp $(REP_TRACES)/Trace.h $(REP_TRACES)/Sequence.cpp $(REP_TRACES)/Sequence.h $(REP_TRACES)/Call.cpp $(REP_TRACES)/Call.h $(REP_TRACES)/CallDef.h $(REP_TRACES)/Event.cpp $(REP_TRACES)/Event.h $(REP_TRACES)/EventDef.h $(REP_TRACES)/constantList_KP4.4.h
 
-$(REP_TRACES)/params.json: ./params.json
-	cp ./params.json $(REP_TRACES)
+$(REP_CONT)/params.json: ./params.json
+	cp ./params.json $(REP_CONT)
 	
-$(REP_TRACES)/feedbacks.xml: ./feedbacks.xml
-	cp ./feedbacks.xml $(REP_TRACES)
+$(REP_CONT)/feedbacks.xml: ./feedbacks.xml
+	cp ./feedbacks.xml $(REP_CONT)
 	
 $(REP_TRACES)/constantList_KP4.4.h: src/constantList_KP4.4.h
 	cp src/constantList_KP4.4.h $(REP_TRACES)

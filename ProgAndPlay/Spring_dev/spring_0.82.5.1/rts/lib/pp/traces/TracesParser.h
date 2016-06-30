@@ -59,6 +59,7 @@ public:
 	void initParamsMap(const std::string& json);
 	void display(std::ostream &os = std::cout);
 	void setEnd();
+	bool getEnd() const;
 	bool compressionDone();
 	void setProceed(bool proceed);
 	bool getProceed();

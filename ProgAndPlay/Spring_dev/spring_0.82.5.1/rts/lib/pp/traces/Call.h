@@ -142,11 +142,11 @@ public:
 	};
 	
 	/**
-	  * \brief Constructeur de la classe Call.
+	  * \brief Constructeur principal de la classe Call.
 	  *
 	  * \param label le label de la fonction modélisée par l'objet Call.
 	  * \param error l'erreur survenue lors de l'appel de la fonction représentée par l'objet Call.
-	  * \param info le label donné par l'expert.
+	  * \param info le label attribué par l'expert.
 	  */
 	Call(std::string label, ErrorType error, std::string info = "");
 	

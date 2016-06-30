@@ -603,7 +603,7 @@ function widget:TeamDied(teamID)
 	else
 		victoryState = "loss"
 	end
-	Script.LuaUI.CreateMissionEndedFile(victoryState)
+	Script.LuaUI.MissionEnded(victoryState)
 end
 
 function widget:Initialize()

@@ -122,18 +122,6 @@ Function .onInit
 	!endif
 	${!echonow} "Using MINGWLIBS_DIR: ${MINGWLIBS_DIR}"
 
-	; Meresse
-	!ifndef PP_TRACES_DIR
-		!define PP_TRACES_DIR "..\rts\lib\pp\traces"
-	!endif
-	${!defineifdirexists} PP_TRACES_DIR_EXISTS "${PP_TRACES_DIR}"
-	!ifndef PP_TRACES_DIR_EXISTS
-		!error "Could not find the PP-traces dir at '${PP_TRACES_DIR}', try setting PP_TRACES_DIR manually."
-		!undef PP_TRACES_DIR_EXISTS
-	!endif
-	${!echonow} "Using PP_TRACES_DIR: ${PP_TRACES_DIR}"
-	;
-
 	!ifndef BUILD_DIR
 		!ifndef DIST_DIR
 			!error "Neither BUILD_DIR nor DIST_DIR are defined. Define only one of the two, depending on whether you want to generate the installer from the install- or the build-directory."

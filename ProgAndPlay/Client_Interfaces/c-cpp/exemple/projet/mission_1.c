@@ -9,7 +9,7 @@ int main () {
 	p.x = 1983.0;
 	p.y = 1279.0;
 	PP_Open(); /* open the Prog&Play API */
-	while(true)
+	// while(true)
 		PP_Unit_ActionOnPosition(PP_GetUnitAt(MY_COALITION, 0), MOVE, p);
 	/* close the Prog&Play API */
 	PP_Close();
