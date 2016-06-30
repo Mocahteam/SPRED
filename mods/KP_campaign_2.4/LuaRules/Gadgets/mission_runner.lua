@@ -33,12 +33,13 @@ local gameOver = 0
 
 -- used to show briefing
 local showBriefing = false
-local missionScript=nil
+VFS.Include("MissionPlayer_Editor.lua")
 local initializeUnits = true
 
 local solutions = table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
+  missionScript.RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
     Spring.Echo("it is tried to Show briefing") 
     showBriefing=true  
@@ -69,7 +70,7 @@ function gadget:GamePreload()
     end
   end
   if VFS.FileExists(fileToLoad) then --TODO can't work anymore, need to be fixed in start
-    missionScript = VFS.Include(fileToLoad)
+
     local units = Spring.GetAllUnits()
     for i = 1,table.getn(units) do
       Spring.DestroyUnit(units[i], false, true)

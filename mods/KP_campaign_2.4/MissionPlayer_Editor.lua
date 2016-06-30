@@ -1582,7 +1582,8 @@ end
 -- Information received from Unsynced Code 
 -- Executed in mission_runner.lua
 -------------------------------------
-function gadget:RecvLuaMsg(msg, player)
+local function RecvLuaMsg(msg, player)
+  Spring.Echo("")
   if isMessage(msg,"kill") then
     local jsonString=string.sub(msg,5,-1)
     EchoDebug("killTable-->"..jsonString,3)
@@ -1635,18 +1636,19 @@ end
 
 
 
-local Mission = {}
+missionScript = {}
 
-Mission.returnEventsTriggered=returnEventsTriggered
-Mission.parseJson=parseJson
-Mission.StartAfterJson=StartAfterJson
-Mission.Start = Start
-Mission.ShowBriefing = ShowBriefing
-Mission.Update = Update
-Mission.Stop = Stop
-Mission.ApplyAction = ApplyAction
+missionScript.returnEventsTriggered=returnEventsTriggered
+missionScript.parseJson=parseJson
+missionScript.StartAfterJson=StartAfterJson
+missionScript.Start = Start
+missionScript.ShowBriefing = ShowBriefing
+missionScript.Update = Update
+missionScript.Stop = Stop
+missionScript.ApplyAction = ApplyAction
+missionScript.RecvLuaMsg = RecvLuaMsg
 
 ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
 ctx.Spring=Spring 
 
-return Mission
+
