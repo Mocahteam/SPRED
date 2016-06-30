@@ -1,4 +1,5 @@
 LAUNCHER_QUIT = ""
+LAUNCHER_SUBTITLE = ""
 LAUNCHER_NEW_MISSION = ""
 LAUNCHER_NEW_TITLE = ""
 LAUNCHER_NEW_NO_MAP_FOUND = ""
@@ -33,6 +34,7 @@ LAUNCHER_NO = ""
 function GetLauncherStrings(lang)
 	if lang == "fr" then
 		LAUNCHER_QUIT = "Quitter"
+		LAUNCHER_SUBTITLE = "(pour /MAINGAME/)"
 		LAUNCHER_NEW_MISSION = "Nouvelle mission"
 		LAUNCHER_NEW_TITLE = "Choisissez une carte"
 		LAUNCHER_NEW_NO_MAP_FOUND = "Aucune carte trouvée dans le répertoire \"maps/\""
@@ -66,6 +68,7 @@ function GetLauncherStrings(lang)
 		LAUNCHER_NO = "Non"
 	else
 		LAUNCHER_QUIT = "Quit"
+		LAUNCHER_SUBTITLE = "(for /MAINGAME/)"
 		LAUNCHER_NEW_MISSION = "New mission"
 		LAUNCHER_NEW_TITLE = "Choose a map"
 		LAUNCHER_NEW_NO_MAP_FOUND = "No map found in the \"maps/\" directory"

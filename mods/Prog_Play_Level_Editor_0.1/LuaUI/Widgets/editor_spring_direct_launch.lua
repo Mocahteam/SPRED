@@ -95,11 +95,26 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 	UI.Title = Chili.Image:New{
 		parent = UI.MainWindow,
 		x = '0%',
-		y = '5%',
+		y = '2%',
 		width = '100%',
 		height = '20%',
 		keepAspect = true,
 		file = "bitmaps/launcher/spred_logo.png"
+	}
+	UI.Subtitle = Chili.Label:New{
+		parent = UI.MainWindow,
+		x = '0%',
+		y = '22%',
+		width = '100%',
+		height = '3%',
+		caption = string.gsub(LAUNCHER_SUBTITLE, "/MAINGAME/", MainGame),
+		valign = "center",
+		align = "center",
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			color = { 0.2, 0.4, 0.8, 1 }
+		}
 	}
 	UI.NewMissionButton = Chili.Button:New{
 		parent = UI.MainWindow,
@@ -717,6 +732,7 @@ end
 function ClearUI() -- Remove UI elements from the screen
 	ClearTemporaryUI()
 	UI.MainWindow:RemoveChild(UI.Title)
+	UI.MainWindow:RemoveChild(UI.Subtitle)
 	UI.MainWindow:RemoveChild(UI.Logo)
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
@@ -757,6 +773,7 @@ end
 function MainMenuFrame() -- Shows the main menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.Title)
+	UI.MainWindow:AddChild(UI.Subtitle)
 	UI.MainWindow:AddChild(UI.Logo)
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
@@ -1164,6 +1181,7 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	Language = lang
 	GetLauncherStrings(lang)
 	
+	UpdateCaption(UI.Subtitle, string.gsub(LAUNCHER_SUBTITLE, "/MAINGAME/", MainGame))
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
