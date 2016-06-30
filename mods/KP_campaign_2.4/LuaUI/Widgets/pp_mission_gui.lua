@@ -32,7 +32,7 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
+--local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
@@ -43,7 +43,6 @@ local rooms = WG.rooms -- available in all widgets
 local Window = rooms.Window
 local Tab = rooms.Tab
 
-local ppTraces = nil -- File handler to store traces
 
 -- Set label
 local saveMessage="Your progression has been saved under the name : "
@@ -262,18 +261,7 @@ function MissionEvent(e)
 		-- update window
 		if e.state ~= "menu" then
 			if e.state == "won" then
-			  popup.lineArray = {victory}
-				if scenarioType == "default" then
-					if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
-						popup.lineArray = {victoryCampaign}
-            else 
-              popup.lineArray = {victory}
-            end
-				else --elseif scenarioType == "noScenario" then --commented out to be more robust
 					popup.lineArray = {victory}
-				--else
-					-- TODO: use appliqManager to define accurate popup.lineArray property
-				end
 			else
 				popup.lineArray = {loss}
 			end
@@ -520,13 +508,6 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
 	widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
 	widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
-	
-	-- open ppTraces file
-	ppTraces = io.open("ppTraces.txt", "a")
-	if ppTraces ~= nil and missionName~=nil then
-		ppTraces:write(missionName.." start\n")
-		ppTraces:flush()
-	end
 end
 
 
@@ -534,10 +515,6 @@ function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("EmulateEscapeKey")
 	widgetHandler:DeregisterGlobal("MissionEvent")
 	widgetHandler:DeregisterGlobal("TutorialEvent")
-	
-	if ppTraces ~= nil then
-		ppTraces:close()
-	end
 end
 
 --------------------------------------------------------------------------------
