@@ -265,13 +265,10 @@ function MissionEvent(e)
 						end
 					end
 			end
-			
-			-- disable "Close tab" and "Show briefing"
-			--popup.tabs[6] = nil
-			-- inform the game that mission is over with a temporary file
+				
 			if e.feedback == nil then
-				popup.tabs[6] = nil
-				Script.LuaUI.CreateMissionEndedFile(victoryState)
+				popup.tabs[6] = nil -- disable "Close tab" and "Show briefing"
+				Script.LuaUI.MissionEnded(victoryState)
 			else
 				popup.tabs[6] = {
 					preset = function(tab)

@@ -68,6 +68,7 @@ function getFeedbackMessage(json_obj)
 	local color = ""
 	if json_obj.score ~= nil then
 		local score = json_obj.score
+		Spring.SetConfigString("score", score, 1) -- save the value for the engine
 		if score < 25 then
 			color = red
 		elseif score >= 25 and score < 75 then
@@ -118,11 +119,6 @@ end
 
 function handleFeedback(str)
 	local json_obj = json.decode(str)
-	--local valmeta = getmetatable(json_obj)
-	--if valmeta.__jsontype == "object" and table.getn(json_obj) == 0 then
-	--	Spring.Echo("empty json_obj")
-	--	return
-	--end
 	local json_string = getFeedbackMessage(json_obj)
 	if json_obj.won ~= nil then -- the mission is over
 		local state = ""

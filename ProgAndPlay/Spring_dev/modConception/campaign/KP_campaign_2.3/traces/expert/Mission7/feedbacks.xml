@@ -8,7 +8,7 @@
 			</sequence>
 		</expert>
 		<infos lang="fr">
-			<info>N'oubliez pas de placer une boucle d'attente après avoir ordonné à un assembleur de soigner une unité, sinon elle ne récupèrera pas toute sa santé</info>
+			<info>N'oubliez pas de placer une boucle d'attente après avoir ordonné à un assembleur de soigner une unité sinon elle ne récupérera pas toute sa santé<info>
 		</infos>
 		<infos lang="en">
 			<info>Don't forget the waiting loop after giving the order to an assembler to heal an unit, otherwise it won't fully recover its health</info>

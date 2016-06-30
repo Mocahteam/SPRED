@@ -25,14 +25,20 @@
 #define USELESS_FREQ 0					// threshold value in [0,1] used to determine if we have to make a USELESS_CALL feedback
 #define USEFUL_FREQ 1					// threshold value in [0,1] used to determine if we have to make a USEFUL_CALL feedback
 #define DIST_SEQ_NUM_THRES 0.5 			// threshold value in [0,1] used to determine if we have to make a SEQ_NUM feedback
+#define NUM_MAX_FEEDBACKS 3				// maximal number of feedbacks return to the player
 #define NUM_DOWNGRADS 2		 			// this value is used to determine the number of priority downgrads accepted
 #define SEQ_LACK_INFO_RATIO 1			// the proportion in [0,1] of labels given to the player for SEQ_LACK feedbacks
 #define NUM_CALL_APPEARS_THRES 2		// if the number of appearances of a call is less than this value in the trace, we can keep the associated CALL_EXTRA/CALL_LACK feedbacks
 #define IND_SEQ_NUM_CONST 4				// this value in [1,inf] is used to set the range of the bonus added to the similarity score in the case of the alignment of two sequences
 
-// scores used for alignment
-#define ALIGN_MATCH_SCORE 1
+//#define ALIGN_MATCH_SCORE 1
+/**
+  * Score utilisé pour l'alignement. Correspond au pire score possible pour l'alignement. Les deux traces comparées ne seront jamais alignées.
+  */
 #define ALIGN_MISMATCH_SCORE -1
+/**
+  * Score utilisé pour l'alignement. Correpond au score obtenu si on aligne la trace avec rien (introduction d'un trou).
+  */
 #define ALIGN_GAP_SCORE 0
 
 // macro for change score range from [0,1] to [INF,SUP]
