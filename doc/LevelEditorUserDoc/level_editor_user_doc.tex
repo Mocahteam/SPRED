@@ -162,7 +162,7 @@ Les équipes peuvent être alliées entre elles (onglet Ally Teams). Il faut né
 Ce menu permet de gérer les différents évènements s'effectuant au cours de la mission.
 \subsubsection{Évènements, conditions et actions}
 \paragraph{ }
-Un évènement correspond à un couple ensemble de conditions / ensemble d'actions. Il est possible d'ajouter des conditions et des actions puis de les paramétrer en utilisant les boutons et fenêtres appropriés. Un exemple est visible Figure \ref{fig:editor-trigger}. Cette partie étant la plus compliquée lors de la création d'une mission, il est recommandé de bien regarder l'exemple vidéo de création d'une mission complète\footnote{Disponible sur : }. Les actions et les conditions peuvent être plus facilement retrouvées dans la liste en choisissant un filtre correspondant au type de l'action ou de la condition (par exemple, si on veut définir une action portant sur des unités, on peut sélectionner le filtre "Unités" pour n'afficher que les actions portant sur des unités).
+Un évènement correspond à un couple ensemble de conditions / ensemble d'actions. Il est possible d'ajouter des conditions et des actions puis de les paramétrer en utilisant les boutons et fenêtres appropriés. Un exemple est visible Figure \ref{fig:editor-trigger}. Cette partie étant la plus compliquée lors de la création d'une mission, il est recommandé de bien regarder l'exemple vidéo de création d'une mission complète\footnote{Disponible sur : \textbf{TODO}}. Les actions et les conditions peuvent être plus facilement retrouvées dans la liste en choisissant un filtre correspondant au type de l'action ou de la condition (par exemple, si on veut définir une action portant sur des unités, on peut sélectionner le filtre "Unités" pour n'afficher que les actions portant sur des unités).
 \paragraph{ }
 Ensuite, il est possible de paramétrer l'évènement en définissant un déclencheur qui correspond à une expression logique entre toutes les conditions. Par défaut, le déclencheur est un "et" logique global\footnote{Par exemple, pour un évènement possédant 3 conditions C1, C2 et C3, le déclencheur par défaut sera (C1 et C2 et C3).}. Lorsque le déclencheur renvoie \textit{"true"}, les actions s'effectuent l'une après l'autre, dans l'ordre où elles ont été définies. Cet ordre est paramétrable dans la même fenêtre que la définition du déclencheur (voir Figure \ref{fig:editor-eventconfig}).
 \paragraph{ }
@@ -215,7 +215,7 @@ Il est également possible d'activer ou de désactiver :
 \item la souris
 \item la minimap
 \item le feedback d'aide au joueur
-\item certains widgets propres au mod sélectionné ou à Prog \& Play
+\item certains widgets propres au mod sélectionné
 \end{itemize}
 \begin{figure}[H]
 \centering
@@ -225,7 +225,9 @@ Il est également possible d'activer ou de désactiver :
 \end{figure}
 \subsection{Gestion des traces expertes}
 \paragraph{ }
-TODO
+Vous pouvez générer des traces en éxécutant un programme Prog\&Play lorsque vous testez la mission. Ces traces se retrouvent dans le répertoire <Spring>/traces/data/expert/<Nom de la mission>. Elles peuvent être ouvertes à l'aide d'un éditeur de texte pour ajouter par exemple les metadonnées.
+\paragraph{ }
+Le menu \textit{Traces} permet de visualiser les traces présentes dans le dossier mentionné précédemment, et de sélectionner les traces à exporter dans le jeu final (ce qui permettra ensuite de produire du feedback pour le joueur).
 \section{Création du jeu final}
 \paragraph{ }
 Une fois que toutes les missions du jeu ont été créés, vous pouvez retourner dans le menu principal pour les scénariser et exporter le jeu final.

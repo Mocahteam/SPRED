@@ -34,23 +34,24 @@
 \contentsline {paragraph}{ }{9}
 \contentsline {paragraph}{ }{9}
 \contentsline {paragraph}{ }{9}
-\contentsline {subsubsection}{\numberline {3.5.2}Variables}{12}
+\contentsline {subsubsection}{\numberline {3.5.2}Variables}{11}
+\contentsline {paragraph}{ }{11}
+\contentsline {subsubsection}{\numberline {3.5.3}Param\IeC {\`e}tres particuliers}{11}
+\contentsline {paragraph}{ }{11}
+\contentsline {subsection}{\numberline {3.6}Param\IeC {\`e}tres de la mission}{12}
 \contentsline {paragraph}{ }{12}
-\contentsline {subsubsection}{\numberline {3.5.3}Param\IeC {\`e}tres particuliers}{12}
 \contentsline {paragraph}{ }{12}
-\contentsline {subsection}{\numberline {3.6}Param\IeC {\`e}tres de la mission}{13}
+\contentsline {paragraph}{ }{12}
+\contentsline {subsection}{\numberline {3.7}Gestion des traces expertes}{13}
 \contentsline {paragraph}{ }{13}
 \contentsline {paragraph}{ }{13}
+\contentsline {section}{\numberline {4}Cr\IeC {\'e}ation du jeu final}{13}
 \contentsline {paragraph}{ }{13}
-\contentsline {subsection}{\numberline {3.7}Gestion des traces expertes}{14}
+\contentsline {subsection}{\numberline {4.1}Sc\IeC {\'e}narisation}{13}
+\contentsline {paragraph}{ }{13}
+\contentsline {paragraph}{ }{13}
+\contentsline {subsection}{\numberline {4.2}Exportation du jeu}{14}
 \contentsline {paragraph}{ }{14}
-\contentsline {section}{\numberline {4}Cr\IeC {\'e}ation du jeu final}{14}
-\contentsline {paragraph}{ }{14}
-\contentsline {subsection}{\numberline {4.1}Sc\IeC {\'e}narisation}{14}
+\contentsline {subsection}{\numberline {4.3}Lancement du jeu cr\IeC {\'e}\IeC {\'e}}{14}
 \contentsline {paragraph}{ }{14}
 \contentsline {paragraph}{ }{14}
-\contentsline {subsection}{\numberline {4.2}Exportation du jeu}{15}
-\contentsline {paragraph}{ }{15}
-\contentsline {subsection}{\numberline {4.3}Lancement du jeu cr\IeC {\'e}\IeC {\'e}}{15}
-\contentsline {paragraph}{ }{15}
-\contentsline {paragraph}{ }{15}
