@@ -110,7 +110,7 @@ Le menu de gauche permet de d'instancier des unités dans la scène. Pour ce fai
 \item les ajouter ou les retirer d'un groupe d'unités.
 \end{itemize}
 \paragraph{ }
-Les groupes d'unités peuvent être gérés plus précisément en utilisant l'interface accessible par le menu de droite (bouton Show Unit Groups). Pour ajouter des unités à des groupes, il faut sélectionner les groupes en question, sélectionner les unités que l'on veut ajouter, puis cliquer sur la flèche. Ces groupes sont purement logiques et servent à effectuer des actions ou à tester des conditions sur plusieurs unités en même temps.
+Les groupes d'unités peuvent être gérés plus précisément en utilisant l'interface accessible par le menu de droite (bouton Show Unit Groups, voir Figure \ref{fig:editor-units}). Pour ajouter des unités à des groupes, il faut sélectionner les groupes en question, sélectionner les unités que l'on veut ajouter, puis cliquer sur la flèche. Ces groupes sont purement logiques et servent à effectuer des actions ou à tester des conditions sur plusieurs unités en même temps.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{editor-groups.png}
@@ -170,7 +170,7 @@ Il est également possible de changer les paramètres de répétition d'un évè
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{editor-trigger.png}
-\caption{Exemple d'édition de la condition \textit{BitsInZone} de l'événement \textit{WinCondition}.}
+\caption{Exemple d'édition de l'action \textit{Action3} de l'événement \textit{Event0}.}
 \label{fig:editor-trigger}
 \end{figure}
 \begin{figure}[H]
@@ -181,7 +181,7 @@ Il est également possible de changer les paramètres de répétition d'un évè
 \end{figure}
 \subsubsection{Variables}
 \paragraph{ }
-L'éditeur d'évènements permet de définir des variables numériques ou booléennes. On accède à l'interface d'édition des variables en utilisant le bouton situé en dessous de la liste des évènements (Figure \ref{fig:editor-variables}). Ces variables permettent d'avoir plus de contrôle sur la façon dont s'enchaînent les différents évènements. Leurs valeurs peuvent être modifiées en utilisant des actions spécifiques aux variables.
+L'éditeur d'évènements permet de définir des variables numériques ou booléennes (Figure \ref{fig:editor-variables}). On accède à l'interface d'édition des variables en utilisant le bouton situé en dessous de la liste des évènements (bouton \textit{Edit Variables} sur la Figure \ref{fig:editor-trigger}). Ces variables permettent via les conditions d'avoir plus de contrôle sur la façon dont s'enchaînent les différents évènements. Leurs valeurs peuvent être modifiées en utilisant des actions spécifiques aux variables.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{editor-variables.png}
@@ -192,7 +192,7 @@ L'éditeur d'évènements permet de définir des variables numériques ou boolé
 \paragraph{ }
 Certains paramètres définissables dans les conditions et dans les actions requièrent des explications supplémentaires :
 \begin{itemize}
-\item \textbf{UnitSet} - Un ensemble d'unités correspond soit à une unité déjà présente dans la scène, soit à une équipe toute entière, soit à un groupe d'unités, soit aux unités validant une condition faisant partie de l'événement actuellement modifié, soit aux unités ayant été créées par le dernier appel à une action de création d'unité (voir Figure \ref{fig:editor-pickunit}). Une fois qu'une unité a été sélectionnée, il est possible de zoomer dessus en cliquant sur le bouton avec l'œil.
+\item \textbf{UnitSet} - Un ensemble d'unités correspond soit à une unité déjà présente dans la scène, soit à une équipe toute entière, soit à un groupe d'unités, soit aux unités validant une condition faisant partie de l'événement actuellement modifié, soit aux unités ayant été créées par le dernier appel à une action de création d'unité (voir Figure \ref{fig:editor-pickunit}).
 \item \textbf{Position} - Une position peut être soit un couple (x, y), soit une position aléatoire à l'intérieur d'une zone. Une fois qu'une position a été sélectionnée, il est possible de zoomer dessus en cliquant sur le bouton avec l'œil.
 \item \textbf{Script} - Les paramètres de ce type s'adressent à des utilisateurs avancés. Le champ texte permet d'écrire du code en Lua permettant de définir totalement une condition\footnote{Le script défini dans le cas d'une condition doit nécessairement renvoyer une valeur booléenne.} ou une action personnalisée.
 \end{itemize}
@@ -208,7 +208,7 @@ Ce menu permet de choisir un nom pour la mission, d'écrire un briefing qui sera
 \paragraph{ }
 Le briefing peut contenir du texte coloré. Il faut pour cela choisir une couleur grâce aux sliders, sélectionner le texte à colorer, puis appuyer sur le bouton correspondant.
 \paragraph{ }
-Il est également possible d'activer ou de désactiver :
+Il est également possible d'activer ou de désactiver\footnote{Le feedback d'aide au joueur, la caméra automatique ainsi que la souris peuvent être activés ou désactivés lors de l'exécution du jeu en utilisant les actions appropriées} :
 \begin{itemize}
 \item la caméra automatique (en jeu, cette caméra contient en permanence dans son champ de vision les unités visibles par le joueur ainsi que les zones définies comme toujours présentes dans le champ de vision)
 \item le soin automatique des unités (autoheal)
@@ -225,7 +225,7 @@ Il est également possible d'activer ou de désactiver :
 \end{figure}
 \subsection{Gestion des traces expertes}
 \paragraph{ }
-Vous pouvez générer des traces en éxécutant un programme Prog\&Play lorsque vous testez la mission. Ces traces se retrouvent dans le répertoire <Spring>/traces/data/expert/<Nom de la mission>. Elles peuvent être ouvertes à l'aide d'un éditeur de texte pour ajouter par exemple les metadonnées.
+Vous pouvez générer des modèles de solution en éxécutant un programme Prog\&Play lorsque vous testez la mission. Ces traces se retrouvent dans le répertoire <Spring>/traces/data/expert/<Nom de la mission>. Elles peuvent être ouvertes à l'aide d'un éditeur de texte pour ajouter par exemple les metadonnées.
 \paragraph{ }
 Le menu \textit{Traces} permet de visualiser les traces présentes dans le dossier mentionné précédemment, et de sélectionner les traces à exporter dans le jeu final (ce qui permettra ensuite de produire du feedback pour le joueur).
 \section{Création du jeu final}
@@ -233,7 +233,7 @@ Le menu \textit{Traces} permet de visualiser les traces présentes dans le dossi
 Une fois que toutes les missions du jeu ont été créés, vous pouvez retourner dans le menu principal pour les scénariser et exporter le jeu final.
 \subsection{Scénarisation}\label{scenario-editor}
 \paragraph{ }
-Chaque mission créée est représentée par une fenêtre contenant le nom de la mission, un état d'entrée et un ou plusieurs états de sortie en fonction de ce qui a été défini dans l'éditeur. En cliquant sur le bouton correspondant à un état de sortie puis sur le bouton correspondant à un état d'entrée, les deux états seront connectés. Vous pouvez double-cliquer sur un état de sortie pour supprimer le lien associé. Un exemple d'édition d'un scénario est disponible Figure \ref{fig:launcher-scenario}.
+Chaque mission créée est représentée par une fenêtre contenant le nom de la mission, un état d'entrée et un ou plusieurs états de sortie en fonction de ce qui a été défini dans l'éditeur (Actions \textit{Game - Player wins} et \textit{Game - Player lose}). En cliquant sur le bouton correspondant à un état de sortie puis sur le bouton correspondant à un état d'entrée, les deux états seront connectés. Vous pouvez double-cliquer sur un état de sortie pour supprimer le lien associé. Un exemple d'édition d'un scénario est disponible Figure \ref{fig:launcher-scenario}.
 \paragraph{ }
 Il est possible de sauvegarder et de charger des scénarios (ces derniers se trouvant dans le répertoire \textit{<Spring>/SPRED/scenarios}).
 \begin{figure}[H]
