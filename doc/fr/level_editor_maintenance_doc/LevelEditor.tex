@@ -1,0 +1,180 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[a4paper]{geometry}
+
+\title{SPRED}
+\author{Benjamin BONTEMPS}
+
+\sloppy
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Ce document a pour objectifs de récapituler l'essentiel du travail réalisé dans le cadre du projet de conception d'un éditeur de missions pour le jeu sérieux Prog\&Play et de permettre sa maintenabilité en cas de nécessité. Il suppose acquis les concepts de base liés à Prog\&Play, à Spring (moteur sur lequel est basé le jeu) et au développement en Lua.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Architecture globale}
+\paragraph{}
+Cette section présente les choix effectués quant à l'architecture adoptée pour la réalisation de l'éditeur de missions.
+\paragraph{}
+Le core est composé d'un unique widget (launcher.lua) permettant de sélectionner le jeu de base sur lequel les missions vont être créés, ainsi que deux archives permettant de générer les éditeurs spécifiques ainsi que d'exporter le jeu final.
+\paragraph{}
+Le launcher est composé d'un widget central permettant d'afficher l'interface du launcher et de réagir en fonction des boutons sur lesquels l'utilisateur clique (editor\_spring\_direct\_launch.lua). A noter que ce widget communique également avec les autres widgets et gadgets définis ci-dessous.
+\paragraph{}
+L'éditeur à proprement parler est composé de :
+\begin{itemize}
+\item Un widget central permettant d'afficher les éléments de l'interface utilisateur et de capter les interactions avec cette dernière ou avec le moteur pour effectuer des actions en conséquence. (editor\_user\_interface.lua)
+\item Un widget permettant de récupérer la liste des commandes que les différentes unités du jeu sélectionné dans le pré-launcher peuvent exécuter. (editor\_commands\_list.lua)
+\item Un widget permettant de récupérer la liste de tous les widgets présents. (editor\_widget\_list.lua)
+\item Un widget affichant un écran de chargement pour empêcher l'utilisateur d'interagir avec l'interface lorsqu'elle n'est pas complètement chargée (editor\_loading\_screen.lua)
+\item Un widget permettant de ne pas afficher les boutons permettant de donner des ordres aux unités. (hide\_commands.lua)
+\item Un gadget permettant l'utilisation de code synchronisé (Par exemple, la création d'une unité sur le terrain). (editor\_gadget.lua)
+\item Deux fichiers contenant toutes les chaînes de caractères à afficher. (EditorStrings.lua et LauncherStrings.lua)
+\item Un fichier définissant une classe "machine à états" et ses différentes instances. (StateMachine.lua)
+\item Un fichier contenant des fonctions utilitaires. (Misc.lua)
+\item Des fichiers de description de tables Lua. (Actions.lua, Conditions.lua, TextColors.lua)
+\end{itemize}
+\paragraph{}
+Ces modules dépendent pour la plupart des bibliothèques suivantes :
+\begin{itemize}
+\item \textbf{Chili UI} - Framework d'interface graphique
+\item \textbf{dkjson.lua} - Permet de convertir une table lua en string au format json et inversement.
+\item \textbf{xml-serde.lua} - Permet de convertir une table lua possédant une syntaxe spécifique en string au format xml et inversement.
+\item \textbf{RestartScript.lua} - Permet de redémarrer le jeu avec certains paramètres supplémentaires.
+\end{itemize}
+\section{Chili UI} \label{chili}
+\paragraph{}
+Afin de simplifier le développement de l'interface graphique, j'ai choisi d'utiliser un framework d'interface graphique développé spécifiquement pour Spring dénommé Chili UI. 
+\paragraph{}
+Ce framework a l'avantage de ne pas avoir à utiliser l'API OpenGL de Spring et les différents listeners pour afficher et permettre l'interaction avec des fenêtres, boutons etc. Tout y est déjà implémenté, ce qui a permis de réduire considérablement le temps requis pour obtenir les premiers résultats. Le problème majeur est que le framework est extrêmement mal documenté, et la meilleure façon de comprendre son fonctionnement pour s'en servir correctement voire même le modifier pour l'adapter à des besoins particuliers est de se référer au code source présent sur github\footnote{https://github.com/jk3064/chiliui/}.
+\paragraph{}
+Les modifications que j'y ai personnellement apporté concernent les boutons, qui possèdent un état supplémentaire \textit{chosen} permettant d'avoir un feedback visuel lorsqu'on les sélectionne (les modifications de cet état sont gérées "à la main", mais le feedback visuel est géré automatiquement par le framework). Une autre modification a également été réalisée : il s'agit de l'ajout d'un membre "onReturn" de type \textit{function} sur les editbox qui permet de donner un comportement à une pression sur la touche entrée lorsque l'utilisateur a le focus sur une editbox.
+\paragraph{}
+Le widget central de l'éditeur comporte de nombreuses fonctions reprenant les fonctions \textit{New} du framework en n'utilisant qu'un certain nombre de paramètres, ce qui permet une définition plus compacte de chaque élément de l'interface. Le point négatif est qu'il faut soit connaître par cœur l'ordre dans lequel les paramètres doivent être renseignés dans le prototype de la fonction soit se référer en permanence à la définition des fonctions. Ces fonctions sont définies dans le widget central de l'éditeur dans la catégorie \textit{Chili UI functions}.
+\paragraph{}
+Il faut faire extrêmement attention à une chose en particulier en ce qui concerne le framework : il ne faut surtout pas modifier les éléments d'interface qui ne sont pas affichés à l'écran (c'est-à-dire les éléments d'interface qui n'ont ni Screen0, ni un descendant de Screen0 en tant que parent). Ceci ne produit pas d'erreur lors de l'exécution, mais les éléments d'interface concernés ne s'actualiseront plus correctement, ce qui est très gênant d'un point de vue utilisateur (les opérations seront effectuées, mais l'utilisateur n'aura aucun feedback visuel).
+\section{Le core}
+\paragraph{}
+Le core est la base de l'éditeur. Il permet de sélectionner un jeu de base sur lequel l'utilisateur va ensuite créer ses missions. Lorsque le jeu en question est sélectionné, le pré-launcher va s'occuper de créer une archive contenant les fichiers permettant le fonctionnement de l'éditeur tout en y modifiant le fichier ModInfo.lua contenant les informations de dépendance pour y ajouter le jeu sélectionné. Ensuite, il va redémarrer Spring avec l'archive nouvellement créée.
+\paragraph{}
+Si l'archive correspondant à l'éditeur pour un certain mod est déjà créée, il va simplement redémarrer Spring en utilisant cette archive. Ceci ne pose pas de problèmes d'un point de vue utilisateur, mais pendant une phase de développement, il ne faut pas oublier de supprimer l'archive créée à chaque modification.
+\paragraph{}
+Le core possède également une seconde archive qui contient toutes les données nécessaires pour faire fonctionner les missions créées avec l'éditeur. En effet, lorsque l'utilisateur exportera son scénario sous la forme d'un jeu, le launcher extraira du core l'archive \textit{game} et il y ajoutera les missions, le scénario ainsi que les traces expertes sélectionnées.
+\section{Le launcher}
+\paragraph{}
+La launcher se présente en 4 menus distincts : Création d'une nouvelle mission, Edition d'une mission existante, Edition d'un scénario et Exportation d'un jeu. Pendant l'écran de chargement du launcher, le gadget de l'éditeur instancie chacune des unités du mod de base, récupère la liste de leurs commandes et la transfère au widget editor\_commands\_list.lua qui effectue un tri dessus. Les commandes seront ensuite passées à l'éditeur grâce au ModOptions.
+\subsection{Création d'une nouvelle mission}
+\paragraph{}
+Rien de très compliqué ici : on s'occupe simplement de lister les cartes présentes dans le répertoire maps/ à la racine de Spring. Lorsque l'utilisateur clique sur le nom d'une carte, Spring redémarre sur la carte sélectionnée.
+\subsection{Edition d'une mission existante}
+\paragraph{}
+De même, on liste ici les missions correspondant au jeu sélectionné qui sont dans le répertoire pp\_editor/missions/. Lorsque l'utilisateur clique sur le nom d'une mission, on va chercher dans la description de cette mission la carte sur laquelle la mission a été créée, puis on redémarre Spring sur la bonne carte et on indique dans le ModOptions que l'éditeur va devoir charger cette mission.
+\subsection{Editeur de scénario}
+\paragraph{}
+Pour chaque mission créée correspondant au jeu sélectionné, on créé une fenêtre contenant le nom de la mission, un bouton pour l'état d'entrée et n boutons pour les n états de sortie. En cliquant sur un bouton correspondant à un état de sortie, on stocke dans les variables \textit{selectedOutputMission} et \textit{selectedOutput} l'état de sortie sur lequel on vient de cliquer. Si ces variables ne sont pas nil et que l'on clique sur un état d'entrée, on le stocke dans \textit{selectedInput}.
+\paragraph{}
+La fonction MakeLink() s'effectue à chaque frame et s'occupe de répertorier un lien dans la table Links si selectedOutputMission, selectedOutput et selectedInput ne sont pas nil. Un objet Chili personnalisé permet d'afficher ces liens lorsqu'ils existent.
+\paragraph{}
+En ce qui concerne la sauvegarde et le chargement des scénarios, ceci se fait en utilisant la bibliothèque xml-serde qui nous permet de transformer la table Links en fichier xml et vice-versa.
+\subsection{Exportation du jeu}
+\paragraph{}
+Pour l'exportation de l'archive du jeu final, l'utilisateur va simplement choisir un des scénarios qu'il a préalablement créé via l'éditeur de scénario. Il peut également spécifier s'il ne veut exporter que les missions liées au scénario ou bien toutes les missions du répertoire <Spring>/SPRED/missions. Une fois que le scénario en question a été sélectionné, on effectue la même opération que pour charger un scénario dans l'éditeur de scénario, puis on lit le contenu de la table Links pour définir les missions à exporter, et enfin on créé une archive contenant les fichiers nécessaires au fonctionnement du jeu ainsi que le scénario, les missions qui le composent (ou toutes les missions) et le cas échéant les traces sélectionnées par l'utilisateur.
+\section{L'éditeur de missions}
+\subsection{Editor User Interface}
+\paragraph{}
+Ce widget est l'élément central de l'éditeur de missions. Le choix d'un widget en tant qu'élément central se justifie par le fait que la majorité des interactions se font de façon asynchrone. L'unicité du widget vient du fait qu'il n'est possible de n'avoir des variables communes à plusieurs widgets qu'en passant par la table WG, ce qui aurait été gênant étant donné le très grand nombre de variables devant être utilisées à de nombreux endroits distincts. Les sections suivantes expliquent rapidement le contenu de chacune des parties ; se référer au code et aux commentaires pour plus de précisions.
+\subsubsection{Initialisation}
+\paragraph{}
+L'initialisation de la quasi-intégralité de l'interface se fait par les fonctions d'initialisation décrites dans la catégorie \textit{Initialisation functions}. La grande majorité des fenêtres y est initialisée, en les affichant toutes d'un coup (pour les raisons évoquées à la section \ref{chili}), puis elles sont ensuite masquées pour n'afficher que la fenêtre correspondant à l'état actuel de la machine à états globale (voir \ref{statemachine}).
+\paragraph{}
+Sont présentes également deux fonctions s'occupant de l'initialisation de fonctions liées aux changements d'état lors de la sélection d'un type et d'une équipe d'une unité pour la placer ensuite sur le terrain.
+\paragraph{}
+Les fonctions des catégories \textit{Top bar functions} et \textit{Forces window buttons functions} s'occupent de changer l'état courant de la machine à états globale et de choisir quelles fenêtres doivent être affichées. Il s'agit pour la plupart de fonctions appelées lors de la pression sur des boutons ou sur des touches du clavier.
+\subsubsection{Unités et groupes d'unités}
+\paragraph{}
+Les fonctions présentes dans la section \textit{Unit/Selection state functions} gèrent à la  fois le placement des unités (choix du type et de l'équipe), la sélection, le positionnement, l'orientation, les attributs et l'appartenance à un groupe d'une ou plusieurs unités.
+\paragraph{} Les états de la machine à états des unités permettent d'adapter le comportement des fonctions listeners d'évènements souris ou clavier. Ainsi, les fonctionnalités de sélection, rotation, déplacement... des unités se font dans les fonctions de callback des événements souris.
+\subsubsection{Zones}
+\paragraph{}
+Les fonctions de cette section concernent la création, suppression, affichage, sélection et déplacement des zones logiques. Ces zones sont utilisées dans les déclencheurs.
+\paragraph{}
+De même que précédemment, les états de la machine à états régissent les interactions souris, qui sont donc gérées dans les listeners du widget.
+\subsubsection{Forces}
+\paragraph{}
+Les fonctions de cette section s'occupent d'afficher les paramètres liés aux équipes et de gérer les alliances entre les différentes équipes actives.
+\subsubsection{Déclencheurs}
+\paragraph{}
+Les fonctions de cette partie concernent la gestion du système de déclencheurs (création, édition, suppression des évènements, conditions et actions ainsi que la gestion des variables).
+\subsubsection{Paramètres de la mission}
+\paragraph{}
+Les fonctions de cette partie sauvegardent les paramètres globaux de la mission, et transforme le texte du briefing en texte coloré et avec des retours à la ligne si les tags sont présents.
+\subsubsection{Sauvegarde / Chargement}
+\paragraph{ }
+Les fonctions de cette partie s'occupent de la gestion des fichiers de sauvegarde (.editor), de la transformation de l'état de la mission en une table lua, et des save states (ctrl+z).
+\subsubsection{Fonctions de dessin}
+\paragraph{ }
+Les fonctions de cette partie permettent de dessiner des ellipses sur le terrain, de gérer les différents curseurs et l'état de certains boutons.
+\subsubsection{Listeners\label{listeners}}
+Les fonctions de cette partie correspondent aux callbacks des événements souris et clavier.
+\subsection{Gadget}
+\paragraph{ }
+Le gadget permet surtout d'effectuer toutes les opérations nécessitant d'être en code synchronisé. Il se décompose en 3 méthodes :
+\paragraph{RecvLuaMsg} Cette fonction permet de recevoir les messages envoyés depuis les widgets vers le gadget et d'effectuer des opérations en adéquation. Globalement, elle récupère un message de la forme "\textit{operation++param1++param2++...}", split cette chaîne de caractères, effectue un switch sur "\textit{operation}", effectue éventuellement des calculs avec les paramètres, stocke les paramètres transmis et calculés dans des variables, puis mets un booléen à \textit{true}.
+\paragraph{GameFrame} Cette fonction est appelée à chaque frame. Elle s'occupe lorsque l'on est dans le launcher d'instancier toutes les unités du mod de base sélectionné et d'en récupérer leurs commandes. Lorsque l'on est dans l'éditeur, elle s'occupe de supprimer toutes les unités de base créées automatiquement à la première frame, puis à chaque frame suivante elle effectue un test sur les booléens mis à \textit{true} ou non par la méthode précédente. Si un des booléens est à \textit{true}, on effectue des opérations avec les variables stockées précédemment, et on remet le booléen à false.
+\paragraph{RecvFromSynced} Permet de récupérer les messages envoyés depuis la partie synchronisée du gadget vers la partie non synchronisée pour ensuite utiliser des méthodes des widgets.
+\subsection{Machines à états\label{statemachine}}
+\paragraph{ }
+Les machines à états servent à savoir les actions à effectuer lorsqu'une seule commande (clic souris par exemple) peut effectuer plusieurs actions distinctes. En réalité, il s'agit d'une metatable possédant plusieurs membres correspondant aux états ainsi que deux méthodes, un getter et un setter sur les états. Au final, les machines à états n'ont pas été bien exploitées puisqu'il s'agit ici juste de savoir dans quel état on se trouve (et une simple variable changeant de valeur à chaque changement d'état aurait fait le même travail). On pourrait augmenter l'intérêt d'avoir des machines à états en définissant des fonctions de transition à chaque fois que l'on appelle le setter, mais il n'y a pas d'utilité immédiate.
+\subsection{Fonctions utilitaires}
+\paragraph{ }
+Les fonctions implémentées dans ce fichier sont soit des fonctions classiques qui ne sont pas présentes de base en lua (arrondir un nombre, etc.) soit des fonctions utilisées à plusieurs endroits dans le projet (récupération des informations des équipes par exemple).
+\subsection{Fichiers de description}
+\paragraph{ } Les fichiers de description des actions et des conditions contiennent toutes les informations nécessaires pour définir les actions et les conditions présentes dans l'éditeur. Pour rajouter une action ou une condition, il faut donc ajouter un élément dans la table correspondante possédant les éléments suivants :
+\begin{itemize}
+\item \textbf{type} : id de l'action ou de la condition à ajouter.
+\item \textbf{filter} : catégorie à laquelle l'action ou la condition appartient (s'ajoute automatiquement à la liste des filtres de l'éditeur).
+\item \textbf{typeText} : description présente dans la combobox lors du choix du type de l'action ou de la condition.
+\item \textbf{text} : texte à trou de l'action ou de la condition.
+\item \textbf{attributes} : "trous" du texte à trou.
+\end{itemize}
+\paragraph{ }
+Chaque élément de la table \textbf{attributes} est composé de :
+\begin{itemize}
+\item \textbf{text} : identifiant dans le texte à trous
+\item \textbf{type} : type de paramètre. Les types disponibles sont :
+\begin{itemize}
+\item \textbf{unit} (une seule unité à pick dans la scène)
+\item \textbf{unitset} (un ensemble d'unités = une seule unité, un groupe, une équipe, les unités validant une condition ou les unités créées par le dernier appel à une action)
+\item \textbf{unitType} (un type d'unité)
+\item \textbf{team} (une équipe)
+\item \textbf{player} (une équipe contrôlée par un joueur
+\item \textbf{position} (une position = un couple x,z de coordonnées)
+\item \textbf{zone} (une zone logique)
+\item \textbf{group} (un groupe d'unités)
+\item \textbf{numberComparison} (un opérateur de comparaison (au moins, au plus, etc.) + un nombre)
+\item \textbf{numberVariable} (une variable numérique)
+\item \textbf{booleanVariable} (une variable booléenne)
+\item \textbf{comparison} (un opérateur de comparaison)
+\item \textbf{condition} (une condition parmi celles définies dans l'événement actuellement modifié)
+\item \textbf{toggle} (activé/désactivé)
+\item \textbf{command} (un ordre)
+\item \textbf{text} (une chaîne de caractères)
+\item \textbf{textSplit} (texte pouvant être transformé en table grâce au séparateur "||")
+\item \textbf{boolean} (true/false)
+\item \textbf{widget} (un widget parmi les widgets visibles)
+\end{itemize}
+\item \textbf{id} : case dans laquelle la valeur sélectionnée va être stockée.
+\item \textbf{hint} (optionnel) : message d'aide pour l'utilisateur.
+\end{itemize}
+\paragraph{ }
+Une fois qu'une nouvelle action ou condition a été définie dans l'éditeur, il ne faut pas oublier d'implémenter son comportement dans les fichiers s'occupant de l'exécution du jeu.
+\end{document}
