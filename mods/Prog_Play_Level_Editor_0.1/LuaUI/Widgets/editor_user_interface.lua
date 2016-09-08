@@ -2429,7 +2429,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 			end
 		}
 		local showInGameButton = addButton(sp, "75%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
-		showInGameButton.state.chosen = z.showInGame or true
+		showInGameButton.state.chosen = z.showInGame
 		showInGameButton.OnClick = {
 			function()
 				showInGameButton.state.chosen = not showInGameButton.state.chosen

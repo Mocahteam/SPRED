@@ -124,7 +124,6 @@ local function RunScenario(i)
     local options={
     ["MODOPTIONS"]=
       {
-      ["testmap"]="true",
       ["scenariomode"]="appliq",
       ["language"]=lang,
       ["scenario"]=i, --Todo: Should be an id instead
