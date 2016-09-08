@@ -755,7 +755,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0", "unbindkeyset backspace") -- TODO : change fps 1 to fps 0 in release
+	Spring.SendCommands("resbar 0","fps 0","console 0","info 0", "tooltip 0", "unbindkeyset backspace")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -4804,7 +4804,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 	
 	-- Write
 	local jsonfile = json.encode(savedTable)
-	local DBG_formatString = true -- TODO remove format
+	local DBG_formatString = false -- Set this to true to have a better view of the json file
 	if DBG_formatString then
 		jsonfile = string.gsub(jsonfile, ",", ",\n")
 		jsonfile = string.gsub(jsonfile, "}", "\n}")
