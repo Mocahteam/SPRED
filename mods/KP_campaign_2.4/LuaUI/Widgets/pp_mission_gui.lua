@@ -21,7 +21,7 @@ include('keysym.h.lua')
 
 VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart function
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
-
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
 local AppliqManager
 Spring.Echo(xmlFiles[1])
@@ -30,7 +30,7 @@ if(xmlFiles[1]~=nil)then
   AppliqManager:parse()
 end
 
-VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
+VFS.Include("LuaUI/Widgets/libs/Pickle.lua") 
 
 --local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
 local lang = Spring.GetModOptions()["language"] -- get the language
@@ -54,7 +54,7 @@ local quitMission = "Quit the mission"
 local closeMenu = "Close menu"
 local showBriefing = "Show briefing"
 local victory = "You won the mission"
-local victoryCampaign = "Congratulations !!! You complete the campaign"
+local victoryCampaign = "Congratulations !!! You have completed the campaign"
 local loss = "You lost the mission"
 local continue = "continue"
 local saveProgression="Save progression"
@@ -418,8 +418,14 @@ function MissionEvent(e)
 		end
 		-- create new one with preset popup config
 		Spring.Echo("try to open popup")
+		-- popup
+		Spring.Echo(json.encode(e))
+		Spring.Echo(json.encode(popup.lineArray))
+		Spring.Echo(winPopup == nil)
+		--Spring.Echo(json.encode(popup))
 		winPopup = Window:CreateCentered(popup)
 		-- and open it
+		Spring.Echo(winPopup)
 		winPopup:Open()
 		-- set tutorial launcher if tutoPopup has been created
 		if tutoPopup then
@@ -474,16 +480,18 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	  Spring.Echo(briefing)
 	  Spring.Echo(winPopup)
 		if not WG.rooms.Video.closed then
+		  Spring.Echo("Video not closed")
 			WG.rooms.Video:Close()
 			if briefing ~= nil then
 				briefing.delayDrawing = false
 			end
 		else
+		  Spring.Echo("Video closed")
 			if not WG.rooms.TutoView.closed then
 				WG.rooms.TutoView:Close()
 			end
 			if winPopup == nil then
-			 Spring.Echo("launch event")
+			 Spring.Echo("winPopup is nil : try to launch event")
 				local event = {logicType = "ShowMissionMenu",
 								state = "menu"}
 				MissionEvent (event)
