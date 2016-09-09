@@ -36,7 +36,7 @@ local showBriefing = false
 VFS.Include("MissionPlayer_Editor.lua")
 local initializeUnits = true
 
-local solutions = table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0
+local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0)
 -- message sent by mission_gui (Widget)
 function gadget:RecvLuaMsg(msg, player)
   missionScript.RecvLuaMsg(msg, player)
