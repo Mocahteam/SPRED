@@ -1910,11 +1910,24 @@ function Quit() -- Close spring
 end
 
 function RemoveOtherWidgets() -- Disable other widgets
-	for name, w in pairs(widgetHandler.knownWidgets) do
-		if w.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" then
-			widgetHandler:DisableWidget(name)
-		end
-	end
+  local RemovedWidgetList = {}
+  local RemovedWidgetListName = {}
+  for name,kw in pairs(widgetHandler.knownWidgets) do
+    if kw.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" then
+      table.insert(RemovedWidgetListName,name)
+    end
+  end
+  for _,w in pairs(widgetHandler.widgets) do
+    for _,name in pairs(RemovedWidgetListName) do
+      if w.GetInfo().name == name then
+        table.insert(RemovedWidgetList,w)
+      end
+    end
+  end
+  for _,w in pairs(RemovedWidgetList) do
+    Spring.Echo("Removing",w.GetInfo().name)
+    widgetHandler:RemoveWidget(w)
+  end
 end
 
 function EitherDrawScreen() -- Shows a black background if required
