@@ -32,7 +32,10 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
+local campaign = nil
+if  Spring.GetModOptions()["testmap"] == nil then
+  campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
+end
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission

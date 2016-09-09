@@ -32,7 +32,14 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-local campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
+local campaign = nil
+if Spring.GetModOptions()["editor"] == nil and Spring.GetModOptions()["testmap"] == nil then
+  campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
+end
+if  Spring.GetModOptions()["testmap"] ~= nil then
+  WG.rooms["Video"] = "stupid stuff" -- dirty trick to get WG.rooms.Video.closed giving nil instead of raising error in case of testmap
+end
+
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
@@ -434,7 +441,7 @@ function MissionEvent(e)
 	    else
 	      briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
 	    end
-		if not WG.rooms.Video.closed then
+		if WG.rooms.Video and not WG.rooms.Video.closed then
 			briefing.delayDrawing = true
 		end
 	elseif e.logicType == "PauseAction" then
@@ -449,7 +456,7 @@ function MissionEvent(e)
 end
 
 function TutorialEvent()
-  if not WG.rooms.Video.closed then
+  if WG.rooms.Video and not WG.rooms.Video.closed then
     WG.rooms.Video:Close()
   end
 	if not tutoPopup then	
@@ -467,13 +474,13 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	  Spring.Echo("escape pushed")
 	  Spring.Echo(briefing)
 	  Spring.Echo(winPopup)
-		if not WG.rooms.Video.closed then
+		if WG.rooms.Video and not WG.rooms.Video.closed then
 			WG.rooms.Video:Close()
 			if briefing ~= nil then
 				briefing.delayDrawing = false
 			end
 		else
-			if not WG.rooms.TutoView.closed then
+			if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
 				WG.rooms.TutoView:Close()
 			end
 			if winPopup == nil then
