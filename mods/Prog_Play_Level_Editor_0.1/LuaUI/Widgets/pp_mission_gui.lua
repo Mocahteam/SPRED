@@ -250,6 +250,20 @@ function MissionEvent(e)
 				WG.rooms.TutoView:Close()
 			end
 		end
+		
+		
+		if (Spring.GetModOptions()["testmap"]~=nil) then
+		  local message = ""
+		  if e.state == "won" then
+        message = victory
+      else
+         message = loss     
+      end
+		  MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
+		  return
+		end
+		
+		
 		-- close briefing window if it oppened
 		WG.Message:DeleteAll()
 		-- load templated mission
@@ -446,7 +460,10 @@ end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
-	if key == KEYSYMS.ESCAPE and Spring.GetModOptions()["testmap"]==nil then
+	if key == KEYSYMS.ESCAPE then
+	 if Spring.GetModOptions()["testmap"]~=nil then
+	   Spring.SendLuaRulesMsg("Show briefing")
+	 else
 	  Spring.Echo("escape pushed")
 	  Spring.Echo(briefing)
 	  Spring.Echo(winPopup)
@@ -469,6 +486,7 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 					winPopup:Open()
 				end
 			end
+		 end
 		end
 		return true
 	end
