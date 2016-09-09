@@ -2,10 +2,10 @@ function widget:GetInfo()
   return {
     name    = "campaign launcher",
     desc    = "",
-    author  = "zigaroula,bruno",
+    author  = "mocahteam",
     date    = "",
     license = "GNU GPL v2",
-    layer   = 20,
+    layer   = 20000,
     enabled = true,
     handler = true
   }
@@ -72,11 +72,30 @@ function initChili() -- Initialize Chili variables
 end
 
 local function removeWidgets()
-  for name, w in pairs(widgetHandler.knownWidgets) do
-    if w.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
-      widgetHandler:DisableWidget(name)
+  RemovedWidgetList = {}
+  local RemovedWidgetListName = {}
+  for name,kw in pairs(widgetHandler.knownWidgets) do
+    if kw.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
+      table.insert(RemovedWidgetListName,name)
     end
   end
+  for _,w in pairs(widgetHandler.widgets) do
+    for _,name in pairs(RemovedWidgetListName) do
+      if w.GetInfo().name == name then
+        table.insert(RemovedWidgetList,w)
+      end
+    end
+  end
+  for _,w in pairs(RemovedWidgetList) do
+    Spring.Echo("Removing",w.GetInfo().name)
+    widgetHandler:RemoveWidget(w)
+  end
+--  for name, w in pairs(widgetHandler.widgets) do
+--    if name ~= "campaign launcher" and name ~= "Chili Framework" then
+--      Spring.Echo("initGUI disabled "..name)
+--      widgetHandler:RemoveWidget(w)
+--    end
+--  end
 end
 
 function clearUI() -- Remove UI elements from the screen
@@ -410,13 +429,14 @@ end
 WG.switchOnMenu = initGui
 
 function widget:Initialize()
+  widgetHandler:EnableWidget("Chili Framework")
   if not Spring.GetModOptions().hidemenu then
     if (not WG.Chili) then
       -- don't run if we can't find Chili
       widgetHandler:RemoveWidget()
       return
     end
-  initGui()
+    initGui()
   else
     hideView=false
   end
