@@ -513,7 +513,10 @@ local function addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExt
   end
 end
 
+-- add Unit to specified groups
+-- side effect : add the unit to the overarching group : "team_all".
 local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
+  table.insert(groups,"team_all")
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUnits)
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUndeletedUnits)
 end  

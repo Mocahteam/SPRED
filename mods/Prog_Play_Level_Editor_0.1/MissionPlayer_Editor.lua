@@ -513,7 +513,10 @@ local function addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExt
   end
 end
 
+-- add Unit to specified groups
+-- side effect : add the unit to the overarching group : "team_all".
 local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
+  table.insert(groups,"team_all")
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUnits)
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUndeletedUnits)
 end  
@@ -1570,11 +1573,11 @@ end
 -- Called by mission_runner at the end of the mission
 -------------------------------------
 local function Stop ()
-	-- delete all units created
-	local units = Spring.GetAllUnits() 
-	for i = 1,table.getn(units) do
-		Spring.DestroyUnit(units[i], false, true)
-	end
+  -- delete all units created
+  local units = Spring.GetAllUnits() 
+  for i = 1,table.getn(units) do
+    Spring.DestroyUnit(units[i], false, true)
+  end
 end
 
 
