@@ -154,6 +154,7 @@ end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
 local function computeReference(expression)
+  EchoDebug("compute expression : "..expression)
   if(expression==nil or expression=="") then return expression end
   local n1=tonumber(expression)
   if(n1~=nil)then return n1 end
@@ -161,6 +162,7 @@ local function computeReference(expression)
   for v,value in pairs(ctx.variables)do
     expression=string.gsub(expression, v, tostring(value))
   end
+  EchoDebug("expression before execution : "..expression)
   local executableStatement="return("..expression..")"
   return load_code(executableStatement)
 end
@@ -184,9 +186,11 @@ end
 -- @return boolean
 -------------------------------------
 local function compareValue_Numerical(v1,v2,mode) 
-  if(mode==">")then return v1>v2 end
+  v1 = tonumber(v1)
+  v2 = tonumber(v2)
+  if(mode==">") then return v1>v2  end
   if(mode==">=")then return v1>=v2 end
-  if(mode=="<")then return v1<v2 end
+  if(mode=="<") then return v1<v2  end
   if(mode=="<=")then return v1<=v2 end
   if(mode=="==")then return v1==v2 end
   if(mode=="!=")then return v1~=v2 end
@@ -1189,9 +1193,10 @@ local function UpdateConditionsTruthfulness (frameNumber)
         ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
       -- Time related conditions [END]
       -- Variable related conditions [START]
-      elseif(c.type=="variableVSnumber") then --TODO new simpler way to deal with variables
+      elseif(c.type=="numberVariable") then 
         local v1=ctx.variables[c.params.variable]
         local v2=c.params.number
+        --{"type":"numberVariable","name":"Condition1","id":1,"object":"other","currentlyValid":false,"params":{"number":"6","variable":"unitscreated","comparison":"<"}}
         ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="variableVSvariable") then
         local v1=ctx.variables[c.params.variable1]
@@ -1565,11 +1570,11 @@ end
 -- Called by mission_runner at the end of the mission
 -------------------------------------
 local function Stop ()
-	-- delete all units created
-	local units = Spring.GetAllUnits() 
-	for i = 1,table.getn(units) do
-		Spring.DestroyUnit(units[i], false, true)
-	end
+  -- delete all units created
+  local units = Spring.GetAllUnits() 
+  for i = 1,table.getn(units) do
+    Spring.DestroyUnit(units[i], false, true)
+  end
 end
 
 
