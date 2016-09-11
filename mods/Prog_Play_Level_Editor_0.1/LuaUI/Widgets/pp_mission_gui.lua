@@ -69,16 +69,16 @@ local saveProgression="Save progression"
 if lang == "fr" then
   saveMessage="Votre progression a été sauvegardée sous le nom : "
   continue= "continuer"
-	previousMission = "Mission précédente"
-	replayMission = "Rejouer mission"
-	nextMission = "Mission suivante"
-	quitGame = "Quitter le jeu"
-	quitMission = "Quitter la mission"
-	closeMenu = "Fermer menu"
-	showBriefing = "Voir briefing"
-	victory = "Vous avez gagné la mission"
-	victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
-	loss = "Vous avez perdu la mission"
+  previousMission = "Mission précédente"
+  replayMission = "Rejouer mission"
+  nextMission = "Mission suivante"
+  quitGame = "Quitter le jeu"
+  quitMission = "Quitter la mission"
+  closeMenu = "Fermer menu"
+  showBriefing = "Voir briefing"
+  victory = "Vous avez gagné la mission"
+  victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
+  loss = "Vous avez perdu la mission"
   saveProgression="Sauvegarder"
 end
 
@@ -88,95 +88,100 @@ if mode=="appliq" and AppliqManager~=nil then
 end
 -- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
 local function createTmpFile()
-	if not VFS.FileExists("mission_ended.conf") then
-		local f = io.open("mission_ended.conf", "w")
-		if f ~= nil then
-			f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
-			f:flush()
-			f:close()
-		end
-	end
+  if not VFS.FileExists("mission_ended.conf") then
+    local f = io.open("mission_ended.conf", "w")
+    if f ~= nil then
+      f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
+      f:flush()
+      f:close()
+    end
+  end
 end
 
+-- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
+local function createAppliqOutputState(missionOutputState)
+  local missionName = Spring.GetModOptions()["missionname"]  
+  return missionName.."//"..missionOutputState
+end
 -- Defines a template window for the end mission menu
 local template_endMission = {
-	lineArray = {""},
-	closed = true,
-	noMove = true,
-	--noAnimation = true,
-	tabs = {
-		-- The previousMission tab
-		{preset = function(tab)
-				-- By default this tab is disabled, activation depend on mission events (see MissionEvent function)
-				tab.title = "\255\50\50\50"..previousMission.."\255\255\255\255"
-				tab.isAboveColors = {
-										bottomLeft  = {0.3, 0.3, 0.3, 0.3},
-										topLeft     = {0.3, 0.3, 0.3, 0.3},
-										topRight    = {0.3, 0.3, 0.3, 0.3},
-										bottomRight = {0.3, 0.3, 0.3, 0.3}
-									}
-				tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
-				tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
-				tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
-				tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
-				tab.position = "bottom"
-			end
-		},
-		-- The replayMission tab
-		{preset = function(tab)
-				tab.title = replayMission
-				tab.position = "bottom"
-				tab.OnClick = function()
-					tab.parent:Close()
-					 local operations={
+  lineArray = {""},
+  closed = true,
+  noMove = true,
+  --noAnimation = true,
+  tabs = {
+    -- The previousMission tab
+    {preset = function(tab)
+        -- By default this tab is disabled, activation depend on mission events (see MissionEvent function)
+        tab.title = "\255\50\50\50"..previousMission.."\255\255\255\255"
+        tab.isAboveColors = {
+                    bottomLeft  = {0.3, 0.3, 0.3, 0.3},
+                    topLeft     = {0.3, 0.3, 0.3, 0.3},
+                    topRight    = {0.3, 0.3, 0.3, 0.3},
+                    bottomRight = {0.3, 0.3, 0.3, 0.3}
+                  }
+        tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
+        tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
+        tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
+        tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
+        tab.position = "bottom"
+      end
+    },
+    -- The replayMission tab
+    {preset = function(tab)
+        tab.title = replayMission
+        tab.position = "bottom"
+        tab.OnClick = function()
+          tab.parent:Close()
+           local operations={
   ["MODOPTIONS"]=
     {
     ["language"]=lang,
     ["scenario"]=scenarioType
     }
   }
-					genericRestart(missionName, operations,false)
-				end
-			end
-		},
-		-- The nextMission tab
-		{preset = function(tab)
-				-- By default this tab is disable, activation depend on mission events (see MissionEvent function)
-				tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
-				tab.isAboveColors = {
-										bottomLeft  = {0.3, 0.3, 0.3, 0.3},
-										topLeft     = {0.3, 0.3, 0.3, 0.3},
-										topRight    = {0.3, 0.3, 0.3, 0.3},
-										bottomRight = {0.3, 0.3, 0.3, 0.3}
-									}
-				tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
-				tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
-				tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
-				tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
-				tab.position = "bottom"
-			end
-		},
-		-- The quitGame tab
-		{preset = function(tab)
-				tab.title = quitGame
-				tab.position = "right"
-				tab.OnClick = function()
-					tab.parent:Close()
-					Spring.SendCommands("quitforce")
-				end
-			end
-		},
-		-- The quitMission tab
-		{preset = function(tab)
-				tab.title = quitMission
-				tab.position = "right"
-				tab.OnClick = function()
-					tab.parent:Close()
-					WG.switchOnMenu()
-				end
-			end
-		},
-		-- the save progression Tab
+          genericRestart(missionName, operations,false)
+        end
+      end
+    },
+    -- The nextMission tab
+    {preset = function(tab)
+        -- By default this tab is disable, activation depend on mission events (see MissionEvent function)
+        tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
+        tab.isAboveColors = {
+                    bottomLeft  = {0.3, 0.3, 0.3, 0.3},
+                    topLeft     = {0.3, 0.3, 0.3, 0.3},
+                    topRight    = {0.3, 0.3, 0.3, 0.3},
+                    bottomRight = {0.3, 0.3, 0.3, 0.3}
+                  }
+        tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
+        tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
+        tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
+        tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
+        tab.position = "bottom"
+      end
+    },
+    -- The quitGame tab
+    {preset = function(tab)
+        tab.title = quitGame
+        tab.position = "right"
+        tab.OnClick = function()
+          tab.parent:Close()
+          Spring.SendCommands("quitforce")
+        end
+      end
+    },
+    -- The quitMission tab
+    {preset = function(tab)
+        tab.title = quitMission
+        tab.position = "right"
+        tab.OnClick = function()
+          tab.parent:Close()
+          WG.switchOnMenu()
+        end
+      end
+    },
+    -- the save progression Tab
     {preset = function(tab)
         tab.title = saveProgression
         tab.position = "right"
@@ -193,33 +198,33 @@ local template_endMission = {
         end
       end
     },
-		-- The closeMenu tab
-		{preset = function(tab)
-				tab.title = closeMenu
-				tab.position = "right"
-				tab.OnClick = function()
-					tab.parent:Close()
-					if tab.parent.launchTuto ~= nil then
-						tab.parent.launchTuto()
-					end
-				end
-			end
-		},
-		-- The showBriefing tab
-		{preset = function(tab)
-				tab.title = showBriefing
-				tab.position = "top"
-				tab.OnClick = function()
-					tab.parent:Close()
-					if tab.parent.launchTuto ~= nil then
-						tab.parent.launchTuto()
-					else
-						Spring.SendLuaRulesMsg("Show briefing")
-					end
-				end
-			end
-		}
-	}
+    -- The closeMenu tab
+    {preset = function(tab)
+        tab.title = closeMenu
+        tab.position = "right"
+        tab.OnClick = function()
+          tab.parent:Close()
+          if tab.parent.launchTuto ~= nil then
+            tab.parent.launchTuto()
+          end
+        end
+      end
+    },
+    -- The showBriefing tab
+    {preset = function(tab)
+        tab.title = showBriefing
+        tab.position = "top"
+        tab.OnClick = function()
+          tab.parent:Close()
+          if tab.parent.launchTuto ~= nil then
+            tab.parent.launchTuto()
+          else
+            Spring.SendLuaRulesMsg("Show briefing")
+          end
+        end
+      end
+    }
+  }
 }
 
 -- This function returns a deep copy of a given table. The function below also
@@ -250,100 +255,100 @@ local tutoPopup = false
 function MissionEvent(e)
   
   --Spring.Echo("try event")
-	if e.logicType == "ShowMissionMenu" then
-		-- close tuto window if it oppened
-		if tutoPopup then
-			if not WG.rooms.TutoView.closed then
-				WG.rooms.TutoView:Close()
-			end
-		end
-		
-		
-		if (Spring.GetModOptions()["testmap"]~=nil) then
-		  local message = ""
-		  if e.state == "won" then
+  if e.logicType == "ShowMissionMenu" then
+    -- close tuto window if it oppened
+    if tutoPopup then
+      if not WG.rooms.TutoView.closed then
+        WG.rooms.TutoView:Close()
+      end
+    end
+    
+    
+    if (Spring.GetModOptions()["testmap"]~=nil) then
+      local message = ""
+      if e.state == "won" then
         message = victory
       else
          message = loss     
       end
-		  MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
-		  return
-		end
-		
-		
-		-- close briefing window if it oppened
-		WG.Message:DeleteAll()
-		-- load templated mission
-		local popup = deepcopy(template_endMission)
-		-- update window
-		if e.state ~= "menu" then
-			if e.state == "won" then
-			  popup.lineArray = {victory}
-				if scenarioType == "default" then
-					if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
-						popup.lineArray = {victoryCampaign}
+      MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
+      return
+    end
+    
+    
+    -- close briefing window if it oppened
+    WG.Message:DeleteAll()
+    -- load templated mission
+    local popup = deepcopy(template_endMission)
+    -- update window
+    if e.state ~= "menu" then
+      if e.state == "won" then
+        popup.lineArray = {victory}
+        if scenarioType == "default" then
+          if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
+            popup.lineArray = {victoryCampaign}
             else 
               popup.lineArray = {victory}
             end
-				else --elseif scenarioType == "noScenario" then --commented out to be more robust
-					popup.lineArray = {victory}
-				--else
-					-- TODO: use appliqManager to define accurate popup.lineArray property
-				end
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." won\n")
-					ppTraces:flush()
-				end
-			else
-				popup.lineArray = {loss}
-				if ppTraces ~= nil then
-					ppTraces:write(missionName.." loss\n")
-					ppTraces:flush()
-				end
-			end
-			
-			-- Enable PreviousMission and NextMission tabs
-			-- PreviousMission tab is activated if we are on the default scenario and a previous mission is defined
-			local activatePreviousMission = (scenarioType == "default" and campaign[missionName] and campaign[missionName].previousMission ~= nil)
-			if activatePreviousMission then
-				popup.tabs[1].preset = function(tab)
-				tab.title = previousMission
-				tab.position = "bottom"
-				tab.OnClick = function()
-				tab.parent:Close()
-				local operations={
+        else --elseif scenarioType == "noScenario" then --commented out to be more robust
+          popup.lineArray = {victory}
+        --else
+          -- TODO: use appliqManager to define accurate popup.lineArray property
+        end
+        if ppTraces ~= nil then
+          ppTraces:write(missionName.." won\n")
+          ppTraces:flush()
+        end
+      else
+        popup.lineArray = {loss}
+        if ppTraces ~= nil then
+          ppTraces:write(missionName.." loss\n")
+          ppTraces:flush()
+        end
+      end
+      
+      -- Enable PreviousMission and NextMission tabs
+      -- PreviousMission tab is activated if we are on the default scenario and a previous mission is defined
+      local activatePreviousMission = (scenarioType == "default" and campaign[missionName] and campaign[missionName].previousMission ~= nil)
+      if activatePreviousMission then
+        popup.tabs[1].preset = function(tab)
+        tab.title = previousMission
+        tab.position = "bottom"
+        tab.OnClick = function()
+        tab.parent:Close()
+        local operations={
           ["MODOPTIONS"]=
             {
             ["language"]=lang,
             ["scenario"]=scenarioType
             }
           }
-							genericRestart(campaign[missionName].previousMission, operations,false)
-						end
-					end
-			end
-			-- Next tab is activated if we are on the default scenario and a next mission is defined OR if we interpret an Appliq scenario (TODO: use appliq manager to define next mission)
-			local activateNextMission = ( ((scenarioType == "default")or( AppliqManager==nil)) and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
-			-- Of course, we can pass to the next mission if current mission is won
-			-- If AppliqManager is nil (mostly because xml is not found) then  scenarioType is considered to default even if appliq mode is activated
-			if e.state == "won" and activateNextMission then
-				popup.tabs[3].preset = function(tab)
-						tab.title = nextMission
-						tab.position = "bottom"
-						tab.OnClick = function()
-							tab.parent:Close()
-							-- set nextLauncher depending on type of scenario
-							local nextLauncher = ""
-							if scenarioType == "default" then
-								nextLauncher = "Missions/"..campaign[missionName].nextMission..".txt"
-							else
-								-- TODO: define nextLauncher with appliqManager
-							end
-							DoTheRestart(nextLauncher, lang, scenarioType)
-						end
-					end
-			end
-			
+              genericRestart(campaign[missionName].previousMission, operations,false)
+            end
+          end
+      end
+      -- Next tab is activated if we are on the default scenario and a next mission is defined OR if we interpret an Appliq scenario (TODO: use appliq manager to define next mission)
+      local activateNextMission = ( ((scenarioType == "default")or( AppliqManager==nil)) and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
+      -- Of course, we can pass to the next mission if current mission is won
+      -- If AppliqManager is nil (mostly because xml is not found) then  scenarioType is considered to default even if appliq mode is activated
+      if e.state == "won" and activateNextMission then
+        popup.tabs[3].preset = function(tab)
+            tab.title = nextMission
+            tab.position = "bottom"
+            tab.OnClick = function()
+              tab.parent:Close()
+              -- set nextLauncher depending on type of scenario
+              local nextLauncher = ""
+              if scenarioType == "default" then
+                nextLauncher = "Missions/"..campaign[missionName].nextMission..".txt"
+              else
+                -- TODO: define nextLauncher with appliqManager
+              end
+              DoTheRestart(nextLauncher, lang, scenarioType)
+            end
+          end
+      end
+      
     -- Of course, we can pass to the next mission if current mission is won
       if mode=="appliq" and AppliqManager~=nil then     
         Spring.Echo("APPLIQ MODE")
@@ -358,8 +363,10 @@ function MissionEvent(e)
         --Spring.Echo(e.outputstate)
         AppliqManager:setProgression(progression)
         local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
-        --Spring.Echo(pickle(outputs))  
-        local nextMiss=AppliqManager:next(e.outputstate)   
+        Spring.Echo(pickle(outputs))
+        local appliqOutputState = createAppliqOutputState(e.outputstate)  
+        local nextMiss=AppliqManager:next(appliqOutputState)  
+        Spring.Echo(appliqOutputState) 
         local mission=AppliqManager.currentActivityID
         if(nextMiss==nil) then     
           Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
@@ -400,134 +407,134 @@ function MissionEvent(e)
             end
           end
       end
-			
-			-- disable "Close tab" and "Show briefing"
-			popup.tabs[6] = nil
-			-- inform the game that mission is over with a temporary file
-			createTmpFile()
-		else
-			popup.lineArray = {"Menu"}
-		end
-		
-		-- close presious window if require
-		if winPopup ~= nil then
-			winPopup:Close()
-			winPopup = nil
-		end
-		-- create new one with preset popup config
-		Spring.Echo("try to open popup")
-		winPopup = Window:CreateCentered(popup)
-		-- and open it
-		winPopup:Open()
-		-- set tutorial launcher if tutoPopup has been created
-		if tutoPopup then
-			winPopup.launchTuto = function ()
-				if WG.rooms.TutoView.closed then
-					WG.rooms.TutoView:Open()
-				end
-			end
-		else
-			winPopup.launchTuto = nil
-		end
-	elseif e.logicType == "ShowMessage" then
-	    if e.image then 
-	      briefing = WG.Message:Show{
-	        texture = ":n:LuaUI/Images/"..e.image,
-	        text = e.message,
-	        width = e.imageWidth,
-	        height = e.imageHeight,
-	        pause = e.pause,
-	      }
-	    else
-	      briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
-	    end
-		if WG.rooms.Video and not WG.rooms.Video.closed then
-			briefing.delayDrawing = true
-		end
-	elseif e.logicType == "PauseAction" then
-		Spring.SendCommands"pause"
-	elseif e.logicType == "MarkerPointAction" then
-		local height = Spring.GetGroundHeight(e.x, e.y)
-		Spring.MarkerAddPoint(e.x, height, e.y, e.text)
-		if e.centerCamera then
-		  Spring.SetCameraTarget(e.x, height, e.y, 1)
-		end
-	end
+      
+      -- disable "Close tab" and "Show briefing"
+      popup.tabs[6] = nil
+      -- inform the game that mission is over with a temporary file
+      createTmpFile()
+    else
+      popup.lineArray = {"Menu"}
+    end
+    
+    -- close presious window if require
+    if winPopup ~= nil then
+      winPopup:Close()
+      winPopup = nil
+    end
+    -- create new one with preset popup config
+    Spring.Echo("try to open popup")
+    winPopup = Window:CreateCentered(popup)
+    -- and open it
+    winPopup:Open()
+    -- set tutorial launcher if tutoPopup has been created
+    if tutoPopup then
+      winPopup.launchTuto = function ()
+        if WG.rooms.TutoView.closed then
+          WG.rooms.TutoView:Open()
+        end
+      end
+    else
+      winPopup.launchTuto = nil
+    end
+  elseif e.logicType == "ShowMessage" then
+      if e.image then 
+        briefing = WG.Message:Show{
+          texture = ":n:LuaUI/Images/"..e.image,
+          text = e.message,
+          width = e.imageWidth,
+          height = e.imageHeight,
+          pause = e.pause,
+        }
+      else
+        briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
+      end
+    if WG.rooms.Video and not WG.rooms.Video.closed then
+      briefing.delayDrawing = true
+    end
+  elseif e.logicType == "PauseAction" then
+    Spring.SendCommands"pause"
+  elseif e.logicType == "MarkerPointAction" then
+    local height = Spring.GetGroundHeight(e.x, e.y)
+    Spring.MarkerAddPoint(e.x, height, e.y, e.text)
+    if e.centerCamera then
+      Spring.SetCameraTarget(e.x, height, e.y, 1)
+    end
+  end
 end
 
 function TutorialEvent()
   if WG.rooms.Video and not WG.rooms.Video.closed then
     WG.rooms.Video:Close()
   end
-	if not tutoPopup then	
-		tutoPopup = true
-		WG.rooms.TutoView:Open()
-	end
+  if not tutoPopup then 
+    tutoPopup = true
+    WG.rooms.TutoView:Open()
+  end
 end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
-	-- intercept ESCAPE pressure
-	if key == KEYSYMS.ESCAPE then
-	 if Spring.GetModOptions()["testmap"]~=nil then
-	   Spring.SendLuaRulesMsg("Show briefing")
-	 else
-	  Spring.Echo("escape pushed")
-	  Spring.Echo(briefing)
-	  Spring.Echo(winPopup)
-		if WG.rooms.Video and not WG.rooms.Video.closed then
-			WG.rooms.Video:Close()
-			if briefing ~= nil then
-				briefing.delayDrawing = false
-			end
-		else
-			if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
-				WG.rooms.TutoView:Close()
-			end
-			if winPopup == nil then
-			 Spring.Echo("launch event")
-				local event = {logicType = "ShowMissionMenu",
-								state = "menu"}
-				MissionEvent (event)
-			else
-				if winPopup.closed then 
-					winPopup:Open()
-				end
-			end
-		 end
-		end
-		return true
-	end
+  -- intercept ESCAPE pressure
+  if key == KEYSYMS.ESCAPE then
+   if Spring.GetModOptions()["testmap"]~=nil then
+     Spring.SendLuaRulesMsg("Show briefing")
+   else
+    Spring.Echo("escape pushed")
+    Spring.Echo(briefing)
+    Spring.Echo(winPopup)
+    if WG.rooms.Video and not WG.rooms.Video.closed then
+      WG.rooms.Video:Close()
+      if briefing ~= nil then
+        briefing.delayDrawing = false
+      end
+    else
+      if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
+        WG.rooms.TutoView:Close()
+      end
+      if winPopup == nil then
+       Spring.Echo("launch event")
+        local event = {logicType = "ShowMissionMenu",
+                state = "menu"}
+        MissionEvent (event)
+      else
+        if winPopup.closed then 
+          winPopup:Open()
+        end
+      end
+     end
+    end
+    return true
+  end
 end
 
 function EmulateEscapeKey ()
-	widget:KeyPress(KEYSYMS.ESCAPE, nil, nil, nil, nil)
+  widget:KeyPress(KEYSYMS.ESCAPE, nil, nil, nil, nil)
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-	widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
-	widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
-	widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
-	
-	-- open ppTraces file
-	ppTraces = io.open("ppTraces.txt", "a")
-	if ppTraces ~= nil and missionName~=nil then
-		ppTraces:write(missionName.." start\n")
-		ppTraces:flush()
-	end
+  widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
+  widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
+  widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
+  
+  -- open ppTraces file
+  ppTraces = io.open("ppTraces.txt", "a")
+  if ppTraces ~= nil and missionName~=nil then
+    ppTraces:write(missionName.." start\n")
+    ppTraces:flush()
+  end
 end
 
 
 function widget:Shutdown()
-	widgetHandler:DeregisterGlobal("EmulateEscapeKey")
-	widgetHandler:DeregisterGlobal("MissionEvent")
-	widgetHandler:DeregisterGlobal("TutorialEvent")
-	
-	if ppTraces ~= nil then
-		ppTraces:close()
-	end
+  widgetHandler:DeregisterGlobal("EmulateEscapeKey")
+  widgetHandler:DeregisterGlobal("MissionEvent")
+  widgetHandler:DeregisterGlobal("TutorialEvent")
+  
+  if ppTraces ~= nil then
+    ppTraces:close()
+  end
 end
 
 --------------------------------------------------------------------------------

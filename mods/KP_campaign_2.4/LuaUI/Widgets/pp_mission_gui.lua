@@ -98,6 +98,11 @@ local function createTmpFile()
   end
 end
 
+-- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
+local function createAppliqOutputState(missionOutputState)
+  local missionName = Spring.GetModOptions()["missionname"]  
+  return missionName.."//"..missionOutputState
+end
 -- Defines a template window for the end mission menu
 local template_endMission = {
   lineArray = {""},
@@ -358,8 +363,10 @@ function MissionEvent(e)
         --Spring.Echo(e.outputstate)
         AppliqManager:setProgression(progression)
         local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
-        --Spring.Echo(pickle(outputs))  
-        local nextMiss=AppliqManager:next(e.outputstate)   
+        Spring.Echo(pickle(outputs))
+        local appliqOutputState = createAppliqOutputState(e.outputstate)  
+        local nextMiss=AppliqManager:next(appliqOutputState)  
+        Spring.Echo(appliqOutputState) 
         local mission=AppliqManager.currentActivityID
         if(nextMiss==nil) then     
           Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
