@@ -1345,7 +1345,7 @@ local function parseJson(jsonString)
   --]]
   local widgetWithForcedState={
     ["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
-    ,["Mission GUI"]=true,["Spring Direct Launch 2 for Prog&Play"]=true,["CA Interface"]=true
+    ,["Mission GUI"]=true,["campaign launcher"]=true,["CA Interface"]=true
     ,["Camera Auto"]=true,["Chili Framework"]=true,["Display Zones"]=true,["Traces Widget"]=true
     ,["Feedbacks Widget"]=true,["Widget Informer"]=true
   }

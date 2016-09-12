@@ -105,7 +105,7 @@ function gadget:GameFrame( frameNumber )
       end
     else
       gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
-
+	  
       -- if required, show GuiMission
       if gameOver == -1 or gameOver == 1 then
         local prefix=true
@@ -121,12 +121,11 @@ function gadget:GameFrame( frameNumber )
         end
         local victoryState = _G.event.state or ""
         if not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
-          _G.event = {logicType = "ShowMissionMenu", state = victoryState}
           SendToUnsynced("MissionEvent")
-          _G.event = nil
         else
           SendToUnsynced("MissionEnded", victoryState)
         end
+        _G.event = nil
       end
     end
   end
@@ -286,19 +285,10 @@ function gadget:RecvFromSynced(...)
     local valsToSend={}
     valsToSend["speedFactor"]=Spring.GetGameSpeed()
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
-    
   elseif arg1 == "MissionEnded" then
     Script.LuaUI.MissionEnded(arg2) -- function defined and registered in mission_traces widget
   elseif arg1 == "Feedback" then
     Script.LuaUI.handleFeedback(arg2) -- function defined and registered in mission_feedback widget
-  elseif arg1 == "MissionEvent" then
-    if Script.LuaUI("MissionEvent") then
-      local e = {}
-        for k, v in spairs(SYNCED.event) do
-        e[k] = v
-        end
-      Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
-    end
   end
 end
 
