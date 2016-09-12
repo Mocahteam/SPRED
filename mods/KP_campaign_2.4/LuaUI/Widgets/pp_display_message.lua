@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Display Message",
     desc      = "Display message at a specific position or above a unit",
-    author    = "zigaroula,martinb",
+    author    = "zigaroula,martinb, mocahteam",
     date      = "Apr 29, 2016",
     license   = "GPL v2 or later",
     layer     = 0,

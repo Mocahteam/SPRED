@@ -1,0 +1,416 @@
+{
+	"zones":[
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":2000,
+			"z1":1728,
+			"z2":1856,
+			"x1":1840,
+			"showInGame":true,
+			"marker":false,
+			"name":"intermediate",
+			"green":0.55862176418304,
+			"alwaysInView":false,
+			"shown":true,
+			"id":1,
+			"red":0.51526319980621
+		},
+		{
+			"type":"Rectangle",
+			"blue":0.13901698589325,
+			"x2":2000,
+			"z1":1584,
+			"z2":1712,
+			"x1":1856,
+			"showInGame":true,
+			"marker":false,
+			"name":"Final",
+			"green":0.50874388217926,
+			"alwaysInView":false,
+			"shown":true,
+			"id":2,
+			"red":0.79427468776703
+		} 
+	],
+	"allyteams":{
+		"1":[
+			 
+		],
+		"2":[
+			 
+		],
+		"3":[
+			 
+		],
+		"4":[
+			 
+		],
+		"5":[
+			 
+		],
+		"6":[
+			 
+		],
+		"7":[
+			 
+		],
+		"8":[
+			 
+		],
+		"9":[
+			 
+		],
+		"0":[
+			 
+		]
+	},
+	"description":{
+		"map":"Marble_Madness_Map",
+		"cameraAuto":"enabled",
+		"briefingRaw":"Mission Briefing",
+		"autoHeal":"disabled",
+		"minimap":"disabled",
+		"feedback":"disabled",
+		"widgets":[
+			{
+				"desc":"Teach you to play the game,
+				 one tip at a time",
+				"name":"Kernel Panic Automatic Tip Dispenser",
+				"active":false
+			},
+			{
+				"desc":"Hides all commands",
+				"name":"Hide commands",
+				"active":true
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},
+			{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},
+			{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},
+			{
+				"desc":"Control the rest of your army while in Hero mode",
+				"name":"Heroes Right Click",
+				"active":false
+			},
+			{
+				"desc":"Prints a message when a team die",
+				"name":"TeamDiedMessages",
+				"active":false
+			},
+			{
+				"desc":"Show the mission title and briefing",
+				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},
+			{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},
+			{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
+				"active":false
+			},
+			{
+				"desc":"Prettier background for the tooltip",
+				"name":"Kernel Panic MidKnight's tooltip background",
+				"active":false
+			},
+			{
+				"desc":"Replace the default Spring tooltip by one customised for K.P.",
+				"name":"Kernel Panic Tooltip",
+				"active":false
+			},
+			{
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
+				"active":false
+			},
+			{
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":false
+			},
+			{
+				"desc":"Highlight the Geovents when placing Buildings,
+				 or when in metal view",
+				"name":"Kernel Panic Geos Highlight",
+				"active":false
+			},
+			{
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},
+			{
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},
+			{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
+				"active":false
+			},
+			{
+				"desc":"Remove the need to add /luarules in front of some gadgets command",
+				"name":"Kernel Panic Console Commands",
+				"active":false
+			} 
+		],
+		"saveName":"vartest",
+		"name":"vartest",
+		"mainGame":"Kernel Panic 4.1",
+		"mouse":"disabled",
+		"traces":[
+			 
+		],
+		"briefing":"Mission Briefing"
+	},
+	"events":[
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Event0",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":0,
+					"type":"zone",
+					"name":"Condition0",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"exactly"
+						},
+						"unitset":{
+							"value":5477,
+							"type":"unit"
+						},
+						"zone":1
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":0,
+					"type":"setBooleanVariable",
+					"name":"Action0",
+					"params":{
+						"boolean":"true",
+						"variable":"passed"
+					}
+				} 
+			],
+			"id":0
+		},
+		{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":2,
+			"name":"Event1",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[
+				{
+					"id":1,
+					"type":"zone",
+					"name":"Condition1",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"exactly"
+						},
+						"unitset":{
+							"value":5477,
+							"type":"unit"
+						},
+						"zone":2
+					}
+				},
+				{
+					"id":2,
+					"type":"booleanVariable",
+					"name":"Condition2",
+					"params":{
+						"variable":"passed"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":1,
+					"type":"win",
+					"name":"Action1",
+					"params":{
+						"team":0,
+						"outputState":""
+					}
+				} 
+			],
+			"id":1
+		} 
+	],
+	"variables":[
+		{
+			"id":0,
+			"type":"boolean",
+			"name":"passed",
+			"initValue":"false"
+		} 
+	],
+	"teams":{
+		"1":{
+			"ai":"",
+			"name":"Team 1",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":0,
+				"red":0
+			},
+			"enabled":true
+		},
+		"2":{
+			"ai":"",
+			"name":"Team 2",
+			"control":"computer",
+			"color":{
+				"green":0,
+				"blue":0,
+				"red":1
+			},
+			"enabled":true
+		},
+		"3":{
+			"ai":"",
+			"name":"Team 3",
+			"control":"computer",
+			"color":{
+				"green":0,
+				"blue":0.49803921580315,
+				"red":0.49803921580315
+			},
+			"enabled":false
+		},
+		"4":{
+			"ai":"",
+			"name":"Team 4",
+			"control":"computer",
+			"color":{
+				"green":0.49803921580315,
+				"blue":0,
+				"red":1
+			},
+			"enabled":false
+		},
+		"5":{
+			"ai":"",
+			"name":"Team 5",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"6":{
+			"ai":"",
+			"name":"Team 6",
+			"control":"computer",
+			"color":{
+				"green":0.49803921580315,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"7":{
+			"ai":"",
+			"name":"Team 7",
+			"control":"computer",
+			"color":{
+				"green":0.49803921580315,
+				"blue":1,
+				"red":0
+			},
+			"enabled":false
+		},
+		"8":{
+			"ai":"",
+			"name":"Team 8",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":0.49803921580315,
+				"red":0
+			},
+			"enabled":false
+		},
+		"9":{
+			"ai":"",
+			"name":"Team 9",
+			"control":"computer",
+			"color":{
+				"green":0.49803921580315,
+				"blue":0,
+				"red":0.49803921580315
+			},
+			"enabled":false
+		},
+		"0":{
+			"ai":"",
+			"name":"Team 0",
+			"control":"player",
+			"color":{
+				"green":0.49803921580315,
+				"blue":1,
+				"red":0.49803921580315
+			},
+			"enabled":true
+		}
+	},
+	"groups":[
+		 
+	],
+	"units":[
+		{
+			"type":"bit",
+			"id":5477,
+			"position":{
+				"y":116,
+				"x":1773,
+				"z":1773
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		} 
+	]
+}

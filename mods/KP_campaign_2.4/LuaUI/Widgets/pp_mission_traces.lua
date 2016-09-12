@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Traces Widget",
     desc      = "Used to deal with traces",
-    author    = "meresse",
+    author    = "meresse, mocahteam",
     date      = "Feb 25, 2016",
     license   = "GPL v2 or later",
     layer     = 211,

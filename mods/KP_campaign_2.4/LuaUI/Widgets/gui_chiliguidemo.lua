@@ -5,7 +5,7 @@ function widget:GetInfo()
   return {
     name      = "chiliGUIDemo",
     desc      = "GUI demo for robocracy",
-    author    = "quantum",
+    author    = "quantum, mocahteam",
     date      = "WIP",
     license   = "WIP",
     layer     = 1,

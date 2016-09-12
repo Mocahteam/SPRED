@@ -6,7 +6,7 @@ function widget:GetInfo()
   return {
     name      = "Camera Auto",
     desc      = "",
-    author    = "mocahteam",
+    author    = "muratet, mocahteam",
     date      = "Jul 15, 2012",
     license   = "GPL v2 or later",
     layer     = 211,

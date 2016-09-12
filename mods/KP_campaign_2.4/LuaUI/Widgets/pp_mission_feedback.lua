@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Feedbacks Widget",
     desc      = "Used to display feedbacks to the player during the game",
-    author    = "meresse",
+    author    = "meresse, mocahteam",
     date      = "Jun 20, 2016",
     license   = "GPL v2 or later",
     layer     = 211,

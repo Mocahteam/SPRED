@@ -16,7 +16,7 @@ cd ..\editor_launcher_tmp
 cd ..
 rmdir /Q /S editor_launcher_tmp
 
-del ..\..\mods\SPRED.sdz
-move SPRED.sdz ..\..\mods\SPRED.sdz
-cd ..\..
+del C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED.sdz
+move SPRED.sdz C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED.sdz
+cd C:\Users\mmuratet\Downloads\Spring-git
 spring.exe

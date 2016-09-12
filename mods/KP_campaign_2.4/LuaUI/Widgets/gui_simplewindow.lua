@@ -4,7 +4,7 @@ function widget:GetInfo()
   return {
 		name		= "chilli example",
 		desc		= "example chilli code",
-		author		= "smoth",
+		author		= "smoth, mocahteam",
 		date		= "8/26/10",
 		license   = "none",
 		layer		 = 0,

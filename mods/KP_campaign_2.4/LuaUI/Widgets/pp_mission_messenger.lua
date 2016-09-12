@@ -6,7 +6,7 @@ function widget:GetInfo()
   return {
     name      = "Messenger",
     desc      = "Displays Messages. Click on them to make them go away.",
-    author    = "quantum",
+    author    = "quantum, mocahteam",
     date      = "June 29, 2007",
     license   = "GPL v2 or later",
     layer     = 210,

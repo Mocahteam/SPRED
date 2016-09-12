@@ -5,7 +5,7 @@ function widget:GetInfo()
   return {
     name      = "ChiliProfiler",
     desc      = "",
-    author    = "",
+    author    = "mocahteam",
     date      = "2013",
     license   = "GPLv2",
     layer     = 2,

@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name = "Widget Activator",
     desc = "Activate or Deactivate Widgets",
-    author = "zigaroula,martinb",
+    author = "zigaroula,martinb, mocahteam",
     version = "0.1",
     date = "May 17, 2016",
     license = "Public Domain",

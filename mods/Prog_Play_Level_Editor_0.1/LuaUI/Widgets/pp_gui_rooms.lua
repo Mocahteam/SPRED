@@ -10,7 +10,7 @@ function widget:GetInfo()
   return {
     name      = "CA Interface",
     desc      = "CA in-game interface",
-    author    = "quantum, muratet",
+    author    = "quantum, muratet, mocahteam",
     date      = "Jul 15, 2012",
     license   = "GNU GPL, v2 or later",
     layer     = 210,

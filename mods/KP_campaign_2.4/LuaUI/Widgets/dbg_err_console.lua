@@ -3,7 +3,7 @@ function widget:GetInfo()
     return {
         name    = 'Debug Err Console',
         desc    = 'Displays errors', 
-        author  = 'Bluestone',
+        author  = 'Bluestone, mocahteam',
         date    = '2016',
         license = 'GNU GPL v2',
         layer   = 50,

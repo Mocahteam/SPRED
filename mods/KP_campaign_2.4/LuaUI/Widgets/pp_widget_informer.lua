@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Widget Informer",
     desc      = "Used to inform about states of widgets by setting a ConfigString (see Spring.SetConfigString())",
-    author    = "meresse",
+    author    = "meresse, mocahteam",
     date      = "Jun 20, 2016",
     license   = "GPL v2 or later",
     layer     = 211,

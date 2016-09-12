@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "Chili Docking",
     desc      = "Provides docking and position saving for chili windows",
-    author    = "Licho, jK",
+    author    = "Licho, jK, mocahteam",
     date      = "2010, 2013",
     license   = "GNU GPL, v2 or later",
     layer     = 50,

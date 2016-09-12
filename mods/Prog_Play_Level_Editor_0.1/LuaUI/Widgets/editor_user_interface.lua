@@ -4418,7 +4418,7 @@ end
 function initWidgetList() -- Remove some widgets linked directly to SPRED from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
-		if w.author ~= "mocahteam" and k ~= "Chili Framework" then
+		if not string.find(w.author, "mocahteam") then
 			local customWidget = {}
 			customWidget.name = k
 			customWidget.active = false
