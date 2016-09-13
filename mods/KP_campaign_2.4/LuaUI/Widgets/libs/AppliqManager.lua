@@ -57,21 +57,17 @@ function appliqManager:parse()
   -- check if we have at least a game node. If not, something wrong !!!
   if (self.treehandler.root and self.treehandler.root.games and self.treehandler.root.games.game) then
     self.game = self.treehandler.root.games.game
-    Spring.Echo("game is parsed")
     -- trying to initialise scenario
     if self.game.link_sets and self.game.link_sets.link_set then
       self.scenario = self.game.link_sets.link_set
-       Spring.Echo("scenario is parsed")
     end
     -- trying to initialise activities
     if self.game.activities and self.game.activities.activity then
       self.activities = self.game.activities.activity
-      Spring.Echo("activ are parsed")
     end
     -- trying to initialise and goals
     if self.game.goals and self.game.goals.goal then
       self.goals = self.game.goals.goal
-      Spring.Echo("goals are parsed")
     end
   end
 end
@@ -263,7 +259,7 @@ end
 function appliqManager:getActivityNameFromId(idAct)
   for i=1,table.getn(self.activities) do
     local act=self.activities[i]
-    Spring.Echo(act._attr.id_activity)
+    --Spring.Echo(act._attr.id_activity)
     if(act._attr.id_activity==idAct) then
       return act.name
     end

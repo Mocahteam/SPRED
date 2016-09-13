@@ -15,7 +15,7 @@ local ctx={}
 --ctx passed as a "context" when loading custom code from the user (script actions). 
 --This way, the user can get and set values related to the game 
 
-ctx.debugLevel=1 -- in order to filter Spring Echo between 0 (all) and 10 (none)
+ctx.debugLevel=10 -- in order to filter Spring Echo between 0 (all) and 10 (none)
 ctx.armySpring={}--table to store created spring units externalId (number or string)->SpringId (number)
 ctx.armyExternal={}--table to store created spring units SpringId (number)->externalId (number)
 ctx.groupOfUnits={}--table to store group of units externalIdGroups-> list of externalIdUnits
@@ -154,7 +154,7 @@ end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
 local function computeReference(expression)
-  EchoDebug("compute expression : "..expression)
+  EchoDebug("compute expression : "..expression, 1)
   if(expression==nil or expression=="") then return expression end
   local n1=tonumber(expression)
   if(n1~=nil)then return n1 end
@@ -162,7 +162,7 @@ local function computeReference(expression)
   for v,value in pairs(ctx.variables)do
     expression=string.gsub(expression, v, tostring(value))
   end
-  EchoDebug("expression before execution : "..expression)
+  EchoDebug("expression before execution : "..expression, 1)
   local executableStatement="return("..expression..")"
   return load_code(executableStatement)
 end
@@ -458,7 +458,7 @@ local function isInGroup(externalId,gp,testOnExternalsOnly)
   EchoDebug("is in group ->"..json.encode(gp),0)
   local isAlreadyStored=false
   if(gp==nil)then
-    EchoDebug("group is nil in function isInGroup, this should not occur")
+    EchoDebug("group is nil in function isInGroup, this should not occur",1)
     return false, nil
   end
   if(testOnExternalsOnly)then
@@ -570,7 +570,7 @@ end
 -------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams,groupToCheck)
   local groupToCheck = groupToCheck or ctx.groupOfUnits
-  --EchoDebug("debug : "..tostring(id))
+  --EchoDebug("debug : "..tostring(id), 1)
   --Spring.Echo("extract process")
   --Spring.Echo(json.encode(conditionParams))
   --Spring.Echo(json.encode(ctx.groupOfUnits))
@@ -590,7 +590,7 @@ local function extractListOfUnitsImpliedByCondition(conditionParams,groupToCheck
      else
        local index=conditionParams.unitset.type..'_'..tostring(conditionParams.unitset.value)
        if(groupToCheck[index]==nil)then
-         EchoDebug("warning. This index gave nothing : "..index)
+         EchoDebug("warning. This index gave nothing : "..index, 2)
        end
        groupToReturn=groupToCheck[index]
      end
@@ -662,7 +662,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {})   
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
       if Spring.ValidUnitID(unit) then
-        EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit))
+        EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
         SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=act.params.time/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitePosition(springUnitId)
@@ -1182,7 +1182,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(ctx.conditions) do
     local object=c["object"]
     if(object=="unit")then
-      EchoDebug("this should not occur anymore")
+      EchoDebug("this should not occur anymore", 6)
       --ctx.conditions[idCond]["currentlyValid"]=UpdateConditionOnUnit(c.params.unit,c)
     elseif(object=="other")then  
       -- Time related conditions [START]
@@ -1246,18 +1246,18 @@ local function UpdateConditionsTruthfulness (frameNumber)
         killerGroupTofind=c.params.attacker.type.."_"..tostring(c.params.attacker.value)
         targetGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)     
       end 
-      EchoDebug('killerGroupTofind,targetGroupTofind,ctx.kills -> '..json.encode({killerGroupTofind,targetGroupTofind,ctx.kills}))
+      EchoDebug('killerGroupTofind,targetGroupTofind,ctx.kills -> '..json.encode({killerGroupTofind,targetGroupTofind,ctx.kills}), 2)
       for killerUnit,killedUnit in pairs(ctx.kills) do
         local killerUnit_groups = getGroupsOfUnit(killerUnit, false, ctx.groupOfUndeletedUnits)--, ctx.groupOfUndeletedUnits
-        EchoDebug('killerUnit_groups -> '..json.encode(killerUnit_groups))--
+        EchoDebug('killerUnit_groups -> '..json.encode(killerUnit_groups), 2)--
         local killedUnit_groups = getGroupsOfUnit(killedUnit, false, ctx.groupOfUndeletedUnits)--
-        EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups))
+        EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups), 2)
         for g,gpname_killer in pairs(killerUnit_groups) do
           if(gpname_killer == killerGroupTofind) then
             for g,gpname_killed in pairs(killedUnit_groups) do
               if(gpname_killed == targetGroupTofind) then
                 count = count + 1     
-                EchoDebug("finally !")   
+                EchoDebug("finally !", 2)   
                 local unitToStore
                 if(object=="killed") then
                   local unitToStore=killedUnit
@@ -1529,7 +1529,7 @@ end
           cond_object="group"
          end
         ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["object"]=cond_object
-       EchoDebug(json.encode(ctx.conditions))
+       EchoDebug(json.encode(ctx.conditions), 2)
       end 
       ctx.indexOfLastEvent=i
     end

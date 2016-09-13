@@ -88,7 +88,6 @@ function gadget:GamePreload()
     else
       miss=VFS.LoadFile("Missions/"..missionName..".editor")    
     end
-    Spring.Echo("try to parse"..missionName)
     missionScript.parseJson(miss)
   end
 end
@@ -276,9 +275,6 @@ function gadget:RecvFromSynced(...)
     -- should be called. However, registerGlobals do not work as registerGlobals can't work because of the necessary option handler = true
     -- Using a Callins such as :KeyPress could be a workaround to use the function changeWidgetState whenever it's necessary
     local p=json.decode(arg2)
-    Spring.Echo("try to change widget Activation")
-    Spring.Echo(p.widgetName)
-    Spring.Echo(p.activation)
     if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
     if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
   elseif arg1 == "requestUnsyncVals" then

@@ -30,6 +30,7 @@ local gameName=Game.gameShortName or Game.modShortName
 
 
 if(xmlFiles[1]~=nil)then
+  Spring.Echo("Loading "..xmlFiles[1])
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
 end
