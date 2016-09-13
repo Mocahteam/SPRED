@@ -24,7 +24,6 @@ VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
 local AppliqManager
-Spring.Echo(xmlFiles[1])
 if(xmlFiles[1]~=nil)then
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
@@ -98,11 +97,6 @@ local function createTmpFile()
   end
 end
 
--- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
-local function createAppliqOutputState(missionOutputState)
-  local missionName = Spring.GetModOptions()["missionname"]  
-  return missionName.."//"..missionOutputState
-end
 -- Defines a template window for the end mission menu
 local template_endMission = {
   lineArray = {""},
@@ -351,7 +345,7 @@ function MissionEvent(e)
       
     -- Of course, we can pass to the next mission if current mission is won
       if mode=="appliq" and AppliqManager~=nil then     
-        Spring.Echo("APPLIQ MODE")
+        Spring.Echo("Using Appliq to define next mission...")
         local currentoptions=Spring.GetModOptions()       
         AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
         AppliqManager:startRoute()
@@ -363,10 +357,7 @@ function MissionEvent(e)
         --Spring.Echo(e.outputstate)
         AppliqManager:setProgression(progression)
         local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
-        Spring.Echo(pickle(outputs))
-        local appliqOutputState = createAppliqOutputState(e.outputstate)  
-        local nextMiss=AppliqManager:next(appliqOutputState)  
-        Spring.Echo(appliqOutputState) 
+        local nextMiss=AppliqManager:next(e.outputstate)  
         local mission=AppliqManager.currentActivityID
         if(nextMiss==nil) then     
           Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
@@ -399,8 +390,7 @@ function MissionEvent(e)
             tab.position = "bottom"
             tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
               if(nextMiss~="end")then
-                tab.parent:Close()            
-              --Spring.Echo("test")
+                tab.parent:Close()
               --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
                 genericRestart(mission, {["MODOPTIONS"]=currentoptions}  ,false) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
               end
@@ -422,7 +412,6 @@ function MissionEvent(e)
       winPopup = nil
     end
     -- create new one with preset popup config
-    Spring.Echo("try to open popup")
     winPopup = Window:CreateCentered(popup)
     -- and open it
     winPopup:Open()
