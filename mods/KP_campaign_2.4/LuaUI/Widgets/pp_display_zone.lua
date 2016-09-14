@@ -33,11 +33,11 @@ function DrawText(text, _x, _z)
 	gl.Text(text, x, y, s, "s")
 end
 
-function DrawGroundFilledEllipsis(centerX, centerZ, a, b, r, g, b)
-	local divs = 25
-	gl.Color(r, g, b, 0.5)
+function DrawGroundFilledEllipsis(centerX, centerZ, a, b, red, green, blue)
+	local divs = 100
+	gl.Color(red, green, blue, 0.5)
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
-		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+		for angle = 0, 2*math.pi+2*math.pi/divs, 2*math.pi/divs do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)

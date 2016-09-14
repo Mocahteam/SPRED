@@ -2036,7 +2036,7 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 				local a, b = (zonePositions.zoneX2 - zonePositions.zoneX1) / 2, (zonePositions.zoneZ2 - zonePositions.zoneZ1) /2
 				local centerX, centerZ = (zonePositions.zoneX1 + zonePositions.zoneX2) / 2, (zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2
 				gl.Color(rValue, gValue, bValue, 0.5)
-				drawGroundFilledEllipsis(centerX, centerZ, a, b, 50)
+				drawGroundFilledEllipsis(centerX, centerZ, a, b, 100)
 			end
 		end
 	end
@@ -2049,7 +2049,7 @@ function displayZones() -- Render every zones that are displayed
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 		elseif z.shown and z.type == "Disk" then
 			gl.Color(z.red, z.green, z.blue, 0.5)
-			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 50)
+			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 100)
 		elseif not z.shown and z == selectedZone then
 			selectedZone = nil -- Deselect hidden zone
 		end
@@ -2065,7 +2065,7 @@ function displaySelectedZoneAnchors() -- Render the border of the selected zone 
 			gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
 			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 		elseif selectedZone.type == "Disk" then
-			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 12, 50)
+			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 12, 100)
 		end
 	end
 end
@@ -5178,7 +5178,7 @@ end
 function drawGroundFilledEllipsis(centerX, centerZ, a, b, d) -- Draw an ellipsis
 	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
-		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+		for angle = 0, 2*math.pi+2*math.pi/divs, 2*math.pi/divs do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
@@ -5189,7 +5189,7 @@ end
 function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d) -- Draw the border of an ellipsis
 	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
-		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+		for angle = 0, 2*math.pi+2*math.pi/divs, 2*math.pi/divs do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			local xbis, zbis = centerX + (a-w) * math.cos(angle), centerZ + (b-w) * math.sin(angle)
