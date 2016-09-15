@@ -2036,7 +2036,7 @@ function drawZoneDisk() -- Draw the zone feedback ellipsis
 				local a, b = (zonePositions.zoneX2 - zonePositions.zoneX1) / 2, (zonePositions.zoneZ2 - zonePositions.zoneZ1) /2
 				local centerX, centerZ = (zonePositions.zoneX1 + zonePositions.zoneX2) / 2, (zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2
 				gl.Color(rValue, gValue, bValue, 0.5)
-				drawGroundFilledEllipsis(centerX, centerZ, a, b, 50)
+				drawGroundFilledEllipsis(centerX, centerZ, a, b, 100)
 			end
 		end
 	end
@@ -2049,7 +2049,7 @@ function displayZones() -- Render every zones that are displayed
 			gl.DrawGroundQuad(z.x1, z.z1, z.x2, z.z2)
 		elseif z.shown and z.type == "Disk" then
 			gl.Color(z.red, z.green, z.blue, 0.5)
-			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 50)
+			drawGroundFilledEllipsis(z.x, z.z, z.a, z.b, 100)
 		elseif not z.shown and z == selectedZone then
 			selectedZone = nil -- Deselect hidden zone
 		end
@@ -2065,7 +2065,7 @@ function displaySelectedZoneAnchors() -- Render the border of the selected zone 
 			gl.DrawGroundQuad(selectedZone.x2-8, selectedZone.z1, selectedZone.x2, selectedZone.z2)
 			gl.DrawGroundQuad(selectedZone.x1, selectedZone.z2-8, selectedZone.x2, selectedZone.z2)
 		elseif selectedZone.type == "Disk" then
-			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 12, 50)
+			drawGroundEmptyEllipsis(selectedZone.x, selectedZone.z, selectedZone.a, selectedZone.b, 12, 100)
 		end
 	end
 end
@@ -2076,31 +2076,40 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 		if selectedZone.type == "Rectangle" then
 			local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
 			local text =  "("..tostring(selectedZone.x1)..", "..tostring(selectedZone.z1)..")"
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2), selectedZone.z2)
 			text =  "("..tostring(selectedZone.x2)..", "..tostring(selectedZone.z2)..")"
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
+            
+            local centerX, centerZ = (selectedZone.x1 + selectedZone.x2)/2, (selectedZone.z1 + selectedZone.z2)/2
+            x, y = Spring.WorldToScreenCoords(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
+            text = "("..tostring(centerX)..", "..tostring(centerZ)..")"
+            gl.Text(text, x, y, 15, "vcs")
 		elseif selectedZone.type == "Disk" then
 			local x, y = Spring.WorldToScreenCoords(selectedZone.x - selectedZone.a, Spring.GetGroundHeight(selectedZone.x - selectedZone.a, selectedZone.z), selectedZone.z)
 			local text =  tostring(selectedZone.x - selectedZone.a)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x + selectedZone.a, Spring.GetGroundHeight(selectedZone.x + selectedZone.a, selectedZone.z), selectedZone.z)
 			text =  tostring(selectedZone.x + selectedZone.a)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z + selectedZone.b), selectedZone.z + selectedZone.b)
 			text =  tostring(selectedZone.z + selectedZone.b)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z - selectedZone.b), selectedZone.z - selectedZone.b)
 			text =  tostring(selectedZone.z - selectedZone.b)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
+            
+            x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z), selectedZone.z)
+            text = "("..tostring(selectedZone.x)..", "..tostring(selectedZone.z)..")"
+            gl.Text(text, x, y, 15, "vcs")
 		end
 	end
 	for i, z in ipairs(zoneList) do -- Every zones (name)
-		if z.shown then
+		if z.shown and z ~= selectedZone then
 			local x, y
 			if z.type == "Rectangle" then
 				x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
@@ -2108,10 +2117,8 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 			elseif z.type == "Disk" then
 				x, y = Spring.WorldToScreenCoords(z.x, Spring.GetGroundHeight(z.x, z.z), z.z)
 			end
-			local text = z.name
-			local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
-			x, y = x - w/2, y - h/2
-			gl.Text(text, x, y, 15, "s")
+			local text = string.gsub(z.name, "\\n", "\n")
+			gl.Text(text, x, y, 15, "vcs")
 		end
 	end
 	gl.EndText()
@@ -5178,7 +5185,7 @@ end
 function drawGroundFilledEllipsis(centerX, centerZ, a, b, d) -- Draw an ellipsis
 	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
-		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+		for angle = 0, 2*math.pi+2*math.pi/divs, 2*math.pi/divs do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			gl.Vertex(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
@@ -5189,7 +5196,7 @@ end
 function drawGroundEmptyEllipsis(centerX, centerZ, a, b, w, d) -- Draw the border of an ellipsis
 	local divs = d or 25 -- number of segments
 	gl.BeginEnd(GL.TRIANGLE_STRIP, function()
-		for angle = 0, 2*math.pi+2*math.pi/25, 2*math.pi/25 do
+		for angle = 0, 2*math.pi+2*math.pi/divs, 2*math.pi/divs do
 			local x, z = centerX + a * math.cos(angle), centerZ + b * math.sin(angle)
 			gl.Vertex(x, Spring.GetGroundHeight(x, z), z)
 			local xbis, zbis = centerX + (a-w) * math.cos(angle), centerZ + (b-w) * math.sin(angle)
