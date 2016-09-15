@@ -2076,31 +2076,40 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 		if selectedZone.type == "Rectangle" then
 			local x, y = Spring.WorldToScreenCoords(selectedZone.x1, Spring.GetGroundHeight(selectedZone.x1, selectedZone.z1), selectedZone.z1)
 			local text =  "("..tostring(selectedZone.x1)..", "..tostring(selectedZone.z1)..")"
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x2, Spring.GetGroundHeight(selectedZone.x2, selectedZone.z2), selectedZone.z2)
 			text =  "("..tostring(selectedZone.x2)..", "..tostring(selectedZone.z2)..")"
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
+            
+            local centerX, centerZ = (selectedZone.x1 + selectedZone.x2)/2, (selectedZone.z1 + selectedZone.z2)/2
+            x, y = Spring.WorldToScreenCoords(centerX, Spring.GetGroundHeight(centerX, centerZ), centerZ)
+            text = "("..tostring(centerX)..", "..tostring(centerZ)..")"
+            gl.Text(text, x, y, 15, "vcs")
 		elseif selectedZone.type == "Disk" then
 			local x, y = Spring.WorldToScreenCoords(selectedZone.x - selectedZone.a, Spring.GetGroundHeight(selectedZone.x - selectedZone.a, selectedZone.z), selectedZone.z)
 			local text =  tostring(selectedZone.x - selectedZone.a)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x + selectedZone.a, Spring.GetGroundHeight(selectedZone.x + selectedZone.a, selectedZone.z), selectedZone.z)
 			text =  tostring(selectedZone.x + selectedZone.a)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z + selectedZone.b), selectedZone.z + selectedZone.b)
 			text =  tostring(selectedZone.z + selectedZone.b)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
 			
 			x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z - selectedZone.b), selectedZone.z - selectedZone.b)
 			text =  tostring(selectedZone.z - selectedZone.b)
-			gl.Text(text, x, y, 15, "s")
+			gl.Text(text, x, y, 15, "vcs")
+            
+            x, y = Spring.WorldToScreenCoords(selectedZone.x, Spring.GetGroundHeight(selectedZone.x, selectedZone.z), selectedZone.z)
+            text = "("..tostring(selectedZone.x)..", "..tostring(selectedZone.z)..")"
+            gl.Text(text, x, y, 15, "vcs")
 		end
 	end
 	for i, z in ipairs(zoneList) do -- Every zones (name)
-		if z.shown then
+		if z.shown and z ~= selectedZone then
 			local x, y
 			if z.type == "Rectangle" then
 				x, y = (z.x1 + z.x2) / 2, (z.z1 + z.z2) / 2
@@ -2108,10 +2117,8 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 			elseif z.type == "Disk" then
 				x, y = Spring.WorldToScreenCoords(z.x, Spring.GetGroundHeight(z.x, z.z), z.z)
 			end
-			local text = z.name
-			local w, h = gl.GetTextWidth(text) * 15, gl.GetTextHeight(text) * 15
-			x, y = x - w/2, y - h/2
-			gl.Text(text, x, y, 15, "s")
+			local text = string.gsub(z.name, "\\n", "\n")
+			gl.Text(text, x, y, 15, "vcs")
 		end
 	end
 	gl.EndText()

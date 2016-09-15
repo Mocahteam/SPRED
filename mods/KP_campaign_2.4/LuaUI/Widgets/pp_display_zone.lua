@@ -28,9 +28,7 @@ end
 function DrawText(text, _x, _z)
 	local s = 20
 	local x, y = Spring.WorldToScreenCoords(_x, Spring.GetGroundHeight(_x, _z), _z)
-	local w, h = gl.GetTextWidth(text) * s, gl.GetTextHeight(text) * s
-	x, y = x - w/2, y - h/2
-	gl.Text(text, x, y, s, "s")
+	gl.Text(text, x, y, s, "vcs")
 end
 
 function DrawGroundFilledEllipsis(centerX, centerZ, a, b, red, green, blue)
@@ -64,10 +62,11 @@ end
 
 function widget:DrawScreen()
 	for i, z in ipairs(Zones) do
+        local zName = string.gsub(z.name, "\\n", "\n")
 		if z.type == "Rectangle" then
-			DrawText(z.name, (z.x1+z.x2)/2, (z.z1+z.z2)/2)
+			DrawText(zName, (z.x1+z.x2)/2, (z.z1+z.z2)/2)
 		elseif z.type == "Disk" then
-			DrawText(z.name, z.x, z.z)
+			DrawText(zName, z.x, z.z)
 		end
 	end
 end
