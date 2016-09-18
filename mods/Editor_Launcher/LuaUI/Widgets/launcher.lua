@@ -13,12 +13,25 @@ function widget:GetInfo()
 end
 
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
+VFS.Include("LuaUI/Widgets/libs/Locale.lua")
 
 local Chili, Screen0
+local UI = {} -- Contains each UI element
 local gameFolder = "games"
+-- Screen width in pixels
+local vsx = 0
+-- Screen height in pixels
+local vsy = 0
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
-function InitializeChili() 
+function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
+	GetLauncherStrings(lang)
+	UI.Title:SetCaption (LAUNCHER_TITLE)
+	UI.Help:SetText (LAUNCHER_HELP)
+	UI.QuitButton:SetCaption (LAUNCHER_QUIT)
+end
+
+function InitializeChili()
 	if not WG.Chili then
 		widgetHandler:RemoveWidget()
 		return
@@ -28,7 +41,7 @@ function InitializeChili()
 end
 
 function InitializeMenu()
-	local MainWindow = Chili.Window:New{
+	UI.MainWindow = Chili.Window:New{
 		parent = Screen0,
 		x = "0%",
 		y = "0%",
@@ -37,36 +50,58 @@ function InitializeMenu()
 		resizable = false,
 		draggable = false
 	}
-	Chili.Label:New{
-		parent = MainWindow,
+	UI.LanguageComboBox = Chili.ComboBox:New{
+		parent = UI.MainWindow,
+		x = "85%",
+		y = "0%",
+		width = "15%",
+		height = "7%",
+		items = { "English", "French" },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	UI.LanguageComboBox.OnSelect = { -- Change language to the newly selected language
+		function()
+			if UI.LanguageComboBox.selected == 1 then
+				ChangeLanguage("en")
+			elseif UI.LanguageComboBox.selected == 2 then
+				ChangeLanguage("fr")
+			end
+		end
+	}
+	UI.Title = Chili.Label:New{
+		parent = UI.MainWindow,
 		x = "0%",
 		y = "5%",
 		width = "100%",
 		height = "10%",
-		caption = "Choose the master game",
+		caption = LAUNCHER_TITLE,
 		align = "center",
 		valign = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 60,
+			size = 40,
 			color = { 0.2, 0.6, 0.8, 1 }
 		}
 	}
-	Chili.TextBox:New{
-		parent = MainWindow,
+	UI.Help = Chili.TextBox:New{
+		parent = UI.MainWindow,
 		x = "10%",
 		y = "15%",
 		width = "80%",
 		height = "10%",
-		text = "This game will be the base of the editor : it will define units and their behaviour, and will be required to play the created missions. Once a game has been chosen, a new archive corresponding to the editor for the chosen mod will be created. Spring will restart using this new archive. Afterwards, you will be able to launch the editor using the archive directly from the launcher.",
+		text = LAUNCHER_HELP,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 23,
+			size = 18,
 			color = { 0.6, 0.6, 0.8, 1 }
 		}
 	}
 	local sp = Chili.ScrollPanel:New{
-		parent = MainWindow,
+		parent = UI.MainWindow,
 		x = "20%",
 		y = "25%",
 		width = "60%",
@@ -88,15 +123,15 @@ function InitializeMenu()
 				OnClick = { function() Launch(game) end },
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
-					size = 40,
+					size = 30,
 					color = { 0, 0.2, 0.8, 1 }
 				}
 			}
 			count = count + 1
 		end
 	end
-	ErrorMessage1 = Chili.Label:New{
-		parent = MainWindow,
+	UI.ErrorMessage1 = Chili.Label:New{
+		parent = UI.MainWindow,
 		x = "0%",
 		y = "90%",
 		width = "100%",
@@ -106,12 +141,12 @@ function InitializeMenu()
 		valign = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 18,
 			color = { 1, 0.2, 0.2, 1 }
 		}
 	}
-	ErrorMessage2 = Chili.Label:New{
-		parent = MainWindow,
+	UI.ErrorMessage2 = Chili.Label:New{
+		parent = UI.MainWindow,
 		x = "0%",
 		y = "95%",
 		width = "100%",
@@ -121,20 +156,20 @@ function InitializeMenu()
 		valign = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25,
+			size = 20,
 			color = { 1, 0.6, 0.2, 1 }
 		}
 	}
-	Chili.Button:New{
-		parent = MainWindow,
+	UI.QuitButton = Chili.Button:New{
+		parent = UI.MainWindow,
 		x = "90%",
 		y = "90%",
 		width = "10%",
 		height = "10%",
-		caption = "Quit",
+		caption = LAUNCHER_QUIT,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
 			color = { 0.8, 0.6, 0.2, 1 }
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
@@ -149,8 +184,8 @@ function Launch(game)
 			if VFS.BuildPPEditor and not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 				VFS.BuildPPEditor(game)
 			else
-				ErrorMessage1:SetCaption("The editor does not work on the version of Spring you are using.")
-				ErrorMessage2:SetCaption("Please use the tweaked 0.82.5.1 or a 98+ version.")
+				UI.ErrorMessage1:SetCaption(LAUNCHER_ERROR1)
+				UI.ErrorMessage2:SetCaption(LAUNCHER_ERROR2)
 			end
 		else
 			local modInfo = "return { game='SPRED', shortGame='SPRED', name='SPRED for "..game.."', shortName='SPRED', mutator='official', version='1.0', description='SPRED', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
@@ -164,7 +199,7 @@ function Launch(game)
 			end
 		end
 	end
-	
+
 	if VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 		local operations = {
 			["MODOPTIONS"] = {
@@ -187,7 +222,7 @@ function EitherDrawScreen()
 	if not vsx or not vsy then
 		return
 	end
-	
+
 	local bgText = "bitmaps/editor/blank.png"
 	gl.Blending(false)
 	gl.Color(0, 0, 0, 0)
@@ -198,7 +233,11 @@ function EitherDrawScreen()
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
-	vsx, vsy = dse_vsx, dse_vsy
+	if (dse_vsx ~= vsx or dse_vsy ~= vsy) then
+		vsx, vsy = dse_vsx, dse_vsy
+		Spring.Echo (vsx.." "..vsy)
+		--updateTextsSize ()
+	end
 	if Spring.IsGUIHidden() then
 		EitherDrawScreen()
 	end
@@ -214,4 +253,5 @@ function widget:Initialize()
 	widgetHandler:EnableWidget("Chili Framework")
 	InitializeChili()
 	InitializeMenu()
+	ChangeLanguage("en")
 end
