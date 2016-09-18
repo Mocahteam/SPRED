@@ -23,10 +23,12 @@ ComboBox = Button:Inherit{
   minDropDownWidth = 50,
 }
 
-local ComboBoxWindow      = Window:Inherit{classname = "combobox_window", resizable = false, draggable = false, }
 local ComboBoxScrollPanel = ScrollPanel:Inherit{classname = "combobox_scrollpanel", horizontalScrollbar = false, }
 local ComboBoxStackPanel  = StackPanel:Inherit{classname = "combobox_stackpanel", autosize = true, resizeItems = false, borderThickness = 0, padding = {0,0,0,0}, itemPadding = {0,0,0,0}, itemMargin = {0,0,0,0}, }
 local ComboBoxItem        = Button:Inherit{classname = "combobox_item"}
+function ComboBoxItem:FocusUpdate()
+  self.state.focused = true
+end
 
 local this = ComboBox
 local inherited = this.inherited
@@ -69,15 +71,10 @@ function ComboBox:_CloseWindow()
   end
 end
 
-function ComboBox:FocusUpdate()
-  if not self.state.focused then
-    self:_CloseWindow()
-  end
-end
-
 function ComboBox:MouseDown(...)
   self.state.pressed = true
   if not self._dropDownWindow then
+    -- drop down window doesn't exist => create it
     local sx,sy = self:LocalToScreen(0,0)
 
     local labels = {}
@@ -92,7 +89,7 @@ function ComboBox:MouseDown(...)
             caption = item,
             width = '100%',
             height = labelHeight,
-            state = {focused = (i == self.selected), selected = (i == self.selected)},
+            state = {selected = (i == self.selected)},
             OnMouseUp = { function()
               self:Select(i)
               self:_CloseWindow()
@@ -123,6 +120,8 @@ function ComboBox:MouseDown(...)
     end
 
     self._dropDownWindow = ComboBoxWindow:New{
+      mainCombo = self,
+      selected = self.selected,
       parent = screen,
       width  = width,
       height = height,
@@ -142,6 +141,7 @@ function ComboBox:MouseDown(...)
       }
     }
   else
+    -- drop down window exists => close it
     self:_CloseWindow()
   end
 
@@ -153,4 +153,13 @@ function ComboBox:MouseUp(...)
   self:Invalidate()
   return self
   -- this exists to override Button:MouseUp so it doesn't modify .state.pressed
+end
+
+function ComboBox:FocusUpdate()
+  local screen = self:FindParent("screen")
+  -- Check if drop down window exists
+  if self._dropDownWindow and not CompareLinks(screen:GetFocusedControl(), self._dropDownWindow) then
+    -- Give focus to drop down window
+    screen:FocusControl(self._dropDownWindow)
+  end
 end

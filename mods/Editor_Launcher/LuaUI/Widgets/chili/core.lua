@@ -38,6 +38,7 @@ local includes = {
   "controls/treeview.lua",
   "controls/editbox.lua",
   "controls/line.lua",
+  "controls/comboboxwindow.lua",
   "controls/combobox.lua",
   "controls/tabbaritem.lua",
   "controls/tabbar.lua",
