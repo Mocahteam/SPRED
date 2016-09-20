@@ -390,7 +390,6 @@ end
 
 function Control:RequestRealign(savespace)
   if (not self._inRealign) then
-    Spring.Echo (self.classname..":RequestRealign")
     self._realignRequested = true
     self.__savespace = savespace
     self:RequestUpdate()
@@ -415,7 +414,6 @@ end
 function Control:Realign(savespace)
   if (not self._realignDisabled) then
     if (not self._inRealign) then
-      Spring.Echo (self.classname..":Realign")
       self._savespace = savespace or self.savespace
       self._inRealign = true
       self:AlignControl() --FIXME still needed?
@@ -445,7 +443,6 @@ function Control:UpdateLayout()
   end
 
   if (self.autosize) then
-    Spring.Echo (self.classname..":UpdateLayout because autosize")
     self:RealignChildren(true)
 
     local neededWidth, neededHeight = self:GetChildrenMinimumExtents()
@@ -876,13 +873,11 @@ end
 
 function Control:Update()
 	if self._realignRequested then
-    Spring.Echo (self.classname..":Update1")
 		self:Realign(self.__savespace)
 		self._realignRequested = false
 	end
 
 	if self._needRedraw then
-    Spring.Echo (self.classname..":Update2")
 		if self:IsInView() then
 			self._in_update = true
 			self:_UpdateOwnDList()

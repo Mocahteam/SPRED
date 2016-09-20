@@ -119,7 +119,6 @@ end
 --//=============================================================================
 
 function Screen:Resize(w,h)
-  Spring.Echo ("Screen:Resize")
 	self.width = w
 	self.height = h
 	self:CallChildren("RequestRealign")

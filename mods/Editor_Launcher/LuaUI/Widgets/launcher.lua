@@ -251,19 +251,6 @@ function EitherDrawScreen()
 	gl.Blending(true)
 end
 
-function updateFontsSize()
-	Spring.Echo ("updateFontsSize")
-	for i, v in pairs(UI) do
-		if UI[i].font and UI[i].defaultFontSize then
-			Spring.Echo ("\tupdate "..UI[i].classname)
-			UI[i].font.size = UI[i].defaultFontSize * minRatio
-			UI[i].font:_LoadFont()
-			UI[i].font:SetParent(UI[i])
-			UI[i]:RequestUpdate()
-		end
-	end
-end
-
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if (dse_vsx ~= vsx or dse_vsy ~= vsy) then
 		vsx, vsy = dse_vsx, dse_vsy
@@ -271,8 +258,6 @@ function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 		if (vsy / defaultHeight < minRatio) then
 			minRatio = vsy / defaultHeight
 		end
-		Spring.Echo (vsx.." "..vsy.." "..minRatio)
-		--updateFontsSize ()
 	end
 	if Spring.IsGUIHidden() then
 		EitherDrawScreen()
