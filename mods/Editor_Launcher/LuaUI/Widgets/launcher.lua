@@ -20,8 +20,13 @@ local UI = {} -- Contains each UI element
 local gameFolder = "games"
 -- Screen width in pixels
 local vsx = 0
+local defaultWidth = 1366
 -- Screen height in pixels
 local vsy = 0
+local defaultHeight = 705
+-- minimal ratio on screen scaling
+local minRatio
+
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
@@ -60,6 +65,8 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
+		  autoAdjust = true,
+		  maxSize = 20,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -84,6 +91,8 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
+		  autoAdjust = true,
+		  maxSize = 40,
 			color = { 0.2, 0.6, 0.8, 1 }
 		}
 	}
@@ -92,18 +101,20 @@ function InitializeMenu()
 		x = "10%",
 		y = "15%",
 		width = "80%",
-		height = "10%",
+		height = "15%",
 		text = LAUNCHER_HELP,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 18,
+		  autoAdjust = true,
+		  maxSize = 18,
 			color = { 0.6, 0.6, 0.8, 1 }
 		}
 	}
 	local sp = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
 		x = "20%",
-		y = "25%",
+		y = "30%",
 		width = "60%",
 		height = "50%"
 	}
@@ -124,6 +135,8 @@ function InitializeMenu()
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 30,
+				  autoAdjust = true,
+				  maxSize = 30,
 					color = { 0, 0.2, 0.8, 1 }
 				}
 			}
@@ -142,6 +155,8 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 18,
+		  autoAdjust = true,
+		  maxSize = 18,
 			color = { 1, 0.2, 0.2, 1 }
 		}
 	}
@@ -157,6 +172,8 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
+		  autoAdjust = true,
+		  maxSize = 20,
 			color = { 1, 0.6, 0.2, 1 }
 		}
 	}
@@ -170,6 +187,8 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.8, 0.6, 0.2, 1 }
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
@@ -232,11 +251,28 @@ function EitherDrawScreen()
 	gl.Blending(true)
 end
 
+function updateFontsSize()
+	Spring.Echo ("updateFontsSize")
+	for i, v in pairs(UI) do
+		if UI[i].font and UI[i].defaultFontSize then
+			Spring.Echo ("\tupdate "..UI[i].classname)
+			UI[i].font.size = UI[i].defaultFontSize * minRatio
+			UI[i].font:_LoadFont()
+			UI[i].font:SetParent(UI[i])
+			UI[i]:RequestUpdate()
+		end
+	end
+end
+
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if (dse_vsx ~= vsx or dse_vsy ~= vsy) then
 		vsx, vsy = dse_vsx, dse_vsy
-		Spring.Echo (vsx.." "..vsy)
-		--updateTextsSize ()
+		minRatio = vsx / defaultWidth
+		if (vsy / defaultHeight < minRatio) then
+			minRatio = vsy / defaultHeight
+		end
+		Spring.Echo (vsx.." "..vsy.." "..minRatio)
+		--updateFontsSize ()
 	end
 	if Spring.IsGUIHidden() then
 		EitherDrawScreen()

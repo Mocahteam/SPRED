@@ -3,7 +3,6 @@ function DoTheRestart(startscriptfilename, tableOperation)
   -- for exemple, as it happened, using a key such as mode when gamemode already exists.
   -- One idea would be to fix how regex are made in the function replace section.
 	local n_infologcopy="infolog.bak.txt"
-	Spring.Echo("test")
 	Spring.Echo(widget:GetInfo().name..": Wanting to reload \""..startscriptfilename.."\"")
 	if VFS.FileExists(startscriptfilename) then
 		local complete=VFS.LoadFile(startscriptfilename)
@@ -52,7 +51,7 @@ end
 
 function updateValues(fullFile,tableOperation)
 	Spring.Echo(fullFile)
-  -- works as follow : will replace the entire sections. 
+  -- works as follow : will replace the entire sections.
   -- For each section concerned a copy is made and replacements are done within this section
   -- If the attribute is not present then it is added at the end of the section
   for section,operations in pairs(tableOperation) do
@@ -70,7 +69,7 @@ function updateValues(fullFile,tableOperation)
     fullFile=replaceSection(fullFile,section,contentSection) -- will replace the old section by the newly created section
   end
     --local fullFile=string.gsub(fullFile,"%["..section.."%]%s*%{([^%}]*)%}",contentSection) -- replace the content of the action
-  return fullFile 
+  return fullFile
 end
 
 local function writeAttributes(file, levelOfIndentation, tableValues)
@@ -92,9 +91,9 @@ local function createFromScratch(editorTables)
   local file=""
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
-  local mapName=editorTables.description.map or "Marble_Madness_Map" 
+  local mapName=editorTables.description.map or "Marble_Madness_Map"
   local name=editorTables.description.safename or "unamed"
-  local lang=editorTables.description.lang or "en" 
+  local lang=editorTables.description.lang or "en"
   local table1 = {Mapname=mapName, Gametype="Prog & Play Level Editor 0.1", MyPlayerName="Player"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
@@ -103,4 +102,3 @@ local function createFromScratch(editorTables)
     local allyTeamInformation=pairs(editorTables.allyteams[teamNumber])
   end
 end
-

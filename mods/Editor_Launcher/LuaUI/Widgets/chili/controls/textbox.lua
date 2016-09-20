@@ -14,8 +14,8 @@ TextBox = Control:Inherit{
   padding = {0,0,0,0},
 
   text      = "line1\nline2",
-  autoHeight  = true, 
-  autoObeyLineHeight = true, 
+  autoHeight  = true,
+  autoObeyLineHeight = true,
   fontsize = 12,
 
   _lines = {},
@@ -71,6 +71,7 @@ end
 
 function TextBox:UpdateLayout()
   local font = self.font
+
   local padding = self.padding
   local width  = self.width - padding[1] - padding[3]
   local height = self.height - padding[2] - padding[4]
@@ -79,6 +80,60 @@ function TextBox:UpdateLayout()
   end
 
   self._wrappedText = font:WrapText(self.text, width, height)
+
+  if (font.autoAdjust) then
+    -- local textHeight
+    -- local currentSize = font.maxSize + 1
+    -- repeat
+    --   currentSize = currentSize - 1
+    --   local wrappedText = font:WrapText(self.text, width, height, currentSize)
+    --   _,_,numLines = font:GetTextHeight(wrappedText, currentSize)
+    --   textHeight = numLines * font:GetLineHeight(currentSize)
+    -- until textHeight <= self.height
+    -- font.size = currentSize
+    -- font:_LoadFont()
+    -- font:SetParent(self)
+    local textHeight
+    local currentSize = font.size
+    local continue = true
+    -- compute text Height including multiline
+    _,_,numLines = font:GetTextHeight(self._wrappedText, currentSize)
+    textHeight = numLines * font:GetLineHeight(currentSize)
+    -- check if we need to increase or decrease font size
+    local step = 1
+    if textHeight > self.height then
+      step = -1
+    end
+    -- change font size depending on step until we found the appropriate size
+    repeat
+      currentSize = currentSize + step
+      -- compute text height (including multilines) with the new font size
+      self._wrappedText = font:WrapText(self.text, width, height, currentSize)
+      _,_,numLines = font:GetTextHeight(self._wrappedText, currentSize)
+      textHeight = numLines * font:GetLineHeight(currentSize)
+      -- if we try to increase font size and we reach max height or max font size => we stop
+      if step == 1 and (textHeight > self.height or currentSize > font.maxSize) then
+        continue = false
+        if currentSize > font.maxSize then
+          currentSize = font.maxSize
+        else
+          currentSize = currentSize - 1
+        end
+      -- if we try to decrease font size and we reach max height => we stop
+      elseif step == -1 and (textHeight < self.height or textHeight < 1) then
+        if textHeight < 1 then
+          textHeight = 1
+        end
+        continue = false
+      end
+    until not continue
+    -- update font size with the current size
+    font.size = currentSize
+    font:_LoadFont()
+    font:SetParent(self)
+    -- compute final text wrapping
+    self._wrappedText = font:WrapText(self.text, width, height)
+  end
 
   if self.autoHeight then
     local textHeight,textDescender,numLines = font:GetTextHeight(self._wrappedText)

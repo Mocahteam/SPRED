@@ -60,7 +60,7 @@ function EditBox:New(obj)
 	return obj
 end
 
-function EditBox:Dispose(...)	
+function EditBox:Dispose(...)
 	Control.Dispose(self)
 	self.hintFont:SetParent()
 end
@@ -87,6 +87,16 @@ end
 
 function EditBox:UpdateLayout()
   local font = self.font
+
+  if (font.autoAdjust) then
+    local textHeight  = font:GetTextHeight(self.text, font.maxSize)
+    local textWidth = self.font:GetTextWidth(self.text, font.maxSize)
+    local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
+    ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)
+    font.size = math.max(1, math.min(font.maxSize * ratio, font.maxSize))
+    font:_LoadFont()
+    font:SetParent(self)
+  end
 
   --FIXME
   if (self.autosize) then
@@ -152,7 +162,7 @@ function EditBox:_SetCursorByMousePos(x, y)
 		local text = self.text
 		-- properly accounts for passworded text where characters are represented as "*"
 		-- TODO: what if the passworded text is displayed differently? this is using assumptions about the skin
-		if #text > 0 and self.passwordInput then 
+		if #text > 0 and self.passwordInput then
 			text = string.rep("*", #text)
 		end
 		self.cursor = #text + 1 -- at end of text
@@ -179,7 +189,7 @@ function EditBox:MouseDown(x, y, ...)
 		self.selStart = nil
 		self.selEnd = nil
 	end
-	
+
 	self._interactedTime = Spring.GetTimer()
 	inherited.MouseDown(self, x, y, ...)
 	self:Invalidate()
@@ -311,7 +321,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		-- backward compability with Spring <97
 		self:TextInput(unicode)
 	end
-	
+
 	-- text selection handling
 	if key == Spring.GetKeyCode("left") or key == Spring.GetKeyCode("right") or key == Spring.GetKeyCode("home") or key == Spring.GetKeyCode("end") then
 		if mods.shift then
@@ -324,7 +334,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 			self.selEnd = nil
 		end
 	end
-	
+
 	self._interactedTime = Spring.GetTimer()
 	inherited.KeyPress(self, key, mods, isRepeat, label, unicode, ...)
 	self:UpdateLayout()

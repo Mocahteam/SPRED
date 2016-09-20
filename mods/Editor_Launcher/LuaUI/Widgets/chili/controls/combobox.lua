@@ -23,9 +23,22 @@ ComboBox = Button:Inherit{
   minDropDownWidth = 50,
 }
 
-local ComboBoxScrollPanel = ScrollPanel:Inherit{classname = "combobox_scrollpanel", horizontalScrollbar = false, }
-local ComboBoxStackPanel  = StackPanel:Inherit{classname = "combobox_stackpanel", autosize = true, resizeItems = false, borderThickness = 0, padding = {0,0,0,0}, itemPadding = {0,0,0,0}, itemMargin = {0,0,0,0}, }
-local ComboBoxItem        = Button:Inherit{classname = "combobox_item"}
+local ComboBoxScrollPanel = ScrollPanel:Inherit{
+  classname = "combobox_scrollpanel",
+  horizontalScrollbar = false
+}
+local ComboBoxStackPanel  = StackPanel:Inherit{
+  classname = "combobox_stackpanel",
+  autosize = true,
+  resizeItems = false,
+  borderThickness = 0,
+  padding = {0,0,0,0},
+  itemPadding = {0,0,0,0},
+  itemMargin = {0,0,0,0}
+}
+local ComboBoxItem        = Button:Inherit{
+  classname = "combobox_item"
+}
 function ComboBoxItem:FocusUpdate()
   self.state.focused = true
 end
@@ -78,7 +91,7 @@ function ComboBox:MouseDown(...)
     local sx,sy = self:LocalToScreen(0,0)
 
     local labels = {}
-    local labelHeight = 20
+    local labelHeight = self.height
 
     local width = math.max(self.width, self.minDropDownWidth)
     local height = 10
@@ -90,6 +103,10 @@ function ComboBox:MouseDown(...)
             width = '100%',
             height = labelHeight,
             state = {selected = (i == self.selected)},
+            font = {
+              font = self.font.font,
+              autoAdjust = self.font.autoAdjust
+            },
             OnMouseUp = { function()
               self:Select(i)
               self:_CloseWindow()
