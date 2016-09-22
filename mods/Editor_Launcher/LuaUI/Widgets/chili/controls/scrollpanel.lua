@@ -226,6 +226,21 @@ function ScrollPanel:UpdateLayout()
     self.scrollPosY = clamp(0, self.clampY, self.scrollPosY)
   end
 
+  -- reposition children depending on their height
+  local children = self.children
+  local y = nil
+  for i=1,#children do
+    local child = children[i]
+    if (child) then
+      if y == nil then
+        y = child.y + child.height
+      else
+        child.y = y
+        y = y + child.height
+      end
+    end
+  end
+
   return true;
 end
 

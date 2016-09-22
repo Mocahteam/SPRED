@@ -127,9 +127,9 @@ function InitializeMenu()
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
-				y = count * 80,
+				y = '0%',
 				width = '100%',
-				height = 80,
+				height = "20%",
 				caption = game,
 				OnClick = { function() Launch(game) end },
 				font = {
