@@ -116,7 +116,8 @@ function InitializeMenu()
 		x = "20%",
 		y = "30%",
 		width = "60%",
-		height = "50%"
+		height = "50%",
+		autoAdjustChildren = true,
 	}
 	local gameList = {}
 	gameList = VFS.GetGames()
@@ -127,7 +128,7 @@ function InitializeMenu()
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
-				-- y = count * 80, Don't set y it will be done on scroll panel
+				-- y = count * 80, Don't set y due to autoAdjustChildren on scroll panel
 				width = '100%',
 				height = "20%",
 				caption = game,
