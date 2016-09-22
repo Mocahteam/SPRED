@@ -127,7 +127,7 @@ function InitializeMenu()
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
-				y = '0%',
+				-- y = count * 80, Don't set y it will be done on scroll panel
 				width = '100%',
 				height = "20%",
 				caption = game,
