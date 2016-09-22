@@ -61,7 +61,7 @@ function InitializeMenu()
 		y = "0%",
 		width = "15%",
 		height = "7%",
-		items = { "English", "French" },
+		items = { "English", "Français" },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
