@@ -130,7 +130,7 @@ function InitializeMenu()
 				x = '0%',
 				-- y = count * 80, Don't set y due to autoAdjustChildren on scroll panel
 				width = '100%',
-				height = "20%",
+				height = "15%",
 				caption = game,
 				OnClick = { function() Launch(game) end },
 				font = {
