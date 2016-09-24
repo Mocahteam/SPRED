@@ -20,12 +20,8 @@ local UI = {} -- Contains each UI element
 local gameFolder = "games"
 -- Screen width in pixels
 local vsx = 0
-local defaultWidth = 1366
 -- Screen height in pixels
 local vsy = 0
-local defaultHeight = 705
--- minimal ratio on screen scaling
-local minRatio
 
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
@@ -144,40 +140,6 @@ function InitializeMenu()
 			count = count + 1
 		end
 	end
-	UI.ErrorMessage1 = Chili.Label:New{
-		parent = UI.MainWindow,
-		x = "0%",
-		y = "90%",
-		width = "100%",
-		height = "5%",
-		caption = "",
-		align = "center",
-		valign = "center",
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 18,
-		  autoAdjust = true,
-		  maxSize = 18,
-			color = { 1, 0.2, 0.2, 1 }
-		}
-	}
-	UI.ErrorMessage2 = Chili.Label:New{
-		parent = UI.MainWindow,
-		x = "0%",
-		y = "95%",
-		width = "100%",
-		height = "5%",
-		caption = "",
-		align = "center",
-		valign = "center",
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20,
-		  autoAdjust = true,
-		  maxSize = 20,
-			color = { 1, 0.6, 0.2, 1 }
-		}
-	}
 	UI.QuitButton = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "90%",
@@ -198,14 +160,76 @@ function InitializeMenu()
 	}
 end
 
+--- Shows a warning message
+-- @tparam msg message to display as warning
+function FrameWarning(msg)
+	UI.Warning = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '15%',
+		y = '45%',
+		width = '70%',
+		height = '20%',
+		draggable = false,
+		resizable = false
+	}
+	Chili.Label:New{
+		parent = UI.Warning,
+		x = '2%',
+		y = '0%',
+		width = '96%',
+		height = '60%',
+		align = "center",
+		valign = "center",
+		caption = msg,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
+		}
+	}
+	Chili.Button:New{
+		parent = UI.Warning,
+		x = '33%',
+		y = '50%',
+		width = '33%',
+		height = '40%',
+		caption = "OK",
+		OnClick = { function () UI.Warning:Dispose() end },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
+		}
+	}
+	Chili.Image:New{
+		parent = UI.Warning,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/launcher/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
+end
+
 function Launch(game)
 	if not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
 		if Game.isPPEnabled then
 			if VFS.BuildPPEditor and not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
-				VFS.BuildPPEditor(game)
+			 	VFS.BuildPPEditor(game)
 			else
-				UI.ErrorMessage1:SetCaption(LAUNCHER_ERROR1)
-				UI.ErrorMessage2:SetCaption(LAUNCHER_ERROR2)
+				FrameWarning(LAUNCHER_ERROR)
 			end
 		else
 			local modInfo = "return { game='SPRED', shortGame='SPRED', name='SPRED for "..game.."', shortName='SPRED', mutator='official', version='1.0', description='SPRED', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
@@ -255,10 +279,6 @@ end
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	if (dse_vsx ~= vsx or dse_vsy ~= vsy) then
 		vsx, vsy = dse_vsx, dse_vsy
-		minRatio = vsx / defaultWidth
-		if (vsy / defaultHeight < minRatio) then
-			minRatio = vsy / defaultHeight
-		end
 	end
 	if Spring.IsGUIHidden() then
 		EitherDrawScreen()

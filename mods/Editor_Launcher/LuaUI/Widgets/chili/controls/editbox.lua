@@ -90,12 +90,18 @@ function EditBox:UpdateLayout()
 
   if (font.autoAdjust) then
     local textHeight  = font:GetTextHeight(self.text, font.maxSize)
-    local textWidth = self.font:GetTextWidth(self.text, font.maxSize)
     local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
-    ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)
     font.size = math.max(1, math.min(font.maxSize * ratio, font.maxSize))
     font:_LoadFont()
     font:SetParent(self)
+  end
+  if (self.hintFont.autoAdjust) then
+    -- do the same for hint
+    local textHeight  = self.hintFont:GetTextHeight(self.hint, self.hintFont.maxSize)
+    local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
+    self.hintFont.size = math.max(1, math.min(self.hintFont.maxSize * ratio, self.hintFont.maxSize))
+    self.hintFont:_LoadFont()
+    self.hintFont:SetParent(self)
   end
 
   --FIXME
