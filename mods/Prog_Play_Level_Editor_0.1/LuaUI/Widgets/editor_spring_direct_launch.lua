@@ -219,6 +219,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 				if NeedToBeSaved then
 					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ResetScenario() MainMenuFrame() end)
 				else
+					ResetScenario()
 					MainMenuFrame()
 				end
 			end
@@ -488,7 +489,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		},
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ResetScenario () ImportScenarioFrame() end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ImportScenarioFrame() end)
 				else
 					ImportScenarioFrame()
 				end
@@ -873,6 +874,7 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 			but:InvalidateSelf()
 		end
 	end
+	NeedToBeSaved = false
 end
 
 function ExportScenarioFrame() -- Shows the export scenario pop-up
@@ -1161,7 +1163,12 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 				width = '100%',
 				height = "25%",
 				caption = name,
-				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name))) window:Dispose() end },
+				OnClick = { function()
+						ResetScenario()
+						LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))
+						window:Dispose()
+				 	end
+				},
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 30,
