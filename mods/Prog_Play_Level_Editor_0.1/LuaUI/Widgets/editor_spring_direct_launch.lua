@@ -294,7 +294,7 @@ function InitializeLevelList() -- Initialization of levels
 	end
 end
 
-function InitializeScenarioList() -- initoalization of scenarios
+function UpdateScenarioList() -- update scenarios
 	local toBeRemoved = {} -- Remove scenarios not corresponding to the chosen game
 	ScenarioListNames = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
 	for i, scenario in ipairs(ScenarioListNames) do
@@ -467,7 +467,7 @@ end
 
 function InitializeScenarioFrame() -- Create a window for each level, and in each window, create a button for each output state and one for the input state
 	InitializeOutputStates()
-	InitializeScenarioList()
+	UpdateScenarioList()
 	UI.Scenario = {}
 	UI.Scenario.Title = Chili.Label:New{
 		parent = UI.MainWindow,
@@ -519,9 +519,9 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		},
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false LoadScenarioFrame() end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false OpenScenarioFrame() end)
 				else
-					LoadScenarioFrame()
+					OpenScenarioFrame()
 				end
 			end
 	 	}
@@ -837,17 +837,17 @@ function ClearUI() -- Remove UI elements from the screen
 end
 
 function ClearTemporaryUI() -- Remove pop-ups
-	if UI.Scenario.LoadScenario then
-		UI.Scenario.LoadScenario:Dispose()
+	if UI.Scenario.OpenScenarioPopUp then
+		UI.Scenario.OpenScenarioPopUp:Dispose()
 	end
-	if UI.Scenario.SaveScenario then
-		UI.Scenario.SaveScenario:Dispose()
+	if UI.Scenario.SaveScenarioPopUp then
+		UI.Scenario.SaveScenarioPopUp:Dispose()
 	end
-	if UI.Scenario.Warning then
-		UI.Scenario.Warning:Dispose()
+	if UI.Scenario.WarningPopUp then
+		UI.Scenario.WarningPopUp:Dispose()
 	end
-	if UI.Scenario.ExportGame then
-		UI.Scenario.ExportGame:Dispose()
+	if UI.Scenario.ExportGamePopUp then
+		UI.Scenario.ExportGamePopUp:Dispose()
 	end
 end
 
@@ -1076,7 +1076,7 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.SaveScenario = window
+	UI.Scenario.SaveScenarioPopUp = window
 end
 
 --- Shows a warning message
@@ -1097,9 +1097,9 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 	}
 	Chili.Label:New{
 		parent = window,
-		x = '0%',
+		x = '2%',
 		y = '0%',
-		width = '100%',
+		width = '96%',
 		height = '60%',
 		align = "center",
 		valign = "center",
@@ -1186,10 +1186,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.Warning = window
+	UI.Scenario.WarningPopUp = window
 end
 
-function LoadScenarioFrame() -- Shows the import scenario pop-up
+function OpenScenarioFrame() -- Shows the import scenario pop-up
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
@@ -1200,12 +1200,30 @@ function LoadScenarioFrame() -- Shows the import scenario pop-up
 		draggable = false,
 		resizable = false
 	}
+	Chili.Label:New{
+		parent = window,
+		x = '2%',
+		y = '0%',
+		width = '90%',
+		height = '19%',
+		caption = LAUNCHER_SCENARIO_SELECT,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
+		}
+	}
 	local scrollPanel = Chili.ScrollPanel:New{
 		parent = window,
 		x = '0%',
-		y = '10%',
+		y = '20%',
 		width = '100%',
-		height = '90%',
+		height = '80%',
 		autoAdjustChildren = true,
 	}
 	local closeButton = Chili.Image:New{
@@ -1223,6 +1241,7 @@ function LoadScenarioFrame() -- Shows the import scenario pop-up
 	}
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
+	UpdateScenarioList()
 	if #ScenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
@@ -1250,7 +1269,7 @@ function LoadScenarioFrame() -- Shows the import scenario pop-up
 				caption = name,
 				OnClick = { function()
 						ResetScenario()
-						LoadScenario(ScenarioList[i])
+						OpenScenario(ScenarioList[i])
 						window:Dispose()
 				 	end
 				},
@@ -1273,7 +1292,7 @@ function LoadScenarioFrame() -- Shows the import scenario pop-up
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.LoadScenario = window
+	UI.Scenario.OpenScenarioPopUp = window
 end
 
 function ExportGameFrame()
@@ -1344,6 +1363,7 @@ function ExportGameFrame()
 			maxSize = 20,
 		}
 	}
+	UpdateScenarioList()
 	if #ScenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
@@ -1371,7 +1391,7 @@ function ExportGameFrame()
 				caption = name,
 				OnClick = { function()
 					IncludeAllMissions = includeMissions.checked
-					if (LoadScenario(ScenarioList[i])) then
+					if (OpenScenario(ScenarioList[i])) then
 						BeginExportGame()
 					end
 					window:Dispose()
@@ -1395,7 +1415,7 @@ function ExportGameFrame()
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.ExportGame = window
+	UI.Scenario.ExportGamePopUp = window
 end
 
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
@@ -1684,7 +1704,7 @@ function LoadState(direction) -- Load a previous state of the scenario
 	LoadLock = true
 end
 
-function LoadScenario(xmlTable) -- Load a scenario from a xml file
+function OpenScenario(xmlTable) -- Load a scenario from a xml file
 	loadingSuccess = true
 	ResetLinks()
 	LoadLock = false
