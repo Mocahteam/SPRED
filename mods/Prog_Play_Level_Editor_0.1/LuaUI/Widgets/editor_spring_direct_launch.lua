@@ -89,7 +89,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		y = '80%',
 		width = '20%',
 		height = '20%',
-		keepAspect = false,
+		keepAspect = true,
 		file = "bitmaps/launcher/su.png"
 	}
 	UI.Title = Chili.Image:New{
@@ -112,7 +112,9 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		align = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 40,
+		  autoAdjust = true,
+		  maxSize = 40,
 			color = { 0.2, 0.4, 0.8, 1 }
 		}
 	}
@@ -126,7 +128,9 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		OnClick = { NewMissionFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -140,7 +144,9 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		OnClick = { EditMissionFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -154,7 +160,9 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		OnClick = { EditScenarioFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -168,7 +176,9 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		OnClick = { ExportGameFrame },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -178,10 +188,12 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		y = "0%",
 		width = "15%",
 		height = "7%",
-		items = { "English", "French" },
+		items = { "English", "Français" },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 20,
+		  autoAdjust = true,
+		  maxSize = 20,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -196,13 +208,21 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 	}
 	UI.BackButton = Chili.Button:New{
 		parent = UI.MainWindow,
-		x = "0%",
+		x = "1%",
 		y = "0%",
 		width = "10%",
 		height = "10%",
+		caption = "",
 		backgroundColor = { 0, 0.2, 0.6, 1 },
 		focusColor = { 0, 0.6, 1, 1 },
-		OnClick = { BackWarning }
+		OnClick = { function ()
+				if NeedToBeSaved then
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ResetScenario() MainMenuFrame() end)
+				else
+					MainMenuFrame()
+				end
+			end
+	 	}
 	}
 	Chili.Image:New{ -- Image for the back button
 		parent = UI.BackButton,
@@ -222,12 +242,21 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		caption = LAUNCHER_QUIT,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 0.8, 0.6, 0.2, 1 }
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
 		focusColor= { 0.8, 0.6, 0.2, 1 },
-		OnClick = { QuitWarning }
+		OnClick = { function ()
+				if NeedToBeSaved then
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, Quit)
+				else
+					Quit()
+				end
+			end
+	 	}
 	}
 end
 
@@ -282,7 +311,7 @@ function InitializeMapButtons() -- Create a button for each map to select it
 	UI.NewLevel.Title = Chili.Label:New{
 		parent = UI.MainWindow,
 		x = "20%",
-		y = "15%",
+		y = "10%",
 		width = "60%",
 		height = "5%",
 		align = "center",
@@ -291,6 +320,8 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
+		  autoAdjust = true,
+		  maxSize = 40,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
@@ -299,7 +330,8 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		x = "20%",
 		y = "20%",
 		width = "60%",
-		height = "60%"
+		height = "60%",
+		autoAdjustChildren = true,
 	}
 	UI.NewLevel.NoMapMessage = Chili.TextBox:New{
 		parent = UI.NewLevel.MapScrollPanel,
@@ -310,7 +342,9 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		text = LAUNCHER_NEW_NO_MAP_FOUND,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+		  autoAdjust = true,
+		  maxSize = 30,
 			color = { 1, 0, 0, 1 }
 		}
 	}
@@ -319,14 +353,16 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		local mapButton = Chili.Button:New{
 			parent = UI.NewLevel.MapScrollPanel,
 			x = "0%",
-			y = 80 * ( i - 1 ),
+			--y = 80 * ( i - 1 ), Don't set y due to autoAdjustChildren on scroll panel
 			width = "100%",
-			height = 80,
+			height = "15%",
 			caption = map,
 			OnClick = { function() NewMission(map) end },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 40,
+				size = 30,
+			  autoAdjust = true,
+			  maxSize = 30,
 				color = { 0.2, 0.4, 0.8, 1 }
 			}
 		}
@@ -340,7 +376,7 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 	UI.LoadLevel.Title = Chili.Label:New{
 		parent = UI.MainWindow,
 		x = "20%",
-		y = "15%",
+		y = "10%",
 		width = "60%",
 		height = "5%",
 		align = "center",
@@ -348,7 +384,9 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		caption = LAUNCHER_EDIT_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
@@ -357,7 +395,8 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		x = "20%",
 		y = "20%",
 		width = "60%",
-		height = "60%"
+		height = "60%",
+		autoAdjustChildren = true,
 	}
 	UI.LoadLevel.NoLevelMessage = Chili.TextBox:New{
 		parent = UI.LoadLevel.LevelScrollPanel,
@@ -368,7 +407,9 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		text = LAUNCHER_EDIT_NO_LEVEL_FOUND,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 1, 0, 0, 1 }
 		}
 	}
@@ -377,14 +418,16 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		local levelButton = Chili.Button:New{
 			parent = UI.LoadLevel.LevelScrollPanel,
 			x = "0%",
-			y = 80 * ( i - 1 ),
+			-- y = 80 * ( i - 1 ), Don't set y due to autoAdjustChildren on scroll panel
 			width = "100%",
-			height = 80,
+			height = "15%",
 			caption = LevelList[i].description.name,
 			OnClick = { function() EditMission(level) end },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 40,
+				size = 30,
+				autoAdjust = true,
+				maxSize = 30,
 				color = { 0.2, 0.4, 0.8, 1 }
 			}
 		}
@@ -398,7 +441,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 	UI.Scenario.Title = Chili.Label:New{
 		parent = UI.MainWindow,
 		x = "20%",
-		y = "15%",
+		y = "10%",
 		width = "60%",
 		height = "5%",
 		align = "center",
@@ -407,53 +450,73 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
+			autoAdjust = true,
+			maxSize = 40,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
 	UI.Scenario.Reset = Chili.Button:New{
 		parent = UI.MainWindow,
-		x = '90%',
-		y = '15%',
-		width = '8%',
-		height = '5%',
+		x = '91%',
+		y = '12%',
+		width = '9%',
+		height = '8%',
 		caption = LAUNCHER_SCENARIO_RESET,
 		OnClick = { ResetScenario },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+			color = { 0, 0.8, 1, 1 }
+		},
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
 	UI.Scenario.Import = Chili.Button:New{
 		parent = UI.MainWindow,
-		x = "2%",
-		y = "89%",
+		x = "1%",
+		y = "90%",
 		width = "20%",
-		height = "5%",
+		height = "10%",
 		caption = LAUNCHER_SCENARIO_IMPORT,
 		backgroundColor = { 0.2, 1, 0.8, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
 		},
-		OnClick = { ImportScenarioFrameWarning }
+		OnClick = { function ()
+				if NeedToBeSaved then
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ResetScenario () ImportScenarioFrame() end)
+				else
+					ImportScenarioFrame()
+				end
+			end
+	 	}
 	}
 	UI.Scenario.Export = Chili.Button:New{
 		parent = UI.MainWindow,
-		x = "2%",
-		y = "94%",
+		x = "21%",
+		y = "90%",
 		width = "20%",
-		height = "5%",
+		height = "10%",
 		caption = LAUNCHER_SCENARIO_EXPORT,
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
 		},
 		OnClick = { ExportScenarioFrame }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
-		x = "2%",
+		x = "1%",
 		y = "20%",
-		width = "96%",
-		height = "68%"
+		width = "99%",
+		height = "69%"
 	}
 	local drawLinks = function(obj) -- Function to draw links between buttons
 		gl.Color(1, 1, 1, 1)
@@ -526,7 +589,9 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		caption = LAUNCHER_SCENARIO_BEGIN,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 16
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
 		},
 		OnClick = { function()
 			if selectedOutputMission == "start" and selectedOutput == 1 then -- Delete links when double-click
@@ -574,9 +639,11 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		caption = LAUNCHER_SCENARIO_END,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 16
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
 		},
-		OnClick = { function() 
+		OnClick = { function()
 				if selectedInput == "end" then -- Delete links when double-click
 					for k, link in pairs(Links) do
 						for kk, linked in pairs(link) do
@@ -636,6 +703,8 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 18,
+				autoAdjust = true,
+				maxSize = 18,
 				color = { 0, 0.8, 0.8, 1 }
 			}
 		}
@@ -648,9 +717,11 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			caption = "in",
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 16
+				size = 16,
+				autoAdjust = true,
+				maxSize = 16,
 			},
-			OnClick = { function() 
+			OnClick = { function()
 				if selectedInput == LevelListNames[i] then -- Delete links when double-click
 					for k, link in pairs(Links) do
 						for kk, linked in pairs(link) do
@@ -682,7 +753,9 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				caption = out,
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
-					size = 16
+					size = 16,
+					autoAdjust = true,
+					maxSize = 16,
 				}
 			}
 			but.OnClick = { function()
@@ -739,15 +812,15 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
 	UI.MainWindow:RemoveChild(UI.ExportGameButton)
 	UI.MainWindow:RemoveChild(UI.BackButton)
-	
+
 	UI.MainWindow:RemoveChild(UI.NewLevel.Title)
 	UI.NewLevel.MapScrollPanel:RemoveChild(UI.NewLevel.NoMapMessage)
 	UI.MainWindow:RemoveChild(UI.NewLevel.MapScrollPanel)
-	
+
 	UI.MainWindow:RemoveChild(UI.LoadLevel.Title)
 	UI.LoadLevel.LevelScrollPanel:RemoveChild(UI.LoadLevel.NoLevelMessage)
 	UI.MainWindow:RemoveChild(UI.LoadLevel.LevelScrollPanel)
-	
+
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
 	UI.MainWindow:RemoveChild(UI.Scenario.Export)
@@ -842,6 +915,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
 			shadow = false
 		},
 		valign = "center",
@@ -856,6 +931,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
 			shadow = false
 		},
 		text = ScenarioName,
@@ -870,6 +947,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
 			shadow = false
 		},
 		valign = "center",
@@ -884,6 +963,8 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
 			shadow = false
 		},
 		text = ScenarioDesc,
@@ -899,7 +980,9 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 25
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
 		}
 	}
 	exportBut.OnClick = { function()
@@ -930,72 +1013,98 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 	UI.Scenario.ExportScenario = window
 end
 
-function ImportScenarioFrameWarning() -- Shows a warning if trying to load when changes have not been saved
+--- Shows a warning message
+-- @tparam msg message to display as warning
+-- @bool yesnoButton if true display "yes" and "no" buttons
+-- @bool okButton if true display "ok" button
+-- @tparam yesCallback function listener yes button clicked
+function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 	ClearTemporaryUI()
-	if NeedToBeSaved then
-		local window = Chili.Window:New{
-			parent = UI.MainWindow,
-			x = '20%',
-			y = '45%',
-			width = '60%',
-			height = '10%',
-			draggable = true,
-			resizable = false
+	local window = Chili.Window:New{
+		parent = UI.MainWindow,
+		x = '20%',
+		y = '45%',
+		width = '60%',
+		height = '20%',
+		draggable = true,
+		resizable = false
+	}
+	Chili.Label:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '60%',
+		align = "center",
+		valign = "center",
+		caption = msg,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
 		}
-		Chili.Label:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '50%',
-			align = "center",
-			valign = "center",
-			caption = LAUNCHER_SCENARIO_WARNING,
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
+	}
+	if (yesnoButton) then
 		Chili.Button:New{
 			parent = window,
 			x = '0%',
 			y = '50%',
-			width = '50%',
-			height = '50%',
+			width = '33%',
+			height = '40%',
 			caption = LAUNCHER_YES,
-			OnClick = { ImportScenarioFrame },
+			OnClick = { yesCallback },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
+				size = 25,
+				autoAdjust = true,
+				maxSize = 25,
 			}
 		}
 		Chili.Button:New{
 			parent = window,
-			x = '50%',
+			x = '66%',
 			y = '50%',
-			width = '50%',
-			height = '50%',
+			width = '33%',
+			height = '40%',
 			caption = LAUNCHER_NO,
 			OnClick = { ClearTemporaryUI },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
+				size = 25,
+				autoAdjust = true,
+				maxSize = 25,
 			}
 		}
-		Chili.Image:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '100%',
-			keepAspect = false,
-			file = "bitmaps/editor/blank.png",
-			color = { 0, 0, 0, 1 }
-		}
-		UI.Scenario.Warning = window
-	else
-		ImportScenarioFrame()
 	end
+	if okButton then
+		Chili.Button:New{
+			parent = window,
+			x = '33%',
+			y = '50%',
+			width = '33%',
+			height = '40%',
+			caption = LAUNCHER_OK,
+			OnClick = { ClearTemporaryUI },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 25,
+				autoAdjust = true,
+				maxSize = 25,
+			}
+		}
+	end
+	Chili.Image:New{
+		parent = window,
+		x = '0%',
+		y = '0%',
+		width = '100%',
+		height = '100%',
+		keepAspect = false,
+		file = "bitmaps/editor/blank.png",
+		color = { 0, 0, 0, 1 }
+	}
+	UI.Scenario.Warning = window
 end
 
 function ImportScenarioFrame() -- Shows the import scenario pop-up
@@ -1014,7 +1123,8 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		x = '0%',
 		y = '10%',
 		width = '100%',
-		height = '90%'
+		height = '90%',
+		autoAdjustChildren = true,
 	}
 	local closeButton = Chili.Button:New{
 		parent = window,
@@ -1023,9 +1133,16 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		width = '10%',
 		height = '10%',
 		caption = LAUNCHER_X,
-		OnClick = { function() window:Dispose() end }
+		OnClick = { function() window:Dispose() end },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 1, 0, 0, 1 }
+		},
+	  padding = {4, 4, 4, 4},
 	}
-	closeButton.font.color = { 1, 0, 0, 1 }
 	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
 	if #scenarioList == 0 then
 		Chili.TextBox:New{
@@ -1038,6 +1155,8 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 30,
+				autoAdjust = true,
+				maxSize = 30,
 				color = { 1, 0, 0, 1 }
 			}
 		}
@@ -1047,11 +1166,17 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
-				y = (i-1) * 40,
+				-- y = (i-1) * 40, Don't set y due to autoAdjustChildren on scroll panel
 				width = '100%',
-				height = 40,
+				height = "25%",
 				caption = name,
-				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name))) window:Dispose() end }
+				OnClick = { function() LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name))) window:Dispose() end },
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 30,
+					autoAdjust = true,
+					maxSize = 30,
+				}
 			}
 		end
 	end
@@ -1083,14 +1208,16 @@ function ExportGameFrame()
 		parent = window,
 		x = "0%",
 		y = "0%",
-		width = "100%",
+		width = "80%",
 		height = "10%",
-		caption = "Export game",
+		caption = LAUNCHER_SCENARIO_EXPORT_GAME_TITLE,
 		align = "center",
 		valing = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			shadow = false
 		}
 	}
@@ -1099,7 +1226,8 @@ function ExportGameFrame()
 		x = '0%',
 		y = '10%',
 		width = '100%',
-		height = '80%'
+		height = '80%',
+		autoAdjustChildren = true,
 	}
 	local closeButton = Chili.Button:New{
 		parent = window,
@@ -1108,14 +1236,21 @@ function ExportGameFrame()
 		width = '10%',
 		height = '10%',
 		caption = LAUNCHER_X,
-		OnClick = { function() window:Dispose() end }
+		OnClick = { function() window:Dispose() end },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 1, 0, 0, 1 }
+		},
+	  padding = {4, 4, 4, 4},
 	}
-	closeButton.font.color = { 1, 0, 0, 1 }
 	local includeMissions = Chili.Checkbox:New{
 		parent = window,
 		x = "0%",
 		y = "90%",
-		width = "100%",
+		width = "50%",
 		height = "10%",
 		boxsize = 30,
 		boxalign = "left",
@@ -1123,7 +1258,9 @@ function ExportGameFrame()
 		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
 		}
 	}
 	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
@@ -1138,6 +1275,8 @@ function ExportGameFrame()
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 30,
+				autoAdjust = true,
+				maxSize = 30,
 				color = { 1, 0, 0, 1 }
 			}
 		}
@@ -1147,9 +1286,9 @@ function ExportGameFrame()
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
-				y = (i-1) * 60,
+				-- y = (i-1) * 60, Don't set y due to autoAdjustChildren on scroll panel
 				width = '100%',
-				height = 60,
+				height = "15%",
 				caption = name,
 				OnClick = { function()
 					IncludeAllMissions = includeMissions.checked
@@ -1159,7 +1298,9 @@ function ExportGameFrame()
 				end },
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
-					size = 20
+					size = 20,
+					autoAdjust = true,
+					maxSize = 20,
 				}
 			}
 		end
@@ -1180,20 +1321,20 @@ end
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
 	Language = lang
 	GetLauncherStrings(lang)
-	
+
 	UpdateCaption(UI.Subtitle, string.gsub(LAUNCHER_SUBTITLE, "/MAINGAME/", MainGame))
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
 	UpdateCaption(UI.ExportGameButton, LAUNCHER_SCENARIO_EXPORT_GAME)
 	UpdateCaption(UI.QuitButton, LAUNCHER_QUIT)
-	
+
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
 	UpdateCaption(UI.NewLevel.Title, LAUNCHER_NEW_TITLE)
-	
+
 	UpdateText(UI.LoadLevel.NoLevelMessage, LAUNCHER_EDIT_NO_LEVEL_FOUND)
 	UpdateCaption(UI.LoadLevel.Title, LAUNCHER_EDIT_TITLE)
-	
+
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
@@ -1319,7 +1460,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			}
 		}
 	}
-	
+
 	-- Only consider levels with links
 	local purifiedLevelList = {}
 	for k, link in pairs(Links) do
@@ -1329,7 +1470,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 			end
 		end
 	end
-		
+
 	-- Activities
 	for i, level in ipairs(LevelList) do
 		if findInTable(purifiedLevelList, LevelListNames[i]) then
@@ -1467,37 +1608,43 @@ function LoadScenario(xmlTable) -- Import a scenario from a xml file
 	LoadLock = false
 	NeedToBeSaved = false
 	links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
-	for i, link in ipairs(links) do
-		local input = splitString(link.attr.id_input, "//")[1]
-		local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
-		if outputMission == "start" then
-			selectedOutputMission = "start"
-			selectedOutput = 1
-			selectedInput = input
-		else
-			selectedOutputMission = outputMission
-			selectedOutput = output
-			selectedInput = input
+	if links ~= nil then
+		for i, link in ipairs(links) do
+			local input = splitString(link.attr.id_input, "//")[1]
+			local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
+			if outputMission == "start" then
+				selectedOutputMission = "start"
+				selectedOutput = 1
+				selectedInput = input
+			else
+				selectedOutputMission = outputMission
+				selectedOutput = output
+				selectedInput = input
+			end
+			MakeLink()
 		end
-		MakeLink()
+		ScenarioName = xmlTable.kids[1].kids[4].kids[1].kids[1].text
+		ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
+	else
+		FrameWarning(LAUNCHER_SCENARIO_EMPTY, false, true)
 	end
-	ScenarioName = xmlTable.kids[1].kids[4].kids[1].kids[1].text
-	ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
 	LoadLock = true
 end
 
 function ResetLinks()
-	NeedToBeSaved = true
+	NeedToBeSaved = false
 	for k, link in pairs(Links) do
 		Links[k] = {}
 	end
 	for k, but in pairs(UI.Scenario.Input) do
 		but.state.chosen = false
+		Spring.Echo ("Input : "..but.caption)
 		but:InvalidateSelf()
 	end
 	for k, out in pairs(UI.Scenario.Output) do
 		for kk, but in pairs(out) do
 			but.state.chosen = false
+			Spring.Echo ("Output : "..but.caption)
 			but:InvalidateSelf()
 		end
 	end
@@ -1523,6 +1670,8 @@ function ExportGame()
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 25,
+					autoAdjust = true,
+					maxSize = 25,
 					color = { 1, 0.2, 0.2, 1 }
 				}
 			}
@@ -1543,6 +1692,8 @@ function ExportGame()
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 25,
+				autoAdjust = true,
+				maxSize = 25,
 				color = { 0.4, 0.2, 1, 1 }
 			},
 			beginExport = false
@@ -1555,7 +1706,7 @@ function BeginExportGame()
 		UI.Scenario.BeginExportationMessage:Dispose()
 		UI.Scenario.BeginExportationMessage = nil
 	end
-	
+
 	if not VFS.FileExists(gameFolder.."/SPRED.sdz") then
 		local message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND
 		UI.Scenario.ConfirmationMessage = Chili.Label:New{
@@ -1569,6 +1720,8 @@ function BeginExportGame()
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 25,
+				autoAdjust = true,
+				maxSize = 25,
 				color = { 1, 0.2, 0.2, 1 }
 			}
 		}
@@ -1589,7 +1742,7 @@ function BeginExportGame()
 		name = newName
 		scenarioName = scenarioName.."("..tostring(count)..")"
 	end
-	
+
 	-- Choose levels
 	local levelList = {}
 	if IncludeAllMissions then
@@ -1603,7 +1756,7 @@ function BeginExportGame()
 			end
 		end
 	end
-	
+
 	-- Choose traces
 	local tracesList = {}
 	for i, level in ipairs(LevelList) do
@@ -1613,9 +1766,9 @@ function BeginExportGame()
 			end
 		end
 	end
-	
+
 	local exportSuccess = false
-	
+
 	if Game.isPPEnabled then
 		if VFS.BuildPPGame then
 			VFS.BuildPPGame(scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
@@ -1633,6 +1786,8 @@ function BeginExportGame()
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 25,
+					autoAdjust = true,
+					maxSize = 25,
 					color = { 1, 0.2, 0.2, 1 }
 				}
 			}
@@ -1644,28 +1799,28 @@ function BeginExportGame()
 		local file = io.open("SPRED/game/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()
-		
+
 		-- Add levels and scenario
 		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game/scenario/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("SPRED/missions/"..level..".editor", "SPRED/game/missions/"..level..".editor")
 		end
-		
+
 		-- Compress
 		if not VFS.FileExists("SPRED/game.sdz") then
 			VFS.CompressFolder("SPRED/game")
 			os.rename("SPRED/game.sdz", "games/"..name..".sdz")
 		end
-		
+
 		-- Remove levels and scenario
 		os.rename("SPRED/game/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
 		for i, level in ipairs(levelList) do
 			os.rename("SPRED/game/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
 		end
-		
+
 		exportSuccess = true
 	end
-	
+
 	if exportSuccess then
 		-- Show message
 		if not alreadyExists then
@@ -1682,6 +1837,8 @@ function BeginExportGame()
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 25,
+					autoAdjust = true,
+					maxSize = 25,
 					color = { 0.2, 1, 0.2, 1 }
 				}
 			}
@@ -1699,6 +1856,8 @@ function BeginExportGame()
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 25,
+					autoAdjust = true,
+					maxSize = 25,
 					color = { 1, 0.2, 0.2, 1 }
 				}
 			}
@@ -1708,9 +1867,9 @@ end
 
 function MakeLink() -- If both input and output are selected, proceed linking
 	if selectedInput and selectedOutputMission then
-		
+
 		if (findInTable(LevelListNames, selectedInput) and findInTable(LevelListNames, selectedOutputMission))
-			or (selectedOutputMission == "start" and findInTable(LevelListNames, selectedInput)) 
+			or (selectedOutputMission == "start" and findInTable(LevelListNames, selectedInput))
 			or (selectedInput == "end" and findInTable(LevelListNames, selectedOutputMission))
 		then
 			local isValidOutput = false
@@ -1721,13 +1880,13 @@ function MakeLink() -- If both input and output are selected, proceed linking
 			end
 			if isValidOutput then
 				Links[selectedOutputMission][selectedOutput] = selectedInput
-				
+
 				UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
 				UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
 				UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
 				UI.Scenario.Input[selectedInput].state.chosen = true
 				UI.Scenario.Input[selectedInput]:InvalidateSelf()
-			
+
 				local someLinks = {}
 				for k, link in pairs(Links) do
 					for kk, output in pairs(link) do
@@ -1740,16 +1899,16 @@ function MakeLink() -- If both input and output are selected, proceed linking
 						b:InvalidateSelf()
 					end
 				end
-		
+
 				SaveState()
 			end
 		end
-		
+
 		selectedOutput = nil
 		selectedOutputMission = nil
 		selectedInput = nil
 	end
-	
+
 	if UI.Scenario then
 		UI.Scenario.Links:InvalidateSelf()
 	end
@@ -1765,142 +1924,6 @@ function FadeConfirmationMessage(delta)
 				UI.Scenario.ConfirmationMessage = nil
 			end
 		end
-	end
-end
-
-function BackWarning()
-	ClearTemporaryUI()
-	if NeedToBeSaved then
-		local window = Chili.Window:New{
-			parent = UI.MainWindow,
-			x = '20%',
-			y = '45%',
-			width = '60%',
-			height = '10%',
-			draggable = true,
-			resizable = false
-		}
-		Chili.Label:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '50%',
-			align = "center",
-			valign = "center",
-			caption = LAUNCHER_SCENARIO_WARNING,
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '0%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_YES,
-			OnClick = { function() NeedToBeSaved = false MainMenuFrame() end },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '50%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_NO,
-			OnClick = { ClearTemporaryUI },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Image:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '100%',
-			keepAspect = false,
-			file = "bitmaps/editor/blank.png",
-			color = { 0, 0, 0, 1 }
-		}
-		UI.Scenario.Warning = window
-	else
-		MainMenuFrame()
-	end
-end
-
-function QuitWarning()
-	ClearTemporaryUI()
-	if NeedToBeSaved then
-		local window = Chili.Window:New{
-			parent = UI.MainWindow,
-			x = '20%',
-			y = '45%',
-			width = '60%',
-			height = '10%',
-			draggable = true,
-			resizable = false
-		}
-		Chili.Label:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '50%',
-			align = "center",
-			valign = "center",
-			caption = LAUNCHER_SCENARIO_WARNING,
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '0%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_YES,
-			OnClick = { Quit },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Button:New{
-			parent = window,
-			x = '50%',
-			y = '50%',
-			width = '50%',
-			height = '50%',
-			caption = LAUNCHER_NO,
-			OnClick = { ClearTemporaryUI },
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25
-			}
-		}
-		Chili.Image:New{
-			parent = window,
-			x = '0%',
-			y = '0%',
-			width = '100%',
-			height = '100%',
-			keepAspect = false,
-			file = "bitmaps/editor/blank.png",
-			color = { 0, 0, 0, 1 }
-		}
-		UI.Scenario.Warning = window
-	else
-		Quit()
 	end
 end
 
@@ -1934,7 +1957,7 @@ function EitherDrawScreen() -- Shows a black background if required
 	if not vsx or not vsy or not HideView then
 		return
 	end
-	
+
 	local bgText = "bitmaps/editor/blank.png"
 	gl.Blending(false)
 	gl.Color(0, 0, 0, 0)

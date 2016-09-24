@@ -54,7 +54,7 @@ Object = {
   OnShow          = {},
 
   disableChildrenHitTest = false, --// if set childrens are not clickable/draggable etc - their mouse events are not processed
-} 
+}
 
 do
   local __lowerkeys = {}
@@ -72,7 +72,7 @@ local inherited = this.inherited
 --//=============================================================================
 --// used to generate unique objects names
 
-local cic = {} 
+local cic = {}
 local function GetUniqueId(classname)
   local ci = cic[classname] or 0
   cic[classname] = ci + 1
@@ -169,7 +169,7 @@ function Object:Dispose(_internal)
         end
       end
     end
- 
+
     self:CallListeners(self.OnDispose)
 
     self.disposed = true
@@ -346,7 +346,7 @@ function Object:ClearChildren()
   local old = self.preserveChildrenOrder
   self.preserveChildrenOrder = false
 
-  --// remove all children  
+  --// remove all children
     for i=1,#self.children_hidden do
       self:ShowChild(self.children_hidden[i])
     end
@@ -579,14 +579,14 @@ function Object:GetObjectByName(name)
 end
 
 
---// Climbs the family tree and returns the first parent that satisfies a 
+--// Climbs the family tree and returns the first parent that satisfies a
 --// predicate function or inherites the given class.
 --// Returns nil if not found.
 function Object:FindParent(predicate)
   if not self.parent then
     return -- not parent with such class name found, return nil
   elseif (type(predicate) == "string" and (self.parent):InheritsFrom(predicate)) or
-         (type(predicate) == "function" and predicate(self.parent)) then 
+         (type(predicate) == "function" and predicate(self.parent)) then
     return self.parent
   else
     return self.parent:FindParent(predicate)
@@ -841,7 +841,7 @@ end
 
 
 function Object:HitTest(x,y)
-  if not self.disableChildrenHitTest then 
+  if not self.disableChildrenHitTest then
     local children = self.children
     for i=1,#children do
       local c = children[i]
@@ -855,7 +855,7 @@ function Object:HitTest(x,y)
         end
       end
     end
-  end 
+  end
 
   return false
 end
@@ -961,4 +961,3 @@ function Object:FocusUpdate(...)
 end
 
 --//=============================================================================
-

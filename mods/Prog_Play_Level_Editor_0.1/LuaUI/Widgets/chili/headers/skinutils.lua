@@ -385,21 +385,21 @@ function DrawEditBox(obj)
 	gl.BeginEnd(GL.TRIANGLE_STRIP, _DrawTiledTexture, 0, 0, obj.width, obj.height,  skLeft,skTop,skRight,skBottom, tw,th)
 	gl.Texture(0,false)
 
-	local text = obj.text	
+	local text = obj.text
 	local font = obj.font
 	local displayHint = false
-	
+
 	if text == "" and not obj.state.focused then
-		text = obj.hint		
+		text = obj.hint
 		displayHint = true
 		font = obj.hintFont
 	end
-	
-	if (text) then        
-        if obj.passwordInput and not displayHint then 
+
+	if (text) then
+        if obj.passwordInput and not displayHint then
             text = string.rep("*", #text)
         end
-            
+
 		if (obj.offset > obj.cursor) then
 			obj.offset = obj.cursor
 		end
@@ -457,12 +457,12 @@ function DrawEditBox(obj)
 			local cursorX = font:GetTextWidth(cursorTxt)
 			local cc = obj.selectionColor
 			gl.Color(cc[1], cc[2], cc[3], cc[4])
-            
+
             local left, right = obj.selStart, obj.selEnd
             if left > right then
                 left, right = right, left
             end
-			
+
             local leftTxt = text:sub(obj.offset, left - 1)
 			local leftX = font:GetTextWidth(leftTxt)
             local rightTxt = text:sub(obj.offset, right - 1)

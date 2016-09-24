@@ -15,6 +15,7 @@
 -- @bool[opt=false] verticalSmartScroll if control is scrolled to bottom, keep scroll when layout changes
 -- @number[opt=0.7] smoothScrollTime time of the smooth scroll, in seconds
 -- @bool[opt=false] ignoreMouseWheel mouse wheel scrolling is enabled
+-- @bool[opt=false] autoAdjustChildren on update layout compute children vertical position depending on their height
 ScrollPanel = Control:Inherit{
   classname     = "scrollpanel",
   padding       = {0,0,0,0},
@@ -24,10 +25,11 @@ ScrollPanel = Control:Inherit{
   scrollPosY    = 0,
   verticalScrollbar   = true,
   horizontalScrollbar = true,
-  verticalSmartScroll = false, 
+  verticalSmartScroll = false,
   smoothScroll     = true,
-  smoothScrollTime = 0.7, 
+  smoothScrollTime = 0.7,
   ignoreMouseWheel = false,
+  autoAdjustChildren = false,
 }
 
 local this = ScrollPanel
@@ -224,6 +226,23 @@ function ScrollPanel:UpdateLayout()
     self.scrollPosY = self.clampY
   else
     self.scrollPosY = clamp(0, self.clampY, self.scrollPosY)
+  end
+
+  if self.autoAdjustChildren then
+    -- reposition children depending on their height
+    local children = self.children
+    local y = nil
+    for i=1,#children do
+      local child = children[i]
+      if (child) then
+        if y == nil then
+          y = child.y + child.height
+        else
+          child.y = y
+          y = y + child.height
+        end
+      end
+    end
   end
 
   return true;

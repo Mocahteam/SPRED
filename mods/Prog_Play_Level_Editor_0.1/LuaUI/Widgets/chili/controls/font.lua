@@ -8,6 +8,8 @@
 -- @table Font
 -- @string[opt="FreeSansBold.otf"] font font name
 -- @int[opt=12] size font size
+-- @bool[opt=false] autoAdjust if true auto adjust font size depending on parent size
+-- @bool[opt=false] maxSize if autoAdjust == true then font size doesn't exceed maxSize
 -- @bool[opt=false] shadow shadow enabled
 -- @bool[opt=false] outline outline enabled
 -- @tparam {r,g,b,a} color color table (default {1,1,1,1})
@@ -18,6 +20,8 @@ Font = Object:Inherit{
 
   font          = "FreeSansBold.otf",
   size          = 12,
+  autoAdjust    = false,
+  maxSize       = 12,
   outlineWidth  = 3,
   outlineWeight = 3,
 

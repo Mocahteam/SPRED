@@ -52,6 +52,8 @@ Control = Object:Inherit{
   font = {
     font          = "FreeSansBold.otf",
     size          = 14,
+    autoAdjust    = false,
+    maxSize       = 14,
     shadow        = false,
     outline       = false,
     outlineWidth  = 3,
@@ -68,7 +70,7 @@ Control = Object:Inherit{
     selected = false, --FIXME implement
     pressed  = false,
     enabled  = true, --FIXME implement
-	chosen = false,
+	  chosen = false,
   },
 
   skin            = nil,
@@ -430,6 +432,16 @@ end
 
 
 function Control:UpdateLayout()
+  if (self.font.autoAdjust and self.caption) then
+    local textHeight  = self.font:GetTextHeight(self.caption, self.font.maxSize)
+    local textWidth = self.font:GetTextWidth(self.caption, self.font.maxSize)
+    local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
+    ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)
+    self.font.size = math.max(1, math.min(self.font.maxSize * ratio, self.font.maxSize))
+    self.font:_LoadFont()
+    self.font:SetParent(self)
+  end
+
   if (self.autosize) then
     self:RealignChildren(true)
 
@@ -644,7 +656,7 @@ function Control:SetPosRelative(x, y, w, h, clientArea, dontUpdateRelative)
   end
 end
 
---- Resize the control 
+--- Resize the control
 -- @int w width
 -- @int h height
 -- @param clientArea TODO
@@ -690,14 +702,6 @@ function Control:GetMinimumExtents()
     if (not crb.top)    then top    = cgb.top    or 0 end
     if (not IsRelativeCoord(crb.bottom)) then bottomt = crb.bottom or 0 end
     local totalHeight = top + height + bottom
-
---[[
-    if (crb.width) then width = cgb.width or 0 end
-    if (crb.left)  then left  = cgb.left or 0 end
-    if (IsRelativeCoord(cgb.right)) then right = cgb.right or 0 end
-
-    ...
---]]
 
     totalWidth  = math.max(totalWidth,  self.minWidth)
     totalHeight = math.max(totalHeight, self.minHeight)
@@ -1009,16 +1013,7 @@ function Control:_SetupRTT(fnc, self_, drawInContentRect, ...)
 
 	gl.BlendFuncSeparate(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA, GL.ZERO, GL.ONE_MINUS_SRC_ALPHA)
 		fnc(self_, ...)
---[[
-		--//Render a red quad to indicate that RTT is used for the respective control
-		gl.Color(1,0,0,0.5)
-		if not drawInContentRect then
-			gl.Rect(self.x,self.y,self.x+50,self.y+50)
-		else
-			gl.Rect(0,0,50,50)
-		end
-		gl.Color(1,1,1,1)
---]]
+
 	gl.Blending("reset")
 
 	gl.StencilTest(false)

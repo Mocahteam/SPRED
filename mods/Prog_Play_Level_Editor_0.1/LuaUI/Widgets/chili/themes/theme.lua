@@ -57,4 +57,3 @@ function theme.LoadThemeDefaults(control)
     then table.merge(control,theme.skin[control.classname]) end -- per-class defaults
   table.merge(control,theme.skin.general)
 end
-

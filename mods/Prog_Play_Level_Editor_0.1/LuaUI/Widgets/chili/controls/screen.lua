@@ -180,19 +180,22 @@ end
 
 function Screen:FocusControl(control)
   --UnlinkSafe(self.activeControl)
-  if not CompareLinks(control, self.focusedControl) then
-      local focusedControl = UnlinkSafe(self.focusedControl)
-      if focusedControl then
-          focusedControl.state.focused = false
-          focusedControl:FocusUpdate() --rename FocusLost()
-      end
-      self.focusedControl = nil
-      if control then
-          self.focusedControl = MakeWeakLink(control, self.focusedControl)
-          self.focusedControl.state.focused = true
-          self.focusedControl:FocusUpdate() --rename FocusGain()
-      end
+  local oldFocusedControl = self.focusedControl
+  self.focusedControl = nil
+  if control then
+      self.focusedControl = MakeWeakLink(control, self.focusedControl)
+      self.focusedControl.state.focused = true
+      self.focusedControl:FocusUpdate() --rename FocusGain()
   end
+  oldFocusedControl = UnlinkSafe(oldFocusedControl)
+  if oldFocusedControl then
+      oldFocusedControl.state.focused = false
+      oldFocusedControl:FocusUpdate() --rename FocusLost()
+  end
+end
+
+function Screen:GetFocusedControl()
+  return self.focusedControl
 end
 
 function Screen:MouseDown(x,y,...)
