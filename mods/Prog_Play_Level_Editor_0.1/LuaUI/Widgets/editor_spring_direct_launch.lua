@@ -33,7 +33,7 @@ local ScenarioName = "" -- Name of the current scenario
 local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
 local selectedOutputMission -- Currently selected output mission
-local selectedOutput -- Currently selected output state
+local selectedOutputState -- Currently selected output state
 local IncludeAllMissions = false
 local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 local gameFolder = "games"
@@ -533,10 +533,10 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
 					gl.Vertex(x, y)
 					gl.Vertex(mouseX, mouseY)
-				elseif selectedOutputMission and selectedOutput then -- Draw a link between the center of the selected output and the mouse cursor
+				elseif selectedOutputMission and selectedOutputState then -- Draw a link between the center of the selected output and the mouse cursor
 					local x, y
-					x = UI.Scenario.Output[selectedOutputMission][selectedOutput].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutput].width/2
-					y = UI.Scenario.Output[selectedOutputMission][selectedOutput].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutput].height/2
+					x = UI.Scenario.Output[selectedOutputMission][selectedOutputState].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].width/2
+					y = UI.Scenario.Output[selectedOutputMission][selectedOutputState].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].height/2
 					local mouseX, mouseY = Spring.GetMouseState()
 					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
 					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
@@ -594,11 +594,11 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			maxSize = 16,
 		},
 		OnClick = { function()
-			if selectedOutputMission == "start" and selectedOutput == 1 then -- Delete links when double-click
-				if Links[selectedOutputMission][selectedOutput] then
-					UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
-					UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-					Links[selectedOutputMission][selectedOutput] = nil
+			if selectedOutputMission == "start" and selectedOutputState == 1 then -- Delete links when double-click
+				if Links[selectedOutputMission][selectedOutputState] then
+					UI.Scenario.Output[selectedOutputMission][selectedOutputState].state.chosen = false
+					UI.Scenario.Output[selectedOutputMission][selectedOutputState]:InvalidateSelf()
+					Links[selectedOutputMission][selectedOutputState] = nil
 					local someLinks = {}
 					for k, link in pairs(Links) do
 						for kk, output in pairs(link) do
@@ -612,12 +612,12 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 						end
 					end
 				end
-				selectedOutput = nil
+				selectedOutputState = nil
 				selectedOutputMission = nil
 				SaveState()
 			else
 				selectedOutputMission = "start"
-				selectedOutput = 1
+				selectedOutputState = 1
 			end
 		end }
 	}
@@ -644,21 +644,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			maxSize = 16,
 		},
 		OnClick = { function()
-				if selectedInput == "end" then -- Delete links when double-click
-					for k, link in pairs(Links) do
-						for kk, linked in pairs(link) do
-							if linked == selectedInput then
-								UI.Scenario.Output[k][kk].state.chosen = false
-								UI.Scenario.Output[k][kk]:InvalidateSelf()
-								Links[k][kk] = nil
-							end
-						end
-					end
-					UI.Scenario.Input[selectedInput].state.chosen = false
-					UI.Scenario.Input[selectedInput]:InvalidateSelf()
-					selectedInput = nil
-					SaveState()
-				elseif selectedOutputMission and selectedOutput then
+				if selectedOutputMission and selectedOutputState then
 					selectedInput = "end"
 				end
 			end
@@ -736,7 +722,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					UI.Scenario.Input[selectedInput]:InvalidateSelf()
 					selectedInput = nil
 					SaveState()
-				elseif selectedOutputMission and selectedOutput then
+				elseif selectedOutputMission and selectedOutputState then
 					selectedInput = LevelListNames[i]
 				end
 			end },
@@ -759,11 +745,11 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				}
 			}
 			but.OnClick = { function()
-				if selectedOutputMission == LevelListNames[i] and selectedOutput == out then -- Delete links when double-click
-					if Links[selectedOutputMission][selectedOutput] then
-						UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = false
-						UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
-						Links[selectedOutputMission][selectedOutput] = nil
+				if selectedOutputMission == LevelListNames[i] and selectedOutputState == out then -- Delete links when double-click
+					if Links[selectedOutputMission][selectedOutputState] then
+						UI.Scenario.Output[selectedOutputMission][selectedOutputState].state.chosen = false
+						UI.Scenario.Output[selectedOutputMission][selectedOutputState]:InvalidateSelf()
+						Links[selectedOutputMission][selectedOutputState] = nil
 						local someLinks = {}
 						for k, link in pairs(Links) do
 							for kk, output in pairs(link) do
@@ -777,12 +763,12 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 							end
 						end
 					end
-					selectedOutput = nil
+					selectedOutputState = nil
 					selectedOutputMission = nil
 					SaveState()
 				else
 					selectedOutputMission = LevelListNames[i]
-					selectedOutput = out
+					selectedOutputState = out
 				end
 			end }
 			UI.Scenario.Output[LevelListNames[i]][out] = but
@@ -882,6 +868,16 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	UI.MainWindow:AddChild(UI.Scenario.Export)
 	UI.MainWindow:AddChild(UI.Scenario.Import)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
+	-- force all output and input states to redraw (resolves bug on Begin and End
+	-- that are already display in chosen state even if they aren't in this state)
+	for k, but in pairs(UI.Scenario.Input) do
+		but:InvalidateSelf()
+	end
+	for k, out in pairs(UI.Scenario.Output) do
+		for kk, but in pairs(out) do
+			but:InvalidateSelf()
+		end
+	end
 end
 
 function ExportScenarioFrame() -- Shows the export scenario pop-up
@@ -1595,7 +1591,7 @@ function LoadState(direction) -- Load a previous state of the scenario
 			for kk, input in pairs(link) do
 				selectedInput = input
 				selectedOutputMission = k
-				selectedOutput = kk
+				selectedOutputState = kk
 				MakeLink()
 			end
 		end
@@ -1614,11 +1610,11 @@ function LoadScenario(xmlTable) -- Import a scenario from a xml file
 			local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
 			if outputMission == "start" then
 				selectedOutputMission = "start"
-				selectedOutput = 1
+				selectedOutputState = 1
 				selectedInput = input
 			else
 				selectedOutputMission = outputMission
-				selectedOutput = output
+				selectedOutputState = output
 				selectedInput = input
 			end
 			MakeLink()
@@ -1638,13 +1634,11 @@ function ResetLinks()
 	end
 	for k, but in pairs(UI.Scenario.Input) do
 		but.state.chosen = false
-		Spring.Echo ("Input : "..but.caption)
 		but:InvalidateSelf()
 	end
 	for k, out in pairs(UI.Scenario.Output) do
 		for kk, but in pairs(out) do
 			but.state.chosen = false
-			Spring.Echo ("Output : "..but.caption)
 			but:InvalidateSelf()
 		end
 	end
@@ -1876,14 +1870,14 @@ function MakeLink() -- If both input and output are selected, proceed linking
 			if selectedOutputMission == "start" then
 				isValidOutput = true
 			else
-				isValidOutput = findInTable(OutputStates[selectedOutputMission], selectedOutput)
+				isValidOutput = findInTable(OutputStates[selectedOutputMission], selectedOutputState)
 			end
 			if isValidOutput then
-				Links[selectedOutputMission][selectedOutput] = selectedInput
+				Links[selectedOutputMission][selectedOutputState] = selectedInput
 
-				UI.Scenario.Output[selectedOutputMission][selectedOutput].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
-				UI.Scenario.Output[selectedOutputMission][selectedOutput].state.chosen = true
-				UI.Scenario.Output[selectedOutputMission][selectedOutput]:InvalidateSelf()
+				UI.Scenario.Output[selectedOutputMission][selectedOutputState].chosenColor = UI.Scenario.Input[selectedInput].chosenColor
+				UI.Scenario.Output[selectedOutputMission][selectedOutputState].state.chosen = true
+				UI.Scenario.Output[selectedOutputMission][selectedOutputState]:InvalidateSelf()
 				UI.Scenario.Input[selectedInput].state.chosen = true
 				UI.Scenario.Input[selectedInput]:InvalidateSelf()
 
@@ -1904,7 +1898,7 @@ function MakeLink() -- If both input and output are selected, proceed linking
 			end
 		end
 
-		selectedOutput = nil
+		selectedOutputState = nil
 		selectedOutputMission = nil
 		selectedInput = nil
 	end
@@ -2042,7 +2036,7 @@ function widget:MousePress(mx, my, button)
 	if button == 3 then
 		selectedInput = nil
 		selectedOutputMission = nil
-		selectedOutput = nil
+		selectedOutputState = nil
 	end
 end
 

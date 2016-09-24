@@ -300,7 +300,7 @@ end
 --//
 
 function DrawButton(obj)
-  if obj.debug then Spring.Echo("DrawButton", obj.name, obj.state.pressed) end
+  if obj.debug then Spring.Echo("DrawButton", obj.name, obj.state.pressed, obj.state.chosen) end
 
   local w = obj.width
   local h = obj.height
@@ -314,7 +314,7 @@ function DrawButton(obj)
     bgcolor = obj.focusColor
     --bgcolor = mixColors(bgcolor, obj.focusColor, 0.5)
   elseif (obj.state.chosen and obj.chosenColor ~= nil) then
-	bgcolor = obj.chosenColor
+	   bgcolor = obj.chosenColor
   end
   gl.Color(bgcolor)
 
@@ -331,7 +331,7 @@ function DrawButton(obj)
   elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
     fgcolor = obj.focusColor
   elseif (obj.state.chosen and obj.chosenColor ~= nil) then
-	fgcolor = obj.chosenColor
+	   fgcolor = obj.chosenColor
   end
   gl.Color(fgcolor)
 
