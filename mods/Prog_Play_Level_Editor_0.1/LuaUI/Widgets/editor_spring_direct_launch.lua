@@ -27,6 +27,8 @@ local UI = {} -- Contains each UI element
 local MapList = {} -- List of the maps as read in the maps/ directory
 local LevelList = {} -- List of the levels as read in the SPRED/missions/ directory
 local LevelListNames = {} -- Names of the aforementioned levels
+local ScenarioList = {} -- List of the scenarios as read in the SPRED/scenarios/ directory
+local ScenarioListNames = {} -- Names of the aforementioned scenarios
 local OutputStates = {} -- List of the output states of the levels
 local Links = {} -- Links betwenn output and input states
 local ScenarioName = "" -- Name of the current scenario
@@ -292,6 +294,32 @@ function InitializeLevelList() -- Initialization of levels
 	end
 end
 
+function InitializeScenarioList() -- initoalization of scenarios
+	local toBeRemoved = {} -- Remove scenarios not corresponding to the chosen game
+	ScenarioListNames = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
+	for i, scenario in ipairs(ScenarioListNames) do
+		ScenarioList[i] = serde.deserialize(VFS.LoadFile(scenario)) -- This table contains the whole description of the scenarios
+		scenario = string.gsub(scenario, "SPRED\\scenarios\\", "")
+		scenario = string.gsub(scenario, ".xml", "")
+		ScenarioListNames[i] = scenario -- This table contains the raw name of the scenarios
+		if not string.find(ScenarioList[i].kids[1].kids[2].text, MainGame) then
+			table.insert(toBeRemoved, scenario)
+		end
+	end
+	for i, scenario in ipairs(toBeRemoved) do
+		local removedIndex = nil
+		for ii, s in ipairs(ScenarioListNames) do
+			if scenario == s then
+				removedIndex = ii
+			end
+		end
+		if removedIndex then
+			table.remove(ScenarioListNames, removedIndex)
+			table.remove(ScenarioList, removedIndex)
+		end
+	end
+end
+
 function InitializeOutputStates() -- Initialization of the list that contains every output states
 	Links["start"] = {}
 	for i, level in ipairs(LevelList) do
@@ -344,9 +372,9 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		text = LAUNCHER_NEW_NO_MAP_FOUND,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 20,
 		  autoAdjust = true,
-		  maxSize = 30,
+		  maxSize = 20,
 			color = { 1, 0, 0, 1 }
 		}
 	}
@@ -406,12 +434,12 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		y = "5%",
 		width = "90%",
 		height = "90%",
-		text = LAUNCHER_EDIT_NO_LEVEL_FOUND,
+		text = string.gsub(LAUNCHER_EDIT_NO_LEVEL_FOUND, "/MAINGAME/", MainGame),
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 20,
 			autoAdjust = true,
-			maxSize = 30,
+			maxSize = 20,
 			color = { 1, 0, 0, 1 }
 		}
 	}
@@ -439,6 +467,7 @@ end
 
 function InitializeScenarioFrame() -- Create a window for each level, and in each window, create a button for each output state and one for the input state
 	InitializeOutputStates()
+	InitializeScenarioList()
 	UI.Scenario = {}
 	UI.Scenario.Title = Chili.Label:New{
 		parent = UI.MainWindow,
@@ -474,13 +503,13 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		},
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
-	UI.Scenario.Import = Chili.Button:New{
+	UI.Scenario.Open = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "1%",
 		y = "90%",
 		width = "20%",
 		height = "10%",
-		caption = LAUNCHER_SCENARIO_IMPORT,
+		caption = LAUNCHER_SCENARIO_OPEN,
 		backgroundColor = { 0.2, 1, 0.8, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -490,20 +519,20 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		},
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ImportScenarioFrame() end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false LoadScenarioFrame() end)
 				else
-					ImportScenarioFrame()
+					LoadScenarioFrame()
 				end
 			end
 	 	}
 	}
-	UI.Scenario.Export = Chili.Button:New{
+	UI.Scenario.Save = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "21%",
 		y = "90%",
 		width = "20%",
 		height = "10%",
-		caption = LAUNCHER_SCENARIO_EXPORT,
+		caption = LAUNCHER_SCENARIO_SAVE,
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -511,7 +540,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			autoAdjust = true,
 			maxSize = 25,
 		},
-		OnClick = { ExportScenarioFrame }
+		OnClick = { SaveScenarioFrame }
 	}
 	UI.Scenario.ScenarioScrollPanel = Chili.ScrollPanel:New{
 		parent = UI.MainWindow,
@@ -802,17 +831,17 @@ function ClearUI() -- Remove UI elements from the screen
 
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
 	UI.MainWindow:RemoveChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:RemoveChild(UI.Scenario.Export)
-	UI.MainWindow:RemoveChild(UI.Scenario.Import)
+	UI.MainWindow:RemoveChild(UI.Scenario.Save)
+	UI.MainWindow:RemoveChild(UI.Scenario.Open)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
 end
 
 function ClearTemporaryUI() -- Remove pop-ups
-	if UI.Scenario.ImportScenario then
-		UI.Scenario.ImportScenario:Dispose()
+	if UI.Scenario.LoadScenario then
+		UI.Scenario.LoadScenario:Dispose()
 	end
-	if UI.Scenario.ExportScenario then
-		UI.Scenario.ExportScenario:Dispose()
+	if UI.Scenario.SaveScenario then
+		UI.Scenario.SaveScenario:Dispose()
 	end
 	if UI.Scenario.Warning then
 		UI.Scenario.Warning:Dispose()
@@ -862,8 +891,8 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.Scenario.Title)
 	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:AddChild(UI.Scenario.Export)
-	UI.MainWindow:AddChild(UI.Scenario.Import)
+	UI.MainWindow:AddChild(UI.Scenario.Save)
+	UI.MainWindow:AddChild(UI.Scenario.Open)
 	UI.MainWindow:AddChild(UI.Scenario.Reset)
 	-- force all output and input states to redraw (resolves bug on Begin and End
 	-- that are already display in chosen state even if they aren't in this state)
@@ -878,7 +907,7 @@ function EditScenarioFrame() -- Shows the edit scenario menu
 	NeedToBeSaved = false
 end
 
-function ExportScenarioFrame() -- Shows the export scenario pop-up
+function SaveScenarioFrame() -- Shows the save scenario pop-up
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
@@ -935,7 +964,6 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			color = {0.6, 0.6, 0.6, 1},
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
@@ -1010,7 +1038,7 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		y = "65%",
 		width = "40%",
 		height = "33%",
-		caption = LAUNCHER_SCENARIO_EXPORT,
+		caption = LAUNCHER_SCENARIO_SAVE,
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -1036,7 +1064,7 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			desc = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
 		end
 		window:Dispose()
-		ExportScenario(name, desc)
+		SaveScenario(name, desc)
 	end }
 	Chili.Image:New{
 		parent = window,
@@ -1048,7 +1076,7 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.ExportScenario = window
+	UI.Scenario.SaveScenario = window
 end
 
 --- Shows a warning message
@@ -1064,7 +1092,7 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		y = '45%',
 		width = '60%',
 		height = '20%',
-		draggable = true,
+		draggable = false,
 		resizable = false
 	}
 	Chili.Label:New{
@@ -1161,7 +1189,7 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 	UI.Scenario.Warning = window
 end
 
-function ImportScenarioFrame() -- Shows the import scenario pop-up
+function LoadScenarioFrame() -- Shows the import scenario pop-up
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
@@ -1195,26 +1223,24 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 	}
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
-	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
-	if #scenarioList == 0 then
+	if #ScenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
 			x = "5%",
 			y = "5%",
 			width = "90%",
 			height = "90%",
-			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			text = string.gsub(LAUNCHER_SCENARIO_OPEN_SCENARIO_NOT_FOUND, "/MAINGAME/", MainGame),
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 30,
+				size = 20,
 				autoAdjust = true,
-				maxSize = 30,
+				maxSize = 20,
 				color = { 1, 0, 0, 1 }
 			}
 		}
 	else
-		for i, scen in ipairs(scenarioList) do
-			local name = string.gsub(scen, "SPRED\\scenarios\\", "")
+		for i, name in ipairs(ScenarioListNames) do
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
@@ -1224,7 +1250,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 				caption = name,
 				OnClick = { function()
 						ResetScenario()
-						LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))
+						LoadScenario(ScenarioList[i])
 						window:Dispose()
 				 	end
 				},
@@ -1247,7 +1273,7 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		file = "bitmaps/editor/blank.png",
 		color = { 0, 0, 0, 1 }
 	}
-	UI.Scenario.ImportScenario = window
+	UI.Scenario.LoadScenario = window
 end
 
 function ExportGameFrame()
@@ -1318,26 +1344,24 @@ function ExportGameFrame()
 			maxSize = 20,
 		}
 	}
-	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
-	if #scenarioList == 0 then
+	if #ScenarioList == 0 then
 		Chili.TextBox:New{
 			parent = scrollPanel,
 			x = "5%",
 			y = "5%",
 			width = "90%",
 			height = "90%",
-			text = LAUNCHER_SCENARIO_IMPORT_SCENARIO_NOT_FOUND,
+			text = string.gsub(LAUNCHER_SCENARIO_OPEN_SCENARIO_NOT_FOUND, "/MAINGAME/", MainGame),
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 30,
+				size = 20,
 				autoAdjust = true,
-				maxSize = 30,
+				maxSize = 20,
 				color = { 1, 0, 0, 1 }
 			}
 		}
 	else
-		for i, scen in ipairs(scenarioList) do
-			local name = string.gsub(scen, "SPRED\\scenarios\\", "")
+		for i, name in ipairs(ScenarioListNames) do
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
@@ -1347,8 +1371,8 @@ function ExportGameFrame()
 				caption = name,
 				OnClick = { function()
 					IncludeAllMissions = includeMissions.checked
-					if (LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))) then
-						ExportGame()
+					if (LoadScenario(ScenarioList[i])) then
+						BeginExportGame()
 					end
 					window:Dispose()
 				end },
@@ -1388,14 +1412,14 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UpdateText(UI.NewLevel.NoMapMessage, LAUNCHER_NEW_NO_MAP_FOUND)
 	UpdateCaption(UI.NewLevel.Title, LAUNCHER_NEW_TITLE)
 
-	UpdateText(UI.LoadLevel.NoLevelMessage, LAUNCHER_EDIT_NO_LEVEL_FOUND)
+	UpdateText(UI.LoadLevel.NoLevelMessage, string.gsub(LAUNCHER_EDIT_NO_LEVEL_FOUND, "/MAINGAME/", MainGame))
 	UpdateCaption(UI.LoadLevel.Title, LAUNCHER_EDIT_TITLE)
 
 	UpdateCaption(UI.Scenario.Title, LAUNCHER_SCENARIO_TITLE)
 	UpdateCaption(UI.Scenario.Output["start"][1], LAUNCHER_SCENARIO_BEGIN)
 	UpdateCaption(UI.Scenario.Input["end"], LAUNCHER_SCENARIO_END)
-	UpdateCaption(UI.Scenario.Export, LAUNCHER_SCENARIO_EXPORT)
-	UpdateCaption(UI.Scenario.Import, LAUNCHER_SCENARIO_IMPORT)
+	UpdateCaption(UI.Scenario.Save, LAUNCHER_SCENARIO_SAVE)
+	UpdateCaption(UI.Scenario.Open, LAUNCHER_SCENARIO_OPEN)
 	UpdateCaption(UI.Scenario.Reset, LAUNCHER_SCENARIO_RESET)
 end
 
@@ -1450,7 +1474,7 @@ function ComputeInputStates() -- Associative table between input states and outp
 	return inputStates
 end
 
-function ExportScenario(name, desc) -- Creates a table using the xml-serde formalism and export it as a xml file
+function SaveScenario(name, desc) -- Creates a table using the xml-serde formalism and export it as a xml file
 	ScenarioName = name
 	ScenarioDesc = desc
 	NeedToBeSaved = false
@@ -1478,7 +1502,7 @@ function ExportScenario(name, desc) -- Creates a table using the xml-serde forma
 					},
 					{
 						["name"] = "description",
-						["text"] = "Game made with SPRED"
+						["text"] = "Game made with SPRED for "..MainGame
 					},
 					{
 						["name"] = "activities",
@@ -1660,7 +1684,7 @@ function LoadState(direction) -- Load a previous state of the scenario
 	LoadLock = true
 end
 
-function LoadScenario(xmlTable) -- Import a scenario from a xml file
+function LoadScenario(xmlTable) -- Load a scenario from a xml file
 	loadingSuccess = true
 	ResetLinks()
 	LoadLock = false
@@ -1715,75 +1739,10 @@ function ResetScenario()
 	SaveState()
 end
 
-function ExportGame()
-	if NeedToBeSaved then
-		if ScenarioName == "" then
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = LAUNCHER_SCENARIO_EXPORT_GAME_NOT_SAVED,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					autoAdjust = true,
-					maxSize = 25,
-					color = { 1, 0.2, 0.2, 1 }
-				}
-			}
-			return
-		else
-			ExportScenario(ScenarioName, ScenarioDesc)
-		end
-	end
-	if not UI.Scenario.ConfirmationMessage then
-		UI.Scenario.BeginExportationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = LAUNCHER_SCENARIO_EXPORT_GAME_BEGIN,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				autoAdjust = true,
-				maxSize = 25,
-				color = { 0.4, 0.2, 1, 1 }
-			},
-			beginExport = false
-		}
-	end
-end
-
 function BeginExportGame()
-	if UI.Scenario.BeginExportationMessage then
-		UI.Scenario.BeginExportationMessage:Dispose()
-		UI.Scenario.BeginExportationMessage = nil
-	end
-
 	if not VFS.FileExists(gameFolder.."/SPRED.sdz") then
-		local message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND
-		UI.Scenario.ConfirmationMessage = Chili.Label:New{
-			parent = UI.MainWindow,
-			x = "20%",
-			y = "95%",
-			width = "60%",
-			height = "5%",
-			caption = message,
-			align = "center",
-			font = {
-				font = "LuaUI/Fonts/Asimov.otf",
-				size = 25,
-				autoAdjust = true,
-				maxSize = 25,
-				color = { 1, 0.2, 0.2, 1 }
-			}
-		}
+		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/SPRED.sdz")
+		FrameWarning (message, false, true)
 		return
 	end
 	-- Generate name
@@ -1833,23 +1792,7 @@ function BeginExportGame()
 			VFS.BuildPPGame(scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
 			exportSuccess = true
 		else
-			local message = LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = message,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					autoAdjust = true,
-					maxSize = 25,
-					color = { 1, 0.2, 0.2, 1 }
-				}
-			}
+			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, false, true)
 		end
 	else
 		-- Change Modinfo.lua
@@ -1882,45 +1825,15 @@ function BeginExportGame()
 
 	if exportSuccess then
 		-- Show message
+		local message = ""
 		if not alreadyExists then
-			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", scenarioName)
+			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", scenarioName)
 			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = message,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					autoAdjust = true,
-					maxSize = 25,
-					color = { 0.2, 1, 0.2, 1 }
-				}
-			}
 		else
-			local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
+			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
 			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
-			UI.Scenario.ConfirmationMessage = Chili.Label:New{
-				parent = UI.MainWindow,
-				x = "20%",
-				y = "95%",
-				width = "60%",
-				height = "5%",
-				caption = message,
-				align = "center",
-				font = {
-					font = "LuaUI/Fonts/Asimov.otf",
-					size = 25,
-					autoAdjust = true,
-					maxSize = 25,
-					color = { 1, 0.2, 0.2, 1 }
-				}
-			}
 		end
+		FrameWarning(message, false, true)
 	end
 end
 
@@ -1970,19 +1883,6 @@ function MakeLink() -- If both input and output are selected, proceed linking
 
 	if UI.Scenario then
 		UI.Scenario.Links:InvalidateSelf()
-	end
-end
-
-function FadeConfirmationMessage(delta)
-	if UI.Scenario then
-		if UI.Scenario.ConfirmationMessage then
-			UI.Scenario.ConfirmationMessage.font.color[4] = UI.Scenario.ConfirmationMessage.font.color[4] - (delta/10)
-			UI.Scenario.ConfirmationMessage:InvalidateSelf()
-			if UI.Scenario.ConfirmationMessage.font.color[4] < 0 then
-				UI.Scenario.ConfirmationMessage:Dispose()
-				UI.Scenario.ConfirmationMessage = nil
-			end
-		end
 	end
 end
 
@@ -2085,16 +1985,6 @@ end
 
 function widget:Update(delta)
 	MakeLink()
-	FadeConfirmationMessage(delta)
-	if UI.Scenario then
-		if UI.Scenario.BeginExportationMessage then
-			if UI.Scenario.BeginExportationMessage.beginExport then
-				BeginExportGame()
-			else
-				UI.Scenario.BeginExportationMessage.beginExport = true
-			end
-		end
-	end
 end
 
 function widget:MousePress(mx, my, button)
