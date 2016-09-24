@@ -524,22 +524,13 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		gl.BeginEnd(
 			GL.LINES,
 			function()
-				if selectedInput then -- Draw a link between the center of the selected input and the mouse cursor
-					local x, y
-					x = UI.Scenario.Input[selectedInput].x + UI.Scenario.Input[selectedInput].tiles[1]/2 + UI.Scenario.Levels[selectedInput].x + UI.Scenario.Input[selectedInput].width/2
-					y = UI.Scenario.Input[selectedInput].y + UI.Scenario.Input[selectedInput].tiles[2]/2 + UI.Scenario.Levels[selectedInput].y + UI.Scenario.Input[selectedInput].height/2
-					local mouseX, mouseY = Spring.GetMouseState()
-					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
-					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
-					gl.Vertex(x, y)
-					gl.Vertex(mouseX, mouseY)
-				elseif selectedOutputMission and selectedOutputState then -- Draw a link between the center of the selected output and the mouse cursor
+				if selectedOutputMission and selectedOutputState then -- Draw a link between the center of the selected output and the mouse cursor
 					local x, y
 					x = UI.Scenario.Output[selectedOutputMission][selectedOutputState].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].width/2
 					y = UI.Scenario.Output[selectedOutputMission][selectedOutputState].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].height/2
 					local mouseX, mouseY = Spring.GetMouseState()
-					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7
-					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7
+					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosX
+					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosY
 					gl.Vertex(x, y)
 					gl.Vertex(mouseX, mouseY)
 				end
