@@ -821,6 +821,10 @@ function ClearTemporaryUI() -- Remove pop-ups
 end
 
 function MainMenuFrame() -- Shows the main menu
+	-- reset history
+	SaveStates = {}
+	LoadIndex = 1
+	-- Display main menu
 	ClearUI()
 	UI.MainWindow:AddChild(UI.Title)
 	UI.MainWindow:AddChild(UI.Subtitle)
@@ -1586,6 +1590,7 @@ function LoadState(direction) -- Load a previous state of the scenario
 				MakeLink()
 			end
 		end
+		NeedToBeSaved = true
 	end
 	LoadLock = true
 end
@@ -1639,6 +1644,7 @@ function ResetScenario()
 	ResetLinks()
 	ScenarioName = ""
 	ScenarioDesc = ""
+	SaveState()
 end
 
 function ExportGame()
