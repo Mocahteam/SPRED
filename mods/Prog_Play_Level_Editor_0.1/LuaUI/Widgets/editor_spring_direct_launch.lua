@@ -217,10 +217,11 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		focusColor = { 0, 0.6, 1, 1 },
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false ResetScenario() MainMenuFrame() end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() ResetScenario() MainMenuFrame() NeedToBeSaved = false end)
 				else
 					ResetScenario()
 					MainMenuFrame()
+					NeedToBeSaved = false
 				end
 			end
 	 	}
@@ -320,9 +321,9 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		caption = LAUNCHER_NEW_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 50,
 		  autoAdjust = true,
-		  maxSize = 40,
+		  maxSize = 50,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
@@ -385,9 +386,9 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		caption = LAUNCHER_EDIT_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
+			size = 50,
 			autoAdjust = true,
-			maxSize = 30,
+			maxSize = 50,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
@@ -450,9 +451,9 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		caption = LAUNCHER_SCENARIO_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
-			size = 40,
+			size = 50,
 			autoAdjust = true,
-			maxSize = 40,
+			maxSize = 50,
 			color = { 0, 0.8, 1, 1 }
 		}
 	}
@@ -884,27 +885,32 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		x = '20%',
 		y = '40%',
 		width = '60%',
-		height = '20%',
-		draggable = true,
+		height = '30%',
+		draggable = false,
 		resizable = false,
 		color = {1, 1, 1, 1}
 	}
-	local closeButton = Chili.Button:New{
+	local closeButton = Chili.Image:New{
 		parent = window,
-		x = '97%',
+		x = '95%',
 		y = '0%',
-		width = '3%',
-		height = '20%',
-		caption = LAUNCHER_X,
+		width = '5%',
+		height = '15%',
+		minWidth = 0,
+		minHeight = 0,
+		keepAspect = true,
+		file = "bitmaps/editor/close.png",
+		color = { 1, 0, 0, 1 },
 		OnClick = { function() window:Dispose() end }
 	}
-	closeButton.font.color = { 1, 0, 0, 1 }
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
 	Chili.Label:New{
 		parent = window,
 		x = '5%',
 		y = '10%',
-		width = '10%',
-		height = '20%',
+		width = '15%',
+		height = '21%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
@@ -917,10 +923,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 	}
 	local nameBox = Chili.EditBox:New{
 		parent = window,
-		x = '15%',
+		x = '25%',
 		y = '10%',
-		width = '75%',
-		height = '20%',
+		width = '60%',
+		height = '21%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
@@ -934,9 +940,9 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 	Chili.Label:New{
 		parent = window,
 		x = '5%',
-		y = '35%',
-		width = '10%',
-		height = '20%',
+		y = '36%',
+		width = '15%',
+		height = '21%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
@@ -949,10 +955,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 	}
 	local descBox = Chili.EditBox:New{
 		parent = window,
-		x = '15%',
-		y = '35%',
-		width = '75%',
-		height = '20%',
+		x = '25%',
+		y = '36%',
+		width = '60%',
+		height = '21%',
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 16,
@@ -961,14 +967,21 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			shadow = false
 		},
 		text = ScenarioDesc,
-		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT
+		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT,
+		hintFont = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
+			shadow = false
+		},
 	}
 	local exportBut = Chili.Button:New{
 		parent = window,
 		x = "30%",
-		y = "60%",
+		y = "65%",
 		width = "40%",
-		height = "30%",
+		height = "33%",
 		caption = LAUNCHER_SCENARIO_EXPORT,
 		backgroundColor = { 0, 0.8, 1, 1 },
 		font = {
@@ -1119,23 +1132,21 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 		height = '90%',
 		autoAdjustChildren = true,
 	}
-	local closeButton = Chili.Button:New{
+	local closeButton = Chili.Image:New{
 		parent = window,
 		x = '90%',
 		y = '0%',
-		width = '10%',
-		height = '10%',
-		caption = LAUNCHER_X,
-		OnClick = { function() window:Dispose() end },
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
-			autoAdjust = true,
-			maxSize = 30,
-			color = { 1, 0, 0, 1 }
-		},
-	  padding = {4, 4, 4, 4},
+		width = '9%',
+		height = '9%',
+		minWidth = 0,
+		minHeight = 0,
+		keepAspect = true,
+		file = "bitmaps/editor/close.png",
+		color = { 1, 0, 0, 1 },
+		OnClick = { function() window:Dispose() end }
 	}
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
 	local scenarioList = VFS.DirList("SPRED/scenarios/", "*.xml", VFS.RAW)
 	if #scenarioList == 0 then
 		Chili.TextBox:New{
@@ -1227,23 +1238,21 @@ function ExportGameFrame()
 		height = '80%',
 		autoAdjustChildren = true,
 	}
-	local closeButton = Chili.Button:New{
+	local closeButton = Chili.Image:New{
 		parent = window,
 		x = '90%',
 		y = '0%',
-		width = '10%',
-		height = '10%',
-		caption = LAUNCHER_X,
-		OnClick = { function() window:Dispose() end },
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 30,
-			autoAdjust = true,
-			maxSize = 30,
-			color = { 1, 0, 0, 1 }
-		},
-	  padding = {4, 4, 4, 4},
+		width = '9%',
+		height = '9%',
+		minWidth = 0,
+		minHeight = 0,
+		keepAspect = true,
+		file = "bitmaps/editor/close.png",
+		color = { 1, 0, 0, 1 },
+		OnClick = { function() window:Dispose() end }
 	}
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
 	local includeMissions = Chili.Checkbox:New{
 		parent = window,
 		x = "0%",
@@ -1290,8 +1299,9 @@ function ExportGameFrame()
 				caption = name,
 				OnClick = { function()
 					IncludeAllMissions = includeMissions.checked
-					LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))
-					ExportGame()
+					if (LoadScenario(serde.deserialize(VFS.LoadFile("SPRED/scenarios/"..name)))) then
+						ExportGame()
+					end
 					window:Dispose()
 				end },
 				font = {
@@ -1603,6 +1613,7 @@ function LoadState(direction) -- Load a previous state of the scenario
 end
 
 function LoadScenario(xmlTable) -- Import a scenario from a xml file
+	loadingSuccess = true
 	ResetLinks()
 	LoadLock = false
 	NeedToBeSaved = false
@@ -1626,8 +1637,10 @@ function LoadScenario(xmlTable) -- Import a scenario from a xml file
 		ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
 	else
 		FrameWarning(LAUNCHER_SCENARIO_EMPTY, false, true)
+		loadingSuccess = false
 	end
 	LoadLock = true
+	return loadingSuccess
 end
 
 function ResetLinks()
