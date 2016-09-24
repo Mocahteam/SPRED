@@ -895,7 +895,7 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 		x = '95%',
 		y = '0%',
 		width = '5%',
-		height = '15%',
+		height = '10%',
 		minWidth = 0,
 		minHeight = 0,
 		keepAspect = true,
@@ -916,7 +916,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			shadow = false
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_NAME
@@ -932,10 +935,25 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			shadow = false
+			color = {0.6, 0.6, 0.6, 1},
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		},
 		text = ScenarioName,
-		hint = LAUNCHER_SCENARIO_NAME_DEFAULT
+		hint = LAUNCHER_SCENARIO_NAME_DEFAULT,
+		hintFont = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
+			color = {0.6, 0.6, 0.6, 1},
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
+		},
 	}
 	Chili.Label:New{
 		parent = window,
@@ -948,7 +966,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			shadow = false
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		},
 		valign = "center",
 		caption = LAUNCHER_SCENARIO_DESCRIPTION
@@ -964,7 +985,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 16,
 			autoAdjust = true,
 			maxSize = 16,
-			shadow = false
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		},
 		text = ScenarioDesc,
 		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT,
@@ -973,7 +997,11 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 16,
 			autoAdjust = true,
 			maxSize = 16,
-			shadow = false
+			color = {0.6, 0.6, 0.6, 1},
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		},
 	}
 	local exportBut = Chili.Button:New{
@@ -989,6 +1017,10 @@ function ExportScenarioFrame() -- Shows the export scenario pop-up
 			size = 25,
 			autoAdjust = true,
 			maxSize = 25,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		}
 	}
 	exportBut.OnClick = { function()
@@ -1049,6 +1081,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 			size = 25,
 			autoAdjust = true,
 			maxSize = 25,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true
 		}
 	}
 	if (yesnoButton) then
@@ -1065,6 +1101,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				size = 25,
 				autoAdjust = true,
 				maxSize = 25,
+				-- avoid transparent artifact on windows superposition
+				outlineWidth = 0,
+				outlineWeight = 0,
+				outline = true
 			}
 		}
 		Chili.Button:New{
@@ -1080,6 +1120,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				size = 25,
 				autoAdjust = true,
 				maxSize = 25,
+				-- avoid transparent artifact on windows superposition
+				outlineWidth = 0,
+				outlineWeight = 0,
+				outline = true
 			}
 		}
 	end
@@ -1097,6 +1141,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				size = 25,
 				autoAdjust = true,
 				maxSize = 25,
+				-- avoid transparent artifact on windows superposition
+				outlineWidth = 0,
+				outlineWeight = 0,
+				outline = true
 			}
 		}
 	end
@@ -1134,10 +1182,10 @@ function ImportScenarioFrame() -- Shows the import scenario pop-up
 	}
 	local closeButton = Chili.Image:New{
 		parent = window,
-		x = '90%',
+		x = '95%',
 		y = '0%',
-		width = '9%',
-		height = '9%',
+		width = '5%',
+		height = '5%',
 		minWidth = 0,
 		minHeight = 0,
 		keepAspect = true,
@@ -1240,10 +1288,10 @@ function ExportGameFrame()
 	}
 	local closeButton = Chili.Image:New{
 		parent = window,
-		x = '90%',
+		x = '95%',
 		y = '0%',
-		width = '9%',
-		height = '9%',
+		width = '5%',
+		height = '5%',
 		minWidth = 0,
 		minHeight = 0,
 		keepAspect = true,

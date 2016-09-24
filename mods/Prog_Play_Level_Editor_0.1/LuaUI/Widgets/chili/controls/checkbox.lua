@@ -40,6 +40,19 @@ function Checkbox:New(obj)
 	return obj
 end
 
+function Checkbox:UpdateLayout()
+  if (self.font.autoAdjust and self.caption) then
+    local textHeight  = self.font:GetTextHeight(self.caption, self.font.maxSize)
+    local textWidth = self.font:GetTextWidth(self.caption, self.font.maxSize)
+    local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
+    ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)
+    self.font.size = math.max(1, math.min(self.font.maxSize * ratio, self.font.maxSize))
+    self.font:_LoadFont()
+    self.font:SetParent(self)
+    self.boxsize = self.font.size
+  end
+end
+
 --//=============================================================================
 
 --- Toggles the checked state
