@@ -1419,6 +1419,9 @@ function ExportGameFrame()
 end
 
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
+	-- close pop-up
+	ClearTemporaryUI()
+
 	Language = lang
 	GetLauncherStrings(lang)
 

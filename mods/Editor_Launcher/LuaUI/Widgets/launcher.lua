@@ -26,6 +26,10 @@ local vsy = 0
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
 function ChangeLanguage(lang) -- Load strings corresponding to lang and update captions/texts
+	if UI.Warning then
+		UI.Warning:Dispose()
+	end
+
 	GetLauncherStrings(lang)
 	UI.Title:SetCaption (LAUNCHER_TITLE)
 	UI.Help:SetText (LAUNCHER_HELP)
