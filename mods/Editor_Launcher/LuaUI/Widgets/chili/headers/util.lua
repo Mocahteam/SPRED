@@ -48,8 +48,10 @@ function ProcessRelativeCoord(code, total)
     local percent = tonumber(code:sub(1,-2)) or 0
     if (percent<0) then
       percent = 0
-    elseif (percent>100) then
-      percent = 100
+    -- Enable to specify relative coordinates bigger than parent size
+    -- usefull for responsive scrollPanels
+    --elseif (percent>100) then
+    --  percent = 100
     end
     return math.floor(total * percent/100)
   elseif (num)and((1/num)<0) then

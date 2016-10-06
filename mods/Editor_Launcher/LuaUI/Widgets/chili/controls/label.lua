@@ -85,7 +85,7 @@ function Label:UpdateLayout()
     local x = self.x
     local y = self.y
 
-    if self.valign == "center" then
+    if self.valign == "linecenter" then
       y = math.round(y + (self.height - h) * 0.5)
     elseif self.valign == "bottom" then
       y = y + self.height - h

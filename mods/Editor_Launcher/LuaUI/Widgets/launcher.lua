@@ -87,7 +87,7 @@ function InitializeMenu()
 		height = "10%",
 		caption = LAUNCHER_TITLE,
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
@@ -117,7 +117,6 @@ function InitializeMenu()
 		y = "30%",
 		width = "60%",
 		height = "50%",
-		autoAdjustChildren = true,
 	}
 	local gameList = {}
 	gameList = VFS.GetGames()
@@ -128,7 +127,7 @@ function InitializeMenu()
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
-				-- y = count * 80, Don't set y due to autoAdjustChildren on scroll panel
+				y = (count*15).."%",
 				width = '100%',
 				height = "15%",
 				caption = game,
@@ -183,7 +182,7 @@ function FrameWarning(msg)
 		width = '96%',
 		height = '60%',
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		caption = msg,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
