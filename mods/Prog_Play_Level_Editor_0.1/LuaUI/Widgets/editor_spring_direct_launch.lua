@@ -190,7 +190,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		y = "0%",
 		width = "15%",
 		height = "7%",
-		items = { "English", "Français" },
+		items = { "English", "Franï¿½ais" },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
@@ -1350,7 +1350,7 @@ function ExportGameFrame()
 		y = "90%",
 		width = "50%",
 		height = "10%",
-		boxsize = 30,
+		maxboxsize = 20,
 		boxalign = "left",
 		checked = false,
 		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,

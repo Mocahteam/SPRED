@@ -83,7 +83,7 @@ local selectionRect -- Selection visual feedback
 -- Zone variables
 local zoneButtons = {} -- Choose which type of zone to create
 local zoneScrollPanel -- List of zones placed
-local zoneBoxes = {} -- Contains an editbox to rename a zone and checkbox to display it
+local zoneBoxes = {} -- Contains an editbox to rename a zone, a focus button and checkbox to display it
 local plotZone = false -- Lock to plot a new zone
 local rValue, gValue, bValue = 0, 0, 0 -- Color of the new zone
 local zonePositions = { zoneX1 = 0, zoneX2 = 0, zoneZ1 = 0, zoneZ2 = 0 }
@@ -435,13 +435,14 @@ function addCheckbox(_parent, _x, _y, _w, _h, _checked, _text, _textColor)
 		height = _h,
 		caption = _text or "",
 		textColor = _textColor or {1, 1, 1, 1},
-		boxsize = _h or 10,
 		checked = _checked or false,
+		minWidth = 0,
+		minHeight = 0,
 		font = {
 			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = _h or 10,
+			size = 15,
 			autoAdjust = true,
-			maxSize = _h or 10,
+			maxSize = 15,
 		}
 	}
 	return checkBox
@@ -569,7 +570,7 @@ function zoneFrame()
 		clearUI()
 		globalStateMachine:setCurrentState(globalStateMachine.states.ZONE)
 		zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT)
-		Screen0:AddChild(windows["zoneWindow"])
+		Screen0:AddChild(windows['zoneWindow'])
 		zonesAttributesButton.state.chosen = false -- Reset state of this button
 		zonesAttributesButton:InvalidateSelf()
 	end
@@ -899,12 +900,12 @@ function initUnitContextualMenu()
 end
 
 function initZoneWindow()
-	windows['zoneWindow'] = addWindow(Screen0, '0%', '5%', '15%', '80%')
+	windows['zoneWindow'] = addWindow(Screen0, '0%', '10%', '15%', '80%')
 	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', EDITOR_ZONES)
 	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
-	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '0%', '0%', '100%', '100%', "bitmaps/editor/rectangle.png")
+	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '5%', '5%', '90%', '90%', "bitmaps/editor/rectangle.png", true)
 	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end)
-	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '0%', '0%', '100%', '100%', "bitmaps/editor/disk.png")
+	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '5%', '5%', '90%', '90%', "bitmaps/editor/disk.png", true)
 	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '75%')
 
 	local toggleAllOn = function() -- show all zones
@@ -921,8 +922,8 @@ function initZoneWindow()
 			end
 		end
 	end
-	addButton(zoneScrollPanel, 0, 0, "50%", 30, EDITOR_ZONES_SHOW, toggleAllOn)
-	addButton(zoneScrollPanel, "50%", 0, "50%", 30, EDITOR_ZONES_HIDE, toggleAllOff)
+	addButton(zoneScrollPanel, "0%", "0%", "50%", "6%", EDITOR_ZONES_SHOW, toggleAllOn)
+	addButton(zoneScrollPanel, "50%", "0%", "50%", "6%", EDITOR_ZONES_HIDE, toggleAllOff)
 
 	zonesAttributesButton = addButton(windows['zoneWindow'], '0%', '90%', '100%', '10%', EDITOR_ZONES_ATTRIBUTES, showZonesSpecialAttributesWindow)
 end
@@ -2456,14 +2457,35 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 		for k, zb in pairs(zoneBoxes) do
 			zoneScrollPanel:RemoveChild(zb.editBox)
 			zb.editBox:Dispose()
+			zoneScrollPanel:RemoveChild(zb.eyeBut)
+			zb.eyeBut:Dispose()
 			zoneScrollPanel:RemoveChild(zb.checkbox)
 			zb.checkbox:Dispose()
 		end
-		local size = 20
-		for i, z in ipairs(zoneList) do
-			local checkbox = addCheckbox(zoneScrollPanel, "80%", i * 3/2 * size, "20%", size, z.shown)
-			local editBox = addEditBox(zoneScrollPanel, 0, i * 3/2 * size, "80%", size, "left", z.name, {z.red, z.green, z.blue, 1})
-			zoneBoxes[z.id] = { editBox = editBox, checkbox = checkbox }
+		local size = 6
+		for i, zone in ipairs(zoneList) do
+			-- Eye button to focus a specific zone
+			local function viewZone()
+				local state = Spring.GetCameraState()
+				local x, z
+				if zone.type == "Rectangle" then
+					x = (zone.x1 + zone.x2)/2
+					z = (zone.z1 + zone.z2)/2
+				elseif zone.type == "Disk" then
+					x = zone.x
+					z = zone.z
+				end
+				state.px, state.py, state.pz = x, Spring.GetGroundHeight(x, z), z
+				state.height = 500
+				Spring.SetCameraState(state, 2)
+			end
+			local eyeBut = addImage(zoneScrollPanel, "0%", (6+(i-1)*(size+1)).."%", "15%", size.."%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+			eyeBut.OnClick = { viewZone }
+			eyeBut.OnMouseOver = { function() eyeBut.color = {1, 1, 1, 1} end }
+			eyeBut.OnMouseOut = { function() eyeBut.color = {0, 1, 1, 1} end }
+			local editBox = addEditBox(zoneScrollPanel, "15%", (6+(i-1)*(size+1)).."%", "70%", size.."%", "left", zone.name, {zone.red, zone.green, zone.blue, 1})
+			local checkbox = addCheckbox(zoneScrollPanel, "85%", (6+(i-1)*(size+1)).."%", "15%", size.."%", zone.shown)
+			zoneBoxes[zone.id] = { editBox = editBox, eyeBut = eyeBut, checkbox = checkbox }
 		end
 		totalZones = #zoneList
 		zoneIndex = 0
@@ -2487,12 +2509,13 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.ATTR)
 	zonesAttributesButton.state.chosen = true
 	zonesAttributesButton:InvalidateSelf()
-	windows['zonesAttributes'] = addWindow(Screen0, '15%', '5%', '60%', '80%')
+	windows['zonesAttributes'] = addWindow(Screen0, '15%', '10%', '60%', '80%')
 	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
 	local count = 0
 	for i, z in ipairs(zoneList) do -- Generate labels and buttons
-		addLabel(sp, '0%', count * 50, "25%", 50, z.name, 20, "center", { z.red, z.green, z.blue, 1 })
-		local alwaysInViewButton = addButton(sp, "25%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
+		local y = (count * 7).."%"
+		addLabel(sp, '0%', y, "25%", "7%", z.name, 20, "center", { z.red, z.green, z.blue, 1 })
+		local alwaysInViewButton = addButton(sp, "25%", y, "25%", "7%", EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
 		alwaysInViewButton.state.chosen = z.alwaysInView -- Set to current value
 		alwaysInViewButton.OnClick = {
 			function()
@@ -2501,7 +2524,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				z.alwaysInView = not z.alwaysInView
 			end
 		}
-		local markerButton = addButton(sp, "50%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
+		local markerButton = addButton(sp, "50%", y, "25%", "7%", EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
 		markerButton.state.chosen = z.marker -- Set to current value
 		markerButton.OnClick = {
 			function()
@@ -2510,7 +2533,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				z.marker = not z.marker
 			end
 		}
-		local showInGameButton = addButton(sp, "75%", count * 50, "25%", 50, EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
+		local showInGameButton = addButton(sp, "75%", y, "25%", "7%", EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
 		showInGameButton.state.chosen = z.showInGame
 		showInGameButton.OnClick = {
 			function()
