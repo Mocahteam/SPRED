@@ -26,8 +26,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 -- Global UI Variables
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
-local testLevelButton
-local globalFunctions, unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
+local unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
 
 -- File Variables
@@ -43,7 +42,6 @@ local unitButtons = {} -- Contains every type of unit as defined in UnitDef, but
 local factionButtons = {} -- Buttons to expand or collapse unit buttons
 local teamLabels = {} -- Number of each team
 local teamButtons = {} -- Contains every teams, buttons used to define the team of units being placed
-local teamImages = {} -- Used to color the team buttons
 local unitContextualMenu -- Appears when right-clicking on a unit
 local unitAttributesWindow -- Temporary window to change unit's attributes
 local changeHPEditBox -- Edit box to change the hp of the unit to a specific percentage
@@ -71,7 +69,6 @@ local selectGroupButtons = {} -- Select a group to assign units to it
 local unitGroupLabels = {} -- Name and id of unit in a group
 local unitGroupViewButtons = {} -- Focus on a unit that is in a group
 local unitGroupRemoveUnitButtons = {} -- Remove a unit from a group
-local addUnitsToGroupsButton -- Add the selected units to the selected groups (in the groups frame)
 local groupListUnitsButtons = {} -- Allows selection of units
 local groupListUnitsEyes = {} -- Allows to focus on units
 local addGroupButton -- Creates a new group
@@ -173,8 +170,6 @@ local actionFeatures = {}
 local dontUpdateComboBox = false -- lock to prevent updating when it's required not to
 local configureEventButton -- button to show the configure event window
 local customTriggerEditBox -- to write a custom trigger
-local customTriggerButton -- to save the custom trigger
-local defaultTriggerButton -- to use the default trigger
 local currentTriggerLabel -- so the user knows which trigger is currently used
 local actionSequenceScrollPanel -- scrollpanel containing labels and buttons for each action
 local actionSequenceItems = {} -- contains the aforementioned labels and buttons
@@ -818,7 +813,7 @@ function initTopBar()
 	if Game.isPPEnabled then
 		topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '65%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
 	end
-	testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
+	local testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
 
@@ -880,7 +875,7 @@ function initUnitWindow()
 	windows["unitGroupsWindow"] = addWindow(Screen0, "5%", "15%", '90%', '80%', true)
 	addLabel(windows["unitGroupsWindow"], '0%', '0%', '18%', '9%', EDITOR_UNITS_LIST, 30)
 	groupListUnitsScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '18%', '90%')
-	addUnitsToGroupsButton = addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
+	addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
 	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '9%', EDITOR_UNITS_GROUPS_LIST, 30)
 	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '22%', '10%', '78%', '90%')
 	local closeGroupsWindow = function()
@@ -1166,8 +1161,8 @@ function initTriggerWindow()
 		saveState()
 	end
 	currentTriggerLabel = addLabel(windows['configureEvent'], '2%', '19%', '96%', '2%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13, "left")
-	customTriggerButton = addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
-	defaultTriggerButton = addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
+	addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
+	addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
 	-- Action sequence
 	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE)
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
