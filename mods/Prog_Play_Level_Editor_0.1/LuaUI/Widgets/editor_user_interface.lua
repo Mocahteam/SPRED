@@ -663,9 +663,9 @@ function tracesFrame()
 		else
 			local count = 0
 			for i, trace in ipairs(tracesList) do
-				local name = string.gsub(trace, "traces\\"..missionName.."\\", "")
+				local name = string.gsub(trace, "traces\\data\\expert\\"..missionName.."\\", "")
 				name = string.gsub(name, ".xml", "")
-				local but = addButton(tracesUI.scrollPanel, '0%', 40 * count, '90%', 40, name)
+				local but = addButton(tracesUI.scrollPanel, '0%', (10 * count).."%", '90%', "10%", name)
 				but.OnClick = {
 					function()
 						local index = findInTable(chosenTraces, name)
@@ -687,8 +687,10 @@ function tracesFrame()
 					but.state.chosen = false
 				end
 				table.insert(tracesUI.buttons, but)
-				local viewBut = addButton(tracesUI.scrollPanel, '90%', 40 * count, '10%', 40, "", function() tracesUI.textbox:SetText(VFS.LoadFile("traces/"..missionName.."/"..name..".xml")) end)
-				addImage(viewBut, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				local viewBut = addImage(tracesUI.scrollPanel, '90%', (10 * count).."%", '10%', "10%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				viewBut.OnClick = { function() tracesUI.textbox:SetText(VFS.LoadFile("traces/data/expert/"..missionName.."/"..name..".xml")) end }
+				viewBut.OnMouseOver = { function() viewBut.color = {1, 1, 1, 1} end }
+				viewBut.OnMouseOut = { function() viewBut.color = {0, 1, 1, 1} end }
 				table.insert(tracesUI.viewButtons, viewBut)
 				count = count + 1
 			end
@@ -1334,12 +1336,14 @@ function initMapSettingsWindow()
 end
 
 function initTracesWindow()
-	windows['tracesWindow'] = addWindow(Screen0, '5%', '15%', '90%', '70%', true)
-	local closeButton = addButton(windows['tracesWindow'], '95%', '0%', '5%', '7%', "X", tracesFrame)
-	closeButton.font.color = { 1, 0, 0, 1 }
-	addLabel(windows['tracesWindow'], '0%', '0%', '30%', '10%', EDITOR_TRACES_TITLE)
-	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '10%', '30%', '90%')
-	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '10%', '70%', '90%')
+	windows['tracesWindow'] = addWindow(Screen0, '5%', '15%', '90%', '80%')
+	addLabel(windows['tracesWindow'], '10%', '0%', '80%', '15%', EDITOR_TRACES_TITLE, 30)
+	local closeButton = addImage(windows['tracesWindow'], '97%', '0%', '3%', '5%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeButton.OnClick = { tracesFrame }
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
+	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '17%', '30%', '83%')
+	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '17%', '70%', '83%')
 	tracesUI.textbox = addTextBox(viewSP, '2%', '2%', '96%', '96%', "", 15)
 end
 
