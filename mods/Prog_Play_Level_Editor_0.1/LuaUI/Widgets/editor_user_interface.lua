@@ -609,7 +609,7 @@ function mapSettingsFrame()
 	else
 		clearUI()
 		globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
-		Screen0:AddChild(windows["mapSettingsWindow"])
+		Screen0:AddChild(windows['mapSettingsWindow'])
 		-- Set parameters to UI elements
 		mapNameEditBox:SetText(mapDescription.mapName)
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
@@ -806,11 +806,11 @@ function initTopBar()
 
 	-- Menu buttons
 	topBarButtons[globalStateMachine.states.FILE] = addButton(windows["topBar"], '0%', '0%', '10%', '100%', EDITOR_FILE, fileFrame)
-	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '10%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
-	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '20%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
-	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '30%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
-	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '40%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
-	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '50%', '0%', '15%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.MAPSETTINGS] = addButton(windows["topBar"], '10%', '0%', '15%', '100%', EDITOR_MAPSETTINGS, mapSettingsFrame)
+	topBarButtons[globalStateMachine.states.UNIT] = addButton(windows["topBar"], '25%', '0%', '10%', '100%', EDITOR_UNITS, unitFrame)
+	topBarButtons[globalStateMachine.states.ZONE] = addButton(windows["topBar"], '35%', '0%', '10%', '100%', EDITOR_ZONES, zoneFrame)
+	topBarButtons[globalStateMachine.states.FORCES] = addButton(windows["topBar"], '45%', '0%', '10%', '100%', EDITOR_FORCES, forcesFrame)
+	topBarButtons[globalStateMachine.states.TRIGGER] = addButton(windows["topBar"], '55%', '0%', '10%', '100%', EDITOR_TRIGGERS, triggerFrame)
 	if Game.isPPEnabled then
 		topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '65%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
 	end
@@ -1194,24 +1194,26 @@ function initTriggerWindow()
 end
 
 function initMapSettingsWindow()
-	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '25%', '60%', '50%', true)
-	local closeButton = addButton(windows['mapSettingsWindow'], '95%', '0%', '5%', '7%', "X", mapSettingsFrame)
-	closeButton.font.color = { 1, 0, 0, 1 }
-	addLabel(windows['mapSettingsWindow'], '0%', '0%', '100%', '5%', EDITOR_MAPSETTINGS)
-	addLabel(windows['mapSettingsWindow'], '0%', '10%', '10%', '10%', EDITOR_MAPSETTINGS_MAP_NAME, 16)
-	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '10%', '10%', '85%', '10%')
-	addLabel(windows['mapSettingsWindow'], '0%', '25%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING)
-	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '2%', '30%', '96%', '5%')
-	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '45%', '96%', '30%')
+	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '20%', '60%', '60%')
+	addLabel(windows['mapSettingsWindow'], '0%', '0%', '100%', '7%', EDITOR_MAPSETTINGS, 30)
+	local closeButton = addImage(windows['mapSettingsWindow'], '95%', '0%', '4%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeButton.OnClick = { mapSettingsFrame }
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
+	addLabel(windows['mapSettingsWindow'], '0%', '10%', '15%', '6%', EDITOR_MAPSETTINGS_MAP_NAME)
+	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '15%', '10%', '85%', '6%')
+	addLabel(windows['mapSettingsWindow'], '0%', '20%', '15%', '6%', EDITOR_MAPSETTINGS_MAP_BRIEFING)
+	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '15%', '20%', '85%', '6%')
+	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '35%', '96%', '40%')
 	mapBriefingTextBox = addTextBox(panel, '2%', '7%', '96%', '86%', "Lorem ipsum blabla", 18)
 	mapBriefingTextBox.font.shadow = false
 
 	local colorUI = {}
-	colorUI.red = addTrackbar(windows['mapSettingsWindow'], '5%', '37%', "20%", "5%", 0, 1, 1, 0.02)
-	colorUI.green = addTrackbar(windows['mapSettingsWindow'], '25%', '37%', "20%", "5%", 0, 1, 0, 0.02)
-	colorUI.blue = addTrackbar(windows['mapSettingsWindow'], '45%', '37%', "20%", "5%", 0, 1, 0, 0.02)
-	colorUI.previewImage = addImage(windows['mapSettingsWindow'], '67%', '37%', '6%', '5%', "bitmaps/editor/blank.png", false, {1, 0, 0, 1})
-	colorUI.button = addButton(windows['mapSettingsWindow'], '75%', '37%', '20%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR)
+	colorUI.red = addTrackbar(windows['mapSettingsWindow'], '5%', '28%', "20%", "5%", 0, 1, 1, 0.02)
+	colorUI.green = addTrackbar(windows['mapSettingsWindow'], '25%', '28%', "20%", "5%", 0, 1, 0, 0.02)
+	colorUI.blue = addTrackbar(windows['mapSettingsWindow'], '45%', '28%', "20%", "5%", 0, 1, 0, 0.02)
+	colorUI.previewImage = addImage(windows['mapSettingsWindow'], '67%', '28%', '6%', '5%', "bitmaps/editor/blank.png", false, {1, 0, 0, 1})
+	colorUI.button = addButton(windows['mapSettingsWindow'], '75%', '28%', '20%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR)
 
 	local function updateImage()
 		colorUI.previewImage.color = { colorUI.red.value, colorUI.green.value, colorUI.blue.value, 1 }
@@ -4547,12 +4549,12 @@ function showWidgetsWindow() -- Show the window that allows the user to change w
 	end
 	mapSettingsButtons.widgetsButton.state.chosen = true
 	mapSettingsButtons.widgetsButton:InvalidateSelf()
-	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '50%')
+	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '20%', '60%')
 	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS)
 	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
 	local count = 0
 	for i, w in ipairs(customWidgets) do
-		local but = addButton(sp, '0%', 40 * count, '100%', 40, w.name)
+		local but = addButton(sp, '0%', (15 * count).."%", '100%', "15%", w.name)
 		but.state.chosen = w.active
 		but.OnClick = {
 			function()
