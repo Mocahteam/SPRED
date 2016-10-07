@@ -17,7 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 --
 -- SYNCED
 --
-if (gadgetHandler:IsSyncedCode()) then 
+if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -264,7 +264,7 @@ function gadget:GameFrame( frameNumber )
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
--- 
+--
 -- UNSYNCED
 --
 else
@@ -287,9 +287,6 @@ function gadget:RecvFromSynced(msg)
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2])
-	end
-	if msgContents[1] == "requestSave" then
-		Script.LuaUI.requestUnitListUpdate()
 	end
 	if msgContents[1] == "finishedLoading" then
 		Script.LuaUI.finishedLoading()

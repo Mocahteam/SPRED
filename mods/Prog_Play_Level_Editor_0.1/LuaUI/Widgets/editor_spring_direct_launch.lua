@@ -110,7 +110,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		width = '100%',
 		height = '3%',
 		caption = string.gsub(LAUNCHER_SUBTITLE, "/MAINGAME/", MainGame),
-		valign = "center",
+		valign = "linecenter",
 		align = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -345,7 +345,7 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		width = "60%",
 		height = "5%",
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		caption = LAUNCHER_NEW_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -361,7 +361,6 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		y = "20%",
 		width = "60%",
 		height = "60%",
-		autoAdjustChildren = true,
 	}
 	UI.NewLevel.NoMapMessage = Chili.TextBox:New{
 		parent = UI.NewLevel.MapScrollPanel,
@@ -383,7 +382,7 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		local mapButton = Chili.Button:New{
 			parent = UI.NewLevel.MapScrollPanel,
 			x = "0%",
-			--y = 80 * ( i - 1 ), Don't set y due to autoAdjustChildren on scroll panel
+			y = ((i-1)*15).."%",
 			width = "100%",
 			height = "15%",
 			caption = map,
@@ -410,7 +409,7 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		width = "60%",
 		height = "5%",
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		caption = LAUNCHER_EDIT_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -426,7 +425,6 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		y = "20%",
 		width = "60%",
 		height = "60%",
-		autoAdjustChildren = true,
 	}
 	UI.LoadLevel.NoLevelMessage = Chili.TextBox:New{
 		parent = UI.LoadLevel.LevelScrollPanel,
@@ -448,7 +446,7 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		local levelButton = Chili.Button:New{
 			parent = UI.LoadLevel.LevelScrollPanel,
 			x = "0%",
-			-- y = 80 * ( i - 1 ), Don't set y due to autoAdjustChildren on scroll panel
+			y = ((i-1)*15).."%",
 			width = "100%",
 			height = "15%",
 			caption = LevelList[i].description.name,
@@ -476,7 +474,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		width = "60%",
 		height = "5%",
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		caption = LAUNCHER_SCENARIO_TITLE,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -707,7 +705,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			height = 30,
 			caption = level.description.name,
 			align = "center",
-			valign = "center",
+			valign = "linecenter",
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 18,
@@ -950,7 +948,7 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			outlineWeight = 0,
 			outline = true
 		},
-		valign = "center",
+		valign = "linecenter",
 		caption = LAUNCHER_SCENARIO_NAME
 	}
 	local nameBox = Chili.EditBox:New{
@@ -999,7 +997,7 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			outlineWeight = 0,
 			outline = true
 		},
-		valign = "center",
+		valign = "linecenter",
 		caption = LAUNCHER_SCENARIO_DESCRIPTION
 	}
 	local descBox = Chili.EditBox:New{
@@ -1102,7 +1100,7 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		width = '96%',
 		height = '60%',
 		align = "center",
-		valign = "center",
+		valign = "linecenter",
 		caption = msg,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
@@ -1207,6 +1205,8 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 		width = '90%',
 		height = '19%',
 		caption = LAUNCHER_SCENARIO_SELECT,
+		valign = "linecenter",
+		align = "center",
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
@@ -1224,7 +1224,6 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 		y = '20%',
 		width = '100%',
 		height = '80%',
-		autoAdjustChildren = true,
 	}
 	local closeButton = Chili.Image:New{
 		parent = window,
@@ -1263,7 +1262,7 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
-				-- y = (i-1) * 40, Don't set y due to autoAdjustChildren on scroll panel
+				y = ((i-1) * 25).."%",
 				width = '100%',
 				height = "25%",
 				caption = name,
@@ -1329,7 +1328,6 @@ function ExportGameFrame()
 		y = '10%',
 		width = '100%',
 		height = '80%',
-		autoAdjustChildren = true,
 	}
 	local closeButton = Chili.Image:New{
 		parent = window,
@@ -1385,7 +1383,7 @@ function ExportGameFrame()
 			Chili.Button:New{
 				parent = scrollPanel,
 				x = '0%',
-				-- y = (i-1) * 60, Don't set y due to autoAdjustChildren on scroll panel
+				y = ((i-1) * 15).."%",
 				width = '100%',
 				height = "15%",
 				caption = name,

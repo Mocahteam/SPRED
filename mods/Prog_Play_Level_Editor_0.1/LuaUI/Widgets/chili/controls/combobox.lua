@@ -92,6 +92,7 @@ function ComboBox:MouseDown(...)
 
     local labels = {}
     local labelHeight = self.height
+    local labelPadding = self.padding
 
     local width = math.max(self.width, self.minDropDownWidth)
     local height = 10
@@ -102,6 +103,7 @@ function ComboBox:MouseDown(...)
             caption = item,
             width = '100%',
             height = labelHeight,
+            padding = labelPadding,
             state = {selected = (i == self.selected)},
             font = {
               font = self.font.font,
