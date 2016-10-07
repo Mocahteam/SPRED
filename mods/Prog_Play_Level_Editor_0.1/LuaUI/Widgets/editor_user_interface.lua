@@ -582,7 +582,7 @@ function forcesFrame()
 	else
 		clearUI()
 		globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
-		Screen0:AddChild(windows["forceWindow"])
+		Screen0:AddChild(windows['forceWindow'])
 		if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
 			teamConfig()
 		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
@@ -886,10 +886,10 @@ function initUnitWindow()
 		showGroupsButton:InvalidateSelf()
 		unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
 	end
-	local delbut = addImage(windows["unitGroupsWindow"], "95%", "2%", "5%", "5%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-	delbut.OnClick = { closeGroupsWindow }
-	delbut.OnMouseOver = { function() delbut.color = { 1, 0.5, 0, 1 } end }
-	delbut.OnMouseOut = { function() delbut.color = { 1, 0, 0, 1 } end }
+	local closebut = addImage(windows["unitGroupsWindow"], "95%", "2%", "5%", "5%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closebut.OnClick = { closeGroupsWindow }
+	closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
+	closebut.OnMouseOut = { function() closebut.color = { 1, 0, 0, 1 } end }
 end
 
 function initUnitContextualMenu()
@@ -929,17 +929,19 @@ function initZoneWindow()
 end
 
 function initForcesWindow()
-	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%', true)
+	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%')
 	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_TEAMCONFIG, teamConfig)
 	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/2).."%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_ALLYTEAMS, allyTeam)
-	local closeButton = addButton(windows['forceWindow'], "95%", "0%", "5%", "5%", EDITOR_X, clearUI)
-	closeButton.font.color = {1, 0, 0, 1}
+	local closeButton = addImage(windows['forceWindow'], "95%", "0%", "5%", "5%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeButton.OnClick = { clearUI }
+	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
+	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
 
 	-- Team Config Window
-	forcesWindows.teamConfigWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	forcesWindows.teamConfigWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
 	local teamConfigScrollPanel = addScrollPanel(forcesWindows.teamConfigWindow, '0%', '0%', '100%', '100%')
 	for i, team in ipairs(teamStateMachine.states) do
-		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', team * 100, '100%', 100)
+		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', (team * 20).."%", '100%', "20%")
 		teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '5%', '30%', '10%', '40%', "left", EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), {teams[team].red, teams[team].green, teams[team].blue, 1})
 		teamName[team] = teamNameEditBoxes[team].text
 		-- Enabled/Disabled
@@ -1009,7 +1011,7 @@ function initForcesWindow()
 	end
 
 	-- Ally Team Window
-	forcesWindows.allyTeamsWindow = addWindow(windows['forceWindow'], 0, '5%', '100%', '95%')
+	forcesWindows.allyTeamsWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
 	addLabel(forcesWindows.allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30)
 	teamListScrollPanel = addScrollPanel(forcesWindows.allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
 	for i, team in ipairs(teamStateMachine.states) do
@@ -1023,8 +1025,8 @@ function initForcesWindow()
 		selectAllyTeamsButtons[team].font.size = 20
 		allyTeamsScrollPanels[team] = addScrollPanel(allyTeamPanels[team], '2%', '10%', '96%', '89%')
 
-		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*team, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*team, '80%', 40, teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
+		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '70%', (10*team).."%", '30%', "10%", ">>", function() addTeamToSelectedAllyTeam(team) end)
+		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*team).."%", '70%', "10%", teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
 
 		allyTeamsRemoveTeamButtons[team] = {}
 		allyTeamsRemoveTeamLabels[team] = {}
@@ -2554,15 +2556,17 @@ end
 
 function updateAllyTeamPanels() -- Update the ally team window
 	for k, at in pairs(allyTeams) do
-		if tableLength(at) ~= allyTeamsSize[k] then -- Update panel when the size of an allyteam changed
+		if tableLength(at) ~= allyTeamsSize[k] or updateAllyTeam then -- Update panel when the size of an allyteam changed
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamButtons[k], true)
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamLabels[k], true)
 			local count = 0
 			for i, t in ipairs(at) do
-				local lab = addLabel(allyTeamsScrollPanels[k], '30%', 40 * count, '70%', 40, teamName[t], 20, "left", {teams[t].red, teams[t].green, teams[t].blue, 1})
+				local lab = addLabel(allyTeamsScrollPanels[k], '30%', (10*count).."%", '70%', "10%", teamName[t], 20, "center", {teams[t].red, teams[t].green, teams[t].blue, 1})
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
-				local but = addButton(allyTeamsScrollPanels[k], '0%', 40 * count, '20%', 40, "", function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end)
-				addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+				local but = addImage(allyTeamsScrollPanels[k], '0%', (10*count+1).."%", '20%', "8%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+				but.OnClick = { function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end }
+				but.OnMouseOver = { function() but.color = { 1, 0.5, 0, 1 } end }
+				but.OnMouseOut = { function() but.color = { 1, 0, 0, 1 } end }
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
 				count = count + 1
 			end
@@ -2578,8 +2582,8 @@ function updateAllyTeamPanels() -- Update the ally team window
 		for i, team in ipairs(teamStateMachine.states) do
 			if enabledTeams[team] then
 				forcesWindows.allyTeamsWindow:AddChild(allyTeamPanels[team])
-				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '80%', 40*count, '20%', 40, ">>", function() addTeamToSelectedAllyTeam(team) end)
-				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', 40*count, '80%', 40, teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
+				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '70%', (10*count).."%", '30%', "10%", ">>", function() addTeamToSelectedAllyTeam(team) end)
+				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*count).."%", '70%', "10%", teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
 				count = count + 1
 			end
 		end
@@ -4952,10 +4956,10 @@ function newMapFrame() -- Show a window when the user clicks on the new button
 	end
 	windows["fileWindowPopUp"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
 	addLabel(windows["fileWindowPopUp"], '0%', '0%', '90%', '10%', EDITOR_FILE_NEW_TITLE)
-	local delbut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-	delbut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
-	delbut.OnMouseOver = { function() delbut.color = { 1, 0.5, 0, 1 } end }
-	delbut.OnMouseOut = { function() delbut.color = { 1, 0, 0, 1 } end }
+	local closebut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closebut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
+	closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
+	closebut.OnMouseOut = { function() closebut.color = { 1, 0, 0, 1 } end }
 	local mapList = VFS.GetMaps()
 	if #mapList == 0 then
 		addTextBox(windows["fileWindowPopUp"], '10%', '20%', '80%', '70%', EDITOR_FILE_NEW_NO_MAP_FOUND, 16, {1, 0, 0, 1})
@@ -4977,10 +4981,10 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 	local showLoadWindow = function()
 		windows["fileWindowPopUp"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '90%', '10%', EDITOR_FILE_LOAD_TITLE)
-		local delbut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-		delbut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
-		delbut.OnMouseOver = { function() delbut.color = { 1, 0.5, 0, 1 } end }
-		delbut.OnMouseOut = { function() delbut.color = { 1, 0, 0, 1 } end }
+		local closebut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+		closebut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
+		closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
+		closebut.OnMouseOut = { function() closebut.color = { 1, 0, 0, 1 } end }
 		local levelList = VFS.DirList("SPRED/missions/", "*.editor", VFS.RAW)
 		if #levelList == 0 then
 			addTextBox(windows["fileWindowPopUp"], '10%', '20%', '80%', '70%', EDITOR_FILE_LOAD_NO_LEVEL_FOUND, 16, {1, 0, 0, 1})
