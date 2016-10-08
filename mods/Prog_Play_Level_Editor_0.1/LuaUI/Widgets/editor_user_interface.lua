@@ -255,19 +255,6 @@ function initChili() -- Initialize Chili variables
 	Screen0 = Chili.Screen0
 end
 
-function addControl(_parent, _x, _y, _w, _h)
-	local control = Chili.Control:New{
-		parent = _parent,
-		x = _x,
-		y = _y,
-		width  = _w,
-		height = _h,
-		draggable = false,
-		resizable = false
-	}
-	return control
-end
-
 function addWindow(_parent, _x, _y, _w, _h, _draggable)
 	local window = Chili.Window:New{
 		parent = _parent,
@@ -1040,24 +1027,26 @@ end
 
 function initTriggerWindow()
 	-- Left Panel
-	windows['triggerWindow'] = addWindow(Screen0, '0%', '5%', '30%', '80%')
+	windows['triggerWindow'] = addWindow(Screen0, '0%', '10%', '30%', '90%')
 	addLabel(windows['triggerWindow'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS)
-	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '5%', '100%', '85%')
-	newEventButton = addButton(eventScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
-	editVariablesButton = addButton(windows['triggerWindow'], '0%', '90%', '100%', '10%', EDITOR_TRIGGERS_VARIABLES_EDIT, showVariablesFrame)
+	eventScrollPanel = addScrollPanel(windows['triggerWindow'], '0%', '7%', '100%', '82%')
+	addButton(eventScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_EVENTS_NEW, createNewEvent)
+	editVariablesButton = addButton(windows['triggerWindow'], '0%', '89%', '100%', '11%', EDITOR_TRIGGERS_VARIABLES_EDIT, showVariablesFrame)
 
 	-- Event window
-	windows['eventWindow'] = addWindow(Screen0, '30%', '5%', '30%', '80%')
-	local closeEvent = addButton(windows['eventWindow'], '93%', '0%', '7%', '4%', "X", function() editEvent(currentEvent) end)
-	closeEvent.font.color = { 1, 0, 0, 1 }
-	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['eventWindow'], '0%', '5%', '50%', '5%', EDITOR_TRIGGERS_CONDITIONS)
-	addLabel(windows['eventWindow'], '50%', '5%', '50%', '5%', EDITOR_TRIGGERS_ACTIONS)
-	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '83%')
-	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
-	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
-	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
-	configureEventButton = addButton(windows['eventWindow'], '2%', '94%', '96%', '6%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_EVENT, configureEvent)
+	windows['eventWindow'] = addWindow(Screen0, '30%', '10%', '40%', '75%')
+	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '5%', "left", "")
+	local closeEvent = addImage(windows['eventWindow'], '93%', '1%', '7%', '5%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeEvent.OnClick = { function() editEvent(currentEvent) end }
+	closeEvent.OnMouseOver = { function() closeEvent.color = { 1, 0.5, 0, 1 } end }
+	closeEvent.OnMouseOut = { function() closeEvent.color = { 1, 0, 0, 1 } end }
+	addLabel(windows['eventWindow'], '0%', '7%', '50%', '5%', EDITOR_TRIGGERS_CONDITIONS)
+	addLabel(windows['eventWindow'], '50%', '7%', '50%', '5%', EDITOR_TRIGGERS_ACTIONS)
+	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '13%', '46%', '75%')
+	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
+	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '13%', '46%', '75%')
+	newEventActionButton = addButton(eventActionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
+	configureEventButton = addButton(windows['eventWindow'], '2%', '88%', '96%', '12%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_EVENT, configureEvent)
 
 	-- Action/Condition
 	local conditionFilterList, actionFilterList = { "All" }, { "All" }
@@ -1073,7 +1062,7 @@ function initTriggerWindow()
 	end
 
 	-- Condition window
-	windows['conditionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
+	windows['conditionWindow'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
 	local closeCondition = addButton(windows['conditionWindow'], '93%', '0%', '7%', '4%', "X", function() editCondition(currentCondition) end)
 	closeCondition.font.color = { 1, 0, 0, 1 }
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -1086,7 +1075,7 @@ function initTriggerWindow()
 	conditionTextBox.font.shadow = false
 
 	-- Action window
-	windows['actionWindow'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
+	windows['actionWindow'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
 	local closeAction = addButton(windows['actionWindow'], '93%', '0%', '7%', '4%', "X", function() editAction(currentAction) end)
 	closeAction.font.color = { 1, 0, 0, 1 }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
@@ -1099,13 +1088,15 @@ function initTriggerWindow()
 	actionTextBox.font.shadow = false
 
 	-- Configure event window
-	windows['configureEvent'] = addWindow(Screen0, '60%', '5%', '30%', '80%')
-	local closeConfigure = addButton(windows['configureEvent'], '93%', '0%', '7%', '4%', "X", configureEvent)
-	closeConfigure.font.color = { 1, 0, 0, 1 }
+	windows['configureEvent'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
+	local closeConfigure = addImage(windows['configureEvent'], '93%', '0%', '7%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeConfigure.OnClick = { showVariablesFrame }
+	closeConfigure.OnMouseOver = { function() closeConfigure.color = { 1, 0.5, 0, 1 } end }
+	closeConfigure.OnMouseOut = { function() closeConfigure.color = { 1, 0, 0, 1 } end }
 	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE)
 	-- Trigger
-	addLabel(windows['configureEvent'], '0%', '6%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left")
-	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '3%', "left", "")
+	addLabel(windows['configureEvent'], '0%', '7%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER, 20, "left")
+	customTriggerEditBox = addEditBox(windows['configureEvent'], '0%', '11%', '100%', '4%', "left", "")
 	customTriggerEditBox.hint = EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_EXAMPLE
 
 	local function useCustomTrigger()
@@ -1137,12 +1128,12 @@ function initTriggerWindow()
 				end
 				if pcall(loadstring("return "..checkingTrigger)) then
 					e.trigger = customTriggerEditBox.text
-					currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
 				else
-					currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 				end
 			else
-				currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+				currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 			end
 		end
 		saveState()
@@ -1161,38 +1152,41 @@ function initTriggerWindow()
 			end
 			e.trigger = trig
 			customTriggerEditBox:SetText(trig)
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
+			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
 		end
 		saveState()
 	end
-	currentTriggerLabel = addLabel(windows['configureEvent'], '2%', '19%', '96%', '2%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13, "left")
-	addButton(windows['configureEvent'], '0%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
-	addButton(windows['configureEvent'], '50%', '14%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
+	addButton(windows['configureEvent'], '0%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
+	addButton(windows['configureEvent'], '50%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
+	local triggerScrollPanel = addScrollPanel(windows['configureEvent'], '2%', '20%', '96%', '10%')
+	currentTriggerLabel = addTextBox(triggerScrollPanel, '0%', '0%', '100%', '100%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13)
 	-- Action sequence
-	addLabel(windows['configureEvent'], '0%', '25%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE)
-	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '30%', '50%', '40%')
+	addLabel(windows['configureEvent'], '0%', '30%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_ACTION_SEQUENCE)
+	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '35%', '50%', '35%')
 	-- Other parameters
-	addLabel(windows['configureEvent'], '0%', '75%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER)
-	addLabel(windows['configureEvent'], '5%', '80%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left")
-	addLabel(windows['configureEvent'], '5%', '90%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left")
+	addLabel(windows['configureEvent'], '0%', '70%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER)
+	addLabel(windows['configureEvent'], '5%', '75%', '30%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left")
+	addLabel(windows['configureEvent'], '5%', '92%', '30%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left")
 
 	-- Import Actions/Conditions window
-	windows["importWindow"] = addWindow(Screen0, "30%", "86%", "30%", "10%")
-	addLabel(windows["importWindow"], '0%', '0%', '100%', '20%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT, 16, "left")
-	importEventComboBox = addComboBox(windows["importWindow"], '0%', '20%', tostring(100/3).."%", "80%", {}, nil)
-	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '20%', tostring(100/3).."%", "40%", {}, nil)
-	addButton(windows["importWindow"], tostring(200/3).."%", '20%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
-	importActionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '60%', tostring(100/3).."%", "40%", {}, nil)
-	addButton(windows["importWindow"], tostring(200/3).."%", '60%', tostring(100/3).."%", "40%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
+	windows["importWindow"] = addWindow(Screen0, "30%", "85%", "40%", "15%")
+	addLabel(windows["importWindow"], '0%', '0%', '100%', '30%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT)
+	importEventComboBox = addComboBox(windows["importWindow"], '0%', '30%', tostring(100/3).."%", "70%", {}, nil)
+	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '30%', tostring(100/3).."%", "35%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '30%', tostring(100/3).."%", "35%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
+	importActionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '65%', tostring(100/3).."%", "35%", {}, nil)
+	addButton(windows["importWindow"], tostring(200/3).."%", '65%', tostring(100/3).."%", "35%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_ACTION, importAction)
 	importEventComboBox.OnSelect = { updateImportComboBoxes }
 
 	-- Variables window
-	windows["variablesWindow"] = addWindow(Screen0, '30%', '5%', '60%', '80%')
-	local closeVariables = addButton(windows['variablesWindow'], '97%', '0%', '3%', '4%', "X", showVariablesFrame)
-	closeVariables.font.color = { 1, 0, 0, 1 }
+	windows["variablesWindow"] = addWindow(Screen0, '30%', '10%', '70%', '90%')
+	local closeVariables = addImage(windows['variablesWindow'], '97%', '0%', '3%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeVariables.OnClick = { showVariablesFrame }
+	closeVariables.OnMouseOver = { function() closeVariables.color = { 1, 0.5, 0, 1 } end }
+	closeVariables.OnMouseOut = { function() closeVariables.color = { 1, 0, 0, 1 } end }
 	addLabel(windows["variablesWindow"], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_VARIABLES)
 	variablesScrollPanel = addScrollPanel(windows["variablesWindow"], '2%', '7%', '96%', '91%')
-	newVariableButton = addButton(variablesScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
+	addButton(variablesScrollPanel, '0%', "0%", '100%', "6%", EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
 
 function initMapSettingsWindow()
@@ -1338,7 +1332,7 @@ end
 function initTracesWindow()
 	windows['tracesWindow'] = addWindow(Screen0, '5%', '15%', '90%', '80%')
 	addLabel(windows['tracesWindow'], '10%', '0%', '80%', '15%', EDITOR_TRACES_TITLE, 30)
-	local closeButton = addImage(windows['tracesWindow'], '97%', '0%', '3%', '5%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	local closeButton = addImage(windows['tracesWindow'], '97%', '5%', '3%', '5%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
 	closeButton.OnClick = { tracesFrame }
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
@@ -2874,11 +2868,12 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 		removeElements(eventScrollPanel, eventUI.deleteEventButtons, true)
 		removeElements(eventScrollPanel, eventUI.upEventButtons, true)
 		removeElements(eventScrollPanel, eventUI.downEventButtons, true)
-		local count = 0
 		for i, e in ipairs(events) do
-			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', 40 * count, '60%', 40, e.name, function() editEvent(i) end)
-			eventUI.deleteEventButtons[i] = addButton(eventScrollPanel, '90%', 40 * count, '10%', 40, "", function() removeEvent(i) end)
-			addImage(eventUI.deleteEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+			eventUI.eventButtons[i] = addButton(eventScrollPanel, '15%', (10 * i).."%", '60%', "10%", e.name, function() editEvent(i) end)
+			eventUI.deleteEventButtons[i] = addImage(eventScrollPanel, '90%', (10 * i + 2).."%", '10%', "6%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+			eventUI.deleteEventButtons[i].OnClick = { function() removeEvent(i) end }
+			eventUI.deleteEventButtons[i].OnMouseOver = { function() eventUI.deleteEventButtons[i].color = { 1, 0.5, 0, 1 } end }
+			eventUI.deleteEventButtons[i].OnMouseOut = { function() eventUI.deleteEventButtons[i].color = { 1, 0, 0, 1 } end }
 			if i ~= 1 then
 				local moveUpEvent = function()
 					removeSecondWindows() -- close windows to prevent bugs
@@ -2890,8 +2885,10 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					updateEventList(true)
 					saveState()
 				end
-				eventUI.upEventButtons[i] = addButton(eventScrollPanel, '0%', 40 * count, '15%', 40, "", moveUpEvent)
-				addImage(eventUI.upEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
+				eventUI.upEventButtons[i] = addImage(eventScrollPanel, '0%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
+				eventUI.upEventButtons[i].OnClick = { moveUpEvent }
+				eventUI.upEventButtons[i].OnMouseOver = { function() eventUI.upEventButtons[i].color = { 1, 1, 0, 1 } end }
+				eventUI.upEventButtons[i].OnMouseOut = { function() eventUI.upEventButtons[i].color = { 1, 1, 1, 1 } end }
 			end
 			if i ~= #events then
 				local moveDownEvent = function()
@@ -2904,12 +2901,12 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					updateEventList(true)
 					saveState()
 				end
-				eventUI.downEventButtons[i] = addButton(eventScrollPanel, '75%', 40 * count, '15%', 40, "", moveDownEvent)
-				addImage(eventUI.downEventButtons[i], '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
+				eventUI.downEventButtons[i] = addImage(eventScrollPanel, '75%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
+				eventUI.downEventButtons[i].OnClick = { moveDownEvent }
+				eventUI.downEventButtons[i].OnMouseOver = { function() eventUI.downEventButtons[i].color = { 1, 1, 0, 1 } end }
+				eventUI.downEventButtons[i].OnMouseOut = { function() eventUI.downEventButtons[i].color = { 1, 1, 1, 1 } end }
 			end
-			count = count + 1
 		end
-		newEventButton.y = 40 * count
 		eventTotal = #events
 	end
 
@@ -2933,28 +2930,14 @@ function updateEventFrame() -- When a new condition or action is created or its 
 		if e.conditionTotal ~= #(e.conditions) then
 			removeElements(eventConditionsScrollPanel, conditionButtons[e.id], true)
 			removeElements(eventConditionsScrollPanel, deleteConditionButtons[e.id], true)
-			local count = 0
-			for i, c in ipairs(e.conditions) do
-				conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-				deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
-				addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-				count = count + 1
-			end
-			newEventConditionButton.y = 40 * count
+			updateConditionList(e)
 			e.conditionTotal = #(e.conditions)
 		end
 
 		if e.actionTotal ~= #(e.actions) then
 			removeElements(eventActionsScrollPanel, actionButtons[e.id], true)
 			removeElements(eventActionsScrollPanel, deleteActionButtons[e.id], true)
-			local count = 0
-			for i, c in ipairs(e.actions) do
-				actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-				deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-				addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-				count = count + 1
-			end
-			newEventActionButton.y = 40 * count
+			updateActionList(e)
 			e.actionTotal = #(e.actions)
 		end
 	end
@@ -2976,6 +2959,26 @@ function updateEventFrame() -- When a new condition or action is created or its 
 	end
 end
 
+function updateConditionList(e)
+	for i, c in ipairs(e.conditions) do
+		conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', (10 * i).."%", '80%', "10%", c.name, function() editCondition(i) end)
+		deleteConditionButtons[e.id][i] = addImage(eventConditionsScrollPanel, '80%', (10 * i + 2).."%", '20%', "6%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+		deleteConditionButtons[e.id][i].OnClick = { function() removeCondition(i) end }
+		deleteConditionButtons[e.id][i].OnMouseOver = { function() deleteConditionButtons[e.id][i].color = { 1, 0.5, 0, 1 } end }
+		deleteConditionButtons[e.id][i].OnMouseOut = { function() deleteConditionButtons[e.id][i].color = { 1, 0, 0, 1 } end }
+	end
+end
+
+function updateActionList(e)
+	for i, c in ipairs(e.actions) do
+		actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', (10 * i).."%", '80%', "10%", c.name, function() editAction(i) end)
+		deleteActionButtons[e.id][i] = addImage(eventActionsScrollPanel, '80%', (10 * i + 2).."%", '20%', "6%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+		deleteActionButtons[e.id][i].OnClick = { function() removeAction(i) end }
+		deleteActionButtons[e.id][i].OnMouseOver = { function() deleteActionButtons[e.id][i].color = { 1, 0.5, 0, 1 } end }
+		deleteActionButtons[e.id][i].OnMouseOut = { function() deleteActionButtons[e.id][i].color = { 1, 0, 0, 1 } end }
+	end
+end
+
 function currentEventFrame() -- Force update on the event frame when switching event
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2988,14 +2991,7 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		for _, dCB in pairs(deleteConditionButtons) do
 			removeElements(eventConditionsScrollPanel, dCB, false)
 		end
-		local count = 0
-		for i, c in ipairs(e.conditions) do
-			conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editCondition(i) end)
-			deleteConditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeCondition(i) end)
-			addImage(deleteConditionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-			count = count + 1
-		end
-		newEventConditionButton.y = 40 * count
+		updateConditionList(e)
 		-- set action buttons
 		for _, aB in pairs(actionButtons) do
 			removeElements(eventActionsScrollPanel, aB, false)
@@ -3003,14 +2999,7 @@ function currentEventFrame() -- Force update on the event frame when switching e
 		for _, dAB in pairs(deleteActionButtons) do
 			removeElements(eventActionsScrollPanel, dAB, false)
 		end
-		local count = 0
-		for i, c in ipairs(e.actions) do
-			actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-			deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-			addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-			count = count + 1
-		end
-		newEventActionButton.y = 40 * count
+		updateActionList(e)
 	end
 end
 
@@ -3978,12 +3967,12 @@ function configureEvent() -- Show the event configuration window
 			configureEventLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE.." "..events[currentEvent].name)
 			-- Trigger
 			customTriggerEditBox:SetText(e.trigger)
-			currentTriggerLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
 			-- Action sequence
 			removeElements(actionSequenceScrollPanel, actionSequenceItems, true)
 			local act = events[currentEvent].actions
 			for i, a in ipairs(act) do
-				local lab = addLabel(actionSequenceScrollPanel, '20%', (i - 1) * 40, '60%', 40, a.name, 16)
+				local lab = addLabel(actionSequenceScrollPanel, '20%', ((i - 1) * 20).."%", '60%', "20%", a.name, 16)
 				table.insert(actionSequenceItems, lab)
 				if i ~= 1 then -- do not show this arrow for the first element
 					local moveUpAction = function()
@@ -3997,18 +3986,13 @@ function configureEvent() -- Show the event configuration window
 						for _, dAB in pairs(deleteActionButtons) do
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
-						local count = 0
-						for i, c in ipairs(e.actions) do -- update action list
-							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-							count = count + 1
-						end
-						newEventActionButton.y = 40 * count
+						updateActionList(e)
 						saveState()
 					end
-					local but = addButton(actionSequenceScrollPanel, '0%', (i - 1) * 40, '20%', 40, "", moveUpAction)
-					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowup.png", false, {1, 1, 1, 1})
+					local but = addImage(actionSequenceScrollPanel, '0%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
+					but.OnClick = { moveUpAction }
+					but.OnMouseOver = { function() but.color = { 1, 1, 0, 1 } end }
+					but.OnMouseOut = { function() but.color = { 1, 1, 1, 1 } end }
 					table.insert(actionSequenceItems, but)
 				end
 				if i ~= #(events[currentEvent].actions) then -- do not show this arrow for the last element
@@ -4023,40 +4007,23 @@ function configureEvent() -- Show the event configuration window
 						for _, dAB in pairs(deleteActionButtons) do
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
-						local count = 0
-						for i, c in ipairs(e.actions) do -- update action list
-							actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', 40 * count, '80%', 40, c.name, function() editAction(i) end)
-							deleteActionButtons[e.id][i] = addButton(eventActionsScrollPanel, '80%', 40 * count, '20%', 40, "", function() removeAction(i) end)
-							addImage(deleteActionButtons[e.id][i], '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-							count = count + 1
-						end
-						newEventActionButton.y = 40 * count
+						updateActionList(e)
 						saveState()
 					end
-					local but = addButton(actionSequenceScrollPanel, '80%', (i - 1) * 40, '20%', 40, "", moveDownAction)
-					addImage(but, '0%', '0%', '100%', '100%', "bitmaps/editor/arrowdown.png", false, {1, 1, 1, 1})
+					local but = addImage(actionSequenceScrollPanel, '80%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
+					but.OnClick = { moveDownAction }
+					but.OnMouseOver = { function() but.color = { 1, 1, 0, 1 } end }
+					but.OnMouseOut = { function() but.color = { 1, 1, 1, 1 } end }
 					table.insert(actionSequenceItems, but)
 				end
 			end
 			-- Parameters
 			removeElements(windows['configureEvent'], repetitionUI, true)
 			repetitionUI = {}
-			repetitionUI.repetitionLabel = addLabel(windows['configureEvent'], '10%', '85%', '80%', '5%', "", 16, "left")
-			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '25%', '80%', '40%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
-			repetitionUI.repetitionComboBox.OnSelect = {
-				function()
-					if repetitionUI.repetitionComboBox.selected == 1 then
-						e.repetition = false
-						e.repetitionTime = nil
-						repetitionUI.repetitionLabel:SetCaption("")
-					else
-						e.repetition = true
-					end
-				end
-			}
-			repetitionUI.repetitionEditBox = addEditBox(windows['configureEvent'], '70%', '81%', '10%', '3%')
+			repetitionUI.repetitionLabel = addLabel(windows['configureEvent'], '0%', '85%', '100%', '5%', "")
+			repetitionUI.repetitionEditBox = addEditBox(windows['configureEvent'], '80%', '81%', '10%', '3%')
 			repetitionUI.repetitionEditBox.hint = "X = "
-			repetitionUI.repetitionButton = addButton(windows['configureEvent'], '85%', '80%', '10%', '5%', EDITOR_OK,
+			repetitionUI.repetitionButton = addButton(windows['configureEvent'], '90%', '80%', '10%', '5%', EDITOR_OK,
 				function()
 					if e.repetition then
 						e.repetitionTime = repetitionUI.repetitionEditBox.text
@@ -4064,6 +4031,24 @@ function configureEvent() -- Show the event configuration window
 					end
 				end
 			)
+			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '35%', '75%', '65%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
+			repetitionUI.repetitionComboBox.OnSelect = {
+				function()
+					if repetitionUI.repetitionComboBox.selected == 1 then
+						e.repetition = false
+						e.repetitionTime = nil
+						repetitionUI.repetitionLabel:SetCaption("")
+						windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
+						windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
+						windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+					else
+						e.repetition = true
+						windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
+						windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
+						windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+					end
+				end
+			}
 			if e.repetition then
 				repetitionUI.repetitionComboBox:Select(2)
 				repetitionUI.repetitionEditBox:SetText(e.repetitionTime)
@@ -4075,7 +4060,7 @@ function configureEvent() -- Show the event configuration window
 				repetitionUI.repetitionLabel:SetCaption("")
 			end
 
-			eventCommentEditBox = addEditBox(windows["configureEvent"], '25%', '90%', '70%', '4%', "left", "")
+			eventCommentEditBox = addEditBox(windows["configureEvent"], '35%', '92%', '65%', '5%', "left", "")
 			if e.comment then
 				eventCommentEditBox:SetText(e.comment)
 			else
@@ -4273,10 +4258,9 @@ function updateVariables()
 		local count = 0
 		variablesFeatures = {}
 		for i, var in ipairs(triggerVariables) do
-			table.insert(variablesFeatures, drawVariableFeature(var, count * 40))
+			table.insert(variablesFeatures, drawVariableFeature(var, i))
 			count = count + 1
 		end
-		newVariableButton.y = count * 40
 		variablesTotal = #triggerVariables
 		forceUpdateVariables = false
 	end
@@ -4284,11 +4268,13 @@ end
 
 function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	local feature = {}
-	local nameLabel = addLabel(variablesScrollPanel, '0%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_NAME, 16)
-	local nameEditBox = addEditBox(variablesScrollPanel, '5%', y+5, '30%', 30, "left", var.name)
-	nameEditBox.font.size = 16
-	local typeLabel = addLabel(variablesScrollPanel, '40%', y, '5%', 40, EDITOR_TRIGGERS_VARIABLES_TYPE, 16)
-	local typeComboBox = addComboBox(variablesScrollPanel, '45%', y, '10%', 40, { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
+	local height = 6
+	y = y*(height+1)
+	local nameLabel = addLabel(variablesScrollPanel, '0%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_NAME)
+	local nameEditBox = addEditBox(variablesScrollPanel, '10%', y.."%", '20%', height.."%", "left", var.name)
+
+	local typeLabel = addLabel(variablesScrollPanel, '32%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_TYPE)
+	local typeComboBox = addComboBox(variablesScrollPanel, '42%', y.."%", '13%', height.."%", { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
 	local selectType = function()
 		if typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER then
 			var.type = "number"
@@ -4302,18 +4288,21 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 			variablesScrollPanel:AddChild(feature.initValueComboBox)
 		end
 	end
-	typeComboBox.OnSelect = { selectType }
-
-	local initValueLabel = addLabel(variablesScrollPanel, '60%', y, '10%', 40, EDITOR_TRIGGERS_VARIABLES_INITVALUE, 16)
-	local initValueComboBox = addComboBox(variablesScrollPanel, '70%', y, '20%', 40, { "true", "false" }, nil)
+	typeComboBox.OnSelect = {selectType}
+	local initValueLabel = addLabel(variablesScrollPanel, '60%', y.."%", '20%', height.."%", EDITOR_TRIGGERS_VARIABLES_INITVALUE)
+	-- controls for Boolean variable
+	local initValueComboBox = addComboBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", { "true", "false" }, nil)
 	local selectInitValue = function()
 		var.initValue = initValueComboBox.items[initValueComboBox.selected]
 	end
-	initValueComboBox.OnSelect = { selectInitValue }
-	local initValueEditBox = addEditBox(variablesScrollPanel, '70%', y+5, '20%', 30, "left", tostring(var.initValue))
-	initValueEditBox.font.size = 16
-	local deleteVariableButton = addButton(variablesScrollPanel, '95%', y, '5%', 40, "", function() removeVariable(var) end)
-	addImage(deleteVariableButton, '0%', '0%', '100%', '100%', "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+	initValueComboBox.OnSelect = {selectInitValue}
+	-- controls for Number variable
+	local initValueEditBox = addEditBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", "left", tostring(var.initValue))
+
+	local deleteVariableButton = addImage(variablesScrollPanel, '95%', (y+1).."%", '5%', (height-2).."%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+	deleteVariableButton.OnClick = { function() removeVariable(var) end }
+	deleteVariableButton.OnMouseOver = { function() deleteVariableButton.color = { 1, 0.5, 0, 1 } end }
+	deleteVariableButton.OnMouseOut = { function() deleteVariableButton.color = { 1, 0, 0, 1 } end }
 
 	feature.nameLabel = nameLabel
 	feature.nameEditBox = nameEditBox
@@ -4673,10 +4662,10 @@ function newMap() -- Set each parameter to its default value
 	newEventConditionButton:Dispose()
 	eventActionsScrollPanel:Dispose()
 	newEventActionButton:Dispose()
-	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '10%', '46%', '83%')
-	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
-	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '10%', '46%', '83%')
-	newEventActionButton = addButton(eventActionsScrollPanel, '0%', 0, '100%', 40, EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
+	eventConditionsScrollPanel = addScrollPanel(windows['eventWindow'], '2%', '13%', '46%', '75%')
+	newEventConditionButton = addButton(eventConditionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_CONDITIONS_NEW, createNewCondition)
+	eventActionsScrollPanel = addScrollPanel(windows['eventWindow'], '52%', '13%', '46%', '75%')
+	newEventActionButton = addButton(eventActionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
 
 function newMapInitialize() -- Open the window of the state you were in before load/new
