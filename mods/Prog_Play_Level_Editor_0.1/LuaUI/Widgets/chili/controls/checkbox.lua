@@ -46,15 +46,10 @@ function Checkbox:UpdateLayout()
   if (self.font.autoAdjust) then
     if (self.caption and self.caption ~= "") then
       local textHeight  = self.font:GetTextHeight(self.caption, self.font.maxSize)
-      Spring.Echo("CheckBox (textHeight) : "..textHeight)
       local textWidth = self.font:GetTextWidth(self.caption, self.font.maxSize)
-      Spring.Echo("CheckBox (textWidth) : "..textWidth)
       local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
-      Spring.Echo("CheckBox (ratio 1) : "..ratio)
       ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)
-      Spring.Echo("CheckBox (ratio 2) : "..ratio)
       self.font.size = math.max(1, math.min(self.font.maxSize * ratio, self.font.maxSize))
-      Spring.Echo("CheckBox (font size) : "..self.font.size)
       self.font:_LoadFont()
       self.font:SetParent(self)
     end
