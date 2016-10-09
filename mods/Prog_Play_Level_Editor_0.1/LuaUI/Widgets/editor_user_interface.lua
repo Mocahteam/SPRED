@@ -3713,53 +3713,6 @@ drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, pickButton)
 end
 
-drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
-	local y = yref[1]
-
-	-- Parameters check
-	local unitLabel = addLabel(panel, '30%', y.."%", '40%', "5%", "? (?)")
-	if a.params[attr.id] then
-		if a.params[attr.id].type and a.params[attr.id].value then
-			local u = a.params[attr.id].value
-			local uDefID = Spring.GetUnitDefID(u)
-			if uDefID then
-				local name = UnitDefs[uDefID].humanName
-				local team = Spring.GetUnitTeam(u)
-				unitLabel.font.color = { teams[team].red, teams[team].green, teams[team].blue, 1 }
-				unitLabel:SetCaption(name.." ("..tostring(u)..")")
-				local function viewUnit()
-					local state = Spring.GetCameraState()
-					local x, y, z = Spring.GetUnitPosition(u)
-					state.px, state.py, state.pz = x, y, z
-					state.height = 500
-					Spring.SetCameraState(state, 2)
-				end
-				local viewButton = addImage(panel, '90%', (y+1).."%", '8%', "3%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
-				viewButton.OnClick = { viewUnit }
-				viewButton.OnMouseOver = { function() viewButton.color = {1, 1, 1, 1} end }
-				viewButton.OnMouseOut = { function() viewButton.color = {0, 1, 1, 1} end }
-				table.insert(feature, viewButton)
-			end
-		end
-	end
-
-	-- Pick process
-	local pickButton = addButton(panel, '70%', y.."%", '20%', "5%", EDITOR_TRIGGERS_EVENTS_PICK, nil)
-	local pickUnit = function()
-		changedParam = attr.id
-		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
-		Screen0:RemoveChild(windows["triggerWindow"])
-		Screen0:RemoveChild(windows["eventWindow"])
-		Screen0:RemoveChild(windows["conditionWindow"])
-		Screen0:RemoveChild(windows["actionWindow"])
-		Screen0:RemoveChild(windows["importWindow"])
-	end
-	pickButton.OnClick = { pickUnit }
-
-	table.insert(feature, unitLabel)
-	table.insert(feature, pickButton)
-end
-
 drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
