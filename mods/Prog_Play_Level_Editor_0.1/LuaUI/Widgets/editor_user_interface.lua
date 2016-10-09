@@ -3055,7 +3055,6 @@ function currentActionFrame() -- Force update on the action frame when switching
 end
 
 function selectFilter() -- Only show some conditions/actions in the combobox
-	Spring.Echo ("Select Filter")
 	if currentCondition then
 		local conditionTypesList = {}
 		local currentSelectedItem = conditionTypeComboBox.items[conditionTypeComboBox.selected]

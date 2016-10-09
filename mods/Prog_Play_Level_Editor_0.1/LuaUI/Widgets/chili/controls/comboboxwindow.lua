@@ -10,16 +10,15 @@ ComboBoxWindow = Window:Inherit{
   classname = "combobox_window",
   resizable = false,
   draggable = false,
+  mainCombo = nil,
 }
 
 local this = ComboBoxWindow
 local inherited = this.inherited
-local mainCombo
 
 function ComboBoxWindow:New(obj)
   obj = inherited.New(self,obj)
-  mainCombo = obj.mainCombo
-  mainCombo:Select(obj.selected)
+  obj.mainCombo:Select(obj.selected)
   return obj
 end
 
@@ -36,7 +35,7 @@ function ComboBoxWindow:FocusUpdate()
       end
     end
     if needToClose then
-      mainCombo:_CloseWindow()
+      self.mainCombo:_CloseWindow()
     end
   end
 end
