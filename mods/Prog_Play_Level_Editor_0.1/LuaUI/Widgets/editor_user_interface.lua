@@ -6015,17 +6015,19 @@ end
 
 function widget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam)
 	if unitListLabels[unitID] ~= nil then
-		unitListScrollPanel:RemoveChild(unitListLabels[unitID])
-		unitListScrollPanel:RemoveChild(unitListEyes[unitID])
-		unitListScrollPanel:RemoveChild(unitListHighlight[unitID])
-		unitListLabels[unitID] = nil
-		unitListEyes[unitID] = nil
-		unitListHighlight[unitID] = nil
-		-- update counter
-		unitListLinesCnt = unitListLinesCnt - 1
-		-- update relative positions
-		realignUnitList(unitListLabels, "0%", "85%")
-		realignUnitList(unitListEyes, "85%", "15%")
-		realignUnitList(unitListHighlight, "0%", "100%")
+		if unitListScrollPanel ~= nil then -- could be true on testing mode
+			unitListScrollPanel:RemoveChild(unitListLabels[unitID])
+			unitListScrollPanel:RemoveChild(unitListEyes[unitID])
+			unitListScrollPanel:RemoveChild(unitListHighlight[unitID])
+			unitListLabels[unitID] = nil
+			unitListEyes[unitID] = nil
+			unitListHighlight[unitID] = nil
+			-- update counter
+			unitListLinesCnt = unitListLinesCnt - 1
+			-- update relative positions
+			realignUnitList(unitListLabels, "0%", "85%")
+			realignUnitList(unitListEyes, "85%", "15%")
+			realignUnitList(unitListHighlight, "0%", "100%")
+		end
 	end
 end
