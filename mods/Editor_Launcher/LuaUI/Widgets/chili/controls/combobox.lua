@@ -68,6 +68,7 @@ function ComboBox:Select(itemIdx)
     end
     self:CallListeners(self.OnSelect, itemIdx, true)
     self:Invalidate()
+    self:UpdateLayout()
   end
   --FIXME add Select(name)
 end
