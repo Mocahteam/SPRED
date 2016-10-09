@@ -27,11 +27,15 @@ function ComboBoxWindow:FocusUpdate()
     local needToClose = true
     --Check if one of the items is focused
     local scrollPanel = self.children[1]
-    local stackPanel = scrollPanel.children[1]
-    local items = stackPanel.children
-    for i=1,#items do
-      if items[i].state.focused then
-        needToClose = false
+    if scrollPanel.state.focused then
+      needToClose = false
+    else
+      local stackPanel = scrollPanel.children[1]
+      local items = stackPanel.children
+      for i=1,#items do
+        if items[i].state.focused then
+          needToClose = false
+        end
       end
     end
     if needToClose then

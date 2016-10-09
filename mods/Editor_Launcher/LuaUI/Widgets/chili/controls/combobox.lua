@@ -27,6 +27,25 @@ local ComboBoxScrollPanel = ScrollPanel:Inherit{
   classname = "combobox_scrollpanel",
   horizontalScrollbar = false
 }
+function ComboBoxScrollPanel:FocusUpdate()
+  local screen = self:FindParent("screen")
+  -- Check if we lose the focus
+  if (not self.state.focused and not CompareLinks(screen:GetFocusedControl(), self)) then
+    local needToClose = true
+    --Check if one of the items is focused
+    local stackPanel = self.children[1]
+    local items = stackPanel.children
+    for i=1,#items do
+      if items[i].state.focused then
+        needToClose = false
+      end
+    end
+    if needToClose then
+      self.parent.mainCombo:_CloseWindow()
+    end
+  end
+end
+
 local ComboBoxStackPanel  = StackPanel:Inherit{
   classname = "combobox_stackpanel",
   autosize = true,
@@ -39,9 +58,6 @@ local ComboBoxStackPanel  = StackPanel:Inherit{
 local ComboBoxItem        = Button:Inherit{
   classname = "combobox_item"
 }
-function ComboBoxItem:FocusUpdate()
-  self.state.focused = true
-end
 
 local this = ComboBox
 local inherited = this.inherited
@@ -75,6 +91,7 @@ end
 
 function ComboBox:_CloseWindow()
   if self._dropDownWindow then
+    Spring.Echo(DebugHandler.Stacktrace())
     self._dropDownWindow:Dispose()
     self._dropDownWindow = nil
   end
