@@ -3055,39 +3055,63 @@ function currentActionFrame() -- Force update on the action frame when switching
 end
 
 function selectFilter() -- Only show some conditions/actions in the combobox
+	Spring.Echo ("Select Filter")
 	if currentCondition then
 		local conditionTypesList = {}
+		local currentSelectedItem = conditionTypeComboBox.items[conditionTypeComboBox.selected]
+		local newSelectedItemId = 1
+		local count = 1
 		if conditionFilterComboBox.selected == 1 then
 			for i, c in ipairs(conditions_list) do
 				table.insert(conditionTypesList, c.typeText)
+				if currentSelectedItem == c.typeText then
+					newSelectedItemId = count
+				end
+				count = count + 1
 			end
+			needToChangeSelectedItem = false
 		else
 			for i, c in ipairs(conditions_list) do
 				if conditionFilterComboBox.items[conditionFilterComboBox.selected] == c.filter then
 					table.insert(conditionTypesList, c.typeText)
+					if currentSelectedItem == c.typeText then
+						newSelectedItemId = count
+					end
+					count = count + 1
 				end
 			end
 		end
 		conditionTypeComboBox.items = conditionTypesList
 		if not dontUpdateComboBox then
-			conditionTypeComboBox:Select(1)
+			conditionTypeComboBox:Select(newSelectedItemId)
 		end
 	elseif currentAction then
 		local actionTypesList = {}
+		local currentSelectedItem = actionTypeComboBox.items[actionTypeComboBox.selected]
+		local newSelectedItemId = 1
+		local count = 1
 		if actionFilterComboBox.selected == 1 then
 			for i, c in ipairs(actions_list) do
 				table.insert(actionTypesList, c.typeText)
+				if currentSelectedItem == c.typeText then
+					newSelectedItemId = count
+				end
+				count = count + 1
 			end
 		else
 			for i, c in ipairs(actions_list) do
 				if actionFilterComboBox.items[actionFilterComboBox.selected] == c.filter then
 					table.insert(actionTypesList, c.typeText)
+					if currentSelectedItem == c.typeText then
+						newSelectedItemId = count
+					end
+					count = count + 1
 				end
 			end
 		end
 		actionTypeComboBox.items = actionTypesList
 		if not dontUpdateComboBox then
-			actionTypeComboBox:Select(1)
+			actionTypeComboBox:Select(newSelectedItemId)
 		end
 	end
 end
