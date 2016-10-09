@@ -507,6 +507,9 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	if selectSetOfUnitsWindows.actcond then
 		selectSetOfUnitsWindows.actcond:Dispose()
 	end
+	if selectSetOfUnitsWindows.cancelbut then
+		selectSetOfUnitsWindows.cancelbut:Dispose()
+	end
 	if randomInZoneWindow then
 		randomInZoneWindow:Dispose()
 	end
@@ -1063,28 +1066,34 @@ function initTriggerWindow()
 
 	-- Condition window
 	windows['conditionWindow'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
-	local closeCondition = addButton(windows['conditionWindow'], '93%', '0%', '7%', '4%', "X", function() editCondition(currentCondition) end)
-	closeCondition.font.color = { 1, 0, 0, 1 }
-	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['conditionWindow'], '0%', '5%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER)
-	addLabel(windows['conditionWindow'], '0%', '10%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE)
-	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '5%', '80%', '5%', conditionFilterList, selectFilter)
-	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '10%', '80%', '5%', {}, selectConditionType)
-	conditionScrollPanel = addScrollPanel(windows['conditionWindow'], '0%', '15%', '100%', '85%')
-	conditionTextBox = addTextBox(conditionScrollPanel, '5%', 20, '90%', 100, "")
+	local closeCondition = addImage(windows['conditionWindow'], '93%', '0%', '7%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeCondition.OnClick = { function() editCondition(currentCondition) end }
+	closeCondition.OnMouseOver = { function() closeCondition.color = { 1, 0.5, 0, 1 } end }
+	closeCondition.OnMouseOut = { function() closeCondition.color = { 1, 0, 0, 1 } end }
+	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '5%', "left", "")
+	addLabel(windows['conditionWindow'], '0%', '6%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER)
+	addLabel(windows['conditionWindow'], '0%', '11%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE)
+	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '6%', '80%', '5%', conditionFilterList, selectFilter)
+	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '11%', '80%', '5%', {}, selectConditionType)
+	conditionScrollPanel = addPanel(windows['conditionWindow'], '0%', '16%', '100%', '84%')
+	local conditionTextScrollPanel = addScrollPanel(conditionScrollPanel, '1%', "1%", '98%', "23%")
+	conditionTextBox = addTextBox(conditionTextScrollPanel, '0%', "0%", '100%', "100%", "")
 	conditionTextBox.font.shadow = false
 
 	-- Action window
 	windows['actionWindow'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
-	local closeAction = addButton(windows['actionWindow'], '93%', '0%', '7%', '4%', "X", function() editAction(currentAction) end)
-	closeAction.font.color = { 1, 0, 0, 1 }
-	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '3%', "left", "")
-	addLabel(windows['actionWindow'], '0%', '5%', '20%', '5%', "Filter")
-	addLabel(windows['actionWindow'], '0%', '10%', '20%', '5%', "Type")
-	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '5%', '80%', '5%', actionFilterList, selectFilter)
-	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '10%', '80%', '5%', {}, selectActionType)
-	actionScrollPanel = addScrollPanel(windows['actionWindow'], '0%', '15%', '100%', '85%')
-	actionTextBox = addTextBox(actionScrollPanel, '5%', 20, '90%', 100, "")
+	local closeAction = addImage(windows['conditionWindow'], '93%', '0%', '7%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+	closeAction.OnClick = { function() editAction(currentAction) end }
+	closeAction.OnMouseOver = { function() closeAction.color = { 1, 0.5, 0, 1 } end }
+	closeAction.OnMouseOut = { function() closeAction.color = { 1, 0, 0, 1 } end }
+	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '5%', "left", "")
+	addLabel(windows['actionWindow'], '0%', '6%', '20%', '5%', "Filter")
+	addLabel(windows['actionWindow'], '0%', '11%', '20%', '5%', "Type")
+	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '6%', '80%', '5%', actionFilterList, selectFilter)
+	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '11%', '80%', '5%', {}, selectActionType)
+	actionScrollPanel = addPanel(windows['actionWindow'], '0%', '16%', '100%', '84%')
+	local actionTextScrollPanel = addScrollPanel(actionScrollPanel, '1%', "1%", '98%', "23%")
+	actionTextBox = addTextBox(actionTextScrollPanel, '5%', "0%", '90%', "100%", "")
 	actionTextBox.font.shadow = false
 
 	-- Configure event window
@@ -3142,11 +3151,11 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 			end
 		end
 		local y = {}
-		y[1] = 120
+		y[1] = 26
 		conditionFeatures = {}
 		for i, attr in ipairs(condition_template.attributes) do
 			table.insert(conditionFeatures, drawFeature(attr, y, a, conditionScrollPanel))
-			y[1] = y[1] + 30
+			y[1] = y[1] + 6
 		end
 	end
 end
@@ -3172,11 +3181,11 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 			end
 		end
 		local y = {}
-		y[1] = 120
+		y[1] = 26
 		actionFeatures = {}
 		for i, attr in ipairs(action_template.attributes) do
 			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
-			y[1] = y[1] + 30
+			y[1] = y[1] + 6
 		end
 	end
 end
@@ -3195,7 +3204,7 @@ drawFeatureFunctions["unitType"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3225,7 +3234,7 @@ drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			for k, n in pairs(teamName) do
@@ -3264,7 +3273,7 @@ drawFeatureFunctions["player"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			for k, n in pairs(teamName) do
@@ -3304,7 +3313,7 @@ drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			for i, g in ipairs(unitGroups) do
@@ -3351,7 +3360,7 @@ drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			for i, zone in ipairs(zoneList) do
@@ -3399,7 +3408,7 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3432,7 +3441,7 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3457,7 +3466,7 @@ drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
 	local comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3490,7 +3499,7 @@ drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3515,7 +3524,7 @@ drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
 	local comboBoxItems = { "enabled", "disabled" }
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3551,7 +3560,7 @@ drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
 
 	-- Parameters check
@@ -3576,7 +3585,7 @@ drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
 	local comboBoxItems = { "true", "false" }
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '40%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3604,7 +3613,7 @@ drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y, '40%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
 	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
 
 	-- Parameters check
@@ -3626,7 +3635,7 @@ drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Parameters check
-	local positionLabel = addLabel(panel, '30%', y, '40%', 30, "X: ?   Z: ?", 16)
+	local positionLabel = addLabel(panel, '30%', y.."%", '40%', "5%", "X: ?   Z: ?", 16)
 	if a.params[attr.id] then
 		local param = a.params[attr.id]
 		if type(param) == "number" then
@@ -3654,15 +3663,17 @@ drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
 					Spring.MarkerAddPoint(x, y, z, "("..tostring(x)..", "..tostring(z)..")")
 					table.insert(markerList, { x = x, y = y, z = z, timer = 2 })
 				end
-				local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewPosition)
-				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				local viewButton = addImage(panel, '90%', (y+1).."%", '8%', "3%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				viewButton.OnClick = { viewPosition }
+				viewButton.OnMouseOver = { function() viewButton.color = {1, 1, 1, 1} end }
+				viewButton.OnMouseOut = { function() viewButton.color = {0, 1, 1, 1} end }
 				table.insert(feature, viewButton)
 			end
 		end
 	end
 
 	-- Pick process
-	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickButton = addButton(panel, '70%', y.."%", '20%', "5%", EDITOR_TRIGGERS_EVENTS_PICK, nil)
 	local pickPosition = function()
 		changedParam = attr.id
 		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKPOSITION)
@@ -3683,7 +3694,7 @@ drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Parameters check
-	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "? (?)", 16)
+	local unitLabel = addLabel(panel, '30%', y.."%", '40%', "5%", "? (?)")
 	if a.params[attr.id] then
 		if a.params[attr.id].type and a.params[attr.id].value then
 			local u = a.params[attr.id].value
@@ -3700,15 +3711,17 @@ drawFeatureFunctions["unit"] = function(attr, yref, a, panel, feature)
 					state.height = 500
 					Spring.SetCameraState(state, 2)
 				end
-				local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
-				addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				local viewButton = addImage(panel, '90%', (y+1).."%", '8%', "3%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+				viewButton.OnClick = { viewUnit }
+				viewButton.OnMouseOver = { function() viewButton.color = {1, 1, 1, 1} end }
+				viewButton.OnMouseOut = { function() viewButton.color = {0, 1, 1, 1} end }
 				table.insert(feature, viewButton)
 			end
 		end
 	end
 
 	-- Pick process
-	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickButton = addButton(panel, '70%', y.."%", '20%', "5%", EDITOR_TRIGGERS_EVENTS_PICK, nil)
 	local pickUnit = function()
 		changedParam = attr.id
 		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNIT)
@@ -3728,7 +3741,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Parameters check
-	local unitLabel = addLabel(panel, '30%', y, '40%', 30, "[ ]", 16)
+	local unitLabel = addLabel(panel, '30%', y.."%", '40%', "5%", "[ ]")
 	if a.params[attr.id] then
 		local param = a.params[attr.id]
 		if param.type and param.value then
@@ -3748,8 +3761,10 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 						state.height = 500
 						Spring.SetCameraState(state, 2)
 					end
-					local viewButton = addButton(panel, '90%', y, '10%', 30, "", viewUnit)
-					addImage(viewButton, '0%', '0%', '100%', '100%', "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+					local viewButton = addImage(panel, '90%', (y+1).."%", '8%', "3%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+					viewButton.OnClick = { viewUnit }
+					viewButton.OnMouseOver = { function() viewButton.color = {1, 1, 1, 1} end }
+					viewButton.OnMouseOut = { function() viewButton.color = {0, 1, 1, 1} end }
 					table.insert(feature, viewButton)
 				end
 			elseif param.type == "group" then
@@ -3792,7 +3807,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 	end
 
 	-- Pick process
-	local pickButton = addButton(panel, '70%', y, '20%', 30, EDITOR_TRIGGERS_EVENTS_PICK, nil)
+	local pickButton = addButton(panel, '70%', y.."%", '20%', "5%", EDITOR_TRIGGERS_EVENTS_PICK, nil)
 	local pickUnit = function()
 		changedParam = attr.id
 		triggerStateMachine:setCurrentState(triggerStateMachine.states.PICKUNITSET)
@@ -3813,7 +3828,7 @@ drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Editbox
-	local editBox = addEditBox(panel, '30%', y, '40%', 30)
+	local editBox = addEditBox(panel, '30%', y.."%", '40%', "5%")
 	editBox.font.size = 13
 	editBox.updateFunction = function()
 		a.params[attr.id] = editBox.text
@@ -3832,7 +3847,7 @@ drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Editbox
-	local editBox = addEditBox(panel, '30%', y, '40%', 30)
+	local editBox = addEditBox(panel, '30%', y.."%", '40%', "5%")
 	editBox.font.size = 13
 	editBox.updateFunction = function()
 		local msgs = splitString(editBox.text, "||")
@@ -3874,10 +3889,10 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, featur
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST,
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL
 	}
-	local comboBox = addComboBox(panel, '30%', y, '30%', 30, comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '30%', "5%", comboBoxItems)
 
 	-- Editbox
-	local editBox = addEditBox(panel, '60%', y, '30%', 30)
+	local editBox = addEditBox(panel, '60%', y.."%", '30%', "5%")
 	editBox.toShow = true
 	comboBox.OnSelect = {
 		function()
@@ -3938,16 +3953,17 @@ end
 function drawFeature(attr, yref, a, panel) -- Display parameter according to its type
 	local feature = {}
 
-	local textLabel = addLabel(panel, '0%', yref[1], '30%', 30, attr.text, 16)
+	local textLabel = addLabel(panel, '0%', yref[1].."%", '30%', "5%", attr.text)
 	textLabel.font.shadow = false
 	table.insert(feature, textLabel)
 
 	drawFeatureFunctions[attr.type](attr, yref, a, panel, feature)
 
 	if attr.hint then
-		local variableHint = addTextBox(panel, '5%', yref[1]+35, '90%', 35, attr.hint, 14, { 0.6, 1, 1, 1 })
-		table.insert(feature, variableHint)
-		yref[1] = yref[1] + 40
+		local hintScrollPanel = addScrollPanel(panel, '5%', (yref[1]+6).."%", '90%', "10%")
+		addTextBox(hintScrollPanel, '0%', "0%", '100%', "100%", attr.hint, 14, { 0.6, 1, 1, 1 })
+		table.insert(feature, hintScrollPanel)
+		yref[1] = yref[1] + 11
 	end
 
 	return feature
@@ -4042,10 +4058,12 @@ function configureEvent() -- Show the event configuration window
 						windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
 						windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
 					else
-						e.repetition = true
-						windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
-						windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
-						windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+						if not e.repetition then
+							e.repetition = true
+							windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
+							windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
+							windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+						end
 					end
 				end
 			}
@@ -4395,6 +4413,7 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		ca.params[changedParam].value = v
 		Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
+		Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
 		Screen0:AddChild(windows["triggerWindow"])
 		Screen0:AddChild(windows["eventWindow"])
 		Screen0:AddChild(windows["importWindow"])
@@ -4407,16 +4426,16 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		end
 	end
 
-	selectSetOfUnitsWindows.groupteam = addWindow(Screen0, "0%", "5%", "15%", "80%")
+	selectSetOfUnitsWindows.groupteam = addWindow(Screen0, "0%", "10%", "15%", "80%")
 
 	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '0%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM)
 	local tsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '5%', '100%', '45%')
 	local tc = 0
-	local allBut = addButton(tsp, "0%", tc * 40, "100%", 40, EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM_ALL, function() pickFunction("team", "all") end)
+	local allBut = addButton(tsp, "0%", "0%", "100%", "15%", EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM_ALL, function() pickFunction("team", "all") end)
 	tc = tc + 1
 	for k, t in pairs(teamStateMachine.states) do
 		if enabledTeams[t] then
-			local but = addButton(tsp, "0%", tc * 40, "100%", 40, teamName[t], function() pickFunction("team", t) end)
+			local but = addButton(tsp, "0%", (tc * 15).."%", "100%", "15%", teamName[t], function() pickFunction("team", t) end)
 			but.font.color = {teamColor[t].red, teamColor[t].green, teamColor[t].blue, 1}
 			tc = tc + 1
 		end
@@ -4425,29 +4444,31 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	addLabel(selectSetOfUnitsWindows.groupteam, '0%', '50%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_GROUP)
 	local gsp = addScrollPanel(selectSetOfUnitsWindows.groupteam, '0%', '55%', '100%', '45%')
 	for i, g in ipairs(unitGroups) do
-		addButton(gsp, "0%", (i-1) * 40, "100%", 40, g.name, function() pickFunction("group", g.id) end)
+		addButton(gsp, "0%", ((i-1) * 15).."%", "100%", "15%", g.name, function() pickFunction("group", g.id) end)
 	end
 
-	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "5%", "15%", "80%")
+	selectSetOfUnitsWindows.cancelbut = addButton(Screen0, "75%", "10%", "10%", "5%", EDITOR_CANCEL, pickFunction)
 
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION)
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '3%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED, 13)
-	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '5%', '100%', '45%')
+	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "10%", "15%", "80%")
+
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION)
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '4%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED)
+	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '7%', '100%', '43%')
 	local count = 0
 	for i, e in ipairs(events) do
 		for ii, a in ipairs(e.actions) do
 			if a.type == "createUnits" then
-				addButton(asp, "0%", count * 40, "100%", 40, a.name, function() pickFunction("action", a.id) end)
+				addButton(asp, "0%", (count * 15).."%", "100%", "15%", a.name, function() pickFunction("action", a.id) end)
 				count = count + 1
 			end
 		end
 	end
 
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION)
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '53%', '100%', '2%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING, 13)
-	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '55%', '100%', '45%')
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION)
+	addLabel(selectSetOfUnitsWindows.actcond, '0%', '54%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING)
+	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '57%', '100%', '43%')
 	for i, c in ipairs(events[currentEvent].conditions) do
-		addButton(csp, "0%", (i-1) * 40, "100%", 40, c.name, function() pickFunction("condition", c.id) end)
+		addButton(csp, "0%", ((i-1) * 15).."%", "100%", "15%", c.name, function() pickFunction("condition", c.id) end)
 	end
 end
 
