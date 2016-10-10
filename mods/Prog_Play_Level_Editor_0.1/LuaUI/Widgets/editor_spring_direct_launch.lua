@@ -190,7 +190,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		y = "0%",
 		width = "15%",
 		height = "7%",
-		items = { "English", "Franï¿½ais" },
+		items = { "English", "Français" },
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
