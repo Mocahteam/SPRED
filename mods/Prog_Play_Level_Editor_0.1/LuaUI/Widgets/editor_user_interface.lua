@@ -5687,6 +5687,7 @@ function widget:MousePress(mx, my, button)
 					Screen0:AddChild(windows["importWindow"])
 					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
+					Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
 					if currentAction then
 						Screen0:AddChild(windows["actionWindow"])
 						drawActionFrame(false)
