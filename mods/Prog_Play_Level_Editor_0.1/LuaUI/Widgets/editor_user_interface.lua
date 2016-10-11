@@ -1360,7 +1360,7 @@ function initTestLevelFrame()
 				["language"] = Language,
 				["scenario"] = "noScenario",
 				["maingame"] = MainGame,
-				["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
+				["commands"] = Spring.GetModOptions().commands,
 				["toBeLoaded"] = levelFile.description.saveName
 			},
 			["GAME"] = {
