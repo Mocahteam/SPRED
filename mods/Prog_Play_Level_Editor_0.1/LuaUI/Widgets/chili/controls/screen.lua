@@ -179,18 +179,18 @@ function Screen:IsAbove(x,y,...)
 end
 
 function Screen:FocusControl(control)
-  -- Do not update focus if new control is the same as the previous one
-  if not CompareLinks(control, self.focusedControl) then
-    --UnlinkSafe(self.activeControl)
-    local oldFocusedControl = self.focusedControl
-    self.focusedControl = nil
-    if control then
-        self.focusedControl = MakeWeakLink(control, self.focusedControl)
-        self.focusedControl.state.focused = true
-        self.focusedControl:FocusUpdate() --rename FocusGain()
-    end
-    oldFocusedControl = UnlinkSafe(oldFocusedControl)
-    if oldFocusedControl then
+  --UnlinkSafe(self.activeControl)
+  local oldFocusedControl = self.focusedControl
+  self.focusedControl = nil
+  if control then
+      self.focusedControl = MakeWeakLink(control, self.focusedControl)
+      self.focusedControl.state.focused = true
+      self.focusedControl:FocusUpdate() --rename FocusGain()
+  end
+  oldFocusedControl = UnlinkSafe(oldFocusedControl)
+  if oldFocusedControl then
+    -- Do not remove focus if new control is the same as the previous one
+    if not CompareLinks(control, oldFocusedControl) then
         oldFocusedControl.state.focused = false
         oldFocusedControl:FocusUpdate() --rename FocusLost()
     end

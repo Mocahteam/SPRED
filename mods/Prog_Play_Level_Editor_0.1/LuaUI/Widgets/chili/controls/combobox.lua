@@ -91,7 +91,6 @@ end
 
 function ComboBox:_CloseWindow()
   if self._dropDownWindow then
-    Spring.Echo(DebugHandler.Stacktrace())
     self._dropDownWindow:Dispose()
     self._dropDownWindow = nil
   end
@@ -194,7 +193,7 @@ end
 
 function ComboBox:FocusUpdate()
   local screen = self:FindParent("screen")
-  -- Check if drop down window exists
+  -- Check if drop down window exists and doesn't have focus
   if self._dropDownWindow and not CompareLinks(screen:GetFocusedControl(), self._dropDownWindow) then
     -- Give focus to drop down window
     screen:FocusControl(self._dropDownWindow)
