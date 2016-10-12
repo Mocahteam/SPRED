@@ -2005,11 +2005,13 @@ function widget:Initialize()
 end
 
 function widget:Update(delta)
-	MakeLink()
+	if not HideView then
+		MakeLink()
+	end
 end
 
 function widget:MousePress(mx, my, button)
-	if button == 3 then
+	if not HideView and button == 3 then
 		selectedInput = nil
 		selectedOutputMission = nil
 		selectedOutputState = nil
@@ -2017,19 +2019,21 @@ function widget:MousePress(mx, my, button)
 end
 
 function widget:KeyPress(key, mods)
-	if key == Spring.GetKeyCode("esc") then
-		MainMenuFrame()
-		return true
-	end
-	if key == Spring.GetKeyCode("z") and mods.ctrl then
-		LoadState(1)
-		return true
-	end
-	if key == Spring.GetKeyCode("y") and mods.ctrl then
-		LoadState(-1)
-		return true
-	end
-	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
-		return true
+	if not HideView then
+		if key == Spring.GetKeyCode("esc") then
+			MainMenuFrame()
+			return true
+		end
+		if key == Spring.GetKeyCode("z") and mods.ctrl then
+			LoadState(1)
+			return true
+		end
+		if key == Spring.GetKeyCode("y") and mods.ctrl then
+			LoadState(-1)
+			return true
+		end
+		if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+			return true
+		end
 	end
 end

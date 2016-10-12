@@ -46,6 +46,7 @@ end
 
 local this = EditBox
 local inherited = this.inherited
+local clipboard = ""
 
 --//=============================================================================
 
@@ -310,13 +311,25 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		local e = self.selEnd
 		if s and e then
 			s,e = math.min(s,e), math.max(s,e)
-			Spring.SetClipboard(txt:sub(s,e-1))
+			if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
+        Spring.SetClipboard(txt:sub(s,e-1))
+      else
+        clipboard = txt:sub(s,e-1)
+      end
 		end
 		if key == Spring.GetKeyCode("x") and self.selStart ~= nil then
 			self:ClearSelected()
 		end
 	elseif mods.ctrl and key == Spring.GetKeyCode("v") then
-		self:TextInput(Spring.GetClipboard())
+		if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
+      self:TextInput(Spring.GetClipboard())
+    else
+      -- here clipboard is not unicode then we mislead TextInput
+      local allowUnicode  = self.allowUnicode
+      self.allowUnicode = true
+      self:TextInput(clipboard)
+      self.allowUnicode = allowUnicode -- We reset allowUnicode property
+    end
 
 	-- select all
 	elseif mods.ctrl and key == Spring.GetKeyCode("a") then
