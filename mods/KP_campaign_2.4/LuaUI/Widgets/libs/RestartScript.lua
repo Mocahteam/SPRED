@@ -107,7 +107,7 @@ local function createFromScratch(editorTables)
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
   local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player1", HostIP="localhost", HostPort="8451", ishost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
@@ -130,10 +130,10 @@ local function createFromScratch(editorTables)
       if (teamInformations.control=="player" and teamInformations.enabled==true) then 
 -- if a team is player controled but disabled it should not be stored as a player  
 -- controled team to avoid bug "Player1 has name player which is already taken" 
-        local sectionName="PLAYER"..tostring(indexPlayer)
+        local sectionName=string.lower("PLAYER"..tostring(indexPlayer))
         local name=teamInformations.name or string.lower(sectionName)
         indexPlayer=indexPlayer+1
-        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} -- "Player"..tostring(indexPlayer)
+        local tableController={Name="Player"..tostring(indexPlayer) ,Spectator="0",Team=tostring(teamNumber)} -- "Player"..tostring(indexPlayer)
         file=writeAttributesAndSection(file,sectionName, 1, tableController)   
       else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
       -- when max is attained, it's not necessary to add disabled teams anymore
@@ -181,19 +181,37 @@ function restartWithEditorFile(editorTables)
   end
 end
 
+local function findNumberOfPlayer(tableEditor)
+
+end
+
+local function generateTxt_and_restart(missionName, operations, reload)
+   Spring.Echo("dadadadada")
+   local updatedTxtFileContent=""
+   local sf=VFS.LoadFile(missionName)
+   Spring.Echo("try to decode")
+   Spring.Echo(missionName)
+   local tableEditor=json.decode(sf)
+   local numberOfPlayer=findNumberOfPlayer(tableEditor)
+   Spring.Echo("decoded with success")
+   local txtFileContent=createFromScratch(tableEditor)
+   updatedTxtFileContent=updateValues(txtFileContent, operations)
+   saveTxt(updatedTxtFileContent)
+   if(reload) then
+        Spring.Reload(updatedTxtFileContent) --(this line, yes)
+   else
+        Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+   end
+end
+
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
 -- a bit of copy pasta in this function, could be refractored easily
 function genericRestart(missionName,operations,contextFile)
    local updatedTxtFileContent=""
    if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
      if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
-        local sf=VFS.LoadFile("Missions/"..missionName..".editor")-- because we are in the context : Ingame
-        local tableEditor=json.decode(sf)
-        local txtFileContent=createFromScratch(tableEditor)
-        updatedTxtFileContent=updateValues(txtFileContent, operations)
-        saveTxt(updatedTxtFileContent)
-        Spring.Restart("-s",updatedTxtFileContent)
-        --Spring.Reload(updatedTxtFileContent)
+        local path = "Missions/"..missionName..".editor"-- because we are in the context : Ingame
+        generateTxt_and_restart(missionName, operations, false)
      else
         DoTheRestart("Missions/"..missionName.."txt", operations)  
      end
@@ -201,21 +219,7 @@ function genericRestart(missionName,operations,contextFile)
     if (string.sub(missionName, -3, -1)=="txt")then      
       DoTheRestart(missionName, operations)  
     elseif (string.sub(missionName, -6, -1)=="editor")then
-      local sf=VFS.LoadFile(missionName)
-      Spring.Echo("try to decode")
-      Spring.Echo(missionName)
-      local tableEditor=json.decode(sf)
-      Spring.Echo("decoded with success")
-      local txtFileContent=createFromScratch(tableEditor)
-      updatedTxtFileContent=updateValues(txtFileContent, operations)
-      saveTxt(updatedTxtFileContent)
-      --Spring.Restart("-s",updatedTxtFileContent)
-        if(reloadAvailable) then
-          Spring.Reload(updatedTxtFileContent) --(this line, yes)
-        else
-        --Spring.Echo(updatedTxtFileContent)
-        Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
-        end
+      generateTxt_and_restart(missionName, operations, reloadAvailable)
     else
       Spring.Echo("Warning, pbm in restart script")
     end   
@@ -224,7 +228,7 @@ end
 
 
 function restartToConnect(playerName,IP)
-  local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
+  local table2={HostIP=IP ,Hostport="8451",ishost="0",MyPlayerName=playerName}
   local file=writeAttributesAndSection("","GAME", 0, table2)
   Spring.Reload(file)--(this line, yes)
   --  Spring.Restart("-s",file)--(this line, yes)
