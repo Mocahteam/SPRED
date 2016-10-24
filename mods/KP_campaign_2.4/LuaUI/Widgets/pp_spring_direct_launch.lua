@@ -19,7 +19,7 @@ VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/WriteScript.lua",nil)
 
-VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain DoTheRestart function
+VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain the genericRestart function
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
@@ -164,7 +164,10 @@ local function Capitalize(str)
   return string.gsub (str, "(%w)(%w*)", function(a,b) return string.upper(a) .. b end)
 end
 
-local function RunScript(ScriptFileName, scenario)
+local function RunScript(scenario, ScriptFileName)
+  if(scenario)then
+    RunScenario(1)
+  end
   if Spring.Restart then
      local contextFile=true
     --if (string.sub(ScriptFileName, -3, -1)=="txt")then
@@ -272,7 +275,7 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
     width = "40%",
     height = "10%",
     caption = "Nouvelle Partie",
-    OnClick = { function() RunScenario(1) end },
+    OnClick = { function() RunScript(true) end },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 40,
@@ -407,7 +410,7 @@ function missionMenu()
       width = "100%",
       height = 80,
       caption = userMissionName,
-      OnClick = { function() RunScript(MissionFileName,"noScenario") end },
+      OnClick = { function() RunScript(false, MissionFileName) end },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
         size = 40,

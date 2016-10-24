@@ -12,7 +12,7 @@ local function saveTxt(txt)
   file:flush()
   file:close()
 end
-
+--- 
 
 function DoTheRestart(startscriptfilename, tableOperation)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
@@ -182,7 +182,13 @@ function restartWithEditorFile(editorTables)
 end
 
 local function findNumberOfPlayer(tableEditor)
-
+  local count =  0
+  for teamNumber,teamInformations in pairs(tableEditor.teams) do
+      if (teamInformations.control=="player" and teamInformations.enabled==true) then 
+        count = count + 1
+      end
+   end
+   return count
 end
 
 local function generateTxt_and_restart(missionName, operations, reload)
@@ -193,14 +199,15 @@ local function generateTxt_and_restart(missionName, operations, reload)
    Spring.Echo(missionName)
    local tableEditor=json.decode(sf)
    local numberOfPlayer=findNumberOfPlayer(tableEditor)
+   Spring.Echo(numberOfPlayer)
    Spring.Echo("decoded with success")
    local txtFileContent=createFromScratch(tableEditor)
    updatedTxtFileContent=updateValues(txtFileContent, operations)
    saveTxt(updatedTxtFileContent)
    if(reload) then
-        Spring.Reload(updatedTxtFileContent) --(this line, yes)
+        -- Spring.Reload(updatedTxtFileContent) --(this line, yes)
    else
-        Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+        -- Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
    end
 end
 
