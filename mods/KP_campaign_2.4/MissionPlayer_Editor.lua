@@ -44,21 +44,25 @@ ctx.speedFactor=1 -- placeHolder to store current speed
 -- the next one is a bit different
 ctx.customInformations={}--dedicated for storing information related to the execution of scripts described in "script" actions editor
 
+-------------------------------------
 -- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
 -- in order to sort events by order of execution
--- 1/3
-local function __genOrderedIndex( t )
+-- part 1/3
+-- -------------------------------------
+local function __genOrderedIndex(t )
     local orderedIndex = {}
     for key in pairs(t) do
-        table.insert( orderedIndex, key )
+        table.insert(orderedIndex, key)
     end
-    table.sort( orderedIndex )
+    table.sort(orderedIndex )
     return orderedIndex
 end
 
+-------------------------------------
 -- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
 -- in order to sort events by order of execution
--- 2/3
+-- part 2/3
+-------------------------------------
 local function orderedNext(t, state)
     -- Equivalent of the next function, but returns the keys in the alphabetic
     -- order. We use a temporary ordered key table that is stored in the
@@ -88,16 +92,21 @@ local function orderedNext(t, state)
     return
 end
 
+-------------------------------------
 -- Brainless copy-pasta from http://lua-users.org/wiki/SortedIteration, 
 -- in order to sort events by order of execution
--- 3/3
+-- part 3/3
+-------------------------------------
 local function orderedPairs(t)
     -- Equivalent of the pairs() function on tables. Allows to iterate
     -- in order
     return orderedNext, t, nil
 end
 
-
+-------------------------------------
+-- Cheap logging function, will echo a message if its level of importance
+-- is superior or equal of the global debugLevel parameter
+-------------------------------------
 local function EchoDebug(message,level)
   local level=level or 10
   if(level >= ctx.debugLevel)then
@@ -106,8 +115,9 @@ local function EchoDebug(message,level)
 end
 
 -------------------------------------
--- Load codegiven an environnement (table of variables that can be accessed and changed)
--- This function ensure compatibility (setfenv is dropped from lua 5.2)
+-- Load code in the ctx environnement which is the table of variables that can be accessed and changed
+-- This will be used to load custom code entered by the user
+-- This function ensures compatibility (setfenv is dropped from lua 5.2)
 -- Shamelessly taken from http://stackoverflow.com/questions/9268954/lua-pass-context-into-loadstring
 -------------------------------------
 local function load_code(code)
@@ -121,6 +131,12 @@ local function load_code(code)
     end
 end
 
+-------------------------------------
+-- General util function returning the instersection of two lists
+-- @param #table list1 
+-- @param #table list2
+-- @return #table
+-------------------------------------
 local function intersection(list1,list2)
   local inters={}
   if list1==nil then return nil end
@@ -136,7 +152,12 @@ local function intersection(list1,list2)
   return inters
 end
 
--- warning, if intersection is non void, duplicates will occur.
+-------------------------------------
+-- General util function returning the union of two lists
+-- @param #table list1 
+-- @param #table list2
+-- @return #table
+-------------------------------------
 local function union(list1,list2)
   local union={}
   if (list1~=nil) then
@@ -152,7 +173,14 @@ local function union(list1,list2)
   return union
 end
 
--- must give a number, string under the form of "8", "3" or v1+v2-3
+-------------------------------------
+-- Evaluate a string (returning a numerical value)
+-- The string can be the string representation of a number such as "8" or
+-- a mixed expression involving variables that will be replaced by their current
+-- numerical value such as "8 + v1"
+-- @param #string expression
+-- @return #number
+-------------------------------------
 local function computeReference(expression)
   EchoDebug("compute expression : "..expression, 1)
   if(expression==nil or expression=="") then return expression end
@@ -169,13 +197,15 @@ end
 
 -------------------------------------
 -- Compare an expression to a numerical value, a verbal "mode" being given 
--- @return boolean
+-- @param #string reference
+-- @param #string maxRef replace reference if the mode "all" is used
+-- @return #boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
   EchoDebug(json.encode{reference,maxRef,value,mode},1)
   reference=computeReference(reference)
   if(mode=="atmost")then return (value<=reference)      
-  elseif(mode=="atleast")then  return (value>=reference)    
+  elseif(mode=="atleast")then return (value>=reference)    
   elseif(mode=="exactly")then return (reference==value)  
   elseif(mode=="all")then return (maxRef==value)
   end
@@ -183,7 +213,10 @@ end
 
 -------------------------------------
 -- Compare numerical values, a numerical "mode" being given 
--- @return boolean
+-- @param #string v1
+-- @param #string v2
+-- @param #string mode (">", "<", etc.)
+-- @return #boolean
 -------------------------------------
 local function compareValue_Numerical(v1,v2,mode) 
   v1 = tonumber(v1)
@@ -214,7 +247,7 @@ local function makeOperation(v1,v2,operation)
 end
 
 -------------------------------------
--- Deep copy of tables 
+-- General util function : Deep copy of tables 
 -- @return table
 -------------------------------------
 local function deepcopy(orig)
@@ -243,7 +276,7 @@ end
 
 -------------------------------------
 -- Simple faction to get spring code given its string representation
--- @return faction code, related to factions described in txt files (such as Mission1.txt)
+-- @return #string faction code, related to factions described in txt files (such as Mission1.txt)
 -------------------------------------
 local function getFactionCode(factionType)
   if(factionType=="PLAYER") then
@@ -256,7 +289,7 @@ local function getFactionCode(factionType)
 end
 
 -------------------------------------
--- Return string litteral representation of a boolean 
+-- @return #string string representation of a boolean ("true" or "false")
 -------------------------------------
 local function boolAsString(booleanValue)
   if (booleanValue) then
@@ -269,6 +302,7 @@ end
 -------------------------------------
 -- Get a message from a message table
 -- If the message is not unique (a list), taking one by random
+-- @return #string message
 -------------------------------------
 local function getAMessage(messageTable) 
   if(messageTable[1]==nil) then
@@ -344,8 +378,9 @@ local function getARandomPositionInZone(idZone)
 end
 
 -------------------------------------
--- Extract position from parameters
 -- Sometimes a zone is given and getARandomPositionInZone will be called
+-- else, the parameters is a position and nothing has to be done
+-- @return #table table with x,z attributes 
 -------------------------------------
 local function extractPosition(tablePosOrMaybeJustZoneId)
   if(type(tablePosOrMaybeJustZoneId)=="number")then
@@ -357,6 +392,8 @@ end
 -------------------------------------
 -- Write letter on map giving its position
 -- Only O,W,N,S,E implemented
+-- Not directly used in the actions of the editor but may be used
+-- by loading custom actions 
 ------------------------------------- 
 local function writeLetter(x, y, z, letter)
   if letter == "O" then
@@ -395,6 +432,8 @@ end
 -------------------------------------
 -- Write sign on map at given position
 -- Only + and - are implemented
+-- Not directly used in the actions of the editor but may be used
+-- by loading custom actions 
 -------------------------------------
 local function writeSign(x, y, z, sign)
   if sign == "+" then
@@ -409,6 +448,7 @@ end
 -- show message on map 
 -- instead of directly printing the message, replacements are made
 -- to allow special elements such as colors. A global table, replacements is used to this effect
+-- @param #string content message to be printed
 -------------------------------------
 local function showMessage(content)
   local contentList=string.gmatch(content, '([^%.%.]+)') --split according the two dots (..) separator
@@ -425,13 +465,22 @@ end
 
 -------------------------------------
 -- Show Briefing, this function can be called from outside
--- For this reason all the json files must have a message with id BRIEFING
+-- For this reason all the json files must have a message with id "briefing"
 -------------------------------------
 local function ShowBriefing ()
   --Spring.Echo(json.encode(mission))
   showMessage(getAMessage(ctx.messages["briefing"]))-- convention all json files have briefing attribute
 end
 
+-------------------------------------
+-- Register an unit into the various table that refers it
+-- ctx.armySpring and ctx.armySpring allowing to get springId knowing externalId and reciprocately
+-- another table (ctx.armyInformations) holds value describing the current state of the unit.
+-- @param springId id given by spring once an unit is created
+-- @param externalId id comming from the editor file (or script-made id in case of in-game created units)
+-- @param reduction #number between 0 and 1 reducing health of unit at creation
+-- @param autoHeal #boolean allowing the autoHeal of units or not 
+-------------------------------------
 local function registerUnit(springId,externalId,reduction,autoHeal)
     ctx.armySpring[externalId]=springId
     ctx.armyExternal[springId]=externalId
@@ -454,6 +503,14 @@ local function registerUnit(springId,externalId,reduction,autoHeal)
     ctx.armyInformations[externalId].isAttacking=false
 end
 
+-------------------------------------
+-- Test if an unit is in a group
+-- Two comparisons are possible. The shallowest look only if the external Id is in the group.
+-- The other is more robust as two external ids are the same if their corresponding springID is the same
+-- This last case may happen in rare cases where the unit is registered twice (cf registerUnit). 
+-- Indeed, when it comes about unit creation, units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
+-- @return #boolean 
+-------------------------------------
 local function isInGroup(externalId,gp,testOnExternalsOnly)
   EchoDebug("is in group ->"..json.encode(gp),0)
   local isAlreadyStored=false
@@ -474,6 +531,9 @@ local function isInGroup(externalId,gp,testOnExternalsOnly)
   return false,nil
 end
 
+-------------------------------------
+-- @return #table table listing all the group indexes involving the unit
+-------------------------------------
 local function getGroupsOfUnit(externalId, testOnExternalsOnly, groupToCheck)
   local groupToCheck = groupToCheck or ctx.groupOfUnits
   local groups={}
@@ -486,6 +546,9 @@ local function getGroupsOfUnit(externalId, testOnExternalsOnly, groupToCheck)
   return groups
 end
  
+-------------------------------------
+-- de-register the units from groups
+-------------------------------------
 local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
   local testOnExternalsOnly=testOnExternalsOnly or true 
   for g,group in pairs(groups) do
@@ -496,10 +559,12 @@ local function removeUnitFromGroups(externalId,groups,testOnExternalsOnly)
   end
 end
 
+-------------------------------------
+-- add Units to groups inside the groupToStore meta group (or create one group if not existing)
+-- @param #table groupToStore group of group
+-------------------------------------
 local function addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,groupToStore)
   local testOnExternalsOnly=testOnExternalsOnly or true 
-  -- usefull to check redundancy at a deeper level because, when it comes about unit creation
-  -- units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
       -- create group if not existing
     if(groupToStore[group]==nil) then
@@ -513,20 +578,31 @@ local function addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExt
   end
 end
 
--- add Unit to specified groups
--- side effect : add the unit to the overarching group : "team_all".
+-------------------------------------
+-- add Units to groups, register it into two meta-groups : groupOfUnits and groupOfUndeletedUnits
+-- also add unit into the groups team_all (TODO: maybe this is not the place to do that, but would be better placed in the register units function)
+-------------------------------------
 local function addUnitToGroups(externalId,groups,testOnExternalsOnly)
   table.insert(groups,"team_all")
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUnits)
   addUnitToGroups_groupToStoreSpecified(externalId,groups,testOnExternalsOnly,ctx.groupOfUndeletedUnits)
 end  
 
+-------------------------------------
+-- add multiple Units to groups (see addUnitToGroups)
+-------------------------------------
 local function addUnitsToGroups(units,groups,testOnExternalsOnly)
   for u,unit in pairs(units) do
     addUnitToGroups(unit,groups,testOnExternalsOnly)
   end
 end
 
+-------------------------------------
+-- return units corresponding to an unitSet
+-- step1 : turn params into group index
+-- step2 : get the units from this group
+-- @return #table table of units
+-------------------------------------
 local function unitSetParamsToUnitsExternal(param)
   local index = param.type..'_'..tostring(param.value)
   local units = ctx.groupOfUnits[index]
@@ -537,8 +613,11 @@ local function unitSetParamsToUnitsExternal(param)
 end
    
 -------------------------------------
--- Check if a condition, expressed as a string describing boolean condition where variables
--- are related to conditions in the json files.
+-- Check if an event is triggerable
+-- This is done by 
+-- (1) replacing condition strings by their boolean value in the trigger
+-- (2) evaluating the trigger (e.g "true and (true or false)" give true
+-- @return #boolean 
 -------------------------------------
 local function isTriggerable(event)
   --Spring.Echo(json.encode(ctx.conditions))
@@ -567,13 +646,10 @@ end
 -- If we are in the context of action, it's possible that a list
 -- has already been compiled from previous condition checking process
 -- in this case, units_extracted is an index for this list
+-- @return #table group of units
 -------------------------------------
 local function extractListOfUnitsImpliedByCondition(conditionParams,groupToCheck)
   local groupToCheck = groupToCheck or ctx.groupOfUnits
-  --EchoDebug("debug : "..tostring(id), 1)
-  --Spring.Echo("extract process")
-  --Spring.Echo(json.encode(conditionParams))
-  --Spring.Echo(json.encode(ctx.groupOfUnits))
   
   if(conditionParams["units_extracted"]~=nil)then 
   -- when units_extracted exists, this means we are in the context of action.
@@ -617,8 +693,7 @@ end
 -------------------------------------
 -- Indicate if the action is groupable, which means that
 -- it can be applied to a group of units
--- add information in the action to facilitate manipulations of this action
--- return a boolean indicating if it's groupable
+-- TODO: return 2 values is not necessary anymore
 -------------------------------------
 local function isAGroupableTypeOfAction(a)
  local groupable=(a.params.unitset~=nil)
@@ -677,10 +752,9 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
 end
 
 -------------------------------------
--- Create an unit at a certain position
+-- Create an unit at a certain position (resulting from an action of unit creation)
 -- As side effects, the unit is added to various groups
--- One special group is also used in order to identify all the units
--- created by an action 
+-- One special group (team_all) is also used in order to identify all the units (see addUnitToGroups function)
 -------------------------------------
 local function createUnitAtPosition(act,position)
   local y=Spring.GetGroundHeight(position.x,position.z)
@@ -854,7 +928,7 @@ end
 -------------------------------------
 local function printMyStack()
   for i,el in pairs(ctx.actionStack) do
-    --Spring.Echo("action "..el.actId.." is planned with delay : "..el.delay)
+    Spring.Echo("action "..el.actId.." is planned with delay : "..el.delay)
   end
 end 
 
@@ -1000,7 +1074,6 @@ local function watchHeal(frameNumber)
 end
 
 -------------------------------------
---
 -- If an event must be triggered, then shall be it
 -- All the actions will be put in stack unless some specific options related to repetition
 -- forbide to do so, such as allowMultipleInStack
@@ -1066,7 +1139,7 @@ local function processEvents(frameNumber)
 end
 
 -------------------------------------
--- update values which are available in unsync only
+-- Update values which are available in unsync only
 -- It justs request unsync code by sendMessage
 -- Values are sent back to sync code (check RecvLuaMsg(msg, player))
 -------------------------------------
@@ -1075,6 +1148,11 @@ local function  UpdateUnsyncValues(frameNumber)
   SendToUnsynced("requestUnsyncVals")
 end
 
+-------------------------------------
+-- Update groups, useful to delete dead units from them
+-- nb: the meta-group ctx.groupOfUndeletedUnits is not concerned by this update
+-- as its very role is to keep informations also about dead unit.
+-------------------------------------
 local function UpdateGroups()
   EchoDebug("before update-> "..json.encode(ctx.groupOfUnits),0)
   for g,group in pairs(ctx.groupOfUnits) do
@@ -1120,7 +1198,7 @@ end
 -------------------------------------
 -- Determine if an unit satisfies a condition
 -- Two modes are possible depending on the mode of comparison (at least, at most ...)
--- Return boolean
+-- @return #boolean
 -------------------------------------
 local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=ctx.armySpring[externalUnitId]
@@ -1177,6 +1255,7 @@ end
 
 -------------------------------------
 -- Update the truthfulness of a condition
+-- @return #boolean
 -------------------------------------
 local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(ctx.conditions) do
@@ -1279,7 +1358,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
     EchoDebug(ctx.conditions[idCond]["currentlyValid"],2)
     EchoDebug("current group of units",2)
     EchoDebug(json.encode(ctx.groupOfUnits),2)
-     EchoDebug("current group of undeleted units",2)
+    EchoDebug("current group of undeleted units",2)
     EchoDebug(json.encode(ctx.groupOfUndeletedUnits),2)
   end 
 end
@@ -1343,6 +1422,7 @@ local function parseJson(jsonString)
   -- enable Widget Informer
   widgetHandler:EnableWidget("Widget Informer")
   --]]
+  -- 
   local widgetWithForcedState={
     ["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
     ,["Mission GUI"]=true,["campaign launcher"]=true,["CA Interface"]=true
@@ -1367,6 +1447,10 @@ local function parseJson(jsonString)
   return true
 end
 
+-------------------------------------
+-- Return the list of triggered events
+-- @return table list of triggered events
+-------------------------------------
 local function returnEventsTriggered()
   local eventsTriggered={}
   for idEv,ev in pairs(ctx.events) do   
@@ -1580,15 +1664,18 @@ local function Stop ()
   end
 end
 
-
+-------------------------------------
+-- check if the message received start with a particular prefix
+-- @return #boolean 
+-------------------------------------
 local function isMessage(msg,target_msg)
   local lengthTarget=string.len(target_msg)
   return ((msg~=nil)and(string.len(msg)>lengthTarget)and(string.sub(msg,1,lengthTarget)==target_msg))
 end
 
 -------------------------------------
--- Information received from Unsynced Code 
--- Executed in mission_runner.lua
+-- Update game data from information received from Unsynced Code 
+-- in mission_runner.lua
 -------------------------------------
 local function RecvLuaMsg(msg, player)
   Spring.Echo("")
