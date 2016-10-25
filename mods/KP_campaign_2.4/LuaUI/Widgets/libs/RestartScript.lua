@@ -100,14 +100,14 @@ local function writeAttributesAndSection(file,sectionName, levelOfIndentation, t
   return file
 end
 
-local function createFromScratch(editorTables)
+local function createFromScratch(editorTables, playerName)
   local file=""
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n{" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
   local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player1", HostIP="localhost", HostPort="8451", ishost="1",StartPosType="3"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName=playerName, HostIP="localhost", HostPort="8451", ishost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={jsonlocation="editor" ,gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
@@ -181,7 +181,15 @@ function restartWithEditorFile(editorTables)
   end
 end
 
-local function findNumberOfPlayer(tableEditor)
+local function open_and_decode(missionName)
+   local sf=VFS.LoadFile(missionName)
+   Spring.Echo("try to decode")
+   Spring.Echo(missionName)
+   return json.decode(sf)
+end
+
+function number_of_player_editor_file(missionName,operations,contextFile)
+  local tableEditor = open_and_decode(missionName)
   local count =  0
   for teamNumber,teamInformations in pairs(tableEditor.teams) do
       if (teamInformations.control=="player" and teamInformations.enabled==true) then 
@@ -191,17 +199,10 @@ local function findNumberOfPlayer(tableEditor)
    return count
 end
 
-local function generateTxt_and_restart(missionName, operations, reload)
-   Spring.Echo("dadadadada")
-   local updatedTxtFileContent=""
-   local sf=VFS.LoadFile(missionName)
-   Spring.Echo("try to decode")
-   Spring.Echo(missionName)
-   local tableEditor=json.decode(sf)
-   local numberOfPlayer=findNumberOfPlayer(tableEditor)
-   Spring.Echo(numberOfPlayer)
+local function generateTxt_and_restart(missionName, operations, reload, playerName)
+   local tableEditor=open_and_decode(missionName)
    Spring.Echo("decoded with success")
-   local txtFileContent=createFromScratch(tableEditor)
+   local txtFileContent=createFromScratch(tableEditor, playerName)
    updatedTxtFileContent=updateValues(txtFileContent, operations)
    saveTxt(updatedTxtFileContent)
    if(reload) then
@@ -211,14 +212,36 @@ local function generateTxt_and_restart(missionName, operations, reload)
    end
 end
 
+
+function number_of_player(missionName,contextFile)
+-- Warning : no retro compatibility with old txt files
+-- they can still be run, but are 1 player by default (return false statements below)
+   local path = ""
+   if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
+     if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
+        path = "Missions/"..missionName..".editor"-- because we are in the context : Ingame
+     else
+        return false  
+     end
+   else -- meaning Not in game, we just have access to the file name
+    if (string.sub(missionName, -3, -1)=="txt")then      
+      return false 
+    elseif (string.sub(missionName, -6, -1)=="editor")then
+      path = missionName
+    else
+      Spring.Echo("Warning, pbm in restart script")
+    end   
+  end
+  return number_of_player_editor_file(path)
+end 
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
 -- a bit of copy pasta in this function, could be refractored easily
-function genericRestart(missionName,operations,contextFile)
-   local updatedTxtFileContent=""
+function genericRestart(missionName,operations,contextFile, playerName)
+  playerName = playerName or "Player1"
    if(not contextFile)then -- meaning that context is : In-game => we have access to modoptions
      if Spring.GetModOptions()["jsonlocation"]~=nil and Spring.GetModOptions()["jsonlocation"]=="editor" then
         local path = "Missions/"..missionName..".editor"-- because we are in the context : Ingame
-        generateTxt_and_restart(missionName, operations, false)
+        generateTxt_and_restart(missionName, operations, false, playerName)
      else
         DoTheRestart("Missions/"..missionName.."txt", operations)  
      end
@@ -226,7 +249,7 @@ function genericRestart(missionName,operations,contextFile)
     if (string.sub(missionName, -3, -1)=="txt")then      
       DoTheRestart(missionName, operations)  
     elseif (string.sub(missionName, -6, -1)=="editor")then
-      generateTxt_and_restart(missionName, operations, reloadAvailable)
+      generateTxt_and_restart(missionName, operations, reloadAvailable, playerName)
     else
       Spring.Echo("Warning, pbm in restart script")
     end   
