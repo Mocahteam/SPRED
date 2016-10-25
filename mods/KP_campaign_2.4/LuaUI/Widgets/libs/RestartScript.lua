@@ -203,12 +203,12 @@ local function generateTxt_and_restart(missionName, operations, reload, playerNa
    local tableEditor=open_and_decode(missionName)
    Spring.Echo("decoded with success")
    local txtFileContent=createFromScratch(tableEditor, playerName)
-   updatedTxtFileContent=updateValues(txtFileContent, operations)
+   local updatedTxtFileContent=updateValues(txtFileContent, operations)
    saveTxt(updatedTxtFileContent)
    if(reload) then
-        -- Spring.Reload(updatedTxtFileContent) --(this line, yes)
+      Spring.Reload(updatedTxtFileContent) --(this line, yes)
    else
-        -- Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
+      Spring.Restart("-s",updatedTxtFileContent)--( and this line too)
    end
 end
 
@@ -260,18 +260,6 @@ end
 function restartToConnect(playerName,IP)
   local table2={HostIP=IP ,Hostport="8451",ishost="0",MyPlayerName=playerName}
   local file=writeAttributesAndSection("","GAME", 0, table2)
-  Spring.Reload(file)--(this line, yes)
-  --  Spring.Restart("-s",file)--(this line, yes)
---[[
-[GAME]
-{
-  HostIP=132.227.207.137;
-  Hostport=8451;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
-  IsHost=0;           // 0: no server will be started in this instance
-                      // 1: start a server
-  
-  MyPlayerName=Player2; // our ingame-name (needs to match one players Name= field)
-}
---]]
+  Spring.Restart("-s",file)--(this line, yes)
 end 
       
