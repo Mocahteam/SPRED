@@ -3,7 +3,7 @@
 #include "stdio.h"
 
 // réparer toutes les unités endommagées
-int main (){
+int main () {
 	int i; // compteur de boucle
 	PP_Unit u, assembleur; // unités de traitement
 	
@@ -25,10 +25,7 @@ int main (){
 			u = PP_GetUnitAt(MY_COALITION, i);
 			if (PP_Unit_GetHealth(u) < PP_Unit_GetMaxHealth(u)){
 				PP_Unit_ActionOnUnit(assembleur, REPAIR, u);
-				while (PP_Unit_GetHealth(u) < PP_Unit_GetMaxHealth(u)){
-					// afficher la santée courante
-					printf("Sante de l'unite %d : %.2f/%.2f\n", u, PP_Unit_GetHealth(u), PP_Unit_GetMaxHealth(u));
-				}
+				while (PP_Unit_GetHealth(u) < PP_Unit_GetMaxHealth(u));
 			}
 			// passer à l'unité suivante
 			i = i + 1;

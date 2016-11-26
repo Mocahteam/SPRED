@@ -1,0 +1,285 @@
+\hypertarget{class_event}{}\section{Event Class Reference}
+\label{class_event}\index{Event@{Event}}
+
+
+Classe héritant de \hyperlink{class_trace}{Trace}. Cette classe sert de classe mère pour toutes les classes définies dans le fichier \hyperlink{_event_def_8h}{Event\+Def.\+h}.  
+
+
+
+
+{\ttfamily \#include $<$Event.\+h$>$}
+
+Inheritance diagram for Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_event}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\+::shared\+\_\+ptr$<$ \hyperlink{class_event}{Event} $>$ \hyperlink{class_event_af09ed5d4baca5790d6decf72075dfe13}{sp\+\_\+event}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_event_a0effe34c8d7cf236f831b6a038ca5d94}{Event} (std\+::string \hyperlink{class_event_a8d9ecffd91cc944bee314f83260713ff}{label}, std\+::string \hyperlink{class_trace_a4835dcfa7da5d4c971e8f7d6860acb09}{info}=\char`\"{}\char`\"{})
+\item 
+\hyperlink{class_event_af490e691699bb4c74235fc9b224addee}{Event} (const \hyperlink{class_event}{Event} $\ast$e)
+\item 
+virtual unsigned int \hyperlink{class_event_adc33626b18f2090fba9f58cf0991fdb5}{length} () const 
+\begin{DoxyCompactList}\small\item\em Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}un événement. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_event_a33edb6d4cfa0dc8040a8a7e9e3e326d9}{operator==} (\hyperlink{class_trace}{Trace} $\ast$t) const 
+\begin{DoxyCompactList}\small\item\em Comparaison de l\textquotesingle{}objet \hyperlink{class_event}{Event} avec une trace {\ttfamily t}. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{class_event_aafa2022d6600717a9cd6511797548265}{clone} () const 
+\begin{DoxyCompactList}\small\item\em Clonage d\textquotesingle{}un événement. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_event_ae5465424aa2d50e2e144eae1d84a7ea9}{display} (std\+::ostream \&os=std\+::cout) const 
+\begin{DoxyCompactList}\small\item\em Affichage des informations de l\textquotesingle{}objet \hyperlink{class_event}{Event}. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_event_aad213c94070547bb727ba369b3460e2a}{get\+Params} () const 
+\begin{DoxyCompactList}\small\item\em Retourne les différents paramètres relatifs à l\textquotesingle{}événement sous forme de chaîne de caractères. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_event_aadab1c703ff3bd4983da917badbb83d4}{get\+Label} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable {\ttfamily label}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_event_a27d769cc30bbd8d827124958a9a95cae}{concat\+Events\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}game\+\_\+paused\char`\"{}, \char`\"{}game\+\_\+unpaused\char`\"{}, N\+U\+LL\}
+\item 
+static const char $\ast$ \hyperlink{class_event_aaf275d46129b6cda2a84b905550349f2}{no\+Concat\+Events\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}start\+\_\+mission\char`\"{}, \char`\"{}end\+\_\+mission\char`\"{}, \char`\"{}new\+\_\+execution\char`\"{}, \char`\"{}end\+\_\+execution\char`\"{}, \char`\"{}eof\char`\"{}, N\+U\+LL\}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{class_event_a8d9ecffd91cc944bee314f83260713ff}{label}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe héritant de \hyperlink{class_trace}{Trace}. Cette classe sert de classe mère pour toutes les classes définies dans le fichier \hyperlink{_event_def_8h}{Event\+Def.\+h}. 
+
+Definition at line 19 of file Event.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Event@{Event}!sp\+\_\+event@{sp\+\_\+event}}
+\index{sp\+\_\+event@{sp\+\_\+event}!Event@{Event}}
+\subsubsection[{\texorpdfstring{sp\+\_\+event}{sp_event}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<${\bf Event}$>$ {\bf Event\+::sp\+\_\+event}}\hypertarget{class_event_af09ed5d4baca5790d6decf72075dfe13}{}\label{class_event_af09ed5d4baca5790d6decf72075dfe13}
+Définition du type pointeur intelligent vers un objet \hyperlink{class_event}{Event}. 
+
+Definition at line 26 of file Event.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\subsubsection[{\texorpdfstring{Event(std\+::string label, std\+::string info="""")}{Event(std::string label, std::string info="")}}]{\setlength{\rightskip}{0pt plus 5cm}Event\+::\+Event (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{label, }
+\item[{std\+::string}]{info = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_event_a0effe34c8d7cf236f831b6a038ca5d94}{}\label{class_event_a0effe34c8d7cf236f831b6a038ca5d94}
+Constructeur principal de la classe \hyperlink{class_event}{Event}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em label} & le label de l\textquotesingle{}événement modélisé par l\textquotesingle{}objet \hyperlink{class_event}{Event}. \\
+\hline
+{\em info} & le label attribué par l\textquotesingle{}expert. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 6 of file Event.\+cpp.
+
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\subsubsection[{\texorpdfstring{Event(const Event $\ast$e)}{Event(const Event *e)}}]{\setlength{\rightskip}{0pt plus 5cm}Event\+::\+Event (
+\begin{DoxyParamCaption}
+\item[{const {\bf Event} $\ast$}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_event_af490e691699bb4c74235fc9b224addee}{}\label{class_event_af490e691699bb4c74235fc9b224addee}
+Constructeur de la classe \hyperlink{class_event}{Event} utilisé notamment lors de la copie de l\textquotesingle{}objet. 
+
+Definition at line 8 of file Event.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Event@{Event}!clone@{clone}}
+\index{clone@{clone}!Event@{Event}}
+\subsubsection[{\texorpdfstring{clone() const }{clone() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trace\+::sp\+\_\+trace} Event\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_event_aafa2022d6600717a9cd6511797548265}{}\label{class_event_aafa2022d6600717a9cd6511797548265}
+
+
+Clonage d\textquotesingle{}un événement. 
+
+\begin{DoxyReturn}{Returns}
+une copie de l\textquotesingle{}objet \hyperlink{class_event}{Event}. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a0917758337e37f936713ccaf75b532f2}{Trace}.
+
+
+
+Reimplemented in \hyperlink{class_end_execution_event_aa89f0e0da951077ac408345235b7444b}{End\+Execution\+Event}, \hyperlink{class_new_execution_event_adc75351c4c45e5161c26138b29e980ed}{New\+Execution\+Event}, \hyperlink{class_end_mission_event_a2d851feeb940eb1c73ab05d8cff28d84}{End\+Mission\+Event}, and \hyperlink{class_start_mission_event_a4dcda1cb85c391e3594ab1486bc3223d}{Start\+Mission\+Event}.
+
+
+
+Definition at line 22 of file Event.\+cpp.
+
+\index{Event@{Event}!display@{display}}
+\index{display@{display}!Event@{Event}}
+\subsubsection[{\texorpdfstring{display(std\+::ostream \&os=std\+::cout) const }{display(std::ostream &os=std::cout) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Event\+::display (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_event_ae5465424aa2d50e2e144eae1d84a7ea9}{}\label{class_event_ae5465424aa2d50e2e144eae1d84a7ea9}
+
+
+Affichage des informations de l\textquotesingle{}objet \hyperlink{class_event}{Event}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & le flux de sortie utilisé pour l\textquotesingle{}affichage. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_trace_a4324fa45af235238ddedc2215c3d1cf0}{Trace}.
+
+
+
+Definition at line 26 of file Event.\+cpp.
+
+\index{Event@{Event}!get\+Label@{get\+Label}}
+\index{get\+Label@{get\+Label}!Event@{Event}}
+\subsubsection[{\texorpdfstring{get\+Label() const }{getLabel() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Event\+::get\+Label (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_event_aadab1c703ff3bd4983da917badbb83d4}{}\label{class_event_aadab1c703ff3bd4983da917badbb83d4}
+
+
+Getter pour la variable {\ttfamily label}. 
+
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères {\ttfamily label} associée à l\textquotesingle{}événement. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file Event.\+cpp.
+
+\index{Event@{Event}!get\+Params@{get\+Params}}
+\index{get\+Params@{get\+Params}!Event@{Event}}
+\subsubsection[{\texorpdfstring{get\+Params() const }{getParams() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Event\+::get\+Params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_event_aad213c94070547bb727ba369b3460e2a}{}\label{class_event_aad213c94070547bb727ba369b3460e2a}
+
+
+Retourne les différents paramètres relatifs à l\textquotesingle{}événement sous forme de chaîne de caractères. 
+
+Cette fonction doit être redéfinie par les classes héritant de \hyperlink{class_event}{Event}.
+
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères formatée contenant les valeurs des différents paramètres de l\textquotesingle{}événement séparées par des espaces. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_end_execution_event_a8676ace3828d6b5914d76e90ec9a7105}{End\+Execution\+Event}, \hyperlink{class_new_execution_event_a1d28826bae4c7b73bc85859f62f48a48}{New\+Execution\+Event}, \hyperlink{class_end_mission_event_a79a3dc9a0bc4e39b4f9af2d1633a5029}{End\+Mission\+Event}, and \hyperlink{class_start_mission_event_a498a3b6e3fa6dfd736486aaa1db421dd}{Start\+Mission\+Event}.
+
+
+
+Definition at line 41 of file Event.\+cpp.
+
+\index{Event@{Event}!length@{length}}
+\index{length@{length}!Event@{Event}}
+\subsubsection[{\texorpdfstring{length() const }{length() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Event\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_event_adc33626b18f2090fba9f58cf0991fdb5}{}\label{class_event_adc33626b18f2090fba9f58cf0991fdb5}
+
+
+Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}un événement. 
+
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a74a29f7e259781424d9f81409ed34701}{Trace}.
+
+
+
+Definition at line 33 of file Event.\+cpp.
+
+\index{Event@{Event}!operator==@{operator==}}
+\index{operator==@{operator==}!Event@{Event}}
+\subsubsection[{\texorpdfstring{operator==(\+Trace $\ast$t) const }{operator==(Trace *t) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Event\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace} $\ast$}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_event_a33edb6d4cfa0dc8040a8a7e9e3e326d9}{}\label{class_event_a33edb6d4cfa0dc8040a8a7e9e3e326d9}
+
+
+Comparaison de l\textquotesingle{}objet \hyperlink{class_event}{Event} avec une trace {\ttfamily t}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \+: la trace utilisée pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la trace {\ttfamily t} est également un événement et si elle a le même label que cet événement. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a8201809c2fcc1d02cfa8bf894a79bb5e}{Trace}.
+
+
+
+Definition at line 12 of file Event.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Event@{Event}!concat\+Events\+Arr@{concat\+Events\+Arr}}
+\index{concat\+Events\+Arr@{concat\+Events\+Arr}!Event@{Event}}
+\subsubsection[{\texorpdfstring{concat\+Events\+Arr}{concatEventsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Event\+::concat\+Events\+Arr = \{\char`\"{}game\+\_\+paused\char`\"{}, \char`\"{}game\+\_\+unpaused\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_event_a27d769cc30bbd8d827124958a9a95cae}{}\label{class_event_a27d769cc30bbd8d827124958a9a95cae}
+Tableau contenant les labels des événements pris en compte lors du parsing du fichier de traces brutes.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_traces_parser_af094e480d2d92e273ec454cc8bdb4c56}{Traces\+Parser\+::handle\+Line} 
+\end{DoxySeeAlso}
+
+
+Definition at line 46 of file Event.\+h.
+
+\index{Event@{Event}!label@{label}}
+\index{label@{label}!Event@{Event}}
+\subsubsection[{\texorpdfstring{label}{label}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Event\+::label\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_event_a8d9ecffd91cc944bee314f83260713ff}{}\label{class_event_a8d9ecffd91cc944bee314f83260713ff}
+Le label associé permettant d\textquotesingle{}identifier l\textquotesingle{}événement modélisé par l\textquotesingle{}objet \hyperlink{class_event}{Event}. 
+
+Definition at line 104 of file Event.\+h.
+
+\index{Event@{Event}!no\+Concat\+Events\+Arr@{no\+Concat\+Events\+Arr}}
+\index{no\+Concat\+Events\+Arr@{no\+Concat\+Events\+Arr}!Event@{Event}}
+\subsubsection[{\texorpdfstring{no\+Concat\+Events\+Arr}{noConcatEventsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Event\+::no\+Concat\+Events\+Arr = \{\char`\"{}start\+\_\+mission\char`\"{}, \char`\"{}end\+\_\+mission\char`\"{}, \char`\"{}new\+\_\+execution\char`\"{}, \char`\"{}end\+\_\+execution\char`\"{}, \char`\"{}eof\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_event_aaf275d46129b6cda2a84b905550349f2}{}\label{class_event_aaf275d46129b6cda2a84b905550349f2}
+Tableau contenant les labels des événements définissant les débuts/fins de mission/d\textquotesingle{}éxécution. 
+
+Definition at line 51 of file Event.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_event_8h}{Event.\+h}\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_event_8cpp}{Event.\+cpp}\end{DoxyCompactItemize}

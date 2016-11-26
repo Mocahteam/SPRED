@@ -1,3 +1,10 @@
+/**
+ * \file EventDef.h
+ * \brief Déclaration des classes dérivées de la classe Event
+ * \author meresse
+ * \version 0.1
+ */
+
 #ifndef __EVENT_DEF_H__
 #define __EVENT_DEF_H__
 

@@ -1,0 +1,523 @@
+\hypertarget{class_traces_parser}{}\section{Traces\+Parser Class Reference}
+\label{class_traces_parser}\index{Traces\+Parser@{Traces\+Parser}}
+
+
+La classe \hyperlink{class_traces_parser}{Traces\+Parser} définit les méthodes de parsing de fichiers de traces brutes (que ce soit dans le contexte d\textquotesingle{}une partie de jeu ou en ligne de commandes), les différentes fonctions de l\textquotesingle{}algorithme hors-\/ligne, et les fonctions d\textquotesingle{}export et d\textquotesingle{}import de traces à partir d\textquotesingle{}un document X\+ML.  
+
+
+
+
+{\ttfamily \#include $<$Traces\+Parser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_traces_parser_ab7218dcf00853f4bcef39d0638fad455}{Traces\+Parser} (bool in\+\_\+game)
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{class_traces_parser}{Traces\+Parser}. \end{DoxyCompactList}\item 
+\hyperlink{class_traces_parser_aacb694406ed5ff3f0124bd8c38626e73}{$\sim$\+Traces\+Parser} ()
+\begin{DoxyCompactList}\small\item\em Destructeur de \hyperlink{class_traces_parser}{Traces\+Parser}. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_af6d608ef964c68501657e0087b428e78}{parse\+Trace\+File\+Offline} (const std\+::string \&dir\+\_\+path, const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Lancement de la compression d\textquotesingle{}un fichier de traces brutes avec l\textquotesingle{}algorithme de compression hors-\/ligne. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_ae38980b29e0c70e2df3f6685a4fc5eb4}{parse\+Trace\+File} (const std\+::string \&dir\+\_\+path, const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Lancement du parsage d\textquotesingle{}un fichier de traces brutes. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_a6cbaf502b65284074b79ed10ff462f5d}{init\+Params\+Map} (const std\+::string \&json)
+\begin{DoxyCompactList}\small\item\em Chargement des paramètres de compression. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_a7ccd84d89ea60faf074c852b0d7b2b85}{display} (std\+::ostream \&os=std\+::cout)
+\begin{DoxyCompactList}\small\item\em Affichage des traces contenues dans le vecteur Traces\+Parser\+::traces. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_adafdd12df08a028854ac2bb52d1e610f}{set\+End} ()
+\begin{DoxyCompactList}\small\item\em Setter pour la variable Traces\+Parser\+::end. \end{DoxyCompactList}\item 
+bool \hyperlink{class_traces_parser_a6f0cc2b49ed08edeb987d088c1ec5320}{get\+End} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable Traces\+Parser\+::end. \end{DoxyCompactList}\item 
+bool \hyperlink{class_traces_parser_a4b35fa08af68c2b1b93e0eaef75c7a86}{compression\+Done} ()
+\begin{DoxyCompactList}\small\item\em Getter pour la variable Traces\+Parser\+::compressed. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_parser_ad5ef57948524c0c85eea22615491c47f}{set\+Proceed} (bool proceed)
+\begin{DoxyCompactList}\small\item\em Setter pour la variable Traces\+Parser\+::proceed. \end{DoxyCompactList}\item 
+bool \hyperlink{class_traces_parser_a093f9b0e30ee770ae45bf66c3bcf5de2}{get\+Proceed} ()
+\begin{DoxyCompactList}\small\item\em Getter pour la variable Traces\+Parser\+::proceed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{class_traces_parser_af094e480d2d92e273ec454cc8bdb4c56}{handle\+Line} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Instantiation d\textquotesingle{}un objet \hyperlink{class_trace}{Trace} à partir d\textquotesingle{}une chaîne de caractères. \end{DoxyCompactList}\item 
+static \hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{Sequence\+::sp\+\_\+sequence} \hyperlink{class_traces_parser_ac304d9f86b7a99e29ec9d6aacd748d41}{merge\+Sequences} (\hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{Sequence\+::sp\+\_\+sequence} sps\+\_\+up, \hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{Sequence\+::sp\+\_\+sequence} sps\+\_\+down)
+\begin{DoxyCompactList}\small\item\em Fusion de deux séquences. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} $>$ \hyperlink{class_traces_parser_a9a4c5e8e51fcb6feec230a0275a46c11}{import\+Trace\+From\+Xml} (const std\+::string \&xml)
+\begin{DoxyCompactList}\small\item\em Importation de traces à partir d\textquotesingle{}un document X\+ML. \end{DoxyCompactList}\item 
+static void \hyperlink{class_traces_parser_a515973e07e60b36499649239592f6edb}{import\+Trace\+From\+Node} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, std\+::vector$<$ \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} $>$ \&traces)
+\begin{DoxyCompactList}\small\item\em Importation de traces à partir d\textquotesingle{}un noeud de document X\+ML. \end{DoxyCompactList}\item 
+static unsigned int \hyperlink{class_traces_parser_a66b4be9e4be69fc9164400fcbd30aee8}{get\+Node\+Child\+Count} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Détermination du nombre de noeuds fils d\textquotesingle{}un noeud dans un document X\+ML. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \hyperlink{class_traces_parser_a12aa7a30eaa7ccc6fdd49f7d60ad1ec4}{split\+Line} (const std\+::string \&s, char delim= \textquotesingle{} \textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Fonction permettant de découper une chaîne de caractères en se basant sur un délimiteur. \end{DoxyCompactList}\item 
+static int \hyperlink{class_traces_parser_a50ffcbaea509b2a2ed4d5ebd5dc4da3e}{stoi} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Conversion d\textquotesingle{}une chaîne de caractères en entier. \end{DoxyCompactList}\item 
+static float \hyperlink{class_traces_parser_aa6ed3ca29fafafef59554bd3244820e2}{stof} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Conversion d\textquotesingle{}une chaîne de caractères en flottant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_traces_parser_a5e73c688eb2abd99e00b82b18eec1ef4}{line\+Num} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+La classe \hyperlink{class_traces_parser}{Traces\+Parser} définit les méthodes de parsing de fichiers de traces brutes (que ce soit dans le contexte d\textquotesingle{}une partie de jeu ou en ligne de commandes), les différentes fonctions de l\textquotesingle{}algorithme hors-\/ligne, et les fonctions d\textquotesingle{}export et d\textquotesingle{}import de traces à partir d\textquotesingle{}un document X\+ML. 
+
+Definition at line 49 of file Traces\+Parser.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Traces\+Parser@{Traces\+Parser}!Traces\+Parser@{Traces\+Parser}}
+\index{Traces\+Parser@{Traces\+Parser}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{Traces\+Parser(bool in\+\_\+game)}{TracesParser(bool in_game)}}]{\setlength{\rightskip}{0pt plus 5cm}Traces\+Parser\+::\+Traces\+Parser (
+\begin{DoxyParamCaption}
+\item[{bool}]{in\+\_\+game}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_ab7218dcf00853f4bcef39d0638fad455}{}\label{class_traces_parser_ab7218dcf00853f4bcef39d0638fad455}
+
+
+Constructeur de \hyperlink{class_traces_parser}{Traces\+Parser}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+game} & indique si la compression doit se faire en cours de jeu. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 20 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!````~Traces\+Parser@{$\sim$\+Traces\+Parser}}
+\index{````~Traces\+Parser@{$\sim$\+Traces\+Parser}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{$\sim$\+Traces\+Parser()}{~TracesParser()}}]{\setlength{\rightskip}{0pt plus 5cm}Traces\+Parser\+::$\sim$\+Traces\+Parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_aacb694406ed5ff3f0124bd8c38626e73}{}\label{class_traces_parser_aacb694406ed5ff3f0124bd8c38626e73}
+
+
+Destructeur de \hyperlink{class_traces_parser}{Traces\+Parser}. 
+
+Tous les fichiers ouverts sont fermés. L\textquotesingle{}utilisation de boost\+::shared\+\_\+ptr évite d\textquotesingle{}avoir à appeler delete sur les objets alloués dynamiquement. 
+
+Definition at line 24 of file Traces\+Parser.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Traces\+Parser@{Traces\+Parser}!compression\+Done@{compression\+Done}}
+\index{compression\+Done@{compression\+Done}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{compression\+Done()}{compressionDone()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Parser\+::compression\+Done (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_a4b35fa08af68c2b1b93e0eaef75c7a86}{}\label{class_traces_parser_a4b35fa08af68c2b1b93e0eaef75c7a86}
+
+
+Getter pour la variable Traces\+Parser\+::compressed. 
+
+Si le booléen Traces\+Parser\+::compressed est à vrai lorsque la fonction est appelée, il est mis à faux.
+
+Cette fonction est appelée par la classe C\+Prog\+And\+Play définie au niveau du moteur de jeu.
+
+\begin{DoxyReturn}{Returns}
+la valeur du booléen Traces\+Parser\+::compressed.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::compressed 
+\end{DoxySeeAlso}
+
+
+Definition at line 944 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!display@{display}}
+\index{display@{display}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{display(std\+::ostream \&os=std\+::cout)}{display(std::ostream &os=std::cout)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::display (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_a7ccd84d89ea60faf074c852b0d7b2b85}{}\label{class_traces_parser_a7ccd84d89ea60faf074c852b0d7b2b85}
+
+
+Affichage des traces contenues dans le vecteur Traces\+Parser\+::traces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & le flux de sortie à utiliser pour l\textquotesingle{}affichage. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 674 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!get\+End@{get\+End}}
+\index{get\+End@{get\+End}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{get\+End() const }{getEnd() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Parser\+::get\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_traces_parser_a6f0cc2b49ed08edeb987d088c1ec5320}{}\label{class_traces_parser_a6f0cc2b49ed08edeb987d088c1ec5320}
+
+
+Getter pour la variable Traces\+Parser\+::end. 
+
+\begin{DoxyReturn}{Returns}
+la valeur du booléen Traces\+Parser\+::end.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::end 
+\end{DoxySeeAlso}
+
+
+Definition at line 940 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!get\+Node\+Child\+Count@{get\+Node\+Child\+Count}}
+\index{get\+Node\+Child\+Count@{get\+Node\+Child\+Count}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{get\+Node\+Child\+Count(rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)}{getNodeChildCount(rapidxml::xml_node<> *node)}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Traces\+Parser\+::get\+Node\+Child\+Count (
+\begin{DoxyParamCaption}
+\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a66b4be9e4be69fc9164400fcbd30aee8}{}\label{class_traces_parser_a66b4be9e4be69fc9164400fcbd30aee8}
+
+
+Détermination du nombre de noeuds fils d\textquotesingle{}un noeud dans un document X\+ML. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & le noeud dont l\textquotesingle{}on souhaite connaître le nombre de noeuds fils.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le nombre de noeuds fils de {\ttfamily node}. 
+\end{DoxyReturn}
+
+
+Definition at line 813 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!get\+Proceed@{get\+Proceed}}
+\index{get\+Proceed@{get\+Proceed}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{get\+Proceed()}{getProceed()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Parser\+::get\+Proceed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_a093f9b0e30ee770ae45bf66c3bcf5de2}{}\label{class_traces_parser_a093f9b0e30ee770ae45bf66c3bcf5de2}
+
+
+Getter pour la variable Traces\+Parser\+::proceed. 
+
+\begin{DoxyReturn}{Returns}
+la valeur du booléen Traces\+Parser\+::proceed.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::proceed 
+\end{DoxySeeAlso}
+
+
+Definition at line 956 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!handle\+Line@{handle\+Line}}
+\index{handle\+Line@{handle\+Line}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{handle\+Line(const std\+::string \&s)}{handleLine(const std::string &s)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trace\+::sp\+\_\+trace} Traces\+Parser\+::handle\+Line (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_af094e480d2d92e273ec454cc8bdb4c56}{}\label{class_traces_parser_af094e480d2d92e273ec454cc8bdb4c56}
+
+
+Instantiation d\textquotesingle{}un objet \hyperlink{class_trace}{Trace} à partir d\textquotesingle{}une chaîne de caractères. 
+
+Cette fonction est utilisée pour l\textquotesingle{}instanciation d\textquotesingle{}objets de type \hyperlink{class_call}{Call} et \hyperlink{class_event}{Event}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & une chaîne de caractères formatée selon le modèle de traces défini.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un pointeur intelligent de type \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} pointant vers l\textquotesingle{}objet \hyperlink{class_trace}{Trace} créé, ou vers N\+U\+LL si aucun objet n\textquotesingle{}a été créé lors de l\textquotesingle{}appel. 
+\end{DoxyReturn}
+
+
+Definition at line 215 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!import\+Trace\+From\+Node@{import\+Trace\+From\+Node}}
+\index{import\+Trace\+From\+Node@{import\+Trace\+From\+Node}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{import\+Trace\+From\+Node(rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, std\+::vector$<$ Trace\+::sp\+\_\+trace $>$ \&traces)}{importTraceFromNode(rapidxml::xml_node<> *node, std::vector< Trace::sp_trace > &traces)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::import\+Trace\+From\+Node (
+\begin{DoxyParamCaption}
+\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node, }
+\item[{std\+::vector$<$ {\bf Trace\+::sp\+\_\+trace} $>$ \&}]{traces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a515973e07e60b36499649239592f6edb}{}\label{class_traces_parser_a515973e07e60b36499649239592f6edb}
+
+
+Importation de traces à partir d\textquotesingle{}un noeud de document X\+ML. 
+
+Cette fonction permet d\textquotesingle{}instancier et d\textquotesingle{}insérer de nouveaux objets \hyperlink{class_trace}{Trace} dans le vecteur {\ttfamily traces} en parsant un document X\+ML à partir d\textquotesingle{}un de ses noeuds {\ttfamily node}. La structure établie par le document X\+ML est ainsi respectée.
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & le noeud à partir duquel le document X\+ML est parsé. \\
+\hline
+{\em traces} & le vecteur de traces dans lequel les nouvelles traces créées sont ajoutées. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 728 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!import\+Trace\+From\+Xml@{import\+Trace\+From\+Xml}}
+\index{import\+Trace\+From\+Xml@{import\+Trace\+From\+Xml}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{import\+Trace\+From\+Xml(const std\+::string \&xml)}{importTraceFromXml(const std::string &xml)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Trace\+::sp\+\_\+trace} $>$ Traces\+Parser\+::import\+Trace\+From\+Xml (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{xml}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a9a4c5e8e51fcb6feec230a0275a46c11}{}\label{class_traces_parser_a9a4c5e8e51fcb6feec230a0275a46c11}
+
+
+Importation de traces à partir d\textquotesingle{}un document X\+ML. 
+
+Cette fonction permet de construire un vecteur de traces à partir d\textquotesingle{}une chaîne de caractères au format X\+ML. Le document X\+ML correspondant constitue une sauvegarde des informations et des traces relatifs à un ou plusieurs lancements de mission.
+
+
+\begin{DoxyParams}{Parameters}
+{\em xml} & la chaîne de caractères correspondant au contenu du document X\+ML.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le vecteur de traces construit à la fin de l\textquotesingle{}import. 
+\end{DoxyReturn}
+
+
+Definition at line 706 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!init\+Params\+Map@{init\+Params\+Map}}
+\index{init\+Params\+Map@{init\+Params\+Map}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{init\+Params\+Map(const std\+::string \&json)}{initParamsMap(const std::string &json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::init\+Params\+Map (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_a6cbaf502b65284074b79ed10ff462f5d}{}\label{class_traces_parser_a6cbaf502b65284074b79ed10ff462f5d}
+
+
+Chargement des paramètres de compression. 
+
+Cette fonction appelle la fonction \hyperlink{class_params_map_a41a00ad45b0153fa04b35ea474e00786}{Params\+Map\+::init\+Map} afin de charger les paramètres de compression.
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & la chaîne de caractères contenant les paramètres de compression au format J\+S\+ON.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_params_map}{Params\+Map} 
+\end{DoxySeeAlso}
+
+
+Definition at line 84 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!merge\+Sequences@{merge\+Sequences}}
+\index{merge\+Sequences@{merge\+Sequences}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{merge\+Sequences(\+Sequence\+::sp\+\_\+sequence sps\+\_\+up, Sequence\+::sp\+\_\+sequence sps\+\_\+down)}{mergeSequences(Sequence::sp_sequence sps_up, Sequence::sp_sequence sps_down)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+::sp\+\_\+sequence} Traces\+Parser\+::merge\+Sequences (
+\begin{DoxyParamCaption}
+\item[{{\bf Sequence\+::sp\+\_\+sequence}}]{sps\+\_\+up, }
+\item[{{\bf Sequence\+::sp\+\_\+sequence}}]{sps\+\_\+down}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_ac304d9f86b7a99e29ec9d6aacd748d41}{}\label{class_traces_parser_ac304d9f86b7a99e29ec9d6aacd748d41}
+
+
+Fusion de deux séquences. 
+
+Cette fonction permet de construire une nouvelle séquence la plus générale possible à partir de deux séquences {\ttfamily sps\+\_\+up} et {\ttfamily sps\+\_\+down} qui doivent être égales pour que la fusion ait lieue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sps\+\_\+up} & la première séquence passée en entrée de la fusion. \\
+\hline
+{\em sps\+\_\+down} & la seconde séquence passée en entrée de la fusion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la nouvelle séquence créée résultante de la fusion de {\ttfamily sps\+\_\+up} et {\ttfamily sps\+\_\+down}.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a1d6dedda9e2b8bb5489a7cca5e21a220}{Sequence\+::compare} 
+
+Traces\+Parser\+::detect\+Sequences 
+\end{DoxySeeAlso}
+
+
+Definition at line 468 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!parse\+Trace\+File@{parse\+Trace\+File}}
+\index{parse\+Trace\+File@{parse\+Trace\+File}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{parse\+Trace\+File(const std\+::string \&dir\+\_\+path, const std\+::string \&filename)}{parseTraceFile(const std::string &dir_path, const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::parse\+Trace\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{dir\+\_\+path, }
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_ae38980b29e0c70e2df3f6685a4fc5eb4}{}\label{class_traces_parser_ae38980b29e0c70e2df3f6685a4fc5eb4}
+
+
+Lancement du parsage d\textquotesingle{}un fichier de traces brutes. 
+
+Cette fonction permet de parser un fichier de traces brutes. Les traces sont simplement ajoutées dans le vecteur Traces\+Parser\+::traces sans aucune compression.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir\+\_\+path} & le chemin d\textquotesingle{}accès au fichier. \\
+\hline
+{\em filename} & le nom du fichier. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 104 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!parse\+Trace\+File\+Offline@{parse\+Trace\+File\+Offline}}
+\index{parse\+Trace\+File\+Offline@{parse\+Trace\+File\+Offline}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{parse\+Trace\+File\+Offline(const std\+::string \&dir\+\_\+path, const std\+::string \&filename)}{parseTraceFileOffline(const std::string &dir_path, const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::parse\+Trace\+File\+Offline (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{dir\+\_\+path, }
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_af6d608ef964c68501657e0087b428e78}{}\label{class_traces_parser_af6d608ef964c68501657e0087b428e78}
+
+
+Lancement de la compression d\textquotesingle{}un fichier de traces brutes avec l\textquotesingle{}algorithme de compression hors-\/ligne. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir\+\_\+path} & le chemin d\textquotesingle{}accès au fichier. \\
+\hline
+{\em filename} & le nom du fichier. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!set\+End@{set\+End}}
+\index{set\+End@{set\+End}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{set\+End()}{setEnd()}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::set\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_adafdd12df08a028854ac2bb52d1e610f}{}\label{class_traces_parser_adafdd12df08a028854ac2bb52d1e610f}
+
+
+Setter pour la variable Traces\+Parser\+::end. 
+
+La variable Traces\+Parser\+::end est mise à vraie.
+
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::end 
+\end{DoxySeeAlso}
+
+
+Definition at line 936 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!set\+Proceed@{set\+Proceed}}
+\index{set\+Proceed@{set\+Proceed}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{set\+Proceed(bool proceed)}{setProceed(bool proceed)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Parser\+::set\+Proceed (
+\begin{DoxyParamCaption}
+\item[{bool}]{proceed}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_parser_ad5ef57948524c0c85eea22615491c47f}{}\label{class_traces_parser_ad5ef57948524c0c85eea22615491c47f}
+
+
+Setter pour la variable Traces\+Parser\+::proceed. 
+
+Cette fonction est appelée par la classe C\+Prog\+And\+Play définie au niveau du moteur de jeu.
+
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::proceed 
+\end{DoxySeeAlso}
+
+
+Definition at line 952 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!split\+Line@{split\+Line}}
+\index{split\+Line@{split\+Line}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{split\+Line(const std\+::string \&s, char delim= \textquotesingle{} \textquotesingle{})}{splitLine(const std::string &s, char delim= ' ')}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ Traces\+Parser\+::split\+Line (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s, }
+\item[{char}]{delim = {\ttfamily \textquotesingle{}~\textquotesingle{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a12aa7a30eaa7ccc6fdd49f7d60ad1ec4}{}\label{class_traces_parser_a12aa7a30eaa7ccc6fdd49f7d60ad1ec4}
+
+
+Fonction permettant de découper une chaîne de caractères en se basant sur un délimiteur. 
+
+Cette fonction prend en entrée une chaîne de caractère {\ttfamily s} et construit un vecteur de chaînes de caractères contenant les différentes parties de {\ttfamily s} qui sont séparées par le délimiteur {\ttfamily delim} dans la chaîne. Si la chaîne de caractères ne contient aucune occurrence du délimiteur, alors le vecteur renvoyé ne contiendra qu\textquotesingle{}un seul élément \+: la chaîne elle-\/même.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & la chaîne de caractères à découper. \\
+\hline
+{\em delim} & le délimiteur utilisé pour le découpage de {\ttfamily s}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le vecteur construit lors du découpage de la chaîne. 
+\end{DoxyReturn}
+
+
+Definition at line 960 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!stof@{stof}}
+\index{stof@{stof}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{stof(const std\+::string \&s)}{stof(const std::string &s)}}]{\setlength{\rightskip}{0pt plus 5cm}float Traces\+Parser\+::stof (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_aa6ed3ca29fafafef59554bd3244820e2}{}\label{class_traces_parser_aa6ed3ca29fafafef59554bd3244820e2}
+
+
+Conversion d\textquotesingle{}une chaîne de caractères en flottant. 
+
+Si la conversion échoue, une erreur est générée et le programme se termine. Si {\ttfamily s} = \char`\"{}?\char`\"{}, la valeur -\/1.\+0 est renvoyée.
+
+\begin{DoxyReturn}{Returns}
+la valeur résultante de la conversion. 
+\end{DoxyReturn}
+
+
+Definition at line 986 of file Traces\+Parser.\+cpp.
+
+\index{Traces\+Parser@{Traces\+Parser}!stoi@{stoi}}
+\index{stoi@{stoi}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{stoi(const std\+::string \&s)}{stoi(const std::string &s)}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Parser\+::stoi (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a50ffcbaea509b2a2ed4d5ebd5dc4da3e}{}\label{class_traces_parser_a50ffcbaea509b2a2ed4d5ebd5dc4da3e}
+
+
+Conversion d\textquotesingle{}une chaîne de caractères en entier. 
+
+Si la conversion échoue, une erreur est générée et le programme se termine. Si {\ttfamily s} = \char`\"{}?\char`\"{}, la valeur -\/1 est renvoyée.
+
+\begin{DoxyReturn}{Returns}
+la valeur résultante de la conversion. 
+\end{DoxyReturn}
+
+
+Definition at line 972 of file Traces\+Parser.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Traces\+Parser@{Traces\+Parser}!line\+Num@{line\+Num}}
+\index{line\+Num@{line\+Num}!Traces\+Parser@{Traces\+Parser}}
+\subsubsection[{\texorpdfstring{line\+Num}{lineNum}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Parser\+::line\+Num = 0\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_parser_a5e73c688eb2abd99e00b82b18eec1ef4}{}\label{class_traces_parser_a5e73c688eb2abd99e00b82b18eec1ef4}
+Variable utilisée pour stocker le numero de la ligne courante lorsqu\textquotesingle{}un fichier de traces brutes est parsé. 
+
+Definition at line 70 of file Traces\+Parser.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_parser_8h}{Traces\+Parser.\+h}\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_parser_8cpp}{Traces\+Parser.\+cpp}\end{DoxyCompactItemize}

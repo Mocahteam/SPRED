@@ -1,0 +1,109 @@
+\hypertarget{class_params_map}{}\section{Params\+Map Class Reference}
+\label{class_params_map}\index{Params\+Map@{Params\+Map}}
+
+
+Classe utilisée pour le chargement des paramètres de compression à partir du fichier J\+S\+ON \textquotesingle{}params.\+json\textquotesingle{}.  
+
+
+
+
+{\ttfamily \#include $<$Call.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_params_map_a8d606a7d84a804e9480dbbc1806b29df}{Params\+Map} ()
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe \hyperlink{class_params_map}{Params\+Map}. \end{DoxyCompactList}\item 
+void \hyperlink{class_params_map_a41a00ad45b0153fa04b35ea474e00786}{init\+Map} (const std\+::string \&json)
+\begin{DoxyCompactList}\small\item\em Chargement des paramètres de compression. \end{DoxyCompactList}\item 
+bool \hyperlink{class_params_map_af25b9a05c7a95b7d8ff1386014b23e41}{contains} (std\+::string label, std\+::string param) const 
+\begin{DoxyCompactList}\small\item\em Récupération des paramètres de compression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe utilisée pour le chargement des paramètres de compression à partir du fichier J\+S\+ON \textquotesingle{}params.\+json\textquotesingle{}. 
+
+Definition at line 34 of file Call.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Params\+Map@{Params\+Map}!Params\+Map@{Params\+Map}}
+\index{Params\+Map@{Params\+Map}!Params\+Map@{Params\+Map}}
+\subsubsection[{\texorpdfstring{Params\+Map()}{ParamsMap()}}]{\setlength{\rightskip}{0pt plus 5cm}Params\+Map\+::\+Params\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_params_map_a8d606a7d84a804e9480dbbc1806b29df}{}\label{class_params_map_a8d606a7d84a804e9480dbbc1806b29df}
+
+
+Constructeur de la classe \hyperlink{class_params_map}{Params\+Map}. 
+
+
+
+Definition at line 41 of file Call.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Params\+Map@{Params\+Map}!contains@{contains}}
+\index{contains@{contains}!Params\+Map@{Params\+Map}}
+\subsubsection[{\texorpdfstring{contains(std\+::string label, std\+::string param) const }{contains(std::string label, std::string param) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Params\+Map\+::contains (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{label, }
+\item[{std\+::string}]{param}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_params_map_af25b9a05c7a95b7d8ff1386014b23e41}{}\label{class_params_map_af25b9a05c7a95b7d8ff1386014b23e41}
+
+
+Récupération des paramètres de compression. 
+
+Le booléen {\ttfamily loaded} est mis à vrai si la chaine à bien été parsée, de sorte que le chargement ne puisse être effectué qu\textquotesingle{}une seule fois.
+
+Si cette fonction alors que {\ttfamily loaded} est à faux (la fonction \hyperlink{class_params_map_a41a00ad45b0153fa04b35ea474e00786}{Params\+Map\+::init\+Map} n\textquotesingle{}a pas été appelée ou le parsing a échoué), un mode de compression par défaut est utilisé. Suivant la valeur de D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD \+:
+\begin{DoxyItemize}
+\item 0 \+: Aucun paramètre n\textquotesingle{}est pris en considération pour la compression (compression maximale)
+\item 1 \+: Tous les paramètres sont pris en considération pour la compression (compression minimale)
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em label} & \+: un label de fonction utilisée pouvant être utilisée dans \hyperlink{class_call}{Call}. \\
+\hline
+{\em param} & \+: un nom de paramètre associé à la fonction {\ttfamily label}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la valeur du paramètre {\ttfamily param} du label {\ttfamily label} doit être pris en considération lors de la compression et faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file Call.\+h.
+
+\index{Params\+Map@{Params\+Map}!init\+Map@{init\+Map}}
+\index{init\+Map@{init\+Map}!Params\+Map@{Params\+Map}}
+\subsubsection[{\texorpdfstring{init\+Map(const std\+::string \&json)}{initMap(const std::string &json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Params\+Map\+::init\+Map (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_params_map_a41a00ad45b0153fa04b35ea474e00786}{}\label{class_params_map_a41a00ad45b0153fa04b35ea474e00786}
+
+
+Chargement des paramètres de compression. 
+
+Le booléen {\ttfamily loaded} est mis à vrai si la chaine à bien été parsée, de sorte que le chargement ne puisse être effectué qu\textquotesingle{}une seule fois.
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & \+: une chaîne de caractères contenant les données au format J\+S\+ON. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file Call.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_call_8h}{Call.\+h}\end{DoxyCompactItemize}

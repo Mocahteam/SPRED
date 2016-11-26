@@ -1,0 +1,224 @@
+\hypertarget{struct_traces_analyser_1_1_game_infos}{}\section{Traces\+Analyser\+:\+:Game\+Infos Struct Reference}
+\label{struct_traces_analyser_1_1_game_infos}\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+
+
+{\ttfamily \#include $<$Traces\+Analyser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_traces_analyser_1_1_game_infos_a6c95d2699b29e297aaaaed93fca6446a}{Game\+Infos} ()
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{struct_traces_analyser_1_1_game_infos}{Game\+Infos}. \end{DoxyCompactList}\item 
+void \hyperlink{struct_traces_analyser_1_1_game_infos_a313f36b89634c6cdcd68274f3fa7318d}{clear\+Mission} ()
+\begin{DoxyCompactList}\small\item\em Réinitialise toutes les informations de l\textquotesingle{}objet \hyperlink{struct_traces_analyser_1_1_game_infos}{Game\+Infos}. \end{DoxyCompactList}\item 
+void \hyperlink{struct_traces_analyser_1_1_game_infos_aee048954110f387b71d66ef5528c09d5}{clear\+Execution} ()
+\begin{DoxyCompactList}\small\item\em Réinitialise toutes les informations relatives à une exécution. \end{DoxyCompactList}\item 
+int \hyperlink{struct_traces_analyser_1_1_game_infos_a67c16e181087d3fceab87a4ac786a24a}{get\+Resolution\+Time} ()
+\begin{DoxyCompactList}\small\item\em Calcul du temps de résolution de la mission. \end{DoxyCompactList}\item 
+int \hyperlink{struct_traces_analyser_1_1_game_infos_a7736e87dac7d9caa86b8b27560f2e95f}{get\+Execution\+Time} ()
+\begin{DoxyCompactList}\small\item\em Calcul du temps d\textquotesingle{}exécution du programme de résolution de la mission. \end{DoxyCompactList}\item 
+int \hyperlink{struct_traces_analyser_1_1_game_infos_a41d562577af62e38a8c0b8d9aa9f9ce7}{get\+Num\+Executions} ()
+\begin{DoxyCompactList}\small\item\em Calcul du nombre d\textquotesingle{}exécutions lancées par le joueur pour résoudre une mission. \end{DoxyCompactList}\item 
+double \hyperlink{struct_traces_analyser_1_1_game_infos_abd4e2397d4f2fa5e290420ad9fe93019}{get\+Average\+Wait\+Time} ()
+\begin{DoxyCompactList}\small\item\em Calcul du temps moyen d\textquotesingle{}attente entre deux exécutions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_start_mission_event}{Start\+Mission\+Event} $\ast$ \hyperlink{struct_traces_analyser_1_1_game_infos_ae14dc2f1fb7fd6f6ebc774adcc7453ff}{sme}
+\item 
+\hyperlink{class_end_mission_event}{End\+Mission\+Event} $\ast$ \hyperlink{struct_traces_analyser_1_1_game_infos_a626886085d8342aaa0bb35d4ef768a2d}{eme}
+\item 
+\hyperlink{class_new_execution_event}{New\+Execution\+Event} $\ast$ \hyperlink{struct_traces_analyser_1_1_game_infos_a9536f8b96fa309397655264cc2983063}{nee}
+\item 
+\hyperlink{class_end_execution_event}{End\+Execution\+Event} $\ast$ \hyperlink{struct_traces_analyser_1_1_game_infos_ad8bab50191b3a7d55dbeb60b88e12de7}{eee}
+\item 
+std\+::vector$<$ \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} $>$ \hyperlink{struct_traces_analyser_1_1_game_infos_a97beef39c7cb8d643ba4f11de8b7073b}{mission\+\_\+traces}
+\item 
+\hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{Sequence\+::sp\+\_\+sequence} \hyperlink{struct_traces_analyser_1_1_game_infos_a674838500aafddb2a17153413708be08}{root\+\_\+sps}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure utilisée pour contenir un ensemble d\textquotesingle{}informations sur une trace compressée. 
+
+Definition at line 250 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!Game\+Infos@{Game\+Infos}}
+\index{Game\+Infos@{Game\+Infos}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{Game\+Infos()}{GameInfos()}}]{\setlength{\rightskip}{0pt plus 5cm}Traces\+Analyser\+::\+Game\+Infos\+::\+Game\+Infos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_a6c95d2699b29e297aaaaed93fca6446a}{}\label{struct_traces_analyser_1_1_game_infos_a6c95d2699b29e297aaaaed93fca6446a}
+
+
+Constructeur de \hyperlink{struct_traces_analyser_1_1_game_infos}{Game\+Infos}. 
+
+
+
+Definition at line 286 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!clear\+Execution@{clear\+Execution}}
+\index{clear\+Execution@{clear\+Execution}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{clear\+Execution()}{clearExecution()}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::\+Game\+Infos\+::clear\+Execution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_aee048954110f387b71d66ef5528c09d5}{}\label{struct_traces_analyser_1_1_game_infos_aee048954110f387b71d66ef5528c09d5}
+
+
+Réinitialise toutes les informations relatives à une exécution. 
+
+
+
+Definition at line 301 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!clear\+Mission@{clear\+Mission}}
+\index{clear\+Mission@{clear\+Mission}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{clear\+Mission()}{clearMission()}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::\+Game\+Infos\+::clear\+Mission (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_a313f36b89634c6cdcd68274f3fa7318d}{}\label{struct_traces_analyser_1_1_game_infos_a313f36b89634c6cdcd68274f3fa7318d}
+
+
+Réinitialise toutes les informations de l\textquotesingle{}objet \hyperlink{struct_traces_analyser_1_1_game_infos}{Game\+Infos}. 
+
+
+
+Definition at line 291 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!get\+Average\+Wait\+Time@{get\+Average\+Wait\+Time}}
+\index{get\+Average\+Wait\+Time@{get\+Average\+Wait\+Time}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{get\+Average\+Wait\+Time()}{getAverageWaitTime()}}]{\setlength{\rightskip}{0pt plus 5cm}double Traces\+Analyser\+::\+Game\+Infos\+::get\+Average\+Wait\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_abd4e2397d4f2fa5e290420ad9fe93019}{}\label{struct_traces_analyser_1_1_game_infos_abd4e2397d4f2fa5e290420ad9fe93019}
+
+
+Calcul du temps moyen d\textquotesingle{}attente entre deux exécutions. 
+
+Pour que ce temps puisse être calculé, il faut qu\textquotesingle{}un événement \hyperlink{class_new_execution_event}{New\+Execution\+Event} soit toujours précédée par un événement \hyperlink{class_end_execution_event}{End\+Execution\+Event} (excepté pour la première exécution).
+
+\begin{DoxyReturn}{Returns}
+le temps moyen d\textquotesingle{}attente (en secondes) entre deux lancements d\textquotesingle{}exécutions par le joueur si celui-\/ci peut être calculé, ou -\/1 sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 356 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!get\+Execution\+Time@{get\+Execution\+Time}}
+\index{get\+Execution\+Time@{get\+Execution\+Time}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{get\+Execution\+Time()}{getExecutionTime()}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::\+Game\+Infos\+::get\+Execution\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_a7736e87dac7d9caa86b8b27560f2e95f}{}\label{struct_traces_analyser_1_1_game_infos_a7736e87dac7d9caa86b8b27560f2e95f}
+
+
+Calcul du temps d\textquotesingle{}exécution du programme de résolution de la mission. 
+
+Pour que ce temps puisse être calculé, il faut que {\ttfamily nee} et {\ttfamily eee} soit différents de N\+U\+LL (afin d\textquotesingle{}avoir accès aux timestamps de début et de fin d\textquotesingle{}exécution).
+
+\begin{DoxyReturn}{Returns}
+le temps d\textquotesingle{}exécution du programme (en secondes) si celui-\/ci peut être calculé, ou -\/1 sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 328 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!get\+Num\+Executions@{get\+Num\+Executions}}
+\index{get\+Num\+Executions@{get\+Num\+Executions}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{get\+Num\+Executions()}{getNumExecutions()}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::\+Game\+Infos\+::get\+Num\+Executions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_a41d562577af62e38a8c0b8d9aa9f9ce7}{}\label{struct_traces_analyser_1_1_game_infos_a41d562577af62e38a8c0b8d9aa9f9ce7}
+
+
+Calcul du nombre d\textquotesingle{}exécutions lancées par le joueur pour résoudre une mission. 
+
+\begin{DoxyReturn}{Returns}
+le nombre d\textquotesingle{}exécutions lancées pour résoudre la mission. 
+\end{DoxyReturn}
+
+
+Definition at line 340 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!get\+Resolution\+Time@{get\+Resolution\+Time}}
+\index{get\+Resolution\+Time@{get\+Resolution\+Time}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{get\+Resolution\+Time()}{getResolutionTime()}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::\+Game\+Infos\+::get\+Resolution\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_game_infos_a67c16e181087d3fceab87a4ac786a24a}{}\label{struct_traces_analyser_1_1_game_infos_a67c16e181087d3fceab87a4ac786a24a}
+
+
+Calcul du temps de résolution de la mission. 
+
+Pour que ce temps puisse être calculé, la mission doit avoir été terminée.
+
+\begin{DoxyReturn}{Returns}
+le temps de résolution de la mission (en secondes) si celui-\/ci peut être calculé, ou -\/1 sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 314 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!eee@{eee}}
+\index{eee@{eee}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{eee}{eee}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf End\+Execution\+Event}$\ast$ Traces\+Analyser\+::\+Game\+Infos\+::eee}\hypertarget{struct_traces_analyser_1_1_game_infos_ad8bab50191b3a7d55dbeb60b88e12de7}{}\label{struct_traces_analyser_1_1_game_infos_ad8bab50191b3a7d55dbeb60b88e12de7}
+Pointeur vers l\textquotesingle{}objet \hyperlink{class_event}{Event} modélisant la fin d\textquotesingle{}une exécution. 
+
+Definition at line 270 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!eme@{eme}}
+\index{eme@{eme}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{eme}{eme}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf End\+Mission\+Event}$\ast$ Traces\+Analyser\+::\+Game\+Infos\+::eme}\hypertarget{struct_traces_analyser_1_1_game_infos_a626886085d8342aaa0bb35d4ef768a2d}{}\label{struct_traces_analyser_1_1_game_infos_a626886085d8342aaa0bb35d4ef768a2d}
+Pointeur vers l\textquotesingle{}objet \hyperlink{class_event}{Event} modélisant la fin de la mission. 
+
+Definition at line 260 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!mission\+\_\+traces@{mission\+\_\+traces}}
+\index{mission\+\_\+traces@{mission\+\_\+traces}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{mission\+\_\+traces}{mission_traces}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Trace\+::sp\+\_\+trace}$>$ Traces\+Analyser\+::\+Game\+Infos\+::mission\+\_\+traces}\hypertarget{struct_traces_analyser_1_1_game_infos_a97beef39c7cb8d643ba4f11de8b7073b}{}\label{struct_traces_analyser_1_1_game_infos_a97beef39c7cb8d643ba4f11de8b7073b}
+Vecteur de traces contenant l\textquotesingle{}ensemble des traces générées durant une mission, i.\+e. un ensemble d\textquotesingle{}exécutions. 
+
+Definition at line 275 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!nee@{nee}}
+\index{nee@{nee}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{nee}{nee}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf New\+Execution\+Event}$\ast$ Traces\+Analyser\+::\+Game\+Infos\+::nee}\hypertarget{struct_traces_analyser_1_1_game_infos_a9536f8b96fa309397655264cc2983063}{}\label{struct_traces_analyser_1_1_game_infos_a9536f8b96fa309397655264cc2983063}
+Pointeur vers l\textquotesingle{}objet \hyperlink{class_event}{Event} modélisant le lancement d\textquotesingle{}une exécution. 
+
+Definition at line 265 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!root\+\_\+sps@{root\+\_\+sps}}
+\index{root\+\_\+sps@{root\+\_\+sps}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{root\+\_\+sps}{root_sps}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+::sp\+\_\+sequence} Traces\+Analyser\+::\+Game\+Infos\+::root\+\_\+sps}\hypertarget{struct_traces_analyser_1_1_game_infos_a674838500aafddb2a17153413708be08}{}\label{struct_traces_analyser_1_1_game_infos_a674838500aafddb2a17153413708be08}
+Objet \hyperlink{class_sequence}{Sequence} correspondant à une séquence racine (son indice est donc $<$1\+:1$>$) dont le vecteur contient l\textquotesingle{}ensemble des traces relatives à une exécution. Ce sont ces traces qui seront analysées pour calculer le score du joueur et pour déterminer le retour à lui donner. 
+
+Definition at line 281 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}!sme@{sme}}
+\index{sme@{sme}!Traces\+Analyser\+::\+Game\+Infos@{Traces\+Analyser\+::\+Game\+Infos}}
+\subsubsection[{\texorpdfstring{sme}{sme}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Start\+Mission\+Event}$\ast$ Traces\+Analyser\+::\+Game\+Infos\+::sme}\hypertarget{struct_traces_analyser_1_1_game_infos_ae14dc2f1fb7fd6f6ebc774adcc7453ff}{}\label{struct_traces_analyser_1_1_game_infos_ae14dc2f1fb7fd6f6ebc774adcc7453ff}
+Pointeur vers l\textquotesingle{}objet \hyperlink{class_event}{Event} modélisant le lancement de la mission. 
+
+Definition at line 255 of file Traces\+Analyser.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_analyser_8h}{Traces\+Analyser.\+h}\end{DoxyCompactItemize}

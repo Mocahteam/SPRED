@@ -27,10 +27,6 @@
   */
 #define DEFAULT_COMPRESSION_MOD 0
 
-#define EDIT_MATCH_SCORE 0
-#define EDIT_MISMATCH_SCORE 1
-#define EDIT_GAP_SCORE 1
-
 /** 
  * \class ParamsMap
  * \brief Classe utilisée pour le chargement des paramètres de compression à partir du fichier JSON 'params.json'.
@@ -120,13 +116,17 @@ private:
 
 /** 
  * \class Call
- * \brief Classe abstraite héritant de Trace. Cette classe sert de classe mère pour toutes les classes définis dans le fichier CallDef.h.
+ * \brief Classe abstraite héritant de Trace. Cette classe sert de classe mère pour toutes les classes définies dans le fichier CallDef.h.
  */
 class Call : public Trace {
 	
 public:
 
+	/**
+	  * Définition du type pointeur intelligent vers un objet Call.
+	  */
 	typedef boost::shared_ptr<Call> sp_call;
+	
 	typedef std::vector<sp_call> call_vector;
 
 	/**
@@ -219,30 +219,174 @@ public:
 		return NULL;
 	}
 	
+	/**
+	  * \brief Récupération de la longueur (l'espace occupé dans un vecteur de traces) d'un appel.
+	  *
+	  * \return 1
+	  */
 	virtual unsigned int length() const;
+	
+	/**
+	  * \brief Comparaison de l'objet Call avec une trace \p t.
+	  *
+	  * \param t : la trace utilisée pour la comparaison.
+	  *
+	  * \return vrai si la trace \p t est également un appel et qu'elle a les mêmes paramètres (label, type d'erreur, valeur de retour, et paramètres pris en considération lors de la compression) que cet appel.
+	  */
 	virtual bool operator==(Trace *t) const;
+	
+	/**
+	  * \brief Détection des paramètres non robustes.
+	  *
+	  * Cette fonction est utilisée pour affecter aux paramètres non robustes de l'appel, i.e. ceux non pris en compte lors de la compression et dont la valeur diffère entre deux itération d'une même séquence, la valeur -1.
+	  * Attention : cette fonction doit être appelée uniquement si operator==(c) renvoie vrai.
+	  *
+	  * \param c : un pointeur vers l'appel utilisé pour la comparaison.
+	  */
 	virtual void filterCall(const Call *c);
+	
+	/**
+	  * \brief Affichage des informations de l'objet Call.
+	  *
+	  * \param os le flux de sortie utilisé pour l'affichage.
+	  */
 	virtual void display(std::ostream &os = std::cout) const;
+	
+	/**
+	  * \brief Clonage d'un appel.
+	  *
+	  * \return une copie de l'objet Call.
+	  */
 	virtual Trace::sp_trace clone() const = 0;
+	
+	/**
+	  * \brief Récupération des paramètres de l'appel sous forme de chaîne de caractères.
+	  *
+	  * Cette fonction est notamment utilisée lors de l'export des traces vers un document XML.
+	  *
+	  * \return une chaîne de caractères formatée contenant les valeurs des différents paramètres de l'appel séparées par des espaces.
+	  */
 	virtual std::string getParams() const = 0;
+	
+	/**
+	  * \brief Récupération des paramètres de l'appel sous forme de chaîne de caractères.
+	  *
+	  * Cette fonction est notamment utilisée lors de la construction du feedback qui sera fait au joueur.
+	  *
+	  * \return une chaîne de caratères formatée contenant les valeurs des différents paramètres de l'appel.
+	  */
 	virtual std::string getReadableParams() const = 0;
+	
+	/**
+	  * \brief Récupération des identifiants des paramètres non conformes.
+	  *
+	  * Si \p c pointe vers un objet Call, les identifiants des paramètres dont les valeurs diffèrent de ceux de \p c sont ajoutés à la liste. Sinon, si \p c est à NULL et si la valeur de \p error est différente de Call::ErrorType::None, alors l'identifiant du paramètre ayant causé cette erreur est ajouté à la liste.
+	  * Cette fonction est utilisée lors de la construction des messages qui seront affichés au joueur.
+	  *
+	  * \param c : un pointeur vers l'objet Call utilisé pour la comparaison.
+	  *
+	  * \return la liste d'identifiants des paramètres non conformes.
+	  */
 	virtual std::vector<std::string> getListIdWrongParams(Call *c = NULL) const;
 	
+	/**
+	  * \brief Calcul de la distance entre deux appels.
+	  *
+	  * \param c : un pointeur vers l'objet Call dont l'on souhaite mesurer la distance avec cet appel.
+	  *
+	  * \return la distance dans l'intervalle [0,1] entre les deux appels. Si la distance est égale à 0, les deux appels sont complètement identiques. Si elle est égale à 1, les deux appels ont des labels et/ou des types d'erreur différents.
+	  */
 	double getEditDistance(const Call *c) const;
 	
+	/**
+	  * \brief Getter pour la variable \p label.
+	  *
+	  * \return la chaîne de caractères \p label de l'appel.
+	  */
 	std::string getLabel() const;
+	
+	/**
+	  * \brief Getter pour la variable \p error.
+	  *
+	  * \return le type d'erreur associé à l'appel.
+	  */
 	ErrorType getError() const;
+	
+	/**
+	  * \brief Ajout d'une valeur dans le tableau \p ret contenant les codes de retour de l'appel.
+	  *
+	  * \param code : le code retour de l'appel à sauvegarder dans le tableau \p ret.
+	  *
+	  * \return vrai si la valeur a bien été sauvegardée dans \p ret, et faux sinon (plus de place disponible).
+	  */
 	bool addReturnCode(float code);
+	
+	/**
+	  * \brief Récupération des codes de retour sous forme de chaîne de caractères.
+	  *
+	  * \return une chaîne de caractères formatée contenant les valeurs du retour de l'appel séparées par des espaces.
+	  */
 	std::string getReturn() const;
+	
+	/**
+	  * \brief Comparaison des codes de retour entre deux appels.
+	  *
+	  * \param c : un pointeur vers l'appel utilisé pour la comparaison.
+	  * 
+	  * \return vrai si le tableau \p ret de l'objet pointé par \p c est identique à celui de cet appel.
+	  */
 	bool compareReturn(const Call *c) const;
+	
+	/**
+	  * \brief Mise à -1 de \p ind_ret.
+	  *
+	  * Cette fonction doit être appelée pour enregistrer le retour de l'appel comme étant un paramètre non robuste.
+	  */
 	void setReturn();
+	
+	/**
+	  * \brief Indique si l'appel a un retour.
+	  *
+	  * \return vrai si l'appel a un retour (robuste ou non), et faux sinon. 
+	  */
 	bool hasReturn() const;
 	
 protected:
 
+	/**
+	  * \brief Comparaison entre deux appels.
+	  *
+	  * \param c : un pointeur vers l'objet Call utilisé pour la comparaison.
+	  *
+	  * \return vrai si les deux appels sont égaux, et faux sinon.
+	  *
+	  * \see Call::operator==
+	  */
 	virtual bool compare(const Call *c) const = 0;
+	
+	/**
+	  * \brief Détection des paramètres non robustes.
+	  *
+	  * \param c : un pointeur vers l'objet Call utilisé pour la comparaison.
+	  *
+	  * \see Call::filterCall
+	  */
 	virtual void filter(const Call *c) = 0;
+	
+	/**
+	  * \brief Détermination de la distance entre deux appels.
+	  *
+	  * \param c : un pointeur vers l'objet Call utilisé pour la comparaison.
+	  *
+	  * \return un couple d'entiers où le premier élément correspond au nombre de paramètres qui diffèrent entre les deux appels et où le second élément est le nombre de comparaisons effectués.
+	  *
+	  * \see Call::getEditDistance
+	  */
 	virtual std::pair<int,int> distance(const Call *c) const = 0;
+	
+	/**
+	  * \see Call::getListIdWrongParams 
+	  */
 	virtual std::vector<std::string> id_wrong_params(Call *c) const = 0;
 	
 	/**

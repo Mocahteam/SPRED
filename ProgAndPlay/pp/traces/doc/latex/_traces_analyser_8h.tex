@@ -1,0 +1,175 @@
+\hypertarget{_traces_analyser_8h}{}\section{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Analyser.h File Reference}
+\label{_traces_analyser_8h}\index{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Analyser.\+h@{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Analyser.\+h}}
+
+
+Déclaration de la classe \hyperlink{class_traces_analyser}{Traces\+Analyser}, de la structure Feedback et de la structure Game\+Infos.  
+
+
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include $<$dirent.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$stack$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$cstdarg$>$}\\*
+{\ttfamily \#include $<$rapidxml-\/1.\+13/rapidxml.\+hpp$>$}\\*
+{\ttfamily \#include $<$rapidjson/document.\+h$>$}\\*
+{\ttfamily \#include $<$rapidjson/stringbuffer.\+h$>$}\\*
+{\ttfamily \#include $<$rapidjson/prettywriter.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Trace.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Call.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sequence.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Event.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Event\+Def.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_traces_analyser}{Traces\+Analyser}
+\begin{DoxyCompactList}\small\item\em La classe \hyperlink{class_traces_analyser}{Traces\+Analyser} définit l\textquotesingle{}ensemble des traitements relatifs à l\textquotesingle{}analyse des traces. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_traces_analyser_1_1_feedback}{Traces\+Analyser\+::\+Feedback}
+\item 
+struct \hyperlink{struct_traces_analyser_1_1_game_infos}{Traces\+Analyser\+::\+Game\+Infos}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_traces_analyser_8h_a9ccf54dbe5d5cf3fbe7bc9555126fa71}{U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ}~0
+\item 
+\#define \hyperlink{_traces_analyser_8h_ab7d6256d9508383fd4bbe940d9e39dd9}{U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ}~1
+\item 
+\#define \hyperlink{_traces_analyser_8h_a0b8ce683e771fc028f744e835b2cba08}{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES}~0.\+5
+\item 
+\#define \hyperlink{_traces_analyser_8h_aff39f727f43cf7e301348a88956a8b01}{N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS}~3
+\item 
+\#define \hyperlink{_traces_analyser_8h_a228088a8da48dae5e7c38a3dae5764ae}{N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS}~2
+\item 
+\#define \hyperlink{_traces_analyser_8h_aa389fcf297b6c4522dc8c9ebc35fa841}{S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO}~1
+\item 
+\#define \hyperlink{_traces_analyser_8h_ab5240d07d3898c23188ecf537b8c3bb2}{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST}~4
+\item 
+\#define \hyperlink{_traces_analyser_8h_ad03034e8969ee7e7073fd56c20aea8cd}{A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE}~-\/1
+\item 
+\#define \hyperlink{_traces_analyser_8h_a0340228fb82ef39fe5e5c21257a70516}{A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE}~0
+\item 
+\#define \hyperlink{_traces_analyser_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}{I\+NF}~-\/1
+\item 
+\#define \hyperlink{_traces_analyser_8h_aaa821c1b90884150e64661c7df312f38}{S\+UP}~1
+\item 
+\#define \hyperlink{_traces_analyser_8h_a14baeaf6d659dd4e9a14e82f9884a49a}{T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE}(val)~((\hyperlink{_traces_analyser_8h_aaa821c1b90884150e64661c7df312f38}{S\+UP} -\/ \hyperlink{_traces_analyser_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}{I\+NF}) $\ast$ val + \hyperlink{_traces_analyser_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}{I\+NF})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Déclaration de la classe \hyperlink{class_traces_analyser}{Traces\+Analyser}, de la structure Feedback et de la structure Game\+Infos. 
+
+\begin{DoxyAuthor}{Author}
+meresse 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE@{A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE}}
+\index{A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE@{A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE}{ALIGN_GAP_SCORE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+I\+G\+N\+\_\+\+G\+A\+P\+\_\+\+S\+C\+O\+RE~0}\hypertarget{_traces_analyser_8h_a0340228fb82ef39fe5e5c21257a70516}{}\label{_traces_analyser_8h_a0340228fb82ef39fe5e5c21257a70516}
+Score utilisé pour l\textquotesingle{}alignement. Correpond au score obtenu si on aligne la trace avec rien (introduction d\textquotesingle{}un trou). 
+
+Definition at line 83 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE@{A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE}}
+\index{A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE@{A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE}{ALIGN_MISMATCH_SCORE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+L\+I\+G\+N\+\_\+\+M\+I\+S\+M\+A\+T\+C\+H\+\_\+\+S\+C\+O\+RE~-\/1}\hypertarget{_traces_analyser_8h_ad03034e8969ee7e7073fd56c20aea8cd}{}\label{_traces_analyser_8h_ad03034e8969ee7e7073fd56c20aea8cd}
+Score utilisé pour l\textquotesingle{}alignement. Correspond au pire score possible pour l\textquotesingle{}alignement. Les deux traces comparées ne seront jamais alignées. 
+
+Definition at line 79 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES@{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES}}
+\index{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES@{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES}{DIST_SEQ_NUM_THRES}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES~0.\+5}\hypertarget{_traces_analyser_8h_a0b8ce683e771fc028f744e835b2cba08}{}\label{_traces_analyser_8h_a0b8ce683e771fc028f744e835b2cba08}
+Valeur comprise dans l\textquotesingle{}intervalle \mbox{[}0,1\mbox{]} utilisée pour déterminer si l\textquotesingle{}on doit créer un feedback de type Traces\+Analyser\+::\+Feedback\+Type\+::\+D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM 
+
+Definition at line 45 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST@{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST}}
+\index{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST@{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST}{IND_SEQ_NUM_CONST}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+C\+O\+N\+ST~4}\hypertarget{_traces_analyser_8h_ab5240d07d3898c23188ecf537b8c3bb2}{}\label{_traces_analyser_8h_ab5240d07d3898c23188ecf537b8c3bb2}
+Cette valeur comprise dans l\textquotesingle{}intervalle \mbox{[}1,+inf\mbox{]} est utilisée pour définir l\textquotesingle{}intervalle de définition du bonus ajouté au score de similarité dans le cas de la tentative d\textquotesingle{}alignement entre deux séquences. 
+
+Definition at line 74 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!I\+NF@{I\+NF}}
+\index{I\+NF@{I\+NF}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{I\+NF}{INF}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+NF~-\/1}\hypertarget{_traces_analyser_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}{}\label{_traces_analyser_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}
+
+
+Definition at line 85 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS@{N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS}}
+\index{N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS@{N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS}{NUM_DOWNGRADS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+D\+O\+W\+N\+G\+R\+A\+DS~2}\hypertarget{_traces_analyser_8h_a228088a8da48dae5e7c38a3dae5764ae}{}\label{_traces_analyser_8h_a228088a8da48dae5e7c38a3dae5764ae}
+Valeur utilisée pour calculer le nombre de dégradations de priorité autorisées.
+
+Exemple \+:
+\begin{DoxyItemize}
+\item un feedback avec une priorité à 0
+\item un feedback avec une priorité à 1
+\item le nombre de dégradations autorisé est à 0
+\end{DoxyItemize}
+
+-\/$>$ On ne retourne que le premier feedback. 
+
+Definition at line 62 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS@{N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS}}
+\index{N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS@{N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS}{NUM_MAX_FEEDBACKS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+M\+\_\+\+M\+A\+X\+\_\+\+F\+E\+E\+D\+B\+A\+C\+KS~3}\hypertarget{_traces_analyser_8h_aff39f727f43cf7e301348a88956a8b01}{}\label{_traces_analyser_8h_aff39f727f43cf7e301348a88956a8b01}
+Nombre maximal de feedbacks retournés au joueur 
+
+Definition at line 50 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO@{S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO}}
+\index{S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO@{S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO}{SEQ_LACK_INFO_RATIO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+Q\+\_\+\+L\+A\+C\+K\+\_\+\+I\+N\+F\+O\+\_\+\+R\+A\+T\+IO~1}\hypertarget{_traces_analyser_8h_aa389fcf297b6c4522dc8c9ebc35fa841}{}\label{_traces_analyser_8h_aa389fcf297b6c4522dc8c9ebc35fa841}
+Valeur comprise dans l\textquotesingle{}intervalle \mbox{[}0,1\mbox{]} correspondant au pourcentage de labels à afficher au joueur dans le cas d\textquotesingle{}un feedback de type Traces\+Analyser\+::\+Feedback\+Type\+::\+S\+E\+Q\+\_\+\+L\+A\+CK.
+
+Si la valeur est à 1, on affichera donc l\textquotesingle{}ensemble des labels des appels utilisés dans la séquence. 
+
+Definition at line 69 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!S\+UP@{S\+UP}}
+\index{S\+UP@{S\+UP}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{S\+UP}{SUP}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+UP~1}\hypertarget{_traces_analyser_8h_aaa821c1b90884150e64661c7df312f38}{}\label{_traces_analyser_8h_aaa821c1b90884150e64661c7df312f38}
+
+
+Definition at line 86 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE@{T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE}}
+\index{T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE@{T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE}{TRANSFORM_SCORE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+R\+A\+N\+S\+F\+O\+R\+M\+\_\+\+S\+C\+O\+RE(
+\begin{DoxyParamCaption}
+\item[{}]{val}
+\end{DoxyParamCaption}
+)~(({\bf S\+UP} -\/ {\bf I\+NF}) $\ast$ val + {\bf I\+NF})}\hypertarget{_traces_analyser_8h_a14baeaf6d659dd4e9a14e82f9884a49a}{}\label{_traces_analyser_8h_a14baeaf6d659dd4e9a14e82f9884a49a}
+Macro utilisée pour changer l\textquotesingle{}intervalle de définition du score de \mbox{[}0,1\mbox{]} à \mbox{[}Traces\+Analyser\+::\+I\+NF,Traces\+Analyser\+::\+S\+UP\mbox{]}. 
+
+Definition at line 91 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ@{U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ}}
+\index{U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ@{U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ}{USEFUL_FREQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ~1}\hypertarget{_traces_analyser_8h_ab7d6256d9508383fd4bbe940d9e39dd9}{}\label{_traces_analyser_8h_ab7d6256d9508383fd4bbe940d9e39dd9}
+Valeur comprise dans l\textquotesingle{}intervalle \mbox{[}0,1\mbox{]} utilisée pour déterminer si l\textquotesingle{}on doit créer un feedback de type Traces\+Analyser\+::\+Feedback\+Type\+::\+U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL 
+
+Definition at line 40 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser.\+h@{Traces\+Analyser.\+h}!U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ@{U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ}}
+\index{U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ@{U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ}!Traces\+Analyser.\+h@{Traces\+Analyser.\+h}}
+\subsubsection[{\texorpdfstring{U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ}{USELESS_FREQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ~0}\hypertarget{_traces_analyser_8h_a9ccf54dbe5d5cf3fbe7bc9555126fa71}{}\label{_traces_analyser_8h_a9ccf54dbe5d5cf3fbe7bc9555126fa71}
+valeur comprise dans l\textquotesingle{}intervalle \mbox{[}0,1\mbox{]} utilisée pour déterminer si l\textquotesingle{}on doit créer un feedback de type Traces\+Analyser\+::\+Feedback\+Type\+::\+U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL 
+
+Definition at line 35 of file Traces\+Analyser.\+h.
+

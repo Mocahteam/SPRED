@@ -1,0 +1,1010 @@
+\hypertarget{class_sequence}{}\section{Sequence Class Reference}
+\label{class_sequence}\index{Sequence@{Sequence}}
+
+
+La classe \hyperlink{class_sequence}{Sequence} hérite de la classe.  
+
+
+
+
+{\ttfamily \#include $<$Sequence.\+h$>$}
+
+Inheritance diagram for Sequence\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sequence}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\+::shared\+\_\+ptr$<$ \hyperlink{class_sequence}{Sequence} $>$ \hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{sp\+\_\+sequence}
+\item 
+typedef boost\+::shared\+\_\+ptr$<$ const \hyperlink{class_sequence}{Sequence} $>$ \hyperlink{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}{const\+\_\+sp\+\_\+sequence}
+\item 
+typedef std\+::vector$<$ \hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{sp\+\_\+sequence} $>$ \hyperlink{class_sequence_a4487def8096371d361c6099c2d46dd13}{sequence\+\_\+vector}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sequence_a6005e244485149e7daa5650f0bd29186}{Sequence} (std\+::string \hyperlink{class_trace_a4835dcfa7da5d4c971e8f7d6860acb09}{info}, bool \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{num\+\_\+fixed})
+\begin{DoxyCompactList}\small\item\em Constructeur utilisé dans la fonction \hyperlink{class_traces_parser_a515973e07e60b36499649239592f6edb}{Traces\+Parser\+::import\+Trace\+From\+Node}. \end{DoxyCompactList}\item 
+\hyperlink{class_sequence_a1d61d80db0f83560c70880673c5186a0}{Sequence} (unsigned int \hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{num}, bool \hyperlink{class_sequence_ac09da762e43cc657842d4f953ffff613}{root}=false)
+\begin{DoxyCompactList}\small\item\em Constructeur principal de la classe \hyperlink{class_sequence}{Sequence}. \end{DoxyCompactList}\item 
+\hyperlink{class_sequence_a2c6d8767415f842e22c68008225d7c22}{Sequence} (\hyperlink{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}{const\+\_\+sp\+\_\+sequence} sps)
+\begin{DoxyCompactList}\small\item\em Constructeur se basant sur une séquence. \end{DoxyCompactList}\item 
+\hyperlink{class_sequence_ae5975e693da40545b8326a9d3f33229a}{Sequence} (\hyperlink{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}{const\+\_\+sp\+\_\+sequence} sps\+\_\+up, \hyperlink{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}{const\+\_\+sp\+\_\+sequence} sps\+\_\+down)
+\begin{DoxyCompactList}\small\item\em Constructeur se basant sur deux séquences. \end{DoxyCompactList}\item 
+virtual unsigned int \hyperlink{class_sequence_a6da226d77ff5150ced893f0b6c83f83a}{length} () const 
+\begin{DoxyCompactList}\small\item\em Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}une séquence. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_sequence_a945e1cb29fadc554bc8a3d61f188998c}{operator==} (\hyperlink{class_trace}{Trace} $\ast$t) const 
+\begin{DoxyCompactList}\small\item\em Comparaison de la séquence avec une trace. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{class_sequence_aad8c31973496749c3e57848af2812284}{clone} () const 
+\begin{DoxyCompactList}\small\item\em Clonage d\textquotesingle{}une séquence. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_sequence_a19d7d6f49253cbaae84cc802760c7d38}{display} (std\+::ostream \&os=std\+::cout) const 
+\begin{DoxyCompactList}\small\item\em Affichage des informations de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence}. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_sequence_aacd81267429077588208d2a040ea51e4}{reset\+Aligned} ()
+\begin{DoxyCompactList}\small\item\em Réinitialisation récursive de l\textquotesingle{}alignement de la séquence. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a1d6dedda9e2b8bb5489a7cca5e21a220}{compare} (\hyperlink{class_trace}{Trace} $\ast$t)
+\begin{DoxyCompactList}\small\item\em Comparaison de la séquence avec une trace. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} $>$ \& \hyperlink{class_sequence_a4d3e82279c084b43f99171b6dc2ad4eb}{get\+Traces} ()
+\begin{DoxyCompactList}\small\item\em Getter pour le vecteur de traces de la séquence \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces}. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_sequence_af33fa151c98bbf84a28823cd09ee7d9a}{get\+Pt} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt}. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_sequence_a4cc3d5e3e7d3f289e920aa3e5c9e92ee}{get\+Num} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{Sequence\+::num}. \end{DoxyCompactList}\item 
+const std\+::map$<$ unsigned int, unsigned int $>$ \& \hyperlink{class_sequence_abb5f09294c5e976997d1a8350b4d2996}{get\+Num\+Map} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a32de7afc9fdde5cdacc5ea445b3dd4d3}{has\+Number\+Iteration\+Fixed} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{Sequence\+::num\+\_\+fixed}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a294b1ccae843cd2e5da5e240688b514b}{is\+End\+Reached} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{Sequence\+::end\+Reached}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a7687abf7372c74369a1e892127c3c3fa}{is\+Shared} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}{Sequence\+::shared}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a231764f7959252b2c95e7658c5c1fd19}{is\+Root} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable \hyperlink{class_sequence_ac09da762e43cc657842d4f953ffff613}{Sequence\+::root}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a0eee9fda2394b83b440911f4fc888b60}{is\+Implicit} () const 
+\begin{DoxyCompactList}\small\item\em Test si la séquence est une séquence implicite. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_sequence_a40b394b58ce0a47d2e265f098eb8edca}{size} () const 
+\begin{DoxyCompactList}\small\item\em Taille du vecteur de traces de la séquence. \end{DoxyCompactList}\item 
+const \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \& \hyperlink{class_sequence_a65030d6b4be29f3747f646d2b246c05c}{at} (unsigned int i) const 
+\begin{DoxyCompactList}\small\item\em Accès à une trace du vecteur de traces de la séquence. \end{DoxyCompactList}\item 
+int \hyperlink{class_sequence_ac312884c78445acddcdb9d96a6a3b4b7}{get\+Index} (const \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \&spt) const 
+\begin{DoxyCompactList}\small\item\em Récupération de l\textquotesingle{}indice de la position d\textquotesingle{}une trace dans le vecteur de traces de la séquence. \end{DoxyCompactList}\item 
+\hyperlink{class_call_aa446a4316c03fb722ab10d0e1da33643}{Call\+::call\+\_\+vector} \hyperlink{class_sequence_ae19d30e099accaf9dd07b21d434c67e2}{get\+Calls} (bool set\+Mod=false)
+\begin{DoxyCompactList}\small\item\em Récupération de l\textquotesingle{}ensemble des appels contenus dans la séquence et dans ses sous-\/séquences. \end{DoxyCompactList}\item 
+\hyperlink{class_sequence_a4487def8096371d361c6099c2d46dd13}{sequence\+\_\+vector} \hyperlink{class_sequence_a066802ba99f1fd93fff062d1b54ca985}{get\+Sequences} ()
+\begin{DoxyCompactList}\small\item\em Récupération de l\textquotesingle{}ensemble des séquences contenues dans la séquence et dans ses sous-\/séquences. \end{DoxyCompactList}\item 
+void \hyperlink{class_sequence_a901736e6e3f64dcb3a4c12892bc5dc92}{add\+One} ()
+\begin{DoxyCompactList}\small\item\em Ajout d\textquotesingle{}une répétition pour la séquence. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a74e000d0651eb8d4c7bfd20032440c07}{add\+Trace} (\hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} spt, int ind=-\/1)
+\begin{DoxyCompactList}\small\item\em Ajout d\textquotesingle{}une trace dans le vecteur de la séquence. \end{DoxyCompactList}\item 
+const \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \& \hyperlink{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{next} ()
+\begin{DoxyCompactList}\small\item\em Récupération de la prochaine trace dans le vecteur de la séquence. \end{DoxyCompactList}\item 
+void \hyperlink{class_sequence_af1dbfa6630d8224407b489658f3cae13}{reset} ()
+\begin{DoxyCompactList}\small\item\em Réinitialisation du parcours de la séquence. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sequence_a4332a20962a5bda02bba87789c06490d}{check\+Delayed} ()
+\begin{DoxyCompactList}\small\item\em Test si le champ \hyperlink{class_trace_a9757057cc65f9e45bbeaa848cb06d5a1}{Trace\+::delayed} de la séquence doit être mis à vrai. \end{DoxyCompactList}\item 
+void \hyperlink{class_sequence_a3cbca7f0a868e768d112e61f2087cbae}{update\+Num\+Map} (unsigned int \hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{num}, int update=1)
+\begin{DoxyCompactList}\small\item\em Mise à jour de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\item 
+void \hyperlink{class_sequence_a03ef5cb5c25d9a9de0f5c61d786580bb}{update\+Num\+Map} (const std\+::map$<$ unsigned int, unsigned int $>$ \&\hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{num\+Map})
+\begin{DoxyCompactList}\small\item\em Mise à jour de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} à partir d\textquotesingle{}une autre \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\item 
+void \hyperlink{class_sequence_a2069ef17dde51540555a4aada06977fb}{complete\+Num\+Map} ()
+\begin{DoxyCompactList}\small\item\em Complétion de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\item 
+std\+::map$<$ unsigned int, double $>$ \hyperlink{class_sequence_aa2f856b4cbc1aa775824144caa4d47e3}{get\+Percentage\+Num\+Map} () const 
+\begin{DoxyCompactList}\small\item\em Récupération des fréquences de répétitions de la séquence. \end{DoxyCompactList}\item 
+double \hyperlink{class_sequence_aa619292ed4984e6f7f4f3010caa55d16}{get\+Num\+Map\+Mean\+Distance} (const \hyperlink{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{sp\+\_\+sequence} \&sps) const 
+\begin{DoxyCompactList}\small\item\em Calcul de la distance entre deux objets \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\static std\+::string \hyperlink{class_sequence_a161ac4fab17750ca48b1fe5053bc1c98}{get\+Num\+Map\+String} (const std\+::map$<$ unsigned int, T $>$ \&\hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{num\+Map})
+\begin{DoxyCompactList}\small\item\em Construction d\textquotesingle{}une chaîne de caractères contenant les entrées d\textquotesingle{}un objet \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{num\+\_\+fixed}
+\item 
+std\+::vector$<$ \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} $>$ \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{traces}
+\item 
+unsigned int \hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{num}
+\item 
+std\+::map$<$ unsigned int, unsigned int $>$ \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{num\+Map}
+\item 
+unsigned int \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{pt}
+\item 
+bool \hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{end\+Reached}
+\item 
+bool \hyperlink{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}{shared}
+\item 
+bool \hyperlink{class_sequence_ac09da762e43cc657842d4f953ffff613}{root}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+La classe \hyperlink{class_sequence}{Sequence} hérite de la classe. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_trace}{Trace}. Une séquence possède un vecteur d\textquotesingle{}objets \hyperlink{class_trace}{Trace}. 
+\end{DoxySeeAlso}
+
+
+Definition at line 28 of file Sequence.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Sequence@{Sequence}!const\+\_\+sp\+\_\+sequence@{const\+\_\+sp\+\_\+sequence}}
+\index{const\+\_\+sp\+\_\+sequence@{const\+\_\+sp\+\_\+sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{const\+\_\+sp\+\_\+sequence}{const_sp_sequence}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<$const {\bf Sequence}$>$ {\bf Sequence\+::const\+\_\+sp\+\_\+sequence}}\hypertarget{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}{}\label{class_sequence_ad2a8856e4c26f405a86b0cb9683c25ed}
+
+
+Definition at line 36 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!sequence\+\_\+vector@{sequence\+\_\+vector}}
+\index{sequence\+\_\+vector@{sequence\+\_\+vector}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{sequence\+\_\+vector}{sequence_vector}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf sp\+\_\+sequence}$>$ {\bf Sequence\+::sequence\+\_\+vector}}\hypertarget{class_sequence_a4487def8096371d361c6099c2d46dd13}{}\label{class_sequence_a4487def8096371d361c6099c2d46dd13}
+
+
+Definition at line 37 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!sp\+\_\+sequence@{sp\+\_\+sequence}}
+\index{sp\+\_\+sequence@{sp\+\_\+sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{sp\+\_\+sequence}{sp_sequence}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<${\bf Sequence}$>$ {\bf Sequence\+::sp\+\_\+sequence}}\hypertarget{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}{}\label{class_sequence_a796bfa70aa4ddd4e447c210655b5dc5a}
+Définition du type pointeur intelligent vers un objet \hyperlink{class_sequence}{Sequence}. 
+
+Definition at line 35 of file Sequence.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{Sequence(std\+::string info, bool num\+\_\+fixed)}{Sequence(std::string info, bool num_fixed)}}]{\setlength{\rightskip}{0pt plus 5cm}Sequence\+::\+Sequence (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{info, }
+\item[{bool}]{num\+\_\+fixed}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a6005e244485149e7daa5650f0bd29186}{}\label{class_sequence_a6005e244485149e7daa5650f0bd29186}
+
+
+Constructeur utilisé dans la fonction \hyperlink{class_traces_parser_a515973e07e60b36499649239592f6edb}{Traces\+Parser\+::import\+Trace\+From\+Node}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & label de la séquence ajouté par l\textquotesingle{}expert. \\
+\hline
+{\em num\+\_\+fixed} & valeur de l\textquotesingle{}attribut num\+\_\+fixed indiquée par l\textquotesingle{}expert.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_traces_parser_a515973e07e60b36499649239592f6edb}{Traces\+Parser\+::import\+Trace\+From\+Node} 
+\end{DoxySeeAlso}
+
+
+Definition at line 3 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{Sequence(unsigned int num, bool root=false)}{Sequence(unsigned int num, bool root=false)}}]{\setlength{\rightskip}{0pt plus 5cm}Sequence\+::\+Sequence (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{num, }
+\item[{bool}]{root = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a1d61d80db0f83560c70880673c5186a0}{}\label{class_sequence_a1d61d80db0f83560c70880673c5186a0}
+
+
+Constructeur principal de la classe \hyperlink{class_sequence}{Sequence}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num} & le nombre de répétitions contiguës de la séquence. \\
+\hline
+{\em root} & booléen mis à vrai si la séquence créée est une racine. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{Sequence(const\+\_\+sp\+\_\+sequence sps)}{Sequence(const_sp_sequence sps)}}]{\setlength{\rightskip}{0pt plus 5cm}Sequence\+::\+Sequence (
+\begin{DoxyParamCaption}
+\item[{{\bf const\+\_\+sp\+\_\+sequence}}]{sps}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a2c6d8767415f842e22c68008225d7c22}{}\label{class_sequence_a2c6d8767415f842e22c68008225d7c22}
+
+
+Constructeur se basant sur une séquence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sps} & la séquence utilisée pour la construction de la nouvelle séquence. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\index{Sequence@{Sequence}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{Sequence(const\+\_\+sp\+\_\+sequence sps\+\_\+up, const\+\_\+sp\+\_\+sequence sps\+\_\+down)}{Sequence(const_sp_sequence sps_up, const_sp_sequence sps_down)}}]{\setlength{\rightskip}{0pt plus 5cm}Sequence\+::\+Sequence (
+\begin{DoxyParamCaption}
+\item[{{\bf const\+\_\+sp\+\_\+sequence}}]{sps\+\_\+up, }
+\item[{{\bf const\+\_\+sp\+\_\+sequence}}]{sps\+\_\+down}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_ae5975e693da40545b8326a9d3f33229a}{}\label{class_sequence_ae5975e693da40545b8326a9d3f33229a}
+
+
+Constructeur se basant sur deux séquences. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sps\+\_\+up} & la première séquence. \\
+\hline
+{\em sps\+\_\+down} & la deuxième séquence.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_traces_parser_ac304d9f86b7a99e29ec9d6aacd748d41}{Traces\+Parser\+::merge\+Sequences} 
+\end{DoxySeeAlso}
+
+
+Definition at line 16 of file Sequence.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Sequence@{Sequence}!add\+One@{add\+One}}
+\index{add\+One@{add\+One}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{add\+One()}{addOne()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::add\+One (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a901736e6e3f64dcb3a4c12892bc5dc92}{}\label{class_sequence_a901736e6e3f64dcb3a4c12892bc5dc92}
+
+
+Ajout d\textquotesingle{}une répétition pour la séquence. 
+
+Cette fonction met à jour l\textquotesingle{}objet \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} de la séquence. 
+
+Definition at line 113 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!add\+Trace@{add\+Trace}}
+\index{add\+Trace@{add\+Trace}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{add\+Trace(\+Trace\+::sp\+\_\+trace spt, int ind=-\/1)}{addTrace(Trace::sp_trace spt, int ind=-1)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::add\+Trace (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace\+::sp\+\_\+trace}}]{spt, }
+\item[{int}]{ind = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a74e000d0651eb8d4c7bfd20032440c07}{}\label{class_sequence_a74e000d0651eb8d4c7bfd20032440c07}
+
+
+Ajout d\textquotesingle{}une trace dans le vecteur de la séquence. 
+
+Cette fonction permet d\textquotesingle{}ajouter une trace dans le vecteur \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces}. La séquence devient le nouveau parent de {\ttfamily spt} durant l\textquotesingle{}opération.
+
+
+\begin{DoxyParams}{Parameters}
+{\em spt} & la trace à ajouter dans le vecteur. \\
+\hline
+{\em ind} & l\textquotesingle{}indice de la position dans le vecteur \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces} que {\ttfamily spt} doit occupée après l\textquotesingle{}insertion. Sa valeur par défaut est -\/1, i.\+e. que la trace est ajoutée à la fin du vecteur.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la trace a bien été insérée dans le vecteur \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces}, ou faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!at@{at}}
+\index{at@{at}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{at(unsigned int i) const }{at(unsigned int i) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Trace\+::sp\+\_\+trace} \& Sequence\+::at (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a65030d6b4be29f3747f646d2b246c05c}{}\label{class_sequence_a65030d6b4be29f3747f646d2b246c05c}
+
+
+Accès à une trace du vecteur de traces de la séquence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & l\textquotesingle{}indice de la trace à récupérer dans le vecteur.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Une référence constante vers la trace qui se trouve à l\textquotesingle{}indice {\ttfamily i} dans le vecteur de traces de la séquence. 
+\end{DoxyReturn}
+
+
+Definition at line 122 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!check\+Delayed@{check\+Delayed}}
+\index{check\+Delayed@{check\+Delayed}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{check\+Delayed()}{checkDelayed()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::check\+Delayed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a4332a20962a5bda02bba87789c06490d}{}\label{class_sequence_a4332a20962a5bda02bba87789c06490d}
+
+
+Test si le champ \hyperlink{class_trace_a9757057cc65f9e45bbeaa848cb06d5a1}{Trace\+::delayed} de la séquence doit être mis à vrai. 
+
+Cette fonction parcours l\textquotesingle{}ensemble des traces contenues dans la séquence de façon récursive et vérifie les valeurs de leur attribut \hyperlink{class_trace_a9757057cc65f9e45bbeaa848cb06d5a1}{Trace\+::delayed}. L\textquotesingle{}attribut \hyperlink{class_trace_a9757057cc65f9e45bbeaa848cb06d5a1}{Trace\+::delayed} de la séquence est mis à vrai si tous les booléens \hyperlink{class_trace_a9757057cc65f9e45bbeaa848cb06d5a1}{Trace\+::delayed} des traces qu\textquotesingle{}elle contient sont à vrai. 
+
+Definition at line 181 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!clone@{clone}}
+\index{clone@{clone}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{clone() const }{clone() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trace\+::sp\+\_\+trace} Sequence\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sequence_aad8c31973496749c3e57848af2812284}{}\label{class_sequence_aad8c31973496749c3e57848af2812284}
+
+
+Clonage d\textquotesingle{}une séquence. 
+
+\begin{DoxyReturn}{Returns}
+une copie de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence}. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a0917758337e37f936713ccaf75b532f2}{Trace}.
+
+
+
+Definition at line 60 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!compare@{compare}}
+\index{compare@{compare}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{compare(\+Trace $\ast$t)}{compare(Trace *t)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::compare (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace} $\ast$}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a1d6dedda9e2b8bb5489a7cca5e21a220}{}\label{class_sequence_a1d6dedda9e2b8bb5489a7cca5e21a220}
+
+
+Comparaison de la séquence avec une trace. 
+
+Cette fonction permet de tester l\textquotesingle{}égalité entre l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence} et une trace {\ttfamily t}. On considère dans ce cas qu\textquotesingle{}il y a égalité si {\ttfamily t} est une séquence et si la liste \textquotesingle{}fl\textquotesingle{} des appels de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence} est égale à la liste d\textquotesingle{}appels \textquotesingle{}sl\textquotesingle{} de la séquence {\ttfamily t} (même taille et pour tout i, fl\mbox{[}i\mbox{]} est considéré égal à sl\mbox{[}i\mbox{]}).
+
+On peut noter que ce test d\textquotesingle{}égalité entre deux séquences est bien moins exigeant que celui de la fonction \hyperlink{class_sequence_a945e1cb29fadc554bc8a3d61f188998c}{Sequence\+::operator==}. Si l\textquotesingle{}on reprend l\textquotesingle{}exemple donné pour \hyperlink{class_sequence_a945e1cb29fadc554bc8a3d61f188998c}{Sequence\+::operator==}, les deux séquences sont cette fois-\/ci égales \+: \begin{DoxyVerb}Sequence
+    A
+    B
+    Sequence
+        C
+
+Sequence
+    Sequence
+        A
+        B
+    C
+\end{DoxyVerb}
+
+
+\begin{DoxyReturn}{Returns}
+vrai si la séquence est considérée comme étant égale à {\ttfamily t}, et faux sinon.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_ae19d30e099accaf9dd07b21d434c67e2}{Sequence\+::get\+Calls} 
+\end{DoxySeeAlso}
+
+
+Definition at line 43 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!complete\+Num\+Map@{complete\+Num\+Map}}
+\index{complete\+Num\+Map@{complete\+Num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{complete\+Num\+Map()}{completeNumMap()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::complete\+Num\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a2069ef17dde51540555a4aada06977fb}{}\label{class_sequence_a2069ef17dde51540555a4aada06977fb}
+
+
+Complétion de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+Il est possible qu\textquotesingle{}une séquence ne se répète qu\textquotesingle{}une fois à un moment donné dans les traces brutes. Lors de la compression, cette seule itération n\textquotesingle{}est alors pas modélisée par un objet \hyperlink{class_sequence}{Sequence} mais par un ensemble de traces dans Traces\+Parser\+::traces. Cette fonction se base donc sur la séquence parente (\hyperlink{class_trace_a52648b4a6c117072f5797c0e31518f24}{Trace\+::parent}) de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence} afin de compléter sa variable {\ttfamily num\+Map} en y ajoutant ces itérations manquantes. 
+
+Definition at line 233 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!display@{display}}
+\index{display@{display}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{display(std\+::ostream \&os=std\+::cout) const }{display(std::ostream &os=std::cout) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::display (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sequence_a19d7d6f49253cbaae84cc802760c7d38}{}\label{class_sequence_a19d7d6f49253cbaae84cc802760c7d38}
+
+
+Affichage des informations de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & le flux de sortie utilisé pour l\textquotesingle{}affichage. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_trace_a4324fa45af235238ddedc2215c3d1cf0}{Trace}.
+
+
+
+Definition at line 67 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Calls@{get\+Calls}}
+\index{get\+Calls@{get\+Calls}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Calls(bool set\+Mod=false)}{getCalls(bool setMod=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Call\+::call\+\_\+vector} Sequence\+::get\+Calls (
+\begin{DoxyParamCaption}
+\item[{bool}]{set\+Mod = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_ae19d30e099accaf9dd07b21d434c67e2}{}\label{class_sequence_ae19d30e099accaf9dd07b21d434c67e2}
+
+
+Récupération de l\textquotesingle{}ensemble des appels contenus dans la séquence et dans ses sous-\/séquences. 
+
+Extraction de l\textquotesingle{}ensemble des calls contenus dans le vecteur de traces de la séquence.
+
+Cette fonction permet de construire le vecteur des appels contenus dans la séquence et dans ses sous-\/séquences en parcourant de façon récursive la séquence.
+
+
+\begin{DoxyParams}{Parameters}
+{\em set\+Mod} & booléen mis à vrai si le vecteur ne doit pas contenir deux appels partageant un même label (pas de doublon).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le vecteur des appels contenus dans la séquence.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em set\+Mod} & \+: un booléen qui est à faux si on autorise les doublons, et à vrai sinon\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un vecteur de calls 
+\end{DoxyReturn}
+
+
+Definition at line 309 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Index@{get\+Index}}
+\index{get\+Index@{get\+Index}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Index(const Trace\+::sp\+\_\+trace \&spt) const }{getIndex(const Trace::sp_trace &spt) const }}]{\setlength{\rightskip}{0pt plus 5cm}int Sequence\+::get\+Index (
+\begin{DoxyParamCaption}
+\item[{const {\bf Trace\+::sp\+\_\+trace} \&}]{spt}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_ac312884c78445acddcdb9d96a6a3b4b7}{}\label{class_sequence_ac312884c78445acddcdb9d96a6a3b4b7}
+
+
+Récupération de l\textquotesingle{}indice de la position d\textquotesingle{}une trace dans le vecteur de traces de la séquence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spt} & une référence constante vers la trace à rechercher dans le vecteur.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}indice de la position de la trace dans le vecteur si elle s\textquotesingle{}y trouve, ou -\/1 sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Num@{get\+Num}}
+\index{get\+Num@{get\+Num}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Num() const }{getNum() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::get\+Num (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a4cc3d5e3e7d3f289e920aa3e5c9e92ee}{}\label{class_sequence_a4cc3d5e3e7d3f289e920aa3e5c9e92ee}
+
+
+Getter pour la variable \hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{Sequence\+::num}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{Sequence\+::num} 
+\end{DoxySeeAlso}
+
+
+Definition at line 105 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Num\+Map@{get\+Num\+Map}}
+\index{get\+Num\+Map@{get\+Num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Num\+Map() const }{getNumMap() const }}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::map$<$ unsigned int, unsigned int $>$ \& Sequence\+::get\+Num\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_abb5f09294c5e976997d1a8350b4d2996}{}\label{class_sequence_abb5f09294c5e976997d1a8350b4d2996}
+
+
+Getter pour la variable \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} 
+\end{DoxySeeAlso}
+
+
+Definition at line 197 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Num\+Map\+Mean\+Distance@{get\+Num\+Map\+Mean\+Distance}}
+\index{get\+Num\+Map\+Mean\+Distance@{get\+Num\+Map\+Mean\+Distance}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Num\+Map\+Mean\+Distance(const sp\+\_\+sequence \&sps) const }{getNumMapMeanDistance(const sp_sequence &sps) const }}]{\setlength{\rightskip}{0pt plus 5cm}double Sequence\+::get\+Num\+Map\+Mean\+Distance (
+\begin{DoxyParamCaption}
+\item[{const {\bf sp\+\_\+sequence} \&}]{sps}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_aa619292ed4984e6f7f4f3010caa55d16}{}\label{class_sequence_aa619292ed4984e6f7f4f3010caa55d16}
+
+
+Calcul de la distance entre deux objets \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+La distance entre deux objets \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} est calculée avec la formule suivante \+: abs(sl -\/ se) / (sl + se) où \textquotesingle{}sl\textquotesingle{} est la somme des produits x$\ast$y pour toute entrée $<$x\+:y$>$ de l\textquotesingle{}objet \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} de la séquence et \textquotesingle{}se\textquotesingle{} est la somme des produits x$\ast$y pour toute entrée $<$x\+:y$>$ de l\textquotesingle{}objet \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} de {\ttfamily sps}.
+
+\begin{DoxyReturn}{Returns}
+la distance calculée. 
+\end{DoxyReturn}
+
+
+Definition at line 253 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Num\+Map\+String@{get\+Num\+Map\+String}}
+\index{get\+Num\+Map\+String@{get\+Num\+Map\+String}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Num\+Map\+String(const std\+::map$<$ unsigned int, T $>$ \&num\+Map)}{getNumMapString(const std::map< unsigned int, T > &numMap)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ static std\+::string Sequence\+::get\+Num\+Map\+String (
+\begin{DoxyParamCaption}
+\item[{const std\+::map$<$ unsigned int, T $>$ \&}]{num\+Map}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_sequence_a161ac4fab17750ca48b1fe5053bc1c98}{}\label{class_sequence_a161ac4fab17750ca48b1fe5053bc1c98}
+
+
+Construction d\textquotesingle{}une chaîne de caractères contenant les entrées d\textquotesingle{}un objet \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Map} & l\textquotesingle{}objet num\+Map dont les informations doivent être récupérées sous forme de chaîne de caractères.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères construite. 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!get\+Percentage\+Num\+Map@{get\+Percentage\+Num\+Map}}
+\index{get\+Percentage\+Num\+Map@{get\+Percentage\+Num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Percentage\+Num\+Map() const }{getPercentageNumMap() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ unsigned int, double $>$ Sequence\+::get\+Percentage\+Num\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_aa2f856b4cbc1aa775824144caa4d47e3}{}\label{class_sequence_aa2f856b4cbc1aa775824144caa4d47e3}
+
+
+Récupération des fréquences de répétitions de la séquence. 
+
+Cette fonction construit et retourne un objet Map contenant des entrées $<$x\+:z$>$ en se basant sur \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. Une entrée $<$x\+:z$>$ signifie que la séquence se répète x fois de façon contiguë avec une fréquence égale à z.
+
+Par exemple, si \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} = $<$1\+:4$>$ $<$3\+:5$>$ $<$10\+:1$>$, on obtient le résultat suivant en appelant cette fonction \+: $<$1,0.\+4$>$ $<$3,0.\+5$>$ $<$10,0.\+1$>$.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} 
+\end{DoxySeeAlso}
+
+
+Definition at line 201 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Pt@{get\+Pt}}
+\index{get\+Pt@{get\+Pt}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Pt() const }{getPt() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::get\+Pt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_af33fa151c98bbf84a28823cd09ee7d9a}{}\label{class_sequence_af33fa151c98bbf84a28823cd09ee7d9a}
+
+
+Getter pour la variable \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt} 
+\end{DoxySeeAlso}
+
+
+Definition at line 153 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Sequences@{get\+Sequences}}
+\index{get\+Sequences@{get\+Sequences}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Sequences()}{getSequences()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sequence\+::sequence\+\_\+vector} Sequence\+::get\+Sequences (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a066802ba99f1fd93fff062d1b54ca985}{}\label{class_sequence_a066802ba99f1fd93fff062d1b54ca985}
+
+
+Récupération de l\textquotesingle{}ensemble des séquences contenues dans la séquence et dans ses sous-\/séquences. 
+
+Extraction de l\textquotesingle{}ensemble des sequences contenus dans le vecteur de traces de la séquence. La séquence appelante est inclus dans le résultat.
+
+Cette fonction permet de construire le vecteur des séquences contenues dans la séquence et dans ses sous-\/séquences en parcourant récursivement la séquence.
+
+\begin{DoxyReturn}{Returns}
+le vecteur des séquences contenues dans la séquence.
+
+un vecteur de sequences 
+\end{DoxyReturn}
+
+
+Definition at line 275 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!get\+Traces@{get\+Traces}}
+\index{get\+Traces@{get\+Traces}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{get\+Traces()}{getTraces()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Trace\+::sp\+\_\+trace} $>$ \& Sequence\+::get\+Traces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a4d3e82279c084b43f99171b6dc2ad4eb}{}\label{class_sequence_a4d3e82279c084b43f99171b6dc2ad4eb}
+
+
+Getter pour le vecteur de traces de la séquence \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces}. 
+
+\begin{DoxyReturn}{Returns}
+le vecteur de traces de la séquence. 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!has\+Number\+Iteration\+Fixed@{has\+Number\+Iteration\+Fixed}}
+\index{has\+Number\+Iteration\+Fixed@{has\+Number\+Iteration\+Fixed}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{has\+Number\+Iteration\+Fixed() const }{hasNumberIterationFixed() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::has\+Number\+Iteration\+Fixed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a32de7afc9fdde5cdacc5ea445b3dd4d3}{}\label{class_sequence_a32de7afc9fdde5cdacc5ea445b3dd4d3}
+
+
+Getter pour la variable \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{Sequence\+::num\+\_\+fixed}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{Sequence\+::num\+\_\+fixed} 
+\end{DoxySeeAlso}
+
+
+Definition at line 109 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!is\+End\+Reached@{is\+End\+Reached}}
+\index{is\+End\+Reached@{is\+End\+Reached}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{is\+End\+Reached() const }{isEndReached() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::is\+End\+Reached (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a294b1ccae843cd2e5da5e240688b514b}{}\label{class_sequence_a294b1ccae843cd2e5da5e240688b514b}
+
+
+Getter pour la variable \hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{Sequence\+::end\+Reached}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{Sequence\+::end\+Reached} 
+\end{DoxySeeAlso}
+
+
+Definition at line 169 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!is\+Implicit@{is\+Implicit}}
+\index{is\+Implicit@{is\+Implicit}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{is\+Implicit() const }{isImplicit() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::is\+Implicit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a0eee9fda2394b83b440911f4fc888b60}{}\label{class_sequence_a0eee9fda2394b83b440911f4fc888b60}
+
+
+Test si la séquence est une séquence implicite. 
+
+Une séquence est implicite si la seule entrée contenue dans \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} est $<$1\+:1$>$.
+
+\begin{DoxyReturn}{Returns}
+vrai si la séquence est implicite, et faux sinon.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Traces\+Analyser\+::add\+Implicit\+Sequences 
+\end{DoxySeeAlso}
+
+
+Definition at line 177 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!is\+Root@{is\+Root}}
+\index{is\+Root@{is\+Root}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{is\+Root() const }{isRoot() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::is\+Root (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a231764f7959252b2c95e7658c5c1fd19}{}\label{class_sequence_a231764f7959252b2c95e7658c5c1fd19}
+
+
+Getter pour la variable \hyperlink{class_sequence_ac09da762e43cc657842d4f953ffff613}{Sequence\+::root}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_ac09da762e43cc657842d4f953ffff613}{Sequence\+::root} 
+\end{DoxySeeAlso}
+
+
+Definition at line 101 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!is\+Shared@{is\+Shared}}
+\index{is\+Shared@{is\+Shared}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{is\+Shared() const }{isShared() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::is\+Shared (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a7687abf7372c74369a1e892127c3c3fa}{}\label{class_sequence_a7687abf7372c74369a1e892127c3c3fa}
+
+
+Getter pour la variable \hyperlink{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}{Sequence\+::shared}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}{Sequence\+::shared} 
+\end{DoxySeeAlso}
+
+
+Definition at line 173 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!length@{length}}
+\index{length@{length}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{length() const }{length() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sequence_a6da226d77ff5150ced893f0b6c83f83a}{}\label{class_sequence_a6da226d77ff5150ced893f0b6c83f83a}
+
+
+Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}une séquence. 
+
+La longueur d\textquotesingle{}une séquence est calculée de façon récursive en parcourant ses séquences et sous-\/séquences et en appelant \hyperlink{class_trace_a74a29f7e259781424d9f81409ed34701}{Trace\+::length} sur les traces parcourues.
+
+\begin{DoxyReturn}{Returns}
+la longueur de la séquence 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a74a29f7e259781424d9f81409ed34701}{Trace}.
+
+
+
+Definition at line 82 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!next@{next}}
+\index{next@{next}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{next()}{next()}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Trace\+::sp\+\_\+trace} \& Sequence\+::next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{}\label{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}
+
+
+Récupération de la prochaine trace dans le vecteur de la séquence. 
+
+Cette fonction sert à parcourir les traces contenues dans \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces} de façon non récursive, i.\+e. qu\textquotesingle{}on ne rentre pas dans les séquence (s\textquotesingle{}il y en a). A chaque appel à \hyperlink{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{Sequence\+::next}, la trace se trouvant à l\textquotesingle{}indice \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt} dans le vecteur \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces} est retournée, la variable \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt} est incrémentée (pour pointer vers la trace suivante qui sera retournée lors du prochain appel à \hyperlink{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{Sequence\+::next}). Le booleén \hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{Sequence\+::end\+Reached} est mis à vrai lorsque la dernière trace du vecteur est retournée.
+
+\begin{DoxyReturn}{Returns}
+la prochaine trace du vecteur \hyperlink{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{Sequence\+::traces}. 
+\end{DoxyReturn}
+
+
+Definition at line 140 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!operator==@{operator==}}
+\index{operator==@{operator==}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{operator==(\+Trace $\ast$t) const }{operator==(Trace *t) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace} $\ast$}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sequence_a945e1cb29fadc554bc8a3d61f188998c}{}\label{class_sequence_a945e1cb29fadc554bc8a3d61f188998c}
+
+
+Comparaison de la séquence avec une trace. 
+
+Cette fonction permet de tester l\textquotesingle{}égalité entre l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence} et une trace {\ttfamily t}. On considère dans ce cas qu\textquotesingle{}il y a égalité si {\ttfamily t} est une séquence, si les tailles des vecteurs de traces des séquences sont égales à une certaine valeur \textquotesingle{}size\textquotesingle{} et si pour tout i dans \mbox{[}0,size\mbox{[}, on a égalité entre la trace qui se trouve à la position i dans le vecteur de traces de la séquence et la trace qui se trouve à la position i dans le vecteur de traces de la séquence {\ttfamily t} (égalité testée en utilisant la fonction \hyperlink{class_trace_a8201809c2fcc1d02cfa8bf894a79bb5e}{Trace\+::operator==}).
+
+Par exemple, les deux séquences ci-\/dessous ne sont pas égales \+: \begin{DoxyVerb}Sequence
+    A
+    B
+    Sequence
+        C
+
+Sequence
+    Sequence
+        A
+        B
+    C
+\end{DoxyVerb}
+
+
+\begin{DoxyReturn}{Returns}
+vrai si la séquence est considérée comme étant égale à {\ttfamily t}, et faux sinon. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a8201809c2fcc1d02cfa8bf894a79bb5e}{Trace}.
+
+
+
+Definition at line 22 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!reset@{reset}}
+\index{reset@{reset}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{reset()}{reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_af1dbfa6630d8224407b489658f3cae13}{}\label{class_sequence_af1dbfa6630d8224407b489658f3cae13}
+
+
+Réinitialisation du parcours de la séquence. 
+
+Cette fonction doit être appelée pour réinitialiser le parcours de la séquence. Lors de la réinitialisation, la variable \hyperlink{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{Sequence\+::pt} est mise à 0 afin de pointer sur la première trace du vecteur, le booléen \hyperlink{class_sequence_a37ae535e71d53216a85e16bec941410d}{Sequence\+::end\+Reached} est mis à faux. Cette réinitialisation est effectuée de façon récursive, i.\+e. pour toutes les séquences et sous-\/séquences de l\textquotesingle{}objet \hyperlink{class_sequence}{Sequence}. 
+
+Definition at line 157 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!reset\+Aligned@{reset\+Aligned}}
+\index{reset\+Aligned@{reset\+Aligned}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{reset\+Aligned()}{resetAligned()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::reset\+Aligned (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_sequence_aacd81267429077588208d2a040ea51e4}{}\label{class_sequence_aacd81267429077588208d2a040ea51e4}
+
+
+Réinitialisation récursive de l\textquotesingle{}alignement de la séquence. 
+
+Cette fonction permet de supprimer le lien vers la trace avec laquelle la séquence était éventuellement alignée, i.\+e. de réinitialiser le pointeur intelligent \hyperlink{class_trace_a4ace0a20ceb2b0722970be729bd41dc8}{Trace\+::aligned} de la séquence. Ce traitement est effectué de façon récursive pour toutes les traces inclus dans la séquence. 
+
+Reimplemented from \hyperlink{class_trace_ab152bd0c953d48da2eecda17a1762b18}{Trace}.
+
+
+
+Definition at line 37 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!size@{size}}
+\index{size@{size}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{size() const }{size() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_sequence_a40b394b58ce0a47d2e265f098eb8edca}{}\label{class_sequence_a40b394b58ce0a47d2e265f098eb8edca}
+
+
+Taille du vecteur de traces de la séquence. 
+
+\begin{DoxyReturn}{Returns}
+la taille du vecteur de traces de la séquence. 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!update\+Num\+Map@{update\+Num\+Map}}
+\index{update\+Num\+Map@{update\+Num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{update\+Num\+Map(unsigned int num, int update=1)}{updateNumMap(unsigned int num, int update=1)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::update\+Num\+Map (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{num, }
+\item[{int}]{update = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a3cbca7f0a868e768d112e61f2087cbae}{}\label{class_sequence_a3cbca7f0a868e768d112e61f2087cbae}
+
+
+Mise à jour de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+Cette fonction va permettre d\textquotesingle{}ajouter l\textquotesingle{}entrée $<${\ttfamily num\+:{\ttfamily update$>$} dans} l\textquotesingle{}objet Map {\ttfamily num\+Map} si aucune entrée avec la clé {\ttfamily num} ne s\textquotesingle{}y trouve déjà. Dans le cas contraire, l\textquotesingle{}entrée existante est modifiée et {\ttfamily update} est ajoutée à la valeur correspondante à cette entrée.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num} & la clé de l\textquotesingle{}entrée à ajouter ou à modifier. \\
+\hline
+{\em update} & la valeur de la mise à jour. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 215 of file Sequence.\+cpp.
+
+\index{Sequence@{Sequence}!update\+Num\+Map@{update\+Num\+Map}}
+\index{update\+Num\+Map@{update\+Num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{update\+Num\+Map(const std\+::map$<$ unsigned int, unsigned int $>$ \&num\+Map)}{updateNumMap(const std::map< unsigned int, unsigned int > &numMap)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sequence\+::update\+Num\+Map (
+\begin{DoxyParamCaption}
+\item[{const std\+::map$<$ unsigned int, unsigned int $>$ \&}]{num\+Map}
+\end{DoxyParamCaption}
+)}\hypertarget{class_sequence_a03ef5cb5c25d9a9de0f5c61d786580bb}{}\label{class_sequence_a03ef5cb5c25d9a9de0f5c61d786580bb}
+
+
+Mise à jour de \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} à partir d\textquotesingle{}une autre \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map}. 
+
+Cette fonction est utilisée pour mettre à jour la variable \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} de la séquence avec chacune des entrées de l\textquotesingle{}objet {\ttfamily num\+Map} passé en paramètres.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Map} & l\textquotesingle{}objet Map \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} utilisé pour la mise à jour. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 225 of file Sequence.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Sequence@{Sequence}!end\+Reached@{end\+Reached}}
+\index{end\+Reached@{end\+Reached}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{end\+Reached}{endReached}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::end\+Reached\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a37ae535e71d53216a85e16bec941410d}{}\label{class_sequence_a37ae535e71d53216a85e16bec941410d}
+Un booléen mis à vrai lorsque la dernière trace du vecteur de la séquence a été renvoyée suite à l\textquotesingle{}appel de \hyperlink{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{Sequence\+::next}. 
+
+Definition at line 404 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!num@{num}}
+\index{num@{num}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{num}{num}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::num\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}{}\label{class_sequence_a9283bd1da021b06eeaed1028b1e7069e}
+Un entier indiquant le nombre d\textquotesingle{}occurrences actuel de la séquence. 
+
+Definition at line 387 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!num\+\_\+fixed@{num\+\_\+fixed}}
+\index{num\+\_\+fixed@{num\+\_\+fixed}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{num\+\_\+fixed}{num_fixed}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::num\+\_\+fixed\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_ae495f3d3267ac936660920ab13b2316e}{}\label{class_sequence_ae495f3d3267ac936660920ab13b2316e}
+Un booléen permettant d\textquotesingle{}indiquer si le nombre d\textquotesingle{}occurrences de la sequence doit être utilisé lors de l\textquotesingle{}analyse pour le calcul du score du joueur et pour la détermination des feedbacks. Cette variable est mise à vraie uniquement si l\textquotesingle{}expert a fixé la valeur de l\textquotesingle{}attribut \textquotesingle{}nb\+\_\+iteration\+\_\+fixed\textquotesingle{} à \textquotesingle{}true\textquotesingle{} pour la séquence dans le fichier X\+ML utilisé pour l\textquotesingle{}import. 
+
+Definition at line 377 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!num\+Map@{num\+Map}}
+\index{num\+Map@{num\+Map}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{num\+Map}{numMap}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$unsigned int,unsigned int$>$ Sequence\+::num\+Map\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{}\label{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}
+Objet servant à stocker des entrées $<$x\+:y$>$. Une entrée $<$x\+:y$>$ signifie que la séquence de traces se répète y fois avec un nombre de répétitions contiguës égal à x.
+
+Par exemple, si \hyperlink{class_sequence_a3fb6b6543259ea07c976012dd622cdcc}{Sequence\+::num\+Map} = $<$1\+:4$>$ $<$3\+:5$>$ $<$10\+:1$>$, cela signifique que la séquence se répète en tout 1$\ast$4 + 3$\ast$5 + 10$\ast$1 = 29 fois \+: 4 fois avec une seule répétition, 5 fois avec 3 répétitions contiguës et enfin 1 fois avec 10 répétitions contiguës. 
+
+Definition at line 394 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!pt@{pt}}
+\index{pt@{pt}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{pt}{pt}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sequence\+::pt\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}{}\label{class_sequence_a6005aee7fd142d6292dcfeefe062bc82}
+Un indice sur le vecteur des traces de la séquence. A chaque appel à \hyperlink{class_sequence_a5c6f4d1232eb3fddc256a2d654c48c6b}{Sequence\+::next}, cette valeur est incrémentée et le prochain élément du vecteur est renvoyé. 
+
+Definition at line 399 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!root@{root}}
+\index{root@{root}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{root}{root}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::root\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_ac09da762e43cc657842d4f953ffff613}{}\label{class_sequence_ac09da762e43cc657842d4f953ffff613}
+Un booléen indiquant si la séquence est une séquence racine. Une séquence racine n\textquotesingle{}a pas de parent et l\textquotesingle{}objet Map {\ttfamily num\+Map} ne contient qu\textquotesingle{}une entrée \+: $<$1\+:1$>$.
+
+\begin{DoxySeeAlso}{See also}
+Traces\+Analyser\+::get\+Infos\+On\+Execution 
+\end{DoxySeeAlso}
+
+
+Definition at line 418 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!shared@{shared}}
+\index{shared@{shared}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{shared}{shared}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sequence\+::shared\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}{}\label{class_sequence_a77c5ea96e0222cb80d5a8cf420e1d624}
+Un booléen utilisé uniquement lors de la fusion de deux séquences.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_traces_parser_ac304d9f86b7a99e29ec9d6aacd748d41}{Traces\+Parser\+::merge\+Sequences} 
+\end{DoxySeeAlso}
+
+
+Definition at line 411 of file Sequence.\+h.
+
+\index{Sequence@{Sequence}!traces@{traces}}
+\index{traces@{traces}!Sequence@{Sequence}}
+\subsubsection[{\texorpdfstring{traces}{traces}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Trace\+::sp\+\_\+trace}$>$ Sequence\+::traces\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}{}\label{class_sequence_a2e22b6d3eda29911dda95aa36efefa83}
+Le vecteur des traces de la séquence. 
+
+Definition at line 382 of file Sequence.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_sequence_8h}{Sequence.\+h}\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_sequence_8cpp}{Sequence.\+cpp}\end{DoxyCompactItemize}

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feedbacks>
-	<feedback type="seq_lack" priority="0">
+	<feedback type="useful_call" priority="0">
 		<expert>
-			<sequence>
-				<call label="PP_GetNumUnits" params="2"/>
-			</sequence>
+			<call label="PP_Unit_GetPosition"/>
 		</expert>
 		<infos lang="fr">
-			<info>Vous devriez attendre qu'il y ait au moins une unité ennemie sur la carte avant de donner des ordres à vos unités</info>
+			<info>Pourquoi s'embêter avec les calculs alors que la fonction "PP_Unit_GetPosition" est disponible ?</info>
 		</infos>
 		<infos lang="en">
-			<info>You should wait until there is at least one enemy unit on the map before send orders to your units</info>
+			<info>Why bother with the calculations when the function "PP_Unit_GetPosition" is available ?</info>
 		</infos>
 	</feedback>
 </feedbacks>

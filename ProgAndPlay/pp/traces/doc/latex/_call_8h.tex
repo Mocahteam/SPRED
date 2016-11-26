@@ -1,0 +1,59 @@
+\hypertarget{_call_8h}{}\section{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Call.h File Reference}
+\label{_call_8h}\index{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Call.\+h@{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Call.\+h}}
+
+
+Déclaration des classes \hyperlink{class_call}{Call} et \hyperlink{class_params_map}{Params\+Map}.  
+
+
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$stdexcept$>$}\\*
+{\ttfamily \#include $<$rapidjson/document.\+h$>$}\\*
+{\ttfamily \#include $<$boost/lexical\+\_\+cast.\+hpp$>$}\\*
+{\ttfamily \#include \char`\"{}Trace.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_params_map}{Params\+Map}
+\begin{DoxyCompactList}\small\item\em Classe utilisée pour le chargement des paramètres de compression à partir du fichier J\+S\+ON \textquotesingle{}params.\+json\textquotesingle{}. \end{DoxyCompactList}\item 
+class \hyperlink{class_call}{Call}
+\begin{DoxyCompactList}\small\item\em Classe abstraite héritant de \hyperlink{class_trace}{Trace}. Cette classe sert de classe mère pour toutes les classes définies dans le fichier \hyperlink{_call_def_8h}{Call\+Def.\+h}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_call_8h_a92280872d50a2c64ffe1acbc6c88dfff}{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}~2
+\item 
+\#define \hyperlink{_call_8h_a4b857c8e2ae4074d043871fd75adfcef}{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD}~0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Déclaration des classes \hyperlink{class_call}{Call} et \hyperlink{class_params_map}{Params\+Map}. 
+
+\begin{DoxyAuthor}{Author}
+meresse 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\index{Call.\+h@{Call.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD}!Call.\+h@{Call.\+h}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD}{DEFAULT_COMPRESSION_MOD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD~0}\hypertarget{_call_8h_a4b857c8e2ae4074d043871fd75adfcef}{}\label{_call_8h_a4b857c8e2ae4074d043871fd75adfcef}
+si D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+M\+OD == 0, alors aucune valeur de paramètre n\textquotesingle{}est utilisé durant la compression. Sinon, tous les paramètres sont pris en compte pour la compression. 
+
+Definition at line 28 of file Call.\+h.
+
+\index{Call.\+h@{Call.\+h}!M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS@{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}}
+\index{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS@{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}!Call.\+h@{Call.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}{MAX_SIZE_PARAMS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS~2}\hypertarget{_call_8h_a92280872d50a2c64ffe1acbc6c88dfff}{}\label{_call_8h_a92280872d50a2c64ffe1acbc6c88dfff}
+
+
+Definition at line 11 of file Call.\+h.
+
