@@ -43,11 +43,3 @@ rem remove tmp folder
 cd ..
 rmdir /Q /S build_editor_tmp
 rem ==================
-
-rem install editor archive
-del "C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED test editor.sdz"
-copy "SPRED test editor.sdz" "C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED test editor.sdz"
-
-REM execution
-cd C:\Users\mmuratet\Downloads\Spring-git
-spring.exe

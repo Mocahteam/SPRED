@@ -61,11 +61,3 @@ rem remove tmp folder
 cd ..
 rmdir /Q /S build_launcher_tmp
 rem ==================
-
-rem install launcher archive
-del C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED_Launcher.sdz
-copy SPRED_Launcher.sdz C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED_Launcher.sdz
-
-REM execution
-cd C:\Users\mmuratet\Downloads\Spring-git
-spring.exe

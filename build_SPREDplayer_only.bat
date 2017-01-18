@@ -21,11 +21,3 @@ rem remove tmp folder
 cd ..
 rmdir /Q /S build_player_tmp
 rem ==================
-
-rem install player archive
-del "C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED test player.sdz"
-copy "SPRED test player.sdz" "C:\Users\mmuratet\Downloads\Spring-git\mods\SPRED test player.sdz"
-
-REM execution
-cd C:\Users\mmuratet\Downloads\Spring-git
-spring.exe
