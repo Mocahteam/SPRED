@@ -1,0 +1,767 @@
+{
+	"zones":[
+		{
+			"type":"Rectangle",
+			"blue":0.80613851547241,
+			"x2":440,
+			"z1":808,
+			"z2":1208,
+			"x1":64,
+			"marker":true,
+			"name":"point de ralliement (260-1000)",
+			"green":0.55862176418304,
+			"id":1,
+			"shown":true,
+			"alwaysInView":true,
+			"red":0.51526319980621
+		} 
+	],
+	"allyteams":{
+		"1":[
+			0 
+		],
+		"2":[
+			 
+		],
+		"3":[
+			 
+		],
+		"4":[
+			 
+		],
+		"5":[
+			 
+		],
+		"6":[
+			 
+		],
+		"7":[
+			 
+		],
+		"8":[
+			 
+		],
+		"9":[
+			 
+		],
+		"0":[
+			 
+		]
+	},
+	"description":{
+		"map":"Marble_Madness_Map",
+		"cameraAuto":"enabled",
+		"briefingRaw":"Mission 5\\n \\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#A9A9A9#Appuyez sur Echap pour continuer/",
+		"minimap":"disabled",
+		"name":"_mission5",
+		"widgets":[
+			{
+				"desc":"User interface of the level editor",
+				"name":"Editor User Interface",
+				"active":false
+			},
+			{
+				"desc":"Teach you to play the game,
+				 one tip at a time",
+				"name":"Kernel Panic Automatic Tip Dispenser",
+				"active":false
+			},
+			{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},
+			{
+				"desc":"Show some P&P menu when Spring.exe is run directly.",
+				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
+				"active":true
+			},
+			{
+				"desc":"Control the rest of your army while in Hero mode",
+				"name":"Heroes Right Click",
+				"active":false
+			},
+			{
+				"desc":"Hot GUI Framework",
+				"name":"Chili Framework",
+				"active":true
+			},
+			{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},
+			{
+				"desc":"Show the mission title and briefing",
+				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},
+			{
+				"desc":"Prettier background for the tooltip",
+				"name":"Kernel Panic MidKnight's tooltip background",
+				"active":false
+			},
+			{
+				"desc":"Replace the default Spring tooltip by one customised for K.P.",
+				"name":"Kernel Panic Tooltip",
+				"active":false
+			},
+			{
+				"desc":"Sets immobile builders to ROAM,
+				 with a PATROL command",
+				"name":"ImmobileBuilder",
+				"active":false
+			},
+			{
+				"desc":"XrayShader",
+				"name":"XrayShader",
+				"active":false
+			},
+			{
+				"desc":"test",
+				"name":"test",
+				"active":false
+			},
+			{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
+				"active":false
+			},
+			{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
+				"active":false
+			},
+			{
+				"desc":"Hides all commands",
+				"name":"Hide commands",
+				"active":true
+			},
+			{
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},
+			{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},
+			{
+				"desc":"Makes sockets or window automatically spam bits or bugs,
+				 and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":false
+			},
+			{
+				"desc":"Indicator for the CommEnds state (at game start)",
+				"name":"CommanderEnds",
+				"active":false
+			},
+			{
+				"desc":"Automatically adds 100 stockpile builds to new units",
+				"name":"Stockpiler",
+				"active":false
+			},
+			{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},
+			{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},
+			{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},
+			{
+				"desc":"Controls metal makers to minimize energy stalls",
+				"name":"MetalMakers",
+				"active":false
+			},
+			{
+				"desc":"Assigns new builders to assist their source factory",
+				"name":"FactoryGuard",
+				"active":false
+			},
+			{
+				"desc":"Shows a team color platter above all visible units",
+				"name":"TeamPlatter",
+				"active":false
+			},
+			{
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
+				"active":false
+			},
+			{
+				"desc":"Alternate view movement for the middle mouse button",
+				"name":"SmoothScroll",
+				"active":false
+			},
+			{
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},
+			{
+				"desc":"Highlight the Geovents when placing Buildings,
+				 or when in metal view",
+				"name":"Kernel Panic Geos Highlight",
+				"active":false
+			},
+			{
+				"desc":"Camera shakes",
+				"name":"CameraShake",
+				"active":false
+			},
+			{
+				"desc":"Keeps the minimap at a relative size (maxspect)",
+				"name":"RelativeMinimap",
+				"active":false
+			},
+			{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},
+			{
+				"desc":"Returns the llist of known widgets",
+				"name":"Editor Widget List",
+				"active":true
+			},
+			{
+				"desc":"Remove the need to add /luarules in front of some gadgets command",
+				"name":"Kernel Panic Console Commands",
+				"active":false
+			},
+			{
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,
+				4,
+				6,
+				8",
+				"name":"Kernel Panic Hotkeys",
+				"active":false
+			} 
+		],
+		"briefing":"Mission 5\n \n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques.  Vous devez les réparer avant de lancer la contre-attaque.\nLe dernier ASSEMBLEUR (ASSEMBLER) encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256; 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ©©©Appuyez sur Echap pour continuerÿÿÿÿ",
+		"mouse":"disabled",
+		"saveName":"_mission5",
+		"autoHeal":"disabled"
+	},
+	"events":[
+		{
+			"actions":[
+				{
+					"id":0,
+					"type":"win",
+					"name":"Action0",
+					"params":{
+						"team":0,
+						"outputState":"wellPlaced"
+					}
+				} 
+			],
+			"name":"WellPlaced",
+			"trigger":"",
+			"id":0,
+			"conditions":[
+				{
+					"id":3,
+					"type":"team_zone",
+					"name":"ConditionPlaced",
+					"params":{
+						"team":0,
+						"number":{
+							"number":1,
+							"comparison":"all"
+						},
+						"zone":1
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"actionTotal":1
+		},
+		{
+			"actions":[
+				{
+					"id":1,
+					"type":"lose",
+					"name":"endbydead",
+					"params":{
+						"team":0,
+						"outputState":"endByDead_5"
+					}
+				} 
+			],
+			"trigger":"",
+			"name":"teamOIsDead",
+			"repetition":false,
+			"id":1,
+			"conditions":[
+				{
+					"id":4,
+					"type":"team_dead",
+					"name":"team0isdead",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"actionTotal":1
+		},
+		{
+			"actionTotal":3,
+			"conditionTotal":3,
+			"name":"NotSimultaneous",
+			"repetition":false,
+			"trigger":"Condition6 and not allMove and not Condition13",
+			"conditions":[
+				{
+					"id":6,
+					"type":"booleanVariable",
+					"name":"Condition6",
+					"params":{
+						"variable":"unitsAreMoving"
+					}
+				},
+				{
+					"id":8,
+					"type":"team_order",
+					"name":"allMove",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"all"
+						},
+						"team":0,
+						"command":10
+					}
+				},
+				{
+					"id":13,
+					"type":"booleanVariable",
+					"name":"Condition13",
+					"params":{
+						"variable":"units_lag"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":5,
+					"type":"messageGlobal",
+					"name":"Action5",
+					"params":{
+						"message":[
+							"Votre armée n'est pas très synchronisée,
+							\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t il ne faut pas perdre de temps" 
+						]
+					}
+				},
+				{
+					"id":6,
+					"type":"wait",
+					"name":"Wt",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":4,
+					"type":"lose",
+					"name":"Action4",
+					"params":{
+						"team":0,
+						"outputState":"not simulatenous"
+					}
+				} 
+			],
+			"id":2
+		},
+		{
+			"actions":[
+				{
+					"id":2,
+					"type":"wait",
+					"name":"wait",
+					"params":{
+						"time":4
+					}
+				},
+				{
+					"id":3,
+					"type":"setBooleanVariable",
+					"name":"Action3",
+					"params":{
+						"boolean":"true",
+						"variable":"unitsAreMoving"
+					}
+				},
+				{
+					"id":10,
+					"type":"wait",
+					"name":"wait2",
+					"params":{
+						"time":4
+					}
+				},
+				{
+					"id":11,
+					"type":"setBooleanVariable",
+					"name":"Action11",
+					"params":{
+						"boolean":"true",
+						"variable":"units_lag"
+					}
+				} 
+			],
+			"trigger":"",
+			"name":"unitsAreMoving",
+			"repetition":false,
+			"id":3,
+			"conditions":[
+				{
+					"id":5,
+					"type":"team_order",
+					"name":"Condition5",
+					"params":{
+						"command":10,
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0
+					}
+				} 
+			],
+			"conditionTotal":1,
+			"actionTotal":4
+		},
+		{
+			"actionTotal":3,
+			"conditionTotal":3,
+			"name":"NotWellPlaced",
+			"repetition":false,
+			"trigger":"not Condition3 and not move and Condition12",
+			"conditions":[
+				{
+					"id":10,
+					"type":"team_zone",
+					"name":"Condition3",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0,
+						"zone":1
+					}
+				},
+				{
+					"id":11,
+					"type":"team_order",
+					"name":"move",
+					"params":{
+						"number":{
+							"number":1,
+							"comparison":"atleast"
+						},
+						"team":0,
+						"command":10
+					}
+				},
+				{
+					"id":12,
+					"type":"booleanVariable",
+					"name":"Condition12",
+					"params":{
+						"variable":"unitsAreMoving"
+					}
+				} 
+			],
+			"actions":[
+				{
+					"id":7,
+					"type":"messageGlobal",
+					"name":"Action7",
+					"params":{
+						"message":[
+							"Mauvais placement" 
+						]
+					}
+				},
+				{
+					"id":8,
+					"type":"wait",
+					"name":"Action8",
+					"params":{
+						"time":3
+					}
+				},
+				{
+					"id":9,
+					"type":"lose",
+					"name":"Action9",
+					"params":{
+						"team":0,
+						"outputState":"wrongSpot"
+					}
+				} 
+			],
+			"id":4
+		} 
+	],
+	"variables":[
+		{
+			"id":0,
+			"type":"boolean",
+			"name":"unitsAreMoving",
+			"initValue":"false"
+		},
+		{
+			"id":1,
+			"type":"boolean",
+			"name":"units_lag",
+			"initValue":"false"
+		} 
+	],
+	"teams":{
+		"1":{
+			"enabled":false,
+			"color":{
+				"green":1,
+				"blue":0,
+				"red":0
+			},
+			"name":"Team 1",
+			"control":"computer"
+		},
+		"2":{
+			"enabled":false,
+			"color":{
+				"green":0,
+				"blue":0,
+				"red":1
+			},
+			"name":"Team 2",
+			"control":"player"
+		},
+		"3":{
+			"enabled":false,
+			"color":{
+				"green":0,
+				"blue":0.5,
+				"red":0.5
+			},
+			"name":"Team 3",
+			"control":"player"
+		},
+		"4":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":1
+			},
+			"name":"Team 4",
+			"control":"player"
+		},
+		"5":{
+			"enabled":false,
+			"color":{
+				"green":1,
+				"blue":1,
+				"red":1
+			},
+			"name":"Team 5",
+			"control":"player"
+		},
+		"6":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":1
+			},
+			"name":"Team 6",
+			"control":"player"
+		},
+		"7":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0
+			},
+			"name":"Team 7",
+			"control":"player"
+		},
+		"8":{
+			"enabled":false,
+			"color":{
+				"green":1,
+				"blue":0.5,
+				"red":0
+			},
+			"name":"Team 8",
+			"control":"player"
+		},
+		"9":{
+			"enabled":false,
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":0.5
+			},
+			"name":"Team 9",
+			"control":"player"
+		},
+		"0":{
+			"enabled":true,
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0.5
+			},
+			"name":"Team 0",
+			"control":"player"
+		}
+	},
+	"groups":[
+		{
+			"name":"da",
+			"units":[
+				 
+			]
+		} 
+	],
+	"units":[
+		{
+			"type":"byte",
+			"id":9137,
+			"position":{
+				"y":130,
+				"x":294,
+				"z":1862
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":11316,
+			"position":{
+				"y":130,
+				"x":354,
+				"z":1748
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":3274,
+			"position":{
+				"y":270.39453125,
+				"x":1356,
+				"z":1370
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13526,
+			"position":{
+				"y":270.39453125,
+				"x":1424,
+				"z":1436
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":5269,
+			"position":{
+				"y":270.39453125,
+				"x":1351,
+				"z":1451
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":14973,
+			"position":{
+				"y":270.39453125,
+				"x":1307,
+				"z":1392
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":4048,
+			"position":{
+				"y":270.39453125,
+				"x":1331,
+				"z":1329
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"bit",
+			"id":13710,
+			"position":{
+				"y":270.39453125,
+				"x":1401,
+				"z":1377
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		},
+		{
+			"type":"byte",
+			"id":2984,
+			"position":{
+				"y":130,
+				"x":437,
+				"z":1852
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":40,
+			"team":0
+		} 
+	]
+}

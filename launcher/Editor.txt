@@ -1,0 +1,51 @@
+// Launcher for Level Editor
+
+[GAME]
+{
+	Mapname=Marble_Madness_Map; // any map works, just set a valid map to enable starting game
+	
+	Gametype=empty; //Gametype will be defined dynamically in launcher.lua
+	
+	StartPosType=3;     // 0 fixed, 1 random, 2 choose in game, 3 choose before game (see StartPosX)
+	
+	MyPlayerName=Player; // our ingame-name (needs to match one players Name= field)
+	
+	[MODOPTIONS]
+	{
+		gamemode=3;				// 0 cmdr dead->game continues, 1 cmdr dead->game ends,
+								// 2 lineage, 3 open end
+		language=en;			// en english (default), fr français
+	}
+	
+	// A player (controlls a team, player 0 is the host only if IsHost is not set)
+	[PLAYER0]
+	{
+		Name=Player;		// pure info
+		Spectator=1;
+		Team=0; 			// the team this player controlls
+	}
+	// more players ...
+	
+	// players in this will share the same units (start with one commander etc.)
+	[TEAM0]
+	{
+		TeamLeader=0;		// player number that is the "leader"
+		                // if this is an AI controlled team, TeamLeader is the
+		                // player number of the AI controlling team
+		                // see AI.Host
+		AllyTeam=0;
+		RGBColor=0.500000 0.500000 1.000000;
+		Side=System; // or Hacker or Network
+		StartPosX=1056; // Use these in combination with StartPosType=3
+		StartPosZ=1900; // Use these in combination with StartPosType=3
+	}
+	// more teams ...
+	
+	// teams in ally team share los etc and cant break alliance, every team must
+	// be in exactly one ally team
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	// more ally teams ...
+}
