@@ -7,14 +7,13 @@ int main (){
 	/* define target position */
 	PP_Pos p;
 	p.x = 256.0;
-	p.y = 1024.0;
+	p.y = 1034.0;
 	PP_Open(); /* open the Prog&Play API */
+	int num_units = PP_GetNumUnits (MY_COALITION);
 	/* iterate all units */
-	for (i = 0 ; i < PP_GetNumUnits (MY_COALITION) ; i++){
+	for (i = 0 ; i < num_units-1; i++){
 		/* order the current unit to move to the target position */
 		PP_Unit_ActionOnPosition(PP_GetUnitAt(MY_COALITION, i), MOVE, p);
 	}
-	/* close the Prog&Play API */
-	PP_Close();
 	return 0;
 }

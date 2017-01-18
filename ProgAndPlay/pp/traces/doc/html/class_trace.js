@@ -1,0 +1,37 @@
+var class_trace =
+[
+    [ "sp_trace", "class_trace.html#a9c58e523529fc8a03fb6acf3eef86150", null ],
+    [ "TraceType", "class_trace.html#a39e5f82f2243958348cc74d7cdae527c", [
+      [ "SEQUENCE", "class_trace.html#a39e5f82f2243958348cc74d7cdae527caebbdad96feb25d8a1b79eafbfc0036c1", null ],
+      [ "CALL", "class_trace.html#a39e5f82f2243958348cc74d7cdae527ca15e133d9a16235bbac953dbfa35a5368", null ],
+      [ "EVENT", "class_trace.html#a39e5f82f2243958348cc74d7cdae527caf73b96a847b9877ca903e102074a52df", null ]
+    ] ],
+    [ "~Trace", "class_trace.html#a293f9c9de28b53b0d5edae908b90be03", null ],
+    [ "Trace", "class_trace.html#a1891c08c9e847b798d2e39f49b2d24b5", null ],
+    [ "Trace", "class_trace.html#a586ba22dd795fc2d6ff874d9f7d52929", null ],
+    [ "clone", "class_trace.html#a0917758337e37f936713ccaf75b532f2", null ],
+    [ "display", "class_trace.html#a4324fa45af235238ddedc2215c3d1cf0", null ],
+    [ "getAligned", "class_trace.html#aac433090e2cf94657c61e4c73c3bd530", null ],
+    [ "getInfo", "class_trace.html#a077c3a0c551e5e898ec0f7cf3911e882", null ],
+    [ "getLevel", "class_trace.html#af355f36b176399dd35848562ba38ebea", null ],
+    [ "getParent", "class_trace.html#a3d82b8d5984686606bf485112be53354", null ],
+    [ "isCall", "class_trace.html#a65fbddb70261866299cbaabb7c5f019e", null ],
+    [ "isDelayed", "class_trace.html#aabbb4de8e5b5ea0983021688800bd43f", null ],
+    [ "isEvent", "class_trace.html#a901bf10475a27420aa2ccd52388bc1fd", null ],
+    [ "isSequence", "class_trace.html#aaa85a39ff507206addd6cfd5a49bbca8", null ],
+    [ "length", "class_trace.html#a74a29f7e259781424d9f81409ed34701", null ],
+    [ "operator==", "class_trace.html#a8201809c2fcc1d02cfa8bf894a79bb5e", null ],
+    [ "resetAligned", "class_trace.html#ab152bd0c953d48da2eecda17a1762b18", null ],
+    [ "setAligned", "class_trace.html#ae6552786a5c3b35573c106e4910a5881", null ],
+    [ "setDelayed", "class_trace.html#ae534382e67e6abdf8614a30ebf849d03", null ],
+    [ "setInfo", "class_trace.html#a881e1e9879f9db561402f1381fc6fe3e", null ],
+    [ "setParent", "class_trace.html#af1973ce75a2b1a1422bfffdfc1b8e4a2", null ],
+    [ "aligned", "class_trace.html#a4ace0a20ceb2b0722970be729bd41dc8", null ],
+    [ "delayed", "class_trace.html#a9757057cc65f9e45bbeaa848cb06d5a1", null ],
+    [ "endSearch", "class_trace.html#a8c8413995806feaeebda9f5360db9dbd", null ],
+    [ "indSearch", "class_trace.html#ae1aa55b6282f5dae12f63b0282ef4b9d", null ],
+    [ "info", "class_trace.html#a4835dcfa7da5d4c971e8f7d6860acb09", null ],
+    [ "lenSearch", "class_trace.html#a37d1196b3efa0038af8dcbb7701fcd91", null ],
+    [ "parent", "class_trace.html#a52648b4a6c117072f5797c0e31518f24", null ],
+    [ "type", "class_trace.html#a9f90324e4302d53892143da44cc63054", null ]
+];

@@ -1,0 +1,142 @@
+\hypertarget{struct_traces_analyser_1_1_feedback}{}\section{Traces\+Analyser\+:\+:Feedback Struct Reference}
+\label{struct_traces_analyser_1_1_feedback}\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+
+
+{\ttfamily \#include $<$Traces\+Analyser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{struct_traces_analyser_1_1_feedback_a3597de15c1c142a06bc044d35eff110a}{operator$<$} (const \hyperlink{struct_traces_analyser_1_1_feedback}{Feedback} \&f) const 
+\begin{DoxyCompactList}\small\item\em Fonction utilisé lors de l\textquotesingle{}opération de tri des feedbacks listés. \end{DoxyCompactList}\item 
+void \hyperlink{struct_traces_analyser_1_1_feedback_affc7db79662d3e99b01e3cf3ca5e1616}{display} (std\+::ostream \&os=std\+::cout)
+\begin{DoxyCompactList}\small\item\em Affichage du feedback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} \hyperlink{struct_traces_analyser_1_1_feedback_a828dbdc4ca2e76874679e91a5245996e}{type}
+\item 
+std\+::string \hyperlink{struct_traces_analyser_1_1_feedback_a3300931839b28cbf4a2d1faa3028c679}{info}
+\item 
+\hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{struct_traces_analyser_1_1_feedback_a1c4848a6f5ad484386c1baaac8270a27}{learner\+\_\+spt}
+\item 
+\hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{struct_traces_analyser_1_1_feedback_ab0783087941c78c1ac592a1e284d4396}{expert\+\_\+spt}
+\item 
+int \hyperlink{struct_traces_analyser_1_1_feedback_ad139e027aaebcb9f3b4cfe4a5a7c5ff7}{priority}
+\item 
+int \hyperlink{struct_traces_analyser_1_1_feedback_a4ec88472bb7b925d548267cb263ee81b}{level}
+\item 
+bool \hyperlink{struct_traces_analyser_1_1_feedback_a3d84d2d22c4639d2c04789c054120c27}{defined}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure utilisée pour contenir un ensemble d\textquotesingle{}informations sur un retour qui pourrait être donné au joueur. 
+
+Definition at line 175 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!display@{display}}
+\index{display@{display}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{display(std\+::ostream \&os=std\+::cout)}{display(std::ostream &os=std::cout)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::\+Feedback\+::display (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_feedback_affc7db79662d3e99b01e3cf3ca5e1616}{}\label{struct_traces_analyser_1_1_feedback_affc7db79662d3e99b01e3cf3ca5e1616}
+
+
+Affichage du feedback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & le flux de sortie utilisé pour l\textquotesingle{}affichage. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 231 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{operator$<$(const Feedback \&f) const }{operator<(const Feedback &f) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Analyser\+::\+Feedback\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf Feedback} \&}]{f}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{struct_traces_analyser_1_1_feedback_a3597de15c1c142a06bc044d35eff110a}{}\label{struct_traces_analyser_1_1_feedback_a3597de15c1c142a06bc044d35eff110a}
+
+
+Fonction utilisé lors de l\textquotesingle{}opération de tri des feedbacks listés. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & l\textquotesingle{}objet \hyperlink{struct_traces_analyser_1_1_feedback}{Feedback} utilisé pour la comparaison. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 221 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!defined@{defined}}
+\index{defined@{defined}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{defined}{defined}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Analyser\+::\+Feedback\+::defined}\hypertarget{struct_traces_analyser_1_1_feedback_a3d84d2d22c4639d2c04789c054120c27}{}\label{struct_traces_analyser_1_1_feedback_a3d84d2d22c4639d2c04789c054120c27}
+Booléen mis à vrai si un pattern a été défini pour le feedback dans le fichier X\+ML de définition de feedbacks, i.\+e. si learner\+\_\+spt OU (non exclusif) expert\+\_\+spt est défini. 
+
+Definition at line 213 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!expert\+\_\+spt@{expert\+\_\+spt}}
+\index{expert\+\_\+spt@{expert\+\_\+spt}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{expert\+\_\+spt}{expert_spt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trace\+::sp\+\_\+trace} Traces\+Analyser\+::\+Feedback\+::expert\+\_\+spt}\hypertarget{struct_traces_analyser_1_1_feedback_ab0783087941c78c1ac592a1e284d4396}{}\label{struct_traces_analyser_1_1_feedback_ab0783087941c78c1ac592a1e284d4396}
+\hyperlink{class_trace}{Trace} de l\textquotesingle{}expert défini pour ce feedback. Défini par la balise $<$expert$>$ dans un fichier X\+ML de définition de feedbacks. 
+
+Definition at line 198 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!info@{info}}
+\index{info@{info}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{info}{info}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Traces\+Analyser\+::\+Feedback\+::info}\hypertarget{struct_traces_analyser_1_1_feedback_a3300931839b28cbf4a2d1faa3028c679}{}\label{struct_traces_analyser_1_1_feedback_a3300931839b28cbf4a2d1faa3028c679}
+Chaîne de caractères contenant le texte associé au feedback. Défini par la balise $<$info$>$ dans un fichier X\+ML de définition de feedbacks. A noter que la balise $<$infos lang=\char`\"{}...\char`\"{}$>$ doit contenir au moins une balise $<$info$>$ pour la langue choisie. 
+
+Definition at line 188 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!learner\+\_\+spt@{learner\+\_\+spt}}
+\index{learner\+\_\+spt@{learner\+\_\+spt}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{learner\+\_\+spt}{learner_spt}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trace\+::sp\+\_\+trace} Traces\+Analyser\+::\+Feedback\+::learner\+\_\+spt}\hypertarget{struct_traces_analyser_1_1_feedback_a1c4848a6f5ad484386c1baaac8270a27}{}\label{struct_traces_analyser_1_1_feedback_a1c4848a6f5ad484386c1baaac8270a27}
+\hyperlink{class_trace}{Trace} de l\textquotesingle{}apprenant pour ce feedback. Défini par la balise $<$learner$>$ dans un fichier X\+ML de définition de feedbacks. 
+
+Definition at line 193 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!level@{level}}
+\index{level@{level}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{level}{level}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::\+Feedback\+::level}\hypertarget{struct_traces_analyser_1_1_feedback_a4ec88472bb7b925d548267cb263ee81b}{}\label{struct_traces_analyser_1_1_feedback_a4ec88472bb7b925d548267cb263ee81b}
+Variable prenant la valeur de l\textquotesingle{}attribut \textquotesingle{}level\textquotesingle{} associé à la balise $<$feedback$>$ dans le fichier X\+ML de définition de feedbacks. Cet attribut est optionnel. S\textquotesingle{}il n\textquotesingle{}est pas défini, cette variable prend la valeur -\/1 et ne sera pas utilisée lors de l\textquotesingle{}analyse. Dans le cas, où il est défini, sa valeur est utilisée pour associer un niveau aux traces {\ttfamily learner\+\_\+spt} et {\ttfamily expert\+\_\+spt}. 
+
+Definition at line 208 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!priority@{priority}}
+\index{priority@{priority}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{priority}{priority}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::\+Feedback\+::priority}\hypertarget{struct_traces_analyser_1_1_feedback_ad139e027aaebcb9f3b4cfe4a5a7c5ff7}{}\label{struct_traces_analyser_1_1_feedback_ad139e027aaebcb9f3b4cfe4a5a7c5ff7}
+Priorité associée au feedback. Ce champ est obligatoire dans le fichier X\+ML de définition de feedbacks. 
+
+Definition at line 203 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}!type@{type}}
+\index{type@{type}!Traces\+Analyser\+::\+Feedback@{Traces\+Analyser\+::\+Feedback}}
+\subsubsection[{\texorpdfstring{type}{type}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Feedback\+Type} Traces\+Analyser\+::\+Feedback\+::type}\hypertarget{struct_traces_analyser_1_1_feedback_a828dbdc4ca2e76874679e91a5245996e}{}\label{struct_traces_analyser_1_1_feedback_a828dbdc4ca2e76874679e91a5245996e}
+Définition du type du feedback. Ce champ est obligatoire dans le fichier X\+ML de définition de feedbacks.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} 
+\end{DoxySeeAlso}
+
+
+Definition at line 182 of file Traces\+Analyser.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_analyser_8h}{Traces\+Analyser.\+h}\end{DoxyCompactItemize}

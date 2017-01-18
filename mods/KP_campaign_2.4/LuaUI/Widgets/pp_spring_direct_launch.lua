@@ -19,7 +19,7 @@ VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/WriteScript.lua",nil)
 
-VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain DoTheRestart function
+VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain the genericRestart function
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
@@ -43,8 +43,17 @@ local tableCaptions={
   {el="NewPartyButton",fr="Nouvelle Partie",en="Start Campaign"},
   {el="ListMissionButtons",fr="Liste Des Missions",en="Missions List"},
   {el="QuitButton",fr="Quitter",en="Quit"},
-  {el="continueGameButton",fr="Continuer",en="Continue"}
+  {el="continueGameButton",fr="Continuer",en="Continue"},
+  {el="HostButton",fr="Héberger la mission",en="Host the mission"},
+  {el="JoinButton",fr="Rejoindre la mission",en="Join the mission"},
+  {el="JoinLaunchButton",fr="Rejoindre",en="Join"},
+  {el="Join_Host_Label",
+  fr="Ceci est une partie à plusieurs.\n\n Si vous hébergez la partie, il faut que d'abord que vous trouvez et donnez votre adresse IP à vos partenaire. \nSi vous rejoignez une partie, récuperez l'adresse IP du joueur qui héberge la partie.",
+  en="This is a multiplayer game.\n\nIf you host, please find and distribute your IP to your patners beforehand. \nIf you join, get the Host IP",
+  }
 }
+local enterIpText={fr="Entrez l'IP de votre hôte",en="Enter the IP Host"}
+
 local UI = {} -- Contains each UI element
 
 function hideDefaultGUI()
@@ -131,9 +140,12 @@ local function ChangeLanguage(lg)
     local elToChange=bloc["el"]
     UpdateCaption(UI[elToChange], newCaption)
   end
+  if(UI.textBox)then
+    UI.textBox.text = enterIpText[lg]
+  end
 end
 
-local function RunScenario(i)
+local function RunScenario(i, playerName)
   if Spring.Restart then
     AppliqManager:selectScenario(i)
     AppliqManager:startRoute()
@@ -154,7 +166,7 @@ local function RunScenario(i)
       }
     }
     local contextFile=true
-    genericRestart("Missions/"..mission..".editor",options,contextFile)
+    genericRestart("Missions/"..mission..".editor",options,contextFile, playerName)
   else
     NoRestart()
   end
@@ -164,21 +176,41 @@ local function Capitalize(str)
   return string.gsub (str, "(%w)(%w*)", function(a,b) return string.upper(a) .. b end)
 end
 
-local function RunScript(ScriptFileName, scenario)
-  if Spring.Restart then
-     local contextFile=true
-    --if (string.sub(ScriptFileName, -3, -1)=="txt")then
-      local operations={
-      ["MODOPTIONS"]=
-        {
-        ["language"]=lang,
-        ["scenario"]=scenario,
-        ["hidemenu"]="true"
-        }
-      }    
-      genericRestart(ScriptFileName,operations,contextFile)
+local function RunScript(scenario, ScriptFileName, playerName)
+    if Spring.Restart then
+      --if (string.sub(ScriptFileName, -3, -1)=="txt")then
+        local operations={
+        ["MODOPTIONS"]=
+          {
+          ["language"]=lang,
+          ["scenario"]=tostring(scenario),
+          ["hidemenu"]="true"
+          }
+        }    
+        genericRestart(ScriptFileName,operations,true, playerName)
+    else
+      NoRestart()
+    end
+end
+
+local function launch_mission_orIpInput(scenario, ScriptFileName, playerName, isHost)
+    if(isHost == false)then
+      ip_input(playerName)  
+    else
+      if(scenario)then
+        RunScenario(1, playerName)
+      else
+        RunScript(scenario, ScriptFileName, playerName)
+      end
+    end
+end
+
+local function RunScript_orMultiPlayerScreen(scenario, ScriptFileName)
+  local number_of_player_editor_file = number_of_player_editor_file(ScriptFileName)
+  if(number_of_player_editor_file >1)then
+     host_or_join(number_of_player_editor_file, ScriptFileName, scenario)
   else
-    NoRestart()
+    launch_mission_orIpInput(scenario, ScriptFileName, "Player1", true)
   end
 end
 
@@ -272,7 +304,7 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
     width = "40%",
     height = "10%",
     caption = "Nouvelle Partie",
-    OnClick = { function() RunScenario(1) end },
+    OnClick = { function() RunScript_orMultiPlayerScreen(true, "Start scenario") end },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 40,
@@ -365,6 +397,113 @@ function continue()
     table.insert(UI.ContButtons, contButton)
   end
 end
+
+
+function players_slot(nbPlayer, missionName, isHost, scenario)
+  Spring.Echo(isHost)
+   clearUI()
+
+ --]]
+
+ commonElements()
+  UI.MapScrollPanel3 = Chili.ScrollPanel:New{
+    parent = UI.MainWindow,
+    x = "20%",
+    y = "40%",
+    width = "60%",
+    height = "40%"
+  }
+  
+  UI.BackButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "0%",
+    y = "0%",
+    width = "10%",
+    height = "10%",
+    backgroundColor = { 0, 0.2, 0.6, 1 },
+    focusColor = { 0, 0.6, 1, 1 },
+    OnClick = { InitializeMainMenu }
+  }
+  Chili.Image:New{ -- Image for the back button
+    parent = UI.BackButton,
+    x = "10%",
+    y = "10%",
+    width = "80%",
+    height = "80%",
+    keepAspect = false,
+    file = "bitmaps/launcher/arrow.png"
+  }
+  UI.ContButtons = {}
+  for i=1,nbPlayer do 
+    local player_name = "Player"..tostring(i)
+    local playerButton = Chili.Button:New{
+      parent = UI.MapScrollPanel3,
+      x = "0%",
+      y = 80 * ( i - 1 ),
+      width = "100%",
+      height = 80,
+      caption = player_name,
+      OnClick = { function() launch_mission_orIpInput(scenario, missionName, player_name, isHost) end},
+      font = {
+        font = "LuaUI/Fonts/Asimov.otf",
+        size = 40,
+        color = { 0.2, 0.4, 0.8, 1 }
+      }
+    }
+    table.insert(UI.ContButtons, playerButton)
+  end
+end
+
+function ip_input(playerName)
+ clearUI()
+ commonElements()
+  
+  UI.BackButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "0%",
+    y = "0%",
+    width = "10%",
+    height = "10%",
+    backgroundColor = { 0, 0.2, 0.6, 1 },
+    focusColor = { 0, 0.6, 1, 1 },
+    OnClick = { InitializeMainMenu }
+  }
+    Chili.Image:New{ -- Image for the back button
+    parent = UI.BackButton,
+    x = "10%",
+    y = "10%",
+    width = "80%",
+    height = "80%",
+    keepAspect = false,
+    file = "bitmaps/launcher/arrow.png"
+  }
+  UI.textBox = Chili.EditBox:New {
+    parent = UI.MainWindow,
+    x = "10%",
+    y = "40%",
+    width = "80%",
+    height = "20%",
+    text = "Entrez l'IP de l'hôte",
+    fontsize =  40,
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf"
+    }
+  }
+  UI.textBox.font.color = {1, 1, 1, 1}
+  
+    UI.JoinLaunchButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    caption = "Rejoindre",
+    x = "40%",
+    y = "62%",
+    width = "20%",
+    height = "10%",
+    backgroundColor = { 0, 0.2, 0.6, 1 },
+    focusColor = { 0, 0.6, 1, 1 },
+    OnClick = { function() restartToConnect(playerName,UI.textBox.text) end}
+  }
+end
+
 function missionMenu()
  clearUI()
  commonElements()
@@ -407,7 +546,7 @@ function missionMenu()
       width = "100%",
       height = 80,
       caption = userMissionName,
-      OnClick = { function() RunScript(MissionFileName,"noScenario") end },
+      OnClick = { function() RunScript_orMultiPlayerScreen(false, MissionFileName) end },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
         size = 40,
@@ -416,6 +555,73 @@ function missionMenu()
     }
     table.insert(UI.MapButtons, mapButton)
   end
+end
+
+function host_or_join(number_of_player_editor_file, missionName, scenario)
+ clearUI()
+ commonElements()
+    UI.Join_Host_Label = Chili.Label:New{
+    parent = UI.MainWindow,
+    x = '0%',
+    y = '20%',
+    width = '100%',
+    height = '10%',
+    align = "center",
+    valign = "center",
+    caption = "Ceci est une partie à plusieurs.\n\n Si vous hébergez la partie, il faut que d'abord que vous trouvez et donnez votre adresse IP à vos partenaire. \nSi vous rejoignez une partie, récuperez l'adresse IP du joueur qui héberge la partie.",
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 30,
+      color = { 1, 1, 1, 0.8 }
+    }
+  }
+  UI.BackButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "0%",
+    y = "0%",
+    width = "10%",
+    height = "10%",
+    backgroundColor = { 0, 0.2, 0.6, 1 },
+    focusColor = { 0, 0.6, 1, 1 },
+    OnClick = { InitializeMainMenu }
+  }
+    Chili.Image:New{ -- Image for the back button
+    parent = UI.BackButton,
+    x = "10%",
+    y = "10%",
+    width = "80%",
+    height = "80%",
+    keepAspect = false,
+    file = "bitmaps/launcher/arrow.png"
+  }
+  UI.HostButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "30%",
+    y = "40%",
+    width = "40%",
+    height = "10%",
+    caption = "Héberger la mission",
+    OnClick = { function() players_slot(number_of_player_editor_file,missionName, true, scenario) end},-- players_slot(nbPlayer, missionName, isHost, scenario)
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 40,
+      color = { 0.2, 1, 0.8, 1 }
+    }
+  }
+  UI.JoinButton = Chili.Button:New{
+    parent = UI.MainWindow,
+    x = "30%",
+    y = "50%",
+    width = "40%",
+    height = "10%",
+    caption = "Rejoindre la mission",
+    OnClick = {function() players_slot(number_of_player_editor_file,missionName, false, scenario) end},
+    font = {
+      font = "LuaUI/Fonts/Asimov.otf",
+      size = 40,
+      color = { 0.2, 1, 0.8, 1 }
+    }
+  }
 end
 
 function initGui()

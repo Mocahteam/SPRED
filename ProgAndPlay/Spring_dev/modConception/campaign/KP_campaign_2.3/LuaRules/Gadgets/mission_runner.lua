@@ -22,6 +22,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
+local activeTraces = Spring.GetModOptions()["activetraces"]
 local testmap = Spring.GetModOptions()["testmap"]
 local missionScript = nil -- the lua script that define current mission
 
@@ -71,11 +72,11 @@ function gadget:GameFrame( frameNumber )
 			else
 				victoryState = "won"
 			end
-			if not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
+			if activeTraces == "0" or not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then -- old end mission display
 				_G.event = {logicType = "ShowMissionMenu", state = victoryState}
 				SendToUnsynced("MissionEvent")
 				_G.event = nil
-			else
+			else -- feedbacks widget will handled the end mission display
 				SendToUnsynced("MissionEnded", victoryState)
 			end
 		end

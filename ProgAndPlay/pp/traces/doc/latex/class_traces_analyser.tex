@@ -1,0 +1,379 @@
+\hypertarget{class_traces_analyser}{}\section{Traces\+Analyser Class Reference}
+\label{class_traces_analyser}\index{Traces\+Analyser@{Traces\+Analyser}}
+
+
+La classe \hyperlink{class_traces_analyser}{Traces\+Analyser} définit l\textquotesingle{}ensemble des traitements relatifs à l\textquotesingle{}analyse des traces.  
+
+
+
+
+{\ttfamily \#include $<$Traces\+Analyser.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_traces_analyser_1_1_feedback}{Feedback}
+\item 
+struct \hyperlink{struct_traces_analyser_1_1_game_infos}{Game\+Infos}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} \{ \\*
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a30a02bf0d89826bac04b59a3723f6225}{N\+O\+NE} = -\/1, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08d214704090ad0ead7d60fc2775f2c3}{U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08b0a1ea5237d7bab9b09490e7e30b42}{U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a1b8c8e95fab1f4dde6d38848785a7e08}{S\+E\+Q\+\_\+\+E\+X\+T\+RA}, 
+\\*
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820acd30979f43c0fd19d60770022386222d}{S\+E\+Q\+\_\+\+L\+A\+CK}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6ed25d15ae1133d3fa4a095e38f274ad}{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820aea74b14f216c72b2b6ef13ebe16b48f4}{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a14b0fc808a62906ab67aa4b182fe823c}{C\+A\+L\+L\+\_\+\+E\+X\+T\+RA}, 
+\\*
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6bdc7824ca798742b8ff903b2c3de12f}{C\+A\+L\+L\+\_\+\+L\+A\+CK}, 
+\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a7ed621eaa247a6d92a9b78e3f3359bf5}{C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS}
+ \}
+\item 
+typedef std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \hyperlink{class_traces_analyser_a07dca9f55e9ec0dad64e9bf14d329003}{path}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_traces_analyser_a3e6e883ed6bc74f787684f1a3c0c7c01}{Traces\+Analyser} (std\+::string lang=\char`\"{}fr\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructeur principal de la classe \hyperlink{class_traces_analyser}{Traces\+Analyser}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_traces_analyser_aff9ec49bcec7d983dc41c97d452b3e94}{construct\+Feedback} (const std\+::string \&learner\+\_\+xml, const std\+::vector$<$ std\+::string $>$ \&experts\+\_\+xml, int ind\+\_\+mission=-\/1, int ind\+\_\+execution=-\/1, std\+::ostream \&os=std\+::cout)
+\begin{DoxyCompactList}\small\item\em Fonction principale d\textquotesingle{}analyse des traces. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_analyser_aead7e56360dc6778a99ccdb63ac63f1e}{load\+Xml\+Infos} (const std\+::string \&feedbacks\+\_\+xml, const std\+::string \&mission\+\_\+feedbacks\+\_\+xml)
+\begin{DoxyCompactList}\small\item\em Chargement des feedbacks et des messages contenus dans les fichiers X\+ML \textquotesingle{}feedbacks.\+xml\textquotesingle{}. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_analyser_a76a830a7ca35812b578d2255fb1a6fe9}{set\+Endless\+Loop} (bool endless\+\_\+loop)
+\begin{DoxyCompactList}\small\item\em Setter pour la variable {\ttfamily endless\+\_\+loop}. \end{DoxyCompactList}\item 
+void \hyperlink{class_traces_analyser_a9726338ac15091c533c9562942d062e1}{set\+Lang} (std\+::string lang)
+\begin{DoxyCompactList}\small\item\em Setter pour la variable {\ttfamily lang}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_traces_analyser_aefd7da818aa52292e7e9d4df9a7b2be0}{get\+Random\+Int\+In\+Range} (int max)
+\begin{DoxyCompactList}\small\item\em Génération aléatoire d\textquotesingle{}un entier compris dans l\textquotesingle{}intervalle \mbox{[}0,max\mbox{[}. \end{DoxyCompactList}\item 
+static bool \hyperlink{class_traces_analyser_aa2f744bc8abc8acfbb1407163c36c0b8}{feedback\+Type\+In} (\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} type, int n,...)
+\begin{DoxyCompactList}\small\item\em Test d\textquotesingle{}appartenance de {\ttfamily type} à un ensemble de valeurs. \end{DoxyCompactList}\item 
+static bool \hyperlink{class_traces_analyser_a0ffe68d882d091ec904aa15ab795ec8a}{is\+Expert\+Related\+Feedback} (\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} type)
+\begin{DoxyCompactList}\small\item\em Test si la valeur de {\ttfamily type} est égale à l\textquotesingle{}une des valeurs suivantes \+: U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL, S\+E\+Q\+\_\+\+L\+A\+CK, D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, C\+A\+L\+L\+\_\+\+L\+A\+CK, C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS. \end{DoxyCompactList}\item 
+static bool \hyperlink{class_traces_analyser_ab4bf5099acb58320a75f6540ba3730e2}{is\+Learner\+Related\+Feedback} (\hyperlink{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{Feedback\+Type} type)
+\begin{DoxyCompactList}\small\item\em Test si la valeur de {\ttfamily type} est égale à l\textquotesingle{}une des valeurs suivantes \+: U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL, S\+E\+Q\+\_\+\+E\+X\+T\+RA, D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, C\+A\+L\+L\+\_\+\+E\+X\+T\+RA, C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_traces_analyser_af1de6c1349fdad93945a0d8079451d22}{feedback\+Types\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}useful\+\_\+call\char`\"{}, \char`\"{}useless\+\_\+call\char`\"{}, \char`\"{}seq\+\_\+extra\char`\"{}, \char`\"{}seq\+\_\+lack\char`\"{}, \char`\"{}ind\+\_\+seq\+\_\+num\char`\"{}, \char`\"{}dist\+\_\+seq\+\_\+num\char`\"{}, \char`\"{}call\+\_\+extra\char`\"{}, \char`\"{}call\+\_\+lack\char`\"{}, \char`\"{}call\+\_\+params\char`\"{}, N\+U\+LL\}
+\item 
+static std\+::map$<$ int, std\+::string $>$ \hyperlink{class_traces_analyser_a5e748c4f52e6cbad197b08c7e0273cd8}{units\+\_\+id\+\_\+map}
+\item 
+static std\+::map$<$ int, std\+::string $>$ \hyperlink{class_traces_analyser_ac37a3052687b9fc98c38e8ca870157be}{orders\+\_\+map}
+\item 
+static std\+::map$<$ int, std\+::string $>$ \hyperlink{class_traces_analyser_af64ea0a819c3a124563fe7d0ff6e455f}{resources\+\_\+map}
+\item 
+static std\+::map$<$ std\+::string, std\+::string $>$ \hyperlink{class_traces_analyser_a2addfbe4fff91dcaa53b83163144bf45}{messages\+\_\+map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+La classe \hyperlink{class_traces_analyser}{Traces\+Analyser} définit l\textquotesingle{}ensemble des traitements relatifs à l\textquotesingle{}analyse des traces. 
+
+Definition at line 98 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Traces\+Analyser@{Traces\+Analyser}!path@{path}}
+\index{path@{path}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{path}{path}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<$ std\+::pair$<$int,int$>$ $>$ {\bf Traces\+Analyser\+::path}}\hypertarget{class_traces_analyser_a07dca9f55e9ec0dad64e9bf14d329003}{}\label{class_traces_analyser_a07dca9f55e9ec0dad64e9bf14d329003}
+
+
+Definition at line 102 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{Traces\+Analyser@{Traces\+Analyser}!Feedback\+Type@{Feedback\+Type}}
+\index{Feedback\+Type@{Feedback\+Type}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{Feedback\+Type}{FeedbackType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Traces\+Analyser\+::\+Feedback\+Type}}\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820}
+Enumération utilisée pour connaître le type de feedback. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a30a02bf0d89826bac04b59a3723f6225}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a30a02bf0d89826bac04b59a3723f6225}
+}]\index{U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL@{U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL@{U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL}}\item[{\em 
+U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08d214704090ad0ead7d60fc2775f2c3}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08d214704090ad0ead7d60fc2775f2c3}
+}]La plupart des experts ont utilisé cet appel mais pas le joueur. Paramétrable avec Traces\+Analyser\+::\+U\+S\+E\+F\+U\+L\+\_\+\+F\+R\+EQ. \index{U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL@{U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL@{U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL}}\item[{\em 
+U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08b0a1ea5237d7bab9b09490e7e30b42}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a08b0a1ea5237d7bab9b09490e7e30b42}
+}]le joueur a utilisé cet appel mais très peu d\textquotesingle{}experts l\textquotesingle{}ont utilisé. Paramétrable avec Traces\+Analyser\+::\+U\+S\+E\+L\+E\+S\+S\+\_\+\+F\+R\+EQ. \index{S\+E\+Q\+\_\+\+E\+X\+T\+RA@{S\+E\+Q\+\_\+\+E\+X\+T\+RA}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!S\+E\+Q\+\_\+\+E\+X\+T\+RA@{S\+E\+Q\+\_\+\+E\+X\+T\+RA}}\item[{\em 
+S\+E\+Q\+\_\+\+E\+X\+T\+RA\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a1b8c8e95fab1f4dde6d38848785a7e08}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a1b8c8e95fab1f4dde6d38848785a7e08}
+}]Une séquence non présente dans les traces de l\textquotesingle{}expert est présente dans les traces du joueur. \index{S\+E\+Q\+\_\+\+L\+A\+CK@{S\+E\+Q\+\_\+\+L\+A\+CK}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!S\+E\+Q\+\_\+\+L\+A\+CK@{S\+E\+Q\+\_\+\+L\+A\+CK}}\item[{\em 
+S\+E\+Q\+\_\+\+L\+A\+CK\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820acd30979f43c0fd19d60770022386222d}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820acd30979f43c0fd19d60770022386222d}
+}]Une séquence non présente dans les traces du joueur est présente dans les traces de l\textquotesingle{}expert. \index{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}}\item[{\em 
+I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6ed25d15ae1133d3fa4a095e38f274ad}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6ed25d15ae1133d3fa4a095e38f274ad}
+}]L\textquotesingle{}attribut de la séquence experte \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{Sequence\+::num\+\_\+fixed} est à true. La séquence experte est alignée avec une séquence présente dans les traces du joueur. Les deux séquences se trouvent sous la racine. Les indices des deux séquences diffèrent. \index{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM@{D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM}}\item[{\em 
+D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820aea74b14f216c72b2b6ef13ebe16b48f4}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820aea74b14f216c72b2b6ef13ebe16b48f4}
+}]L\textquotesingle{}attribut de la séquence experte \hyperlink{class_sequence_ae495f3d3267ac936660920ab13b2316e}{Sequence\+::num\+\_\+fixed} est à true. La séquence experte est alignée avec une séquence présente dans les traces du joueur. La distance entre les deux ensembles d\textquotesingle{}indices est supérieure au seuil défini par D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+ES. \index{C\+A\+L\+L\+\_\+\+E\+X\+T\+RA@{C\+A\+L\+L\+\_\+\+E\+X\+T\+RA}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!C\+A\+L\+L\+\_\+\+E\+X\+T\+RA@{C\+A\+L\+L\+\_\+\+E\+X\+T\+RA}}\item[{\em 
+C\+A\+L\+L\+\_\+\+E\+X\+T\+RA\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a14b0fc808a62906ab67aa4b182fe823c}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a14b0fc808a62906ab67aa4b182fe823c}
+}]Un appel non présent dans les traces de l\textquotesingle{}expert est présent dans les traces du joueur. \index{C\+A\+L\+L\+\_\+\+L\+A\+CK@{C\+A\+L\+L\+\_\+\+L\+A\+CK}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!C\+A\+L\+L\+\_\+\+L\+A\+CK@{C\+A\+L\+L\+\_\+\+L\+A\+CK}}\item[{\em 
+C\+A\+L\+L\+\_\+\+L\+A\+CK\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6bdc7824ca798742b8ff903b2c3de12f}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a6bdc7824ca798742b8ff903b2c3de12f}
+}]Un appel non présent dans les traces du joueur est présent dans les traces de l\textquotesingle{}expert. \index{C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS@{C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS}!Traces\+Analyser@{Traces\+Analyser}}\index{Traces\+Analyser@{Traces\+Analyser}!C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS@{C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS}}\item[{\em 
+C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS\hypertarget{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a7ed621eaa247a6d92a9b78e3f3359bf5}{}\label{class_traces_analyser_a57be29ce5ac10ca51e56d8385b4a1820a7ed621eaa247a6d92a9b78e3f3359bf5}
+}]La distance entre deux appels alignés est supérieure à 0 (le score de similarité n\textquotesingle{}est pas égale à 1) \end{description}
+\end{Desc}
+
+
+Definition at line 107 of file Traces\+Analyser.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Traces\+Analyser@{Traces\+Analyser}!Traces\+Analyser@{Traces\+Analyser}}
+\index{Traces\+Analyser@{Traces\+Analyser}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{Traces\+Analyser(std\+::string lang=""fr"")}{TracesAnalyser(std::string lang="fr")}}]{\setlength{\rightskip}{0pt plus 5cm}Traces\+Analyser\+::\+Traces\+Analyser (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{lang = {\ttfamily \char`\"{}fr\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_analyser_a3e6e883ed6bc74f787684f1a3c0c7c01}{}\label{class_traces_analyser_a3e6e883ed6bc74f787684f1a3c0c7c01}
+
+
+Constructeur principal de la classe \hyperlink{class_traces_analyser}{Traces\+Analyser}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lang} & la langue qui sera utilisée pour le retour d\textquotesingle{}informations (par défaut \+: le français). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Traces\+Analyser.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Traces\+Analyser@{Traces\+Analyser}!construct\+Feedback@{construct\+Feedback}}
+\index{construct\+Feedback@{construct\+Feedback}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{construct\+Feedback(const std\+::string \&learner\+\_\+xml, const std\+::vector$<$ std\+::string $>$ \&experts\+\_\+xml, int ind\+\_\+mission=-\/1, int ind\+\_\+execution=-\/1, std\+::ostream \&os=std\+::cout)}{constructFeedback(const std::string &learner_xml, const std::vector< std::string > &experts_xml, int ind_mission=-1, int ind_execution=-1, std::ostream &os=std::cout)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Traces\+Analyser\+::construct\+Feedback (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{learner\+\_\+xml, }
+\item[{const std\+::vector$<$ std\+::string $>$ \&}]{experts\+\_\+xml, }
+\item[{int}]{ind\+\_\+mission = {\ttfamily -\/1}, }
+\item[{int}]{ind\+\_\+execution = {\ttfamily -\/1}, }
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_analyser_aff9ec49bcec7d983dc41c97d452b3e94}{}\label{class_traces_analyser_aff9ec49bcec7d983dc41c97d452b3e94}
+
+
+Fonction principale d\textquotesingle{}analyse des traces. 
+
+Cette fonction permet de construire le feedback qui sera donné au joueur. Ce feedback comprend la note du joueur, des statistiques sur sa partie et une liste de conseils pour améliorer son programme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em learner\+\_\+xml} & une chaîne de caractères contenant une trace complète et compressée provenant de la partie (ou des parties) du joueur au format X\+ML. Une trace complète peut contenir plusieurs occurrences de missions correspondants à plusieurs lancements de mission. Chaque occurrence de mission peut elle-\/même contenir plusieurs occurrences d\textquotesingle{}exécution. \\
+\hline
+{\em experts\+\_\+xml} & un vecteur de chaînes de caractères contenant les traces compressées provenant des exécutions des solutions expertes au format X\+ML. \\
+\hline
+{\em ind\+\_\+mission} & l\textquotesingle{}indice de l\textquotesingle{}occurrence de la mission à considérer parmi toutes celles se trouvant dans la trace compressée du joueur. Par défaut, la dernière est celle choisie. \\
+\hline
+{\em ind\+\_\+execution} & l\textquotesingle{}indice de l\textquotesingle{}exécution à considérer parmi toutes celles contenues dans l\textquotesingle{}occurrence de la mission selectionnée. Par défaut, la dernière est celle choisie. \\
+\hline
+{\em os} & le flux de sortie utilisé pour l\textquotesingle{}affichage.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une chaîne de caractères contenant le feedback pour le joueur au format J\+S\+ON. 
+\end{DoxyReturn}
+
+
+Definition at line 174 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!feedback\+Type\+In@{feedback\+Type\+In}}
+\index{feedback\+Type\+In@{feedback\+Type\+In}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{feedback\+Type\+In(\+Feedback\+Type type, int n,...)}{feedbackTypeIn(FeedbackType type, int n,...)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Analyser\+::feedback\+Type\+In (
+\begin{DoxyParamCaption}
+\item[{{\bf Feedback\+Type}}]{type, }
+\item[{int}]{n, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_aa2f744bc8abc8acfbb1407163c36c0b8}{}\label{class_traces_analyser_aa2f744bc8abc8acfbb1407163c36c0b8}
+
+
+Test d\textquotesingle{}appartenance de {\ttfamily type} à un ensemble de valeurs. 
+
+Cette fonction permet de tester si la valeur de {\ttfamily type} appartient à l\textquotesingle{}ensemble défini en extension par les valeurs donnés en arguments de la fonction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & la valeur du type de feedback à tester. \\
+\hline
+{\em n} & la taille de l\textquotesingle{}ensemble. \\
+\hline
+{\em ...} & les types de feedback constituants l\textquotesingle{}ensemble.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la valeur de {\ttfamily type} appartient à l\textquotesingle{}ensemble, et faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 1144 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!get\+Random\+Int\+In\+Range@{get\+Random\+Int\+In\+Range}}
+\index{get\+Random\+Int\+In\+Range@{get\+Random\+Int\+In\+Range}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{get\+Random\+Int\+In\+Range(int max)}{getRandomIntInRange(int max)}}]{\setlength{\rightskip}{0pt plus 5cm}int Traces\+Analyser\+::get\+Random\+Int\+In\+Range (
+\begin{DoxyParamCaption}
+\item[{int}]{max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_aefd7da818aa52292e7e9d4df9a7b2be0}{}\label{class_traces_analyser_aefd7da818aa52292e7e9d4df9a7b2be0}
+
+
+Génération aléatoire d\textquotesingle{}un entier compris dans l\textquotesingle{}intervalle \mbox{[}0,max\mbox{[}. 
+
+
+
+Definition at line 169 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!is\+Expert\+Related\+Feedback@{is\+Expert\+Related\+Feedback}}
+\index{is\+Expert\+Related\+Feedback@{is\+Expert\+Related\+Feedback}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{is\+Expert\+Related\+Feedback(\+Feedback\+Type type)}{isExpertRelatedFeedback(FeedbackType type)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Analyser\+::is\+Expert\+Related\+Feedback (
+\begin{DoxyParamCaption}
+\item[{{\bf Feedback\+Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_a0ffe68d882d091ec904aa15ab795ec8a}{}\label{class_traces_analyser_a0ffe68d882d091ec904aa15ab795ec8a}
+
+
+Test si la valeur de {\ttfamily type} est égale à l\textquotesingle{}une des valeurs suivantes \+: U\+S\+E\+F\+U\+L\+\_\+\+C\+A\+LL, S\+E\+Q\+\_\+\+L\+A\+CK, D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, C\+A\+L\+L\+\_\+\+L\+A\+CK, C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS. 
+
+\begin{DoxyReturn}{Returns}
+vrai si c\textquotesingle{}est le cas, et faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 1156 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!is\+Learner\+Related\+Feedback@{is\+Learner\+Related\+Feedback}}
+\index{is\+Learner\+Related\+Feedback@{is\+Learner\+Related\+Feedback}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{is\+Learner\+Related\+Feedback(\+Feedback\+Type type)}{isLearnerRelatedFeedback(FeedbackType type)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Traces\+Analyser\+::is\+Learner\+Related\+Feedback (
+\begin{DoxyParamCaption}
+\item[{{\bf Feedback\+Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_ab4bf5099acb58320a75f6540ba3730e2}{}\label{class_traces_analyser_ab4bf5099acb58320a75f6540ba3730e2}
+
+
+Test si la valeur de {\ttfamily type} est égale à l\textquotesingle{}une des valeurs suivantes \+: U\+S\+E\+L\+E\+S\+S\+\_\+\+C\+A\+LL, S\+E\+Q\+\_\+\+E\+X\+T\+RA, D\+I\+S\+T\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, I\+N\+D\+\_\+\+S\+E\+Q\+\_\+\+N\+UM, C\+A\+L\+L\+\_\+\+E\+X\+T\+RA, C\+A\+L\+L\+\_\+\+P\+A\+R\+A\+MS. 
+
+\begin{DoxyReturn}{Returns}
+vrai si c\textquotesingle{}est le cas, et faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 1160 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!load\+Xml\+Infos@{load\+Xml\+Infos}}
+\index{load\+Xml\+Infos@{load\+Xml\+Infos}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{load\+Xml\+Infos(const std\+::string \&feedbacks\+\_\+xml, const std\+::string \&mission\+\_\+feedbacks\+\_\+xml)}{loadXmlInfos(const std::string &feedbacks_xml, const std::string &mission_feedbacks_xml)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::load\+Xml\+Infos (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{feedbacks\+\_\+xml, }
+\item[{const std\+::string \&}]{mission\+\_\+feedbacks\+\_\+xml}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_analyser_aead7e56360dc6778a99ccdb63ac63f1e}{}\label{class_traces_analyser_aead7e56360dc6778a99ccdb63ac63f1e}
+
+
+Chargement des feedbacks et des messages contenus dans les fichiers X\+ML \textquotesingle{}feedbacks.\+xml\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em feedbacks\+\_\+xml} & la chaîne de caractères correspondant au contenu du fichier \textquotesingle{}feedbacks.\+xml\textquotesingle{} de base. Cette chaîne doit permettre de charger les feedbacks par défaut, mais aussi les messages. Elle doit obligatoirement être non vide. \\
+\hline
+{\em mission\+\_\+feedbacks\+\_\+xml} & la chaîne de caractères correspondant au contenu du fichier \textquotesingle{}feedbacks.\+xml\textquotesingle{} spécifique pour la mission considérée. Cette chaîne doit permettre de charger les feedbacks définis pour la mission. Cette chaîne peut être vide car ces feedbacks ne sont pas obligatoires. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!set\+Endless\+Loop@{set\+Endless\+Loop}}
+\index{set\+Endless\+Loop@{set\+Endless\+Loop}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{set\+Endless\+Loop(bool endless\+\_\+loop)}{setEndlessLoop(bool endless_loop)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::set\+Endless\+Loop (
+\begin{DoxyParamCaption}
+\item[{bool}]{endless\+\_\+loop}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_analyser_a76a830a7ca35812b578d2255fb1a6fe9}{}\label{class_traces_analyser_a76a830a7ca35812b578d2255fb1a6fe9}
+
+
+Setter pour la variable {\ttfamily endless\+\_\+loop}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endless\+\_\+loop} & la nouvelle valeur du champ {\ttfamily endless\+\_\+loop}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 347 of file Traces\+Analyser.\+cpp.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!set\+Lang@{set\+Lang}}
+\index{set\+Lang@{set\+Lang}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{set\+Lang(std\+::string lang)}{setLang(std::string lang)}}]{\setlength{\rightskip}{0pt plus 5cm}void Traces\+Analyser\+::set\+Lang (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{lang}
+\end{DoxyParamCaption}
+)}\hypertarget{class_traces_analyser_a9726338ac15091c533c9562942d062e1}{}\label{class_traces_analyser_a9726338ac15091c533c9562942d062e1}
+
+
+Setter pour la variable {\ttfamily lang}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lang} & la nouvelle valeur du champ {\ttfamily lang}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 351 of file Traces\+Analyser.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Traces\+Analyser@{Traces\+Analyser}!feedback\+Types\+Arr@{feedback\+Types\+Arr}}
+\index{feedback\+Types\+Arr@{feedback\+Types\+Arr}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{feedback\+Types\+Arr}{feedbackTypesArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Traces\+Analyser\+::feedback\+Types\+Arr = \{\char`\"{}useful\+\_\+call\char`\"{}, \char`\"{}useless\+\_\+call\char`\"{}, \char`\"{}seq\+\_\+extra\char`\"{}, \char`\"{}seq\+\_\+lack\char`\"{}, \char`\"{}ind\+\_\+seq\+\_\+num\char`\"{}, \char`\"{}dist\+\_\+seq\+\_\+num\char`\"{}, \char`\"{}call\+\_\+extra\char`\"{}, \char`\"{}call\+\_\+lack\char`\"{}, \char`\"{}call\+\_\+params\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_af1de6c1349fdad93945a0d8079451d22}{}\label{class_traces_analyser_af1de6c1349fdad93945a0d8079451d22}
+Tableau contenant les chaînes de caractères associées aux différents types de feedback. 
+
+Definition at line 150 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!messages\+\_\+map@{messages\+\_\+map}}
+\index{messages\+\_\+map@{messages\+\_\+map}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{messages\+\_\+map}{messages_map}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ std\+::string, std\+::string $>$ Traces\+Analyser\+::messages\+\_\+map\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_a2addfbe4fff91dcaa53b83163144bf45}{}\label{class_traces_analyser_a2addfbe4fff91dcaa53b83163144bf45}
+Objet permettant d\textquotesingle{}associer un message (qui pourra être utilisé pour le retour donné au joueur) à un identifiant. 
+
+Definition at line 170 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!orders\+\_\+map@{orders\+\_\+map}}
+\index{orders\+\_\+map@{orders\+\_\+map}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{orders\+\_\+map}{orders_map}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ int, std\+::string $>$ Traces\+Analyser\+::orders\+\_\+map\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_ac37a3052687b9fc98c38e8ca870157be}{}\label{class_traces_analyser_ac37a3052687b9fc98c38e8ca870157be}
+Objet permettant de récupérer la chaîne de caractères associée au code du type d\textquotesingle{}ordre. Ces codes sont définis dans le fichier \hyperlink{constant_list___k_p4_84_8h}{constant\+List\+\_\+\+K\+P4.\+4.\+h}. 
+
+Definition at line 160 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!resources\+\_\+map@{resources\+\_\+map}}
+\index{resources\+\_\+map@{resources\+\_\+map}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{resources\+\_\+map}{resources_map}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ int, std\+::string $>$ Traces\+Analyser\+::resources\+\_\+map\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_af64ea0a819c3a124563fe7d0ff6e455f}{}\label{class_traces_analyser_af64ea0a819c3a124563fe7d0ff6e455f}
+Objet permettant de récupérer la chaîne de caractères associée au code du type de ressource. Ces codes sont définis dans le fichier \hyperlink{constant_list___k_p4_84_8h}{constant\+List\+\_\+\+K\+P4.\+4.\+h}. 
+
+Definition at line 165 of file Traces\+Analyser.\+h.
+
+\index{Traces\+Analyser@{Traces\+Analyser}!units\+\_\+id\+\_\+map@{units\+\_\+id\+\_\+map}}
+\index{units\+\_\+id\+\_\+map@{units\+\_\+id\+\_\+map}!Traces\+Analyser@{Traces\+Analyser}}
+\subsubsection[{\texorpdfstring{units\+\_\+id\+\_\+map}{units_id_map}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ int, std\+::string $>$ Traces\+Analyser\+::units\+\_\+id\+\_\+map\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_traces_analyser_a5e748c4f52e6cbad197b08c7e0273cd8}{}\label{class_traces_analyser_a5e748c4f52e6cbad197b08c7e0273cd8}
+Objet permettant de récupérer la chaîne de caractères associée au code du type d\textquotesingle{}unité. Ces codes sont définis dans le fichier \hyperlink{constant_list___k_p4_84_8h}{constant\+List\+\_\+\+K\+P4.\+4.\+h}. 
+
+Definition at line 155 of file Traces\+Analyser.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_analyser_8h}{Traces\+Analyser.\+h}\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_traces_analyser_8cpp}{Traces\+Analyser.\+cpp}\end{DoxyCompactItemize}

@@ -42,7 +42,7 @@ double Call::getEditDistance(const Call *c) const {
 		tot += sub_dis.second;
 		return dis / tot;
 	}
-	return EDIT_MISMATCH_SCORE;
+	return 1;
 }
 
 void Call::filterCall(const Call *c) {

@@ -1,0 +1,28 @@
+var annotated_dup =
+[
+    [ "CallMisc", "namespace_call_misc.html", "namespace_call_misc" ],
+    [ "ActionOnPositionCall", "class_action_on_position_call.html", "class_action_on_position_call" ],
+    [ "ActionOnUnitCall", "class_action_on_unit_call.html", "class_action_on_unit_call" ],
+    [ "Call", "class_call.html", "class_call" ],
+    [ "EndExecutionEvent", "class_end_execution_event.html", "class_end_execution_event" ],
+    [ "EndMissionEvent", "class_end_mission_event.html", "class_end_mission_event" ],
+    [ "Event", "class_event.html", "class_event" ],
+    [ "GetCodePdgCmdCall", "class_get_code_pdg_cmd_call.html", "class_get_code_pdg_cmd_call" ],
+    [ "GetNumParamsPdgCmdCall", "class_get_num_params_pdg_cmd_call.html", "class_get_num_params_pdg_cmd_call" ],
+    [ "GetNumUnitsCall", "class_get_num_units_call.html", "class_get_num_units_call" ],
+    [ "GetParamPdgCmdCall", "class_get_param_pdg_cmd_call.html", "class_get_param_pdg_cmd_call" ],
+    [ "GetResourceCall", "class_get_resource_call.html", "class_get_resource_call" ],
+    [ "GetSpecialAreaPositionCall", "class_get_special_area_position_call.html", "class_get_special_area_position_call" ],
+    [ "GetUnitAtCall", "class_get_unit_at_call.html", "class_get_unit_at_call" ],
+    [ "NewExecutionEvent", "class_new_execution_event.html", "class_new_execution_event" ],
+    [ "NoParamCall", "class_no_param_call.html", "class_no_param_call" ],
+    [ "ParamsMap", "class_params_map.html", "class_params_map" ],
+    [ "Sequence", "class_sequence.html", "class_sequence" ],
+    [ "SetGroupCall", "class_set_group_call.html", "class_set_group_call" ],
+    [ "StartMissionEvent", "class_start_mission_event.html", "class_start_mission_event" ],
+    [ "Trace", "class_trace.html", "class_trace" ],
+    [ "TracesAnalyser", "class_traces_analyser.html", "class_traces_analyser" ],
+    [ "TracesParser", "class_traces_parser.html", "class_traces_parser" ],
+    [ "UnitCall", "class_unit_call.html", "class_unit_call" ],
+    [ "UntargetedActionCall", "class_untargeted_action_call.html", "class_untargeted_action_call" ]
+];

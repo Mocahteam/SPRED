@@ -1,0 +1,756 @@
+\hypertarget{class_call}{}\section{Call Class Reference}
+\label{class_call}\index{Call@{Call}}
+
+
+Classe abstraite héritant de \hyperlink{class_trace}{Trace}. Cette classe sert de classe mère pour toutes les classes définies dans le fichier \hyperlink{_call_def_8h}{Call\+Def.\+h}.  
+
+
+
+
+{\ttfamily \#include $<$Call.\+h$>$}
+
+Inheritance diagram for Call\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_call}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_call_ade833a08ce215aaa4121102f3448c898}{Error\+Type} \{ \\*
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898a672dcb94435dc8e1e9a33ae581328ff4}{N\+O\+NE} = -\/1, 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898a6683d72305e4eb207a1fef960d382da2}{O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE}, 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898afbdbbeb758c8827116fcd1b22da74d98}{W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON}, 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898a92cfb2a9e7bb655e5238e59cd2e77c95}{W\+R\+O\+N\+G\+\_\+\+U\+N\+IT}, 
+\\*
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898a737864f300ae8be2eae56bcd4b71072d}{W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET}, 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898ab5c4229f384c869c390469e0edc2c335}{W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON}
+ \}\begin{DoxyCompactList}\small\item\em Enumération utilisée pour connaître le type d\textquotesingle{}erreur associé à l\textquotesingle{}objet \hyperlink{class_call}{Call}. \end{DoxyCompactList}
+\item 
+typedef boost\+::shared\+\_\+ptr$<$ \hyperlink{class_call}{Call} $>$ \hyperlink{class_call_a4c0609ade3e9bd1366499e2f64f6e0a2}{sp\+\_\+call}
+\item 
+typedef std\+::vector$<$ \hyperlink{class_call_a4c0609ade3e9bd1366499e2f64f6e0a2}{sp\+\_\+call} $>$ \hyperlink{class_call_aa446a4316c03fb722ab10d0e1da33643}{call\+\_\+vector}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_call_a5c9ce1d9165652dfc34a0a471a036c5e}{Call} (std\+::string \hyperlink{class_call_ad6b8343d530798fdb48407b3f2489ae7}{label}, \hyperlink{class_call_ade833a08ce215aaa4121102f3448c898}{Error\+Type} \hyperlink{class_call_a206f6150a8038fda48c17c2c7421aed1}{error}, std\+::string \hyperlink{class_trace_a4835dcfa7da5d4c971e8f7d6860acb09}{info}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructeur principal de la classe \hyperlink{class_call}{Call}. \end{DoxyCompactList}\item 
+\hyperlink{class_call_ac67647d4a7daa45d0dcd5f971f376fc6}{Call} (const \hyperlink{class_call}{Call} $\ast$c)
+\item 
+virtual unsigned int \hyperlink{class_call_ac94d8a7498716a0131a731963f035905}{length} () const 
+\begin{DoxyCompactList}\small\item\em Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}un appel. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_call_a63f6986cf6a599a25705cf05687f6412}{operator==} (\hyperlink{class_trace}{Trace} $\ast$t) const 
+\begin{DoxyCompactList}\small\item\em Comparaison de l\textquotesingle{}objet \hyperlink{class_call}{Call} avec une trace {\ttfamily t}. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_call_a9fa2498f2e58dd9efe627a69dfdfb7f0}{filter\+Call} (const \hyperlink{class_call}{Call} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Détection des paramètres non robustes. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_call_a397f37a434fc1b186ea3460d0c21ff43}{display} (std\+::ostream \&os=std\+::cout) const 
+\begin{DoxyCompactList}\small\item\em Affichage des informations de l\textquotesingle{}objet \hyperlink{class_call}{Call}. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{class_call_ab3bf0965d35eb1e97ecddaf2d3978e9b}{clone} () const  =0
+\begin{DoxyCompactList}\small\item\em Clonage d\textquotesingle{}un appel. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_call_af77d25bd64b8a89750950c872cec1a8c}{get\+Params} () const  =0
+\begin{DoxyCompactList}\small\item\em Récupération des paramètres de l\textquotesingle{}appel sous forme de chaîne de caractères. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_call_a3b0d9700a627280d86af88ef128f2f83}{get\+Readable\+Params} () const  =0
+\begin{DoxyCompactList}\small\item\em Récupération des paramètres de l\textquotesingle{}appel sous forme de chaîne de caractères. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \hyperlink{class_call_a0c1f026fe71ef9faaab3bfdf6e954f40}{get\+List\+Id\+Wrong\+Params} (\hyperlink{class_call}{Call} $\ast$c=N\+U\+LL) const 
+\begin{DoxyCompactList}\small\item\em Récupération des identifiants des paramètres non conformes. \end{DoxyCompactList}\item 
+double \hyperlink{class_call_aa184f73d80fafba5e1a8c78007bfd01a}{get\+Edit\+Distance} (const \hyperlink{class_call}{Call} $\ast$c) const 
+\begin{DoxyCompactList}\small\item\em Calcul de la distance entre deux appels. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_call_a42f1632ea1ae777b469a5ce60bce6557}{get\+Label} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable {\ttfamily label}. \end{DoxyCompactList}\item 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898}{Error\+Type} \hyperlink{class_call_a7d624f62e2e404da13441057bb0b7807}{get\+Error} () const 
+\begin{DoxyCompactList}\small\item\em Getter pour la variable {\ttfamily error}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_call_a60fcad7a31734fe08b1d30003099597d}{add\+Return\+Code} (float code)
+\begin{DoxyCompactList}\small\item\em Ajout d\textquotesingle{}une valeur dans le tableau {\ttfamily ret} contenant les codes de retour de l\textquotesingle{}appel. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_call_a16aa36fdd27ccbbe7102e92b10eeb455}{get\+Return} () const 
+\begin{DoxyCompactList}\small\item\em Récupération des codes de retour sous forme de chaîne de caractères. \end{DoxyCompactList}\item 
+bool \hyperlink{class_call_a55acd6e34cc1510d6fabc354a1883c8e}{compare\+Return} (const \hyperlink{class_call}{Call} $\ast$c) const 
+\begin{DoxyCompactList}\small\item\em Comparaison des codes de retour entre deux appels. \end{DoxyCompactList}\item 
+void \hyperlink{class_call_aacee3123aaa6a75fb52b360cf9635dc3}{set\+Return} ()
+\begin{DoxyCompactList}\small\item\em Mise à -\/1 de {\ttfamily ind\+\_\+ret}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_call_a4d93216142746c833503dec59c07c11c}{has\+Return} () const 
+\begin{DoxyCompactList}\small\item\em Indique si l\textquotesingle{}appel a un retour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename E $>$ }\\static E \hyperlink{class_call_a46a8f56e18b25a36d951c3d59ec3211a}{get\+Enum\+Type} (const char $\ast$ch, const char $\ast$$\ast$arr)
+\begin{DoxyCompactList}\small\item\em Récupération de la valeur d\textquotesingle{}une énumération à partir d\textquotesingle{}une chaîne de caractères. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename E $>$ }\\static const char $\ast$ \hyperlink{class_call_a1df0e032b2cb618b6b92e8f86c3704a9}{get\+Enum\+Label} (E e, const char $\ast$$\ast$arr)
+\begin{DoxyCompactList}\small\item\em Récupération d\textquotesingle{}une chaîne de caractères à partir de la valeur d\textquotesingle{}une énumération. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_call_a9b4594fe997fce2b0155af42d47af07a}{errors\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}out\+\_\+of\+\_\+range\char`\"{}, \char`\"{}wrong\+\_\+coalition\char`\"{}, \char`\"{}wrong\+\_\+unit\char`\"{}, \char`\"{}wrong\+\_\+target\char`\"{}, \char`\"{}wrong\+\_\+position\char`\"{}, N\+U\+LL\}
+\item 
+static const char $\ast$ \hyperlink{class_call_a69386ad6806856e50ad09edf31998dc2}{coalitions\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}M\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, \char`\"{}A\+L\+L\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, \char`\"{}E\+N\+E\+M\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, N\+U\+LL\}
+\item 
+static const char $\ast$ \hyperlink{class_call_a502f84377bff9a869d6c0349408a8cd1}{no\+Param\+Call\+Labels\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}P\+P\+\_\+\+Open\char`\"{}, \char`\"{}P\+P\+\_\+\+Close\char`\"{}, \char`\"{}P\+P\+\_\+\+Is\+Game\+Over\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Map\+Size\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Start\+Position\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Num\+Special\+Areas\char`\"{}, N\+U\+LL\}
+\item 
+static const char $\ast$ \hyperlink{class_call_a7f62a26228ad25563c7dfbacda6f9759}{unit\+Call\+Labels\+Arr} \mbox{[}$\,$\mbox{]} = \{\char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Coalition\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Type\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Position\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Health\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Max\+Health\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Pending\+Commands\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Group\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Num\+Pdg\+Cmds\char`\"{}, N\+U\+LL\}
+\item 
+static \hyperlink{class_params_map}{Params\+Map} \hyperlink{class_call_ab91ad28c9446ceec253123d66b23f81c}{params\+Map}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{class_call_a48f59d92851fd5802ace768dc9470564}{compare} (const \hyperlink{class_call}{Call} $\ast$c) const  =0
+\begin{DoxyCompactList}\small\item\em Comparaison entre deux appels. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_call_acd4b5ce39b8ab5850321594dea288940}{filter} (const \hyperlink{class_call}{Call} $\ast$c)=0
+\begin{DoxyCompactList}\small\item\em Détection des paramètres non robustes. \end{DoxyCompactList}\item 
+virtual std\+::pair$<$ int, int $>$ \hyperlink{class_call_a79e000ddc3d6c863e28d601e417b096f}{distance} (const \hyperlink{class_call}{Call} $\ast$c) const  =0
+\begin{DoxyCompactList}\small\item\em Détermination de la distance entre deux appels. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \hyperlink{class_call_a4ca5c037197ed0391119ac7be3eb14c6}{id\+\_\+wrong\+\_\+params} (\hyperlink{class_call}{Call} $\ast$c) const  =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{class_call_ad6b8343d530798fdb48407b3f2489ae7}{label}
+\item 
+\hyperlink{class_call_ade833a08ce215aaa4121102f3448c898}{Error\+Type} \hyperlink{class_call_a206f6150a8038fda48c17c2c7421aed1}{error}
+\item 
+int \hyperlink{class_call_ac61426df38580506f015d44c687c2ee8}{ind\+\_\+ret}
+\item 
+float \hyperlink{class_call_a634f1033a7d282e03578a3d0fd2823f8}{ret} \mbox{[}\hyperlink{_call_8h_a92280872d50a2c64ffe1acbc6c88dfff}{M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe abstraite héritant de \hyperlink{class_trace}{Trace}. Cette classe sert de classe mère pour toutes les classes définies dans le fichier \hyperlink{_call_def_8h}{Call\+Def.\+h}. 
+
+Definition at line 121 of file Call.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Call@{Call}!call\+\_\+vector@{call\+\_\+vector}}
+\index{call\+\_\+vector@{call\+\_\+vector}!Call@{Call}}
+\subsubsection[{\texorpdfstring{call\+\_\+vector}{call_vector}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf sp\+\_\+call}$>$ {\bf Call\+::call\+\_\+vector}}\hypertarget{class_call_aa446a4316c03fb722ab10d0e1da33643}{}\label{class_call_aa446a4316c03fb722ab10d0e1da33643}
+
+
+Definition at line 130 of file Call.\+h.
+
+\index{Call@{Call}!sp\+\_\+call@{sp\+\_\+call}}
+\index{sp\+\_\+call@{sp\+\_\+call}!Call@{Call}}
+\subsubsection[{\texorpdfstring{sp\+\_\+call}{sp_call}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<${\bf Call}$>$ {\bf Call\+::sp\+\_\+call}}\hypertarget{class_call_a4c0609ade3e9bd1366499e2f64f6e0a2}{}\label{class_call_a4c0609ade3e9bd1366499e2f64f6e0a2}
+Définition du type pointeur intelligent vers un objet \hyperlink{class_call}{Call}. 
+
+Definition at line 128 of file Call.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{Call@{Call}!Error\+Type@{Error\+Type}}
+\index{Error\+Type@{Error\+Type}!Call@{Call}}
+\subsubsection[{\texorpdfstring{Error\+Type}{ErrorType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Call\+::\+Error\+Type}}\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898}{}\label{class_call_ade833a08ce215aaa4121102f3448c898}
+
+
+Enumération utilisée pour connaître le type d\textquotesingle{}erreur associé à l\textquotesingle{}objet \hyperlink{class_call}{Call}. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!Call@{Call}}\index{Call@{Call}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898a672dcb94435dc8e1e9a33ae581328ff4}{}\label{class_call_ade833a08ce215aaa4121102f3448c898a672dcb94435dc8e1e9a33ae581328ff4}
+}]\index{O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE@{O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE}!Call@{Call}}\index{Call@{Call}!O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE@{O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE}}\item[{\em 
+O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898a6683d72305e4eb207a1fef960d382da2}{}\label{class_call_ade833a08ce215aaa4121102f3448c898a6683d72305e4eb207a1fef960d382da2}
+}]\index{W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON@{W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON}!Call@{Call}}\index{Call@{Call}!W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON@{W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON}}\item[{\em 
+W\+R\+O\+N\+G\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898afbdbbeb758c8827116fcd1b22da74d98}{}\label{class_call_ade833a08ce215aaa4121102f3448c898afbdbbeb758c8827116fcd1b22da74d98}
+}]\index{W\+R\+O\+N\+G\+\_\+\+U\+N\+IT@{W\+R\+O\+N\+G\+\_\+\+U\+N\+IT}!Call@{Call}}\index{Call@{Call}!W\+R\+O\+N\+G\+\_\+\+U\+N\+IT@{W\+R\+O\+N\+G\+\_\+\+U\+N\+IT}}\item[{\em 
+W\+R\+O\+N\+G\+\_\+\+U\+N\+IT\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898a92cfb2a9e7bb655e5238e59cd2e77c95}{}\label{class_call_ade833a08ce215aaa4121102f3448c898a92cfb2a9e7bb655e5238e59cd2e77c95}
+}]\index{W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET@{W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET}!Call@{Call}}\index{Call@{Call}!W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET@{W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET}}\item[{\em 
+W\+R\+O\+N\+G\+\_\+\+T\+A\+R\+G\+ET\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898a737864f300ae8be2eae56bcd4b71072d}{}\label{class_call_ade833a08ce215aaa4121102f3448c898a737864f300ae8be2eae56bcd4b71072d}
+}]\index{W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON@{W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON}!Call@{Call}}\index{Call@{Call}!W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON@{W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON}}\item[{\em 
+W\+R\+O\+N\+G\+\_\+\+P\+O\+S\+I\+T\+I\+ON\hypertarget{class_call_ade833a08ce215aaa4121102f3448c898ab5c4229f384c869c390469e0edc2c335}{}\label{class_call_ade833a08ce215aaa4121102f3448c898ab5c4229f384c869c390469e0edc2c335}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 135 of file Call.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Call@{Call}!Call@{Call}}
+\index{Call@{Call}!Call@{Call}}
+\subsubsection[{\texorpdfstring{Call(std\+::string label, Error\+Type error, std\+::string info="""")}{Call(std::string label, ErrorType error, std::string info="")}}]{\setlength{\rightskip}{0pt plus 5cm}Call\+::\+Call (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{label, }
+\item[{{\bf Error\+Type}}]{error, }
+\item[{std\+::string}]{info = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_call_a5c9ce1d9165652dfc34a0a471a036c5e}{}\label{class_call_a5c9ce1d9165652dfc34a0a471a036c5e}
+
+
+Constructeur principal de la classe \hyperlink{class_call}{Call}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em label} & le label de la fonction modélisée par l\textquotesingle{}objet \hyperlink{class_call}{Call}. \\
+\hline
+{\em error} & l\textquotesingle{}erreur survenue lors de l\textquotesingle{}appel de la fonction représentée par l\textquotesingle{}objet \hyperlink{class_call}{Call}. \\
+\hline
+{\em info} & le label attribué par l\textquotesingle{}expert. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file Call.\+cpp.
+
+\index{Call@{Call}!Call@{Call}}
+\index{Call@{Call}!Call@{Call}}
+\subsubsection[{\texorpdfstring{Call(const Call $\ast$c)}{Call(const Call *c)}}]{\setlength{\rightskip}{0pt plus 5cm}Call\+::\+Call (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{class_call_ac67647d4a7daa45d0dcd5f971f376fc6}{}\label{class_call_ac67647d4a7daa45d0dcd5f971f376fc6}
+Constructeur de la classe \hyperlink{class_call}{Call} utilisé notamment lors de la copie de l\textquotesingle{}objet. 
+
+Definition at line 11 of file Call.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Call@{Call}!add\+Return\+Code@{add\+Return\+Code}}
+\index{add\+Return\+Code@{add\+Return\+Code}!Call@{Call}}
+\subsubsection[{\texorpdfstring{add\+Return\+Code(float code)}{addReturnCode(float code)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Call\+::add\+Return\+Code (
+\begin{DoxyParamCaption}
+\item[{float}]{code}
+\end{DoxyParamCaption}
+)}\hypertarget{class_call_a60fcad7a31734fe08b1d30003099597d}{}\label{class_call_a60fcad7a31734fe08b1d30003099597d}
+
+
+Ajout d\textquotesingle{}une valeur dans le tableau {\ttfamily ret} contenant les codes de retour de l\textquotesingle{}appel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \+: le code retour de l\textquotesingle{}appel à sauvegarder dans le tableau {\ttfamily ret}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la valeur a bien été sauvegardée dans {\ttfamily ret}, et faux sinon (plus de place disponible). 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file Call.\+cpp.
+
+\index{Call@{Call}!clone@{clone}}
+\index{clone@{clone}!Call@{Call}}
+\subsubsection[{\texorpdfstring{clone() const  =0}{clone() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Trace\+::sp\+\_\+trace} Call\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_call_ab3bf0965d35eb1e97ecddaf2d3978e9b}{}\label{class_call_ab3bf0965d35eb1e97ecddaf2d3978e9b}
+
+
+Clonage d\textquotesingle{}un appel. 
+
+\begin{DoxyReturn}{Returns}
+une copie de l\textquotesingle{}objet \hyperlink{class_call}{Call}. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a0917758337e37f936713ccaf75b532f2}{Trace}.
+
+
+
+Implemented in \hyperlink{class_get_param_pdg_cmd_call_a07b0bec23a831830746b25ca5d44b317}{Get\+Param\+Pdg\+Cmd\+Call}, \hyperlink{class_get_num_params_pdg_cmd_call_ae0633bca77530d2e3ad5bc3a68109c8f}{Get\+Num\+Params\+Pdg\+Cmd\+Call}, \hyperlink{class_get_code_pdg_cmd_call_adad7b71e06c9b81d17b02191401245f5}{Get\+Code\+Pdg\+Cmd\+Call}, \hyperlink{class_untargeted_action_call_a483d86c01a984c4b1e59e339a1f7329e}{Untargeted\+Action\+Call}, \hyperlink{class_action_on_position_call_aa755b6dbfcbd7efd47251556381f6bc3}{Action\+On\+Position\+Call}, \hyperlink{class_action_on_unit_call_ab127ed211f2b34f476cd0f4ef20d6057}{Action\+On\+Unit\+Call}, \hyperlink{class_set_group_call_ac970b30cd2a4769ec134ba451768ee64}{Set\+Group\+Call}, \hyperlink{class_unit_call_a637d309cd3d0bc05849aa7ca20eb5f89}{Unit\+Call}, \hyperlink{class_get_unit_at_call_a228108026f5f8522a6724e1183e1b6bb}{Get\+Unit\+At\+Call}, \hyperlink{class_get_num_units_call_a279250063949139d58842ae5a6b39b03}{Get\+Num\+Units\+Call}, \hyperlink{class_get_resource_call_adeda1479826fb33c27c76bd8fe711776}{Get\+Resource\+Call}, \hyperlink{class_get_special_area_position_call_ad522313dad00572f50f2a4a84e12dafd}{Get\+Special\+Area\+Position\+Call}, and \hyperlink{class_no_param_call_a8488a6947c974711af12b10f89298bf8}{No\+Param\+Call}.
+
+\index{Call@{Call}!compare@{compare}}
+\index{compare@{compare}!Call@{Call}}
+\subsubsection[{\texorpdfstring{compare(const Call $\ast$c) const  =0}{compare(const Call *c) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Call\+::compare (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_call_a48f59d92851fd5802ace768dc9470564}{}\label{class_call_a48f59d92851fd5802ace768dc9470564}
+
+
+Comparaison entre deux appels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}objet \hyperlink{class_call}{Call} utilisé pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si les deux appels sont égaux, et faux sinon.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_a63f6986cf6a599a25705cf05687f6412}{Call\+::operator==} 
+\end{DoxySeeAlso}
+\index{Call@{Call}!compare\+Return@{compare\+Return}}
+\index{compare\+Return@{compare\+Return}!Call@{Call}}
+\subsubsection[{\texorpdfstring{compare\+Return(const Call $\ast$c) const }{compareReturn(const Call *c) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Call\+::compare\+Return (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_a55acd6e34cc1510d6fabc354a1883c8e}{}\label{class_call_a55acd6e34cc1510d6fabc354a1883c8e}
+
+
+Comparaison des codes de retour entre deux appels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}appel utilisé pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si le tableau {\ttfamily ret} de l\textquotesingle{}objet pointé par {\ttfamily c} est identique à celui de cet appel. 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file Call.\+cpp.
+
+\index{Call@{Call}!display@{display}}
+\index{display@{display}!Call@{Call}}
+\subsubsection[{\texorpdfstring{display(std\+::ostream \&os=std\+::cout) const }{display(std::ostream &os=std::cout) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Call\+::display (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_call_a397f37a434fc1b186ea3460d0c21ff43}{}\label{class_call_a397f37a434fc1b186ea3460d0c21ff43}
+
+
+Affichage des informations de l\textquotesingle{}objet \hyperlink{class_call}{Call}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & le flux de sortie utilisé pour l\textquotesingle{}affichage. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_trace_a4324fa45af235238ddedc2215c3d1cf0}{Trace}.
+
+
+
+Definition at line 63 of file Call.\+cpp.
+
+\index{Call@{Call}!distance@{distance}}
+\index{distance@{distance}!Call@{Call}}
+\subsubsection[{\texorpdfstring{distance(const Call $\ast$c) const  =0}{distance(const Call *c) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::pair$<$int,int$>$ Call\+::distance (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_call_a79e000ddc3d6c863e28d601e417b096f}{}\label{class_call_a79e000ddc3d6c863e28d601e417b096f}
+
+
+Détermination de la distance entre deux appels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}objet \hyperlink{class_call}{Call} utilisé pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un couple d\textquotesingle{}entiers où le premier élément correspond au nombre de paramètres qui diffèrent entre les deux appels et où le second élément est le nombre de comparaisons effectués.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_aa184f73d80fafba5e1a8c78007bfd01a}{Call\+::get\+Edit\+Distance} 
+\end{DoxySeeAlso}
+\index{Call@{Call}!filter@{filter}}
+\index{filter@{filter}!Call@{Call}}
+\subsubsection[{\texorpdfstring{filter(const Call $\ast$c)=0}{filter(const Call *c)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Call\+::filter (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_call_acd4b5ce39b8ab5850321594dea288940}{}\label{class_call_acd4b5ce39b8ab5850321594dea288940}
+
+
+Détection des paramètres non robustes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}objet \hyperlink{class_call}{Call} utilisé pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_a9fa2498f2e58dd9efe627a69dfdfb7f0}{Call\+::filter\+Call} 
+\end{DoxySeeAlso}
+\index{Call@{Call}!filter\+Call@{filter\+Call}}
+\index{filter\+Call@{filter\+Call}!Call@{Call}}
+\subsubsection[{\texorpdfstring{filter\+Call(const Call $\ast$c)}{filterCall(const Call *c)}}]{\setlength{\rightskip}{0pt plus 5cm}void Call\+::filter\+Call (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_call_a9fa2498f2e58dd9efe627a69dfdfb7f0}{}\label{class_call_a9fa2498f2e58dd9efe627a69dfdfb7f0}
+
+
+Détection des paramètres non robustes. 
+
+Cette fonction est utilisée pour affecter aux paramètres non robustes de l\textquotesingle{}appel, i.\+e. ceux non pris en compte lors de la compression et dont la valeur diffère entre deux itération d\textquotesingle{}une même séquence, la valeur -\/1. Attention \+: cette fonction doit être appelée uniquement si operator==(c) renvoie vrai.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}appel utilisé pour la comparaison. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file Call.\+cpp.
+
+\index{Call@{Call}!get\+Edit\+Distance@{get\+Edit\+Distance}}
+\index{get\+Edit\+Distance@{get\+Edit\+Distance}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Edit\+Distance(const Call $\ast$c) const }{getEditDistance(const Call *c) const }}]{\setlength{\rightskip}{0pt plus 5cm}double Call\+::get\+Edit\+Distance (
+\begin{DoxyParamCaption}
+\item[{const {\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_aa184f73d80fafba5e1a8c78007bfd01a}{}\label{class_call_aa184f73d80fafba5e1a8c78007bfd01a}
+
+
+Calcul de la distance entre deux appels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}objet \hyperlink{class_call}{Call} dont l\textquotesingle{}on souhaite mesurer la distance avec cet appel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la distance dans l\textquotesingle{}intervalle \mbox{[}0,1\mbox{]} entre les deux appels. Si la distance est égale à 0, les deux appels sont complètement identiques. Si elle est égale à 1, les deux appels ont des labels et/ou des types d\textquotesingle{}erreur différents. 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file Call.\+cpp.
+
+\index{Call@{Call}!get\+Enum\+Label@{get\+Enum\+Label}}
+\index{get\+Enum\+Label@{get\+Enum\+Label}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Enum\+Label(\+E e, const char $\ast$$\ast$arr)}{getEnumLabel(E e, const char **arr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename E $>$ static const char$\ast$ Call\+::get\+Enum\+Label (
+\begin{DoxyParamCaption}
+\item[{E}]{e, }
+\item[{const char $\ast$$\ast$}]{arr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_call_a1df0e032b2cb618b6b92e8f86c3704a9}{}\label{class_call_a1df0e032b2cb618b6b92e8f86c3704a9}
+
+
+Récupération d\textquotesingle{}une chaîne de caractères à partir de la valeur d\textquotesingle{}une énumération. 
+
+On utilise l\textquotesingle{}entier associé à la valeur de l\textquotesingle{}énumération pour récupérer la chaîne de caractères contenu dans {\ttfamily arr}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \+: la valeur de l\textquotesingle{}énumération. \\
+\hline
+{\em arr} & \+: le tableau de chaînes de caractères où l\textquotesingle{}on récupère la chaîne.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères associée à la valeur de l\textquotesingle{}énumération si elle peut être récupérée dans {\ttfamily arr}, ou N\+U\+LL sinon.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_a46a8f56e18b25a36d951c3d59ec3211a}{Call\+::get\+Enum\+Type} 
+\end{DoxySeeAlso}
+
+
+Definition at line 215 of file Call.\+h.
+
+\index{Call@{Call}!get\+Enum\+Type@{get\+Enum\+Type}}
+\index{get\+Enum\+Type@{get\+Enum\+Type}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Enum\+Type(const char $\ast$ch, const char $\ast$$\ast$arr)}{getEnumType(const char *ch, const char **arr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename E $>$ static E Call\+::get\+Enum\+Type (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch, }
+\item[{const char $\ast$$\ast$}]{arr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_call_a46a8f56e18b25a36d951c3d59ec3211a}{}\label{class_call_a46a8f56e18b25a36d951c3d59ec3211a}
+
+
+Récupération de la valeur d\textquotesingle{}une énumération à partir d\textquotesingle{}une chaîne de caractères. 
+
+La chaîne {\ttfamily ch} est recherchée dans le tableau {\ttfamily arr} et l\textquotesingle{}indice de sa position est utilisée pour récupérér la bonne valeur d\textquotesingle{}énumération.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & \+: la chaîne de caractères. \\
+\hline
+{\em arr} & \+: le tableau de chaînes de caractères dans lequel {\ttfamily ch} est recherchée.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la valeur de l\textquotesingle{}énumération associée à {\ttfamily ch}.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_a1df0e032b2cb618b6b92e8f86c3704a9}{Call\+::get\+Enum\+Label} 
+\end{DoxySeeAlso}
+
+
+Definition at line 198 of file Call.\+h.
+
+\index{Call@{Call}!get\+Error@{get\+Error}}
+\index{get\+Error@{get\+Error}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Error() const }{getError() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Call\+::\+Error\+Type} Call\+::get\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_a7d624f62e2e404da13441057bb0b7807}{}\label{class_call_a7d624f62e2e404da13441057bb0b7807}
+
+
+Getter pour la variable {\ttfamily error}. 
+
+\begin{DoxyReturn}{Returns}
+le type d\textquotesingle{}erreur associé à l\textquotesingle{}appel. 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file Call.\+cpp.
+
+\index{Call@{Call}!get\+Label@{get\+Label}}
+\index{get\+Label@{get\+Label}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Label() const }{getLabel() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Call\+::get\+Label (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_a42f1632ea1ae777b469a5ce60bce6557}{}\label{class_call_a42f1632ea1ae777b469a5ce60bce6557}
+
+
+Getter pour la variable {\ttfamily label}. 
+
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères {\ttfamily label} de l\textquotesingle{}appel. 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file Call.\+cpp.
+
+\index{Call@{Call}!get\+List\+Id\+Wrong\+Params@{get\+List\+Id\+Wrong\+Params}}
+\index{get\+List\+Id\+Wrong\+Params@{get\+List\+Id\+Wrong\+Params}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+List\+Id\+Wrong\+Params(\+Call $\ast$c=\+N\+U\+L\+L) const }{getListIdWrongParams(Call *c=NULL) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ Call\+::get\+List\+Id\+Wrong\+Params (
+\begin{DoxyParamCaption}
+\item[{{\bf Call} $\ast$}]{c = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_call_a0c1f026fe71ef9faaab3bfdf6e954f40}{}\label{class_call_a0c1f026fe71ef9faaab3bfdf6e954f40}
+
+
+Récupération des identifiants des paramètres non conformes. 
+
+Si {\ttfamily c} pointe vers un objet \hyperlink{class_call}{Call}, les identifiants des paramètres dont les valeurs diffèrent de ceux de {\ttfamily c} sont ajoutés à la liste. Sinon, si {\ttfamily c} est à N\+U\+LL et si la valeur de {\ttfamily error} est différente de Call\+::\+Error\+Type\+::\+None, alors l\textquotesingle{}identifiant du paramètre ayant causé cette erreur est ajouté à la liste. Cette fonction est utilisée lors de la construction des messages qui seront affichés au joueur.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: un pointeur vers l\textquotesingle{}objet \hyperlink{class_call}{Call} utilisé pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la liste d\textquotesingle{}identifiants des paramètres non conformes. 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file Call.\+cpp.
+
+\index{Call@{Call}!get\+Params@{get\+Params}}
+\index{get\+Params@{get\+Params}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Params() const  =0}{getParams() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Call\+::get\+Params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_call_af77d25bd64b8a89750950c872cec1a8c}{}\label{class_call_af77d25bd64b8a89750950c872cec1a8c}
+
+
+Récupération des paramètres de l\textquotesingle{}appel sous forme de chaîne de caractères. 
+
+Cette fonction est notamment utilisée lors de l\textquotesingle{}export des traces vers un document X\+ML.
+
+\begin{DoxyReturn}{Returns}
+une chaîne de caractères formatée contenant les valeurs des différents paramètres de l\textquotesingle{}appel séparées par des espaces. 
+\end{DoxyReturn}
+\index{Call@{Call}!get\+Readable\+Params@{get\+Readable\+Params}}
+\index{get\+Readable\+Params@{get\+Readable\+Params}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Readable\+Params() const  =0}{getReadableParams() const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Call\+::get\+Readable\+Params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_call_a3b0d9700a627280d86af88ef128f2f83}{}\label{class_call_a3b0d9700a627280d86af88ef128f2f83}
+
+
+Récupération des paramètres de l\textquotesingle{}appel sous forme de chaîne de caractères. 
+
+Cette fonction est notamment utilisée lors de la construction du feedback qui sera fait au joueur.
+
+\begin{DoxyReturn}{Returns}
+une chaîne de caratères formatée contenant les valeurs des différents paramètres de l\textquotesingle{}appel. 
+\end{DoxyReturn}
+\index{Call@{Call}!get\+Return@{get\+Return}}
+\index{get\+Return@{get\+Return}!Call@{Call}}
+\subsubsection[{\texorpdfstring{get\+Return() const }{getReturn() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Call\+::get\+Return (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_a16aa36fdd27ccbbe7102e92b10eeb455}{}\label{class_call_a16aa36fdd27ccbbe7102e92b10eeb455}
+
+
+Récupération des codes de retour sous forme de chaîne de caractères. 
+
+\begin{DoxyReturn}{Returns}
+une chaîne de caractères formatée contenant les valeurs du retour de l\textquotesingle{}appel séparées par des espaces. 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file Call.\+cpp.
+
+\index{Call@{Call}!has\+Return@{has\+Return}}
+\index{has\+Return@{has\+Return}!Call@{Call}}
+\subsubsection[{\texorpdfstring{has\+Return() const }{hasReturn() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Call\+::has\+Return (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_call_a4d93216142746c833503dec59c07c11c}{}\label{class_call_a4d93216142746c833503dec59c07c11c}
+
+
+Indique si l\textquotesingle{}appel a un retour. 
+
+\begin{DoxyReturn}{Returns}
+vrai si l\textquotesingle{}appel a un retour (robuste ou non), et faux sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 129 of file Call.\+cpp.
+
+\index{Call@{Call}!id\+\_\+wrong\+\_\+params@{id\+\_\+wrong\+\_\+params}}
+\index{id\+\_\+wrong\+\_\+params@{id\+\_\+wrong\+\_\+params}!Call@{Call}}
+\subsubsection[{\texorpdfstring{id\+\_\+wrong\+\_\+params(\+Call $\ast$c) const  =0}{id_wrong_params(Call *c) const  =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::vector$<$std\+::string$>$ Call\+::id\+\_\+wrong\+\_\+params (
+\begin{DoxyParamCaption}
+\item[{{\bf Call} $\ast$}]{c}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_call_a4ca5c037197ed0391119ac7be3eb14c6}{}\label{class_call_a4ca5c037197ed0391119ac7be3eb14c6}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_call_a0c1f026fe71ef9faaab3bfdf6e954f40}{Call\+::get\+List\+Id\+Wrong\+Params} 
+\end{DoxySeeAlso}
+\index{Call@{Call}!length@{length}}
+\index{length@{length}!Call@{Call}}
+\subsubsection[{\texorpdfstring{length() const }{length() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Call\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_call_ac94d8a7498716a0131a731963f035905}{}\label{class_call_ac94d8a7498716a0131a731963f035905}
+
+
+Récupération de la longueur (l\textquotesingle{}espace occupé dans un vecteur de traces) d\textquotesingle{}un appel. 
+
+\begin{DoxyReturn}{Returns}
+1 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a74a29f7e259781424d9f81409ed34701}{Trace}.
+
+
+
+Definition at line 81 of file Call.\+cpp.
+
+\index{Call@{Call}!operator==@{operator==}}
+\index{operator==@{operator==}!Call@{Call}}
+\subsubsection[{\texorpdfstring{operator==(\+Trace $\ast$t) const }{operator==(Trace *t) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Call\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace} $\ast$}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_call_a63f6986cf6a599a25705cf05687f6412}{}\label{class_call_a63f6986cf6a599a25705cf05687f6412}
+
+
+Comparaison de l\textquotesingle{}objet \hyperlink{class_call}{Call} avec une trace {\ttfamily t}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \+: la trace utilisée pour la comparaison.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vrai si la trace {\ttfamily t} est également un appel et qu\textquotesingle{}elle a les mêmes paramètres (label, type d\textquotesingle{}erreur, valeur de retour, et paramètres pris en considération lors de la compression) que cet appel. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_trace_a8201809c2fcc1d02cfa8bf894a79bb5e}{Trace}.
+
+
+
+Definition at line 19 of file Call.\+cpp.
+
+\index{Call@{Call}!set\+Return@{set\+Return}}
+\index{set\+Return@{set\+Return}!Call@{Call}}
+\subsubsection[{\texorpdfstring{set\+Return()}{setReturn()}}]{\setlength{\rightskip}{0pt plus 5cm}void Call\+::set\+Return (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_call_aacee3123aaa6a75fb52b360cf9635dc3}{}\label{class_call_aacee3123aaa6a75fb52b360cf9635dc3}
+
+
+Mise à -\/1 de {\ttfamily ind\+\_\+ret}. 
+
+Cette fonction doit être appelée pour enregistrer le retour de l\textquotesingle{}appel comme étant un paramètre non robuste. 
+
+Definition at line 125 of file Call.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Call@{Call}!coalitions\+Arr@{coalitions\+Arr}}
+\index{coalitions\+Arr@{coalitions\+Arr}!Call@{Call}}
+\subsubsection[{\texorpdfstring{coalitions\+Arr}{coalitionsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Call\+::coalitions\+Arr = \{\char`\"{}M\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, \char`\"{}A\+L\+L\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, \char`\"{}E\+N\+E\+M\+Y\+\_\+\+C\+O\+A\+L\+I\+T\+I\+ON\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_call_a69386ad6806856e50ad09edf31998dc2}{}\label{class_call_a69386ad6806856e50ad09edf31998dc2}
+Tableau contenant les chaînes de caractères associées aux différentes valeurs définies dans l\textquotesingle{}enumération \hyperlink{namespace_call_misc_a490b3c2ef1a821675848ebcab0b677d8}{Call\+Misc\+::\+Coalition}. 
+
+Definition at line 166 of file Call.\+h.
+
+\index{Call@{Call}!error@{error}}
+\index{error@{error}!Call@{Call}}
+\subsubsection[{\texorpdfstring{error}{error}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Error\+Type} Call\+::error\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_call_a206f6150a8038fda48c17c2c7421aed1}{}\label{class_call_a206f6150a8038fda48c17c2c7421aed1}
+Variable permettant de connaître le type d\textquotesingle{}erreur retourné lors de l\textquotesingle{}appel à la fonction \hyperlink{class_call_ad6b8343d530798fdb48407b3f2489ae7}{Call\+::label}, si une erreur a été retournée. Si aucune erreur n\textquotesingle{}est présente, la variable prend la valeur Call\+::\+Error\+Type\+::\+N\+O\+NE. 
+
+Definition at line 400 of file Call.\+h.
+
+\index{Call@{Call}!errors\+Arr@{errors\+Arr}}
+\index{errors\+Arr@{errors\+Arr}!Call@{Call}}
+\subsubsection[{\texorpdfstring{errors\+Arr}{errorsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Call\+::errors\+Arr = \{\char`\"{}out\+\_\+of\+\_\+range\char`\"{}, \char`\"{}wrong\+\_\+coalition\char`\"{}, \char`\"{}wrong\+\_\+unit\char`\"{}, \char`\"{}wrong\+\_\+target\char`\"{}, \char`\"{}wrong\+\_\+position\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_call_a9b4594fe997fce2b0155af42d47af07a}{}\label{class_call_a9b4594fe997fce2b0155af42d47af07a}
+Tableau contenant les chaînes de caractères associées aux différentes valeurs définies dans l\textquotesingle{}enumération \hyperlink{class_call_ade833a08ce215aaa4121102f3448c898}{Call\+::\+Error\+Type}. 
+
+Definition at line 161 of file Call.\+h.
+
+\index{Call@{Call}!ind\+\_\+ret@{ind\+\_\+ret}}
+\index{ind\+\_\+ret@{ind\+\_\+ret}!Call@{Call}}
+\subsubsection[{\texorpdfstring{ind\+\_\+ret}{ind_ret}}]{\setlength{\rightskip}{0pt plus 5cm}int Call\+::ind\+\_\+ret\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_call_ac61426df38580506f015d44c687c2ee8}{}\label{class_call_ac61426df38580506f015d44c687c2ee8}
+Indice utilisée pour remplir le tableau \hyperlink{class_call_a634f1033a7d282e03578a3d0fd2823f8}{Call\+::ret}. 
+
+Definition at line 405 of file Call.\+h.
+
+\index{Call@{Call}!label@{label}}
+\index{label@{label}!Call@{Call}}
+\subsubsection[{\texorpdfstring{label}{label}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Call\+::label\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_call_ad6b8343d530798fdb48407b3f2489ae7}{}\label{class_call_ad6b8343d530798fdb48407b3f2489ae7}
+Le label associé permettant d\textquotesingle{}identifier la fonction modélisée par l\textquotesingle{}objet \hyperlink{class_call}{Call}. 
+
+Definition at line 395 of file Call.\+h.
+
+\index{Call@{Call}!no\+Param\+Call\+Labels\+Arr@{no\+Param\+Call\+Labels\+Arr}}
+\index{no\+Param\+Call\+Labels\+Arr@{no\+Param\+Call\+Labels\+Arr}!Call@{Call}}
+\subsubsection[{\texorpdfstring{no\+Param\+Call\+Labels\+Arr}{noParamCallLabelsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Call\+::no\+Param\+Call\+Labels\+Arr = \{\char`\"{}P\+P\+\_\+\+Open\char`\"{}, \char`\"{}P\+P\+\_\+\+Close\char`\"{}, \char`\"{}P\+P\+\_\+\+Is\+Game\+Over\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Map\+Size\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Start\+Position\char`\"{}, \char`\"{}P\+P\+\_\+\+Get\+Num\+Special\+Areas\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_call_a502f84377bff9a869d6c0349408a8cd1}{}\label{class_call_a502f84377bff9a869d6c0349408a8cd1}
+Tableau contenant les labels autorisés à être utilisé pour l\textquotesingle{}instanciation d\textquotesingle{}un objet \hyperlink{class_no_param_call}{No\+Param\+Call}. 
+
+Definition at line 171 of file Call.\+h.
+
+\index{Call@{Call}!params\+Map@{params\+Map}}
+\index{params\+Map@{params\+Map}!Call@{Call}}
+\subsubsection[{\texorpdfstring{params\+Map}{paramsMap}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Params\+Map} Call\+::params\+Map\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_call_ab91ad28c9446ceec253123d66b23f81c}{}\label{class_call_ab91ad28c9446ceec253123d66b23f81c}
+Variable utilisée pour le chargement et le stockage des paramètres de compression.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_params_map}{Params\+Map} 
+\end{DoxySeeAlso}
+
+
+Definition at line 183 of file Call.\+h.
+
+\index{Call@{Call}!ret@{ret}}
+\index{ret@{ret}!Call@{Call}}
+\subsubsection[{\texorpdfstring{ret}{ret}}]{\setlength{\rightskip}{0pt plus 5cm}float Call\+::ret\mbox{[}{\bf M\+A\+X\+\_\+\+S\+I\+Z\+E\+\_\+\+P\+A\+R\+A\+MS}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_call_a634f1033a7d282e03578a3d0fd2823f8}{}\label{class_call_a634f1033a7d282e03578a3d0fd2823f8}
+Tableau contenant les valeurs de retour de l\textquotesingle{}appel à la fonction \hyperlink{class_call_ad6b8343d530798fdb48407b3f2489ae7}{Call\+::label}. 
+
+Definition at line 410 of file Call.\+h.
+
+\index{Call@{Call}!unit\+Call\+Labels\+Arr@{unit\+Call\+Labels\+Arr}}
+\index{unit\+Call\+Labels\+Arr@{unit\+Call\+Labels\+Arr}!Call@{Call}}
+\subsubsection[{\texorpdfstring{unit\+Call\+Labels\+Arr}{unitCallLabelsArr}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Call\+::unit\+Call\+Labels\+Arr = \{\char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Coalition\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Type\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Position\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Health\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Max\+Health\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Pending\+Commands\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Group\char`\"{}, \char`\"{}P\+P\+\_\+\+Unit\+\_\+\+Get\+Num\+Pdg\+Cmds\char`\"{}, N\+U\+LL\}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_call_a7f62a26228ad25563c7dfbacda6f9759}{}\label{class_call_a7f62a26228ad25563c7dfbacda6f9759}
+Tableau contenant les labels autorisés à être utilisé pour l\textquotesingle{}instanciation d\textquotesingle{}un objet \hyperlink{class_unit_call}{Unit\+Call}. 
+
+Definition at line 176 of file Call.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_call_8h}{Call.\+h}\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_call_8cpp}{Call.\+cpp}\end{DoxyCompactItemize}

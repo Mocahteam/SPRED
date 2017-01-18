@@ -189,8 +189,11 @@ function Screen:FocusControl(control)
   end
   oldFocusedControl = UnlinkSafe(oldFocusedControl)
   if oldFocusedControl then
-      oldFocusedControl.state.focused = false
-      oldFocusedControl:FocusUpdate() --rename FocusLost()
+    -- Do not remove focus if new control is the same as the previous one
+    if not CompareLinks(control, oldFocusedControl) then
+        oldFocusedControl.state.focused = false
+        oldFocusedControl:FocusUpdate() --rename FocusLost()
+    end
   end
 end
 

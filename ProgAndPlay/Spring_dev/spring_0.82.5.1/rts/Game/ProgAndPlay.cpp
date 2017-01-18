@@ -45,15 +45,16 @@ const std::string springFeedbacksPath = "traces\\data\\feedbacks.xml";
 const std::string springExpertPath = "traces\\data\\expert\\";
 const std::string springFeedbackPath = "traces\\data\\feedback.json";
 
-const std::string server_name = "localhost";
-const std::string server_path = "/test/build_image.php";
+const std::string server_name = "seriousgames.lip6.fr";
+const std::string server_path = "/facebook/build_image.php";
+const std::string server_images_path = "/facebook/images/generated/";
 
+const std::string facebookUrl = "https://www.facebook.com/dialog/feed";
 const std::string appId = "1199712723374964";
 const std::string caption = "Essaye de faire mieux. Clique ici pour en savoir plus sur ProgAndPlay";
 const std::string description = "ProgAndPlay est une bibliotheque de fonctions pour les jeux de Strategie Temps Reel (STR). Elle permet au joueur de programmer de maniere simple et interactive les entites virtuelles d'un STR. Actuellement...";
 const std::string link = "https://www.irit.fr/ProgAndPlay/";
 const std::string redirect_uri = "https://www.facebook.com/";
-const std::string pictureUrl = "localhost/test/images/generated/";
 
 std::ofstream logFile("log.txt", std::ios::out | std::ofstream::trunc);
 std::ofstream ppTraces;
@@ -122,16 +123,23 @@ CProgAndPlay::~CProgAndPlay() {
 void CProgAndPlay::Update(void) {
 	log("ProgAndPLay::Update begin");
 	
-	bool unitsIdled = allUnitsIdled();
-	// clean messages in shared memory and store log messages
-	logMessages(unitsIdled);
+	// std::stringstream ss;
 	
-	if (!tp.getEnd()) {
+	bool unitsIdled = allUnitsIdled();
+	logMessages(unitsIdled); // check if mission is ended, clean messages in shared memory and store log messages
+	
+	// ss << "units idled : " << unitsIdled << std::endl;
+	// log(ss.str());
+	// ss.str("");
+	
+	if (tracePlayer && !tp.getEnd()) {
 		if (!unitsIdled) {
 			if (endless_loop_frame_counter != 0)
 				endless_loop_frame_counter = 0;
 			if (units_idled_frame_counter != 0)
 				units_idled_frame_counter = 0;
+			if (tp.getProceed())
+				tp.setProceed(false);
 		}
 		else if (units_idled_frame_counter > -1)
 			units_idled_frame_counter++;
@@ -139,28 +147,30 @@ void CProgAndPlay::Update(void) {
 		bool endlessLoop = endless_loop_frame_counter > UPDATE_RATE_MULTIPLIER * UNIT_SLOWUPDATE_RATE;
 		unitsIdled = units_idled_frame_counter > UPDATE_RATE_MULTIPLIER * UNIT_SLOWUPDATE_RATE;
 		
-		if (!tp.getProceed() && unitsIdled)
+		if (!tp.getProceed() && (unitsIdled || allUnitsDead()))
 			tp.setProceed(true);
 		
-		std::stringstream ss;
-		ss << "endless loop : " << endlessLoop << std::endl;
-		log(ss.str());
-		ss.str("");
-		ss << "unitsIdled : " << unitsIdled << std::endl;
-		log(ss.str());
-		ss.str("");
-		ss << "endless_loop_frame_counter : " << endless_loop_frame_counter << std::endl;
-		log(ss.str());
-		ss.str("");
-		ss << "units_idled_frame_counter : " << units_idled_frame_counter << std::endl;
-		log(ss.str());
-		ss.str("");
-		ss << "mission_ended : " << missionEnded << std::endl;
-		log(ss.str());
-		ss.str("");
-		ss << "proceed : " << tp.getProceed() << std::endl;
-		log(ss.str());
-		ss.str("");
+		// ss << "endless loop : " << endlessLoop << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "units idled (counter) : " << unitsIdled << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "endless_loop_frame_counter : " << endless_loop_frame_counter << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "units_idled_frame_counter : " << units_idled_frame_counter << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "mission_ended : " << missionEnded << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "proceed : " << tp.getProceed() << std::endl;
+		// log(ss.str());
+		// ss.str("");
+		// ss << "all units dead : " << allUnitsDead() << std::endl;
+		// log(ss.str());
+		// ss.str("");
 
 		if (tp.compressionDone()) {
 			log("compression done");
@@ -174,9 +184,9 @@ void CProgAndPlay::Update(void) {
 				ppTraces.close();
 			}
 			
-			ss << "feedbacksWidgetEnabled : " << configHandler->GetString("Feedbacks Widget", "disabled") << std::endl;
-			log(ss.str());
-			ss.str("");
+			// ss << "feedbacksWidgetEnabled : " << configHandler->GetString("Feedbacks Widget", "disabled") << std::endl;
+			// log(ss.str());
+			// ss.str("");
 
 			const std::map<std::string,std::string>& modOpts = gameSetup->modOptions;
 			if ((modOpts.find("testmap") == modOpts.end() || modOpts.at("testmap").compare("0") == 0) && configHandler->GetString("Feedbacks Widget", "disabled").compare("enabled") == 0) {
@@ -188,7 +198,7 @@ void CProgAndPlay::Update(void) {
 				if (archiveLoaded) {
 					std::vector<std::string> files = vfsHandler->GetFilesInDir(archiveExpertPath + missionName);
 					for (unsigned int i = 0; i < files.size(); i++) {
-						if (files.at(i).find(".xml") != std::string::npos)
+						if (files.at(i).find(".xml") != std::string::npos && files.at(i).compare("feedbacks.xml") != 0)
 							experts_xml.push_back(loadFileFromArchive(archiveExpertPath + missionName + "\\" + files.at(i)));
 					}
 				}
@@ -713,6 +723,8 @@ log("ProgAndPLay::execPendingCommands end");
 
 bool CProgAndPlay::allUnitsIdled() {
 	CUnitSet *tmp = &(teamHandler->Team(gu->myTeam)->units);
+	if (tmp->size() == 0)
+		return false;
 	CUnitSet::iterator it = tmp->begin();
 	while (it != tmp->end()) {
 		const CCommandAI* commandAI = (*it)->commandAI;
@@ -724,6 +736,11 @@ bool CProgAndPlay::allUnitsIdled() {
 		it++;
 	}
 	return true;
+}
+
+bool CProgAndPlay::allUnitsDead() {
+	CUnitSet *tmp = &(teamHandler->Team(gu->myTeam)->units);
+	return tmp->size() == 0;
 }
 
 void CProgAndPlay::logMessages(bool unitsIdled) {
@@ -803,7 +820,7 @@ void CProgAndPlay::openTracesFile() {
 					log("default compression params will be used");
 					
 				if (modOpts.find("testmap") != modOpts.end() && modOpts.at("testmap").compare("0") == 0) {
-					log("feedbacks loading");
+					log("start feedbacks loading");
 					// feedbacks loading from XML for TracesAnalyser
 					const std::string feedbacks_xml = loadFile(springFeedbacksPath);
 					std::string mission_feedbacks_xml;
@@ -816,6 +833,7 @@ void CProgAndPlay::openTracesFile() {
 					}
 					if (feedbacks_xml.compare("") != 0)
 						ta.loadXmlInfos(feedbacks_xml,mission_feedbacks_xml);
+					log("end feedbacks loading");
 				}
 			}
 			else
@@ -847,8 +865,8 @@ void CProgAndPlay::openTracesFile() {
 
 // Publish on facebook functions
 
-void CProgAndPlay::openFacebookUrl(const std::string& photoId) {
-	std::string url = "https://www.facebook.com/dialog/share?app_id="+appId+"&display=page&caption="+caption+"&description="+description+"&link="+link+"&href="+link+"&redirect_uri="+redirect_uri+"&picture="+pictureUrl+photoId+".png";
+void CProgAndPlay::openFacebookUrl() {
+	std::string url = facebookUrl+"?app_id="+appId+"&display=page&caption="+caption+"&description="+description+"&link="+link+"&href="+link+"&redirect_uri="+redirect_uri+"&picture="+server_name+server_images_path+photoFilename;
 	#ifdef __linux__
 		std::string cmd = "x-www-browser " + url; 
 		system(cmd.c_str());
@@ -857,7 +875,7 @@ void CProgAndPlay::openFacebookUrl(const std::string& photoId) {
 	#endif
 }
 
-std::string CProgAndPlay::sendIdRequest() {
+void CProgAndPlay::sendRequestToServer() {
 	using boost::asio::ip::tcp;
 	try {
 		boost::asio::io_service io_service;
@@ -902,12 +920,12 @@ std::string CProgAndPlay::sendIdRequest() {
 		std::string status_message;
 		std::getline(response_stream, status_message);
 		if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
-		  std::cout << "Invalid response\n";
-		  return "";
+			std::cout << "Invalid response\n";
+			return;
 		}
 		if (status_code != 200) {
-		  std::cout << "Response returned with status code " << status_code << "\n";
-		  return "";
+			std::cout << "Response returned with status code " << status_code << "\n";
+			return;
 		}
 		// Read the response headers, which are terminated by a blank line.
 		boost::asio::read_until(socket, response, "\r\n\r\n");
@@ -916,9 +934,9 @@ std::string CProgAndPlay::sendIdRequest() {
 		while (std::getline(response_stream, header) && header != "\r");
 		// Write whatever content we already have to output.
 		if (response.size() > 0) {
-		  std::ostringstream oss;
-		  oss << &response;
-		  return oss.str();
+			std::ostringstream oss;
+			oss << &response;
+			photoFilename = oss.str();
 		}
 		// Read until EOF, writing data to output as we go.
 		while (boost::asio::read(socket, response, boost::asio::transfer_at_least(1), error))
@@ -929,14 +947,17 @@ std::string CProgAndPlay::sendIdRequest() {
 	catch (std::exception& e) {
 		std::cout << "Exception: " << e.what() << "\n";
 	}
-	return "";
 }
 
 void CProgAndPlay::publishOnFacebook() {
-	if (!configHandler->GetString("score", "").empty()) {
-		std::string id = sendIdRequest();
-		if (id != "")
-			openFacebookUrl(id);
+	log("publish");
+	if (photoFilename.empty() && !configHandler->GetString("score", "").empty()) {
+		log("sending request to the server");
+		sendRequestToServer();
+	}
+	if (!photoFilename.empty()) {
+		log("open facebook url");
+		openFacebookUrl();
 	}
 }
 

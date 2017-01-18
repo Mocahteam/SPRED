@@ -67,6 +67,9 @@ bool LuaConstGame::PushEntries(lua_State* L)
 	LuaPushNamedBool(L,   "commEnds",         (gameSetup->gameMode >= 1));
 	LuaPushNamedBool(L,   "limitDGun",        limitDGun);
 	LuaPushNamedBool(L,   "ghostedBuildings", ghostedBuildings);
+	// Muratet (Bontemps) (Add a constant to know if prog&play is enabled) ---
+	LuaPushNamedBool(L,   "isPPEnabled", true);
+	// ---
 
 	const CMapInfo* mi = mapInfo;
 

@@ -2585,8 +2585,6 @@ boost/lexical_cast.hpp
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.cpp
 Sequence.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
-TracesAnalyser.h
-C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/TracesAnalyser.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Sequence.h
 iostream
@@ -2617,6 +2615,8 @@ Trace.h
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
 
 C:/Users/Stephane/Desktop/mocahteam/ProgAndPlay/Spring_dev/spring_0.82.5.1/rts/lib/pp/traces/Trace.h
+stdexcept
+-
 vector
 -
 iostream

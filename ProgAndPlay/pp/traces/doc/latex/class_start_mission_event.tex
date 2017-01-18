@@ -1,0 +1,137 @@
+\hypertarget{class_start_mission_event}{}\section{Start\+Mission\+Event Class Reference}
+\label{class_start_mission_event}\index{Start\+Mission\+Event@{Start\+Mission\+Event}}
+
+
+{\ttfamily \#include $<$Event\+Def.\+h$>$}
+
+Inheritance diagram for Start\+Mission\+Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_start_mission_event}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_start_mission_event_ad8eb6b28186a393389c733bc1f7d2126}{Start\+Mission\+Event} (std\+::string mission\+\_\+name, int start\+\_\+time)
+\item 
+\hyperlink{class_start_mission_event_a7eb187e97a54da7f4385724e437db3dc}{Start\+Mission\+Event} (const \hyperlink{class_start_mission_event}{Start\+Mission\+Event} $\ast$sme)
+\item 
+virtual \hyperlink{class_trace_a9c58e523529fc8a03fb6acf3eef86150}{Trace\+::sp\+\_\+trace} \hyperlink{class_start_mission_event_a4dcda1cb85c391e3594ab1486bc3223d}{clone} () const 
+\begin{DoxyCompactList}\small\item\em Clonage d\textquotesingle{}un événement. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_start_mission_event_a498a3b6e3fa6dfd736486aaa1db421dd}{get\+Params} () const 
+\begin{DoxyCompactList}\small\item\em Retourne les différents paramètres relatifs à l\textquotesingle{}événement sous forme de chaîne de caractères. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_start_mission_event_a605cdb25ede0fbb309816a9175ca250a}{get\+Mission\+Name} () const 
+\item 
+int \hyperlink{class_start_mission_event_a7fe6b59b37da5c1a25fe5794a4426db6}{get\+Start\+Time} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 13 of file Event\+Def.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{Start\+Mission\+Event(std\+::string mission\+\_\+name, int start\+\_\+time)}{StartMissionEvent(std::string mission_name, int start_time)}}]{\setlength{\rightskip}{0pt plus 5cm}Start\+Mission\+Event\+::\+Start\+Mission\+Event (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{mission\+\_\+name, }
+\item[{int}]{start\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_start_mission_event_ad8eb6b28186a393389c733bc1f7d2126}{}\label{class_start_mission_event_ad8eb6b28186a393389c733bc1f7d2126}
+
+
+Definition at line 17 of file Event\+Def.\+h.
+
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{Start\+Mission\+Event(const Start\+Mission\+Event $\ast$sme)}{StartMissionEvent(const StartMissionEvent *sme)}}]{\setlength{\rightskip}{0pt plus 5cm}Start\+Mission\+Event\+::\+Start\+Mission\+Event (
+\begin{DoxyParamCaption}
+\item[{const {\bf Start\+Mission\+Event} $\ast$}]{sme}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_start_mission_event_a7eb187e97a54da7f4385724e437db3dc}{}\label{class_start_mission_event_a7eb187e97a54da7f4385724e437db3dc}
+
+
+Definition at line 19 of file Event\+Def.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!clone@{clone}}
+\index{clone@{clone}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{clone() const }{clone() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Trace\+::sp\+\_\+trace} Start\+Mission\+Event\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_start_mission_event_a4dcda1cb85c391e3594ab1486bc3223d}{}\label{class_start_mission_event_a4dcda1cb85c391e3594ab1486bc3223d}
+
+
+Clonage d\textquotesingle{}un événement. 
+
+\begin{DoxyReturn}{Returns}
+une copie de l\textquotesingle{}objet \hyperlink{class_event}{Event}. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_event_aafa2022d6600717a9cd6511797548265}{Event}.
+
+
+
+Definition at line 24 of file Event\+Def.\+h.
+
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!get\+Mission\+Name@{get\+Mission\+Name}}
+\index{get\+Mission\+Name@{get\+Mission\+Name}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{get\+Mission\+Name() const }{getMissionName() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Start\+Mission\+Event\+::get\+Mission\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_start_mission_event_a605cdb25ede0fbb309816a9175ca250a}{}\label{class_start_mission_event_a605cdb25ede0fbb309816a9175ca250a}
+
+
+Definition at line 32 of file Event\+Def.\+h.
+
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!get\+Params@{get\+Params}}
+\index{get\+Params@{get\+Params}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{get\+Params() const }{getParams() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Start\+Mission\+Event\+::get\+Params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_start_mission_event_a498a3b6e3fa6dfd736486aaa1db421dd}{}\label{class_start_mission_event_a498a3b6e3fa6dfd736486aaa1db421dd}
+
+
+Retourne les différents paramètres relatifs à l\textquotesingle{}événement sous forme de chaîne de caractères. 
+
+Cette fonction doit être redéfinie par les classes héritant de \hyperlink{class_event}{Event}.
+
+\begin{DoxyReturn}{Returns}
+la chaîne de caractères formatée contenant les valeurs des différents paramètres de l\textquotesingle{}événement séparées par des espaces. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_event_aad213c94070547bb727ba369b3460e2a}{Event}.
+
+
+
+Definition at line 28 of file Event\+Def.\+h.
+
+\index{Start\+Mission\+Event@{Start\+Mission\+Event}!get\+Start\+Time@{get\+Start\+Time}}
+\index{get\+Start\+Time@{get\+Start\+Time}!Start\+Mission\+Event@{Start\+Mission\+Event}}
+\subsubsection[{\texorpdfstring{get\+Start\+Time() const }{getStartTime() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Start\+Mission\+Event\+::get\+Start\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_start_mission_event_a7fe6b59b37da5c1a25fe5794a4426db6}{}\label{class_start_mission_event_a7fe6b59b37da5c1a25fe5794a4426db6}
+
+
+Definition at line 36 of file Event\+Def.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\hyperlink{_event_def_8h}{Event\+Def.\+h}\end{DoxyCompactItemize}

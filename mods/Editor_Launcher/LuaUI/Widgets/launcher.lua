@@ -120,13 +120,14 @@ function InitializeMenu()
 	}
 	local gameList = {}
 	gameList = VFS.GetGames()
+	local cpt = 1
 	for i, game in ipairs(gameList) do
 		local infos = VFS.GetArchiveInfo(game)
 		if infos.shortname ~= "SPRED" then
 			Chili.Button:New{
 				parent = sp,
 				x = '0%',
-				y = ((i-1)*15).."%",
+				y = ((cpt-1)*15).."%",
 				width = '100%',
 				height = "15%",
 				caption = game,
@@ -139,6 +140,7 @@ function InitializeMenu()
 					color = { 0, 0.2, 0.8, 1 }
 				}
 			}
+			cpt = cpt + 1
 		end
 	end
 	UI.QuitButton = Chili.Button:New{

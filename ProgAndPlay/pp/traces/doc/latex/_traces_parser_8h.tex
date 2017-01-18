@@ -1,0 +1,70 @@
+\hypertarget{_traces_parser_8h}{}\section{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Parser.h File Reference}
+\label{_traces_parser_8h}\index{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Parser.\+h@{C\+:/\+Users/\+Stephane/\+Desktop/mocahteam/\+Prog\+And\+Play/pp/traces/src/\+Traces\+Parser.\+h}}
+
+
+Déclaration de la classe \hyperlink{class_traces_parser}{Traces\+Parser}.  
+
+
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$stack$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$windows.\+h$>$}\\*
+{\ttfamily \#include $<$boost/lexical\+\_\+cast.\+hpp$>$}\\*
+{\ttfamily \#include $<$rapidxml-\/1.\+13/rapidxml.\+hpp$>$}\\*
+{\ttfamily \#include $<$rapidxml-\/1.\+13/rapidxml\+\_\+print.\+hpp$>$}\\*
+{\ttfamily \#include $<$rapidxml-\/1.\+13/rapidxml\+\_\+utils.\+hpp$>$}\\*
+{\ttfamily \#include \char`\"{}Trace.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Call.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Call\+Def.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Event.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Event\+Def.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sequence.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_traces_parser}{Traces\+Parser}
+\begin{DoxyCompactList}\small\item\em La classe \hyperlink{class_traces_parser}{Traces\+Parser} définit les méthodes de parsing de fichiers de traces brutes (que ce soit dans le contexte d\textquotesingle{}une partie de jeu ou en ligne de commandes), les différentes fonctions de l\textquotesingle{}algorithme hors-\/ligne, et les fonctions d\textquotesingle{}export et d\textquotesingle{}import de traces à partir d\textquotesingle{}un document X\+ML. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_traces_parser_8h_a09b610abde344f1c4c5a35ef212f7939}{I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS}~0
+\item 
+\#define \hyperlink{_traces_parser_8h_a13b65f582eb9833f76f425c067a057cf}{M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH}~10
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Déclaration de la classe \hyperlink{class_traces_parser}{Traces\+Parser}. 
+
+\begin{DoxyAuthor}{Author}
+meresse 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\index{Traces\+Parser.\+h@{Traces\+Parser.\+h}!I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS@{I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS}}
+\index{I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS@{I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS}!Traces\+Parser.\+h@{Traces\+Parser.\+h}}
+\subsubsection[{\texorpdfstring{I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS}{INCLUDE_EVENTS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+C\+L\+U\+D\+E\+\_\+\+E\+V\+E\+N\+TS~0}\hypertarget{_traces_parser_8h_a09b610abde344f1c4c5a35ef212f7939}{}\label{_traces_parser_8h_a09b610abde344f1c4c5a35ef212f7939}
+Doit être mis à 1 pour prendre en compte les événements de \hyperlink{class_event_a27d769cc30bbd8d827124958a9a95cae}{Event\+::concat\+Events\+Arr} rencontrés lors du parsage de fichier de traces brutes. 
+
+Definition at line 34 of file Traces\+Parser.\+h.
+
+\index{Traces\+Parser.\+h@{Traces\+Parser.\+h}!M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH@{M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH}}
+\index{M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH@{M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH}!Traces\+Parser.\+h@{Traces\+Parser.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH}{MAX_END_SEARCH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+E\+N\+D\+\_\+\+S\+E\+A\+R\+CH~10}\hypertarget{_traces_parser_8h_a13b65f582eb9833f76f425c067a057cf}{}\label{_traces_parser_8h_a13b65f582eb9833f76f425c067a057cf}
+Seuil utilisé pour stopper et éviter toute future recherche de répétitions d\textquotesingle{}un groupe de traces à partir d\textquotesingle{}une trace.
+
+\begin{DoxySeeAlso}{See also}
+Traces\+Parser\+::detect\+Sequences 
+\end{DoxySeeAlso}
+
+
+Definition at line 42 of file Traces\+Parser.\+h.
+
