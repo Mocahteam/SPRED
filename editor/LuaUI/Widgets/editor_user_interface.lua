@@ -15,6 +15,7 @@ VFS.Include("LuaUI/Widgets/editor/Misc.lua") -- Miscellaneous useful functions
 VFS.Include("LuaUI/Widgets/editor/Conditions.lua")
 VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
+VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -690,92 +691,6 @@ function tracesFrame()
 	end
 end
 
-function ExportTestGame()
-	local editorName = string.gsub(Game.modName, " "..Game.modVersion, "") -- remove version to Game.modName
-	if not VFS.FileExists(gameFolder.."/"..editorName..".sdz") then
-		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..editorName..".sdz")
-		FrameWarning (message, false, true)
-		return
-	end
-	-- Generate name
-	local name = "testingGame"
-
-	-- Choose levels
-	local levelList = {}
-	if IncludeAllMissions then
-		levelList = LevelListNames
-	else
-		for k, link in pairs(Links) do
-			for kk, input in pairs(link) do
-				if not findInTable(levelList, input) and findInTable(LevelListNames, input) then
-					table.insert(levelList, input)
-				end
-			end
-		end
-	end
-
-	-- Choose traces
-	local tracesList = {}
-	for i, level in ipairs(LevelList) do
-		if findInTable(levelList, level.description.saveName) and level.description.traces then
-			for ii, trace in ipairs(level.description.traces) do
-				table.insert(tracesList, level.description.saveName..","..trace)
-			end
-		end
-	end
-
-	local exportSuccess = false
-
-	if Game.isPPEnabled then
-		if VFS.BuildPPGame then
-			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
-			exportSuccess = true
-		else
-			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, false, true)
-		end
-	else
-		-- Change Modinfo.lua
-		local maingame = MainGame
-		local modInfo = "return { game='"..scenarioName.."', shortGame='"..scenarioName.."', name='"..scenarioName.."', shortName='"..scenarioName.."', mutator='official', version='1.0', description='SPRED module. "..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
-		local file = io.open("SPRED/game/ModInfo.lua", "w")
-		file:write(modInfo)
-		file:close()
-
-		-- Add levels and scenario
-		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game/scenario/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("SPRED/missions/"..level..".editor", "SPRED/game/missions/"..level..".editor")
-		end
-
-		-- Compress
-		if not VFS.FileExists("SPRED/game.sdz") then
-			VFS.CompressFolder("SPRED/game")
-			os.rename("SPRED/game.sdz", "games/"..name..".sdz")
-		end
-
-		-- Remove levels and scenario
-		os.rename("SPRED/game/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("SPRED/game/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
-		end
-
-		exportSuccess = true
-	end
-
-	if exportSuccess then
-		-- Show message
-		local message = ""
-		if not alreadyExists then
-			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", scenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
-		else
-			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
-		end
-		FrameWarning(message, false, true)
-	end
-end
-
 function testLevel()
 	local levelFile = encodeSaveTable()
 	local goTest = function()
@@ -787,20 +702,87 @@ function testLevel()
 			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
 			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
 		else
-			local saveName = generateSaveName(mapDescription.mapName)
 			saveMap()
-			local operations = {
-				["MODOPTIONS"] = {
-					["language"] = Language,
-					["scenario"] = "noScenario",
-					["testmap"] = Game.modName
-				},
-				["GAME"] = {
-					["Mapname"] = levelFile.description.map,
-					["Gametype"] = MainGame
+			-- check editor existence in order to extract game model
+			local editorName = string.gsub(Game.modName, " "..Game.modVersion, "") -- remove version to Game.modName
+			local gameFolder = "games"
+			if Game.version == "0.82.5.1" then gameFolder = "mods" end
+			if not VFS.FileExists(gameFolder.."/"..editorName..".sdz") then
+				local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..editorName..".sdz")
+				windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
+				addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', message, 20)
+				addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
+				return
+			end
+			-- Generate name
+			local name = "testingGame"
+			-- Only include tested level in testing mode
+			local levelList = {}
+			local saveName = generateSaveName(mapDescription.mapName)
+			table.insert(levelList, saveName)
+			-- No traces in testing mode
+			local tracesList = {}
+
+			local exportSuccess = false
+			if Game.isPPEnabled then
+				if VFS.BuildPPGame then
+					VFS.BuildPPGame(editorName, "TestModule", "TestModule", "", "TestModule", MainGame, levelList, tracesList, "0")
+					exportSuccess = true
+				else
+					windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
+					addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, 20)
+					addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
+				end
+			else
+				-- Change Modinfo.lua
+				local modInfo = "return { game='TestModule', shortGame='TestModule', name='TestModule', shortName='TestModule', mutator='official', version='1.0', description='SPRED module. TestModule', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..MainGame.."\"}, }"
+				local file = io.open("SPRED/game/ModInfo.lua", "w")
+				file:write(modInfo)
+				file:close()
+
+				-- Add tested level
+				os.rename("SPRED/missions/"..saveName..".editor", "SPRED/game/missions/"..saveName..".editor")
+				
+				-- Compress
+				if VFS.FileExists("SPRED/game.sdz") or VFS.FileExists("games/testModule.sdz") then
+					windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
+					local message = ""
+					if VFS.FileExists("SPRED/game.sdz") then
+						message = string.gsub(EDITOR_FILE_EXPORT_FAIL, "/GAMEFILENAME/", "<Spring>/SPRED/game.sdz")
+						addLabel(windows["testWindow"], '0%', '0%', '100%', '25%', message, 20)
+					end
+					if VFS.FileExists("games/testModule.sdz") then
+						message = string.gsub(EDITOR_FILE_EXPORT_FAIL, "/GAMEFILENAME/", "<Spring>/games/testModule.sdz")
+						addLabel(windows["testWindow"], '0%', '25%', '100%', '25%', message, 20)
+					end
+					addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
+					return
+				end
+				VFS.CompressFolder("SPRED/game")
+				os.rename("SPRED/game.sdz", "games/testModule.sdz")
+
+				-- Restore tested level
+				os.rename("SPRED/game/missions/"..saveName..".editor", "SPRED/missions/"..saveName..".editor")
+
+				exportSuccess = true
+			end
+
+			if exportSuccess then
+				-- Do the restart
+				local operations = {
+					["MODOPTIONS"] = {
+						["language"] = Language,
+						["scenario"] = "noScenario",
+						["testmap"] = Game.modName,
+						["hidemenu"] = "true"
+					},
+					["GAME"] = {
+						["Mapname"] = levelFile.description.map,
+						["Gametype"] = "TestModule 1.0"
+					}
 				}
-			}
-			genericRestart("SPRED/missions/"..saveName..".editor", operations)
+				genericRestart("SPRED/missions/"..saveName..".editor", operations)
+			end
 		end
 	end
 
@@ -4981,7 +4963,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 
 	-- Write
 	local jsonfile = json.encode(savedTable)
-	local DBG_formatString = false -- Set this to true to have a better view of the json file
+	local DBG_formatString = true -- Set this to true to have a better view of the json file
 	if DBG_formatString then
 		jsonfile = string.gsub(jsonfile, ",", ",\n")
 		jsonfile = string.gsub(jsonfile, "}", "\n}")

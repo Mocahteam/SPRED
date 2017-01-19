@@ -1765,6 +1765,7 @@ function ResetScenario()
 end
 
 function BeginExportGame()
+	-- check editor existence in order to extract game model
 	local editorName = string.gsub(Game.modName, " "..Game.modVersion, "") -- remove version to Game.modName
 	if not VFS.FileExists(gameFolder.."/"..editorName..".sdz") then
 		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..editorName..".sdz")
@@ -1815,7 +1816,7 @@ function BeginExportGame()
 
 	if Game.isPPEnabled then
 		if VFS.BuildPPGame then
-			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList)
+			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList, "1")
 			exportSuccess = true
 		else
 			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, false, true)

@@ -166,11 +166,10 @@ local function RunScript(ScriptFileName, scenario)
   if Spring.Restart then
     --if (string.sub(ScriptFileName, -3, -1)=="txt")then
       local operations={
-      ["MODOPTIONS"]=
-        {
-        ["language"]=lang,
-        ["scenario"]=scenario,
-        ["hidemenu"]="true"
+		["MODOPTIONS"]={
+			["language"]=lang,
+			["scenario"]=scenario,
+			["hidemenu"]="true"
         }
       }    
       genericRestart(ScriptFileName,operations)
