@@ -781,25 +781,23 @@ function testLevel()
 	local goTest = function()
 		Screen0:RemoveChild(windows["testWindow"])
 		windows["testWindow"]:Dispose()
-		local saveName = generateSaveName(mapDescription.mapName)
-		if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
+		if mapDescription.mapName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
 			addButton(windows["testWindow"], '25%', '50%', '50%', '50%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() mapSettingsFrame() end)
 		else
+			local saveName = generateSaveName(mapDescription.mapName)
 			saveMap()
 			local operations = {
 				["MODOPTIONS"] = {
 					["language"] = Language,
 					["scenario"] = "noScenario",
-					["maingame"] = MainGame,
-					["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit),
-					["testmap"] = "yes"
+					["testmap"] = Game.modName
 				},
 				["GAME"] = {
 					["Mapname"] = levelFile.description.map,
-					["Gametype"] = Game.modName
+					["Gametype"] = MainGame
 				}
 			}
 			genericRestart("SPRED/missions/"..saveName..".editor", operations)
@@ -4766,11 +4764,11 @@ function loadMap(name) -- Load a map given a file name or if loadedTable is not 
 		local mapfile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		loadedTable = json.decode(mapfile)
 	end
-	if loadedTable then
+	if loadedTable then 
 		-- The previous call of "newMap()" ask to the gadget to remove all existing units but killing a unit takes time.
 		-- Then we need to wait all units are removed before asking to the gadget to instantiate the new level (creating a unit is immediate).
 		-- If we don't care about this, the "saveStates" table (to manage Ctrl+Z and Ctrl+Y) can contain inconsistent data
-		askGadgetToLoadTable = 0.1
+		askGadgetToLoadTable = 0.1 -- ask gadget to load table in 100ms
 	else
 		loading = false
 	end
@@ -5107,13 +5105,13 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
 	end
-	local saveName = generateSaveName(mapDescription.mapName)
-	if saveName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
+	if mapDescription.mapName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
 		windows["fileWindowPopUp"] = addWindow(Screen0, "30%", "40%", "40%", "20%")
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 18)
 		addButton(windows["fileWindowPopUp"], '25%', '60%', '50%', '40%', EDITOR_OK, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() mapSettingsFrame() end)
 	else
+		local saveName = generateSaveName(mapDescription.mapName)
 		local confirmSave = function()
 			if windows["fileWindowPopUp"] then
 				Screen0:RemoveChild(windows["fileWindowPopUp"])
