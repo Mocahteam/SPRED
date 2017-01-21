@@ -1,5 +1,6 @@
 LAUNCHER_QUIT = ""
 LAUNCHER_SUBTITLE = ""
+LAUNCHER_BACK_TO_EDITOR = ""
 LAUNCHER_NEW_MISSION = ""
 LAUNCHER_NEW_TITLE = ""
 LAUNCHER_NEW_NO_MAP_FOUND = ""
@@ -36,6 +37,7 @@ function GetLauncherStrings(lang)
 	if lang == "fr" then
 		LAUNCHER_QUIT = "Quitter"
 		LAUNCHER_SUBTITLE = "(pour /MAINGAME/)"
+		LAUNCHER_BACK_TO_EDITOR = "Retour à l'éditeur"
 		LAUNCHER_NEW_MISSION = "Nouvelle mission"
 		LAUNCHER_NEW_TITLE = "Choisissez une carte"
 		LAUNCHER_NEW_NO_MAP_FOUND = "Aucune carte trouvée dans le répertoire \"<Spring>/maps/\""
@@ -69,6 +71,7 @@ function GetLauncherStrings(lang)
 	else
 		LAUNCHER_QUIT = "Quit"
 		LAUNCHER_SUBTITLE = "(for /MAINGAME/)"
+		LAUNCHER_BACK_TO_EDITOR = "Back to editor"
 		LAUNCHER_NEW_MISSION = "New mission"
 		LAUNCHER_NEW_TITLE = "Choose a map"
 		LAUNCHER_NEW_NO_MAP_FOUND = "No map found in the \"<Spring>/maps/\" directory"

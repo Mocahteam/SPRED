@@ -21,7 +21,6 @@ local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua") -- Json serial
 local Chili, Screen0 -- Chili
 local IsActive = false -- True if this widget has to be shown
 local HideView = false -- True if there is need for a black background
-local Language = Spring.GetModOptions().language or "en" -- Current language
 local vsx, vsy -- Window size
 local UI = {} -- Contains each UI element
 local MapList = {} -- List of the maps as read in the maps/ directory
@@ -47,6 +46,9 @@ local SaveStates = {} -- Save states
 local LoadIndex = 1 -- Current load index
 local NeedToBeSaved = false -- Know when the scenario has to be changed or not
 
+local editorRunning = false
+WG.Language = Spring.GetModOptions().language or "en" -- Current language
+
 function InitializeChili() -- Initialize Chili variables
 	if not WG.Chili then
 		widgetHandler:RemoveWidget()
@@ -57,7 +59,9 @@ function InitializeChili() -- Initialize Chili variables
 end
 
 function InitializeEditor() -- Enable editor widgets
-	widgetHandler:EnableWidget("Editor Loading Screen")
+	if not editorRunning then
+		widgetHandler:EnableWidget("Editor Loading Screen")
+	end
 	widgetHandler:EnableWidget("Chili Framework")
 	widgetHandler:EnableWidget("Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")
@@ -65,7 +69,7 @@ function InitializeEditor() -- Enable editor widgets
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
-	if not Spring.GetModOptions().editor then
+	if not editorRunning then
 		widgetHandler:EnableWidget("Editor Loading Screen")
 	end
 	widgetHandler:EnableWidget("Editor Commands List")
@@ -115,8 +119,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
-		  autoAdjust = true,
-		  maxSize = 40,
+			autoAdjust = true,
+			maxSize = 40,
 			color = { 0.2, 0.4, 0.8, 1 }
 		}
 	}
@@ -131,8 +135,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -147,8 +151,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -163,8 +167,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -179,8 +183,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -194,8 +198,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
-		  autoAdjust = true,
-		  maxSize = 20,
+			autoAdjust = true,
+			maxSize = 20,
 			color = { 0.2, 1, 0.8, 1 }
 		}
 	}
@@ -207,6 +211,24 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 				ChangeLanguage("fr")
 			end
 		end
+	}
+	UI.BackToEditor = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "80%",
+		y = "8%",
+		width = "20%",
+		height = "7%",
+		caption = LAUNCHER_BACK_TO_EDITOR,
+		OnClick = { SwitchOff },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 0.2, 1, 0.8, 1 }
+		},
+		backgroundColor = { 0, 0.2, 0.6, 1 },
+		focusColor= { 0, 0.6, 1, 1 },
 	}
 	UI.BackButton = Chili.Button:New{
 		parent = UI.MainWindow,
@@ -247,8 +269,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
+			autoAdjust = true,
+			maxSize = 30,
 			color = { 0.8, 0.6, 0.2, 1 }
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
@@ -792,7 +814,6 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				else
 					selectedOutputMission = LevelListNames[i]
 					selectedOutputState = out
-					Spring.Echo (selectedOutputMission, selectedOutputState)
 				end
 			end }
 			UI.Scenario.Output[LevelListNames[i]][out] = but
@@ -817,6 +838,7 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.Title)
 	UI.MainWindow:RemoveChild(UI.Subtitle)
 	UI.MainWindow:RemoveChild(UI.Logo)
+	UI.MainWindow:RemoveChild(UI.BackToEditor)
 	UI.MainWindow:RemoveChild(UI.NewMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditMissionButton)
 	UI.MainWindow:RemoveChild(UI.EditScenarioButton)
@@ -862,6 +884,9 @@ function MainMenuFrame() -- Shows the main menu
 	UI.MainWindow:AddChild(UI.Title)
 	UI.MainWindow:AddChild(UI.Subtitle)
 	UI.MainWindow:AddChild(UI.Logo)
+	if editorRunning then
+		UI.MainWindow:AddChild(UI.BackToEditor)
+	end
 	UI.MainWindow:AddChild(UI.NewMissionButton)
 	UI.MainWindow:AddChild(UI.EditMissionButton)
 	UI.MainWindow:AddChild(UI.EditScenarioButton)
@@ -1424,10 +1449,11 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	-- close pop-up
 	ClearTemporaryUI()
 
-	Language = lang
+	WG.Language = lang
 	GetLauncherStrings(lang)
 
 	UpdateCaption(UI.Subtitle, string.gsub(LAUNCHER_SUBTITLE, "/MAINGAME/", MainGame))
+	UpdateCaption(UI.BackToEditor, LAUNCHER_BACK_TO_EDITOR)
 	UpdateCaption(UI.NewMissionButton, LAUNCHER_NEW_MISSION)
 	UpdateCaption(UI.EditMissionButton, LAUNCHER_EDIT_MISSION)
 	UpdateCaption(UI.EditScenarioButton, LAUNCHER_SCENARIO)
@@ -1451,7 +1477,7 @@ end
 function NewMission(map) -- Start editor with empty mission on the selected map
 	local operations = {
 		["MODOPTIONS"] = {
-			["language"] = Language,
+			["language"] = WG.Language,
 			["scenario"] = "noScenario",
 			["maingame"] = MainGame,
 			["commands"] = Script.LuaUI.getCommandsList()
@@ -1470,7 +1496,7 @@ function EditMission(level) -- Start editor with selected mission
 		levelFile = json.decode(levelFile)
 		local operations = {
 			["MODOPTIONS"] = {
-				["language"] = Language,
+				["language"] = WG.Language,
 				["scenario"] = "noScenario",
 				["toBeLoaded"] = level,
 				["maingame"] = MainGame,
@@ -1954,24 +1980,41 @@ function EitherDrawScreen() -- Shows a black background if required
 end
 
 function SwitchOn() -- Activate this widget
-	GetLauncherStrings("en")
 	Spring.SendCommands({"NoSound 1"})
 	Spring.SendCommands("forcestart")
 	Spring.SendCommands("fps 1")
 	HideView = true
-	RemoveOtherWidgets()
+	if not editorRunning then
+		RemoveOtherWidgets()
+	end
 	InitializeLauncher()
-	ChangeLanguage("en")
 	MainMenuFrame()
+	if WG.Language == "en" then
+		UI.LanguageComboBox:Select(1)
+	elseif WG.Language == "fr" then
+		UI.LanguageComboBox:Select(2)
+	end
 	SaveState()
 	NeedToBeSaved = false
 end
-WG.BackToMainMenu = SwitchOn
+
+function backToMainMenu() -- called in editor_user_interface.lua
+	editorRunning = true
+	SwitchOn()
+end
+WG.BackToMainMenu = backToMainMenu
 
 function SwitchOff() -- Desactivate this widget
 	HideView = false
-	RemoveOtherWidgets()
-	InitializeEditor()
+	if UI.MainWindow then
+		UI.MainWindow:Dispose()
+	end
+	if not editorRunning then
+		RemoveOtherWidgets()
+		InitializeEditor()
+	else
+		WG.BackToEditor() -- Defined in editor_user_interface.lua
+	end
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)

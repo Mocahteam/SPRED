@@ -30,6 +30,7 @@ local windows, topBarButtons = {}, {} -- references to UI elements
 local unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
 local initialize = false
 local loadingFromMenu = false
+local logicalWidgetDeactivation = false -- used to deactivate widget when main menu is on
 
 -- File Variables
 local fileButtons = {}
@@ -199,9 +200,6 @@ local markerList = {}
 
 -- Map settings variables
 local mapDescription = {}
-mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
-mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map
-mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map with raw color tags
 local mapNameEditBox -- Edit box to change the name of the map
 local mapBriefingEditBox -- Edit box to change the briefing of the map
 local mapBriefingTextBox -- Text box to preview the briefing of the map with colors
@@ -604,7 +602,11 @@ function mapSettingsFrame()
 		globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 		Screen0:AddChild(windows['mapSettingsWindow'])
 		-- Set parameters to UI elements
-		mapNameEditBox:SetText(mapDescription.mapName)
+		if isMapNameDefaultValue(mapDescription.mapName) then -- isMapNameDefaultValue(...) is defined in EditorStrings.lua
+			mapNameEditBox:SetText(EDITOR_MAPSETTINGS_DEFAULT_NAME)
+		else
+			mapNameEditBox:SetText(mapDescription.mapName)
+		end
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
 		if cameraAutoState == "enabled" then
 			mapSettingsButtons.cameraAutoButton:SetCaption(EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED)
@@ -696,7 +698,7 @@ function testLevel()
 	local goTest = function()
 		Screen0:RemoveChild(windows["testWindow"])
 		windows["testWindow"]:Dispose()
-		if mapDescription.mapName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
+		if isMapNameDefaultValue(mapDescription.mapName) then -- isMapNameDefaultValue(...) is defined in EditorStrings.lua
 			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 			addLabel(windows["testWindow"], '0%', '30%', '100%', '15%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 14)
@@ -771,7 +773,7 @@ function testLevel()
 				-- Do the restart
 				local operations = {
 					["MODOPTIONS"] = {
-						["language"] = Language,
+						["language"] = WG.Language, -- WG.Language is defined in editor_spring_direct_launch.lua
 						["scenario"] = "noScenario",
 						["testmap"] = Game.modName,
 						["hidemenu"] = "true"
@@ -853,7 +855,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 0","console 1","info 0", "tooltip 0", "unbindkeyset backspace")
+	Spring.SendCommands("resbar 0","fps 0","console 0","info 0", "tooltip 0", "unbindkeyset backspace")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -874,9 +876,18 @@ function initTopBar()
 	if Game.isPPEnabled then
 		topBarButtons[globalStateMachine.states.TRACES] = addButton(windows["topBar"], '65%', '0%', '10%', '100%', EDITOR_TRACES, tracesFrame)
 	end
-	local testLevelButton = addButton(windows["topBar"], '85%', '0%', '15%', '100%', EDITOR_TEST_LEVEL, testLevel)
+	local testLevelButton = addButton(windows["topBar"], '80%', '0%', '20%', '100%', EDITOR_TEST_LEVEL, testLevel)
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
+
+function backToEditor () -- called in editor_spring_direct_launch.lua
+	updateLanguage() -- defined in EditorStrings.lua
+	initTopBar()
+	initWindows()
+	fileFrame()
+	logicalWidgetDeactivation = false
+end
+WG.BackToEditor = backToEditor
 
 function initWindows()
 	initFileWindow()
@@ -890,7 +901,7 @@ function initWindows()
 end
 
 function initFileWindow()
-	windows['fileWindow'] = addWindow(Screen0, '0%', '10%', '10%', '40%')
+	windows['fileWindow'] = addWindow(Screen0, '0%', '10%', '15%', '40%')
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '10%', EDITOR_FILE)
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
@@ -1273,8 +1284,8 @@ function initMapSettingsWindow()
 	closeButton.OnClick = { mapSettingsFrame }
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
-	addLabel(windows['mapSettingsWindow'], '0%', '10%', '15%', '6%', EDITOR_MAPSETTINGS_MAP_NAME)
-	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '15%', '10%', '85%', '6%')
+	addLabel(windows['mapSettingsWindow'], '0%', '10%', '25%', '6%', EDITOR_MAPSETTINGS_MAP_NAME)
+	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '25%', '10%', '75%', '6%')
 	addLabel(windows['mapSettingsWindow'], '0%', '20%', '15%', '6%', EDITOR_MAPSETTINGS_MAP_BRIEFING)
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '15%', '20%', '85%', '6%')
 	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '35%', '96%', '40%')
@@ -5087,7 +5098,7 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
 	end
-	if mapDescription.mapName == EDITOR_MAPSETTINGS_DEFAULT_NAME then
+	if isMapNameDefaultValue(mapDescription.mapName) then -- isMapNameDefaultValue(...) is defined in EditorStrings.lua
 		windows["fileWindowPopUp"] = addWindow(Screen0, "30%", "40%", "40%", "20%")
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
 		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGE_NAME_HELP, 18)
@@ -5124,9 +5135,14 @@ function backToMenuFrame() -- Show a window when the user clicks on the main men
 	windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
 	addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
 	if NeedToBeSaved then
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 18)
+		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
 	end
-	addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() WG.BackToMainMenu() end)
+	addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function()
+		WG.BackToMainMenu() -- BackToMainMenu() is defined in editor_spring_direct_launch.lua
+		logicalWidgetDeactivation = true
+		clearUI()
+		windows['topBar']:Dispose() -- hide top bar
+	end)
 	addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
 end
 
@@ -5138,7 +5154,7 @@ function quitFrame() -- Show a window when the user clicks on the quit button
 	windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
 	addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_QUIT_CONFIRM, 20)
 	if NeedToBeSaved then
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_BACK_TO_MENU_CONFIRM_HELP, 18)
+		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
 	end
 	addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Spring.SendCommands("quit") Spring.SendCommands("quitforce") end)
 	addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
@@ -5158,7 +5174,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 		end
 		local operations = {
 			["MODOPTIONS"] = {
-				["language"] = Language,
+				["language"] = WG.Language, -- WG.Language is defined in editor_spring_direct_launch.lua
 				["scenario"] = "noScenario",
 				["toBeLoaded"] = name,
 				["maingame"] = MainGame,
@@ -5178,11 +5194,20 @@ function newLevelWithRightMap(name) -- Creates a new level on the selected map
 		newMap()
 		newMapInitialize()
 		resetStack() -- reset stack of states
+		-- Notify user for the successful loading
+		if windows["fileWindowPopUp"] then
+			Screen0:RemoveChild(windows["fileWindowPopUp"])
+			windows["fileWindowPopUp"]:Dispose()
+		end
+		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "35%", "30%", "10%")
+		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '50%', EDITOR_FILE_LOAD_SUCCESS, 20)
+		addButton(windows["fileWindowPopUp"], '33%', '55%', '33%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose()
+		end)
 		return
 	end
 	local operations = {
 		["MODOPTIONS"] = {
-			["language"] = Language,
+			["language"] = WG.Language, -- WG.Language is defined in editor_spring_direct_launch.lua
 			["scenario"] = "noScenario",
 			["maingame"] = MainGame,
 			["commands"] = json.encode(commandsToID).."++"..json.encode(idToCommands).."++"..json.encode(sortedCommandsList).."++"..json.encode(sortedCommandsListUnit)
@@ -5476,31 +5501,35 @@ function markButtonWithinSet(buttonTable, markedButton, condition) -- Visual fee
 end
 
 function widget:DrawScreen()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-		showUnitsInformation()
-		drawSelectionRect()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		updateZoneInformation()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-		showPickText()
-		if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
+	if not logicalWidgetDeactivation then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 			showUnitsInformation()
+			drawSelectionRect()
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			updateZoneInformation()
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+			showPickText()
+			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
+				showUnitsInformation()
+			end
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES and forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+			showWarningMultiplayerMessage()
 		end
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES and forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
-		showWarningMultiplayerMessage()
+		showZoneInformation()
 	end
-	showZoneInformation()
 end
 
 function widget:DrawWorld()
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		previewUnit()
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		drawZoneRect()
-		drawZoneDisk()
-		displaySelectedZoneAnchors()
+	if not logicalWidgetDeactivation then
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+			previewUnit()
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			drawZoneRect()
+			drawZoneDisk()
+			displaySelectedZoneAnchors()
+		end
+		displayZones()
 	end
-	displayZones()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -5510,15 +5539,19 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
+	Spring.Echo("Initialize Widget editor user interface")
 	initChili()
 	initialize = true
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
--- A Supprimer ?
---	widgetHandler:RegisterGlobal("requestUnitListUpdate", function() updateUnitList() end)
 	getCommandsList()
+	updateLanguage() -- defined in EditorStrings.lua
+	-- load default values for map description
+	mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
+	mapDescription.mapBriefing = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map
+	mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME -- Briefing of the map with raw color tags
 	hideDefaultGUI()
 	initTopBar()
 	initUnitFunctions()
@@ -5532,94 +5565,101 @@ function widget:Initialize()
 end
 
 function widget:Update(delta)
-	-- Tell the gadget which units are selected (might be improved in terms of performance)
-	local unitSelection = Spring.GetSelectedUnits()
-	local msg = "Select Units"
-	for i, u in ipairs(unitSelection) do
-		msg = msg.."++"..u
-	end
-	Spring.SendLuaRulesMsg(msg)
-
-	-- Double click timer
-	if doubleClick < 0.3 then
-		doubleClick = doubleClick + delta
-	end
-
-	if #unitSelection == 0 then
-		clearTemporaryWindows()
-	end
-
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		updateSelectTeamButtons()
-		updateUnitHighlights()
-		if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
-			updateUnitGroupPanels()
+	if not logicalWidgetDeactivation then
+		-- Tell the gadget which units are selected (might be improved in terms of performance)
+		local unitSelection = Spring.GetSelectedUnits()
+		local msg = "Select Units"
+		for i, u in ipairs(unitSelection) do
+			msg = msg.."++"..u
 		end
-	end
+		Spring.SendLuaRulesMsg(msg)
 
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		updateZonePanel()
-	end
-
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
-		updateTeamsWindows()
-		if forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
-			updateAllyTeamPanels()
-		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
-			updateTeamConfigPanels()
+		-- Double click timer
+		if doubleClick < 0.3 then
+			doubleClick = doubleClick + delta
 		end
-	end
 
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-		preventSpaces()
-		updateEventList()
-		updateEventFrame()
-		updateVariables()
-		if currentEvent and (currentAction or currentCondition) then
-			updateEditBoxesParams()
+		if #unitSelection == 0 then
+			clearTemporaryWindows()
 		end
-	end
 
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
-		updateMapSettings()
-		updateWidgetsWindowPosition()
-	end
-
-	updateButtonVisualFeedback()
-
-	changeMouseCursor()
-
-	for i, marker in ipairs(markerList) do
-		marker.timer = marker.timer - delta
-		if marker.timer < 0 then
-			Spring.MarkerErasePosition(marker.x, marker.y, marker.z)
-			table.remove(markerList, i)
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+			updateSelectTeamButtons()
+			updateUnitHighlights()
+			if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
+				updateUnitGroupPanels()
+			end
 		end
-	end
 
-	-- Add a cooldown to ctrl+z/y
-	if saveLoadCooldown < 1 then
-		saveLoadCooldown = saveLoadCooldown + delta
-	end
-	
-	-- see comment in loadMap function
-	if askGadgetToLoadTable > 0 then
-		askGadgetToLoadTable = askGadgetToLoadTable - delta
-		if askGadgetToLoadTable < 0 then
-			Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			updateZonePanel()
+		end
+
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
+			updateTeamsWindows()
+			if forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
+				updateAllyTeamPanels()
+			elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
+				updateTeamConfigPanels()
+			end
+		end
+
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+			preventSpaces()
+			updateEventList()
+			updateEventFrame()
+			updateVariables()
+			if currentEvent and (currentAction or currentCondition) then
+				updateEditBoxesParams()
+			end
+		end
+
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
+			updateMapSettings()
+			updateWidgetsWindowPosition()
+		end
+
+		updateButtonVisualFeedback()
+
+		changeMouseCursor()
+
+		for i, marker in ipairs(markerList) do
+			marker.timer = marker.timer - delta
+			if marker.timer < 0 then
+				Spring.MarkerErasePosition(marker.x, marker.y, marker.z)
+				table.remove(markerList, i)
+			end
+		end
+
+		-- Add a cooldown to ctrl+z/y
+		if saveLoadCooldown < 1 then
+			saveLoadCooldown = saveLoadCooldown + delta
+		end
+		
+		-- see comment in loadMap function
+		if askGadgetToLoadTable > 0 then
+			askGadgetToLoadTable = askGadgetToLoadTable - delta
+			if askGadgetToLoadTable < 0 then
+				Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
+			end
 		end
 	end
 end
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
-	if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
-		screenSizeX, screenSizeY = dse_vsx, dse_vsy
-		rebuildUnitList()
+	if not logicalWidgetDeactivation then
+		if dse_vsx ~= screenSizeX or dse_vsy ~= screenSizeY then
+			screenSizeX, screenSizeY = dse_vsx, dse_vsy
+			rebuildUnitList()
+		end
 	end
 end
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("GetNewUnitIDsAndContinueLoadMap")
+	widgetHandler:DeregisterGlobal("saveState")
+	widgetHandler:DeregisterGlobal("requestSave")
+	widgetHandler:DeregisterGlobal("beginLoadLevel")
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -5629,321 +5669,326 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:MousePress(mx, my, button)
+	if not logicalWidgetDeactivation then
+		clearTemporaryWindows()
+		-- raycast
+		local kind,var = Spring.TraceScreenRay(mx,my)
 
-	clearTemporaryWindows()
-	-- raycast
-	local kind,var = Spring.TraceScreenRay(mx,my)
+		clickedZone = getClickedZone(mx, my)
 
-	clickedZone = getClickedZone(mx, my)
-
-	-- Change state depending on the clicked element
-	if kind == "unit" and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
-		if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
-			unitFrame()
-		end
-	elseif clickedZone ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
-		if (unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION or unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS) and clickedZone.shown and globalStateMachine:getCurrentState() ~= globalStateMachine.states.ZONE then
-			zoneFrame()
-			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-		end
-	end
-
-	-- Left click
-	if button == 1 then
-		-- STATE UNIT : place units on the field and select/move/rotate them
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-			-- STATE UNIT : place units on the field
-			if unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and unitStateMachine:getCurrentState() ~= unitStateMachine.states.UNITGROUPS then
-				if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
-					local xUnit, yUnit, zUnit = unpack(var)
-					xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
-					local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
-					Spring.SendLuaRulesMsg(msg)
-				elseif kind == "unit" then -- If unit is selected, go to selection state
-					unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
-				end
+		-- Change state depending on the clicked element
+		if kind == "unit" and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
+			if globalStateMachine:getCurrentState() ~= globalStateMachine.states.UNIT then
+				unitFrame()
 			end
-			-- STATE SELECTION : select and move units on the field
-			if unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-				if kind == "unit" then -- handle movement / selection
-					if doubleClick < 0.3 then -- multiple selection of units of same type and same team using double click
-						local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
-						proceedSelection(unitArray)
-						doubleClick = 0.3
-						return true
-					else
-						if Spring.IsUnitSelected(var) then
-							if proceedDeselection(var) then -- deselect the unit if shift is pressed
-								return false
-							else
-								clickToSelect = true -- if the unit is already selected and shift is not pressed, allow isolation
-							end
+		elseif clickedZone ~= nil and globalStateMachine:getCurrentState() ~= globalStateMachine.states.TRIGGER then
+			if (unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION or unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS) and clickedZone.shown and globalStateMachine:getCurrentState() ~= globalStateMachine.states.ZONE then
+				zoneFrame()
+				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+			end
+		end
+
+		-- Left click
+		if button == 1 then
+			-- STATE UNIT : place units on the field and select/move/rotate them
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
+				-- STATE UNIT : place units on the field
+				if unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION and unitStateMachine:getCurrentState() ~= unitStateMachine.states.UNITGROUPS then
+					if kind == "ground" then -- If ground is selected and we can place a unit, send a message to the gadget to create the unit
+						local xUnit, yUnit, zUnit = unpack(var)
+						xUnit, yUnit, zUnit = round(xUnit), round(yUnit), round(zUnit)
+						local msg = "Create Unit".."++"..unitStateMachine:getCurrentState().."++"..teamStateMachine:getCurrentState().."++"..tostring(xUnit).."++"..tostring(yUnit).."++"..tostring(zUnit)
+						Spring.SendLuaRulesMsg(msg)
+					elseif kind == "unit" then -- If unit is selected, go to selection state
+						unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+					end
+				end
+				-- STATE SELECTION : select and move units on the field
+				if unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+					if kind == "unit" then -- handle movement / selection
+						if doubleClick < 0.3 then -- multiple selection of units of same type and same team using double click
+							local unitArray = Spring.GetTeamUnitsByDefs(Spring.GetUnitTeam(var), Spring.GetUnitDefID(var)) -- get units of same type and same team
+							proceedSelection(unitArray)
+							doubleClick = 0.3
+							return true
 						else
-							proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
+							if Spring.IsUnitSelected(var) then
+								if proceedDeselection(var) then -- deselect the unit if shift is pressed
+									return false
+								else
+									clickToSelect = true -- if the unit is already selected and shift is not pressed, allow isolation
+								end
+							else
+								proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
+							end
+							mouseMove = true
+							Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
+							return true
 						end
-						mouseMove = true
-						Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
+					else -- start a box selection
+						proceedSelection({}) -- deselect all units
+						plotSelection = true
+						drawStartX, drawEndX = mx, mx
+						drawStartY, drawEndY = my, my
 						return true
 					end
-				else -- start a box selection
-					proceedSelection({}) -- deselect all units
-					plotSelection = true
+				end
+			end
+
+			-- STATE ZONE : draw, move and rename logical zones
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+				if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
+					rValue, gValue, bValue = math.random(), math.random(), math.random() -- define new zone color
+					plotZone = true
 					drawStartX, drawEndX = mx, mx
 					drawStartY, drawEndY = my, my
-					return true
-				end
-			end
-		end
-
-		-- STATE ZONE : draw, move and rename logical zones
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
-				rValue, gValue, bValue = math.random(), math.random(), math.random() -- define new zone color
-				plotZone = true
-				drawStartX, drawEndX = mx, mx
-				drawStartY, drawEndY = my, my
-			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
-				local _, var = Spring.TraceScreenRay(mx, my, true, true)
-				if var ~= nil then
-					local x, _, z = unpack(var)
-					zoneAnchorX, zoneAnchorZ = x, z
-					-- select new zone
-					if selectedZone ~= clickedZone then
-						selectedZone = clickedZone
-					end
-					if selectedZone ~= nil then
-						zoneSide = getZoneSide(x, z) -- get side to proceed movement/resizing
-						mouseMove = true
+				elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
+					local _, var = Spring.TraceScreenRay(mx, my, true, true)
+					if var ~= nil then
+						local x, _, z = unpack(var)
+						zoneAnchorX, zoneAnchorZ = x, z
+						-- select new zone
+						if selectedZone ~= clickedZone then
+							selectedZone = clickedZone
+						end
+						if selectedZone ~= nil then
+							zoneSide = getZoneSide(x, z) -- get side to proceed movement/resizing
+							mouseMove = true
+						end
 					end
 				end
+				clickToSelect = true
+				return true
 			end
-			clickToSelect = true
-			return true
-		end
 
-		-- STATE TRIGGER
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-			local e = {}
-			if currentEvent then
-				if currentAction then
-					e = events[currentEvent].actions[currentAction]
-				elseif currentCondition then
-					e = events[currentEvent].conditions[currentCondition]
-				end
-			end
-			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
-				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-				if var and currentEvent and (currentCondition or currentAction) then
-					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					local x, _, z = unpack(var)
-					e.params[changedParam] = {}
-					e.params[changedParam].x = round(x)
-					e.params[changedParam].z = round(z)
-					Screen0:AddChild(windows["triggerWindow"])
-					Screen0:AddChild(windows["eventWindow"])
-					Screen0:AddChild(windows["importWindow"])
-					Screen0:RemoveChild(randomInZoneWindow)
+			-- STATE TRIGGER
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
+				local e = {}
+				if currentEvent then
 					if currentAction then
-						Screen0:AddChild(windows["actionWindow"])
-						drawActionFrame(false)
+						e = events[currentEvent].actions[currentAction]
 					elseif currentCondition then
-						Screen0:AddChild(windows["conditionWindow"])
-						drawConditionFrame(false)
+						e = events[currentEvent].conditions[currentCondition]
 					end
 				end
-			elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
-				if kind == "unit" and currentEvent then
-					triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-					e.params[changedParam] = {}
-					e.params[changedParam].type = "unit"
-					e.params[changedParam].value = var
-					Screen0:AddChild(windows["triggerWindow"])
-					Screen0:AddChild(windows["eventWindow"])
-					Screen0:AddChild(windows["importWindow"])
-					Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
-					Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
-					Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
-					if currentAction then
-						Screen0:AddChild(windows["actionWindow"])
-						drawActionFrame(false)
-					elseif currentCondition then
-						Screen0:AddChild(windows["conditionWindow"])
-						drawConditionFrame(false)
+				if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKPOSITION then
+					local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+					if var and currentEvent and (currentCondition or currentAction) then
+						triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+						local x, _, z = unpack(var)
+						e.params[changedParam] = {}
+						e.params[changedParam].x = round(x)
+						e.params[changedParam].z = round(z)
+						Screen0:AddChild(windows["triggerWindow"])
+						Screen0:AddChild(windows["eventWindow"])
+						Screen0:AddChild(windows["importWindow"])
+						Screen0:RemoveChild(randomInZoneWindow)
+						if currentAction then
+							Screen0:AddChild(windows["actionWindow"])
+							drawActionFrame(false)
+						elseif currentCondition then
+							Screen0:AddChild(windows["conditionWindow"])
+							drawConditionFrame(false)
+						end
+					end
+				elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
+					if kind == "unit" and currentEvent then
+						triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+						e.params[changedParam] = {}
+						e.params[changedParam].type = "unit"
+						e.params[changedParam].value = var
+						Screen0:AddChild(windows["triggerWindow"])
+						Screen0:AddChild(windows["eventWindow"])
+						Screen0:AddChild(windows["importWindow"])
+						Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
+						Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
+						Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
+						if currentAction then
+							Screen0:AddChild(windows["actionWindow"])
+							drawActionFrame(false)
+						elseif currentCondition then
+							Screen0:AddChild(windows["conditionWindow"])
+							drawConditionFrame(false)
+						end
 					end
 				end
 			end
-		end
 
-	-- Right click
-	elseif button == 3 then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
-			unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
-			if kind == "unit" then
-				local unitSelection = Spring.GetSelectedUnits()
-				if #unitSelection == 0 or not Spring.IsUnitSelected(var) then
-					proceedSelection({var})
-				end
-				if Spring.IsUnitSelected(var) then
-					Screen0:AddChild(unitContextualMenu)
-					if mx + unitContextualMenu.width > screenSizeX then -- force contextual menu in the screen region
-						unitContextualMenu.x = ((mx - unitContextualMenu.width) / screenSizeX * 100).."%"
-					else
-						unitContextualMenu.x = (mx / screenSizeX * 100).."%"
+		-- Right click
+		elseif button == 3 then
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then -- enable selection / disable unit placement
+				unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+				if kind == "unit" then
+					local unitSelection = Spring.GetSelectedUnits()
+					if #unitSelection == 0 or not Spring.IsUnitSelected(var) then
+						proceedSelection({var})
 					end
-					if screenSizeY - my + unitContextualMenu.height > screenSizeY then
-						unitContextualMenu.y = ((screenSizeY - my - unitContextualMenu.height) / screenSizeY * 100).."%"
-					else
-						unitContextualMenu.y = ((screenSizeY - my) / screenSizeY * 100).."%"
+					if Spring.IsUnitSelected(var) then
+						Screen0:AddChild(unitContextualMenu)
+						if mx + unitContextualMenu.width > screenSizeX then -- force contextual menu in the screen region
+							unitContextualMenu.x = ((mx - unitContextualMenu.width) / screenSizeX * 100).."%"
+						else
+							unitContextualMenu.x = (mx / screenSizeX * 100).."%"
+						end
+						if screenSizeY - my + unitContextualMenu.height > screenSizeY then
+							unitContextualMenu.y = ((screenSizeY - my - unitContextualMenu.height) / screenSizeY * 100).."%"
+						else
+							unitContextualMenu.y = ((screenSizeY - my) / screenSizeY * 100).."%"
+						end
+						unitContextualMenu.width = "20%"
+						unitContextualMenu.height = "20%"
+						unitContextualMenu:DetectRelativeBounds()
+						unitContextualMenu:AlignControl()
 					end
-					unitContextualMenu.width = "20%"
-					unitContextualMenu.height = "20%"
-					unitContextualMenu:DetectRelativeBounds()
-					unitContextualMenu:AlignControl()
 				end
+			elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
+				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 			end
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then -- enable selection / disable zone placement
-			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
 		end
 	end
 end
 
 function widget:MouseRelease(mx, my, button)
-	if button == 1 then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-			-- raycast
-			local kind, var = Spring.TraceScreenRay(mx, my)
-			if kind == "unit" then
-				if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
-					proceedSelection({var})
-					clickToSelect = false
+	if not logicalWidgetDeactivation then
+		if button == 1 then
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+				-- raycast
+				local kind, var = Spring.TraceScreenRay(mx, my)
+				if kind == "unit" then
+					if clickToSelect and doubleClick > 0.3 then -- isolate one unit if the mouse did not move during the process
+						proceedSelection({var})
+						clickToSelect = false
+					end
 				end
+				-- return in idle state
+				plotSelection = false
+				mouseMove = false
 			end
-			-- return in idle state
-			plotSelection = false
-			mouseMove = false
-		end
 
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if clickToSelect then -- select clicked zone and go to selection state
-				selectedZone = clickedZone
-				zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
-				local zone = 	{
-										red = rValue, green = gValue, blue = bValue,
-										x1 = round(zonePositions.zoneX1) - round(zonePositions.zoneX1)%8,
-										x2 = round(zonePositions.zoneX2) - round(zonePositions.zoneX2)%8,
-										z1 = round(zonePositions.zoneZ1) - round(zonePositions.zoneZ1)%8,
-										z2 = round(zonePositions.zoneZ2) - round(zonePositions.zoneZ2)%8,
-										id = zoneNumber,
-										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
-										type = "Rectangle",
-										shown = true,
-										alwaysInView = false,
-										marker = false,
-										showInGame = true
-									}
-				if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
-					table.insert(zoneList, zone)
-					zoneNumber = zoneNumber + 1
-					requestSave()
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+				if clickToSelect then -- select clicked zone and go to selection state
+					selectedZone = clickedZone
+					zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+				elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT then
+					local zone = 	{
+											red = rValue, green = gValue, blue = bValue,
+											x1 = round(zonePositions.zoneX1) - round(zonePositions.zoneX1)%8,
+											x2 = round(zonePositions.zoneX2) - round(zonePositions.zoneX2)%8,
+											z1 = round(zonePositions.zoneZ1) - round(zonePositions.zoneZ1)%8,
+											z2 = round(zonePositions.zoneZ2) - round(zonePositions.zoneZ2)%8,
+											id = zoneNumber,
+											name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
+											type = "Rectangle",
+											shown = true,
+											alwaysInView = false,
+											marker = false,
+											showInGame = true
+										}
+					if zone.x2 - zone.x1 >= minZoneSize and zone.z2 - zone.z1 >= minZoneSize then -- if the drawn zone is large enough, store it
+						table.insert(zoneList, zone)
+						zoneNumber = zoneNumber + 1
+						requestSave()
+					end
+				elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
+					local zone = 	{
+											red = rValue, green = gValue, blue = bValue,
+											a = round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2) - round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2)%8,
+											b = round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2) - round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2)%8,
+											x = round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2) - round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2)%8,
+											z = round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2) - round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2)%8,
+											id = zoneNumber,
+											name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
+											type = "Disk",
+											shown = true,
+											alwaysInView = false,
+											marker = false,
+											showInGame = true
+										}
+					if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
+						table.insert(zoneList, zone)
+						zoneNumber = zoneNumber + 1
+						requestSave()
+					end
 				end
-			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
-				local zone = 	{
-										red = rValue, green = gValue, blue = bValue,
-										a = round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2) - round((zonePositions.zoneX2 - zonePositions.zoneX1) / 2)%8,
-										b = round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2) - round((zonePositions.zoneZ2 - zonePositions.zoneZ1) / 2)%8,
-										x = round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2) - round((zonePositions.zoneX1 + zonePositions.zoneX2) / 2)%8,
-										z = round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2) - round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2)%8,
-										id = zoneNumber,
-										name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
-										type = "Disk",
-										shown = true,
-										alwaysInView = false,
-										marker = false,
-										showInGame = true
-									}
-				if 2*zone.a >= minZoneSize and 2*zone.b >= minZoneSize then -- if the drawn zone is large enough, store it
-					table.insert(zoneList, zone)
-					zoneNumber = zoneNumber + 1
-					requestSave()
-				end
+				plotZone = false
+				mouseMove = false
+				zoneSide = ""
 			end
-			plotZone = false
-			mouseMove = false
-			zoneSide = ""
 		end
+		doubleClick = 0 -- reset double click timer
+		if toSave then
+			saveState()
+			toSave = false
+		end
+		return true
 	end
-	doubleClick = 0 -- reset double click timer
-	if toSave then
-		saveState()
-		toSave = false
-	end
-	return true
 end
 
 function widget:MouseMove(mx, my, dmx, dmy, button)
-	-- disable click to select and double click if mousemove
-	clickToSelect = false
-	doubleClick = 0.3
+	if not logicalWidgetDeactivation then
+		-- disable click to select and double click if mousemove
+		clickToSelect = false
+		doubleClick = 0.3
 
-	if button == 1 then
-		-- STATE SELECTION
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-			local altPressed, ctrlPressed = Spring.GetModKeyState()
-			if altPressed then -- Send a message to the gadget to rotate selectedUnits
-				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-				if var ~= nil then
-					local x, _, z = unpack(var)
-					local msg = "Rotate Units".."++"..x.."++"..z
-					Spring.SendLuaRulesMsg(msg)
-				end
-			elseif ctrlPressed then -- Send a message to the gadget to make unit face a point
-				local kind, var = Spring.TraceScreenRay(mx, my, true, true)
-				if var ~= nil then
-					local x, _, z = unpack(var)
-					local msg = "Face Units".."++"..x.."++"..z
-					Spring.SendLuaRulesMsg(msg)
-				end
-			else -- Send a message to the gadget to move selected units
-				if mouseMove and not plotSelection then
-					local _, pos = Spring.TraceScreenRay(mx, my, true)
-					if pos then
-						local x, _, z = unpack(pos)
-						x, z = round(x), round(z)
-						local msg = "Move Units".."++"..x.."++"..z
-						Spring.SendLuaRulesMsg(msg)
-					end
-				end
-				-- update selection box
-				if plotSelection then
-					drawEndX = mx
-					drawEndY = my
-					-- Select all units in the rectangle
-					local unitSelection = GetUnitsInScreenRectangle(drawStartX, drawStartY, drawEndX, drawEndY)
-					proceedSelection(unitSelection)
-				end
-			end
-		end
-
-		-- STATE ZONE
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
-				-- update zone
-				if plotZone then
-					drawEndX = mx
-					drawEndY = my
-				end
-			elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
-				if mouseMove and selectedZone then
-					local _, var = Spring.TraceScreenRay(mx, my, true, true)
+		if button == 1 then
+			-- STATE SELECTION
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+				local altPressed, ctrlPressed = Spring.GetModKeyState()
+				if altPressed then -- Send a message to the gadget to rotate selectedUnits
+					local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 					if var ~= nil then
 						local x, _, z = unpack(var)
-						x, z = round(x), round(z)
-						local dx, dz = round(x - zoneAnchorX), round(z - zoneAnchorZ)
-						dx = dx - sign(dx) * ( (sign(dx)*dx)%8 ) -- compute variations modulo 8 (complex because operator % only accepts positive numbers)
-						dz = dz - sign(dz) * ( (sign(dz)*dz)%8 )
-						applyChangesToSelectedZone(dx, dz)
-						requestSave()
+						local msg = "Rotate Units".."++"..x.."++"..z
+						Spring.SendLuaRulesMsg(msg)
+					end
+				elseif ctrlPressed then -- Send a message to the gadget to make unit face a point
+					local kind, var = Spring.TraceScreenRay(mx, my, true, true)
+					if var ~= nil then
+						local x, _, z = unpack(var)
+						local msg = "Face Units".."++"..x.."++"..z
+						Spring.SendLuaRulesMsg(msg)
+					end
+				else -- Send a message to the gadget to move selected units
+					if mouseMove and not plotSelection then
+						local _, pos = Spring.TraceScreenRay(mx, my, true)
+						if pos then
+							local x, _, z = unpack(pos)
+							x, z = round(x), round(z)
+							local msg = "Move Units".."++"..x.."++"..z
+							Spring.SendLuaRulesMsg(msg)
+						end
+					end
+					-- update selection box
+					if plotSelection then
+						drawEndX = mx
+						drawEndY = my
+						-- Select all units in the rectangle
+						local unitSelection = GetUnitsInScreenRectangle(drawStartX, drawStartY, drawEndX, drawEndY)
+						proceedSelection(unitSelection)
+					end
+				end
+			end
+
+			-- STATE ZONE
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+				if zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWRECT or zoneStateMachine:getCurrentState() == zoneStateMachine.states.DRAWDISK then
+					-- update zone
+					if plotZone then
+						drawEndX = mx
+						drawEndY = my
+					end
+				elseif zoneStateMachine:getCurrentState() == zoneStateMachine.states.SELECTION then
+					if mouseMove and selectedZone then
+						local _, var = Spring.TraceScreenRay(mx, my, true, true)
+						if var ~= nil then
+							local x, _, z = unpack(var)
+							x, z = round(x), round(z)
+							local dx, dz = round(x - zoneAnchorX), round(z - zoneAnchorZ)
+							dx = dx - sign(dx) * ( (sign(dx)*dx)%8 ) -- compute variations modulo 8 (complex because operator % only accepts positive numbers)
+							dz = dz - sign(dz) * ( (sign(dz)*dz)%8 )
+							applyChangesToSelectedZone(dx, dz)
+							requestSave()
+						end
 					end
 				end
 			end
@@ -5952,135 +5997,136 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 end
 
 function widget:KeyPress(key, mods)
-	
-	-- Global
-	-- CTRL + S : save the current map
-	if key == Spring.GetKeyCode("s") and mods.ctrl then
-		saveMapFrame()
-		return true
-	-- CTRL + O : load a map
-	elseif key == Spring.GetKeyCode("o") and mods.ctrl then
-		loadMapFrame()
-		return true
-	-- CTRL + N : new map
-	elseif key == Spring.GetKeyCode("n") and mods.ctrl then
-		newMapFrame()
-		return true
-	-- CTRL + Z
-	elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.2 then
-		saveLoadCooldown = 0
-		loadState(1)
-		return true
-	-- CTRL + Y
-	elseif key == Spring.GetKeyCode("y") and mods.ctrl and saveLoadCooldown > 0.2 then
-		saveLoadCooldown = 0
-		loadState(-1)
-		return true
-	-- ESCAPE : back to file menu
-	elseif key == Spring.GetKeyCode("esc") then
-		if globalStateMachine:getCurrentState() == globalStateMachine.states.NONE then
-			backToMenuFrame()
-		else
-			clearUI()
-		end
-		return true
-	-- ENTER
-	elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
-		return true
-	end
-	-- Selection state
-	if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
-		local unitSelection = Spring.GetSelectedUnits()
-		-- CTRL + A : select all units
-		if key == Spring.GetKeyCode("a") and mods.ctrl then
-			Spring.SelectUnitArray(Spring.GetAllUnits())
+	if not logicalWidgetDeactivation then
+		-- Global
+		-- CTRL + S : save the current map
+		if key == Spring.GetKeyCode("s") and mods.ctrl then
+			saveMapFrame()
 			return true
-		-- DELETE : delete selected units
-		elseif key == Spring.GetKeyCode("delete") then
-			for i, g in ipairs(unitGroups) do
-				for i, u in ipairs(unitSelection) do
-					if findInTable(g.units, u) then
-						removeUnitFromGroup(g, u)
-					end
-				end
+		-- CTRL + O : load a map
+		elseif key == Spring.GetKeyCode("o") and mods.ctrl then
+			loadMapFrame()
+			return true
+		-- CTRL + N : new map
+		elseif key == Spring.GetKeyCode("n") and mods.ctrl then
+			newMapFrame()
+			return true
+		-- CTRL + Z
+		elseif key == Spring.GetKeyCode("z") and mods.ctrl and saveLoadCooldown > 0.2 then
+			saveLoadCooldown = 0
+			loadState(1)
+			return true
+		-- CTRL + Y
+		elseif key == Spring.GetKeyCode("y") and mods.ctrl and saveLoadCooldown > 0.2 then
+			saveLoadCooldown = 0
+			loadState(-1)
+			return true
+		-- ESCAPE : back to file menu
+		elseif key == Spring.GetKeyCode("esc") then
+			if globalStateMachine:getCurrentState() == globalStateMachine.states.NONE then
+				backToMenuFrame()
+			else
+				clearUI()
 			end
-			Spring.SendLuaRulesMsg("Delete Selected Units")
+			return true
+		-- ENTER
+		elseif key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
 			return true
 		end
-		-- ARROWS : move selected units
-		if #unitSelection > 0 then
-			if key == Spring.GetKeyCode("up") then
-				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
-				local msg = "Translate Units".."++".."0".."++".."-1"
-				Spring.SendLuaRulesMsg(msg)
+		-- Selection state
+		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
+			local unitSelection = Spring.GetSelectedUnits()
+			-- CTRL + A : select all units
+			if key == Spring.GetKeyCode("a") and mods.ctrl then
+				Spring.SelectUnitArray(Spring.GetAllUnits())
 				return true
-			elseif key == Spring.GetKeyCode("down") then
-				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
-				local msg = "Translate Units".."++".."0".."++".."1"
-				Spring.SendLuaRulesMsg(msg)
-				return true
-			elseif key == Spring.GetKeyCode("left") then
-				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
-				local msg = "Translate Units".."++".."-1".."++".."0"
-				Spring.SendLuaRulesMsg(msg)
-				return true
-			elseif key == Spring.GetKeyCode("right") then
-				Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
-				local msg = "Translate Units".."++".."1".."++".."0"
-				Spring.SendLuaRulesMsg(msg)
-				return true
-			end
-		end
-	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-		if selectedZone ~= nil then
-			-- DELETE : delete selected zone
-			if key == Spring.GetKeyCode("delete") then
-				for i, z in ipairs(zoneList) do
-					if z == selectedZone then
-						table.remove(zoneList, i)
-						selectedZone = nil
-						break
+			-- DELETE : delete selected units
+			elseif key == Spring.GetKeyCode("delete") then
+				for i, g in ipairs(unitGroups) do
+					for i, u in ipairs(unitSelection) do
+						if findInTable(g.units, u) then
+							removeUnitFromGroup(g, u)
+						end
 					end
 				end
-				saveState()
-				return true
-			-- ARROWS : move selected zone
-			elseif key == Spring.GetKeyCode("up") then
-				if selectedZone.type == "Rectangle" then
-					selectedZone.z1 = selectedZone.z1 - 8
-					selectedZone.z2 = selectedZone.z2 - 8
-				elseif selectedZone.type == "Disk" then
-					selectedZone.z = selectedZone.z - 8
-				end
-				return true
-			elseif key == Spring.GetKeyCode("down") then
-				if selectedZone.type == "Rectangle" then
-					selectedZone.z1 = selectedZone.z1 + 8
-					selectedZone.z2 = selectedZone.z2 + 8
-				elseif selectedZone.type == "Disk" then
-					selectedZone.z = selectedZone.z + 8
-				end
-				return true
-			elseif key == Spring.GetKeyCode("left") then
-				if selectedZone.type == "Rectangle" then
-					selectedZone.x1 = selectedZone.x1 - 8
-					selectedZone.x2 = selectedZone.x2 - 8
-				elseif selectedZone.type == "Disk" then
-					selectedZone.x = selectedZone.x - 8
-				end
-				return true
-			elseif key == Spring.GetKeyCode("right") then
-				if selectedZone.type == "Rectangle" then
-					selectedZone.x1 = selectedZone.x1 + 8
-					selectedZone.x2 = selectedZone.x2 + 8
-				elseif selectedZone.type == "Disk" then
-					selectedZone.x = selectedZone.x + 8
-				end
+				Spring.SendLuaRulesMsg("Delete Selected Units")
 				return true
 			end
+			-- ARROWS : move selected units
+			if #unitSelection > 0 then
+				if key == Spring.GetKeyCode("up") then
+					Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+					local msg = "Translate Units".."++".."0".."++".."-1"
+					Spring.SendLuaRulesMsg(msg)
+					return true
+				elseif key == Spring.GetKeyCode("down") then
+					Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+					local msg = "Translate Units".."++".."0".."++".."1"
+					Spring.SendLuaRulesMsg(msg)
+					return true
+				elseif key == Spring.GetKeyCode("left") then
+					Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+					local msg = "Translate Units".."++".."-1".."++".."0"
+					Spring.SendLuaRulesMsg(msg)
+					return true
+				elseif key == Spring.GetKeyCode("right") then
+					Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
+					local msg = "Translate Units".."++".."1".."++".."0"
+					Spring.SendLuaRulesMsg(msg)
+					return true
+				end
+			end
+		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+			if selectedZone ~= nil then
+				-- DELETE : delete selected zone
+				if key == Spring.GetKeyCode("delete") then
+					for i, z in ipairs(zoneList) do
+						if z == selectedZone then
+							table.remove(zoneList, i)
+							selectedZone = nil
+							break
+						end
+					end
+					saveState()
+					return true
+				-- ARROWS : move selected zone
+				elseif key == Spring.GetKeyCode("up") then
+					if selectedZone.type == "Rectangle" then
+						selectedZone.z1 = selectedZone.z1 - 8
+						selectedZone.z2 = selectedZone.z2 - 8
+					elseif selectedZone.type == "Disk" then
+						selectedZone.z = selectedZone.z - 8
+					end
+					return true
+				elseif key == Spring.GetKeyCode("down") then
+					if selectedZone.type == "Rectangle" then
+						selectedZone.z1 = selectedZone.z1 + 8
+						selectedZone.z2 = selectedZone.z2 + 8
+					elseif selectedZone.type == "Disk" then
+						selectedZone.z = selectedZone.z + 8
+					end
+					return true
+				elseif key == Spring.GetKeyCode("left") then
+					if selectedZone.type == "Rectangle" then
+						selectedZone.x1 = selectedZone.x1 - 8
+						selectedZone.x2 = selectedZone.x2 - 8
+					elseif selectedZone.type == "Disk" then
+						selectedZone.x = selectedZone.x - 8
+					end
+					return true
+				elseif key == Spring.GetKeyCode("right") then
+					if selectedZone.type == "Rectangle" then
+						selectedZone.x1 = selectedZone.x1 + 8
+						selectedZone.x2 = selectedZone.x2 + 8
+					elseif selectedZone.type == "Disk" then
+						selectedZone.x = selectedZone.x + 8
+					end
+					return true
+				end
+			end
 		end
+		return false
 	end
-	return false
 end
 
 function widget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
