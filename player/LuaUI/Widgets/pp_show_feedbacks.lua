@@ -159,7 +159,7 @@ function handleFeedback(str)
 		--feedback_only_string = breakLine(feedback_only_string,width)
 		e = {logicType = "ShowMessage", message = feedback_only_string, width = width, pause = true}
 	end
-	Script.LuaUI.MissionEvent(e) -- registered by pp_mission_gui.lua
+	Script.LuaUI.MissionEvent(e) -- registered by pp_gui_main_menu.lua
 end
 
 function widget:Initialize()

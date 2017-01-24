@@ -21,11 +21,10 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local missionScript = VFS.Include("MissionPlayer_Editor.lua")
-
+local missionScript = nil
 local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
-local testmap = Spring.GetModOptions()["testmap"]  --indicate if the mission is runned from the context of the editor ("test mission button")
+local testmap = Spring.GetModOptions()["testmap"]  --indicate the editor that wants to test a level ("test mission button")
 -- variable to know the state of the mission
 -- -1 => mission lost
 --  0 => mission running
@@ -41,7 +40,6 @@ local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..mi
 function gadget:RecvLuaMsg(msg, player)
   missionScript.RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
-    Spring.Echo("it is tried to Show briefing") 
     showBriefing=true  
   end
   if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="mission")) then
@@ -60,13 +58,8 @@ function gadget:GamePreload()
 	for i = 1,table.getn(units) do
 	  Spring.DestroyUnit(units[i], false, true)
 	end
-	local miss = ""
-	if(Spring.GetModOptions()["testmap"])then
-		miss = Spring.GetModOptions()["testmap"]
-	else
-		miss=VFS.LoadFile("Missions/"..missionName..".editor")    
-	end
-	missionScript.parseJson(miss)
+	missionScript = VFS.Include("MissionPlayer_Editor.lua")
+	missionScript.parseJson(VFS.LoadFile("Missions/"..missionName..".editor"))
 end
 
 function gadget:GameFrame( frameNumber )
@@ -96,7 +89,7 @@ function gadget:GameFrame( frameNumber )
           _G.event.state = "won"
         end
         local victoryState = _G.event.state or ""
-        if not solutions or testmap == "1" or Spring.GetConfigString("Feedbacks Widget","disabled") ~= "enabled" then
+        if not solutions or testmap ~= nil or Spring.GetConfigString("PP Show Feedbacks","disabled") ~= "enabled" then
           SendToUnsynced("MissionEvent")
         else
           SendToUnsynced("MissionEnded", victoryState)
@@ -150,15 +143,8 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
   if(unitID~=nil)then
     local damageTable={attackedUnit=unitID,damage=damage, attackerID=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
     Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
-    --Spring.Echo("damage sent")
   end
 end
-
---function gadget:UnitFromFactory(unitID, unitDefID, unitTeam, factID, factDefID, userOrders) 
---    local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
---    Spring.SendLuaRulesMsg("unitCreation"..json.encode(damageTable))
---    Spring.Echo("unitCreatedFromFactory")
---end
 
 function gadget:UnitFinished(unitID, unitDefID, unitTeam)
     local damageTable={unitID=unitID,unitDefID=unitDefID, unitTeam=unitTeam}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
@@ -242,11 +228,6 @@ function gadget:RecvFromSynced(...)
     Script.LuaUI.AddZoneToDisplayList(zone)
     
   elseif arg1 == "changeWidgetState" then
-    -- This may be not the better approach to activate/deactivate widgets
-    -- as an activated widget will be reloaded. These special settings are processed at frame0
-    -- so the side effects may not be harmful. If they do are harmful, then changeWidgetState from widget_activator.lua
-    -- should be called. However, registerGlobals do not work as registerGlobals can't work because of the necessary option handler = true
-    -- Using a Callins such as :KeyPress could be a workaround to use the function changeWidgetState whenever it's necessary
     local p=json.decode(arg2)
     if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
     if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end

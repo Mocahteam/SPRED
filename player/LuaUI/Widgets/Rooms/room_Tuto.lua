@@ -134,7 +134,7 @@ end
 
 MainMenu = CreateMainMenuCentered()
 
--- This is the main variable accessible from mission_gui.lua. It indicate wich
+-- This is the main variable accessible from pp_gui_main_menu.lua. It indicate wich
 -- tutorial window is set
 TutoView = MainMenu
 --------------------------------------------------------------------------------

@@ -1,7 +1,3 @@
--- $Id: mission_messenger.lua 3171 2008-11-06 09:06:29Z det $
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 function widget:GetInfo()
   return {
     name      = "PP GUI Messenger",
@@ -14,8 +10,6 @@ function widget:GetInfo()
   }
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 -- You must import the KEYSYM table if you want to access keys by name
 include('keysym.h.lua')
 
@@ -24,8 +18,6 @@ local gl, GL = gl, GL
 local fontHandler = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua", VFS.ZIP_FIRST))()
 local messages = {}
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 local function Split(s, separator)
   local results = {}
@@ -88,9 +80,6 @@ local function WordWrap(text, font, maxWidth, size)
   return allLines
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 local function DrawBox(width, height)
 	gl.Color(0, 0, 0, 0.5)
 	gl.Vertex(0.5, 0.5)
@@ -120,9 +109,6 @@ local function List(width, height, texture)
     gl.BeginEnd(GL.LINE_LOOP, DrawBorders, width, height)
   end
 end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 local Message  = {
   font      = "LuaUI/Fonts/FreeSansBold_16",
@@ -209,9 +195,6 @@ function Message:DeleteAll()
   end
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 function widget:DrawScreen()
   local viewSizeX, viewSizeY = gl.GetViewSizes()
   for message in pairs(messages) do
@@ -275,5 +258,3 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	end
 	return capture
 end
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------

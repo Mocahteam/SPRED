@@ -1,7 +1,3 @@
--- $Id: mission_gui.lua 3171 2008-11-06 09:06:29Z det $
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 function widget:GetInfo()
   return {
     name      = "PP GUI Main Menu",
@@ -14,8 +10,6 @@ function widget:GetInfo()
   }
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 -- You must import the KEYSYM table if you want to access keys by name
 include('keysym.h.lua')
 
@@ -442,9 +436,6 @@ function EmulateEscapeKey ()
   widget:KeyPress(KEYSYMS.ESCAPE, nil, nil, nil, nil)
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 function widget:Initialize()
   widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
@@ -468,6 +459,3 @@ function widget:Shutdown()
     ppTraces:close()
   end
 end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------

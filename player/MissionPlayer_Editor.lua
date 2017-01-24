@@ -1337,17 +1337,18 @@ local function parseJson(jsonString)
   ctx.mission=json.decode(jsonString)
   -- desactivate widget
   --[[
-    widgetHandler:EnableWidget("Traces Widget")
-  -- enable Feedbacks Widget
-  widgetHandler:EnableWidget("Feedbacks Widget")
-  -- enable Widget Informer
-  widgetHandler:EnableWidget("Widget Informer")
+    widgetHandler:EnableWidget("PP Meta Traces Manager")
+  -- enable PP Show Feedbacks
+  widgetHandler:EnableWidget("PP Show Feedbacks")
+  -- enable PP Widget Informer
+  widgetHandler:EnableWidget("PP Widget Informer")
   --]]
   local widgetWithForcedState={
-    ["Display Message"]=true,["Hide commands"]=true,["Messenger"]=true
-    ,["Mission GUI"]=true,["campaign launcher"]=true,["CA Interface"]=true
-    ,["Camera Auto"]=true,["Chili Framework"]=true,["Display Zones"]=true,["Traces Widget"]=true
-    ,["Feedbacks Widget"]=true,["Widget Informer"]=true
+    ["PP Display Bubble"]=true,["Hide commands"]=true,["PP GUI Messenger"]=true
+    ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
+	,["PP gui rooms"]=true,["PP Camera Auto"]=true,["Chili Framework"]=true
+	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
+	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true
   }
   
   for i=1, table.getn(ctx.mission.description.widgets) do
@@ -1659,4 +1660,4 @@ missionScript.RecvLuaMsg = RecvLuaMsg
 ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
 ctx.Spring=Spring 
 
-
+return missionScript
