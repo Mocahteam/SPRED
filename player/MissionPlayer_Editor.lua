@@ -1345,8 +1345,8 @@ local function parseJson(jsonString)
   --]]
   local widgetWithForcedState={
     ["PP Display Bubble"]=true,["Hide commands"]=true,["PP GUI Messenger"]=true
-    ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP gui rooms"]=true,["PP Camera Auto"]=true,["Chili Framework"]=true
+    ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
 	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true
   }

@@ -25,19 +25,16 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-if  Spring.GetModOptions()["testmap"] ~= nil then
-  WG.rooms["Video"] = "stupid stuff" -- dirty trick to get WG.rooms.Video.closed giving nil instead of raising error in case of testmap
-end
-
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 
 local mode = Spring.GetModOptions()["scenariomode"]
 
-local rooms = WG.rooms -- available in all widgets
-local Window = rooms.Window
-local Tab = rooms.Tab
+-- see Widget:Initialize() for default value of these variables
+local rooms
+local Window
+local Tab
 
 local ppTraces = nil -- File handler to store traces
 
@@ -447,6 +444,14 @@ function widget:Initialize()
     ppTraces:write(missionName.." start\n")
     ppTraces:flush()
   end
+  
+  rooms = WG.rooms -- WG is available in all widgets
+  Window = rooms.Window
+  Tab = rooms.Tab
+  if Spring.GetModOptions()["testmap"] ~= nil then
+    rooms["Video"] = "stupid stuff" -- dirty trick to get WG.rooms.Video.closed giving nil instead of raising error in case of testmap
+  end
+  
 end
 
 
