@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Display Message",
+    name      = "PP Display Bubble",
     desc      = "Display message at a specific position or above a unit",
     author    = "zigaroula,martinb, mocahteam",
     date      = "Apr 29, 2016",

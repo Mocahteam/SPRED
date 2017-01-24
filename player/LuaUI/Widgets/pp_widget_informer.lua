@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Widget Informer",
+    name      = "PP Widget Informer",
     desc      = "Used to inform about states of widgets by setting a ConfigString (see Spring.SetConfigString())",
     author    = "meresse, mocahteam",
     date      = "Jun 20, 2016",
@@ -12,7 +12,7 @@ function widget:GetInfo()
 end
 
 local savedActiveStates = {}
-local widgets = {"Feedbacks Widget"}
+local widgets = {"PP Show Feedbacks"}
 
 function informAboutWidget(name)
 	for _,e in pairs(widgets) do

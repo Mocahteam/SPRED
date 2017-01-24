@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name = "Widget Activator",
+    name = "PP Widget Activator",
     desc = "Activate or Deactivate Widgets",
     author = "zigaroula,martinb, mocahteam",
     version = "0.1",
@@ -13,16 +13,11 @@ function widget:GetInfo()
 end
 
 function changeWidgetState(widgetName,activation) -- Disable other widgets
-  Spring.Echo("we tryyyyyyyyyyy")
   if(widgetHandler.knownWidgets[widgetName]~=nil)then
     local w=widgetHandler.knownWidgets[widgetName]
     if w.active and activation then
-      Spring.Echo("disable this widget")
-      Spring.Echo(widgetName)
       widgetHandler:DisableWidget(widgetName)
     elseif not w.active and not activation then
-      Spring.Echo("enable this widget")
-      Spring.Echo(widgetName)
       widgetHandler:EnableWidget(widgetName)
     end
   end

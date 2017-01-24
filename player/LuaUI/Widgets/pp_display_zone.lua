@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Display Zones",
+    name      = "PP Display Zones",
     desc      = "Display zone at a specific position",
     author    = "mocahteam",
     date      = "Apr 29, 2016",

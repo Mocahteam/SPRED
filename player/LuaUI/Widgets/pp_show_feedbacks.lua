@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Feedbacks Widget",
+    name      = "PP Show Feedbacks",
     desc      = "Used to display feedbacks to the player during the game",
     author    = "meresse, mocahteam",
     date      = "Jun 20, 2016",
@@ -12,6 +12,29 @@ end
 
 local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 local fontHandler = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua", VFS.ZIP_FIRST))()
+local lang = Spring.GetModOptions()["language"] -- get the language
+local LANG_SCORE = "Your score: "
+local LANG_TENTATIVE = "Number of attempts to resolve the mission: "
+local LANG_PROGRAM_EXECUTION = "Program execution time: "
+local LANG_PROGRAM_REFERENCE = "Reference execution time: "
+local LANG_AVERAGE_TIME = "Average wait time between two attempts: "
+local LANG_MISSION_TIME = "Mission resolution time: "
+local LANG_REFERENCE_TIME = "Reference resolution time: "
+local LANG_ONE_ADVICE = "Advice to improve the program: "
+local LANG_SEVERAL_ADVICE = "Advices to improve the program: "
+local LANG_WARNING = "Warning: "
+if lang == "fr" then
+	LANG_SCORE = "Votre score : "
+	LANG_TENTATIVE = "Nombre de tentative(s) de résolution de la mission : "
+	LANG_PROGRAM_EXECUTION = "Temps d'éxecution de ton programme : "
+	LANG_PROGRAM_REFERENCE = "Temps d'éxecution référence : "
+	LANG_AVERAGE_TIME = "Temps d'attente moyen entre deux tentatives : "
+	LANG_MISSION_TIME = "Temps de résolution de la mission : "
+	LANG_REFERENCE_TIME = "Temps de résolution référence : "
+	LANG_ONE_ADVICE = "Un conseil pour améliorer votre programme : "
+	LANG_SEVERAL_ADVICE = "Quelques conseils pour améliorer votre programme : "
+	LANG_WARNING = "Attention : "
+end
 
 local white = "\255\255\255\255"
 local red = "\255\255\0\0"
@@ -76,27 +99,27 @@ function getFeedbackMessage(json_obj, export_score)
 		else
 			color = green
 		end
-		s = s.."Votre score : "..color..score.." / 100"..white.."\n"
+		s = s..LANG_SCORE..color..score.." / 100"..white.."\n"
 	end
 	if json_obj.num_attempts ~= nil and export_score then
-		s = s.."Nombre de de tentative(s) de résolution de la mission : "..json_obj.num_attempts.."\n"
+		s = s..LANG_TENTATIVE..json_obj.num_attempts.."\n"
 	end
 	if json_obj.execution_time ~= nil and export_score then
-		s = s.."Temps d'éxecution de ton programme : "..json_obj.execution_time.." s\n"
-		s = s.."Temps d'éxecution référence : "..json_obj.ref_execution_time.." s\n"
+		s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\n"
+		s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\n"
 	end
 	if json_obj.exec_mean_wait_time ~= nil and export_score then
-		s = s.."Temps d'attente moyen entre deux tentatives : "..json_obj.exec_mean_wait_time.." s\n"
+		s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\n"
 	end
 	if json_obj.resolution_time ~= nil and export_score then
-		s = s.."Temps de résolution de la mission : "..json_obj.resolution_time.." s\n"
-		s = s.."Temps de résolution référence : "..json_obj.ref_resolution_time.." s\n"
+		s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
+		s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
 	end
 	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
 		if #json_obj.feedbacks == 1 then
-			s = s.."\nUn conseil pour améliorer votre programme :\n\n"
+			s = s.."\n"..LANG_ONE_ADVICE.."\n\n"
 		else
-			s = s.."\nQuelques conseils pour améliorer votre programme :\n\n"
+			s = s.."\n"..LANG_SEVERAL_ADVICE.."\n\n"
 		end
 		for i = 1,#json_obj.feedbacks do
 			s = s..color..json_obj.feedbacks[i]..white.."\n"
@@ -106,7 +129,7 @@ function getFeedbackMessage(json_obj, export_score)
 		end
 	end
 	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
-		s = s.."\nAttention :\n\n"
+		s = s.."\n"..LANG_WARNING.."\n\n"
 		for i = 1,#json_obj.warnings do
 			s = s..red..json_obj.warnings[i]..white.."\n"
 			if #json_obj.warnings > 1 and i < #json_obj.warnings then
@@ -140,11 +163,11 @@ function handleFeedback(str)
 end
 
 function widget:Initialize()
-	Spring.SetConfigString("Feedbacks Widget", "enabled", 1) -- inform the engine and mission_runner
+	Spring.SetConfigString("PP Show Feedbacks", "enabled", 1) -- inform the engine and mission_runner
 	widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
 end
 
 function widget:Shutdown()
-	Spring.SetConfigString("Feedbacks Widget", "disabled", 1) -- inform the engine and mission_runner
+	Spring.SetConfigString("PP Show Feedbacks", "disabled", 1) -- inform the engine and mission_runner
 	widgetHandler:DeregisterGlobal("handleFeedback", handleFeedback)
 end

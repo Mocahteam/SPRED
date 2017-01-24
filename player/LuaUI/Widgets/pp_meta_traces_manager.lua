@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Traces Widget",
+    name      = "PP Meta Traces Manager",
     desc      = "Used to deal with traces",
     author    = "meresse, mocahteam",
     date      = "Feb 25, 2016",

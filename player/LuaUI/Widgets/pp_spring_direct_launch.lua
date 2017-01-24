@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name    = "campaign launcher",
+    name    = "Spring Direct Launch for mission player",
     desc    = "",
     author  = "mocahteam",
     date    = "",
@@ -76,7 +76,7 @@ local function removeWidgets()
   RemovedWidgetList = {}
   local RemovedWidgetListName = {}
   for name,kw in pairs(widgetHandler.knownWidgets) do
-    if kw.active and name ~= "campaign launcher" and name ~= "Chili Framework" then
+    if kw.active and name ~= "Spring Direct Launch for mission player" and name ~= "Chili Framework" then
       table.insert(RemovedWidgetListName,name)
     end
   end
@@ -91,12 +91,6 @@ local function removeWidgets()
     Spring.Echo("Removing",w.GetInfo().name)
     widgetHandler:RemoveWidget(w)
   end
---  for name, w in pairs(widgetHandler.widgets) do
---    if name ~= "campaign launcher" and name ~= "Chili Framework" then
---      Spring.Echo("initGUI disabled "..name)
---      widgetHandler:RemoveWidget(w)
---    end
---  end
 end
 
 function clearUI() -- Remove UI elements from the screen

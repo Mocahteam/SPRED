@@ -8,7 +8,7 @@
 
 function widget:GetInfo()
   return {
-    name      = "CA Interface",
+    name      = "PP gui rooms",
     desc      = "CA in-game interface",
     author    = "quantum, muratet, mocahteam",
     date      = "Jul 15, 2012",

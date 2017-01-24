@@ -4,7 +4,7 @@
 
 function widget:GetInfo()
   return {
-    name      = "Messenger",
+    name      = "PP GUI Messenger",
     desc      = "Displays Messages. Click on them to make them go away.",
     author    = "quantum, mocahteam",
     date      = "June 29, 2007",

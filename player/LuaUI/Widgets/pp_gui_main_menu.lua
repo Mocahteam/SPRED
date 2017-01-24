@@ -4,7 +4,7 @@
 
 function widget:GetInfo()
   return {
-    name      = "Mission GUI",
+    name      = "PP GUI Main Menu",
     desc      = "Turning this off might disrupt the mission.",
     author    = "quantum, muratet, mocahteam",
     date      = "Jul 15, 2012",
@@ -31,10 +31,6 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-local campaign = nil
-if Spring.GetModOptions()["editor"] == nil and Spring.GetModOptions()["testmap"] == nil then
-  campaign = VFS.Include ("campaign.lua") -- the default campaign of Prog&Play
-end
 if  Spring.GetModOptions()["testmap"] ~= nil then
   WG.rooms["Video"] = "stupid stuff" -- dirty trick to get WG.rooms.Video.closed giving nil instead of raising error in case of testmap
 end
@@ -53,7 +49,6 @@ local ppTraces = nil -- File handler to store traces
 
 -- Set label
 local saveMessage="Your progression has been saved under the name : "
-local previousMission = "Previous mission"
 local replayMission = "Replay mission"
 local nextMission = "Next mission"
 local quitGame = "Quit the game"
@@ -68,7 +63,6 @@ local saveProgression="Save progression"
 if lang == "fr" then
   saveMessage="Votre progression a été sauvegardée sous le nom : "
   continue= "continuer"
-  previousMission = "Mission précédente"
   replayMission = "Rejouer mission"
   nextMission = "Mission suivante"
   quitGame = "Quitter le jeu"
@@ -90,7 +84,7 @@ local function createTmpFile()
   if not VFS.FileExists("mission_ended.conf") then
     local f = io.open("mission_ended.conf", "w")
     if f ~= nil then
-      f:write("This file has been created by Mission GUI Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
+      f:write("This file has been created by \"PP GUI Main Menu\" Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
       f:flush()
       f:close()
     end
@@ -104,23 +98,6 @@ local template_endMission = {
   noMove = true,
   --noAnimation = true,
   tabs = {
-    -- The previousMission tab
-    {preset = function(tab)
-        -- By default this tab is disabled, activation depend on mission events (see MissionEvent function)
-        tab.title = "\255\50\50\50"..previousMission.."\255\255\255\255"
-        tab.isAboveColors = {
-			bottomLeft  = {0.3, 0.3, 0.3, 0.3},
-			topLeft     = {0.3, 0.3, 0.3, 0.3},
-			topRight    = {0.3, 0.3, 0.3, 0.3},
-			bottomRight = {0.3, 0.3, 0.3, 0.3}
-		}
-        tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
-        tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
-        tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
-        tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
-        tab.position = "bottom"
-      end
-    },
     -- The replayMission tab
     {preset = function(tab)
         tab.title = replayMission
@@ -261,8 +238,7 @@ function MissionEvent(e)
         WG.rooms.TutoView:Close()
       end
     end
-    
-    
+        
     if (Spring.GetModOptions()["testmap"]~=nil) then
       local message = ""
       if e.state == "won" then
@@ -284,17 +260,6 @@ function MissionEvent(e)
 	  -- define popup base text depending on victory state
       if e.state == "won" then
 		popup.lineArray = {victory}
-		if scenarioType == "default" then
-			if campaign[missionName]~= nil and campaign[missionName].nextMission == nil then
-				popup.lineArray = {victoryCampaign}
-			else 
-				popup.lineArray = {victory}
-			end
-		else --elseif scenarioType == "noScenario" then --commented out to be more robust
-			popup.lineArray = {victory}
-		--else
-		  -- TODO: use appliqManager to define accurate popup.lineArray property
-		end
 		if ppTraces ~= nil then
 			ppTraces:write(missionName.." won\n")
 			ppTraces:flush()
@@ -321,51 +286,6 @@ function MissionEvent(e)
         end
         table.insert(popup.lineArray,"")
       end
-	  
-      -- Enable PreviousMission
-      -- PreviousMission tab is activated if we are on the default scenario and a previous mission is defined
-      local activatePreviousMission = (scenarioType == "default" and campaign[missionName] and campaign[missionName].previousMission ~= nil)
-      if activatePreviousMission then
-        popup.tabs[1].preset = function(tab)
-			tab.title = previousMission
-			tab.position = "bottom"
-			tab.OnClick = function()
-				tab.parent:Close()
-				Script.LuaUI.TraceAction("previous "..campaign[missionName].previousMission.."\n")
-				local operations={
-				  ["MODOPTIONS"]=
-					{
-						["language"]=lang,
-						["scenario"]=scenarioType
-					}
-				}
-				genericRestart("Missions/"..campaign[missionName].previousMission..".editor", operations)
-            end
-          end
-      end
-	  
-	  -- Enable NextMission tabs
-      -- Next tab is activated if we are on the default scenario and a next mission is defined OR if we interpret an Appliq scenario (TODO: use appliq manager to define next mission)
-      local activateNextMission = ( ((scenarioType == "default")or( AppliqManager==nil)) and campaign[missionName] and campaign[missionName].nextMission ~= nil) -- or (scenarioType ~= "noScenario" and appliqManager.nextMission() ~= nil) ??????
-      -- Of course, we can pass to the next mission if current mission is won
-      -- If AppliqManager is nil (mostly because xml is not found) then  scenarioType is considered to default even if appliq mode is activated
-      if e.state == "won" and activateNextMission then
-        popup.tabs[3].preset = function(tab)
-            tab.title = nextMission
-            tab.position = "bottom"
-            tab.OnClick = function()
-              tab.parent:Close()
-              -- set nextLauncher depending on type of scenario
-              local nextLauncher = ""
-              if scenarioType == "default" then
-                nextLauncher = "Missions/"..campaign[missionName].nextMission..".txt"
-              else
-                -- TODO: define nextLauncher with appliqManager
-              end
-              DoTheRestart(nextLauncher, lang, scenarioType)
-            end
-          end
-      end
       
 	  -- Of course, we can pass to the next mission if current mission is won
       if mode=="appliq" and AppliqManager~=nil then     
@@ -391,8 +311,7 @@ function MissionEvent(e)
           Spring.Echo("end of scenario")
           popup.lineArray = {victoryCampaign}
           continue="\255\50\50\50"..continue.."\255\255\255\255"
-        else      
-          
+        else
           local currentInput=AppliqManager:getCurrentInputName()
           --Spring.Echo(currentoptions["progression"])
          -- Spring.Echo(currentInput)
