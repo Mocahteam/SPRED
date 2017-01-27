@@ -36,7 +36,7 @@ local showBriefing = false
 local initializeUnits = true
 
 local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0)
--- message sent by mission_gui (Widget)
+-- message sent by pp_gui_main_menu (Widget)
 function gadget:RecvLuaMsg(msg, player)
   missionScript.RecvLuaMsg(msg, player)
   if msg == "Show briefing" then
@@ -77,6 +77,7 @@ function gadget:GameFrame( frameNumber )
 	  
       -- if required, show GuiMission
       if gameOver == -1 or gameOver == 1 then
+		-- build event for unsynchronized section
         local prefix=true
         if (prefix)then
           outputState=missionName.."//"..outputState
@@ -89,12 +90,15 @@ function gadget:GameFrame( frameNumber )
           _G.event.state = "won"
         end
         local victoryState = _G.event.state or ""
-        if not solutions or testmap ~= nil or Spring.GetConfigString("PP Show Feedbacks","disabled") ~= "enabled" then
-          SendToUnsynced("MissionEvent")
-        else
-          SendToUnsynced("MissionEnded", victoryState)
-        end
+		Spring.SetConfigString("victoryState", victoryState, 1) -- inform the game engine that the mission is ended
+        SendToUnsynced("MissionEvent")
+        -- if not solutions or testmap ~= nil or Spring.GetConfigString("PP Show Feedbacks","disabled") ~= "enabled" then
+          -- SendToUnsynced("MissionEvent")
+        -- else
+          -- SendToUnsynced("MissionEnded", victoryState)
+        -- end
         _G.event = nil
+		SendToUnsynced("MissionEnded", victoryState) -- write trace in meta log (see pp_meta_traces_manager.lua)
       end
     end
   end
@@ -191,7 +195,7 @@ function gadget:RecvFromSynced(...)
     
   elseif arg1 == "TutorialEvent" then
     if Script.LuaUI("TutorialEvent") then
-      Script.LuaUI.TutorialEvent() -- function defined and registered in mission_gui widget
+      Script.LuaUI.TutorialEvent() -- function defined and registered in pp_gui_main_menu widget
     end
 	
   elseif arg1 == "MissionEvent" then
@@ -200,7 +204,7 @@ function gadget:RecvFromSynced(...)
         for k, v in spairs(SYNCED.event) do
         e[k] = v
         end
-      Script.LuaUI.MissionEvent(e) -- function defined and registered in mission_gui widget
+      Script.LuaUI.MissionEvent(e) -- function defined and registered in pp_gui_main_menu widget
     end
 	
   elseif arg1=="centerCamera" then
@@ -238,10 +242,10 @@ function gadget:RecvFromSynced(...)
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
 	
   elseif arg1 == "MissionEnded" then
-    Script.LuaUI.MissionEnded(arg2) -- function defined and registered in mission_traces widget
+    Script.LuaUI.MissionEnded(arg2) -- function defined and registered in Meta Traces Manager widget
 	
   elseif arg1 == "Feedback" then
-    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in mission_feedback widget
+    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in Show Feedbacks widget
   end
 end
 

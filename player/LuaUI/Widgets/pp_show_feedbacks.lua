@@ -104,17 +104,17 @@ function getFeedbackMessage(json_obj, export_score)
 	if json_obj.num_attempts ~= nil and export_score then
 		s = s..LANG_TENTATIVE..json_obj.num_attempts.."\n"
 	end
-	if json_obj.execution_time ~= nil and export_score then
-		s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\n"
-		s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\n"
-	end
-	if json_obj.exec_mean_wait_time ~= nil and export_score then
-		s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\n"
-	end
-	if json_obj.resolution_time ~= nil and export_score then
-		s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
-		s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
-	end
+	-- if json_obj.execution_time ~= nil and export_score then
+		-- s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\n"
+		-- s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\n"
+	-- end
+	-- if json_obj.exec_mean_wait_time ~= nil and export_score then
+		-- s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\n"
+	-- end
+	-- if json_obj.resolution_time ~= nil and export_score then
+		-- s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
+		-- s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
+	-- end
 	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
 		if #json_obj.feedbacks == 1 then
 			s = s.."\n"..LANG_ONE_ADVICE.."\n\n"
@@ -143,16 +143,10 @@ end
 function handleFeedback(str)
 	local json_obj = json.decode(str)
 	if json_obj.won ~= nil then -- the mission is over
-		local state = ""
-		if json_obj.won then
-			state = "won"
-		else
-			state = "lost"
-		end
 		local width = 0.5 * vsx
 		local feedback_and_score_string = getFeedbackMessage(json_obj, true)
 		feedback_and_score_string = breakLine(feedback_and_score_string,width)
-		e = {logicType = "ShowMissionMenu", state = state, feedback = feedback_and_score_string}
+		e = {logicType = "UpdateFeedback", feedback = feedback_and_score_string}
 	else -- the mission is not over yet
 		local width = 0.85 * vsx
 		local feedback_only_string = getFeedbackMessage(json_obj, false)

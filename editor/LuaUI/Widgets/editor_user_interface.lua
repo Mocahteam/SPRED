@@ -696,8 +696,10 @@ end
 function testLevel()
 	local levelFile = encodeSaveTable()
 	local goTest = function()
-		Screen0:RemoveChild(windows["testWindow"])
-		windows["testWindow"]:Dispose()
+		if windows["testWindow"] then
+			Screen0:RemoveChild(windows["testWindow"])
+			windows["testWindow"]:Dispose()
+		end
 		if isMapNameDefaultValue(mapDescription.mapName) then -- isMapNameDefaultValue(...) is defined in EditorStrings.lua
 			windows["testWindow"] = addWindow(Screen0, "35%", "45%", "30%", "10%")
 			addLabel(windows["testWindow"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGE_NAME, 20)
@@ -776,7 +778,8 @@ function testLevel()
 						["language"] = WG.Language, -- WG.Language is defined in editor_spring_direct_launch.lua
 						["scenario"] = "noScenario",
 						["testmap"] = Game.modName,
-						["hidemenu"] = "true"
+						["hidemenu"] = "true",
+						["activetraces"] = "1" -- turn on traces in order to build expert solution if a program is executed during testing
 					},
 					["GAME"] = {
 						["Mapname"] = levelFile.description.map,
@@ -788,15 +791,19 @@ function testLevel()
 		end
 	end
 
-	if windows["testWindow"] then
-		Screen0:RemoveChild(windows["testWindow"])
-		windows["testWindow"]:Dispose()
+	if NeedToBeSaved then
+		if windows["testWindow"] then
+			Screen0:RemoveChild(windows["testWindow"])
+			windows["testWindow"]:Dispose()
+		end
+		windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
+		local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
+		addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text)
+		addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
+		addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
+	else
+		goTest()
 	end
-	windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
-	local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
-	addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text)
-	addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
-	addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -4974,7 +4981,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 
 	-- Write
 	local jsonfile = json.encode(savedTable)
-	local DBG_formatString = true -- Set this to true to have a better view of the json file
+	local DBG_formatString = false -- Set this to true to have a better view of the json file (Warning if true this produces bugs on zone text if it contains ",", "}", "{", "%[" or "%]" tokkens )
 	if DBG_formatString then
 		jsonfile = string.gsub(jsonfile, ",", ",\n")
 		jsonfile = string.gsub(jsonfile, "}", "\n}")

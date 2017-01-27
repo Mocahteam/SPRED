@@ -179,7 +179,6 @@ function Message:Draw(viewSizeX, viewSizeY)
   gl.PopMatrix()
 end
 
-
 function Message:Delete()
   local _, _, paused = Spring.GetGameSpeed()
   if self.pause and paused then
@@ -242,7 +241,7 @@ function widget:MouseRelease(x, y, button)
 end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
-  local capture
+	local capture
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
 		for message in pairs(messages) do

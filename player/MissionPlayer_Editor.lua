@@ -428,7 +428,6 @@ end
 -- For this reason all the json files must have a message with id BRIEFING
 -------------------------------------
 local function ShowBriefing ()
-  --Spring.Echo(json.encode(mission))
   showMessage(getAMessage(ctx.messages["briefing"]))-- convention all json files have briefing attribute
 end
 
@@ -1344,8 +1343,8 @@ local function parseJson(jsonString)
   widgetHandler:EnableWidget("PP Widget Informer")
   --]]
   local widgetWithForcedState={
-    ["PP Display Bubble"]=true,["Hide commands"]=true,["PP GUI Messenger"]=true
-	,["PP gui rooms"]=true,["PP Camera Auto"]=true,["Chili Framework"]=true
+    ["PP gui rooms"]=true,["Chili Framework"]=true,["PP Display Bubble"]=true
+	,["Hide commands"]=true,["PP GUI Messenger"]=true,["PP Camera Auto"]=true
     ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
 	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true
@@ -1416,7 +1415,8 @@ local function StartAfterJson ()
       table.insert(specialPositionTables,{center_xz.x,center_xz.z})
     end 
     if(cZ.marker)then
-      Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, cZ.name)
+      local zName = string.gsub(cZ.name, "\\n", "\n")
+      Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, zName)
     end 
     if cZ.showInGame then
        SendToUnsynced("displayZone", json.encode(cZ))    

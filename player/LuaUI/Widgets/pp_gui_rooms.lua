@@ -968,12 +968,12 @@ function Window:ProcessArguments()
   self.borderColor        = self.borderColor      or {  1,   1,   1,   1}
   -- Background color when the mouse cursor is within the window.
   self.isAboveColors      = self.isAboveColors    or isAboveColorsDefault
-  self.bottomLeftColor    = self.bottomLeftColor  or {  0,   0,   0, 0.5}
-  self.topLeftColor       = self.topLeftColor     or {  0,   0,   0, 0.8}
-  self.topRightColor      = self.topRightColor    or {  0,   0,   0, 0.5}
-  self.bottomRightColor   = self.bottomRightColor or {0.4, 0.4, 0.4, 0.5}
+  self.bottomLeftColor    = self.bottomLeftColor  or {  0,   0,   0, 0.8}
+  self.topLeftColor       = self.topLeftColor     or {  0,   0,   0, 1}
+  self.topRightColor      = self.topRightColor    or {  0,   0,   0, 0.8}
+  self.bottomRightColor   = self.bottomRightColor or {0.4, 0.4, 0.4, 0.8}
   self.gradient           = self.IsAboveColors    or true -- FIXME?
-  self.backgroundColor    = self.backgroundColor  or {  0,   0,   0, 0.5}
+  self.backgroundColor    = self.backgroundColor  or {  0,   0,   0, 0.8}
 
   if (not self.gradient) then
     self.topRightColor    = self.backgroundColor

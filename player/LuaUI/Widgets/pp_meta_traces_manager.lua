@@ -23,7 +23,6 @@ end
 
 function MissionEnded(victoryState)
 	TraceAction("end "..victoryState.." "..missionName.."\n")
-	Spring.SetConfigString("victoryState", victoryState, 1) -- inform the game engine that the mission is ended
 end
 
 function widget:Initialize()

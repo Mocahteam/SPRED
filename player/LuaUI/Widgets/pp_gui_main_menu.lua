@@ -36,8 +36,6 @@ local rooms
 local Window
 local Tab
 
-local ppTraces = nil -- File handler to store traces
-
 -- Set label
 local saveMessage="Your progression has been saved under the name : "
 local replayMission = "Replay mission"
@@ -51,6 +49,7 @@ local victoryCampaign = "Congratulations !!! You complete the campaign"
 local loss = "You lost the mission"
 local continue = "continue"
 local saveProgression="Save progression"
+local scoreComputing="Analysis of your work, please wait..."
 if lang == "fr" then
   saveMessage="Votre progression a été sauvegardée sous le nom : "
   continue= "continuer"
@@ -64,22 +63,12 @@ if lang == "fr" then
   victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
   loss = "Vous avez perdu la mission"
   saveProgression="Sauvegarder"
+  scoreComputing="Analyse de votre travail en cours, merci de patienter..."
 end
 
 local activateSave=false
 if mode=="appliq" and AppliqManager~=nil then
   activateSave=true
-end
--- create the "mission_ended.conf" file in order to inform game engine that a mission is ended
-local function createTmpFile()
-  if not VFS.FileExists("mission_ended.conf") then
-    local f = io.open("mission_ended.conf", "w")
-    if f ~= nil then
-      f:write("This file has been created by \"PP GUI Main Menu\" Widget in order to inform game engine that a mission is ended. This file will be deleted the next time the game restarts.")
-      f:flush()
-      f:close()
-    end
-  end
 end
 
 -- Defines a template window for the end mission menu
@@ -96,14 +85,7 @@ local template_endMission = {
         tab.OnClick = function()
           tab.parent:Close()
 		  Script.LuaUI.TraceAction("replay "..missionName.."\n")
-           local operations={
-			["MODOPTIONS"]=
-			{
-			  ["language"]=lang,
-			  ["scenario"]=scenarioType
-			}
-		  }
-          genericRestart("Missions/"..missionName..".editor", operations)
+		  DoTheRestart("_script.txt", {}) -- _script.txt is the launcher file used by the previous start, so we can reuse it for replay the game
         end
       end
     },
@@ -221,7 +203,6 @@ local tutoPopup = false
 
 function MissionEvent(e)
   
-  --Spring.Echo("try event")
   if e.logicType == "ShowMissionMenu" then
     -- close tuto window if it oppened
     if tutoPopup then
@@ -229,121 +210,103 @@ function MissionEvent(e)
         WG.rooms.TutoView:Close()
       end
     end
-        
-    if (Spring.GetModOptions()["testmap"]~=nil) then
-      local message = ""
-      if e.state == "won" then
-        message = victory
-      else
-         message = loss     
-      end
-      MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
-      return
-    end
-    
     
     -- close briefing window if it oppened
     WG.Message:DeleteAll()
     -- load templated mission
     local popup = deepcopy(template_endMission)
-    -- update window
+    -- update main menu content depending on e.state ("menu", "won" or "lost") and "testmap" modoption
     if e.state ~= "menu" then
-	  -- define popup base text depending on victory state
-      if e.state == "won" then
-		popup.lineArray = {victory}
-		if ppTraces ~= nil then
-			ppTraces:write(missionName.." won\n")
-			ppTraces:flush()
+		
+		if (Spring.GetModOptions()["testmap"]~=nil) then
+			-- if we are in testmap case, the main menu is only simple message
+			-- the button "return back to editor" is permanently displayed in UI
+			local message = ""
+			if e.state == "won" then
+				message = victory
+			else
+				message = loss     
+			end
+			MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
+			return
 		end
-      else
-        popup.lineArray = {loss}
-        if ppTraces ~= nil then
-			ppTraces:write(missionName.." loss\n")
-			ppTraces:flush()
-        end
-      end
-      
-	  -- update popup text if feedback is set
-	  if e.feedback ~= nil then
-        table.insert(popup.lineArray,"")
-        local ind_s = 1
-        for i = 1,#e.feedback do
-          if e.feedback:sub(i,i) == "\n" then
-            table.insert(popup.lineArray,string.sub(e.feedback,ind_s,i-1))
-            ind_s = i+1
-          elseif i == #e.feedback then
-            table.insert(popup.lineArray,string.sub(e.feedback,ind_s))
-          end
-        end
-        table.insert(popup.lineArray,"")
-      end
-      
-	  -- Of course, we can pass to the next mission if current mission is won
-      if mode=="appliq" and AppliqManager~=nil then     
-        Spring.Echo("Using Appliq to define next mission...")
-        local currentoptions=Spring.GetModOptions()       
-        AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
-        AppliqManager:startRoute()
-        --Spring.Echo(e.outputstate)
-        --Spring.Echo("current Act ID")
-        --Spring.Echo(AppliqManager.currentActivityID)
-        local progression=unpickleProgression(currentoptions["progression"])
-        --AppliqManager:setProgression(unpickle(currentoptions["progression"]))
-        --Spring.Echo(e.outputstate)
-        AppliqManager:setProgression(progression)
-        local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
-        local nextMiss=AppliqManager:next(e.outputstate)  
-        local mission=AppliqManager.currentActivityID
-        if(nextMiss==nil) then     
-          Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
-          local selectedOutput=outputs[math.random(#outputs)]
-          AppliqManager:next(selectedOutput)         
-        elseif (nextMiss=="end") then
-          Spring.Echo("end of scenario")
-          popup.lineArray = {victoryCampaign}
-          continue="\255\50\50\50"..continue.."\255\255\255\255"
-        else
-          local currentInput=AppliqManager:getCurrentInputName()
-          --Spring.Echo(currentoptions["progression"])
-         -- Spring.Echo(currentInput)
-          --Spring.Echo(e.outputstate)         
-          --Spring.Echo(mission)           
-          currentoptions["currentinput"]=currentInput  
-          currentoptions["missionname"]=mission
-          currentoptions["currentinput"]=currentInput
-          currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
-        end          
-        popup.tabs[2].preset = function(tab)
-          tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
-          tab.OnClick = function()
-          end
-        end
-        -- enable continue
-        popup.tabs[3].preset = function(tab)
-            tab.title = continue
-            tab.position = "bottom"
-            tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
-              if(nextMiss~="end")then
-                tab.parent:Close()
-              --DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
-                genericRestart("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
-              end
-            end
-          end
-      end
-      
-      -- disable "Close tab" and "Show briefing"
-      popup.tabs[6] = nil
-      -- inform the game that mission is over with a temporary file
-      createTmpFile()
+		
+		-- define popup base text depending on victory state
+		if e.state == "won" then
+			popup.lineArray = {victory}
+		else
+			popup.lineArray = {loss}
+		end
+
+		-- Of course, we can pass to the next mission if current mission is won
+		if mode=="appliq" and AppliqManager~=nil then     
+			local currentoptions=Spring.GetModOptions()       
+			AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
+			AppliqManager:startRoute()
+			--Spring.Echo(e.outputstate)
+			--Spring.Echo("current Act ID")
+			--Spring.Echo(AppliqManager.currentActivityID)
+			local progression=unpickleProgression(currentoptions["progression"])
+			--AppliqManager:setProgression(unpickle(currentoptions["progression"]))
+			--Spring.Echo(e.outputstate)
+			AppliqManager:setProgression(progression)
+			local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
+			local nextMiss=AppliqManager:next(e.outputstate)  
+			local mission=AppliqManager.currentActivityID
+			if(nextMiss==nil) then     
+				Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
+				local selectedOutput=outputs[math.random(#outputs)]
+				AppliqManager:next(selectedOutput)         
+			elseif (nextMiss=="end") then
+				Spring.Echo("end of scenario")
+				popup.lineArray = {victoryCampaign}
+				continue="\255\50\50\50"..continue.."\255\255\255\255"
+			else
+				local currentInput=AppliqManager:getCurrentInputName()
+				--Spring.Echo(currentoptions["progression"])
+				-- Spring.Echo(currentInput)
+				--Spring.Echo(e.outputstate)         
+				--Spring.Echo(mission)           
+				currentoptions["currentinput"]=currentInput  
+				currentoptions["missionname"]=mission
+				currentoptions["currentinput"]=currentInput
+				currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
+			end          
+			popup.tabs[2].preset = function(tab)
+				tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
+				tab.OnClick = function()
+				end
+			end
+			-- enable continue
+			popup.tabs[3].preset = function(tab)
+				tab.title = continue
+				tab.position = "bottom"
+				tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
+					if(nextMiss~="end")then
+						tab.parent:Close()
+						--DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
+						genericRestart("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+					end
+				end
+			end
+		end
+		
+		if Spring.GetConfigString("PP Show Feedbacks","disabled") == "enabled" then
+			table.insert(popup.lineArray, "")
+			table.insert(popup.lineArray, scoreComputing)
+		end
+
+		-- disable "Close tab" and "Show briefing"
+		popup.tabs[6] = nil
+	  
     else
-      popup.lineArray = {"Menu"}
+		popup.lineArray = {"Menu"}
     end
     
     -- close presious window if require
     if winPopup ~= nil then
-      winPopup:Close()
-      winPopup = nil
+		winPopup:Close()
+		winPopup = nil
     end
     -- create new one with preset popup config
     winPopup = Window:CreateCentered(popup)
@@ -351,14 +314,40 @@ function MissionEvent(e)
     winPopup:Open()
     -- set tutorial launcher if tutoPopup has been created
     if tutoPopup then
-      winPopup.launchTuto = function ()
-        if WG.rooms.TutoView.closed then
-          WG.rooms.TutoView:Open()
-        end
-      end
+		winPopup.launchTuto = function ()
+			if WG.rooms.TutoView.closed then
+				WG.rooms.TutoView:Open()
+			end
+		end
     else
-      winPopup.launchTuto = nil
+		winPopup.launchTuto = nil
     end
+  elseif e.logicType == "UpdateFeedback" then
+	-- update winPopup text if feedback is set
+	if e.feedback ~= nil and winPopup ~= nil then
+		-- remove the last line (score computing label)
+		table.remove(winPopup.lineArray)
+		-- add lines feedbacks to the popup
+		local ind_s = 1
+		for i = 1,#e.feedback do
+			if e.feedback:sub(i,i) == "\n" then
+				table.insert(winPopup.lineArray,string.sub(e.feedback,ind_s,i-1))
+				ind_s = i+1
+			elseif i == #e.feedback then
+				table.insert(winPopup.lineArray,string.sub(e.feedback,ind_s))
+			end
+		end
+		table.insert(winPopup.lineArray,"")
+		-- make a copy in order to recreate it
+		local popup = deepcopy(winPopup)
+		-- reset position in order to recompute them when we rebuild the popup
+		popup.x2 = nil
+		popup.y2 = nil
+		winPopup:Close()
+		-- rebuild the popup
+		winPopup = Window:CreateCentered(popup)
+		winPopup:Open()
+	end
   elseif e.logicType == "ShowMessage" then
       if e.image then 
         briefing = WG.Message:Show{
@@ -371,9 +360,9 @@ function MissionEvent(e)
       else
         briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
       end
-    if WG.rooms.Video and not WG.rooms.Video.closed then
-      briefing.delayDrawing = true
-    end
+	  if WG.rooms.Video and not WG.rooms.Video.closed then
+		briefing.delayDrawing = true
+      end
   elseif e.logicType == "PauseAction" then
     Spring.SendCommands"pause"
   elseif e.logicType == "MarkerPointAction" then
@@ -396,37 +385,38 @@ function TutorialEvent()
 end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
-  -- intercept ESCAPE pressure
-  if key == KEYSYMS.ESCAPE then
-   if Spring.GetModOptions()["testmap"]~=nil then
-     Spring.SendLuaRulesMsg("Show briefing")
-   else
-    Spring.Echo("escape pushed")
-    Spring.Echo(briefing)
-    Spring.Echo(winPopup)
-    if WG.rooms.Video and not WG.rooms.Video.closed then
-      WG.rooms.Video:Close()
-      if briefing ~= nil then
-        briefing.delayDrawing = false
-      end
-    else
-      if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
-        WG.rooms.TutoView:Close()
-      end
-      if winPopup == nil then
-       Spring.Echo("launch event")
-        local event = {logicType = "ShowMissionMenu",
-                state = "menu"}
-        MissionEvent (event)
-      else
-        if winPopup.closed then 
-          winPopup:Open()
-        end
-      end
-     end
-    end
-    return true
-  end
+	-- intercept ESCAPE pressure
+	if key == KEYSYMS.ESCAPE then
+		if WG.rooms.Video and not WG.rooms.Video.closed then
+			WG.rooms.Video:Close()
+			if briefing ~= nil then
+				briefing.delayDrawing = false
+			end
+		else
+			if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
+				WG.rooms.TutoView:Close()
+			end
+			if Spring.GetModOptions()["testmap"]~=nil then
+				Spring.SendLuaRulesMsg("Show briefing")
+			else
+				if winPopup == nil then
+					local event = {logicType = "ShowMissionMenu",
+					state = "menu"}
+					MissionEvent (event)
+				else
+					if winPopup.closed then 
+						winPopup:Open()
+					else
+						winPopup:Close()
+						if winPopup.launchTuto ~= nil then
+							winPopup.launchTuto()
+						end
+					end
+				end
+			end
+		end
+		return true
+	end
 end
 
 function EmulateEscapeKey ()
@@ -438,19 +428,9 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
   widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
   
-  -- open ppTraces file
-  ppTraces = io.open("ppTraces.txt", "a")
-  if ppTraces ~= nil and missionName~=nil then
-    ppTraces:write(missionName.." start\n")
-    ppTraces:flush()
-  end
-  
   rooms = WG.rooms -- WG is available in all widgets
   Window = rooms.Window
   Tab = rooms.Tab
-  if Spring.GetModOptions()["testmap"] ~= nil then
-    rooms["Video"] = "stupid stuff" -- dirty trick to get WG.rooms.Video.closed giving nil instead of raising error in case of testmap
-  end
   
 end
 
@@ -459,8 +439,4 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal("EmulateEscapeKey")
   widgetHandler:DeregisterGlobal("MissionEvent")
   widgetHandler:DeregisterGlobal("TutorialEvent")
-  
-  if ppTraces ~= nil then
-    ppTraces:close()
-  end
 end

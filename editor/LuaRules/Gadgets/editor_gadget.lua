@@ -133,7 +133,7 @@ function gadget:RecvLuaMsg(msg, player)
 end
 
 function gadget:GameFrame( frameNumber )
-	if missionName == "LevelEditor" then
+--	if missionName == "LevelEditor" then
 		-- Delete units at the beginning
 		if initialize and frameNumber > 0 then
 			local units = Spring.GetAllUnits()
@@ -230,31 +230,31 @@ function gadget:GameFrame( frameNumber )
 			loadMap = false
 		end
 	-- INITIALIZE COMMANDS LIST
-	elseif initialize then
-		initialize = false
-		local cmdList = {}
-		local cmdListUnit = {}
-		for id, unitDef in pairs(UnitDefs) do
-			local unitType = unitDef.name
-			cmdListUnit[unitType] = {}
-			local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
-			Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
-			Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
-			local cmds = Spring.GetUnitCmdDescs(id)
-			for i, cmd in ipairs(cmds) do
-				if cmd.id < 0 then
-					cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-					cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-				else
-					cmdList[cmd.name] = cmd.id
-					cmdListUnit[unitType][cmd.name] = cmd.id
-				end
-			end
-			Spring.DestroyUnit(id, true, true)
-		end
-		SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
-		SendToUnsynced("finishedLoading")
-	end
+	-- elseif initialize then
+		-- initialize = false
+		-- local cmdList = {}
+		-- local cmdListUnit = {}
+		-- for id, unitDef in pairs(UnitDefs) do
+			-- local unitType = unitDef.name
+			-- cmdListUnit[unitType] = {}
+			-- local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
+			-- Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
+			-- Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
+			-- local cmds = Spring.GetUnitCmdDescs(id)
+			-- for i, cmd in ipairs(cmds) do
+				-- if cmd.id < 0 then
+					-- cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+					-- cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+				-- else
+					-- cmdList[cmd.name] = cmd.id
+					-- cmdListUnit[unitType][cmd.name] = cmd.id
+				-- end
+			-- end
+			-- Spring.DestroyUnit(id, true, true)
+		-- end
+		-- SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
+		-- SendToUnsynced("finishedLoading")
+	-- end
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

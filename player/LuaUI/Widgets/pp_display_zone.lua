@@ -5,7 +5,7 @@ function widget:GetInfo()
     author    = "mocahteam",
     date      = "Apr 29, 2016",
     license   = "GPL v2 or later",
-    layer     = 0,
+    layer     = 300,
     enabled   = true --  loaded by default?
   }
 end
