@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "PP Show Feedbacks",
-    desc      = "Used to display feedbacks to the player during the game",
+    desc      = "Used to display feedbacks to the player during the game and add help button in UI",
     author    = "meresse, mocahteam",
     date      = "Jun 20, 2016",
     license   = "GPL v2 or later",
@@ -20,7 +20,7 @@ local LANG_PROGRAM_REFERENCE = "Reference execution time: "
 local LANG_AVERAGE_TIME = "Average wait time between two attempts: "
 local LANG_MISSION_TIME = "Mission resolution time: "
 local LANG_REFERENCE_TIME = "Reference resolution time: "
-local LANG_ONE_ADVICE = "Advice to improve the program: "
+local LANG_ONE_ADVICE = "Help: "
 local LANG_SEVERAL_ADVICE = "Advices to improve the program: "
 local LANG_WARNING = "Warning: "
 if lang == "fr" then
@@ -31,7 +31,7 @@ if lang == "fr" then
 	LANG_AVERAGE_TIME = "Temps d'attente moyen entre deux tentatives : "
 	LANG_MISSION_TIME = "Temps de résolution de la mission : "
 	LANG_REFERENCE_TIME = "Temps de résolution référence : "
-	LANG_ONE_ADVICE = "Un conseil pour améliorer votre programme : "
+	LANG_ONE_ADVICE = "Aide : "
 	LANG_SEVERAL_ADVICE = "Quelques conseils pour améliorer votre programme : "
 	LANG_WARNING = "Attention : "
 end
@@ -42,6 +42,10 @@ local green = "\255\0\255\0"
 local blue = "\255\0\0\255"
 
 local vsx = 0
+
+local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
+
+local HelpButton = nil -- the button to ask an help notification
 
 function widget:DrawScreenEffects(dse_vsx, dse_vsy)
 	vsx = dse_vsx
@@ -141,27 +145,69 @@ function getFeedbackMessage(json_obj, export_score)
 end
 
 function handleFeedback(str)
-	local json_obj = json.decode(str)
-	if json_obj.won ~= nil then -- the mission is over
-		local width = 0.5 * vsx
-		local feedback_and_score_string = getFeedbackMessage(json_obj, true)
-		feedback_and_score_string = breakLine(feedback_and_score_string,width)
-		e = {logicType = "UpdateFeedback", feedback = feedback_and_score_string}
-	else -- the mission is not over yet
-		local width = 0.85 * vsx
-		local feedback_only_string = getFeedbackMessage(json_obj, false)
-		--feedback_only_string = breakLine(feedback_only_string,width)
-		e = {logicType = "ShowMessage", message = feedback_only_string, width = width, pause = true}
+	-- check if the feedback is consistent
+	if str == "" or str == "{}" then
+		e = {logicType = "UpdateFeedback", feedback = ""}
+	else
+		local json_obj = json.decode(str)
+		if json_obj.won ~= nil then -- the mission is over
+			local width = 0.5 * vsx
+			local feedback_and_score_string = getFeedbackMessage(json_obj, true)
+			feedback_and_score_string = breakLine(feedback_and_score_string,width)
+			e = {logicType = "UpdateFeedback", feedback = feedback_and_score_string}
+		else -- the mission is not over yet
+			local width = 0.85 * vsx
+			local feedback_only_string = getFeedbackMessage(json_obj, false)
+			feedback_only_string = breakLine(feedback_only_string,width)
+			e = {logicType = "ShowMessage", message = feedback_only_string, width = width, pause = false}
+		end
 	end
 	Script.LuaUI.MissionEvent(e) -- registered by pp_gui_main_menu.lua
 end
 
+function askHelp()
+	Spring.SetConfigString("helpPlease", "enabled", 1) -- inform the game engine that we want a feedback
+end
+
 function widget:Initialize()
-	Spring.SetConfigString("PP Show Feedbacks", "enabled", 1) -- inform the engine and mission_runner
 	widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
+	
+	if traceOn then -- Traces are on => we display the button
+		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
+			Spring.Echo("PP Mission Tester: Chili is not defined, remove himself")
+			return
+		end
+
+		local helpLabel
+		if Spring.GetModOptions()["language"] == "en" then
+			helpLabel = "Help"
+		else
+			helpLabel = "Aide"
+		end
+		
+		HelpButton = WG.Chili.Button:New{
+			parent = WG.Chili.Screen0,
+			x = "85%",
+			y = "0%",
+			width = "15%",
+			height = "5%",
+			caption = helpLabel,
+			OnClick = { askHelp },
+			font = {
+				font = "LuaUI/Fonts/Asimov.otf",
+				size = 30,
+				autoAdjust = true,
+				maxSize = 30,
+				color = { 0.2, 1, 0.8, 1 }
+			}
+		}
+	end
 end
 
 function widget:Shutdown()
-	Spring.SetConfigString("PP Show Feedbacks", "disabled", 1) -- inform the engine and mission_runner
 	widgetHandler:DeregisterGlobal("handleFeedback", handleFeedback)
+	
+	if HelpButton then
+		HelpButton:Dispose()
+	end
 end

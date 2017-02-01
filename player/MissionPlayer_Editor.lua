@@ -1334,14 +1334,7 @@ local function parseJson(jsonString)
   end
   ctx.canUpdate=true
   ctx.mission=json.decode(jsonString)
-  -- desactivate widget
-  --[[
-    widgetHandler:EnableWidget("PP Meta Traces Manager")
-  -- enable PP Show Feedbacks
-  widgetHandler:EnableWidget("PP Show Feedbacks")
-  -- enable PP Widget Informer
-  widgetHandler:EnableWidget("PP Widget Informer")
-  --]]
+
   local widgetWithForcedState={
     ["PP gui rooms"]=true,["Chili Framework"]=true,["PP Display Bubble"]=true
 	,["Hide commands"]=true,["PP GUI Messenger"]=true,["PP Camera Auto"]=true

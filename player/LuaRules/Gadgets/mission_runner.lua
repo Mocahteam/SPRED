@@ -92,11 +92,6 @@ function gadget:GameFrame( frameNumber )
         local victoryState = _G.event.state or ""
 		Spring.SetConfigString("victoryState", victoryState, 1) -- inform the game engine that the mission is ended
         SendToUnsynced("MissionEvent")
-        -- if not solutions or testmap ~= nil or Spring.GetConfigString("PP Show Feedbacks","disabled") ~= "enabled" then
-          -- SendToUnsynced("MissionEvent")
-        -- else
-          -- SendToUnsynced("MissionEnded", victoryState)
-        -- end
         _G.event = nil
 		SendToUnsynced("MissionEnded", victoryState) -- write trace in meta log (see pp_meta_traces_manager.lua)
       end

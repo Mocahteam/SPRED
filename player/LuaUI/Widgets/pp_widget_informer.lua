@@ -12,16 +12,6 @@ function widget:GetInfo()
 end
 
 local savedActiveStates = {}
-local widgets = {"PP Show Feedbacks"}
-
-function informAboutWidget(name)
-	for _,e in pairs(widgets) do
-		if e == name then
-			return true
-		end
-	end
-	return false
-end
 
 function widget:Update()
 	for name,data in pairs(widgetHandler.knownWidgets) do
@@ -30,15 +20,6 @@ function widget:Update()
 				Spring.Echo(name.." was enabled and is now disabled")
 			else
 				Spring.Echo(name.." was disabled and is now enabled")
-			end
-			if informAboutWidget(name) then
-				local value = ""
-				if data.active then
-					value = "enabled"
-				else
-					value = "disabled"
-				end
-				Spring.SetConfigString(name, value, 1)
 			end
 			savedActiveStates[name] = data.active
 		end

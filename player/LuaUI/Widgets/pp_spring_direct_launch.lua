@@ -12,7 +12,7 @@ function widget:GetInfo()
 end
 local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99)
 local hideView=true
-local lang="fr"
+local lang=Spring.GetModOptions().language or "en"
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
 VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
@@ -37,11 +37,10 @@ end
 local RemovedWidgetList = {}
 local Chili, Screen0 -- Chili framework, main screen
 local tableCaptions={
-  {el="NewPartyButton",fr="Nouvelle Partie",en="New Game"},
+  {el="NewPartyButton",fr="Nouvelle partie",en="New Game"},
   {el="ListMissionButtons",fr="Missions",en="Missions"},
-  {el="Title",fr="campagne",en="campaign"},
-  {el="NewPartyButton",fr="Nouvelle Partie",en="Start Campaign"},
-  {el="ListMissionButtons",fr="Liste Des Missions",en="Missions List"},
+  {el="Title",fr="Campagne",en="Campaign"},
+  {el="ListMissionButtons",fr="Liste des missions",en="Missions List"},
   {el="QuitButton",fr="Quitter",en="Quit"},
   {el="continueGameButton",fr="Continuer",en="Continue"}
 }
@@ -119,12 +118,12 @@ function UpdateText(element, text) -- Update the text of an UI element
 end
 
 local function ChangeLanguage(lg)
-  lang = lg
-  for _,bloc in pairs(tableCaptions) do
-    local newCaption=bloc[lg]
-    local elToChange=bloc["el"]
-    UpdateCaption(UI[elToChange], newCaption)
-  end
+	lang = lg
+	for _,bloc in pairs(tableCaptions) do
+		local newCaption=bloc[lg]
+		local elToChange=bloc["el"]
+		UpdateCaption(UI[elToChange], newCaption)
+	end
 end
 
 local function RunScenario(i)
@@ -200,27 +199,31 @@ local function commonElements()
     x = '0%',
     y = '0%',
     width = '100%',
-    height = '10%',
+    height = '15%',
     align = "center",
-    valign = "center",
-    caption = "campagne",
+    valign = "linecenter",
+    caption = "Campagne",
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
       size = 60,
+	  autoAdjust = true,
+	  maxSize = 60,
       color = { 0.2, 0.6, 0.8, 1 }
     }
   }
-  -- scrollPanel
+  -- combobox
   UI.LanguageComboBox = Chili.ComboBox:New{
     parent = UI.MainWindow,
     x = "85%",
     y = "0%",
     width = "15%",
     height = "7%",
-    items = { "French","English" },
+    items = { "English", "Français" },
     font = {
       font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
+      size = 20,
+	  autoAdjust = true,
+	  maxSize = 20,
       color = { 0.2, 1, 0.8, 1 }
     }
   }
@@ -240,10 +243,12 @@ local function commonElements()
       y = "90%",
       width = "10%",
       height = "10%",
-      caption = "quitter",
+      caption = "Quitter",
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
-        size = 40,
+        size = 30,
+		autoAdjust = true,
+		maxSize = 30,
         color = { 0.8, 0.6, 0.2, 1 }
       },
       backgroundColor = { 0.8, 0, 0.2, 1 },
@@ -253,57 +258,68 @@ local function commonElements()
 end
 
 local function InitializeMainMenu() -- Initialize the main window and buttons of the main menu
-  clearUI()
-  commonElements()
-  UI.NewPartyButton = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "30%",
-    y = "30%",
-    width = "40%",
-    height = "10%",
-    caption = "Nouvelle Partie",
-    OnClick = { function() RunScenario(1) end },
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.2, 1, 0.8, 1 }
-    }
-  }
-  UI.ListMissionButtons = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "30%",
-    y = "40%",
-    width = "40%",
-    height = "10%",
-    caption = "Liste des missions",
-    OnClick = { missionMenu },
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.2, 1, 0.8, 1 }
-    }
-  }
-  UI.continueGameButton = Chili.Button:New{
-    parent = UI.MainWindow,
-    x = "30%",
-    y = "50%",
-    width = "40%",
-    height = "10%",
-    caption = "Continuer",
-    OnClick = { continue },
-    font = {
-      font = "LuaUI/Fonts/Asimov.otf",
-      size = 40,
-      color = { 0.2, 1, 0.8, 1 }
-    }
-  }
+	clearUI()
+	commonElements()
+	UI.NewPartyButton = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "30%",
+		y = "30%",
+		width = "40%",
+		height = "10%",
+		caption = "Nouvelle partie",
+		OnClick = { function() RunScenario(1) end },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	UI.ListMissionButtons = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "30%",
+		y = "40%",
+		width = "40%",
+		height = "10%",
+		caption = "Liste des missions",
+		OnClick = { missionMenu },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	UI.continueGameButton = Chili.Button:New{
+		parent = UI.MainWindow,
+		x = "30%",
+		y = "50%",
+		width = "40%",
+		height = "10%",
+		caption = "Continuer",
+		OnClick = { continue },
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 30,
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 0.2, 1, 0.8, 1 }
+		}
+	}
+	if lang == "en" then
+		UI.LanguageComboBox:Select(1)
+	else
+		UI.LanguageComboBox:Select(2)
+	end
 end
 
 function continue()
   local saveFiles = VFS.DirList("Savegames/"..gameName.."/" ,"*.sav")
   -- it's better to look for save files at this precise moment in order to include recent saved files.
- clearUI()
- commonElements()
+  clearUI()
+  commonElements()
   UI.MapScrollPanel2 = Chili.ScrollPanel:New{
     parent = UI.MainWindow,
     x = "20%",
@@ -318,6 +334,7 @@ function continue()
     y = "0%",
     width = "10%",
     height = "10%",
+	caption = "",
     backgroundColor = { 0, 0.2, 0.6, 1 },
     focusColor = { 0, 0.6, 1, 1 },
     OnClick = { InitializeMainMenu }
@@ -334,13 +351,12 @@ function continue()
   UI.ContButtons = {}
   for i,MissionFileName in ipairs(saveFiles) do 
     local userMissionName=string.match(MissionFileName, '\\([^\\]*)%.')--match string between the last "\" and the "." of .editor 
-    Spring.Echo(userMissionName)
     local contButton = Chili.Button:New{
       parent = UI.MapScrollPanel2,
       x = "0%",
-      y = 80 * ( i - 1 ),
+      y = ((i-1)*15).."%", --80 * ( i - 1 ),
       width = "100%",
-      height = 80,
+      height = "15%", --80,
       caption = userMissionName,
       OnClick = { function() 
                 local txt=VFS.LoadFile(MissionFileName) 
@@ -348,16 +364,23 @@ function continue()
                 end },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
-        size = 40,
+        size = 30,
+		autoAdjust = true,
+		maxSize = 30,
         color = { 0.2, 0.4, 0.8, 1 }
       }
     }
     table.insert(UI.ContButtons, contButton)
   end
+  if lang == "en" then
+	UI.LanguageComboBox:Select(1)
+  else
+	UI.LanguageComboBox:Select(2)
+  end
 end
 function missionMenu()
- clearUI()
- commonElements()
+  clearUI()
+  commonElements()
   UI.MapScrollPanel = Chili.ScrollPanel:New{
     parent = UI.MainWindow,
     x = "20%",
@@ -372,6 +395,7 @@ function missionMenu()
     y = "0%",
     width = "10%",
     height = "10%",
+	caption = "",
     backgroundColor = { 0, 0.2, 0.6, 1 },
     focusColor = { 0, 0.6, 1, 1 },
     OnClick = { InitializeMainMenu }
@@ -388,32 +412,38 @@ function missionMenu()
   UI.MapButtons = {}
   local MissionsList=VFS.DirList("Missions")
   for i,MissionFileName in ipairs(MissionsList) do 
-    Spring.Echo(MissionFileName)
     local userMissionName=string.match(MissionFileName, '/([^/]*)%.')--match string between the last "/" and the "." of .editor 
     local mapButton = Chili.Button:New{
       parent = UI.MapScrollPanel,
       x = "0%",
-      y = 80 * ( i - 1 ),
+      y = ((i-1)*15).."%", --80 * ( i - 1 ),
       width = "100%",
-      height = 80,
+      height = "15%", --80,
       caption = userMissionName,
       OnClick = { function() RunScript(MissionFileName,"noScenario") end },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
-        size = 40,
+        size = 30,
+		autoAdjust = true,
+		maxSize = 30,
         color = { 0.2, 0.4, 0.8, 1 }
       }
     }
     table.insert(UI.MapButtons, mapButton)
   end
+  if lang == "en" then
+	UI.LanguageComboBox:Select(1)
+  else
+	UI.LanguageComboBox:Select(2)
+  end
 end
 
 function initGui()
-  hideView=true
-  hideDefaultGUI()
-  removeWidgets()
-  initChili()
-  InitializeMainMenu()
+	hideView=true
+	hideDefaultGUI()
+	removeWidgets()
+	initChili()
+	InitializeMainMenu()
   --EitherDrawScreen(1536,803)
 end
 

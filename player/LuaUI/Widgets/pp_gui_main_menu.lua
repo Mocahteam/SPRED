@@ -28,6 +28,7 @@ VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil)
 local lang = Spring.GetModOptions()["language"] -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
+local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
 
 local mode = Spring.GetModOptions()["scenariomode"]
 
@@ -291,7 +292,7 @@ function MissionEvent(e)
 			end
 		end
 		
-		if Spring.GetConfigString("PP Show Feedbacks","disabled") == "enabled" then
+		if traceOn then
 			table.insert(popup.lineArray, "")
 			table.insert(popup.lineArray, scoreComputing)
 		end
@@ -324,7 +325,8 @@ function MissionEvent(e)
     end
   elseif e.logicType == "UpdateFeedback" then
 	-- update winPopup text if feedback is set
-	if e.feedback ~= nil and winPopup ~= nil then
+	if e.feedback ~= nil and winPopup ~= nil and traceOn then
+		Spring.Echo ("Feedback to update : "..e.feedback.."FIN")
 		-- remove the last line (score computing label)
 		table.remove(winPopup.lineArray)
 		-- add lines feedbacks to the popup
@@ -343,9 +345,12 @@ function MissionEvent(e)
 		-- reset position in order to recompute them when we rebuild the popup
 		popup.x2 = nil
 		popup.y2 = nil
+		Spring.Echo ("Cloose popup")
 		winPopup:Close()
 		-- rebuild the popup
+		Spring.Echo ("Build popup")
 		winPopup = Window:CreateCentered(popup)
+		Spring.Echo ("Open popup")
 		winPopup:Open()
 	end
   elseif e.logicType == "ShowMessage" then
