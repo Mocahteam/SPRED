@@ -39,6 +39,7 @@ local Tab
 
 -- Set label
 local saveMessage="Your progression has been saved under the name : "
+local saveError="Base file missing to save your progression, save aborted!!!"
 local replayMission = "Replay mission"
 local nextMission = "Next mission"
 local quitGame = "Quit the game"
@@ -50,9 +51,17 @@ local victoryCampaign = "Congratulations !!! You complete the campaign"
 local loss = "You lost the mission"
 local continue = "continue"
 local saveProgression="Save progression"
+local saveName="Please, give a name of your save:"
+local saveConfirm1="A file with the name "
+local saveConfirm2=" already exists.\nDo you want override it?"
 local scoreComputing="Analysis of your work, please wait..."
+local cancelLabel="Cancel"
+local okLabel="OK"
+local yesLabel="Yes"
+local noLabel="No"
 if lang == "fr" then
   saveMessage="Votre progression a été sauvegardée sous le nom : "
+  saveError="Fichier de base manquant pour réaliser la sauvegarde, opération annulée !!!"
   continue= "continuer"
   replayMission = "Rejouer mission"
   nextMission = "Mission suivante"
@@ -64,12 +73,267 @@ if lang == "fr" then
   victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
   loss = "Vous avez perdu la mission"
   saveProgression="Sauvegarder"
+  saveName="Merci d'indiquer un nom à votre sauvegarde :"
+  saveConfirm1="Un fichier avec le nom "
+  saveConfirm2=" existe déjà.\nSouhaitez-vous le remplacer ?"
   scoreComputing="Analyse de votre travail en cours, merci de patienter..."
+  cancelLabel="Annuler"
+  yesLabel="Oui"
+  noLabel="Non"
 end
 
 local activateSave=false
 if mode=="appliq" and AppliqManager~=nil then
   activateSave=true
+end
+
+-- Save UI
+local saveWindow = nil
+local saveNameEditBox = nil
+local saveBackground = nil
+
+local function doTheSave(gameName, fileName)
+	local savingContent=VFS.LoadFile("Savegames/"..gameName.."/currentSave.sav")
+	if savingContent ~= nil then
+		local file=io.open("Savegames/"..gameName.."/"..fileName,"wb")
+		file:write(savingContent)
+		file:flush()
+		file:close()
+		Script.LuaUI.TraceAction("save progression\n")
+		MissionEvent({logicType = "ShowMessage",message = saveMessage.."\""..fileName.."\"", width = 500,pause = false})
+	else
+		MissionEvent({logicType = "ShowMessage",message = saveError, width = 500,pause = false})
+	end
+	--close save window
+	if saveWindow ~= nil then
+		saveWindow:Dispose()
+		saveBackground:Dispose()
+		saveWindow = nil
+		saveNameEditBox = nil
+		saveBackground = nil
+	end
+end
+
+local function displayConfirmSave(gameName, fileName)
+	if saveWindow ~= nil then
+		-- In this case we want to keep the background, so we don't dispose it
+		saveWindow:Dispose()
+		saveWindow = nil
+		saveNameEditBox = nil
+	end
+	-- build UI to confirm saving
+	saveWindow = WG.Chili.Window:New{
+		parent = WG.Chili.Screen0,
+		x = "27%",
+		y = "44%",
+		width  = "46%",
+		height = "12%",
+		minWidth = 0,
+		minHeight = 0,
+		draggable = false,
+		resizable = false,
+	}
+	WG.Chili.Label:New {
+		parent = saveWindow,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "58%",
+		minWidth = 0,
+		minHeight = 0,
+		caption = saveConfirm1.."\""..fileName.."\""..saveConfirm2,
+		fontsize = 20,
+		align = "center",
+		valign = "top",
+		padding = {8, 2, 8, 2},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+		}
+	}
+	WG.Chili.Button:New {
+		parent = saveWindow,
+		x = "15%",
+		y = "60%",
+		width = "20%",
+		height = "40%",
+		caption = yesLabel,
+		minWidth = 0,
+		minHeight = 0,
+		OnClick = {
+			function ()
+				doTheSave(gameName, fileName)
+			end
+		},
+		padding = {8, 0, 8, 0},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 15,
+			autoAdjust = true,
+			maxSize = 15,
+		}
+	}
+	WG.Chili.Button:New {
+		parent = saveWindow,
+		x = "65%",
+		y = "60%",
+		width = "20%",
+		height = "40%",
+		caption = noLabel,
+		minWidth = 0,
+		minHeight = 0,
+		OnClick = {
+			function ()
+				--close save window
+				if saveWindow ~= nil then
+					saveWindow:Dispose()
+					saveBackground:Dispose()
+					saveWindow = nil
+					saveNameEditBox = nil
+					saveBackground = nil
+				end
+			end
+		},
+		padding = {8, 0, 8, 0},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 15,
+			autoAdjust = true,
+			maxSize = 15,
+		}
+	}
+end
+
+local function processSaving ()
+	if saveNameEditBox ~= nil then
+		local fileName=saveNameEditBox.text..".sav"
+		local gameName=Game.gameShortName or Game.modShortName
+		if VFS.FileExists("Savegames/"..gameName.."/"..fileName) then
+			displayConfirmSave(gameName, fileName)
+		else
+			doTheSave(gameName, fileName)
+		end
+	end
+end
+
+local function displaySaveWindow()
+	if saveWindow ~= nil then
+		saveWindow:Dispose()
+		saveBackground:Dispose()
+		saveWindow = nil
+		saveNameEditBox = nil
+		saveBackground = nil
+	end
+	saveWindow = WG.Chili.Window:New{
+		parent = WG.Chili.Screen0,
+		x = "25%",
+		y = "42%",
+		width  = "50%",
+		height = "16%",
+		minWidth = 0,
+		minHeight = 0,
+		draggable = false,
+		resizable = false,
+	}
+	saveBackground = WG.Chili.Image:New {
+		parent = WG.Chili.Screen0,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "100%",
+		minWidth = 0,
+		minHeight = 0,
+		file = "bitmaps/editor/blank.png",
+		keepAspect = false,
+		color = {0, 0, 0, 0.9}
+	}
+	saveBackground.OnClick = {
+		function()
+			return true -- Stop Clic event
+		end
+	}
+	WG.Chili.Label:New {
+		parent = saveWindow,
+		x = "0%",
+		y = "0%",
+		width = "100%",
+		height = "33%",
+		minWidth = 0,
+		minHeight = 0,
+		caption = saveName,
+		fontsize = 20,
+		align = "left",
+		valign = "top",
+		padding = {8, 2, 8, 2},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+		}
+	}
+	saveNameEditBox = WG.Chili.EditBox:New {
+		parent = saveWindow,
+		x = "0%",
+		y = "33%",
+		width = "100%",
+		height = "33%",
+		align = "left",
+		text = "",
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16
+		}
+	}
+	WG.Chili.Button:New {
+		parent = saveWindow,
+		x = "15%",
+		y = "67%",
+		width = "20%",
+		height = "33%",
+		caption = okLabel,
+		minWidth = 0,
+		minHeight = 0,
+		OnClick = {processSaving},
+		padding = {8, 0, 8, 0},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 15,
+			autoAdjust = true,
+			maxSize = 15,
+		}
+	}
+	WG.Chili.Button:New {
+		parent = saveWindow,
+		x = "65%",
+		y = "67%",
+		width = "20%",
+		height = "33%",
+		caption = cancelLabel,
+		minWidth = 0,
+		minHeight = 0,
+		OnClick = {
+			function ()
+				saveWindow:Dispose()
+				saveBackground:Dispose()
+				saveWindow = nil
+				saveNameEditBox = nil
+				saveBackground = nil
+			end
+		},
+		padding = {8, 0, 8, 0},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 15,
+			autoAdjust = true,
+			maxSize = 15,
+		}
+	}
+	WG.Chili.Screen0:FocusControl(saveNameEditBox)
 end
 
 -- Defines a template window for the end mission menu
@@ -134,16 +398,7 @@ local template_endMission = {
         tab.title = saveProgression
         tab.position = "right"
         tab.OnClick = function()
-          local fileName=os.date(missionName.."_%d_%m-%Hh",os.time())..".sav"
-          local gameName=Game.gameShortName or Game.modShortName
-          local file=io.open("Savegames/"..gameName.."/"..fileName,"wb")
-          local savingContent=VFS.LoadFile("Savegames/"..gameName.."/currentSave.sav")
-          file:write(savingContent)                    
-          file:flush()
-          file:close()
-          tab.parent:Close()
-		  Script.LuaUI.TraceAction("save progression\n")
-          MissionEvent({logicType = "ShowMessage",message = saveMessage..fileName, width = 500,pause = false})
+			displaySaveWindow()
         end
       end
     },
@@ -345,12 +600,9 @@ function MissionEvent(e)
 		-- reset position in order to recompute them when we rebuild the popup
 		popup.x2 = nil
 		popup.y2 = nil
-		Spring.Echo ("Cloose popup")
 		winPopup:Close()
 		-- rebuild the popup
-		Spring.Echo ("Build popup")
 		winPopup = Window:CreateCentered(popup)
-		Spring.Echo ("Open popup")
 		winPopup:Open()
 	end
   elseif e.logicType == "ShowMessage" then
@@ -409,7 +661,14 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 					state = "menu"}
 					MissionEvent (event)
 				else
-					if winPopup.closed then 
+					if winPopup.closed then
+						-- make a copy in order to recreate it and be sure it is centered
+						local popup = deepcopy(winPopup)
+						-- reset position in order to recompute them when we rebuild the popup
+						popup.x2 = nil
+						popup.y2 = nil
+						-- rebuild the popup
+						winPopup = Window:CreateCentered(popup)
 						winPopup:Open()
 					else
 						winPopup:Close()

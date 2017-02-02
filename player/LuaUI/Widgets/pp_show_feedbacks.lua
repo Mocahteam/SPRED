@@ -23,6 +23,7 @@ local LANG_REFERENCE_TIME = "Reference resolution time: "
 local LANG_ONE_ADVICE = "Help: "
 local LANG_SEVERAL_ADVICE = "Advices to improve the program: "
 local LANG_WARNING = "Warning: "
+local HELP_LABEL = "Help"
 if lang == "fr" then
 	LANG_SCORE = "Votre score : "
 	LANG_TENTATIVE = "Nombre de tentative(s) de résolution de la mission : "
@@ -34,6 +35,7 @@ if lang == "fr" then
 	LANG_ONE_ADVICE = "Aide : "
 	LANG_SEVERAL_ADVICE = "Quelques conseils pour améliorer votre programme : "
 	LANG_WARNING = "Attention : "
+	HELP_LABEL = "Aide"
 end
 
 local white = "\255\255\255\255"
@@ -167,6 +169,9 @@ end
 
 function askHelp()
 	Spring.SetConfigString("helpPlease", "enabled", 1) -- inform the game engine that we want a feedback
+	if Script.LuaUI.TraceAction then
+		Script.LuaUI.TraceAction("ask help\n")
+	end
 end
 
 function widget:Initialize()
@@ -174,15 +179,8 @@ function widget:Initialize()
 	
 	if traceOn then -- Traces are on => we display the button
 		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
-			Spring.Echo("PP Mission Tester: Chili is not defined, remove himself")
+			Spring.Echo("PP Show Feedbacks: Chili is not defined, remove himself")
 			return
-		end
-
-		local helpLabel
-		if Spring.GetModOptions()["language"] == "en" then
-			helpLabel = "Help"
-		else
-			helpLabel = "Aide"
 		end
 		
 		HelpButton = WG.Chili.Button:New{
@@ -191,7 +189,7 @@ function widget:Initialize()
 			y = "0%",
 			width = "15%",
 			height = "5%",
-			caption = helpLabel,
+			caption = HELP_LABEL,
 			OnClick = { askHelp },
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",

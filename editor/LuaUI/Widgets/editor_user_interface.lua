@@ -1173,8 +1173,8 @@ function initTriggerWindow()
 	closeAction.OnMouseOver = { function() closeAction.color = { 1, 0.5, 0, 1 } end }
 	closeAction.OnMouseOut = { function() closeAction.color = { 1, 0, 0, 1 } end }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '5%', "left", "")
-	addLabel(windows['actionWindow'], '0%', '6%', '20%', '5%', "Filter")
-	addLabel(windows['actionWindow'], '0%', '11%', '20%', '5%', "Type")
+	addLabel(windows['actionWindow'], '0%', '6%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER)
+	addLabel(windows['actionWindow'], '0%', '11%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE)
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '6%', '80%', '5%', actionFilterList, selectFilter)
 	actionTypeComboBox = addComboBox(windows['actionWindow'], '20%', '11%', '80%', '5%', {}, selectActionType)
 	actionScrollPanel = addPanel(windows['actionWindow'], '0%', '16%', '100%', '84%')
@@ -5024,27 +5024,40 @@ function newMapFrame() -- Show a window when the user clicks on the new button
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
 	end
-	windows["fileWindowPopUp"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
-	addLabel(windows["fileWindowPopUp"], '0%', '0%', '90%', '10%', EDITOR_FILE_NEW_TITLE)
-	local closebut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-	closebut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
-	closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
-	closebut.OnMouseOut = { function() closebut.color = { 1, 0, 0, 1 } end }
-	local mapList = VFS.GetMaps()
-	if #mapList == 0 then
-		addTextBox(windows["fileWindowPopUp"], '10%', '20%', '80%', '70%', EDITOR_FILE_NEW_NO_MAP_FOUND, 16, {1, 0, 0, 1})
-	else
-		local scrollPanel = addScrollPanel(windows["fileWindowPopUp"], '0%', '10%', '100%', '90%')
-		local count = 0
-		for i, m in ipairs(mapList) do
-			addButton(scrollPanel, '0%', (count*20).."%", '100%', "20%", m,  function()
-				Screen0:RemoveChild(windows["fileWindowPopUp"])
-				windows["fileWindowPopUp"]:Dispose()
-				-- load the map
-				newLevelWithRightMap(m)
-			end)
-			count = count + 1
+	local function performNewMap()
+		windows["fileWindowPopUp"] = addWindow(Screen0, '40%', '30%', '20%', '40%', true)
+		addLabel(windows["fileWindowPopUp"], '0%', '0%', '90%', '10%', EDITOR_FILE_NEW_TITLE)
+		local closebut = addImage(windows["fileWindowPopUp"], "90%", "0%", "8%", "8%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
+		closebut.OnClick = { function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end }
+		closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
+		closebut.OnMouseOut = { function() closebut.color = { 1, 0, 0, 1 } end }
+		local mapList = VFS.GetMaps()
+		if #mapList == 0 then
+			addTextBox(windows["fileWindowPopUp"], '10%', '20%', '80%', '70%', EDITOR_FILE_NEW_NO_MAP_FOUND, 16, {1, 0, 0, 1})
+		else
+			local scrollPanel = addScrollPanel(windows["fileWindowPopUp"], '0%', '10%', '100%', '90%')
+			local count = 0
+			for i, m in ipairs(mapList) do
+				addButton(scrollPanel, '0%', (count*20).."%", '100%', "20%", m,  function()
+					Screen0:RemoveChild(windows["fileWindowPopUp"])
+					windows["fileWindowPopUp"]:Dispose()
+					-- load the map
+					newLevelWithRightMap(m)
+				end)
+				count = count + 1
+			end
 		end
+	end
+	
+	if NeedToBeSaved then
+		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
+		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
+		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
+		addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() performNewMap() end)
+		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+		return
+	else
+		showLoadWindow()
 	end
 end
 

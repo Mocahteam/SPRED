@@ -52,7 +52,8 @@ function Label:UpdateLayout()
   local font = self.font
 
   if (font.autoAdjust and self.caption) then
-    local textHeight  = font:GetTextHeight(self.caption, font.maxSize)
+    local textHeight, d, numLines  = font:GetTextHeight(self.caption, font.maxSize)
+	textHeight = textHeight*numLines
     local textWidth = font:GetTextWidth(self.caption, font.maxSize)
     local ratio = (self.height - self.padding[2] - self.padding[4]) / textHeight
     ratio = math.min(ratio, (self.width - self.padding[1] - self.padding[3]) / textWidth)

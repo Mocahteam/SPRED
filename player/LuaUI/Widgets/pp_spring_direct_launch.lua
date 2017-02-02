@@ -42,7 +42,7 @@ local tableCaptions={
   {el="Title",fr="Campagne",en="Campaign"},
   {el="ListMissionButtons",fr="Liste des missions",en="Missions List"},
   {el="QuitButton",fr="Quitter",en="Quit"},
-  {el="continueGameButton",fr="Continuer",en="Continue"}
+  {el="continueGameButton",fr="Charger une sauvegarde",en="Load a savegame"}
 }
 local UI = {} -- Contains each UI element
 
@@ -317,6 +317,13 @@ end
 
 function continue()
   local saveFiles = VFS.DirList("Savegames/"..gameName.."/" ,"*.sav")
+  -- remove special file "currentSave.sav"
+  for i=#saveFiles,1,-1 do
+	local userMissionName=string.match(saveFiles[i], '\\([^\\]*)%.')--match string between the last "\" and the "." of .sav 
+    if userMissionName == "currentSave" then
+        table.remove(saveFiles, i)
+    end
+  end
   -- it's better to look for save files at this precise moment in order to include recent saved files.
   clearUI()
   commonElements()
@@ -350,7 +357,7 @@ function continue()
   }
   UI.ContButtons = {}
   for i,MissionFileName in ipairs(saveFiles) do 
-    local userMissionName=string.match(MissionFileName, '\\([^\\]*)%.')--match string between the last "\" and the "." of .editor 
+    local userMissionName=string.match(MissionFileName, '\\([^\\]*)%.')--match string between the last "\" and the "." of .sav 
     local contButton = Chili.Button:New{
       parent = UI.MapScrollPanel2,
       x = "0%",
