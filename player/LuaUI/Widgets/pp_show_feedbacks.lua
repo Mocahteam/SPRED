@@ -46,6 +46,7 @@ local blue = "\255\0\0\255"
 local vsx = 0
 
 local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
+local testMap = Spring.GetModOptions()["testmap"] ~= nil
 
 local HelpButton = nil -- the button to ask an help notification
 
@@ -177,7 +178,7 @@ end
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
 	
-	if traceOn then -- Traces are on => we display the button
+	if traceOn and not testMap then -- Traces are on => we display the button
 		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
 			Spring.Echo("PP Show Feedbacks: Chili is not defined, remove himself")
 			return

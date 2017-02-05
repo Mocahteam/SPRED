@@ -1,0 +1,362 @@
+start Mission1
+mission_start_time 1486237683
+start Mission1
+mission_start_time 1486237819
+execution_start_time 1486237819
+programming_language_used C
+PP_Open
+PP_GetUnitAt 0 0 - 2308
+PP_Unit_ActionOnPosition 2308_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486237819
+mission_end_time 1486237819
+end won Mission1
+start Mission1
+mission_start_time 1486237857
+execution_start_time 1486237857
+programming_language_used Ada
+PP_Open
+PP_GetUnitAt 0 0 - 2276
+PP_Unit_ActionOnPosition 2276_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486237857
+mission_end_time 1486237857
+end won Mission1
+start Mission1
+mission_start_time 1486237878
+execution_start_time 1486237878
+programming_language_used Ada
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 5651
+PP_Unit_ActionOnPosition 5651_4 10 1983 1279 0
+out_of_range PP_GetUnitAt 0 1
+unit_not_found PP_Unit_ActionOnPosition -1 10 1983 1279 0
+PP_Close
+execution_end_time 1486237878
+mission_end_time 1486237878
+end won Mission1
+start Mission1
+mission_start_time 1486237969
+execution_start_time 1486237969
+programming_language_used Ada
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 5273
+PP_Unit_ActionOnPosition 5273_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486237969
+mission_end_time 1486237969
+end won Mission1
+start Mission1
+mission_start_time 1486238024
+execution_start_time 1486238024
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 5666
+PP_Unit_ActionOnPosition 5666_4 10 1983 1279 0
+PP_GetNumUnits 0 - 1
+out_of_range PP_GetUnitAt 0 1
+unit_not_found PP_Unit_ActionOnPosition -1 10 1983 1279 0
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486238024
+mission_end_time 1486238024
+end won Mission1
+start Mission1
+mission_start_time 1486238099
+execution_start_time 1486238099
+programming_language_used Ada
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 847
+PP_Unit_ActionOnPosition 847_4 10 1983 1279 1
+mission_end_time 1486238099
+end won Mission1
+start Mission1
+mission_start_time 1486238210
+execution_start_time 1486238210
+programming_language_used Ada
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 206
+PP_Unit_ActionOnPosition 206_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486238210
+mission_end_time 1486238210
+end won Mission1
+start Mission1
+mission_start_time 1486310056
+execution_start_time 1486310056
+programming_language_used Ada
+PP_Open
+PP_GetUnitAt 0 0 - 4543
+PP_Unit_ActionOnPosition 4543_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486310056
+mission_end_time 1486310056
+end won Mission1
+start Mission1
+mission_start_time 1486311965
+execution_start_time 1486311965
+programming_language_used Python
+PP_Open
+execution_start_time 1486311965
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4693
+PP_Unit_ActionOnPosition 4693_4 10 1983 1279 0
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486311965
+mission_end_time 1486311965
+end won Mission1
+start Mission1
+mission_start_time 1486312191
+execution_start_time 1486312191
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1199
+PP_Unit_ActionOnPosition 1199_4 10 1983 1279 0
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486312191
+mission_end_time 1486312191
+end won Mission1
+start Mission1
+mission_start_time 1486312225
+execution_start_time 1486312225
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 2570
+PP_Unit_ActionOnPosition 2570_4 10 1983 1279 1
+mission_end_time 1486312225
+end won Mission1
+start Mission1
+mission_start_time 1486312318
+execution_start_time 1486312318
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 5849
+PP_Unit_ActionOnPosition 5849_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486312318
+start Mission1
+mission_start_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 0
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 20 1983 1979 1
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+execution_start_time 1486314811
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4988
+PP_Unit_ActionOnPosition 4988_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486314811
+mission_end_time 1486314811
+end won Mission1
+start Mission1
+mission_start_time 1486315308
+execution_start_time 1486315308
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1163
+PP_Unit_ActionOnPosition 1163_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315308
+execution_start_time 1486315308
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1163
+PP_Unit_ActionOnPosition 1163_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315308
+execution_start_time 1486315308
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1163
+PP_Unit_ActionOnPosition 1163_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315308
+execution_start_time 1486315308
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1163
+PP_Unit_ActionOnPosition 1163_4 10 1983 4979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315308
+execution_start_time 1486315308
+programming_language_used C
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 1163
+PP_Unit_ActionOnPosition 1163_4 10 1983 1279 1
+mission_end_time 1486315308
+end won Mission1
+start Mission1
+mission_start_time 1486315822
+execution_start_time 1486315822
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4826
+PP_Unit_ActionOnPosition 4826_4 10 1983 1279 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315822
+execution_start_time 1486315822
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4826
+PP_Unit_ActionOnPosition 4826_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315822
+execution_start_time 1486315822
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 1
+PP_GetUnitAt 0 0 - 4826
+PP_Unit_ActionOnPosition 4826_4 10 1983 1979 1
+PP_GetNumUnits 0 - 1
+PP_Close
+execution_end_time 1486315822
+start Mission1
+mission_start_time 1486315919
+execution_start_time 1486315919
+programming_language_used Python
+PP_Open
+PP_GetUnitAt 0 0 - 2398
+PP_Unit_ActionOnPosition 2398_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486315919
+mission_end_time 1486315919
+end won Mission1

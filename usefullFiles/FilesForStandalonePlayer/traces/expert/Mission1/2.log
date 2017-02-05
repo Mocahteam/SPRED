@@ -1,0 +1,11 @@
+start Mission1
+mission_start_time 1486237657
+execution_start_time 1486237657
+programming_language_used Ada
+PP_Open
+PP_GetUnitAt 0 0 - 1404
+PP_Unit_ActionOnPosition 1404_4 10 1983 1279 0
+PP_Close
+execution_end_time 1486237657
+mission_end_time 1486237657
+end won Mission1
