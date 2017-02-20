@@ -909,19 +909,12 @@ function EditMissionFrame() -- Shows the edit mission menu
 	ClearUI()
 	InitializeLevelButtons()
 	UI.MainWindow:AddChild(UI.BackButton)
-	--UI.MainWindow:AddChild(UI.LoadLevel.Title)
-	--UI.MainWindow:AddChild(UI.LoadLevel.LevelScrollPanel)
 end
 
 function EditScenarioFrame() -- Shows the edit scenario menu
 	ClearUI()
 	InitializeScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
-	--UI.MainWindow:AddChild(UI.Scenario.Title)
-	--UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
-	--UI.MainWindow:AddChild(UI.Scenario.Save)
-	--UI.MainWindow:AddChild(UI.Scenario.Open)
-	--UI.MainWindow:AddChild(UI.Scenario.Reset)
 	-- force all output and input states to redraw (resolves bug on Begin and End
 	-- that are already display in chosen state even if they aren't in this state)
 	for k, but in pairs(UI.Scenario.Input) do

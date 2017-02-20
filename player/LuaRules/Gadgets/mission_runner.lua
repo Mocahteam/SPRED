@@ -115,20 +115,13 @@ function showMessage (msg, p, w)
   _G.event = nil
 end
 
--- used to show tuto (called by missionScript i.e. MissionPlayer_Editor.lua)
-function showTuto ()
-  SendToUnsynced("TutorialEvent")
-end
-
 function gadget:Initialize()
   gadgetHandler:RegisterGlobal("showMessage", showMessage)
-  gadgetHandler:RegisterGlobal("showTuto", showTuto)
 end
 
 
 function gadget:Shutdown()
   gadgetHandler:DeregisterGlobal("showMessage")
-  gadgetHandler:DeregisterGlobal("showTuto")
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam) 
@@ -186,11 +179,6 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "disableCameraAuto" then
     if Script.LuaUI("CameraAuto") then
       Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
-    end
-    
-  elseif arg1 == "TutorialEvent" then
-    if Script.LuaUI("TutorialEvent") then
-      Script.LuaUI.TutorialEvent() -- function defined and registered in pp_gui_main_menu widget
     end
 	
   elseif arg1 == "MissionEvent" then
