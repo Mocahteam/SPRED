@@ -10,7 +10,7 @@ function widget:GetInfo()
   }
 end
 
-function widget:Initialize()
+function widget:GameStart()
 	if Script.LuaUI("TutorialEvent") then
       Script.LuaUI.TutorialEvent() -- function defined and registered in pp_gui_main_menu widget
     end

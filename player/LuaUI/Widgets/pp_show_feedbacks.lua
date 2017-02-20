@@ -177,7 +177,9 @@ end
 
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
-	
+end
+
+function widget:GameStart()
 	if traceOn and not testMap then -- Traces are on => we display the button
 		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
 			Spring.Echo("PP Show Feedbacks: Chili is not defined, remove himself")

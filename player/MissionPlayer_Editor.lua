@@ -428,7 +428,10 @@ end
 -- For this reason all the json files must have a message with id BRIEFING
 -------------------------------------
 local function ShowBriefing ()
-  showMessage(getAMessage(ctx.messages["briefing"]))-- convention all json files have briefing attribute
+  local briefingTxt = ctx.messages["briefing"] -- convention all json files have briefing attribute
+  if briefingTxt ~= "" then
+	showMessage(briefingTxt)
+  end
 end
 
 local function registerUnit(springId,externalId,reduction,autoHeal)
