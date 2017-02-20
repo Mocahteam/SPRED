@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="Mission1" start_time="1487586766" end_time="1487586766" status="won">
+		<execution start_time="1487586766" programming_language_used="Scratch" end_time="1487586766">
+			<call label="PP_Open" info=""/>
+			<call label="PP_GetUnitAtIndexFirst" params="0 0" return="1961" info=""/>
+			<call label="PP_Unit_ActionOnPosition" params="1961_4 10 1983 1279 0" info=""/>
+			<call label="PP_Close" info=""/>
+		</execution>
+	</mission>
+</trace>
+
