@@ -387,40 +387,43 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		width = "60%",
 		height = "60%",
 	}
-	UI.NewLevel.NoMapMessage = Chili.TextBox:New{
-		parent = UI.NewLevel.MapScrollPanel,
-		x = "5%",
-		y = "5%",
-		width = "90%",
-		height = "90%",
-		text = LAUNCHER_NEW_NO_MAP_FOUND,
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20,
-		  autoAdjust = true,
-		  maxSize = 20,
-			color = { 1, 0, 0, 1 }
-		}
-	}
-	UI.NewLevel.MapButtons = {}
-	for i, map in ipairs(MapList) do
-		local mapButton = Chili.Button:New{
+	if #MapList == 0 then
+		UI.NewLevel.NoMapMessage = Chili.TextBox:New{
 			parent = UI.NewLevel.MapScrollPanel,
-			x = "0%",
-			y = ((i-1)*15).."%",
-			width = "100%",
-			height = "15%",
-			caption = map,
-			OnClick = { function() NewMission(map) end },
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = LAUNCHER_NEW_NO_MAP_FOUND,
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 30,
+				size = 20,
 			  autoAdjust = true,
-			  maxSize = 30,
-				color = { 0.2, 0.4, 0.8, 1 }
+			  maxSize = 20,
+				color = { 1, 0, 0, 1 }
 			}
 		}
-		table.insert(UI.NewLevel.MapButtons, mapButton)
+	else
+		UI.NewLevel.MapButtons = {}
+		for i, map in ipairs(MapList) do
+			local mapButton = Chili.Button:New{
+				parent = UI.NewLevel.MapScrollPanel,
+				x = "0%",
+				y = ((i-1)*15).."%",
+				width = "100%",
+				height = "15%",
+				caption = map,
+				OnClick = { function() NewMission(map) end },
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 30,
+				  autoAdjust = true,
+				  maxSize = 30,
+					color = { 0.2, 0.4, 0.8, 1 }
+				}
+			}
+			table.insert(UI.NewLevel.MapButtons, mapButton)
+		end
 	end
 end
 
@@ -451,44 +454,48 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 		width = "60%",
 		height = "60%",
 	}
-	UI.LoadLevel.NoLevelMessage = Chili.TextBox:New{
-		parent = UI.LoadLevel.LevelScrollPanel,
-		x = "5%",
-		y = "5%",
-		width = "90%",
-		height = "90%",
-		text = string.gsub(LAUNCHER_EDIT_NO_LEVEL_FOUND, "/MAINGAME/", MainGame),
-		font = {
-			font = "LuaUI/Fonts/Asimov.otf",
-			size = 20,
-			autoAdjust = true,
-			maxSize = 20,
-			color = { 1, 0, 0, 1 }
-		}
-	}
-	UI.LoadLevel.LevelButtons = {}
-	for i, level in ipairs(LevelListNames) do
-		local levelButton = Chili.Button:New{
+	if #LevelListNames == 0 then
+		UI.LoadLevel.NoLevelMessage = Chili.TextBox:New{
 			parent = UI.LoadLevel.LevelScrollPanel,
-			x = "0%",
-			y = ((i-1)*15).."%",
-			width = "100%",
-			height = "15%",
-			caption = LevelList[i].description.name,
-			OnClick = { function() EditMission(level) end },
+			x = "5%",
+			y = "5%",
+			width = "90%",
+			height = "90%",
+			text = string.gsub(LAUNCHER_EDIT_NO_LEVEL_FOUND, "/MAINGAME/", MainGame),
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
-				size = 30,
+				size = 20,
 				autoAdjust = true,
-				maxSize = 30,
-				color = { 0.2, 0.4, 0.8, 1 }
+				maxSize = 20,
+				color = { 1, 0, 0, 1 }
 			}
 		}
-		table.insert(UI.LoadLevel.LevelButtons, levelButton)
+	else
+		UI.LoadLevel.LevelButtons = {}
+		for i, level in ipairs(LevelListNames) do
+			local levelButton = Chili.Button:New{
+				parent = UI.LoadLevel.LevelScrollPanel,
+				x = "0%",
+				y = ((i-1)*15).."%",
+				width = "100%",
+				height = "15%",
+				caption = LevelList[i].description.name,
+				OnClick = { function() EditMission(level) end },
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 30,
+					autoAdjust = true,
+					maxSize = 30,
+					color = { 0.2, 0.4, 0.8, 1 }
+				}
+			}
+			table.insert(UI.LoadLevel.LevelButtons, levelButton)
+		end
 	end
 end
 
 function InitializeScenarioFrame() -- Create a window for each level, and in each window, create a button for each output state and one for the input state
+	InitializeLevelList()
 	InitializeOutputStates()
 	UpdateScenarioList()
 	UI.Scenario = {}
@@ -846,11 +853,9 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.BackButton)
 
 	UI.MainWindow:RemoveChild(UI.NewLevel.Title)
-	UI.NewLevel.MapScrollPanel:RemoveChild(UI.NewLevel.NoMapMessage)
 	UI.MainWindow:RemoveChild(UI.NewLevel.MapScrollPanel)
 
 	UI.MainWindow:RemoveChild(UI.LoadLevel.Title)
-	UI.LoadLevel.LevelScrollPanel:RemoveChild(UI.LoadLevel.NoLevelMessage)
 	UI.MainWindow:RemoveChild(UI.LoadLevel.LevelScrollPanel)
 
 	UI.MainWindow:RemoveChild(UI.Scenario.Title)
@@ -898,29 +903,25 @@ function NewMissionFrame() -- Shows the new mission menu
 	UI.MainWindow:AddChild(UI.BackButton)
 	UI.MainWindow:AddChild(UI.NewLevel.Title)
 	UI.MainWindow:AddChild(UI.NewLevel.MapScrollPanel)
-	if #MapList == 0 then
-		UI.NewLevel.MapScrollPanel:AddChild(UI.NewLevel.NoMapMessage)
-	end
 end
 
 function EditMissionFrame() -- Shows the edit mission menu
 	ClearUI()
+	InitializeLevelButtons()
 	UI.MainWindow:AddChild(UI.BackButton)
-	UI.MainWindow:AddChild(UI.LoadLevel.Title)
-	UI.MainWindow:AddChild(UI.LoadLevel.LevelScrollPanel)
-	if #LevelListNames == 0 then
-		UI.LoadLevel.LevelScrollPanel:AddChild(UI.LoadLevel.NoLevelMessage)
-	end
+	--UI.MainWindow:AddChild(UI.LoadLevel.Title)
+	--UI.MainWindow:AddChild(UI.LoadLevel.LevelScrollPanel)
 end
 
 function EditScenarioFrame() -- Shows the edit scenario menu
 	ClearUI()
+	InitializeScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
-	UI.MainWindow:AddChild(UI.Scenario.Title)
-	UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
-	UI.MainWindow:AddChild(UI.Scenario.Save)
-	UI.MainWindow:AddChild(UI.Scenario.Open)
-	UI.MainWindow:AddChild(UI.Scenario.Reset)
+	--UI.MainWindow:AddChild(UI.Scenario.Title)
+	--UI.MainWindow:AddChild(UI.Scenario.ScenarioScrollPanel)
+	--UI.MainWindow:AddChild(UI.Scenario.Save)
+	--UI.MainWindow:AddChild(UI.Scenario.Open)
+	--UI.MainWindow:AddChild(UI.Scenario.Reset)
 	-- force all output and input states to redraw (resolves bug on Begin and End
 	-- that are already display in chosen state even if they aren't in this state)
 	for k, but in pairs(UI.Scenario.Input) do
@@ -1382,7 +1383,7 @@ function ExportGameFrame()
 		maxboxsize = 20,
 		boxalign = "left",
 		checked = false,
-		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE,
+		caption = "  "..LAUNCHER_SCENARIO_EXPORT_GAME_INCLUDE_ALL,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
