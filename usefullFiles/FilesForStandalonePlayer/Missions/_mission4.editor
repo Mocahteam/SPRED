@@ -87,6 +87,11 @@
 				"active":false
 			},
 			{
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
+				"active":false
+			},
+			{
 				"desc":"Show some P&P menu when Spring.exe is run directly.",
 				"name":"Spring Direct Launch 2 for Prog&Play Level Editor",
 				"active":true
