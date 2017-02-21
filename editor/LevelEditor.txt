@@ -17,7 +17,6 @@
 		fixedallies=0;			    // enable in game alliance
 		hidemenu=1;				    // set a value to avoid starting menu
 		language=en;			    // en english, fr français
-		missionname=LevelEditor;	// mission name used to define script file and launcher file
 		scenario=noScenario;		// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
 		// toBeLoaded=missionname; => is a modoption set dynamically this enable to launch editor and load directly a mission with name missionname.editor
 		// maingame=gamename; => is a modoption set dynamically this enable to know the game from which the mod is based on (equivalent to depend key on ModInfo files)

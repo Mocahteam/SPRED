@@ -641,6 +641,12 @@ function TutorialEvent()
   end
 end
 
+function PlayVideo()
+  if WG.rooms.Video and WG.rooms.Video.closed then
+    WG.rooms.Video:Open()
+  end
+end
+
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
@@ -691,6 +697,7 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
   widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
+  widgetHandler:RegisterGlobal("PlayVideo", PlayVideo)
   
   rooms = WG.rooms -- WG is available in all widgets
   Window = rooms.Window
@@ -703,4 +710,5 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal("EmulateEscapeKey")
   widgetHandler:DeregisterGlobal("MissionEvent")
   widgetHandler:DeregisterGlobal("TutorialEvent")
+  widgetHandler:DeregisterGlobal("PlayVideo")
 end

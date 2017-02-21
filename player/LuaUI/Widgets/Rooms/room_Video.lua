@@ -13,11 +13,6 @@
 
 local lang = Spring.GetModOptions()["language"] -- get the language
 
-local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario
-local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
-
-local openState = ((scenarioType == "default" or scenarioType == "noScenario") and missionName == "Mission1")
-
 local winSizeX, winSizeY = Spring.GetWindowGeometry()
 
 local loading = true
@@ -163,7 +158,7 @@ end
 
 
 local template_Text = {
-    closed = not openState,
+    closed = true,
     noMove = true,
 	noBorder = true,
 	x = 0,
@@ -173,7 +168,7 @@ local template_Text = {
 }
 
 local template_VideoBackground = {
-  closed = not openState,
+  closed = true,
   noMove = true,
   bottomLeftColor = {0, 0, 0, 1},
   topLeftColor = {0, 0, 0, 1},
@@ -266,10 +261,6 @@ local template_VideoBackground = {
 
 local function CreateFullScreenVideo ()
 	template_VideoBackground.son = Window:CreateCentered(template_Text)
-	-- disable sound
-	if openState then
-		Spring.SendCommands("nosound")
-	end
 	return Window:CreateCentered(template_VideoBackground)
 end
 

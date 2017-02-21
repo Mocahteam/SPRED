@@ -5057,7 +5057,7 @@ function newMapFrame() -- Show a window when the user clicks on the new button
 		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
 		return
 	else
-		showLoadWindow()
+		performNewMap()
 	end
 end
 
