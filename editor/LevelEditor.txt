@@ -67,7 +67,7 @@
 		                // player number of the AI controlling team
 		                // see AI.Host
 		AllyTeam=0;
-		RGBColor=0.500000 0.500000 1.000000;
+		RGBColor=0.000000 0.000000 1.000000;
 		Side=System; // or Hacker or Network
 		StartPosX=1056; // Use these in combination with StartPosType=3
 		StartPosZ=1900; // Use these in combination with StartPosType=3

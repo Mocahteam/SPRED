@@ -58,6 +58,7 @@ local groupTotal = nil -- Total number of unit groups
 local groupSizes = {} -- Contains the total number of units in each group
 local unitGroupsAttributionWindow -- Pop-up window to add selected units to a group
 local unitGroupsRemovalWindow -- Pop-up window to remove selected units from a group
+local forceUpdateUnitList = false -- ask to update unit list panel the next time it is displayed
 local unitListScrollPanel -- List of units placed on the field
 local unitListLabels = {} -- List of units' label
 local unitListEyes = {} -- Allow to focus on units
@@ -66,6 +67,7 @@ local unitListLinesHeight = 8 -- How much % of the parent size a line is height
 local unitListHighlight = {} -- Show if unit is selected or not
 local groupListScrollPanel -- List of unit groups
 local groupListUnitsScrollPanel -- List of units in the unit groups frame
+local forceUpdateUnitGroupPanels = false -- ask to update unit group panel the next time it is displayed
 local groupPanels = {} -- Panels of unit groups
 local groupEditBoxes = {} -- Allows changing the name of unit groups
 local selectGroupButtons = {} -- Select a group to assign units to it
@@ -551,6 +553,10 @@ function unitFrame()
 		teamStateMachine:setCurrentState(teamStateMachine:getCurrentState())
 		Screen0:AddChild(windows["unitWindow"])
 		Screen0:AddChild(windows["unitListWindow"])
+		if forceUpdateUnitList then
+			forceUpdateUnitList = false
+			rebuildUnitList()
+		end
 	end
 end
 
@@ -796,7 +802,7 @@ function testLevel()
 			Screen0:RemoveChild(windows["testWindow"])
 			windows["testWindow"]:Dispose()
 		end
-		windows["testWindow"] = addWindow(Screen0, '20%', '45%', '60%', '10%', true)
+		windows["testWindow"] = addWindow(Screen0, '20%', '40%', '60%', '20%', true)
 		local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
 		addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text)
 		addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
@@ -1075,6 +1081,18 @@ function initForcesWindow()
 				1
 			}
 			teamColorImage[team]:InvalidateSelf()
+			-- update all UI element depending of this team
+			teams[team].red = teamColor[team].red
+			teams[team].green = teamColor[team].green
+			teams[team].blue = teamColor[team].blue
+			updateTeamButtons = true
+			updateAllyTeam = true
+			forceUpdateUnitGroupPanels = true
+			forceUpdateUnitList = true
+			teamNameEditBoxes[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+			teamNameEditBoxes[team]:InvalidateSelf()
+			-- update units already created
+			Spring.SetTeamColor(team, teamColor[team].red, teamColor[team].green, teamColor[team].blue)
 		end
 		teamColorTrackbars[team].red.OnChange = {updateImage}
 		teamColorTrackbars[team].red.color = {1, 0, 0, 1}
@@ -1185,7 +1203,13 @@ function initTriggerWindow()
 	-- Configure event window
 	windows['configureEvent'] = addWindow(Screen0, '70%', '10%', '30%', '90%')
 	local closeConfigure = addImage(windows['configureEvent'], '93%', '0%', '7%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-	closeConfigure.OnClick = { showVariablesFrame }
+	closeConfigure.OnClick = {
+		function () 
+			removeThirdWindows()
+			currentCondition = nil
+			currentAction = nil
+		end
+	}
 	closeConfigure.OnMouseOver = { function() closeConfigure.color = { 1, 0.5, 0, 1 } end }
 	closeConfigure.OnMouseOut = { function() closeConfigure.color = { 1, 0, 0, 1 } end }
 	configureEventLabel = addLabel(windows['configureEvent'], '0%', '1%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE)
@@ -1911,7 +1935,8 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 	end
 
 	-- Update
-	if updatePanels then
+	if updatePanels or forceUpdateUnitGroupPanels then
+		forceUpdateUnitGroupPanels = false
 		-- Clear UI elements
 		removeElements(groupListScrollPanel, groupPanels, true)
 		groupListScrollPanel:RemoveChild(addGroupButton)
@@ -2642,6 +2667,8 @@ function updateAllyTeamPanels() -- Update the ally team window
 				count = count + 1
 			end
 			allyTeamsSize[k] = tableLength(at)
+			-- update also color of team button in case of color changed
+			selectAllyTeamsButtons[k].font.color = {teams[k].red, teams[k].green, teams[k].blue, 1}
 		end
 	end
 

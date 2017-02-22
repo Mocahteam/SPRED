@@ -145,6 +145,13 @@ function getTeamsInformation()
 		end
 		local colors = {}
 		colors[1], colors[2], colors[3] = Spring.GetTeamColor(i)
+		-- if one of the color is undef, we use color defined in LevelEditor.txt
+		if not (colors[1] and colors[2] and colors[3]) then
+			local rgbRegex = "RGBColor%=%d.%d+ %d.%d+ %d.%d+"
+			local rgbSection = string.match(contentSection, rgbRegex)
+			local msgContents = splitString(rgbSection, "=")
+			colors = splitString(msgContents[2], " ")
+		end
 		teams[i] = { id = i, red = colors[1], green = colors[2], blue = colors[3] }
 		i = i + 1
 	end
