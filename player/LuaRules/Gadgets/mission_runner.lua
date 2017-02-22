@@ -22,9 +22,7 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 
 local missionScript = nil
-local lang = Spring.GetModOptions()["language"] -- get the language
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
-local testmap = Spring.GetModOptions()["testmap"]  --indicate the editor that wants to test a level ("test mission button")
 -- variable to know the state of the mission
 -- -1 => mission lost
 --  0 => mission running
