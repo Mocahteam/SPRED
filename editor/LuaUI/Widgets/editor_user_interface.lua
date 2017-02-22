@@ -5300,8 +5300,11 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 		table.insert(savedTable.description.widgets, widget)
 	end
 	savedTable.description.traces = {}
-	for i, t in ipairs(chosenTraces) do
-		table.insert(savedTable.description.traces, t)
+	for _, t in ipairs(chosenTraces) do
+		-- check if trace already exists (case of expert solution deleted by user)
+		if VFS.FileExists("traces/data/expert/"..mapDescription.mapName.."/"..t..".xml") then
+			table.insert(savedTable.description.traces, t)
+		end
 	end
 
 	-- Units
