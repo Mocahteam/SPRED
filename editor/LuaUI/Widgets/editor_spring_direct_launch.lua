@@ -1473,8 +1473,7 @@ function NewMission(map) -- Start editor with empty mission on the selected map
 		["MODOPTIONS"] = {
 			["language"] = WG.Language,
 			["scenario"] = "noScenario",
-			["maingame"] = MainGame,
-			["commands"] = Script.LuaUI.getCommandsList()
+			["maingame"] = MainGame
 		},
 		["GAME"] = {
 			["Mapname"] = map,
@@ -1493,8 +1492,7 @@ function EditMission(level) -- Start editor with selected mission
 				["language"] = WG.Language,
 				["scenario"] = "noScenario",
 				["toBeLoaded"] = level,
-				["maingame"] = MainGame,
-				["commands"] = Script.LuaUI.getCommandsList()
+				["maingame"] = MainGame
 			},
 			["GAME"] = {
 				["Mapname"] = levelFile.description.map,

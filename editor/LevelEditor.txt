@@ -20,7 +20,6 @@
 		scenario=noScenario;		// default: use campaign.lua scenario, noScenario: no scenario are used, [appliqScenarioTitle]: the title of the appliq scenario to use
 		// toBeLoaded=missionname; => is a modoption set dynamically this enable to launch editor and load directly a mission with name missionname.editor
 		// maingame=gamename; => is a modoption set dynamically this enable to know the game from which the mod is based on (equivalent to depend key on ModInfo files)
-		// commands=...; => is a modoption set dynamically to store commandsToId, idToCommands, sortedCommandsList and sortedCommandsListByUnit
 	}
 
 	// A player (controlls a team, player 0 is the host only if IsHost is not set)

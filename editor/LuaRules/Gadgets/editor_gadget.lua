@@ -22,7 +22,7 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 
 local lang = Spring.GetModOptions()["language"] -- get the language
-local hidemenu = Spring.GetModOptions()["hidemenu"] -- get the name of the current mission
+local hideMenu = Spring.GetModOptions()["hidemenu"] -- know if menu is hidden
 local createUnit = false
 local unitType, team = "bit", 0
 local newTeam = 0
@@ -42,7 +42,8 @@ local unitsInfo = {}
 local moveUnitsAnchor = nil
 local relativepos = {}
 local hpPercent = -1
-local initialize = true
+local initialized = false
+local cleaned = false
 
 function gadget:Initialize()
 	-- Allow to see everything and select any unit
@@ -133,127 +134,133 @@ function gadget:RecvLuaMsg(msg, player)
 end
 
 function gadget:GameFrame( frameNumber )
-	if hidemenu then
-		-- Delete units at the beginning
-		if initialize and frameNumber > 0 then
-			local units = Spring.GetAllUnits()
-			if units.n ~= 0 then
-				for i, u in ipairs(units) do
-					Spring.DestroyUnit(u, true, true)
-				end
-				initialize = false
-			end
-			if Spring.GetModOptions().tobeloaded then
-				SendToUnsynced("beginLoadLevel".."++"..Spring.GetModOptions().tobeloaded)
-			end
-			SendToUnsynced("finishedLoading")
-		end
-		-- CREATE UNIT
-		if createUnit then
-			local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
-			Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
-			createUnit = false
-			SendToUnsynced("saveState")
-		-- MOVE UNITS
-		elseif moveUnits then
-			if selectedUnits ~= {} then
-				Spring.SetUnitPosition(moveUnitsAnchor, newX, Spring.GetGroundHeight(newX, newZ), newZ)
-				Spring.GiveOrderToUnit(moveUnitsAnchor, CMD.STOP, {}, {})
-				for i, u in ipairs(selectedUnits) do
-					if relativepos[u] ~= nil then
-						local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
-						Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
-						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+	if not hideMenu then
+		SendToUnsynced("finishedLoading")
+	else
+		if not initialized then
+			-- INITIALIZE COMMANDS LIST
+			initialized = true
+			local cmdList = {}
+			local cmdListUnit = {}
+			for id, unitDef in pairs(UnitDefs) do
+				local unitType = unitDef.name
+				cmdListUnit[unitType] = {}
+				local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
+				Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
+				Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
+				local cmds = Spring.GetUnitCmdDescs(id)
+				for i, cmd in ipairs(cmds) do
+					if cmd.id < 0 then
+						cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+						cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
+					else
+						cmdList[cmd.name] = cmd.id
+						cmdListUnit[unitType][cmd.name] = cmd.id
 					end
 				end
+				Spring.DestroyUnit(id, true, true)
 			end
-			moveUnits = false
-			SendToUnsynced("requestSave")
-		-- DELETE UNITS
-		elseif deleteUnits then
-			if selectedUnits ~= {} then
-				for i, u in ipairs(selectedUnits) do
-					Spring.DestroyUnit(u)
+			SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
+		end
+		if initialized then
+			-- Delete units at the beginning
+			if not cleaned and frameNumber > 0 then
+				local units = Spring.GetAllUnits()
+				if units.n ~= 0 then
+					for i, u in ipairs(units) do
+						Spring.DestroyUnit(u, true, true)
+					end
+					cleaned = true
+					if Spring.GetModOptions().tobeloaded then
+						SendToUnsynced("beginLoadLevel".."++"..Spring.GetModOptions().tobeloaded)
+					end
+					SendToUnsynced("finishedLoading")
 				end
 			end
-			deleteUnits = false
-			SendToUnsynced("requestSave")
-		-- TRANSFER UNITS
-		elseif transferUnits then
-			for i, u in ipairs(selectedUnits) do
-				Spring.TransferUnit(u, newTeam)
-				Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
-				Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
-			end
-			SendToUnsynced("requestSave")
-			SendToUnsynced("requestUpdate")
-			transferUnits = false
-		-- ROTATE UNITS
-		elseif rotateUnits then
-			for i, u in ipairs(selectedUnits) do
-				Spring.SetUnitRotation(u, 0, -angle, 0)
-			end
-			rotateUnits = false
-			SendToUnsynced("requestSave")
-		-- FACE UNITS
-		elseif faceUnits then
-			for i, u in ipairs(selectedUnits) do
-				Spring.SetUnitRotation(u, 0, -faceAngles[i], 0)
-			end
-			faceUnits = false
-			SendToUnsynced("requestSave")
-		-- RESET MAP
-		elseif resetMap then
-			local units = Spring.GetAllUnits()
-			for i = 1,table.getn(units) do
-				Spring.DestroyUnit(units[i], false, true)
-			end
-			resetMap = false
-		-- CHANGE HP OF SELECTED UNITS
-		elseif hpPercent > 0 and hpPercent <= 1 then
-			for i, u in ipairs(selectedUnits) do
-				local _, mh = Spring.GetUnitHealth(u)
-				Spring.SetUnitHealth(u, hpPercent * mh)
-			end
-			hpPercent = -1
-			SendToUnsynced("requestSave")
-		-- INSTANTIATE UNITS AND KEEP THEIR IDs
-		elseif loadMap then
-			local unitsNewIDs = {}
-			for i, u in ipairs(unitsInfo) do
-				unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
-				Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
-				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.STOP, {}, {})
-				Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.FIRE_STATE, {0}, {})
-			end
-			SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
-			loadMap = false
-		end
-	-- INITIALIZE COMMANDS LIST
-	elseif initialize then
-		initialize = false
-		local cmdList = {}
-		local cmdListUnit = {}
-		for id, unitDef in pairs(UnitDefs) do
-			local unitType = unitDef.name
-			cmdListUnit[unitType] = {}
-			local id = Spring.CreateUnit(unitType, 0, 0, 0, "s", 0)
-			Spring.GiveOrderToUnit(id, CMD.STOP, {}, {})
-			Spring.GiveOrderToUnit(id, CMD.FIRE_STATE, {0}, {})
-			local cmds = Spring.GetUnitCmdDescs(id)
-			for i, cmd in ipairs(cmds) do
-				if cmd.id < 0 then
-					cmdList["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-					cmdListUnit[unitType]["Build "..UnitDefNames[cmd.name].humanName] = cmd.id
-				else
-					cmdList[cmd.name] = cmd.id
-					cmdListUnit[unitType][cmd.name] = cmd.id
+			if cleaned then
+				-- CREATE UNIT
+				if createUnit then
+					local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
+					Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
+					createUnit = false
+					SendToUnsynced("saveState")
+				-- MOVE UNITS
+				elseif moveUnits then
+					if selectedUnits ~= {} then
+						Spring.SetUnitPosition(moveUnitsAnchor, newX, Spring.GetGroundHeight(newX, newZ), newZ)
+						Spring.GiveOrderToUnit(moveUnitsAnchor, CMD.STOP, {}, {})
+						for i, u in ipairs(selectedUnits) do
+							if relativepos[u] ~= nil then
+								local xtar, ztar = newX + relativepos[u].dx, newZ + relativepos[u].dz
+								Spring.SetUnitPosition(u, xtar, Spring.GetGroundHeight(xtar, ztar), ztar)
+								Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+							end
+						end
+					end
+					moveUnits = false
+					SendToUnsynced("requestSave")
+				-- DELETE UNITS
+				elseif deleteUnits then
+					if selectedUnits ~= {} then
+						for i, u in ipairs(selectedUnits) do
+							Spring.DestroyUnit(u)
+						end
+					end
+					deleteUnits = false
+					SendToUnsynced("requestSave")
+				-- TRANSFER UNITS
+				elseif transferUnits then
+					for i, u in ipairs(selectedUnits) do
+						Spring.TransferUnit(u, newTeam)
+						Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
+						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+					end
+					SendToUnsynced("requestSave")
+					SendToUnsynced("requestUpdate")
+					transferUnits = false
+				-- ROTATE UNITS
+				elseif rotateUnits then
+					for i, u in ipairs(selectedUnits) do
+						Spring.SetUnitRotation(u, 0, -angle, 0)
+					end
+					rotateUnits = false
+					SendToUnsynced("requestSave")
+				-- FACE UNITS
+				elseif faceUnits then
+					for i, u in ipairs(selectedUnits) do
+						Spring.SetUnitRotation(u, 0, -faceAngles[i], 0)
+					end
+					faceUnits = false
+					SendToUnsynced("requestSave")
+				-- RESET MAP
+				elseif resetMap then
+					local units = Spring.GetAllUnits()
+					for i = 1,table.getn(units) do
+						Spring.DestroyUnit(units[i], false, true)
+					end
+					resetMap = false
+				-- CHANGE HP OF SELECTED UNITS
+				elseif hpPercent > 0 and hpPercent <= 1 then
+					for i, u in ipairs(selectedUnits) do
+						local _, mh = Spring.GetUnitHealth(u)
+						Spring.SetUnitHealth(u, hpPercent * mh)
+					end
+					hpPercent = -1
+					SendToUnsynced("requestSave")
+				-- INSTANTIATE UNITS AND KEEP THEIR IDs
+				elseif loadMap then
+					local unitsNewIDs = {}
+					for i, u in ipairs(unitsInfo) do
+						unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
+						Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
+						Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.STOP, {}, {})
+						Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.FIRE_STATE, {0}, {})
+					end
+					SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
+					loadMap = false
 				end
 			end
-			Spring.DestroyUnit(id, true, true)
 		end
-		SendToUnsynced("commands".."++"..json.encode(cmdList).."++"..json.encode(cmdListUnit))
-		SendToUnsynced("finishedLoading")
 	end
 end
 --------------------------------------------------------------------------------
@@ -277,7 +284,7 @@ function gadget:RecvFromSynced(msg)
 		Script.LuaUI.requestSave()
 	end
 	if msgContents[1] == "commands" then
-		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3]) -- registered from editor_commands_list.lua
+		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3]) -- registered from editor_userinterface.lua
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2]) -- registered from editor_user_interface.lua

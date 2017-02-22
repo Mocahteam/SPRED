@@ -4456,11 +4456,20 @@ function updateEditBoxesParams() -- update some attributes if they require editb
 	end
 end
 
-function getCommandsList() -- Get the list of the commands of the units as read in the appropriate widget
-	local commandList = Spring.GetModOptions().commands
-	if commandList then
-		commandList = splitString(commandList, "++")
-		commandsToID, idToCommands, sortedCommandsList, sortedCommandsListUnit = json.decode(commandList[1]), json.decode(commandList[2]), json.decode(commandList[3]), json.decode(commandList[4])
+function generateCommandsList(encodedList, encodedUnitList)
+	commandsToID = json.decode(encodedList)
+	for c, id in pairs(commandsToID) do
+		table.insert(sortedCommandsList, c)
+		idToCommands[id] = c
+	end
+	table.sort(sortedCommandsList)
+	local commandsUnitList = json.decode(encodedUnitList)
+	for u, cl in pairs(commandsUnitList) do
+		sortedCommandsListUnit[u] = {}
+		for c, id in pairs(cl) do
+			table.insert(sortedCommandsListUnit[u], c)
+		end
+		table.sort(sortedCommandsListUnit[u])
 	end
 end
 
@@ -5593,7 +5602,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
-	getCommandsList()
+	widgetHandler:RegisterGlobal("generateCommandsList", generateCommandsList)
 	updateLanguage() -- defined in EditorStrings.lua
 	-- load default values for map description
 	mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
