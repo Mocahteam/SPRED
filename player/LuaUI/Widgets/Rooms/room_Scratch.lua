@@ -83,27 +83,27 @@ end
 local function getText ()
 	if currentPage == 1 then
 		if lang == "fr" then
-			return "Etape 1 : Vous devez placer en tout premier les briques de contrôle qui vous permettront de gérer l'exécution de votre programme. "
+			return "Etape 1 : Vous devez placer en tout premier la brique d'évènement drapeau vert qui vous permettra de gérer l'exécution de votre programme. "
 		else
-			return "Step 1: You have to drag and drop control blocks in order to manage your program execution."
+			return "Step 1: You have to drag and the green flag drop event block in order to manage your program execution."
 		end
 	elseif currentPage == 2 then
 		if lang == "fr" then
-			return "Etape 2 : Après avoir positionné les briques de contrôle, vous devez initialiser la bibliothèque Prog&Play. Ceci doit être fait à l'aide de la brique \"open Prog&Play\". Enfin, pensez toujours à utiliser, avant la fin de votre programme, la brique \"close Prog&Play\" pour fermer proprement la bibliothèque Prog&Play. "
+			return "Etape 2 : Après avoir positionné la brique de d'évènement, vous devez initialiser la bibliothèque Prog&Play. Ceci doit être fait à l'aide de la brique \"open Prog&Play\". Enfin, pensez toujours à utiliser, avant la fin de votre programme, la brique \"close Prog&Play\" pour fermer proprement la bibliothèque Prog&Play. "
 		else
-			return "Step 2 : When you have drag and drop first blocks, you have to initialize the Prog&Play library. This can be done with the \"open Prog&Play\" block. Then, don't forget to use the \"close Prog&Play\" block in order to properly close the Prog&Play library. "
+			return "Step 2 : When you have drag and drop the event block, you have to initialize the Prog&Play library. This can be done with the \"open Prog&Play\" block. Then, don't forget to use the \"close Prog&Play\" block in order to properly close the Prog&Play library. "
 		end
 	elseif currentPage == 3 then
 		if lang == "fr" then
 			return "Etape 3 : Après avoir initialisé la bibliothèque Prog&Play, vous pouvez vous attacher à tenter de résoudre le problème qui vous est posé. Dans ce tutoriel, l'objectif consiste à déplacer votre unité à une position particulière. Pour agir sur votre unité, vous devez dans un premier temps la récupérer dans le contexte de votre programme. Ceci peut être fait à l'aide de la brique \"unit [num] of [constant] coalition\". Dans l'exemple ci-dessous, les paramètres indiquent que vous souhaitez récupérer la première unité (indice 0) que vous possédez (constante MY). L'unité ainsi retournée est stockée dans une variable (ici nommée \"u\"). "
 		else
-			return "Step 3: When you have initialized the Prog&Play library, you can try to resolve game objective. In this tutorial, objective consists in moving a unit to a target position. In order to control the unit, you have to get it into the program context. You can do it with the \"unit [num] of [constant] coalition\" block. In example below, you get the first unit (index "..orange.."0"..white..") you control (MY constant). The unit returned is stored into a variable named \"u\". "
+			return "Step 3: When you have initialized the Prog&Play library, you can try to resolve game objective. In this tutorial, objective consists in moving a unit to a target position. In order to control the unit, you have to get it into the program context. You can do it with the \"unit [num] of [constant] coalition\" block. In example below, you get the first unit (index 0) you control (MY constant). The unit returned is stored into a variable named \"u\". "
 		end
 	elseif currentPage == 4 then
 		if lang == "fr" then
-			return "Etape 4 : Après avoir récupéré votre unité, vous pouvez lui donner l'ordre de se déplacer. Ceci peut être fait à l'aide de la brique \"command unit id [num] to [action] to x: [int] y: [int]\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\") et la position où effectuer l'action sous la forme de coordonnées x et y. A noter que l'origine de la carte de jeu se trouve en haut à gauche. "
+			return "Etape 4 : Après avoir récupéré votre unité, vous pouvez lui donner l'ordre de se déplacer. Ceci peut être fait à l'aide de la brique \"command unit id [num] to [action] to x: [int] y: [int] and [constant]\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\"), la position où effectuer l'action sous la forme de coordonnées x et y et une constante indiquant si l'appel est bloquant ou pas. A noter que l'origine de la carte de jeu se trouve en haut à gauche. "
 		else
-			return "Step 4: When you have got the unit, you can order it to move to a position. You can do it with the \"command unit id [num] to [action] to x: [int] y: [int]\" block that takes as parameter the unit to command (\"u\"), the order (\"MOVE\") and the position where to carry out action. Note: the map origin is on the top left corner. "
+			return "Step 4: When you have got the unit, you can order it to move to a position. You can do it with the \"command unit id [num] to [action] to x: [int] y: [int]\" block that takes as parameter the unit to command (\"u\"), the order (\"MOVE\"), the position where to carry out action and a constant that defines if the call is blocking or not. Note: the map origin is on the top left corner. "
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then
@@ -118,9 +118,9 @@ end
 
 local function getTextHeight ()
 	if lang == "fr" then
-		return 200
+		return 220
 	else
-		return 140
+		return 160
 	end
 end
 
@@ -130,7 +130,7 @@ local template_ScratchPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 533,
+	x2 = 467,
 	y2 = getTextHeight (),
 }
 
@@ -140,8 +140,8 @@ local template_ScratchPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Scratch/Scratch1.jpg",
   x = 0,
   y = 0,
-  x2 = 334,
-  y2 = 155,
+  x2 = 467,
+  y2 = 153,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then

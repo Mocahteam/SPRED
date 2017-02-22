@@ -113,9 +113,9 @@ local function getText ()
 		end
 	elseif currentPage == 6 then
 		if lang == "fr" then
-			return "Etape 6 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la méthode \"command\" de la classe \"Unit\" qui prend comme paramètre l'ordre à réaliser (\"MOVE\") et la position (\"p\") où effectuer l'action. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans la classe \"ConstantList_KP_4_1\". Vous devez donc importer cette classe. "
+			return "Etape 6 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la méthode \"command\" de la classe \"Unit\" qui prend comme paramètre l'ordre à réaliser (\"MOVE\"), la position (\"p\") où effectuer l'action et un booléen indiquant si l'appel est bloquant ou pas. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans la classe \"ConstantList_KP_4_1\". Vous devez donc importer cette classe. "
 		else
-			return "Step 6: When you have defined the target position, you can order your unit to move to it. Use the \"command\" method that commands the unit to carry out action (\"MOVE\") on a specified position (\"p\"). The \"MOVE\" constant and others are defined into the  \"ConstantList_KP_4_1\" class. You have to include this class. "
+			return "Step 6: When you have defined the target position, you can order your unit to move to it. Use the \"command\" method that commands the unit to carry out action (\"MOVE\") on a specified position (\"p\"). The last parameter is a boolean that defines if the call is blocking or not. The \"MOVE\" constant and others are defined into the  \"ConstantList_KP_4_1\" class. You have to include this class. "
 		end
 	elseif currentPage == 7 then
 		if lang == "fr" then
@@ -130,9 +130,9 @@ end
 
 local function getTextHeight ()
 	if lang == "fr" then
-		return 160
+		return 180
 	else
-		return 100
+		return 140
 	end
 end
 
@@ -142,7 +142,7 @@ local template_JavaPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 725,
+	x2 = 606,
 	y2 = getTextHeight (),
 }
 
@@ -152,8 +152,8 @@ local template_JavaPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Java/Java1.jpg",
   x = 0,
   y = 0,
-  x2 = 725,
-  y2 = 461,
+  x2 = 606,
+  y2 = 392,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then

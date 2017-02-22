@@ -83,39 +83,51 @@ end
 local function getText ()
 	if currentPage == 1 then
 		if lang == "fr" then
-			return "Etape 1 : Pour déplacer une unité, il vous suffit d'appeler la fonction \"actionOnPosition\" du module \"Pp\" (vous devez avoir chargé au préalable le fichier \"pp.cma\" contenant ce module). Cette fonction prend trois paramètres, l'unité à commander, l'ordre à réaliser et la position où effectuer l'action. "
+			return "Etape 1 : Vous devez initialiser la bibliothèque Prog&Play. Ceci doit être fait à l'aide de la fonction \"openConnexion\" du module \"Pp\" (vous devez avoir chargé au préalable le fichier \"pp.cma\" contenant ce module). Pensez toujours à appeler, avant la fin de votre programme, la fonction \"closeConnexion\" pour fermer proprement la bibliothèque Prog&Play."
 		else
-			return "Step 1: In order to move a unit, simply call the \"actionOnPosition\" function from the \"Pp\" module (first you have to load the \"pp.cma\" file). This function takes three parameters: the unit to command, the order to carry out and the position where to process the action. "
+			return "Step 1: You have to initialize the Prog&Play library. This can be done with the \"openConnexion\" function from the \"Pp\" module (first you have to load the \"pp.cma\" file). Don't forget to call the \"closeConnexion\" function in order to properly close the Prog&Play library."
 		end
 	elseif currentPage == 2 then
 		if lang == "fr" then
-			return "Etape 2 : Pour obtenir le premier paramètre vous pouvez exploiter la liste d'unités retournée par la fonction \"getEntities\". Dans notre example, le paramètre (MyCoalition) de cette fonction indique que vous souhaitez obtenir la liste des unités en votre possession dans le jeu. "
+			return "Etape 2 : Pour déplacer une unité, il vous suffit d'appeler la fonction \"actionOnPosition\". Cette fonction prend trois paramètres, l'unité à commander, l'ordre à réaliser et la position où effectuer l'action. "
 		else
-			return "Step 2: In order to get the first parameter you can use the unit list returned by the \"getEntities\" function. In this exemple, sets \"MyCoalition\" to get your units. "
+			return "Step 2: In order to move a unit, simply call the \"actionOnPosition\" function. This function takes three parameters: the unit to command, the order to carry out and the position where to process the action. "
 		end
 	elseif currentPage == 3 then
 		if lang == "fr" then
-			return "Etape 3 : Pour extraire votre unité de la liste, vous pouvez utiliser la fonction \"hd\" du module \"List\" qui permet de renvoyer le premier élément d'une liste. De cette manière votre fonction \"actionOnPosition\" recevra comme premier paramètre la première unité en votre possession. "
+			return "Etape 3 : Pour obtenir le premier paramètre vous pouvez exploiter la liste d'unités retournée par la fonction \"getEntities\". Dans notre example, le paramètre (MyCoalition) de cette fonction indique que vous souhaitez obtenir la liste des unités en votre possession dans le jeu. "
 		else
-			return "Step 3: In order to extract your unit from the list, use the \"hd\" function from the \"list\" module. This function returns the first element of the given list. Then the \"actionOnPosition\" function will get the first unit you control in parameter."
+			return "Step 3: In order to get the first parameter you can use the unit list returned by the \"getEntities\" function. In this exemple, sets \"MyCoalition\" to get your units. "
 		end
 	elseif currentPage == 4 then
 		if lang == "fr" then
-			return "Etape 4 : Le deuxième paramètre est l'action à réaliser. Cette constante, ainsi que de nombreuses autres sont définies dans le fichier \"constantlistKP41.ml\". Pensez à le charger à l'aide de l'instruction \"#use\". "
+			return "Etape 4 : Pour extraire votre unité de la liste, vous pouvez utiliser la fonction \"hd\" du module \"List\" qui permet de renvoyer le premier élément d'une liste. De cette manière votre fonction \"actionOnPosition\" recevra comme premier paramètre la première unité en votre possession. "
 		else
-			return "Step 4: The second parameter is the action to carry out. This constant and others are defined into the \"constantlistKP41.ml\" file. Remember to load the file with the \"use\" instruction. "
+			return "Step 4: In order to extract your unit from the list, use the \"hd\" function from the \"list\" module. This function returns the first element of the given list. Then the \"actionOnPosition\" function will get the first unit you control in parameter."
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then
-			return "Etape 5 : Le dernier paramètre exprime une position représentée sous la forme d'un couple de réels. A noter que l'origine de la carte de jeu se trouve en haut à gauche. "
+			return "Etape 5 : Le deuxième paramètre est l'action à réaliser. Cette constante, ainsi que de nombreuses autres sont définies dans le fichier \"constantlistKP41.ml\". Pensez à le charger à l'aide de l'instruction \"#use\". "
 		else
-			return "Step 5: The last parameter is the position where to carry out action. A position is a pair of float value. Note: the map origin is on the top left corner. "
+			return "Step 5: The second parameter is the action to carry out. This constant and others are defined into the \"constantlistKP41.ml\" file. Remember to load the file with the \"use\" instruction. "
 		end
 	elseif currentPage == 6 then
 		if lang == "fr" then
-			return "Etape 6 : Maintenant que vous avez écrit votre premier fonction, il ne vous reste plus qu'à l'exécuter pour observer son influence dans le jeu. N'hésitez pas à consulter les fichiers relatifs aux différents modules, vous y trouverez de nombreuses informations sur les fonctionalités de la bibliothèque Prog&Play qui vous seront utiles pour terminer la campagne à venir. "
+			return "Etape 6 : Le troixième paramètre exprime une position représentée sous la forme d'un couple de réels. A noter que l'origine de la carte de jeu se trouve en haut à gauche. "
 		else
-			return "Step 6: When you have written your first function, you have to execute it in order to observe consequences into the game. Do not hesitate to take a look of module files, you will find a lot of informations on Prog&Play functionalities. "
+			return "Step 6: The third parameter is the position where to carry out action. A position is a pair of float value. Note: the map origin is on the top left corner. "
+		end
+	elseif currentPage == 7 then
+		if lang == "fr" then
+			return "Etape 7 : Le dernier paramètre exprime sous la forme d'un booléen si l'appel est bloquant ou non. "
+		else
+			return "Step 7: The last parameter defines as a boolean if the call is blocking or not. "
+		end
+	elseif currentPage == 8 then
+		if lang == "fr" then
+			return "Etape 8 : Maintenant que vous avez écrit votre premier fonction, il ne vous reste plus qu'à l'exécuter pour observer son influence dans le jeu. N'hésitez pas à consulter les fichiers relatifs aux différents modules, vous y trouverez de nombreuses informations sur les fonctionalités de la bibliothèque Prog&Play qui vous seront utiles pour terminer la campagne à venir. "
+		else
+			return "Step 8: When you have written your first function, you have to execute it in order to observe consequences into the game. Do not hesitate to take a look of module files, you will find a lot of informations on Prog&Play functionalities. "
 		end
 	else
 		return "Page not found "
@@ -124,9 +136,9 @@ end
 
 local function getTextHeight ()
 	if lang == "fr" then
-		return 120
+		return 140
 	else
-		return 80
+		return 100
 	end
 end
 
@@ -136,7 +148,7 @@ local template_OCamlPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 533,
+	x2 = 450,
 	y2 = getTextHeight (),
 }
 
@@ -146,8 +158,8 @@ local template_OCamlPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/OCaml/OCaml1.jpg",
   x = 0,
   y = 0,
-  x2 = 533,
-  y2 = 216,
+  x2 = 450,
+  y2 = 254,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then

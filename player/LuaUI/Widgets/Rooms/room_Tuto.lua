@@ -25,22 +25,22 @@ local template_MainMenu = {
 	--noAnimation = true,
 	tabs = {
 		{preset = function(tab)
-				tab.title = "ALGO"
-				tab.position = "bottom"
-				tab.OnMouseReleaseAction = function()
-					tab.parent:Close()
-					AlgoPages:Open()
-					TutoView = AlgoPages
-				end
-			end
-		},
-		{preset = function(tab)
 				tab.title = "ADA"
 				tab.position = "bottom"
 				tab.OnMouseReleaseAction = function()
 					tab.parent:Close()
 					AdaPages:Open()
 					TutoView = AdaPages
+				end
+			end
+		},
+		{preset = function(tab)
+				tab.title = "ALGO"
+				tab.position = "bottom"
+				tab.OnMouseReleaseAction = function()
+					tab.parent:Close()
+					AlgoPages:Open()
+					TutoView = AlgoPages
 				end
 			end
 		},
@@ -85,22 +85,22 @@ local template_MainMenu = {
 			end
 		},
 		{preset = function(tab)
-				tab.title = "Scratch"
-				tab.position = "bottom"
-				tab.OnMouseReleaseAction = function()
-					tab.parent:Close()
-					ScratchPages:Open()
-					TutoView = ScratchPages
-				end
-			end
-		},
-		{preset = function(tab)
 				tab.title = "Python"
 				tab.position = "bottom"
 				tab.OnMouseReleaseAction = function()
 					tab.parent:Close()
 					PythonPages:Open()
 					TutoView = PythonPages
+				end
+			end
+		},
+		{preset = function(tab)
+				tab.title = "Scratch"
+				tab.position = "bottom"
+				tab.OnMouseReleaseAction = function()
+					tab.parent:Close()
+					ScratchPages:Open()
+					TutoView = ScratchPages
 				end
 			end
 		}

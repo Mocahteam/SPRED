@@ -17,6 +17,7 @@ local gray = "\255\50\50\50"
 local purple = "\255\143\006\255"
 local orange = "\255\255\130\108"
 local red = "\255\142\068\085"
+local blue = "\255\050\050\255"
 
 local function setInactiveColor (tab)
 	tab.isAboveColors = {
@@ -83,9 +84,9 @@ end
 local function getText ()
 	if currentPage == 1 then
 		if lang == "fr" then
-			return "Etape 1 : Vous devez commencer par initialiser la bibliothèque Prog&Play. Ceci doit être fait à l'aide de la fonction \"PP_Open\". Enfin, pensez toujours à appeler, avant la fin de votre programme, la fonction \"PP_Close\" pour fermer proprement la bibliothèque Prog&Play. A noter que les fonctions de la bibliothèque Prog&Play sont définies dans le fichier \"pp.py\". Vous devez donc inclure ce module à l'aide de la directive : "..orange.."from"..white.." ...  "..orange.."import"..white.." ... "
+			return "Etape 1 : Vous devez commencer par initialiser la bibliothèque Prog&Play. Ceci doit être fait à l'aide de la fonction \"PP_Open\". Enfin, pensez toujours à appeler, avant la fin de votre programme, la fonction \"PP_Close\" pour fermer proprement la bibliothèque Prog&Play. A noter que les fonctions de la bibliothèque Prog&Play sont définies dans le fichier \"pp.py\". Vous devez donc inclure ce module à l'aide de la directive : "..blue.."from"..white.." ...  "..blue.."import"..white.." ... "
 		else
-			return "Step 1 : You have to start by initializing the Prog&Play library. This can be done with the \"PP_Open\" function. Then, don't forget to call the \"PP_Close\" function in order to properly close the Prog&Play library. Functions of the Prog&Play library are defined into the \"pp.py\" file. You have to include this module with the \""..orange.."from"..white.." ...  "..orange.."import"..white.." ...\" directive. "
+			return "Step 1 : You have to start by initializing the Prog&Play library. This can be done with the \"PP_Open\" function. Then, don't forget to call the \"PP_Close\" function in order to properly close the Prog&Play library. Functions of the Prog&Play library are defined into the \"pp.py\" file. You have to include this module with the \""..blue.."from"..white.." ...  "..blue.."import"..white.." ...\" directive. "
 		end
 	elseif currentPage == 2 then
 		if lang == "fr" then
@@ -101,9 +102,9 @@ local function getText ()
 		end
 	elseif currentPage == 4 then
 		if lang == "fr" then
-			return "Etape 4 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"PP_Unit_ActionOnPosition\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\") et la position (\"p\") où effectuer l'action. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans le fichier \"constantList_KP4_1.py\". Vous devez donc inclure ce module à l'aide de la directive "..orange.."from"..white.." ... "..orange.."import"..white.." ... "
+			return "Etape 4 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"PP_Unit_ActionOnPosition\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\"), la position (\"p\") où effectuer l'action et un booléen indiquant si l'appel est bloquant ou pas. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans le fichier \"constantList_KP4_1.py\". Vous devez donc inclure ce module à l'aide de la directive "..blue.."from"..white.." ... "..blue.."import"..white.." ... "
 		else
-			return "Step 4: When you have defined the target position, you can order your unit to move to it. Use the \"PP_Unit_ActionOnPosition\" function that commands a unit (\"u\") to carry out action (\"MOVE\") on a specified position (\"p\"). The \"MOVE\" constant and others are defined into the  \"constantList_KP4_1.py\" file. You have to include it with the \""..orange.."from"..white.." ... "..orange.."import"..white.." ...\" directive. "
+			return "Step 4: When you have defined the target position, you can order your unit to move to it. Use the \"PP_Unit_ActionOnPosition\" function that commands a unit (\"u\") to carry out action (\"MOVE\") on a specified position (\"p\"). The last parameter is a boolean that defines if the call is blocking or not. The \"MOVE\" constant and others are defined into the  \"constantList_KP4_1.py\" file. You have to include it with the \""..blue.."from"..white.." ... "..blue.."import"..white.." ...\" directive. "
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then
@@ -118,9 +119,9 @@ end
 
 local function getTextHeight ()
 	if lang == "fr" then
-		return 280
+		return 220
 	else
-		return 200
+		return 160
 	end
 end
 
@@ -130,7 +131,7 @@ local template_PythonPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 367,
+	x2 = 479,
 	y2 = getTextHeight (),
 }
 
@@ -140,8 +141,8 @@ local template_PythonPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Python/Python1.jpg",
   x = 0,
   y = 0,
-  x2 = 367,
-  y2 = 168,
+  x2 = 479,
+  y2 = 187,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then

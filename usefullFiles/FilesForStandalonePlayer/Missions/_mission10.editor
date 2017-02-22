@@ -53,6 +53,11 @@
 				"active":false
 			},
 			{
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
+				"active":false
+			},
+			{
 				"desc":"Maintain unit selection through morphing",
 				"name":"Keep Morpheds Selected",
 				"active":false

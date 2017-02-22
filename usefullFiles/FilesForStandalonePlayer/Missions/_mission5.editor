@@ -67,6 +67,11 @@
 				"active":false
 			},
 			{
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
+				"active":false
+			},
+			{
 				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
 				"name":"Show PP Tuto",
 				"active":false

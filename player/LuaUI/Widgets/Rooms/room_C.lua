@@ -107,9 +107,9 @@ local function getText ()
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then
-			return "Etape 5 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"PP_Unit_ActionOnPosition\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\") et la position (\"p\") où effectuer l'action. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans le fichier \"constantList_KP4.1.h\". Vous devez donc l'inclure à l'aide de la directive de préprocesseur "..red.."#include"..white..". "
+			return "Etape 5 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"PP_Unit_ActionOnPosition\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\"), la position (\"p\") où effectuer l'action et une valeur binaire indiquant si l'appel est bloquant ou pas. La constante \"MOVE\" ainsi que d'autres ordres sont définis dans le fichier \"constantList_KP4.1.h\". Vous devez donc l'inclure à l'aide de la directive de préprocesseur "..red.."#include"..white..". "
 		else
-			return "Step 5: When you have defined the target position, you can order your unit to move to it. Use the \"PP_Unit_ActionOnPosition\" function that commands a unit (\"u\") to carry out action (\"MOVE\") on a specified position (\"p\"). The \"MOVE\" constant and others are defined into the  \"constantList_KP4.1.h\" file. You have to include it with the "..red.."#include"..white.." directive. "
+			return "Step 5: When you have defined the target position, you can order your unit to move to it. Use the \"PP_Unit_ActionOnPosition\" function that commands a unit (\"u\") to carry out action (\"MOVE\") on a specified position (\"p\"). The last parameter is a boolean that defines if the call is blocking or not. The \"MOVE\" constant and others are defined into the  \"constantList_KP4.1.h\" file. You have to include it with the "..red.."#include"..white.." directive. "
 		end
 	elseif currentPage == 6 then
 		if lang == "fr" then
@@ -136,7 +136,7 @@ local template_CPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 509,
+	x2 = 470,
 	y2 = getTextHeight (),
 }
 
@@ -146,8 +146,8 @@ local template_CPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/C/C1.jpg",
   x = 0,
   y = 0,
-  x2 = 509,
-  y2 = 314,
+  x2 = 470,
+  y2 = 302,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then

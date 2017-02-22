@@ -108,9 +108,9 @@ local function getText ()
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then
-			return "Etape 5 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"CarryOutCommand\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"Move\") et la position (\"p\") où effectuer l'action. La constante \"Move\" ainsi que d'autres ordres sont définis dans le package \"ConstantListKP41\". Vous devez donc l'inclure à l'aide des mots clés "..blue.."with"..white.." et "..blue.."use"..white..". "
+			return "Etape 5 : Après avoir défini la position à atteindre, vous pouvez donner l'ordre à votre unité de s'y déplacer. Ceci peut être fait à l'aide de la fonction \"CarryOutCommand\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"Move\"), la position (\"p\") où effectuer l'action et un booléen indiquant si l'appel est bloquant ou pas. La constante \"Move\" ainsi que d'autres ordres sont définis dans le package \"ConstantListKP41\". Vous devez donc l'inclure à l'aide des mots clés "..blue.."with"..white.." et "..blue.."use"..white..". "
 		else
-			return "Step 5: When you have defined the target position, you can order your unit to move to it. Use the \"CarryOutCommand\" function that commands a unit (\"u\") to carry out action (\"Move\") on a specified position (\"p\"). The \"Move\" constant and others are defined into the  \"ConstantListKP41\" package. You have to include it with the "..blue.."with"..white.." and "..blue.."use"..white.." key words. "
+			return "Step 5: When you have defined the target position, you can order your unit to move to it. Use the \"CarryOutCommand\" function that commands a unit (\"u\") to carry out action (\"Move\") on a specified position (\"p\"). The last parameter is a boolean that defines if the call is blocking or not. The \"Move\" constant and others are defined into the  \"ConstantListKP41\" package. You have to include it with the "..blue.."with"..white.." and "..blue.."use"..white.." key words. "
 		end
 	elseif currentPage == 6 then
 		if lang == "fr" then
@@ -125,9 +125,9 @@ end
 
 local function getTextHeight ()
 	if lang == "fr" then
-		return 200
+		return 240
 	else
-		return 140
+		return 160
 	end
 end
 
@@ -137,7 +137,7 @@ local template_AdaPages_Text = {
 	text = getText(),
 	x = 0,
 	y = 0,
-	x2 = 534,
+	x2 = 443,
 	y2 = getTextHeight (),
 }
 
@@ -147,8 +147,8 @@ local template_AdaPages = {
   backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Ada/Ada1.jpg",
   x = 0,
   y = 0,
-  x2 = 534,
-  y2 = 376,
+  x2 = 443,
+  y2 = 321,
   tabs = {
 		{preset = function(tab)
 				if lang == "fr" then
