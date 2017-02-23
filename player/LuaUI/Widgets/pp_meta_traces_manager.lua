@@ -16,13 +16,13 @@ local ppTraces = nil -- File handler to store traces
 
 function TraceAction(msg)
 	if ppTraces ~= nil then
-		ppTraces:write(msg)
+		ppTraces:write("TIME_STAMP "..os.time().." "..msg.."\n")
 		ppTraces:flush()
 	end
 end
 
 function MissionEnded(victoryState)
-	TraceAction("end "..victoryState.." "..missionName.."\n")
+	TraceAction("end_mission "..victoryState.." "..missionName)
 end
 
 function widget:Initialize()
@@ -34,7 +34,7 @@ function widget:Initialize()
 			Spring.CreateDir(tracesDirname)
 		end
 		ppTraces = io.open(tracesDirname..'\\'.."meta.log", "a+")
-		TraceAction("start "..missionName.."\n")
+		TraceAction("start_mission "..missionName)
 	end
 end
 

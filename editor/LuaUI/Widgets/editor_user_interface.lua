@@ -5089,8 +5089,8 @@ function newMapFrame() -- Show a window when the user clicks on the new button
 		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
 		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
-		addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() performNewMap() end)
-		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+		addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() saveMap() performNewMap() end)
+		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() performNewMap() end)
 		return
 	else
 		performNewMap()

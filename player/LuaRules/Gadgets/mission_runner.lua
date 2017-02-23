@@ -45,8 +45,12 @@ function gadget:RecvLuaMsg(msg, player)
     missionScript.parseJson(jsonfile)
   end
   if((msg~=nil)and(string.len(msg)>8)and(string.sub(msg,1,8)=="Feedback")) then -- received from game engine (ProgAndPlay.cpp)
-    local jsonfile=string.sub(msg,10,-1) -- not 9,-1 because an underscore is used as a separator
+    local jsonfile=string.sub(msg,10,-1) -- we start at 10 due to an underscore used as a separator
     SendToUnsynced("Feedback", jsonfile)
+  end
+  if((msg~=nil)and(string.len(msg)>16)and(string.sub(msg,1,16)=="CompressedTraces")) then -- received from game engine (ProgAndPlay.cpp)
+    local jsonfile=string.sub(msg,18,-1) -- we start at 10 due to an underscore used as a separator
+    SendToUnsynced("CompressedTraces", jsonfile)
   end
 end
 
@@ -56,8 +60,10 @@ function gadget:GamePreload()
 	for i = 1,table.getn(units) do
 	  Spring.DestroyUnit(units[i], false, true)
 	end
-	missionScript = VFS.Include("MissionPlayer_Editor.lua")
-	missionScript.parseJson(VFS.LoadFile("Missions/"..missionName..".editor"))
+	if missionName then
+		missionScript = VFS.Include("MissionPlayer_Editor.lua")
+		missionScript.parseJson(VFS.LoadFile("Missions/"..missionName..".editor"))
+	end
 end
 
 function gadget:GameFrame( frameNumber )
@@ -227,6 +233,11 @@ function gadget:RecvFromSynced(...)
 	
   elseif arg1 == "Feedback" then
     Script.LuaUI.handleFeedback(arg2) -- function defined and registered in Show Feedbacks widget
+  
+  elseif arg1 == "CompressedTraces" then
+	if Script.LuaUI.TraceAction then
+		Script.LuaUI.TraceAction("compressed_trace_begin\n"..arg2.."compressed_trace_end") -- registered by pp_meta_trace_manager.lua
+	end
   end
 end
 

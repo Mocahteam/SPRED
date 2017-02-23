@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd">
+<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-02-22T16:46:47+01:00">
+<title>SPRED</title>
+<description>Game made with SPRED for Kernel Panic 4.1</description>
+<activities>
+<activity id_activity="Mission1">
+<name>Mission1</name>
+<input_states>
+<input_state id_input="Mission1//1"/>
+<input_state id_input="Mission1//2"/>
+</input_states>
+<output_states>
+<output_state id_output="Mission1//win"/>
+<output_state id_output="Mission1//lost"/>
+</output_states>
+</activity>
+<activity id_activity="Mission4">
+<name>Mission4</name>
+<input_states>
+<input_state id_input="Mission4//1"/>
+<input_state id_input="Mission4//2"/>
+</input_states>
+<output_states>
+<output_state id_output="Mission4//win"/>
+<output_state id_output="Mission4//lost"/>
+</output_states>
+</activity>
+<activity id_activity="Mission_5">
+<name>Mission 5</name>
+<input_states>
+<input_state id_input="Mission_5//1"/>
+</input_states>
+<output_states>
+<output_state id_output="Mission_5//win"/>
+</output_states>
+</activity>
+</activities>
+<link_sets>
+<link_set publication_date="2017-02-22T16:46:47+01:00" status="prepa" default="oui" id_link_set="302">
+<title>3 mission exemple</title>
+<description>Scenario for this game</description>
+<links>
+<output_input_link id_output="Mission4//win" id_input="Mission_5//1"/>
+<output_input_link id_output="Mission4//lost" id_input="Mission4//1"/>
+<output_input_link id_output="start" id_input="Mission1//1"/>
+<output_input_link id_output="Mission1//win" id_input="Mission4//2"/>
+<output_input_link id_output="Mission1//lost" id_input="Mission1//2"/>
+<output_input_link id_output="Mission_5//win" id_input="end"/>
+</links>
+</link_set>
+</link_sets>
+</game>
+</games>

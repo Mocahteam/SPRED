@@ -99,7 +99,9 @@ local function doTheSave(gameName, fileName)
 		file:write(savingContent)
 		file:flush()
 		file:close()
-		Script.LuaUI.TraceAction("save progression\n")
+		if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
+		end
 		MissionEvent({logicType = "ShowMessage",message = saveMessage.."\""..fileName.."\"", width = 500,pause = false})
 	else
 		MissionEvent({logicType = "ShowMessage",message = saveError, width = 500,pause = false})
@@ -349,7 +351,9 @@ local template_endMission = {
         tab.position = "bottom"
         tab.OnClick = function()
           tab.parent:Close()
-		  Script.LuaUI.TraceAction("replay "..missionName.."\n")
+		  if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("replay_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+		  end
 		  DoTheRestart("_script.txt", {}) -- _script.txt is the launcher file used by the previous start, so we can reuse it for replay the game
         end
       end
@@ -377,7 +381,9 @@ local template_endMission = {
         tab.position = "right"
         tab.OnClick = function()
           tab.parent:Close()
-		  Script.LuaUI.TraceAction("quit_game\n")
+		  if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("quit_game") -- registered by pp_meta_trace_manager.lua
+		  end
           Spring.SendCommands("quitforce")
         end
       end
@@ -388,7 +394,9 @@ local template_endMission = {
         tab.position = "right"
         tab.OnClick = function()
           tab.parent:Close()
-		  Script.LuaUI.TraceAction("quit "..missionName.."\n")
+		  if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("quit_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+		  end
           WG.switchOnMenu()
         end
       end
@@ -420,7 +428,9 @@ local template_endMission = {
         tab.position = "top"
         tab.OnClick = function()
           tab.parent:Close()
-		  Script.LuaUI.TraceAction("show_briefing\n")
+		  if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("show_briefing") -- registered by pp_meta_trace_manager.lua
+		  end
           if tab.parent.launchTuto ~= nil then
             tab.parent.launchTuto()
           else

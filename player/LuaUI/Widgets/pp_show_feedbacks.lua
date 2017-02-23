@@ -153,16 +153,22 @@ function handleFeedback(str)
 		e = {logicType = "UpdateFeedback", feedback = ""}
 	else
 		local json_obj = json.decode(str)
+		local feedbackToLog
 		if json_obj.won ~= nil then -- the mission is over
 			local width = 0.5 * vsx
 			local feedback_and_score_string = getFeedbackMessage(json_obj, true)
 			feedback_and_score_string = breakLine(feedback_and_score_string,width)
+			feedbackToLog = feedback_and_score_string
 			e = {logicType = "UpdateFeedback", feedback = feedback_and_score_string}
 		else -- the mission is not over yet
 			local width = 0.85 * vsx
 			local feedback_only_string = getFeedbackMessage(json_obj, false)
 			feedback_only_string = breakLine(feedback_only_string,width)
+			feedbackToLog = feedback_only_string
 			e = {logicType = "ShowMessage", message = feedback_only_string, width = width, pause = false}
+		end
+		if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("feedback_begin\n"..feedbackToLog.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
 		end
 	end
 	Script.LuaUI.MissionEvent(e) -- registered by pp_gui_main_menu.lua
@@ -171,7 +177,7 @@ end
 function askHelp()
 	Spring.SetConfigString("helpPlease", "enabled", 1) -- inform the game engine that we want a feedback
 	if Script.LuaUI.TraceAction then
-		Script.LuaUI.TraceAction("ask help\n")
+		Script.LuaUI.TraceAction("ask_help") -- registered by pp_meta_trace_manager.lua
 	end
 end
 
