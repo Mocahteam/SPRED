@@ -232,7 +232,7 @@ function gadget:RecvFromSynced(...)
     Script.LuaUI.MissionEnded(arg2) -- function defined and registered in Meta Traces Manager widget
 	
   elseif arg1 == "Feedback" then
-    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in Show Feedbacks widget
+    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in pp_gui_main_menu.lua
   
   elseif arg1 == "CompressedTraces" then
 	if Script.LuaUI.TraceAction then

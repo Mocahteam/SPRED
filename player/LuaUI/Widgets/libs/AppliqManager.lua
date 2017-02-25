@@ -7,7 +7,7 @@
 -- @module appliqManager
 appliqManager = {} 
 
-local rootDirectory="KP_campaign_2.4/LuaUI/Widgets/libs/" -- IMPORTANT EDIT THIS LINE with the path for this file relatively to the roo of the current project.
+--local rootDirectory="KP_campaign_2.4/LuaUI/Widgets/libs/" -- IMPORTANT EDIT THIS LINE with the path for this file relatively to the roo of the current project.
 --dofile(rootDirectory.."context.lua") -- allows to work in local or int the context of Spring Runtime
 --dofile("context.lua")
 --local contx=context:new("AppliqManager/",rootDirectory) -- Not sure that spring is working

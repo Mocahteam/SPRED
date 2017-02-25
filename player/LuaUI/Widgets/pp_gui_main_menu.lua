@@ -13,7 +13,9 @@ end
 -- You must import the KEYSYM table if you want to access keys by name
 include('keysym.h.lua')
 
-VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart function
+local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
+
+VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart and genericRestart functions
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
@@ -30,56 +32,114 @@ local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scena
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
 
+local feedbacks = {}
+-- Exemple of data structure
+--	{
+--		feedback="Feedback 1",
+--		clearness = 1,
+--		utility = 1
+--	},
+--	{
+--		feedback="Feedback 1",
+--		clearness = 1,
+--		utility = 1
+--	},
+--	...
+--}
+local currentFeedback = 1
+
+-- associative table between a number and its character
+local colorTable = {"\3", "\5",	"\8", "\10", "\13", "\15", "\18", "\20",
+	"\23", "\25", "\28", "\30", "\33", "\35", "\38", "\40",
+	"\43", "\45", "\48", "\50", "\53", "\55", "\58", "\60",
+	"\63", "\65", "\68", "\70", "\73", "\75", "\78", "\80",
+	"\83", "\85", "\88", "\90", "\93", "\95", "\98", "\100",
+	"\103", "\105", "\108", "\110", "\113", "\115", "\118", "\120",
+	"\123", "\125", "\128", "\130", "\133", "\135", "\138", "\140",
+	"\143", "\145", "\148", "\150", "\153", "\155",	"\158", "\160",
+	"\163", "\165", "\168", "\170", "\173", "\175", "\178", "\180",
+	"\183", "\185", "\188", "\190", "\193", "\195", "\198", "\200",
+	"\203", "\205", "\208", "\210", "\213", "\215", "\218", "\220",
+	"\223", "\225", "\228", "\230", "\233", "\235", "\238", "\240",
+	"\243", "\245", "\248", "\250", "\253"}
+
 local mode = Spring.GetModOptions()["scenariomode"]
 
--- see Widget:Initialize() for default value of these variables
+-- see Widget:Initialize() for default value of this variable
 local rooms
-local Window
-local Tab
+
+local briefingPopup = nil
+local tutoPopup = false
 
 -- Set label
-local saveMessage="Your progression has been saved under the name : "
-local saveError="Base file missing to save your progression, save aborted!!!"
-local replayMission = "Replay mission"
-local nextMission = "Next mission"
-local quitGame = "Quit the game"
-local quitMission = "Quit the mission"
-local closeMenu = "Close menu"
-local showBriefing = "Show briefing"
-local victory = "You won the mission"
-local victoryCampaign = "Congratulations !!! You complete the campaign"
-local loss = "You lost the mission"
-local continue = "continue"
-local saveProgression="Save progression"
-local saveName="Please, give a name of your save:"
-local saveConfirm1="A file with the name "
-local saveConfirm2=" already exists.\nDo you want override it?"
-local scoreComputing="Analysis of your work, please wait..."
-local cancelLabel="Cancel"
-local okLabel="OK"
-local yesLabel="Yes"
-local noLabel="No"
+local LANG_REPLAY_MISSION = "Replay mission"
+local LANG_QUIT_GAME = "Quit the game"
+local LANG_QUIT_MISSION = "Quit the mission"
+local LANG_SHOW_BRIEFING = "Show briefing"
+local LANG_VICTORY = "You won the mission"
+local LANG_VICTORY_CAMPAIGN = "Congratulations!!! You complete the campaign"
+local LANG_LOSS = "You lost the mission"
+local LANG_CONTINUE = "Continue"
+local LANG_SAVE_PROGRESSION="Save progression"
+local LANG_SAVE_MESSAGE="Your progression has been saved under the name: "
+local LANG_SAVE_ERROR="Base file missing to save your progression, save aborted!!!"
+local LANG_SAVE_NAME="Please, give a name of your save:"
+local LANG_SAVE_CONFIRM1="A file with the name "
+local LANG_SAVE_CONFIRM2=" already exists.\nDo you want override it?"
+local LANG_SCORE="Your score: "
+local LANG_SCORE_COMPUTING="Please wait..."
+local LANG_NUM_ATTEMPTS = "Number of attempts: "
+local LANG_CANCEL="Cancel"
+local LANG_OK="OK"
+local LANG_YES="Yes"
+local LANG_NO="No"
+local LANG_ADVICE = "Advices to improve your program: "
+local LANG_VOTE = "No vote"
+local LANG_NOT_CLEAR = "(Not clear)"
+local LANG_CLEAR = "(Very clear)"
+local LANG_NOT_USEFUL = "(Not useful)"
+local LANG_USEFUL = "(Very useful)"
+local LANG_CLOSE_BUTTON = "Close"
+local LANG_ASSESS_FEEDBACK = "What do you think about this advice?"
+local LANG_PROGRAM_EXECUTION = "Program execution time: "
+local LANG_PROGRAM_REFERENCE = "Reference execution time: "
+local LANG_AVERAGE_TIME = "Average wait time between two attempts: "
+local LANG_MISSION_TIME = "Mission resolution time: "
+local LANG_REFERENCE_TIME = "Reference resolution time: "
 if lang == "fr" then
-  saveMessage="Votre progression a été sauvegardée sous le nom : "
-  saveError="Fichier de base manquant pour réaliser la sauvegarde, opération annulée !!!"
-  continue= "continuer"
-  replayMission = "Rejouer mission"
-  nextMission = "Mission suivante"
-  quitGame = "Quitter le jeu"
-  quitMission = "Quitter la mission"
-  closeMenu = "Fermer menu"
-  showBriefing = "Voir briefing"
-  victory = "Vous avez gagné la mission"
-  victoryCampaign = "Félicitations !!! Vous avez terminé la campagne"
-  loss = "Vous avez perdu la mission"
-  saveProgression="Sauvegarder"
-  saveName="Merci d'indiquer un nom à votre sauvegarde :"
-  saveConfirm1="Un fichier avec le nom "
-  saveConfirm2=" existe déjà.\nSouhaitez-vous le remplacer ?"
-  scoreComputing="Analyse de votre travail en cours, merci de patienter..."
-  cancelLabel="Annuler"
-  yesLabel="Oui"
-  noLabel="Non"
+	LANG_CONTINUE= "Continuer"
+	LANG_REPLAY_MISSION = "Rejouer mission"
+	LANG_QUIT_GAME = "Quitter le jeu"
+	LANG_QUIT_MISSION = "Quitter la mission"
+	LANG_SHOW_BRIEFING = "Voir briefing"
+	LANG_VICTORY = "Vous avez gagné la mission"
+	LANG_VICTORY_CAMPAIGN = "Félicitations !!! Vous avez terminé la campagne"
+	LANG_LOSS = "Vous avez perdu la mission"
+	LANG_SAVE_PROGRESSION="Sauvegarder"
+	LANG_SAVE_MESSAGE="Votre progression a été sauvegardée sous le nom : "
+	LANG_SAVE_ERROR="Fichier de base manquant pour réaliser la sauvegarde, opération annulée !!!"
+	LANG_SAVE_NAME="Merci d'indiquer un nom à votre sauvegarde :"
+	LANG_SAVE_CONFIRM1="Un fichier avec le nom "
+	LANG_SAVE_CONFIRM2=" existe déjà.\nSouhaitez-vous le remplacer ?"
+	LANG_SCORE="Votre score : "
+	LANG_SCORE_COMPUTING="Merci de patienter..."
+	LANG_NUM_ATTEMPTS="Nombre de tentative(s) : "
+	LANG_CANCEL="Annuler"
+	LANG_YES="Oui"
+	LANG_NO="Non"
+	LANG_ADVICE = "Quelques conseils pour améliorer votre programme : "
+	LANG_VOTE = "Aucun vote"
+	LANG_NOT_CLEAR = "(Pas clair)"
+	LANG_CLEAR = "(Très clair)"
+	LANG_NOT_USEFUL = "(Pas utile)"
+	LANG_USEFUL = "(Très utile)"
+	LANG_CLOSE_BUTTON = "Fermer"
+	LANG_ASSESS_FEEDBACK = "Que pensez-vous de ce conseil ?"
+	LANG_PROGRAM_EXECUTION = "Temps d'éxecution de ton programme : "
+	LANG_PROGRAM_REFERENCE = "Temps d'éxecution référence : "
+	LANG_AVERAGE_TIME = "Temps d'attente moyen entre deux tentatives : "
+	LANG_MISSION_TIME = "Temps de résolution de la mission : "
+	LANG_REFERENCE_TIME = "Temps de résolution référence : "
 end
 
 local activateSave=false
@@ -87,13 +147,186 @@ if mode=="appliq" and AppliqManager~=nil then
   activateSave=true
 end
 
+-- Main menu UI
+local mainMenuWindow = nil
+local filterBackground = nil
+
 -- Save UI
 local saveWindow = nil
 local saveNameEditBox = nil
-local saveBackground = nil
+
+-- Feedback UI
+local feedbackCanvas = nil
+local nextFeedbackBt = nil
+local prevFeedbackBt = nil
+local logComboEvent = true
+local clearComboBox = nil
+local usefulComboBox = nil
+local scoreLabel = nil
+local numAttemptLabel = nil
+local assessLabel = nil
+local mainMenuCloseButton = nil
+
+-- UI builders
+local function addWindow(_parent, _x, _y, _width, _height)
+	return WG.Chili.Window:New{
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width  = _width,
+		height = _height,
+		minWidth = 0,
+		minHeight = 0,
+		draggable = false,
+		resizable = false,
+	}
+end
+
+local function addLabel(_parent, _x, _y, _width, _height, _caption, _align, _valign)
+	return WG.Chili.Label:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		minWidth = 0,
+		minHeight = 0,
+		caption = _caption,
+		fontsize = 20,
+		align = _align,
+		valign = _valign,
+		padding = {8, 2, 8, 2},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+			shadow = false
+		}
+	}
+end
+
+local function addButton(_parent, _x, _y, _width, _height, _caption)
+	return WG.Chili.Button:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		caption = _caption,
+		minWidth = 0,
+		minHeight = 0,
+		padding = {8, 0, 8, 0},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 15,
+			autoAdjust = true,
+			maxSize = 15,
+			shadow = false,
+		}
+	}
+end
+
+local function addImage(_parent, _x, _y, _width, _height, _file, _keepAspect)
+	return WG.Chili.Image:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		file = _file,
+		keepAspect = _keepAspect
+	}
+end
+
+local function addEditBox(_parent, _x, _y, _width, _height, _align, _text)
+	return WG.Chili.EditBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		align = _align,
+		text = _text,
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 16,
+			autoAdjust = true,
+			maxSize = 16,
+			shadow = false
+		}
+	}
+end
+
+local function addPanel(_parent, _x, _y, _width, _height)
+	return WG.Chili.Panel:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		minWidth = 0,
+		minHeight = 0
+	}
+end
+
+local function addScrollPanel(_parent, _x, _y, _width, _height)
+	return WG.Chili.ScrollPanel:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height
+	}
+end
+
+local function addTextBox(_parent, _x, _y, _width, _height, _text)
+	return WG.Chili.TextBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		text = _text,
+		fontsize = 20,
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			shadow = false
+		}
+	}
+end
+
+local function addComboBox(_parent, _x, _y, _width, _height, _items)
+	return WG.Chili.ComboBox:New {
+		parent = _parent,
+		x = _x,
+		y = _y,
+		width = _width,
+		height = _height,
+		items = _items,
+		fontsize = 20,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
+		}
+	}
+end
+-- UI builders end
 
 local function doTheSave(gameName, fileName)
+	--close save window
+	if saveWindow ~= nil then
+		saveWindow:Dispose()
+		saveWindow = nil
+		saveNameEditBox = nil
+	end
+	
 	local savingContent=VFS.LoadFile("Savegames/"..gameName.."/currentSave.sav")
+	local notif = ""
 	if savingContent ~= nil then
 		local file=io.open("Savegames/"..gameName.."/"..fileName,"wb")
 		file:write(savingContent)
@@ -102,18 +335,21 @@ local function doTheSave(gameName, fileName)
 		if Script.LuaUI.TraceAction then
 			Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
 		end
-		MissionEvent({logicType = "ShowMessage",message = saveMessage.."\""..fileName.."\"", width = 500,pause = false})
+		notif = LANG_SAVE_MESSAGE.."\""..fileName.."\""
 	else
-		MissionEvent({logicType = "ShowMessage",message = saveError, width = 500,pause = false})
+		notif = LANG_SAVE_ERROR
 	end
-	--close save window
-	if saveWindow ~= nil then
-		saveWindow:Dispose()
-		saveBackground:Dispose()
-		saveWindow = nil
-		saveNameEditBox = nil
-		saveBackground = nil
-	end
+	-- Show notification
+	local notifWindow = addWindow(WG.Chili.Screen0, "10%", "44%", "80%", "12%")
+	addLabel(notifWindow, "0%", "0%", "100%", "58%", notif, "center", "linecenter")
+	local okBut = addButton(notifWindow, "45%", "60%", "10%", "40%", LANG_OK)
+	okBut.OnClick = {
+		function ()
+			--close notification and show Main menu
+			notifWindow:Dispose()
+			mainMenuWindow:Show()
+		end
+	}
 end
 
 local function displayConfirmSave(gameName, fileName)
@@ -124,87 +360,28 @@ local function displayConfirmSave(gameName, fileName)
 		saveNameEditBox = nil
 	end
 	-- build UI to confirm saving
-	saveWindow = WG.Chili.Window:New{
-		parent = WG.Chili.Screen0,
-		x = "27%",
-		y = "44%",
-		width  = "46%",
-		height = "12%",
-		minWidth = 0,
-		minHeight = 0,
-		draggable = false,
-		resizable = false,
+	saveWindow = addWindow(WG.Chili.Screen0, "27%", "44%", "46%", "12%")
+	
+	addLabel(saveWindow, "0%", "0%", "100%", "58%", LANG_SAVE_CONFIRM1.."\""..fileName.."\""..LANG_SAVE_CONFIRM2, "center", "top")
+	
+	local yesBut = addButton(saveWindow, "15%", "60%", "20%", "40%", LANG_YES)
+	yesBut.OnClick = {
+		function ()
+			doTheSave(gameName, fileName)
+		end
 	}
-	WG.Chili.Label:New {
-		parent = saveWindow,
-		x = "0%",
-		y = "0%",
-		width = "100%",
-		height = "58%",
-		minWidth = 0,
-		minHeight = 0,
-		caption = saveConfirm1.."\""..fileName.."\""..saveConfirm2,
-		fontsize = 20,
-		align = "center",
-		valign = "top",
-		padding = {8, 2, 8, 2},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 20,
-			autoAdjust = true,
-			maxSize = 20,
-		}
-	}
-	WG.Chili.Button:New {
-		parent = saveWindow,
-		x = "15%",
-		y = "60%",
-		width = "20%",
-		height = "40%",
-		caption = yesLabel,
-		minWidth = 0,
-		minHeight = 0,
-		OnClick = {
-			function ()
-				doTheSave(gameName, fileName)
+	
+	local noBut = addButton(saveWindow, "65%", "60%", "20%", "40%", LANG_NO)
+	noBut.OnClick = {
+		function ()
+			--close save window
+			if saveWindow ~= nil then
+				saveWindow:Dispose()
+				saveWindow = nil
+				saveNameEditBox = nil
+				mainMenuWindow:Show()
 			end
-		},
-		padding = {8, 0, 8, 0},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 15,
-			autoAdjust = true,
-			maxSize = 15,
-		}
-	}
-	WG.Chili.Button:New {
-		parent = saveWindow,
-		x = "65%",
-		y = "60%",
-		width = "20%",
-		height = "40%",
-		caption = noLabel,
-		minWidth = 0,
-		minHeight = 0,
-		OnClick = {
-			function ()
-				--close save window
-				if saveWindow ~= nil then
-					saveWindow:Dispose()
-					saveBackground:Dispose()
-					saveWindow = nil
-					saveNameEditBox = nil
-					saveBackground = nil
-				end
-			end
-		},
-		padding = {8, 0, 8, 0},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 15,
-			autoAdjust = true,
-			maxSize = 15,
-		}
+		end
 	}
 end
 
@@ -223,401 +400,428 @@ end
 local function displaySaveWindow()
 	if saveWindow ~= nil then
 		saveWindow:Dispose()
-		saveBackground:Dispose()
 		saveWindow = nil
 		saveNameEditBox = nil
-		saveBackground = nil
 	end
-	saveWindow = WG.Chili.Window:New{
-		parent = WG.Chili.Screen0,
-		x = "25%",
-		y = "42%",
-		width  = "50%",
-		height = "16%",
-		minWidth = 0,
-		minHeight = 0,
-		draggable = false,
-		resizable = false,
-	}
-	saveBackground = WG.Chili.Image:New {
-		parent = WG.Chili.Screen0,
-		x = "0%",
-		y = "0%",
-		width = "100%",
-		height = "100%",
-		minWidth = 0,
-		minHeight = 0,
-		file = "bitmaps/editor/blank.png",
-		keepAspect = false,
-		color = {0, 0, 0, 0.9}
-	}
-	saveBackground.OnClick = {
-		function()
-			return true -- Stop Clic event
+	
+	saveWindow = addWindow(WG.Chili.Screen0, "25%", "42%", "50%", "16%")
+	
+	addLabel(saveWindow, "0%", "0%", "100%", "33%", LANG_SAVE_NAME, "left", "top")
+	
+	saveNameEditBox = addEditBox(saveWindow, "0%", "33%", "100%", "33%", "left", "")
+	
+	local okBut = addButton(saveWindow, "15%", "67%", "20%", "33%", LANG_OK)
+	okBut.OnClick = {processSaving}
+	
+	local cancelBut = addButton(saveWindow, "65%", "67%", "20%", "33%", LANG_CANCEL)
+	cancelBut.OnClick = {
+		function ()
+			saveWindow:Dispose()
+			saveWindow = nil
+			saveNameEditBox = nil
+			mainMenuWindow:Show()
 		end
-	}
-	WG.Chili.Label:New {
-		parent = saveWindow,
-		x = "0%",
-		y = "0%",
-		width = "100%",
-		height = "33%",
-		minWidth = 0,
-		minHeight = 0,
-		caption = saveName,
-		fontsize = 20,
-		align = "left",
-		valign = "top",
-		padding = {8, 2, 8, 2},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 20,
-			autoAdjust = true,
-			maxSize = 20,
-		}
-	}
-	saveNameEditBox = WG.Chili.EditBox:New {
-		parent = saveWindow,
-		x = "0%",
-		y = "33%",
-		width = "100%",
-		height = "33%",
-		align = "left",
-		text = "",
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 16,
-			autoAdjust = true,
-			maxSize = 16
-		}
-	}
-	WG.Chili.Button:New {
-		parent = saveWindow,
-		x = "15%",
-		y = "67%",
-		width = "20%",
-		height = "33%",
-		caption = okLabel,
-		minWidth = 0,
-		minHeight = 0,
-		OnClick = {processSaving},
-		padding = {8, 0, 8, 0},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 15,
-			autoAdjust = true,
-			maxSize = 15,
-		}
-	}
-	WG.Chili.Button:New {
-		parent = saveWindow,
-		x = "65%",
-		y = "67%",
-		width = "20%",
-		height = "33%",
-		caption = cancelLabel,
-		minWidth = 0,
-		minHeight = 0,
-		OnClick = {
-			function ()
-				saveWindow:Dispose()
-				saveBackground:Dispose()
-				saveWindow = nil
-				saveNameEditBox = nil
-				saveBackground = nil
-			end
-		},
-		padding = {8, 0, 8, 0},
-		font = {
-			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 15,
-			autoAdjust = true,
-			maxSize = 15,
-		}
 	}
 	WG.Chili.Screen0:FocusControl(saveNameEditBox)
 end
 
--- Defines a template window for the end mission menu
-local template_endMission = {
-  lineArray = {""},
-  closed = true,
-  noMove = true,
-  --noAnimation = true,
-  tabs = {
-    -- The replayMission tab
-    {preset = function(tab)
-        tab.title = replayMission
-        tab.position = "bottom"
-        tab.OnClick = function()
-          tab.parent:Close()
-		  if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("replay_mission "..missionName) -- registered by pp_meta_trace_manager.lua
-		  end
-		  DoTheRestart("_script.txt", {}) -- _script.txt is the launcher file used by the previous start, so we can reuse it for replay the game
-        end
-      end
-    },
-    -- The nextMission tab
-    {preset = function(tab)
-        -- By default this tab is disable, activation depend on mission events (see MissionEvent function)
-        tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
-        tab.isAboveColors = {
-			bottomLeft  = {0.3, 0.3, 0.3, 0.3},
-			topLeft     = {0.3, 0.3, 0.3, 0.3},
-			topRight    = {0.3, 0.3, 0.3, 0.3},
-			bottomRight = {0.3, 0.3, 0.3, 0.3}
-		}
-        tab.topLeftColor     = {0.3, 0.3, 0.3, 0.3}
-        tab.topRightColor    = {0.3, 0.3, 0.3, 0.3}
-        tab.bottomLeftColor  = {0.3, 0.3, 0.3, 0.3}
-        tab.bottomRightColor = {0.3, 0.3, 0.3, 0.3}
-        tab.position = "bottom"
-      end
-    },
-    -- The quitGame tab
-    {preset = function(tab)
-        tab.title = quitGame
-        tab.position = "right"
-        tab.OnClick = function()
-          tab.parent:Close()
-		  if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("quit_game") -- registered by pp_meta_trace_manager.lua
-		  end
-          Spring.SendCommands("quitforce")
-        end
-      end
-    },
-    -- The quitMission tab
-    {preset = function(tab)
-        tab.title = quitMission
-        tab.position = "right"
-        tab.OnClick = function()
-          tab.parent:Close()
-		  if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("quit_mission "..missionName) -- registered by pp_meta_trace_manager.lua
-		  end
-          WG.switchOnMenu()
-        end
-      end
-    },
-    -- the save progression Tab
-    {preset = function(tab)
-        tab.title = saveProgression
-        tab.position = "right"
-        tab.OnClick = function()
-			displaySaveWindow()
-        end
-      end
-    },
-    -- The closeMenu tab
-    {preset = function(tab)
-        tab.title = closeMenu
-        tab.position = "right"
-        tab.OnClick = function()
-          tab.parent:Close()
-          if tab.parent.launchTuto ~= nil then
-            tab.parent.launchTuto()
-          end
-        end
-      end
-    },
-    -- The showBriefing tab
-    {preset = function(tab)
-        tab.title = showBriefing
-        tab.position = "top"
-        tab.OnClick = function()
-          tab.parent:Close()
-		  if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("show_briefing") -- registered by pp_meta_trace_manager.lua
-		  end
-          if tab.parent.launchTuto ~= nil then
-            tab.parent.launchTuto()
-          else
-            Spring.SendLuaRulesMsg("Show briefing")
-          end
-        end
-      end
-    }
-  }
-}
-
--- This function returns a deep copy of a given table. The function below also
--- copies the metatable to the new table if there is one, so the behaviour of
--- the copied table is the same as the original.
-local function deepcopy(object)
-    local lookup_table = {}
-    local function _copy(object)
-        if type(object) ~= "table" then
-            return object
-        elseif lookup_table[object] then
-            return lookup_table[object]
-        end
-        local new_table = {}
-        lookup_table[object] = new_table
-        for index, value in pairs(object) do
-            new_table[_copy(index)] = _copy(value)
-        end
-        return setmetatable(new_table, _copy(getmetatable(object)))
-    end
-    return _copy(object)
+local function updateFeedbackFields ()
+	-- be sure that currentFeedback is included into [1, #feedbacks]
+	if currentFeedback < 1 then
+		currentFeedback = 1
+	elseif currentFeedback > #feedbacks then
+		currentFeedback = #feedbacks
+	end
+	-- show next/previous button depending on feedbacks number
+	if nextFeedbackBt and prevFeedbackBt then
+		if #feedbacks < 2 then
+			nextFeedbackBt:Hide()
+			prevFeedbackBt:Hide()
+		else
+			-- and current feedback selected
+			if currentFeedback == 1 then
+				nextFeedbackBt:Show()
+				prevFeedbackBt:Hide()
+			elseif currentFeedback == #feedbacks then
+				nextFeedbackBt:Hide()
+				prevFeedbackBt:Show()
+			else
+				nextFeedbackBt:Show()
+				prevFeedbackBt:Show()
+			end
+		end
+	end
+	-- show comboboxes depending on feedbacks number (need at least one)
+	if feedbackCanvas and clearComboBox and usefulComboBox then
+		if #feedbacks <= 0 then
+			feedbackCanvas:SetText("")
+			clearComboBox:Hide()
+			usefulComboBox:Hide()
+			assessLabel:Hide()
+		else
+			feedbackCanvas:SetText(feedbacks[currentFeedback].feedback)
+			clearComboBox:Show()
+			usefulComboBox:Show()
+			assessLabel:Show()
+			logComboEvent = false
+			clearComboBox:Select(feedbacks[currentFeedback].clearness)
+			usefulComboBox:Select(feedbacks[currentFeedback].utility)
+			logComboEvent = true
+		end
+	end
 end
 
-local winPopup = nil
-local briefing = nil
-local tutoPopup = false
+local function loadPreviousFeedback ()
+	if currentFeedback > 1 then
+		currentFeedback = currentFeedback - 1
+	end
+	updateFeedbackFields()
+	if Script.LuaUI.TraceAction and #feedbacks > 0 then
+		Script.LuaUI.TraceAction("see_previous_feedback "..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+	end
+end
+
+local function loadNextFeedback ()
+	if currentFeedback < #feedbacks then
+		currentFeedback = currentFeedback + 1
+	end
+	updateFeedbackFields()
+	if Script.LuaUI.TraceAction and #feedbacks > 0 then
+		Script.LuaUI.TraceAction("see_next_feedback "..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+	end
+end
+
+local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
+	currentFeedback = 1
+	
+	local feedbackPanel = addPanel(mainWindow, _x, _y, _width, _height)
+	
+	addLabel(feedbackPanel, "2%", "0%", "96%", "17%", LANG_ADVICE, "center", "linecenter")
+	
+	-- add scroll panel for long feedbacks
+	local scrollPanel = addScrollPanel(feedbackPanel, "16%", "17%", "68%", "49%")
+	-- add canvas to display feedback
+	local _feedback = ""
+	if feedbacks[1] then
+		_feedback = feedbacks[1].feedback
+	end
+	feedbackCanvas = addTextBox(scrollPanel, "0%", "0%", "100%", "100%", _feedback)
+	
+	-- add previous feedback button
+	prevFeedbackBt = addButton(feedbackPanel, "0%", "34%", "16%", "16%", "")
+	prevFeedbackBt.backgroundColor = { 0, 0.2, 0.6, 1 }
+	prevFeedbackBt.focusColor = { 0, 0.6, 1, 1 }
+	prevFeedbackBt.OnClick = { loadPreviousFeedback }
+	addImage(prevFeedbackBt, "10%", "10%", "80%", "80%", "bitmaps/launcher/arrow.png", true)
+	
+	-- add next feedback button
+	nextFeedbackBt = addButton(feedbackPanel, "84%", "34%", "16%", "16%", "")
+	nextFeedbackBt.backgroundColor = { 0, 0.2, 0.6, 1 }
+	nextFeedbackBt.focusColor = { 0, 0.6, 1, 1 }
+	nextFeedbackBt.OnClick = { loadNextFeedback }
+	addImage(nextFeedbackBt, "10%", "10%", "80%", "80%", "bitmaps/launcher/arrow_reverse.png", true)
+	
+	-- add label to invite user to assess feedback
+	assessLabel = addLabel(feedbackPanel, "2%", "66%", "96%", "17%", LANG_ASSESS_FEEDBACK, "center", "linecenter")
+	
+	-- add clearness combobox
+	clearComboBox = addComboBox(feedbackPanel, "17%", "83%", "33%", "17%", { LANG_VOTE, "1 "..LANG_NOT_CLEAR, "2", "3", "4", "5 "..LANG_CLEAR })
+	clearComboBox.OnSelect = {
+		function()
+			if logComboEvent and feedbacks[currentFeedback].clearness ~= clearComboBox.selected then
+				if Script.LuaUI.TraceAction then
+					Script.LuaUI.TraceAction("assess_feedback_clearness "..clearComboBox.caption.." feedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+				end
+			end
+			feedbacks[currentFeedback].clearness = clearComboBox.selected
+		end
+	}
+	
+	-- add usefulness combobox
+	usefulComboBox = addComboBox(feedbackPanel, "50%", "83%", "33%", "17%", { LANG_VOTE, "1 "..LANG_NOT_USEFUL, "2", "3", "4", "5 "..LANG_USEFUL })
+	usefulComboBox.OnSelect = {
+		function()
+			if logComboEvent and feedbacks[currentFeedback].utility ~= usefulComboBox.selected then
+				if Script.LuaUI.TraceAction then
+					Script.LuaUI.TraceAction("assess_feedback_utility "..usefulComboBox.caption.." feedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+				end
+			end
+			feedbacks[currentFeedback].utility = usefulComboBox.selected
+		end
+	}
+	
+	updateFeedbackFields()
+end
+
+local function closeMainMenu ()
+	if mainMenuWindow ~= nil then
+		mainMenuWindow:Dispose()
+		mainMenuWindow = nil
+		saveWindow = nil
+		saveNameEditBox = nil
+		feedbackCanvas = nil
+		nextFeedbackBt = nil
+		prevFeedbackBt = nil
+		clearComboBox = nil
+		usefulComboBox = nil
+		scoreLabel = nil
+		numAttemptLabel = nil
+		assessLabel = nil
+		mainMenuCloseButton = nil
+		-- reset data
+		feedbacks = {}
+		currentFeedback = 1
+		logComboEvent = true
+		if Script.LuaUI.ToggleHelpButton then
+			Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
+		end
+	end
+	if filterBackground ~= nil then
+		filterBackground:Dispose()
+		filterBackground = nil
+	end
+end
+
+local function showFeedback ()
+	closeMainMenu() -- close Main menu if the window is visible
+	
+	mainMenuWindow = addWindow(WG.Chili.Screen0, "25%", "25%", "50%", "50%")
+	
+	if Script.LuaUI.ToggleHelpButton then
+		Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
+	end
+	
+	-- add feedback panel
+	displayFeedbackPanel(mainMenuWindow, "0%", "0%", "100%", "85%")
+	
+	-- close button
+	local closeBut = addButton(mainMenuWindow, "40%", "85%", "20%", "15%", LANG_CLOSE_BUTTON)
+	closeBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+	closeBut.focusColor = { 0, 0.6, 1, 1 }
+	closeBut.OnClick = { closeMainMenu } -- close Main menu if the window is visible
+end
+
+local function showMainMenu (missionEnd)
+	closeMainMenu () -- close Main menu if the window is visible
+	
+	filterBackground = addImage(WG.Chili.Screen0, "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false)
+	filterBackground.color = {0, 0, 0, 0.9}
+	filterBackground.OnClick = {
+		function()
+			return true -- Stop Clic event
+		end
+	}
+	
+	mainMenuWindow = addWindow(WG.Chili.Screen0, "12%", "12%", "76%", "76%")
+	
+	if Script.LuaUI.ToggleHelpButton then
+		Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
+	end
+	
+	-- The window label
+	local title = ""
+	if missionEnd.state == "won" then
+		title = LANG_VICTORY
+	elseif missionEnd.state == "lost" then
+		title = LANG_LOSS
+	else
+		title = "Menu"
+	end
+	local windowLabel = addLabel(mainMenuWindow, "40%", "0%", "50%", "20%", title, "left", "linecenter")
+	windowLabel.fontsize = 40
+	windowLabel.font.size = 40
+	windowLabel.font.maxSize = 40
+	
+	-- add score and number of attemps canevas
+	if missionEnd.state ~= "menu" then
+		-- add score
+		scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
+		
+		-- add number of attemps
+		numAttemptLabel = addLabel(mainMenuWindow, "40%", "30%", "60%", "10%", LANG_NUM_ATTEMPTS, "left", "linecenter")
+	else
+		-- The close button
+		mainMenuCloseButton = addImage(mainMenuWindow, "95%", "0%", "5%", "5%", "bitmaps/editor/close.png", true)
+		mainMenuCloseButton.color = { 1, 0, 0, 1 }
+		mainMenuCloseButton.OnClick = {
+			function ()
+				closeMainMenu () -- close Main menu if the window is visible
+				-- reopen tuto if required
+				if tutoPopup then
+					if rooms.TutoView.closed then
+						rooms.TutoView:Open()
+					end
+				end
+			end
+		}
+		mainMenuCloseButton.OnMouseOver = {
+			function()
+				if mainMenuCloseButton then
+					mainMenuCloseButton.color = { 1, 0.5, 0, 1 }
+				end
+			end
+		}
+		mainMenuCloseButton.OnMouseOut = {
+			function()
+				if mainMenuCloseButton then
+					mainMenuCloseButton.color = { 1, 0, 0, 1 }
+				end
+			end
+		}
+	end
+	
+	displayFeedbackPanel(mainMenuWindow, "40%", "40%", "60%", "60%")
+	
+	if missionEnd.state == "menu" then
+		-- add showBriefing button
+		local showBriefingBut = addButton(mainMenuWindow, "0%", "0%", "30%", "10%", LANG_SHOW_BRIEFING)
+		showBriefingBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+		showBriefingBut.focusColor = { 0, 0.6, 1, 1 }
+		showBriefingBut.OnClick = {
+			function ()
+				closeMainMenu () -- close Main menu if the window is visible
+				if Script.LuaUI.TraceAction then
+					Script.LuaUI.TraceAction("show_briefing") -- registered by pp_meta_trace_manager.lua
+				end
+				if tutoPopup then
+					if rooms.TutoView.closed then
+						rooms.TutoView:Open()
+					end
+				else
+					Spring.SendLuaRulesMsg("Show briefing")
+				end
+			end
+		}
+	end
+	
+	-- add replay button
+	local replayBut = addButton(mainMenuWindow, "0%", "10%", "30%", "10%", LANG_REPLAY_MISSION)
+	replayBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+	replayBut.focusColor = { 0, 0.6, 1, 1 }
+	replayBut.OnClick = {
+		function ()
+			closeMainMenu () -- close Main menu if the window is visible
+			if Script.LuaUI.TraceAction then
+				Script.LuaUI.TraceAction("replay_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+			end
+			DoTheRestart("_script.txt", {}) -- _script.txt is the launcher file used by the previous start, so we can reuse it for replay the game
+		end
+	}
+	
+	-- check if we have to add the continue button
+	-- first its depend if the player has achived the end of the mission
+	-- and if appliq is properly initialized
+	if missionEnd.state ~= "menu" and mode=="appliq" and AppliqManager~=nil then
+		local currentoptions=Spring.GetModOptions()       
+		AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
+		AppliqManager:startRoute()
+		local progression=unpickleProgression(currentoptions["progression"])
+		AppliqManager:setProgression(progression)
+		local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
+		local nextMiss=AppliqManager:next(missionEnd.outputstate)  
+		local mission=AppliqManager.currentActivityID
+		-- second its depend on next mission available
+		if (nextMiss==nil) then   
+			Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. Scenario aborted... please fix your mission.")
+		else
+			-- is the last mission ?
+			if(nextMiss=="end") then  
+				Spring.Echo("end of scenario")
+				-- change menu label
+				windowLabel:SetCaption(LANG_VICTORY_CAMPAIGN)
+			else
+				-- add continue button
+				local currentInput=AppliqManager:getCurrentInputName()          
+				currentoptions["currentinput"]=currentInput  
+				currentoptions["missionname"]=mission
+				currentoptions["currentinput"]=currentInput
+				currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
+				local continueBut = addButton(mainMenuWindow, "0%", "30%", "30%", "10%", LANG_CONTINUE)
+				continueBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+				continueBut.focusColor = { 0, 0.6, 1, 1 }
+				continueBut.OnClick = {
+					function ()
+						closeMainMenu () -- close Main menu if the window is visible
+						if Script.LuaUI.TraceAction then
+							Script.LuaUI.TraceAction("continue_scenario "..missionName) -- registered by pp_meta_trace_manager.lua
+						end
+						genericRestart("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+					end
+				}
+			end
+		end
+	end
+	
+	-- save button
+	local saveBut = addButton(mainMenuWindow, "0%", "70%", "30%", "10%", LANG_SAVE_PROGRESSION)
+	saveBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+	saveBut.focusColor = { 0, 0.6, 1, 1 }
+	saveBut.OnClick = {
+		function ()
+			if Script.LuaUI.TraceAction then
+				Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
+			end
+			mainMenuWindow:Hide()
+			displaySaveWindow()
+		end
+	}
+	
+	-- quit mission button
+	local quitMissionBut = addButton(mainMenuWindow, "0%", "80%", "30%", "10%", LANG_QUIT_MISSION)
+	quitMissionBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+	quitMissionBut.focusColor = { 0, 0.6, 1, 1 }
+	quitMissionBut.OnClick = {
+		function ()
+			if Script.LuaUI.TraceAction then
+				Script.LuaUI.TraceAction("quit_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+			end
+			WG.switchOnMenu()
+		end
+	}
+	
+	-- quit game button
+	local quitGameBut = addButton(mainMenuWindow, "0%", "90%", "30%", "10%", LANG_QUIT_GAME)
+	quitGameBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+	quitGameBut.focusColor = { 0, 0.6, 1, 1 }
+	quitGameBut.OnClick = {
+		function ()
+			if Script.LuaUI.TraceAction then
+				Script.LuaUI.TraceAction("quit_game") -- registered by pp_meta_trace_manager.lua
+			end
+			Spring.SendCommands("quitforce")
+		end
+	}
+end
 
 function MissionEvent(e)
   
   if e.logicType == "ShowMissionMenu" then
     -- close tuto window if it oppened
     if tutoPopup then
-      if not WG.rooms.TutoView.closed then
-        WG.rooms.TutoView:Close()
+      if not rooms.TutoView.closed then
+        rooms.TutoView:Close()
       end
     end
-    
     -- close briefing window if it oppened
     WG.Message:DeleteAll()
-    -- load templated mission
-    local popup = deepcopy(template_endMission)
-    -- update main menu content depending on e.state ("menu", "won" or "lost") and "testmap" modoption
-    if e.state ~= "menu" then
-		
-		if (Spring.GetModOptions()["testmap"]~=nil) then
-			-- if we are in testmap case, the main menu is only simple message
-			-- the button "return back to editor" is permanently displayed in UI
-			local message = ""
-			if e.state == "won" then
-				message = victory
-			else
-				message = loss     
-			end
-			MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
-			return
-		end
-		
-		-- define popup base text depending on victory state
+ 	-- replace Main menu by a single message if we are testing map
+	if (Spring.GetModOptions()["testmap"]~=nil) then
+		-- if we are in testmap case, the main menu is only simple message
+		-- the button "return back to editor" is permanently displayed in UI
+		local message = ""
 		if e.state == "won" then
-			popup.lineArray = {victory}
+			message = LANG_VICTORY
 		else
-			popup.lineArray = {loss}
+			message = LANG_LOSS     
 		end
-
-		-- Of course, we can pass to the next mission if current mission is won
-		if mode=="appliq" and AppliqManager~=nil then     
-			local currentoptions=Spring.GetModOptions()       
-			AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
-			AppliqManager:startRoute()
-			--Spring.Echo(e.outputstate)
-			--Spring.Echo("current Act ID")
-			--Spring.Echo(AppliqManager.currentActivityID)
-			local progression=unpickleProgression(currentoptions["progression"])
-			--AppliqManager:setProgression(unpickle(currentoptions["progression"]))
-			--Spring.Echo(e.outputstate)
-			AppliqManager:setProgression(progression)
-			local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
-			local nextMiss=AppliqManager:next(e.outputstate)  
-			local mission=AppliqManager.currentActivityID
-			if(nextMiss==nil) then     
-				Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. As a result a random output state has been picked, please fix your mission")
-				local selectedOutput=outputs[math.random(#outputs)]
-				AppliqManager:next(selectedOutput)         
-			elseif (nextMiss=="end") then
-				Spring.Echo("end of scenario")
-				popup.lineArray = {victoryCampaign}
-				continue="\255\50\50\50"..continue.."\255\255\255\255"
-			else
-				local currentInput=AppliqManager:getCurrentInputName()
-				--Spring.Echo(currentoptions["progression"])
-				-- Spring.Echo(currentInput)
-				--Spring.Echo(e.outputstate)         
-				--Spring.Echo(mission)           
-				currentoptions["currentinput"]=currentInput  
-				currentoptions["missionname"]=mission
-				currentoptions["currentinput"]=currentInput
-				currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
-			end          
-			popup.tabs[2].preset = function(tab)
-				tab.title = "\255\50\50\50"..nextMission.."\255\255\255\255"
-				tab.OnClick = function()
-				end
-			end
-			-- enable continue
-			popup.tabs[3].preset = function(tab)
-				tab.title = continue
-				tab.position = "bottom"
-				tab.OnClick = function() --TODO: It would be nice to reduce the amount of code in this function
-					if(nextMiss~="end")then
-						tab.parent:Close()
-						--DoTheRestart("Missions/"..Game.modShortName.."/mission2.txt",options)      
-						genericRestart("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
-					end
-				end
-			end
-		end
-		
-		if traceOn then
-			table.insert(popup.lineArray, "")
-			table.insert(popup.lineArray, scoreComputing)
-		end
-
-		-- disable "Close tab" and "Show briefing"
-		popup.tabs[6] = nil
-	  
-    else
-		popup.lineArray = {"Menu"}
-    end
-    
-    -- close presious window if require
-    if winPopup ~= nil then
-		winPopup:Close()
-		winPopup = nil
-    end
-    -- create new one with preset popup config
-    winPopup = Window:CreateCentered(popup)
-    -- and open it
-    winPopup:Open()
-    -- set tutorial launcher if tutoPopup has been created
-    if tutoPopup then
-		winPopup.launchTuto = function ()
-			if WG.rooms.TutoView.closed then
-				WG.rooms.TutoView:Open()
-			end
-		end
-    else
-		winPopup.launchTuto = nil
-    end
-  elseif e.logicType == "UpdateFeedback" then
-	-- update winPopup text if feedback is set
-	if e.feedback ~= nil and winPopup ~= nil and traceOn then
-		Spring.Echo ("Feedback to update : "..e.feedback.."FIN")
-		-- remove the last line (score computing label)
-		table.remove(winPopup.lineArray)
-		-- add lines feedbacks to the popup
-		local ind_s = 1
-		for i = 1,#e.feedback do
-			if e.feedback:sub(i,i) == "\n" then
-				table.insert(winPopup.lineArray,string.sub(e.feedback,ind_s,i-1))
-				ind_s = i+1
-			elseif i == #e.feedback then
-				table.insert(winPopup.lineArray,string.sub(e.feedback,ind_s))
-			end
-		end
-		table.insert(winPopup.lineArray,"")
-		-- make a copy in order to recreate it
-		local popup = deepcopy(winPopup)
-		-- reset position in order to recompute them when we rebuild the popup
-		popup.x2 = nil
-		popup.y2 = nil
-		winPopup:Close()
-		-- rebuild the popup
-		winPopup = Window:CreateCentered(popup)
-		winPopup:Open()
+		MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
+	else
+		showMainMenu(e)
 	end
+
   elseif e.logicType == "ShowMessage" then
       if e.image then 
-        briefing = WG.Message:Show{
+        briefingPopup = WG.Message:Show{
           texture = ":n:LuaUI/Images/"..e.image,
           text = e.message,
           width = e.imageWidth,
@@ -625,10 +829,10 @@ function MissionEvent(e)
           pause = e.pause,
         }
       else
-        briefing = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
+        briefingPopup = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
       end
-	  if WG.rooms.Video and not WG.rooms.Video.closed then
-		briefing.delayDrawing = true
+	  if rooms.Video and not rooms.Video.closed then
+		briefingPopup.delayDrawing = true
       end
   elseif e.logicType == "PauseAction" then
     Spring.SendCommands"pause"
@@ -642,54 +846,127 @@ function MissionEvent(e)
 end
 
 function TutorialEvent()
-  if WG.rooms.Video and not WG.rooms.Video.closed then
-    WG.rooms.Video:Close()
+  if rooms.Video and not rooms.Video.closed then
+    rooms.Video:Close()
   end
   if not tutoPopup then 
     tutoPopup = true
-    WG.rooms.TutoView:Open()
+    rooms.TutoView:Open()
   end
 end
 
 function PlayVideo()
-  if WG.rooms.Video and WG.rooms.Video.closed then
-    WG.rooms.Video:Open()
+  if rooms.Video and rooms.Video.closed then
+    rooms.Video:Open()
   end
+end
+
+function getFeedbackToString(json_obj, export_score)
+	local s = ""
+	if json_obj.score ~= nil and export_score then
+		s = s..LANG_SCORE..json_obj.score.." / 100\n"
+	end
+	if json_obj.num_attempts ~= nil and export_score then
+		s = s..LANG_NUM_ATTEMPTS..json_obj.num_attempts.."\n"
+	end
+	-- if json_obj.execution_time ~= nil and export_score then
+		-- s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\n"
+		-- s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\n"
+	-- end
+	-- if json_obj.exec_mean_wait_time ~= nil and export_score then
+		-- s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\n"
+	-- end
+	-- if json_obj.resolution_time ~= nil and export_score then
+		-- s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
+		-- s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
+	-- end
+	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
+		for i = 1,#json_obj.feedbacks do
+			s = s..json_obj.feedbacks[i].."\n"
+		end
+	end
+	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
+		for i = 1,#json_obj.warnings do
+			s = s..json_obj.warnings[i].."\n"
+		end
+	end
+	return s
+end
+
+function handleFeedback(str)
+	-- check if the feedback is consistent
+	Spring.Echo (str)
+	if str == "" or str == "{}" then
+		if scoreLabel then
+			scoreLabel:Hide()
+		end
+		if numAttemptLabel then
+			numAttemptLabel:Hide()
+		end
+	else
+		local json_obj = json.decode(str)
+		-- parse all feedbacks and define default clearness and utility
+		local newFeedbacks = {}
+		for i = 1,#json_obj.feedbacks do
+			newFeedbacks[i] = {
+				feedback=json_obj.feedbacks[i],
+				clearness = 1,
+				utility = 1
+			}
+		end
+		feedbacks = newFeedbacks
+		currentFeedback = 1
+		local feedbackToLog
+		if json_obj.won ~= nil then -- the mission is over
+			feedbackToLog = getFeedbackToString(json_obj, true)
+			Spring.SetConfigString("score", json_obj.score, 1) -- save the score for the engine
+			-- display score
+			if scoreLabel then
+				scoreLabel:SetCaption(LANG_SCORE.."\255"..colorTable[101-json_obj.score]..colorTable[json_obj.score+1].."\0"..json_obj.score.." / 100")
+			end
+			-- display number of attempts
+			if numAttemptLabel then
+				numAttemptLabel:SetCaption(LANG_NUM_ATTEMPTS..json_obj.num_attempts)
+			end
+			-- update feedback panel
+			updateFeedbackFields ()
+		else -- the mission is not over yet
+			feedbackToLog = getFeedbackToString(json_obj, false)
+			showFeedback ()
+		end
+		if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("feedbacks_begin\n"..feedbackToLog.."feedbacks_end") -- registered by pp_meta_trace_manager.lua
+		end
+	end
 end
 
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
-		if WG.rooms.Video and not WG.rooms.Video.closed then
-			WG.rooms.Video:Close()
-			if briefing ~= nil then
-				briefing.delayDrawing = false
+		if rooms.Video and not rooms.Video.closed then
+			rooms.Video:Close()
+			if briefingPopup ~= nil then
+				briefingPopup.delayDrawing = false
 			end
 		else
-			if WG.rooms.TutoView and not WG.rooms.TutoView.closed then
-				WG.rooms.TutoView:Close()
+			if rooms.TutoView and not rooms.TutoView.closed then
+				rooms.TutoView:Close()
 			end
 			if Spring.GetModOptions()["testmap"]~=nil then
 				Spring.SendLuaRulesMsg("Show briefing")
 			else
-				if winPopup == nil then
-					local event = {logicType = "ShowMissionMenu",
-					state = "menu"}
-					MissionEvent (event)
+				if mainMenuWindow == nil then
+					MissionEvent ({logicType = "ShowMissionMenu",
+					state = "menu"})
 				else
-					if winPopup.closed then
-						-- make a copy in order to recreate it and be sure it is centered
-						local popup = deepcopy(winPopup)
-						-- reset position in order to recompute them when we rebuild the popup
-						popup.x2 = nil
-						popup.y2 = nil
-						-- rebuild the popup
-						winPopup = Window:CreateCentered(popup)
-						winPopup:Open()
-					else
-						winPopup:Close()
-						if winPopup.launchTuto ~= nil then
-							winPopup.launchTuto()
+					-- close Main menu if the close button is Show
+					if mainMenuCloseButton and mainMenuCloseButton.visible then
+						closeMainMenu () -- close Main menu if the window is visible
+						-- reopen tuto if required
+						if tutoPopup then
+							if rooms.TutoView.closed then
+								rooms.TutoView:Open()
+							end
 						end
 					end
 				end
@@ -708,11 +985,9 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
   widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
   widgetHandler:RegisterGlobal("PlayVideo", PlayVideo)
+  widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
   
-  rooms = WG.rooms -- WG is available in all widgets
-  Window = rooms.Window
-  Tab = rooms.Tab
-  
+  rooms = WG.rooms -- WG is available in all widgets (defined in pp_gui_rooms.lua)
 end
 
 
@@ -721,4 +996,5 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal("MissionEvent")
   widgetHandler:DeregisterGlobal("TutorialEvent")
   widgetHandler:DeregisterGlobal("PlayVideo")
+  widgetHandler:DeregisterGlobal("handleFeedback", handleFeedback)
 end
