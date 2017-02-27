@@ -895,7 +895,6 @@ end
 
 function handleFeedback(str)
 	-- check if the feedback is consistent
-	Spring.Echo (str)
 	if str == "" or str == "{}" then
 		if scoreLabel then
 			scoreLabel:Hide()
@@ -947,6 +946,9 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 			rooms.Video:Close()
 			if briefingPopup ~= nil then
 				briefingPopup.delayDrawing = false
+			end
+			if Script.LuaUI.ToggleHelpButton then
+				Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
 			end
 		else
 			if rooms.TutoView and not rooms.TutoView.closed then

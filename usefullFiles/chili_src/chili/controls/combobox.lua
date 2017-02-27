@@ -133,7 +133,7 @@ function ComboBox:MouseDown(...)
           }
           labels[#labels+1] = newBtn
           height = height + labelHeight
-          width = math.max(width, self.font:GetTextWidth(item))
+          width = math.max(width, newBtn.font:GetTextWidth(item))
       else
           labels[#labels+1] = item
           item.OnMouseUp = { function()
@@ -154,6 +154,8 @@ function ComboBox:MouseDown(...)
     if y + height > screen.height then
       y = sy - height
     end
+	
+    width = math.min(screen.width, width)
 
     self._dropDownWindow = ComboBoxWindow:New{
       mainCombo = self,
@@ -161,7 +163,7 @@ function ComboBox:MouseDown(...)
       parent = screen,
       width  = width,
       height = height,
-      x = sx - (width - self.width),
+      x = width == screen.width and 0 or sx - (width - self.width),
       y = y,
       children = {
         ComboBoxScrollPanel:New{

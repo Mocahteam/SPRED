@@ -14,6 +14,7 @@
 -- @string[opt=""] hint hint to be displayed when there is no text and the control isn't focused
 -- @int[opt=1] cursor cursor position
 -- @bool passwordInput specifies whether the text should be treated as a password
+-- @tparam {func1,func2,...} OnChange listener functions for content changes, (default {})
 EditBox = Control:Inherit{
   classname= "editbox",
 
@@ -39,6 +40,8 @@ EditBox = Control:Inherit{
 
   allowUnicode = true,
   passwordInput = false,
+  
+  OnChange = {},
 }
 if Script.IsEngineMinVersion == nil or not Script.IsEngineMinVersion(97) then
     EditBox.allowUnicode = false
@@ -82,6 +85,7 @@ function EditBox:SetText(newtext)
  	self.selStart = nil
  	self.selEnd = nil
 	self:UpdateLayout()
+	self:CallListeners(self.OnChange)
 	self:Invalidate()
 end
 
@@ -306,39 +310,39 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		self.cursor = #txt + 1
 
 	-- copy & paste
-  elseif mods.ctrl and (key == Spring.GetKeyCode("c") or key == Spring.GetKeyCode("x")) then
-    if self.passwordInput then
-      -- Avoid to copy password input
-      if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
-        Spring.SetClipboard("")
-      else
-        clipboard = ""
-      end
-    else
-  		local s = self.selStart
-  		local e = self.selEnd
-  		if s and e then
-  			s,e = math.min(s,e), math.max(s,e)
-  			if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
-          Spring.SetClipboard(txt:sub(s,e-1))
-        else
-          clipboard = txt:sub(s,e-1)
-        end
-  		end
-  		if key == Spring.GetKeyCode("x") and self.selStart ~= nil then
-  			self:ClearSelected()
-  		end
-    end
+	elseif mods.ctrl and (key == Spring.GetKeyCode("c") or key == Spring.GetKeyCode("x")) then
+		if self.passwordInput then
+		  -- Avoid to copy password input
+		  if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
+			Spring.SetClipboard("")
+		  else
+			clipboard = ""
+		  end
+		else
+			local s = self.selStart
+			local e = self.selEnd
+			if s and e then
+				s,e = math.min(s,e), math.max(s,e)
+				if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
+			  Spring.SetClipboard(txt:sub(s,e-1))
+			else
+			  clipboard = txt:sub(s,e-1)
+			end
+			end
+			if key == Spring.GetKeyCode("x") and self.selStart ~= nil then
+				self:ClearSelected()
+			end
+		end
 	elseif mods.ctrl and key == Spring.GetKeyCode("v") then
 		if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
-      self:TextInput(Spring.GetClipboard())
-    else
-      -- here clipboard is not unicode then we mislead TextInput
-      local allowUnicode  = self.allowUnicode
-      self.allowUnicode = true
-      self:TextInput(clipboard)
-      self.allowUnicode = allowUnicode -- We reset allowUnicode property
-    end
+		  self:TextInput(Spring.GetClipboard())
+		else
+		  -- here clipboard is not unicode then we mislead TextInput
+		  local allowUnicode  = self.allowUnicode
+		  self.allowUnicode = true
+		  self:TextInput(clipboard)
+		  self.allowUnicode = allowUnicode -- We reset allowUnicode property
+		end
 
 	-- select all
 	elseif mods.ctrl and key == Spring.GetKeyCode("a") then
@@ -366,6 +370,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 	self._interactedTime = Spring.GetTimer()
 	inherited.KeyPress(self, key, mods, isRepeat, label, unicode, ...)
 	self:UpdateLayout()
+	self:CallListeners(self.OnChange)
 	self:Invalidate()
 	return self
 end
@@ -399,6 +404,7 @@ function EditBox:TextInput(utf8char, ...)
 	self._interactedTime = Spring.GetTimer()
 	inherited.TextInput(self, utf8char, ...)
 	self:UpdateLayout()
+	self:CallListeners(self.OnChange)
 	self:Invalidate()
 	return self
 end

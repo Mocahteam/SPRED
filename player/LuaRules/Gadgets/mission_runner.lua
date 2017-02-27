@@ -166,10 +166,10 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
-    mouseDisabled = true
+	mouseDisabled = true
 	
   elseif arg1 == "mouseEnabled" then
-    mouseDisabled = false
+	mouseDisabled = false
 	
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then

@@ -1189,8 +1189,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
     elseif(object=="other")then  
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
-        local elapsedAsFrame=math.floor(secondesToFrames(c.params.number.number))
-        ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(elapsedAsFrame,nil,frameNumber,c.params.number.comparison)  
+        local elapsedAsFrame=math.floor(secondesToFrames(c.params.number))
+        ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(frameNumber, elapsedAsFrame,c.params.comparison) 
       elseif(c.type=="repeat") then
         local framePeriod=secondesToFrames(c.params.number)
         ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
@@ -1449,9 +1449,9 @@ end
    -------------------------------
   ctx.messages["briefing"]=ctx.mission.description.briefing
   --Spring.Echo(ctx.messages["briefing"])
-  --  if(mission.description.mouse=="disabled") then
-  --   SendToUnsynced("mouseDisabled", true)
-  --  end
+   if(ctx.mission.description.mouse=="disabled") then
+    SendToUnsynced("mouseDisabled", true)
+   end
   
   if(ctx.mission.description.cameraAuto=="enabled") then
     _G.cameraAuto = {

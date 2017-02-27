@@ -121,7 +121,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 40,
 			autoAdjust = true,
 			maxSize = 40,
-			color = { 0.2, 0.4, 0.8, 1 }
+			color = { 0.2, 0.4, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.NewMissionButton = Chili.Button:New{
@@ -137,7 +138,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.EditMissionButton = Chili.Button:New{
@@ -153,7 +155,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.EditScenarioButton = Chili.Button:New{
@@ -169,7 +172,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.ExportGameButton = Chili.Button:New{
@@ -185,7 +189,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.LanguageComboBox = Chili.ComboBox:New{
@@ -200,7 +205,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.LanguageComboBox.OnSelect = { -- Change language to the newly selected language
@@ -225,7 +231,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		},
 		backgroundColor = { 0, 0.2, 0.6, 1 },
 		focusColor= { 0, 0.6, 1, 1 },
@@ -271,7 +278,8 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.8, 0.6, 0.2, 1 }
+			color = { 0.8, 0.6, 0.2, 1 },
+			shadow = false
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
 		focusColor= { 0.8, 0.6, 0.2, 1 },
@@ -375,9 +383,10 @@ function InitializeMapButtons() -- Create a button for each map to select it
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 50,
-		  autoAdjust = true,
-		  maxSize = 50,
-			color = { 0, 0.8, 1, 1 }
+			autoAdjust = true,
+			maxSize = 50,
+			color = { 0, 0.8, 1, 1 },
+			shadow = false
 		}
 	}
 	UI.NewLevel.MapScrollPanel = Chili.ScrollPanel:New{
@@ -398,9 +407,10 @@ function InitializeMapButtons() -- Create a button for each map to select it
 			font = {
 				font = "LuaUI/Fonts/Asimov.otf",
 				size = 20,
-			  autoAdjust = true,
-			  maxSize = 20,
-				color = { 1, 0, 0, 1 }
+				autoAdjust = true,
+				maxSize = 20,
+				color = { 1, 0, 0, 1 },
+				shadow = false
 			}
 		}
 	else
@@ -417,9 +427,10 @@ function InitializeMapButtons() -- Create a button for each map to select it
 				font = {
 					font = "LuaUI/Fonts/Asimov.otf",
 					size = 30,
-				  autoAdjust = true,
-				  maxSize = 30,
-					color = { 0.2, 0.4, 0.8, 1 }
+					autoAdjust = true,
+					maxSize = 30,
+					color = { 0.2, 0.4, 0.8, 1 },
+					shadow = false
 				}
 			}
 			table.insert(UI.NewLevel.MapButtons, mapButton)
@@ -444,7 +455,8 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 			size = 50,
 			autoAdjust = true,
 			maxSize = 50,
-			color = { 0, 0.8, 1, 1 }
+			color = { 0, 0.8, 1, 1 },
+			shadow = false
 		}
 	}
 	UI.LoadLevel.LevelScrollPanel = Chili.ScrollPanel:New{
@@ -467,7 +479,8 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 				size = 20,
 				autoAdjust = true,
 				maxSize = 20,
-				color = { 1, 0, 0, 1 }
+				color = { 1, 0, 0, 1 },
+				shadow = false
 			}
 		}
 	else
@@ -486,7 +499,8 @@ function InitializeLevelButtons() -- Create a button for each level to edit it
 					size = 30,
 					autoAdjust = true,
 					maxSize = 30,
-					color = { 0.2, 0.4, 0.8, 1 }
+					color = { 0.2, 0.4, 0.8, 1 },
+					shadow = false
 				}
 			}
 			table.insert(UI.LoadLevel.LevelButtons, levelButton)
@@ -513,7 +527,8 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 50,
 			autoAdjust = true,
 			maxSize = 50,
-			color = { 0, 0.8, 1, 1 }
+			color = { 0, 0.8, 1, 1 },
+			shadow = false
 		}
 	}
 	UI.Scenario.Reset = Chili.Button:New{
@@ -529,7 +544,8 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
-			color = { 0, 0.8, 1, 1 }
+			color = { 0, 0.8, 1, 1 },
+			shadow = false
 		},
 		backgroundColor = { 1, 0.8, 0.4, 1 }
 	}
@@ -546,6 +562,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 25,
 			autoAdjust = true,
 			maxSize = 25,
+			shadow = false,
 		},
 		OnClick = { function ()
 				if NeedToBeSaved then
@@ -569,6 +586,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 25,
 			autoAdjust = true,
 			maxSize = 25,
+			shadow = false,
 		},
 		OnClick = { SaveScenarioFrame }
 	}
@@ -644,6 +662,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 16,
 			autoAdjust = true,
 			maxSize = 16,
+			shadow = false,
 		},
 		OnClick = { function()
 			if selectedOutputMission == "start" and selectedOutputState == 1 then -- Delete links when double-click
@@ -694,6 +713,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			size = 16,
 			autoAdjust = true,
 			maxSize = 16,
+			shadow = false,
 		},
 		OnClick = { function()
 				if selectedOutputMission and selectedOutputState then
@@ -743,7 +763,8 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				size = 18,
 				autoAdjust = true,
 				maxSize = 18,
-				color = { 0, 0.8, 0.8, 1 }
+				color = { 0, 0.8, 0.8, 1 },
+				shadow = false
 			}
 		}
 		UI.Scenario.Input[LevelListNames[i]] = Chili.Button:New{
@@ -758,6 +779,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 				size = 16,
 				autoAdjust = true,
 				maxSize = 16,
+				shadow = false,
 			},
 			OnClick = { function()
 				if selectedInput == LevelListNames[i] then -- Delete links when double-click
@@ -794,6 +816,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 					size = 16,
 					autoAdjust = true,
 					maxSize = 16,
+					shadow = false,
 				}
 			}
 			but.OnClick = { function()
@@ -969,7 +992,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 		valign = "linecenter",
 		caption = LAUNCHER_SCENARIO_NAME
@@ -988,7 +1012,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 		text = ScenarioName,
 		hint = LAUNCHER_SCENARIO_NAME_DEFAULT,
@@ -1001,7 +1026,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 	}
 	Chili.Label:New{
@@ -1018,7 +1044,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 		valign = "linecenter",
 		caption = LAUNCHER_SCENARIO_DESCRIPTION
@@ -1037,7 +1064,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 		text = ScenarioDesc,
 		hint = LAUNCHER_SCENARIO_DESCRIPTION_DEFAULT,
@@ -1050,7 +1078,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		},
 	}
 	local exportBut = Chili.Button:New{
@@ -1069,7 +1098,8 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		}
 	}
 	exportBut.OnClick = { function()
@@ -1133,7 +1163,8 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		}
 	}
 	if (yesnoButton) then
@@ -1153,7 +1184,8 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				-- avoid transparent artifact on windows superposition
 				outlineWidth = 0,
 				outlineWeight = 0,
-				outline = true
+				outline = true,
+				shadow = false
 			}
 		}
 		Chili.Button:New{
@@ -1172,7 +1204,8 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				-- avoid transparent artifact on windows superposition
 				outlineWidth = 0,
 				outlineWeight = 0,
-				outline = true
+				outline = true,
+				shadow = false
 			}
 		}
 	end
@@ -1193,7 +1226,8 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 				-- avoid transparent artifact on windows superposition
 				outlineWidth = 0,
 				outlineWeight = 0,
-				outline = true
+				outline = true,
+				shadow = false
 			}
 		}
 	end
@@ -1238,7 +1272,8 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		}
 	}
 	local scrollPanel = Chili.ScrollPanel:New{
@@ -1277,7 +1312,8 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 				size = 20,
 				autoAdjust = true,
 				maxSize = 20,
-				color = { 1, 0, 0, 1 }
+				color = { 1, 0, 0, 1 },
+				shadow = false
 			}
 		}
 	else
@@ -1300,6 +1336,7 @@ function OpenScenarioFrame() -- Shows the import scenario pop-up
 					size = 30,
 					autoAdjust = true,
 					maxSize = 30,
+					shadow = false,
 				}
 			}
 		end
@@ -1382,6 +1419,7 @@ function ExportGameFrame()
 			size = 20,
 			autoAdjust = true,
 			maxSize = 20,
+			shadow = false,
 		}
 	}
 	UpdateScenarioList()
@@ -1398,7 +1436,8 @@ function ExportGameFrame()
 				size = 20,
 				autoAdjust = true,
 				maxSize = 20,
-				color = { 1, 0, 0, 1 }
+				color = { 1, 0, 0, 1 },
+				shadow = false
 			}
 		}
 	else
@@ -1422,6 +1461,7 @@ function ExportGameFrame()
 					size = 20,
 					autoAdjust = true,
 					maxSize = 20,
+					shadow = false,
 				}
 			}
 		end
@@ -1974,7 +2014,7 @@ end
 function SwitchOn() -- Activate this widget
 	Spring.SendCommands({"NoSound 1"})
 	Spring.SendCommands("forcestart")
-	Spring.SendCommands("fps 1")
+	Spring.SendCommands("fps 0")
 	HideView = true
 	if not editorRunning then
 		RemoveOtherWidgets()

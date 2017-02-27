@@ -68,9 +68,10 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 20,
-		  autoAdjust = true,
-		  maxSize = 20,
-			color = { 0.2, 1, 0.8, 1 }
+			autoAdjust = true,
+			maxSize = 20,
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.LanguageComboBox.OnSelect = { -- Change language to the newly selected language
@@ -94,9 +95,10 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 40,
-		  autoAdjust = true,
-		  maxSize = 40,
-			color = { 0.2, 0.6, 0.8, 1 }
+			autoAdjust = true,
+			maxSize = 40,
+			color = { 0.2, 0.6, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.Help = Chili.TextBox:New{
@@ -109,9 +111,10 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 18,
-		  autoAdjust = true,
-		  maxSize = 18,
-			color = { 0.6, 0.6, 0.8, 1 }
+			autoAdjust = true,
+			maxSize = 18,
+			color = { 0.6, 0.6, 0.8, 1 },
+			shadow = false
 		}
 	}
 	local sp = Chili.ScrollPanel:New{
@@ -140,7 +143,8 @@ function InitializeMenu()
 					size = 30,
 					autoAdjust = true,
 					maxSize = 30,
-					color = { 0, 0.2, 0.8, 1 }
+					color = { 0, 0.2, 0.8, 1 },
+					shadow = false
 				}
 			}
 			cpt = cpt + 1
@@ -156,9 +160,10 @@ function InitializeMenu()
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
-		  autoAdjust = true,
-		  maxSize = 30,
-			color = { 0.8, 0.6, 0.2, 1 }
+			autoAdjust = true,
+			maxSize = 30,
+			color = { 0.8, 0.6, 0.2, 1 },
+			shadow = false
 		},
 		backgroundColor = { 0.8, 0, 0.2, 1 },
 		focusColor= { 0.8, 0.6, 0.2, 1 },
@@ -195,7 +200,8 @@ function FrameWarning(msg)
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		}
 	}
 	Chili.Button:New{
@@ -214,7 +220,8 @@ function FrameWarning(msg)
 			-- avoid transparent artifact on windows superposition
 			outlineWidth = 0,
 			outlineWeight = 0,
-			outline = true
+			outline = true,
+			shadow = false
 		}
 	}
 	Chili.Image:New{

@@ -30,7 +30,6 @@ local gameName=Game.gameShortName or Game.modShortName
 
 
 if(xmlFiles[1]~=nil)then
-  Spring.Echo("Loading "..xmlFiles[1])
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
 end
@@ -208,7 +207,8 @@ local function commonElements()
       size = 60,
 	  autoAdjust = true,
 	  maxSize = 60,
-      color = { 0.2, 0.6, 0.8, 1 }
+      color = { 0.2, 0.6, 0.8, 1 },
+	  shadow = false
     }
   }
   -- combobox
@@ -224,7 +224,8 @@ local function commonElements()
       size = 20,
 	  autoAdjust = true,
 	  maxSize = 20,
-      color = { 0.2, 1, 0.8, 1 }
+      color = { 0.2, 1, 0.8, 1 },
+	  shadow = false
     }
   }
   UI.LanguageComboBox.OnSelect = { -- Change language to the newly selected language
@@ -249,7 +250,8 @@ local function commonElements()
         size = 30,
 		autoAdjust = true,
 		maxSize = 30,
-        color = { 0.8, 0.6, 0.2, 1 }
+        color = { 0.8, 0.6, 0.2, 1 },
+		shadow = false
       },
       backgroundColor = { 0.8, 0, 0.2, 1 },
       focusColor= { 0.8, 0.6, 0.2, 1 },
@@ -273,7 +275,8 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.ListMissionButtons = Chili.Button:New{
@@ -289,7 +292,8 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	UI.continueGameButton = Chili.Button:New{
@@ -305,7 +309,8 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
 			size = 30,
 			autoAdjust = true,
 			maxSize = 30,
-			color = { 0.2, 1, 0.8, 1 }
+			color = { 0.2, 1, 0.8, 1 },
+			shadow = false
 		}
 	}
 	if lang == "en" then
@@ -374,7 +379,8 @@ function continue()
         size = 30,
 		autoAdjust = true,
 		maxSize = 30,
-        color = { 0.2, 0.4, 0.8, 1 }
+        color = { 0.2, 0.4, 0.8, 1 },
+		shadow = false
       }
     }
     table.insert(UI.ContButtons, contButton)
@@ -433,7 +439,8 @@ function missionMenu()
         size = 30,
 		autoAdjust = true,
 		maxSize = 30,
-        color = { 0.2, 0.4, 0.8, 1 }
+        color = { 0.2, 0.4, 0.8, 1 },
+		shadow = false
       }
     }
     table.insert(UI.MapButtons, mapButton)

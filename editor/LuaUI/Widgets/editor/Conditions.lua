@@ -13,11 +13,16 @@ conditions_list = {
 		type = "elapsedTime",
 		filter = "Game",
 		typeText = "Time elapsed",
-		text = "<Number> seconds have elapsed.",
+		text = "Seconds elapsed <Comparison> <Number>.",
 		attributes = {
 			{
+				text = "<Comparison>",
+				type = "comparison",
+				id = "comparison"
+			},
+			{
 				text = "<Number>",
-				type = "numberComparison",
+				type = "text",
 				id = "number"
 			}
 		}
