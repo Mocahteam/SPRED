@@ -72,7 +72,6 @@ function InitializeLauncher() -- Initialize UI elements for the launcher
 	if not editorRunning then
 		widgetHandler:EnableWidget("Editor Loading Screen")
 	end
-	widgetHandler:EnableWidget("Editor Commands List")
 	InitializeMainMenu()
 	InitializeMapButtons()
 	InitializeLevelButtons()

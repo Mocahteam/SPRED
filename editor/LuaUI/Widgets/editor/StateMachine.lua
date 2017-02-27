@@ -45,7 +45,7 @@ unitStateMachine = StateMachine.new(unitStates, unitStates.SELECTION)
 -- Initialize team state machine
 ------------------------------
 local teamStates = {}
-local teams = getTeamsInformation()
+local teams = getDefaultTeamsColor()
 for i = 0, #teams, 1 do
 	table.insert(teamStates, teams[i].id)
 end

@@ -274,6 +274,8 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		else
 			self:ClearSelected()
 		end
+		self:CallListeners(self.OnChange)
+		
 	elseif key == Spring.GetKeyCode("delete") then
 		if self.selStart == nil then
 			if mods.ctrl then
@@ -286,6 +288,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		else
 			self:ClearSelected()
 		end
+		self:CallListeners(self.OnChange)
 
 	-- cursor movement
 	elseif key == Spring.GetKeyCode("left") then
@@ -296,6 +299,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		else
 		self.cursor = Utf8PrevChar(txt, cp)
 		end
+		
 	elseif key == Spring.GetKeyCode("right") then
 		if mods.ctrl then
 			repeat
@@ -304,8 +308,10 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 		else
 		self.cursor = Utf8NextChar(txt, cp)
 		end
+		
 	elseif key == Spring.GetKeyCode("home") then
 		self.cursor = 1
+		
 	elseif key == Spring.GetKeyCode("end") then
 		self.cursor = #txt + 1
 
@@ -331,8 +337,10 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 			end
 			if key == Spring.GetKeyCode("x") and self.selStart ~= nil then
 				self:ClearSelected()
+				self:CallListeners(self.OnChange)
 			end
 		end
+		
 	elseif mods.ctrl and key == Spring.GetKeyCode("v") then
 		if Script.IsEngineMinVersion ~= nil and Script.IsEngineMinVersion(98) then
 		  self:TextInput(Spring.GetClipboard())
@@ -348,6 +356,7 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 	elseif mods.ctrl and key == Spring.GetKeyCode("a") then
 		self.selStart = 1
 		self.selEnd = #txt + 1
+		
 	-- character input
 	elseif unicode and unicode ~= 0 then
 		-- backward compability with Spring <97
@@ -370,7 +379,6 @@ function EditBox:KeyPress(key, mods, isRepeat, label, unicode, ...)
 	self._interactedTime = Spring.GetTimer()
 	inherited.KeyPress(self, key, mods, isRepeat, label, unicode, ...)
 	self:UpdateLayout()
-	self:CallListeners(self.OnChange)
 	self:Invalidate()
 	return self
 end
@@ -399,12 +407,12 @@ function EditBox:TextInput(utf8char, ...)
 		end
 		self.text = txt:sub(1, cp - 1) .. unicode .. txt:sub(cp, #txt)
 		self.cursor = cp + unicode:len()
+		self:CallListeners(self.OnChange)
 	end
 
 	self._interactedTime = Spring.GetTimer()
 	inherited.TextInput(self, utf8char, ...)
 	self:UpdateLayout()
-	self:CallListeners(self.OnChange)
 	self:Invalidate()
 	return self
 end

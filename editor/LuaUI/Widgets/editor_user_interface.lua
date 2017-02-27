@@ -28,7 +28,7 @@ VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
 local Chili, Screen0 -- Chili framework, main screen
 local windows, topBarButtons = {}, {} -- references to UI elements
 local unitFunctions, teamFunctions = {}, {}, {} -- Generated functions for some buttons
-local initialize = false
+local initialized = false
 local loadingFromMenu = false
 local logicalWidgetDeactivation = false -- used to deactivate widget when main menu is on
 
@@ -38,7 +38,7 @@ local loadedTable = {}
 
 -- Unit Variables
 local factionUnits = getFactionUnits() -- List of units sorted by faction
-local teams = getTeamsInformation() -- List of teams as read in the LevelEditor.txt file (contains id and color)
+local defaultTeamsColor = getDefaultTeamsColor() -- List of default teams color as read in the LevelEditor.txt file (contains also ids)
 local teamCount = tableLength(teamStateMachine.states) -- Total number of teams
 local unitScrollPanel -- Contains buttons to change the state of the unit state machine
 local unitButtons = {} -- Contains every type of unit as defined in UnitDef, buttons used to place units on the field
@@ -221,7 +221,7 @@ local chosenTraces = {}
 
 -- Save states variables
 local saveStates = {} -- States for CTRL+Z
-local loadLock = true -- Prevents saving states when loading a state
+local loadingState = false -- Prevents saving states when loading a state
 local loading = false -- Prevents multiple load
 local askGadgetToLoadTable = -1 -- delay communication with gadget in second
 local loadIndex = 1 -- State to be loaded
@@ -588,9 +588,9 @@ function forcesFrame()
 		globalStateMachine:setCurrentState(globalStateMachine.states.FORCES)
 		Screen0:AddChild(windows['forceWindow'])
 		if forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
-			teamConfig()
+			showTeamConfig()
 		elseif forcesStateMachine:getCurrentState() == forcesStateMachine.states.ALLYTEAMS then
-			allyTeam()
+			showAllyTeam()
 		end
 	end
 end
@@ -679,7 +679,7 @@ function tracesFrame()
 							but.state.chosen = true
 							but:InvalidateSelf()
 						end
-						saveState()
+						saveState2()
 					end
 				}
 				if findInTable(chosenTraces, name) then
@@ -823,10 +823,128 @@ function clearForceWindow()
 	windows['forceWindow']:RemoveChild(forcesWindows.allyTeamsWindow)
 end
 
-function teamConfig() -- Show the team config panel
+function showTeamConfig() -- Show the team config panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.TEAMCONFIG)
-	windows['forceWindow']:AddChild(forcesWindows.teamConfigWindow)
+	
+	-- Team Config Window
+	if forcesWindows.teamConfigWindow == nil then
+		forcesWindows.teamConfigWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
+		local teamConfigScrollPanel = addScrollPanel(forcesWindows.teamConfigWindow, '0%', '0%', '100%', '100%')
+		for i, team in ipairs(teamStateMachine.states) do
+			teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', (team * 20).."%", '100%', "20%")
+			
+			-- Team name
+			teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '2%', '30%', '12%', '40%', "left", teamName[team], {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
+			teamNameEditBoxes[team].OnChange = {
+				function ()
+					if teamName[team] ~= teamNameEditBoxes[team].text then
+						teamName[team] = teamNameEditBoxes[team].text
+						updateAllyTeam = true
+						saveState2()
+					end
+				end
+			}
+			
+			-- Enabled/Disabled
+			enableTeamButtons[team] = addButton(teamConfigPanels[team], '16%', '30%', '18%', '40%', EDITOR_FORCES_TEAMCONFIG_DISABLED, nil)
+			if enabledTeams[team] then
+				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+			end
+			local function changeTeamState()
+				enabledTeams[team] = not enabledTeams[team]
+				enableTeamButtons[team].state.chosen = not enableTeamButtons[team].state.chosen
+				if enableTeamButtons[team].caption == EDITOR_FORCES_TEAMCONFIG_DISABLED then
+					enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+				else
+					enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
+				end
+				if not enabledTeams[team] then
+					removeTeamFromTables(team)
+				end
+				saveState2()
+			end
+			enableTeamButtons[team].state.chosen = enabledTeams[team]
+			enableTeamButtons[team].OnClick = { changeTeamState }
+			
+			-- Controlled by
+			teamControlLabels[team] = addLabel(teamConfigPanels[team], '36%', '20%', '18%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL)
+			teamControlButtons[team] = {}
+			
+			teamControlButtons[team].player = addButton(teamConfigPanels[team], '36%', '50%', '9%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER)
+			teamControlButtons[team].player.state.chosen = (teamControl[team] == "player")
+			teamControlButtons[team].player.OnClick = {
+				function()
+					teamControl[team] = "player"
+					updateTeamConfig = true
+					saveState2()
+				end
+			}
+			
+			teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '9%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER)
+			teamControlButtons[team].computer.state.chosen = teamControl[team] == "computer"
+			teamControlButtons[team].computer.OnClick = {
+				function()
+					teamControl[team] = "computer"
+					updateTeamConfig = true
+					saveState2()
+				end
+			}
+			
+			-- Color UI
+			teamColorLabels[team] = addLabel(teamConfigPanels[team], '56%', '20%', '21%', '30%', EDITOR_FORCES_TEAMCONFIG_COLOR)
+			teamColorImage[team] = addImage(teamConfigPanels[team], '79%', '20%', '4%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
+			teamColorTrackbars[team] = {}
+			teamColorTrackbars[team].red = addTrackbar(teamConfigPanels[team], '56%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
+			teamColorTrackbars[team].green = addTrackbar(teamConfigPanels[team], tostring(56 + 20/3)..'%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
+			teamColorTrackbars[team].blue = addTrackbar(teamConfigPanels[team], tostring(56 + 40/3)..'%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
+			local function updateImage()
+				teamColor[team].red = teamColorTrackbars[team].red.value
+				teamColor[team].green = teamColorTrackbars[team].green.value
+				teamColor[team].blue = teamColorTrackbars[team].blue.value
+				teamColorImage[team].color = {
+					teamColorTrackbars[team].red.value,
+					teamColorTrackbars[team].green.value,
+					teamColorTrackbars[team].blue.value,
+					1
+				}
+				teamColorImage[team]:InvalidateSelf()
+				-- update all UI element depending of this team
+				updateTeamButtons = true
+				updateAllyTeam = true
+				forceUpdateUnitGroupPanels = true
+				forceUpdateUnitList = true
+				teamNameEditBoxes[team].font.color = {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1}
+				teamNameEditBoxes[team]:InvalidateSelf()
+				-- update units already created
+				Spring.SetTeamColor(team, teamColor[team].red, teamColor[team].green, teamColor[team].blue)
+			end
+			teamColorTrackbars[team].red.OnChange = {updateImage}
+			teamColorTrackbars[team].red.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].red.color = {1, 0, 0, 1}
+			teamColorTrackbars[team].green.OnChange = {updateImage}
+			teamColorTrackbars[team].green.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].green.color = {0, 1, 0, 1}
+			teamColorTrackbars[team].blue.OnChange = {updateImage}
+			teamColorTrackbars[team].blue.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].blue.color = {0, 0, 1, 1}
+			-- IA field
+			teamAIElements.teamAILabels[team] = addLabel(teamConfigPanels[team], '85%', '20%', '13%', '30%', EDITOR_FORCES_TEAMCONFIG_AI)
+			teamAIElements.teamAIEditBoxes[team] = addEditBox(teamConfigPanels[team], '85%', '50%', '13%', '30%')
+			teamAIElements.teamAIEditBoxes[team].text = teamAIElements.teamAI[team]
+			teamAIElements.teamAIEditBoxes[team].OnChange = {
+				function ()
+					if teamAIElements.teamAI[team] ~= teamAIElements.teamAIEditBoxes[team].text then
+						teamAIElements.teamAI[team] = teamAIElements.teamAIEditBoxes[team].text
+						saveState2()
+					end
+				end
+			}
+		end
+	else
+		windows['forceWindow']:AddChild(forcesWindows.teamConfigWindow)
+	end
+	
 	for k, p in pairs(teamConfigPanels) do -- Force update on panels
 		p:InvalidateSelf()
 	end
@@ -851,10 +969,38 @@ function teamConfig() -- Show the team config panel
 	end
 end
 
-function allyTeam() -- Show the allyteam panel
+function showAllyTeam() -- Show the allyteam panel
 	clearForceWindow()
 	forcesStateMachine:setCurrentState(forcesStateMachine.states.ALLYTEAMS)
-	windows['forceWindow']:AddChild(forcesWindows.allyTeamsWindow)
+	
+	-- Ally Team Window
+	if forcesWindows.allyTeamsWindow == nil then
+		forcesWindows.allyTeamsWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
+		addLabel(forcesWindows.allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30)
+		teamListScrollPanel = addScrollPanel(forcesWindows.allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
+		for i, team in ipairs(teamStateMachine.states) do
+			local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
+			local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
+			local w = tostring(80 / math.ceil(teamCount/2)).."%"
+			local h = "50%"
+		
+			allyTeamPanels[team] = addWindow(forcesWindows.allyTeamsWindow, x, y, w, h)
+			selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', teamName[team], function() selectedAllyTeam = team end)
+			selectAllyTeamsButtons[team].font.color = {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1}
+			allyTeamsScrollPanels[team] = addScrollPanel(allyTeamPanels[team], '2%', '10%', '96%', '89%')
+
+			allyTeamsListButtons[team] = addButton(teamListScrollPanel, '70%', (10*team).."%", '30%', "10%", ">>", function() addTeamToSelectedAllyTeam(team) end)
+			allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*team).."%", '70%', "10%", teamName[team], 20, "center", {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
+
+			allyTeamsRemoveTeamButtons[team] = {}
+			allyTeamsRemoveTeamLabels[team] = {}
+
+			allyTeams[team] = {}
+			allyTeamsSize[team] = 0
+		end
+	else
+		windows['forceWindow']:AddChild(forcesWindows.allyTeamsWindow)
+	end
 	for i, t in ipairs(teamStateMachine.states) do -- Set the teams names
 		selectAllyTeamsButtons[t]:SetCaption(teamName[t])
 	end
@@ -893,11 +1039,25 @@ function initTopBar()
 	testLevelButton.backgroundColor = { 0.4, 1, 0.4, 1 }
 end
 
+function syncUI()
+	forceUpdateUnitList = true
+	forceUpdateUnitGroupPanels = true
+	totalZones = 0
+	updateTeamsWindows(true)
+	eventTotal = 0
+	variablesTotal = 0
+end
+
 function backToEditor () -- called in editor_spring_direct_launch.lua
+	initialized = false
 	updateLanguage() -- defined in EditorStrings.lua
 	initTopBar()
 	initWindows()
+	-- ask to synck data with frames the next time there will be displayed
+	syncUI()
+	-- Show file frame
 	fileFrame()
+	initialized = true
 	logicalWidgetDeactivation = false
 end
 WG.BackToEditor = backToEditor
@@ -1020,121 +1180,23 @@ end
 
 function initForcesWindow()
 	windows['forceWindow'] = addWindow(Screen0, '10%', '10%', '80%', '80%')
-	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_TEAMCONFIG, teamConfig)
-	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/2).."%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_ALLYTEAMS, allyTeam)
+	forcesTabs[forcesStateMachine.states.TEAMCONFIG] = addButton(windows['forceWindow'], "0%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_TEAMCONFIG, showTeamConfig)
+	forcesTabs[forcesStateMachine.states.ALLYTEAMS] = addButton(windows['forceWindow'], tostring(95/2).."%", "0%", tostring(95/2).."%", '5%', EDITOR_FORCES_ALLYTEAMS, showAllyTeam)
 	local closeButton = addImage(windows['forceWindow'], "95%", "0%", "5%", "5%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
 	closeButton.OnClick = { clearUI }
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
-
-	-- Team Config Window
-	forcesWindows.teamConfigWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
-	local teamConfigScrollPanel = addScrollPanel(forcesWindows.teamConfigWindow, '0%', '0%', '100%', '100%')
-	for i, team in ipairs(teamStateMachine.states) do
-		teamConfigPanels[team] = addPanel(teamConfigScrollPanel, '0%', (team * 20).."%", '100%', "20%")
-		teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '2%', '30%', '12%', '40%', "left", EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(team), {teams[team].red, teams[team].green, teams[team].blue, 1})
-		teamName[team] = teamNameEditBoxes[team].text
-		-- Enabled/Disabled
-		enableTeamButtons[team] = addButton(teamConfigPanels[team], '16%', '30%', '18%', '40%', EDITOR_FORCES_TEAMCONFIG_DISABLED, nil)
-		local function changeTeamState()
-			enabledTeams[team] = not enabledTeams[team]
-			enableTeamButtons[team].state.chosen = not enableTeamButtons[team].state.chosen
-			if enableTeamButtons[team].caption == EDITOR_FORCES_TEAMCONFIG_DISABLED then
-				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
-			else
-				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
-			end
-			if not enabledTeams[team] then
-				removeTeamFromTables(team)
-			end
-			saveState()
+	
+	for k, t in pairs(teamStateMachine.states) do
+		if teamColor[t] == nil then
+			-- team color
+			teamColor[t] = {}
+			teamColor[t].red = tonumber(defaultTeamsColor[t].red)
+			teamColor[t].green = tonumber(defaultTeamsColor[t].green)
+			teamColor[t].blue = tonumber(defaultTeamsColor[t].blue)
+			-- team name
+			teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
 		end
-		enabledTeams[team] = false -- Disable all teams at start
-		enableTeamButtons[team].state.chosen = false
-		enableTeamButtons[team].OnClick = { changeTeamState }
-		if team == 0 or team == 1 or team == 2 then -- except the first 3 teams
-			changeTeamState()
-		end
-		-- Controlled by
-		teamControlLabels[team] = addLabel(teamConfigPanels[team], '36%', '20%', '18%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL)
-		teamControlButtons[team] = {}
-		teamControlButtons[team].player = addButton(teamConfigPanels[team], '36%', '50%', '9%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_PLAYER, function() teamControl[team] = "player" updateTeamConfig = true saveState() end)
-		teamControlButtons[team].computer = addButton(teamConfigPanels[team], '45%', '50%', '9%', '30%', EDITOR_FORCES_TEAMCONFIG_CONTROL_COMPUTER, function() teamControl[team] = "computer" updateTeamConfig = true saveState() end)
-		teamControl[team] = "computer"
-		if team == 0 then
-			teamControl[team] = "player"
-			updateTeamConfig = true
-		end
-		-- Color
-		teamColor[team] = {}
-		teamColor[team].red = tonumber(teams[team].red)
-		teamColor[team].green = tonumber(teams[team].green)
-		teamColor[team].blue = tonumber(teams[team].blue)
-		teamColorLabels[team] = addLabel(teamConfigPanels[team], '56%', '20%', '21%', '30%', EDITOR_FORCES_TEAMCONFIG_COLOR)
-		teamColorImage[team] = addImage(teamConfigPanels[team], '79%', '20%', '4%', '60%', "bitmaps/editor/blank.png", false, {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
-		teamColorTrackbars[team] = {}
-		teamColorTrackbars[team].red = addTrackbar(teamConfigPanels[team], '56%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].red, 0.02)
-		teamColorTrackbars[team].green = addTrackbar(teamConfigPanels[team], tostring(56 + 20/3)..'%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].green, 0.02)
-		teamColorTrackbars[team].blue = addTrackbar(teamConfigPanels[team], tostring(56 + 40/3)..'%', '50%', tostring(21/3).."%", "30%", 0, 1, teamColor[team].blue, 0.02)
-		local function updateImage()
-			teamColor[team].red = teamColorTrackbars[team].red.value
-			teamColor[team].green = teamColorTrackbars[team].green.value
-			teamColor[team].blue = teamColorTrackbars[team].blue.value
-			teamColorImage[team].color = {
-				teamColorTrackbars[team].red.value,
-				teamColorTrackbars[team].green.value,
-				teamColorTrackbars[team].blue.value,
-				1
-			}
-			teamColorImage[team]:InvalidateSelf()
-			-- update all UI element depending of this team
-			teams[team].red = teamColor[team].red
-			teams[team].green = teamColor[team].green
-			teams[team].blue = teamColor[team].blue
-			updateTeamButtons = true
-			updateAllyTeam = true
-			forceUpdateUnitGroupPanels = true
-			forceUpdateUnitList = true
-			teamNameEditBoxes[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-			teamNameEditBoxes[team]:InvalidateSelf()
-			-- update units already created
-			Spring.SetTeamColor(team, teamColor[team].red, teamColor[team].green, teamColor[team].blue)
-		end
-		teamColorTrackbars[team].red.OnChange = {updateImage}
-		teamColorTrackbars[team].red.color = {1, 0, 0, 1}
-		teamColorTrackbars[team].green.OnChange = {updateImage}
-		teamColorTrackbars[team].green.color = {0, 1, 0, 1}
-		teamColorTrackbars[team].blue.OnChange = {updateImage}
-		teamColorTrackbars[team].blue.color = {0, 0, 1, 1}
-		-- IA field
-		teamAIElements.teamAI[team] = ""
-		teamAIElements.teamAILabels[team] = addLabel(teamConfigPanels[team], '85%', '20%', '13%', '30%', EDITOR_FORCES_TEAMCONFIG_AI)
-		teamAIElements.teamAIEditBoxes[team] = addEditBox(teamConfigPanels[team], '85%', '50%', '13%', '30%')
-	end
-
-	-- Ally Team Window
-	forcesWindows.allyTeamsWindow = addWindow(windows['forceWindow'], "0%", '5%', '100%', '95%')
-	addLabel(forcesWindows.allyTeamsWindow, '0%', '0%', '20%', '10%', EDITOR_FORCES_ALLYTEAMS_LIST, 30)
-	teamListScrollPanel = addScrollPanel(forcesWindows.allyTeamsWindow, '2%', '10%', '16%', '85%') -- List of all the teams
-	for i, team in ipairs(teamStateMachine.states) do
-		local x = tostring(20 + team * 80 / math.ceil(teamCount/2) - 80 * math.floor(team/math.ceil(teamCount/2)))..'%'
-		local y = tostring(0 + 50 * math.floor(team/math.ceil(teamCount/2))).."%"
-		local w = tostring(80 / math.ceil(teamCount/2)).."%"
-		local h = "50%"
-		allyTeamPanels[team] = addWindow(forcesWindows.allyTeamsWindow, x, y, w, h)
-		selectAllyTeamsButtons[team] = addButton(allyTeamPanels[team], '0%', '0%', '100%', '10%', teamName[team], function() selectedAllyTeam = team end)
-		selectAllyTeamsButtons[team].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
-		selectAllyTeamsButtons[team].font.size = 20
-		allyTeamsScrollPanels[team] = addScrollPanel(allyTeamPanels[team], '2%', '10%', '96%', '89%')
-
-		allyTeamsListButtons[team] = addButton(teamListScrollPanel, '70%', (10*team).."%", '30%', "10%", ">>", function() addTeamToSelectedAllyTeam(team) end)
-		allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*team).."%", '70%', "10%", teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
-
-		allyTeamsRemoveTeamButtons[team] = {}
-		allyTeamsRemoveTeamLabels[team] = {}
-
-		allyTeams[team] = {}
-		allyTeamsSize[team] = 0
 	end
 end
 
@@ -1149,6 +1211,20 @@ function initTriggerWindow()
 	-- Event window
 	windows['eventWindow'] = addWindow(Screen0, '25%', '10%', '40%', '75%')
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '5%', "left", "")
+	eventNameEditBox.OnChange = {
+		function ()
+			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
+			if currentEvent and events[currentEvent].name ~= eventNameEditBox.text and not string.find(eventNameEditBox.text, " ") then
+				-- Update internal data
+				events[currentEvent].name = eventNameEditBox.text
+				-- Update associated button
+				eventUI.eventButtons[currentEvent].caption = eventNameEditBox.text
+				eventUI.eventButtons[currentEvent]:InvalidateSelf()
+				-- save state
+				saveState2()
+			end
+		end
+	}
 	local closeEvent = addImage(windows['eventWindow'], '93%', '1%', '7%', '5%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
 	closeEvent.OnClick = { function() editEvent(currentEvent) end }
 	closeEvent.OnMouseOver = { function() closeEvent.color = { 1, 0.5, 0, 1 } end }
@@ -1181,10 +1257,27 @@ function initTriggerWindow()
 	closeCondition.OnMouseOver = { function() closeCondition.color = { 1, 0.5, 0, 1 } end }
 	closeCondition.OnMouseOut = { function() closeCondition.color = { 1, 0, 0, 1 } end }
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '5%', "left", "")
+	conditionNameEditBox.OnChange = {
+		function ()
+			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
+			if currentEvent and currentCondition and events[currentEvent].conditions[currentCondition].name ~= conditionNameEditBox.text and not string.find(conditionNameEditBox.text, " ") then
+				-- Update internale data
+				events[currentEvent].conditions[currentCondition].name = conditionNameEditBox.text
+				-- Update associated button
+				conditionButtons[events[currentEvent].id][currentCondition].caption = conditionNameEditBox.text
+				conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
+				-- save state
+				saveState2()
+			end
+		end
+	}
 	addLabel(windows['conditionWindow'], '0%', '6%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER)
 	addLabel(windows['conditionWindow'], '0%', '11%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE)
+	
 	conditionFilterComboBox = addComboBox(windows['conditionWindow'], '20%', '6%', '80%', '5%', conditionFilterList, selectFilter)
+	
 	conditionTypeComboBox = addComboBox(windows['conditionWindow'], '20%', '11%', '80%', '5%', {}, selectConditionType)
+	
 	conditionScrollPanel = addPanel(windows['conditionWindow'], '0%', '16%', '100%', '84%')
 	local conditionTextScrollPanel = addScrollPanel(conditionScrollPanel, '1%', "1%", '98%', "23%")
 	conditionTextBox = addTextBox(conditionTextScrollPanel, '0%', "0%", '100%', "100%", "")
@@ -1196,6 +1289,21 @@ function initTriggerWindow()
 	closeAction.OnMouseOver = { function() closeAction.color = { 1, 0.5, 0, 1 } end }
 	closeAction.OnMouseOut = { function() closeAction.color = { 1, 0, 0, 1 } end }
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '5%', "left", "")
+	actionNameEditBox.OnChange = {
+		function ()
+			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
+			if currentEvent and currentAction and events[currentEvent].actions[currentAction].name ~= actionNameEditBox.text and not string.find(actionNameEditBox.text, " ") then
+				-- Update internale data
+				events[currentEvent].actions[currentAction].name = actionNameEditBox.text
+				-- Update associated button
+				actionButtons[events[currentEvent].id][currentAction].caption = actionNameEditBox.text
+				actionButtons[events[currentEvent].id][currentAction]:InvalidateSelf()
+				-- save state
+				saveState2()
+			end
+		end
+	}
+	
 	addLabel(windows['actionWindow'], '0%', '6%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_FILTER)
 	addLabel(windows['actionWindow'], '0%', '11%', '20%', '5%', EDITOR_TRIGGERS_EVENTS_TYPE)
 	actionFilterComboBox = addComboBox(windows['actionWindow'], '20%', '6%', '80%', '5%', actionFilterList, selectFilter)
@@ -1252,6 +1360,7 @@ function initTriggerWindow()
 				if pcall(loadstring("return "..checkingTrigger)) then
 					e.trigger = customTriggerEditBox.text
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
+					saveState2()
 				else
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 				end
@@ -1259,7 +1368,6 @@ function initTriggerWindow()
 				currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 			end
 		end
-		saveState()
 	end
 	customTriggerEditBox.onReturn = useCustomTrigger
 
@@ -1276,11 +1384,12 @@ function initTriggerWindow()
 			e.trigger = trig
 			customTriggerEditBox:SetText(trig)
 			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
+			saveState2()
 		end
-		saveState()
 	end
 	addButton(windows['configureEvent'], '0%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
 	addButton(windows['configureEvent'], '50%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
+	
 	local triggerScrollPanel = addScrollPanel(windows['configureEvent'], '2%', '20%', '96%', '10%')
 	currentTriggerLabel = addTextBox(triggerScrollPanel, '0%', '0%', '100%', '100%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13)
 	-- Action sequence
@@ -1756,7 +1865,7 @@ function updateSelectTeamButtons() -- Update the buttons used to select a team b
 				local y = tostring(85 + 5 * math.floor(count/math.ceil(enabledTeamsCount/3))).."%"
 				local w = tostring(100 / math.ceil(enabledTeamsCount/3)).."%"
 				local h = "5%"
-				local color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+				local color = {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1}
 				teamButtons[team] = addButton(windows["unitWindow"], x, y, w, h, team, teamFunctions[team])
 				teamButtons[team].backgroundColor = color
 				count = count + 1
@@ -1803,7 +1912,7 @@ function addUnitLine(unitID, unitDefID, unitTeam)
 	local name = UnitDefs[uDefID].humanName
 	local team = unitTeam or Spring.GetUnitTeam(unitID)
 
-	unitListLabels[unitID] = addLabel(unitListScrollPanel, '0%', (unitListLinesCnt*unitListLinesHeight).."%", "85%", unitListLinesHeight.."%", name.." ("..tostring(unitID)..")", 16, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
+	unitListLabels[unitID] = addLabel(unitListScrollPanel, '0%', (unitListLinesCnt*unitListLinesHeight).."%", "85%", unitListLinesHeight.."%", name.." ("..tostring(unitID)..")", 16, "left", {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 
 	-- Eye button to focus a specific unit
 	local function viewUnit()
@@ -1841,7 +1950,7 @@ function updateGroupListUnitList() -- update group frame unit list
 		groupListUnitsButtons[u] = addButton(groupListUnitsScrollPanel, '0%', ((i-1)*8).."%", '85%', "8%", name.." ("..tostring(u)..")", function() groupListUnitsButtons[u].state.chosen = not groupListUnitsButtons[u].state.chosen groupListUnitsButtons[u]:InvalidateSelf() end)
 		groupListUnitsButtons[u].font.size = 16
 		groupListUnitsButtons[u].font.maxSize = 16
-		groupListUnitsButtons[u].font.color = {teams[team].red, teams[team].green, teams[team].blue, 1}
+		groupListUnitsButtons[u].font.color = {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1}
 
 		-- Eye button to focus a specific unit
 		local function viewUnit()
@@ -1964,7 +2073,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				local uDefID = Spring.GetUnitDefID(u)
 				local name = UnitDefs[uDefID].humanName
 				local team = Spring.GetUnitTeam(u)
-				local label = addLabel(groupPanels[group.id], '15%', (childCoordHeaderLineHeight + childCoordBodyLineHeight * count).."%", "70%", childCoordBodyLineHeight.."%", name.." ("..tostring(u)..")", 20, "left", {teams[team].red, teams[team].green, teams[team].blue, 1})
+				local label = addLabel(groupPanels[group.id], '15%', (childCoordHeaderLineHeight + childCoordBodyLineHeight * count).."%", "70%", childCoordBodyLineHeight.."%", name.." ("..tostring(u)..")", 20, "left", {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 				table.insert(unitGroupLabels[group.id], label)
 
 				-- Eye button to focus a specific unit
@@ -2633,10 +2742,16 @@ function updateAllyTeamPanels() -- Update the ally team window
 			removeElements(allyTeamsScrollPanels[k], allyTeamsRemoveTeamLabels[k], true)
 			local count = 0
 			for i, t in ipairs(at) do
-				local lab = addLabel(allyTeamsScrollPanels[k], '30%', (10*count).."%", '70%', "10%", teamName[t], 20, "center", {teams[t].red, teams[t].green, teams[t].blue, 1})
+				local lab = addLabel(allyTeamsScrollPanels[k], '30%', (10*count).."%", '70%', "10%", teamName[t], 20, "center", {teamColor[t].red, teamColor[t].green, teamColor[t].blue, 1})
 				table.insert(allyTeamsRemoveTeamLabels[k], lab)
 				local but = addImage(allyTeamsScrollPanels[k], '0%', (10*count+1).."%", '20%', "8%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-				but.OnClick = { function() removeTeamFromAllyTeam(k, t) selectedAllyTeam = k end }
+				but.OnClick = {
+					function()
+						removeTeamFromAllyTeam(k, t)
+						selectedAllyTeam = k 
+						saveState2()
+					end
+				}
 				but.OnMouseOver = { function() but.color = { 1, 0.5, 0, 1 } end }
 				but.OnMouseOut = { function() but.color = { 1, 0, 0, 1 } end }
 				table.insert(allyTeamsRemoveTeamButtons[k], but)
@@ -2644,7 +2759,7 @@ function updateAllyTeamPanels() -- Update the ally team window
 			end
 			allyTeamsSize[k] = tableLength(at)
 			-- update also color of team button in case of color changed
-			selectAllyTeamsButtons[k].font.color = {teams[k].red, teams[k].green, teams[k].blue, 1}
+			selectAllyTeamsButtons[k].font.color = {teamColor[k].red, teamColor[k].green, teamColor[k].blue, 1}
 		end
 	end
 
@@ -2657,7 +2772,7 @@ function updateAllyTeamPanels() -- Update the ally team window
 			if enabledTeams[team] then
 				forcesWindows.allyTeamsWindow:AddChild(allyTeamPanels[team])
 				allyTeamsListButtons[team] = addButton(teamListScrollPanel, '70%', (10*count).."%", '30%', "10%", ">>", function() addTeamToSelectedAllyTeam(team) end)
-				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*count).."%", '70%', "10%", teamName[team], 20, "center", {teams[team].red, teams[team].green, teams[team].blue, 1})
+				allyTeamsListLabels[team] = addLabel(teamListScrollPanel, '0%', (10*count).."%", '70%', "10%", teamName[team], 20, "center", {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 				count = count + 1
 			end
 		end
@@ -2669,8 +2784,8 @@ function addTeamToSelectedAllyTeam(team)
 	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
 		table.insert(allyTeams[selectedAllyTeam], team)
 		table.sort(allyTeams[selectedAllyTeam])
+		saveState2()
 	end
-	saveState()
 end
 
 function removeTeamFromAllyTeam(allyTeam, team)
@@ -2682,7 +2797,6 @@ function removeTeamFromAllyTeam(allyTeam, team)
 		end
 	end
 	table.sort(at)
-	saveState()
 end
 
 function removeTeamFromTables(team) -- Remove disabled team from allyteams
@@ -2691,15 +2805,15 @@ function removeTeamFromTables(team) -- Remove disabled team from allyteams
 	end
 end
 
-function updateTeamsWindows() -- When the number of enabled teams changes, ask other windows to update themselves the next time they are shown
+function updateTeamsWindows(forceUpdate) -- When the number of enabled teams changes, ask other windows to update themselves the next time they are shown
 	local enabledTeamsCount = 0 -- count the number of enabled teams
 	for k, enabled in pairs(enabledTeams) do
 		if enabled then
 			enabledTeamsCount = enabledTeamsCount + 1
 		end
 	end
-
-	if enabledTeamsCount ~= enabledTeamsTotal then -- update every windows
+	
+	if enabledTeamsCount ~= enabledTeamsTotal or forceUpdate then -- update every windows
 		updateTeamButtons = true -- Team selection when instanciating units
 		updateTeamConfig = true -- Team settings
 		updateAllyTeam = true -- Ally teams
@@ -2751,15 +2865,6 @@ function updateTeamConfigPanels() -- Update panels when teams become enabled/dis
 		end
 		updateTeamConfig = false
 	end
-	for i, t in ipairs(teamStateMachine.states) do
-		if teamName[t] ~= teamNameEditBoxes[t].text then -- Update the name of the teams
-			teamName[t] = teamNameEditBoxes[t].text
-			updateAllyTeam = true
-		end
-		if teamAIElements.teamAI[t] ~= teamAIElements.teamAIEditBoxes[t].text then -- Update the AI of the computer controlled teams
-			teamAIElements.teamAI[t] = teamAIElements.teamAIEditBoxes[t].text
-		end
-	end
 end
 
 function showWarningMultiplayerMessage()
@@ -2809,7 +2914,7 @@ function createNewEvent()
 	deleteActionButtons[event.id] = {}
 
 	editEvent(#events) -- edit this event
-	saveState()
+	saveState2()
 end
 
 function editEvent(i)
@@ -2835,7 +2940,7 @@ function removeEvent(i)
 	currentEvent = nil
 	currentCondition = nil
 	currentAction = nil
-	saveState()
+	saveState2()
 end
 
 function createNewCondition()
@@ -2849,7 +2954,7 @@ function createNewCondition()
 		conditionNumber = conditionNumber + 1
 
 		editCondition(#(e.conditions))
-		saveState()
+		saveState2()
 	end
 end
 
@@ -2888,7 +2993,7 @@ function createNewAction()
 		actionNumber = actionNumber + 1
 
 		editAction(#(e.actions))
-		saveState()
+		saveState2()
 	end
 end
 
@@ -2957,7 +3062,7 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					table.remove(events, i)
 					table.insert(events, i-1, e)
 					updateEventList(true)
-					saveState()
+					saveState2()
 				end
 				eventUI.upEventButtons[i] = addImage(eventScrollPanel, '0%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
 				eventUI.upEventButtons[i].OnClick = { moveUpEvent }
@@ -2973,7 +3078,7 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					table.remove(events, i)
 					table.insert(events, i+1, e)
 					updateEventList(true)
-					saveState()
+					saveState2()
 				end
 				eventUI.downEventButtons[i] = addImage(eventScrollPanel, '75%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
 				eventUI.downEventButtons[i].OnClick = { moveDownEvent }
@@ -2983,23 +3088,11 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 		end
 		eventTotal = #events
 	end
-
-	if currentEvent then
-		events[currentEvent].name = eventNameEditBox.text
-		if events[currentEvent].name ~= eventUI.eventButtons[currentEvent].caption then
-			eventUI.eventButtons[currentEvent].caption = events[currentEvent].name
-			eventUI.eventButtons[currentEvent]:InvalidateSelf()
-		end
-	end
 end
 
 function updateEventFrame() -- When a new condition or action is created or its name is changed, update lists
 	if currentEvent then
 		local e = events[currentEvent]
-
-		if eventCommentEditBox then
-			e.comment = eventCommentEditBox.text
-		end
 
 		if e.conditionTotal ~= #(e.conditions) then
 			removeElements(eventConditionsScrollPanel, conditionButtons[e.id], true)
@@ -3013,22 +3106,6 @@ function updateEventFrame() -- When a new condition or action is created or its 
 			removeElements(eventActionsScrollPanel, deleteActionButtons[e.id], true)
 			updateActionList(e)
 			e.actionTotal = #(e.actions)
-		end
-	end
-
-	if currentEvent and currentCondition then
-		events[currentEvent].conditions[currentCondition].name = conditionNameEditBox.text
-		if events[currentEvent].conditions[currentCondition].name ~= conditionButtons[events[currentEvent].id][currentCondition].caption then
-			conditionButtons[events[currentEvent].id][currentCondition].caption = events[currentEvent].conditions[currentCondition].name
-			conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
-		end
-	end
-
-	if currentEvent and currentAction then
-		events[currentEvent].actions[currentAction].name = actionNameEditBox.text
-		if events[currentEvent].actions[currentAction].name ~= actionButtons[events[currentEvent].id][currentAction].caption then
-			actionButtons[events[currentEvent].id][currentAction].caption = events[currentEvent].actions[currentAction].name
-			actionButtons[events[currentEvent].id][currentAction]:InvalidateSelf()
 		end
 	end
 end
@@ -3193,6 +3270,7 @@ function selectConditionType() -- Callback when selecting a condition
 		if events[currentEvent].conditions[currentCondition].type ~= conditionType then
 			events[currentEvent].conditions[currentCondition].type = conditionType
 			drawConditionFrame(true)
+			saveState2()
 		else
 			drawConditionFrame(false)
 		end
@@ -3212,6 +3290,7 @@ function selectActionType() -- Callback when selecting an action
 		if events[currentEvent].actions[currentAction].type ~= actionType then
 			events[currentEvent].actions[currentAction].type = actionType
 			drawActionFrame(true)
+			saveState2()
 		else
 			drawActionFrame(false)
 		end
@@ -3792,7 +3871,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 				if uDefID then
 					local name = UnitDefs[uDefID].humanName
 					local team = Spring.GetUnitTeam(u)
-					local r, g, b = round(teams[team].red*255)+1, round(teams[team].green*255)+1, round(teams[team].blue*255)+1
+					local r, g, b = round(teamColor[team].red*255)+1, round(teamColor[team].green*255)+1, round(teamColor[team].blue*255)+1
 					unitLabel.font.color = { 1, 1, 1, 1 }
 					unitLabel:SetCaption("\255\255\255\255[ \255"..colorTable[r]..colorTable[g]..colorTable[b]..name.." ("..tostring(u)..")\255\255\255\255 ]")
 					local function viewUnit()
@@ -3821,7 +3900,7 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 					unitLabel.font.color = {1, 1, 1, 1}
 					unitLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ALL)
 				else
-					unitLabel.font.color = {teams[param.value].red, teams[param.value].green, teams[param.value].blue, 1}
+					unitLabel.font.color = {teamColor[param.value].red, teamColor[param.value].green, teamColor[param.value].blue, 1}
 					unitLabel:SetCaption(teamName[param.value])
 				end
 			elseif param.type == "action" then
@@ -3933,7 +4012,7 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, featur
 	local comboBox = addComboBox(panel, '30%', y.."%", '38%', "5%", comboBoxItems)
 
 	-- Editbox
-	local editBox = addEditBox(panel, '60%', y.."%", '30%', "5%")
+	local editBox = addEditBox(panel, '68%', y.."%", '30%', "5%")
 	editBox.toShow = true
 	comboBox.OnSelect = {
 		function()
@@ -4043,7 +4122,7 @@ function configureEvent() -- Show the event configuration window
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						updateActionList(e)
-						saveState()
+						saveState2()
 					end
 					local but = addImage(actionSequenceScrollPanel, '0%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
 					but.OnClick = { moveUpAction }
@@ -4064,7 +4143,7 @@ function configureEvent() -- Show the event configuration window
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						updateActionList(e)
-						saveState()
+						saveState2()
 					end
 					local but = addImage(actionSequenceScrollPanel, '80%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
 					but.OnClick = { moveDownAction }
@@ -4084,6 +4163,7 @@ function configureEvent() -- Show the event configuration window
 					if e.repetition then
 						e.repetitionTime = repetitionUI.repetitionEditBox.text
 						repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
+						saveState2()
 					end
 				end
 			)
@@ -4091,12 +4171,15 @@ function configureEvent() -- Show the event configuration window
 			repetitionUI.repetitionComboBox.OnSelect = {
 				function()
 					if repetitionUI.repetitionComboBox.selected == 1 then
-						e.repetition = false
-						e.repetitionTime = nil
-						repetitionUI.repetitionLabel:SetCaption("")
-						windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
-						windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
-						windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+						if e.repetition then
+							e.repetition = false
+							e.repetitionTime = nil
+							repetitionUI.repetitionLabel:SetCaption("")
+							windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
+							windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
+							windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+							saveState2()
+						end
 					else
 						if not e.repetition then
 							e.repetition = true
@@ -4119,6 +4202,15 @@ function configureEvent() -- Show the event configuration window
 			end
 
 			eventCommentEditBox = addEditBox(windows["configureEvent"], '35%', '92%', '65%', '5%', "left", "")
+			eventCommentEditBox.OnChange = {
+				function ()
+					if e.comment ~= eventCommentEditBox.text then
+						e.comment = eventCommentEditBox.text
+						saveState2()
+					end
+				end
+			}
+
 			if e.comment then
 				eventCommentEditBox:SetText(e.comment)
 			else
@@ -4286,14 +4378,14 @@ function addVariable()
 	variablesNumber = variablesNumber + 1
 	variablesTotal = variablesTotal + 1
 
-	saveState()
+	saveState2()
 end
 
 function removeVariable(var)
 	for i, v in ipairs(triggerVariables) do
 		if var == v then
 			table.remove(triggerVariables, i)
-			saveState()
+			saveState2()
 			updateVariables()
 			break
 		end
@@ -4324,42 +4416,55 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	local feature = {}
 	local height = 6
 	y = y*(height+1)
+	-- variable name
 	local nameLabel = addLabel(variablesScrollPanel, '0%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_NAME)
 	local nameEditBox = addEditBox(variablesScrollPanel, '10%', y.."%", '20%', height.."%", "left", var.name)
 	nameEditBox.OnChange = {
 		function ()
-			Spring.Echo (var.name.."OnChange")
-			var.name = nameEditBox.text -- Update variables value
+			if var.name ~= nameEditBox.text then
+				var.name = nameEditBox.text -- Update variables value
+				saveState2()
+			end
 		end
 	}
-
+	-- variable type
 	local typeLabel = addLabel(variablesScrollPanel, '32%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_TYPE)
 	local typeComboBox = addComboBox(variablesScrollPanel, '42%', y.."%", '13%', height.."%", { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
-	local selectType = function()
-		Spring.Echo ("typeComboBox selected"..typeComboBox.selected)
-		if var.type == "boolean" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER then
-			var.type = "number"
-			variablesScrollPanel:RemoveChild(feature.initValueComboBox)
-			variablesScrollPanel:AddChild(feature.initValueEditBox)
-		elseif var.type == "number" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
-			var.type = "boolean"
-			variablesScrollPanel:RemoveChild(feature.initValueEditBox)
-			variablesScrollPanel:AddChild(feature.initValueComboBox)
+	typeComboBox.OnSelect = {
+		function()
+			if var.type == "boolean" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER then
+				var.type = "number"
+				variablesScrollPanel:RemoveChild(feature.initValueComboBox)
+				variablesScrollPanel:AddChild(feature.initValueEditBox)
+				saveState2()
+			elseif var.type == "number" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
+				var.type = "boolean"
+				variablesScrollPanel:RemoveChild(feature.initValueEditBox)
+				variablesScrollPanel:AddChild(feature.initValueComboBox)
+				saveState2()
+			end
 		end
-	end
-	typeComboBox.OnSelect = {selectType}
+	}
+	-- variable value
 	local initValueLabel = addLabel(variablesScrollPanel, '60%', y.."%", '20%', height.."%", EDITOR_TRIGGERS_VARIABLES_INITVALUE)
 	-- controls for Boolean variable
-	local initValueComboBox = addComboBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", { "true", "false" }, nil)
-	local selectInitValue = function()
-		var.initValue = initValueComboBox.items[initValueComboBox.selected]
-	end
-	initValueComboBox.OnSelect = {selectInitValue}
+	local initValueComboBox = addComboBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", { "true", "false" })
+	initValueComboBox.OnSelect = {
+		function()
+			if var.initValue ~= initValueComboBox.items[initValueComboBox.selected] then
+				var.initValue = initValueComboBox.items[initValueComboBox.selected]
+				saveState2()
+			end
+		end
+	}
 	-- controls for Number variable
 	local initValueEditBox = addEditBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", "left", tostring(var.initValue))
 	initValueEditBox.OnChange = {
 		function ()
-			var.initValue = tonumber(initValueEditBox.text)
+			if var.initValue ~= tonumber(initValueEditBox.text) then
+				var.initValue = tonumber(initValueEditBox.text)
+				saveState2()
+			end
 		end
 	}
 
@@ -4674,43 +4779,38 @@ function newMap() -- Set each parameter to its default value
 	totalZones = nil
 	zoneNumber = 1
 	zoneIndex = 0
-	-- AllyTeams
-	allyTeams = {}
-	for k, t in pairs(teamStateMachine.states) do
-		allyTeams[t] = {}
-	end
-	allyTeamsSize = {}
-	selectedAllyTeam = 0
 	-- TeamConfig
 	teamControl = {}
+	enabledTeams = {}
+	enabledTeamsTotal = nil
+	teamColor = {}
+	teamName = {}
+	teamAIElements.teamAI = {}
+	allyTeams = {}
+	allyTeamsSize = {}
+	selectedAllyTeam = 0
 	for k, t in pairs(teamStateMachine.states) do
+		-- computer / player
 		teamControl[t] = "computer"
 		if t == 0 then
 			teamControl[t] = "player"
 		end
-	end
-	enabledTeams = {}
-	for k, t in pairs(teamStateMachine.states) do
+		-- enabled / disabled
 		enabledTeams[t] = false
-		if t == 0 or t == 1 or t == 2 then
+		if t == 0 then --or t == 1 or t == 2 then
 			enabledTeams[t] = true
 		end
-	end
-	enabledTeamsTotal = nil
-	teamColor = {}
-	for k,t in pairs(teamStateMachine.states) do
+		-- team color
 		teamColor[t] = {}
-		teamColor[t].red = tonumber(teams[t].red)
-		teamColor[t].green = tonumber(teams[t].green)
-		teamColor[t].blue = tonumber(teams[t].blue)
-	end
-	teamName = {}
-	for i, t in ipairs(teamStateMachine.states) do
+		teamColor[t].red = tonumber(defaultTeamsColor[t].red)
+		teamColor[t].green = tonumber(defaultTeamsColor[t].green)
+		teamColor[t].blue = tonumber(defaultTeamsColor[t].blue)
+		-- team name
 		teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
-	end
-	teamAIElements.teamAI = {}
-	for i, t in ipairs(teamStateMachine.states) do
+		-- team AI
 		teamAIElements.teamAI[t] = ""
+		-- ally team
+		allyTeams[t] = {}
 	end
 	-- Trigger
 	events = {}
@@ -4782,6 +4882,7 @@ end
 
 function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
 	if loading then return end -- Don't load if already loading
+	
 	loading = true
 	newMap()
 	if name ~= nil and VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
@@ -4827,7 +4928,6 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	end
 
 	-- Teams
-	updateTeamButtons = true
 	for k, t in pairs(teamStateMachine.states) do
 		teamControl[t] = loadedTable.teams[tostring(t)].control
 		teamColor[t] = {}
@@ -4837,6 +4937,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 		teamColor[t].blue = loadedTable.teams[tostring(t)].color.blue
 		teamColor[t].green = loadedTable.teams[tostring(t)].color.green
 		teamName[t] = loadedTable.teams[tostring(t)].name
+		-- update units already created
+		Spring.SetTeamColor(t, teamColor[t].red, teamColor[t].green, teamColor[t].blue)
 	end
 
 	-- Ally Teams
@@ -4969,12 +5071,14 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	-- Initialize
 	newMapInitialize()
 	
-	if not loadLock then
+	if loadingState then
 		continueLoadState()
 	end
 	
 	loading = false
 	NeedToBeSaved = true
+	
+	syncUI()
 	
 	-- it's possible to pass by this function by using Ctrl+Z
 	-- then we notify user from successful loading only if this call is a consequence of a menu user action
@@ -5185,7 +5289,7 @@ function backToMenuFrame() -- Show a window when the user clicks on the main men
 		WG.BackToMainMenu() -- BackToMainMenu() is defined in editor_spring_direct_launch.lua
 		logicalWidgetDeactivation = true
 		clearUI()
-		windows['topBar']:Dispose() -- hide top bar
+		windows['topBar']:Dispose() -- Dispose top bar
 	end)
 	addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
 end
@@ -5362,12 +5466,12 @@ end
 function resetStack() -- reset the stack
 	saveStates = {}
 	loadIndex = 1
-	saveState() 
+	saveState2() 
 end
 
-function saveState() -- Save the state and put it in the stack
+function saveState2() -- Save the state and put it in the stack
 	NeedToBeSaved = true
-	if loadLock and not initialize then
+	if not loadingState and initialized then
 		-- remove states on the top of the stack
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
@@ -5381,12 +5485,28 @@ function saveState() -- Save the state and put it in the stack
 	end
 end
 
+function saveState() -- Save the state and put it in the stack
+	-- NeedToBeSaved = true
+	-- if not loadingState and initialized then
+		-- -- remove states on the top of the stack
+		-- for i = 1, loadIndex-1, 1 do
+			-- table.remove(saveStates, 1)
+		-- end
+		-- -- compute new state
+		-- local savedTable = encodeSaveTable()
+		-- savedTable = json.decode(json.encode(savedTable))
+		-- -- push the new state on the top of the stack
+		-- table.insert(saveStates, 1, savedTable)
+		-- loadIndex = 1
+	-- end
+end
+
 function loadState(direction) -- Load a state from the stack depending on the direction (CTRL + Y or Z)
 	if (loadIndex < #saveStates and direction > 0) -- Ctrl+Z
 		or (loadIndex > 1 and direction < 0) -- Ctrl+Y
 	then
 		NeedToBeSaved = true
-		loadLock = false
+		loadingState = true
 		saveCurrentEvent = currentEvent
 		saveCurrentAction = currentAction
 		saveCurrentCondition = currentCondition
@@ -5417,7 +5537,7 @@ function continueLoadState() -- Open windows that were opened before ctrl + z or
 		showGroupsWindow()
 	end
 
-	loadLock = true
+	loadingState = false
 end
 
 function requestSave() -- Save only after everything required has been done
@@ -5513,10 +5633,12 @@ function updateButtonVisualFeedback() -- Show current states on GUI (colored but
 	markButtonWithinSet(unitButtons, unitStateMachine:getCurrentState())
 	markButtonWithinSet(teamButtons, teamStateMachine:getCurrentState(), unitStateMachine:getCurrentState() ~= unitStateMachine.states.SELECTION)
 	markButtonWithinSet(zoneButtons, zoneStateMachine:getCurrentState())
-	markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
+		markButtonWithinSet(selectAllyTeamsButtons, selectedAllyTeam)
 	markButtonWithinSet(forcesTabs, forcesStateMachine:getCurrentState())
 	for i, team in ipairs(teamStateMachine.states) do
-		markButtonWithinSet(teamControlButtons[team], teamControl[team])
+		if teamControlButtons[team] then
+			markButtonWithinSet(teamControlButtons[team], teamControl[team])
+		end
 	end
 	markButtonWithinSet(eventUI.eventButtons, currentEvent)
 	if currentEvent then
@@ -5586,9 +5708,8 @@ end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function widget:Initialize()
-	Spring.Echo("Initialize Widget editor user interface")
 	initChili()
-	initialize = true
+	initialized = false
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
 	widgetHandler:RegisterGlobal("saveState", saveState)
 	widgetHandler:RegisterGlobal("requestSave", requestSave)
@@ -5607,8 +5728,8 @@ function widget:Initialize()
 	initWindows()
 	fileFrame()
 	initWidgetList()
-	initialize = false
-	saveState()
+	initialized = true
+	loadingFromMenu = true
 end
 
 function widget:Update(delta)
@@ -5685,7 +5806,7 @@ function widget:Update(delta)
 		-- see comment in loadMap function
 		if askGadgetToLoadTable > 0 then
 			askGadgetToLoadTable = askGadgetToLoadTable - delta
-			if askGadgetToLoadTable < 0 then
+			if askGadgetToLoadTable <= 0 then
 				Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
 			end
 		end
