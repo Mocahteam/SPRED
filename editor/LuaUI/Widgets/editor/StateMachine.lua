@@ -68,3 +68,9 @@ forcesStateMachine = StateMachine.new(forcesStates, forcesStates.TEAMCONFIG)
 ------------------------------
 local triggerStates = { DEFAULT = "default", PICKPOSITION = "pickPosition", PICKUNIT = "pickUnit", PICKUNITSET = "pickUnitset" }
 triggerStateMachine = StateMachine.new(triggerStates, triggerStates.DEFAULT)
+
+------------------------------
+-- Initialize map settings state machine
+------------------------------
+local mapSettingsStates = { WITHOUTWIDGETS = "withoutWidgets", WITHWIDGETS = "withWidgets" }
+mapSettingsStateMachine = StateMachine.new(mapSettingsStates, mapSettingsStates.WITHOUTWIDGETS)

@@ -222,17 +222,17 @@ local chosenTraces = {}
 -- Save states variables
 local saveStates = {} -- States for CTRL+Z
 local loadingState = false -- Prevents saving states when loading a state
-local loading = false -- Prevents multiple load
+local loadingMap = false -- Prevents multiple load
 local askGadgetToLoadTable = -1 -- delay communication with gadget in second
 local loadIndex = 1 -- State to be loaded
 local saveLoadCooldown = 0 -- Prevents too many loads in a short period of time
 local saveCurrentEvent = nil -- If an event was opened, save it to open it again after the load
 local saveCurrentCondition = nil -- same for condition
 local saveCurrentAction = nil -- same for action
+local saveStateTrigger = -1 -- used to manage units creation et destroying in a same frame in order to delay game state saving
 local variablesWindowToBeShown = false -- same for the variables window
 local configureWindowToBeShown = false -- same for the configure event window
-local unitGroupsWindowToBeShown = false -- same for the unit groups window
-local toSave = false -- Synchronised save when moving units for example
+local waitMouseRelease = false -- Synchronised save when moving units for example
 local NeedToBeSaved = true -- Know when changes happened
 
 -- Mouse variables
@@ -523,10 +523,10 @@ function clearUI() -- remove every windows except topbar and clear current selec
 	if randomInZoneWindow then
 		randomInZoneWindow:Dispose()
 	end
-	if windows['widgetsWindow'] then
-		windows['widgetsWindow']:Dispose()
-		windows['widgetsWindow'] = nil
-	end
+	-- if windows['widgetsWindow'] then
+		-- windows['widgetsWindow']:Dispose()
+		-- windows['widgetsWindow'] = nil
+	-- end
 	if windows['zonesAttributes'] then
 		windows['zonesAttributes']:Dispose()
 		windows['zonesAttributes'] = nil
@@ -614,6 +614,15 @@ function mapSettingsFrame()
 		clearUI()
 		globalStateMachine:setCurrentState(globalStateMachine.states.MAPSETTINGS)
 		Screen0:AddChild(windows['mapSettingsWindow'])
+		if mapSettingsStateMachine:getCurrentState() == mapSettingsStateMachine.states.WITHWIDGETS then
+			Screen0:AddChild(windows['widgetsWindow'])
+			mapSettingsButtons.widgetsButton.state.chosen = true
+			refreshWidgetWindows()
+		else
+			mapSettingsButtons.widgetsButton.state.chosen = false
+		end
+		mapSettingsButtons.widgetsButton:InvalidateSelf()
+		
 		-- Set parameters to UI elements
 		if isMapNameDefaultValue(mapDescription.mapName) then -- isMapNameDefaultValue(...) is defined in EditorStrings.lua
 			mapNameEditBox:SetText(EDITOR_MAPSETTINGS_DEFAULT_NAME)
@@ -621,6 +630,7 @@ function mapSettingsFrame()
 			mapNameEditBox:SetText(mapDescription.mapName)
 		end
 		mapBriefingEditBox:SetText(mapDescription.mapBriefingRaw)
+		updateBriefingPreview()
 		
 		-- update checkboxes
 		if mapSettingsButtons.cameraAutoButton.checked ~= cameraAutoState then
@@ -638,9 +648,6 @@ function mapSettingsFrame()
 		if mapSettingsButtons.feedbackButton.checked ~= feedbackState then
 			mapSettingsButtons.feedbackButton:Toggle()
 		end
-		
-		mapSettingsButtons.widgetsButton.state.chosen = false -- Reset the state of this button
-		mapSettingsButtons.widgetsButton:InvalidateSelf()
 	end
 end
 
@@ -796,20 +803,7 @@ function testLevel()
 			end
 		end
 	end
-
-	if NeedToBeSaved then
-		if windows["testWindow"] then
-			Screen0:RemoveChild(windows["testWindow"])
-			windows["testWindow"]:Dispose()
-		end
-		windows["testWindow"] = addWindow(Screen0, '20%', '40%', '60%', '20%', true)
-		local text = string.gsub(EDITOR_TEST_LEVEL_CONFIRM, "/MAPFILE/", "SPRED/missions/"..levelFile.description.saveName..".editor")
-		addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', text)
-		addButton(windows["testWindow"], '0%', '50%', '50%', '50%', EDITOR_YES, goTest)
-		addButton(windows["testWindow"], '50%', '50%', '50%', '50%', EDITOR_NO, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
-	else
-		goTest()
-	end
+	checkNeedToBeSaved(goTest)
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1078,7 +1072,7 @@ function initFileWindow()
 	addLabel(windows['fileWindow'], '0%', '1%', '100%', '10%', EDITOR_FILE)
 	fileButtons['new'] = addButton(windows['fileWindow'], '0%', '10%', '100%', '15%', EDITOR_FILE_NEW, newMapFrame)
 	fileButtons['load'] = addButton(windows['fileWindow'], '0%', '25%', '100%', '15%', EDITOR_FILE_LOAD, loadMapFrame)
-	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, saveMapFrame)
+	fileButtons['save'] = addButton(windows['fileWindow'], '0%', '40%', '100%', '15%', EDITOR_FILE_SAVE, function () saveMapFrame(nil) end)
 	fileButtons['settings'] = addButton(windows['fileWindow'], '0%', '70%', '100%', '15%', EDITOR_FILE_MENU, backToMenuFrame)
 	fileButtons['quit'] = addButton(windows['fileWindow'], '0%', '85%', '100%', '15%', EDITOR_FILE_QUIT, quitFrame)
 	fileButtons['quit'].backgroundColor = { 0.8, 0, 0.2, 1 }
@@ -1119,17 +1113,17 @@ function initUnitWindow()
 	-- Unit Groups Window
 	windows["unitGroupsWindow"] = addWindow(Screen0, "5%", "15%", '90%', '80%', true)
 	addLabel(windows["unitGroupsWindow"], '0%', '0%', '18%', '9%', EDITOR_UNITS_LIST, 30)
+	-- left scroll panel
 	groupListUnitsScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '0%', '10%', '18%', '90%')
 	addButton(windows["unitGroupsWindow"], '18%', '50%', '4%', '10%', ">>", addChosenUnitsToSelectedGroups)
 	addLabel(windows["unitGroupsWindow"], '22%', '0%', '78%', '9%', EDITOR_UNITS_GROUPS_LIST, 30)
+	-- right scroll panel
 	groupListScrollPanel = addScrollPanel(windows["unitGroupsWindow"], '22%', '10%', '78%', '90%')
 	local closeGroupsWindow = function()
-		Screen0:RemoveChild(windows["unitGroupsWindow"])
-		Screen0:AddChild(windows['unitListWindow'])
-		Screen0:AddChild(windows['unitWindow'])
-		showGroupsButton:InvalidateSelf()
-		unitStateMachine:setCurrentState(unitStateMachine.states.SELECTION)
+		unitFrame() -- close first 
+		unitFrame() -- reopen default windows
 	end
+	-- close button
 	local closebut = addImage(windows["unitGroupsWindow"], "95%", "2%", "5%", "5%", "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
 	closebut.OnClick = { closeGroupsWindow }
 	closebut.OnMouseOver = { function() closebut.color = { 1, 0.5, 0, 1 } end }
@@ -1146,36 +1140,46 @@ end
 function initZoneWindow()
 	windows['zoneWindow'] = addWindow(Screen0, '0%', '10%', '20%', '80%')
 	addLabel(windows['zoneWindow'], '0%', '1%', '100%', '5%', EDITOR_ZONES)
+	-- add button to select rectangular zone
 	zoneButtons[zoneStateMachine.states.DRAWRECT] = addButton(windows['zoneWindow'], '0%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWRECT) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWRECT], '5%', '5%', '90%', '90%', "bitmaps/editor/rectangle.png", true)
+	-- add button to select disk zone
 	zoneButtons[zoneStateMachine.states.DRAWDISK] = addButton(windows['zoneWindow'], '50%', '5%', '50%', '10%', "", function() zoneStateMachine:setCurrentState(zoneStateMachine.states.DRAWDISK) selectedZone = nil end)
 	addImage(zoneButtons[zoneStateMachine.states.DRAWDISK], '5%', '5%', '90%', '90%', "bitmaps/editor/disk.png", true)
 	zoneScrollPanel = addScrollPanel(windows['zoneWindow'], '0%', '15%', '100%', '75%')
 
 	local toggleAllOn = function() -- show all zones
+		local atLeastOneZoneUpdated = false
+		loadingState = true -- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
 		for k, zb in pairs(zoneBoxes) do
 			if not zb.checkbox.checked then
+				atLeastOneZoneUpdated = true
 				zb.checkbox:Toggle()
 			end
 		end
-		if windows['zonesAttributes'] then
-			showZonesSpecialAttributesWindow() -- will close the window
+		loadingState = false -- and now we restore savestate mecanism
+		if atLeastOneZoneUpdated then
+			saveState2()
 		end
 	end
 	local toggleAllOff = function() -- hide all zones
+		local atLeastOneZoneUpdated = false
+		loadingState = true -- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
 		for k, zb in pairs(zoneBoxes) do
 			if zb.checkbox.checked then
+				atLeastOneZoneUpdated = true
 				zb.checkbox:Toggle()
 			end
 		end
-		if windows['zonesAttributes'] then
-			showZonesSpecialAttributesWindow() -- will close the window
+		loadingState = false -- and now we restore savestate mecanism
+		if atLeastOneZoneUpdated then
+			saveState2()
 		end
 	end
 	addButton(zoneScrollPanel, "0%", "0%", "50%", "6%", EDITOR_ZONES_SHOW, toggleAllOn)
 	addButton(zoneScrollPanel, "50%", "0%", "50%", "6%", EDITOR_ZONES_HIDE, toggleAllOff)
 
-	zonesAttributesButton = addButton(windows['zoneWindow'], '0%', '90%', '100%', '10%', EDITOR_ZONES_ATTRIBUTES, showZonesSpecialAttributesWindow)
+	zonesAttributesButton = addButton(windows['zoneWindow'], '0%', '90%', '100%', '10%', EDITOR_ZONES_ATTRIBUTES, toggleZonesSpecialAttributesWindow)
 end
 
 function initForcesWindow()
@@ -1421,21 +1425,68 @@ function initTriggerWindow()
 	addButton(variablesScrollPanel, '0%', "0%", '100%', "6%", EDITOR_TRIGGERS_VARIABLES_NEW, addVariable)
 end
 
+function updateBriefingPreview ()
+	local text = mapBriefingEditBox.text
+	local newText = text
+	for word in string.gmatch(text, "/#%w*#.-/") do -- for each /#XXXXXX#ABC/ sequence where X is a hexadecimal number and ABC a string, surround ABC with color tags to color this part of the string
+		local color = string.gsub(word, "#[^#]+$", "")
+		color = string.gsub(color, "/#", "")
+		local red = tonumber(string.sub(color, 1, 2), 16)
+		if red then red = red + 1 end
+		local green = tonumber(string.sub(color, 3, 4), 16)
+		if green then green = green + 1 end
+		local blue = tonumber(string.sub(color, 5, 6), 16)
+		if blue then blue = blue + 1 end
+		if red and green and blue then
+			local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
+			local newWord = string.gsub(word, "/#%w*#", replacement)
+			newWord = string.gsub(newWord, "/", "\255\255\255\255")
+			newText = string.gsub(newText, word, newWord)
+		end
+	end
+	newText = string.gsub(newText, "\\n", "\n")
+	mapBriefingTextBox:SetText(newText)
+end
+
 function initMapSettingsWindow()
-	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '15%', '60%', '70%')
+	windows['mapSettingsWindow'] = addWindow(Screen0, '20%', '15%', '60%', '70%')  -- x position is updated on updateWidgetsWindowPosition()
 	
 	addLabel(windows['mapSettingsWindow'], '0%', '0%', '100%', '7%', EDITOR_MAPSETTINGS, 30)
 	
 	local closeButton = addImage(windows['mapSettingsWindow'], '95%', '0%', '4%', '4%', "bitmaps/editor/close.png", true, { 1, 0, 0, 1 })
-	closeButton.OnClick = { mapSettingsFrame }
+	closeButton.OnClick = {
+		function ()
+			mapSettingsFrame()
+			mapSettingsStateMachine:setCurrentState(mapSettingsStateMachine.states.WITHOUTWIDGETS)
+		end
+	}
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
 	
 	addLabel(windows['mapSettingsWindow'], '0%', '10%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_NAME, 20, "left")
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '5%', '15%', '95%', '5%')
+	mapNameEditBox.OnChange = {
+		function ()
+			if mapDescription.mapName ~= mapNameEditBox.text then
+				mapDescription.mapName = mapNameEditBox.text
+				saveState2()
+			end
+		end
+	}
 	
 	addLabel(windows['mapSettingsWindow'], '0%', '22%', '20%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "left")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '5%', '27%', '95%', '5%')
+	mapBriefingEditBox.OnChange = {
+		function ()
+			if mapDescription.mapBriefingRaw ~= mapBriefingEditBox.text then
+				mapDescription.mapBriefingRaw = mapBriefingEditBox.text
+				-- update preview briefing
+				updateBriefingPreview()
+				mapDescription.mapBriefing = mapBriefingTextBox.text
+				saveState2()
+			end
+		end
+	}
 	
 	local colorUI = {}
 	colorUI.red = addTrackbar(windows['mapSettingsWindow'], '2%', '33%', "20%", "5%", 0, 1, 1, 0.02)
@@ -1474,6 +1525,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.cameraAutoButton.OnChange = {
 		function()
 			cameraAutoState = not mapSettingsButtons.cameraAutoButton.checked
+			saveState2()
 		end
 	}
 	
@@ -1481,6 +1533,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.mouseStateButton.OnChange = {
 		function()
 			mouseState = not mapSettingsButtons.mouseStateButton.checked
+			saveState2()
 		end
 	}
 	
@@ -1488,6 +1541,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.autoHealButton.OnChange = {
 		function()
 			autoHealState = not mapSettingsButtons.autoHealButton.checked
+			saveState2()
 		end
 	}
 	
@@ -1495,6 +1549,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.minimapButton.OnChange = {
 		function()
 			minimapState = not mapSettingsButtons.minimapButton.checked
+			saveState2()
 		end
 	}
 	
@@ -1503,11 +1558,12 @@ function initMapSettingsWindow()
 		mapSettingsButtons.feedbackButton.OnChange = {
 			function()
 				feedbackState = not mapSettingsButtons.feedbackButton.checked
+				saveState2()
 			end
 		}
 	end
 
-	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '76%', '30%', '20%',  EDITOR_MAPSETTINGS_WIDGETS, showWidgetsWindow)
+	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '76%', '30%', '20%',  EDITOR_MAPSETTINGS_WIDGETS, toggleWidgetsWindow)
 end
 
 function initTracesWindow()
@@ -1585,7 +1641,8 @@ function applyChangesToSelectedUnits() -- Apply changes to units attributes
 	end
 	for k, n in pairs(teamName) do
 		if teamComboBox.items[teamComboBox.selected] == n then
-			Spring.SendLuaRulesMsg("Transfer Units".."++"..k)
+			tellGadgetWichUnitsAreSelected()
+			Spring.SendLuaRulesMsg("Transfer Units".."++"..k) -- will call saveState() indirectly
 			break
 		end
 	end
@@ -1697,7 +1754,7 @@ end
 function showUnitAttributes() -- Show a window to edit unit's instance attributes
 	clearTemporaryWindows()
 	local unitSelection = Spring.GetSelectedUnits()
-	unitAttributesWindow = addWindow(Screen0, '70%', '10%', '15%', '40%', true)
+	unitAttributesWindow = addWindow(Screen0, '65%', '10%', '20%', '40%', true)
 	addLabel(unitAttributesWindow, '0%', "0%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES, 30)
 	-- HP
 	local hpLabel = addLabel(unitAttributesWindow, '5%', "15%", "40%", "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_HP.."%", 20)
@@ -1785,7 +1842,7 @@ end
 
 function showUnitGroupsAttributionWindow() -- Show a small window allowing to add the current selection to an existing or new group
 	clearTemporaryWindows()
-	unitGroupsAttributionWindow = addWindow(Screen0, '70%', '10%', '15%', '40%', true)
+	unitGroupsAttributionWindow = addWindow(Screen0, '65%', '10%', '20%', '40%', true)
 	local attributionWindowScrollPanel = addScrollPanel(unitGroupsAttributionWindow, '0%', '0%', '100%', '100%')
 
 	local count = 0
@@ -1799,7 +1856,6 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 	end
 
 	newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', (count * 20).."%", '60%', "20%", "left", "") -- Allow the creation of a new group
-	newUnitGroupEditBox.font.size = 14
 	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
 	newUnitGroupEditBox.onReturn = function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end
 	local function newGroup()
@@ -1813,7 +1869,7 @@ end
 
 function showUnitGroupsRemovalWindow() -- Show a small window allowing to remove the current selection from a group
 	clearTemporaryWindows()
-	unitGroupsRemovalWindow = addWindow(Screen0, '70%', '10%', '15%', '40%', true)
+	unitGroupsRemovalWindow = addWindow(Screen0, '65%', '10%', '20%', '40%', true)
 	local removalWindowScrollPanel = addScrollPanel(unitGroupsRemovalWindow, '0%', '0%', '100%', '100%')
 
 	local noGroupsInCommon = true
@@ -2022,14 +2078,31 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				y = heights[column].."%"
 				heights[column] = heights[column] + headerLineHeight + bodyLineHeight * tableLength(group.units)
 			end
-			-- Add panel, editbox, buttons
+			-- Add panel
 			local panelHeight = headerLineHeight + bodyLineHeight * tableLength(group.units)
 			groupPanels[group.id] = addPanel(groupListScrollPanel, x, y, (100/3).."%", panelHeight.."%")
 			local childCoordHeaderLineHeight = (headerLineHeight / panelHeight) * 100
 			selectGroupButtons[group.id] = addButton(groupPanels[group.id], "0%", "0%", "10%", childCoordHeaderLineHeight.."%", "", function() selectGroupButtons[group.id].state.chosen = not selectGroupButtons[group.id].state.chosen selectGroupButtons[group.id]:InvalidateSelf() end)
 			selectGroupButtons[group.id].unitGroupsId = i
+			-- group name
 			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], "10%", "0%", "80%", childCoordHeaderLineHeight.."%", "left", group.name)
-			groupEditBoxes[group.id].font.size = 14
+			groupEditBoxes[group.id].OnChange = {
+				function ()
+					-- String in the editbox as name for the group
+					if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
+						group.name = groupEditBoxes[group.id].text
+						saveState2()
+					end
+				end
+			}
+			groupEditBoxes[group.id].OnFocusUpdate = {
+				function ()
+					if groupEditBoxes[group.id].text == "" then
+						groupEditBoxes[group.id]:SetText(group.name)
+					end
+				end
+			}
+			-- trash button
 			local trashbut = addImage(groupPanels[group.id], "90%", "0%", "10%", childCoordHeaderLineHeight.."%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
 			trashbut.OnClick = { function() deleteUnitGroup(group.id) end }
 			trashbut.OnMouseOver = { function() trashbut.color = { 1, 0.5, 0, 1 } end }
@@ -2064,7 +2137,12 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			for key, u in pairs(group.units) do
 				-- Remove button
 				local trashbut = addImage(groupPanels[group.id], '2%', (childCoordHeaderLineHeight + childCoordBodyLineHeight * count).."%", '7%', (childCoordBodyLineHeight).."%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-				trashbut.OnClick = { function() removeUnitFromGroup(group, u) end }
+				trashbut.OnClick = {
+					function()
+						removeUnitFromGroup(group, u)
+						saveState2()
+					end 
+				}
 				trashbut.OnMouseOver = { function() trashbut.color = { 1, 0.5, 0, 1 } end }
 				trashbut.OnMouseOut = { function() trashbut.color = { 1, 0, 0, 1 } end }
 				table.insert(unitGroupRemoveUnitButtons[group.id], trashbut)
@@ -2096,13 +2174,6 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			groupSizes[group.id] = tableLength(group.units)
 		end
 	end
-
-	-- String in the editbox as name for the group
-	for i, group in ipairs(unitGroups) do
-		if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
-			group.name = groupEditBoxes[group.id].text
-		end
-	end
 end
 
 function showGroupsWindow()
@@ -2131,14 +2202,16 @@ function addSelectedUnitsToGroup(group)
 	for i, u in ipairs(unitSelection) do
 		addUnitToGroup(group, u)
 	end
-	saveState()
+	saveState2()
 end
 
 function addChosenUnitsToSelectedGroups() -- Add selected units to the selected groups (in the groups frame)
+	local atLeastOneUnitAffected = false
 	for groupKey, groupButton in pairs(selectGroupButtons) do
 		if groupButton.state.chosen then
 			for unitKey, unitButton in pairs(groupListUnitsButtons) do
 				if unitButton.state.chosen then
+					atLeastOneUnitAffected = true
 					addUnitToGroup(unitGroups[groupButton.unitGroupsId], unitKey)
 				end
 			end
@@ -2150,7 +2223,9 @@ function addChosenUnitsToSelectedGroups() -- Add selected units to the selected 
 		unitButton.state.chosen = false
 		unitButton:InvalidateSelf()
 	end
-	saveState()
+	if atLeastOneUnitAffected then
+		saveState2()
+	end
 end
 
 function removeSelectedUnitsFromGroup(group)
@@ -2158,7 +2233,7 @@ function removeSelectedUnitsFromGroup(group)
 	for i, u in ipairs(unitSelection) do
 		removeUnitFromGroup(group, u)
 	end
-	saveState()
+	saveState2()
 end
 
 function removeUnitFromGroup(group, unit)
@@ -2169,7 +2244,6 @@ function removeUnitFromGroup(group, unit)
 			break
 		end
 	end
-	saveState()
 end
 
 function addUnitGroup(name)
@@ -2187,7 +2261,7 @@ function addUnitGroup(name)
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
-	saveState()
+	saveState2()
 end
 
 function addEmptyUnitGroup()
@@ -2201,7 +2275,7 @@ function addEmptyUnitGroup()
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
-	saveState()
+	saveState2()
 end
 
 function deleteUnitGroup(id)
@@ -2211,7 +2285,7 @@ function deleteUnitGroup(id)
 			break
 		end
 	end
-	saveState()
+	saveState2()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2358,15 +2432,6 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 		end
 	end
 	gl.EndText()
-end
-
-function updateZoneInformation() -- Change the name and the shown state of a zone
-	for i, z in ipairs(zoneList) do
-		if z.name ~= zoneBoxes[z.id].editBox.text then
-			z.name = zoneBoxes[z.id].editBox.text
-		end
-		z.shown = zoneBoxes[z.id].checkbox.checked
-	end
 end
 
 function getClickedZone(mx, my) -- Returns the clicked zone if it exists, else nil
@@ -2643,53 +2708,67 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 			eyeBut.OnClick = {
 				function ()
 					viewZone()
-					if windows['zonesAttributes'] then
-						showZonesSpecialAttributesWindow() -- will close the window
-					end
+					closeZonesSpecialAttributesWindow()
 				end
 			}
 			eyeBut.OnMouseOver = { function() eyeBut.color = {1, 1, 1, 1} end }
 			eyeBut.OnMouseOut = { function() eyeBut.color = {0, 1, 1, 1} end }
+			-- zone name
 			local editBox = addEditBox(zoneScrollPanel, "15%", (6+(i-1)*(size+1)).."%", "70%", size.."%", "left", zone.name, {zone.red, zone.green, zone.blue, 1})
 			editBox.OnChange = {
 				function ()
-					if windows['zonesAttributes'] then
-						showZonesSpecialAttributesWindow() -- will close the window
+					closeZonesSpecialAttributesWindow()
+					if zone.name ~= editBox.text then
+						zone.name = editBox.text
+						saveState2()
 					end
 				end
 			}
 			local checkbox = addCheckbox(zoneScrollPanel, "85%", (6+(i-1)*(size+1)).."%", "15%", size.."%", zone.shown)
 			checkbox.OnChange = {
 				function ()
-					if windows['zonesAttributes'] then
-						showZonesSpecialAttributesWindow() -- will close the window
-					end
+					zone.shown = not checkbox.checked
+					saveState2()
 				end
 			}
 			zoneBoxes[zone.id] = { editBox = editBox, eyeBut = eyeBut, checkbox = checkbox }
 		end
 		totalZones = #zoneList
 		zoneIndex = 0
+		if zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR then
+			showZonesSpecialAttributesWindow()
+		end
 	end
-	if windows['zonesAttributes'] and zoneStateMachine:getCurrentState() ~= zoneStateMachine.states.ATTR then
-		showZonesSpecialAttributesWindow() -- Remove the zone attributes window when not in right state
+end
+
+function toggleZonesSpecialAttributesWindow()
+	if zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR then
+		closeZonesSpecialAttributesWindow()
+	else
+		showZonesSpecialAttributesWindow()
+	end
+end
+
+function closeZonesSpecialAttributesWindow()
+	zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
+	if windows['zonesAttributes'] then -- if the window is already opened, close it
+		zonesAttributesButton.state.chosen = false
+		zonesAttributesButton:InvalidateSelf()
+		Screen0:RemoveChild(windows['zonesAttributes'])
+		windows['zonesAttributes']:Dispose()
+		windows['zonesAttributes'] = nil
 	end
 end
 
 function showZonesSpecialAttributesWindow() -- Show the window to change some special attributes concerning zones
-	if windows['zonesAttributes'] then -- if the window is already opened, close it
-		zonesAttributesButton.state.chosen = false
-		zonesAttributesButton:InvalidateSelf()
-		windows['zonesAttributes']:Dispose()
-		windows['zonesAttributes'] = nil
-		if zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR then
-			zoneStateMachine:setCurrentState(zoneStateMachine.states.SELECTION)
-		end
-		return
-	end
 	zoneStateMachine:setCurrentState(zoneStateMachine.states.ATTR)
 	zonesAttributesButton.state.chosen = true
 	zonesAttributesButton:InvalidateSelf()
+	if windows['zonesAttributes'] then
+		windows['zonesAttributes']:Dispose()
+		windows['zonesAttributes'] = nil
+	end
+	-- rebuild the window
 	windows['zonesAttributes'] = addWindow(Screen0, '20%', '10%', '80%', '80%')
 	local sp = addScrollPanel(windows['zonesAttributes'], '0%', '0%', '100%', '100%')
 	addImage(windows['zonesAttributes'], "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false, {0, 0, 0, 1})
@@ -2705,6 +2784,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				alwaysInViewButton.state.chosen = not alwaysInViewButton.state.chosen
 				alwaysInViewButton:InvalidateSelf()
 				z.alwaysInView = not z.alwaysInView
+				saveState2()
 			end
 		}
 		local markerButton = addButton(panel, "50%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
@@ -2714,6 +2794,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				markerButton.state.chosen = not markerButton.state.chosen
 				markerButton:InvalidateSelf()
 				z.marker = not z.marker
+				saveState2()
 			end
 		}
 		local showInGameButton = addButton(panel, "75%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
@@ -2723,6 +2804,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				showInGameButton.state.chosen = not showInGameButton.state.chosen
 				showInGameButton:InvalidateSelf()
 				z.showInGame = not z.showInGame
+				saveState2()
 			end
 		}
 		count = count + 1
@@ -2952,8 +3034,11 @@ function createNewCondition()
 		table.insert(e.conditions, condition)
 
 		conditionNumber = conditionNumber + 1
-
+		
+		loadingState = true -- deactivate temporarily save state mecanim
 		editCondition(#(e.conditions))
+		loadingState = false
+		
 		saveState2()
 	end
 end
@@ -2971,16 +3056,6 @@ function editCondition(i)
 	end
 end
 
-function removeCondition(i)
-	if currentEvent then
-		table.remove(events[currentEvent].conditions, i)
-		removeThirdWindows() -- close windows to prevent bugs
-		currentCondition = nil
-		currentAction = nil
-		saveState()
-	end
-end
-
 function createNewAction()
 	if currentEvent then
 		local e = events[currentEvent]
@@ -2992,7 +3067,10 @@ function createNewAction()
 
 		actionNumber = actionNumber + 1
 
+		loadingState = true -- deactivate temporarily save state mecanim
 		editAction(#(e.actions))
+		loadingState = false
+		
 		saveState2()
 	end
 end
@@ -3007,16 +3085,6 @@ function editAction(i)
 		updateImportWindow()
 	else -- if the edit frame is already opened, close it
 		currentAction = nil
-	end
-end
-
-function removeAction(i)
-	if currentEvent then
-		table.remove(events[currentEvent].actions, i)
-		removeThirdWindows() -- close windows to prevent bugs
-		currentAction = nil
-		currentCondition = nil
-		saveState()
 	end
 end
 
@@ -3114,7 +3182,17 @@ function updateConditionList(e)
 	for i, c in ipairs(e.conditions) do
 		conditionButtons[e.id][i] = addButton(eventConditionsScrollPanel, '0%', (10 * i).."%", '80%', "10%", c.name, function() editCondition(i) end)
 		deleteConditionButtons[e.id][i] = addImage(eventConditionsScrollPanel, '80%', (10 * i + 2).."%", '20%', "6%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-		deleteConditionButtons[e.id][i].OnClick = { function() removeCondition(i) end }
+		deleteConditionButtons[e.id][i].OnClick = {
+			function()
+				if currentEvent then
+					table.remove(events[currentEvent].conditions, i)
+					removeThirdWindows() -- close windows to prevent bugs
+					currentCondition = nil
+					currentAction = nil
+					saveState2()
+				end
+			end
+		}
 		deleteConditionButtons[e.id][i].OnMouseOver = { function() deleteConditionButtons[e.id][i].color = { 1, 0.5, 0, 1 } end }
 		deleteConditionButtons[e.id][i].OnMouseOut = { function() deleteConditionButtons[e.id][i].color = { 1, 0, 0, 1 } end }
 	end
@@ -3124,7 +3202,17 @@ function updateActionList(e)
 	for i, c in ipairs(e.actions) do
 		actionButtons[e.id][i] = addButton(eventActionsScrollPanel, '0%', (10 * i).."%", '80%', "10%", c.name, function() editAction(i) end)
 		deleteActionButtons[e.id][i] = addImage(eventActionsScrollPanel, '80%', (10 * i + 2).."%", '20%', "6%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-		deleteActionButtons[e.id][i].OnClick = { function() removeAction(i) end }
+		deleteActionButtons[e.id][i].OnClick = {
+			function()
+				if currentEvent then
+					table.remove(events[currentEvent].actions, i)
+					removeThirdWindows() -- close windows to prevent bugs
+					currentAction = nil
+					currentCondition = nil
+					saveState2()
+				end
+			end
+		}
 		deleteActionButtons[e.id][i].OnMouseOver = { function() deleteActionButtons[e.id][i].color = { 1, 0.5, 0, 1 } end }
 		deleteActionButtons[e.id][i].OnMouseOut = { function() deleteActionButtons[e.id][i].color = { 1, 0, 0, 1 } end }
 	end
@@ -4167,38 +4255,49 @@ function configureEvent() -- Show the event configuration window
 					end
 				end
 			)
+			
+			
+			local enableRepetitionUI = function ()
+				windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
+				windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
+				windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+			end
+			
+			local disableRepetitionUI = function ()
+				e.repetitionTime = nil
+				repetitionUI.repetitionLabel:SetCaption("")
+				windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
+				windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
+				windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+			end
+			
 			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '35%', '75%', '65%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
 			repetitionUI.repetitionComboBox.OnSelect = {
 				function()
 					if repetitionUI.repetitionComboBox.selected == 1 then
 						if e.repetition then
 							e.repetition = false
-							e.repetitionTime = nil
-							repetitionUI.repetitionLabel:SetCaption("")
-							windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
-							windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
-							windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+							disableRepetitionUI()
 							saveState2()
 						end
 					else
 						if not e.repetition then
 							e.repetition = true
-							windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
-							windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
-							windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+							enableRepetitionUI()
 						end
 					end
 				end
 			}
 			if e.repetition then
+				enableRepetitionUI()
 				repetitionUI.repetitionComboBox:Select(2)
 				repetitionUI.repetitionEditBox:SetText(e.repetitionTime)
 				if e.repetitionTime then
 					repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
 				end
 			else
+				disableRepetitionUI()
 				repetitionUI.repetitionComboBox:Select(1)
-				repetitionUI.repetitionLabel:SetCaption("")
 			end
 
 			eventCommentEditBox = addEditBox(windows["configureEvent"], '35%', '92%', '65%', '5%', "left", "")
@@ -4285,7 +4384,7 @@ function importCondition() -- Import a condition to the current event, renaming 
 
 	conditionNumber = conditionNumber + 1
 
-	saveState()
+	saveState2()
 end
 
 function importAction() -- Import an action to the current event, renaming it if necessary
@@ -4316,7 +4415,7 @@ function importAction() -- Import an action to the current event, renaming it if
 
 	updateActionSequence = true
 
-	saveState()
+	saveState2()
 end
 
 function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
@@ -4381,26 +4480,15 @@ function addVariable()
 	saveState2()
 end
 
-function removeVariable(var)
-	for i, v in ipairs(triggerVariables) do
-		if var == v then
-			table.remove(triggerVariables, i)
-			saveState2()
-			updateVariables()
-			break
-		end
-	end
-end
-
 function updateVariables()
 	if variablesTotal ~= #triggerVariables then -- When UI is not synchronized with data
 		-- Remove all variables UI elements
 		for i, vf in ipairs(variablesFeatures) do
 			-- remove all UI element for this variable
 			for k, f in pairs(vf) do
-				if k ~= "var" then
-					variablesScrollPanel:RemoveChild(f)
-				end
+				variablesScrollPanel:RemoveChild(f)
+				f:Dispose()
+				f = nil
 			end
 		end
 		variablesFeatures = {}
@@ -4427,28 +4515,55 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 			end
 		end
 	}
-	-- variable type
+	
+	-- create all UI controls
 	local typeLabel = addLabel(variablesScrollPanel, '32%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_TYPE)
 	local typeComboBox = addComboBox(variablesScrollPanel, '42%', y.."%", '13%', height.."%", { EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER, EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN }, nil)
+	if var.type == "number" then
+		typeComboBox:Select(1)
+	else
+		typeComboBox:Select(2)
+	end
+	local initValueLabel = addLabel(variablesScrollPanel, '60%', y.."%", '20%', height.."%", EDITOR_TRIGGERS_VARIABLES_INITVALUE)
+	local initValueEditBox = addEditBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", "left", tostring(var.initValue))
+	local initValueComboBox = addComboBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", { "true", "false" })
+		
+	-- set callbacks to update UI when we change type of variable
 	typeComboBox.OnSelect = {
 		function()
 			if var.type == "boolean" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_NUMBER then
 				var.type = "number"
-				variablesScrollPanel:RemoveChild(feature.initValueComboBox)
-				variablesScrollPanel:AddChild(feature.initValueEditBox)
+				variablesScrollPanel:RemoveChild(initValueComboBox)
+				variablesScrollPanel:AddChild(initValueEditBox)
+				loadingState = true -- deactivate temporarily save state mecanim
+				initValueEditBox:SetText("0")
+				loadingState = false
 				saveState2()
 			elseif var.type == "number" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
 				var.type = "boolean"
-				variablesScrollPanel:RemoveChild(feature.initValueEditBox)
-				variablesScrollPanel:AddChild(feature.initValueComboBox)
+				variablesScrollPanel:RemoveChild(initValueEditBox)
+				variablesScrollPanel:AddChild(initValueComboBox)
+				loadingState = true -- deactivate temporarily save state mecanim
+				initValueComboBox:Select(1)
+				loadingState = false
 				saveState2()
 			end
 		end
 	}
-	-- variable value
-	local initValueLabel = addLabel(variablesScrollPanel, '60%', y.."%", '20%', height.."%", EDITOR_TRIGGERS_VARIABLES_INITVALUE)
-	-- controls for Boolean variable
-	local initValueComboBox = addComboBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", { "true", "false" })
+	-- set callback to editbox
+	initValueEditBox.OnChange = {
+		function ()
+			if var.initValue ~= tonumber(initValueEditBox.text) then
+				var.initValue = tonumber(initValueEditBox.text)
+				if var.initValue ==  nil then -- the value contains non numeric value
+					initValueEditBox:SetText("0")
+				else
+					saveState2()
+				end
+			end
+		end
+	}
+	-- set callback for combobox true/false
 	initValueComboBox.OnSelect = {
 		function()
 			if var.initValue ~= initValueComboBox.items[initValueComboBox.selected] then
@@ -4457,19 +4572,33 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 			end
 		end
 	}
-	-- controls for Number variable
-	local initValueEditBox = addEditBox(variablesScrollPanel, '80%', y.."%", '10%', height.."%", "left", tostring(var.initValue))
-	initValueEditBox.OnChange = {
-		function ()
-			if var.initValue ~= tonumber(initValueEditBox.text) then
-				var.initValue = tonumber(initValueEditBox.text)
-				saveState2()
+		
+	-- init UI depending on its type
+	if var.type == "number" then
+		variablesScrollPanel:RemoveChild(initValueComboBox)
+	elseif var.type == "boolean" then
+		variablesScrollPanel:RemoveChild(initValueEditBox)
+		if var.initValue == "true" then
+			initValueComboBox:Select(1)
+		elseif var.initValue == "false" then
+			initValueComboBox:Select(2)
+		end
+	end
+	
+	-- controls for remove variable
+	local deleteVariableButton = addImage(variablesScrollPanel, '95%', (y+1).."%", '5%', (height-2).."%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
+	deleteVariableButton.OnClick = {
+		function()
+			for i, v in ipairs(triggerVariables) do
+				if var == v then
+					table.remove(triggerVariables, i)
+					saveState2()
+					updateVariables()
+					break
+				end
 			end
 		end
 	}
-
-	local deleteVariableButton = addImage(variablesScrollPanel, '95%', (y+1).."%", '5%', (height-2).."%", "bitmaps/editor/trash.png", true, { 1, 0, 0, 1 })
-	deleteVariableButton.OnClick = { function() removeVariable(var) end }
 	deleteVariableButton.OnMouseOver = { function() deleteVariableButton.color = { 1, 0.5, 0, 1 } end }
 	deleteVariableButton.OnMouseOut = { function() deleteVariableButton.color = { 1, 0, 0, 1 } end }
 
@@ -4481,20 +4610,6 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	feature.initValueEditBox = initValueEditBox
 	feature.initValueComboBox = initValueComboBox
 	feature.deleteVariableButton = deleteVariableButton
-	feature.var = var
-
-	if var.type == "number" then
-		feature.typeComboBox:Select(1)
-		variablesScrollPanel:RemoveChild(feature.initValueComboBox)
-	elseif var.type == "boolean" then
-		feature.typeComboBox:Select(2)
-		variablesScrollPanel:RemoveChild(feature.initValueEditBox)
-		if var.initValue == "true" then
-			feature.initValueComboBox:Select(1)
-		elseif var.initValue == "false" then
-			feature.initValueComboBox:Select(2)
-		end
-	end
 
 	return feature
 end
@@ -4676,34 +4791,6 @@ end
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-function updateMapSettings() -- Update the settings of the map according to what is written/chosen
-	mapDescription.mapName = mapNameEditBox.text -- update name
-	mapDescription.mapBriefingRaw = mapBriefingEditBox.text -- update briefing (without colors and returns)
-	if mapBriefingEditBox.text ~= mapBriefingTextBox.text then
-		local text = mapBriefingEditBox.text
-		local newText = text
-		for word in string.gmatch(text, "/#%w*#.-/") do -- for each /#XXXXXX#ABC/ sequence where X is a hexadecimal number and ABC a string, surround ABC with color tags to color this part of the string
-			local color = string.gsub(word, "#[^#]+$", "")
-			color = string.gsub(color, "/#", "")
-			local red = tonumber(string.sub(color, 1, 2), 16)
-			if red then red = red + 1 end
-			local green = tonumber(string.sub(color, 3, 4), 16)
-			if green then green = green + 1 end
-			local blue = tonumber(string.sub(color, 5, 6), 16)
-			if blue then blue = blue + 1 end
-			if red and green and blue then
-				local replacement = "\255"..colorTable[red]..colorTable[green]..colorTable[blue]
-				local newWord = string.gsub(word, "/#%w*#", replacement)
-				newWord = string.gsub(newWord, "/", "\255\255\255\255")
-				newText = string.gsub(newText, word, newWord)
-			end
-		end
-		newText = string.gsub(newText, "\\n", "\n")
-		mapBriefingTextBox:SetText(newText)
-	end
-	mapDescription.mapBriefing = mapBriefingTextBox.text
-end
-
 function initWidgetList() -- Remove some widgets linked directly to SPRED from the widget list
 	customWidgets = {}
 	for k, w in pairs(WG.widgetList) do
@@ -4717,17 +4804,11 @@ function initWidgetList() -- Remove some widgets linked directly to SPRED from t
 	end
 end
 
-function showWidgetsWindow() -- Show the window that allows the user to change widgets status for his level
+function refreshWidgetWindows()
 	if windows['widgetsWindow'] then
-		mapSettingsButtons.widgetsButton.state.chosen = false
-		mapSettingsButtons.widgetsButton:InvalidateSelf()
-		windows['widgetsWindow']:Dispose()
-		windows['widgetsWindow'] = nil
-		return
+		windows['widgetsWindow']:Dispose() -- dispose the preview one before rebuild it
 	end
-	mapSettingsButtons.widgetsButton.state.chosen = true
-	mapSettingsButtons.widgetsButton:InvalidateSelf()
-	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '40%', '70%')
+	windows['widgetsWindow'] = addWindow(Screen0, '0%', '0%', '40%', '70%') -- x and y position is computed on updateWidgetsWindowPosition()
 	addLabel(windows['widgetsWindow'], '0%', '0%', '100%', '10%', EDITOR_MAPSETTINGS_WIDGETS)
 	local sp = addScrollPanel(windows['widgetsWindow'], '2%', '10%', '96%', '89%')
 	local count = 0
@@ -4738,14 +4819,29 @@ function showWidgetsWindow() -- Show the window that allows the user to change w
 			function()
 				but.state.chosen = not but.state.chosen
 				w.active = not w.active
+				saveState2()
 			end
 		}
 		count = count + 1
 	end
 end
 
+function toggleWidgetsWindow() -- Show the window that allows the user to change widgets status for his level
+	if mapSettingsStateMachine:getCurrentState() == mapSettingsStateMachine.states.WITHWIDGETS then
+		mapSettingsStateMachine:setCurrentState(mapSettingsStateMachine.states.WITHOUTWIDGETS)
+		mapSettingsButtons.widgetsButton.state.chosen = false
+		Screen0:RemoveChild(windows['widgetsWindow'])
+	else
+		mapSettingsStateMachine:setCurrentState(mapSettingsStateMachine.states.WITHWIDGETS)
+		mapSettingsButtons.widgetsButton.state.chosen = true
+		
+		refreshWidgetWindows()
+	end
+	mapSettingsButtons.widgetsButton:InvalidateSelf()
+end
+
 function updateWidgetsWindowPosition() -- Stick the widget window to the mapsettings window
-	if windows['widgetsWindow'] then
+	if mapSettingsStateMachine:getCurrentState() == mapSettingsStateMachine.states.WITHWIDGETS then
 		windows['mapSettingsWindow']:SetPos(0)
 		windows['widgetsWindow']:SetPos(windows['mapSettingsWindow'].x + windows['mapSettingsWindow'].width, windows['mapSettingsWindow'].y)
 	else
@@ -4851,7 +4947,7 @@ function newMap() -- Set each parameter to its default value
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
 
-function newMapInitialize() -- Open the window of the state you were in before load/new
+function refreshGUI() -- Open the window of the state you were in before load/new
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
 	updateTeamConfig = true
@@ -4859,17 +4955,39 @@ function newMapInitialize() -- Open the window of the state you were in before l
 		fileFrame() -- double to close the frame and open it again (to refresh)
 		fileFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT then
-		unitFrame()
-		unitFrame()
+		if unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS then
+			showGroupsWindow()
+		else
+			unitFrame()
+			unitFrame()
+		end
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
+		local restoreSpecialAttributes = zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR
 		zoneFrame()
 		zoneFrame()
+		if restoreSpecialAttributes then
+			showZonesSpecialAttributesWindow()
+		end
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES then
 		forcesFrame()
 		forcesFrame()
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 		triggerFrame()
 		triggerFrame()
+		if variablesWindowToBeShown then
+			showVariablesFrame()
+		else
+			if saveCurrentEvent and events[saveCurrentEvent] then
+				editEvent(saveCurrentEvent)
+				if saveCurrentAction and events[saveCurrentEvent].actions[saveCurrentAction] then
+					editAction(saveCurrentAction)
+				elseif saveCurrentCondition and events[saveCurrentEvent].conditions[saveCurrentCondition] then
+					editCondition(saveCurrentCondition)
+				elseif configureWindowToBeShown then
+					configureEvent()
+				end
+			end
+		end
 	elseif globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
 		mapSettingsFrame()
 		mapSettingsFrame()
@@ -4881,9 +4999,9 @@ function newMapInitialize() -- Open the window of the state you were in before l
 end
 
 function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
-	if loading then return end -- Don't load if already loading
+	if loadingMap then return end -- Don't load if already loading
 	
-	loading = true
+	loadingMap = true
 	newMap()
 	if name ~= nil and VFS.FileExists("SPRED/missions/"..name..".editor",  VFS.RAW) then
 		local mapfile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
@@ -4895,7 +5013,7 @@ function loadMap(name) -- Load a map given a file name or if loadedTable is not 
 		-- If we don't care about this, the "saveStates" table (to manage Ctrl+Z and Ctrl+Y) can contain inconsistent data
 		askGadgetToLoadTable = 0.1 -- ask gadget to load table in 100ms
 	else
-		loading = false
+		loadingMap = false
 	end
 end
 
@@ -4930,9 +5048,9 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	-- Teams
 	for k, t in pairs(teamStateMachine.states) do
 		teamControl[t] = loadedTable.teams[tostring(t)].control
-		teamColor[t] = {}
 		enabledTeams[t] = loadedTable.teams[tostring(t)].enabled
 		teamAIElements.teamAI[t] = loadedTable.teams[tostring(t)].ai
+		teamColor[t] = {}
 		teamColor[t].red = loadedTable.teams[tostring(t)].color.red
 		teamColor[t].blue = loadedTable.teams[tostring(t)].color.blue
 		teamColor[t].green = loadedTable.teams[tostring(t)].color.green
@@ -4952,7 +5070,12 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 
 	-- Variables
 	for i, v in ipairs(loadedTable.variables) do
-		table.insert(triggerVariables, v)
+		local variable = {}
+		variable.id = v.id
+		variable.name = v.name
+		variable.type = v.type
+		variable.initValue = v.initValue
+		table.insert(triggerVariables, variable)
 		if v.id >= variablesNumber then
 			variablesNumber = v.id + 1
 		end
@@ -5067,18 +5190,14 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	end
 
 	loadedTable = nil
-
-	-- Initialize
-	newMapInitialize()
-	
-	if loadingState then
-		continueLoadState()
-	end
-	
-	loading = false
-	NeedToBeSaved = true
 	
 	syncUI()
+	-- rebuild UIs
+	refreshGUI()
+	
+	loadingState = false -- Warning this flag has to be set here, before the resetStack into the following "if"
+	loadingMap = false -- idem for this flag
+	NeedToBeSaved = true
 	
 	-- it's possible to pass by this function by using Ctrl+Z
 	-- then we notify user from successful loading only if this call is a consequence of a menu user action
@@ -5095,6 +5214,24 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 		-- reset flag
 		loadingFromMenu = false
 		resetStack() -- reset stack of states
+	end
+end
+
+function checkNeedToBeSaved (NextFctCall)
+	if NeedToBeSaved then
+		if windows["fileWindowPopUp"] then
+			Screen0:RemoveChild(windows["fileWindowPopUp"])
+			windows["fileWindowPopUp"]:Dispose()
+		end
+		windows["fileWindowPopUp"] = addWindow(Screen0, "25%", "40%", "50%", "20%")
+		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
+		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
+		addButton(windows["fileWindowPopUp"], '0%', '60%', '33%', '40%', EDITOR_SAVE, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() saveMapFrame(NextFctCall) end)
+		addButton(windows["fileWindowPopUp"], '33%', '60%', '33%', '40%', EDITOR_DO_NOT_SAVE, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() NextFctCall() end)
+		addButton(windows["fileWindowPopUp"], '66%', '60%', '34%', '40%', EDITOR_CANCEL, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+		return
+	else
+		NextFctCall()
 	end
 end
 
@@ -5176,17 +5313,7 @@ function newMapFrame() -- Show a window when the user clicks on the new button
 			end
 		end
 	end
-	
-	if NeedToBeSaved then
-		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
-		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
-		addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() saveMap() performNewMap() end)
-		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() performNewMap() end)
-		return
-	else
-		performNewMap()
-	end
+	checkNeedToBeSaved(performNewMap)
 end
 
 function loadMapFrame() -- Show a window when the user clicks on the load button
@@ -5229,19 +5356,10 @@ function loadMapFrame() -- Show a window when the user clicks on the load button
 			end
 		end
 	end
-	if NeedToBeSaved then
-		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
-		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CHANGES, 20)
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
-		addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() saveMapFrame() end)
-		addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() showLoadWindow() end)
-		return
-	else
-		showLoadWindow()
-	end
+	checkNeedToBeSaved(showLoadWindow)
 end
 
-function saveMapFrame() -- Show a window when the user clicks on the save button
+function saveMapFrame(NextFctCall) -- Show a window when the user clicks on the save button
 	if windows["fileWindowPopUp"] then
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
@@ -5260,18 +5378,18 @@ function saveMapFrame() -- Show a window when the user clicks on the save button
 			end
 			windows["fileWindowPopUp"] = addWindow(Screen0, "5%", "40%", "90%", "20%")
 			addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '60%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/SPRED/levels/"..saveName..".editor)", 20)
-			addButton(windows["fileWindowPopUp"], '35%', '60%', '30%', '40%', EDITOR_OK, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+			addButton(windows["fileWindowPopUp"], '35%', '60%', '30%', '40%', EDITOR_OK,
+				function()
+					Screen0:RemoveChild(windows["fileWindowPopUp"])
+					windows["fileWindowPopUp"]:Dispose()
+					if NextFctCall then
+						NextFctCall()
+					end
+				end
+			)
 		end
-		if VFS.FileExists("SPRED/missions/"..saveName..".editor", VFS.RAW) then
-			windows["fileWindowPopUp"] = addWindow(Screen0, "30%", "40%", "40%", "20%")
-			addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_SAVE_CONFIRM.." ("..saveName..".editor)", 20)
-			addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CONFIRM_HELP, 18)
-			addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() saveMap() confirmSave() end)
-			addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
-		else
-			saveMap()
-			confirmSave()
-		end
+		saveMap()
+		confirmSave()
 	end
 end
 
@@ -5280,18 +5398,13 @@ function backToMenuFrame() -- Show a window when the user clicks on the main men
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
 	end
-	windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
-	addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_BACK_TO_MENU_CONFIRM, 20)
-	if NeedToBeSaved then
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
-	end
-	addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function()
+	local goBack = function ()
 		WG.BackToMainMenu() -- BackToMainMenu() is defined in editor_spring_direct_launch.lua
 		logicalWidgetDeactivation = true
 		clearUI()
 		windows['topBar']:Dispose() -- Dispose top bar
-	end)
-	addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+	end
+	checkNeedToBeSaved(goBack)
 end
 
 function quitFrame() -- Show a window when the user clicks on the quit button
@@ -5299,13 +5412,11 @@ function quitFrame() -- Show a window when the user clicks on the quit button
 		Screen0:RemoveChild(windows["fileWindowPopUp"])
 		windows["fileWindowPopUp"]:Dispose()
 	end
-	windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "40%", "30%", "20%")
-	addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '35%', EDITOR_FILE_QUIT_CONFIRM, 20)
-	if NeedToBeSaved then
-		addLabel(windows["fileWindowPopUp"], '5%', '35%', '90%', '25%', EDITOR_FILE_SAVE_CHANGES_HELP, 18)
-	end
-	addButton(windows["fileWindowPopUp"], '0%', '60%', '50%', '40%', EDITOR_YES, function() Spring.SendCommands("quit") Spring.SendCommands("quitforce") end)
-	addButton(windows["fileWindowPopUp"], '50%', '60%', '50%', '40%', EDITOR_NO, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose() end)
+	checkNeedToBeSaved(
+		function ()
+			Spring.SendCommands("quitforce")
+		end
+	)
 end
 
 function beginLoadLevel(name) -- Callback used to load a map directly from the gadget
@@ -5340,7 +5451,7 @@ end
 function newLevelWithRightMap(name) -- Creates a new level on the selected map
 	if name == Game.mapName then
 		newMap()
-		newMapInitialize()
+		refreshGUI()
 		resetStack() -- reset stack of states
 		-- Notify user for the successful loading
 		if windows["fileWindowPopUp"] then
@@ -5471,7 +5582,7 @@ end
 
 function saveState2() -- Save the state and put it in the stack
 	NeedToBeSaved = true
-	if not loadingState and initialized then
+	if not loadingMap and not loadingState and initialized then
 		-- remove states on the top of the stack
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
@@ -5479,9 +5590,12 @@ function saveState2() -- Save the state and put it in the stack
 		-- compute new state
 		local savedTable = encodeSaveTable()
 		savedTable = json.decode(json.encode(savedTable))
+		
 		-- push the new state on the top of the stack
 		table.insert(saveStates, 1, savedTable)
+		
 		loadIndex = 1
+		Spring.Echo ("Push new state: "..loadIndex.." / "..#saveStates)
 	end
 end
 
@@ -5510,38 +5624,21 @@ function loadState(direction) -- Load a state from the stack depending on the di
 		saveCurrentEvent = currentEvent
 		saveCurrentAction = currentAction
 		saveCurrentCondition = currentCondition
-		variablesWindowToBeShown = editVariablesButton.state.chosen
 		configureWindowToBeShown = configureEventButton.state.chosen
-		unitGroupsWindowToBeShown = (unitStateMachine:getCurrentState() == unitStateMachine.states.UNITGROUPS)
+		variablesWindowToBeShown = editVariablesButton.state.chosen
 		loadIndex = loadIndex + direction
 		loadedTable = saveStates[loadIndex]
+		if direction > 0 then
+			Spring.Echo ("Load older state: "..loadIndex.." / "..#saveStates)
+		else
+			Spring.Echo ("Load newer state: "..loadIndex.." / "..#saveStates)
+		end
 		loadMap()
 	end
 end
 
-function continueLoadState() -- Open windows that were opened before ctrl + z or y
-	if saveCurrentEvent and events[saveCurrentEvent] then
-		editEvent(saveCurrentEvent)
-		if saveCurrentAction and events[saveCurrentEvent].actions[saveCurrentAction] then
-			editAction(saveCurrentAction)
-		elseif saveCurrentCondition and events[saveCurrentEvent].conditions[saveCurrentCondition] then
-			editCondition(saveCurrentCondition)
-		elseif configureWindowToBeShown then
-			configureEvent()
-		end
-	end
-	if variablesWindowToBeShown then
-		showVariablesFrame()
-	end
-	if unitGroupsWindowToBeShown then
-		showGroupsWindow()
-	end
-
-	loadingState = false
-end
-
 function requestSave() -- Save only after everything required has been done
-	toSave = true
+	waitMouseRelease = true
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -5674,8 +5771,6 @@ function widget:DrawScreen()
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.UNIT and unitStateMachine:getCurrentState() == unitStateMachine.states.SELECTION then
 			showUnitsInformation()
 			drawSelectionRect()
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.ZONE then
-			updateZoneInformation()
 		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
 			showPickText()
 			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
@@ -5711,8 +5806,8 @@ function widget:Initialize()
 	initChili()
 	initialized = false
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
-	widgetHandler:RegisterGlobal("saveState", saveState)
-	widgetHandler:RegisterGlobal("requestSave", requestSave)
+	widgetHandler:RegisterGlobal("saveState", saveState2) -- called by gadget when a unit is created
+	widgetHandler:RegisterGlobal("requestSave", requestSave) -- called by gadget when a unit is updated
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
 	widgetHandler:RegisterGlobal("generateCommandsList", generateCommandsList)
 	updateLanguage() -- defined in EditorStrings.lua
@@ -5734,19 +5829,13 @@ end
 
 function widget:Update(delta)
 	if not logicalWidgetDeactivation then
-		-- Tell the gadget which units are selected (might be improved in terms of performance)
-		local unitSelection = Spring.GetSelectedUnits()
-		local msg = "Select Units"
-		for i, u in ipairs(unitSelection) do
-			msg = msg.."++"..u
-		end
-		Spring.SendLuaRulesMsg(msg)
 
 		-- Double click timer
 		if doubleClick < 0.3 then
 			doubleClick = doubleClick + delta
 		end
 
+		local unitSelection = Spring.GetSelectedUnits()
 		if #unitSelection == 0 then
 			clearTemporaryWindows()
 		end
@@ -5782,7 +5871,6 @@ function widget:Update(delta)
 		end
 
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
-			updateMapSettings()
 			updateWidgetsWindowPosition()
 		end
 
@@ -5804,10 +5892,17 @@ function widget:Update(delta)
 		end
 		
 		-- see comment in loadMap function
-		if askGadgetToLoadTable > 0 then
+		if askGadgetToLoadTable >= 0 then
 			askGadgetToLoadTable = askGadgetToLoadTable - delta
-			if askGadgetToLoadTable <= 0 then
+			if askGadgetToLoadTable < 0 then
 				Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
+			end
+		end
+		
+		if saveStateTrigger >= 0 then
+			saveStateTrigger = saveStateTrigger - delta
+			if saveStateTrigger < 0 then
+				saveState2()
 			end
 		end
 	end
@@ -5834,6 +5929,16 @@ end
 --			Input functions
 --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- Tell the gadget which units are selected
+function tellGadgetWichUnitsAreSelected()
+	local unitSelection = Spring.GetSelectedUnits()
+	local msg = "Select Units"
+	for i, u in ipairs(unitSelection) do
+		msg = msg.."++"..u
+	end
+	Spring.SendLuaRulesMsg(msg)
+end
 
 function widget:MousePress(mx, my, button)
 	if not logicalWidgetDeactivation then
@@ -5889,6 +5994,7 @@ function widget:MousePress(mx, my, button)
 								proceedSelection({var}) -- if the unit was not selected, select it and proceed movement
 							end
 							mouseMove = true
+							tellGadgetWichUnitsAreSelected()
 							Spring.SendLuaRulesMsg("Anchor".."++"..var) -- tell the gadget the anchor of the movement
 							return true
 						end
@@ -6083,9 +6189,9 @@ function widget:MouseRelease(mx, my, button)
 			end
 		end
 		doubleClick = 0 -- reset double click timer
-		if toSave then
-			saveState()
-			toSave = false
+		if waitMouseRelease then
+			saveState2()
+			waitMouseRelease = false
 		end
 		return true
 	end
@@ -6106,13 +6212,16 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 					if var ~= nil then
 						local x, _, z = unpack(var)
 						local msg = "Rotate Units".."++"..x.."++"..z
+						tellGadgetWichUnitsAreSelected()
 						Spring.SendLuaRulesMsg(msg)
 					end
 				elseif ctrlPressed then -- Send a message to the gadget to make unit face a point
 					local kind, var = Spring.TraceScreenRay(mx, my, true, true)
 					if var ~= nil then
+						tellGadgetWichUnitsAreSelected()
 						local x, _, z = unpack(var)
 						local msg = "Face Units".."++"..x.."++"..z
+						tellGadgetWichUnitsAreSelected()
 						Spring.SendLuaRulesMsg(msg)
 					end
 				else -- Send a message to the gadget to move selected units
@@ -6122,6 +6231,7 @@ function widget:MouseMove(mx, my, dmx, dmy, button)
 							local x, _, z = unpack(pos)
 							x, z = round(x), round(z)
 							local msg = "Move Units".."++"..x.."++"..z
+							tellGadgetWichUnitsAreSelected()
 							Spring.SendLuaRulesMsg(msg)
 						end
 					end
@@ -6216,11 +6326,13 @@ function widget:KeyPress(key, mods)
 						end
 					end
 				end
+				tellGadgetWichUnitsAreSelected()
 				Spring.SendLuaRulesMsg("Delete Selected Units")
 				return true
 			end
 			-- ARROWS : move selected units
 			if #unitSelection > 0 then
+				tellGadgetWichUnitsAreSelected()
 				if key == Spring.GetKeyCode("up") then
 					Spring.SendLuaRulesMsg("Anchor".."++"..unitSelection[1])
 					local msg = "Translate Units".."++".."0".."++".."-1"
@@ -6254,7 +6366,7 @@ function widget:KeyPress(key, mods)
 							break
 						end
 					end
-					saveState()
+					saveState2()
 					return true
 				-- ARROWS : move selected zone
 				elseif key == Spring.GetKeyCode("up") then
@@ -6264,6 +6376,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.z = selectedZone.z - 8
 					end
+					saveState2()
 					return true
 				elseif key == Spring.GetKeyCode("down") then
 					if selectedZone.type == "Rectangle" then
@@ -6272,6 +6385,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.z = selectedZone.z + 8
 					end
+					saveState2()
 					return true
 				elseif key == Spring.GetKeyCode("left") then
 					if selectedZone.type == "Rectangle" then
@@ -6280,6 +6394,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.x = selectedZone.x - 8
 					end
+					saveState2()
 					return true
 				elseif key == Spring.GetKeyCode("right") then
 					if selectedZone.type == "Rectangle" then
@@ -6288,6 +6403,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.x = selectedZone.x + 8
 					end
+					saveState2()
 					return true
 				end
 			end
@@ -6298,6 +6414,9 @@ end
 
 function widget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
 	addUnitLine(unitID, unitDefID, unitTeam)
+	if not loadingMap and not loadingState and initialized then
+		saveStateTrigger = 0 -- creating units is immediate, then we ask to save state immediately
+	end
 end
 
 function widget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam)
@@ -6316,5 +6435,8 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerD
 			realignUnitList(unitListEyes, "85%", "15%")
 			realignUnitList(unitListHighlight, "0%", "100%")
 		end
+	end
+	if not loadingMap and not loadingState and initialized then
+		saveStateTrigger = 0.1 -- destroying units taking time, then we ask to save state in 100ms
 	end
 end

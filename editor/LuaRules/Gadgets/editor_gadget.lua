@@ -41,7 +41,6 @@ local loadMap = false
 local unitsInfo = {}
 local moveUnitsAnchor = nil
 local relativepos = {}
-local hpPercent = -1
 local initialized = false
 local cleaned = false
 
@@ -127,9 +126,6 @@ function gadget:RecvLuaMsg(msg, player)
 	elseif (msgContents[1] == "Load Map") then
 		loadMap = true
 		unitsInfo = json.decode(msgContents[2])
-	-- CHANGE HP : change hp of selected units
-	elseif (msgContents[1] == "Change HP") then
-		hpPercent = tonumber(msgContents[2])/100
 	end
 end
 
@@ -183,6 +179,24 @@ function gadget:GameFrame( frameNumber )
 					local unitID = Spring.CreateUnit(unitType, xUnit, Spring.GetGroundHeight(xUnit, zUnit), zUnit, "s", team)
 					Spring.GiveOrderToUnit(unitID, CMD.FIRE_STATE, {0}, {})
 					createUnit = false
+					-- saveSate will be managed by the callin widget:UnitCreated in editor_userinterface.lua
+				-- DELETE UNITS
+				elseif deleteUnits then
+					if selectedUnits ~= {} then
+						for i, u in ipairs(selectedUnits) do
+							Spring.DestroyUnit(u, false, true)
+						end
+					end
+					deleteUnits = false
+					-- saveSate will be managed by the callin widget:UnitDestroyed in editor_userinterface.lua
+				-- TRANSFER UNITS
+				elseif transferUnits then
+					for i, u in ipairs(selectedUnits) do
+						Spring.TransferUnit(u, newTeam)
+						Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
+						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
+					end
+					transferUnits = false
 					SendToUnsynced("saveState")
 				-- MOVE UNITS
 				elseif moveUnits then
@@ -199,25 +213,6 @@ function gadget:GameFrame( frameNumber )
 					end
 					moveUnits = false
 					SendToUnsynced("requestSave")
-				-- DELETE UNITS
-				elseif deleteUnits then
-					if selectedUnits ~= {} then
-						for i, u in ipairs(selectedUnits) do
-							Spring.DestroyUnit(u)
-						end
-					end
-					deleteUnits = false
-					SendToUnsynced("requestSave")
-				-- TRANSFER UNITS
-				elseif transferUnits then
-					for i, u in ipairs(selectedUnits) do
-						Spring.TransferUnit(u, newTeam)
-						Spring.GiveOrderToUnit(u, CMD.FIRE_STATE, {0}, {})
-						Spring.GiveOrderToUnit(u, CMD.STOP, {}, {})
-					end
-					SendToUnsynced("requestSave")
-					SendToUnsynced("requestUpdate")
-					transferUnits = false
 				-- ROTATE UNITS
 				elseif rotateUnits then
 					for i, u in ipairs(selectedUnits) do
@@ -239,14 +234,6 @@ function gadget:GameFrame( frameNumber )
 						Spring.DestroyUnit(units[i], false, true)
 					end
 					resetMap = false
-				-- CHANGE HP OF SELECTED UNITS
-				elseif hpPercent > 0 and hpPercent <= 1 then
-					for i, u in ipairs(selectedUnits) do
-						local _, mh = Spring.GetUnitHealth(u)
-						Spring.SetUnitHealth(u, hpPercent * mh)
-					end
-					hpPercent = -1
-					SendToUnsynced("requestSave")
 				-- INSTANTIATE UNITS AND KEEP THEIR IDs
 				elseif loadMap then
 					local unitsNewIDs = {}
@@ -278,10 +265,10 @@ function gadget:RecvFromSynced(msg)
 		Script.LuaUI.GetNewUnitIDsAndContinueLoadMap(msgContents[2])
 	end
 	if msg == "saveState" then
-		Script.LuaUI.saveState()
+		Script.LuaUI.saveState() --registered by editor_user_interface.lua
 	end
 	if msg == "requestSave" then
-		Script.LuaUI.requestSave()
+		Script.LuaUI.requestSave() --registered by editor_user_interface.lua
 	end
 	if msgContents[1] == "commands" then
 		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3]) -- registered from editor_userinterface.lua
