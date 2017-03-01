@@ -1150,28 +1150,42 @@ function initZoneWindow()
 
 	local toggleAllOn = function() -- show all zones
 		local atLeastOneZoneUpdated = false
-		loadingState = true -- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
+		-- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
 		for k, zb in pairs(zoneBoxes) do
 			if not zb.checkbox.checked then
 				atLeastOneZoneUpdated = true
 				zb.checkbox:Toggle()
 			end
 		end
-		loadingState = false -- and now we restore savestate mecanism
+		if localLock then
+			loadingState = false -- turn on save state mecanism
+		end
 		if atLeastOneZoneUpdated then
 			saveState2()
 		end
 	end
 	local toggleAllOff = function() -- hide all zones
 		local atLeastOneZoneUpdated = false
-		loadingState = true -- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
+		-- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
 		for k, zb in pairs(zoneBoxes) do
 			if zb.checkbox.checked then
 				atLeastOneZoneUpdated = true
 				zb.checkbox:Toggle()
 			end
 		end
-		loadingState = false -- and now we restore savestate mecanism
+		if localLock then
+			loadingState = false -- turn on save state mecanism
+		end
 		if atLeastOneZoneUpdated then
 			saveState2()
 		end
@@ -3035,9 +3049,15 @@ function createNewCondition()
 
 		conditionNumber = conditionNumber + 1
 		
-		loadingState = true -- deactivate temporarily save state mecanim
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
 		editCondition(#(e.conditions))
-		loadingState = false
+		if localLock then
+			loadingState = false -- turn on save state mecanism
+		end
 		
 		saveState2()
 	end
@@ -3067,9 +3087,15 @@ function createNewAction()
 
 		actionNumber = actionNumber + 1
 
-		loadingState = true -- deactivate temporarily save state mecanim
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
 		editAction(#(e.actions))
-		loadingState = false
+		if localLock then
+			loadingState = false -- turn on save state mecanism
+		end
 		
 		saveState2()
 	end
@@ -3387,17 +3413,22 @@ end
 
 function drawConditionFrame(reset) -- Display specific condition with its parameters
 	if currentEvent and currentCondition then
-		local a = events[currentEvent].conditions[currentCondition]
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
+		local c = events[currentEvent].conditions[currentCondition]
 		local condition_template
 		for i, condition in pairs(conditions_list) do
-			if condition.type == a.type then
+			if condition.type == c.type then
 				condition_template = condition -- get the template of the selected condition
 				break
 			end
 		end
 		conditionTextBox:SetText(condition_template.text)
 		if reset then -- if reset is true, reset the parameters
-			a.params = {}
+			c.params = {}
 		end
 		for i, cf in ipairs(conditionFeatures) do
 			for _, f in ipairs(cf) do
@@ -3409,14 +3440,22 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 		y[1] = 26
 		conditionFeatures = {}
 		for i, attr in ipairs(condition_template.attributes) do
-			table.insert(conditionFeatures, drawFeature(attr, y, a, conditionScrollPanel))
+			table.insert(conditionFeatures, drawFeature(attr, y, c, conditionScrollPanel))
 			y[1] = y[1] + 6
+		end
+		if localLock then
+			loadingState = false -- turn on save state mecanism
 		end
 	end
 end
 
 function drawActionFrame(reset) -- Display specific action with its parameters
 	if currentEvent and currentAction then
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mecanism
+			localLock = true
+		end
 		local a = events[currentEvent].actions[currentAction]
 		local action_template
 		for i, action in pairs(actions_list) do
@@ -3442,16 +3481,24 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 			table.insert(actionFeatures, drawFeature(attr, y, a, actionScrollPanel))
 			y[1] = y[1] + 6
 		end
+		if localLock then
+			loadingState = false -- turn on save state mecanism
+		end
 	end
 end
 
 drawFeatureFunctions = {}
 
-drawFeatureFunctions["unitType"] = function(attr, yref, a, panel, feature)
+-- attr: the attributes fields of the condition/action
+-- yref: the y position (as percentage) to display the condition/action 
+-- ac: the condition/action
+-- panel: the parent panel to include the new UI controls associated to the condition/action
+-- feature: a table containing the UI controls added to the panel
+drawFeatureFunctions["unitType"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = {}
+	local comboBoxItems = {} -- store list of types to display into combobox
 	for i, fu in ipairs(factionUnits) do
 		for i, u in ipairs(fu) do
 			table.insert(comboBoxItems, u)
@@ -3460,51 +3507,19 @@ drawFeatureFunctions["unitType"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
-
-	-- Parameters check
-	if a.params[attr.id] then
-		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
-				comboBox:Select(i)
-				break
-			end
-		end
-	else
-		comboBox:Select(1)
-	end
-
-	table.insert(feature, comboBox)
-end
-
-drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
-	local y = yref[1]
-
-	-- Items generation
-	local comboBoxItems = {}
-	for k, t in pairs(teamStateMachine.states) do
-		if enabledTeams[t] then
-			table.insert(comboBoxItems, teamName[t])
-		end
-	end
-
-	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
-			for k, n in pairs(teamName) do
-				if comboBox.items[comboBox.selected] == n then
-					a.params[attr.id] = k
-					break
-				end
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
 			end
 		end
 	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if teamName[a.params[attr.id]] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
 				break
 			end
@@ -3516,52 +3531,112 @@ drawFeatureFunctions["team"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["player"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["team"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = {}
-	for k, t in pairs(teamStateMachine.states) do
-		if enabledTeams[t] and teamControl[t] == "player" then
-			table.insert(comboBoxItems, teamName[t])
+	local comboBoxItems = {} -- store list of teams to display into combobox
+	local itemIdToTeamId = {} -- for each item save the team id associated
+	for _, teamNo in pairs(teamStateMachine.states) do
+		if enabledTeams[teamNo] then
+			table.insert(comboBoxItems, teamName[teamNo])
+			itemIdToTeamId[#comboBoxItems] = teamNo -- now we know that the nth combobox item is associated to the team with number teamNo
 		end
 	end
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
-			for k, n in pairs(teamName) do
-				if comboBox.items[comboBox.selected] == n then
-					a.params[attr.id] = k
-					break
-				end
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				ac.params[attr.id] = itemIdToTeamId[comboBox.selected]
+				saveState2()
 			end
 		end
 	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if teamName[a.params[attr.id]] == item then
+			-- check if the team id associated to this item is the same of the one saved into param
+			if itemIdToTeamId[i] == ac.params[attr.id] then
 				comboBox:Select(i)
+				comboBox.prevSelection = i
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
+		comboBox.prevSelection = 1
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["player"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = {}
+	local comboBoxItems = {} -- store list of teams to display into combobox
+	local itemIdToTeamId = {} -- for each item save the team id associated
+	for _, teamNo in pairs(teamStateMachine.states) do
+		if enabledTeams[teamNo] and teamControl[teamNo] == "player" then
+			table.insert(comboBoxItems, teamName[teamNo])
+			itemIdToTeamId[#comboBoxItems] = teamNo -- now we know that the nth combobox item is associated to the team with number teamNo
+		end
+	end
+
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	comboBox.prevSelection = nil
+	comboBox.OnSelect = {
+		function()
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				ac.params[attr.id] = itemIdToTeamId[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
+
+	-- Parameters check
+	local init = false
+	if ac.params[attr.id] then
+		for i, item in ipairs(comboBox.items) do
+			-- check if the team id associated to this item is the same of the one saved into param
+			if itemIdToTeamId[i] == ac.params[attr.id] then
+				comboBox:Select(i)
+				comboBox.prevSelection = i
+				init = true
+				break
+			end
+		end
+	end
+	if not init then
+		comboBox:Select(1)
+		comboBox.prevSelection = 1
+	end
+
+	table.insert(feature, comboBox)
+end
+
+-- see below for params documentation
+drawFeatureFunctions["group"] = function(attr, yref, ac, panel, feature)
+	local y = yref[1]
+
+	-- Items generation
+	local comboBoxItems = {} -- store list of groups to display into combobox
+	local itemIdToGroupId = {} -- for each item save the group id associated
 	for i, g in ipairs(unitGroups) do
 		table.insert(comboBoxItems, g.name)
+		itemIdToGroupId[#comboBoxItems] = g.id -- now we know that the nth combobox item is associated to the group id
 	end
 	if #comboBoxItems == 0 then
 		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_GROUP_NOT_FOUND)
@@ -3569,46 +3644,48 @@ drawFeatureFunctions["group"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
-			for i, g in ipairs(unitGroups) do
-				if g.name == comboBox.items[comboBox.selected] then
-					a.params[attr.id] = g.id
-					return
-				end
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				ac.params[attr.id] = itemIdToGroupId[comboBox.selected]
+				saveState2()
 			end
 		end
 	}
 
 	-- Parameters check
-	if a.params[attr.id] then
-		local groupName
-		for i, g in ipairs(unitGroups) do
-			if g.id == a.params[attr.id] then
-				groupName = g.name
-				break
-			end
-		end
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if item == groupName then
+			-- check if the group id associated to this item is the same of the one saved into param
+			if itemIdToGroupId[i] == ac.params[attr.id] then
 				comboBox:Select(i)
+				comboBox.prevSelection = i
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
+		comboBox.prevSelection = 1
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["zone"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = {}
+	local comboBoxItems = {} -- store list of zones to display into combobox
+	local itemIdToZoneId = {} -- for each item save the group id associated
 	for k, z in pairs(zoneList) do
 		table.insert(comboBoxItems, z.name)
+		itemIdToZoneId[#comboBoxItems] = z.id -- now we know that the nth combobox item is associated to the zone id
 	end
 	if #comboBoxItems == 0 then
 		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_ZONE_NOT_FOUND)
@@ -3616,43 +3693,44 @@ drawFeatureFunctions["zone"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
-			for i, zone in ipairs(zoneList) do
-				if zone.name == comboBox.items[comboBox.selected] then
-					a.params[attr.id] = zone.id
-					break
-				end
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				ac.params[attr.id] = itemIdToZoneId[comboBox.selected]
+				saveState2()
 			end
 		end
 	}
 
 	-- Parameters check
-	if a.params[attr.id] then
-		chosenZone = ""
-		for i, zone in ipairs(zoneList) do
-			if zone.id == a.params[attr.id] then
-				chosenZone = zone.name
-			end
-		end
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if chosenZone == item then
+			-- check if the zone id associated to this item is the same of the one saved into param
+			if itemIdToZoneId[i] == ac.params[attr.id] then
 				comboBox:Select(i)
+				comboBox.prevSelection = i
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
+		comboBox.prevSelection = 1
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["numberVariable"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = {}
+	local comboBoxItems = {} -- store list of vars to display into combobox
 	for i, v in ipairs(triggerVariables) do
 		if v.type == "number" then
 			table.insert(comboBoxItems, v.name)
@@ -3664,24 +3742,35 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["booleanVariable"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3697,24 +3786,35 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, a, panel, feature
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["comparison"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3722,24 +3822,35 @@ drawFeatureFunctions["comparison"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["condition"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3755,24 +3866,35 @@ drawFeatureFunctions["condition"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["toggle"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3780,31 +3902,42 @@ drawFeatureFunctions["toggle"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
 	local comboBoxItems = {}
-	if a.params["unitset"] then
-		if a.params["unitset"].type == "unit" then
-			local uDefID = Spring.GetUnitDefID(a.params["unitset"].value)
+	if ac.params["unitset"] then
+		if ac.params["unitset"].type == "unit" then
+			local uDefID = Spring.GetUnitDefID(ac.params["unitset"].value)
 			local unitType = UnitDefs[uDefID].name
 			comboBoxItems = sortedCommandsListUnit[unitType] or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
 		else
@@ -3816,24 +3949,35 @@ drawFeatureFunctions["command"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= commandsToID[comboBox.items[comboBox.selected]] then
+				ac.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if idToCommands[tostring(a.params[attr.id])] == item then
+			if idToCommands[ac.params[attr.id]] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["boolean"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3841,24 +3985,35 @@ drawFeatureFunctions["boolean"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["widget"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
@@ -3869,30 +4024,41 @@ drawFeatureFunctions["widget"] = function(attr, yref, a, panel, feature)
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
-	comboBox.OnSelect = { function() a.params[attr.id] = comboBox.items[comboBox.selected] end }
+	comboBox.OnSelect = {
+		function()
+			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
+				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
-	if a.params[attr.id] then
+	local init = false
+	if ac.params[attr.id] then
 		for i, item in ipairs(comboBox.items) do
-			if a.params[attr.id] == item then
+			if ac.params[attr.id] == item then
 				comboBox:Select(i)
+				init = true
 				break
 			end
 		end
-	else
+	end
+	if not init then
 		comboBox:Select(1)
 	end
 
 	table.insert(feature, comboBox)
 end
 
-drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["position"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Parameters check
 	local positionLabel = addLabel(panel, '30%', y.."%", '40%', "5%", "X: ?   Z: ?", 16)
-	if a.params[attr.id] then
-		local param = a.params[attr.id]
+	if ac.params[attr.id] then
+		local param = ac.params[attr.id]
 		if type(param) == "number" then
 			local zoneName = ""
 			local r, g, b = 255, 255, 255
@@ -3906,11 +4072,11 @@ drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
 			positionLabel.font.color = {1, 1, 1, 1}
 			positionLabel:SetCaption(EDITOR_TRIGGERS_EVENTS_RANDOM_ZONE.." \255"..colorTable[r]..colorTable[g]..colorTable[b]..zoneName)
 		else
-			if a.params[attr.id].x and a.params[attr.id].z then
-				positionLabel:SetCaption("X: "..tostring(a.params[attr.id].x).."   Z: "..tostring(a.params[attr.id].z))
+			if ac.params[attr.id].x and ac.params[attr.id].z then
+				positionLabel:SetCaption("X: "..tostring(ac.params[attr.id].x).."   Z: "..tostring(ac.params[attr.id].z))
 				local function viewPosition()
 					local state = Spring.GetCameraState()
-					local x, z = a.params[attr.id].x, a.params[attr.id].z
+					local x, z = ac.params[attr.id].x, ac.params[attr.id].z
 					local y = Spring.GetGroundHeight(x, z)
 					state.px, state.py, state.pz = x, y, z
 					state.height = 500
@@ -3945,6 +4111,7 @@ drawFeatureFunctions["position"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, pickButton)
 end
 
+-- see below for params documentation
 drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
@@ -4032,16 +4199,20 @@ drawFeatureFunctions["unitset"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, pickButton)
 end
 
+-- see below for params documentation
 drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Editbox
 	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
-	editBox.font.size = 13
-	editBox.updateFunction = function()
-		a.params[attr.id] = editBox.text
-	end
-	editBox.isEditBox = true
+	editBox.OnChange = {
+		function()
+			if a.params[attr.id] ~= editBox.text then
+				a.params[attr.id] = editBox.text
+				saveState2()
+			end
+		end
+	}
 
 	-- Parameters check
 	if a.params[attr.id] then
@@ -4051,21 +4222,29 @@ drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, editBox)
 end
 
+-- see below for params documentation
 drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
 	-- Editbox
 	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
-	editBox.font.size = 13
-	editBox.updateFunction = function()
-		local msgs = splitString(editBox.text, "||")
-		for i in ipairs(msgs) do
-			msgs[i] = string.gsub(msgs[i], "^%s+", "")
-			msgs[i] = string.gsub(msgs[i], "%s+$", "")
+	editBox.rawText = nil
+	editBox.OnChange = {
+		function()
+			if editBox.rawText ~= editBox.text then
+				Spring.Echo (editBox.text)
+				local msgs = splitString2(editBox.text, "||")
+				for i in ipairs(msgs) do
+					msgs[i] = string.gsub(msgs[i], "^%s+", "")
+					msgs[i] = string.gsub(msgs[i], "%s+$", "")
+					Spring.Echo ("\t"..msgs[i])
+				end
+				a.params[attr.id] = msgs
+				editBox.rawText = editBox.text
+				saveState2()
+			end
 		end
-		a.params[attr.id] = msgs
-	end
-	editBox.isEditBox = true
+	}
 
 	-- Parameters check
 	if a.params[attr.id] then
@@ -4082,14 +4261,26 @@ drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	table.insert(feature, editBox)
 end
 
-drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, feature)
+-- see below for params documentation
+drawFeatureFunctions["numberComparison"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Initialize parameters table
-	if not a.params[attr.id] then
-		a.params[attr.id] = {}
+	if not ac.params[attr.id] then
+		ac.params[attr.id] = {}
 	end
 
+	-- Editbox
+	local editBox = addEditBox(panel, '68%', y.."%", '30%', "5%")
+	editBox.OnChange = {
+		function()
+			if ac.params[attr.id].number ~= editBox.text then
+				ac.params[attr.id].number = editBox.text
+				saveState2()
+			end
+		end
+	}
+	
 	-- Combobox
 	local comboBoxItems = {
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ALL,
@@ -4098,48 +4289,35 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, featur
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST
 	}
 	local comboBox = addComboBox(panel, '30%', y.."%", '38%', "5%", comboBoxItems)
-
-	-- Editbox
-	local editBox = addEditBox(panel, '68%', y.."%", '30%', "5%")
-	editBox.toShow = true
+	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
-			if comboBox.selected == 1 then
-				a.params[attr.id].comparison = "all"
-				panel:RemoveChild(editBox)
-				editBox.toShow = false
-			elseif comboBox.selected == 2 then
-				a.params[attr.id].comparison = "exactly"
-				if not editBox.toShow then
-					panel:AddChild(editBox)
-					editBox.toShow = true
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				if comboBox.selected == 1 then
+					ac.params[attr.id].comparison = "all"
+					editBox:Hide()
+				elseif comboBox.selected == 2 then
+					ac.params[attr.id].comparison = "exactly"
+					editBox:Show()
+				elseif comboBox.selected == 3 then
+					ac.params[attr.id].comparison = "atleast"
+					editBox:Show()
+				elseif comboBox.selected == 4 then
+					ac.params[attr.id].comparison = "atmost"
+					editBox:Show()
 				end
-			elseif comboBox.selected == 3 then
-				a.params[attr.id].comparison = "atleast"
-				if not editBox.toShow then
-					panel:AddChild(editBox)
-					editBox.toShow = true
-				end
-			elseif comboBox.selected == 4 then
-				a.params[attr.id].comparison = "atmost"
-				if not editBox.toShow then
-					panel:AddChild(editBox)
-					editBox.toShow = true
-				end
+				saveState2()
 			end
 		end
 	}
-	editBox.font.size = 13
-	editBox.updateFunction = function()
-		a.params[attr.id].number = editBox.text
-	end
-	editBox.isEditBox = true
 
 	-- Parameters check
-	if a.params[attr.id].comparison then
-		local comp = a.params[attr.id].comparison
+	if ac.params[attr.id].comparison then
+		local comp = ac.params[attr.id].comparison
 		if comp == "all" then
 			comboBox:Select(1)
+			editBox:Hide()
 		elseif comp == "exactly" then
 			comboBox:Select(2)
 		elseif comp == "atleast" then
@@ -4150,21 +4328,21 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, a, panel, featur
 	else
 		comboBox:Select(1)
 	end
-	if a.params[attr.id].number then
-		editBox:SetText(a.params[attr.id].number)
+	if ac.params[attr.id].number then
+		editBox:SetText(ac.params[attr.id].number)
 	end
 
 	table.insert(feature, comboBox)
 	table.insert(feature, editBox)
 end
 
-function drawFeature(attr, yref, a, panel) -- Display parameter according to its type
+function drawFeature(attr, yref, ac, panel) -- Display parameter according to its type
 	local feature = {}
 
 	local textLabel = addLabel(panel, '0%', yref[1].."%", '30%', "5%", attr.text)
 	table.insert(feature, textLabel)
 
-	drawFeatureFunctions[attr.type](attr, yref, a, panel, feature)
+	drawFeatureFunctions[attr.type](attr, yref, ac, panel, feature)
 
 	if attr.hint then
 		local hintScrollPanel = addScrollPanel(panel, '5%', (yref[1]+6).."%", '90%', "10%")
@@ -4535,17 +4713,29 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 				var.type = "number"
 				variablesScrollPanel:RemoveChild(initValueComboBox)
 				variablesScrollPanel:AddChild(initValueEditBox)
-				loadingState = true -- deactivate temporarily save state mecanim
+				local localLock = false
+				if not loadingState then
+					loadingState = true -- turn off save state mecanism
+					localLock = true
+				end
 				initValueEditBox:SetText("0")
-				loadingState = false
+				if localLock then
+					loadingState = false -- turn on save state mecanism
+				end
 				saveState2()
 			elseif var.type == "number" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
 				var.type = "boolean"
 				variablesScrollPanel:RemoveChild(initValueEditBox)
 				variablesScrollPanel:AddChild(initValueComboBox)
-				loadingState = true -- deactivate temporarily save state mecanim
+				local localLock = false
+				if not loadingState then
+					loadingState = true -- turn off save state mecanism
+					localLock = true
+				end
 				initValueComboBox:Select(1)
-				loadingState = false
+				if localLock then
+					loadingState = false -- turn on save state mecanism
+				end
 				saveState2()
 			end
 		end
@@ -4639,26 +4829,6 @@ function showPickText() -- Show text next to the mouse and in the middle of the 
 	end
 end
 
-function updateEditBoxesParams() -- update some attributes if they require editboxes
-	if currentAction then
-		for i, af in ipairs(actionFeatures) do
-			for ii, f in ipairs(af) do
-				if f.isEditBox then
-					f.updateFunction()
-				end
-			end
-		end
-	elseif currentCondition then
-		for i, cf in ipairs(conditionFeatures) do
-			for ii, f in ipairs(cf) do
-				if f.isEditBox then
-					f.updateFunction()
-				end
-			end
-		end
-	end
-end
-
 function generateCommandsList(encodedList, encodedUnitList)
 	commandsToID = json.decode(encodedList)
 	for c, id in pairs(commandsToID) do
@@ -4678,16 +4848,18 @@ end
 
 function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	local pickFunction = function(t, v)
-		local ca = {}
-		if currentAction then
-			ca = events[currentEvent].actions[currentAction]
-		elseif currentCondition then
-			ca = events[currentEvent].conditions[currentCondition]
+		if t and v then
+			local ca = {}
+			if currentAction then
+				ca = events[currentEvent].actions[currentAction]
+			elseif currentCondition then
+				ca = events[currentEvent].conditions[currentCondition]
+			end
+			triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
+			ca.params[changedParam] = {}
+			ca.params[changedParam].type = t
+			ca.params[changedParam].value = v
 		end
-		triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
-		ca.params[changedParam] = {}
-		ca.params[changedParam].type = t
-		ca.params[changedParam].value = v
 		Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
@@ -4700,6 +4872,9 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		elseif currentCondition then
 			Screen0:AddChild(windows["conditionWindow"])
 			drawConditionFrame(false)
+		end
+		if t and v then
+			saveState2()
 		end
 	end
 
@@ -4724,7 +4899,7 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 		addButton(gsp, "0%", ((i-1) * 15).."%", "100%", "15%", g.name, function() pickFunction("group", g.id) end)
 	end
 
-	selectSetOfUnitsWindows.cancelbut = addButton(Screen0, "75%", "10%", "10%", "5%", EDITOR_CANCEL, pickFunction)
+	selectSetOfUnitsWindows.cancelbut = addButton(Screen0, "75%", "10%", "10%", "5%", EDITOR_CANCEL, function () pickFunction(nil, nil) end)
 
 	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "10%", "15%", "80%")
 
@@ -4778,6 +4953,7 @@ function showRandomPositionInZoneWindow() -- Allow the user to pick a zone when 
 				ca = events[currentEvent].conditions[currentCondition]
 			end
 			ca.params[changedParam] = z.id
+			saveState2()
 			closeWindow ()
 		end
 		but.OnClick = { pickFunction }
@@ -5865,9 +6041,6 @@ function widget:Update(delta)
 			preventSpaces()
 			updateEventList()
 			updateEventFrame()
-			if currentEvent and (currentAction or currentCondition) then
-				updateEditBoxesParams()
-			end
 		end
 
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.MAPSETTINGS then
@@ -6063,6 +6236,7 @@ function widget:MousePress(mx, my, button)
 							Screen0:AddChild(windows["conditionWindow"])
 							drawConditionFrame(false)
 						end
+						saveState2()
 					end
 				elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 					if kind == "unit" and currentEvent then
@@ -6083,6 +6257,7 @@ function widget:MousePress(mx, my, button)
 							Screen0:AddChild(windows["conditionWindow"])
 							drawConditionFrame(false)
 						end
+						saveState2()
 					end
 				end
 			end

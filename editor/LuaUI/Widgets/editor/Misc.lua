@@ -89,6 +89,16 @@ end
 -------------------------------------
 -- Useful function to split messages into tokens
 -------------------------------------
+
+-- Exemples of use:
+-- splitString("Hello || everybody | nice day", "||")
+--       "Hello "
+--       " everybody "
+--       " nice day"
+-- splitString("Hello || everybody | nice day", "|")
+--       "Hello "
+--       " everybody "
+--       " nice day"
 function splitString(inputstr, sep)
 	if sep == nil then
 		sep = "%s"
@@ -100,6 +110,31 @@ function splitString(inputstr, sep)
 		i = i + 1
 	end
 	return t
+end
+
+-- Exemples of use:
+-- splitString2("Hello || everybody | nice day", "||")
+--       "Hello "
+--       " everybody | nice day"
+-- splitString2("Hello || everybody | nice day", "|")
+--       "Hello "
+--       ""
+--       " everybody "
+--       " nice day"
+function splitString2(inputstr, sep)
+	local str = inputstr
+	tokens = {}
+	while str ~= "" do
+		if string.find(str, sep) == nil then
+			table.insert(tokens, str)
+			str = ""
+		else
+			begin = string.gsub(str, "^(.-)"..sep.."(.*)", "%1")
+			table.insert(tokens, begin)
+			str = string.gsub(str, begin..sep.."(.*)", "%1")
+		end
+	end 
+	return tokens
 end
 
 -----------------------
