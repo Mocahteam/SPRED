@@ -129,9 +129,10 @@ function splitString2(inputstr, sep)
 			table.insert(tokens, str)
 			str = ""
 		else
-			begin = string.gsub(str, "^(.-)"..sep.."(.*)", "%1")
+			begin = string.gsub(str, "^(.-)"..sep..".*", "%1")
+			finish = string.gsub(str, "^.-"..sep.."(.*)", "%1")
 			table.insert(tokens, begin)
-			str = string.gsub(str, begin..sep.."(.*)", "%1")
+			str = finish 
 		end
 	end 
 	return tokens

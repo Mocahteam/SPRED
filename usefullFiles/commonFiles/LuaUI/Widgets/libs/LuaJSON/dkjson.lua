@@ -193,7 +193,7 @@ end
 
 local function addnewline2 (level, buffer, buflen)
   buffer[buflen+1] = "\n"
-  buffer[buflen+2] = strrep ("  ", level)
+  buffer[buflen+2] = strrep ("\t", level)
   buflen = buflen + 2
   return buflen
 end

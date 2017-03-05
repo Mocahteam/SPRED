@@ -5,7 +5,7 @@ function widget:GetInfo()
     author    = "zigaroula,martinb, mocahteam",
     date      = "Apr 29, 2016",
     license   = "GPL v2 or later",
-    layer     = 0,
+    layer     = 230,
     enabled   = true --  loaded by default?
   }
 end
@@ -15,7 +15,7 @@ local PositionMessages = {}
 local BubbleMessages = {}
 
 function DisplayMessageAboveUnit(message, unit, timer)
-	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
+	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil})
 end
 
 function DisplayMessageAtPosition(message, x, y, z, timer)
@@ -23,7 +23,7 @@ function DisplayMessageAtPosition(message, x, y, z, timer)
 end
 
 function DisplayMessageInBubble(message, unit, timer)
-	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0)})
+	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil})
 end
 
 function TurnTextIntoLines(texte)
@@ -78,9 +78,9 @@ function DisplayBubbleAtScreenPosition(x, y, text, u)
 	gl.Texture(bot_tex)
 	gl.TexRect(x, y, x+300, y+80, false, false)
 	gl.Texture(top_tex)
-	gl.TexRect(x, y+height+80, x+300, y+height+100, false, false)
+	gl.TexRect(x, y+height+81, x+300, y+height+101, false, false)
 	gl.Texture(mid_tex)
-	gl.TexRect(x, y+80, x+300, y+height+80, false, false)
+	gl.TexRect(x, y+80, x+300, y+height+81, false, false)
 	gl.Texture(false)
 end
 
@@ -90,6 +90,27 @@ function widget:DrawScreen()
 		if(not Spring.ValidUnitID(u))then return end
 		local x, y, z = Spring.GetUnitPosition(u)
 		x, y = Spring.WorldToScreenCoords(x, y+50, z)
+		-- avoid quake
+		x = math.floor(x)
+		y = math.floor(y)
+		if mes.prevX == nil then
+			mes.prevX = x
+		else
+			if math.abs(x-mes.prevX) < 4 then
+				x = mes.prevX
+			else
+				mes.prevX = x
+			end
+		end
+		if mes.prevY == nil then
+			mes.prevY = y
+		else
+			if math.abs(y-mes.prevY) < 4 then
+				y = mes.prevY
+			else
+				mes.prevY = y
+			end
+		end
 		DisplayTextAtScreenPosition(x, y, m)
 	end
 	for i, mes in ipairs(PositionMessages) do
@@ -102,6 +123,27 @@ function widget:DrawScreen()
 		if(not Spring.ValidUnitID(u))then return end
 		local x, y, z = Spring.GetUnitPosition(u)
 		x, y = Spring.WorldToScreenCoords(x, y+50, z)
+		-- avoid quake
+		x = math.floor(x)
+		y = math.floor(y)
+		if mes.prevX == nil then
+			mes.prevX = x
+		else
+			if math.abs(x-mes.prevX) < 4 then
+				x = mes.prevX
+			else
+				mes.prevX = x
+			end
+		end
+		if mes.prevY == nil then
+			mes.prevY = y
+		else
+			if math.abs(y-mes.prevY) < 4 then
+				y = mes.prevY
+			else
+				mes.prevY = y
+			end
+		end
 		DisplayBubbleAtScreenPosition(x, y, m, u)
 	end
 end

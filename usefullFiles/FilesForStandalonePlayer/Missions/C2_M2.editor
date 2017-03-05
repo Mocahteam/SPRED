@@ -1,0 +1,909 @@
+{
+	"zones":[{
+			"type":"Rectangle",
+			"blue":0.60814476013184,
+			"x2":2976,
+			"z1":1160,
+			"z2":1256,
+			"x1":2872,
+			"showInGame":false,
+			"marker":true,
+			"name":"   Entrée 1\\n(2924, 1208)",
+			"green":0.54002010822296,
+			"alwaysInView":true,
+			"shown":true,
+			"id":9,
+			"red":0.29673206806183
+		},{
+			"type":"Rectangle",
+			"blue":0.088949203491211,
+			"x2":3328,
+			"z1":600,
+			"z2":720,
+			"x1":3176,
+			"showInGame":false,
+			"marker":true,
+			"name":"  Entrée 2\\n(3252, 660)",
+			"green":0.53627705574036,
+			"alwaysInView":true,
+			"shown":true,
+			"id":10,
+			"red":0.15385806560516
+		},{
+			"type":"Rectangle",
+			"blue":0.71166574954987,
+			"x2":3952,
+			"z1":696,
+			"z2":848,
+			"x1":3792,
+			"showInGame":false,
+			"marker":true,
+			"name":"  Entrée 3\\n(3872, 772)",
+			"green":0.16118931770325,
+			"alwaysInView":true,
+			"shown":true,
+			"id":11,
+			"red":0.86147344112396
+		}],
+	"description":{
+		"map":"Sili-CiumMap v1",
+		"cameraAuto":"enabled",
+		"briefingRaw":"Mission 2\\n \\nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\\n \\nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"autoHeal":"disabled",
+		"minimap":"disabled",
+		"feedback":"disabled",
+		"widgets":[{
+				"desc":"Teach you to play the game, one tip at a time",
+				"name":"Kernel Panic Automatic Tip Dispenser",
+				"active":false
+			},{
+				"desc":"Maintain unit selection through morphing",
+				"name":"Keep Morpheds Selected",
+				"active":false
+			},{
+				"desc":"Control the rest of your army while in Hero mode",
+				"name":"Heroes Right Click",
+				"active":false
+			},{
+				"desc":"Show the mission title and briefing",
+				"name":"Kernel Panic Mission Briefing",
+				"active":false
+			},{
+				"desc":"Prettier background for the tooltip",
+				"name":"Kernel Panic MidKnight's tooltip background",
+				"active":false
+			},{
+				"desc":"Replace the default Spring tooltip by one customised for K.P.",
+				"name":"Kernel Panic Tooltip",
+				"active":false
+			},{
+				"desc":"Sets immobile builders to ROAM, with a PATROL command",
+				"name":"ImmobileBuilder",
+				"active":false
+			},{
+				"desc":"XrayShader",
+				"name":"XrayShader",
+				"active":false
+			},{
+				"desc":"Reset settings and widgets to fit Kernel Panic",
+				"name":"Set Spring-wide settings and Lua WhiteList",
+				"active":false
+			},{
+				"desc":"Show some KP menu when Spring.exe is run directly",
+				"name":"Spring Direct Launch 2",
+				"active":false
+			},{
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
+				"active":false
+			},{
+				"desc":"Allows using the rightclick for some commands",
+				"name":"Kernel Panic Default Commands",
+				"active":false
+			},{
+				"desc":"Display the debug information of K.P.A.I.",
+				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
+				"active":false
+			},{
+				"desc":"Indicator for the CommEnds state (at game start)",
+				"name":"CommanderEnds",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
+			},{
+				"desc":"Automatically adds 100 stockpile builds to new units",
+				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Display info tips related to O.N.S. shields",
+				"name":"Kernel Panic O.N.S. help tips",
+				"active":false
+			},{
+				"desc":"Buttons for the current selection (incomplete)",
+				"name":"SelectionButtons",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":false
+			},{
+				"desc":"Shows a team color platter above all visible units",
+				"name":"TeamPlatter",
+				"active":false
+			},{
+				"desc":"Controls metal makers to minimize energy stalls",
+				"name":"MetalMakers",
+				"active":false
+			},{
+				"desc":"Assigns new builders to assist their source factory",
+				"name":"FactoryGuard",
+				"active":false
+			},{
+				"desc":"Highlights the unit or feature under the cursor\nÿÀÀÀHold ÿÿÿ€METAÿÀÀÀ to show the unit or feature name",
+				"name":"HighlightUnit",
+				"active":false
+			},{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},{
+				"desc":"Alternate view movement for the middle mouse button",
+				"name":"SmoothScroll",
+				"active":false
+			},{
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
+				"active":false
+			},{
+				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
+				"name":"Kernel Panic Geos Highlight",
+				"active":false
+			},{
+				"desc":"Camera shakes",
+				"name":"CameraShake",
+				"active":false
+			},{
+				"desc":"Keeps the minimap at a relative size (maxspect)",
+				"name":"RelativeMinimap",
+				"active":false
+			},{
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
+				"desc":"Remove the need to add /luarules in front of some gadgets command",
+				"name":"Kernel Panic Console Commands",
+				"active":false
+			},{
+				"desc":"Draws a mirrored map next to the edges of the real map",
+				"name":"Map edge extension",
+				"active":false
+			}],
+		"saveName":"C2_M2",
+		"name":"C2 M2",
+		"mainGame":"Kernel Panic 4.1",
+		"mouse":"enabled",
+		"traces":[],
+		"briefing":"Mission 2\n \nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\n \nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+	},
+	"units":[{
+			"type":"pointer",
+			"id":2776,
+			"position":{
+				"y":128.99685668945,
+				"x":3475.8403320313,
+				"z":1212.1966552734
+			},
+			"orientation":2.2235834598541,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1402,
+			"position":{
+				"y":171.99165344238,
+				"x":3230,
+				"z":1931
+			},
+			"orientation":2.3584811687469,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":626,
+			"position":{
+				"y":79.134963989258,
+				"x":3978,
+				"z":1502
+			},
+			"orientation":-1.3283445835114,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1354,
+			"position":{
+				"y":130.47662353516,
+				"x":3981,
+				"z":140
+			},
+			"orientation":-0.074528746306896,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":23,
+			"position":{
+				"y":157.17481994629,
+				"x":3152.6748046875,
+				"z":1400.9140625
+			},
+			"orientation":1.1422681808472,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1644,
+			"position":{
+				"y":202.53300476074,
+				"x":2950.4516601563,
+				"z":975.60589599609
+			},
+			"orientation":1.8094688653946,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":2321,
+			"position":{
+				"y":223.73870849609,
+				"x":3509,
+				"z":638
+			},
+			"orientation":0.90417367219925,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":2578,
+			"position":{
+				"y":169.61465454102,
+				"x":3435,
+				"z":737
+			},
+			"orientation":0.96662479639053,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":251,
+			"position":{
+				"y":237.25904846191,
+				"x":3067.4150390625,
+				"z":1587.8966064453
+			},
+			"orientation":1.8614529371262,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":408,
+			"position":{
+				"y":226.36219787598,
+				"x":3081.9855957031,
+				"z":829.06475830078
+			},
+			"orientation":0.27687910199165,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":4416,
+			"position":{
+				"y":208.33813476563,
+				"x":3478,
+				"z":681
+			},
+			"orientation":1.2880702018738,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":1994,
+			"position":{
+				"y":240.25434875488,
+				"x":3037.9208984375,
+				"z":768.9326171875
+			},
+			"orientation":0.36935499310493,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":3944,
+			"position":{
+				"y":186.67340087891,
+				"x":3124,
+				"z":1491
+			},
+			"orientation":1.3309831619263,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":3849,
+			"position":{
+				"y":244.46913146973,
+				"x":2896.7016601563,
+				"z":940.1181640625
+			},
+			"orientation":-0.85692113637924,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":860,
+			"position":{
+				"y":103.38246154785,
+				"x":3716,
+				"z":1622
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":1432,
+			"position":{
+				"y":75.89720916748,
+				"x":3961,
+				"z":1640
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":57,
+			"position":{
+				"y":104.07032012939,
+				"x":3673,
+				"z":1888
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"hole",
+			"id":908,
+			"position":{
+				"y":136.1784362793,
+				"x":3478,
+				"z":1456
+			},
+			"orientation":2.9697868824005,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":2475,
+			"position":{
+				"y":253.5625,
+				"x":3617,
+				"z":519
+			},
+			"orientation":-2.75963139534,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":3097,
+			"position":{
+				"y":253.5625,
+				"x":3080,
+				"z":1696
+			},
+			"orientation":-1.8469127416611,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":3313,
+			"position":{
+				"y":253.62161254883,
+				"x":2898,
+				"z":819
+			},
+			"orientation":-1.2609322071075,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":4235,
+			"position":{
+				"y":166.15704345703,
+				"x":3338,
+				"z":936
+			},
+			"orientation":-0.13416659832001,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"assembler",
+			"id":2719,
+			"position":{
+				"y":119.02044677734,
+				"x":3641,
+				"z":1225
+			},
+			"orientation":-0.0069136912934482,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		}],
+	"allyteams":{
+		"1":[0],
+		"2":[],
+		"3":[],
+		"4":[],
+		"5":[],
+		"6":[],
+		"7":[],
+		"8":[],
+		"9":[],
+		"0":[1]
+	},
+	"groups":[],
+	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
+	"variables":[{
+			"id":0,
+			"type":"boolean",
+			"name":"ZonesOccupées",
+			"initValue":"false"
+		}],
+	"teams":{
+		"1":{
+			"ai":"",
+			"name":"Ally",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":0,
+				"red":0
+			},
+			"enabled":true
+		},
+		"2":{
+			"ai":"",
+			"name":"Annemy",
+			"control":"computer",
+			"color":{
+				"green":0,
+				"blue":0,
+				"red":1
+			},
+			"enabled":false
+		},
+		"3":{
+			"ai":"",
+			"name":"Team 3",
+			"control":"computer",
+			"color":{
+				"green":0,
+				"blue":0.5,
+				"red":0.5
+			},
+			"enabled":false
+		},
+		"4":{
+			"ai":"",
+			"name":"Team 4",
+			"control":"computer",
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":1
+			},
+			"enabled":false
+		},
+		"5":{
+			"ai":"",
+			"name":"Team 5",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"6":{
+			"ai":"",
+			"name":"Team 6",
+			"control":"computer",
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":1
+			},
+			"enabled":false
+		},
+		"7":{
+			"ai":"",
+			"name":"Team 7",
+			"control":"computer",
+			"color":{
+				"green":0.5,
+				"blue":1,
+				"red":0
+			},
+			"enabled":false
+		},
+		"8":{
+			"ai":"",
+			"name":"Team 8",
+			"control":"computer",
+			"color":{
+				"green":1,
+				"blue":0.5,
+				"red":0
+			},
+			"enabled":false
+		},
+		"9":{
+			"ai":"",
+			"name":"Team 9",
+			"control":"computer",
+			"color":{
+				"green":0.5,
+				"blue":0,
+				"red":0.5
+			},
+			"enabled":false
+		},
+		"0":{
+			"ai":"",
+			"name":"Player",
+			"control":"player",
+			"color":{
+				"green":0,
+				"blue":1,
+				"red":0
+			},
+			"enabled":true
+		}
+	},
+	"events":[{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Initialisation",
+			"repetition":false,
+			"actionTotal":5,
+			"conditions":[{
+					"id":0,
+					"type":"start",
+					"name":"GameStart",
+					"params":[]
+				}],
+			"actions":[{
+					"id":0,
+					"type":"orderPosition",
+					"name":"Patrouille1",
+					"params":{
+						"command":15,
+						"unitset":{
+							"value":1354,
+							"type":"unit"
+						},
+						"position":{
+							"z":1067,
+							"x":3546
+						}
+					}
+				},{
+					"id":1,
+					"type":"orderPosition",
+					"name":"Patrouille2",
+					"params":{
+						"command":15,
+						"unitset":{
+							"value":626,
+							"type":"unit"
+						},
+						"position":{
+							"z":1906,
+							"x":3507
+						}
+					}
+				},{
+					"id":2,
+					"type":"orderPosition",
+					"name":"Patrouille3",
+					"params":{
+						"command":15,
+						"unitset":{
+							"value":1402,
+							"type":"unit"
+						},
+						"position":{
+							"z":1342,
+							"x":3340
+						}
+					}
+				},{
+					"id":3,
+					"type":"orderPosition",
+					"name":"Patrouille4",
+					"params":{
+						"command":15,
+						"unitset":{
+							"value":4235,
+							"type":"unit"
+						},
+						"position":{
+							"x":3327,
+							"z":1359
+						}
+					}
+				},{
+					"id":21,
+					"type":"orderPosition",
+					"name":"Move",
+					"params":{
+						"command":10,
+						"unitset":{
+							"value":2776,
+							"type":"unit"
+						},
+						"position":{
+							"x":3810,
+							"z":1744
+						}
+					}
+				}],
+			"id":0
+		},{
+			"comment":"",
+			"trigger":"Entrée1Minée and Entrée2Minée and Entrée3Minée",
+			"conditionTotal":6,
+			"name":"Win",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":26,
+					"type":"type",
+					"name":"Entrée1Minée",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"type":"logic_bomb",
+						"unitset":{
+							"value":32,
+							"type":"condition"
+						}
+					}
+				},{
+					"id":27,
+					"type":"type",
+					"name":"Entrée2Minée",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"type":"logic_bomb",
+						"unitset":{
+							"value":33,
+							"type":"condition"
+						}
+					}
+				},{
+					"id":28,
+					"type":"type",
+					"name":"Entrée3Minée",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"type":"logic_bomb",
+						"unitset":{
+							"value":34,
+							"type":"condition"
+						}
+					}
+				},{
+					"id":32,
+					"type":"zone",
+					"name":"DansEntrée1",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":0,
+							"type":"team"
+						},
+						"zone":9
+					}
+				},{
+					"id":33,
+					"type":"zone",
+					"name":"DansEntrée2",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":0,
+							"type":"team"
+						},
+						"zone":10
+					}
+				},{
+					"id":34,
+					"type":"zone",
+					"name":"DansEntrée3",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":0,
+							"type":"team"
+						},
+						"zone":11
+					}
+				}],
+			"actions":[{
+					"id":32,
+					"type":"win",
+					"name":"Victoire",
+					"params":{
+						"team":0,
+						"outputState":"win"
+					}
+				}],
+			"id":9
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Lost",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":11,
+					"type":"dead",
+					"name":"UnitéDétruite",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":2719,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":33,
+					"type":"lose",
+					"name":"Défaite",
+					"params":{
+						"team":0,
+						"outputState":"lost"
+					}
+				}],
+			"id":10
+		}],
+	"listOfCommands":{
+		"0":"Stop",
+		"-1":"Build Alice",
+		"5":"Wait",
+		"6":"TimeWait",
+		"7":"DeathWait",
+		"-2":"Build assembler",
+		"-39":"Build pointer",
+		"-3":"Build Corruption",
+		"-55":"Build Worm",
+		"16":"Fight",
+		"20":"Attack",
+		"95":"Cloak state",
+		"-7":"Build byte",
+		"31647":"Bombard",
+		"-12":"Build Artillery",
+		"-14":"Build Constructor",
+		"-16":"Build mobile arty",
+		"-20":"Build Flow",
+		"-40":"Build Port",
+		"-48":"Build Small Circle",
+		"33389":"NX Flag",
+		"33390":"Deploy",
+		"33391":"Undeploy",
+		"33392":"Mine",
+		"33393":" Bug ",
+		"33395":"Launch Mines",
+		"-41":"Build Reimu",
+		"21":"Area attack",
+		"25":"Guard",
+		"115":"Repeat",
+		"50":"Move state",
+		"135":"Repair level",
+		"-21":"Build Gateway",
+		"-42":"Build Rock",
+		"-50":"Build Trojan",
+		"85":"Active state",
+		"32103":"AutoHold",
+		"32104":"Burrow",
+		"-35":"Build Debug",
+		"35126":"90s",
+		"15":"Patrol",
+		"-9":"Build Connection",
+		"-11":"Build Denial of Service",
+		"-18":"Build Fairy",
+		"-26":"Build Logic Bomb",
+		"-36":"Build obelisk",
+		"145":"Land mode",
+		"45":"Fire state",
+		"90":"Reclaim",
+		"-37":"Build Packet",
+		"-45":"Build socket",
+		"31574":"Enter",
+		"31581":"Dispatch",
+		"40":"Repair",
+		"8":"SquadWait",
+		"65":"SelfD",
+		"-6":"Build Bug",
+		"9":"GatherWait",
+		"10":"Move",
+		"-53":"Build Window",
+		"-43":"Build Scissors",
+		"-19":"Build Firewall",
+		"-4":"Build Bit",
+		"-27":"Build Marisa",
+		"110":"Restore",
+		"-38":"Build Paper",
+		"-46":"Build terminal",
+		"-17":"Build Scout",
+		"76":"Load units"
+	}
+}

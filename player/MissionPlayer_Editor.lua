@@ -154,8 +154,8 @@ end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
 local function computeReference(expression)
-  EchoDebug("compute expression : "..expression, 1)
   if(expression==nil or expression=="") then return expression end
+  EchoDebug("compute expression : "..expression, 1)
   local n1=tonumber(expression)
   if(n1~=nil)then return n1 end
 
@@ -279,10 +279,11 @@ local function getAMessage(messageTable)
 end
 
 -------------------------------------
--- Indicates if a point is inside a zone (disk or rectangle)
+-- Indicates if a point is inside a zone (disk or rectangle).
+-- If borderException is not nil => consider position into the border outside the zone
 -- @return boolean
 -------------------------------------
-local function isXZInsideZone(x,z,zoneId)
+local function isXZInsideZone(x,z,zoneId, borderException)
   local zone=ctx.zones[zoneId]
   if(zone==nil)then
     EchoDebug(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)),5)
@@ -290,16 +291,16 @@ local function isXZInsideZone(x,z,zoneId)
   if(zone.type=="Rectangle") then
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
-    if(center_x+zone.demiLargeur<x)then return false end -- uncommon formatting but multiline looks better IMHO
-    if(center_x-zone.demiLargeur>x)then return false end
-    if(center_z+zone.demiLongueur<z)then return false end
-    if(center_z-zone.demiLongueur>z)then return false end
+    if(center_x+zone.demiLargeur-(borderException or 0)<x)then return false end -- uncommon formatting but multiline looks better IMHO
+    if(center_x-zone.demiLargeur+(borderException or 0)>x)then return false end
+    if(center_z+zone.demiLongueur-(borderException or 0)<z)then return false end
+    if(center_z-zone.demiLongueur+(borderException or 0)>z)then return false end
     return true
   elseif(zone.type=="Disk") then
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
-    local apart=((center_x-x)*(center_x-x))/((zone.a)*(zone.a))
-    local bpart=((center_z-z)*(center_z-z))/((zone.b)*(zone.b))
+    local apart=((center_x-x)*(center_x-x))/((zone.a-(borderException or 0))*(zone.a-(borderException or 0)))
+    local bpart=((center_z-z)*(center_z-z))/((zone.b-(borderException or 0))*(zone.b-(borderException or 0)))
     return (apart+bpart<1)
   end
 end
@@ -323,19 +324,26 @@ local function getARandomPositionInZone(idZone)
     local posit={}
     local center_x=zone.center_xz.x
     local center_z=zone.center_xz.z
+	local borderException = 10 -- we avoid to get random position closer to the border (resolve bug when we ask to move a unit on a random position in a zone, if the position is on the border the unit risks to not enter in the zone. Then a condition testing the entrance of the unit into the zone will be never evaluated to true.
     if(zone.type=="Disk") then
+	  -- if zone is to small to take into account the borderException, we use its center
+	  local rayonA = zone.a <= borderException and 0 or zone.a - borderException -- <=> (zone.a <= borderException) ? 0 : zone.a - borderException;
+	  local rayonB = zone.b <= borderException and 0 or zone.b - borderException -- <=> (zone.b <= borderException) ? 0 : zone.b - borderException;
       while true do -- rejection method to draw random points from ellipse (drawn from rectangle and accepted if inside ellipse
-        local x=math.random(center_x-zone.a, center_x+zone.a)
-        local z=math.random(center_z-zone.b, center_z+zone.b)
-        if(isXZInsideZone(x,z,idZone))then
+        local x=math.random(center_x-rayonA, center_x+rayonA)
+        local z=math.random(center_z-rayonB, center_z+rayonB)
+        if(isXZInsideZone(x,z,idZone, borderException))then
           posit["x"]=x
           posit["z"]=z
           return posit
         end
       end
     elseif(zone.type=="Rectangle") then
-      local x=math.random(center_x-zone.demiLargeur, center_x+zone.demiLargeur)
-      local z=math.random(center_z-zone.demiLongueur, center_z+zone.demiLongueur)
+	  -- if zone is to small to take into account the borderException, we use its center
+	  local demiLargeur = zone.demiLargeur <= borderException and 0 or zone.demiLargeur - borderException -- <=> (zone.demiLargeur <= borderException) ? 0 : zone.demiLargeur - borderException;
+	  local demiLongueur = zone.demiLongueur <= borderException and 0 or zone.demiLongueur - borderException -- <=> (zone.demiLongueur <= borderException) ? 0 : zone.demiLongueur - borderException;
+      local x=math.random(center_x-demiLargeur, center_x+demiLargeur)
+      local z=math.random(center_z-demiLongueur, center_z+demiLongueur)
       posit["x"]=x
       posit["z"]=z
       return posit
@@ -1387,6 +1395,16 @@ local function StartAfterJson ()
   end  
  
  local specialPositionTables={} 
+ 
+ -------------------------------
+ ------COMMANDS LIST------------
+ -------------------------------
+ if (ctx.mission.listOfCommands~=nil and ctx.mission.listOfUnitTypes~=nil) then
+	-- send these data to Spring engine
+	if Spring.SendModConstants then
+		Spring.SendModConstants(ctx.mission.listOfCommands, ctx.mission.listOfUnitTypes)
+	end
+ end
  
  -------------------------------
  -------ZONES-------------------

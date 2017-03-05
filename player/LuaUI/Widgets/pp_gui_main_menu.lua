@@ -288,7 +288,7 @@ local function addTextBox(_parent, _x, _y, _width, _height, _text)
 		width = _width,
 		height = _height,
 		text = _text,
-		fontsize = 20,
+		fontsize = 16,
 		font = {
 			font = "LuaUI/Fonts/TruenoRg.otf",
 			shadow = false

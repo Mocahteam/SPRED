@@ -169,6 +169,8 @@ function gadget:GameFrame( frameNumber )
 					cleaned = true
 					if Spring.GetModOptions().tobeloaded then
 						SendToUnsynced("beginLoadLevel".."++"..Spring.GetModOptions().tobeloaded)
+					else
+						SendToUnsynced("beginLoadLevel")
 					end
 					SendToUnsynced("finishedLoading")
 				end
@@ -236,6 +238,7 @@ function gadget:GameFrame( frameNumber )
 					resetMap = false
 				-- INSTANTIATE UNITS AND KEEP THEIR IDs
 				elseif loadMap then
+					Spring.Echo ("Spring load map")
 					local unitsNewIDs = {}
 					for i, u in ipairs(unitsInfo) do
 						unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)

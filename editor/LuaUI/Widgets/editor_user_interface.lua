@@ -686,7 +686,7 @@ function tracesFrame()
 							but.state.chosen = true
 							but:InvalidateSelf()
 						end
-						saveState2()
+						saveState()
 					end
 				}
 				if findInTable(chosenTraces, name) then
@@ -835,7 +835,7 @@ function showTeamConfig() -- Show the team config panel
 					if teamName[team] ~= teamNameEditBoxes[team].text then
 						teamName[team] = teamNameEditBoxes[team].text
 						updateAllyTeam = true
-						saveState2()
+						saveState()
 					end
 				end
 			}
@@ -856,7 +856,7 @@ function showTeamConfig() -- Show the team config panel
 				if not enabledTeams[team] then
 					removeTeamFromTables(team)
 				end
-				saveState2()
+				saveState()
 			end
 			enableTeamButtons[team].state.chosen = enabledTeams[team]
 			enableTeamButtons[team].OnClick = { changeTeamState }
@@ -871,7 +871,7 @@ function showTeamConfig() -- Show the team config panel
 				function()
 					teamControl[team] = "player"
 					updateTeamConfig = true
-					saveState2()
+					saveState()
 				end
 			}
 			
@@ -881,7 +881,7 @@ function showTeamConfig() -- Show the team config panel
 				function()
 					teamControl[team] = "computer"
 					updateTeamConfig = true
-					saveState2()
+					saveState()
 				end
 			}
 			
@@ -914,13 +914,13 @@ function showTeamConfig() -- Show the team config panel
 				Spring.SetTeamColor(team, teamColor[team].red, teamColor[team].green, teamColor[team].blue)
 			end
 			teamColorTrackbars[team].red.OnChange = {updateImage}
-			teamColorTrackbars[team].red.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].red.OnMouseUp = {saveState}
 			teamColorTrackbars[team].red.color = {1, 0, 0, 1}
 			teamColorTrackbars[team].green.OnChange = {updateImage}
-			teamColorTrackbars[team].green.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].green.OnMouseUp = {saveState}
 			teamColorTrackbars[team].green.color = {0, 1, 0, 1}
 			teamColorTrackbars[team].blue.OnChange = {updateImage}
-			teamColorTrackbars[team].blue.OnMouseUp = {saveState2}
+			teamColorTrackbars[team].blue.OnMouseUp = {saveState}
 			teamColorTrackbars[team].blue.color = {0, 0, 1, 1}
 			-- IA field
 			teamAIElements.teamAILabels[team] = addLabel(teamConfigPanels[team], '85%', '20%', '13%', '30%', EDITOR_FORCES_TEAMCONFIG_AI)
@@ -930,7 +930,7 @@ function showTeamConfig() -- Show the team config panel
 				function ()
 					if teamAIElements.teamAI[team] ~= teamAIElements.teamAIEditBoxes[team].text then
 						teamAIElements.teamAI[team] = teamAIElements.teamAIEditBoxes[team].text
-						saveState2()
+						saveState()
 					end
 				end
 			}
@@ -1166,7 +1166,7 @@ function initZoneWindow()
 			loadingState = false -- turn on save state mecanism
 		end
 		if atLeastOneZoneUpdated then
-			saveState2()
+			saveState()
 		end
 	end
 	local toggleAllOff = function() -- hide all zones
@@ -1187,7 +1187,7 @@ function initZoneWindow()
 			loadingState = false -- turn on save state mecanism
 		end
 		if atLeastOneZoneUpdated then
-			saveState2()
+			saveState()
 		end
 	end
 	addButton(zoneScrollPanel, "0%", "0%", "50%", "6%", EDITOR_ZONES_SHOW, toggleAllOn)
@@ -1239,7 +1239,7 @@ function initTriggerWindow()
 				eventUI.eventButtons[currentEvent].caption = eventNameEditBox.text
 				eventUI.eventButtons[currentEvent]:InvalidateSelf()
 				-- save state
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -1285,7 +1285,7 @@ function initTriggerWindow()
 				conditionButtons[events[currentEvent].id][currentCondition].caption = conditionNameEditBox.text
 				conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
 				-- save state
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -1317,7 +1317,7 @@ function initTriggerWindow()
 				actionButtons[events[currentEvent].id][currentAction].caption = actionNameEditBox.text
 				actionButtons[events[currentEvent].id][currentAction]:InvalidateSelf()
 				-- save state
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -1378,7 +1378,7 @@ function initTriggerWindow()
 				if pcall(loadstring("return "..checkingTrigger)) then
 					e.trigger = customTriggerEditBox.text
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
-					saveState2()
+					saveState()
 				else
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 				end
@@ -1402,7 +1402,7 @@ function initTriggerWindow()
 			e.trigger = trig
 			customTriggerEditBox:SetText(trig)
 			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
-			saveState2()
+			saveState()
 		end
 	end
 	addButton(windows['configureEvent'], '0%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
@@ -1483,7 +1483,7 @@ function initMapSettingsWindow()
 		function ()
 			if mapDescription.mapName ~= mapNameEditBox.text then
 				mapDescription.mapName = mapNameEditBox.text
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -1497,7 +1497,7 @@ function initMapSettingsWindow()
 				-- update preview briefing
 				updateBriefingPreview()
 				mapDescription.mapBriefing = mapBriefingTextBox.text
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -1539,7 +1539,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.cameraAutoButton.OnChange = {
 		function()
 			cameraAutoState = not mapSettingsButtons.cameraAutoButton.checked
-			saveState2()
+			saveState()
 		end
 	}
 	
@@ -1547,7 +1547,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.mouseStateButton.OnChange = {
 		function()
 			mouseState = not mapSettingsButtons.mouseStateButton.checked
-			saveState2()
+			saveState()
 		end
 	}
 	
@@ -1555,7 +1555,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.autoHealButton.OnChange = {
 		function()
 			autoHealState = not mapSettingsButtons.autoHealButton.checked
-			saveState2()
+			saveState()
 		end
 	}
 	
@@ -1563,7 +1563,7 @@ function initMapSettingsWindow()
 	mapSettingsButtons.minimapButton.OnChange = {
 		function()
 			minimapState = not mapSettingsButtons.minimapButton.checked
-			saveState2()
+			saveState()
 		end
 	}
 	
@@ -1572,7 +1572,7 @@ function initMapSettingsWindow()
 		mapSettingsButtons.feedbackButton.OnChange = {
 			function()
 				feedbackState = not mapSettingsButtons.feedbackButton.checked
-				saveState2()
+				saveState()
 			end
 		}
 	end
@@ -2105,7 +2105,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 					-- String in the editbox as name for the group
 					if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
 						group.name = groupEditBoxes[group.id].text
-						saveState2()
+						saveState()
 					end
 				end
 			}
@@ -2154,7 +2154,7 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 				trashbut.OnClick = {
 					function()
 						removeUnitFromGroup(group, u)
-						saveState2()
+						saveState()
 					end 
 				}
 				trashbut.OnMouseOver = { function() trashbut.color = { 1, 0.5, 0, 1 } end }
@@ -2216,7 +2216,7 @@ function addSelectedUnitsToGroup(group)
 	for i, u in ipairs(unitSelection) do
 		addUnitToGroup(group, u)
 	end
-	saveState2()
+	saveState()
 end
 
 function addChosenUnitsToSelectedGroups() -- Add selected units to the selected groups (in the groups frame)
@@ -2238,7 +2238,7 @@ function addChosenUnitsToSelectedGroups() -- Add selected units to the selected 
 		unitButton:InvalidateSelf()
 	end
 	if atLeastOneUnitAffected then
-		saveState2()
+		saveState()
 	end
 end
 
@@ -2247,7 +2247,7 @@ function removeSelectedUnitsFromGroup(group)
 	for i, u in ipairs(unitSelection) do
 		removeUnitFromGroup(group, u)
 	end
-	saveState2()
+	saveState()
 end
 
 function removeUnitFromGroup(group, unit)
@@ -2275,7 +2275,7 @@ function addUnitGroup(name)
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
-	saveState2()
+	saveState()
 end
 
 function addEmptyUnitGroup()
@@ -2289,7 +2289,7 @@ function addEmptyUnitGroup()
 	unitGroupViewButtons[groupNumber] = {}
 	unitGroupRemoveUnitButtons[groupNumber] = {}
 	groupNumber = groupNumber + 1
-	saveState2()
+	saveState()
 end
 
 function deleteUnitGroup(id)
@@ -2299,7 +2299,7 @@ function deleteUnitGroup(id)
 			break
 		end
 	end
-	saveState2()
+	saveState()
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -2734,7 +2734,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 					closeZonesSpecialAttributesWindow()
 					if zone.name ~= editBox.text then
 						zone.name = editBox.text
-						saveState2()
+						saveState()
 					end
 				end
 			}
@@ -2742,7 +2742,7 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 			checkbox.OnChange = {
 				function ()
 					zone.shown = not checkbox.checked
-					saveState2()
+					saveState()
 				end
 			}
 			zoneBoxes[zone.id] = { editBox = editBox, eyeBut = eyeBut, checkbox = checkbox }
@@ -2798,7 +2798,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				alwaysInViewButton.state.chosen = not alwaysInViewButton.state.chosen
 				alwaysInViewButton:InvalidateSelf()
 				z.alwaysInView = not z.alwaysInView
-				saveState2()
+				saveState()
 			end
 		}
 		local markerButton = addButton(panel, "50%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
@@ -2808,7 +2808,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				markerButton.state.chosen = not markerButton.state.chosen
 				markerButton:InvalidateSelf()
 				z.marker = not z.marker
-				saveState2()
+				saveState()
 			end
 		}
 		local showInGameButton = addButton(panel, "75%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
@@ -2818,7 +2818,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				showInGameButton.state.chosen = not showInGameButton.state.chosen
 				showInGameButton:InvalidateSelf()
 				z.showInGame = not z.showInGame
-				saveState2()
+				saveState()
 			end
 		}
 		count = count + 1
@@ -2845,7 +2845,7 @@ function updateAllyTeamPanels() -- Update the ally team window
 					function()
 						removeTeamFromAllyTeam(k, t)
 						selectedAllyTeam = k 
-						saveState2()
+						saveState()
 					end
 				}
 				but.OnMouseOver = { function() but.color = { 1, 0.5, 0, 1 } end }
@@ -2880,7 +2880,7 @@ function addTeamToSelectedAllyTeam(team)
 	if team ~= selectedAllyTeam and not findInTable(allyTeams[selectedAllyTeam], team) then
 		table.insert(allyTeams[selectedAllyTeam], team)
 		table.sort(allyTeams[selectedAllyTeam])
-		saveState2()
+		saveState()
 	end
 end
 
@@ -3010,7 +3010,7 @@ function createNewEvent()
 	deleteActionButtons[event.id] = {}
 
 	editEvent(#events) -- edit this event
-	saveState2()
+	saveState()
 end
 
 function editEvent(i)
@@ -3036,7 +3036,7 @@ function removeEvent(i)
 	currentEvent = nil
 	currentCondition = nil
 	currentAction = nil
-	saveState2()
+	saveState()
 end
 
 function createNewCondition()
@@ -3059,7 +3059,7 @@ function createNewCondition()
 			loadingState = false -- turn on save state mecanism
 		end
 		
-		saveState2()
+		saveState()
 	end
 end
 
@@ -3097,7 +3097,7 @@ function createNewAction()
 			loadingState = false -- turn on save state mecanism
 		end
 		
-		saveState2()
+		saveState()
 	end
 end
 
@@ -3156,7 +3156,7 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					table.remove(events, i)
 					table.insert(events, i-1, e)
 					updateEventList(true)
-					saveState2()
+					saveState()
 				end
 				eventUI.upEventButtons[i] = addImage(eventScrollPanel, '0%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
 				eventUI.upEventButtons[i].OnClick = { moveUpEvent }
@@ -3172,7 +3172,7 @@ function updateEventList(forceEventListUpdate) -- When a new event is created or
 					table.remove(events, i)
 					table.insert(events, i+1, e)
 					updateEventList(true)
-					saveState2()
+					saveState()
 				end
 				eventUI.downEventButtons[i] = addImage(eventScrollPanel, '75%', (10 * i + 2).."%", '15%', "6%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
 				eventUI.downEventButtons[i].OnClick = { moveDownEvent }
@@ -3215,7 +3215,7 @@ function updateConditionList(e)
 					removeThirdWindows() -- close windows to prevent bugs
 					currentCondition = nil
 					currentAction = nil
-					saveState2()
+					saveState()
 				end
 			end
 		}
@@ -3235,7 +3235,7 @@ function updateActionList(e)
 					removeThirdWindows() -- close windows to prevent bugs
 					currentAction = nil
 					currentCondition = nil
-					saveState2()
+					saveState()
 				end
 			end
 		}
@@ -3384,7 +3384,7 @@ function selectConditionType() -- Callback when selecting a condition
 		if events[currentEvent].conditions[currentCondition].type ~= conditionType then
 			events[currentEvent].conditions[currentCondition].type = conditionType
 			drawConditionFrame(true)
-			saveState2()
+			saveState()
 		else
 			drawConditionFrame(false)
 		end
@@ -3404,7 +3404,7 @@ function selectActionType() -- Callback when selecting an action
 		if events[currentEvent].actions[currentAction].type ~= actionType then
 			events[currentEvent].actions[currentAction].type = actionType
 			drawActionFrame(true)
-			saveState2()
+			saveState()
 		else
 			drawActionFrame(false)
 		end
@@ -3511,7 +3511,7 @@ drawFeatureFunctions["unitType"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3553,7 +3553,7 @@ drawFeatureFunctions["team"] = function(attr, yref, ac, panel, feature)
 			if comboBox.selected ~= comboBox.prevSelection then
 				comboBox.prevSelection = comboBox.selected
 				ac.params[attr.id] = itemIdToTeamId[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3601,7 +3601,7 @@ drawFeatureFunctions["player"] = function(attr, yref, ac, panel, feature)
 			if comboBox.selected ~= comboBox.prevSelection then
 				comboBox.prevSelection = comboBox.selected
 				ac.params[attr.id] = itemIdToTeamId[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3650,7 +3650,7 @@ drawFeatureFunctions["group"] = function(attr, yref, ac, panel, feature)
 			if comboBox.selected ~= comboBox.prevSelection then
 				comboBox.prevSelection = comboBox.selected
 				ac.params[attr.id] = itemIdToGroupId[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3699,7 +3699,7 @@ drawFeatureFunctions["zone"] = function(attr, yref, ac, panel, feature)
 			if comboBox.selected ~= comboBox.prevSelection then
 				comboBox.prevSelection = comboBox.selected
 				ac.params[attr.id] = itemIdToZoneId[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3746,7 +3746,7 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, ac, panel, feature
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3790,7 +3790,7 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, ac, panel, featur
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3826,7 +3826,7 @@ drawFeatureFunctions["comparison"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3870,7 +3870,7 @@ drawFeatureFunctions["condition"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3906,7 +3906,7 @@ drawFeatureFunctions["toggle"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3953,7 +3953,7 @@ drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= commandsToID[comboBox.items[comboBox.selected]] then
 				ac.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -3989,7 +3989,7 @@ drawFeatureFunctions["boolean"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4028,7 +4028,7 @@ drawFeatureFunctions["widget"] = function(attr, yref, ac, panel, feature)
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
 				ac.params[attr.id] = comboBox.items[comboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4209,7 +4209,7 @@ drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 		function()
 			if a.params[attr.id] ~= editBox.text then
 				a.params[attr.id] = editBox.text
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4232,16 +4232,14 @@ drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	editBox.OnChange = {
 		function()
 			if editBox.rawText ~= editBox.text then
-				Spring.Echo (editBox.text)
 				local msgs = splitString2(editBox.text, "||")
 				for i in ipairs(msgs) do
 					msgs[i] = string.gsub(msgs[i], "^%s+", "")
 					msgs[i] = string.gsub(msgs[i], "%s+$", "")
-					Spring.Echo ("\t"..msgs[i])
 				end
 				a.params[attr.id] = msgs
 				editBox.rawText = editBox.text
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4276,7 +4274,7 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, ac, panel, featu
 		function()
 			if ac.params[attr.id].number ~= editBox.text then
 				ac.params[attr.id].number = editBox.text
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4307,7 +4305,7 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, ac, panel, featu
 					ac.params[attr.id].comparison = "atmost"
 					editBox:Show()
 				end
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4388,7 +4386,7 @@ function configureEvent() -- Show the event configuration window
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						updateActionList(e)
-						saveState2()
+						saveState()
 					end
 					local but = addImage(actionSequenceScrollPanel, '0%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowup.png", true, { 1, 1, 1, 1 })
 					but.OnClick = { moveUpAction }
@@ -4409,7 +4407,7 @@ function configureEvent() -- Show the event configuration window
 							removeElements(eventActionsScrollPanel, dAB, false)
 						end
 						updateActionList(e)
-						saveState2()
+						saveState()
 					end
 					local but = addImage(actionSequenceScrollPanel, '80%', ((i - 1) * 20 + 5).."%", '20%', "10%", "bitmaps/editor/arrowdown.png", true, { 1, 1, 1, 1 })
 					but.OnClick = { moveDownAction }
@@ -4429,7 +4427,7 @@ function configureEvent() -- Show the event configuration window
 					if e.repetition then
 						e.repetitionTime = repetitionUI.repetitionEditBox.text
 						repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
-						saveState2()
+						saveState()
 					end
 				end
 			)
@@ -4456,7 +4454,7 @@ function configureEvent() -- Show the event configuration window
 						if e.repetition then
 							e.repetition = false
 							disableRepetitionUI()
-							saveState2()
+							saveState()
 						end
 					else
 						if not e.repetition then
@@ -4483,7 +4481,7 @@ function configureEvent() -- Show the event configuration window
 				function ()
 					if e.comment ~= eventCommentEditBox.text then
 						e.comment = eventCommentEditBox.text
-						saveState2()
+						saveState()
 					end
 				end
 			}
@@ -4562,7 +4560,7 @@ function importCondition() -- Import a condition to the current event, renaming 
 
 	conditionNumber = conditionNumber + 1
 
-	saveState2()
+	saveState()
 end
 
 function importAction() -- Import an action to the current event, renaming it if necessary
@@ -4593,7 +4591,7 @@ function importAction() -- Import an action to the current event, renaming it if
 
 	updateActionSequence = true
 
-	saveState2()
+	saveState()
 end
 
 function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
@@ -4655,7 +4653,7 @@ function addVariable()
 	variablesNumber = variablesNumber + 1
 	variablesTotal = variablesTotal + 1
 
-	saveState2()
+	saveState()
 end
 
 function updateVariables()
@@ -4689,7 +4687,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 		function ()
 			if var.name ~= nameEditBox.text then
 				var.name = nameEditBox.text -- Update variables value
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4722,7 +4720,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 				if localLock then
 					loadingState = false -- turn on save state mecanism
 				end
-				saveState2()
+				saveState()
 			elseif var.type == "number" and typeComboBox.items[typeComboBox.selected] == EDITOR_TRIGGERS_VARIABLES_TYPE_BOOLEAN then
 				var.type = "boolean"
 				variablesScrollPanel:RemoveChild(initValueEditBox)
@@ -4736,7 +4734,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 				if localLock then
 					loadingState = false -- turn on save state mecanism
 				end
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4748,7 +4746,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 				if var.initValue ==  nil then -- the value contains non numeric value
 					initValueEditBox:SetText("0")
 				else
-					saveState2()
+					saveState()
 				end
 			end
 		end
@@ -4758,7 +4756,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 		function()
 			if var.initValue ~= initValueComboBox.items[initValueComboBox.selected] then
 				var.initValue = initValueComboBox.items[initValueComboBox.selected]
-				saveState2()
+				saveState()
 			end
 		end
 	}
@@ -4782,7 +4780,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 			for i, v in ipairs(triggerVariables) do
 				if var == v then
 					table.remove(triggerVariables, i)
-					saveState2()
+					saveState()
 					updateVariables()
 					break
 				end
@@ -4835,6 +4833,7 @@ function generateCommandsList(encodedList, encodedUnitList)
 		table.insert(sortedCommandsList, c)
 		idToCommands[id] = c
 	end
+	
 	table.sort(sortedCommandsList)
 	local commandsUnitList = json.decode(encodedUnitList)
 	for u, cl in pairs(commandsUnitList) do
@@ -4874,7 +4873,7 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 			drawConditionFrame(false)
 		end
 		if t and v then
-			saveState2()
+			saveState()
 		end
 	end
 
@@ -4953,7 +4952,7 @@ function showRandomPositionInZoneWindow() -- Allow the user to pick a zone when 
 				ca = events[currentEvent].conditions[currentCondition]
 			end
 			ca.params[changedParam] = z.id
-			saveState2()
+			saveState()
 			closeWindow ()
 		end
 		but.OnClick = { pickFunction }
@@ -4995,7 +4994,7 @@ function refreshWidgetWindows()
 			function()
 				but.state.chosen = not but.state.chosen
 				w.active = not w.active
-				saveState2()
+				saveState()
 			end
 		}
 		count = count + 1
@@ -5171,7 +5170,6 @@ function refreshGUI() -- Open the window of the state you were in before load/ne
 		tracesFrame()
 		tracesFrame()
 	end
-	saveState()
 end
 
 function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
@@ -5390,6 +5388,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 		-- reset flag
 		loadingFromMenu = false
 		resetStack() -- reset stack of states
+		NeedToBeSaved = false
 	end
 end
 
@@ -5420,39 +5419,19 @@ function saveMap() -- Save the table containing the data of the mission into a f
 	local savedTable = encodeSaveTable()
 	local saveName = savedTable.description.saveName
 
+	-- add to saved table list of commands and unit type 
+	savedTable.listOfCommands = idToCommands
+	savedTable.listOfUnitTypes = {}
+	for id, unitDef in pairs(UnitDefs) do
+		savedTable.listOfUnitTypes[id] = unitDef.humanName
+	end
+	
 	-- Write
-	local jsonfile = json.encode(savedTable)
-	local DBG_formatString = false -- Set this to true to have a better view of the json file (Warning if true this produces bugs on zone text if it contains ",", "}", "{", "%[" or "%]" tokkens )
-	if DBG_formatString then
-		jsonfile = string.gsub(jsonfile, ",", ",\n")
-		jsonfile = string.gsub(jsonfile, "}", "\n}")
-		jsonfile = string.gsub(jsonfile, "{", "{\n")
-		jsonfile = string.gsub(jsonfile, "%[", "[\n")
-		jsonfile = string.gsub(jsonfile, "%]", " \n]")
-		local count = 0
-		jsonfile = string.gsub(
-			jsonfile,
-			".",
-			function(c)
-				if c == "\n" then
-					local rtr = "\n"
-					for i = 1, count, 1 do
-						rtr = rtr.."\t"
-					end
-					return rtr
-				end
-				if c == "[" or c == "{" then
-					count = count + 1
-					return c
-				end
-				if c == "]" or c == "}" then
-					count = count - 1
-					return c
-				end
-			end
-		)
-		jsonfile = string.gsub(jsonfile, "\t}", "}")
-		jsonfile = string.gsub(jsonfile, "\t%]", "]")
+	local jsonfile = json.encode(savedTable, { indent = true })
+	local compress = false -- set to true to compress file (removing \n and \t caracters)
+	if compress then
+		jsonfile = string.gsub(jsonfile, "\n", "")
+		jsonfile = string.gsub(jsonfile, "\t", "")
 	end
 	local file = io.open("SPRED/missions/"..saveName..".editor", "w")
 	file:write(jsonfile)
@@ -5753,12 +5732,12 @@ end
 function resetStack() -- reset the stack
 	saveStates = {}
 	loadIndex = 1
-	saveState2() 
+	saveState()
 end
 
-function saveState2() -- Save the state and put it in the stack
-	NeedToBeSaved = true
+function saveState() -- Save the state and put it in the stack
 	if not loadingMap and not loadingState and initialized then
+		NeedToBeSaved = true
 		-- remove states on the top of the stack
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
@@ -5773,22 +5752,6 @@ function saveState2() -- Save the state and put it in the stack
 		loadIndex = 1
 		Spring.Echo ("Push new state: "..loadIndex.." / "..#saveStates)
 	end
-end
-
-function saveState() -- Save the state and put it in the stack
-	-- NeedToBeSaved = true
-	-- if not loadingState and initialized then
-		-- -- remove states on the top of the stack
-		-- for i = 1, loadIndex-1, 1 do
-			-- table.remove(saveStates, 1)
-		-- end
-		-- -- compute new state
-		-- local savedTable = encodeSaveTable()
-		-- savedTable = json.decode(json.encode(savedTable))
-		-- -- push the new state on the top of the stack
-		-- table.insert(saveStates, 1, savedTable)
-		-- loadIndex = 1
-	-- end
 end
 
 function loadState(direction) -- Load a state from the stack depending on the direction (CTRL + Y or Z)
@@ -5982,7 +5945,7 @@ function widget:Initialize()
 	initChili()
 	initialized = false
 	widgetHandler:RegisterGlobal("GetNewUnitIDsAndContinueLoadMap", GetNewUnitIDsAndContinueLoadMap)
-	widgetHandler:RegisterGlobal("saveState", saveState2) -- called by gadget when a unit is created
+	widgetHandler:RegisterGlobal("saveState", saveState) -- called by gadget when a unit is created
 	widgetHandler:RegisterGlobal("requestSave", requestSave) -- called by gadget when a unit is updated
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
 	widgetHandler:RegisterGlobal("generateCommandsList", generateCommandsList)
@@ -6067,7 +6030,7 @@ function widget:Update(delta)
 		-- see comment in loadMap function
 		if askGadgetToLoadTable >= 0 then
 			askGadgetToLoadTable = askGadgetToLoadTable - delta
-			if askGadgetToLoadTable < 0 then
+			if askGadgetToLoadTable < 0 and loadedTable.units ~= nil then
 				Spring.SendLuaRulesMsg("Load Map".."++"..json.encode(loadedTable.units)) -- ask the gadget to instanciate units with new ids
 			end
 		end
@@ -6075,7 +6038,7 @@ function widget:Update(delta)
 		if saveStateTrigger >= 0 then
 			saveStateTrigger = saveStateTrigger - delta
 			if saveStateTrigger < 0 then
-				saveState2()
+				saveState()
 			end
 		end
 	end
@@ -6095,6 +6058,7 @@ function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("saveState")
 	widgetHandler:DeregisterGlobal("requestSave")
 	widgetHandler:DeregisterGlobal("beginLoadLevel")
+	widgetHandler:DeregisterGlobal("generateCommandsList")
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -6236,7 +6200,7 @@ function widget:MousePress(mx, my, button)
 							Screen0:AddChild(windows["conditionWindow"])
 							drawConditionFrame(false)
 						end
-						saveState2()
+						saveState()
 					end
 				elseif triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT then
 					if kind == "unit" and currentEvent then
@@ -6257,7 +6221,7 @@ function widget:MousePress(mx, my, button)
 							Screen0:AddChild(windows["conditionWindow"])
 							drawConditionFrame(false)
 						end
-						saveState2()
+						saveState()
 					end
 				end
 			end
@@ -6365,7 +6329,7 @@ function widget:MouseRelease(mx, my, button)
 		end
 		doubleClick = 0 -- reset double click timer
 		if waitMouseRelease then
-			saveState2()
+			saveState()
 			waitMouseRelease = false
 		end
 		return true
@@ -6541,7 +6505,7 @@ function widget:KeyPress(key, mods)
 							break
 						end
 					end
-					saveState2()
+					saveState()
 					return true
 				-- ARROWS : move selected zone
 				elseif key == Spring.GetKeyCode("up") then
@@ -6551,7 +6515,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.z = selectedZone.z - 8
 					end
-					saveState2()
+					saveState()
 					return true
 				elseif key == Spring.GetKeyCode("down") then
 					if selectedZone.type == "Rectangle" then
@@ -6560,7 +6524,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.z = selectedZone.z + 8
 					end
-					saveState2()
+					saveState()
 					return true
 				elseif key == Spring.GetKeyCode("left") then
 					if selectedZone.type == "Rectangle" then
@@ -6569,7 +6533,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.x = selectedZone.x - 8
 					end
-					saveState2()
+					saveState()
 					return true
 				elseif key == Spring.GetKeyCode("right") then
 					if selectedZone.type == "Rectangle" then
@@ -6578,7 +6542,7 @@ function widget:KeyPress(key, mods)
 					elseif selectedZone.type == "Disk" then
 						selectedZone.x = selectedZone.x + 8
 					end
-					saveState2()
+					saveState()
 					return true
 				end
 			end
