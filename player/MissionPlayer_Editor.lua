@@ -1019,6 +1019,7 @@ end
 local function processEvents(frameNumber)
   local creationOfNewEvent=false
   local newevent
+  local toBeRemoved = {}
   for order,idEvent  in orderedPairs(ctx.orderedEventsId) do
   -- ctx.events
     local event=ctx.events[idEvent]
@@ -1070,8 +1071,17 @@ local function processEvents(frameNumber)
           ctx.indexOfLastEvent=ctx.indexOfLastEvent+1
           ctx.orderedEventsId[ctx.indexOfLastEvent]=newEvId
         end
+		-- tag this event to be removed from events list if no repetition sets
+		if event.repetition==nil or event.repetition==false then
+			table.insert(toBeRemoved, order)
+		end
       end
     end
+  end
+  -- remove events
+  for i, v in ipairs(toBeRemoved) do
+	table.remove(ctx.orderedEventsId, v)
+	ctx.indexOfLastEvent=ctx.indexOfLastEvent-1
   end
 end
 
