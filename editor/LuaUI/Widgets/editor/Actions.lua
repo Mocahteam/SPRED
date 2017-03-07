@@ -108,19 +108,6 @@ actions_list = {
 		}
 	},
 	{
-		type = "feedback",
-		filter = "Game",
-		typeText = "Change feedback state",
-		text = "Feedback is now <State>.",
-		attributes = {
-			{
-				text = "<State>",
-				type = "toggle",
-				id = "toggle"
-			}
-		}
-	},
-	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
@@ -414,29 +401,11 @@ actions_list = {
 		}
 	},
 	{
-		type = "markerPosition",
+		type = "showBriefing",
 		filter = "Message",
-		typeText = "Display marker at position",
-		text = "Display a marker with <Message> at <Position> for <Time> seconds.",
-		attributes = {
-			{
-				text = '<Message>',
-				type = "textSplit",
-				id = "message",
-				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
-			},
-			{
-				text = "<Position>",
-				type ="position",
-				id = "position"
-			},
-			{
-				text = "<Time>",
-				type = "text",
-				id = "time",
-				hint = "You can put 0 in this field for an infinite duration."
-			}
-		}
+		typeText = "Show briefing",
+		text = "Show the briefing (The briefing is automatically shown on start, use this action only to show the briefing again in game).",
+		attributes = {}
 	},
 	{
 		type = "addToGroup",

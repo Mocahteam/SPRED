@@ -385,9 +385,19 @@ local function displayConfirmSave(gameName, fileName)
 	}
 end
 
+-----------------------
+-- Generate a name for a file from a string
+-----------------------
+local function generateSaveName(name)
+	local saveName = name
+	saveName = string.gsub(name, " ", "_")
+	saveName = string.gsub(saveName, "[/;\\%.%*:%?\"<>|]", "")
+	return saveName
+end
+
 local function processSaving ()
 	if saveNameEditBox ~= nil then
-		local fileName=saveNameEditBox.text..".sav"
+		local fileName=generateSaveName(saveNameEditBox.text)..".sav"
 		local gameName=Game.gameShortName or Game.modShortName
 		if VFS.FileExists("Savegames/"..gameName.."/"..fileName) then
 			displayConfirmSave(gameName, fileName)
@@ -709,7 +719,7 @@ local function showMainMenu (missionEnd)
 	}
 	
 	-- check if we have to add the continue button
-	-- first its depend if the player has achived the end of the mission
+	-- first it depends if the player has achieved the end of the mission
 	-- and if appliq is properly initialized
 	if missionEnd.state ~= "menu" and mode=="appliq" and AppliqManager~=nil then
 		local currentoptions=Spring.GetModOptions()       
@@ -752,19 +762,22 @@ local function showMainMenu (missionEnd)
 		end
 	end
 	
-	-- save button
-	local saveBut = addButton(mainMenuWindow, "0%", "70%", "30%", "10%", LANG_SAVE_PROGRESSION)
-	saveBut.backgroundColor = { 0, 0.2, 0.6, 1 }
-	saveBut.focusColor = { 0, 0.6, 1, 1 }
-	saveBut.OnClick = {
-		function ()
-			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
+	-- check if we have to add the save button
+	-- it depends if appliq is properly initialized
+	if mode=="appliq" and AppliqManager~=nil then
+		local saveBut = addButton(mainMenuWindow, "0%", "70%", "30%", "10%", LANG_SAVE_PROGRESSION)
+		saveBut.backgroundColor = { 0, 0.2, 0.6, 1 }
+		saveBut.focusColor = { 0, 0.6, 1, 1 }
+		saveBut.OnClick = {
+			function ()
+				if Script.LuaUI.TraceAction then
+					Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
+				end
+				mainMenuWindow:Hide()
+				displaySaveWindow()
 			end
-			mainMenuWindow:Hide()
-			displaySaveWindow()
-		end
-	}
+		}
+	end
 	
 	-- quit mission button
 	local quitMissionBut = addButton(mainMenuWindow, "0%", "80%", "30%", "10%", LANG_QUIT_MISSION)

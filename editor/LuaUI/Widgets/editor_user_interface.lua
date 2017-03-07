@@ -1005,7 +1005,7 @@ end
 
 function hideDefaultGUI()
 	-- get rid of engine UI
-	Spring.SendCommands("resbar 0","fps 1","console 0","info 0", "tooltip 0", "unbindkeyset backspace")
+	Spring.SendCommands("resbar 0","fps 0","console 0","info 0", "tooltip 0", "unbindkeyset backspace")
 	-- leaves rendering duty to widget (we won't)
 	gl.SlaveMiniMap(true)
 	-- a hitbox remains for the minimap, unless you do this
@@ -1993,8 +1993,8 @@ function addUnitLine(unitID, unitDefID, unitTeam)
 	end
 	unitListEyes[unitID] = addImage(unitListScrollPanel, "85%", (unitListLinesCnt*unitListLinesHeight).."%", "15%", unitListLinesHeight.."%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 	unitListEyes[unitID].OnClick = { viewUnit }
-	unitListEyes[unitID].OnMouseOver = { function() if unitID then unitListEyes[unitID].color = {1, 1, 1, 1} end end }
-	unitListEyes[unitID].OnMouseOut = { function() if unitID then unitListEyes[unitID].color = {0, 1, 1, 1} end end }
+	unitListEyes[unitID].OnMouseOver = { function() if unitListEyes[unitID] then unitListEyes[unitID].color = {1, 1, 1, 1} end end }
+	unitListEyes[unitID].OnMouseOut = { function() if unitListEyes[unitID] then unitListEyes[unitID].color = {0, 1, 1, 1} end end }
 
 	-- Highlight
 	unitListHighlight[unitID] = addImage(unitListScrollPanel, '0%', (unitListLinesCnt*unitListLinesHeight).."%", "100%", unitListLinesHeight.."%", "bitmaps/editor/blank.png", false, {1, 1, 0.4, 0})
@@ -2030,8 +2030,8 @@ function updateGroupListUnitList() -- update group frame unit list
 		end
 		groupListUnitsEyes[u] = addImage(groupListUnitsScrollPanel, '85%', ((i-1)*8).."%", '15%', "8%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
 		groupListUnitsEyes[u].OnClick = { viewUnit }
-		groupListUnitsEyes[u].OnMouseOver = { function() if u then groupListUnitsEyes[u].color = {1, 1, 1, 1} end end }
-		groupListUnitsEyes[u].OnMouseOut = { function() if u then groupListUnitsEyes[u].color = {0, 1, 1, 1} end end }
+		groupListUnitsEyes[u].OnMouseOver = { function() if groupListUnitsEyes[u] then groupListUnitsEyes[u].color = {1, 1, 1, 1} end end }
+		groupListUnitsEyes[u].OnMouseOut = { function() if groupListUnitsEyes[u] then groupListUnitsEyes[u].color = {0, 1, 1, 1} end end }
 	end
 end
 
@@ -5657,7 +5657,7 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 	savedTable.description.traces = {}
 	for _, t in ipairs(chosenTraces) do
 		-- check if trace already exists (case of expert solution deleted by user)
-		if VFS.FileExists("traces/data/expert/"..mapDescription.mapName.."/"..t..".xml") then
+		if VFS.FileExists("traces/data/expert/"..generateSaveName(mapDescription.mapName).."/"..t..".xml") then
 			table.insert(savedTable.description.traces, t)
 		end
 	end

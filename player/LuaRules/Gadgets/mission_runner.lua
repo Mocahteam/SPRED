@@ -155,6 +155,7 @@ else
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+Spring.SendCommands("resbar 0","fps 0","console 0","info 0") -- TODO : change fps 1 to fps 0 in release
 -- leaves rendering duty to widget (we won't)
 gl.SlaveMiniMap(true)
 -- a hitbox remains for the minimap, unless you do this
@@ -213,9 +214,13 @@ function gadget:RecvFromSynced(...)
     local p=json.decode(arg2)
     Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time)
     
-  elseif arg1 == "displayZone" then
+  elseif arg1 == "showZone" then
     local zone=json.decode(arg2)
     Script.LuaUI.AddZoneToDisplayList(zone)
+    
+  elseif arg1 == "hideZone" then
+    local zone=json.decode(arg2)
+    Script.LuaUI.RemoveZoneFromDisplayList(zone)
     
   elseif arg1 == "changeWidgetState" then
     local p=json.decode(arg2)

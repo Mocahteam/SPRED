@@ -247,7 +247,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		focusColor = { 0, 0.6, 1, 1 },
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() ResetScenario() MainMenuFrame() NeedToBeSaved = false end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, nil, true, false, function() ResetScenario() MainMenuFrame() NeedToBeSaved = false end)
 				else
 					ResetScenario()
 					MainMenuFrame()
@@ -284,7 +284,7 @@ function InitializeMainMenu() -- Initialize the main window and buttons of the m
 		focusColor= { 0.8, 0.6, 0.2, 1 },
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, Quit)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, nil, true, false, Quit)
 				else
 					Quit()
 				end
@@ -565,7 +565,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		},
 		OnClick = { function ()
 				if NeedToBeSaved then
-					FrameWarning(LAUNCHER_SCENARIO_WARNING, true, false, function() NeedToBeSaved = false OpenScenarioFrame() end)
+					FrameWarning(LAUNCHER_SCENARIO_WARNING, nil, true, false, function() NeedToBeSaved = false OpenScenarioFrame() end)
 				else
 					OpenScenarioFrame()
 				end
@@ -1130,18 +1130,19 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 end
 
 --- Shows a warning message
--- @tparam msg message to display as warning
+-- @tparam msg1 first line of the message to display as warning
+-- @tparam msg2 optionnal second line of the message to display as warning
 -- @bool yesnoButton if true display "yes" and "no" buttons
 -- @bool okButton if true display "ok" button
 -- @tparam yesCallback function listener yes button clicked
-function FrameWarning(msg, yesnoButton, okButton, yesCallback)
+function FrameWarning(msg1, msg2, yesnoButton, okButton, yesCallback)
 	ClearTemporaryUI()
 	local window = Chili.Window:New{
 		parent = UI.MainWindow,
 		x = '20%',
-		y = '45%',
+		y = (not msg2 or msg2 == "") and '45%' or '40%', -- 45% if msg2 is not defined or empty and 40% otherwise
 		width = '60%',
-		height = '20%',
+		height = (not msg2 or msg2 == "") and '20%' or '30%', -- 20% if msg2 is not defined or empty and 30% otherwise
 		draggable = false,
 		resizable = false
 	}
@@ -1150,10 +1151,10 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		x = '2%',
 		y = '0%',
 		width = '96%',
-		height = '60%',
+		height = (not msg2 or msg2 == "") and '50%' or '33%',
 		align = "center",
 		valign = "linecenter",
-		caption = msg,
+		caption = msg1,
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 25,
@@ -1166,13 +1167,36 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 			shadow = false
 		}
 	}
+	if msg2 and msg2~="" then
+		Chili.Label:New{
+		parent = window,
+		x = '2%',
+		y = '33%',
+		width = '96%',
+		height = '33%',
+		align = "center",
+		valign = "linecenter",
+		caption = msg2,
+		font = {
+			font = "LuaUI/Fonts/Asimov.otf",
+			size = 25,
+			autoAdjust = true,
+			maxSize = 25,
+			-- avoid transparent artifact on windows superposition
+			outlineWidth = 0,
+			outlineWeight = 0,
+			outline = true,
+			shadow = false
+		}
+	}
+	end
 	if (yesnoButton) then
 		Chili.Button:New{
 			parent = window,
 			x = '0%',
-			y = '50%',
+			y = (not msg2 or msg2 == "") and '55%' or '66%',
 			width = '33%',
-			height = '40%',
+			height = (not msg2 or msg2 == "") and '40%' or '33%',
 			caption = LAUNCHER_YES,
 			OnClick = { yesCallback },
 			font = {
@@ -1190,9 +1214,9 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		Chili.Button:New{
 			parent = window,
 			x = '66%',
-			y = '50%',
+			y = (not msg2 or msg2 == "") and '55%' or '66%',
 			width = '33%',
-			height = '40%',
+			height = (not msg2 or msg2 == "") and '40%' or '33%',
 			caption = LAUNCHER_NO,
 			OnClick = { ClearTemporaryUI },
 			font = {
@@ -1212,9 +1236,9 @@ function FrameWarning(msg, yesnoButton, okButton, yesCallback)
 		Chili.Button:New{
 			parent = window,
 			x = '33%',
-			y = '50%',
+			y = (not msg2 or msg2 == "") and '55%' or '66%',
 			width = '33%',
-			height = '40%',
+			height = (not msg2 or msg2 == "") and '40%' or '33%',
 			caption = LAUNCHER_OK,
 			OnClick = { ClearTemporaryUI },
 			font = {
@@ -1790,7 +1814,7 @@ function OpenScenario(xmlTable) -- Load a scenario from a xml file
 		ScenarioName = xmlTable.kids[1].kids[4].kids[1].kids[1].text
 		ScenarioDesc = xmlTable.kids[1].kids[4].kids[1].kids[2].text
 	else
-		FrameWarning(LAUNCHER_SCENARIO_EMPTY, false, true)
+		FrameWarning(LAUNCHER_SCENARIO_EMPTY, nil, false, true)
 		loadingSuccess = false
 	end
 	LoadLock = true
@@ -1826,7 +1850,7 @@ function BeginExportGame()
 	local editorName = string.gsub(Game.modName, " "..Game.modVersion, "") -- remove version to Game.modName
 	if not VFS.FileExists(gameFolder.."/"..editorName..".sdz") then
 		local message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL_ARCHIVE_NOT_FOUND, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..editorName..".sdz")
-		FrameWarning (message, false, true)
+		FrameWarning (message, nil, false, true)
 		return
 	end
 	-- Generate name
@@ -1876,7 +1900,7 @@ function BeginExportGame()
 			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList, "1")
 			exportSuccess = true
 		else
-			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, false, true)
+			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, nil, false, true)
 		end
 	else
 		-- Change Modinfo.lua
@@ -1911,13 +1935,11 @@ function BeginExportGame()
 		-- Show message
 		local message = ""
 		if not alreadyExists then
-			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "/GAMENAME/", scenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
+			message = LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS
 		else
-			message = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_FAIL, "/GAMENAME/", ScenarioName)
-			message = string.gsub(message, "/GAMEFILENAME/", "<Spring>/"..gameFolder.."/"..name..".sdz")
+			message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL
 		end
-		FrameWarning(message, false, true)
+		FrameWarning(message, "<Spring>/"..gameFolder.."/"..name..".sdz", false, true)
 	end
 end
 

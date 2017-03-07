@@ -3,7 +3,6 @@ local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=9
 local gameName=Game.gameShortName or Game.modShortName
 
 local function saveTxt(txt)
-  Spring.Echo(gameName)
   if(not VFS.FileExists("Savegames/"..gameName.."/"))then
     Spring.CreateDir("Savegames/"..gameName.."/")
   end

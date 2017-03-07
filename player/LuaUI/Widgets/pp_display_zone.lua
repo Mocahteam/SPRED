@@ -13,7 +13,17 @@ end
 local Zones = {}
 
 function AddZoneToDisplayList(zone)
-	table.insert(Zones, zone)
+	-- check if this zone is not already in display list
+	local found = false
+	for i, z in ipairs(Zones) do
+		if z.id == zone.id then
+			found = true
+			break
+		end
+	end
+	if not found then
+		table.insert(Zones, zone)
+	end
 end
 
 function RemoveZoneFromDisplayList(zone)

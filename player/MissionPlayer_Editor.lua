@@ -659,7 +659,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
     elseif(act.type=="removeFromGroup")then
       removeUnitFromGroups(ctx.armyExternal[unit],{"group_"..act.params.group},false) 
     elseif(act.type=="order")then
-      Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters, {})
+      Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters or {}, {})
     elseif(act.type=="orderPosition")then
       local posFound=extractPosition(act.params.position)
       EchoDebug("orderPosition (posFound,unit,command) : "..json.encode({posFound,unit,act.params.command}),5)
@@ -743,6 +743,9 @@ local function ApplyNonGroupableAction(act)
   
   elseif(act.type=="messageGlobal") then
     Script.LuaRules.showMessage(getAMessage(act.params.message), false, 500)
+  
+  elseif(act.type=="showBriefing") then
+    ShowBriefing()
 
   elseif(act.type=="messagePosition") then
     --Spring.Echo("try to send : DisplayMessagePosition")
@@ -759,8 +762,27 @@ local function ApplyNonGroupableAction(act)
     AddActionInStack(deletePositionAction, secondesToFrames(act.params.time))
     --]]
      
-  elseif(act.type=="erasemarker") then 
-    Spring.MarkerErasePosition(act.params.x,act.params.y,act.params.z)
+  -- ZONES
+  
+  elseif(act.type=="hideZone") then 
+	-- look for corresponding zone
+	for i=1, table.getn(ctx.mission.zones) do
+		local cZ=ctx.mission.zones[i]
+		if cZ.id == act.params.zone then
+			SendToUnsynced("hideZone", json.encode(cZ))
+			break
+		end
+	end
+  
+  elseif(act.type=="showZone") then 
+	-- look for corresponding zone
+	for i=1, table.getn(ctx.mission.zones) do
+		local cZ=ctx.mission.zones[i]
+		if cZ.id == act.params.zone then
+			SendToUnsynced("showZone", json.encode(cZ))
+			break
+		end
+	end
   
    -- WIN/LOSE
    
@@ -793,7 +815,7 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="script") then
     load_code(act.params.script)
  
-  elseif(act.type=="enableWidget")or(act.type=="enableWidget") then
+  elseif(act.type=="enableWidget")or(act.type=="disableWidget") then
     local widgetName=act.params.widget
     local activation=(act.type=="enableWidget")
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
@@ -1442,10 +1464,10 @@ local function StartAfterJson ()
       local zName = string.gsub(cZ.name, "\\n", "\n")
       Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, zName)
     end 
-    if cZ.showInGame then
-       SendToUnsynced("displayZone", json.encode(cZ))    
-    end
     --displayZone
+    if cZ.showInGame then
+       SendToUnsynced("showZone", json.encode(cZ))    
+    end
   end
 end
    
@@ -1682,6 +1704,6 @@ missionScript.ApplyAction = ApplyAction
 missionScript.RecvLuaMsg = RecvLuaMsg
 
 ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.writeLetter=writeLetter ; ctx.writeSign=writeSign ; ctx.showMessage=showMessage ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsImpliedByCondition=extractListOfUnitsImpliedByCondition ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.writeCompassOnUnit=writeCompassOnUnit ; ctx.parseJson=parseJson ; ctx.returnEventsTriggered=returnEventsTriggered ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
-ctx.Spring=Spring 
+ctx.Spring=Spring ; ctx.math=math
 
 return missionScript
