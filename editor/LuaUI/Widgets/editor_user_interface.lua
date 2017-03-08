@@ -4915,8 +4915,23 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION)
 	addLabel(selectSetOfUnitsWindows.actcond, '0%', '54%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING)
 	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '57%', '100%', '43%')
+	local counter = 0
 	for i, c in ipairs(events[currentEvent].conditions) do
-		addButton(csp, "0%", ((i-1) * 15).."%", "100%", "15%", c.name, function() pickFunction("condition", c.id) end)
+		-- filter only condition that include one attribute with unitset id
+		-- first we look for the condition pattern associated to the current condition
+		for i, condition_pattern in ipairs(conditions_list) do
+			if condition_pattern.type == c.type then
+				-- second we check in attributes if this condition pattern works on unitset
+				for k, attr in pairs(condition_pattern.attributes) do
+					if attr.id == "unitset" then
+						addButton(csp, "0%", (counter * 15).."%", "100%", "15%", c.name, function() pickFunction("condition", c.id) end)
+						counter = counter + 1
+						break
+					end
+				end
+				break
+			end
+		end
 	end
 end
 

@@ -152,236 +152,116 @@
 		"briefing":"Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
 	},
 	"units":[{
-			"type":"pointer",
-			"id":5381,
+			"type":"logic_bomb",
+			"id":4042,
 			"position":{
-				"y":65.611457824707,
-				"x":3808,
-				"z":1741
-			},
-			"orientation":-2.6024506092072,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":4849,
-			"position":{
-				"y":171.99165344238,
-				"x":3230,
-				"z":1931
-			},
-			"orientation":2.3584811687469,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":647,
-			"position":{
-				"y":79.134963989258,
-				"x":3978,
-				"z":1502
-			},
-			"orientation":-1.2730696201324,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":1993,
-			"position":{
-				"y":130.47662353516,
-				"x":3981,
-				"z":140
-			},
-			"orientation":-0.046921297907829,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":996,
-			"position":{
-				"y":157.17481994629,
-				"x":3152.6748046875,
-				"z":1400.9140625
-			},
-			"orientation":1.1217217445374,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":3578,
-			"position":{
-				"y":202.53300476074,
-				"x":2950.4516601563,
-				"z":975.60589599609
-			},
-			"orientation":1.8291258811951,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":279,
-			"position":{
-				"y":223.73870849609,
-				"x":3509,
-				"z":638
-			},
-			"orientation":0.90417367219925,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":3458,
-			"position":{
-				"y":169.61465454102,
-				"x":3435,
-				"z":737
-			},
-			"orientation":0.96662479639053,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":3455,
-			"position":{
-				"y":237.25904846191,
-				"x":3067.4150390625,
-				"z":1587.8966064453
-			},
-			"orientation":1.9713171720505,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":1423,
-			"position":{
-				"y":226.36219787598,
-				"x":3081.9855957031,
-				"z":829.06475830078
-			},
-			"orientation":-0.055002357810736,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":1806,
-			"position":{
-				"y":208.33813476563,
-				"x":3478,
-				"z":681
-			},
-			"orientation":1.2880702018738,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":5076,
-			"position":{
-				"y":240.25434875488,
-				"x":3037.9208984375,
-				"z":768.9326171875
-			},
-			"orientation":0.31778410077095,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":4447,
-			"position":{
-				"y":186.67340087891,
-				"x":3124,
-				"z":1491
-			},
-			"orientation":1.3847835063934,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":2141,
-			"position":{
-				"y":244.46913146973,
-				"x":2896.7016601563,
-				"z":940.1181640625
-			},
-			"orientation":-0.84195220470428,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":1388,
-			"position":{
-				"y":103.38246154785,
-				"x":3716,
-				"z":1622
+				"y":125.62557983398,
+				"x":3872,
+				"z":772
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"obelisk",
-			"id":3693,
+			"type":"logic_bomb",
+			"id":3289,
 			"position":{
-				"y":75.89720916748,
-				"x":3961,
-				"z":1640
+				"y":167.05850219727,
+				"x":2924,
+				"z":1208
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"obelisk",
-			"id":875,
+			"type":"logic_bomb",
+			"id":2585,
 			"position":{
-				"y":104.07032012939,
-				"x":3673,
-				"z":1888
+				"y":145.83905029297,
+				"x":3252,
+				"z":660
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"hole",
-			"id":3290,
+			"type":"bit",
+			"id":4485,
 			"position":{
-				"y":136.1784362793,
-				"x":3478,
-				"z":1456
+				"y":118.70226287842,
+				"x":3626.6530761719,
+				"z":1359.4791259766
 			},
-			"orientation":2.9145636558533,
+			"orientation":-0.062030356377363,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":152,
+			"position":{
+				"y":118.25057220459,
+				"x":3621.4760742188,
+				"z":1206.8426513672
+			},
+			"orientation":0.098554819822311,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":2008,
+			"position":{
+				"y":104.07597351074,
+				"x":3889.0891113281,
+				"z":1194.6551513672
+			},
+			"orientation":0.60318952798843,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":713,
+			"position":{
+				"y":96.553703308105,
+				"x":3995.7641601563,
+				"z":1311.2705078125
+			},
+			"orientation":0.17531128227711,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"assembler",
+			"id":1612,
+			"position":{
+				"y":142.37466430664,
+				"x":3709.3896484375,
+				"z":856.67535400391
+			},
+			"orientation":0.55832028388977,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1971,
+			"id":1226,
 			"position":{
-				"y":253.5625,
-				"x":3617,
-				"z":519
+				"y":253.62161254883,
+				"x":2898,
+				"z":819
 			},
-			"orientation":-2.6998062133789,
+			"orientation":-1.2164467573166,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4423,
+			"id":4371,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -393,76 +273,232 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":5887,
+			"id":2064,
 			"position":{
-				"y":253.62161254883,
-				"x":2898,
-				"z":819
+				"y":253.5625,
+				"x":3617,
+				"z":519
 			},
-			"orientation":-1.2195147275925,
+			"orientation":-2.6952042579651,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"assembler",
-			"id":4361,
+			"type":"hole",
+			"id":3788,
 			"position":{
-				"y":142.37466430664,
-				"x":3709.3896484375,
-				"z":856.67535400391
+				"y":136.1784362793,
+				"x":3478,
+				"z":1456
 			},
-			"orientation":0.52862191200256,
+			"orientation":2.9114956855774,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":986,
+			"position":{
+				"y":104.07032012939,
+				"x":3673,
+				"z":1888
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":4183,
+			"position":{
+				"y":75.89720916748,
+				"x":3961,
+				"z":1640
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":1245,
+			"position":{
+				"y":103.38246154785,
+				"x":3716,
+				"z":1622
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":653,
+			"position":{
+				"y":244.46913146973,
+				"x":2896.7016601563,
+				"z":940.1181640625
+			},
+			"orientation":-0.84195220470428,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":3860,
+			"position":{
+				"y":186.67340087891,
+				"x":3124,
+				"z":1491
+			},
+			"orientation":1.3861986398697,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":4280,
+			"position":{
+				"y":240.25434875488,
+				"x":3037.9208984375,
+				"z":768.9326171875
+			},
+			"orientation":0.31778410077095,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":2526,
+			"position":{
+				"y":208.33813476563,
+				"x":3478,
+				"z":681
+			},
+			"orientation":1.2880702018738,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":3641,
+			"position":{
+				"y":226.36219787598,
+				"x":3081.9855957031,
+				"z":829.06475830078
+			},
+			"orientation":-0.057637557387352,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":348,
+			"position":{
+				"y":237.25904846191,
+				"x":3067.4150390625,
+				"z":1587.8966064453
+			},
+			"orientation":1.9713171720505,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2754,
+			"id":2963,
 			"position":{
-				"y":96.553703308105,
-				"x":3995.7641601563,
-				"z":1311.2705078125
+				"y":169.61465454102,
+				"x":3435,
+				"z":737
 			},
-			"orientation":0.16530552506447,
+			"orientation":0.96662479639053,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":1
 		},{
 			"type":"bit",
-			"id":38,
+			"id":765,
 			"position":{
-				"y":104.07597351074,
-				"x":3889.0891113281,
-				"z":1194.6551513672
+				"y":223.73870849609,
+				"x":3509,
+				"z":638
 			},
-			"orientation":0.5791979432106,
+			"orientation":0.90417367219925,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":1
 		},{
 			"type":"bit",
-			"id":3728,
+			"id":3852,
 			"position":{
-				"y":118.25057220459,
-				"x":3621.4760742188,
-				"z":1206.8426513672
+				"y":202.53300476074,
+				"x":2950.4516601563,
+				"z":975.60589599609
 			},
-			"orientation":0.087429895997047,
+			"orientation":1.8291258811951,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":1
 		},{
 			"type":"bit",
-			"id":4412,
+			"id":3493,
 			"position":{
-				"y":118.70226287842,
-				"x":3626.6530761719,
-				"z":1359.4791259766
+				"y":157.17481994629,
+				"x":3152.6748046875,
+				"z":1400.9140625
 			},
-			"orientation":-0.0589569658041,
+			"orientation":1.1217217445374,
 			"autoHeal":"global",
 			"hp":100,
-			"team":2
+			"team":1
+		},{
+			"type":"bit",
+			"id":2272,
+			"position":{
+				"y":130.47662353516,
+				"x":3981,
+				"z":140
+			},
+			"orientation":-0.045387610793114,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":4012,
+			"position":{
+				"y":79.134963989258,
+				"x":3978,
+				"z":1502
+			},
+			"orientation":-1.2699992656708,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1494,
+			"position":{
+				"y":171.99165344238,
+				"x":3230,
+				"z":1931
+			},
+			"orientation":2.3584811687469,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"pointer",
+			"id":3495,
+			"position":{
+				"y":65.611457824707,
+				"x":3808,
+				"z":1741
+			},
+			"orientation":-2.5975289344788,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
 		}],
 	"allyteams":{
 		"1":[0,2],
@@ -611,7 +647,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":5381,
+							"value":3495,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -623,12 +659,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1993,
+							"value":2272,
 							"type":"unit"
 						},
 						"position":{
-							"z":775,
-							"x":3736
+							"x":3736,
+							"z":775
 						}
 					}
 				},{
@@ -638,12 +674,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":647,
+							"value":4012,
 							"type":"unit"
 						},
 						"position":{
-							"z":1942,
-							"x":3997
+							"x":3997,
+							"z":1942
 						}
 					}
 				},{
@@ -653,12 +689,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":4849,
+							"value":1494,
 							"type":"unit"
 						},
 						"position":{
-							"z":1479,
-							"x":3306
+							"x":3306,
+							"z":1479
 						}
 					}
 				},{
@@ -668,12 +704,12 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4361,
+							"value":1612,
 							"type":"unit"
 						},
 						"position":{
-							"z":1669,
-							"x":3609
+							"x":3609,
+							"z":1669
 						}
 					}
 				}],
@@ -725,7 +761,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5381,
+							"value":3495,
 							"type":"unit"
 						}
 					}

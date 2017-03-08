@@ -77,7 +77,7 @@ actions_list = {
 				text = "<Trigger>",
 				type = "text",
 				id = "trigger",
-				hint = "This field must be filled with an boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\"."
+				hint = "This field must be filled with a boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\"."
 			}
 		}
 	},

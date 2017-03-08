@@ -258,19 +258,19 @@
 	},
 	"units":[{
 			"type":"assembler",
-			"id":952,
+			"id":4179,
 			"position":{
 				"y":119.02044677734,
 				"x":3641,
 				"z":1225
 			},
-			"orientation":-0.0053808917291462,
+			"orientation":-0.017642684280872,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":953,
+			"id":2342,
 			"position":{
 				"y":166.15704345703,
 				"x":3338,
@@ -282,19 +282,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2059,
+			"id":1464,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2624661922455,
+			"orientation":-1.2501944303513,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1529,
+			"id":2185,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -306,31 +306,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":541,
+			"id":1241,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.7626993656158,
+			"orientation":-2.7381558418274,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":548,
+			"id":2636,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.7395342588425,
+			"orientation":-1.7640779018402,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":2683,
+			"id":1908,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -342,7 +342,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":463,
+			"id":3317,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -354,7 +354,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":648,
+			"id":5365,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -366,43 +366,43 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":4036,
+			"id":4199,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":-0.85964274406433,
+			"orientation":-0.84331315755844,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":3682,
+			"id":269,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3253158330917,
+			"orientation":1.3607221841812,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":2220,
+			"id":5091,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
 				"z":768.9326171875
 			},
-			"orientation":0.38069072365761,
+			"orientation":0.33035588264465,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":2745,
+			"id":1119,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -414,31 +414,31 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2544,
+			"id":4012,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":0.32945013046265,
+			"orientation":0.045351587235928,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":1427,
+			"id":1297,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
 				"z":1587.8966064453
 			},
-			"orientation":1.8322842121124,
+			"orientation":1.9508365392685,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2096,
+			"id":5565,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -450,7 +450,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1732,
+			"id":5803,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -462,73 +462,73 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1458,
+			"id":5498,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.8066606521606,
+			"orientation":1.8207017183304,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2123,
+			"id":4957,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":1.1437356472015,
+			"orientation":1.1319954395294,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":674,
+			"id":3597,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.07606253027916,
+			"orientation":-0.063792280852795,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":4407,
+			"id":1770,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.3314161300659,
+			"orientation":-1.3068463802338,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":3517,
+			"id":1981,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
 				"z":1931
 			},
-			"orientation":2.3599963188171,
+			"orientation":2.3584811687469,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":3104,
+			"id":545,
 			"position":{
 				"y":208.0426940918,
 				"x":22.679006576538,
 				"z":1015.7485351563
 			},
-			"orientation":2.1784901618958,
+			"orientation":2.2376420497894,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -685,7 +685,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":674,
+							"value":3597,
 							"type":"unit"
 						},
 						"position":{
@@ -700,7 +700,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":4407,
+							"value":1770,
 							"type":"unit"
 						},
 						"position":{
@@ -715,7 +715,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":3517,
+							"value":1981,
 							"type":"unit"
 						},
 						"position":{
@@ -730,7 +730,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":953,
+							"value":2342,
 							"type":"unit"
 						},
 						"position":{
@@ -752,7 +752,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"position":1
@@ -771,7 +771,7 @@
 					"params":{
 						"message":["Vite..."],
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"time":"3"
@@ -783,7 +783,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -806,7 +806,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":1
@@ -819,7 +819,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"position":2
@@ -838,7 +838,7 @@
 					"params":{
 						"message":["Viiiiiiite..."],
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"time":"3"
@@ -861,7 +861,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":2
@@ -874,7 +874,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"position":3
@@ -887,7 +887,7 @@
 						"message":["Je dois me dépêcher... ils me rattrapent..."],
 						"time":"5",
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						}
 					}
@@ -909,7 +909,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":3
@@ -922,7 +922,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"position":4
@@ -934,7 +934,7 @@
 					"params":{
 						"message":["Je dois atteindre les défenses alliées avant qu'il ne soit trop tard..."],
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"time":"8"
@@ -957,7 +957,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":4
@@ -971,7 +971,7 @@
 						"message":["C'est juste devant moi à la position (3476, 1212)"],
 						"time":"10",
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						}
 					}
@@ -1016,7 +1016,7 @@
 						"message":["Je dois me dépêcher !!!","Le camp allié n'est pas loin (3476, 1212)","Je dois bouger...","Ils arrivent...","La position (3476, 1212) n'est pas loin.","Je dois prendre une décision.","Il faut vite que j'aille me réfugier."],
 						"time":"4",
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						}
 					}
@@ -1038,7 +1038,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":7
@@ -1101,7 +1101,7 @@
 					"params":{
 						"message":["J'y suis presque... plus qu'un dernier effort."],
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"time":"5"
@@ -1124,7 +1124,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						},
 						"zone":6
@@ -1156,7 +1156,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3104,
+							"value":545,
 							"type":"unit"
 						}
 					}

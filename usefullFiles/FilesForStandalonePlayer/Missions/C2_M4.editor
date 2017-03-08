@@ -4,30 +4,30 @@
 			"type":"Disk",
 			"blue":0.85166883468628,
 			"b":176,
-			"marker":false,
-			"showInGame":true,
 			"id":1,
+			"showInGame":true,
+			"marker":false,
 			"x":3264,
 			"name":"Entrée Nord\\n (3264, 664)",
 			"green":0.018119335174561,
-			"z":664,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":664,
 			"red":0.53519535064697
 		},{
 			"a":184,
 			"type":"Disk",
 			"blue":0.9276956319809,
 			"b":232,
-			"marker":false,
-			"showInGame":true,
 			"id":2,
+			"showInGame":true,
+			"marker":false,
 			"x":3904,
 			"name":"Entrée Est\\n(3904, 752)",
 			"green":0.054250597953796,
-			"z":752,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":752,
 			"red":0.17196381092072
 		}],
 	"description":{
@@ -182,212 +182,92 @@
 		"briefing":"Mission 4\n \nDes informations sont parvenues au camps sur des regroupements ennemis dans les environs. La communauté a dessidé d'envoyer deux groupes d'éclaireurs observer ces mouvements\n \nAidez les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (X, Y) et le second à l'entrée Est (X, Y).\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
 	},
 	"units":[{
-			"type":"bit",
-			"id":3527,
+			"type":"byte",
+			"id":2513,
 			"position":{
-				"y":135.04858398438,
-				"x":3381,
-				"z":1649
+				"y":178.93992614746,
+				"x":3079,
+				"z":1369
 			},
-			"orientation":-0.0048661818727851,
+			"orientation":0.014082928188145,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
-			"type":"assembler",
-			"id":1600,
+			"type":"logic_bomb",
+			"id":3126,
 			"position":{
-				"y":92.058166503906,
-				"x":3595.4990234375,
-				"z":1715.33984375
-			},
-			"orientation":0.41180154681206,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":1397,
-			"position":{
-				"y":253.62161254883,
-				"x":2898,
-				"z":819
-			},
-			"orientation":-1.2103108167648,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":3161,
-			"position":{
-				"y":253.5625,
-				"x":3080,
-				"z":1696
-			},
-			"orientation":-1.8469127416611,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":2254,
-			"position":{
-				"y":253.5625,
-				"x":3617,
-				"z":519
-			},
-			"orientation":-2.6860003471375,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"hole",
-			"id":3037,
-			"position":{
-				"y":136.1784362793,
-				"x":3478,
-				"z":1456
-			},
-			"orientation":2.9053597450256,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":812,
-			"position":{
-				"y":104.07032012939,
-				"x":3673,
-				"z":1888
+				"y":125.62557983398,
+				"x":3872,
+				"z":772
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"obelisk",
-			"id":719,
+			"type":"logic_bomb",
+			"id":1442,
 			"position":{
-				"y":75.89720916748,
-				"x":3961,
-				"z":1640
+				"y":145.83905029297,
+				"x":3252,
+				"z":660
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"obelisk",
-			"id":3058,
+			"type":"logic_bomb",
+			"id":2531,
 			"position":{
-				"y":103.38246154785,
-				"x":3716,
-				"z":1622
+				"y":167.05850219727,
+				"x":2924,
+				"z":1208
 			},
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"byte",
-			"id":251,
+			"type":"pointer",
+			"id":2501,
 			"position":{
-				"y":244.46913146973,
-				"x":2896.7016601563,
-				"z":940.1181640625
+				"y":65.611457824707,
+				"x":3808,
+				"z":1741
 			},
-			"orientation":2.0563006401062,
+			"orientation":-2.5515937805176,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
-			"type":"byte",
-			"id":189,
+			"type":"bit",
+			"id":4599,
 			"position":{
-				"y":186.67340087891,
-				"x":3124,
-				"z":1491
+				"y":171.99165344238,
+				"x":3230,
+				"z":1931
 			},
-			"orientation":2.678718328476,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":1855,
-			"position":{
-				"y":212.51889038086,
-				"x":3038.3857421875,
-				"z":1005.5906982422
-			},
-			"orientation":1.6086648702621,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":460,
-			"position":{
-				"y":162.16098022461,
-				"x":3578.796875,
-				"z":810.36614990234
-			},
-			"orientation":1.1840589046478,
+			"orientation":2.3584811687469,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":2478,
+			"id":3872,
 			"position":{
-				"y":142.2734375,
-				"x":3537.1577148438,
-				"z":884.31518554688
+				"y":79.134963989258,
+				"x":3978,
+				"z":1502
 			},
-			"orientation":0.95413607358932,
+			"orientation":-1.2439048290253,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3355,
-			"position":{
-				"y":199.18748474121,
-				"x":3608.716796875,
-				"z":718.70324707031
-			},
-			"orientation":1.1487210988998,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":274,
-			"position":{
-				"y":202.53300476074,
-				"x":2950.4516601563,
-				"z":975.60589599609
-			},
-			"orientation":2.0091688632965,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":1210,
-			"position":{
-				"y":157.17481994629,
-				"x":3152.6748046875,
-				"z":1400.9140625
-			},
-			"orientation":2.7271530628204,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":1360,
+			"id":338,
 			"position":{
 				"y":101.99140930176,
 				"x":3708.9736328125,
@@ -399,40 +279,196 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":2423,
+			"id":1161,
 			"position":{
-				"y":79.134963989258,
-				"x":3978,
-				"z":1502
+				"y":157.17481994629,
+				"x":3152.6748046875,
+				"z":1400.9140625
 			},
-			"orientation":-1.2638590335846,
+			"orientation":2.6934790611267,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3939,
+			"id":239,
 			"position":{
-				"y":171.99165344238,
-				"x":3230,
-				"z":1931
+				"y":202.53300476074,
+				"x":2950.4516601563,
+				"z":975.60589599609
 			},
-			"orientation":2.3584811687469,
+			"orientation":1.9555947780609,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
-			"type":"pointer",
-			"id":2783,
+			"type":"bit",
+			"id":589,
 			"position":{
-				"y":65.611457824707,
-				"x":3808,
-				"z":1741
+				"y":199.18748474121,
+				"x":3608.716796875,
+				"z":718.70324707031
 			},
-			"orientation":-2.5876853466034,
+			"orientation":1.4818679094315,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":1059,
+			"position":{
+				"y":142.2734375,
+				"x":3537.1577148438,
+				"z":884.31518554688
+			},
+			"orientation":0.92652451992035,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"byte",
+			"id":5308,
+			"position":{
+				"y":162.16098022461,
+				"x":3578.796875,
+				"z":810.36614990234
+			},
+			"orientation":0.99465298652649,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"byte",
+			"id":309,
+			"position":{
+				"y":212.51889038086,
+				"x":3038.3857421875,
+				"z":1005.5906982422
+			},
+			"orientation":1.5275139808655,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"byte",
+			"id":1267,
+			"position":{
+				"y":244.46913146973,
+				"x":2896.7016601563,
+				"z":940.1181640625
+			},
+			"orientation":2.1743111610413,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"obelisk",
+			"id":2431,
+			"position":{
+				"y":103.38246154785,
+				"x":3716,
+				"z":1622
+			},
+			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
+		},{
+			"type":"obelisk",
+			"id":4951,
+			"position":{
+				"y":75.89720916748,
+				"x":3961,
+				"z":1640
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":2873,
+			"position":{
+				"y":104.07032012939,
+				"x":3673,
+				"z":1888
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"hole",
+			"id":5909,
+			"position":{
+				"y":136.1784362793,
+				"x":3478,
+				"z":1456
+			},
+			"orientation":2.8900198936462,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":3852,
+			"position":{
+				"y":253.5625,
+				"x":3617,
+				"z":519
+			},
+			"orientation":-2.6629908084869,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":2629,
+			"position":{
+				"y":253.5625,
+				"x":3080,
+				"z":1696
+			},
+			"orientation":-1.8469127416611,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":155,
+			"position":{
+				"y":253.62161254883,
+				"x":2898,
+				"z":819
+			},
+			"orientation":-1.1949710845947,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"assembler",
+			"id":2177,
+			"position":{
+				"y":92.058166503906,
+				"x":3595.4990234375,
+				"z":1715.33984375
+			},
+			"orientation":0.24946974217892,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1278,
+			"position":{
+				"y":135.04858398438,
+				"x":3381,
+				"z":1649
+			},
+			"orientation":-0.025970540940762,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
 		}],
 	"allyteams":{
 		"1":[0],
@@ -442,18 +478,18 @@
 		"5":[],
 		"6":[],
 		"7":[],
-		"8":[1],
+		"8":[],
 		"9":[],
 		"0":[1]
 	},
 	"groups":[{
 			"id":1,
 			"name":"Bytes",
-			"units":[189,251,460,1855]
+			"units":[309,1267,5308]
 		},{
 			"id":2,
 			"name":"Bits",
-			"units":[274,1210,1360,2423,2478,3355,3939]
+			"units":[239,338,589,1059,1161,3872,4599]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
