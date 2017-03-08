@@ -1372,7 +1372,13 @@ function initTriggerWindow()
 				for i, c in ipairs(e.conditions) do
 					checkingTrigger = string.gsub(checkingTrigger, c.name, "true")
 				end
-				if pcall(loadstring("return "..checkingTrigger)) then
+				local load_code
+				if loadstring then
+					load_code = loadstring -- Lua 5.1
+				else
+					load_code = load -- Lua 5.2 and sooner
+				end
+				if pcall(load_code("return "..checkingTrigger)) then
 					e.trigger = customTriggerEditBox.text
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..e.trigger)
 					saveState()
