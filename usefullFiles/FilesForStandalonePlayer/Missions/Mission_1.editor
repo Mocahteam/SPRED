@@ -1,12 +1,27 @@
 {
-	"zones":[],
+	"zones":[{
+			"type":"Rectangle",
+			"blue":0.29410469532013,
+			"x2":2000,
+			"z1":1648,
+			"z2":1696,
+			"x1":1960,
+			"showInGame":false,
+			"id":1,
+			"name":"Point ralliement\\n   (1980, 1676)",
+			"green":0.46917986869812,
+			"shown":true,
+			"alwaysInView":true,
+			"marker":true,
+			"red":0.51401484012604
+		}],
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission Briefing",
+		"briefingRaw":"Mission 1\\n \\nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la \"guerre numérique\".\\n \\nUn rapport vous est parvenu vous indiquant qu'un BYTE se trouverait au point ralliement (1980, 1676). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage... \\n \\n/#897F84#Appuyez sur Echap pour continuer./",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -18,10 +33,6 @@
 			},{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
 				"active":false
 			},{
 				"desc":"Show the mission title and briefing",
@@ -40,8 +51,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -64,24 +75,20 @@
 				"name":"Kernel Panic A.I. Debug",
 				"active":false
 			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
-				"active":false
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
+				"active":true
 			},{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play video at the beginning of the mission",
-				"name":"Show PP Video",
-				"active":true
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
+				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
-				"active":false
-			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -90,6 +97,10 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -108,12 +119,16 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -128,36 +143,40 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Draws a mirrored map next to the edges of the real map",
+				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"TestVideo",
-		"name":"TestVideo",
+		"saveName":"Mission_1",
+		"name":"Mission 1",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"disabled",
+		"mouse":"enabled",
 		"traces":[],
-		"briefing":"Mission Briefing"
+		"briefing":"Mission 1\n \nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la \"guerre numérique\".\n \nUn rapport vous est parvenu vous indiquant qu'un BYTE se trouverait au point ralliement (1980, 1676). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage... \n \nÿ‰\u007f„Appuyez sur Echap pour continuer.ÿÿÿÿ"
 	},
 	"units":[{
 			"type":"bit",
-			"id":11602,
+			"id":2900,
 			"position":{
 				"y":116,
-				"x":1889,
-				"z":1763
+				"x":2021,
+				"z":2020
 			},
-			"orientation":0,
+			"orientation":-2.9360392093658,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":0
 		}],
 	"allyteams":{
@@ -177,117 +196,163 @@
 	"variables":[],
 	"teams":{
 		"1":{
-			"ai":"",
-			"name":"Team 1",
-			"control":"computer",
 			"color":{
 				"green":1,
 				"blue":0,
 				"red":0
 			},
-			"enabled":true
+			"name":"Team 1",
+			"ai":""
 		},
 		"2":{
-			"ai":"",
-			"name":"Team 2",
-			"control":"computer",
 			"color":{
 				"green":0,
 				"blue":0,
 				"red":1
 			},
-			"enabled":true
+			"name":"Team 2",
+			"ai":""
 		},
 		"3":{
-			"ai":"",
-			"name":"Team 3",
-			"control":"computer",
 			"color":{
 				"green":0,
-				"blue":0.49803921580315,
-				"red":0.49803921580315
+				"blue":0.5,
+				"red":0.5
 			},
-			"enabled":false
+			"name":"Team 3",
+			"ai":""
 		},
 		"4":{
-			"ai":"",
-			"name":"Team 4",
-			"control":"computer",
 			"color":{
-				"green":0.49803921580315,
+				"green":0.5,
 				"blue":0,
 				"red":1
 			},
-			"enabled":false
+			"name":"Team 4",
+			"ai":""
 		},
 		"5":{
-			"ai":"",
-			"name":"Team 5",
-			"control":"computer",
 			"color":{
 				"green":1,
 				"blue":1,
 				"red":1
 			},
-			"enabled":false
+			"name":"Team 5",
+			"ai":""
 		},
 		"6":{
-			"ai":"",
-			"name":"Team 6",
-			"control":"computer",
 			"color":{
-				"green":0.49803921580315,
+				"green":0.5,
 				"blue":1,
 				"red":1
 			},
-			"enabled":false
+			"name":"Team 6",
+			"ai":""
 		},
 		"7":{
-			"ai":"",
-			"name":"Team 7",
-			"control":"computer",
 			"color":{
-				"green":0.49803921580315,
+				"green":0.5,
 				"blue":1,
 				"red":0
 			},
-			"enabled":false
+			"name":"Team 7",
+			"ai":""
 		},
 		"8":{
-			"ai":"",
-			"name":"Team 8",
-			"control":"computer",
 			"color":{
 				"green":1,
-				"blue":0.49803921580315,
+				"blue":0.5,
 				"red":0
 			},
-			"enabled":false
+			"name":"Team 8",
+			"ai":""
 		},
 		"9":{
-			"ai":"",
-			"name":"Team 9",
-			"control":"computer",
 			"color":{
-				"green":0.49803921580315,
+				"green":0.5,
 				"blue":0,
-				"red":0.49803921580315
+				"red":0.5
 			},
-			"enabled":false
+			"name":"Team 9",
+			"ai":""
 		},
 		"0":{
 			"ai":"",
 			"name":"Team 0",
 			"control":"player",
 			"color":{
-				"green":0.49803921580315,
+				"green":0,
 				"blue":1,
-				"red":0.49803921580315
+				"red":0
 			},
 			"enabled":true
 		}
 	},
-	"events":[],
+	"events":[{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Victory",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":0,
+					"type":"zone",
+					"name":"PosReached",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":2900,
+							"type":"unit"
+						},
+						"zone":1
+					}
+				}],
+			"actions":[{
+					"id":4,
+					"type":"win",
+					"name":"WinGame",
+					"params":{
+						"team":0,
+						"outputState":"win"
+					}
+				}],
+			"id":0
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Defeat",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":1,
+					"type":"dead",
+					"name":"UnitsDied",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":0,
+							"type":"team"
+						}
+					}
+				}],
+			"actions":[{
+					"id":5,
+					"type":"lose",
+					"name":"LoseGame",
+					"params":{
+						"team":0,
+						"outputState":"lost"
+					}
+				}],
+			"id":1
+		}],
 	"listOfCommands":{
 		"0":"Stop",
 		"-1":"Build Alice",

@@ -4,60 +4,60 @@
 			"type":"Disk",
 			"blue":0.85116708278656,
 			"b":72,
-			"marker":false,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":false,
 			"x":328,
-			"name":"Passage1",
+			"name":"Step1",
 			"green":0.76358687877655,
-			"z":872,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":872,
 			"red":0.00088560581207275
 		},{
 			"a":64,
 			"type":"Disk",
 			"blue":0.98885846138,
 			"b":48,
-			"marker":false,
-			"showInGame":false,
 			"id":2,
+			"showInGame":false,
+			"marker":false,
 			"x":600,
-			"name":"Passage2",
+			"name":"Step2",
 			"green":0.15312898159027,
-			"z":1144,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":1144,
 			"red":0.25091028213501
 		},{
 			"a":56,
 			"type":"Disk",
 			"blue":0.29673206806183,
 			"b":56,
-			"marker":false,
-			"showInGame":false,
 			"id":3,
+			"showInGame":false,
+			"marker":false,
 			"x":880,
-			"name":"Passage3",
+			"name":"Step3",
 			"green":0.83914542198181,
-			"z":864,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":864,
 			"red":0.91556084156036
 		},{
 			"a":56,
 			"type":"Disk",
 			"blue":0.15385806560516,
 			"b":40,
-			"marker":false,
-			"showInGame":false,
 			"id":4,
+			"showInGame":false,
+			"marker":false,
 			"x":1424,
-			"name":"Passage4",
+			"name":"Step4",
 			"green":0.60814476013184,
-			"z":1032,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":1032,
 			"red":0.54002010822296
 		},{
 			"type":"Rectangle",
@@ -67,12 +67,12 @@
 			"z2":1296,
 			"x1":3368,
 			"showInGame":false,
-			"marker":false,
-			"name":"Arrivée",
-			"green":0.13627111911774,
-			"alwaysInView":false,
-			"shown":true,
 			"id":6,
+			"name":"Finish",
+			"green":0.13627111911774,
+			"shown":true,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.67630434036255
 		},{
 			"type":"Rectangle",
@@ -82,12 +82,12 @@
 			"z2":2040,
 			"x1":2672,
 			"showInGame":false,
-			"id":7,
-			"name":"PresqueArrivé",
-			"green":0.37940680980682,
-			"shown":true,
-			"alwaysInView":false,
 			"marker":false,
+			"name":"FinishNear",
+			"green":0.37940680980682,
+			"alwaysInView":false,
+			"shown":true,
+			"id":7,
 			"red":0.45158708095551
 		},{
 			"type":"Rectangle",
@@ -97,12 +97,12 @@
 			"z2":1592,
 			"x1":1864,
 			"showInGame":false,
-			"id":8,
-			"name":"ZoneDePop",
-			"green":0.9041393995285,
-			"shown":true,
-			"alwaysInView":false,
 			"marker":false,
+			"name":"PopZone",
+			"green":0.9041393995285,
+			"alwaysInView":false,
+			"shown":true,
+			"id":8,
 			"red":0.35799121856689
 		}],
 	"description":{
@@ -252,205 +252,85 @@
 		"saveName":"C2_M1",
 		"name":"C2 M1",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
+		"mouse":"disabled",
 		"traces":[],
 		"briefing":""
 	},
 	"units":[{
-			"type":"assembler",
-			"id":4179,
+			"type":"pointer",
+			"id":13744,
 			"position":{
-				"y":119.02044677734,
-				"x":3641,
-				"z":1225
+				"y":208.0426940918,
+				"x":22.679006576538,
+				"z":1015.7485351563
 			},
-			"orientation":-0.017642684280872,
+			"orientation":2.2627680301666,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":12623,
+			"position":{
+				"y":171.99165344238,
+				"x":3230,
+				"z":1931
+			},
+			"orientation":2.3584811687469,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2342,
+			"id":8494,
 			"position":{
-				"y":166.15704345703,
-				"x":3338,
-				"z":936
+				"y":79.134963989258,
+				"x":3978,
+				"z":1502
 			},
-			"orientation":-0.13416659832001,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":1464,
-			"position":{
-				"y":253.62161254883,
-				"x":2898,
-				"z":819
-			},
-			"orientation":-1.2501944303513,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":2185,
-			"position":{
-				"y":253.5625,
-				"x":3080,
-				"z":1696
-			},
-			"orientation":-1.8469127416611,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"terminal",
-			"id":1241,
-			"position":{
-				"y":253.5625,
-				"x":3617,
-				"z":519
-			},
-			"orientation":-2.7381558418274,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"hole",
-			"id":2636,
-			"position":{
-				"y":136.1784362793,
-				"x":3478,
-				"z":1456
-			},
-			"orientation":-1.7640779018402,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":1908,
-			"position":{
-				"y":104.07032012939,
-				"x":3673,
-				"z":1888
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":3317,
-			"position":{
-				"y":75.89720916748,
-				"x":3961,
-				"z":1640
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":5365,
-			"position":{
-				"y":103.38246154785,
-				"x":3716,
-				"z":1622
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":4199,
-			"position":{
-				"y":244.46913146973,
-				"x":2896.7016601563,
-				"z":940.1181640625
-			},
-			"orientation":-0.84331315755844,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":269,
-			"position":{
-				"y":186.67340087891,
-				"x":3124,
-				"z":1491
-			},
-			"orientation":1.3607221841812,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":5091,
-			"position":{
-				"y":240.25434875488,
-				"x":3037.9208984375,
-				"z":768.9326171875
-			},
-			"orientation":0.33035588264465,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":1119,
-			"position":{
-				"y":208.33813476563,
-				"x":3478,
-				"z":681
-			},
-			"orientation":1.2880702018738,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":4012,
-			"position":{
-				"y":226.36219787598,
-				"x":3081.9855957031,
-				"z":829.06475830078
-			},
-			"orientation":0.045351587235928,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":1297,
-			"position":{
-				"y":237.25904846191,
-				"x":3067.4150390625,
-				"z":1587.8966064453
-			},
-			"orientation":1.9508365392685,
+			"orientation":-1.2914923429489,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":5565,
+			"id":8769,
 			"position":{
-				"y":169.61465454102,
-				"x":3435,
-				"z":737
+				"y":130.47662353516,
+				"x":3981,
+				"z":140
 			},
-			"orientation":0.96662479639053,
+			"orientation":-0.056123565882444,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":5803,
+			"id":10429,
+			"position":{
+				"y":157.17481994629,
+				"x":3152.6748046875,
+				"z":1400.9140625
+			},
+			"orientation":1.1246571540833,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":1766,
+			"position":{
+				"y":202.53300476074,
+				"x":2950.4516601563,
+				"z":975.60589599609
+			},
+			"orientation":1.827721953392,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"bit",
+			"id":5601,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -462,76 +342,196 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":5498,
+			"id":6658,
 			"position":{
-				"y":202.53300476074,
-				"x":2950.4516601563,
-				"z":975.60589599609
+				"y":169.61465454102,
+				"x":3435,
+				"z":737
 			},
-			"orientation":1.8207017183304,
+			"orientation":0.96662479639053,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":16300,
+			"position":{
+				"y":237.25904846191,
+				"x":3067.4150390625,
+				"z":1587.8966064453
+			},
+			"orientation":1.966498374939,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":5965,
+			"position":{
+				"y":226.36219787598,
+				"x":3081.9855957031,
+				"z":829.06475830078
+			},
+			"orientation":-0.022047048434615,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":230,
+			"position":{
+				"y":208.33813476563,
+				"x":3478,
+				"z":681
+			},
+			"orientation":1.2880702018738,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":4542,
+			"position":{
+				"y":240.25434875488,
+				"x":3037.9208984375,
+				"z":768.9326171875
+			},
+			"orientation":0.32155546545982,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":14616,
+			"position":{
+				"y":186.67340087891,
+				"x":3124,
+				"z":1491
+			},
+			"orientation":1.3748770952225,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"byte",
+			"id":15178,
+			"position":{
+				"y":244.46913146973,
+				"x":2896.7016601563,
+				"z":940.1181640625
+			},
+			"orientation":-0.84195220470428,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":13528,
+			"position":{
+				"y":103.38246154785,
+				"x":3716,
+				"z":1622
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":6939,
+			"position":{
+				"y":75.89720916748,
+				"x":3961,
+				"z":1640
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"obelisk",
+			"id":14397,
+			"position":{
+				"y":104.07032012939,
+				"x":3673,
+				"z":1888
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"hole",
+			"id":11280,
+			"position":{
+				"y":136.1784362793,
+				"x":3478,
+				"z":1456
+			},
+			"orientation":-1.7794177532196,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":7365,
+			"position":{
+				"y":253.5625,
+				"x":3617,
+				"z":519
+			},
+			"orientation":-2.722815990448,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":3519,
+			"position":{
+				"y":253.5625,
+				"x":3080,
+				"z":1696
+			},
+			"orientation":-1.8469127416611,
+			"autoHeal":"global",
+			"hp":100,
+			"team":1
+		},{
+			"type":"terminal",
+			"id":11426,
+			"position":{
+				"y":253.62161254883,
+				"x":2898,
+				"z":819
+			},
+			"orientation":-1.2379225492477,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":4957,
+			"id":14633,
 			"position":{
-				"y":157.17481994629,
-				"x":3152.6748046875,
-				"z":1400.9140625
+				"y":166.15704345703,
+				"x":3338,
+				"z":936
 			},
-			"orientation":1.1319954395294,
+			"orientation":-0.13416659832001,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
-			"type":"bit",
-			"id":3597,
+			"type":"assembler",
+			"id":4157,
 			"position":{
-				"y":130.47662353516,
-				"x":3981,
-				"z":140
+				"y":119.02044677734,
+				"x":3641,
+				"z":1225
 			},
-			"orientation":-0.063792280852795,
+			"orientation":-0.025305597111583,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
-		},{
-			"type":"bit",
-			"id":1770,
-			"position":{
-				"y":79.134963989258,
-				"x":3978,
-				"z":1502
-			},
-			"orientation":-1.3068463802338,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":1981,
-			"position":{
-				"y":171.99165344238,
-				"x":3230,
-				"z":1931
-			},
-			"orientation":2.3584811687469,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"pointer",
-			"id":545,
-			"position":{
-				"y":208.0426940918,
-				"x":22.679006576538,
-				"z":1015.7485351563
-			},
-			"orientation":2.2376420497894,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
 		}],
 	"allyteams":{
 		"1":[0],
@@ -681,61 +681,61 @@
 			"actions":[{
 					"id":0,
 					"type":"orderPosition",
-					"name":"Patrouille1",
+					"name":"Patrol1",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":3597,
+							"value":8769,
 							"type":"unit"
 						},
 						"position":{
-							"x":3546,
-							"z":1067
+							"z":1067,
+							"x":3546
 						}
 					}
 				},{
 					"id":1,
 					"type":"orderPosition",
-					"name":"Patrouille2",
+					"name":"Patrol2",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1770,
+							"value":8494,
 							"type":"unit"
 						},
 						"position":{
-							"x":3507,
-							"z":1906
+							"z":1906,
+							"x":3507
 						}
 					}
 				},{
 					"id":2,
 					"type":"orderPosition",
-					"name":"Patrouille3",
+					"name":"Patrol3",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1981,
+							"value":12623,
 							"type":"unit"
 						},
 						"position":{
-							"x":3340,
-							"z":1342
+							"z":1342,
+							"x":3340
 						}
 					}
 				},{
 					"id":3,
 					"type":"orderPosition",
-					"name":"Patrouille4",
+					"name":"Patrol4",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":2342,
+							"value":14633,
 							"type":"unit"
 						},
 						"position":{
-							"z":1359,
-							"x":3327
+							"x":3327,
+							"z":1359
 						}
 					}
 				},{
@@ -752,7 +752,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"position":1
@@ -767,11 +767,11 @@
 				},{
 					"id":23,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["Vite..."],
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"time":"3"
@@ -779,11 +779,11 @@
 				},{
 					"id":35,
 					"type":"order",
-					"name":"ParamPointeur",
+					"name":"ParamPointer",
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -794,19 +794,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"HistoireStep2",
+			"name":"HistoryStep2",
 			"repetition":false,
 			"actionTotal":3,
 			"conditions":[{
 					"id":2,
 					"type":"zone",
-					"name":"EntréePassage1",
+					"name":"EntryStep1",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":1
@@ -819,7 +819,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"position":2
@@ -834,11 +834,11 @@
 				},{
 					"id":11,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["Viiiiiiite..."],
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"time":"3"
@@ -849,19 +849,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"HistoireStep3",
+			"name":"HistoryStep3",
 			"repetition":false,
 			"actionTotal":2,
 			"conditions":[{
 					"id":3,
 					"type":"zone",
-					"name":"EntréePassage2",
+					"name":"EntryStep2",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":2
@@ -874,7 +874,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"position":3
@@ -882,12 +882,12 @@
 				},{
 					"id":12,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["Je dois me dépêcher... ils me rattrapent..."],
 						"time":"5",
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						}
 					}
@@ -897,19 +897,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"HistoireStep4",
+			"name":"HistoryStep4",
 			"repetition":false,
 			"actionTotal":2,
 			"conditions":[{
 					"id":4,
 					"type":"zone",
-					"name":"EntréePassage3",
+					"name":"EntryStep3",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":3
@@ -922,7 +922,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"position":4
@@ -930,11 +930,11 @@
 				},{
 					"id":13,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["Je dois atteindre les défenses alliées avant qu'il ne soit trop tard..."],
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"time":"8"
@@ -945,19 +945,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"HistoireStep5",
+			"name":"HistoryStep5",
 			"repetition":false,
 			"actionTotal":3,
 			"conditions":[{
 					"id":5,
 					"type":"zone",
-					"name":"EntréePassage4",
+					"name":"EntryStep4",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":4
@@ -966,12 +966,12 @@
 			"actions":[{
 					"id":14,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["C'est juste devant moi à la position (3476, 1212)"],
 						"time":"10",
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						}
 					}
@@ -997,7 +997,7 @@
 			"id":6,
 			"conditionTotal":1,
 			"actionTotal":1,
-			"name":"Blablater",
+			"name":"Blathering",
 			"repetition":true,
 			"repetitionTime":"30",
 			"conditions":[{
@@ -1016,7 +1016,7 @@
 						"message":["Je dois me dépêcher !!!","Le camp allié n'est pas loin (3476, 1212)","Je dois bouger...","Ils arrivent...","La position (3476, 1212) n'est pas loin.","Je dois prendre une décision.","Il faut vite que j'aille me réfugier."],
 						"time":"4",
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						}
 					}
@@ -1032,13 +1032,13 @@
 			"conditions":[{
 					"id":9,
 					"type":"zone",
-					"name":"ProcheCamp",
+					"name":"NearCamp",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":7
@@ -1075,8 +1075,8 @@
 							"type":"team"
 						},
 						"position":{
-							"z":1168,
-							"x":3647
+							"x":3647,
+							"z":1168
 						}
 					}
 				},{
@@ -1097,11 +1097,11 @@
 				},{
 					"id":31,
 					"type":"bubbleUnit",
-					"name":"Dire...",
+					"name":"Say...",
 					"params":{
 						"message":["J'y suis presque... plus qu'un dernier effort."],
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"time":"5"
@@ -1112,19 +1112,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"Win",
+			"name":"Victory",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
 					"id":10,
 					"type":"zone",
-					"name":"ArrivéeAtteinte",
+					"name":"OnFinishArea",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						},
 						"zone":6
@@ -1133,7 +1133,7 @@
 			"actions":[{
 					"id":32,
 					"type":"win",
-					"name":"Victoire",
+					"name":"WinGame",
 					"params":{
 						"team":0,
 						"outputState":"win"
@@ -1144,19 +1144,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"Lost",
+			"name":"Defeat",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
 					"id":11,
 					"type":"dead",
-					"name":"UnitéDétruite",
+					"name":"BitDead",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":545,
+							"value":13744,
 							"type":"unit"
 						}
 					}
@@ -1164,7 +1164,7 @@
 			"actions":[{
 					"id":33,
 					"type":"lose",
-					"name":"Défaite",
+					"name":"LoseGame",
 					"params":{
 						"team":0,
 						"outputState":"lost"

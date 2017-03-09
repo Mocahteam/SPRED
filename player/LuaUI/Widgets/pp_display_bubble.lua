@@ -29,22 +29,24 @@ end
 function TurnTextIntoLines(texte)
   local maxWidth=10
   local tableLines={}
-  local message=""
-  local wCurrentLine=0
-  local f=true--first insert
-  for token in string.gmatch(texte, "[^%s]+") do
-    local tokSize=gl.GetTextWidth(token)
-    if(((wCurrentLine+tokSize)<maxWidth) or (message=="")) then -- we continue to write on the same line
-      if (f) then message=token ; f=false -- to avoid a blank space at the beginning of the message
-      else message=message.." "..token end
-      wCurrentLine=wCurrentLine+tokSize
-    else -- threshold reached => newline
-      table.insert(tableLines,message)
-      message=token
-      wCurrentLine=tokSize
-    end
+  for paragraph in string.gmatch(texte, "[^\n]+") do
+	  local message=""
+	  local wCurrentLine=0
+	  local f=true--first insert
+	  for token in string.gmatch(paragraph, "[^%s]+") do
+		local tokSize=gl.GetTextWidth(token)
+		if(((wCurrentLine+tokSize)<maxWidth) or (message=="")) then -- we continue to write on the same line
+		  if (f) then message=token ; f=false -- to avoid a blank space at the beginning of the message
+		  else message=message.." "..token end
+		  wCurrentLine=wCurrentLine+tokSize
+		else -- threshold reached => newline
+		  table.insert(tableLines,message)
+		  message=token
+		  wCurrentLine=tokSize
+		end
+	  end
+	  table.insert(tableLines,message) -- to include the tail of the string for which, by definition, the threshold is not reached
   end
-  table.insert(tableLines,message) -- to include the tail of the string for which, by definition, the threshold is not reached
   return tableLines
 end
 

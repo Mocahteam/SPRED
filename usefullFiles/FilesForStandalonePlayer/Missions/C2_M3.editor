@@ -147,13 +147,13 @@
 		"saveName":"C2_M3",
 		"name":"C2 M3",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
+		"mouse":"disabled",
 		"traces":[],
 		"briefing":"Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":4042,
+			"id":5562,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -165,7 +165,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":3289,
+			"id":12717,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -177,7 +177,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":2585,
+			"id":16447,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -189,79 +189,79 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":4485,
+			"id":98,
 			"position":{
 				"y":118.70226287842,
 				"x":3626.6530761719,
 				"z":1359.4791259766
 			},
-			"orientation":-0.062030356377363,
+			"orientation":-0.074322484433651,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":152,
+			"id":13297,
 			"position":{
 				"y":118.25057220459,
 				"x":3621.4760742188,
 				"z":1206.8426513672
 			},
-			"orientation":0.098554819822311,
+			"orientation":0.14458417892456,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":2008,
+			"id":8190,
 			"position":{
 				"y":104.07597351074,
 				"x":3889.0891113281,
 				"z":1194.6551513672
 			},
-			"orientation":0.60318952798843,
+			"orientation":0.6805032491684,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":713,
+			"id":4065,
 			"position":{
 				"y":96.553703308105,
 				"x":3995.7641601563,
 				"z":1311.2705078125
 			},
-			"orientation":0.17531128227711,
+			"orientation":0.21243721246719,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"assembler",
-			"id":1612,
+			"id":4846,
 			"position":{
 				"y":142.37466430664,
 				"x":3709.3896484375,
 				"z":856.67535400391
 			},
-			"orientation":0.55832028388977,
+			"orientation":0.66742873191833,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1226,
+			"id":4033,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2164467573166,
+			"orientation":-1.2041749954224,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4371,
+			"id":7197,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -273,31 +273,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2064,
+			"id":7946,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6952042579651,
+			"orientation":-2.6767964363098,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":3788,
+			"id":11152,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.9114956855774,
+			"orientation":2.8992238044739,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":986,
+			"id":8222,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -309,7 +309,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":4183,
+			"id":4047,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -321,7 +321,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":1245,
+			"id":4716,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -333,7 +333,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":653,
+			"id":2321,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
@@ -345,19 +345,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":3860,
+			"id":1899,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3861986398697,
+			"orientation":1.3918590545654,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":4280,
+			"id":5205,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
@@ -369,7 +369,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2526,
+			"id":10733,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -381,19 +381,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":3641,
+			"id":9083,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":-0.057637557387352,
+			"orientation":-0.066859900951385,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":348,
+			"id":11009,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
@@ -405,7 +405,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":2963,
+			"id":9613,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -417,7 +417,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":765,
+			"id":14777,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -429,7 +429,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":3852,
+			"id":10801,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
@@ -441,7 +441,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":3493,
+			"id":1204,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
@@ -453,31 +453,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":2272,
+			"id":6387,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.045387610793114,
+			"orientation":-0.039252903312445,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":4012,
+			"id":16270,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2699992656708,
+			"orientation":-1.2577189207077,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":1494,
+			"id":3559,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -489,13 +489,13 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":3495,
+			"id":12457,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.5975289344788,
+			"orientation":-2.5745604038239,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -643,11 +643,11 @@
 			"actions":[{
 					"id":34,
 					"type":"order",
-					"name":"DeactivatePointer",
+					"name":"SetFireState",
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":3495,
+							"value":12457,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -655,11 +655,11 @@
 				},{
 					"id":0,
 					"type":"orderPosition",
-					"name":"Patrouille1",
+					"name":"Patrol1",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":2272,
+							"value":6387,
 							"type":"unit"
 						},
 						"position":{
@@ -670,11 +670,11 @@
 				},{
 					"id":1,
 					"type":"orderPosition",
-					"name":"Patrouille2",
+					"name":"Patrol2",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":4012,
+							"value":16270,
 							"type":"unit"
 						},
 						"position":{
@@ -685,11 +685,11 @@
 				},{
 					"id":2,
 					"type":"orderPosition",
-					"name":"Patrouille3",
+					"name":"Patrol3",
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1494,
+							"value":3559,
 							"type":"unit"
 						},
 						"position":{
@@ -704,7 +704,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":1612,
+							"value":4846,
 							"type":"unit"
 						},
 						"position":{
@@ -718,7 +718,7 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"Win",
+			"name":"Victory",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
@@ -738,7 +738,7 @@
 			"actions":[{
 					"id":32,
 					"type":"win",
-					"name":"Victoire",
+					"name":"WinGame",
 					"params":{
 						"team":0,
 						"outputState":"win"
@@ -749,19 +749,19 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"Lost",
+			"name":"Defeat",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
 					"id":11,
 					"type":"dead",
-					"name":"UnitéDétruite",
+					"name":"BlueDie",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3495,
+							"value":12457,
 							"type":"unit"
 						}
 					}
@@ -769,7 +769,7 @@
 			"actions":[{
 					"id":33,
 					"type":"lose",
-					"name":"Défaite",
+					"name":"LoseGame",
 					"params":{
 						"team":0,
 						"outputState":"lost"

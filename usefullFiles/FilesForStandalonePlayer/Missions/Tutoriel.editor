@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.80158841609955,
 			"b":48,
-			"marker":true,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":true,
 			"x":1248,
 			"name":"Point de ralliement\\n      (1250, 1048)",
 			"green":0.99604952335358,
-			"z":1048,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":1048,
 			"red":0.75692272186279
 		}],
 	"description":{
@@ -35,10 +35,6 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
-				"active":false
-			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -55,8 +51,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -79,24 +75,20 @@
 				"name":"Kernel Panic A.I. Debug",
 				"active":false
 			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
 				"active":false
 			},{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play video at the beginning of the mission",
-				"name":"Show PP Video",
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
-				"active":false
-			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -105,6 +97,10 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -123,12 +119,16 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
+				"active":false
+			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -143,16 +143,20 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
+				"active":false
+			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Draws a mirrored map next to the edges of the real map",
+				"name":"Map edge extension",
 				"active":false
 			}],
 		"saveName":"Tutoriel",
@@ -164,7 +168,7 @@
 	},
 	"units":[{
 			"type":"bit",
-			"id":13803,
+			"id":5432,
 			"position":{
 				"y":270.39453125,
 				"x":850,
@@ -306,7 +310,7 @@
 			"comment":"",
 			"trigger":"",
 			"conditionTotal":1,
-			"name":"Victoire",
+			"name":"Victory",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
@@ -319,7 +323,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":13803,
+							"value":5432,
 							"type":"unit"
 						},
 						"zone":1
@@ -328,13 +332,44 @@
 			"actions":[{
 					"id":0,
 					"type":"win",
-					"name":"Action0",
+					"name":"WinGame",
 					"params":{
 						"team":0,
 						"outputState":"win"
 					}
 				}],
 			"id":0
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Defeat",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":1,
+					"type":"dead",
+					"name":"UnitDies",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":5432,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":1,
+					"type":"lose",
+					"name":"LoseGame",
+					"params":{
+						"team":0,
+						"outputState":"lost"
+					}
+				}],
+			"id":1
 		}],
 	"listOfCommands":{
 		"0":"Stop",

@@ -97,7 +97,7 @@ local minZoneSize = 32 -- Minimum zone size
 local zoneList = {} -- List of the zones placed on the field
 local selectedZone = nil -- Currently selected zone for resizing/moving
 local zoneSide = "" -- Corresponds to the side on which the user clicked to resize a zone
-local totalZones = 0 -- Total number of placed zones
+local totalZones = nil -- Total number of placed zones
 local zoneNumber = 1 -- Current ID of a newly created zone
 local zoneIndex = 0 -- Used to go through every zones under the cursor when multiple zones are under it
 local clickedZone -- Contains the zone the user clicked on
@@ -1033,7 +1033,7 @@ end
 function syncUI()
 	forceUpdateUnitList = true
 	forceUpdateUnitGroupPanels = true
-	totalZones = 0
+	totalZones = nil
 	updateTeamsWindows(true)
 	eventTotal = 0
 	variablesTotal = 0
@@ -2695,7 +2695,7 @@ function applyChangesToSelectedZone(dx, dz) -- Move or resize the selected zone
 end
 
 function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the zone window when a zone is created/deleted
-	if totalZones ~= #zoneList then
+	if totalZones == nil or totalZones ~= #zoneList then
 		for k, zb in pairs(zoneBoxes) do
 			zoneScrollPanel:RemoveChild(zb.editBox)
 			zb.editBox:Dispose()
@@ -5158,6 +5158,9 @@ function refreshGUI() -- Open the window of the state you were in before load/ne
 		local restoreSpecialAttributes = zoneStateMachine:getCurrentState() == zoneStateMachine.states.ATTR
 		zoneFrame()
 		zoneFrame()
+		if totalZones == nil then
+			updateZonePanel()
+		end
 		if restoreSpecialAttributes then
 			showZonesSpecialAttributesWindow()
 		end

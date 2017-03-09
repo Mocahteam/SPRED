@@ -315,13 +315,18 @@ actions_list = {
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",
-		text = "Display <Message>.",
+		text = "Display <Message> and <Pause> the game.",
 		attributes = {
 			{
 				text = '<Message>',
 				type = "textSplit",
 				id = "message",
 				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+			},
+			{
+				text = "<Pause>",
+				type = "boolean",
+				id = "boolean"
 			}
 		}
 	},

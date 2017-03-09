@@ -1,57 +1,42 @@
 {
 	"zones":[{
-			"type":"Rectangle",
-			"blue":0.60814476013184,
-			"x2":2976,
-			"z1":1160,
-			"z2":1256,
-			"x1":2872,
+			"a":64,
+			"type":"Disk",
+			"blue":0.80158841609955,
+			"b":72,
+			"marker":true,
 			"showInGame":false,
-			"id":9,
-			"name":"   Entrée 1\\n(2924, 1208)",
-			"green":0.54002010822296,
+			"id":5,
+			"x":480,
+			"name":"  Point de ralliement\\ndes bytes (479, 1825)",
+			"green":0.99604952335358,
+			"z":1824,
 			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
-			"red":0.29673206806183
+			"red":0.75692272186279
 		},{
-			"type":"Rectangle",
-			"blue":0.088949203491211,
-			"x2":3328,
-			"z1":600,
-			"z2":720,
-			"x1":3176,
+			"a":72,
+			"type":"Disk",
+			"blue":0.64954459667206,
+			"b":80,
+			"marker":true,
 			"showInGame":false,
-			"id":10,
-			"name":"  Entrée 2\\n(3252, 660)",
-			"green":0.53627705574036,
+			"id":6,
+			"x":1400,
+			"name":" Point de ralliement\\ndes bits (1400, 1371)",
+			"green":0.35358023643494,
+			"z":1368,
 			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
-			"red":0.15385806560516
-		},{
-			"type":"Rectangle",
-			"blue":0.71166574954987,
-			"x2":3952,
-			"z1":696,
-			"z2":848,
-			"x1":3792,
-			"showInGame":false,
-			"id":11,
-			"name":"  Entrée 3\\n(3872, 772)",
-			"green":0.16118931770325,
-			"shown":true,
-			"alwaysInView":true,
-			"marker":true,
-			"red":0.86147344112396
+			"red":0.31035709381104
 		}],
 	"description":{
-		"map":"Sili-CiumMap v1",
+		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 2\\n \\nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\\n \\nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 5\\n \\nPour vous remercier de votre aide, le BYTE se rallie à votre cause et vous informe que d'autres entités alliées se sont regroupées non loin de là. Il vous communique les coordonnées de la formation de BYTES qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonées (1400, 1371).\\n \\nAfin de récupérer ces nouvelles forces, ordonnez à vos deux entités de rejoindre leurs semblables.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -189,288 +174,132 @@
 				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"C2_M2",
-		"name":"C2 M2",
+		"saveName":"Mission_5",
+		"name":"Mission 5",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"disabled",
+		"mouse":"enabled",
 		"traces":[],
-		"briefing":"Mission 2\n \nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\n \nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"Mission 5\n \nPour vous remercier de votre aide, le BYTE se rallie à votre cause et vous informe que d'autres entités alliées se sont regroupées non loin de là. Il vous communique les coordonnées de la formation de BYTES qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonées (1400, 1371).\n \nAfin de récupérer ces nouvelles forces, ordonnez à vos deux entités de rejoindre leurs semblables.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
-			"type":"assembler",
-			"id":2866,
+			"type":"bit",
+			"id":5141,
 			"position":{
-				"y":119.02044677734,
-				"x":3641,
-				"z":1225
+				"y":116,
+				"x":1120,
+				"z":1760
 			},
-			"orientation":-0.011511960998178,
+			"orientation":-2.9498450756073,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
+			"team":0
+		},{
+			"type":"byte",
+			"id":3418,
+			"position":{
+				"y":130,
+				"x":1056,
+				"z":1792
+			},
+			"orientation":-1.5661944150925,
+			"autoHeal":"global",
+			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1923,
+			"id":2731,
 			"position":{
-				"y":166.15704345703,
-				"x":3338,
-				"z":936
+				"y":270.39453125,
+				"x":1488,
+				"z":1318
 			},
-			"orientation":-0.13416659832001,
+			"orientation":-1.3637089729309,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
-			"type":"terminal",
-			"id":507,
+			"type":"bit",
+			"id":5051,
 			"position":{
-				"y":253.62161254883,
-				"x":2898,
-				"z":819
+				"y":270.39453125,
+				"x":1432,
+				"z":1320
 			},
-			"orientation":-1.2563302516937,
+			"orientation":-1.2471264600754,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
-			"type":"terminal",
-			"id":5779,
+			"type":"bit",
+			"id":4446,
 			"position":{
-				"y":253.5625,
-				"x":3080,
-				"z":1696
+				"y":270.39453125,
+				"x":1477,
+				"z":1383
 			},
-			"orientation":-1.8469127416611,
+			"orientation":-1.8837283849716,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
-			"type":"terminal",
-			"id":16259,
+			"type":"bit",
+			"id":3943,
 			"position":{
-				"y":253.5625,
-				"x":3617,
-				"z":519
+				"y":270.39453125,
+				"x":1390,
+				"z":1467
 			},
-			"orientation":-2.7504277229309,
+			"orientation":-2.8731460571289,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
-			"type":"hole",
-			"id":7053,
+			"type":"bit",
+			"id":1264,
 			"position":{
-				"y":136.1784362793,
-				"x":3478,
-				"z":1456
+				"y":270.39453125,
+				"x":1463,
+				"z":1459
 			},
-			"orientation":2.9605829715729,
+			"orientation":-2.3960781097412,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
-			"type":"obelisk",
-			"id":1747,
+			"type":"bit",
+			"id":5460,
 			"position":{
-				"y":104.07032012939,
-				"x":3673,
-				"z":1888
+				"y":270.39453125,
+				"x":1331,
+				"z":1430
 			},
-			"orientation":0,
+			"orientation":2.834796667099,
 			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":12782,
-			"position":{
-				"y":75.89720916748,
-				"x":3961,
-				"z":1640
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"obelisk",
-			"id":52,
-			"position":{
-				"y":103.38246154785,
-				"x":3716,
-				"z":1622
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11984,
+			"id":1799,
 			"position":{
-				"y":244.46913146973,
-				"x":2896.7016601563,
-				"z":940.1181640625
+				"y":130,
+				"x":481,
+				"z":1741
 			},
-			"orientation":-0.84875631332397,
+			"orientation":1.7625439167023,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		},{
 			"type":"byte",
-			"id":14775,
+			"id":4974,
 			"position":{
-				"y":186.67340087891,
-				"x":3124,
-				"z":1491
+				"y":130,
+				"x":429,
+				"z":1899
 			},
-			"orientation":1.3451472520828,
+			"orientation":1.8929322957993,
 			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":8276,
-			"position":{
-				"y":240.25434875488,
-				"x":3037.9208984375,
-				"z":768.9326171875
-			},
-			"orientation":0.3467036485672,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":14629,
-			"position":{
-				"y":208.33813476563,
-				"x":3478,
-				"z":681
-			},
-			"orientation":1.2880702018738,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":2359,
-			"position":{
-				"y":226.36219787598,
-				"x":3081.9855957031,
-				"z":829.06475830078
-			},
-			"orientation":0.15063159167767,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"byte",
-			"id":35,
-			"position":{
-				"y":237.25904846191,
-				"x":3067.4150390625,
-				"z":1587.8966064453
-			},
-			"orientation":1.9170812368393,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":14374,
-			"position":{
-				"y":169.61465454102,
-				"x":3435,
-				"z":737
-			},
-			"orientation":0.96662479639053,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":10697,
-			"position":{
-				"y":223.73870849609,
-				"x":3509,
-				"z":638
-			},
-			"orientation":0.90417367219925,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":8393,
-			"position":{
-				"y":202.53300476074,
-				"x":2950.4516601563,
-				"z":975.60589599609
-			},
-			"orientation":1.8150854110718,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":13995,
-			"position":{
-				"y":157.17481994629,
-				"x":3152.6748046875,
-				"z":1400.9140625
-			},
-			"orientation":1.1378657817841,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":1949,
-			"position":{
-				"y":130.47662353516,
-				"x":3981,
-				"z":140
-			},
-			"orientation":-0.069927364587784,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":12008,
-			"position":{
-				"y":79.134963989258,
-				"x":3978,
-				"z":1502
-			},
-			"orientation":-1.3191306591034,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"bit",
-			"id":4266,
-			"position":{
-				"y":171.99165344238,
-				"x":3230,
-				"z":1931
-			},
-			"orientation":2.3584811687469,
-			"autoHeal":"global",
-			"hp":100,
-			"team":1
-		},{
-			"type":"pointer",
-			"id":912,
-			"position":{
-				"y":128.99685668945,
-				"x":3475.8403320313,
-				"z":1212.1966552734
-			},
-			"orientation":2.2675495147705,
-			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
 			"team":1
 		}],
 	"allyteams":{
@@ -481,17 +310,25 @@
 		"5":[],
 		"6":[],
 		"7":[],
-		"8":[],
+		"8":[1],
 		"9":[],
 		"0":[1]
 	},
-	"groups":[],
+	"groups":[{
+			"id":1,
+			"name":"GroupBits",
+			"units":[1264,2731,3943,4446,5051,5460]
+		},{
+			"id":2,
+			"name":"GroupBytes",
+			"units":[1799,4974]
+		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
 	"teams":{
 		"1":{
 			"ai":"",
-			"name":"Ally",
+			"name":"Team 1",
 			"control":"computer",
 			"color":{
 				"green":1,
@@ -502,7 +339,7 @@
 		},
 		"2":{
 			"ai":"",
-			"name":"Annemy",
+			"name":"Team 2",
 			"control":"computer",
 			"color":{
 				"green":0,
@@ -590,7 +427,7 @@
 		},
 		"0":{
 			"ai":"",
-			"name":"Player",
+			"name":"Team 0",
 			"control":"player",
 			"color":{
 				"green":0,
@@ -602,194 +439,55 @@
 	},
 	"events":[{
 			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"Initialisation",
-			"repetition":false,
-			"actionTotal":5,
-			"conditions":[{
-					"id":0,
-					"type":"start",
-					"name":"GameStart",
-					"params":[]
-				}],
-			"actions":[{
-					"id":0,
-					"type":"orderPosition",
-					"name":"Patrol1",
-					"params":{
-						"command":15,
-						"unitset":{
-							"value":1949,
-							"type":"unit"
-						},
-						"position":{
-							"x":3546,
-							"z":1067
-						}
-					}
-				},{
-					"id":1,
-					"type":"orderPosition",
-					"name":"Patrol2",
-					"params":{
-						"command":15,
-						"unitset":{
-							"value":12008,
-							"type":"unit"
-						},
-						"position":{
-							"x":3507,
-							"z":1906
-						}
-					}
-				},{
-					"id":2,
-					"type":"orderPosition",
-					"name":"Patrol3",
-					"params":{
-						"command":15,
-						"unitset":{
-							"value":4266,
-							"type":"unit"
-						},
-						"position":{
-							"x":3340,
-							"z":1342
-						}
-					}
-				},{
-					"id":3,
-					"type":"orderPosition",
-					"name":"Patrol4",
-					"params":{
-						"command":15,
-						"unitset":{
-							"value":1923,
-							"type":"unit"
-						},
-						"position":{
-							"z":1359,
-							"x":3327
-						}
-					}
-				},{
-					"id":21,
-					"type":"orderPosition",
-					"name":"Move",
-					"params":{
-						"command":10,
-						"unitset":{
-							"value":912,
-							"type":"unit"
-						},
-						"position":{
-							"z":1744,
-							"x":3810
-						}
-					}
-				}],
-			"id":0
-		},{
-			"comment":"",
-			"trigger":"Entrance1Mined and Entrance2Mined and Entrance3Mined",
-			"conditionTotal":6,
+			"trigger":"BitInZone and ByteInZone",
+			"conditionTotal":2,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
-					"id":26,
-					"type":"type",
-					"name":"Entrance1Mined",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"type":"logic_bomb",
-						"unitset":{
-							"value":32,
-							"type":"condition"
-						}
-					}
-				},{
-					"id":27,
-					"type":"type",
-					"name":"Entrance2Mined",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"type":"logic_bomb",
-						"unitset":{
-							"value":33,
-							"type":"condition"
-						}
-					}
-				},{
-					"id":28,
-					"type":"type",
-					"name":"Entrance3Mined",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"type":"logic_bomb",
-						"unitset":{
-							"value":34,
-							"type":"condition"
-						}
-					}
-				},{
-					"id":32,
+					"id":8,
 					"type":"zone",
-					"name":"Entrance1Content",
+					"name":"BitInZone",
 					"params":{
 						"number":{
 							"number":"1",
-							"comparison":"atleast"
+							"comparison":"all"
 						},
 						"unitset":{
-							"value":0,
-							"type":"team"
+							"value":5141,
+							"type":"unit"
 						},
-						"zone":9
+						"zone":6
 					}
 				},{
-					"id":33,
+					"id":11,
 					"type":"zone",
-					"name":"Entrance2Content",
+					"name":"ByteInZone",
 					"params":{
 						"number":{
 							"number":"1",
-							"comparison":"atleast"
+							"comparison":"all"
 						},
 						"unitset":{
-							"value":0,
-							"type":"team"
+							"value":3418,
+							"type":"unit"
 						},
-						"zone":10
-					}
-				},{
-					"id":34,
-					"type":"zone",
-					"name":"Entrance3Content",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"unitset":{
-							"value":0,
-							"type":"team"
-						},
-						"zone":11
+						"zone":5
 					}
 				}],
 			"actions":[{
-					"id":32,
+					"id":8,
+					"type":"transfer",
+					"name":"Rallying",
+					"params":{
+						"team":0,
+						"unitset":{
+							"value":1,
+							"type":"team"
+						}
+					}
+				},{
+					"id":4,
 					"type":"win",
 					"name":"WinGame",
 					"params":{
@@ -797,30 +495,31 @@
 						"outputState":"win"
 					}
 				}],
-			"id":9
+			"id":4
 		},{
 			"comment":"",
-			"trigger":"",
+			"trigger":"BlueDie",
 			"conditionTotal":1,
 			"name":"Defeat",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
-					"id":11,
+					"id":6,
 					"type":"dead",
-					"name":"BlueDead",
+					"name":"BlueDie",
 					"params":{
 						"number":{
-							"comparison":"all"
+							"number":"1",
+							"comparison":"atleast"
 						},
 						"unitset":{
-							"value":2866,
-							"type":"unit"
+							"value":0,
+							"type":"team"
 						}
 					}
 				}],
 			"actions":[{
-					"id":33,
+					"id":5,
 					"type":"lose",
 					"name":"LoseGame",
 					"params":{
@@ -828,7 +527,7 @@
 						"outputState":"lost"
 					}
 				}],
-			"id":10
+			"id":5
 		}],
 	"listOfCommands":{
 		"0":"Stop",
