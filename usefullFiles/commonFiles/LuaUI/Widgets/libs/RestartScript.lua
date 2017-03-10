@@ -121,7 +121,7 @@ local function writeAttributesAndSection(file,sectionName, levelOfIndentation, t
   return file
 end
 
-local function createTxtFileContentFromScratch(editorTables)
+local function createTxtFileContentFromScratch(editorTables, toEditor)
   local file=""
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n{" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
@@ -142,8 +142,12 @@ local function createTxtFileContentFromScratch(editorTables)
   
   -- find max 
   local max=0
-  for teamNumber,teamInformations in pairs(editorTables.teams) do
-    if teamInformations.enabled and (tonumber(teamNumber)>max)then max=tonumber(teamNumber) end
+  if not toEditor then
+	  for teamNumber,teamInformations in pairs(editorTables.teams) do
+		if teamInformations.enabled and (tonumber(teamNumber)>max)then max=tonumber(teamNumber) end
+	  end
+  else
+	  max = 9 -- The max team number in editor between team0 and team9
   end
   
   
@@ -197,7 +201,12 @@ local function createTxtFileContentFromScratch(editorTables)
 end
 
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
-function genericRestart(missionName,operations)
+-- toEditor is used to know if the restart is performed to go in editor, in this case we have to
+-- prepare all teams
+function genericRestart(missionName,operations,toEditor)
+	if toEditor == nil then
+		toEditor = false
+	end
 	if (string.sub(missionName, -3, -1)=="txt")then      
 		DoTheRestart(missionName, operations)  
 	elseif (string.sub(missionName, -6, -1)=="editor")then
@@ -207,7 +216,7 @@ function genericRestart(missionName,operations)
 			Spring.Echo(widget:GetInfo().name..": try to decode \""..missionName.."\"")
 			local tableEditor=json.decode(sf)
 			Spring.Echo(widget:GetInfo().name..": decoded with success => build restart script")
-			local txtFileContent=createTxtFileContentFromScratch(tableEditor)
+			local txtFileContent=createTxtFileContentFromScratch(tableEditor, toEditor)
 			DoTheRestart(txtFileContent, operations, true)
 		else
 			Spring.Echo(widget:GetInfo().name..": that file is not valid... Restart aborted")

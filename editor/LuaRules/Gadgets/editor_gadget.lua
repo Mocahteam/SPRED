@@ -238,13 +238,13 @@ function gadget:GameFrame( frameNumber )
 					resetMap = false
 				-- INSTANTIATE UNITS AND KEEP THEIR IDs
 				elseif loadMap then
-					Spring.Echo ("Spring load map")
 					local unitsNewIDs = {}
 					for i, u in ipairs(unitsInfo) do
-						unitsNewIDs[u.id] = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
-						Spring.SetUnitRotation(unitsNewIDs[u.id], 0, -u.orientation, 0)
-						Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.STOP, {}, {})
-						Spring.GiveOrderToUnit(unitsNewIDs[u.id], CMD.FIRE_STATE, {0}, {})
+						local newId = Spring.CreateUnit(u.type, u.position.x, u.position.y, u.position.z, "s", u.team)
+						Spring.SetUnitRotation(newId, 0, -u.orientation, 0)
+						Spring.GiveOrderToUnit(newId, CMD.STOP, {}, {})
+						Spring.GiveOrderToUnit(newId, CMD.FIRE_STATE, {0}, {})
+						table.insert(unitsNewIDs, {oldId = u.id, newId = newId})
 					end
 					SendToUnsynced("loadmap".."++"..json.encode(unitsNewIDs))
 					loadMap = false

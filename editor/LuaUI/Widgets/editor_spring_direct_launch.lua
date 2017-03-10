@@ -1905,7 +1905,7 @@ function BeginExportGame()
 	else
 		-- Change Modinfo.lua
 		local maingame = MainGame
-		local modInfo = "return { game='"..scenarioName.."', shortGame='"..scenarioName.."', name='"..scenarioName.."', shortName='"..scenarioName.."', mutator='official', version='1.0', description='SPRED module. "..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
+		local modInfo = "return { game='"..scenarioName.."', shortGame='"..name.."', name='"..scenarioName.."', shortName='"..name.."', mutator='official', version='1.0', description='SPRED module. "..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
 		local file = io.open("SPRED/game/ModInfo.lua", "w")
 		file:write(modInfo)
 		file:close()

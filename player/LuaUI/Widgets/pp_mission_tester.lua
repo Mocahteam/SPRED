@@ -33,7 +33,7 @@ function returnToEditor()
 			["Gametype"] = editorRef
 		}
 	}
-	genericRestart(levelPath, operations)
+	genericRestart(levelPath, operations, true)
 end
 
 function replayMission()

@@ -1035,8 +1035,8 @@ function syncUI()
 	forceUpdateUnitGroupPanels = true
 	totalZones = nil
 	updateTeamsWindows(true)
-	eventTotal = 0
-	variablesTotal = 0
+	eventTotal = nil
+	variablesTotal = nil
 end
 
 function backToEditor () -- called in editor_spring_direct_launch.lua
@@ -3139,7 +3139,7 @@ function removeThirdWindows() -- Removes the rightmost window
 end
 
 function updateEventList(forceEventListUpdate) -- When a new event is created or the name of an event is changed, update the list
-	if eventTotal ~= #events or forceEventListUpdate then
+	if eventTotal == nil or eventTotal ~= #events or forceEventListUpdate then
 		removeElements(eventScrollPanel, eventUI.eventButtons, true)
 		removeElements(eventScrollPanel, eventUI.deleteEventButtons, true)
 		removeElements(eventScrollPanel, eventUI.upEventButtons, true)
@@ -3939,7 +3939,7 @@ drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 	-- Items generation
 	local comboBoxItems = {}
 	if ac.params["unitset"] then
-		if ac.params["unitset"].type == "unit" then
+		if ac.params["unitset"].type == "unit" and ac.params["unitset"].value then
 			local uDefID = Spring.GetUnitDefID(ac.params["unitset"].value)
 			local unitType = UnitDefs[uDefID].name
 			comboBoxItems = sortedCommandsListUnit[unitType] or { EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND }
@@ -4660,7 +4660,7 @@ function addVariable()
 end
 
 function updateVariables()
-	if variablesTotal ~= #triggerVariables then -- When UI is not synchronized with data
+	if variablesTotal == nil or variablesTotal ~= #triggerVariables then -- When UI is not synchronized with data
 		-- Remove all variables UI elements
 		for i, vf in ipairs(variablesFeatures) do
 			-- remove all UI element for this variable
@@ -5213,11 +5213,19 @@ function loadMap(name) -- Load a map given a file name or if loadedTable is not 
 end
 
 function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once the units have been instanciated with new ids
-	local uIDs = json.decode(unitIDs) -- get the associative table between old ids and new ids
+	local orderedList = json.decode(unitIDs) -- get the ordered table given association between old ids and new ids
+	--build associative table to easly access new Id from old id
+	local uIDs = {}
+	for i, pair in ipairs(orderedList) do
+		uIDs[tostring(pair.oldId)] = pair.newId
+	end
 	for i, u in ipairs(loadedTable.units) do -- set up unit parameters
+		unitHP[u.id] = nil
+		unitAutoHeal[u.id] = nil
 		unitHP[uIDs[tostring(u.id)]] = u.hp
 		unitAutoHeal[uIDs[tostring(u.id)]] = u.autoHeal
 	end
+	
 
 	-- Unit Groups
 	for i, g in ipairs(loadedTable.groups) do
@@ -5689,7 +5697,9 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 	-- Units
 	local units = Spring.GetAllUnits()
 	savedTable.units = {}
-	for i, u in ipairs(units) do
+	-- loop throught units in reverse order in order to maintain the same order as saved data
+	for i = #units, 1, -1 do
+		local u = units[i]
 		local unit = {}
 		unit.type = UnitDefs[Spring.GetUnitDefID(u)].name
 		unit.position = {}

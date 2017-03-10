@@ -644,11 +644,13 @@ local function showMainMenu (missionEnd)
 	
 	-- add score and number of attemps canevas
 	if missionEnd.state ~= "menu" then
-		-- add score
-		scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
-		
-		-- add number of attemps
-		numAttemptLabel = addLabel(mainMenuWindow, "40%", "30%", "60%", "10%", LANG_NUM_ATTEMPTS, "left", "linecenter")
+		if traceOn then
+			-- add score
+			scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
+			
+			-- add number of attemps
+			numAttemptLabel = addLabel(mainMenuWindow, "40%", "30%", "60%", "10%", LANG_NUM_ATTEMPTS, "left", "linecenter")
+		end
 	else
 		-- The close button
 		mainMenuCloseButton = addImage(mainMenuWindow, "95%", "0%", "5%", "5%", "bitmaps/editor/close.png", true)
@@ -680,7 +682,9 @@ local function showMainMenu (missionEnd)
 		}
 	end
 	
-	displayFeedbackPanel(mainMenuWindow, "40%", "40%", "60%", "60%")
+	if traceOn then
+		displayFeedbackPanel(mainMenuWindow, "40%", "40%", "60%", "60%")
+	end
 	
 	if missionEnd.state == "menu" then
 		-- add showBriefing button
