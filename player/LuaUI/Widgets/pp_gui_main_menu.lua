@@ -584,6 +584,12 @@ local function closeMainMenu ()
 		logComboEvent = true
 		if Script.LuaUI.ToggleHelpButton then
 			Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
+		end		
+		-- reopen tuto if required
+		if tutoPopup then
+			if rooms.TutoView.closed then
+				rooms.TutoView:Open()
+			end
 		end
 	end
 	if filterBackground ~= nil then
@@ -897,14 +903,14 @@ function getFeedbackToString(json_obj, export_score)
 		-- s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
 		-- s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
 	-- end
-	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
-		for i = 1,#json_obj.feedbacks do
-			s = s..json_obj.feedbacks[i].."\n"
-		end
-	end
 	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
 		for i = 1,#json_obj.warnings do
 			s = s..json_obj.warnings[i].."\n"
+		end
+	end
+	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
+		for i = 1,#json_obj.feedbacks do
+			s = s..json_obj.feedbacks[i].."\n"
 		end
 	end
 	return s
@@ -923,12 +929,27 @@ function handleFeedback(str)
 		local json_obj = json.decode(str)
 		-- parse all feedbacks and define default clearness and utility
 		local newFeedbacks = {}
-		for i = 1,#json_obj.feedbacks do
-			newFeedbacks[i] = {
-				feedback=json_obj.feedbacks[i],
-				clearness = 1,
-				utility = 1
-			}
+		if json_obj.warnings then
+			for i = 1,#json_obj.warnings do
+				table.insert (newFeedbacks,
+					{
+						feedback="\255\255\0\0"..json_obj.warnings[i].."\255\255\255\255",
+						clearness = 1,
+						utility = 1
+					}
+				)
+			end
+		end
+		if json_obj.feedbacks then
+			for i = 1,#json_obj.feedbacks do
+				table.insert (newFeedbacks,
+					{
+						feedback=json_obj.feedbacks[i],
+						clearness = 1,
+						utility = 1
+					}
+				)
+			end
 		end
 		feedbacks = newFeedbacks
 		currentFeedback = 1
@@ -948,6 +969,9 @@ function handleFeedback(str)
 			updateFeedbackFields ()
 		else -- the mission is not over yet
 			feedbackToLog = getFeedbackToString(json_obj, false)
+			if rooms.TutoView and not rooms.TutoView.closed then
+				rooms.TutoView:Close()
+			end
 			showFeedback ()
 		end
 		if Script.LuaUI.TraceAction then
