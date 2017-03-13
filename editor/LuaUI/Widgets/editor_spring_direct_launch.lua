@@ -1686,7 +1686,7 @@ function SaveScenario(name, desc) -- Creates a table using the xml-serde formali
 				local inputState = {
 					["name"] = "input_state",
 					["attr"] = {
-						["id_input"] = LevelListNames[i].."//"..count
+						["id_input"] = LevelListNames[i].."||"..count
 					}
 				}
 				table.insert(activity.kids[2].kids, inputState)
@@ -1697,7 +1697,7 @@ function SaveScenario(name, desc) -- Creates a table using the xml-serde formali
 				local outputState = {
 					["name"] = "output_state",
 					["attr"] = {
-						["id_output"] = LevelListNames[i].."//"..out
+						["id_output"] = LevelListNames[i].."||"..out
 					}
 				}
 				table.insert(activity.kids[3].kids, outputState)
@@ -1711,7 +1711,7 @@ function SaveScenario(name, desc) -- Creates a table using the xml-serde formali
 			local id = link[1]
 			for ii, linku in ipairs(inputStates[link[1]]) do
 				if k == linku[1] and linku[2] == 1 then
-					id = id.."//"..ii
+					id = id.."||"..ii
 					break
 				end
 			end
@@ -1729,7 +1729,7 @@ function SaveScenario(name, desc) -- Creates a table using the xml-serde formali
 					local l = {
 						["name"] = "output_input_link",
 						["attr"] = {
-							["id_output"] = k.."//"..kk,
+							["id_output"] = k.."||"..kk,
 							["id_input"] = "end"
 						}
 					}
@@ -1740,8 +1740,8 @@ function SaveScenario(name, desc) -- Creates a table using the xml-serde formali
 							local l = {
 								["name"] = "output_input_link",
 								["attr"] = {
-									["id_output"] = k.."//"..kk,
-									["id_input"] = link2.."//"..iii
+									["id_output"] = k.."||"..kk,
+									["id_input"] = link2.."||"..iii
 								}
 							}
 							table.insert(xmlScenario.kids[1].kids[4].kids[1].kids[3].kids, l)
@@ -1798,8 +1798,8 @@ function OpenScenario(xmlTable) -- Load a scenario from a xml file
 	links = xmlTable.kids[1].kids[4].kids[1].kids[3].kids
 	if links ~= nil then
 		for i, link in ipairs(links) do
-			local input = splitString(link.attr.id_input, "//")[1]
-			local outputMission, output = unpack(splitString(link.attr.id_output, "//"))
+			local input = splitString2(link.attr.id_input, "||")[1]
+			local outputMission, output = unpack(splitString2(link.attr.id_output, "||"))
 			if outputMission == "start" then
 				selectedOutputMission = "start"
 				selectedOutputState = 1

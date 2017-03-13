@@ -156,6 +156,7 @@ local saveWindow = nil
 local saveNameEditBox = nil
 
 -- Feedback UI
+local feedbackPanel = nil
 local feedbackCanvas = nil
 local nextFeedbackBt = nil
 local prevFeedbackBt = nil
@@ -347,7 +348,9 @@ local function doTheSave(gameName, fileName)
 		function ()
 			--close notification and show Main menu
 			notifWindow:Dispose()
-			mainMenuWindow:Show()
+			if mainMenuWindow.hidden then
+				mainMenuWindow:Show()
+			end
 		end
 	}
 end
@@ -379,7 +382,9 @@ local function displayConfirmSave(gameName, fileName)
 				saveWindow:Dispose()
 				saveWindow = nil
 				saveNameEditBox = nil
-				mainMenuWindow:Show()
+				if mainMenuWindow.hidden then
+					mainMenuWindow:Show()
+				end
 			end
 		end
 	}
@@ -429,7 +434,9 @@ local function displaySaveWindow()
 			saveWindow:Dispose()
 			saveWindow = nil
 			saveNameEditBox = nil
-			mainMenuWindow:Show()
+			if mainMenuWindow.hidden then
+				mainMenuWindow:Show()
+			end
 		end
 	}
 	WG.Chili.Screen0:FocusControl(saveNameEditBox)
@@ -445,19 +452,35 @@ local function updateFeedbackFields ()
 	-- show next/previous button depending on feedbacks number
 	if nextFeedbackBt and prevFeedbackBt then
 		if #feedbacks < 2 then
-			nextFeedbackBt:Hide()
-			prevFeedbackBt:Hide()
+			if nextFeedbackBt.visible then
+				nextFeedbackBt:Hide()
+			end
+			if prevFeedbackBt.visible then
+				prevFeedbackBt:Hide()
+			end
 		else
 			-- and current feedback selected
 			if currentFeedback == 1 then
-				nextFeedbackBt:Show()
-				prevFeedbackBt:Hide()
+				if nextFeedbackBt.hidden then
+					nextFeedbackBt:Show()
+				end
+				if prevFeedbackBt.visible then
+					prevFeedbackBt:Hide()
+				end
 			elseif currentFeedback == #feedbacks then
-				nextFeedbackBt:Hide()
-				prevFeedbackBt:Show()
+				if nextFeedbackBt.visible then
+					nextFeedbackBt:Hide()
+				end
+				if prevFeedbackBt.hidden then
+					prevFeedbackBt:Show()
+				end
 			else
-				nextFeedbackBt:Show()
-				prevFeedbackBt:Show()
+				if nextFeedbackBt.hidden then
+					nextFeedbackBt:Show()
+				end
+				if prevFeedbackBt.hidden then
+					prevFeedbackBt:Show()
+				end
 			end
 		end
 	end
@@ -465,14 +488,26 @@ local function updateFeedbackFields ()
 	if feedbackCanvas and clearComboBox and usefulComboBox then
 		if #feedbacks <= 0 then
 			feedbackCanvas:SetText("")
-			clearComboBox:Hide()
-			usefulComboBox:Hide()
-			assessLabel:Hide()
+			if clearComboBox.visible then
+				clearComboBox:Hide()
+			end
+			if usefulComboBox.visible then
+				usefulComboBox:Hide()
+			end
+			if assessLabel.visible then
+				assessLabel:Hide()
+			end
 		else
 			feedbackCanvas:SetText(feedbacks[currentFeedback].feedback)
-			clearComboBox:Show()
-			usefulComboBox:Show()
-			assessLabel:Show()
+			if clearComboBox.hidden then
+				clearComboBox:Show()
+			end
+			if usefulComboBox.hidden then
+				usefulComboBox:Show()
+			end
+			if assessLabel.hidden then
+				assessLabel:Show()
+			end
 			logComboEvent = false
 			clearComboBox:Select(feedbacks[currentFeedback].clearness)
 			usefulComboBox:Select(feedbacks[currentFeedback].utility)
@@ -504,7 +539,7 @@ end
 local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 	currentFeedback = 1
 	
-	local feedbackPanel = addPanel(mainWindow, _x, _y, _width, _height)
+	feedbackPanel = addPanel(mainWindow, _x, _y, _width, _height)
 	
 	addLabel(feedbackPanel, "2%", "0%", "96%", "17%", LANG_ADVICE, "center", "linecenter")
 	
@@ -560,7 +595,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		end
 	}
 	
-	updateFeedbackFields()
+	updateFeedbackFields ()
 end
 
 local function closeMainMenu ()
@@ -569,6 +604,7 @@ local function closeMainMenu ()
 		mainMenuWindow = nil
 		saveWindow = nil
 		saveNameEditBox = nil
+		feedbackPanel = nil
 		feedbackCanvas = nil
 		nextFeedbackBt = nil
 		prevFeedbackBt = nil
@@ -587,7 +623,7 @@ local function closeMainMenu ()
 		end		
 		-- reopen tuto if required
 		if tutoPopup then
-			if rooms.TutoView.closed then
+			if rooms.TutoView and rooms.TutoView.closed then
 				rooms.TutoView:Open()
 			end
 		end
@@ -599,7 +635,6 @@ local function closeMainMenu ()
 end
 
 local function showFeedback ()
-	closeMainMenu() -- close Main menu if the window is visible
 	
 	mainMenuWindow = addWindow(WG.Chili.Screen0, "25%", "25%", "50%", "50%")
 	
@@ -611,10 +646,10 @@ local function showFeedback ()
 	displayFeedbackPanel(mainMenuWindow, "0%", "0%", "100%", "85%")
 	
 	-- close button
-	local closeBut = addButton(mainMenuWindow, "40%", "85%", "20%", "15%", LANG_CLOSE_BUTTON)
-	closeBut.backgroundColor = { 0, 0.2, 0.6, 1 }
-	closeBut.focusColor = { 0, 0.6, 1, 1 }
-	closeBut.OnClick = { closeMainMenu } -- close Main menu if the window is visible
+	mainMenuCloseButton = addButton(mainMenuWindow, "40%", "85%", "20%", "15%", LANG_CLOSE_BUTTON)
+	mainMenuCloseButton.backgroundColor = { 0, 0.2, 0.6, 1 }
+	mainMenuCloseButton.focusColor = { 0, 0.6, 1, 1 }
+	mainMenuCloseButton.OnClick = { closeMainMenu } -- close Main menu if the window is visible
 end
 
 local function showMainMenu (missionEnd)
@@ -648,14 +683,19 @@ local function showMainMenu (missionEnd)
 	windowLabel.font.size = 40
 	windowLabel.font.maxSize = 40
 	
-	-- add score and number of attemps canevas
-	if missionEnd.state ~= "menu" then
+	if missionEnd.state ~= "menu" then -- means won or lost
 		if traceOn then
 			-- add score
 			scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
 			
 			-- add number of attemps
 			numAttemptLabel = addLabel(mainMenuWindow, "40%", "30%", "60%", "10%", LANG_NUM_ATTEMPTS, "left", "linecenter")
+			
+			-- add feedbacks panel
+			displayFeedbackPanel(mainMenuWindow, "40%", "40%", "60%", "60%")
+			if feedbackPanel.visible then
+				feedbackPanel:Hide() -- by default, we hide the panel
+			end
 		end
 	else
 		-- The close button
@@ -666,7 +706,7 @@ local function showMainMenu (missionEnd)
 				closeMainMenu () -- close Main menu if the window is visible
 				-- reopen tuto if required
 				if tutoPopup then
-					if rooms.TutoView.closed then
+					if rooms.TutoView and rooms.TutoView.closed then
 						rooms.TutoView:Open()
 					end
 				end
@@ -686,13 +726,7 @@ local function showMainMenu (missionEnd)
 				end
 			end
 		}
-	end
-	
-	if traceOn then
-		displayFeedbackPanel(mainMenuWindow, "40%", "40%", "60%", "60%")
-	end
-	
-	if missionEnd.state == "menu" then
+		
 		-- add showBriefing button
 		local showBriefingBut = addButton(mainMenuWindow, "0%", "0%", "30%", "10%", LANG_SHOW_BRIEFING)
 		showBriefingBut.backgroundColor = { 0, 0.2, 0.6, 1 }
@@ -704,7 +738,7 @@ local function showMainMenu (missionEnd)
 					Script.LuaUI.TraceAction("show_briefing") -- registered by pp_meta_trace_manager.lua
 				end
 				if tutoPopup then
-					if rooms.TutoView.closed then
+					if rooms.TutoView and rooms.TutoView.closed then
 						rooms.TutoView:Open()
 					end
 				else
@@ -745,8 +779,7 @@ local function showMainMenu (missionEnd)
 			Spring.Echo("IMPORTANT WARNING : no (or invalid) output state given while appliq mode is on. Scenario aborted... please fix your mission.")
 		else
 			-- is the last mission ?
-			if(nextMiss=="end") then  
-				Spring.Echo("end of scenario")
+			if(nextMiss=="end") then
 				-- change menu label
 				windowLabel:SetCaption(LANG_VICTORY_CAMPAIGN)
 			else
@@ -783,7 +816,9 @@ local function showMainMenu (missionEnd)
 				if Script.LuaUI.TraceAction then
 					Script.LuaUI.TraceAction("save_progression") -- registered by pp_meta_trace_manager.lua
 				end
-				mainMenuWindow:Hide()
+				if mainMenuWindow.visible then
+					mainMenuWindow:Hide()
+				end
 				displaySaveWindow()
 			end
 		}
@@ -821,7 +856,7 @@ function MissionEvent(e)
   if e.logicType == "ShowMissionMenu" then
     -- close tuto window if it oppened
     if tutoPopup then
-      if not rooms.TutoView.closed then
+      if rooms.TutoView and not rooms.TutoView.closed then
         rooms.TutoView:Close()
       end
     end
@@ -916,13 +951,15 @@ function getFeedbackToString(json_obj, export_score)
 	return s
 end
 
+-- if main menu is openned => update feedback canvas to display feedbacks
+-- if main menu is not openned => show feedback in a popup
 function handleFeedback(str)
 	-- check if the feedback is consistent
-	if str == "" or str == "{}" then
-		if scoreLabel then
+	if str == "" or str == "{}" then 
+		if scoreLabel and scoreLabel.visible then
 			scoreLabel:Hide()
 		end
-		if numAttemptLabel then
+		if numAttemptLabel and numAttemptLabel.visible then
 			numAttemptLabel:Hide()
 		end
 	else
@@ -966,12 +1003,31 @@ function handleFeedback(str)
 				numAttemptLabel:SetCaption(LANG_NUM_ATTEMPTS..json_obj.num_attempts)
 			end
 			-- update feedback panel
-			updateFeedbackFields ()
+			if #feedbacks > 0 then
+				if feedbackPanel.hidden then
+					feedbackPanel:Show()
+				end
+				updateFeedbackFields ()
+			end
 		else -- the mission is not over yet
 			feedbackToLog = getFeedbackToString(json_obj, false)
-			if rooms.TutoView and not rooms.TutoView.closed then
-				rooms.TutoView:Close()
+			
+			-- close Main menu if the window is visible
+			if mainMenuWindow then
+				closeMainMenu() 
+				-- WARNING!!!  closing main menu erase feedbacks so we restore them
+				-- before showing them again
+				feedbacks = newFeedbacks
 			end
+			
+			-- close tuto if it is openned
+			if tutoPopup then
+				if rooms.TutoView and not rooms.TutoView.closed then
+					rooms.TutoView:Close()
+				end
+			end
+			
+			-- show feedbacks popup
 			showFeedback ()
 		end
 		if Script.LuaUI.TraceAction then
@@ -1002,7 +1058,7 @@ function widget:KeyPress(key, mods, isRepeat, label, unicode)
 					MissionEvent ({logicType = "ShowMissionMenu",
 					state = "menu"})
 				else
-					-- close Main menu if the close button is Show
+					-- close Main menu if the close button is Shown
 					if mainMenuCloseButton and mainMenuCloseButton.visible then
 						closeMainMenu () -- close Main menu if the window is visible
 						-- reopen tuto if required

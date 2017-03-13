@@ -84,7 +84,7 @@ function gadget:GameFrame( frameNumber )
 		-- build event for unsynchronized section
         local prefix=true
         if (prefix)then
-          outputState=missionName.."//"..outputState
+          outputState=missionName.."||"..outputState
         end
         _G.event = {logicType = "ShowMissionMenu",
           state = "", outputstate=outputState}
