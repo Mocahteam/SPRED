@@ -188,9 +188,9 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "MissionEvent" then
     if Script.LuaUI("MissionEvent") then
       local e = {}
-        for k, v in spairs(SYNCED.event) do
+      for k, v in spairs(SYNCED.event) do
         e[k] = v
-        end
+      end
       Script.LuaUI.MissionEvent(e) -- function defined and registered in pp_gui_main_menu widget
     end
 	

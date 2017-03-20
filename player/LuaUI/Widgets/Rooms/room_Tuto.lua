@@ -129,6 +129,16 @@ local function CreateMainMenuCentered ()
 			gray.."You can move this window"..white
 		}
 	end
+	template_MainMenu.OnViewResized = function ()
+		local needToBeOpenAgain = MainMenu and not MainMenu.closed
+		if needToBeOpenAgain then MainMenu:Close() end
+		MainMenu = CreateMainMenuCentered()
+		if needToBeOpenAgain then
+			TutoView = MainMenu
+			TutoView:Open()
+		end
+	end
+	
 	return Window:CreateCentered(template_MainMenu)
 end
 

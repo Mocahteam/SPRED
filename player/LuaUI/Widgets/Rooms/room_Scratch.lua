@@ -206,6 +206,17 @@ local template_ScratchPages = {
 }
 
 local function CreateScratchPagesCentered ()
+	template_ScratchPages.OnViewResized = function ()
+		local needToBeOpenAgain = ScratchPages and not ScratchPages.closed
+		if needToBeOpenAgain then ScratchPages:Close() end
+		ScratchPages = CreateScratchPagesCentered()
+		ScratchPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Scratch/Scratch"..currentPage..".jpg"
+		ScratchPages.son.lineArray = WordWrap(getText(), ScratchPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = ScratchPages
+			TutoView:Open()
+		end
+	end
 	template_ScratchPages.son = Window:CreateCentered(template_ScratchPages_Text)
 	local win = Window:CreateCentered(template_ScratchPages)
 	local winHeight = win.y2 - win.y1

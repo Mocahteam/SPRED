@@ -213,6 +213,17 @@ local template_AdaPages = {
 }
 
 local function CreateAdaPagesCentered ()
+	template_AdaPages.OnViewResized = function ()
+		local needToBeOpenAgain = AdaPages and not AdaPages.closed
+		if needToBeOpenAgain then AdaPages:Close() end
+		AdaPages = CreateAdaPagesCentered()
+		AdaPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Ada/Ada"..currentPage..".jpg"
+		AdaPages.son.lineArray = WordWrap(getText(), AdaPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = AdaPages
+			TutoView:Open()
+		end
+	end
 	template_AdaPages.son = Window:CreateCentered(template_AdaPages_Text)
 	local win = Window:CreateCentered(template_AdaPages)
 	local winHeight = win.y2 - win.y1

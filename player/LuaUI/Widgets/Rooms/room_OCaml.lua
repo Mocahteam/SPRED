@@ -224,6 +224,17 @@ local template_OCamlPages = {
 }
 
 local function CreateOCamlPagesCentered ()
+	template_OCamlPages.OnViewResized = function ()
+		local needToBeOpenAgain = OCamlPages and not OCamlPages.closed
+		if needToBeOpenAgain then OCamlPages:Close() end
+		OCamlPages = CreateOCamlPagesCentered()
+		OCamlPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/OCaml/OCaml"..currentPage..".jpg"
+		OCamlPages.son.lineArray = WordWrap(getText(), OCamlPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = OCamlPages
+			TutoView:Open()
+		end
+	end
 	template_OCamlPages.son = Window:CreateCentered(template_OCamlPages_Text)
 	local win = Window:CreateCentered(template_OCamlPages)
 	local winHeight = win.y2 - win.y1

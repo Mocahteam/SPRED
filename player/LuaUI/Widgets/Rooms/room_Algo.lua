@@ -206,6 +206,17 @@ local template_AlgoPages = {
 }
 
 local function CreateAlgoPagesCentered ()
+	template_AlgoPages.OnViewResized = function ()
+		local needToBeOpenAgain = AlgoPages and not AlgoPages.closed
+		if needToBeOpenAgain then AlgoPages:Close() end
+		AlgoPages = CreateAlgoPagesCentered()
+		AlgoPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Algo/Algo"..currentPage..".jpg"
+		AlgoPages.son.lineArray = WordWrap(getText(), AlgoPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = AlgoPages
+			TutoView:Open()
+		end
+	end
 	template_AlgoPages.son = Window:CreateCentered(template_AlgoPages_Text)
 	local win = Window:CreateCentered(template_AlgoPages)
 	local winHeight = win.y2 - win.y1

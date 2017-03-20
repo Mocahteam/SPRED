@@ -4,8 +4,8 @@
 			"type":"Disk",
 			"blue":0.85166883468628,
 			"b":264,
-			"marker":false,
-			"showInGame":true,
+			"marker":true,
+			"showInGame":false,
 			"id":1,
 			"x":3264,
 			"name":"Entrée Nord\\n (3264, 664)",
@@ -19,8 +19,8 @@
 			"type":"Disk",
 			"blue":0.9276956319809,
 			"b":232,
-			"marker":false,
-			"showInGame":true,
+			"marker":true,
+			"showInGame":false,
 			"id":2,
 			"x":3904,
 			"name":"Entrée Est\\n(3904, 752)",
@@ -183,43 +183,43 @@
 	},
 	"units":[{
 			"type":"bit",
-			"id":10040,
+			"id":10191,
 			"position":{
 				"y":135.04858398438,
 				"x":3381,
 				"z":1649
 			},
-			"orientation":-0.041040096431971,
+			"orientation":-0.05911848321557,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":5815,
+			"id":2357,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
 				"z":1715.33984375
 			},
-			"orientation":0.1772316545248,
+			"orientation":0.14121697843075,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2861,
+			"id":11407,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.1796312332153,
+			"orientation":-1.1612235307693,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13844,
+			"id":10985,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -231,31 +231,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":7526,
+			"id":782,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6399810314178,
+			"orientation":-2.6123692989349,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":12170,
+			"id":5119,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.8746800422668,
+			"orientation":2.8562722206116,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":1646,
+			"id":799,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -267,7 +267,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":15971,
+			"id":13593,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -279,7 +279,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":14305,
+			"id":13233,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -291,91 +291,91 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":6594,
+			"id":3511,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":2.238392829895,
+			"orientation":2.2737848758698,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":7572,
+			"id":8846,
 			"position":{
 				"y":212.51889038086,
 				"x":3038.3857421875,
 				"z":1005.5906982422
 			},
-			"orientation":1.4877407550812,
+			"orientation":1.4665443897247,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":3727,
+			"id":2021,
 			"position":{
 				"y":162.16098022461,
 				"x":3578.796875,
 				"z":810.36614990234
 			},
-			"orientation":0.87762159109116,
+			"orientation":0.81466448307037,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":675,
+			"id":14538,
 			"position":{
 				"y":142.2734375,
 				"x":3537.1577148438,
 				"z":884.31518554688
 			},
-			"orientation":0.90351468324661,
+			"orientation":0.87590312957764,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":12432,
+			"id":8885,
 			"position":{
 				"y":199.18748474121,
 				"x":3608.716796875,
 				"z":718.70324707031
 			},
-			"orientation":1.5626536607742,
+			"orientation":1.5819244384766,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":6155,
+			"id":4187,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.9176120758057,
+			"orientation":1.8881024122238,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1691,
+			"id":15371,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":2.6502060890198,
+			"orientation":2.5797734260559,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":16472,
+			"id":15249,
 			"position":{
 				"y":101.99140930176,
 				"x":3708.9736328125,
@@ -387,19 +387,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":4343,
+			"id":6069,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2208840847015,
+			"orientation":-1.1932638883591,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4885,
+			"id":8589,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -411,19 +411,19 @@
 			"team":0
 		},{
 			"type":"pointer",
-			"id":5347,
+			"id":14105,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.502400636673,
+			"orientation":-2.4270839691162,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":3284,
+			"id":1190,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -435,7 +435,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":13532,
+			"id":4410,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -447,7 +447,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":10390,
+			"id":5982,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -459,13 +459,13 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":11618,
+			"id":2420,
 			"position":{
 				"y":178.93992614746,
 				"x":3079,
 				"z":1369
 			},
-			"orientation":0.037211298942566,
+			"orientation":0.064951233565807,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -485,11 +485,11 @@
 	"groups":[{
 			"id":1,
 			"name":"Bytes",
-			"units":[3727,6594,7572,11618]
+			"units":[2021,2420,3511,8846]
 		},{
 			"id":2,
 			"name":"Bits",
-			"units":[675,1691,4343,4885,6155,10040,12432,16472]
+			"units":[4187,6069,8589,8885,10191,14538,15249,15371]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],

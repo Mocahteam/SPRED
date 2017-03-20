@@ -6,7 +6,7 @@
 		"briefingRaw":"Mission 8\\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -147,25 +147,13 @@
 		"saveName":"Mission_8",
 		"name":"Mission 8",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 8\n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
-			"type":"assembler",
-			"id":481,
-			"position":{
-				"y":116,
-				"x":256,
-				"z":811
-			},
-			"orientation":0.033747583627701,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
 			"type":"bit",
-			"id":5666,
+			"id":6885,
 			"position":{
 				"y":116,
 				"x":368,
@@ -177,109 +165,121 @@
 			"team":0
 		},{
 			"type":"byte",
-			"id":2286,
+			"id":13729,
 			"position":{
 				"y":130,
 				"x":349,
 				"z":1060
 			},
-			"orientation":-2.7611653804779,
+			"orientation":-2.5280003547668,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5170,
+			"id":4909,
 			"position":{
 				"y":116,
 				"x":228,
 				"z":1019
 			},
-			"orientation":3.0280780792236,
+			"orientation":2.9483110904694,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5483,
+			"id":4168,
 			"position":{
 				"y":116,
 				"x":193,
 				"z":922
 			},
-			"orientation":2.6952042579651,
+			"orientation":2.437495470047,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1937,
+			"id":9806,
 			"position":{
 				"y":116,
 				"x":425,
 				"z":1021
 			},
-			"orientation":-2.4466993808746,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":2790,
+			"id":4616,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":-2.6185052394867,
+			"orientation":-2.402214050293,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1176,
+			"id":13964,
 			"position":{
 				"y":116,
 				"x":65,
 				"z":974
 			},
-			"orientation":2.3792042732239,
+			"orientation":2.3807382583618,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":575,
+			"id":9989,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.1690487861633,
+			"orientation":2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
+			"type":"assembler",
+			"id":160,
+			"position":{
+				"y":116,
+				"x":256,
+				"z":811
+			},
+			"orientation":0.033747583627701,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
 			"type":"byte",
-			"id":3229,
+			"id":6335,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":-2.9851267337799,
+			"orientation":-2.9053597450256,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":2423,
+			"id":10977,
 			"position":{
 				"y":130,
 				"x":170,
 				"z":1105
 			},
-			"orientation":2.8762140274048,
+			"orientation":2.7749712467194,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
@@ -417,7 +417,7 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
 					"id":12,
 					"type":"hp",
@@ -435,6 +435,13 @@
 					}
 				}],
 			"actions":[{
+					"id":9,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"1"
+					}
+				},{
 					"id":4,
 					"type":"win",
 					"name":"WinGame",
@@ -476,6 +483,35 @@
 					}
 				}],
 			"id":5
+		},{
+			"comment":"",
+			"id":6,
+			"conditionTotal":1,
+			"actionTotal":1,
+			"name":"ForbidFightAsm",
+			"repetition":true,
+			"repetitionTime":"0",
+			"conditions":[{
+					"id":13,
+					"type":"script",
+					"name":"CheckFight",
+					"params":{
+						"script":"local function isAsmFight () local units = Spring.GetAllUnits() for i = 1, #units do local u = units[i] if UnitDefs[Spring.GetUnitDefID(u)][\"name\"]==\"assembler\" then local queue=Spring.GetCommandQueue(u,4) for k = 1, #queue do if queue[k].id == 16 then return true end end end end return false end return isAsmFight ()"
+					}
+				}],
+			"actions":[{
+					"id":8,
+					"type":"order",
+					"name":"Stop",
+					"params":{
+						"command":0,
+						"unitset":{
+							"value":160,
+							"type":"unit"
+						}
+					}
+				}],
+			"trigger":""
 		}],
 	"listOfCommands":{
 		"0":"Stop",

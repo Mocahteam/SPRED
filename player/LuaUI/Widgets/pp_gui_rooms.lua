@@ -99,6 +99,9 @@ local getConfigDataSet     = {}
 local onUpdateSet          = {}
 local onDrawWorldSet       = {}
 local onSeismicPingSet     = {}
+-- Muratet
+local onViewResized        = {}
+--
 
 
 -- Array of display lists to destroy.
@@ -1055,6 +1058,12 @@ function Window:ProcessArguments()
     onSeismicPingSet[self] = true
   end
   
+  -- Muratet
+  if (self.OnViewResized) then
+	onViewResized[self] = true
+  end
+  --
+  
 end
 
 
@@ -1517,6 +1526,11 @@ end
 
 function widget:ViewResize(vsx, vsy)
   viewSizeX, viewSizeY = vsx, vsy
+  -- Muratet
+  for object in pairs(onViewResized) do
+    object.OnViewResized()
+  end
+  --
 end
 
 

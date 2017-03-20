@@ -1064,7 +1064,6 @@ local function processEvents(frameNumber)
 	end
 	--EchoDebug("Removing event: "..idEventToRemove, 7)
 	for k, idEvent in pairs(ctx.orderedEventsId) do
-		Spring.Echo (k, idEvent)
 		if idEvent == idEventToRemove then
 			table.remove(ctx.orderedEventsId, k)
 			ctx.indexOfLastEvent=ctx.indexOfLastEvent-1

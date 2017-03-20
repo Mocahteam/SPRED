@@ -213,7 +213,7 @@
 	},
 	"units":[{
 			"type":"assembler",
-			"id":16024,
+			"id":6522,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
@@ -225,19 +225,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":15907,
+			"id":1275,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.0783885717392,
+			"orientation":-1.0599807500839,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":3937,
+			"id":14013,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -249,31 +249,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":12482,
+			"id":13687,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4957869052887,
+			"orientation":-2.4773790836334,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":2953,
+			"id":9647,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.784175157547,
+			"orientation":2.7657673358917,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8351,
+			"id":15104,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -285,7 +285,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13572,
+			"id":7554,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -297,7 +297,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":11565,
+			"id":12671,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -309,43 +309,43 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":6377,
+			"id":568,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4899131059647,
+			"orientation":1.4719734191895,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":10572,
+			"id":1039,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.3649492263794,
+			"orientation":1.3095438480377,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":12430,
+			"id":12004,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4929419755936,
+			"orientation":-1.4868083000183,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":10174,
+			"id":518,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -357,7 +357,7 @@
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":2385,
+			"id":9233,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -369,7 +369,7 @@
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":78,
+			"id":11988,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -544,7 +544,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":12430,
+							"value":12004,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -636,7 +636,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":12430,
+							"value":12004,
 							"type":"unit"
 						}
 					}
@@ -657,18 +657,33 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
 					"id":14,
 					"type":"numberVariable",
 					"name":"LimitReached",
 					"params":{
 						"number":"10",
-						"variable":"compteur",
+						"variable":"counter",
 						"comparison":"=="
 					}
 				}],
 			"actions":[{
+					"id":48,
+					"type":"orderPosition",
+					"name":"Retreat",
+					"params":{
+						"command":10,
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"position":{
+							"z":187,
+							"x":2581
+						}
+					}
+				},{
 					"id":43,
 					"type":"win",
 					"name":"WinGame",

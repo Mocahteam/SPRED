@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.83343100547791,
 			"b":88,
-			"id":1,
-			"showInGame":false,
 			"marker":false,
+			"showInGame":false,
+			"id":1,
 			"x":1056,
 			"name":"ByteZone",
 			"green":0.87811172008514,
-			"alwaysInView":false,
-			"shown":true,
 			"z":1792,
+			"shown":true,
+			"alwaysInView":false,
 			"red":0.51766788959503
 		}],
 	"description":{
@@ -21,7 +21,7 @@
 		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,25 +162,25 @@
 		"saveName":"Mission_3",
 		"name":"Mission 3",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":""
 	},
 	"units":[{
 			"type":"bit",
-			"id":418,
+			"id":10716,
 			"position":{
 				"y":116,
 				"x":1812,
 				"z":1692
 			},
-			"orientation":-1.2931458950043,
+			"orientation":-1.2732040882111,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":2322,
+			"id":13719,
 			"position":{
 				"y":130,
 				"x":978,
@@ -206,7 +206,7 @@
 	"groups":[{
 			"id":1,
 			"name":"MyBit",
-			"units":[418]
+			"units":[]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[{
@@ -347,12 +347,12 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":418,
+							"value":10716,
 							"type":"unit"
 						},
 						"position":{
-							"z":1356,
-							"x":1865
+							"x":1865,
+							"z":1356
 						}
 					}
 				},{
@@ -362,7 +362,7 @@
 					"params":{
 						"message":["Je dois maintenant exploiter ces indices et trouver où se trouve mon allié."],
 						"unitset":{
-							"value":418,
+							"value":10716,
 							"type":"unit"
 						},
 						"time":"6"
@@ -386,7 +386,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":418,
+							"value":10716,
 							"type":"unit"
 						},
 						"zone":1
@@ -448,7 +448,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":418,
+							"value":10716,
 							"type":"unit"
 						},
 						"number":{
@@ -490,7 +490,7 @@
 					"type":"script",
 					"name":"UpdateBriefing",
 					"params":{
-						"script":"local playerUnitId = extractListOfUnitsImpliedByCondition ({unitset = {type = \"team\", value = 0}})[1] if playerUnitId then local x,y,z=Spring.GetUnitPosition(armySpring[playerUnitId]) local x2, z2 local zone = mission.zones[1] if zone.type == \"Rectangle\" then x2 = (zone.x1+zone.x2)/2 z2 = (zone.z1+zone.z2)/2 elseif zone.type == \"Disk\" then x2 = zone.x z2 = zone.z end local dX = x2 - x local dY = z2 - z local dirX, dirY if dX < 0 then dirX = \"l'Ouest\" else dirX = \"l'Est\" end if dY < 0 then dirX = \"le Nord\" else dirY = \"le Sud\" end local dX = math.ceil(math.abs(dX)) local dY = math.ceil(math.abs(dY)) messages[\"briefing\"] = \"Mission 2\\n \\nVotre BIT s'est déplacé et n'a pas encore retrouvé le BYTE. D'après sa nouvelle position et son estimation, le BYTE se trouve à une distance de \"..dX..\" unités vers \"..dirX..\" et \"..dY..\" unités vers \"..dirY..\".\\n \\nDéplacez votre BIT dans cette direction.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer\" end"
+						"script":"local playerUnitId = extractListOfUnitsImpliedByCondition ({unitset = {type = \"team\", value = 0}})[1] if playerUnitId then local x,y,z=Spring.GetUnitPosition(armySpring[playerUnitId]) local x2, z2 local zone = mission.zones[1] if zone.type == \"Rectangle\" then x2 = (zone.x1+zone.x2)/2 z2 = (zone.z1+zone.z2)/2 elseif zone.type == \"Disk\" then x2 = zone.x z2 = zone.z end local dX = x2 - x local dY = z2 - z local dirX, dirY if dX < 0 then dirX = \"l'Ouest\" else dirX = \"l'Est\" end if dY < 0 then dirX = \"le Nord\" else dirY = \"le Sud\" end local dX = math.ceil(math.abs(dX)) local dY = math.ceil(math.abs(dY)) messages[\"briefing\"] = \"Mission 3\\n \\nVotre BIT s'est déplacé et n'a pas encore retrouvé le BYTE. D'après sa nouvelle position et son estimation, le BYTE se trouve à une distance de \"..dX..\" unités vers \"..dirX..\" et \"..dY..\" unités vers \"..dirY..\".\\n \\nDéplacez votre BIT dans cette direction.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer\" end"
 					}
 				},{
 					"id":11,
@@ -514,7 +514,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":418,
+							"value":10716,
 							"type":"unit"
 						},
 						"number":{

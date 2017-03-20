@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.83343100547791,
 			"b":80,
-			"id":1,
-			"showInGame":false,
 			"marker":true,
+			"showInGame":false,
+			"id":1,
 			"x":256,
 			"name":"      Point de ralliement\\nde l'assembleur (256, 811)",
 			"green":0.87811172008514,
-			"alwaysInView":true,
-			"shown":true,
 			"z":808,
+			"shown":true,
+			"alwaysInView":true,
 			"red":0.51766788959503
 		}],
 	"description":{
@@ -21,7 +21,7 @@
 		"briefingRaw":"Mission 7\\n \\nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,133 +162,97 @@
 		"saveName":"Mission_7",
 		"name":"Mission 7",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 7\n \nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
 			"type":"byte",
-			"id":2372,
+			"id":185,
 			"position":{
 				"y":130,
 				"x":170,
 				"z":1105
 			},
-			"orientation":2.8823499679565,
+			"orientation":2.8409326076508,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":4332,
+			"id":2631,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":-2.9912626743317,
+			"orientation":-2.9498450756073,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":118,
+			"id":14209,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.1506412029266,
+			"orientation":2.2518837451935,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5243,
+			"id":4928,
 			"position":{
 				"y":116,
 				"x":65,
 				"z":974
 			},
-			"orientation":2.3730683326721,
+			"orientation":2.3807382583618,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4077,
+			"id":16149,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":-2.636913061142,
+			"orientation":-2.488116979599,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4085,
+			"id":1167,
 			"position":{
 				"y":116,
 				"x":425,
 				"z":1021
 			},
-			"orientation":-2.4651072025299,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1286,
+			"id":252,
 			"position":{
 				"y":116,
 				"x":193,
 				"z":922
 			},
-			"orientation":2.7136120796204,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
-			"type":"bit",
-			"id":4043,
-			"position":{
-				"y":116,
-				"x":228,
-				"z":1019
-			},
-			"orientation":3.0342140197754,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
-			"type":"byte",
-			"id":5641,
-			"position":{
-				"y":130,
-				"x":349,
-				"z":1060
-			},
-			"orientation":-2.7734372615814,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
-			"type":"bit",
-			"id":2630,
-			"position":{
-				"y":116,
-				"x":368,
-				"z":894
-			},
-			"orientation":-2.3040392398834,
+			"orientation":2.5847578048706,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":578,
+			"id":3298,
 			"position":{
 				"y":116,
 				"x":51,
@@ -297,6 +261,42 @@
 			"orientation":0.033747583627701,
 			"autoHeal":"global",
 			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":15510,
+			"position":{
+				"y":116,
+				"x":228,
+				"z":1019
+			},
+			"orientation":2.9927966594696,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"byte",
+			"id":6682,
+			"position":{
+				"y":130,
+				"x":349,
+				"z":1060
+			},
+			"orientation":-2.6798644065857,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":12724,
+			"position":{
+				"y":116,
+				"x":368,
+				"z":894
+			},
+			"orientation":-2.3040392398834,
+			"autoHeal":"global",
+			"hp":25,
 			"team":0
 		}],
 	"allyteams":{
@@ -314,7 +314,7 @@
 	"groups":[{
 			"id":1,
 			"name":"Army",
-			"units":[118,1286,2372,2630,4043,4077,4085,4332,5243,5641]
+			"units":[185,252,1167,2631,4928,6682,12724,14209,15510,16149]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
@@ -446,7 +446,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":578,
+							"value":3298,
 							"type":"unit"
 						},
 						"zone":1

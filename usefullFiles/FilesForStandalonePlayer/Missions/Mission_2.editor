@@ -51,7 +51,7 @@
 		"briefingRaw":"Mission 2\\n \\nLe rapport que vous aviez reçu était correct mais le BYTE ne se troue plus au point de ralliement prévu. Vous percevez des traces de passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\\n \\nDéplacez-vous sur ces trois positions pour mieux inspecter ces indices. Nous pourrons peut être en déduire où se trouve cet allié. \\n\\n/#898989#Appuyez sur Echap pour continuer. /",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -192,13 +192,13 @@
 		"saveName":"Mission_2",
 		"name":"Mission 2",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":["5"],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 2\n \nLe rapport que vous aviez reçu était correct mais le BYTE ne se troue plus au point de ralliement prévu. Vous percevez des traces de passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\n \nDéplacez-vous sur ces trois positions pour mieux inspecter ces indices. Nous pourrons peut être en déduire où se trouve cet allié. \n\nÿ‰‰‰Appuyez sur Echap pour continuer. ÿÿÿÿ"
 	},
 	"units":[{
 			"type":"bit",
-			"id":2479,
+			"id":5398,
 			"position":{
 				"y":116,
 				"x":1980,
@@ -368,7 +368,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"zone":1
@@ -396,7 +396,7 @@
 					"params":{
 						"message":["Ok..."],
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"time":"3"
@@ -419,7 +419,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"zone":2
@@ -435,7 +435,7 @@
 			"actions":[{
 					"id":1,
 					"type":"setBooleanVariable",
-					"name":"uUpdateCond2",
+					"name":"UpdateCond2",
 					"params":{
 						"boolean":"true",
 						"variable":"cond2"
@@ -454,7 +454,7 @@
 					"params":{
 						"message":["Il est bien passé par là."],
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"time":"3"
@@ -467,7 +467,7 @@
 			"conditionTotal":3,
 			"name":"PassingZone3",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":4,
 			"conditions":[{
 					"id":2,
 					"type":"zone",
@@ -478,7 +478,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"zone":3
@@ -512,10 +512,17 @@
 					"params":{
 						"message":["Je suis sur la bonne piste."],
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"time":"3"
+					}
+				},{
+					"id":15,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"2"
 					}
 				},{
 					"id":2,
@@ -533,7 +540,7 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":1,
 			"conditions":[{
 					"id":5,
 					"type":"booleanVariable",
@@ -543,13 +550,6 @@
 					}
 				}],
 			"actions":[{
-					"id":12,
-					"type":"wait",
-					"name":"Tempo",
-					"params":{
-						"time":"4"
-					}
-				},{
 					"id":3,
 					"type":"win",
 					"name":"WinGame",
@@ -582,7 +582,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"zone":2
@@ -597,7 +597,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						},
 						"zone":3
@@ -618,7 +618,7 @@
 						"message":["Mmmmh... celà n'a pas de sens, peut être devrais-je observer les indices dans l'ordre..."],
 						"time":"6",
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						}
 					}
@@ -640,7 +640,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2479,
+							"value":5398,
 							"type":"unit"
 						}
 					}

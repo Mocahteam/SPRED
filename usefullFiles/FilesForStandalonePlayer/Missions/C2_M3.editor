@@ -153,7 +153,7 @@
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":5562,
+			"id":1022,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -165,7 +165,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":12717,
+			"id":14807,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -177,7 +177,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":16447,
+			"id":2641,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -189,79 +189,79 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":98,
+			"id":8223,
 			"position":{
 				"y":118.70226287842,
 				"x":3626.6530761719,
 				"z":1359.4791259766
 			},
-			"orientation":-0.074322484433651,
+			"orientation":-0.083540096879005,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":13297,
+			"id":10595,
 			"position":{
 				"y":118.25057220459,
 				"x":3621.4760742188,
 				"z":1206.8426513672
 			},
-			"orientation":0.14458417892456,
+			"orientation":0.18259835243225,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":8190,
+			"id":7346,
 			"position":{
 				"y":104.07597351074,
 				"x":3889.0891113281,
 				"z":1194.6551513672
 			},
-			"orientation":0.6805032491684,
+			"orientation":0.71832549571991,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":4065,
+			"id":2959,
 			"position":{
 				"y":96.553703308105,
 				"x":3995.7641601563,
 				"z":1311.2705078125
 			},
-			"orientation":0.21243721246719,
+			"orientation":0.23383311927319,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"assembler",
-			"id":4846,
+			"id":13577,
 			"position":{
 				"y":142.37466430664,
 				"x":3709.3896484375,
 				"z":856.67535400391
 			},
-			"orientation":0.66742873191833,
+			"orientation":0.73325371742249,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4033,
+			"id":5847,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2041749954224,
+			"orientation":-1.1949710845947,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":7197,
+			"id":4274,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -273,31 +273,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":7946,
+			"id":12133,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6767964363098,
+			"orientation":-2.6629908084869,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":11152,
+			"id":886,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.8992238044739,
+			"orientation":2.8900198936462,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8222,
+			"id":5086,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -309,7 +309,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":4047,
+			"id":8735,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -321,7 +321,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":4716,
+			"id":10054,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -333,7 +333,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2321,
+			"id":5771,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
@@ -345,19 +345,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":1899,
+			"id":12837,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3918590545654,
+			"orientation":1.3961040973663,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":5205,
+			"id":10889,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
@@ -369,7 +369,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":10733,
+			"id":4346,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -381,19 +381,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":9083,
+			"id":1411,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":-0.066859900951385,
+			"orientation":-0.070812024176121,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11009,
+			"id":3099,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
@@ -405,7 +405,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":9613,
+			"id":7422,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -417,7 +417,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":14777,
+			"id":4417,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -429,7 +429,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":10801,
+			"id":7098,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
@@ -441,7 +441,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1204,
+			"id":11052,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
@@ -453,31 +453,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":6387,
+			"id":6269,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.039252903312445,
+			"orientation":-0.034651935100555,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":16270,
+			"id":10745,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2577189207077,
+			"orientation":-1.2439048290253,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":3559,
+			"id":3159,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -489,13 +489,13 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":12457,
+			"id":1672,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.5745604038239,
+			"orientation":-2.5515937805176,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -647,7 +647,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":12457,
+							"value":1672,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -659,12 +659,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":6387,
+							"value":6269,
 							"type":"unit"
 						},
 						"position":{
-							"x":3736,
-							"z":775
+							"z":775,
+							"x":3736
 						}
 					}
 				},{
@@ -674,12 +674,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":16270,
+							"value":10745,
 							"type":"unit"
 						},
 						"position":{
-							"x":3997,
-							"z":1942
+							"z":1942,
+							"x":3997
 						}
 					}
 				},{
@@ -689,12 +689,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":3559,
+							"value":3159,
 							"type":"unit"
 						},
 						"position":{
-							"x":3306,
-							"z":1479
+							"z":1479,
+							"x":3306
 						}
 					}
 				},{
@@ -704,12 +704,12 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4846,
+							"value":13577,
 							"type":"unit"
 						},
 						"position":{
-							"x":3609,
-							"z":1669
+							"z":1669,
+							"x":3609
 						}
 					}
 				}],
@@ -761,7 +761,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":12457,
+							"value":1672,
 							"type":"unit"
 						}
 					}

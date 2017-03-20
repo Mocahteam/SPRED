@@ -21,7 +21,7 @@
 		"briefingRaw":"Mission 10\\n \\nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,13 +162,13 @@
 		"saveName":"Mission_10",
 		"name":"Mission 10",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
+		"mouse":"disabled",
 		"traces":[],
 		"briefing":"Mission 10\n \nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\n \nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\n \nBonne chance.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
 			"type":"byte",
-			"id":2635,
+			"id":10631,
 			"position":{
 				"y":130,
 				"x":1600,
@@ -180,7 +180,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":1505,
+			"id":2529,
 			"position":{
 				"y":130,
 				"x":1600,
@@ -192,7 +192,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":4940,
+			"id":5804,
 			"position":{
 				"y":130,
 				"x":1728,
@@ -204,7 +204,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":4674,
+			"id":1252,
 			"position":{
 				"y":130,
 				"x":1856,
@@ -216,7 +216,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1731,
+			"id":10406,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -228,7 +228,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":373,
+			"id":1335,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -240,7 +240,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":786,
+			"id":8913,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -252,7 +252,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1050,
+			"id":7462,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -264,7 +264,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5729,
+			"id":1714,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -276,7 +276,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2202,
+			"id":8500,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -288,7 +288,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5329,
+			"id":13414,
 			"position":{
 				"y":116,
 				"x":1600,
@@ -300,7 +300,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":824,
+			"id":4949,
 			"position":{
 				"y":116,
 				"x":1728,
@@ -312,7 +312,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5992,
+			"id":8344,
 			"position":{
 				"y":116,
 				"x":1856,
@@ -324,7 +324,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":497,
+			"id":6356,
 			"position":{
 				"y":116,
 				"x":1728,
@@ -336,7 +336,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3299,
+			"id":6722,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -348,7 +348,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3470,
+			"id":12219,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -360,7 +360,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2620,
+			"id":2801,
 			"position":{
 				"y":116,
 				"x":1856,
@@ -372,7 +372,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1416,
+			"id":2512,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -384,7 +384,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5357,
+			"id":13055,
 			"position":{
 				"y":116,
 				"x":1640,
@@ -396,7 +396,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5218,
+			"id":1770,
 			"position":{
 				"y":116,
 				"x":1687,
@@ -408,7 +408,7 @@
 			"team":2
 		},{
 			"type":"socket",
-			"id":2528,
+			"id":3143,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -420,145 +420,145 @@
 			"team":1
 		},{
 			"type":"kernel",
-			"id":4346,
+			"id":15927,
 			"position":{
 				"y":101,
 				"x":1792,
 				"z":257
 			},
-			"orientation":-1.6336896419525,
+			"orientation":-1.6766411066055,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":130,
+			"id":12507,
 			"position":{
 				"y":130,
 				"x":165,
 				"z":1063
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":5343,
+			"id":4618,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5008,
+			"id":1119,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1949,
+			"id":15387,
 			"position":{
 				"y":116,
 				"x":65,
 				"z":974
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1298,
+			"id":15859,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":902,
+			"id":9137,
 			"position":{
 				"y":116,
 				"x":425,
 				"z":1021
 			},
-			"orientation":2.9176316261292,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":886,
-			"position":{
-				"y":116,
-				"x":193,
-				"z":922
-			},
-			"orientation":2.9176316261292,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":3799,
-			"position":{
-				"y":116,
-				"x":228,
-				"z":1019
-			},
-			"orientation":2.9176316261292,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":2919,
-			"position":{
-				"y":130,
-				"x":349,
-				"z":1060
-			},
-			"orientation":2.9176316261292,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":2787,
-			"position":{
-				"y":116,
-				"x":368,
-				"z":894
-			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":1127,
+			"id":6187,
 			"position":{
 				"y":116,
 				"x":256,
 				"z":811
 			},
-			"orientation":2.9176316261292,
+			"orientation":2.896155834198,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":5310,
+			"position":{
+				"y":116,
+				"x":193,
+				"z":922
+			},
+			"orientation":2.896155834198,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":4414,
+			"position":{
+				"y":116,
+				"x":228,
+				"z":1019
+			},
+			"orientation":2.896155834198,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"byte",
+			"id":10369,
+			"position":{
+				"y":130,
+				"x":349,
+				"z":1060
+			},
+			"orientation":2.896155834198,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":9665,
+			"position":{
+				"y":116,
+				"x":368,
+				"z":894
+			},
+			"orientation":2.896155834198,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -575,24 +575,13 @@
 		"9":[],
 		"0":[1]
 	},
-	"groups":[],
-	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
-	"variables":[{
-			"id":0,
-			"type":"boolean",
-			"name":"thirdWaveLaunched",
-			"initValue":"false"
-		},{
+	"groups":[{
 			"id":1,
-			"type":"boolean",
-			"name":"firstWaveLaunched",
-			"initValue":"false"
-		},{
-			"id":2,
-			"type":"boolean",
-			"name":"secondWaveLaunched",
-			"initValue":"false"
+			"name":"Soldiers",
+			"units":[1119,4414,4618,5310,9137,9665,10369,12507,15387,15859]
 		}],
+	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
+	"variables":[],
 	"teams":{
 		"1":{
 			"ai":"",
@@ -711,7 +700,7 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":3,
 			"conditions":[{
 					"id":19,
 					"type":"dead",
@@ -733,6 +722,13 @@
 					"params":{
 						"message":["Grâce à votre groupe d'intervention et à vos compétences de programmeur, vous avez pu remporter une grande victoire.\\n \\nCe poste de commandement va nous apporter un avantage certain pour la suite du conflit. De nombreux systèmes vont pouvoir être reprogrammés.\\n \\nEn attendant vos compétences peuvent nous être à nouveau utiles, travaillez et tenez vous prêt...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer"],
 						"boolean":"true"
+					}
+				},{
+					"id":11,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"2"
 					}
 				},{
 					"id":4,
@@ -761,8 +757,8 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":0,
-							"type":"team"
+							"value":1,
+							"type":"group"
 						}
 					}
 				}],
@@ -776,6 +772,35 @@
 					}
 				}],
 			"id":5
+		},{
+			"comment":"",
+			"id":7,
+			"conditionTotal":1,
+			"actionTotal":1,
+			"name":"ForbidFightAsm",
+			"repetition":true,
+			"repetitionTime":"0",
+			"conditions":[{
+					"id":21,
+					"type":"script",
+					"name":"CheckFight",
+					"params":{
+						"script":"local function isAsmFight () local units = Spring.GetAllUnits() for i = 1, #units do local u = units[i] if UnitDefs[Spring.GetUnitDefID(u)][\"name\"]==\"assembler\" then local queue=Spring.GetCommandQueue(u,4) for k = 1, #queue do if queue[k].id == 16 then return true end end end end return false end return isAsmFight ()"
+					}
+				}],
+			"actions":[{
+					"id":10,
+					"type":"order",
+					"name":"Stop",
+					"params":{
+						"command":0,
+						"unitset":{
+							"value":6187,
+							"type":"unit"
+						}
+					}
+				}],
+			"trigger":""
 		}],
 	"listOfCommands":{
 		"0":"Stop",

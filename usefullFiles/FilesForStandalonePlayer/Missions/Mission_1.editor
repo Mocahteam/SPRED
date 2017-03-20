@@ -7,12 +7,12 @@
 			"z2":1696,
 			"x1":1960,
 			"showInGame":false,
-			"id":1,
+			"marker":true,
 			"name":"Point ralliement\\n   (1980, 1676)",
 			"green":0.46917986869812,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
+			"shown":true,
+			"id":1,
 			"red":0.51401484012604
 		}],
 	"description":{
@@ -21,7 +21,7 @@
 		"briefingRaw":"Mission 1\\n \\nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la \"guerre numérique\".\\n \\nUn rapport vous est parvenu vous indiquant qu'un BYTE se trouverait au point ralliement (1980, 1676). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage... \\n \\n/#897F84#Appuyez sur Echap pour continuer./",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,19 +162,19 @@
 		"saveName":"Mission_1",
 		"name":"Mission 1",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 1\n \nVous allez devoir constituer et commander un groupe d'intervention spéciale pour mener une attaque éclair sur un poste de commandement peu défendu. Si vous atteignez cet objectif final nos ennemis s'en trouveront désorientés et nous exploiterons cet avantage pour mettre un terme à la \"guerre numérique\".\n \nUn rapport vous est parvenu vous indiquant qu'un BYTE se trouverait au point ralliement (1980, 1676). Déplacez votre unique entité à cette position pour tenter de rallier à notre cause le BYTE solitaire. Bon courage... \n \nÿ‰\u007f„Appuyez sur Echap pour continuer.ÿÿÿÿ"
 	},
 	"units":[{
 			"type":"bit",
-			"id":2900,
+			"id":1174,
 			"position":{
 				"y":116,
 				"x":2021,
 				"z":2020
 			},
-			"orientation":-2.9360392093658,
+			"orientation":-2.9068937301636,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
@@ -305,7 +305,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2900,
+							"value":1174,
 							"type":"unit"
 						},
 						"zone":1

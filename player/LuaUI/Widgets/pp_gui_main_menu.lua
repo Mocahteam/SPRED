@@ -635,7 +635,6 @@ local function closeMainMenu ()
 end
 
 local function showFeedback ()
-	
 	mainMenuWindow = addWindow(WG.Chili.Screen0, "25%", "25%", "50%", "50%")
 	
 	if Script.LuaUI.ToggleHelpButton then
@@ -789,6 +788,8 @@ local function showMainMenu (missionEnd)
 				currentoptions["missionname"]=mission
 				currentoptions["currentinput"]=currentInput
 				currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
+				-- Reset activetraces property in case it changes between missions
+				currentoptions["activetraces"]=nil
 				local continueBut = addButton(mainMenuWindow, "0%", "30%", "30%", "10%", LANG_CONTINUE)
 				continueBut.backgroundColor = { 0, 0.2, 0.6, 1 }
 				continueBut.focusColor = { 0, 0.6, 1, 1 }

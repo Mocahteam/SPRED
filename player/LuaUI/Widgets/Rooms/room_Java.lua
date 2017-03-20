@@ -218,6 +218,17 @@ local template_JavaPages = {
 }
 
 local function CreateJavaPagesCentered ()
+	template_JavaPages.OnViewResized = function ()
+		local needToBeOpenAgain = JavaPages and not JavaPages.closed
+		if needToBeOpenAgain then JavaPages:Close() end
+		JavaPages = CreateJavaPagesCentered()
+		JavaPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Java/Java"..currentPage..".jpg"
+		JavaPages.son.lineArray = WordWrap(getText(), JavaPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = JavaPages
+			TutoView:Open()
+		end
+	end
 	template_JavaPages.son = Window:CreateCentered(template_JavaPages_Text)
 	local win = Window:CreateCentered(template_JavaPages)
 	local winHeight = win.y2 - win.y1

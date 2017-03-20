@@ -21,7 +21,7 @@
 		"briefingRaw":"Mission 6\\n \\nToutes les entités que vous possédez ont subi de lourds dommanges lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\n \\nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,121 +162,121 @@
 		"saveName":"Mission_6",
 		"name":"Mission 6",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 6\n \nToutes les entités que vous possédez ont subi de lourds dommanges lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\n \nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
 			"type":"bit",
-			"id":3771,
+			"id":5072,
 			"position":{
 				"y":270.39453125,
 				"x":1400,
 				"z":1384
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":3398,
+			"id":10160,
 			"position":{
 				"y":130,
 				"x":510,
 				"z":1842
 			},
-			"orientation":-2.5479421615601,
+			"orientation":-2.463573217392,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1020,
+			"id":14548,
 			"position":{
 				"y":270.39453125,
 				"x":1488,
 				"z":1318
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5333,
+			"id":15852,
 			"position":{
 				"y":270.39453125,
 				"x":1432,
 				"z":1320
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4864,
+			"id":10458,
 			"position":{
 				"y":270.39453125,
 				"x":1477,
 				"z":1383
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3743,
+			"id":13928,
 			"position":{
 				"y":270.39453125,
 				"x":1390,
 				"z":1467
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":50,
+			"id":15385,
 			"position":{
 				"y":270.39453125,
 				"x":1463,
 				"z":1459
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":496,
+			"id":12482,
 			"position":{
 				"y":270.39453125,
 				"x":1331,
 				"z":1430
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.2933013439178,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":3554,
+			"id":3032,
 			"position":{
 				"y":130,
 				"x":481,
 				"z":1741
 			},
-			"orientation":-2.2610876560211,
+			"orientation":-2.2871654033661,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":1955,
+			"id":15019,
 			"position":{
 				"y":130,
 				"x":429,
@@ -420,7 +420,7 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
 					"id":8,
 					"type":"zone",
@@ -438,6 +438,13 @@
 					}
 				}],
 			"actions":[{
+					"id":6,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"4"
+					}
+				},{
 					"id":4,
 					"type":"win",
 					"name":"WinGame",

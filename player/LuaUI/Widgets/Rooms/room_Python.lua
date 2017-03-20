@@ -207,6 +207,17 @@ local template_PythonPages = {
 }
 
 local function CreatePythonPagesCentered ()
+	template_PythonPages.OnViewResized = function ()
+		local needToBeOpenAgain = PythonPages and not PythonPages.closed
+		if needToBeOpenAgain then PythonPages:Close() end
+		PythonPages = CreatePythonPagesCentered()
+		PythonPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Python/Python"..currentPage..".jpg"
+		PythonPages.son.lineArray = WordWrap(getText(), PythonPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = PythonPages
+			TutoView:Open()
+		end
+	end
 	template_PythonPages.son = Window:CreateCentered(template_PythonPages_Text)
 	local win = Window:CreateCentered(template_PythonPages)
 	local winHeight = win.y2 - win.y1

@@ -86,7 +86,6 @@ local function removeWidgets()
     end
   end
   for _,w in pairs(RemovedWidgetList) do
-    Spring.Echo("Removing",w.GetInfo().name)
     widgetHandler:RemoveWidget(w)
   end
 end
@@ -128,11 +127,9 @@ end
 local function RunScenario(i)
   if Spring.Restart then
     AppliqManager:selectScenario(i)
-    AppliqManager:startRoute()
-    Spring.Echo(json.encode(AppliqManager.treehandler.root.games.game))    
+    AppliqManager:startRoute() 
     local mission=AppliqManager.currentActivityID
     local currentInput=AppliqManager:getCurrentInputName()
-    Spring.Echo(currentInput)
     local options={
     ["MODOPTIONS"]=
       {

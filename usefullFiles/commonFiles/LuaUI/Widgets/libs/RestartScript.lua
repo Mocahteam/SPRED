@@ -217,6 +217,7 @@ function genericRestart(missionName,operations,toEditor)
 			local tableEditor=json.decode(sf)
 			Spring.Echo(widget:GetInfo().name..": decoded with success => build restart script")
 			local txtFileContent=createTxtFileContentFromScratch(tableEditor, toEditor)
+			Spring.Echo(widget:GetInfo().name..": Restart file built from \""..missionName.."\": "..txtFileContent)
 			DoTheRestart(txtFileContent, operations, true)
 		else
 			Spring.Echo(widget:GetInfo().name..": that file is not valid... Restart aborted")

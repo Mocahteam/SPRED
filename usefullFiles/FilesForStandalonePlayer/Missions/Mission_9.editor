@@ -21,7 +21,7 @@
 		"briefingRaw":"Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir. Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -162,49 +162,49 @@
 		"saveName":"Mission_9",
 		"name":"Mission 9",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
+		"mouse":"disabled",
 		"traces":[],
 		"briefing":"Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir. Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
 	},
 	"units":[{
 			"type":"byte",
-			"id":2679,
+			"id":13198,
 			"position":{
 				"y":130,
 				"x":165,
 				"z":1063
 			},
-			"orientation":2.8501362800598,
+			"orientation":2.8025829792023,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":381,
+			"id":8438,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":-2.9590489864349,
+			"orientation":-2.9191656112671,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4034,
+			"id":8884,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.2334761619568,
+			"orientation":2.288699388504,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":2545,
+			"id":4515,
 			"position":{
 				"y":116,
 				"x":65,
@@ -216,67 +216,67 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":2858,
+			"id":963,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":-2.5187964439392,
+			"orientation":-2.4160199165344,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":230,
+			"id":10555,
 			"position":{
 				"y":116,
 				"x":425,
 				"z":1021
 			},
-			"orientation":-2.4068160057068,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3766,
+			"id":3667,
 			"position":{
 				"y":116,
 				"x":193,
 				"z":922
 			},
-			"orientation":2.6169712543488,
+			"orientation":2.4727771282196,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4734,
+			"id":3319,
 			"position":{
 				"y":116,
 				"x":228,
 				"z":1019
 			},
-			"orientation":3.0020005702972,
+			"orientation":2.9621169567108,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":5208,
+			"id":14403,
 			"position":{
 				"y":130,
 				"x":349,
 				"z":1060
 			},
-			"orientation":-2.7074761390686,
+			"orientation":-2.5832238197327,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":589,
+			"id":3355,
 			"position":{
 				"y":116,
 				"x":368,
@@ -288,7 +288,7 @@
 			"team":0
 		},{
 			"type":"assembler",
-			"id":3497,
+			"id":10659,
 			"position":{
 				"y":116,
 				"x":256,
@@ -453,7 +453,7 @@
 					"type":"booleanVariable",
 					"name":"Wave3Launched",
 					"params":{
-						"variable":"thirdWaveLaunched"
+						"variable":"Wave3Launched"
 					}
 				},{
 					"id":19,
@@ -545,8 +545,8 @@
 							"type":"team"
 						},
 						"position":{
-							"z":1060,
-							"x":264
+							"x":254,
+							"z":1080
 						}
 					}
 				},{
@@ -555,7 +555,7 @@
 					"name":"Wave1Launched",
 					"params":{
 						"boolean":"true",
-						"variable":"firstWaveLaunched"
+						"variable":"Wave1Launched"
 					}
 				}],
 			"id":6
@@ -584,7 +584,7 @@
 					"type":"booleanVariable",
 					"name":"WaveLaunched",
 					"params":{
-						"variable":"firstWaveLaunched"
+						"variable":"Wave1Launched"
 					}
 				}],
 			"actions":[{
@@ -618,7 +618,7 @@
 					"name":"Wave2Launched",
 					"params":{
 						"boolean":"true",
-						"variable":"secondWaveLaunched"
+						"variable":"Wave2Launched"
 					}
 				}],
 			"id":7
@@ -634,7 +634,7 @@
 					"type":"booleanVariable",
 					"name":"Wave2Launched",
 					"params":{
-						"variable":"secondWaveLaunched"
+						"variable":"Wave2Launched"
 					}
 				},{
 					"id":18,
@@ -685,6 +685,35 @@
 					}
 				}],
 			"id":8
+		},{
+			"comment":"",
+			"id":9,
+			"conditionTotal":1,
+			"actionTotal":1,
+			"name":"ForbidFightAsm",
+			"repetition":true,
+			"repetitionTime":"0",
+			"conditions":[{
+					"id":20,
+					"type":"script",
+					"name":"CheckFight",
+					"params":{
+						"script":"local function isAsmFight () local units = Spring.GetAllUnits() for i = 1, #units do local u = units[i] if UnitDefs[Spring.GetUnitDefID(u)][\"name\"]==\"assembler\" then local queue=Spring.GetCommandQueue(u,4) for k = 1, #queue do if queue[k].id == 16 then return true end end end end return false end return isAsmFight ()"
+					}
+				}],
+			"actions":[{
+					"id":19,
+					"type":"order",
+					"name":"Stop",
+					"params":{
+						"command":0,
+						"unitset":{
+							"value":10659,
+							"type":"unit"
+						}
+					}
+				}],
+			"trigger":""
 		}],
 	"listOfCommands":{
 		"0":"Stop",

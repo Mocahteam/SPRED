@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.80158841609955,
 			"b":48,
-			"id":1,
-			"showInGame":false,
 			"marker":true,
+			"showInGame":false,
+			"id":1,
 			"x":1248,
 			"name":"Point de ralliement\\n      (1250, 1048)",
 			"green":0.99604952335358,
-			"alwaysInView":true,
-			"shown":true,
 			"z":1048,
+			"shown":true,
+			"alwaysInView":true,
 			"red":0.75692272186279
 		}],
 	"description":{
@@ -21,7 +21,7 @@
 		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -163,12 +163,12 @@
 		"name":"Tutoriel",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":[],
+		"traces":["1"],
 		"briefing":""
 	},
 	"units":[{
 			"type":"bit",
-			"id":5432,
+			"id":13452,
 			"position":{
 				"y":270.39453125,
 				"x":850,
@@ -323,7 +323,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5432,
+							"value":13452,
 							"type":"unit"
 						},
 						"zone":1
@@ -355,7 +355,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5432,
+							"value":13452,
 							"type":"unit"
 						}
 					}

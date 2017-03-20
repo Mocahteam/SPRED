@@ -7,12 +7,12 @@
 			"z2":1816,
 			"x1":632,
 			"showInGame":false,
-			"marker":false,
+			"id":3,
 			"name":"MovingZone",
 			"green":0.58732402324677,
-			"alwaysInView":false,
 			"shown":true,
-			"id":3,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.82959282398224
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":1288,
 			"x1":728,
 			"showInGame":true,
-			"marker":false,
+			"id":4,
 			"name":"PopZone",
 			"green":0.24019658565521,
-			"alwaysInView":false,
 			"shown":true,
-			"id":4,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.20089828968048
 		}],
 	"description":{
@@ -36,7 +36,7 @@
 		"briefingRaw":"Mission 4\\n \\nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Protégez-le avant qu'il ne soit trop tard.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer.  /",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"enabled",
+		"feedback":"disabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -177,25 +177,13 @@
 		"saveName":"Mission_4",
 		"name":"Mission 4",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"enabled",
-		"traces":[],
+		"mouse":"disabled",
+		"traces":["1","2"],
 		"briefing":"Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Protégez-le avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ"
 	},
 	"units":[{
-			"type":"bit",
-			"id":3576,
-			"position":{
-				"y":116,
-				"x":1003,
-				"z":1890
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
 			"type":"byte",
-			"id":3020,
+			"id":5806,
 			"position":{
 				"y":130,
 				"x":956,
@@ -205,6 +193,18 @@
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
+		},{
+			"type":"bit",
+			"id":10880,
+			"position":{
+				"y":116,
+				"x":1003,
+				"z":1890
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
 		}],
 	"allyteams":{
 		"1":[0,2],
@@ -381,7 +381,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":3576,
+							"value":10880,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -422,8 +422,8 @@
 							"type":"condition"
 						},
 						"position":{
-							"x":1010,
-							"z":1685
+							"z":1685,
+							"x":1010
 						}
 					}
 				}],
@@ -434,7 +434,7 @@
 			"conditionTotal":2,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":4,
 			"conditions":[{
 					"id":4,
 					"type":"dead",
@@ -463,7 +463,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						}
 					}
@@ -474,9 +474,16 @@
 					"params":{
 						"team":0,
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						}
+					}
+				},{
+					"id":15,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"0.5"
 					}
 				},{
 					"id":4,
@@ -548,7 +555,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						},
 						"attacker":{
@@ -582,7 +589,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						},
 						"number":{
@@ -604,7 +611,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						},
 						"position":3
@@ -626,7 +633,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						},
 						"number":{
@@ -648,7 +655,7 @@
 					"params":{
 						"message":["Aidez moi !!!","S'il vous plait...","AAaarghh !!!","J'ai besoin d'aide...","Que faites-vous ???","Je ne tiendrais pas longtemps...","Mon energie diminue...","Il m'en met plein la gueule !!!","Nooooon !!!"],
 						"unitset":{
-							"value":3020,
+							"value":5806,
 							"type":"unit"
 						},
 						"time":"4"

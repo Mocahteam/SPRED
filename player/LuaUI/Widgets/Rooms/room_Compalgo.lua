@@ -213,6 +213,17 @@ local template_CompalgoPages = {
 }
 
 local function CreateCompalgoPagesCentered ()
+	template_CompalgoPages.OnViewResized = function ()
+		local needToBeOpenAgain = CompalgoPages and not CompalgoPages.closed
+		if needToBeOpenAgain then CompalgoPages:Close() end
+		CompalgoPages = CreateCompalgoPagesCentered()
+		CompalgoPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/Compalgo/Compalgo"..currentPage..".jpg"
+		CompalgoPages.son.lineArray = WordWrap(getText(), CompalgoPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = CompalgoPages
+			TutoView:Open()
+		end
+	end
 	template_CompalgoPages.son = Window:CreateCentered(template_CompalgoPages_Text)
 	local win = Window:CreateCentered(template_CompalgoPages)
 	local winHeight = win.y2 - win.y1

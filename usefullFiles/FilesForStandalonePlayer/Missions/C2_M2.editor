@@ -7,12 +7,12 @@
 			"z2":1256,
 			"x1":2872,
 			"showInGame":false,
-			"id":9,
+			"marker":true,
 			"name":"   Entrée 1\\n(2924, 1208)",
 			"green":0.54002010822296,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
+			"shown":true,
+			"id":9,
 			"red":0.29673206806183
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":720,
 			"x1":3176,
 			"showInGame":false,
-			"id":10,
+			"marker":true,
 			"name":"  Entrée 2\\n(3252, 660)",
 			"green":0.53627705574036,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
+			"shown":true,
+			"id":10,
 			"red":0.15385806560516
 		},{
 			"type":"Rectangle",
@@ -37,12 +37,12 @@
 			"z2":848,
 			"x1":3792,
 			"showInGame":false,
-			"id":11,
+			"marker":true,
 			"name":"  Entrée 3\\n(3872, 772)",
 			"green":0.16118931770325,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":true,
+			"shown":true,
+			"id":11,
 			"red":0.86147344112396
 		}],
 	"description":{
@@ -198,19 +198,19 @@
 	},
 	"units":[{
 			"type":"assembler",
-			"id":2866,
+			"id":4940,
 			"position":{
 				"y":119.02044677734,
 				"x":3641,
 				"z":1225
 			},
-			"orientation":-0.011511960998178,
+			"orientation":-0.016110034659505,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1923,
+			"id":10060,
 			"position":{
 				"y":166.15704345703,
 				"x":3338,
@@ -222,19 +222,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":507,
+			"id":8675,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2563302516937,
+			"orientation":-1.2517284154892,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":5779,
+			"id":11305,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -246,31 +246,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":16259,
+			"id":8617,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.7504277229309,
+			"orientation":-2.7412238121033,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":7053,
+			"id":14897,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.9605829715729,
+			"orientation":2.9513790607452,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":1747,
+			"id":10194,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -282,7 +282,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":12782,
+			"id":8780,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -294,7 +294,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":52,
+			"id":3816,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -306,43 +306,43 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":11984,
+			"id":10774,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":-0.84875631332397,
+			"orientation":-0.84467393159866,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":14775,
+			"id":6631,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3451472520828,
+			"orientation":1.3578908443451,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":8276,
+			"id":13980,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
 				"z":768.9326171875
 			},
-			"orientation":0.3467036485672,
+			"orientation":0.33287048339844,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":14629,
+			"id":11195,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -354,31 +354,31 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2359,
+			"id":7219,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":0.15063159167767,
+			"orientation":0.066569834947586,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":35,
+			"id":11867,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
 				"z":1587.8966064453
 			},
-			"orientation":1.9170812368393,
+			"orientation":1.9448118209839,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":14374,
+			"id":6902,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -390,7 +390,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":10697,
+			"id":7558,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -402,55 +402,55 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":8393,
+			"id":16359,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.8150854110718,
+			"orientation":1.8192977905273,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13995,
+			"id":15122,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":1.1378657817841,
+			"orientation":1.1334631443024,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":1949,
+			"id":4904,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.069927364587784,
+			"orientation":-0.065326049923897,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":12008,
+			"id":1472,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.3191306591034,
+			"orientation":-1.3099173307419,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":4266,
+			"id":2907,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -462,13 +462,13 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":912,
+			"id":9998,
 			"position":{
 				"y":128.99685668945,
 				"x":3475.8403320313,
 				"z":1212.1966552734
 			},
-			"orientation":2.2675495147705,
+			"orientation":2.302659034729,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
@@ -620,12 +620,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1949,
+							"value":4904,
 							"type":"unit"
 						},
 						"position":{
-							"x":3546,
-							"z":1067
+							"z":1067,
+							"x":3546
 						}
 					}
 				},{
@@ -635,12 +635,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":12008,
+							"value":1472,
 							"type":"unit"
 						},
 						"position":{
-							"x":3507,
-							"z":1906
+							"z":1906,
+							"x":3507
 						}
 					}
 				},{
@@ -650,12 +650,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":4266,
+							"value":2907,
 							"type":"unit"
 						},
 						"position":{
-							"x":3340,
-							"z":1342
+							"z":1342,
+							"x":3340
 						}
 					}
 				},{
@@ -665,12 +665,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1923,
+							"value":10060,
 							"type":"unit"
 						},
 						"position":{
-							"z":1359,
-							"x":3327
+							"x":3327,
+							"z":1359
 						}
 					}
 				},{
@@ -680,12 +680,12 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":912,
+							"value":9998,
 							"type":"unit"
 						},
 						"position":{
-							"z":1744,
-							"x":3810
+							"x":3810,
+							"z":1744
 						}
 					}
 				}],
@@ -814,7 +814,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2866,
+							"value":4940,
 							"type":"unit"
 						}
 					}

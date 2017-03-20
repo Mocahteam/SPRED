@@ -7,12 +7,12 @@
 			"z2":960,
 			"x1":3384,
 			"showInGame":false,
-			"marker":false,
+			"id":1,
 			"name":"BuildingArea1",
 			"green":0.14038741588593,
-			"alwaysInView":false,
 			"shown":true,
-			"id":1,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.8685417175293
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":1112,
 			"x1":3688,
 			"showInGame":false,
-			"marker":false,
+			"id":2,
 			"name":"BuildingArea2",
 			"green":0.48907387256622,
-			"alwaysInView":false,
 			"shown":true,
-			"id":2,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.19527971744537
 		},{
 			"type":"Rectangle",
@@ -37,12 +37,12 @@
 			"z2":1360,
 			"x1":3136,
 			"showInGame":false,
-			"marker":false,
+			"id":3,
 			"name":"ForbidArea1",
 			"green":0.53347647190094,
-			"alwaysInView":false,
 			"shown":true,
-			"id":3,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.9041393995285
 		},{
 			"type":"Rectangle",
@@ -52,12 +52,12 @@
 			"z2":1984,
 			"x1":3824,
 			"showInGame":false,
-			"marker":false,
+			"id":4,
 			"name":"ForbidArea2",
 			"green":0.42724168300629,
-			"alwaysInView":false,
 			"shown":true,
-			"id":4,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.99234926700592
 		}],
 	"description":{
@@ -213,7 +213,7 @@
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":1734,
+			"id":3847,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -225,7 +225,7 @@
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":2112,
+			"id":15304,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -237,7 +237,7 @@
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":7951,
+			"id":9515,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -249,43 +249,43 @@
 			"team":0
 		},{
 			"type":"pointer",
-			"id":8017,
+			"id":15826,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4791415929794,
+			"orientation":-1.4745416641235,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":7676,
+			"id":3939,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.2542794942856,
+			"orientation":1.2252366542816,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":7578,
+			"id":13890,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4495557546616,
+			"orientation":1.4376022815704,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":402,
+			"id":10178,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -297,7 +297,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":14739,
+			"id":12333,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -309,7 +309,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":16167,
+			"id":4631,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -321,31 +321,31 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":906,
+			"id":10289,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.968097448349,
+			"orientation":-1.9819031953812,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":7972,
+			"id":11089,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4543693065643,
+			"orientation":-2.4436314105988,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13641,
+			"id":10780,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -357,31 +357,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":15839,
+			"id":2468,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.0369710922241,
+			"orientation":-1.0200972557068,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"assembler",
-			"id":10995,
+			"id":9443,
 			"position":{
 				"y":121.7388381958,
 				"x":3563.4130859375,
 				"z":1034.9774169922
 			},
-			"orientation":-0.10735884308815,
+			"orientation":-0.14378473162651,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":3748,
+			"id":1648,
 			"position":{
 				"y":144.47802734375,
 				"x":3986,
@@ -393,7 +393,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":12068,
+			"id":11759,
 			"position":{
 				"y":174.59600830078,
 				"x":1944,
@@ -405,7 +405,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":14946,
+			"id":5970,
 			"position":{
 				"y":163,
 				"x":1428,
@@ -417,7 +417,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":1796,
+			"id":10271,
 			"position":{
 				"y":203.35562133789,
 				"x":399,
@@ -429,7 +429,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":10930,
+			"id":10339,
 			"position":{
 				"y":189.34906005859,
 				"x":418,
@@ -441,7 +441,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13842,
+			"id":11812,
 			"position":{
 				"y":166.296875,
 				"x":372,
@@ -453,19 +453,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3836,
+			"id":6171,
 			"position":{
 				"y":167.02696228027,
 				"x":326,
 				"z":1663
 			},
-			"orientation":-0.038174614310265,
+			"orientation":-0.047529511153698,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":11797,
+			"id":156,
 			"position":{
 				"y":166.1767578125,
 				"x":283,
@@ -477,7 +477,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12005,
+			"id":4114,
 			"position":{
 				"y":130.7421875,
 				"x":952,
@@ -489,19 +489,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11623,
+			"id":4248,
 			"position":{
 				"y":130.57092285156,
 				"x":1035,
 				"z":811
 			},
-			"orientation":0.018710680305958,
+			"orientation":0.023371856659651,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":11451,
+			"id":12933,
 			"position":{
 				"y":101.76766967773,
 				"x":1679,
@@ -513,7 +513,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15877,
+			"id":119,
 			"position":{
 				"y":101.90937042236,
 				"x":1710,
@@ -525,7 +525,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":7032,
+			"id":5205,
 			"position":{
 				"y":101.9140625,
 				"x":1596,
@@ -537,7 +537,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":853,
+			"id":4240,
 			"position":{
 				"y":101.07887268066,
 				"x":1626,
@@ -549,7 +549,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11554,
+			"id":13510,
 			"position":{
 				"y":247.22601318359,
 				"x":2198.4206542969,
@@ -561,19 +561,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12294,
+			"id":2044,
 			"position":{
 				"y":236.67875671387,
 				"x":2197.4482421875,
 				"z":1019.8780517578
 			},
-			"orientation":-0.98027348518372,
+			"orientation":-1.0252434015274,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":11349,
+			"id":10739,
 			"position":{
 				"y":160.62461853027,
 				"x":2009,
@@ -585,7 +585,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15163,
+			"id":15150,
 			"position":{
 				"y":130.7421875,
 				"x":3896,
@@ -597,7 +597,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15095,
+			"id":16333,
 			"position":{
 				"y":142.3147277832,
 				"x":2480,
@@ -609,31 +609,31 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9534,
+			"id":6487,
 			"position":{
 				"y":143.73313903809,
 				"x":2518,
 				"z":177
 			},
-			"orientation":-0.033613011240959,
+			"orientation":-0.038069318979979,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":13355,
+			"id":8577,
 			"position":{
 				"y":153.03518676758,
 				"x":2445,
 				"z":246
 			},
-			"orientation":-0.82468461990356,
+			"orientation":-0.94245934486389,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":2943,
+			"id":15682,
 			"position":{
 				"y":142.16928100586,
 				"x":2382,
@@ -814,7 +814,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":10995,
+							"value":9443,
 							"type":"unit"
 						}
 					}

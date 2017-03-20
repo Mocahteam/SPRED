@@ -204,7 +204,7 @@ local template_CPages = {
 				tab.OnMouseReleaseAction = function()
 					CPages:Close()
 					MainMenu:Open()
-					TutoView = MainMenu
+					TutoView = MainMenuc
 				end
 			end
 		}
@@ -212,6 +212,17 @@ local template_CPages = {
 }
 
 local function CreateCPagesCentered ()
+	template_CPages.OnViewResized = function ()
+		local needToBeOpenAgain = CPages and not CPages.closed
+		if needToBeOpenAgain then CPages:Close() end
+		CPages = CreateCPagesCentered()
+		CPages.backGroundTextureString = ":n:LuaUI/Widgets/Rooms/Pictures/C/C"..currentPage..".jpg"
+		CPages.son.lineArray = WordWrap(getText(), CPages.son.textWidth)
+		if needToBeOpenAgain then
+			TutoView = CPages
+			TutoView:Open()
+		end
+	end
 	template_CPages.son = Window:CreateCentered(template_CPages_Text)
 	local win = Window:CreateCentered(template_CPages)
 	local winHeight = win.y2 - win.y1
