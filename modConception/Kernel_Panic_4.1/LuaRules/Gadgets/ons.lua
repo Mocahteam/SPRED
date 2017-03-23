@@ -696,15 +696,21 @@ function gadget:UnitDestroyed(u,ud,team)
 	if isAnyBuilding[ud] then
 		UpdateONS=true
 	end
-	if _G.ONS.FromCenter[ud] then
-		_G.ONS.FromCenter[ud]=nil
+	-- Muratet
+	if _G.ONS ~= nil then
+	---
+		if _G.ONS.FromCenter[ud] then
+			_G.ONS.FromCenter[ud]=nil
+		end
+		if _G.ONS.FromExtremity[ud] then
+			_G.ONS.FromExtremity[ud]=nil
+		end
+		if _G.ONS.isExtremity[ud] then
+			_G.ONS.isExtremity[ud]=nil
+		end
+	-- Muratet
 	end
-	if _G.ONS.FromExtremity[ud] then
-		_G.ONS.FromExtremity[ud]=nil
-	end
-	if _G.ONS.isExtremity[ud] then
-		_G.ONS.isExtremity[ud]=nil
-	end
+	--
 end
 
 
