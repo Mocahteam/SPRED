@@ -1,0 +1,63 @@
+[network_build]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=1;
+			particleLife=32;
+			particleLifeSpread=4;
+			numParticles=1;
+			particleSpeed=.8;
+			particleSpeedSpread=0;
+			particleSize=2;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
+
+[network_build1]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=0,1,0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=1;
+			particleLife=16;
+			particleLifeSpread=4;
+			numParticles=1;
+			particleSpeed=.2;
+			particleSpeedSpread=0;
+			particleSize=4;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=30;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

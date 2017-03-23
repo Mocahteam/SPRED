@@ -1,0 +1,71 @@
+piece base, bomb, wingul, wingur, wingbl, wingbr;
+
+#include "springdefs.h"
+
+static-var loaded; //has it dropped the bomb yet?
+
+lua_Destroy() {
+	return 0;
+}
+
+Create()
+{
+	loaded=1;
+	turn base to x-axis <-90> now;
+	sleep 2500;
+	turn base to x-axis 0 speed <60>;
+	sleep 500;
+	move wingul to x-axis [-8] speed [8];
+	move wingul to y-axis [4] speed [4];
+
+	move wingur to x-axis [8] speed [8];
+	move wingur to y-axis [4] speed [4];
+
+	move wingbl to x-axis [-8] speed [8];
+	move wingbl to y-axis [-4] speed [4];
+
+	move wingbr to x-axis [8] speed [8];
+	move wingbr to y-axis [-4] speed [4];
+
+	sleep 120000; //lives 120 seconds at most to prevent a widget from juggling the unit in midair to keep it alive
+	call-script lua_Destroy();
+}
+
+Killed(severity,corpsetype)
+{
+	explode wingul type FALL;
+	hide wingul;
+	explode wingur type FALL;
+	hide wingur;
+	explode wingbl type FALL;
+	hide wingbl;
+	explode wingbr type FALL;
+	hide wingbr;
+	if(loaded) {
+		//drop the bomb
+		emit-sfx 2048 from bomb;
+		hide bomb;
+	}
+}
+
+QueryWeapon1(piecenum)
+{
+	piecenum=bomb;
+}
+
+AimFromWeapon1(piecenum)
+{
+	piecenum=base;
+}
+
+AimWeapon1(h,p)
+{
+	return 1; //unused because it's turretless but just in case
+}
+
+FireWeapon1()
+{
+	loaded=0;
+	hide bomb;
+	call-script lua_Destroy();
+}

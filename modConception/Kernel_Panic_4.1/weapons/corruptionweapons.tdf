@@ -1,0 +1,555 @@
+[BugShot]
+	{
+	name=Failure;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	RGBcolor=128 0 0;
+	thickness=8;
+	intensity=1;
+	corethickness=0;
+	texture1=circle;
+	texture2=none;
+	noselfdamage=1;
+
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=320;
+	weaponvelocity=512;
+
+	reloadtime=.5;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=130;
+		}
+	}
+
+[BugBomb]
+	{
+	name=Bomb;
+	rendertype=1;
+	lineofsight=1;
+	turret=1;
+	model=;
+	range=96;
+	reloadtime=7;
+	weapontimer=5;
+	weaponvelocity=1500;
+	startvelocity=1000;
+	weaponacceleration=150;
+	areaofeffect=512;
+	edgeeffectiveness=0.8;
+	metalpershot=0;
+	soundhit=Explosion5;
+	firestarter=70;
+	tolerance=8000;
+	impulsefactor=0;
+	impulseBoost=0;
+	CollideFriendly=0;
+	AvoidFriendly=0;
+	NoSelfDamage=1;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:mine;
+	soundstart=bytedeath;
+	explosionspeed=65535;
+	[DAMAGE]
+		{
+		default=3000;
+		}
+	}
+
+[DOS_Beam]
+	{
+	name=/.;
+	id=222;
+	rendertype=1;
+	lineofsight=1;
+	beamlaser=1;
+	largebeamlaser=1;
+	beamtime=1;
+	RGBcolor=0 128 0;
+	thickness=8;
+	intensity=1;
+	corethickness=0;
+	scrollspeed=2;
+	texture1=dosray;
+	texture2=black;
+	laserflaresize=0;
+
+	size=5;
+
+	turret=1;
+	range=768;
+
+	reloadtime=1;
+
+	areaofeffect=64;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_stun;
+	paralyzer=1;
+	paralyzetime=5;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=1600;
+		bit=500;
+		factory=.1;
+		}
+	}
+
+[Wormbite]
+	{
+	name=chomp();
+	WeaponType=Melee;
+
+	turret=1;
+	range=200;
+
+	reloadtime=6;
+
+	areaofeffect=140;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:none;// for unknown reason anyway a custom one wouldn't show
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=3200;
+		}
+	}
+	
+[Wormsplash]
+	{
+	name=area;
+	WeaponType=Melee;
+
+	turret=1;
+	range=200;
+
+	reloadtime=6;
+
+	areaofeffect=210;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	edgeeffectiveness=1;
+	explosionspeed=65535;
+
+	texture1=lightning;// The tile used on the beam
+	texture2=flare;// Shown here beam ends
+	texture3=arrowflare;// Periodically spawn and expand from where the beam starts
+	texture4=lightningflare;// Shown where the beam starts
+	explosiongenerator=custom:corruption_worm_splash;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=800;
+		worm=0.000001;
+		virus=10;
+		}
+	}
+
+[BugCannon]
+	{
+	name=bug spit;
+	rendertype=1;
+	ballistic=1;
+//	model=octashot.s3o;
+	texture1=black;
+	//Texture2=firsttrailtex;
+	soundstart=bugartifire;
+	soundhit=bugartihit;
+
+	turret=1;
+	range=1200;
+	weaponvelocity=600;
+	startvelocity=800;
+	sprayangle=600;
+// 	smoketrail=1;
+//	trajectoryheight=.7;
+	myGravity=.3;
+
+	reloadtime=2.2;
+	dance=50;
+	dynDamageExp=1;
+	dynDamageInverted=1;
+	dynDamageRange=700;
+	proximityPriority=-5;
+
+	areaofeffect=40;
+//	projectiles=5;
+//	burst=6;
+//	burstrate=.2;
+	collidefriendly=0;
+	avoidfriendly=0;
+	edgeeffectiveness=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+	cegTag=corruption_BCtrail;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=130;
+		building=200;
+		}
+	}
+
+[FakeBugCannon]
+	{
+	name=bug spit trigger;
+
+	range=1200;
+	projectiles=0;// <- fake trigger weapon
+	commandfire=1;
+
+	rendertype=1;
+	lineofsight=1;
+	model=octashot.s3o;
+	texture1=black;
+	Texture2=pointertrail;
+	size=5;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+	myGravity=.3;
+
+	turret=1;
+
+	weaponvelocity=400;
+	startvelocity=400;
+ 	smoketrail=1;
+	smokedelay=0.01;
+	trajectoryheight=1;
+	tracking=1;
+	guided=1;
+	turnrate=20480;
+	weapontimer=5;
+	noexplode=1;
+	nogroundattack=1;
+
+	reloadtime=4;
+
+	areaofeffect=32;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+
+	explosiongenerator=custom:corruption_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=1;
+		}
+	}
+
+[VirusBeam]
+	{
+	name=Infection;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	RGBcolor=128 0 0;
+	thickness=.5;
+	intensity=1;
+	corethickness=0;
+	texture1=square;
+	texture2=none;
+	noselfdamage=1;
+	duration=.7;
+	hardstop=1;
+
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=220;
+	weaponvelocity=512;
+
+	reloadtime=1;
+
+	areaofeffect=64;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[VirusDeath]
+	{
+	name=Spreader;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	RGBcolor=128 0 0;
+	thickness=8;
+	intensity=1;
+	corethickness=0;
+	texture1=circle;
+	texture2=none;
+	noselfdamage=1;
+
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=320;
+	weaponvelocity=512;
+
+	reloadtime=.5;
+
+	areaofeffect=90;
+	edgeeffectiveness=.8;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=50;
+//		virus=50;
+		}
+	}
+
+[Infection]
+	{
+	name=WMD;
+	rendertype=1;
+	ballistic=1;
+	//model=octashot.s3o;
+	texture1=black;
+	//Texture2=firsttrailtex;
+	soundstart=obeliskfire;
+	soundhit=obeliskhit;
+	id=234;
+
+	turret=1;
+	range=2000;
+	weaponvelocity=800;
+	startvelocity=800;
+	myGravity=.4;
+
+	reloadtime=40;
+	commandfire=1;
+
+	areaofeffect=700;
+	collidefriendly=0;
+	avoidfriendly=0;
+	edgeeffectiveness=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_infection;
+	cegTag=corruption_WMDtrail;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=200;
+		building=1500;
+		}
+	}
+
+
+[Swallow_DISINTEGRATOR]// For wormOLD
+	{
+	//DGun because it's fired from below the surface
+	name=chomp();
+	rendertype=1;
+	lineofsight=1;
+	noselfdamage=1;
+	burnblow=1;
+
+	size=5;
+
+	turret=1;
+	range=200;
+	weaponvelocity=512000;
+
+	reloadtime=3;
+
+	areaofeffect=1;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:none;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=0.0001;
+		}
+	}
+
+[SwallowDamage]// For wormOLD
+	{
+	//Does the damage for this weapon
+	name=chew;
+	rendertype=1;
+	//lineofsight=1;
+	ballistic=1;
+	noselfdamage=1;
+	burnblow=1;
+
+	size=5;
+
+	turret=1;
+	range=2;
+	weaponvelocity=512000;
+
+	reloadtime=3;
+
+	areaofeffect=128;
+	collidefriendly=0;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=200;
+		worm=0.01;
+		building=150;
+		}
+	}
+
+[BuildLightning]
+{
+	name=Trojan Build Ray;
+	rendertype=1;
+	lineofsight=1;
+	beamlaser=1;
+	largebeamlaser=1;
+	beamtime=0.06;
+	RGBcolor=255 255 255;
+	intensity=5;
+	thickness=15;
+	corethickness=0.5;
+	size=1;
+	laserflaresize=2.5;// affects texture2 and texture3 size
+	scrollspeed=2;
+	//tilelength=50;
+	//pulseSpeed=0.2;
+
+	texture1=lightning;// The tile used on the beam
+	texture2=flare;// Shown here beam ends
+	texture3=lightningflare;// Periodically spawn and expand from where the beam starts
+	texture4=lightningflare;// Shown where the beam starts
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=2;
+	Burst=30;
+	Burstrate=0.01;
+	//sprayangle=1000;
+
+	areaofeffect=1;
+	collidefriendly=1;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_build;
+
+	interceptedbyshieldtype=2;
+	[DAMAGE]
+		{
+		default=0.0000000001;
+		}
+	}

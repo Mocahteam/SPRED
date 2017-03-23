@@ -1,0 +1,61 @@
+[network_charge]
+{
+	[hcross]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=-32 r64, 0, 0;
+			emitVector=0,1,0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=0 1 0 1   0 1 0 1   0 0 0 0;
+			airdrag=1;
+			particleLife=32;
+			particleLifeSpread=4;
+			numParticles=1;
+			particleSpeed=2;
+			particleSpeedSpread=0;
+			particleSize=4;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=3;
+	}
+	[vcross]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0,0,-32 r64;
+			emitVector=0,1,0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=0 1 0 1   0 1 0 1   0 0 0 0;
+			airdrag=1;
+			particleLife=32;
+			particleLifeSpread=4;
+			numParticles=1;
+			particleSpeed=2;
+			particleSpeedSpread=0;
+			particleSize=4;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=3;
+	}
+}

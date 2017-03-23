@@ -1,0 +1,42 @@
+piece wheel0, wheel1, wheel2, wheel3, wheel4, wheel5, wheel6, wheel7, wheel8, wheel9, wheel10;
+static-var count, myID;
+
+#include "springdefs.h"
+
+#define TURNSPEED now
+UpdateCounter(value)
+{
+	var place, num, val;
+	val=value;
+	while (place<=10)
+	{
+		num=val;
+		val = val / 10;
+		if (place==0) turn wheel10 to x-axis <36> * num TURNSPEED;
+		else if (place==1) turn wheel9 to x-axis <36> * num TURNSPEED;
+		else if (place==2) turn wheel8 to x-axis <36> * num TURNSPEED;
+		else if (place==3) turn wheel7 to x-axis <36> * num TURNSPEED;
+		else if (place==4) turn wheel6 to x-axis <36> * num TURNSPEED;
+		else if (place==5) turn wheel5 to x-axis <36> * num TURNSPEED;
+		else if (place==6) turn wheel4 to x-axis <36> * num TURNSPEED;
+		else if (place==7) turn wheel3 to x-axis <36> * num TURNSPEED;
+		else if (place==8) turn wheel2 to x-axis <36> * num TURNSPEED;
+		else if (place==9) turn wheel1 to x-axis <36> * num TURNSPEED;
+		else if (place==10) turn wheel0 to x-axis <36> * num TURNSPEED;
+		place=place+1;
+	}
+}
+
+static-var id;
+
+Create()
+{
+	//this function checks if any friendly non-mine units are still alive and detonates the mine if not
+	while(1)
+	for(id = get MAX_ID; id>1; --id) { //iterate through all units
+		if (get UNIT_ALLIED(id)) { //see if it's friendly
+			call-script UpdateCounter((get UNIT_HEIGHT(id)));
+			sleep 2000;
+		}
+	}
+}

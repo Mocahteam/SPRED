@@ -1,0 +1,53 @@
+piece base, bar, flap, hourglass, hglass0, hglass1, sand0, sand1, sand2;
+
+#include "springdefs.h"
+
+Anim() {
+	while(get BUILD_PERCENT_LEFT) {
+		turn sand2 to z-axis <180> now;
+		sleep 250;
+		turn sand1 to z-axis <180> now;
+		sleep 250;
+		turn sand0 to z-axis <180> now;
+		sleep 250;
+		turn hourglass to z-axis <180> speed <480>;
+		wait-for-turn hourglass around z-axis;
+		turn sand0 to z-axis 0 now;
+		turn sand1 to z-axis 0 now;
+		turn sand2 to z-axis 0 now;
+		turn hourglass to z-axis 0 now;
+		sleep 250;
+	}
+}
+
+#include "ons.h"
+
+Create() {
+	start-script ManageONS();
+	set ARMORED to 1;
+	hide bar;
+	hide flap;
+	start-script Anim();
+	while (get BUILD_PERCENT_LEFT) {
+		sleep 30;
+	}
+	show bar;
+	show flap;
+	hide hglass0;
+	hide hglass1;
+	hide sand0;
+	hide sand1;
+	hide sand2;
+	set ARMORED to 0;
+}
+
+Activate() {
+	turn flap to x-axis <-90> speed <120>;
+	wait-for-turn flap around x-axis;
+	set INBUILDSTANCE to 1;
+}
+
+Deactivate() {
+	set INBUILDSTANCE to 0;
+	turn flap to x-axis <0> speed <120>;
+}

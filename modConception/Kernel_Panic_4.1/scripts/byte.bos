@@ -1,0 +1,196 @@
+piece base, aimer, rotor, blade0, blade1, blade2, blade3, bp0, bp1, bp2, bp3, gunpoint, launcher;
+
+// To be compiled with a linear constant of 163840
+
+#include "springdefs.h"
+#define SIG_AIM 2
+#define SIG_MINE 4
+#define SIG_OPENCLOSE 8
+static-var isOpen, gp, cantLaunch;
+
+// Defines for the MineLauncher:
+#define X_NUMBER 1
+#define Y_NUMBER 5
+#define ARC <90>
+#define VERT_ARC <3>
+#define HITPOINT_COST 6000
+
+lua_Damage() {
+	return 0;
+}
+
+lua_GetMyHealth() {
+	return 0;
+}
+
+lua_IsParalyzed() {
+	return 0;
+}
+
+lua_GetLogicBombLeft() {
+	return 0;
+}
+
+Create()
+{
+	turn bp0 to x-axis <90> now;
+	turn bp1 to x-axis <90> now;
+	turn bp2 to x-axis <90> now;
+	turn bp3 to x-axis <90> now;
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT) {
+		move base to y-axis ([-16]*(get BUILD_PERCENT_LEFT)/100) now;
+		sleep 60;
+	}
+	move base to y-axis 0 now;
+	sleep 6000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype)
+{
+	hide blade0;
+	hide blade1;
+	hide blade2;
+	hide blade3;
+	explode blade0 type SHATTER;
+	explode blade1 type SHATTER;
+	explode blade2 type SHATTER;
+	explode blade3 type SHATTER;
+}
+
+QueryWeapon1(piecenum)
+{
+	if (gp==0) piecenum=bp0;
+	if (gp==1) piecenum=bp1;
+	if (gp==2) piecenum=bp2;
+	if (gp==3) piecenum=bp3;
+}
+
+AimFromWeapon1(piecenum)
+{
+	piecenum=aimer;
+}
+
+FireWeapon1() {
+	emit-sfx 1024 from bp0;
+	sleep 90;
+	gp=1;
+	sleep 150;
+
+	emit-sfx 1024 from bp1;
+	sleep 90;
+	gp=2;
+	sleep 150;
+
+	emit-sfx 1024 from bp2;
+	sleep 90;
+	gp=3;
+	sleep 150;
+
+	emit-sfx 1024 from bp3;
+	sleep 90;
+	gp=0;
+}
+
+Close()
+{
+	set-signal-mask SIG_OPENCLOSE | SIG_AIM;
+	sleep 3000;
+	turn aimer to x-axis 0 speed <70>;
+	turn aimer to y-axis 0 speed <70>;
+	wait-for-turn aimer around x-axis;
+	wait-for-turn aimer around y-axis;
+	isOpen=0;
+	stop-spin rotor around y-axis;
+	move blade0 to z-axis [0] speed [16];
+	move blade1 to x-axis [0] speed [16];
+	move blade2 to z-axis [0] speed [16];
+	move blade3 to x-axis [0] speed [16];
+	wait-for-move blade0 along z-axis;
+	turn rotor to y-axis 0 speed <480>;
+	move base to y-axis 0 speed [120];
+}
+
+Open()
+{
+	signal SIG_OPENCLOSE;
+	set-signal-mask SIG_OPENCLOSE;
+//	spin rotor around y-axis speed <180>;
+	move base to y-axis [24] speed [48];
+	wait-for-move base along y-axis;
+	turn rotor to y-axis <45> speed <90>;
+	move blade0 to z-axis [4] speed [16];
+	move blade1 to x-axis [4] speed [16];
+	move blade2 to z-axis [-4] speed [16];
+	move blade3 to x-axis [-4] speed [16];
+	wait-for-move blade0 along z-axis;
+	isOpen=1;
+	start-script Close();
+}
+
+AimWeapon1(h,p)
+{
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	if (!isOpen) {
+		start-script Open();
+		return 0;
+	}
+	turn aimer to x-axis (<-90>-p) speed <270>;
+	turn aimer to y-axis h speed <270>;
+	wait-for-turn aimer around x-axis;
+	wait-for-turn aimer around y-axis;
+	start-script Close();
+	return 1;
+}
+
+LaunchMines() {
+	set-signal-mask 0;
+	signal SIG_MINE;
+	set-signal-mask SIG_MINE;
+	var x, y, lb;
+	call-script lua_GetMyHealth();
+	if((get LUA1)<(HITPOINT_COST))
+		return 0;
+	if(cantLaunch)
+		return 0;
+	if(get ARMORED)
+		return 0;
+	if(!isOpen)
+	{
+		start-script Open();
+		sleep 500;
+		start-script LaunchMines();
+		return 0;
+	}
+	cantLaunch=1;
+	set-signal-mask 0;
+	call-script lua_GetLogicBombLeft();
+	lb=(get LUA1);
+	call-script lua_Damage((HITPOINT_COST));
+	move launcher to y-axis [60] now;
+	for(x=0;x<(X_NUMBER);++x) {
+		turn launcher to x-axis VERT_ARC * x + <30> now;
+		for(y=0;y<(Y_NUMBER);++y) {
+			//turn launcher to y-axis (y * ARC / Y_NUMBER) - ARC / 2 now;
+			turn launcher to y-axis (y>0)*(y*ARC/(2*Y_NUMBER))-(y<0)*(y*ARC/(2*Y_NUMBER)) now;
+			if(lb>0)
+			{
+				emit-sfx 2049 from launcher;
+				--lb;
+			}
+		}
+	}
+	sleep 10000;
+	cantLaunch=0;
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (!isOpen && !(id == 168)) {
+		call-script lua_IsParalyzed();
+		if (!get LUA2) return 30;
+	}
+	return 100;
+}
+

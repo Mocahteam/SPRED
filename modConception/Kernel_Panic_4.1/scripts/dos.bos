@@ -1,0 +1,77 @@
+piece base, center, slash, dot, gunpoint, ground;
+
+#include "springdefs.h"
+
+#define SIG_AIM 1
+#define SIG_MOVE 2
+
+static-var aimed, moving;
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	turn ground to y-axis <180> now;
+	set ARMORED to 1;
+	set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	while(get BUILD_PERCENT_LEFT) {
+		set ALPHA_THRESHOLD to 22+(23 * get BUILD_PERCENT_LEFT)/10;
+		call-script lua_SetAlphaThreshold((get BUILD_PERCENT_LEFT)*13/10);
+		sleep 30;
+	}
+	set ALPHA_THRESHOLD to 1;
+	call-script lua_SetAlphaThreshold(1);
+	sleep 4000;
+	set ARMORED to 0;
+}
+
+StartMoving() {
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=1;
+	spin dot around x-axis speed <360>;
+	while(moving) {
+		emit-sfx 1024 from ground;
+		sleep 120;
+	}
+}
+
+StopMoving() {
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=0;
+	stop-spin dot around x-axis;
+}
+
+ResetAim() {
+	sleep 3000;
+	turn slash to y-axis 0 speed <270>;
+	wait-for-turn slash around y-axis;
+	turn slash to x-axis 0 speed <180>;
+	move center to z-axis 0 speed [16];
+	aimed=0;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	turn slash to x-axis <-67> - p speed <180>;
+	move center to z-axis [8] speed [16];
+	if (!aimed) wait-for-turn slash around x-axis;
+	aimed=1;
+	turn slash to y-axis h speed <270>;
+	wait-for-turn slash around y-axis;
+	wait-for-turn slash around x-axis;
+	start-script ResetAim();
+	return 1;
+}
+
+QueryWeapon1(piecenum) {
+	piecenum=gunpoint;
+}
+
+AimFromWeapon1(piecenum) {
+	piecenum=center;
+}

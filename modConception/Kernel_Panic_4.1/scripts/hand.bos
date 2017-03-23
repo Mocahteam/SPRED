@@ -1,0 +1,128 @@
+piece base, outter, inner, touch;
+
+static-var building, shape, ready;
+
+#include "springdefs.h"
+#define SIG_BUILD 8
+#define SIG_ACTDEACT 16
+#define SIG_SHAPESHIFTING 32
+
+#include "ons.h"
+
+
+
+lua_GetNextShape() {
+	return 0;
+}
+
+ShapeShift(s)
+{
+	signal SIG_SHAPESHIFTING;
+	set-signal-mask SIG_SHAPESHIFTING;
+	ready=FALSE;
+	if(s==0)// Resting position
+	{
+		shape=0;
+	}
+	if(s==1)// Fist
+	{
+		shape=1;
+		ready=TRUE;
+	}
+	if(s==2)// Flat hand
+	{
+		shape=2;
+		ready=TRUE;
+	}
+	if(s==3)// Twix
+	{
+		shape=3;
+		ready=TRUE;
+	}
+	return;
+}
+
+Create()
+{
+	shape=0;
+	ready=FALSE;
+	start-script ManageONS();
+	start-script ShapeShift();
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT) {
+		move outter to y-axis (-92*65536*(get BUILD_PERCENT_LEFT)/100) now; // inner is about 93 tall, outter about 95
+		sleep 60;
+		call-script lua_GetNextShape();
+		if(shape!=get LUA1)
+			start-script ShapeShift(get LUA1);
+	}
+	move outter to y-axis 0 now;
+	set ARMORED to 0;
+}
+
+Activate()
+{
+	var wanted_shape;
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	set YARD_OPEN to TRUE;
+	call-script lua_GetNextShape();
+	wanted_shape=get LUA1;
+	if(shape!=wanted_shape)
+		start-script ShapeShift(wanted_shape);
+	while((!get YARD_OPEN) || (shape!=wanted_shape))
+	{
+		sleep 300;
+		if(!get YARD_OPEN)
+		{
+			set YARD_OPEN to TRUE;
+		}
+		call-script lua_GetNextShape();
+		if(wanted_shape!=get LUA1)
+		{
+			wanted_shape=get LUA1;
+			start-script ShapeShift(wanted_shape);
+		}
+	}
+	set INBUILDSTANCE to TRUE;
+}
+
+Deactivate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	set INBUILDSTANCE to FALSE;
+	set YARD_OPEN to FALSE;
+	while(get YARD_OPEN)
+	{
+		set YARD_OPEN to FALSE;
+		sleep 300;
+	}
+}
+
+
+StartBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+}
+
+StopBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+}
+
+QueryBuildInfo(p)
+{
+	p=touch;
+}
+
+Killed(severity,corpsetype)
+{
+	hide inner;
+	explode inner type SHATTER;
+	hide outter;
+	explode outter type SHATTER;
+	return 0;
+}

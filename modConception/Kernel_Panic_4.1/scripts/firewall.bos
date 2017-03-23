@@ -1,0 +1,34 @@
+piece base, body;
+
+#include "springdefs.h"
+
+#include "ons.h"
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	start-script ManageONS();
+	set ARMORED to 1;
+	set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	while (get BUILD_PERCENT_LEFT) sleep 30;
+	set ALPHA_THRESHOLD to 0;
+	call-script lua_SetAlphaThreshold(0);
+	set ARMORED to 0;
+}
+
+static-var charged;
+
+Charge() {
+	charged=1;
+	while(charged) {
+		emit-sfx 1024 from base;
+		sleep 120;
+	}
+}
+
+Discharge() {
+	charged=0;
+}

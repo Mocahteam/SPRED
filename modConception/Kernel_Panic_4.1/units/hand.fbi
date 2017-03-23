@@ -1,0 +1,92 @@
+[UNITINFO]
+{
+	Name=Hand;
+	Unitname=hand;
+	Description=Throw Rock, Paper, Scissors;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=100;
+	BuildTime=123456789;// Very high to prevent nanoframe decay
+	ShowNanoFrame=0;
+	icontype=socket;
+	Category=EDIBLE FACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxSlope=10;
+	MaxDamage=5000;
+	buildpic=hand.png;
+	ObjectName=hand.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=PLANT;
+	IdleTime=900;
+	IdleAutoHeal=50;
+	Commander=1;
+
+	// Movement
+	BrakeRate=0;
+	Acceleration=0;
+	CanMove=0;
+	MaxVelocity=0;
+	TurnRate=0;
+
+	// Airplane Moventment
+
+	// Buildings
+	yardmap=gggg cccc cccc cccc;
+
+	// Construction
+	Builder=1;
+	WorkerTime=64;
+//	BuildDistance=1024;
+	ShowNanoSpray=0;
+	UseBuildingGroundDecal=1;
+	BuildingGroundDecalType=socket_base.tga;
+	BuildingGroundDecalSizeX=8;
+	BuildingGroundDecalSizeY=8;
+	BuildingGroundDecalDecaySpeed=1;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=100;
+	//EnergyUse=200;
+	MetalStorage=100;
+	MetalMake=30;
+
+
+	// Abilities
+	CanStop=1;
+	DamageModifier=4;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=2048;
+
+	// Weapons
+	ExplodeAs=RetroDeathVBig;
+	SelfDestructAs=RetroDeathVBig;
+	Weapon1=BuildLaser;
+	Weapon2=minifacshieldgood;
+	Weapon3=minifacshieldbad;
+	Weapon4=BuildLaserNoEffect;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	bmcode=0;
+	noautofire=0;
+	unitnumber=5;
+	firestandorders=1;
+	standingfireorder=2;
+	mobilestandorders=1;
+	standingmoveorder=1;
+	canpatrol=1;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:linkbeam;
+	}
+}

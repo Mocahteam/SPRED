@@ -1,0 +1,87 @@
+[UNITINFO]
+{
+	Name=Gateway;
+	Unitname=gateway;
+	Description=construction unit;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	icontype=gateway;
+	//mass = 100000;
+	BuildCostMetal=20;
+	BuildTime=2000;
+	Category=EDIBLE UNIT BUILDER NOTFACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=2000;
+	ObjectName=network_builder.s3o;
+	buildpic=network_builder.png;
+	Side=NET;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=50;
+	IdleTime=450;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=4;
+	Acceleration=4;
+	CanMove=1;
+	MaxVelocity=2;
+	TurnRate=1200;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=30;
+	Reclaimable=0;
+
+	// Abilities
+	CanStop=1;
+	CanBuild=1;
+	CanAssist=0;
+	Builder=1;
+	WorkerTime=128;
+	BuildDistance=384;
+	ShowNanoSpray=0;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=500;
+	SightDistance=384;
+	SeismicSignature=3;
+
+	// Weapons
+	Weapon1=GatewayBeam;
+	BadTargetCategory1=FACTORY;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+//	Corpse=badblock;
+	NoChaseCategory=VTOL;
+//	HighTrajectory=2;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+ [SFXTypes]
+	{
+		explosiongenerator0=custom:network_build;
+		explosiongenerator1=custom:network_build1;
+ 	}
+
+}

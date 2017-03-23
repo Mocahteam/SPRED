@@ -1,0 +1,30 @@
+[corruption_build]
+{
+	[fog]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, -.05, 0;
+			Texture=circle;
+			colorMap=.4 0 0 1   .3 0 0 .8   0 0 0 0;
+			airdrag=.98;
+			particleLife=24;
+			particleLifeSpread=8;
+			numParticles=1;
+			particleSpeed=.5;
+			particleSpeedSpread=1.5;
+			particleSize=8;
+			particleSizeSpread=2;
+			emitRot=55;
+			emitRotSpread=10;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

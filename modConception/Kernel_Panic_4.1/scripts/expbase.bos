@@ -1,0 +1,94 @@
+piece whole, body, nanoarm, nanomover, nanoemitter, pad;
+#define SIG_BUILD 1
+#include "springdefs.h"
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+lua_GetCentralHeading() {
+	return 0;
+}
+
+lua_GiveExpMobile() {
+	return 0;
+}
+
+static-var doEmit;
+
+EmitFX() {
+	set-signal-mask SIG_BUILD;
+	while(1) {
+		if (doEmit) emit-sfx 1024 from nanoemitter;
+		sleep 30;
+	}
+}
+static-var i;
+
+Create() {
+	set ALPHA_THRESHOLD to 240;
+	call-script lua_SetAlphaThreshold(240);
+	sleep 60;
+	call-script lua_GetCentralHeading();
+	turn pad to y-axis ([1.125] + get LUA1) / [.25] * [.25] now;
+	set HEADING to ([1.125] + get LUA1) / [.25] * [.25];
+	call-script lua_GiveExpMobile();
+	//get PRINT(get LUA1);
+	hide nanoarm;
+	hide nanomover;
+}
+
+Activate() {
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+//	var i;
+	show nanoarm;
+	show nanomover;
+	for (i=240; i >= 20; i=i - 10) {
+		set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 100;
+	}
+	set INBUILDSTANCE to 1;
+	start-script EmitFX();
+	while(1) {
+		for (i = 16; i <= 64; i = i + 16) {
+			move nanoarm to x-axis [-1]*i speed [64];
+			move nanomover to z-axis [0] speed [256];
+			wait-for-move nanomover along z-axis;
+			wait-for-move nanoarm along x-axis;
+			doEmit=1;
+			move nanomover to z-axis [-55] speed [128];
+			wait-for-move nanomover along z-axis;
+			doEmit=0;
+		}
+		move nanomover to z-axis [0] speed [128];
+		move nanoarm to x-axis [-16] speed [128];
+		wait-for-move nanoarm along x-axis;
+	}
+}
+
+Deactivate() {
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	set INBUILDSTANCE to 0;
+//	var i;
+	for (i=20; i <= 240; i=i+10) {
+		set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 100;
+	}
+	hide nanoarm;
+	hide nanomover;
+	move nanoarm to x-axis 0 speed [64];
+	move nanomover to z-axis 0 speed [100];
+}
+
+QueryBuildInfo(p) {
+	p=pad;
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (id==168) return 10;
+	return 100;
+}

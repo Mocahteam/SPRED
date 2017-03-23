@@ -1,0 +1,131 @@
+[system_sigterm]
+{
+	[risingfire]
+	{
+		class=CExpGenSpawner;
+		[properties]
+		{
+			delay=2 i3;
+			dir=0,1,0;
+			damage=0 i1;
+			explosionGenerator=custom:system_sigterm_fire;
+			speed=0,0,0;
+			pos=0,0 i23,0;
+			alwaysVisible=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=20;
+	}
+	[downblast]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=1;
+			sizemod=.99;
+			pos=0, 30, 0;
+			emitVector=0, -1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 0 .3   1 0 0 .2   .4 0 0 .8   .2 0 0 .8   0 0 0 .8   0 0 0 0;
+			airdrag=0.85;
+			particleLife=90;
+			particleLifeSpread=70;
+			numParticles=30;
+			particleSpeed=10;
+			particleSpeedSpread=40;
+			particleSize=12;
+			particleSizeSpread=8;
+			emitRot=80;
+			emitRotSpread=30;
+			directional=0;
+			alwaysVisible=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[shockwave]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = 0,1,0.00001;
+			pos = 0, 60, 0;
+			colorMap=.75 .7 .7 .1   .4 .4 .4 .1   0 0 0 0;
+			size=3;
+			length=1;
+			sizeGrowth=140;
+			ttl=6;
+			frontOffset=0;
+			sideTexture=null;
+			frontTexture=shockwave;
+			alwaysVisible=1;
+		}
+		water=1;
+		air=1;
+		ground=1;
+	}
+}
+
+[system_sigterm_fire]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=1;
+			sizemod=.98;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, -0.1 d0.01, 0;
+			Texture=square;
+			colorMap=1 1 0 .3   1 0 0 .2   .4 0 0 .8   .2 0 0 .8   0 0 0 .8   0 0 0 0;
+			airdrag=0.95;
+			particleLife=50;
+			particleLifeSpread=20;
+			numParticles=12;
+			particleSpeed=12 d-.5;
+			particleSpeedSpread=5;
+			particleSize=12;
+			particleSizeSpread=8;
+			emitRot=20;
+			emitRotSpread=80;
+			directional=0;
+			alwaysVisible=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[pillar]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0.05;
+			sizemod=1;
+			pos=-30 r 60, -35.0, -30 r 60;
+			emitVector=0, -1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=.4 0 0 .01   .2 0 0 .2   0 0 0 .8   0 0 0 0;
+			airdrag=1;
+			particleLife=110d-3;
+			particleLifeSpread=48;
+			numParticles=1;
+			particleSpeed=.5;
+			particleSpeedSpread=.7;
+			particleSize=30;
+			particleSizeSpread=20;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=0;
+			alwaysVisible=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=4;
+	}
+}

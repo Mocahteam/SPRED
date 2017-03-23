@@ -1,0 +1,83 @@
+[UNITINFO]
+{
+	Name=byte;
+	Unitname=byte;
+	Description=large attack unit, crushes wreckage;
+
+	// Required Tags
+	icontype=byte;
+	//mass = 100000;
+	BuildCostEnergy=0;
+	BuildCostMetal=100;
+	BuildTime=3600;
+	Category=EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=15000;
+	ObjectName=octaeder.s3o;
+	buildpic=byte.pcx;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=400;
+	IdleTime=600;
+
+	// Movement
+	MovementClass=HEAVY;
+	BrakeRate=3;
+	Acceleration=2;
+	CanMove=1;
+	MaxVelocity=1.5;
+	TurnRate=200;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=200;
+	istargetingupgrade=1;
+	SightDistance=512;
+	SeismicSignature=2.5;
+
+	// Weapons
+	Weapon1=MegaBeam;
+	BadTargetCategory1=FACTORY;
+	OnlyTargetCategory1=TARGET;
+	Weapon2=MineLauncher;
+	OnlyTargetCategory2=VOID;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+//	Corpse=badblock;
+	NoChaseCategory=VTOL;
+//	HighTrajectory=2;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+	}
+}

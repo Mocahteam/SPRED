@@ -1,0 +1,145 @@
+
+
+
+
+// If you ever change the window model,
+// or badblock model or mineblaster model,
+// then measure it with the caliper,
+// available for instance at Unit Universe
+// or at Wormhole Productions
+// and write the new height down here
+#define HEIGHT_OF_WINDOW 2603090
+#define HEIGHT_OF_BADBLOCK 1310720
+#define HEIGHT_OF_MINEBLASTER 262144
+#define HEIGHT_OF_OBELISK 2293760
+
+
+//#define BUILD_RANGE (4000)*65536// Where 400 must be a value above "BuildDistance" in the FBI
+
+piece base, board, horse, wheel0, wheel1, mouth, shoulder, arm, hand;
+
+static-var normalspeed;
+
+#include "springdefs.h"
+
+#define SIG_BUILD 1
+
+#ifndef MAX_ID
+#define MAX_ID 70
+#endif
+#ifndef MAX_SPEED
+#define MAX_SPEED 75
+#endif
+#ifndef UNIT_BUILD_PERCENT_LEFT
+#define UNIT_BUILD_PERCENT_LEFT 73
+#endif
+
+
+Create()
+{
+	normalspeed= get MAX_SPEED;
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT){
+		move board to y-axis ([-56]/100*get BUILD_PERCENT_LEFT) now;
+		turn board to x-axis (<-30>/100*get BUILD_PERCENT_LEFT) now;
+		emit-sfx 1025 from base;
+		sleep 30;
+	}
+	move board to y-axis 0 now;
+	turn board to x-axis 0 now;
+	set ACTIVATION to 1;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Rainbow(heading)
+{
+	var u,angle,d,best_d,best_u,best_a;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	best_u=0 - 1;
+	best_d=1234567890;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(((HEIGHT_OF_WINDOW)==get UNIT_HEIGHT(u)) || ((HEIGHT_OF_BADBLOCK)==get UNIT_HEIGHT(u)) || ((HEIGHT_OF_MINEBLASTER)==get UNIT_HEIGHT(u)) || ((HEIGHT_OF_OBELISK)==get UNIT_HEIGHT(u)))//If unit u is of type window
+		{
+			if(get UNIT_BUILD_PERCENT_LEFT(u))//If under construction
+			{
+				angle=(get XZ_ATAN(get PIECE_XZ(base) - get UNIT_XZ(u))) - heading;
+				while(angle<0) angle=angle + 65536;
+				while(angle>32678) angle=angle - 65536;
+				if(angle<0) angle=0 - angle;
+				if(angle< <5>)
+				{
+					d=get XZ_HYPOT(get PIECE_XZ(base) - get UNIT_XZ(u));
+					if(d<best_d)
+					{
+						best_d=d;
+						best_u=u;
+						best_a=angle;
+					}
+				}
+			}
+		}
+	}
+	u=best_u;
+	angle=best_a;
+	
+	if(u==0 - 1)// Means it couldn't find the window it is building
+	{
+		explode horse type FALL | SMOKE | FIRE | BITMAP3;
+		show horse;
+		return;
+	}
+	
+	turn shoulder to y-axis angle now;
+	turn shoulder to x-axis 0 - get ATAN(get UNIT_Y(u) + ((get UNIT_HEIGHT(u))) - get PIECE_Y(shoulder),get XZ_HYPOT(get PIECE_XZ(shoulder) -  get UNIT_XZ(u))) now;
+	d=get HYPOT(get XZ_HYPOT(get PIECE_XZ(shoulder) -  get UNIT_XZ(u)),get UNIT_Y(u) + ((get UNIT_HEIGHT(u))) - get PIECE_Y(shoulder));
+	move arm to z-axis d/2 now;
+	move arm to y-axis 0 - (d/2) now;
+	move hand to y-axis (d/200)*141 now;
+	// We're getting near the max with distance, so division must come before multiplication
+	// or else the 32 bits signed integer overflow, and wreck the script
+
+	var increment;
+	increment=(<1440>)/(d/65536);
+	
+	while(TRUE)
+	{
+		angle=(<-45>)+rand(0 - increment,increment);
+		while(angle<=(<45>))
+		{
+			turn arm to x-axis angle now;
+			emit-sfx 1026 from hand;
+			angle=angle+increment;
+		}
+		sleep 160;
+	}
+}
+
+
+StartBuilding(heading,pitch)
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	set MAX_SPEED to 1;
+	turn board to y-axis heading speed <240>;
+	wait-for-turn board around y-axis;
+	set INBUILDSTANCE to 1;
+	start-script Rainbow(heading);
+	while(1) {
+		emit-sfx 1024 from mouth;
+		sleep 800;
+	}
+}
+
+StopBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	set INBUILDSTANCE to 1;
+	turn board to y-axis 0 speed <240>;
+	wait-for-turn board around y-axis;
+	set MAX_SPEED to normalspeed;
+}

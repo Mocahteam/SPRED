@@ -1,0 +1,81 @@
+[UNITINFO]
+{
+	Name=Trojan;
+	Unitname=trojan;
+	Description=builder;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	icontype=trojan;
+	//mass = 100000;
+	BuildCostMetal=20;
+	BuildTime=1600;
+	Category=EDIBLE UNIT BUILDER NOTFACTORY TARGET;
+	FootprintX=3;
+	FootprintZ=3;
+	MaxDamage=2000;
+	buildpic=trojan.png;
+	ObjectName=trojanNEW.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=50;
+	IdleTime=450;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=4;
+	Acceleration=4;
+	CanMove=1;
+	MaxVelocity=2;
+	TurnRate=720;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=30;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=0;
+	CanStop=1;
+	CanBuild=1;
+	CanAssist=0;
+	Builder=1;
+	WorkerTime=128;
+	BuildDistance=384;
+	ShowNanoSpray=0;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=768;
+	SightDistance=384;
+	SeismicSignature=3;
+
+	// Weapons
+	Weapon1=BuildLightning;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:corruption_builder;
+	}
+}

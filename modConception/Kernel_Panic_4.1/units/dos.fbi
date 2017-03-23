@@ -1,0 +1,79 @@
+[UNITINFO]
+{
+	Name=Denial of Service;
+	Unitname=dos;
+	Description=disables a target unit;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=30;
+	BuildTime=1280;
+	icontype=dos;
+	//mass = 100000;
+	Category=EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=2;
+	FootprintZ=2;
+	MaxDamage=1700;
+	buildpic=dos.png;
+	ObjectName=dos.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=150;
+	IdleTime=450;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=1.4;
+	Acceleration=.9;
+	CanMove=1;
+	MaxVelocity=2.7;
+	TurnRate=420;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=768;
+	SeismicSignature=2;
+
+	// Weapons
+	Weapon1=DOS_Beam;
+	BadTargetCategory1=FAST;
+	OnlyTargetCategory1=UNIT;
+	ExplodeAs=RetroDeath;
+	SelfDestructAs=RetroDeath;
+	NoChaseCategory=FACTORY;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:corruption_dust;
+		explosiongenerator1=custom:corruption_build;
+	}
+}

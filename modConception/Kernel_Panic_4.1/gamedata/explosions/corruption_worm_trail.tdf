@@ -1,0 +1,30 @@
+[corruption_worm_trail]
+{
+	[dirt]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=1;
+			sizemod=.93;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=.8 .8 0 1   .6 .6 0 .8   0 0 0 0;
+			airdrag=.98;
+			particleLife=24;
+			particleLifeSpread=8;
+			numParticles=2;
+			particleSpeed=.8;
+			particleSpeedSpread=1.9;
+			particleSize=4;
+			particleSizeSpread=2;
+			emitRot=86;
+			emitRotSpread=10;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

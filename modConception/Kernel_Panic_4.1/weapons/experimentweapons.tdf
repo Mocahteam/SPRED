@@ -1,0 +1,90 @@
+[ExpStationary]
+	{
+	name=3d Geometric shapes!!;
+	rendertype=1;
+	lineofsight=1;
+	model=octashot.s3o;
+	texture1=black;
+	Texture2=pointertrail;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+
+	turret=1;
+	range=4000;
+	weaponvelocity=800;
+	startvelocity=200;
+	weaponacceleration=200;
+	flighttime=10;
+ 	smoketrail=0;
+ 	WeaponType=MissileLauncher;
+	trajectoryheight=1;
+	turnrate=20480;
+	tracks=1;
+
+	reloadtime=1;
+
+	areaofeffect=32;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+	cegTag=experiment_trailS;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=300;
+		}
+	}
+
+[ExpMobile]
+	{
+	name=Mobile Artillery;
+	rendertype=1;
+	lineofsight=1;
+	model=octashot.s3o;
+	texture1=black;
+	Texture2=pointertrail;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+
+	turret=1;
+	range=1300;
+	weaponvelocity=800;
+	startvelocity=200;
+	weaponacceleration=200;
+	flighttime=5;
+ 	smoketrail=0;
+ 	WeaponType=MissileLauncher;
+	trajectoryheight=1;
+	turnrate=20480;
+	tracks=1;
+
+	reloadtime=1;
+
+	areaofeffect=32;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+	cegTag=experiment_trailM;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=200;
+		}
+	}
+

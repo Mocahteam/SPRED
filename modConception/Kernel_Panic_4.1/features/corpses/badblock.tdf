@@ -1,0 +1,15 @@
+[BADBLOCK]
+{
+	description=Bad Block;
+	object=badblock.s3o;
+	footprintx=2;
+	footprintz=2;
+	height=22;
+	blocking=1;
+	hitdensity=100;
+	metal=64;
+	damage=400;
+	reclaimable=1;
+	energy=0;
+}
+

@@ -1,0 +1,280 @@
+
+
+Top priority:
+- Fix menu voice but no text when spec
+- Why have cons no radar?
+- Fix pointer rolling on place
+- Fix HOMF getting broken by 0.82
+- Fix bug with flow flying out of bug reach
+- Try adding lines to paper texture
+- Spawn an effect when a Rock/Paper/Scissors disappear into a new hand
+- Rock, Paper, Scissors shots should be ) ] > and not pass through
+- Replace the two "not Spring.IsAboveMiniMap(x,y)" by "true" inside "IsAbove"
+- In "Kernel Panic Tooltip" the following line must be out (just above) of the WG.MidKnightBG block
+- gl.Text("\255\255\255\255 ",0,0,FontSize,'o') -- Reset color to white for other widgets using gl.Text
+- In "Spring Direct Launch 2" rename UnQuoteString into GetFromQuote
+- Set MouseDragScrollThreshold to 0 in settings
+- Don't show tips in missions
+- Replace all the TextWidthFixHack by one fix to GetTextWidth
+- Stop displaying AI shortName when saving in KP4.0
+- 70??.wav -> 17??.wav
+- Get NTai fixed or remove it
+- TASClient spec game not detected as one for auto restart spec game
+- Clicking the restart button while speccing an AI game put player in place of an AI
+- Add anti-wall into AI
+- Make AI more willing to use specials the more specials charged it has, the longer charged they were
+- Make hero icon?
+- Handle Spring.GetModOptions being "0.0000" instead of "0"
+- Fix game over screen not appearing in multi
+- Enable Python scripts, and SPisKPL
+- Make what TASClient html campaign thing needs
+- Remove the selection square when clicking right while left is down
+- The widget that set settings shouldn't change the Spring-wide settings.
+- Optimize double loop in Regen AI
+- Regen AI should not try to build when there are no geo
+- Turn buildings that need turning in the mission charge of hero
+- Make kernel top of tower build 999 hero
+- Give kernel in middle of red, with b 3 byte b 20 bit b asm repeat
+- Make byte minelauncher arcing.
+- Make the gadget that set settings dump script and reload instead of exit. (And write "Single Player" around "first time").
+- Fix exparty script
+- Use the single player widget fix
+- Make destroy unit callin of spawner remove the words left associated with the destroyed unit, and check it works
+- Rename GenerateGame to GenerateSkirmish
+- In GenerateGame, in WriteScript, and in dump_units, make the PlayerTeamNum be index from 1 and not from 0
+- In WriteScript, if .map.InternalFileName or .faction.InternalName do not exist, then take .map and .faction directly.
+- Devise better tag names than LauncherName & LauncherVersion for the tools that wrote the start script
+- Make an AdvPlayersList widget that use DrawScreenEffects instead of DrawScreen and that can be pushed with some WG. and that has a slightly diff name
+- Remove SPisKPL.py or fix it.
+- Custom formation 2 from spring downloader
+- Remove greying from gui_hilight_selectedunits.lua
+- Use power instead of metal in FBI to determine targetting priority
+- Make autosave use actual out-of-game minutes instead of frames
+
+Would be nice:
+- Make tron hero game mode (nibble)
+- Fix bug where Fair KPAI build over the limit when several build commands get sent for one slot free
+- Start turning widgets into gadgets?
+- If a gadget does a GiveOrderToUnit, in multiplayer, do orders stack?
+- Either way, make KP AI disable for every player but the AI owner
+- Make tooltip translator call geovent datavent
+- Is it f%30==5 or f%32==5 for "every second?"
+- Lower the "Bufferised packet" text so it's below the buildbar
+- Make zoom on tooltip read zoom sign (from settings)
+- Decide upon and implement an unified way for gadget/widget GUI elements moving/resising
+- Manage w.owner disappearing in areadenial.lua
+- Investigate possible obelisk crash bug
+- Make better OpenGL graphics for souls
+- The unsynced lua randomiser is not random, seed it
+- Add " in MakePalladium.bat in @"%SpringFolder%\Spring.exe"
+- Make icons for flow and connection
+- Test jK transparency code, if it fails:
+- Edit read me and make wiki faq about transparency bug
+- Fix: In "metal" mode, removed geos still listed by AI (debug mode) and widget
+- Fix probable ONS bug with giving/taking
+- Replace/Reinforce isValidID by isUnitDead
+- Check that AI cancel self D when enemies anew
+- KPL: Add "Online Multiplayer" button
+- Create EnemyNear list, remove loops in the cob called function
+- Ensure that advplayerslist never complains about missing arm & core sidepics anymore
+- ColorWars: Why does CreateFeature takes an AllyTeamID and not a TeamID?
+
+Future features:
+- Color Wars: Make Square, Triangle, Hexagon models (Triangle aligned to nearest map side from start pos)
+- Make building re-center-er
+- Make a campaign
+- Make ONS handle different ONS settings per player/team
+- Make a mode that has fixed time, add up time for finished building, give huge buildspeed advantage to the one who has currently less, and after x minutes.
+- Hex edit KPSClient Help / Links
+- Test assymetrical /ally <alliance#> 1"
+- Cons deselector when selecting mass of units
+- Allow AI gadget to share ID with human
+- Make widget that disable all interface, cross, widget, buffer state, /mapmarks 0,...
+- Use THIS longbow toggle
+- Make AI grab any idle non human
+- Installer: Include an html Kernel Panic help
+- Check if, in ONS Ultra, when the homebase is red and minifacs green, the AI attacks the homebase
+
+Lost their pertinence:
+- Fix / simplify music widget
+- Use MidKnight's newer tooltip background
+- Fix GetUnitCOBValue and SetUnitCOBValue being moved from Spring to Spring.UnitScript as seen at http://springrts.com/phpbb/viewtopic.php?f=12&t=19389
+- Make script.exe
+- Use dummy weapons in every Spring.DestroyUnit to detect and ignore them in S.O.S.
+- Make sound of exploit (and flow) less noisy. Possible XP or Vista bug?
+- Re-add check that no Spring Component is running in the background
+- Installer/Widget: Fix possible select'n'center issue
+- Installer: New KPL source
+- Installer: New KPL exe
+- Installer: Get my uikeys.txt
+- Installer: Remove some startscripts, make mine
+- Installer/TASClient: Find a way to force start pos default to random
+- Widget: Edit Adv Player List to remove metal and energy sharing when the bars are off
+- Recheck layers
+- ONS: Avert /0 (null distance) in all GL ONS func
+- ONS: Make something to not draw LinkBeamVertices out of los yet refresh cleverly
+- ONS: Draw fatter beams
+- ONS: Move isEnemyNear calculation out of GetUnitONSInfo and into GameFrame
+- ONS: Teams ID are the same <- or -> teams are allied
+- ONS: del LuaCob ?
+
+Probably done but recheck once:
+- Test restart skirmish in KP
+- Make spectate start again if it was spectate and no user action
+- Make harder "spectate" be FFA
+- Lua game start spawn
+- Add kill board
+- Use Spring.GetTeamStartPosition(team) with choose before game in GenerateFromCurrentState
+- Use Spring.CreateDir when dumping missions
+- Find the code that read version in the sos and no resbar gadget, fix it so it doesn't crash on test version strings.
+- Fix center'n'select (in hero mode).
+- Make the internal launcher set map to the one chosen in the hard coded menu.
+- Make exploit selected if the bug was before morph. Also transfer more properties and states?
+- Fix NX command adding tons of attack to queue
+- Make AI don't go Touhou / Old hacker when respawning
+- Make team modoption BufferSize setting the initial team buffer
+- Make the /ons 1 to require cheat if noons team mod option is set
+- Make the Destroying of Units of the spawner to set ID as itself which is how I mark deletion that do not count
+- Add start box to whitelist (was actually there, but not showing because of the way it autodisable)
+- In KPL: EFI=GenerateRandNum(2,nbrKPfactions); <- What if nbrKPfactions is 1??? Then it does not work!!
+- Find out why Color Wars blocks are not drawn in multiplayer
+- Remove CopyTable and debug echo from Color Wars
+- Why is master volume set to 1?
+- Add shift+esc to uikeys
+- Add "quit" to "quitforce" in autoquit.lua (and keys, oh well test and use new autoquit bscly)
+- Fix flow not being hit
+- Fix flow being hit and not getting damaged
+- Installer/Widget: ETA off by default
+- Installer/Widget: Add the unit_healthbars.lua and gui_advplayerslist.lua with IsGUIHidden
+- Installer/Widget: Add autoquit widgets
+- Installer/Widget: Add clear start point widgets
+- Installer/Widget: Fix clear start point widgets
+- Installer: Remove "Spring" in StartMenu
+- Installer: Get the NSIS filesizes of old spring.exe
+- Installer: verify that it overwrite any old Spring.exe
+- Fix init_start_point_remover.lua
+- Use Firewall on damaged allies with units around
+- Retest bombard living and dying target
+- Does AI use NX?
+- ONS: Make common definition files
+- ONS: armor in fbi and script
+- Random generator in Lua for map with weight looks like it never take last one (fixed now)
+
+Done:
+- Delete network_buildeffect_black.tga and network_buildeffect_white.tga
+- Handle FireStorm maps
+- Make minimaps for map menu (top left?)
+- Show out of screen hero name on screen border
+- Fix hero when player drop
+- Fix hero expanding shell
+- Fix hero in multi with cancel
+- Make hero keys customiseable
+- Fix color war when units out of map
+- Make tab change item in menu
+- There's a typo somewhere in the tooltip
+- Show player names on hero
+- Spec should not have hero
+- Rename hero mega
+- Make two new cursors, set in shoot_n_run.lua
+- Test Regen AI
+- Make a widget change hole move stance to trigger old hacker 1/2 of times in heroes mode
+- Homebases not anymore face map center. Fix.
+- Make automatic tip dispenser tell about hero mode.
+- Better Fair KPAI: Save the id of factory in need of order, and order them top of gameframe.
+- Make tooltip about what's under cursor and not what's selected in hero mode.
+- Rename "Defense of the ENIACs" (Heroes of Mainframe (homf)).
+- Remove limited arc for "hero".
+- Give heroes heroic weapons.
+- Replace "super" by "hero".
+- Make automatic tips dispenser
+- Disable ONS for players setting themselves a bonus handicap
+- Use "hidden" modoptions to trigger missions
+- In KPL fix missing L in first Challenge
+- Make KPL write its own version in startscript
+- In KPL easy team disable ons for enemies
+- Use Application->ExeName.c_str() without path in WriteField("LauncherName","KPL.exe-like")
+- Check if exploit count as spam for Fair KPAI and Save our Mem: It did not, for neither.
+- Del observer.* colorwarsquad.* /s
+- Make allied recover lost souls too
+- Optimize Color Wars
+- Make tooltips for SoS and ColorWars
+- Change the way Fair KPAI gets an extra free cnstr so it doesn't only build cons when it gets free medium slots one by one
+- Reduce homebases to 25% not 1% hp when out of memory
+- Set master volume in installer, as well as in LuaUI_force.lua and kp_settings.lua
+- Use Fair KPAI in both launchers
+- Get spring.exe 0.79.0.2 and 0.79.1.0 filesizes
+- Change HilightUnit code to HilightSelectedUnits code, make installer
+- Change in SetSettings.lua Enable(HilightUnit) to Enable(HilightSelectedUnits)
+- Add "nowalls" in both generatescript
+- ColorWars.lua DrawScreenEffects does not reset gl.Color(1,1,1,1) !!
+- In kp_settings.lua, add: or n=="MiniMap Start Boxes"
+- Merge & test crippling sos
+- Add anti-factory-repeat on AI (in the "check" function or..)
+- Change description inside KP_AI_31.lua
+- Check fourth UnitFinished argument, can optimise fair AI UnitFinished if it is builder. Result: It's nil.
+- Fix ONS beam texture
+- Fix Sectorised SoS with giving/taking unit.
+- Rename "Save our soul" to "Save Mem"
+- Sectionned faith bar, each isBuilding should add InitialFaith, display like: 4096 -7      1024x4
+- Investigate obelisk fire anim bug in Spring.exe Test Builds & 79
+- Investigate too transparent areadenial explosion groundflash in Spring.exe Test Builds & 79
+- Test tooltip, spread its TextWidthFixHack if tonumber okay
+- SOS: Makes flying units: Not drop souls, not catch souls
+- SOS: Check that changes to InitialFaith in synced are seen in unsynced (they're not)
+- Implement "Color Wars" in KP
+- Installer/Widget: Make my team color fix widget
+- Consider re-adding mine unitlimit
+- Network's buffer and dispatch does not follow unitlimit, fix that
+- Remove PlayerName=="unnamed" as condition to run menu, as SpringLobby use that name.
+- Use the advplayerlist with "take" instead of "say /take"
+- Add Spring Lobby, with or without shortcuts
+- Lower logic bomb metal cost to avoid nanostalling
+- Install to C:\Games\Spring\ instead of C:\Program Files\
+- Make default zoom scroll negative of what it is.
+- Change KPL form from "poDesigned" to "poDefault"
+- Add a KDR metal->geo converter from cuberor
+- Use isX includes in KernelBoost.lua
+- Give Marisa an incantation anim and her shot a trail
+- Make tooltip (especially ONS informations)
+- Add water=1 to all ceg
+- Fix bug with NX flag targetting
+- Make pointer hold pos
+- Fix bug with AI giving wrong orders
+- Add buffer to tooltip of port/connection
+- Remove buffer and tooltip and adv pl widget when in F5 mode
+- Maybe remove buffer large text info when speccing
+- Make custom tooltip
+- Make new minimap icons
+- KPL: Use HSV to get better team colors
+- Installer: Unzip the content of autoupdate
+- Installer: TASClient.exe: Hexedit inis and keynames
+- Installer: set some TA/KP Client regkeys
+- Installer: Remove all inetc
+- Installer: Get the real "Welcome" sidepic
+- Installer: Create "Kernel Panic" in start menu
+- Widget: Make one to highlight the geo when placing a minifac/special (not mines/walls!)
+- Check tooltip in widescreen. Try glGetTextWidth(text) * vsx / vsy * 1.33333333 otherwise.
+- Fix AI bugging on geoless maps.
+- Check Firewall + DoS paralyser
+- Fix player deploying bug inside window
+- Fix LUA errors with firewall and bombard
+- Recheck Go! Go! Go! Kernel (yes, for all 3 factions)
+- Make AI spawn oldhacker, dice 1/10 rolled out of any function, then 2/3 for each AI
+- Throw 1/20 weirdFaction dice, then 2/3 for each AI
+- AI:NX only if pointer and NX enabled
+- ONS: Maek bettar shield pix! Woot! Done!
+- ONS: Use Draw List
+- ONS: Recalculate ONS state only when unit created/given/destroyed+once every 17s
+- ONS: Use UnitFinished, UnitDestroyed, UnitGiven to know when to update ONS. Still add a 1sec / 12s
+- ONS: extremities
+- ONS: destroyed -> id=nil
+- ONS: underconstruction
+- ONS: Draw tree when about to place building
+- ONS: Make layer after every other that manage damage
+- Touhou: Increase Marisa shot visibility
+- Touhou: Nerf Touhou
+- Touhou: Change magic circles background from white to black
+- Touhou: Give Touhou the ONS shield
+
+Q: Does order matter in AreTeamsAllied?
+Q: How to edit unit info GUI (remove elements, add elements)

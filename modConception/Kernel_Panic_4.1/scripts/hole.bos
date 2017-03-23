@@ -1,0 +1,164 @@
+
+piece whole, body, nanoarm, nanomover, nanoemitter, pad, shoulder, arm, hand, finger;
+
+#define SIG_BUILD 1
+#define SIG_CSMOUHB 2
+#include "springdefs.h"
+
+// For this script, Scriptor linear constant must be changed
+// from 163840 to 65536
+
+
+#ifndef ALPHA_THRESHOLD
+#define ALPHA_THRESHOLD 103
+#endif
+#ifndef MAX_ID
+#define MAX_ID 70
+#endif
+#ifndef HEADING
+#define HEADING 82
+#endif
+
+static-var doEmit, hasbuilt;
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+
+EmitFX() {
+	set-signal-mask SIG_BUILD;
+	while(1) {
+		if (doEmit) emit-sfx 1025 from nanoemitter;
+		sleep 30;
+	}
+}
+static-var i;
+
+TurnTowardBarycenter()
+{
+	var u,xz,x,z,n,sx,sz;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	n=0;sx=0;sz=0;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(0!=get UNIT_HEIGHT(u))//If unit u exists
+		{
+			xz=get UNIT_XZ(u);
+			x=xz/65536;
+			z=xz - x*65536;
+			//call-script lua_FoundUnitMsg(u,xz,x,z,n,sx,sz);
+			// Now x and z are the coord of unit u
+			++n;//Number of units found
+			sx=sx+x;//Sum of X coordinate of found units
+			sz=sz+z;//Sum of Z coordinate of found units
+		}
+	}
+	// I somewhat assumed that map won't be epic ( x and z lower than 65536 )
+	// And that number of units at beginning won't be over 65536
+	x=sx/n;
+	z=sz/n;
+	// Now x and z are the mean of coord of all units
+	xz=x*65536+z;//Reconstruct a packed xz
+	
+	// For reasons that I totally do not understand, with the exact values, it doesn't work.
+	// But with the < > values, it works.
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+}
+
+#include "ons.h"
+
+
+lua_GetBackInTime() {
+	return(0);
+}
+
+
+CSMOUHB()
+{
+	signal SIG_CSMOUHB;
+	set-signal-mask SIG_CSMOUHB;
+	while(1==get STANDINGMOVEORDERS)
+		sleep 5;
+	while(2==get STANDINGMOVEORDERS)
+		sleep 5;
+	while(0==get STANDINGMOVEORDERS)
+		sleep 5;
+	if(1==get STANDINGMOVEORDERS)
+		call-script	lua_GetBackInTime();
+}
+
+Create() {
+	start-script ManageONS();
+	start-script TurnTowardBarycenter();
+	set ALPHA_THRESHOLD to 240;
+	call-script lua_SetAlphaThreshold(255);
+	hide nanoarm;
+	hide nanomover;
+	hasbuilt=FALSE;
+	start-script CSMOUHB();
+}
+
+Activate() {
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+//	var i;
+	show nanoarm;
+	show nanomover;
+	for (i=240; i >= 20; i=i - 10) {
+		set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 100;
+	}
+	call-script lua_SetAlphaThreshold(1);
+	set INBUILDSTANCE to 1;
+	start-script EmitFX();
+	while(1) {
+		for (i = 16; i <= 64; i = i + 16) {
+			move nanoarm to x-axis [-1]*i speed [64];
+			move nanomover to z-axis [0] speed [256];
+			wait-for-move nanomover along z-axis;
+			wait-for-move nanoarm along x-axis;
+			doEmit=1;
+			move nanomover to z-axis [-55] speed [128];
+			wait-for-move nanomover along z-axis;
+			doEmit=0;
+		}
+		move nanomover to z-axis [0] speed [128];
+		move nanoarm to x-axis [-16] speed [128];
+		wait-for-move nanoarm along x-axis;
+	}
+}
+
+Deactivate() {
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	set INBUILDSTANCE to 0;
+//	var i;
+	for (i=20; i <= 240; i=i+10) {
+		set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 100;
+	}
+	call-script lua_SetAlphaThreshold(255);
+	hide nanoarm;
+	hide nanomover;
+	move nanoarm to x-axis 0 speed [64];
+	move nanomover to z-axis 0 speed [100];
+}
+
+QueryBuildInfo(p) {
+	hasbuilt=TRUE;
+	signal SIG_CSMOUHB;
+	p=pad;
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (id==168) return 10;
+	return 100;
+}

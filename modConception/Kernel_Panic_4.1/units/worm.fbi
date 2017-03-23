@@ -1,0 +1,79 @@
+[UNITINFO]
+{
+	Name=Worm;
+	Unitname=worm;
+	Description=heavy ambusher;
+
+	// Required Tags
+	icontype=worm;
+	//mass = 100000;
+	BuildCostEnergy=0;
+	BuildCostMetal=100;
+	BuildTime=3200;
+	Category=UNIT NOTFACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=12000;
+	ObjectName=wormNEW.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=300;
+	IdleTime=400;
+	buildpic=worm.png;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=9;
+	Acceleration=6;
+	CanMove=1;
+	MaxVelocity=2.1;
+	TurnRate=280;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	//onoffable=1;
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+	CustomToggle1=AutoHold;
+	CustomToggle1Init=1;
+
+	// Sight/Radar
+	RadarDistance=256;
+	SightDistance=512;
+	SeismicDistance=1024;
+	SeismicSignature=0;
+
+	// Weapons
+	Weapon1=Wormbite;
+	OnlyTargetCategory1=EDIBLE;
+	Weapon2=Wormsplash;
+	OnlyTargetCategory2=VOID;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+	NoChaseCategory=VTOL;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+}

@@ -1,0 +1,13 @@
+[CONSTRUCTION]
+{
+	constructionDecay=1;// Should constructions decay if noone is working on them?
+	constructionDecayTime=0;// How long until the decay starts?
+	constructionDecaySpeed=0.001;// Multiplied by buildTime to get decay time (higher value -> slower decay)
+}
+[flankingBonus]
+{
+	defaultMode=0;
+}
+[EXPERIENCE] {
+	experienceMult=0;
+}

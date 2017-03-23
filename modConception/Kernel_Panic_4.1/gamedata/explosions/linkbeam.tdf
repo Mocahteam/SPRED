@@ -1,0 +1,25 @@
+[linkbeam]
+{
+	[DoesThisEvenMatter]
+	{
+		class=CBitmapMuzzleFlame;
+		[properties]
+		{
+			sideTexture=linkbeam;
+			frontTexture=none;
+			dir=dir;
+			colorMap=1 0.47 0 1   0 1 0.63 1   1 0.47 0 1;
+			size=5;
+			length=356;
+			sizeGrowth=0;
+			ttl=60;// 60 frames = 2 seconds exactly
+			frontOffset=0;
+			speed=5;
+			pos=0, 0, 0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=1;
+	}
+}

@@ -1,0 +1,59 @@
+[network_shot]
+{
+	[circle]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0.5;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0,1,0;
+			gravity=0, 0, 0;
+			Texture=circle;
+			colorMap=.5 1 .5 .3   0 1 0 .2   0 0 0 0;
+			airdrag=.9;
+			particleLife=10;
+			particleLifeSpread=6;
+			numParticles=1;
+			particleSpeed=0;
+			particleSpeedSpread=0;
+			particleSize=2;
+			particleSizeSpread=5;
+			emitRot=0;
+			emitRotSpread=15;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[tracers]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0,1,0;
+			gravity=0, 0, 0;
+			Texture=hline;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=.9;
+			particleLife=8;
+			particleLifeSpread=2;
+			numParticles=8;
+			particleSpeed=4;
+			particleSpeedSpread=4;
+			particleSize=4;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=100;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

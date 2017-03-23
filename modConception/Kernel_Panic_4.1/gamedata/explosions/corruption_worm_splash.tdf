@@ -1,0 +1,23 @@
+[corruption_worm_splash]
+{
+	[shockwave]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = 0, 1, 0.00001;
+			pos = 0, 10, 0;
+			colorMap = .11 .97 1 .1   .12 .36 1 .1   0 0 0 0;
+			size = 5;
+			length = 1;
+			sizeGrowth = 23;
+			ttl = 5;
+			frontOffset = 0;
+			sideTexture = null;
+			frontTexture = shockwave;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

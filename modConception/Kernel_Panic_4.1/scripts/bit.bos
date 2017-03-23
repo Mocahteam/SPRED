@@ -1,0 +1,55 @@
+piece base, body, shell, gunbase, gunpoint;
+
+#include "springdefs.h"
+
+Create()
+{
+	move gunpoint to z-axis [-3] now;//Because the gunpoint is too far from surface, and it's easier to change script that s3o
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT) {
+		move base to y-axis ([-16]*(get BUILD_PERCENT_LEFT)/100) now;
+		sleep 60;
+	}
+	move base to y-axis 0 now;
+	sleep 2500;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype)
+{
+	hide body;
+	hide shell;
+	explode body type SHATTER;
+}
+
+StartMoving()
+{
+	spin body around x-axis speed <270>;
+}
+
+StopMoving()
+{
+	stop-spin body around x-axis;
+}
+
+QueryWeapon1(piecenum)
+{
+	piecenum=gunpoint;
+}
+
+AimFromWeapon1(piecenum)
+{
+	piecenum=gunbase;
+}
+
+AimWeapon1(h,p)
+{
+	turn gunbase to y-axis h now;
+	turn gunbase to x-axis (0-p) now;
+	return 1;
+}
+
+FireWeapon1()
+{
+	emit-sfx 1025 from gunpoint;
+}

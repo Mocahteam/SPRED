@@ -1,0 +1,46 @@
+#include "springdefs.h"
+
+piece base, mine;
+
+CheckForSurvivors()
+{
+	var id;
+	//this function checks if any friendly non-mine units are still alive and detonates the mine if not
+	for(id = 1; id<= get MAX_ID; ++id) { //iterate through all units
+		if (get UNIT_ALLIED(id)) { //see if it's friendly
+			if ((get UNIT_HEIGHT(get MY_ID)) != (get UNIT_HEIGHT(id))) { //check for units of radius != 8 (for some reason the radius is 1 unit smaller than it should be), should mean everything that's not a mine
+				id=1; //this check is done because we've found a survivor, go back to the beginning of the unit list and wait a bit
+				sleep 500;
+			}
+		}
+	}
+	//if this is reached there are no living non-mine friendlies so we detonate the mine
+	emit-sfx 4096 from base;
+}
+
+Create()
+{
+	move mine to y-axis [-4] now;
+	while (99 <= get BUILD_PERCENT_LEFT) sleep 30;
+	while (get BUILD_PERCENT_LEFT) {
+		move mine to y-axis ([-4] * (get BUILD_PERCENT_LEFT)/100) now;
+		emit-sfx 1024 from base;
+		sleep 30;
+	}
+	move mine to y-axis 0 now;
+	start-script CheckForSurvivors();
+}
+
+SweetSpot (piecenum)
+{
+	piecenum = base;
+}
+
+Killed(severity, corpsetype)
+{
+}
+
+AimWeapon1()
+{
+	return 0;
+}

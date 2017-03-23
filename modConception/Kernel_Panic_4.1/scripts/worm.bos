@@ -1,0 +1,211 @@
+
+piece base, body, head, ring0, ring1, ring2, ring3, ring4, ring5, end;
+
+#include "springdefs.h"
+
+#define SIG_AIM 1
+#define SIG_WALK 2
+
+static-var aiming, shooting, moving, doMove, maxspeed, autoholdstate;
+
+#define WALK_WAVEDIST [-8]
+#define WALK_WAVESPEED [24]
+#define WALK_INTERVAL 120
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Walkanim() {
+	if (moving) return 0;
+	signal SIG_WALK;
+	set-signal-mask SIG_WALK;
+	moving=1;
+	while (doMove) {
+		move head to z-axis 0-WALK_WAVEDIST*3 speed WALK_WAVESPEED;
+		move ring4 to z-axis 0 speed WALK_WAVESPEED;
+		move ring0 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move ring5 to z-axis 0 speed WALK_WAVESPEED;
+		move ring1 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move end to z-axis 0 speed WALK_WAVESPEED;
+		move ring2 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move head to z-axis 0 speed WALK_WAVESPEED;
+		move ring0 to z-axis 0 speed WALK_WAVESPEED;
+		move ring3 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move ring1 to z-axis 0 speed WALK_WAVESPEED;
+		move ring4 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move ring2 to z-axis 0 speed WALK_WAVESPEED;
+		move ring5 to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+		move ring3 to z-axis 0 speed WALK_WAVESPEED;
+		move end to z-axis WALK_WAVEDIST speed WALK_WAVESPEED;
+		sleep WALK_INTERVAL;
+	}
+	move ring4 to z-axis 0 speed WALK_WAVESPEED;
+	move ring5 to z-axis 0 speed WALK_WAVESPEED;
+	move end to z-axis 0 speed WALK_WAVESPEED;
+	moving=0;
+}
+
+ForceStopWalk() {
+	signal SIG_WALK;
+	moving=0;
+	move head to z-axis 0 now;
+	move ring0 to z-axis 0 now;
+	move ring1 to z-axis 0 now;
+	move ring2 to z-axis 0 now;
+	move ring3 to z-axis 0 now;
+	move ring4 to z-axis 0 now;
+	move ring5 to z-axis 0 now;
+	move end to z-axis 0 now;
+}
+
+
+
+AutoHold(state)
+{
+	autoholdstate=state;
+	if(!state)
+		set STANDINGFIREORDERS to 2;
+	if(state)
+	{
+		if(!get CLOAKED)
+			set STANDINGFIREORDERS to 2;
+		if(get CLOAKED)
+			set STANDINGFIREORDERS to 0;
+
+	}
+}
+
+StartMoving() {
+	doMove=1;
+	if (aiming) return 0;
+	call-script Walkanim();
+}
+
+StopMoving() {
+	doMove=0;
+}
+
+Create() {
+	var cloak;
+	aiming=0;shooting=0;moving=0;doMove=0;
+	autoholdstate=TRUE;
+	maxspeed=get MAX_SPEED;
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT) {
+		set ALPHA_THRESHOLD to 20 + 2 * get BUILD_PERCENT_LEFT;
+		call-script lua_SetAlphaThreshold((get BUILD_PERCENT_LEFT)*13/10);
+		sleep 30;
+	}
+	set ALPHA_THRESHOLD to 2;
+	call-script lua_SetAlphaThreshold(2);
+	sleep 5000;
+	set ARMORED to 0;
+	set ACTIVATION to 1;
+	cloak=get CLOAKED;
+	if(!aiming)
+	{
+		move head to y-axis [-16] speed [12];
+		sleep 1333;
+		set WANT_CLOAK to TRUE;
+	}
+	while(TRUE)
+	{
+		if(cloak!=get CLOAKED)
+		{
+			cloak=get CLOAKED;
+			if(cloak && autoholdstate) {
+				set STANDINGFIREORDERS to 0;
+			}
+			if(!cloak && autoholdstate) {
+				set STANDINGFIREORDERS to 2;
+			}
+		}
+		sleep 300;
+	}
+}
+
+Killed(severity,corpsetype) {
+	explode head type FALL;
+	explode ring0 type FALL;
+	explode ring1 type FALL;
+	explode ring2 type FALL;
+	explode ring3 type FALL;
+	explode ring4 type FALL;
+	explode ring5 type FALL;
+	explode end type FALL;
+}
+
+ResetAim() {
+	sleep 2000;
+	turn body to y-axis 0 speed <360>;
+	move head to y-axis [-16] speed [12];
+	wait-for-move head along y-axis;
+	set MAX_SPEED to maxspeed;
+	set WANT_CLOAK to TRUE;
+	aiming=0;
+	if (doMove) call-script Walkanim();
+}
+
+AimWeapon1(h,p) {
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	start-script ResetAim();
+	if(shooting)
+		return 0;
+	aiming=1;
+	set MAX_SPEED to maxspeed/2;
+	set CLOAKED to FALSE;
+	set WANT_CLOAK to FALSE;
+	if(autoholdstate)
+		set STANDINGFIREORDERS to 2;
+	move head to y-axis [0] speed [12];
+	turn body to y-axis h speed <800>;
+	wait-for-move head along y-axis;
+	wait-for-turn body around y-axis;
+	return 1;
+}
+
+AimFromWeapon1(p) {
+	p=body;
+}
+
+QueryWeapon1(p) {
+	p=head;
+}
+
+#define ATTACK_LENGTH [-16]
+#define ATTACK_SPEED [48]
+#define ATTACK_RETRACT [24]
+
+FireWeapon1() {
+	call-script ForceStopWalk();
+	shooting=1;
+	move head to z-axis -7*ATTACK_LENGTH speed 7*ATTACK_SPEED;
+	move ring0 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move ring1 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move ring2 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move ring3 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move ring4 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move ring5 to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	move end to z-axis ATTACK_LENGTH speed ATTACK_SPEED;
+	wait-for-move head along z-axis;
+	emit-sfx 4097 from head;
+	emit-sfx 4097 from end;
+	move head to z-axis 0 speed ATTACK_RETRACT * 7;
+	move ring0 to z-axis 0 speed ATTACK_RETRACT;
+	move ring1 to z-axis 0 speed ATTACK_RETRACT;
+	move ring2 to z-axis 0 speed ATTACK_RETRACT;
+	move ring3 to z-axis 0 speed ATTACK_RETRACT;
+	move ring4 to z-axis 0 speed ATTACK_RETRACT;
+	move ring5 to z-axis 0 speed ATTACK_RETRACT;
+	move end to z-axis 0 speed ATTACK_RETRACT;
+	wait-for-move head along z-axis;
+	shooting=0;
+}

@@ -1,0 +1,75 @@
+[UNITINFO]
+{
+	Name=Artillery;
+	Unitname=exparty;
+	Description=artillery emplacement;
+
+	// Required Tags
+	icontype=bit;
+	BuildCostEnergy=0;
+	BuildCostMetal=30;
+	BuildTime=2400;
+	icontype=bit;
+	Category=EDIBLE FACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=15000;
+	IdleAutoHeal=500;
+	IdleTime=200;
+	buildpic=bug.png;
+	ObjectName=bugNEW.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+
+	// Movement
+	CanMove=0;
+
+	// Airplane Moventment
+
+	// Buildings
+	yardmap=oooo oooo oooo oooo;
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=300;
+	SeismicDistance=0;
+
+	// Weapons
+	Weapon1=ExpStationary;
+	OnlyTargetCategory1=TARGET;
+
+	ExplodeAs=RetroDeathVBig;
+	SelfDestructAs=RetroDeathVBig;
+	NoChaseCategory=VTOL;
+	highTrajectory=0;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+ 	}
+}

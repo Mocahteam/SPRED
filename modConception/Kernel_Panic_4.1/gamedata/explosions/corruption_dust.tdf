@@ -1,0 +1,30 @@
+[corruption_dust]
+{
+	[dust]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=dir;
+			gravity=0, -.5, 0;
+			Texture=hline;
+			colorMap=.8 .8 0 1   .4 .0 0 1   0 0 0 1;
+			airdrag=.98;
+			particleLife=12;
+			particleLifeSpread=8;
+			numParticles=4;
+			particleSpeed=6;
+			particleSpeedSpread=3;
+			particleSize=5;
+			particleSizeSpread=1;
+			emitRot=0;
+			emitRotSpread=30;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

@@ -1,0 +1,71 @@
+piece base, body, correcter, gp, gp2;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	set ARMORED to 1;
+	set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	while (get BUILD_PERCENT_LEFT) sleep 30;
+	set ALPHA_THRESHOLD to 0;
+	call-script lua_SetAlphaThreshold(0);
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	explode body type SHATTER;
+	hide body;
+}
+
+AimFromWeapon1(p) {
+	p=gp;
+}
+
+QueryWeapon1(p) {
+	p=gp2;
+}
+
+static-var lockAim;
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	if (lockAim) return 0;
+	turn gp to y-axis h speed <180>;
+	turn gp to x-axis 0 - p speed <180>;
+	if (get TARGET_ID(1))
+		move gp2 to z-axis (get XZ_HYPOT(get UNIT_XZ(get TARGET_ID(1)) - get PIECE_XZ(gp))) speed [90];
+	wait-for-turn gp around y-axis;
+	wait-for-turn gp around x-axis;
+	wait-for-move gp2 along z-axis;
+	return 1;
+}
+
+FireWeapon1() {
+	lockAim=1;
+	var h;
+	h=get HEADING;
+	var i;
+	for (i=0;i<24;++i) {
+		turn correcter to y-axis h - get HEADING now;
+		sleep 1;
+	}
+	turn correcter to y-axis 0 now;
+	lockAim=0;
+}
+
+/*lua_BigArc(part, target) {
+	return 0;
+}
+
+Shot1(zero) {
+	if (get TARGET_ID(1))
+		call-script lua_BigArc(gp, get TARGET_ID(1));
+}*/

@@ -1,0 +1,96 @@
+[oldskool_death]
+{
+	[circle]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=4;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=circle;
+			colorMap=1 1 0 .3   1 0 0 .2   0 0 0 0;
+			airdrag=1;
+			particleLife=10;
+			particleLifeSpread=4;
+			numParticles=1;
+			particleSpeed=0;
+			particleSpeedSpread=0;
+			particleSize=6;
+			particleSizeSpread=5;
+			emitRot=0;
+			emitRotSpread=80;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 1 1   1 1 1 1;
+			airdrag=1;
+			particleLife=48;
+			particleLifeSpread=16;
+			numParticles=32;
+			particleSpeed=0;
+			particleSpeedSpread=1.5;
+			particleSize=.6;
+			particleSizeSpread=.3;
+			emitRot=0;
+			emitRotSpread=80;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[tracers]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=vline;
+			colorMap=1 1 1 1   1 1 1 1 ;
+			airdrag=.9;
+			particleLife=32;
+			particleLifeSpread=16;
+			numParticles=15;
+			particleSpeed=4;
+			particleSpeedSpread=.6;
+			particleSize=6;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=80;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[groundflash]
+	{
+		flashSize = 16; // flash size
+		flashAlpha = 0; // initial alpha of the flash
+		circleGrowth = 6.4; // size increase/frame
+		circleAlpha = 0; // initial alpha of the ring
+		ttl = 0; // number of frames
+		color = 1,0.6,0.6; // color RGB
+	}
+}

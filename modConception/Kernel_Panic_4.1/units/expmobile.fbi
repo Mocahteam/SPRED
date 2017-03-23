@@ -1,0 +1,77 @@
+[UNITINFO]
+{
+	Name=mobile arty;
+	Unitname=expmobile;
+	Description=provides firepower when stationary arty is not available;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=30;
+	BuildTime=2000;
+	icontype=pointer;
+	Category=EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=3;
+	FootprintZ=3;
+	MaxDamage=4000;
+	ObjectName=cube.s3o;
+	buildpic=pointer.pcx;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=150;
+	IdleTime=450;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=.9;
+	Acceleration=.6;
+	CanMove=1;
+	MaxVelocity=2;
+	TurnRate=270;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=400;
+	SeismicSignature=2;
+
+	// Weapons
+	Weapon1=ExpMobile;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=RetroDeath;
+	SelfDestructAs=RetroDeath;
+	NoChaseCategory=VTOL;
+	HighTrajectory=1;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+	}
+}

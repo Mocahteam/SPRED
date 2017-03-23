@@ -1,0 +1,248 @@
+piece base, body, gun;
+piece foot0l, foot1l, foot2l, foot0r, foot1r, foot2r;
+#include "springdefs.h"
+
+static-var burrowed, burrowing, moving, wantsmove, normalspeed, canburrow;
+
+/* All times in milliseconds */
+#define BUILDTIME 3000
+#define BURROWTIME 5000
+#define UNBURRTIME 700
+#define WALKTIME 300
+/* [56]*1000 makes 32 bits signed integers overflow */
+
+#define SIG_AIM 2
+#define SIG_BURROW 4
+
+
+lua_SetBurrowState(state) {
+	return;
+}
+
+WalkScript() {
+	while(TRUE) {
+		turn foot2l to x-axis 0 now;
+		turn foot2r to x-axis 0 now;
+		move foot0l to z-axis 0 now;
+		move foot0r to z-axis 0 now;
+		move foot1l to z-axis 0 now;
+		move foot1r to z-axis 0 now;
+		move foot2l to z-axis 0 now;
+		move foot2r to z-axis 0 now;
+		if(moving) {
+			move foot0l to z-axis [-9.6] speed [9.6]*100/((WALKTIME)/10);
+			move foot0r to z-axis [-9.6] speed [9.6]*100/((WALKTIME)/10);
+			move foot1l to z-axis [-9.6] speed [9.6]*100/((WALKTIME)/10);
+			move foot1r to z-axis [-9.6] speed [9.6]*100/((WALKTIME)/10);
+			move foot2l to z-axis [19.2] speed [19.2]*100/((WALKTIME)/10);
+			move foot2r to z-axis [19.2] speed [19.2]*100/((WALKTIME)/10);
+
+			turn foot2l to x-axis <180> speed <360>*1000/(WALKTIME);
+			turn foot2r to x-axis <180> speed <360>*1000/(WALKTIME);
+		}
+		sleep (WALKTIME)/2;
+		if(moving) {
+			turn foot2l to x-axis <360> speed <360>*1000/(WALKTIME);
+			turn foot2r to x-axis <360> speed <360>*1000/(WALKTIME);
+		}
+		sleep (WALKTIME)/2;
+	}
+}
+
+StartMoving() {
+	wantsmove=TRUE;
+	if ((!burrowed) && (!burrowing)) moving=TRUE;
+}
+
+StopMoving() {
+	wantsmove=FALSE;
+	moving=FALSE;
+}
+
+Burrow() {
+	signal SIG_BURROW;
+	set-signal-mask SIG_BURROW;
+	if(((burrowed) && (!burrowing))||(!canburrow)) return;
+	burrowing=TRUE;
+	moving=FALSE;
+	set MAX_SPEED to 1;
+
+	turn body to y-axis <0> speed <360>;
+	turn body to x-axis <90> speed <180>*1000/(BURROWTIME);
+	move body to y-axis [-8] speed [8]*100/((BURROWTIME)/10);
+	move foot0l to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	move foot0r to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	turn foot0l to x-axis <170> speed <360>*1000/(BURROWTIME);
+	turn foot0r to x-axis <170> speed <360>*1000/(BURROWTIME);
+	sleep (BURROWTIME)/4;
+	
+	move foot1l to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	move foot1r to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	turn foot1l to x-axis <170> speed <360>*1000/(BURROWTIME);
+	turn foot1r to x-axis <170> speed <360>*1000/(BURROWTIME);
+	sleep (BURROWTIME)/4;
+
+	move foot2l to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	move foot2r to y-axis [-24] speed [56]*100/((BURROWTIME)/10);
+	turn foot2l to x-axis <170> speed <360>*1000/(BURROWTIME);
+	turn foot2r to x-axis <170> speed <360>*1000/(BURROWTIME);
+	sleep BURROWTIME/2;
+
+	set CLOAKED to TRUE;
+	burrowed=TRUE;
+	burrowing=FALSE;
+}
+
+Unburrow() {
+	signal SIG_BURROW;
+	set-signal-mask SIG_BURROW;
+	if((!burrowed) && (!burrowing)) return;
+	set CLOAKED to FALSE;
+	burrowing=TRUE;
+	burrowed=FALSE;
+
+	move body to y-axis 0 speed [16]*100/((UNBURRTIME)/10);
+	move foot0l to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	move foot0r to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	turn foot0l to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	turn foot0r to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	sleep (UNBURRTIME)/4;
+
+	move foot1l to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	move foot1r to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	turn foot1l to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	turn foot1r to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	sleep (UNBURRTIME)/4;
+
+	turn body to x-axis 0 speed <180>*1000/(UNBURRTIME);
+	move foot2l to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	move foot2r to y-axis 0 speed [56]*100/((UNBURRTIME)/10);
+	turn foot2l to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	turn foot2r to x-axis 0 speed <360>*1000/(UNBURRTIME);
+	sleep (UNBURRTIME)/2;
+
+	set MAX_SPEED to normalspeed;
+	burrowing=FALSE;
+
+	if (wantsmove) moving=TRUE;
+}
+
+
+Create() {
+	set ARMORED to TRUE;
+	normalspeed = get MAX_SPEED;
+	burrowed=FALSE;
+	burrowing=FALSE;
+	moving=FALSE;
+	wantsmove=FALSE;
+	canburrow=FALSE;
+
+	move body to y-axis [-16] now;
+	turn body to x-axis <-90> now;
+	turn foot0l to x-axis <190> now;
+	turn foot0r to x-axis <190> now;
+	turn foot1l to x-axis <190> now;
+	turn foot1r to x-axis <190> now;
+	turn foot2l to x-axis <190> now;
+	turn foot2r to x-axis <190> now;
+	move foot0l to y-axis [-23] now;
+	move foot0r to y-axis [-23] now;
+	move foot1l to y-axis [-23] now;
+	move foot1r to y-axis [-23] now;
+	move foot2l to y-axis [-23] now;
+	move foot2r to y-axis [-23] now;
+
+	move body to y-axis 0 speed [16]*100/((BUILDTIME)/10);
+	move foot0l to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	move foot0r to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	turn foot0l to x-axis 0 speed <360>*1000/(BUILDTIME);
+	turn foot0r to x-axis 0 speed <360>*1000/(BUILDTIME);
+	sleep (BUILDTIME)/4;
+
+	move foot1l to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	move foot1r to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	turn foot1l to x-axis 0 speed <360>*1000/(BUILDTIME);
+	turn foot1r to x-axis 0 speed <360>*1000/(BUILDTIME);
+	sleep (BUILDTIME)/4;
+
+	turn body to x-axis 0 speed <180>*1000/(BUILDTIME);
+	move foot2l to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	move foot2r to y-axis 0 speed [56]*100/((BUILDTIME)/10);
+	turn foot2l to x-axis 0 speed <360>*1000/(BUILDTIME);
+	turn foot2r to x-axis 0 speed <360>*1000/(BUILDTIME);
+	sleep (BUILDTIME)/2;
+
+	start-script WalkScript();
+
+	sleep 3000;
+	canburrow=TRUE;
+
+	set ARMORED to FALSE;
+}
+
+ResetAim() {
+	sleep 3000;
+	turn body to y-axis 0 speed <360>;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	if ((!burrowed) && (!burrowing)) {
+		turn body to y-axis h speed <360>;
+		wait-for-turn body around y-axis;
+		start-script ResetAim();
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+QueryWeapon1(piecenum) {
+	piecenum=gun;
+}
+
+AimWeapon2() {
+	if (burrowed) emit-sfx 4097 from body;
+	return 0;
+}
+
+QueryWeapon2(piecenum) {
+	piecenum=base;
+}
+
+AimWeapon3() {
+	call-script lua_SetBurrowState(0);
+	return 0;
+}
+
+QueryWeapon3(piecenum) {
+	piecenum=base;
+}
+
+
+SetBurrow(b)
+{
+	if(b)
+		start-script Unburrow();
+	if(!b)
+		start-script Burrow();
+}
+
+Bug(a,b,c,d,e)
+{
+	call-script lua_SetBurrowState(1);
+}
+
+Mine(a,b,c,d,e)
+{
+	call-script lua_SetBurrowState(0);
+}
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+[corruption_const]
+{
+	[stuff]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = -.05 r.1,-1,-.05 r.1;
+			pos = 0, 0, 0;
+			colorMap=1 1 1 1   1 1 1 1   1 1 1 1   1 1 1 1   1 1 1 1   0 0 0 0;
+			size=1;
+			length=4;
+			sizeGrowth=8 r2;
+			ttl=12 r4;
+			frontOffset=1;
+			sideTexture=null;
+			frontTexture=squarehollow;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

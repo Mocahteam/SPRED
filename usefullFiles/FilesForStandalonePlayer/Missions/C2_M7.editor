@@ -7,12 +7,12 @@
 			"z2":536,
 			"x1":1848,
 			"showInGame":true,
-			"id":1,
+			"marker":false,
 			"name":"Zone occupée 1",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":1,
 			"red":0
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":1360,
 			"x1":1296,
 			"showInGame":true,
-			"id":2,
+			"marker":false,
 			"name":"Zone occupée 2",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":2,
 			"red":0
 		},{
 			"type":"Rectangle",
@@ -37,12 +37,12 @@
 			"z2":1888,
 			"x1":1568,
 			"showInGame":true,
-			"id":3,
+			"marker":false,
 			"name":"Zone occupée 3",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":3,
 			"red":0
 		},{
 			"type":"Rectangle",
@@ -52,12 +52,12 @@
 			"z2":1832,
 			"x1":232,
 			"showInGame":true,
-			"id":4,
+			"marker":false,
 			"name":"Zone occupée 4",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":4,
 			"red":0
 		},{
 			"type":"Rectangle",
@@ -67,12 +67,12 @@
 			"z2":856,
 			"x1":280,
 			"showInGame":true,
-			"id":5,
+			"marker":false,
 			"name":"Zone occupée 5",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":5,
 			"red":0
 		},{
 			"type":"Rectangle",
@@ -82,18 +82,18 @@
 			"z2":904,
 			"x1":856,
 			"showInGame":true,
-			"id":6,
+			"marker":false,
 			"name":"Zone occupée 6",
 			"green":0,
-			"shown":true,
 			"alwaysInView":true,
-			"marker":false,
+			"shown":true,
+			"id":6,
 			"red":0
 		}],
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 7\\n \\nLes éclaireurs ont fini par revenir de leur patrouille accompagnés de deux nouveaux POINTEURS. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\\n \\nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"Mission 7\\n \\nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\\n \\nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -239,107 +239,83 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 7\n \nLes éclaireurs ont fini par revenir de leur patrouille accompagnés de deux nouveaux POINTEURS. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\n \nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"Mission 7\n \nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\n \nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
 	},
 	"units":[{
-			"type":"byte",
-			"id":14711,
-			"position":{
-				"y":210.94480895996,
-				"x":2959.6518554688,
-				"z":1002.1044921875
-			},
-			"orientation":-0.12534710764885,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":8672,
-			"position":{
-				"y":182.93571472168,
-				"x":2993.2941894531,
-				"z":1343.0437011719
-			},
-			"orientation":0.022029018029571,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
 			"type":"bit",
-			"id":1442,
+			"id":234,
 			"position":{
 				"y":150.30099487305,
 				"x":2812.3537597656,
 				"z":1418.1474609375
 			},
-			"orientation":-0.0077044731006026,
+			"orientation":0.001463421038352,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5073,
+			"id":7525,
 			"position":{
 				"y":160.68121337891,
 				"x":2862.9270019531,
 				"z":1460.1528320313
 			},
-			"orientation":-0.33075335621834,
+			"orientation":-0.52686840295792,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":10646,
+			"id":15330,
 			"position":{
 				"y":170.74104309082,
 				"x":2925.7583007813,
 				"z":1416.1798095703
 			},
-			"orientation":-0.11209335923195,
+			"orientation":-0.28287661075592,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3955,
+			"id":1225,
 			"position":{
 				"y":175.11929321289,
 				"x":2926.5290527344,
 				"z":1460.3687744141
 			},
-			"orientation":-0.11864646524191,
+			"orientation":-0.36635458469391,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3868,
+			"id":7247,
 			"position":{
 				"y":168.06340026855,
 				"x":2998.4523925781,
 				"z":1400.4364013672
 			},
-			"orientation":0.0051592080853879,
+			"orientation":0.031117994338274,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":10127,
+			"id":7567,
 			"position":{
 				"y":163.44189453125,
 				"x":2921.9187011719,
 				"z":1335.7946777344
 			},
-			"orientation":0.13972954452038,
+			"orientation":0.44510078430176,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11658,
+			"id":1543,
 			"position":{
 				"y":155.78471374512,
 				"x":2882.6662597656,
@@ -351,31 +327,31 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":5805,
+			"id":1894,
 			"position":{
 				"y":149.31391906738,
 				"x":2838.5788574219,
 				"z":1359.6585693359
 			},
-			"orientation":0.1507685482502,
+			"orientation":0.46092543005943,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":9242,
+			"id":2097,
 			"position":{
 				"y":197.60328674316,
 				"x":2892.5454101563,
 				"z":1152.7113037109
 			},
-			"orientation":-0.049336198717356,
+			"orientation":0.043239530175924,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":8955,
+			"id":12502,
 			"position":{
 				"y":196.26533508301,
 				"x":2951.7026367188,
@@ -387,7 +363,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":9993,
+			"id":4970,
 			"position":{
 				"y":205.68885803223,
 				"x":2874.1315917969,
@@ -399,67 +375,67 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":3571,
+			"id":13206,
 			"position":{
 				"y":209.4893951416,
 				"x":2809.6594238281,
 				"z":1117.6871337891
 			},
-			"orientation":0.17531791329384,
+			"orientation":0.14909009635448,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":5883,
+			"id":2672,
 			"position":{
 				"y":212.27005004883,
 				"x":2819.0341796875,
 				"z":1065.1147460938
 			},
-			"orientation":-0.071186408400536,
+			"orientation":-0.097030885517597,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":7016,
+			"id":13101,
 			"position":{
 				"y":206.7281036377,
 				"x":2868.8356933594,
 				"z":1022.8203125
 			},
-			"orientation":0.050937741994858,
+			"orientation":-0.1169995740056,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15679,
+			"id":3735,
 			"position":{
 				"y":98.585502624512,
 				"x":3820,
 				"z":1198
 			},
-			"orientation":0.28653258085251,
+			"orientation":0.54158407449722,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2314,
+			"id":13329,
 			"position":{
 				"y":100.30937194824,
 				"x":3834,
 				"z":1124
 			},
-			"orientation":0.1481765806675,
+			"orientation":0.31668144464493,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":10511,
+			"id":12138,
 			"position":{
 				"y":101.8558807373,
 				"x":3779,
@@ -471,55 +447,55 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":5505,
+			"id":9595,
 			"position":{
 				"y":142.52961730957,
 				"x":3435,
 				"z":991
 			},
-			"orientation":0.092151753604412,
+			"orientation":0.1087853461504,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":9868,
+			"id":10744,
 			"position":{
 				"y":147.23577880859,
 				"x":3392,
 				"z":880
 			},
-			"orientation":0.11074421554804,
+			"orientation":0.15245631337166,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":11011,
+			"id":3154,
 			"position":{
 				"y":146.10781860352,
 				"x":3414,
 				"z":942
 			},
-			"orientation":0.17920209467411,
+			"orientation":0.28529706597328,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":7380,
+			"id":6052,
 			"position":{
 				"y":137.77795410156,
 				"x":3471,
 				"z":951
 			},
-			"orientation":-0.28731948137283,
+			"orientation":-0.66426825523376,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":13547,
+			"id":6325,
 			"position":{
 				"y":204.05380249023,
 				"x":3211,
@@ -531,55 +507,55 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":13755,
+			"id":1997,
 			"position":{
 				"y":198.62272644043,
 				"x":3043,
 				"z":1532
 			},
-			"orientation":-0.96567612886429,
+			"orientation":-1.4333243370056,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":4395,
+			"id":9575,
 			"position":{
 				"y":237.75605773926,
 				"x":3052,
 				"z":806
 			},
-			"orientation":0.23877790570259,
+			"orientation":0.27811214327812,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11355,
+			"id":15789,
 			"position":{
 				"y":232.42492675781,
 				"x":2959,
 				"z":944
 			},
-			"orientation":1.4486060142517,
+			"orientation":1.4771684408188,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":1319,
+			"id":5103,
 			"position":{
 				"y":232.2191619873,
 				"x":3007,
 				"z":888
 			},
-			"orientation":-0.13717140257359,
+			"orientation":-0.24991698563099,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":6204,
+			"id":10395,
 			"position":{
 				"y":230.24145507813,
 				"x":3123,
@@ -591,31 +567,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":6423,
+			"id":7636,
 			"position":{
 				"y":172.15776062012,
 				"x":3095,
 				"z":1481
 			},
-			"orientation":0.074742414057255,
+			"orientation":0.16761161386967,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":9132,
+			"id":7515,
 			"position":{
 				"y":210.81436157227,
 				"x":3556,
 				"z":678
 			},
-			"orientation":1.3066164255142,
+			"orientation":1.344132900238,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":6693,
+			"id":5059,
 			"position":{
 				"y":233.23593139648,
 				"x":3538,
@@ -627,19 +603,19 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":8862,
+			"id":8854,
 			"position":{
 				"y":238.2780456543,
 				"x":3633,
 				"z":641
 			},
-			"orientation":0.74022495746613,
+			"orientation":1.3534047603607,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":3708,
+			"id":16106,
 			"position":{
 				"y":180.296875,
 				"x":299,
@@ -651,7 +627,7 @@
 			"team":2
 		},{
 			"type":"socket",
-			"id":2019,
+			"id":10568,
 			"position":{
 				"y":102.05388641357,
 				"x":3784,
@@ -663,7 +639,7 @@
 			"team":1
 		},{
 			"type":"socket",
-			"id":4578,
+			"id":9125,
 			"position":{
 				"y":142.2734375,
 				"x":3493,
@@ -675,7 +651,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":4808,
+			"id":1567,
 			"position":{
 				"y":160.53125,
 				"x":1992,
@@ -687,7 +663,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11511,
+			"id":6484,
 			"position":{
 				"y":101.9140625,
 				"x":1633,
@@ -699,7 +675,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6854,
+			"id":11125,
 			"position":{
 				"y":101.9140625,
 				"x":1621,
@@ -711,7 +687,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9409,
+			"id":13530,
 			"position":{
 				"y":101.9140625,
 				"x":1677,
@@ -723,7 +699,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11104,
+			"id":2966,
 			"position":{
 				"y":101.91215515137,
 				"x":1685.0150146484,
@@ -735,7 +711,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":10848,
+			"id":12149,
 			"position":{
 				"y":130.7421875,
 				"x":975,
@@ -747,7 +723,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1833,
+			"id":9929,
 			"position":{
 				"y":130.7421875,
 				"x":930,
@@ -759,7 +735,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9731,
+			"id":5292,
 			"position":{
 				"y":166.27697753906,
 				"x":307.94744873047,
@@ -771,19 +747,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":7163,
+			"id":11532,
 			"position":{
 				"y":166.33201599121,
 				"x":349.45724487305,
 				"z":1683.1232910156
 			},
-			"orientation":-0.022997342050076,
+			"orientation":1.2383617104206e-005,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":12510,
+			"id":12926,
 			"position":{
 				"y":166.296875,
 				"x":372,
@@ -795,7 +771,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":161,
+			"id":14396,
 			"position":{
 				"y":189.34906005859,
 				"x":418,
@@ -806,68 +782,32 @@
 			"hp":100,
 			"team":2
 		},{
-			"type":"byte",
-			"id":12712,
-			"position":{
-				"y":203.35562133789,
-				"x":376,
-				"z":792
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},{
-			"type":"byte",
-			"id":14298,
-			"position":{
-				"y":163,
-				"x":1363,
-				"z":1292
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},{
-			"type":"byte",
-			"id":6246,
-			"position":{
-				"y":174.53125,
-				"x":1937,
-				"z":460
-			},
-			"orientation":0,
-			"autoHeal":"global",
-			"hp":100,
-			"team":2
-		},{
 			"type":"assembler",
-			"id":12141,
+			"id":2136,
 			"position":{
 				"y":121.7388381958,
 				"x":3563.4130859375,
 				"z":1034.9774169922
 			},
-			"orientation":-0.20774427056313,
+			"orientation":-0.29909515380859,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1114,
+			"id":9667,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-0.97714579105377,
+			"orientation":-0.88817489147186,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":9931,
+			"id":15974,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -879,31 +819,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":11622,
+			"id":14108,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4221556186676,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":2364,
+			"id":14579,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-2.0187187194824,
+			"orientation":-2.1260974407196,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13428,
+			"id":2859,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -915,7 +855,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":11607,
+			"id":1353,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -927,7 +867,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":1118,
+			"id":7895,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -939,43 +879,43 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1029,
+			"id":2548,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4166874885559,
+			"orientation":1.3703888654709,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":9306,
+			"id":10769,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.1715627908707,
+			"orientation":1.0903928279877,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":7907,
+			"id":16246,
 			"position":{
 				"y":166.51045227051,
 				"x":3034.5678710938,
 				"z":1206.5970458984
 			},
-			"orientation":-0.97752404212952,
+			"orientation":-0.89928585290909,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":12990,
+			"id":1550,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -987,7 +927,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":3140,
+			"id":8073,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -999,7 +939,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":13182,
+			"id":1434,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -1009,6 +949,366 @@
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
+		},{
+			"type":"bit",
+			"id":14947,
+			"position":{
+				"y":160.53125,
+				"x":1946,
+				"z":425
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":15889,
+			"position":{
+				"y":160.53125,
+				"x":1914,
+				"z":449
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":5301,
+			"position":{
+				"y":160.53125,
+				"x":1959,
+				"z":470
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":15191,
+			"position":{
+				"y":160.53125,
+				"x":1917,
+				"z":484
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":4042,
+			"position":{
+				"y":160.55612182617,
+				"x":1957,
+				"z":503
+			},
+			"orientation":-6.1642508626392e-006,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":7353,
+			"position":{
+				"y":160.62744140625,
+				"x":2001,
+				"z":484
+			},
+			"orientation":-0.00024035814567469,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":4706,
+			"position":{
+				"y":160.53125,
+				"x":1905,
+				"z":413
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":2738,
+			"position":{
+				"y":160.55612182617,
+				"x":1879,
+				"z":471
+			},
+			"orientation":5.9490415878827e-005,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":13705,
+			"position":{
+				"y":101.9140625,
+				"x":1650,
+				"z":1819
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":13840,
+			"position":{
+				"y":101.9140625,
+				"x":1647,
+				"z":1868
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":2500,
+			"position":{
+				"y":101.91734313965,
+				"x":1599,
+				"z":1801
+			},
+			"orientation":-3.9627120713703e-006,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":13392,
+			"position":{
+				"y":101.79254150391,
+				"x":1667,
+				"z":1768
+			},
+			"orientation":-3.087655568379e-005,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":6990,
+			"position":{
+				"y":149,
+				"x":1346,
+				"z":1276
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":7024,
+			"position":{
+				"y":149,
+				"x":1390,
+				"z":1278
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":2323,
+			"position":{
+				"y":149,
+				"x":1389,
+				"z":1326
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":9974,
+			"position":{
+				"y":149,
+				"x":1339,
+				"z":1330
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":396,
+			"position":{
+				"y":149,
+				"x":1370,
+				"z":1242
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":9958,
+			"position":{
+				"y":130.7421875,
+				"x":904,
+				"z":779
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":10041,
+			"position":{
+				"y":130.7421875,
+				"x":945,
+				"z":773
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":3706,
+			"position":{
+				"y":130.7421875,
+				"x":930,
+				"z":816
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":15840,
+			"position":{
+				"y":130.7421875,
+				"x":971,
+				"z":850
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":4744,
+			"position":{
+				"y":130.7421875,
+				"x":890,
+				"z":831
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":13811,
+			"position":{
+				"y":130.7421875,
+				"x":989,
+				"z":767
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":10235,
+			"position":{
+				"y":189.18437194824,
+				"x":430,
+				"z":801
+			},
+			"orientation":0.00015379830438178,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":4646,
+			"position":{
+				"y":189.35562133789,
+				"x":392,
+				"z":815
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":11212,
+			"position":{
+				"y":189.35562133789,
+				"x":379,
+				"z":772
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":10684,
+			"position":{
+				"y":189.35562133789,
+				"x":375,
+				"z":725
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":12190,
+			"position":{
+				"y":189.35562133789,
+				"x":331,
+				"z":739
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":14696,
+			"position":{
+				"y":189.35562133789,
+				"x":332,
+				"z":781
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":8746,
+			"position":{
+				"y":189.35562133789,
+				"x":343,
+				"z":826
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
 		}],
 	"allyteams":{
 		"1":[0],
@@ -1022,7 +1322,35 @@
 		"9":[],
 		"0":[1]
 	},
-	"groups":[],
+	"groups":[{
+			"id":1,
+			"name":"UnitsInZone1",
+			"units":[1567,2738,4042,4706,5301,7353,14947,15191,15889]
+		},{
+			"id":2,
+			"name":"UnitsInZone2",
+			"units":[396,2323,6990,7024,9974]
+		},{
+			"id":3,
+			"name":"UnitsInZone3",
+			"units":[2500,2966,6484,11125,13392,13530,13705,13840]
+		},{
+			"id":4,
+			"name":"UnitsInZone4",
+			"units":[5292,11532,12926,16106]
+		},{
+			"id":5,
+			"name":"UnitsInZone5",
+			"units":[4646,8746,10235,10684,11212,12190,14396,14696]
+		},{
+			"id":6,
+			"name":"UnitsInZone6",
+			"units":[3706,4744,9929,9958,10041,12149,13811,15840]
+		},{
+			"id":7,
+			"name":"Test",
+			"units":[234,1225,1543,1894,7525,7567,15330]
+		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
 	"teams":{
@@ -1143,7 +1471,7 @@
 			"conditionTotal":1,
 			"name":"Initialisation",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":2,
 			"conditions":[{
 					"id":13,
 					"type":"start",
@@ -1151,18 +1479,6 @@
 					"params":[]
 				}],
 			"actions":[{
-					"id":40,
-					"type":"order",
-					"name":"FireState",
-					"params":{
-						"command":45,
-						"unitset":{
-							"value":0,
-							"type":"team"
-						},
-						"parameters":["0"]
-					}
-				},{
 					"id":44,
 					"type":"order",
 					"name":"AllyMoveState",
@@ -1175,7 +1491,7 @@
 						"parameters":["0"]
 					}
 				},{
-					"id":47,
+					"id":69,
 					"type":"order",
 					"name":"EnemyMoveState",
 					"params":{
@@ -1184,272 +1500,340 @@
 							"value":2,
 							"type":"team"
 						},
-						"parameters":["0"]
+						"parameters":["1"]
 					}
 				}],
 			"id":12
 		},{
 			"comment":"",
-			"trigger":"BlueDie",
+			"trigger":"",
 			"conditionTotal":1,
-			"name":"Defeat",
+			"name":"EnableZone1",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
-					"id":11,
-					"type":"dead",
-					"name":"BlueDie",
+					"id":34,
+					"type":"killed",
+					"name":"KilledByPointer",
 					"params":{
 						"number":{
-							"comparison":"all"
+							"number":"1",
+							"comparison":"atleast"
 						},
 						"unitset":{
+							"value":1,
+							"type":"group"
+						},
+						"attacker":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":56,
+					"type":"orderTarget",
+					"name":"Revenge",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":1,
+							"type":"group"
+						},
+						"target":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				},{
+					"id":62,
+					"type":"messageUnit",
+					"name":"Action62",
+					"params":{
+						"message":["Event Zone 1 déclenché"],
+						"unitset":{
+							"value":16246,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":20
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"EnableZone2",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":35,
+					"type":"killed",
+					"name":"KilledByPointer",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":2,
+							"type":"group"
+						},
+						"attacker":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":57,
+					"type":"orderTarget",
+					"name":"Revenge",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":2,
+							"type":"group"
+						},
+						"target":{
+							"value":0,
+							"type":"team"
+						}
+					}
+				},{
+					"id":63,
+					"type":"messageUnit",
+					"name":"Action62",
+					"params":{
+						"message":["Event Zone 2 déclenché"],
+						"unitset":{
+							"value":16246,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":21
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"EnableZone3",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":36,
+					"type":"killed",
+					"name":"KilledByPointer",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":3,
+							"type":"group"
+						},
+						"attacker":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":58,
+					"type":"orderTarget",
+					"name":"Revenge",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":3,
+							"type":"group"
+						},
+						"target":{
+							"value":7,
+							"type":"group"
+						}
+					}
+				},{
+					"id":64,
+					"type":"messageUnit",
+					"name":"Action62",
+					"params":{
+						"message":["Event Zone 3 déclenché"],
+						"unitset":{
+							"value":16246,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":22
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"EnableZone4",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":37,
+					"type":"killed",
+					"name":"KilledByPointer",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":4,
+							"type":"group"
+						},
+						"attacker":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":59,
+					"type":"orderTarget",
+					"name":"Revenge",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":4,
+							"type":"group"
+						},
+						"target":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				},{
+					"id":66,
+					"type":"messageUnit",
+					"name":"Action62",
+					"params":{
+						"message":["Event Zone 4 déclenché"],
+						"unitset":{
+							"value":16246,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":23
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"EnableZone5",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":38,
+					"type":"killed",
+					"name":"KilledByPointer",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":5,
+							"type":"group"
+						},
+						"attacker":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				}],
+			"actions":[{
+					"id":60,
+					"type":"orderTarget",
+					"name":"Revenge",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":5,
+							"type":"group"
+						},
+						"target":{
+							"value":16246,
+							"type":"unit"
+						}
+					}
+				},{
+					"id":67,
+					"type":"messageUnit",
+					"name":"Action62",
+					"params":{
+						"message":["Event Zone 5 déclenché"],
+						"unitset":{
+							"value":16246,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":24
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"EnableZone6",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":39,
+					"type":"killed",
+					"name":"KilledByPointer",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":6,
+							"type":"group"
+						},
+						"attacker":{
 							"value":0,
 							"type":"team"
 						}
 					}
 				}],
 			"actions":[{
-					"id":33,
-					"type":"lose",
-					"name":"LoseGame",
+					"id":61,
+					"type":"orderTarget",
+					"name":"Revenge",
 					"params":{
-						"team":0,
-						"outputState":"lost"
-					}
-				}],
-			"id":10
-		},{
-			"comment":"",
-			"trigger":"RedDie",
-			"conditionTotal":1,
-			"name":"Victory",
-			"repetition":false,
-			"actionTotal":2,
-			"conditions":[{
-					"id":26,
-					"type":"dead",
-					"name":"RedDie",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
+						"command":20,
 						"unitset":{
-							"value":2,
-							"type":"team"
+							"value":6,
+							"type":"group"
+						},
+						"target":{
+							"value":16246,
+							"type":"unit"
 						}
 					}
-				}],
-			"actions":[{
-					"id":54,
-					"type":"messageGlobal",
-					"name":"Conclusion",
-					"params":{
-						"boolean":"true",
-						"message":["Félicitation !!!\\n \\nVous avez réussi à reprendre la région de Sili. Bien qu'elle soit dévastée suite aux raids de vos ennemis, l'espoir renaît enfin.\\n \\nBeaucoup de travail reste à fournir pour reconstruire votre foyer et vos compétences en programmation seront un atout certain pour la communauté. Mais ceci est une autre histoire...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer"]
-					}
 				},{
-					"id":43,
-					"type":"win",
-					"name":"WinGame",
+					"id":68,
+					"type":"messageUnit",
+					"name":"Action62",
 					"params":{
-						"team":0,
-						"outputState":"win"
-					}
-				}],
-			"id":13
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone1",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":27,
-					"type":"zone",
-					"name":"NoUnitInZone1",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
+						"message":["Event Zone 6 déclenché"],
 						"unitset":{
-							"value":2,
-							"type":"team"
+							"value":16246,
+							"type":"unit"
 						},
-						"zone":1
+						"time":"4"
 					}
 				}],
-			"actions":[{
-					"id":48,
-					"type":"hideZone",
-					"name":"HideZone1",
-					"params":{
-						"zone":1
-					}
-				}],
-			"id":14
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone2",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":28,
-					"type":"zone",
-					"name":"NoUnitInZone2",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":2
-					}
-				}],
-			"actions":[{
-					"id":49,
-					"type":"hideZone",
-					"name":"HideZone2",
-					"params":{
-						"zone":2
-					}
-				}],
-			"id":15
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone3",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":29,
-					"type":"zone",
-					"name":"NoUnitInZone3",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":3
-					}
-				}],
-			"actions":[{
-					"id":50,
-					"type":"hideZone",
-					"name":"HideZone3",
-					"params":{
-						"zone":3
-					}
-				}],
-			"id":16
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone4",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":30,
-					"type":"zone",
-					"name":"NoUnitInZone4",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":4
-					}
-				}],
-			"actions":[{
-					"id":51,
-					"type":"hideZone",
-					"name":"HideZone4",
-					"params":{
-						"zone":4
-					}
-				}],
-			"id":17
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone5",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":32,
-					"type":"zone",
-					"name":"NoUnitInZone5",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":5
-					}
-				}],
-			"actions":[{
-					"id":52,
-					"type":"hideZone",
-					"name":"HideZone5",
-					"params":{
-						"zone":5
-					}
-				}],
-			"id":18
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"HideZone6",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":33,
-					"type":"zone",
-					"name":"NoUnitInZone6",
-					"params":{
-						"number":{
-							"number":"0",
-							"comparison":"exactly"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":6
-					}
-				}],
-			"actions":[{
-					"id":53,
-					"type":"hideZone",
-					"name":"HideZone6",
-					"params":{
-						"zone":6
-					}
-				}],
-			"id":19
+			"id":25
 		}],
 	"listOfCommands":{
 		"0":"Stop",

@@ -1,0 +1,76 @@
+[bit]
+{
+	bit=1;
+	bug=1;
+	bugOLD=1;
+	exploit=1;
+	packet=1;
+	fairy=1;
+}
+[pointer]
+{
+	pointer=1;
+	dos=1;
+	marisa=1;
+}
+[flow]
+{
+	flow=1;
+}
+[byte]
+{
+	byte=1;
+	connection=1;
+	reimu=1;
+}
+[worm]
+{
+	worm=1;
+	wormOLD=1;
+}
+[assembler]
+{
+	assembler=1;
+	trojan=1;
+	trojanOLD=1;
+	gateway=1;
+	alice=1;
+}
+[building]
+{
+	kernel=1;
+	socket=1;
+	hole=1;
+	window=1;
+	terminal=1;
+	obelisk=1;
+	holeOLD=1;
+	windowOLD=1;
+	carrier=1;
+	port=1;
+	firewall=1;
+	thbase=1;
+	thminifac=1;
+	hand=1;
+}
+[mine]
+{
+	logic_bomb=1;
+	mineblaster=1;
+}
+[virus]
+{
+	virus=1;
+}
+[rock]
+{
+	rock=1;
+}
+[paper]
+{
+	paper=1;
+}
+[scissors]
+{
+	scissors=1;
+}

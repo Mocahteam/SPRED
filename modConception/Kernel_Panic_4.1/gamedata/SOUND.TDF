@@ -1,0 +1,7 @@
+[COMPUTER]		
+	{  
+	select1=select;
+	arrived1=commandgiven;
+	ok1=commandgiven;
+	}
+

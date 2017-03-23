@@ -435,6 +435,7 @@ local function getGroupsOfUnit(externalId, testOnExternalsOnly, groupToCheck)
       table.insert(groups,indexGroup)
     end
   end
+  table.insert(groups, "unit_"..externalId)
   return groups
 end
  
@@ -610,11 +611,16 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       --EchoDebug("orderPosition (posFound,unit,command) : "..json.encode({posFound,unit,act.params.command}),5)
       Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
     elseif(act.type=="orderTarget")then
-      local u=act.params.target
-      local spUnit=ctx.armySpring[u]
-      --Spring.GiveOrderToUnit(unit, act.params.command,{spUnit}, {})
-      --Spring.GiveOrderToUnit(unit, CMD.FIRE_STATE, {0}, {})
-      Spring.GiveOrderToUnit(unit,act.params.command, {spUnit}, {})   
+	  targetUnits = {}
+	  if act.params.target.type == "unit" then
+		targetUnits = {act.params.target.value}
+	  else
+		targetUnits = ctx.groupOfUnits[act.params.target.type.."_"..tostring(act.params.target.value)]
+	  end
+	  --EchoDebug("orderTarget (unit,command,targets) : "..json.encode({unit,act.params.command,targetUnits}),5)
+	  for k, v in pairs(targetUnits) do
+		Spring.GiveOrderToUnit(unit,act.params.command, {ctx.armySpring[v]}, {"shift"})   
+	  end
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
       if Spring.ValidUnitID(unit) then
         --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
@@ -644,7 +650,6 @@ local function createUnitAtPosition(act,position)
   -- in order to keep to track of all created units
   ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1 
   local gpIndex="action_"..act.id
-  ctx.groupOfUnits[gpIndex]={} -- Implementation choice : only the last unit action-created is stored in the action-group, hence the deletion.
   local teamIndex="team_"..tostring(act.params.team)
   registerUnit(springId,externalId)
   addUnitToGroups(externalId,{gpIndex,teamIndex}) 
@@ -746,6 +751,7 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="setBooleanVariable")then
     ctx.variables[act.params.variable]=(act.params.boolean=="true")
   elseif(act.type=="createUnits") then
+	ctx.groupOfUnits["action_"..act.id]={} -- Implementation choice : we reset the action-group associated to the action-created to store only units created by the last call of this action.
     for var=1,act.params.number do
       local position=getARandomPositionInZone(act.params.zone)
       createUnitAtPosition(act,position)
@@ -1218,9 +1224,11 @@ local function UpdateConditionsTruthfulness (frameNumber)
       local killerGroupTofind
       local targetGroupTofind
       if(object=="kill")then   
+		--EchoDebug("object->kill",2)
         killerGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)
         targetGroupTofind=c.params.target.type.."_"..tostring(c.params.target.value)
       elseif (object=="killed") then
+		--EchoDebug("object->killed",2)
         killerGroupTofind=c.params.attacker.type.."_"..tostring(c.params.attacker.value)
         targetGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)     
       end 
@@ -1231,18 +1239,19 @@ local function UpdateConditionsTruthfulness (frameNumber)
         local killedUnit_groups = getGroupsOfUnit(killedUnit, false, ctx.groupOfUndeletedUnits)--
         --EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups), 2)
         for g,gpname_killer in pairs(killerUnit_groups) do
+		  --EchoDebug("Check killer : "..g.." "..gpname_killer.." == "..killerGroupTofind, 2)
           if(gpname_killer == killerGroupTofind) then
             for g,gpname_killed in pairs(killedUnit_groups) do
+			  --EchoDebug("Check killed : "..g.." "..gpname_killed.." == "..targetGroupTofind, 2)
               if(gpname_killed == targetGroupTofind) then
                 count = count + 1     
                 --EchoDebug("finally !", 2)   
                 local unitToStore
                 if(object=="killed") then
-                  local unitToStore=killedUnit
+                  unitToStore=killedUnit
                 else
                   unitToStore=killerUnit
                 end
-                local unitToStore=killerUnit
                 addUnitToGroups(unitToStore,{"condition_"..c.id})        
               end
             end
@@ -1251,6 +1260,9 @@ local function UpdateConditionsTruthfulness (frameNumber)
       end
       --EchoDebug("final count : "..tostring(count),0)    
       ctx.conditions[idCond]["currentlyValid"]= compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
+	  if ctx.conditions[idCond]["currentlyValid"] then
+		--EchoDebug("Condition validated",0)
+	  end
 	  
 	elseif(object=="other")then  
       -- Time related conditions [START]

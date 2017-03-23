@@ -1,0 +1,30 @@
+[corruption_builder]
+{
+	[circle]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			Texture=circle;
+			colorMap=.5 0 0 1   .5 0 0 1   0 0 0 0;
+			airdrag=1;
+			particleLife=32;
+			particleLifeSpread=8;
+			numParticles=0r2;
+			particleSpeed=5;
+			particleSpeedSpread=2;
+			particleSize=8;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

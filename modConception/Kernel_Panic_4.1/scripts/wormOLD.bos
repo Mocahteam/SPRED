@@ -1,0 +1,208 @@
+piece base, body, bodysupport, emitter, jawt, jawb, jawl, jawr, seg0, seg1, seg2, realaimer;
+
+#include "springdefs.h"
+#define SIG_AIM 1
+
+static-var burrowed, normalspeed, wantburrow, eating;
+
+Effect() {
+	while (1) {
+		if (!get CLOAKED) emit-sfx 1026 from base;
+		sleep 200;
+	}
+}
+
+Breathe() {
+	set-signal-mask SIG_AIM;
+	while(1) {
+		turn jawt to x-axis <-15> speed <5>;
+		turn jawb to x-axis <15> speed <5>;
+		sleep 100;
+		turn jawl to y-axis <15> speed <5>;
+		turn jawr to y-axis <-15> speed <5>;
+		sleep 1100;
+		turn jawt to x-axis <-10> speed <5>;
+		turn jawb to x-axis <10> speed <5>;
+		sleep 100;
+		turn jawl to y-axis <10> speed <5>;
+		turn jawr to y-axis <-10> speed <5>;
+		sleep 1100;
+	}
+}
+
+Burrow() {
+	set-signal-mask 0;
+	burrowed=1;
+	turn bodysupport to x-axis <-90> speed <135>;
+	move bodysupport to y-axis [-36] speed [96];
+	move body to z-axis [-32] speed [48];
+	wait-for-turn bodysupport around x-axis;
+	set MAX_SPEED to normalspeed/3;
+	burrowed=2;
+	set CLOAKED to 1;
+	hide seg1;
+	hide seg2;
+}
+
+Unburrow() {
+	set CLOAKED to 0;
+	burrowed=0;
+	show seg1;
+	start-script Breathe();
+	turn bodysupport to y-axis 0 now;
+	turn bodysupport to x-axis <-90> now;
+	turn bodysupport to x-axis <-15> speed <135>;
+	move bodysupport to y-axis [-12] speed [96];
+	move body to z-axis 0 speed [48];
+	//wait-for-turn bodysupport around x-axis;
+	sleep 700;
+	set MAX_SPEED to normalspeed;
+}
+
+ResetAim() {
+	sleep 3000;
+	set CLOAKED to 1;
+	if (!wantburrow) call-script Unburrow();
+}
+
+DoBursts() {
+	while(get BUILD_PERCENT_LEFT) {
+		emit-sfx 1025 from base;
+		sleep 300*rand(1,20);
+	}
+}
+
+Create() {
+	normalspeed=get MAX_SPEED;
+	set ARMORED to 1;
+	set ACTIVATION to 1;
+	turn bodysupport to y-axis 0 now;
+	turn body to x-axis <-90> now;
+	start-script DoBursts();
+	while(5 < get BUILD_PERCENT_LEFT) {
+		move body to y-axis ([-64]/100*get BUILD_PERCENT_LEFT) now;
+		emit-sfx 1024 from base;
+		sleep 30;
+	}
+	
+	turn bodysupport to z-axis <20> now;
+	move body to y-axis [90] speed [256];
+	turn jawt to x-axis <-60> speed <360>;
+	turn jawb to x-axis <60> speed <360>;
+	turn jawl to y-axis <60> speed <360>;
+	turn jawr to y-axis <-60> speed <360>;
+	turn bodysupport to z-axis <-20> speed <16>;
+	sleep 2000;
+	move body to y-axis [0] speed [192];
+	turn jawt to x-axis <-10> speed <360>;
+	turn jawb to x-axis <10> speed <360>;
+	turn jawl to y-axis <10> speed <360>;
+	turn jawr to y-axis <-10> speed <360>;
+	sleep 500;
+	turn bodysupport to z-axis 0 now;
+	turn body to x-axis <0> now;
+	hide seg2;
+	call-script Unburrow();
+	set ARMORED to 0;
+	start-script Effect();
+	
+/*	move bodysupport to y-axis [-12] now;
+	turn bodysupport to x-axis <-15> now;
+	turn jawt to x-axis <-10> now;
+	turn jawb to x-axis <10> now;
+	turn jawl to y-axis <10> now;
+	turn jawr to y-axis <-10> now;
+	start-script Breathe();*/
+}
+
+AimWeapon1(h,p) {
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	if (burrowed<2) {
+		if (burrowed==0) start-script Burrow();
+		start-script ResetAim();
+		return 0;
+	}
+	if (!eating) {
+		turn bodysupport to y-axis h now;
+		turn bodysupport to x-axis <-20> - p now;
+	}
+	start-script ResetAim();
+	return 1;
+}
+
+QueryWeapon1(piecenum) {
+	piecenum=realaimer;
+}
+
+AimFromWeapon1(piecenum) {
+	piecenum=base;
+}
+
+Damage(n) {
+	var i;
+	for (i=0; i<n; ++i) {
+		emit-sfx 4097 from emitter;
+		sleep 30;
+	}
+}
+
+ShowSeg1() {
+	show seg1;
+}
+
+ShowSeg2() {
+	show seg2;
+}
+
+FireWeapon1() {
+	set CLOAKED to 0;
+	eating=1;
+	turn jawt to x-axis <-60> now;
+	turn jawb to x-axis <60> now;
+	turn jawl to y-axis <60> now;
+	turn jawr to y-axis <-60> now;
+	move body to z-axis [128] speed [384];
+	sleep 60;
+	start-script ShowSeg1();
+	start-script Damage(16);
+	sleep 150;
+	start-script ShowSeg2();
+	turn jawt to x-axis 0 speed <240>;
+	turn jawb to x-axis 0 speed <240>;
+	turn jawl to y-axis 0 speed <240>;
+	turn jawr to y-axis 0 speed <240>;
+	sleep 500;
+	move body to z-axis [-32] speed [256];
+	sleep 250;
+	hide seg2;
+	sleep 150;
+	hide seg1;
+	wait-for-move body along z-axis;
+	eating=0;
+}
+
+AimWeapon2() {
+	return 0;
+}
+
+/*
+Activate() {
+	wantburrow=0;
+	start-script ResetAim();
+}
+
+Deactivate() {
+	wantburrow=1;
+	if (burrowed==0) start-script Burrow();
+}
+*/
+
+SetBurrow(b)
+{
+	wantburrow= !b;
+	if(b)
+		start-script ResetAim();
+	if((!b) && (!burrowed))
+		start-script Burrow();
+}

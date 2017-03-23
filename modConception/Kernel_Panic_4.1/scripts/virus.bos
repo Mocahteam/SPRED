@@ -1,0 +1,48 @@
+piece base, body, turret, gun0, gun1;
+#include "springdefs.h"
+
+#define SIG_AIM 1
+
+static-var gun;
+
+Create() {
+//	set ARMORED to 1;
+	sleep 1000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	explode body type SHATTER;
+	explode turret type FALL;
+	hide body;
+	hide turret;
+}
+
+HitByWeaponId(z,x,id,d) {
+	if(id==538) return 200; //takes double damage from fire
+	if(id==234) return 0; //immune against virus bomb
+	return 100;
+}
+
+AimFromWeapon1(p) {
+	p=turret;
+}
+
+QueryWeapon1(p) {
+	if(gun) p=gun0;
+	else p=gun1;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	turn turret to y-axis h speed <480>;
+	turn turret to x-axis 0-p speed <240>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn turret around x-axis;
+	return 1;
+}
+
+Shot1(zero) {
+	gun = !gun;
+}

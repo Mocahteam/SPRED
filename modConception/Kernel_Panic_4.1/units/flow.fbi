@@ -1,0 +1,83 @@
+[UNITINFO]
+{
+	Name=Flow;
+	Unitname=flow;
+	Description=Airborne assault unit, moves faster as you claim more territory;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=120;
+	BuildTime=1400;
+	//mass = 100000;
+	icontype=bit;
+	Category=UNIT TARGET NOTFACTORY VTOL;
+	FootprintX=2;
+	FootprintZ=2;
+	MaxDamage=1000;
+	CollisionSphereScale=1;
+	AutoHeal=30;
+	//IdleTime=100;
+	ObjectName=network_medium.s3o;
+	buildpic=network_medium.png;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+
+	// Movement
+	canFly=1;
+	HoverAttack=1;
+	AirHoverFactor=0;
+	AirStrafe=0;
+	cruiseAlt=140;
+	BrakeRate=.9;
+	Acceleration=.3;
+	CanMove=1;
+	MaxVelocity=1;
+	TurnRate=1280;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=512;
+
+	// Weapons
+	Weapon1=FlowMissile;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+//	Corpse=badblock;
+	NoChaseCategory=NUKE;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+		explosiongenerator1=custom:oldskool_shot2;
+	}
+}

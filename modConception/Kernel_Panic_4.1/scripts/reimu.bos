@@ -1,0 +1,138 @@
+piece base, lower, upper, head, legl, legr, arml, armr, gp, gp1, gp2, ballrot, ball, ballgp;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+static-var moving, walking;
+
+#define WALK_LEG_FORWARD <-30>
+#define WALK_LEG_BACK <30>
+#define WALK_BOB_LOW [-1.2]
+#define WALK_BOB_HIGH [0]
+#define WALK_ARM_FORWARD <-30>
+#define WALK_ARM_BACK <30>
+
+#define MOVE_SPEED [2.2]
+#define MOVE_SPEED_ATTACKING [1.2]
+
+Walk() {
+	set-signal-mask 0;
+	if (walking) return 0;
+	walking=1;
+	while(moving) {
+		turn legl to x-axis WALK_LEG_FORWARD now;
+		turn legr to x-axis WALK_LEG_BACK now;
+		turn arml to x-axis WALK_ARM_BACK now;
+		turn armr to x-axis WALK_ARM_FORWARD now;
+		move lower to y-axis WALK_BOB_LOW now;
+		sleep 250;
+		turn legl to x-axis 0 now;
+		turn legr to x-axis 0 now;
+		turn arml to x-axis 0 now;
+		turn armr to x-axis 0 now;
+		move lower to y-axis WALK_BOB_HIGH now;
+		sleep 250;
+		turn legl to x-axis WALK_LEG_BACK now;
+		turn legr to x-axis WALK_LEG_FORWARD now;
+		turn arml to x-axis WALK_ARM_FORWARD now;
+		turn armr to x-axis WALK_ARM_BACK now;
+		move lower to y-axis WALK_BOB_LOW now;
+		sleep 250;
+		turn legl to x-axis 0 now;
+		turn legr to x-axis 0 now;
+		turn arml to x-axis 0 now;
+		turn armr to x-axis 0 now;
+		move lower to y-axis WALK_BOB_HIGH now;
+		sleep 250;
+	}
+	walking=0;
+}
+
+StartMoving() {
+	moving=1;
+	start-script Walk();
+}
+
+StopMoving() {
+	moving=0;
+}
+
+static-var shotcount;
+
+Create() {
+	set ARMORED to 1;
+	hide upper;
+	hide lower;
+	hide head;
+	hide arml;
+	hide armr;
+	hide legl;
+	hide legr;
+	while(get BUILD_PERCENT_LEFT) sleep 30;
+	show upper;
+	show lower;
+	show head;
+	show arml;
+	show armr;
+	show legl;
+	show legr;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Shot1(zero) {
+	var i;
+	for (i=0;i<5;++i) {
+		move gp1 to x-axis [8] * i now;
+		turn gp1 to y-axis <-5> - <4>*i now;
+		emit-sfx 2048 from gp1;
+		move gp2 to x-axis [-8] * i now;
+		turn gp2 to y-axis <5> + <4>*i now;
+		emit-sfx 2048 from gp2;
+	}
+	/*turn gp1 to y-axis <-5> - (<4>*shotcount) now;
+	emit-sfx 2048 from gp1;
+	turn gp1 to y-axis <-45> + (<4>*shotcount) now;
+	emit-sfx 2048 from gp1;
+	turn gp2 to y-axis <5> + (<4>*shotcount) now;
+	emit-sfx 2048 from gp2;
+	turn gp2 to y-axis <45> - (<4>*shotcount) now;
+	emit-sfx 2048 from gp2;
+	turn ballgp to y-axis <-10> now;
+	emit-sfx 2048 from ballgp;
+	turn ballgp to y-axis <10> now;
+	emit-sfx 2048 from ballgp;
+	++shotcount;
+	if (shotcount > 10) shotcount=0;*/
+}
+
+CancelAim() {
+	sleep 1000;
+	turn lower to y-axis 0 now;
+	set MAX_SPEED to MOVE_SPEED;
+	//signal SIG_Aim;
+}
+
+AimFromWeapon1(p) {
+	p=head;
+}
+
+QueryWeapon1(p) {
+	p=gp;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	set MAX_SPEED to MOVE_SPEED_ATTACKING;
+	start-script CancelAim();
+	if (!moving) {
+		set HEADING to h + get HEADING;
+		turn lower to y-axis 0 now;
+	}
+	else turn lower to y-axis h now;
+	turn gp1 to x-axis 0 - p now;
+	turn gp2 to x-axis 0 - p now;
+	return 1;
+}

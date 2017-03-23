@@ -1,0 +1,158 @@
+[icontypes]
+{
+	[default]
+	{
+		// Units without icons should get this one, but apparently no
+		bitmap=icons/trinver.tga;// Image to use
+		size=1;// Multiplier for icon size
+		radiusadjust=1;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon	
+	}
+	[bit]
+	{
+		bitmap=icons/round.tga;// Image to use
+		size=1;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon		
+	}
+	[byte]
+	{
+		bitmap=icons/losange.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[pointer]
+	{
+		bitmap=icons/foursquare.tga;// Image to use
+		size=1.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[assembler]
+	{
+		bitmap=icons/crosscircle.tga;// Image to use
+		size=2;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[socket]
+	{
+		bitmap=icons/square.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[kernel]
+	{
+		bitmap=icons/cross.tga;// Image to use
+		size=3;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[logic_bomb]
+	{
+		bitmap=icons/triangle.tga;// Image to use
+		size=1;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[mineblaster]
+	{
+		bitmap=icons/trinver.tga;// Image to use
+		size=3;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[terminal]
+	{
+		bitmap=icons/nukehazard.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[hole]
+	{
+		bitmap=icons/circle.tga;// Image to use
+		size=3;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[window]
+	{
+		bitmap=icons/wavyblock.tga;// Image to use
+		size=2.8;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[trojan]
+	{
+		bitmap=icons/shoe.tga;// Image to use
+		size=2;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[worm]
+	{
+		bitmap=icons/tallipse.tga;// Image to use
+		size=2.4;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[dos]
+	{
+		bitmap=icons/slash.tga;// Image to use
+		size=1.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[obelisk]
+	{
+		bitmap=icons/biohazard.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[gateway]
+	{
+		bitmap=icons/clover.tga;// Image to use
+		size=2.2;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[carrier]
+	{
+		bitmap=icons/plussign.tga;// Image to use
+		size=3.2;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[port]
+	{
+		bitmap=icons/neck.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[firewall]
+	{
+		bitmap=icons/laserhazard.tga;// Image to use
+		size=2.5;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[thbase]
+	{
+		bitmap=icons/star6circle.tga;// Image to use
+		size=2.8;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+	[thminifac]
+	{
+		bitmap=icons/star6.tga;// Image to use
+		size=3;// Multiplier for icon size
+		radiusadjust=0;// Does the icon change size according to unit size?
+		distance=0.5;// Multiplier for the distance at which unit turns into icon
+	}
+}

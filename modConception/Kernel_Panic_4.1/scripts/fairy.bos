@@ -1,0 +1,102 @@
+piece base, upper, lower, head, wing0, wing1, gp, gp1, gp2;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+Flap() {
+	while(1) {
+		var i;
+		for (i=0;i<4;++i) {
+			move upper to y-axis [4] speed [2]*(i -2);
+			turn wing0 to y-axis <-50> speed <720>;
+			turn wing1 to y-axis <50> speed <720>;
+			turn wing0 to x-axis <-20> speed <160>;
+			turn wing1 to x-axis <-20> speed <160>;
+			sleep 100;
+			turn wing0 to y-axis <10> speed <720>;
+			turn wing1 to y-axis <-10> speed <720>;
+			turn wing0 to x-axis <20> speed <160>;
+			turn wing1 to x-axis <20> speed <160>;
+			sleep 100;
+		}
+		for (i=0;i<4;++i) {
+			move upper to y-axis [-4] speed [2]*(i -2);
+			turn wing0 to y-axis <-50> speed <720>;
+			turn wing1 to y-axis <50> speed <720>;
+			turn wing0 to x-axis <-20> speed <160>;
+			turn wing1 to x-axis <-20> speed <160>;
+			sleep 100;
+			turn wing0 to y-axis <10> speed <720>;
+			turn wing1 to y-axis <-10> speed <720>;
+			turn wing0 to x-axis <20> speed <160>;
+			turn wing1 to x-axis <20> speed <160>;
+			sleep 100;
+		}
+	}
+}
+
+Create() {
+	set ARMORED to 1;
+	hide upper;
+	hide lower;
+	hide head;
+	hide wing0;
+	hide wing1;
+	while(get BUILD_PERCENT_LEFT) sleep 30;
+	show upper;
+	show lower;
+	show head;
+	show wing0;
+	show wing1;
+	start-script Flap();
+	turn gp1 to y-axis <-20> now;
+	turn gp2 to y-axis <20> now;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+QueryWeapon1(p) {
+	p=gp;
+}
+
+AimFromWeapon1(p) {
+	p=upper;
+}
+
+ResetAim() {
+	sleep 2000;
+	turn upper to y-axis 0 speed <200>;
+	turn head to x-axis 0 speed <100>;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	turn upper to y-axis h speed <600>;
+	turn head to x-axis <0> - p speed <300>;
+	turn gp1 to x-axis <0> - p now;
+	turn gp2 to x-axis <0> - p now;
+	wait-for-turn upper around y-axis;
+	start-script ResetAim();
+	return 1;
+}
+
+StartMoving() {
+	turn gp to x-axis <-30> speed <90>;
+	turn upper to x-axis <30> speed <90>;
+	turn head to x-axis <-30> speed <90>;
+	turn lower to x-axis <20> speed <70>;
+}
+
+StopMoving() {
+	turn gp to x-axis <0> speed <90>;
+	turn upper to x-axis <0> speed <90>;
+	turn head to x-axis <0> speed <90>;
+	turn lower to x-axis <0> speed <70>;
+}
+
+Shot1(zero) {
+	emit-sfx 2049 from gp1;
+	emit-sfx 2049 from gp2;
+}

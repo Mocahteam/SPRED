@@ -1,0 +1,81 @@
+[UNITINFO]
+{
+	Name=Packet;
+	Unitname=packet;
+	Description=swarm unit;
+
+	// Required Tags
+	icontype=bit;
+	//mass = 100000;
+	BuildCostEnergy=0;
+	BuildCostMetal=3;
+	BuildTime=240;
+	icontype=bit;
+	Category=FAST EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=2;
+	FootprintZ=2;
+	MaxDamage=500;
+	IdleAutoHeal=60;
+	IdleTime=400;
+	ObjectName=network_spam.s3o;
+	buildpic=network_spam.png;
+	Side=NET;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	strafeToAttack=1;
+
+	// Movement
+	MovementClass=LIGHT;
+	BrakeRate=1.0;
+	Acceleration=1.2;
+	CanMove=1;
+	MaxVelocity=4;
+	TurnRate=1500;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=400;
+	SeismicSignature=.5;
+
+	// Weapons
+	Weapon1=PacketBeam;
+	BadTargetCategory1=FACTORY;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=RetroDeath;
+	SelfDestructAs=RetroDeath;
+	NoChaseCategory=VTOL;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:network_dissolve;
+		explosiongenerator1=custom:network_spawn;
+	}
+}
