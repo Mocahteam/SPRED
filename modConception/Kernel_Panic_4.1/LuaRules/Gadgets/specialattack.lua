@@ -181,7 +181,6 @@ end
 
 function gadget:GameFrame(f)
 	for i,c in pairs(replacelist) do
-		CobFuncName, 0, c.cmd, c.cmdParams[1], c.cmdParams[2], c.cmdParams[3])
 		Spring.CallCOBScript(c.unitID, special[c.unitDefID][c.cmd].CobFuncName, 0, c.cmd, c.cmdParams[1], c.cmdParams[2], c.cmdParams[3])
 		if special[c.unitDefID][c.cmd].replaceWith then
 			-- Don't insert attack order if (due to repeat) the exact same attack order is already in the queue
