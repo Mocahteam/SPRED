@@ -237,35 +237,24 @@ function FrameWarning(msg)
 end
 
 function Launch(game)
-	if not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
-		if Game.isPPEnabled then
-			if VFS.BuildPPEditor and not VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
-			 	VFS.BuildPPEditor(game)
-			else
-				FrameWarning(LAUNCHER_ERROR)
-			end
-		else
-			local modInfo = "return { game='SPRED for "..game.."', shortGame='SPRED for "..game.."', name='SPRED for "..game.."', shortName='SPRED for "..game.."', mutator='official', version='1.0', description='SPRED module. SPRED for "..game.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..game.."\" },}"
-			local file = io.open("SPRED/editor/ModInfo.lua", "w")
-			file:write(modInfo)
-			file:close()
-			-- Compress Archive
-			VFS.CompressFolder("SPRED/editor")
-			os.rename("SPRED/editor.sdz", "games/SPRED for "..game..".sdz")
-		end
-	end
-
-	if VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
-		local operations = {
-			["MODOPTIONS"] = {
-				["maingame"] = game,
-				["language"] = language
-			},
-			["GAME"] = {
-				["Gametype"] = "SPRED for "..game.." 1.0"
+	if VFS.BuildPPEditor then
+		VFS.BuildPPEditor(game)
+		if VFS.FileExists(gameFolder.."/SPRED for "..game..".sdz") then
+			local operations = {
+				["MODOPTIONS"] = {
+					["maingame"] = game,
+					["language"] = language
+				},
+				["GAME"] = {
+					["Gametype"] = "SPRED for "..game.." 1.0"
+				}
 			}
-		}
-		DoTheRestart("Editor.txt", operations)
+			DoTheRestart("Editor.txt", operations)
+		else
+			FrameWarning(LAUNCHER_BUILD_ERROR)
+		end
+	else
+		FrameWarning(LAUNCHER_ERROR)
 	end
 end
 

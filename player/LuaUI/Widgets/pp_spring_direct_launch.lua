@@ -13,26 +13,17 @@ end
 local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99)
 local hideView=true
 local lang=Spring.GetModOptions().language or "en"
-local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
-VFS.Include("LuaRules/Gadgets/libs/FillModSpecific.lua",nil)
-VFS.Include("LuaRules/Gadgets/libs/ColorConversion.lua",nil)
-VFS.Include("LuaRules/Gadgets/libs/GenerateGame.lua",nil)
-VFS.Include("LuaRules/Gadgets/libs/WriteScript.lua",nil)
 
-VFS.Include("LuaUI/Widgets/libs/RestartScript.lua",nil) -- contain DoTheRestart function
-VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
-VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
-
-
-
-local xmlFiles = VFS.DirList("scenario/", "*.xml")
 local gameName=Game.gameShortName or Game.modShortName
 
-
+VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
+VFS.Include("LuaUI/Widgets/libs/Pickle.lua") 
+local xmlFiles = VFS.DirList("scenario/", "*.xml")
 if(xmlFiles[1]~=nil)then
   AppliqManager=appliqManager:new(xmlFiles[1])
   AppliqManager:parse()
 end
+
 local RemovedWidgetList = {}
 local Chili, Screen0 -- Chili framework, main screen
 local tableCaptions={
@@ -74,7 +65,7 @@ local function removeWidgets()
   RemovedWidgetList = {}
   local RemovedWidgetListName = {}
   for name,kw in pairs(widgetHandler.knownWidgets) do
-    if kw.active and name ~= "Spring Direct Launch for mission player" and name ~= "Chili Framework" then
+    if kw.active and name ~= "Spring Direct Launch for mission player" and name ~= "Chili Framework" and name ~= "PP Restart Manager" then
       table.insert(RemovedWidgetListName,name)
     end
   end
@@ -124,47 +115,8 @@ local function ChangeLanguage(lg)
 	end
 end
 
-local function RunScenario(i)
-  if Spring.Restart then
-    AppliqManager:selectScenario(i)
-    AppliqManager:startRoute() 
-    local mission=AppliqManager.currentActivityID
-    local currentInput=AppliqManager:getCurrentInputName()
-    local options={
-    ["MODOPTIONS"]=
-      {
-      ["scenariomode"]="appliq",
-      ["language"]=lang,
-      ["scenario"]=i, --Todo: Should be an id instead
-      ["currentinput"]=currentInput,
-      ["hidemenu"]="true",
-      ["progression"]=pickle(AppliqManager.progressionOutputs)
-      }
-    }
-    genericRestart("Missions/"..mission..".editor",options)
-  else
-    NoRestart()
-  end
-end
-
 local function Capitalize(str)
   return string.gsub (str, "(%w)(%w*)", function(a,b) return string.upper(a) .. b end)
-end
-
-local function RunScript(ScriptFileName, scenario)
-  if Spring.Restart then
-    --if (string.sub(ScriptFileName, -3, -1)=="txt")then
-      local operations={
-		["MODOPTIONS"]={
-			["language"]=lang,
-			["scenario"]=scenario,
-			["hidemenu"]="true"
-        }
-      }    
-      genericRestart(ScriptFileName,operations)
-  else
-    NoRestart()
-  end
 end
 
 function EitherDrawScreen(vsx, vsy) -- Shows a black background if required
@@ -266,7 +218,32 @@ local function InitializeMainMenu() -- Initialize the main window and buttons of
 		width = "40%",
 		height = "10%",
 		caption = "Nouvelle partie",
-		OnClick = { function() RunScenario(1) end },
+		OnClick = {
+			function()
+				if Script.LuaUI.LoadMission then
+					-- get file name starting the scenario
+					AppliqManager:selectScenario(1)
+					AppliqManager:startRoute() 
+					local mission=AppliqManager.currentActivityID
+					-- define mod options
+					local currentInput=AppliqManager:getCurrentInputName()
+					local options={
+						["MODOPTIONS"]={
+							["scenariomode"]="appliq",
+							["language"]=lang,
+							["scenario"]=1, --Todo: Should be an id instead
+							["currentinput"]=currentInput,
+							["hidemenu"]="true",
+							["progression"]=pickle(AppliqManager.progressionOutputs)
+						}
+					}
+					-- load the mission
+					Script.LuaUI.LoadMission("Missions/"..mission..".editor", options) -- registered by pp_restart_manager.lua
+				else
+					Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..mission..".editor\" aborted.")
+				end
+			end
+		},
 		font = {
 			font = "LuaUI/Fonts/Asimov.otf",
 			size = 30,
@@ -357,10 +334,9 @@ function continue()
     keepAspect = false,
     file = "bitmaps/launcher/arrow.png"
   }
-  UI.ContButtons = {}
   for i,MissionFileName in ipairs(saveFiles) do 
     local userMissionName=string.match(MissionFileName, '\\([^\\]*)%.')--match string between the last "\" and the "." of .sav 
-    local contButton = Chili.Button:New{
+    Chili.Button:New{
       parent = UI.MapScrollPanel2,
       x = "0%",
       y = ((i-1)*15).."%", --80 * ( i - 1 ),
@@ -380,7 +356,6 @@ function continue()
 		shadow = false
       }
     }
-    table.insert(UI.ContButtons, contButton)
   end
   if lang == "en" then
 	UI.LanguageComboBox:Select(1)
@@ -388,6 +363,7 @@ function continue()
 	UI.LanguageComboBox:Select(2)
   end
 end
+
 function missionMenu()
   clearUI()
   commonElements()
@@ -430,7 +406,22 @@ function missionMenu()
       width = "100%",
       height = "15%", --80,
       caption = userMissionName,
-      OnClick = { function() RunScript(MissionFileName,"noScenario") end },
+      OnClick = {
+		function()
+			if Script.LuaUI.LoadMission then
+				local options={
+					["MODOPTIONS"]={
+						["language"]=lang,
+						["scenario"]=scenario,
+						["hidemenu"]="true"
+					}
+				}
+				Script.LuaUI.LoadMission(MissionFileName, options) -- registered by pp_restart_manager.lua
+			else
+				Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \""..MissionFileName.."\" aborted.")
+			end
+		end
+	  },
       font = {
         font = "LuaUI/Fonts/Asimov.otf",
         size = 30,

@@ -14,7 +14,7 @@ end
 
 -- if "notAFile" is set to true, "startscript" is not considering as a file path but contains
 -- directly the data as a string, usefull on genericRestart function when a .editor is used
-function DoTheRestart(startscript, tableOperation, notAFile)
+function DoTheRestart(startscript, tableOperation, notAFile, isClient)
   -- Warning : tableOperation must not include keys which are a substring of another key in the txt file
   -- for exemple, as it happened, using a key such as mode when gamemode already exists.
   -- One idea would be to fix how regex are made in the function replace section.
@@ -53,7 +53,10 @@ function DoTheRestart(startscript, tableOperation, notAFile)
 	Spring.Echo(trimmed)
 	Spring.Echo("\n\n<<END DUMPING UPDATED>>\n\n")
 	-- def options
-	params = "-s"
+	local params = "-s"
+	if isClient then
+		params = "-c"
+	end
 	if tonumber(Spring.GetConfigInt("safemode"))==1 then
 		params = "--safemode "..params
 	end
@@ -121,14 +124,14 @@ local function writeAttributesAndSection(file,sectionName, levelOfIndentation, t
   return file
 end
 
-local function createTxtFileContentFromScratch(editorTables, toEditor)
+local function createTxtFileContentFromScratch(editorTables, toEditor, playerName)
   local file=""
   -- GLOBAL OPTIONS
   file=file.."[GAME]\r\n{" -- This section is special as it includes other section, can't use writeAttributesAndSection, only writeAttributes
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
   local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName="Player", HostIP="localhost", HostPort="0", IsHost="1",StartPosType="3"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName=playerName, HostIP="localhost", HostPort="8451", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   -- activate feedbacks if required
@@ -156,13 +159,13 @@ local function createTxtFileContentFromScratch(editorTables, toEditor)
     -- Write first section : who controls the team (player/IA)
     if(tonumber(teamNumber)<=max)then 
       nteam=nteam+1
-      if (teamInformations.control=="player" and teamInformations.enabled==true) then 
+      if (not toEditor and teamInformations.control=="player" and teamInformations.enabled==true) or
+			(toEditor and tonumber(teamNumber) == 0) then 
 -- if a team is player controled but disabled it should not be stored as a player  
--- controled team to avoid bug "Player1 has name player which is already taken" 
+-- controled team to avoid bug "PlayerX has name player which is already taken" 
         local sectionName="PLAYER"..tostring(indexPlayer)
-        local name=teamInformations.name or string.lower(sectionName)
+        local tableController={Name=toEditor and playerName or teamInformations.name ,Spectator=toEditor and "1" or "0",Team=tostring(teamNumber)}
         indexPlayer=indexPlayer+1
-        local tableController={Name="Player" ,Spectator="0",Team=tostring(teamNumber)} -- "Player"..tostring(indexPlayer)
         file=writeAttributesAndSection(file,sectionName, 1, tableController)   
       else -- control==computer or disabled team. Disabled team MUST be described in the txt to avoid Spring index collapsing and mismatch with editor informations
       -- when max is attained, it's not necessary to add disabled teams anymore
@@ -203,12 +206,13 @@ end
 -- restart can be used for .editor files or .txt files giving some (or none) updating operation
 -- toEditor is used to know if the restart is performed to go in editor, in this case we have to
 -- prepare all teams
-function genericRestart(missionName,operations,toEditor)
+function genericRestart(missionName, options, toEditor, playerName)
+	playerName = playerName or "Player0"
 	if toEditor == nil then
 		toEditor = false
 	end
 	if (string.sub(missionName, -3, -1)=="txt")then      
-		DoTheRestart(missionName, operations)  
+		DoTheRestart(missionName, options)  
 	elseif (string.sub(missionName, -6, -1)=="editor")then
 		Spring.Echo(widget:GetInfo().name..": Wanting to load \""..missionName.."\"")
 		if VFS.FileExists(missionName) then
@@ -216,9 +220,9 @@ function genericRestart(missionName,operations,toEditor)
 			Spring.Echo(widget:GetInfo().name..": try to decode \""..missionName.."\"")
 			local tableEditor=json.decode(sf)
 			Spring.Echo(widget:GetInfo().name..": decoded with success => build restart script")
-			local txtFileContent=createTxtFileContentFromScratch(tableEditor, toEditor)
+			local txtFileContent=createTxtFileContentFromScratch(tableEditor, toEditor, playerName)
 			Spring.Echo(widget:GetInfo().name..": Restart file built from \""..missionName.."\": "..txtFileContent)
-			DoTheRestart(txtFileContent, operations, true)
+			DoTheRestart(txtFileContent, options, true)
 		else
 			Spring.Echo(widget:GetInfo().name..": that file is not valid... Restart aborted")
 		end
@@ -228,11 +232,11 @@ function genericRestart(missionName,operations,toEditor)
 end   
 
 
-function restartToConnect(playerName,IP)
-  local table2={HostIP=IP ,Hostport="8451",IsHost="0",MyPlayerName=playerName}
+function restartAndJoinTheGame(playerName,IP)
+  local table2={HostIP=IP, Hostport="8451", IsHost="0", MyPlayerName=playerName}
   local file=writeAttributesAndSection("","GAME", 0, table2)
-  Spring.Reload(file)--(this line, yes)
-  --  Spring.Restart("-s",file)--(this line, yes)
+  Spring.Echo(widget:GetInfo().name..": Join the game with: "..file)
+  DoTheRestart(file, {}, true, true)--Spring.Restart("-s",file)--(this line, yes)
 --[[
 [GAME]
 {

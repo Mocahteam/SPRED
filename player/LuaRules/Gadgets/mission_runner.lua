@@ -23,34 +23,22 @@ if (gadgetHandler:IsSyncedCode()) then
 
 local missionScript = nil
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
--- variable to know the state of the mission
--- -1 => mission lost
---  0 => mission running
---  1 => mission won
-local gameOver = 0
 
 -- used to show briefing
 local showBriefing = false
 local initializeUnits = true
 
 local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0)
+
 -- message sent by pp_gui_main_menu (Widget)
 function gadget:RecvLuaMsg(msg, player)
-  missionScript.RecvLuaMsg(msg, player)
+  if missionScript then missionScript.RecvLuaMsg(msg, player) end
   if msg == "Show briefing" then
     showBriefing=true  
   end
   if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="mission")) then
     local jsonfile=string.sub(msg,8,-1)
-    missionScript.parseJson(jsonfile)
-  end
-  if((msg~=nil)and(string.len(msg)>8)and(string.sub(msg,1,8)=="Feedback")) then -- received from game engine (ProgAndPlay.cpp)
-    local jsonfile=string.sub(msg,10,-1) -- we start at 10 due to an underscore used as a separator
-    SendToUnsynced("Feedback", jsonfile)
-  end
-  if((msg~=nil)and(string.len(msg)>16)and(string.sub(msg,1,16)=="CompressedTraces")) then -- received from game engine (ProgAndPlay.cpp)
-    local jsonfile=string.sub(msg,18,-1) -- we start at 10 due to an underscore used as a separator
-    SendToUnsynced("CompressedTraces", jsonfile)
+    if missionScript then missionScript.parseJson(jsonfile) end
   end
 end
 
@@ -68,36 +56,21 @@ end
 
 function gadget:GameFrame( frameNumber )
   -- update mission
-  if missionScript ~= nil and gameOver == 0 then
-    -- update gameOver
-    local outputState
+  if missionScript ~= nil then
     if(frameNumber>2 and frameNumber<5)then -- now the first frame is officially 5 
       if (initializeUnits)then
         missionScript.StartAfterJson()
         initializeUnits = false
       end
     else
-      gameOver,outputState = missionScript.Update(Spring.GetGameFrame())
-	  
-      -- if required, show GuiMission
-      if gameOver == -1 or gameOver == 1 then
+	  -- Update mission and check mission end
+      gameOverStates = missionScript.Update(Spring.GetGameFrame())
+	  for teamId, gameOverState in pairs(gameOverStates) do
 		-- build event for unsynchronized section
-        local prefix=true
-        if (prefix)then
-          outputState=missionName.."||"..outputState
-        end
-        _G.event = {logicType = "ShowMissionMenu",
-          state = "", outputstate=outputState}
-        if gameOver == -1 then
-          _G.event.state = "lost"
-        else
-          _G.event.state = "won"
-        end
-        local victoryState = _G.event.state or ""
-		Spring.SetConfigString("victoryState", victoryState, 1) -- inform the game engine that the mission is ended
+        _G.event = {logicType = "ShowMissionMenu", team = teamId,
+          state = gameOverState.victoryState, outputstate=missionName.."||"..gameOverState.outputstate}
         SendToUnsynced("MissionEvent")
         _G.event = nil
-		SendToUnsynced("MissionEnded", victoryState) -- write trace in meta log (see pp_meta_traces_manager.lua)
       end
     end
   end
@@ -231,17 +204,6 @@ function gadget:RecvFromSynced(...)
     local valsToSend={}
     valsToSend["speedFactor"]=Spring.GetGameSpeed()
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
-	
-  elseif arg1 == "MissionEnded" then
-    Script.LuaUI.MissionEnded(arg2) -- function defined and registered in Meta Traces Manager widget
-	
-  elseif arg1 == "Feedback" then
-    Script.LuaUI.handleFeedback(arg2) -- function defined and registered in pp_gui_main_menu.lua
-  
-  elseif arg1 == "CompressedTraces" then
-	if Script.LuaUI.TraceAction then
-		Script.LuaUI.TraceAction("compressed_trace_begin\n"..arg2.."compressed_trace_end") -- registered by pp_meta_trace_manager.lua
-	end
   end
 end
 

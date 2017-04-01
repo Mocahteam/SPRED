@@ -531,6 +531,9 @@ function clearUI() -- remove every windows except topbar and clear current selec
 		windows['zonesAttributes']:Dispose()
 		windows['zonesAttributes'] = nil
 	end
+	if Script.LuaUI.RestartManagerClearUI then
+		Script.LuaUI.RestartManagerClearUI() -- registered by pp_restart_manager.lua
+	end
 end
 
 function clearTemporaryWindows()
@@ -740,51 +743,8 @@ function testLevel()
 			-- No traces in testing mode
 			local tracesList = {}
 
-			local exportSuccess = false
-			if Game.isPPEnabled then
-				if VFS.BuildPPGame then
-					VFS.BuildPPGame(editorName, "TestModule", "TestModule", "", "TestModule", MainGame, levelList, tracesList, "0")
-					exportSuccess = true
-				else
-					windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
-					addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, 20)
-					addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
-				end
-			else
-				-- Change Modinfo.lua
-				local modInfo = "return { game='TestModule', shortGame='TestModule', name='TestModule', shortName='TestModule', mutator='official', version='1.0', description='SPRED module. TestModule', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=0, depend= { \""..MainGame.."\"}, }"
-				local file = io.open("SPRED/game/ModInfo.lua", "w")
-				file:write(modInfo)
-				file:close()
-
-				-- Add tested level
-				os.rename("SPRED/missions/"..saveName..".editor", "SPRED/game/missions/"..saveName..".editor")
-				
-				-- Compress
-				if VFS.FileExists("SPRED/game.sdz") or VFS.FileExists("games/testModule.sdz") then
-					windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
-					local message = ""
-					if VFS.FileExists("SPRED/game.sdz") then
-						message = string.gsub(EDITOR_FILE_EXPORT_FAIL, "/GAMEFILENAME/", "<Spring>/SPRED/game.sdz")
-						addLabel(windows["testWindow"], '0%', '0%', '100%', '25%', message, 20)
-					end
-					if VFS.FileExists("games/testModule.sdz") then
-						message = string.gsub(EDITOR_FILE_EXPORT_FAIL, "/GAMEFILENAME/", "<Spring>/games/testModule.sdz")
-						addLabel(windows["testWindow"], '0%', '25%', '100%', '25%', message, 20)
-					end
-					addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
-					return
-				end
-				VFS.CompressFolder("SPRED/game")
-				os.rename("SPRED/game.sdz", "games/testModule.sdz")
-
-				-- Restore tested level
-				os.rename("SPRED/game/missions/"..saveName..".editor", "SPRED/missions/"..saveName..".editor")
-
-				exportSuccess = true
-			end
-
-			if exportSuccess then
+			if VFS.BuildPPGame then
+				VFS.BuildPPGame(editorName, "TestModule", "TestModule", "", "TestModule", MainGame, levelList, tracesList, "0")
 				-- Do the restart
 				local operations = {
 					["MODOPTIONS"] = {
@@ -799,7 +759,17 @@ function testLevel()
 						["Gametype"] = "TestModule 1.0"
 					}
 				}
-				genericRestart("SPRED/missions/"..saveName..".editor", operations)
+				if Script.LuaUI.LoadMission then
+					clearUI()
+					Script.LuaUI.LoadMission("SPRED/missions/"..saveName..".editor", operations, true) -- registered by pp_restart_manager.lua
+				else
+					Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"SPRED/missions/"..saveName..".editor\" aborted.")
+				end
+			else
+				windows["testWindow"] = addWindow(Screen0, "33%", "45%", "33%", "10%")
+				addLabel(windows["testWindow"], '0%', '0%', '100%', '50%', LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, 20)
+				addButton(windows["testWindow"], '25%', '50%', '55%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["testWindow"]) windows["testWindow"]:Dispose() end)
+				Spring.Echo("WARNING!!! VFS.BuildPPGame == nil, wrong Spring version.")
 			end
 		end
 	end
@@ -2976,13 +2946,11 @@ function showWarningMultiplayerMessage()
 	local text = nil
 	if count < 1 then
 		text = EDITOR_FORCES_TEAMCONFIG_WARNING_NO_PLAYER
-	elseif count > 1 then
-		text = EDITOR_FORCES_TEAMCONFIG_WARNING_MULTIPLAYER
 	end
 	if text then
 		local w = gl.GetTextWidth(text)
 		local x = screenSizeX * 0.5
-		local y = screenSizeY * 0.9
+		local y = screenSizeY * 0.02
 		gl.Text("\255\255\56\0"..text, x - (30*w/2), y, 30, "s")
 	end
 end

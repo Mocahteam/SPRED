@@ -15,7 +15,6 @@ include('keysym.h.lua')
 
 local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
-VFS.Include ("LuaUI/Widgets/libs/RestartScript.lua") -- contain DoTheRestart and genericRestart functions
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
@@ -757,7 +756,12 @@ local function showMainMenu (missionEnd)
 			if Script.LuaUI.TraceAction then
 				Script.LuaUI.TraceAction("replay_mission "..missionName) -- registered by pp_meta_trace_manager.lua
 			end
-			DoTheRestart("_script.txt", {}) -- _script.txt is the launcher file used by the previous start, so we can reuse it for replay the game
+			-- in case of appliq we don't use "_script.txt" because it doesn't work in case of multiplayer missions
+			if Script.LuaUI.LoadMission then
+				Script.LuaUI.LoadMission("Missions/"..missionName..".editor", {["MODOPTIONS"]=Spring.GetModOptions()}) -- registered by pp_restart_manager.lua
+			else
+				Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..missionName..".editor\" aborted.")
+			end
 		end
 	}
 	
@@ -765,12 +769,11 @@ local function showMainMenu (missionEnd)
 	-- first it depends if the player has achieved the end of the mission
 	-- and if appliq is properly initialized
 	if missionEnd.state ~= "menu" and mode=="appliq" and AppliqManager~=nil then
-		local currentoptions=Spring.GetModOptions()       
+		local currentoptions=Spring.GetModOptions()
 		AppliqManager:selectScenario(tonumber(currentoptions["scenario"]))
 		AppliqManager:startRoute()
 		local progression=unpickleProgression(currentoptions["progression"])
 		AppliqManager:setProgression(progression)
-		local outputs=AppliqManager:listPossibleOutputsFromCurrentActivity()
 		local nextMiss=AppliqManager:next(missionEnd.outputstate)  
 		local mission=AppliqManager.currentActivityID
 		-- second its depend on next mission available
@@ -799,7 +802,11 @@ local function showMainMenu (missionEnd)
 						if Script.LuaUI.TraceAction then
 							Script.LuaUI.TraceAction("continue_scenario "..missionName) -- registered by pp_meta_trace_manager.lua
 						end
-						genericRestart("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- COMMENT THIS LINE IF YOU WANT TO SEE SOME MAGIC (or some Spring.Echo)
+						if Script.LuaUI.LoadMission then
+							Script.LuaUI.LoadMission("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- registered by pp_restart_manager.lua
+						else
+							Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..mission..".editor\" aborted.")
+						end
 					end
 				}
 			end
@@ -855,27 +862,36 @@ end
 function MissionEvent(e)
   
   if e.logicType == "ShowMissionMenu" then
-    -- close tuto window if it oppened
-    if tutoPopup then
-      if rooms.TutoView and not rooms.TutoView.closed then
-        rooms.TutoView:Close()
-      end
-    end
-    -- close briefing window if it oppened
-    WG.Message:DeleteAll()
- 	-- replace Main menu by a single message if we are testing map
-	if (Spring.GetModOptions()["testmap"]~=nil) then
-		-- if we are in testmap case, the main menu is only simple message
-		-- the button "return back to editor" is permanently displayed in UI
-		local message = ""
-		if e.state == "won" then
-			message = LANG_VICTORY
-		else
-			message = LANG_LOSS     
+	if e.team == nil or e.team == Spring.GetMyTeamID() then
+		if e.state then
+			if Script.LuaUI.MissionEnded then
+				Script.LuaUI.MissionEnded(e.state) -- function defined and registered in Meta Traces Manager widget
+			end
+			Spring.SetConfigString("victoryState", e.state, 1) -- inform the game engine that the mission is ended
 		end
-		MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
-	else
-		showMainMenu(e)
+		
+		-- close tuto window if it oppened
+		if tutoPopup then
+		  if rooms.TutoView and not rooms.TutoView.closed then
+			rooms.TutoView:Close()
+		  end
+		end
+		-- close briefing window if it oppened
+		WG.Message:DeleteAll()
+		-- replace Main menu by a single message if we are testing map
+		if (Spring.GetModOptions()["testmap"]~=nil) then
+			-- if we are in testmap case, the main menu is only simple message
+			-- the button "return back to editor" is permanently displayed in UI
+			local message = ""
+			if e.state == "won" then
+				message = LANG_VICTORY
+			else
+				message = LANG_LOSS     
+			end
+			MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
+		else
+			showMainMenu(e)
+		end
 	end
 
   elseif e.logicType == "ShowMessage" then
@@ -1080,12 +1096,20 @@ function EmulateEscapeKey ()
   widget:KeyPress(KEYSYMS.ESCAPE, nil, nil, nil, nil)
 end
 
+function widget:RecvLuaMsg(msg, player)
+  if player == Spring.GetMyPlayerID() then
+	if((msg~=nil)and(string.len(msg)>8)and(string.sub(msg,1,8)=="Feedback")) then -- received from game engine (ProgAndPlay.cpp)
+		local jsonfile=string.sub(msg,10,-1) -- we start at 10 due to an underscore used as a separator
+		handleFeedback(jsonfile)
+	end
+  end
+end
+
 function widget:Initialize()
   widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
   widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
   widgetHandler:RegisterGlobal("PlayVideo", PlayVideo)
-  widgetHandler:RegisterGlobal("handleFeedback", handleFeedback)
   
   rooms = WG.rooms -- WG is available in all widgets (defined in pp_gui_rooms.lua)
 end
@@ -1096,5 +1120,4 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal("MissionEvent")
   widgetHandler:DeregisterGlobal("TutorialEvent")
   widgetHandler:DeregisterGlobal("PlayVideo")
-  widgetHandler:DeregisterGlobal("handleFeedback", handleFeedback)
 end

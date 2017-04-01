@@ -1853,21 +1853,6 @@ function BeginExportGame()
 		FrameWarning (message, nil, false, true)
 		return
 	end
-	-- Generate name
-	local name = generateSaveName(ScenarioName)
-	local scenarioName = ScenarioName
-	local alreadyExists = false
-	if VFS.FileExists(gameFolder.."/"..name..".sdz") then
-		alreadyExists = true
-		local count = 1
-		local newName = name.."(1)"
-		while VFS.FileExists(gameFolder.."/"..newName..".sdz") do
-			count = count + 1
-			newName = name.."("..tostring(count)..")"
-		end
-		name = newName
-		scenarioName = scenarioName.."("..tostring(count)..")"
-	end
 
 	-- Choose levels
 	local levelList = {}
@@ -1893,53 +1878,25 @@ function BeginExportGame()
 		end
 	end
 
-	local exportSuccess = false
-
-	if Game.isPPEnabled then
-		if VFS.BuildPPGame then
-			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList, "1")
-			exportSuccess = true
+	local name = generateSaveName(ScenarioName)
+	local scenarioName = ScenarioName
+	if VFS.BuildPPGame then
+		-- Check if game exists
+		if VFS.FileExists(gameFolder.."/"..name..".sdz") then
+			local msg = string.gsub(LAUNCHER_SCENARIO_EXPORT_GAME_EXISTS, "/MAINGAME/", gameFolder.."/"..name..".sdz")
+			FrameWarning(msg, LAUNCHER_SCENARIO_EXPORT_GAME_CONFIRM, true, false,
+				function ()
+					VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList, "1")
+					FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "<Spring>/"..gameFolder.."/"..name..".sdz", false, true)
+				end
+			)
 		else
-			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, nil, false, true)
+			VFS.BuildPPGame(editorName, scenarioName, ScenarioDesc, generateSaveName(ScenarioName), name, MainGame, levelList, tracesList, "1")
+			FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS, "<Spring>/"..gameFolder.."/"..name..".sdz", false, true)
 		end
 	else
-		-- Change Modinfo.lua
-		local maingame = MainGame
-		local modInfo = "return { game='"..scenarioName.."', shortGame='"..name.."', name='"..scenarioName.."', shortName='"..name.."', mutator='official', version='1.0', description='SPRED module. "..ScenarioDesc.."', url='http://www.irit.fr/ProgAndPlay/index_en.php', modtype=1, depend= { \""..maingame.."\"}, }"
-		local file = io.open("SPRED/game/ModInfo.lua", "w")
-		file:write(modInfo)
-		file:close()
-
-		-- Add levels and scenario
-		os.rename("SPRED/scenarios/"..name..".xml", "SPRED/game/scenario/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("SPRED/missions/"..level..".editor", "SPRED/game/missions/"..level..".editor")
-		end
-
-		-- Compress
-		if not VFS.FileExists("SPRED/game.sdz") then
-			VFS.CompressFolder("SPRED/game")
-			os.rename("SPRED/game.sdz", "games/"..name..".sdz")
-		end
-
-		-- Remove levels and scenario
-		os.rename("SPRED/game/scenario/"..name..".xml", "SPRED/scenarios/"..name..".xml")
-		for i, level in ipairs(levelList) do
-			os.rename("SPRED/game/missions/"..level..".editor", "SPRED/missions/"..level..".editor")
-		end
-
-		exportSuccess = true
-	end
-
-	if exportSuccess then
-		-- Show message
-		local message = ""
-		if not alreadyExists then
-			message = LAUNCHER_SCENARIO_EXPORT_GAME_SUCCESS
-		else
-			message = LAUNCHER_SCENARIO_EXPORT_GAME_FAIL
-		end
-		FrameWarning(message, "<Spring>/"..gameFolder.."/"..name..".sdz", false, true)
+		FrameWarning(LAUNCHER_SCENARIO_EXPORT_GAME_WRONG_VERSION, nil, false, true)
+		Spring.Echo ("WARNING!!! VFS.BuildPPGame == nil => wrong Spring version")
 	end
 end
 
@@ -2001,7 +1958,7 @@ function RemoveOtherWidgets() -- Disable other widgets
   local RemovedWidgetList = {}
   local RemovedWidgetListName = {}
   for name,kw in pairs(widgetHandler.knownWidgets) do
-    if kw.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" then
+    if kw.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" and name ~= "PP Restart Manager" then
       table.insert(RemovedWidgetListName,name)
     end
   end
