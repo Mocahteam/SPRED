@@ -30,6 +30,8 @@ local ScenarioList = {} -- List of the scenarios as read in the SPRED/scenarios/
 local ScenarioListNames = {} -- Names of the aforementioned scenarios
 local OutputStates = {} -- List of the output states of the levels
 local Links = {} -- Links betwenn output and input states
+local scenarioInEdition = false -- true if editing scenario frame is shown
+local needUpdateScenarioFrame = false -- true due to screen resize to ask to update scenario editing panel
 local ScenarioName = "" -- Name of the current scenario
 local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
@@ -596,46 +598,6 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		width = "99%",
 		height = "69%"
 	}
-	local drawLinks = function(obj) -- Function to draw links between buttons
-		gl.Color(1, 1, 1, 1)
-		gl.LineWidth(3)
-		gl.BeginEnd(
-			GL.LINES,
-			function()
-				if selectedOutputMission and selectedOutputState then -- Draw a link between the center of the selected output and the mouse cursor
-					local x, y
-					x = UI.Scenario.Output[selectedOutputMission][selectedOutputState].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].width/2
-					y = UI.Scenario.Output[selectedOutputMission][selectedOutputState].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].height/2
-					local mouseX, mouseY = Spring.GetMouseState()
-					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosX
-					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosY
-					gl.Vertex(x, y)
-					gl.Vertex(mouseX, mouseY)
-				end
-				for k, link in pairs(Links) do -- Draw a link between each linked pair input/output
-					for kk, out in pairs(link) do
-						gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor)) -- Color is the color of the button
-						local x1, y1, x2, y2
-						x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2 -- Compute the coordinates of the center of the button. Tiles represents an offset to make children buttons look better.
-						y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
-						x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
-						y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
-						gl.Vertex(x1, y1)
-						gl.Vertex(x2, y2)
-					end
-				end
-			end
-		)
-	end
-	UI.Scenario.Links = Chili.Control:New{
-		parent = UI.Scenario.ScenarioScrollPanel,
-		x = '0%',
-		y = '0%',
-		width = '100%',
-		height = '100%',
-		DrawControl = drawLinks,
-		drawcontrolv2 = true
-	}
 	UI.Scenario.Output = {}
 	UI.Scenario.Input = {}
 	UI.Scenario.Levels = {}
@@ -723,16 +685,20 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		chosenColor = { math.random(), math.random(), math.random(), 1 } -- Initialize the chosen color for links
 	}
 	local column = -1
+	local defaultWidth = 300
+	local nbColumns = math.max(math.floor(UI.Scenario.ScenarioScrollPanel.width / (defaultWidth+10)), 1)
+	local nbLines = math.ceil(#LevelList / nbColumns)
+	local maxY = 0
 	for i, level in ipairs(LevelList) do
 		-- Search for output states
 		local outputStates = OutputStates[LevelListNames[i]]
-		if i % 3 == 1 then
+		if i % nbLines == 1 then
 			column = column + 1
 			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
 				parent = UI.Scenario.ScenarioScrollPanel,
-				x = 10 + column * 310,
+				x = 10 + column * (defaultWidth+10),
 				y = 95,
-				width = 300,
+				width = defaultWidth,
 				height = math.max(150, (#outputStates + 2) * 30),
 				draggable = true,
 				resizable = true
@@ -740,14 +706,15 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		else
 			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
 				parent = UI.Scenario.ScenarioScrollPanel,
-				x = 10 + column * 310,
+				x = 10 + column * (defaultWidth+10),
 				y = UI.Scenario.Levels[LevelListNames[i-1]].y + UI.Scenario.Levels[LevelListNames[i-1]].height + 10,
-				width = 300,
+				width = defaultWidth,
 				height = math.max(150, (#outputStates + 2) * 30),
 				draggable = true,
 				resizable = true
 			}
 		end
+		maxY  = math.max(maxY, UI.Scenario.Levels[LevelListNames[i]].y+UI.Scenario.Levels[LevelListNames[i]].height)
 		Chili.Label:New{
 			parent = UI.Scenario.Levels[LevelListNames[i]],
 			x = "0%",
@@ -848,6 +815,46 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 			UI.Scenario.Output[LevelListNames[i]][out] = but
 		end
 	end
+	local drawLinks = function(obj) -- Function to draw links between buttons
+		gl.Color(1, 1, 1, 1)
+		gl.LineWidth(3)
+		gl.BeginEnd(
+			GL.LINES,
+			function()
+				if selectedOutputMission and selectedOutputState then -- Draw a link between the center of the selected output and the mouse cursor
+					local x, y
+					x = UI.Scenario.Output[selectedOutputMission][selectedOutputState].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[1]/2 + UI.Scenario.Levels[selectedOutputMission].x + UI.Scenario.Output[selectedOutputMission][selectedOutputState].width/2
+					y = UI.Scenario.Output[selectedOutputMission][selectedOutputState].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].tiles[2]/2 + UI.Scenario.Levels[selectedOutputMission].y + UI.Scenario.Output[selectedOutputMission][selectedOutputState].height/2
+					local mouseX, mouseY = Spring.GetMouseState()
+					mouseX = mouseX - obj.x - UI.Scenario.ScenarioScrollPanel.x - UI.Scenario.ScenarioScrollPanel.tiles[1] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosX
+					mouseY = vsy - mouseY - obj.y - UI.Scenario.ScenarioScrollPanel.y - UI.Scenario.ScenarioScrollPanel.tiles[2] - 7 + UI.Scenario.ScenarioScrollPanel.scrollPosY
+					gl.Vertex(x, y)
+					gl.Vertex(mouseX, mouseY)
+				end
+				for k, link in pairs(Links) do -- Draw a link between each linked pair input/output
+					for kk, out in pairs(link) do
+						gl.Color(unpack(UI.Scenario.Output[k][kk].chosenColor)) -- Color is the color of the button
+						local x1, y1, x2, y2
+						x1 = UI.Scenario.Output[k][kk].x + UI.Scenario.Output[k][kk].tiles[1]/2 + UI.Scenario.Levels[k].x + UI.Scenario.Output[k][kk].width/2 -- Compute the coordinates of the center of the button. Tiles represents an offset to make children buttons look better.
+						y1 = UI.Scenario.Output[k][kk].y + UI.Scenario.Output[k][kk].tiles[2]/2 + UI.Scenario.Levels[k].y + UI.Scenario.Output[k][kk].height/2
+						x2 = UI.Scenario.Input[out].x + UI.Scenario.Input[out].tiles[1]/2 + UI.Scenario.Levels[out].x + UI.Scenario.Input[out].width/2
+						y2 = UI.Scenario.Input[out].y + UI.Scenario.Input[out].tiles[2]/2 + UI.Scenario.Levels[out].y + UI.Scenario.Input[out].height/2
+						gl.Vertex(x1, y1)
+						gl.Vertex(x2, y2)
+					end
+				end
+			end
+		)
+	end
+	UI.Scenario.Links = Chili.Control:New{
+		parent = UI.Scenario.ScenarioScrollPanel,
+		x = 0,
+		y = 0,
+		width = 10 + (column+1) * (defaultWidth+10),
+		height = maxY,
+		DrawControl = drawLinks,
+		drawcontrolv2 = true
+	}
 end
 
 function UpdateCaption(element, text) -- Update the caption of an UI element
@@ -885,6 +892,7 @@ function ClearUI() -- Remove UI elements from the screen
 	UI.MainWindow:RemoveChild(UI.Scenario.Save)
 	UI.MainWindow:RemoveChild(UI.Scenario.Open)
 	UI.MainWindow:RemoveChild(UI.Scenario.Reset)
+	scenarioInEdition = false
 end
 
 function ClearTemporaryUI() -- Remove pop-ups
@@ -935,6 +943,7 @@ end
 
 function EditScenarioFrame() -- Shows the edit scenario menu
 	ClearUI()
+	scenarioInEdition = true
 	InitializeScenarioFrame()
 	UI.MainWindow:AddChild(UI.BackButton)
 	-- force all output and input states to redraw (resolves bug on Begin and End
@@ -2040,6 +2049,12 @@ function widget:DrawScreen()
 	end
 end
 
+function widget:ViewResize(viewSizeX, viewSizeY)
+	if scenarioInEdition then
+		needUpdateScenarioFrame = true
+	end
+end
+
 function CreateMissingDirectories()
 	if not VFS.FileExists("SPRED") then
 		Spring.CreateDir("SPRED")
@@ -2066,6 +2081,35 @@ end
 function widget:Update(delta)
 	if HideView then
 		MakeLink()
+	end
+	if scenarioInEdition and needUpdateScenarioFrame then
+		needUpdateScenarioFrame = false
+		-- compute new positions
+		Spring.Echo ("repositionne UI")
+		local column = -1
+		local defaultWidth = 300
+		local nbColumns = math.max(math.floor(UI.Scenario.ScenarioScrollPanel.width / (defaultWidth+10)), 1)
+		local nbLines = math.ceil(#LevelList / nbColumns)
+		local maxY = 0
+		for i, level in ipairs(LevelList) do
+			-- Search for output states
+			local outputStates = OutputStates[LevelListNames[i]]
+			if i % nbLines == 1 then
+				column = column + 1
+				UI.Scenario.Levels[LevelListNames[i]].x = 10 + column * (defaultWidth+10)
+				UI.Scenario.Levels[LevelListNames[i]].y = 95
+				UI.Scenario.Levels[LevelListNames[i]].width = defaultWidth
+				UI.Scenario.Levels[LevelListNames[i]].height = math.max(150, (#outputStates + 2) * 30)
+			else
+				UI.Scenario.Levels[LevelListNames[i]].x = 10 + column * (defaultWidth+10)
+				UI.Scenario.Levels[LevelListNames[i]].y = UI.Scenario.Levels[LevelListNames[i-1]].y + UI.Scenario.Levels[LevelListNames[i-1]].height + 10
+				UI.Scenario.Levels[LevelListNames[i]].width = defaultWidth
+				UI.Scenario.Levels[LevelListNames[i]].height = math.max(150, (#outputStates + 2) * 30)
+			end
+			maxY  = math.max(maxY, UI.Scenario.Levels[LevelListNames[i]].y+UI.Scenario.Levels[LevelListNames[i]].height)
+		end
+		UI.Scenario.Links.width = 10 + (column+1) * (defaultWidth+10)
+		UI.Scenario.Links.height = maxY
 	end
 end
 
