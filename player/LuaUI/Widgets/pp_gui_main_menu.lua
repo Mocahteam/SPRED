@@ -343,15 +343,23 @@ local function doTheSave(gameName, fileName)
 	local notifWindow = addWindow(WG.Chili.Screen0, "10%", "44%", "80%", "12%")
 	addLabel(notifWindow, "0%", "0%", "100%", "58%", notif, "center", "linecenter")
 	local okBut = addButton(notifWindow, "45%", "60%", "10%", "40%", LANG_OK)
-	okBut.OnClick = {
-		function ()
-			--close notification and show Main menu
-			notifWindow:Dispose()
-			if mainMenuWindow.hidden then
-				mainMenuWindow:Show()
+	local function closeNotification()
+		--close notification and show Main menu
+		notifWindow:Dispose()
+		if mainMenuWindow.hidden then
+			mainMenuWindow:Show()
+		end
+	end
+	okBut.OnClick = { closeNotification }
+	okBut.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				closeNotification()
+				return true
 			end
 		end
 	}
+	WG.Chili.Screen0:FocusControl(okBut)
 end
 
 local function displayConfirmSave(gameName, fileName)
@@ -372,6 +380,14 @@ local function displayConfirmSave(gameName, fileName)
 			doTheSave(gameName, fileName)
 		end
 	}
+	yesBut.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				doTheSave(gameName, fileName)
+				return true
+			end
+		end
+	}
 	
 	local noBut = addButton(saveWindow, "65%", "60%", "20%", "40%", LANG_NO)
 	noBut.OnClick = {
@@ -387,6 +403,7 @@ local function displayConfirmSave(gameName, fileName)
 			end
 		end
 	}
+	WG.Chili.Screen0:FocusControl(yesBut)
 end
 
 -----------------------
@@ -423,6 +440,14 @@ local function displaySaveWindow()
 	addLabel(saveWindow, "0%", "0%", "100%", "33%", LANG_SAVE_NAME, "left", "top")
 	
 	saveNameEditBox = addEditBox(saveWindow, "0%", "33%", "100%", "33%", "left", "")
+	saveNameEditBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				processSaving()
+				return true
+			end
+		end
+	}
 	
 	local okBut = addButton(saveWindow, "15%", "67%", "20%", "33%", LANG_OK)
 	okBut.OnClick = {processSaving}

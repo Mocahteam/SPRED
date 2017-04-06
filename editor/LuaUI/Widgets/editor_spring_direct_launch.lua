@@ -1090,6 +1090,13 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			shadow = false
 		},
 	}
+	nameBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				Screen0:FocusControl(descBox)
+			end
+		end
+	}
 	local exportBut = Chili.Button:New{
 		parent = window,
 		x = "30%",
@@ -1110,7 +1117,14 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 			shadow = false
 		}
 	}
-	exportBut.OnClick = { function()
+	descBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				Screen0:FocusControl(exportBut)
+			end
+		end
+	}
+	local function saveClicked ()
 		local name, desc
 		if nameBox.text ~= "" then
 			name = nameBox.text
@@ -1124,7 +1138,16 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 		end
 		window:Dispose()
 		SaveScenario(name, desc)
-	end }
+	end
+	exportBut.OnClick = { saveClicked }
+	exportBut.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				Screen0:FocusControl(nil)
+				saveClicked ()
+			end
+		end
+	}
 	Chili.Image:New{
 		parent = window,
 		x = '0%',
@@ -1136,6 +1159,7 @@ function SaveScenarioFrame() -- Shows the save scenario pop-up
 		color = { 0, 0, 0, 1 }
 	}
 	UI.Scenario.SaveScenarioPopUp = window
+	Screen0:FocusControl(nameBox)
 end
 
 --- Shows a warning message

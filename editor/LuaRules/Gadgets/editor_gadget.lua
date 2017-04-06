@@ -236,6 +236,7 @@ function gadget:GameFrame( frameNumber )
 						Spring.DestroyUnit(units[i], false, true)
 					end
 					resetMap = false
+					SendToUnsynced("NewMapDone")
 				-- INSTANTIATE UNITS AND KEEP THEIR IDs
 				elseif loadMap then
 					local unitsNewIDs = {}
@@ -274,13 +275,16 @@ function gadget:RecvFromSynced(msg)
 		Script.LuaUI.requestSave() --registered by editor_user_interface.lua
 	end
 	if msgContents[1] == "commands" then
-		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3]) -- registered from editor_userinterface.lua
+		Script.LuaUI.generateCommandsList(msgContents[2], msgContents[3]) -- registered from editor_user_interface.lua
 	end
 	if msgContents[1] == "beginLoadLevel" then
 		Script.LuaUI.beginLoadLevel(msgContents[2]) -- registered from editor_user_interface.lua
 	end
 	if msgContents[1] == "finishedLoading" then
 		Script.LuaUI.finishedLoading() -- registered from editor_loading_screen.lua
+	end
+	if msgContents[1] == "NewMapDone" then
+		Script.LuaUI.NewMapDone() -- registered from editor_user_interface.lua
 	end
 end
 

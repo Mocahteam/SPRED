@@ -23,7 +23,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "text",
-				id = "number"
+				id = "number",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -36,7 +37,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "text",
-				id = "number"
+				id = "number",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -49,7 +51,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -72,7 +75,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -95,7 +99,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -118,7 +123,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -141,7 +147,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<Target>",
@@ -159,7 +166,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -182,7 +190,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -197,7 +206,8 @@ conditions_list = {
 			{
 				text = "<Percentage>",
 				type = "text",
-				id = "hp"
+				id = "hp",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -210,7 +220,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -233,7 +244,8 @@ conditions_list = {
 			{
 				text = "<Number>",
 				type = "numberComparison",
-				id = "number"
+				id = "number",
+				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitSet>",
@@ -268,7 +280,7 @@ conditions_list = {
 				text = "<Number>",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")"
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},

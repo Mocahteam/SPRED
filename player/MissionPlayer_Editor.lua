@@ -36,6 +36,7 @@ ctx.messages={}-- -> {string messageId = string messageContent, ...}
 ctx.conditions={}-- -> {string conditionId = {"id" = number, "type" = string, "name" = string, "params" = table, "currentlyValid" = boolean, "object" = "killed" | "kill" | "group" | "other"}, ...}
 
 ctx.nextUniqueIdCondition = 0 --useful to set unique Id to condition created dynamically (see waitCondition and waitTrigger)
+ctx.nextUniqueIdEvent = 0 --useful to set unique Id to event created dynamically (see waitCondition and waitTrigger)
 
 --associative array idEvent->event
 ctx.events={}-- -> {string evenId = {"id" = number, "name" = string, "comment" = string, "repetition" = boolean, "repetitionTime" = string, "lastExecution" = number, "trigger" = string, "conditionTotal" = number, "conditions" = table, "actionTotal" = number, "actions" = table, "listOfInvolvedConditions" = {[1] = string conditionName, ...}}, ...}
@@ -145,12 +146,14 @@ end
 -------------------------------------
 local function load_code(code)
     if setfenv and loadstring then
-        local f = assert(loadstring(code)) -- Lua 5.1
-        setfenv(f,ctx)
-        return f()
+        local f, err = loadstring(code) -- Lua 5.1
+		if f then
+			setfenv(f,ctx)
+		end
+        return f
     else
-        local f=assert(load(code, nil,"t",ctx)) -- Lua 5.2 and later
-        return f()
+        local f = load(code, nil,"t",ctx) -- Lua 5.2 and later
+        return f
     end
 end
 
@@ -185,19 +188,40 @@ local function union(list1,list2)
   return union
 end
 
+function replaceVariableInExpression (expression, variableToFind, replacement)
+	local newExpression = expression
+	newExpression = string.gsub(newExpression, "^"..variableToFind.."$", replacement)
+	newExpression = string.gsub(newExpression, "^"..variableToFind.."([) %+-*/%%])", replacement.."%1")
+	newExpression = string.gsub(newExpression, "([( %+-*/%%])"..variableToFind.."([) %+-*/%%])", "%1"..replacement.."%2")
+	newExpression = string.gsub(newExpression, "([( %+-*/%%])"..variableToFind.."$", "%1"..replacement)
+	return newExpression
+end
+
 -- must give a number, string under the form of "8", "3" or v1+v2-3
+-- return a number
 local function computeReference(expression)
-  if(expression==nil or expression=="") then return expression end
+  if(expression==nil or expression=="") then return 0 end
   --EchoDebug("compute expression : "..expression, 1)
   local n1=tonumber(expression)
   if(n1~=nil)then return n1 end
 
   for v,value in pairs(ctx.variables)do
-    expression=string.gsub(expression, v, tostring(value))
+    expression=replaceVariableInExpression(expression, v, tostring(value))
   end
   --EchoDebug("expression before execution : "..expression, 1)
   local executableStatement="return("..expression..")"
-  return load_code(executableStatement)
+  local success, result = pcall(load_code(executableStatement))
+  if success then
+	if result ~= nil then
+		return result
+	else
+		Spring.Echo ("Warning!!! expression \""..expression.."\" return nil value. 0 is returned instead")
+		return 0
+	end
+  else
+	Spring.Echo ("Warning!!! expression \""..expression.."\" is not a valid expression: "..(result or "nil"))
+	return 0
+  end
 end
 
 -------------------------------------
@@ -205,13 +229,13 @@ end
 -- @return boolean
 -------------------------------------
 local function compareValue_Verbal(reference,maxRef,value,mode)
-  --EchoDebug(json.encode{reference,maxRef,value,mode},1)
-  reference=computeReference(reference)
-  if(mode=="atmost")then return (value<=reference)      
-  elseif(mode=="atleast")then  return (value>=reference)    
-  elseif(mode=="exactly")then return (reference==value)  
-  elseif(mode=="all")then return (maxRef==value)
-  end
+	--EchoDebug(json.encode{reference,maxRef,value,mode},1)
+	reference=computeReference(reference)
+	if(mode=="atmost")then return (value<=reference)      
+	elseif(mode=="atleast")then  return (value>=reference)    
+	elseif(mode=="exactly")then return (reference==value)  
+	elseif(mode=="all")then return (maxRef==value)
+	end
 end
 
 -------------------------------------
@@ -523,7 +547,17 @@ local function unitSetParamsToUnitsExternal(param)
   end
   return units
 end
+
    
+function replaceConditionInTrigger (trigger, conditionToFind, replacement)
+	local newTrigger = trigger
+	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."$", replacement)
+	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."([) ])", replacement.."%1")
+	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."([) ])", "%1"..replacement.."%2")
+	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."$", "%1"..replacement)
+	return newTrigger
+end
+
 -------------------------------------
 -- Check if a condition, expressed as a string describing boolean condition where variables
 -- are related to conditions in the json files.
@@ -541,9 +575,9 @@ local function isTriggerable(event)
   --EchoDebug("isTriggerable (before replacement) => "..trigger, 7)
   for c,cond in pairs(event.listOfInvolvedConditions) do
     -- second step : conditions are replaced to their boolean values.
-	--EchoDebug("look for condition: "..cond.."_"..tostring(event.id), 7)
+	--EchoDebug("look for condition: "..cond.."_"..tostring(event.id).. " in "..json.encode(ctx.conditions), 7)
     local valueCond=ctx.conditions[cond.."_"..tostring(event.id)]
-    trigger=string.gsub(trigger, cond, boolAsString(valueCond["currentlyValid"]))
+    trigger=replaceConditionInTrigger(trigger, cond, boolAsString(valueCond["currentlyValid"]))
 	--EchoDebug("isTriggerable (after replacement) => "..trigger, 7)
   end
   -- third step : turn the string in return statement
@@ -630,7 +664,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       Spring.DestroyUnit(unit)
     elseif(act.type=="hp")then
       local health,maxhealth=Spring.GetUnitHealth(unit)
-      Spring.SetUnitHealth(unit,maxhealth*tonumber(act.params.percentage)/100)
+      Spring.SetUnitHealth(unit,maxhealth*computeReference(act.params.percentage)/100)
     elseif(act.type=="teleport")then
       local posFound=extractPosition(act.params.position)
       Spring.SetUnitPosition(unit,posFound.x,posFound.z)
@@ -660,7 +694,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
       if Spring.ValidUnitID(unit) then
         --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=(act.params.time or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitePosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -744,7 +778,7 @@ local function ApplyNonGroupableAction(act)
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,y=y,z=z,time=(act.params.time or 0)/ctx.speedFactor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,y=y,z=z,time=(computeReference(act.params.time) or 0)/ctx.speedFactor}))
      
   -- ZONES
   
@@ -783,15 +817,18 @@ local function ApplyNonGroupableAction(act)
     ctx.variables[act.params.variable]=(act.params.boolean=="true")
   elseif(act.type=="createUnits") then
 	ctx.getAvailableLocalUnitIdsFromLocalGroupId["action_"..act.id]={} -- Implementation choice : we reset the action-group associated to the action-created to store only units created by the last call of this action.
-    for var=1,act.params.number do
+    for var=1,computeReference(act.params.number) do
       local position=getARandomPositionInZone(act.params.zone)
       createUnitAtPosition(act,position)
     end 
   elseif(act.type=="changeVariableRandom") then
-    local v=math.random(act.params.min,act.params.max)
+    local v=math.random(computeReference(act.params.min),computeReference(act.params.max))
     ctx.variables[act.params.variable]=v   
   elseif(act.type=="script") then
-    load_code(act.params.script)
+    local sucess, result = pcall(load_code(act.params.script))
+	if not success and result ~= nil then
+		Spring.Echo ("Warning!!! script \""..act.params.script.."\" failed: "..result)
+	end
  
   elseif(act.type=="enableWidget")or(act.type=="disableWidget") then
     local widgetName=act.params.widget
@@ -1019,13 +1056,13 @@ local function processEvents(frameNumber)
   local newevent
   local toBeRemoved = {}
   --EchoDebug("liste of events: "..json.encode(ctx.orderedEventsId, { indent = true }),7)
-  for order,idEvent  in orderedPairs(ctx.orderedEventsId) do
+  for order,idEvent in orderedPairs(ctx.orderedEventsId) do
 	-- ctx.events
     local event=ctx.events[idEvent]
 	--EchoDebug("Event "..order..": "..json.encode(event, { indent = true }),7)
     if isTriggerable(event) then
 	  --EchoDebug("Event "..event.id.." is triggerable",7)
-      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(tonumber(event.repetitionTime)))) then
+      if(event.lastExecution==nil)or((event.repetition~=nil and event.repetition~=false and frameNumber>event.lastExecution+secondesToFrames(computeReference(event.repetitionTime)))) then
         -- Handle repetition
         event.lastExecution=frameNumber
         local frameDelay=0
@@ -1035,13 +1072,14 @@ local function processEvents(frameNumber)
           frameDelay=frameDelay+1
           local a=event.actions[j]
           if(a.type=="wait")then
-            frameDelay=frameDelay+secondesToFrames(a.params.time or 0) 
+            frameDelay=frameDelay+secondesToFrames(computeReference(a.params.time)) 
           elseif (a.type=="waitCondition" or a.type=="waitTrigger") and not creationOfNewEvent then -- if creationOfNewEvent is already set this means a previous action ask to wait. So we don't have to process this new wait now but only to insert in the new event in order to be process when the new event will be trigger
             creationOfNewEvent=true
             newevent=deepcopy(event)
             newevent["actions"]={}
             newevent.lastExecution=nil
-            newevent.id=tostring(frameNumber)
+            newevent.id=tostring(ctx.nextUniqueIdEvent)
+			ctx.nextUniqueIdEvent = ctx.nextUniqueIdEvent + 1
             if(a.type=="waitCondition") then
               newevent.trigger=a.params.condition
             elseif(a.type=="waitTrigger")then 
@@ -1210,9 +1248,9 @@ local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only sin
       local action=GetCurrentUnitAction(internalUnitId)     
       return (action==c.params.command) 
     elseif(c.type=="hp") then
-      local thresholdRatio=tonumber(c.params.hp)/100
-      local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
-	  return compareValue_Numerical(health/maxhealth, thresholdRatio, c.params.comparison) 
+	  local hpInPercent = computeReference(c.params.hp)/100
+	  local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
+	  return compareValue_Numerical(health/maxhealth, hpInPercent, c.params.comparison)
       --return compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)      
     elseif(c.type=="type") then
       return(c.params.type==UnitDefs[Spring.GetUnitDefID(internalUnitId)]["name"])
@@ -1302,10 +1340,10 @@ local function UpdateConditionsTruthfulness (frameNumber)
 	elseif(object=="other")then  
       -- Time related conditions [START]
       if(c.type=="elapsedTime") then
-        local elapsedAsFrame=math.floor(secondesToFrames(c.params.number))
+        local elapsedAsFrame=math.floor(secondesToFrames(computeReference(c.params.number)))
         ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(frameNumber, elapsedAsFrame,c.params.comparison) 
       elseif(c.type=="repeat") then
-        local framePeriod=secondesToFrames(c.params.number)
+        local framePeriod=secondesToFrames(computeReference(c.params.number))
         ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
       elseif(c.type=="start") then
         ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
@@ -1322,8 +1360,18 @@ local function UpdateConditionsTruthfulness (frameNumber)
         ctx.conditions[idCond]["currentlyValid"]=compareValue_Numerical(v1,v2,c.params.comparison)   
       elseif(c.type=="booleanVariable") then
         ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
-      elseif(c.type=="script") then
-        ctx.conditions[idCond]["currentlyValid"]=load_code(c.params.script)
+      elseif(c.type=="script") then	  
+		local sucess, result = pcall(load_code(c.params.script))
+		if success or result == true or result == false then
+			if result == nil then
+				result=false
+			end
+			ctx.conditions[idCond]["currentlyValid"]=result
+		else
+			Spring.Echo ("Warning!!! script \""..c.params.script.."\" failed: "..result)
+			ctx.conditions[idCond]["currentlyValid"]=false
+		end
+        
         --EchoDebug(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])), 7)
       end
     end
@@ -1350,11 +1398,11 @@ local function parseJson(jsonString)
 
   local widgetWithForcedState={
     ["PP gui rooms"]=true,["Chili Framework"]=true,["PP Display Bubble"]=true
-	,["Hide commands"]=true,["PP GUI Messenger"]=true,["PP Camera Auto"]=true
+	,["PP GUI Messenger"]=true,["PP Camera Auto"]=true
     ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
 	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true,["PP Restart Manager"]=true
-  }
+  } -- remove <<["Hide commands"]=true>> managed by mouse activation
   
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
@@ -1515,16 +1563,18 @@ end
    -------EVENTS  AND  CONDITIONS--------------
    ---------------------------------------------
   if(ctx.mission.events~=nil)then
+	  ctx.nextUniqueIdCondition = 0
+	  ctx.nextUniqueIdEvent = 0
       for i,currentEvent in ipairs(ctx.mission.events) do
        local idEvent=currentEvent.id
+	   ctx.nextUniqueIdEvent = ctx.nextUniqueIdEvent <= tonumber(idEvent) and tonumber(idEvent) + 1 or ctx.nextUniqueIdEvent -- <=> (ctx.nextUniqueIdEvent < idEvent) ? idEvent + 1 : ctx.nextUniqueIdEvent;
        ctx.orderedEventsId[i]=idEvent
        ctx.events[idEvent]={}
        ctx.events[idEvent]=ctx.mission.events[i]
        ctx.events[idEvent].listOfInvolvedConditions={}
-	   ctx.nextUniqueIdCondition=0
        for j=1, table.getn(currentEvent.conditions)do
          local currentCond=currentEvent.conditions[j]
-		 ctx.nextUniqueIdCondition = ctx.nextUniqueIdCondition < currentCond.id and currentCond.id + 1 or ctx.nextUniqueIdCondition -- <=> (ctx.nextUniqueIdCondition < currentCond.id) ? currentCond.id + 1 : ctx.nextUniqueIdCondition;
+		 ctx.nextUniqueIdCondition = ctx.nextUniqueIdCondition <= currentCond.id and currentCond.id + 1 or ctx.nextUniqueIdCondition -- <=> (ctx.nextUniqueIdCondition < currentCond.id) ? currentCond.id + 1 : ctx.nextUniqueIdCondition;
          local id=currentCond.name
          table.insert(ctx.events[idEvent].listOfInvolvedConditions,id)
          ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]=currentCond

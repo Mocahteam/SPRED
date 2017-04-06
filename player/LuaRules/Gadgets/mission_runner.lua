@@ -139,10 +139,16 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
-	mouseDisabled = true
+	if not mouseDisabled then
+		mouseDisabled = true
+		Spring.SendCommands("luaui enablewidget Hide commands")
+	end
 	
   elseif arg1 == "mouseEnabled" then
-	mouseDisabled = false
+	if mouseDisabled then
+		mouseDisabled = false
+		Spring.SendCommands("luaui disablewidget Hide commands")
+	end
 	
   elseif arg1 == "enableCameraAuto" then
     if Script.LuaUI("CameraAuto") then

@@ -41,7 +41,8 @@ function replayMission()
 end
 
 function widget:Initialize()
-	if editorRef then -- An editor reference is defined => we display the button
+	if editorRef then -- An editor reference is defined => we display the button and enable console
+		Spring.SendCommands("console 1")
 		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
 			Spring.Echo("PP Mission Tester: Chili is not defined, remove himself")
 			return

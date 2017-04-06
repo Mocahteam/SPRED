@@ -212,6 +212,14 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 			autoAdjust = true,
 			maxSize = 16,
 			shadow = false
+		},
+		OnKeyPress = {
+			function (self, key)
+				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+					WG.Chili.Screen0:FocusControl(nil)
+					return true
+				end
+			end
 		}
 	}
 	-- Join Button
@@ -266,6 +274,7 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 			end
 		},	
 	}
+	WG.Chili.Screen0:FocusControl(editBox)
 end
 
 function select_player_slot(missionName, options, playerTeams, isHost, isEditorContext)

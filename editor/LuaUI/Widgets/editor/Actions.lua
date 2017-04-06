@@ -49,7 +49,8 @@ actions_list = {
 			{
 				text = "<Time>",
 				type = "text",
-				id = "time"
+				id = "time",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -155,7 +156,8 @@ actions_list = {
 			{
 				text = "<Number>",
 				type = "text",
-				id = "number"
+				id = "number",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<UnitType>",
@@ -201,7 +203,8 @@ actions_list = {
 			{
 				text = "<Percentage>",
 				type = "text",
-				id = "percentage"
+				id = "percentage",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -351,7 +354,7 @@ actions_list = {
 				text = "<Time>",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration."
+				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -376,7 +379,7 @@ actions_list = {
 				text = "<Time>",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration."
+				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -401,7 +404,7 @@ actions_list = {
 				text = "<Time>",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration."
+				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -536,7 +539,7 @@ actions_list = {
 				text = "<Number>",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")"
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},
@@ -555,12 +558,14 @@ actions_list = {
 			{
 				text = "<Min>",
 				type = "text",
-				id = "min"
+				id = "min",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			},
 			{
 				text = "<Max>",
 				type = "text",
-				id = "max"
+				id = "max",
+				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
 			}
 		}
 	},

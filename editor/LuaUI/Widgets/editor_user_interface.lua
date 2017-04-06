@@ -78,7 +78,6 @@ local groupListUnitsButtons = {} -- Allows selection of units
 local groupListUnitsEyes = {} -- Allows to focus on units
 local addGroupButton -- Creates a new group
 local updateTeamButtons = true -- Force update on the bottom-right team buttons
-local newUnitGroupEditBox -- Edit box to specify the name of the new group created from selected units
 
 -- Draw selection variables
 local drawStartX, drawStartY, drawEndX, drawEndY, screenSizeX, screenSizeY = 0, 0, 0, 0, 1920, 1080 -- Used to know where to plot the rectangle
@@ -223,13 +222,14 @@ local chosenTraces = {}
 local saveStates = {} -- States for CTRL+Z
 local loadingState = false -- Prevents saving states when loading a state
 local loadingMap = false -- Prevents multiple load
+local waitingNewMap = false -- in order waiting end of erasing current map
 local askGadgetToLoadTable = -1 -- delay communication with gadget in second
 local loadIndex = 1 -- State to be loaded
 local saveLoadCooldown = 0 -- Prevents too many loads in a short period of time
 local saveCurrentEvent = nil -- If an event was opened, save it to open it again after the load
 local saveCurrentCondition = nil -- same for condition
 local saveCurrentAction = nil -- same for action
-local saveStateTrigger = -1 -- used to manage units creation et destroying in a same frame in order to delay game state saving
+local saveStateTrigger = -1 -- used to manage units creation and destroying in a same frame in order to delay game state saving
 local variablesWindowToBeShown = false -- same for the variables window
 local configureWindowToBeShown = false -- same for the configure event window
 local waitMouseRelease = false -- Synchronised save when moving units for example
@@ -393,7 +393,7 @@ function addScrollPanel(_parent, _x, _y, _w, _h)
 	return scrollPanel
 end
 
-function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
+function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color, _onKeyPressed)
 	local editBox = Chili.EditBox:New {
 		parent = _parent,
 		x = _x,
@@ -415,6 +415,17 @@ function addEditBox(_parent, _x, _y, _w, _h, _align, _text, _color)
 	else
 		editBox.font.size = 16
 		editBox.font.maxsize = 16
+	end
+	if _onKeyPressed then
+		editBox.OnKeyPress = { _onKeyPressed }
+	else
+		editBox.OnKeyPress = {
+			function (self, key)
+				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+					Screen0:FocusControl(nil)
+				end
+			end
+		}
 	end
 	return editBox
 end
@@ -651,6 +662,9 @@ function mapSettingsFrame()
 		if mapSettingsButtons.feedbackButton.checked ~= feedbackState then
 			mapSettingsButtons.feedbackButton:Toggle()
 		end
+		if not loadingMap and not loadingState and not waitingNewMap and initialized then
+			Screen0:FocusControl(mapNameEditBox)
+		end
 	end
 end
 
@@ -800,12 +814,14 @@ function showTeamConfig() -- Show the team config panel
 			
 			-- Team name
 			teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '2%', '30%', '12%', '40%', "left", teamName[team], {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
-			teamNameEditBoxes[team].OnChange = {
+			teamNameEditBoxes[team].OnFocusUpdate = {
 				function ()
-					if teamName[team] ~= teamNameEditBoxes[team].text then
+					if teamName[team] ~= teamNameEditBoxes[team].text and teamNameEditBoxes[team].text ~= "" then
 						teamName[team] = teamNameEditBoxes[team].text
 						updateAllyTeam = true
 						saveState()
+					elseif teamNameEditBoxes[team].text == "" then
+						teamNameEditBoxes[team]:SetText(teamName[team])
 					end
 				end
 			}
@@ -813,15 +829,15 @@ function showTeamConfig() -- Show the team config panel
 			-- Enabled/Disabled
 			enableTeamButtons[team] = addButton(teamConfigPanels[team], '16%', '30%', '18%', '40%', EDITOR_FORCES_TEAMCONFIG_DISABLED, nil)
 			if enabledTeams[team] then
-				enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+				enableTeamButtons[team]:SetCaption(EDITOR_FORCES_TEAMCONFIG_ENABLED)
 			end
 			local function changeTeamState()
 				enabledTeams[team] = not enabledTeams[team]
 				enableTeamButtons[team].state.chosen = not enableTeamButtons[team].state.chosen
 				if enableTeamButtons[team].caption == EDITOR_FORCES_TEAMCONFIG_DISABLED then
-					enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+					enableTeamButtons[team]:SetCaption(EDITOR_FORCES_TEAMCONFIG_ENABLED)
 				else
-					enableTeamButtons[team].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
+					enableTeamButtons[team]:SetCaption(EDITOR_FORCES_TEAMCONFIG_DISABLED)
 				end
 				if not enabledTeams[team] then
 					removeTeamFromTables(team)
@@ -896,7 +912,7 @@ function showTeamConfig() -- Show the team config panel
 			teamAIElements.teamAILabels[team] = addLabel(teamConfigPanels[team], '85%', '20%', '13%', '30%', EDITOR_FORCES_TEAMCONFIG_AI)
 			teamAIElements.teamAIEditBoxes[team] = addEditBox(teamConfigPanels[team], '85%', '50%', '13%', '30%')
 			teamAIElements.teamAIEditBoxes[team].text = teamAIElements.teamAI[team]
-			teamAIElements.teamAIEditBoxes[team].OnChange = {
+			teamAIElements.teamAIEditBoxes[team].OnFocusUpdate = {
 				function ()
 					if teamAIElements.teamAI[team] ~= teamAIElements.teamAIEditBoxes[team].text then
 						teamAIElements.teamAI[team] = teamAIElements.teamAIEditBoxes[team].text
@@ -918,10 +934,10 @@ function showTeamConfig() -- Show the team config panel
 		-- Update the state of the buttons if they are in wrong state
 		if enabledTeams[t] and not enableTeamButtons[t].state.chosen then
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
-			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_ENABLED
+			enableTeamButtons[t]:SetCaption(EDITOR_FORCES_TEAMCONFIG_ENABLED)
 		elseif not enabledTeams[t] and enableTeamButtons[t].state.chosen then
 			enableTeamButtons[t].state.chosen = not enableTeamButtons[t].state.chosen
-			enableTeamButtons[t].caption = EDITOR_FORCES_TEAMCONFIG_DISABLED
+			enableTeamButtons[t]:SetCaption(EDITOR_FORCES_TEAMCONFIG_DISABLED)
 		end
 		-- Update the values of the trackbars
 		local r, g, b = teamColor[t].red, teamColor[t].green, teamColor[t].blue
@@ -1185,6 +1201,43 @@ function initForcesWindow()
 	end
 end
 
+function triggerReinitializedFrame()
+	if windows["fileWindowPopUp"] then
+		Screen0:RemoveChild(windows["fileWindowPopUp"])
+		windows["fileWindowPopUp"]:Dispose()
+	end
+	windows["fileWindowPopUp"] = addWindow(Screen0, "5%", "40%", "90%", "20%")
+	addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '60%', EDITOR_TRIGGERS_EVENTS_CONDITION_CHANGE, 20)
+	local function okPressed()
+		Screen0:RemoveChild(windows["fileWindowPopUp"])
+		windows["fileWindowPopUp"]:Dispose()
+	end
+	local okButton = addButton(windows["fileWindowPopUp"], '35%', '60%', '30%', '40%', EDITOR_OK,okPressed)
+	okButton.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				okPressed()
+			end
+		end
+	}
+	Screen0:FocusControl(okButton)
+end
+
+function replaceConditionInTrigger (trigger, conditionToFind, replacement)
+	local newTrigger = trigger
+	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."$", replacement)
+	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."([) ])", replacement.."%1")
+	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."([) ])", "%1"..replacement.."%2")
+	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."$", "%1"..replacement)
+	return newTrigger
+end
+
+-- Return true if the trigger contains a condition
+function triggerContainsCondition (trigger, condition)
+	local result = replaceConditionInTrigger(trigger, condition, "")
+	return string.len(trigger) ~= string.len(result)
+end
+
 function initTriggerWindow()
 	-- Left Panel
 	windows['triggerWindow'] = addWindow(Screen0, '0%', '10%', '25%', '90%')
@@ -1198,15 +1251,24 @@ function initTriggerWindow()
 	eventNameEditBox = addEditBox(windows['eventWindow'], '30%', '1%', '40%', '5%', "left", "")
 	eventNameEditBox.OnChange = {
 		function ()
-			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
-			if currentEvent and events[currentEvent].name ~= eventNameEditBox.text and not string.find(eventNameEditBox.text, " ") then
+			if currentEvent and eventUI.eventButtons[currentEvent] then
+				eventUI.eventButtons[currentEvent]:SetCaption(eventNameEditBox.text)
+			end
+		end
+	}
+	eventNameEditBox.OnFocusUpdate = {
+		function ()
+			-- prevent space in name
+			eventNameEditBox:SetText(string.gsub(eventNameEditBox.text, "%s+", ""))
+			if currentEvent and events[currentEvent].name ~= eventNameEditBox.text and eventNameEditBox.text ~= "" then
 				-- Update internal data
 				events[currentEvent].name = eventNameEditBox.text
 				-- Update associated button
-				eventUI.eventButtons[currentEvent].caption = eventNameEditBox.text
-				eventUI.eventButtons[currentEvent]:InvalidateSelf()
+				eventUI.eventButtons[currentEvent]:SetCaption(eventNameEditBox.text)
 				-- save state
 				saveState()
+			elseif eventNameEditBox.text == "" then
+				eventNameEditBox:SetText(events[currentEvent].name)
 			end
 		end
 	}
@@ -1244,15 +1306,31 @@ function initTriggerWindow()
 	conditionNameEditBox = addEditBox(windows['conditionWindow'], '30%', '1%', '40%', '5%', "left", "")
 	conditionNameEditBox.OnChange = {
 		function ()
-			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
-			if currentEvent and currentCondition and events[currentEvent].conditions[currentCondition].name ~= conditionNameEditBox.text and not string.find(conditionNameEditBox.text, " ") then
+			-- Update associated button
+			if currentEvent and currentCondition and conditionButtons[events[currentEvent].id][currentCondition] then
+				conditionButtons[events[currentEvent].id][currentCondition]:SetCaption(conditionNameEditBox.text)
+			end
+		end
+	}
+	conditionNameEditBox.OnFocusUpdate = {
+		function ()
+			-- prevent space in name
+			conditionNameEditBox:SetText(string.gsub(conditionNameEditBox.text, "%s+", ""))
+			if currentEvent and currentCondition and events[currentEvent].conditions[currentCondition].name ~= conditionNameEditBox.text and conditionNameEditBox.text ~= "" then
+				-- check if the condition is included into the trigger
+				if triggerContainsCondition(events[currentEvent].trigger, events[currentEvent].conditions[currentCondition].name) then
+					-- if so, we reset trigger and inform user
+					events[currentEvent].trigger = ""
+					triggerReinitializedFrame()
+				end
 				-- Update internale data
 				events[currentEvent].conditions[currentCondition].name = conditionNameEditBox.text
-				-- Update associated button
-				conditionButtons[events[currentEvent].id][currentCondition].caption = conditionNameEditBox.text
-				conditionButtons[events[currentEvent].id][currentCondition]:InvalidateSelf()
 				-- save state
 				saveState()
+				-- update import window
+				updateImportWindow()
+			elseif conditionNameEditBox.text == "" then
+				conditionNameEditBox:SetText(events[currentEvent].conditions[currentCondition].name)
 			end
 		end
 	}
@@ -1276,15 +1354,25 @@ function initTriggerWindow()
 	actionNameEditBox = addEditBox(windows['actionWindow'], '30%', '1%', '40%', '5%', "left", "")
 	actionNameEditBox.OnChange = {
 		function ()
-			-- If a space is found, a new string will be build (see preventSpaces function) and this callback will be called again. To avoid multiples state saving, we do the save only if string doesn't contain spaces and if the text is not equal to the current saved data
-			if currentEvent and currentAction and events[currentEvent].actions[currentAction].name ~= actionNameEditBox.text and not string.find(actionNameEditBox.text, " ") then
+			-- Update associated button
+			if currentEvent and currentAction and actionButtons[events[currentEvent].id][currentAction] then
+				actionButtons[events[currentEvent].id][currentAction]:SetCaption(actionNameEditBox.text)
+			end
+		end
+	}
+	actionNameEditBox.OnFocusUpdate = {
+		function ()
+			-- prevent space in name
+			actionNameEditBox:SetText(string.gsub(actionNameEditBox.text, "%s+", ""))
+			if currentEvent and currentAction and events[currentEvent].actions[currentAction].name ~= actionNameEditBox.text and actionNameEditBox.text ~= "" then
 				-- Update internale data
 				events[currentEvent].actions[currentAction].name = actionNameEditBox.text
-				-- Update associated button
-				actionButtons[events[currentEvent].id][currentAction].caption = actionNameEditBox.text
-				actionButtons[events[currentEvent].id][currentAction]:InvalidateSelf()
 				-- save state
 				saveState()
+				-- update import window
+				updateImportWindow()
+			elseif actionNameEditBox.text == "" then
+				actionNameEditBox:SetText(events[currentEvent].actions[currentAction].name)
 			end
 		end
 	}
@@ -1320,27 +1408,39 @@ function initTriggerWindow()
 			local e = events[currentEvent]
 			local validTrigger = false
 			local correctTrigger = customTriggerEditBox.text
-			correctTrigger = string.gsub(correctTrigger, "[Oo][Rr]", "or")
-			correctTrigger = string.gsub(correctTrigger, "[Aa][Nn][Dd]", "and")
-			correctTrigger = string.gsub(correctTrigger, "[Nn][Oo][Tt]", "not")
+			-- avoid to transform CORPS in CorPS => then lowercase "OR" keywords only if it is precede by " " or ")" token and followed by " " or "(" token
+			correctTrigger = string.gsub(correctTrigger, "([ )])[Oo][Rr]([( ])", "%1or%2")
+			correctTrigger = string.gsub(correctTrigger, "^[Oo][Rr]([( ])", "or%1")
+			correctTrigger = string.gsub(correctTrigger, "([ )])[Oo][Rr]$", "%1or")
+			-- same for "and" keyword
+			correctTrigger = string.gsub(correctTrigger, "([ )])[Aa][Nn][Dd]([( ])", "%1and%2")
+			correctTrigger = string.gsub(correctTrigger, "^[Aa][Nn][Dd]([( ])", "and%1")
+			correctTrigger = string.gsub(correctTrigger, "([ )])[Aa][Nn][Dd]$", "%1and")
+			-- same for "not" keyword (unary operator)
+			correctTrigger = string.gsub(correctTrigger, " [Nn][Oo][Tt]([( ])", " not%1")
+			correctTrigger = string.gsub(correctTrigger, "^[Nn][Oo][Tt]([( ])", "not%1")
 			customTriggerEditBox:SetText(correctTrigger)
 			local checkingTrigger = customTriggerEditBox.text
+			-- remove all condition from trigger
 			local count = 0
 			for i, c in ipairs(e.conditions) do
-				checkingTrigger = string.gsub(checkingTrigger, c.name, "")
+				checkingTrigger = replaceConditionInTrigger(checkingTrigger, c.name, "")
 			end
+			-- count the number of parenthesis and remove them
 			checkingTrigger = string.gsub(checkingTrigger, ".", function(c) if c == "(" then count = count + 1 return "" elseif c == ")" then count = count - 1 return "" end return c end)
+			-- remove all keywords (or, and, not)
 			checkingTrigger = string.gsub(checkingTrigger, "or", "")
 			checkingTrigger = string.gsub(checkingTrigger, "and", "")
 			checkingTrigger = string.gsub(checkingTrigger, "not", "")
 			checkingTrigger = string.gsub(checkingTrigger, " ", "")
+			
 			if count == 0 and checkingTrigger == "" then
 				validTrigger = true
 			end
 			if validTrigger then
 				checkingTrigger = customTriggerEditBox.text
 				for i, c in ipairs(e.conditions) do
-					checkingTrigger = string.gsub(checkingTrigger, c.name, "true")
+					checkingTrigger = replaceConditionInTrigger(checkingTrigger, c.name, "true")
 				end
 				local load_code
 				if loadstring then
@@ -1356,30 +1456,36 @@ function initTriggerWindow()
 					currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
 				end
 			else
-				currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_NOT_VALID)
+				local msg = EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\255\0\0"
+				if count ~= 0 then
+					msg = msg..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CHECK_PARENTHESIS
+				else
+					msg = msg..EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CHECK_NAMES
+				end
+				currentTriggerLabel:SetText(msg)
 			end
 		end
 	end
-	customTriggerEditBox.onReturn = useCustomTrigger
+	-- Override default OnKeyPressed defined on addEditBox(...) function 
+	customTriggerEditBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				useCustomTrigger()
+				Screen0:FocusControl(nil)
+			end
+		end
+	}
 
 	local useDefaultTrigger = function()
 		if currentEvent then
-			local e = events[currentEvent]
-			local trig = ""
-			for i, c in ipairs(e.conditions) do
-				trig = trig..c.name
-				if i ~= #(e.conditions) then
-					trig = trig.." and "
-				end
-			end
-			e.trigger = trig
-			customTriggerEditBox:SetText(trig)
-			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT.."\255\0\255\204"..trig)
+			events[currentEvent].trigger = ""
+			customTriggerEditBox:SetText("")
+			currentTriggerLabel:SetText(EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT)
 			saveState()
 		end
 	end
-	addButton(windows['configureEvent'], '0%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
-	addButton(windows['configureEvent'], '50%', '15%', '50%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
+	addButton(windows['configureEvent'], '0%', '15%', '60%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CUSTOM, useCustomTrigger)
+	addButton(windows['configureEvent'], '60%', '15%', '40%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_DEFAULT, useDefaultTrigger)
 	
 	local triggerScrollPanel = addScrollPanel(windows['configureEvent'], '2%', '20%', '96%', '10%')
 	currentTriggerLabel = addTextBox(triggerScrollPanel, '0%', '0%', '100%', '100%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_CURRENT, 13)
@@ -1388,8 +1494,8 @@ function initTriggerWindow()
 	actionSequenceScrollPanel = addScrollPanel(windows['configureEvent'], '25%', '35%', '50%', '35%')
 	-- Other parameters
 	addLabel(windows['configureEvent'], '0%', '70%', '100%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_OTHER)
-	addLabel(windows['configureEvent'], '5%', '75%', '30%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left")
-	addLabel(windows['configureEvent'], '5%', '92%', '30%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left")
+	addLabel(windows['configureEvent'], '0%', '75%', '25%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION, 20, "left")
+	addLabel(windows['configureEvent'], '5%', '95%', '30%', '5%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_COMMENT, 20, "left")
 
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "25%", "85%", "40%", "15%")
@@ -1452,7 +1558,7 @@ function initMapSettingsWindow()
 	
 	addLabel(windows['mapSettingsWindow'], '0%', '10%', '100%', '5%', EDITOR_MAPSETTINGS_MAP_NAME, 20, "left")
 	mapNameEditBox = addEditBox(windows['mapSettingsWindow'], '5%', '15%', '95%', '5%')
-	mapNameEditBox.OnChange = {
+	mapNameEditBox.OnFocusUpdate = {
 		function ()
 			if mapDescription.mapName ~= mapNameEditBox.text then
 				mapDescription.mapName = mapNameEditBox.text
@@ -1463,12 +1569,11 @@ function initMapSettingsWindow()
 	
 	addLabel(windows['mapSettingsWindow'], '0%', '22%', '20%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING, 20, "left")
 	mapBriefingEditBox = addEditBox(windows['mapSettingsWindow'], '5%', '27%', '95%', '5%')
-	mapBriefingEditBox.OnChange = {
+	mapBriefingEditBox.OnChange = { updateBriefingPreview }
+	mapBriefingEditBox.OnFocusUpdate = {
 		function ()
 			if mapDescription.mapBriefingRaw ~= mapBriefingEditBox.text then
 				mapDescription.mapBriefingRaw = mapBriefingEditBox.text
-				-- update preview briefing
-				updateBriefingPreview()
 				mapDescription.mapBriefing = mapBriefingTextBox.text
 				saveState()
 			end
@@ -1509,43 +1614,54 @@ function initMapSettingsWindow()
 
 	
 	mapSettingsButtons.cameraAutoButton = addCheckbox(windows['mapSettingsWindow'], "2%", "72%", "60%", "5%", cameraAutoState, EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED, "left")
-	mapSettingsButtons.cameraAutoButton.OnChange = {
+	mapSettingsButtons.cameraAutoButton.OnFocusUpdate = {
 		function()
-			cameraAutoState = not mapSettingsButtons.cameraAutoButton.checked
-			saveState()
+			Spring.Echo("cameraAutoFocus Update")
+			if cameraAutoState ~= mapSettingsButtons.cameraAutoButton.checked then
+				cameraAutoState = mapSettingsButtons.cameraAutoButton.checked
+				saveState()
+			end
 		end
 	}
 	
 	mapSettingsButtons.mouseStateButton = addCheckbox(windows['mapSettingsWindow'], "2%", "77%", "60%", "5%", mouseState, EDITOR_MAPSETTINGS_MOUSE_ENABLED, "left")
-	mapSettingsButtons.mouseStateButton.OnChange = {
+	mapSettingsButtons.mouseStateButton.OnFocusUpdate = {
 		function()
-			mouseState = not mapSettingsButtons.mouseStateButton.checked
-			saveState()
+			if mouseState ~= mapSettingsButtons.mouseStateButton.checked then
+				mouseState = mapSettingsButtons.mouseStateButton.checked
+				saveState()
+			end
 		end
 	}
 	
 	mapSettingsButtons.autoHealButton = addCheckbox(windows['mapSettingsWindow'], "2%", "82%", "60%", "5%", autoHealState, EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED, "left")
-	mapSettingsButtons.autoHealButton.OnChange = {
+	mapSettingsButtons.autoHealButton.OnFocusUpdate = {
 		function()
-			autoHealState = not mapSettingsButtons.autoHealButton.checked
-			saveState()
+			if autoHealState ~= mapSettingsButtons.autoHealButton.checked then
+				autoHealState = mapSettingsButtons.autoHealButton.checked
+				saveState()
+			end
 		end
 	}
 	
 	mapSettingsButtons.minimapButton = addCheckbox(windows['mapSettingsWindow'], "2%", "87%", "60%", "5%", minimapState, EDITOR_MAPSETTINGS_MINIMAP_ENABLED, "left")
-	mapSettingsButtons.minimapButton.OnChange = {
+	mapSettingsButtons.minimapButton.OnFocusUpdate = {
 		function()
-			minimapState = not mapSettingsButtons.minimapButton.checked
-			saveState()
+			if minimapState ~= mapSettingsButtons.minimapButton.checked then	
+				minimapState = mapSettingsButtons.minimapButton.checked
+				saveState()
+			end
 		end
 	}
 	
 	if Game.isPPEnabled then
 		mapSettingsButtons.feedbackButton = addCheckbox(windows['mapSettingsWindow'], "2%", "92%", "60%", "5%", feedbackState, EDITOR_MAPSETTINGS_FEEDBACK_ENABLED, "left")
-		mapSettingsButtons.feedbackButton.OnChange = {
+		mapSettingsButtons.feedbackButton.OnFocusUpdate = {
 			function()
-				feedbackState = not mapSettingsButtons.feedbackButton.checked
-				saveState()
+				if feedbackState ~= mapSettingsButtons.feedbackButton.checked then
+					feedbackState = mapSettingsButtons.feedbackButton.checked
+					saveState()
+				end
 			end
 		}
 	end
@@ -1742,10 +1858,9 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	clearTemporaryWindows()
 	local unitSelection = Spring.GetSelectedUnits()
 	unitAttributesWindow = addWindow(Screen0, '65%', '10%', '20%', '40%', true)
-	addLabel(unitAttributesWindow, '0%', "0%", "100%", "15%", EDITOR_UNITS_EDIT_ATTRIBUTES, 30)
+	addLabel(unitAttributesWindow, '0%', "0%", "100%", "13%", EDITOR_UNITS_EDIT_ATTRIBUTES, 30)
 	-- HP
-	local hpLabel = addLabel(unitAttributesWindow, '5%', "15%", "40%", "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_HP.."%", 20)
-	hpLabel.padding = {0, 0, 0, 0}
+	addLabel(unitAttributesWindow, '0%', "20%", "25%", "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_HP, 20, "left")
 
 	local hpPercent = ""
 	for i, u in ipairs(unitSelection) do
@@ -1757,10 +1872,11 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 			break
 		end
 	end
-	changeHPEditBox = addEditBox(unitAttributesWindow, "45%", "15%", "50%", "10%", "left", hpPercent)
+	changeHPEditBox = addEditBox(unitAttributesWindow, "25%", "20%", "55%", "10%", "left", hpPercent)
+	addLabel(unitAttributesWindow, '80%', "20%", "20%", "10%", "%", 20, "left")
 	-- AutoHeal
-	addLabel(unitAttributesWindow, '0%', "30%", '100%', "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL, 30)
-	autoHealComboBox = addComboBox(unitAttributesWindow, "0%", "45%", "100%", "10%", { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED })
+	addLabel(unitAttributesWindow, '0%', "30%", '100%', "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL, 20, "left")
+	autoHealComboBox = addComboBox(unitAttributesWindow, "5%", "40%", "95%", "10%", { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED })
 	local autoHealStatus = ""
 	for i, u in ipairs(unitSelection) do
 		if i == 1 and unitAutoHeal[u] then
@@ -1779,14 +1895,14 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 		autoHealComboBox:Select(1)
 	end
 	-- Team
-	addLabel(unitAttributesWindow, '0%', "60%", '100%', "15%", EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM, 30)
+	addLabel(unitAttributesWindow, '0%', "50%", '100%', "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_TEAM, 20, "left")
 	local comboBoxItems = {}
 	for k, t in pairs(teamStateMachine.states) do
 		if enabledTeams[t] then
 			table.insert(comboBoxItems, teamName[t])
 		end
 	end
-	teamComboBox = addComboBox(unitAttributesWindow, '0%', "75%", '100%', "10%", comboBoxItems)
+	teamComboBox = addComboBox(unitAttributesWindow, '5%', "60%", '95%', "10%", comboBoxItems)
 	local team = Spring.GetUnitTeam(unitSelection[1])
 	for i, t in ipairs(comboBoxItems) do
 		if t == teamName[team] then
@@ -1795,7 +1911,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 		end
 	end
 	-- Apply
-	addButton(unitAttributesWindow, "0%", "90%", "100%", "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
+	addButton(unitAttributesWindow, "10%", "75%", "80%", "20%", EDITOR_UNITS_EDIT_ATTRIBUTES_APPLY, applyChangesToSelectedUnits)
 end
 
 function showUnitInformation(u) -- Shows units information above unit
@@ -1842,15 +1958,23 @@ function showUnitGroupsAttributionWindow() -- Show a small window allowing to ad
 		count = count + 1
 	end
 
-	newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', (count * 20).."%", '60%', "20%", "left", "") -- Allow the creation of a new group
+	local newUnitGroupEditBox = addEditBox(attributionWindowScrollPanel, '0%', ((count * 20)+2).."%", '60%', "16%", "left", "") -- Allow the creation of a new group
 	newUnitGroupEditBox.hint = EDITOR_UNITS_GROUPS_NEW
-	newUnitGroupEditBox.onReturn = function() addUnitGroup(newUnitGroupEditBox.text) clearTemporaryWindows() end
 	local function newGroup()
 		if newUnitGroupEditBox.text ~= "" then
 			addUnitGroup(newUnitGroupEditBox.text)
 			clearTemporaryWindows()
 		end
 	end
+	-- Override default OnKeyPressed defined on addEditBox(...) function 
+	newUnitGroupEditBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				newGroup()
+				Screen0:FocusControl(nil)
+			end
+		end
+	}
 	local newUnitValidationButton = addButton(attributionWindowScrollPanel, '60%', (count * 20).."%", '40%', "20%", EDITOR_OK, newGroup)
 end
 
@@ -2073,18 +2197,14 @@ function updateUnitGroupPanels() -- Update groups when a group is created/remove
 			selectGroupButtons[group.id].unitGroupsId = i
 			-- group name
 			groupEditBoxes[group.id] = addEditBox(groupPanels[group.id], "10%", "0%", "80%", childCoordHeaderLineHeight.."%", "left", group.name)
-			groupEditBoxes[group.id].OnChange = {
-				function ()
-					-- String in the editbox as name for the group
-					if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
-						group.name = groupEditBoxes[group.id].text
-						saveState()
-					end
-				end
-			}
 			groupEditBoxes[group.id].OnFocusUpdate = {
 				function ()
-					if groupEditBoxes[group.id].text == "" then
+					if group.name ~= groupEditBoxes[group.id].text and groupEditBoxes[group.id].text ~= "" then
+						-- Set string in the editbox as name for the group
+						group.name = groupEditBoxes[group.id].text
+						saveState()
+					elseif groupEditBoxes[group.id].text == "" then
+						-- Reset group name
 						groupEditBoxes[group.id]:SetText(group.name)
 					end
 				end
@@ -2165,6 +2285,7 @@ end
 
 function showGroupsWindow()
 	clearTemporaryWindows()
+	Screen0:RemoveChild(windows["unitGroupsWindow"]) -- in case it is already open (Chili log errors if we try to add multiple times the same object)
 	Screen0:AddChild(windows["unitGroupsWindow"])
 	for k, p in pairs(groupPanels) do
 		p:InvalidateSelf()
@@ -2702,9 +2823,9 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 			eyeBut.OnMouseOut = { function() eyeBut.color = {0, 1, 1, 1} end }
 			-- zone name
 			local editBox = addEditBox(zoneScrollPanel, "15%", (6+(i-1)*(size+1)).."%", "70%", size.."%", "left", zone.name, {zone.red, zone.green, zone.blue, 1})
-			editBox.OnChange = {
+			editBox.OnChange = { closeZonesSpecialAttributesWindow }
+			editBox.OnFocusUpdate = {
 				function ()
-					closeZonesSpecialAttributesWindow()
 					if zone.name ~= editBox.text then
 						zone.name = editBox.text
 						saveState()
@@ -2712,10 +2833,12 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 				end
 			}
 			local checkbox = addCheckbox(zoneScrollPanel, "85%", (6+(i-1)*(size+1)).."%", "15%", size.."%", zone.shown)
-			checkbox.OnChange = {
+			checkbox.OnFocusUpdate = {
 				function ()
-					zone.shown = not checkbox.checked
-					saveState()
+					if zone.shown ~= checkbox.checked then
+						zone.shown = checkbox.checked
+						saveState()
+					end
 				end
 			}
 			zoneBoxes[zone.id] = { editBox = editBox, eyeBut = eyeBut, checkbox = checkbox }
@@ -2936,16 +3059,63 @@ function updateTeamConfigPanels() -- Update panels when teams become enabled/dis
 	end
 end
 
-function showWarningMultiplayerMessage()
-	local count = 0
-	for k, tc in pairs(teamControl) do
-		if tc == "player" then
-			count = count + 1
+function showWarningMessages()
+	-- count the number of players
+	local function countPlayers()
+		local count = 0
+		for k, tc in pairs(teamControl) do
+			if tc == "player" then
+				count = count + 1
+			end
 		end
+		return count
 	end
+	-- return true if no element of "tab" have the same name of antother element of "tab"
+	local function allDifferent(tab)
+		for i, e1 in ipairs(tab) do
+			for j, e2 in ipairs(tab) do
+				if i ~= j and e1.name == e2.name then
+					return false
+				end
+			end
+		end
+		return true
+	end
+	
 	local text = nil
-	if count < 1 then
-		text = EDITOR_FORCES_TEAMCONFIG_WARNING_NO_PLAYER
+	if countPlayers() < 1 then -- check at least one player
+		text = EDITOR_WARNING_NO_PLAYER
+	elseif not allDifferent(events) then -- check events
+		text = EDITOR_WARNING_SAME_EVENTS
+	elseif not allDifferent(unitGroups) then -- check groups
+		text = EDITOR_WARNING_SAME_GROUPS
+	elseif not allDifferent(zoneList) then -- check zones
+		text = EDITOR_WARNING_SAME_ZONES
+	elseif not allDifferent(triggerVariables) then -- check variables
+		text = EDITOR_WARNING_SAME_VARIABLES
+	else
+		for i, e in ipairs(events) do -- for each events
+			if not allDifferent(e.conditions) then -- check conditions
+				text = string.gsub(EDITOR_WARNING_SAME_CONDITIONS, "/EVENT/", e.name)
+				break
+			elseif not allDifferent(e.actions) then -- check actions
+				text = string.gsub(EDITOR_WARNING_SAME_ACTIONS, "/EVENT/", e.name)
+				break
+			end
+		end
+		if text == nil then -- check teams
+			for k1, name1 in pairs(teamName) do
+				for k2, name2 in pairs(teamName) do
+					if k1 ~= k2 and name1 == name2 then
+						text = EDITOR_WARNING_SAME_TEAMS
+						break
+					end
+				end
+				if text then
+					break
+				end
+			end
+		end
 	end
 	if text then
 		local w = gl.GetTextWidth(text)
@@ -3012,6 +3182,7 @@ end
 
 function createNewCondition()
 	if currentEvent then
+		Spring.Echo ("createNewCondition")
 		local e = events[currentEvent]
 		local condition = {}
 		condition.id = conditionNumber
@@ -3035,6 +3206,7 @@ function createNewCondition()
 end
 
 function editCondition(i)
+	Spring.Echo ("editCondition "..i)
 	removeThirdWindows()
 	currentAction = nil
 	if currentCondition ~= i then
@@ -3182,6 +3354,12 @@ function updateConditionList(e)
 		deleteConditionButtons[e.id][i].OnClick = {
 			function()
 				if currentEvent then
+					-- check if the condition is included into the trigger
+					if triggerContainsCondition(e.trigger, c.name) then
+						-- if so, we reset trigger and inform user
+						e.trigger = ""
+						triggerReinitializedFrame()
+					end
 					table.remove(events[currentEvent].conditions, i)
 					removeThirdWindows() -- close windows to prevent bugs
 					currentCondition = nil
@@ -4176,7 +4354,7 @@ drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 
 	-- Editbox
 	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
-	editBox.OnChange = {
+	editBox.OnFocusUpdate = {
 		function()
 			if a.params[attr.id] ~= editBox.text then
 				a.params[attr.id] = editBox.text
@@ -4200,7 +4378,7 @@ drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	-- Editbox
 	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
 	editBox.rawText = nil
-	editBox.OnChange = {
+	editBox.OnFocusUpdate = {
 		function()
 			if editBox.rawText ~= editBox.text then
 				local msgs = splitString2(editBox.text, "||")
@@ -4240,8 +4418,8 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, ac, panel, featu
 	end
 
 	-- Editbox
-	local editBox = addEditBox(panel, '68%', y.."%", '30%', "5%")
-	editBox.OnChange = {
+	local editBox = addEditBox(panel, '60%', y.."%", '38%', "5%")
+	editBox.OnFocusUpdate = {
 		function()
 			if ac.params[attr.id].number ~= editBox.text then
 				ac.params[attr.id].number = editBox.text
@@ -4257,7 +4435,7 @@ drawFeatureFunctions["numberComparison"] = function(attr, yref, ac, panel, featu
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATLEAST,
 		EDITOR_TRIGGERS_EVENTS_COMPARISON_NUMBER_ATMOST
 	}
-	local comboBox = addComboBox(panel, '30%', y.."%", '38%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '30%', "5%", comboBoxItems)
 	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
@@ -4388,26 +4566,40 @@ function configureEvent() -- Show the event configuration window
 				end
 			end
 			-- Parameters
+			local function okPressed ()
+				if e.repetition and e.repetitionTime ~= repetitionUI.repetitionEditBox.text then
+					e.repetitionTime = repetitionUI.repetitionEditBox.text
+					if repetitionUI.repetitionEditBox.text == "" then
+						e.repetitionTime = "0"
+					end
+					repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
+					saveState()
+				end
+			end
 			removeElements(windows['configureEvent'], repetitionUI, true)
 			repetitionUI = {}
-			repetitionUI.repetitionLabel = addLabel(windows['configureEvent'], '0%', '85%', '100%', '5%', "")
-			repetitionUI.repetitionEditBox = addEditBox(windows['configureEvent'], '80%', '81%', '10%', '3%')
-			repetitionUI.repetitionEditBox.hint = "X = "
-			repetitionUI.repetitionButton = addButton(windows['configureEvent'], '90%', '80%', '10%', '5%', EDITOR_OK,
-				function()
-					if e.repetition then
-						e.repetitionTime = repetitionUI.repetitionEditBox.text
-						repetitionUI.repetitionLabel:SetCaption(string.gsub(EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_MESSAGE, "/X/", tostring(e.repetitionTime)))
-						saveState()
+			repetitionUI.repetitionLabel = addLabel(windows['configureEvent'], '0%', '90%', '100%', '5%', "")
+			repetitionUI.repetitionEditBox = addEditBox(windows['configureEvent'], '65%', '76%', '25%', '3%')
+			-- Override default OnKeyPressed defined on addEditBox(...) function 
+			repetitionUI.repetitionEditBox.OnKeyPress = {
+				function (self, key)
+					if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+						okPressed()
+						Screen0:FocusControl(nil)
 					end
 				end
-			)
+			}
+			repetitionUI.repetitionEditBox.hint = "X = "
+			repetitionUI.repetitionButton = addButton(windows['configureEvent'], '90%', '75%', '10%', '5%', EDITOR_OK, okPressed)
+			repetitionUI.repetitionHint = addScrollPanel(windows['configureEvent'], '0%', '80%', '100%', "10%")
+			addTextBox(repetitionUI.repetitionHint, '0%', "0%", '100%', "100%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_TRIGGER_REPETITION, 14, { 0.6, 1, 1, 1 })
 			
 			
 			local enableRepetitionUI = function ()
 				windows['configureEvent']:AddChild(repetitionUI.repetitionLabel)
 				windows['configureEvent']:AddChild(repetitionUI.repetitionEditBox)
 				windows['configureEvent']:AddChild(repetitionUI.repetitionButton)
+				windows['configureEvent']:AddChild(repetitionUI.repetitionHint)
 			end
 			
 			local disableRepetitionUI = function ()
@@ -4416,9 +4608,10 @@ function configureEvent() -- Show the event configuration window
 				windows['configureEvent']:RemoveChild(repetitionUI.repetitionLabel)
 				windows['configureEvent']:RemoveChild(repetitionUI.repetitionEditBox)
 				windows['configureEvent']:RemoveChild(repetitionUI.repetitionButton)
+				windows['configureEvent']:RemoveChild(repetitionUI.repetitionHint)
 			end
 			
-			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '35%', '75%', '65%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
+			repetitionUI.repetitionComboBox = addComboBox(windows['configureEvent'], '25%', '75%', '40%', '5%', { EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_NO, EDITOR_TRIGGERS_EVENTS_CONFIGURE_REPETITION_YES })
 			repetitionUI.repetitionComboBox.OnSelect = {
 				function()
 					if repetitionUI.repetitionComboBox.selected == 1 then
@@ -4447,8 +4640,8 @@ function configureEvent() -- Show the event configuration window
 				repetitionUI.repetitionComboBox:Select(1)
 			end
 
-			eventCommentEditBox = addEditBox(windows["configureEvent"], '35%', '92%', '65%', '5%', "left", "")
-			eventCommentEditBox.OnChange = {
+			eventCommentEditBox = addEditBox(windows["configureEvent"], '35%', '95%', '65%', '5%', "left", "")
+			eventCommentEditBox.OnFocusUpdate = {
 				function ()
 					if e.comment ~= eventCommentEditBox.text then
 						e.comment = eventCommentEditBox.text
@@ -4565,33 +4758,6 @@ function importAction() -- Import an action to the current event, renaming it if
 	saveState()
 end
 
-function preventSpaces() -- Prevent user to use spaces in names (would bug with the custom trigger)
-	if currentEvent then
-		if string.find(eventNameEditBox.text, " ") then
-			local cursor = eventNameEditBox.cursor
-			eventNameEditBox:SetText(string.gsub(eventNameEditBox.text, "%s+", ""))
-			eventNameEditBox.cursor = cursor - 1
-			eventNameEditBox:InvalidateSelf()
-		end
-	end
-	if currentAction then
-		if string.find(actionNameEditBox.text, " ") then
-			local cursor = actionNameEditBox.cursor
-			actionNameEditBox:SetText(string.gsub(actionNameEditBox.text, "%s+", ""))
-			actionNameEditBox.cursor = cursor - 1
-			actionNameEditBox:InvalidateSelf()
-		end
-	end
-	if currentCondition then
-		if string.find(conditionNameEditBox.text, " ") then
-			local cursor = conditionNameEditBox.cursor
-			conditionNameEditBox:SetText(string.gsub(conditionNameEditBox.text, "%s+", ""))
-			conditionNameEditBox.cursor = cursor - 1
-			conditionNameEditBox:InvalidateSelf()
-		end
-	end
-end
-
 function showVariablesFrame() -- Display the edit variables window or hide it if already displayed
 	if not editVariablesButton.state.chosen then
 		removeSecondWindows()
@@ -4614,7 +4780,7 @@ end
 function addVariable()
 	local variable = {}
 	variable.id = variablesNumber
-	variable.name = EDITOR_TRIGGERS_VARIABLES_DEFAULT_NAME.." "..tostring(variablesNumber)
+	variable.name = EDITOR_TRIGGERS_VARIABLES_DEFAULT_NAME..tostring(variablesNumber)
 	variable.type = "number"
 	variable.initValue = 0
 	
@@ -4654,11 +4820,15 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	-- variable name
 	local nameLabel = addLabel(variablesScrollPanel, '0%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_NAME)
 	local nameEditBox = addEditBox(variablesScrollPanel, '10%', y.."%", '20%', height.."%", "left", var.name)
-	nameEditBox.OnChange = {
+	nameEditBox.OnFocusUpdate = {
 		function ()
-			if var.name ~= nameEditBox.text then
+			-- prevent space in name
+			nameEditBox:SetText(string.gsub(nameEditBox.text, "%s+", ""))
+			if var.name ~= nameEditBox.text and nameEditBox.text ~= "" then
 				var.name = nameEditBox.text -- Update variables value
 				saveState()
+			elseif nameEditBox.text == "" then
+				nameEditBox:SetText(var.name)
 			end
 		end
 	}
@@ -4710,13 +4880,14 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 		end
 	}
 	-- set callback to editbox
-	initValueEditBox.OnChange = {
+	initValueEditBox.OnFocusUpdate = {
 		function ()
-			if var.initValue ~= tonumber(initValueEditBox.text) then
-				var.initValue = tonumber(initValueEditBox.text)
-				if var.initValue ==  nil then -- the value contains non numeric value
-					initValueEditBox:SetText("0")
+			local newValue = tonumber(initValueEditBox.text)
+			if var.initValue ~= newValue then 
+				if newValue == nil then
+					initValueEditBox:SetText(tostring(var.initValue))
 				else
+					var.initValue = newValue
 					saveState()
 				end
 			end
@@ -5108,6 +5279,10 @@ function newMap() -- Set each parameter to its default value
 	newEventActionButton = addButton(eventActionsScrollPanel, '0%', "0%", '100%', "10%", EDITOR_TRIGGERS_ACTIONS_NEW, createNewAction)
 end
 
+function newMapDone()
+	waitingNewMap = false
+end
+
 function refreshGUI() -- Open the window of the state you were in before load/new
 	-- Initialize
 	updateTeamButtons = true -- prevents requiring to go to the forces menu
@@ -5368,6 +5543,8 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	
 	loadingState = false -- Warning this flag has to be set here, before the resetStack into the following "if"
 	loadingMap = false -- idem for this flag
+	
+	Spring.SetWMCaption("Spring "..Game.version.." "..mapDescription.mapName..".editor *")
 	NeedToBeSaved = true
 	
 	-- it's possible to pass by this function by using Ctrl+Z
@@ -5380,12 +5557,24 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 		end
 		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "35%", "30%", "10%")
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '50%', EDITOR_FILE_LOAD_SUCCESS, 20)
-		addButton(windows["fileWindowPopUp"], '33%', '55%', '33%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose()
-		end)		
+		local function okPressed()
+			Screen0:RemoveChild(windows["fileWindowPopUp"])
+			windows["fileWindowPopUp"]:Dispose()
+		end
+		local okButton = addButton(windows["fileWindowPopUp"], '33%', '55%', '33%', '45%', EDITOR_OK, okPressed)
+		okButton.OnKeyPress = {
+			function (self, key)
+				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+					okPressed()
+				end
+			end
+		}
+		Screen0:FocusControl(okButton)
 		-- reset flag
 		loadingFromMenu = false
 		resetStack() -- reset stack of states
 		NeedToBeSaved = false
+		Spring.SetWMCaption("Spring "..Game.version.." "..mapDescription.mapName..".editor")
 	end
 end
 
@@ -5434,6 +5623,7 @@ function saveMap() -- Save the table containing the data of the mission into a f
 	file:write(jsonfile)
 	file:close()
 	NeedToBeSaved = false
+	Spring.SetWMCaption("Spring "..Game.version.." "..saveName..".editor")
 end
 
 function newMapFrame() -- Show a window when the user clicks on the new button
@@ -5530,15 +5720,22 @@ function saveMapFrame(NextFctCall) -- Show a window when the user clicks on the 
 			end
 			windows["fileWindowPopUp"] = addWindow(Screen0, "5%", "40%", "90%", "20%")
 			addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '60%', EDITOR_FILE_SAVE_COMPLETED.." (<Spring>/SPRED/levels/"..saveName..".editor)", 20)
-			addButton(windows["fileWindowPopUp"], '35%', '60%', '30%', '40%', EDITOR_OK,
-				function()
-					Screen0:RemoveChild(windows["fileWindowPopUp"])
-					windows["fileWindowPopUp"]:Dispose()
-					if NextFctCall then
-						NextFctCall()
+			local function okPressed ()
+				Screen0:RemoveChild(windows["fileWindowPopUp"])
+				windows["fileWindowPopUp"]:Dispose()
+				if NextFctCall then
+					NextFctCall()
+				end
+			end
+			local okButton = addButton(windows["fileWindowPopUp"], '35%', '60%', '30%', '40%', EDITOR_OK, okPressed)
+			okButton.OnKeyPress = {
+				function (self, key)
+					if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+						okPressed()
 					end
 				end
-			)
+			}
+			Screen0:FocusControl(okButton)
 		end
 		saveMap()
 		confirmSave()
@@ -5572,6 +5769,13 @@ function quitFrame() -- Show a window when the user clicks on the quit button
 end
 
 function beginLoadLevel(name) -- Callback used to load a map directly from the gadget
+	-- set window caption
+	if name then
+		Spring.SetWMCaption("Spring "..Game.version.." "..name..".editor")
+	else
+		Spring.SetWMCaption("Spring "..Game.version.." "..EDITOR_MAPSETTINGS_DEFAULT_NAME)
+	end
+	
 	loadMap(name)
 end
 
@@ -5580,7 +5784,7 @@ function loadLevelWithRightMap(name) -- Load a level in the map associated to th
 		local levelFile = VFS.LoadFile("SPRED/missions/"..name..".editor",  VFS.RAW)
 		levelFile = json.decode(levelFile)
 		if levelFile.description.map == Game.mapName then
-			loadMap(name)
+			beginLoadLevel(name)
 			return
 		end
 		local operations = {
@@ -5602,7 +5806,10 @@ end
 
 function newLevelWithRightMap(name) -- Creates a new level on the selected map
 	if name == Game.mapName then
+		waitingNewMap = true
 		newMap()
+		NeedToBeSaved = true
+		Spring.SetWMCaption("Spring "..Game.version.." "..EDITOR_MAPSETTINGS_DEFAULT_NAME)
 		refreshGUI()
 		resetStack() -- reset stack of states
 		-- Notify user for the successful loading
@@ -5612,8 +5819,19 @@ function newLevelWithRightMap(name) -- Creates a new level on the selected map
 		end
 		windows["fileWindowPopUp"] = addWindow(Screen0, "35%", "35%", "30%", "10%")
 		addLabel(windows["fileWindowPopUp"], '0%', '0%', '100%', '50%', EDITOR_FILE_LOAD_SUCCESS, 20)
-		addButton(windows["fileWindowPopUp"], '33%', '55%', '33%', '45%', EDITOR_OK, function() Screen0:RemoveChild(windows["fileWindowPopUp"]) windows["fileWindowPopUp"]:Dispose()
-		end)
+		local function okPressed()
+			Screen0:RemoveChild(windows["fileWindowPopUp"])
+			windows["fileWindowPopUp"]:Dispose()
+		end
+		local okButton = addButton(windows["fileWindowPopUp"], '33%', '55%', '33%', '45%', EDITOR_OK, okPressed)
+		okButton.OnKeyPress = {
+			function (self, key)
+				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+					okPressed()
+				end
+			end
+		}
+		Screen0:FocusControl(okButton)
 		return
 	end
 	local operations = {
@@ -5735,15 +5953,18 @@ function resetStack() -- reset the stack
 end
 
 function saveState() -- Save the state and put it in the stack
-	if not loadingMap and not loadingState and initialized then
-		NeedToBeSaved = true
+	if not loadingMap and not loadingState and not waitingNewMap and initialized then
 		-- remove states on the top of the stack
 		for i = 1, loadIndex-1, 1 do
 			table.remove(saveStates, 1)
 		end
+		
 		-- compute new state
 		local savedTable = encodeSaveTable()
 		savedTable = json.decode(json.encode(savedTable))
+		
+		Spring.SetWMCaption("Spring "..Game.version.." "..savedTable.description.name..".editor *")
+		NeedToBeSaved = true
 		
 		-- push the new state on the top of the stack
 		table.insert(saveStates, 1, savedTable)
@@ -5757,7 +5978,6 @@ function loadState(direction) -- Load a state from the stack depending on the di
 	if (loadIndex < #saveStates and direction > 0) -- Ctrl+Z
 		or (loadIndex > 1 and direction < 0) -- Ctrl+Y
 	then
-		NeedToBeSaved = true
 		loadingState = true
 		saveCurrentEvent = currentEvent
 		saveCurrentAction = currentAction
@@ -5766,6 +5986,10 @@ function loadState(direction) -- Load a state from the stack depending on the di
 		variablesWindowToBeShown = editVariablesButton.state.chosen
 		loadIndex = loadIndex + direction
 		loadedTable = saveStates[loadIndex]
+		
+		Spring.SetWMCaption("Spring "..Game.version.." "..loadedTable.description.name..".editor *")
+		NeedToBeSaved = true
+		
 		if direction > 0 then
 			Spring.Echo ("Load older state: "..loadIndex.." / "..#saveStates)
 		else
@@ -5914,10 +6138,9 @@ function widget:DrawScreen()
 			if triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNIT or triggerStateMachine:getCurrentState() == triggerStateMachine.states.PICKUNITSET then
 				showUnitsInformation()
 			end
-		elseif globalStateMachine:getCurrentState() == globalStateMachine.states.FORCES and forcesStateMachine:getCurrentState() == forcesStateMachine.states.TEAMCONFIG then
-			showWarningMultiplayerMessage()
 		end
 		showZoneInformation()
+		showWarningMessages()
 	end
 end
 
@@ -5948,6 +6171,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("requestSave", requestSave) -- called by gadget when a unit is updated
 	widgetHandler:RegisterGlobal("beginLoadLevel", beginLoadLevel)
 	widgetHandler:RegisterGlobal("generateCommandsList", generateCommandsList)
+	widgetHandler:RegisterGlobal("NewMapDone", newMapDone)
 	updateLanguage() -- defined in EditorStrings.lua
 	-- load default values for map description
 	mapDescription.mapName = EDITOR_MAPSETTINGS_DEFAULT_NAME -- Name of the map
@@ -6000,7 +6224,6 @@ function widget:Update(delta)
 		end
 
 		if globalStateMachine:getCurrentState() == globalStateMachine.states.TRIGGER then
-			preventSpaces()
 			updateEventList()
 			updateEventFrame()
 		end
@@ -6058,6 +6281,7 @@ function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("requestSave")
 	widgetHandler:DeregisterGlobal("beginLoadLevel")
 	widgetHandler:DeregisterGlobal("generateCommandsList")
+	widgetHandler:DeregisterGlobal("NewMapDone")
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -6552,7 +6776,7 @@ end
 
 function widget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
 	addUnitLine(unitID, unitDefID, unitTeam)
-	if not loadingMap and not loadingState and initialized then
+	if not loadingMap and not loadingState and not waitingNewMap and initialized then
 		saveStateTrigger = 0 -- creating units is immediate, then we ask to save state immediately
 	end
 end
@@ -6574,7 +6798,7 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerD
 			realignUnitList(unitListHighlight, "0%", "100%")
 		end
 	end
-	if not loadingMap and not loadingState and initialized then
+	if not loadingMap and not loadingState and not waitingNewMap and initialized then
 		saveStateTrigger = 0.1 -- destroying units taking time, then we ask to save state in 100ms
 	end
 end
