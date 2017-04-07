@@ -6,25 +6,25 @@ conditions_list = {
 		type = "start",
 		filter = "Game",
 		typeText = "Game start",
-		text = "When game starts.",
+		text = "[en]When game starts.[en][fr]Lorsque le jeu démarre.[fr]",
 		attributes = {}
 	},
 	{
 		type = "elapsedTime",
 		filter = "Game",
 		typeText = "Time elapsed",
-		text = "Seconds elapsed <Comparison> <Number>.",
+		text = "[en]Seconds elapsed <Comparison> <Number>.[en][fr]Nombre de secondes écoulées <Comparaison> <Nombre>.[fr]",
 		attributes = {
 			{
-				text = "<Comparison>",
+				text = "[en]<Comparison>[en][fr]<Comparaison>[fr]",
 				type = "comparison",
 				id = "comparison"
 			},
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -32,13 +32,13 @@ conditions_list = {
 		type = "repeat",
 		filter = "Game",
 		typeText = "Periodically true",
-		text = "True every <Number> seconds since the begining of the mission.",
+		text = "[en]True every <Number> seconds since the begining of the mission.[en][fr]Vrai chaque <Nombre> secondes depuis le début de la mission.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -46,16 +46,16 @@ conditions_list = {
 		type = "zone",
 		filter = "Unit",
 		typeText = "Units are in a zone",
-		text = "<Number> units of <UnitSet> are in <Zone>.",
+		text = "[en]<Number> units of <UnitSet> are in <Zone>.[en][fr]<Nombre> d'unités de <Ensemble> sont dans <Zone>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
@@ -70,21 +70,21 @@ conditions_list = {
 		type = "underAttack",
 		filter = "Unit",
 		typeText = "Units are under attack",
-		text = "<Number> units of <UnitSet> are being attacked by <Attacker>.",
+		text = "[en]<Number> units of <UnitSet> are being attacked by <Attacker>.[en][fr]<Nombre> d'unités de <Ensemble> sont attaquées par <Attaquant>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Attacker>",
+				text = "[en]<Attacker>[en][fr]<Attaquant>[fr]",
 				type = "unitset",
 				id = "attacker"
 			}
@@ -94,21 +94,21 @@ conditions_list = {
 		type = "attacking",
 		filter = "Unit",
 		typeText = "Units are attacking",
-		text = "<Number> units of <UnitSet> are attacking <Target>.",
+		text = "[en]<Number> units of <UnitSet> are attacking <Target>.[en][fr]<Nombre> d'unités de <Ensemble> attaquent <Cible>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Target>",
+				text = "[en]<Target>[en][fr]<Cible>[fr]",
 				type = "unitset",
 				id = "target"
 			}
@@ -118,16 +118,16 @@ conditions_list = {
 		type = "dead",
 		filter = "Unit",
 		typeText = "Units are dead",
-		text = "<Number> units of <UnitSet> are dead.",
+		text = "[en]<Number> units of <UnitSet> are dead.[en][fr]<Nombre> d'unités de <Ensemble> sont mortes.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			}
@@ -137,21 +137,21 @@ conditions_list = {
 		type = "kill",
 		filter = "Unit",
 		typeText = "Units killed specific units",
-		text = "<UnitSet> killed <Number> units of <Target>.",
+		text = "[en]<UnitSet> killed <Number> units of <Target>.[en][fr]<Ensemble> a tué <Nombre> unités de <Cible>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<Target>",
+				text = "[en]<Target>[en][fr]<Cible>[fr]",
 				type = "unitset",
 				id = "target"
 			}
@@ -161,21 +161,21 @@ conditions_list = {
 		type = "killed",
 		filter = "Unit",
 		typeText = "Units have been killed by other units",
-		text = "<Number> units of <UnitSet> have been killed by <Attacker>.",
+		text = "[en]<Number> units of <UnitSet> have been killed by <Attacker>.[en][fr]<Nombre> d'unités de <Ensemble> ont été tuées par <Attaquant>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Attacker>",
+				text = "[en]<Attacker>[en][fr]<Attaquant>[fr]",
 				type = "unitset",
 				id = "attacker"
 			}
@@ -185,29 +185,29 @@ conditions_list = {
 		type = "hp",
 		filter = "Unit",
 		typeText = "HP of units",
-		text = "Hit points of <Number> units of <UnitSet> are <Comparison> <Percentage> %.",
+		text = "[en]Hit points of <Number> units of <UnitSet> are <Comparison> <Percentage> %.[en][fr]Les points de vie de <Nombre> unités de <Ensemble> sont <Comparaison> <Pourcentage> %.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Comparison>",
+				text = "[en]<Comparison>[en][fr]<Comparaison>[fr]",
 				type = "comparison",
 				id = "comparison"
 			},
 			{
-				text = "<Percentage>",
+				text = "[en]<Percentage>[en][fr]<Pourcentage>[fr]",
 				type = "text",
 				id = "hp",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -215,21 +215,21 @@ conditions_list = {
 		type = "order",
 		filter = "Unit",
 		typeText = "Units are doing command",
-		text = "<Number> units of <UnitSet> are doing <Command>.",
+		text = "[en]<Number> units of <UnitSet> are doing <Command>.[en][fr]<Nombre> d'unités de <Ensemble> réalisent <Commande>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Command>",
+				text = "[en]<Command>[en][fr]<Commande>[fr]",
 				type = "command",
 				id = "command"
 			}
@@ -239,21 +239,21 @@ conditions_list = {
 		type = "type",
 		filter = "Unit",
 		typeText = "Units are of specific type",
-		text = "<Number> units of <UnitSet> are of type <UnitType>",
+		text = "[en]<Number> units of <UnitSet> are of type <UnitType>.[en][fr]<Nombre> d'unités de <Ensemble> sont du type <Type>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "numberComparison",
 				id = "number",
-				hint = "In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]In case of \"Exactly\", \"At least\" or \"At most\" is selected, you can put numbers, variables and operators in editing field (example : \"(var1 + 3) / 2\").[en][fr]Si vous sélectionnez \"Exactement\", \"Au moins\" ou \"Au plus\", vous pouvez indiquer des nombres, des variables et des opérateurs dans le champs de saisie (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<UnitType>",
+				text = "[en]<UnitType>[en][fr]<Type>[fr]",
 				type = "unitType",
 				id = "type"
 			}
@@ -263,24 +263,24 @@ conditions_list = {
 		type = "numberVariable",
 		filter = "Variable",
 		typeText = "Compare the value of a variable",
-		text = "<Variable> <Comparison> <Number>.",
+		text = "[en]<Variable> <Comparison> <Number>.[en][fr]<Variable> <Comparaison> <Nombre>.[fr]",
 		attributes = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
 				id = "variable",
-				hint = "Variables can be defined by going to the menu available through the event panel"
+				hint = "[en]Variables can be defined by going to the menu available through the event panel.[en][fr]Les variables peuvent être définies à travers le menu accessible sous le panneau de gestion des événements.[fr]"
 			},
 			{
-				text = "<Comparison>",
+				text = "[en]<Comparison>[en][fr]<Comparaison>[fr]",
 				type = "comparison",
 				id = "comparison"
 			},
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -288,13 +288,13 @@ conditions_list = {
 		type = "booleanVariable",
 		filter = "Variable",
 		typeText = "Variable is true",
-		text = "<Variable> is true.",
+		text = "[en]<Variable> is true.[en][fr]<Variable> est vraie.[fr]",
 		attributes = {
 			{
 				text = "<Variable>",
 				type = "booleanVariable",
 				id = "variable",
-				hint = "Variables can be defined by going to the menu available through the event panel"
+				hint = "[en]Variables can be defined by going to the menu available through the event panel.[en][fr]Les variables peuvent être définies à travers le menu accessible sous le panneau de gestion des événements.[fr]"
 			}
 		}
 	},
@@ -302,7 +302,7 @@ conditions_list = {
 		type = "script",
 		filter = "Script",
 		typeText = "Evaluate custom boolean",
-		text = "Evaluate custom boolean returned by LUA script <Script>.",
+		text = "[en]Evaluate custom boolean returned by LUA script <Script>.[en][fr]Evaluer un booléen retourné par le script LUA <Script>.[fr]",
 		attributes = {
 			{
 				text = "<Script>",
@@ -317,8 +317,10 @@ conditions_list = {
 for i, c in ipairs(conditions_list) do
 	for ii, attr in ipairs(c.attributes) do
 		if textColors[attr.type] then
-			c.text = string.gsub(c.text, attr.text, textColors[attr.type]..attr.text.."\255\255\255\255")
-			attr.text = textColors[attr.type]..attr.text
+			for iii, keyword in ipairs(textColors[attr.type].keywords) do
+				c.text = string.gsub(c.text, keyword, textColors[attr.type].color..keyword.."\255\255\255\255")
+				attr.text = string.gsub(attr.text, keyword, textColors[attr.type].color..keyword.."\255\255\255\255")
+			end
 		end
 	end
 end

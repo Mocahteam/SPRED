@@ -5,7 +5,8 @@
 --
 local maxHealth, tmp
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
-local lang = Spring.GetModOptions()["language"] -- get the language"]
+local lang = Spring.GetModOptions()["language"] -- get the language
+VFS.Include("LuaUI/Widgets/libs/MiscCommon.lua")
 
 local ctx={}
 --ctx is a table containing main variables and functions (cf end of file). 
@@ -186,15 +187,6 @@ local function union(list1,list2)
     end
   end
   return union
-end
-
-function replaceVariableInExpression (expression, variableToFind, replacement)
-	local newExpression = expression
-	newExpression = string.gsub(newExpression, "^"..variableToFind.."$", replacement)
-	newExpression = string.gsub(newExpression, "^"..variableToFind.."([) %+-*/%%])", replacement.."%1")
-	newExpression = string.gsub(newExpression, "([( %+-*/%%])"..variableToFind.."([) %+-*/%%])", "%1"..replacement.."%2")
-	newExpression = string.gsub(newExpression, "([( %+-*/%%])"..variableToFind.."$", "%1"..replacement)
-	return newExpression
 end
 
 -- must give a number, string under the form of "8", "3" or v1+v2-3
@@ -438,7 +430,7 @@ end
 local function ShowBriefing ()
   local briefingTxt = ctx.messages["briefing"] -- convention all json files have briefing attribute
   if briefingTxt and briefingTxt ~= "" then
-	Script.LuaRules.showMessage(briefingTxt, false, 500)
+	Script.LuaRules.showMessage(extractLang(briefingTxt, lang), false, 500)
   end
 end
 
@@ -546,16 +538,6 @@ local function unitSetParamsToUnitsExternal(param)
     --EchoDebug("warning. This index gave nothing : "..index,7)
   end
   return units
-end
-
-   
-function replaceConditionInTrigger (trigger, conditionToFind, replacement)
-	local newTrigger = trigger
-	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."$", replacement)
-	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."([) ])", replacement.."%1")
-	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."([) ])", "%1"..replacement.."%2")
-	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."$", "%1"..replacement)
-	return newTrigger
 end
 
 -------------------------------------
@@ -694,7 +676,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
       if Spring.ValidUnitID(unit) then
         --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=getAMessage(act.params.message),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(getAMessage(act.params.message), lang),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
         --[[
         local x,y,z=Spring.GetUnitePosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -766,7 +748,7 @@ local function ApplyNonGroupableAction(act)
 	if act.params.boolean then
 		pause = act.params.boolean == "true"
 	end
-    Script.LuaRules.showMessage(getAMessage(act.params.message), pause, 500)
+    Script.LuaRules.showMessage(extractLang(getAMessage(act.params.message), lang), pause, 500)
   
   elseif(act.type=="showBriefing") then
     ShowBriefing()
@@ -778,7 +760,7 @@ local function ApplyNonGroupableAction(act)
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=getAMessage(act.params.message),x=x,y=y,z=z,time=(computeReference(act.params.time) or 0)/ctx.speedFactor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(computeReference(act.params.time) or 0)/ctx.speedFactor}))
      
   -- ZONES
   

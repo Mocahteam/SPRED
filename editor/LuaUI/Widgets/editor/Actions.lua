@@ -1,23 +1,22 @@
 VFS.Include("LuaUI/Widgets/editor/TextColors.lua")
-local lang = Spring.GetModOptions()["language"]
 
 actions_list = {
 	{
 		type = "win",
 		filter = "Game",
 		typeText = "Player wins",
-		text = "<Player> wins with state <State>.",
+		text = "[en]<Player> wins with state <State>.[en][fr]<Joueur> gagne avec l'état <Etat>.[fr]",
 		attributes = {
 			{
-				text = "<Player>",
+				text = "[en]<Player>[en][fr]<Joueur>[fr]",
 				type = "player",
 				id = "team"
 			},
 			{
-				text = "<State>",
+				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "text",
 				id = "outputState",
-				hint = "This string will be used as output state for the scenario editor"
+				hint = "[en]This string will be used as output state for the scenario editor[en][fr]Cette information sera utilisée comme un état de sortie pour l'éditeur de scénario[fr]"
 			}
 		}
 	},
@@ -25,18 +24,18 @@ actions_list = {
 		type = "lose",
 		filter = "Game",
 		typeText = "Player loses",
-		text = "<Player> loses with <State>.",
+		text = "[en]<Player> loses with state <State>.[en][fr]<Joueur> perd avec l'état <Etat>.[fr]",
 		attributes = {
 			{
-				text = "<Player>",
+				text = "[en]<Player>[en][fr]<Joueur>[fr]",
 				type = "player",
 				id = "team"
 			},
 			{
-				text = "<State>",
+				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "text",
 				id = "outputState",
-				hint = "This string will be used as output state for the scenario editor"
+				hint = "[en]This string will be used as output state for the scenario editor[en][fr]Cette information sera utilisée comme un état de sortie pour l'éditeur de scénario[fr]"
 			}
 		}
 	},
@@ -44,13 +43,13 @@ actions_list = {
 		type = "wait",
 		filter = "Game",
 		typeText = "Wait",
-		text = "Wait <Time> seconds.",
+		text = "[en]Wait <Time> seconds.[en][fr]Attendre <Temps> secondes.[fr]",
 		attributes = {
 			{
-				text = "<Time>",
+				text = "[en]<Time>[en][fr]<Temps>[fr]",
 				type = "text",
 				id = "time",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -58,13 +57,13 @@ actions_list = {
 		type = "waitCondition",
 		filter = "Game",
 		typeText = "Wait for condition",
-		text = "Wait for <Condition> to be true.",
+		text = "[en]Wait for <Condition> to be true.[en][fr]Attendre que <Condition> soit vraie.[fr]",
 		attributes = {
 			{
 				text = "<Condition>",
 				type = "condition",
 				id = "condition",
-				hint = "The condition can be chosen within the conditions of this event, which may not be part of the trigger of this event."
+				hint = "[en]The condition can be chosen within the conditions of this event, which may not be part of the trigger of this event.[en][fr]La condition peut être choisie parmi les conditions de cet événement[fr]"
 			}
 		}
 	},
@@ -72,13 +71,13 @@ actions_list = {
 		type = "waitTrigger",
 		filter = "Game",
 		typeText = "Wait for trigger",
-		text = "Wait for <Trigger> to be true.",
+		text = "[en]Wait for <Trigger> to be true.[en][fr]Attendre que <Déclencheur> soit vrai.[fr]",
 		attributes = {
 			{
-				text = "<Trigger>",
+				text = "[en]<Trigger>[en][fr]<Déclencheur>[fr]",
 				type = "text",
 				id = "trigger",
-				hint = "This field must be filled with a boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\"."
+				hint = "[en]This field must be filled with a boolean expression of the conditions of this event. For example, given an event with 3 conditions C1, C2 and C3, the trigger can be \"C1 or C2\".[en][fr]Ce champs doit être complété avec une expression booléenne composé des conditions de cet événement. Par exemple, considérant un événement avec 3 conditions C1, C2 et C3, le déclencheur pourrait être \"C1 or C2\".[fr]"
 			}
 		}
 	},
@@ -86,7 +85,7 @@ actions_list = {
 		type = "enableWidget",
 		filter = "Game",
 		typeText = "Enable Widget",
-		text = "Enable <Widget>.",
+		text = "[en]Enable <Widget>.[en][fr]Activer <Widget>.[fr]",
 		attributes = {
 			{
 				text = "<Widget>",
@@ -99,7 +98,7 @@ actions_list = {
 		type = "disableWidget",
 		filter = "Game",
 		typeText = "Disable Widget",
-		text = "Disable <Widget>.",
+		text = "[en]Disable <Widget>.[en][fr]Désactiver <Widget>.[fr]",
 		attributes = {
 			{
 				text = "<Widget>",
@@ -112,7 +111,7 @@ actions_list = {
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
-		text = "Center camera to <Position>.",
+		text = "[en]Center camera to <Position>.[en][fr]Centrer la caméra sur <Position>.[fr]",
 		attributes = {
 			{
 				text = "<Position>",
@@ -125,10 +124,10 @@ actions_list = {
 		type = "cameraAuto",
 		filter = "Control",
 		typeText = "Change camera auto state",
-		text = "Camera auto is now <State>.",
+		text = "[en]Camera auto is now <State>.[en][fr]La caméra automatique est maintenant <Etat>.[fr]",
 		attributes = {
 			{
-				text = "<State>",
+				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "toggle",
 				id = "toggle"
 			}
@@ -138,10 +137,10 @@ actions_list = {
 		type = "mouse",
 		filter = "Control",
 		typeText = "Change mouse state",
-		text = "Mouse is now <State>",
+		text = "[en]Mouse is now <State>.[en][fr]La souris est maintenant <Etat>.[fr]",
 		attributes = {
 			{
-				text = "<State>",
+				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "toggle",
 				id = "toggle"
 			}
@@ -151,21 +150,21 @@ actions_list = {
 		type = "createUnits",
 		filter = "Unit",
 		typeText = "Create Units in Zone",
-		text = "Create <Number> units of type <UnitType> for <Team> within <Zone>.",
+		text = "[en]Create <Number> units of type <UnitType> for <Team> within <Zone>.[en][fr]Créer <Nombre> d'unités du type <Type> pour <Equipe> dans <Zone>.[fr]",
 		attributes = {
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
-				text = "<UnitType>",
+				text = "[en]<UnitType>[en][fr]<Type>[fr]",
 				type = "unitType",
 				id = "unitType"
 			},
 			{
-				text = "<Team>",
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
 				type = "team",
 				id = "team"
 			},
@@ -180,10 +179,10 @@ actions_list = {
 		type = "kill",
 		filter = "Unit",
 		typeText = "Kill units",
-		text = "Kill <UnitSet>.",
+		text = "[en]Kill <UnitSet>.[en][fr]Tuer <Ensemble>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			}
@@ -193,18 +192,18 @@ actions_list = {
 		type = "hp",
 		filter = "Unit",
 		typeText = "Set HP of units",
-		text = "Set hit points of <UnitSet> to <Percentage> %.",
+		text = "[en]Set hit points of <UnitSet> to <Percentage> %.[en][fr]Définir les point de vie de <Ensemble> à <Pourcentage> %.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Percentage>",
+				text = "[en]<Percentage>[en][fr]<Pourcentage>[fr]",
 				type = "text",
 				id = "percentage",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -212,15 +211,15 @@ actions_list = {
 		type = "transfer",
 		filter = "Unit",
 		typeText = "Transfer units",
-		text = "Transfer <UnitSet> to <Team>.",
+		text = "[en]Transfer <UnitSet> to <Team>.[en][fr]Transférer <Ensemble> à <Equipe>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Team>",
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
 				type = "team",
 				id = "team"
 			}
@@ -230,10 +229,10 @@ actions_list = {
 		type = "teleport",
 		filter = "Unit",
 		typeText = "Teleport units",
-		text = "Teleport <UnitSet> to <Position>.",
+		text = "[en]Teleport <UnitSet> to <Position>.[en][fr]Téléporter <Ensemble> vers <Position>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
@@ -248,23 +247,23 @@ actions_list = {
 		type = "order",
 		filter = "Order",
 		typeText = "Order units (untargeted order)",
-		text = "Order <UnitSet> to begin <Command> with <Parameters>.",
+		text = "[en]Order <UnitSet> to begin <Command> with <Parameters>.[en][fr]Ordonner à <Ensemble> de réaliser <Commande> avec les paramètres <Paramètres>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Command>",
+				text = "[en]<Command>[en][fr]<Commande>[fr]",
 				type = "command",
 				id = "command"
 			},
 			{
-				text = "<Parameters>",
+				text = "[en]<Parameters>[en][fr]<Paramètres>[fr]",
 				type = "textSplit",
 				id = "parameters",
-				hint = "Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use."
+				hint = "[en]Parameters can be specified as numbers separated by ||. Please refer to the game documentation to know which parameter to use.[en][fr]Plusierus paramètres peuvent être définis sous forme de nombre séparés par ||. Veuillez vous référer à la documentation du jeu pour connaître les paramètres possibles.[fr]"
 			}
 		}
 	},
@@ -272,15 +271,15 @@ actions_list = {
 		type = "orderPosition",
 		filter = "Order",
 		typeText = "Order units to position",
-		text = "Order <UnitSet> to begin <Command> towards <Position>.",
+		text = "[en]Order <UnitSet> to begin <Command> towards <Position>.[en][fr]Ordonner à <Ensemble> de réaliser <Commande> à <Psotion>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Command>",
+				text = "[en]<Command>[en][fr]<Commande>[fr]",
 				type = "command",
 				id = "command"
 			},
@@ -295,20 +294,20 @@ actions_list = {
 		type = "orderTarget",
 		filter = "Order",
 		typeText = "Order units to target",
-		text = "Order <UnitSet> to begin <Command> towards <Target>.",
+		text = "[en]Order <UnitSet> to begin <Command> towards <Target>.[en][fr]Ordonner à <Ensemble> de réaliser <Commande> sur <Cible>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Command>",
+				text = "[en]<Command>[en][fr]<Commande>[fr]",
 				type = "command",
 				id = "command"
 			},
 			{
-				text = "<Target>",
+				text = "[en]<Target>[en][fr]<Cible>[fr]",
 				type = "unitset",
 				id = "target"
 			}
@@ -318,13 +317,13 @@ actions_list = {
 		type = "messageGlobal",
 		filter = "Message",
 		typeText = "Display message",
-		text = "Display <Message> and <Pause> the game.",
+		text = "[en]Display <Message> and <Pause> the game.[en][fr]Afficher <Message> et mettre en <Pause> le jeu.[fr]",
 		attributes = {
 			{
 				text = '<Message>',
 				type = "textSplit",
 				id = "message",
-				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.[fr]"
 			},
 			{
 				text = "<Pause>",
@@ -337,13 +336,13 @@ actions_list = {
 		type = "messagePosition",
 		filter = "Message",
 		typeText = "Display message at position",
-		text = "Display <Message> at <Position> for <Time> seconds.",
+		text = "[en]Display <Message> at <Position> for <Time> seconds.[en][fr]Afficher <Message> sur <Position> pendant <Temps> secondes.[fr]",
 		attributes = {
 			{
 				text = '<Message>',
 				type = "textSplit",
 				id = "message",
-				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.[fr]"
 			},
 			{
 				text = "<Position>",
@@ -351,10 +350,10 @@ actions_list = {
 				id = "position"
 			},
 			{
-				text = "<Time>",
+				text = "[en]<Time>[en][fr]<Temps>[fr]",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -362,24 +361,24 @@ actions_list = {
 		type = "messageUnit",
 		filter = "Message",
 		typeText = "Display message above units",
-		text = "Display <Message> over units of <UnitSet> for <Time> seconds",
+		text = "[en]Display <Message> over units of <UnitSet> for <Time> seconds.[en][fr]Afficher <Message> au dessus des unités de <Ensemble> pendant <Temps> secondes.[fr]",
 		attributes = {
 			{
 				text = "<Message>",
 				type = "textSplit",
 				id = "message",
-				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Time>",
+				text = "[en]<Time>[en][fr]<Temps>[fr]",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -387,24 +386,24 @@ actions_list = {
 		type = "bubbleUnit",
 		filter = "Message",
 		typeText = "Display message in a bubble above units",
-		text = "Display <Message> in a bubble over <UnitSet> for <Time> seconds",
+		text = "[en]Display <Message> in a bubble over <UnitSet> for <Time> seconds.[en][fr]Afficher <Message> dans une bulle au dessus de <Ensemble> pendant <Temps> secondes.[fr]",
 		attributes = {
 			{
 				text = "<Message>",
 				type = "textSplit",
 				id = "message",
-				hint = "Multiple messages can be defined using || to split them. A random one will be picked each time this action is called."
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.[fr]"
 			},
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Time>",
+				text = "[en]<Time>[en][fr]<Temps>[fr]",
 				type = "text",
 				id = "time",
-				hint = "You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -412,22 +411,22 @@ actions_list = {
 		type = "showBriefing",
 		filter = "Message",
 		typeText = "Show briefing",
-		text = "Show the briefing (The briefing is automatically shown on start, use this action only to show the briefing again in game).",
+		text = "[en]Show the briefing (The briefing is automatically shown on start, use this action only to show the briefing again in game).[en][fr]Afficher le briefing (Le briefing est automatiquement afficher au démarrage d'une partie, n'utilisez cette action seulement pour afficher à nouveau de briefing en cours de partie).[fr]",
 		attributes = {}
 	},
 	{
 		type = "addToGroup",
 		filter = "Group",
 		typeText = "Add units to group",
-		text = "Add <UnitSet> to <Group>.",
+		text = "[en]Add <UnitSet> to <Group>.[en][fr]Ajouter <Ensemble> à <Groupe>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Group>",
+				text = "[en]<Group>[en][fr]<Groupe>[fr]",
 				type = "group",
 				id = "group"
 			}
@@ -437,15 +436,15 @@ actions_list = {
 		type = "removeFromGroup",
 		filter = "Group",
 		typeText = "Remove units from group",
-		text = "Remove <UnitSet> from <Group>.",
+		text = "[en]Remove <UnitSet> from <Group>.[en][fr]Retirer <Ensemble> de <Groupe>.[fr]",
 		attributes = {
 			{
-				text = "<UnitSet>",
+				text = "[en]<UnitSet>[en][fr]<Ensemble>[fr]",
 				type = "unitset",
 				id = "unitset"
 			},
 			{
-				text = "<Group>",
+				text = "[en]<Group>[en][fr]<Groupe>[fr]",
 				type = "group",
 				id = "group"
 			}
@@ -455,20 +454,20 @@ actions_list = {
 		type = "union",
 		filter = "Group",
 		typeText = "Union between 2 Unitsets",
-		text = "Set <Group> to the union between <UnitSet1> and <UnitSet2>.",
+		text = "[en]Set <Group> to the union between <UnitSet1> and <UnitSet2>.[en][fr]Définir <Groupe> comme l'union de <Ensemble1> et <Ensemble2>.[fr]",
 		attributes = {
 			{
-				text = "<Group>",
+				text = "[en]<Group>[en][fr]<Groupe>[fr]",
 				type = "group",
 				id = "group"
 			},
 			{
-				text = "<UnitSet1>",
+				text = "[en]<UnitSet1>[en][fr]<Ensemble1>[fr]",
 				type = "unitset",
 				id = "unitset1"
 			},
 			{
-				text = "<UnitSet2>",
+				text = "[en]<UnitSet2>[en][fr]<Ensemble2>[fr]",
 				type = "unitset",
 				id = "unitset2"
 			}
@@ -478,20 +477,20 @@ actions_list = {
 		type = "intersection",
 		filter = "Group",
 		typeText = "Intersection between 2 Unitsets",
-		text = "Set <Group> to the intersection between <UnitSet1> and <UnitSet2>.",
+		text = "[en]Set <Group> to the intersection between <UnitSet1> and <UnitSet2>.[en][fr]Définir <Groupe> comme l'intersection de <Ensemble1> et <Ensemble2>.[fr]",
 		attributes = {
 			{
-				text = "<Group>",
+				text = "[en]<Group>[en][fr]<Groupe>[fr]",
 				type = "group",
 				id = "group"
 			},
 			{
-				text = "<UnitSet1>",
+				text = "[en]<UnitSet1>[en][fr]<Ensemble1>[fr]",
 				type = "unitset",
 				id = "unitset1"
 			},
 			{
-				text = "<UnitSet2>",
+				text = "[en]<UnitSet2>[en][fr]<Ensemble2>[fr]",
 				type = "unitset",
 				id = "unitset2"
 			}
@@ -501,7 +500,7 @@ actions_list = {
 		type = "showZone",
 		filter = "Zone",
 		typeText = "Show zone in game",
-		text = "Show <Zone> in game.",
+		text = "[en]Show <Zone> in game.[en][fr]Rendre visible <Zone> dans le jeu.[fr]",
 		attributes = {
 			{
 				text = "<Zone>",
@@ -514,7 +513,7 @@ actions_list = {
 		type = "hideZone",
 		filter = "Zone",
 		typeText = "Hide zone in game",
-		text = "Hide <Zone> in game.",
+		text = "[en]Hide <Zone> in game.[en][fr]Cacher <Zone> dans le jeu.[fr]",
 		attributes = {
 			{
 				text = "<Zone>",
@@ -527,19 +526,19 @@ actions_list = {
 		type = "changeVariable",
 		filter = "Variable",
 		typeText = "Set number variable",
-		text = "Set <Variable> to <Number>",
+		text = "[en]Set <Variable> to <Number>.[en][fr]Affecter à <Variable> la valeur <Nombre>.[fr]",
 		attributes = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
 				id = "variable",
-				hint = "Variables can be defined by going to the menu available through the event panel"
+				hint = "[en]Variables can be defined by going to the menu available through the event panel.[en][fr]Les variables peuvent être définies à travers le menu accessible sous le panneau de gestion des événements.[fr]"
 			},
 			{
-				text = "<Number>",
+				text = "[en]<Number>[en][fr]<Nombre>[fr]",
 				type = "text",
 				id = "number",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -547,25 +546,25 @@ actions_list = {
 		type = "changeVariableRandom",
 		filter = "Variable",
 		typeText = "Change the value of a variable randomly",
-		text = "Set <Variable> to a random integer between <Min> and <Max>.",
+		text = "[en]Set <Variable> to a random integer between <Min> and <Max>.[en][fr]Affecter à <Variable> une valeur aléatoire comprise entre <Min> et <Max>.[fr]",
 		attributes = {
 			{
 				text = "<Variable>",
 				type = "numberVariable",
 				id = "variable",
-				hint = "Variables can be defined by going to the menu available through the event panel"
+				hint = "[en]Variables can be defined by going to the menu available through the event panel.[en][fr]Les variables peuvent être définies à travers le menu accessible sous le panneau de gestion des événements.[fr]"
 			},
 			{
 				text = "<Min>",
 				type = "text",
 				id = "min",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
 				text = "<Max>",
 				type = "text",
 				id = "max",
-				hint = "You can put numbers, variables and operators in this field (example : \"(var1 + 3) / 2\")."
+				hint = "[en]You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			}
 		}
 	},
@@ -573,16 +572,16 @@ actions_list = {
 		type = "setBooleanVariable",
 		filter = "Variable",
 		typeText = "Set boolean variable",
-		text = "Set <Variable> to <Boolean>",
+		text = "[en]Set <Variable> to <Boolean>.[en][fr]Affecter à <Variable> la valeur <Booléen>.[fr]",
 		attributes = {
 			{
 				text = "<Variable>",
 				type = "booleanVariable",
 				id = "variable",
-				hint = "Variables can be defined by going to the menu available through the event panel"
+				hint = "[en]Variables can be defined by going to the menu available through the event panel.[en][fr]Les variables peuvent être définies à travers le menu accessible sous le panneau de gestion des événements.[fr]"
 			},
 			{
-				text = "<Boolean>",
+				text = "[en]<Boolean>[en][fr]<Booléen>[fr]",
 				type = "boolean",
 				id = "boolean"
 			}
@@ -592,7 +591,7 @@ actions_list = {
 		type = "script",
 		filter = "Script",
 		typeText = "Execute custom script",
-		text = "Execute custom LUA script <Script>",
+		text = "[en]Execute custom LUA script <Script>.[en][fr]Exécuter le script LUA <Script>.[fr]",
 		attributes = {
 			{
 				text = "<Script>",
@@ -617,8 +616,10 @@ end
 for i, a in ipairs(actions_list) do
 	for ii, attr in ipairs(a.attributes) do
 		if textColors[attr.type] then
-			a.text = string.gsub(a.text, attr.text, textColors[attr.type]..attr.text.."\255\255\255\255")
-			attr.text = textColors[attr.type]..attr.text
+			for iii, keyword in ipairs(textColors[attr.type].keywords) do
+				a.text = string.gsub(a.text, keyword, textColors[attr.type].color..keyword.."\255\255\255\255")
+				attr.text = string.gsub(attr.text, keyword, textColors[attr.type].color..keyword.."\255\255\255\255")
+			end
 		end
 	end
 end

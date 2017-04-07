@@ -195,11 +195,11 @@ function gadget:RecvFromSynced(...)
     
   elseif arg1 == "showZone" then
     local zone=json.decode(arg2)
-    Script.LuaUI.AddZoneToDisplayList(zone)
+    Script.LuaUI.AddZoneToDisplayList(zone) -- function defined and registered in pp_display_zone widget
     
   elseif arg1 == "hideZone" then
     local zone=json.decode(arg2)
-    Script.LuaUI.RemoveZoneFromDisplayList(zone)
+    Script.LuaUI.RemoveZoneFromDisplayList(zone) -- function defined and registered in pp_display_zone widget
     
   elseif arg1 == "changeWidgetState" then
     local p=json.decode(arg2)

@@ -59,10 +59,10 @@ function widget:Initialize()
 		
 		BackButton = WG.Chili.Button:New{
 			parent = WG.Chili.Screen0,
-			x = "85%",
+			x = "80%",
 			y = "0%",
-			width = "15%",
-			height = "7%",
+			width = "20%",
+			height = "5%",
 			caption = back,
 			OnClick = { returnToEditor },
 			font = {
@@ -76,10 +76,10 @@ function widget:Initialize()
 		
 		ReplayButton = WG.Chili.Button:New{
 			parent = WG.Chili.Screen0,
-			x = "85%",
-			y = "8%",
-			width = "15%",
-			height = "7%",
+			x = "80%",
+			y = "6%",
+			width = "20%",
+			height = "5%",
 			caption = replay,
 			OnClick = { replayMission },
 			font = {

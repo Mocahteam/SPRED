@@ -17,6 +17,7 @@ VFS.Include("LuaUI/Widgets/editor/Actions.lua")
 VFS.Include("LuaUI/Widgets/editor/EditorStrings.lua")
 VFS.Include("LuaUI/Widgets/editor/LauncherStrings.lua")
 VFS.Include("LuaUI/Widgets/libs/RestartScript.lua")
+VFS.Include("LuaUI/Widgets/libs/MiscCommon.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
@@ -1223,15 +1224,6 @@ function triggerReinitializedFrame()
 	Screen0:FocusControl(okButton)
 end
 
-function replaceConditionInTrigger (trigger, conditionToFind, replacement)
-	local newTrigger = trigger
-	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."$", replacement)
-	newTrigger = string.gsub(newTrigger, "^"..conditionToFind.."([) ])", replacement.."%1")
-	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."([) ])", "%1"..replacement.."%2")
-	newTrigger = string.gsub(newTrigger, "([( ])"..conditionToFind.."$", "%1"..replacement)
-	return newTrigger
-end
-
 -- Return true if the trigger contains a condition
 function triggerContainsCondition (trigger, condition)
 	local result = replaceConditionInTrigger(trigger, condition, "")
@@ -1736,9 +1728,9 @@ function applyChangesToSelectedUnits() -- Apply changes to units attributes
 		unitHP[u] = tonumber(changeHPEditBox.text)
 		if autoHealComboBox.items[autoHealComboBox.selected] == EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL then
 			unitAutoHeal[u] = "global"
-		elseif autoHealComboBox.items[autoHealComboBox.selected] == EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED	then
+		elseif autoHealComboBox.items[autoHealComboBox.selected] == EDITOR_ENABLED	then
 			unitAutoHeal[u] = "enabled"
-		elseif autoHealComboBox.items[autoHealComboBox.selected] == EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED then
+		elseif autoHealComboBox.items[autoHealComboBox.selected] == EDITOR_DISABLED then
 			unitAutoHeal[u] = "disabled"
 		end
 	end
@@ -1876,7 +1868,7 @@ function showUnitAttributes() -- Show a window to edit unit's instance attribute
 	addLabel(unitAttributesWindow, '80%', "20%", "20%", "10%", "%", 20, "left")
 	-- AutoHeal
 	addLabel(unitAttributesWindow, '0%', "30%", '100%', "10%", EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL, 20, "left")
-	autoHealComboBox = addComboBox(unitAttributesWindow, "5%", "40%", "95%", "10%", { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_ENABLED, EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_DISABLED })
+	autoHealComboBox = addComboBox(unitAttributesWindow, "5%", "40%", "95%", "10%", { EDITOR_UNITS_EDIT_ATTRIBUTES_AUTO_HEAL_GLOBAL, EDITOR_ENABLED, EDITOR_DISABLED })
 	local autoHealStatus = ""
 	for i, u in ipairs(unitSelection) do
 		if i == 1 and unitAutoHeal[u] then
@@ -2535,8 +2527,7 @@ function showZoneInformation() -- Show each displayed zone name and top-left/bot
 			elseif z.type == "Disk" then
 				x, y = Spring.WorldToScreenCoords(z.x, Spring.GetGroundHeight(z.x, z.z), z.z)
 			end
-			local text = string.gsub(z.name, "\\n", "\n")
-			gl.Text(text, x, y, 15, "vcs")
+			gl.Text(z.name, x, y, 15, "vcs")
 		end
 	end
 	gl.EndText()
@@ -2886,8 +2877,21 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 	for i, z in ipairs(zoneList) do -- Generate labels and buttons
 		local y = (count * 14).."%"
 		local panel = addPanel(sp, "0%", y, "100%", "14%")
-		addLabel(panel, '0%', "0%", "100%", "50%", z.name, 20, "left", { z.red, z.green, z.blue, 1 })
-		local alwaysInViewButton = addButton(panel, "25%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
+		addLabel(panel, '0%', "0%", "7%", "50%", EDITOR_NAME, 20, "left")
+		local zName = addEditBox(panel, "8%", "5%", "17%", "38%", "left", z.name, { z.red, z.green, z.blue, 1 })
+		zName.OnFocusUpdate = {
+			function ()
+				if z.name ~= zName.text and zName.text ~= "" then
+					z.name = zName.text
+					saveState()
+					-- force redrawing UI
+					totalZones = nil
+				elseif zName.text == "" then
+					zName:SetText(z.name)
+				end
+			end
+		}
+		local alwaysInViewButton = addButton(panel, "25%", "0%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_ALWAYS_IN_VIEW, nil)
 		alwaysInViewButton.state.chosen = z.alwaysInView -- Set to current value
 		alwaysInViewButton.OnClick = {
 			function()
@@ -2897,7 +2901,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				saveState()
 			end
 		}
-		local markerButton = addButton(panel, "50%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
+		local markerButton = addButton(panel, "50%", "0%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_MARKER, nil)
 		markerButton.state.chosen = z.marker -- Set to current value
 		markerButton.OnClick = {
 			function()
@@ -2907,7 +2911,7 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				saveState()
 			end
 		}
-		local showInGameButton = addButton(panel, "75%", "50%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
+		local showInGameButton = addButton(panel, "75%", "0%", "25%", "50%", EDITOR_ZONES_ATTRIBUTES_SHOW_IN_GAME, nil)
 		showInGameButton.state.chosen = z.showInGame
 		showInGameButton.OnClick = {
 			function()
@@ -2915,6 +2919,20 @@ function showZonesSpecialAttributesWindow() -- Show the window to change some sp
 				showInGameButton:InvalidateSelf()
 				z.showInGame = not z.showInGame
 				saveState()
+			end
+		}
+		addLabel(panel, '0%', "50%", "15%", "50%", EDITOR_ZONES_ATTRIBUTES_IN_GAME_LABEL, 20, "left")
+		local inGameText = addEditBox(panel, "15%", "55%", "85%", "40%", "left", z.inGameText)
+		inGameText.OnFocusUpdate = {
+			function ()
+				if z.inGameText ~= inGameText.text and inGameText.text ~= "" then
+					z.inGameText = inGameText.text
+					saveState()
+					-- force redrawing UI
+					totalZones = nil
+				elseif inGameText.text == "" then
+					inGameText:SetText(z.inGameText)
+				end
 			end
 		}
 		count = count + 1
@@ -3575,7 +3593,7 @@ function drawConditionFrame(reset) -- Display specific condition with its parame
 				break
 			end
 		end
-		conditionTextBox:SetText(condition_template.text)
+		conditionTextBox:SetText(extractLang(condition_template.text, WG.Language))
 		if reset then -- if reset is true, reset the parameters
 			c.params = {}
 		end
@@ -3613,7 +3631,7 @@ function drawActionFrame(reset) -- Display specific action with its parameters
 				break
 			end
 		end
-		actionTextBox:SetText(action_template.text)
+		actionTextBox:SetText(extractLang(action_template.text, WG.Language))
 		if reset then
 			a.params = {}
 		end
@@ -3646,6 +3664,10 @@ drawFeatureFunctions = {}
 drawFeatureFunctions["unitType"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
+
 	-- Items generation
 	local comboBoxItems = {} -- store list of types to display into combobox
 	for i, fu in ipairs(factionUnits) do
@@ -3655,7 +3677,7 @@ drawFeatureFunctions["unitType"] = function(attr, yref, ac, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '40%', y.."%", '58%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
@@ -3966,11 +3988,15 @@ end
 drawFeatureFunctions["comparison"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
+	
 	-- Items generation
 	local comboBoxItems = { "==", "!=", ">", ">=", "<", "<=" }
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '40%', y.."%", '58%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
@@ -4002,6 +4028,10 @@ end
 drawFeatureFunctions["condition"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
+
 	-- Items generation
 	local comboBoxItems = {}
 	for i, e in ipairs(events) do
@@ -4014,7 +4044,7 @@ drawFeatureFunctions["condition"] = function(attr, yref, ac, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '40%', y.."%", '58%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
@@ -4047,14 +4077,18 @@ drawFeatureFunctions["toggle"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
 	-- Items generation
-	local comboBoxItems = { "enabled", "disabled" }
+	local comboBoxItems = { EDITOR_ENABLED, EDITOR_DISABLED }
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_ENABLED then
+					ac.params[attr.id] = "enabled"
+				else
+					ac.params[attr.id] = "disabled"
+				end
 				saveState()
 			end
 		end
@@ -4063,13 +4097,12 @@ drawFeatureFunctions["toggle"] = function(attr, yref, ac, panel, feature)
 	-- Parameters check
 	local init = false
 	if ac.params[attr.id] then
-		for i, item in ipairs(comboBox.items) do
-			if ac.params[attr.id] == item then
-				comboBox:Select(i)
-				init = true
-				break
-			end
+		if ac.params[attr.id] == "enabled" then
+			comboBox:Select(1)
+		else
+			comboBox:Select(2)
 		end
+		init = true
 	end
 	if not init then
 		comboBox:Select(1)
@@ -4081,6 +4114,10 @@ end
 -- see below for params documentation
 drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
+
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
 
 	-- Items generation
 	local comboBoxItems = {}
@@ -4097,7 +4134,7 @@ drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '40%', y.."%", '58%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= commandsToID[comboBox.items[comboBox.selected]] then
@@ -4352,8 +4389,12 @@ end
 drawFeatureFunctions["text"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
+	
 	-- Editbox
-	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
+	local editBox = addEditBox(panel, '40%', y.."%", '58%', "5%")
 	editBox.OnFocusUpdate = {
 		function()
 			if a.params[attr.id] ~= editBox.text then
@@ -4375,8 +4416,12 @@ end
 drawFeatureFunctions["textSplit"] = function(attr, yref, a, panel, feature)
 	local y = yref[1]
 
+	-- increase size of label (this is the last element of features)
+	local label = feature[#feature]
+	label:Resize("38%", "5%", true, false)
+
 	-- Editbox
-	local editBox = addEditBox(panel, '30%', y.."%", '68%', "5%")
+	local editBox = addEditBox(panel, '40%', y.."%", '58%', "5%")
 	editBox.rawText = nil
 	editBox.OnFocusUpdate = {
 		function()
@@ -4486,14 +4531,14 @@ end
 function drawFeature(attr, yref, ac, panel) -- Display parameter according to its type
 	local feature = {}
 
-	local textLabel = addLabel(panel, '0%', yref[1].."%", '30%', "5%", attr.text)
+	local textLabel = addLabel(panel, '2%', yref[1].."%", '28%', "5%", extractLang(attr.text, WG.Language), 20, "left")
 	table.insert(feature, textLabel)
 
 	drawFeatureFunctions[attr.type](attr, yref, ac, panel, feature)
 
 	if attr.hint then
 		local hintScrollPanel = addScrollPanel(panel, '5%', (yref[1]+6).."%", '90%', "10%")
-		addTextBox(hintScrollPanel, '0%', "0%", '100%', "100%", attr.hint, 14, { 0.6, 1, 1, 1 })
+		addTextBox(hintScrollPanel, '0%', "0%", '100%', "100%", extractLang(attr.hint, WG.Language), 14, { 0.6, 1, 1, 1 })
 		table.insert(feature, hintScrollPanel)
 		yref[1] = yref[1] + 11
 	end
@@ -4818,7 +4863,7 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 	local height = 6
 	y = y*(height+1)
 	-- variable name
-	local nameLabel = addLabel(variablesScrollPanel, '0%', y.."%", '10%', height.."%", EDITOR_TRIGGERS_VARIABLES_NAME)
+	local nameLabel = addLabel(variablesScrollPanel, '0%', y.."%", '10%', height.."%", EDITOR_NAME)
 	local nameEditBox = addEditBox(variablesScrollPanel, '10%', y.."%", '20%', height.."%", "left", var.name)
 	nameEditBox.OnFocusUpdate = {
 		function ()
@@ -6513,6 +6558,7 @@ function widget:MouseRelease(mx, my, button)
 											z2 = round(zonePositions.zoneZ2) - round(zonePositions.zoneZ2)%8,
 											id = zoneNumber,
 											name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
+											inGameText = "",
 											type = "Rectangle",
 											shown = true,
 											alwaysInView = false,
@@ -6533,6 +6579,7 @@ function widget:MouseRelease(mx, my, button)
 											z = round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2) - round((zonePositions.zoneZ1 + zonePositions.zoneZ2) / 2)%8,
 											id = zoneNumber,
 											name = EDITOR_ZONES_DEFAULT_NAME.." "..zoneNumber,
+											inGameText = "",
 											type = "Disk",
 											shown = true,
 											alwaysInView = false,

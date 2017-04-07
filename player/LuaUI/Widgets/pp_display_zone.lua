@@ -10,6 +10,9 @@ function widget:GetInfo()
   }
 end
 
+VFS.Include("LuaUI/Widgets/libs/MiscCommon.lua")
+local lang = Spring.GetModOptions()["language"] -- get the language
+
 local Zones = {}
 
 function AddZoneToDisplayList(zone)
@@ -22,6 +25,8 @@ function AddZoneToDisplayList(zone)
 		end
 	end
 	if not found then
+        zone.inGameText = extractLang(zone.inGameText, lang)
+		zone.inGameText = string.gsub(zone.inGameText, "\\n", "\n")
 		table.insert(Zones, zone)
 	end
 end
@@ -72,11 +77,10 @@ end
 
 function widget:DrawScreen()
 	for i, z in ipairs(Zones) do
-        local zName = string.gsub(z.name, "\\n", "\n")
 		if z.type == "Rectangle" then
-			DrawText(zName, (z.x1+z.x2)/2, (z.z1+z.z2)/2)
+			DrawText(z.inGameText, (z.x1+z.x2)/2, (z.z1+z.z2)/2)
 		elseif z.type == "Disk" then
-			DrawText(zName, z.x, z.z)
+			DrawText(z.inGameText, z.x, z.z)
 		end
 	end
 end
