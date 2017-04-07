@@ -3,7 +3,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 3\\n \\nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\\n \\nDétruisez les BITS capturés à l'aide de votre POINTER.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"[en]Mission 3\\n \\nYour POINTER is operational and need to be trained in advanced combat techniques. Your allies catched and desabled enemy BITS. It's an opportinuty to train your POINTER.\\n \\nDestroy all catched BITS with your POINTER.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 3\\n \\nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\\n \\nDétruisez les BITS capturés à l'aide de votre POINTER.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -149,11 +149,11 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 3\n \nYour POINTER is operational and need to be trained in advanced combat techniques. Your allies catched and desabled enemy BITS. It's an opportinuty to train your POINTER.\n \nDestroy all catched BITS with your POINTER.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":1022,
+			"id":6013,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -165,7 +165,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":14807,
+			"id":7088,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -177,7 +177,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":2641,
+			"id":9370,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -189,79 +189,79 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":8223,
+			"id":8841,
 			"position":{
 				"y":118.70226287842,
 				"x":3626.6530761719,
 				"z":1359.4791259766
 			},
-			"orientation":-0.083540096879005,
+			"orientation":-0.10197147727013,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":10595,
+			"id":7530,
 			"position":{
 				"y":118.25057220459,
 				"x":3621.4760742188,
 				"z":1206.8426513672
 			},
-			"orientation":0.18259835243225,
+			"orientation":0.27255553007126,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":7346,
+			"id":3899,
 			"position":{
 				"y":104.07597351074,
 				"x":3889.0891113281,
 				"z":1194.6551513672
 			},
-			"orientation":0.71832549571991,
+			"orientation":0.75888568162918,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":2959,
+			"id":4115,
 			"position":{
 				"y":96.553703308105,
 				"x":3995.7641601563,
 				"z":1311.2705078125
 			},
-			"orientation":0.23383311927319,
+			"orientation":0.26519131660461,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"assembler",
-			"id":13577,
+			"id":15216,
 			"position":{
 				"y":142.37466430664,
 				"x":3709.3896484375,
 				"z":856.67535400391
 			},
-			"orientation":0.73325371742249,
+			"orientation":0.82342600822449,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":5847,
+			"id":3271,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.1949710845947,
+			"orientation":-1.1765632629395,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4274,
+			"id":8068,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -273,31 +273,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":12133,
+			"id":8262,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6629908084869,
+			"orientation":-2.635379076004,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":886,
+			"id":11630,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.8900198936462,
+			"orientation":2.871612071991,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":5086,
+			"id":1071,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -309,7 +309,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8735,
+			"id":3214,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -321,7 +321,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":10054,
+			"id":2688,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -333,7 +333,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":5771,
+			"id":15385,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
@@ -345,7 +345,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":12837,
+			"id":12024,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
@@ -357,7 +357,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":10889,
+			"id":8750,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
@@ -369,7 +369,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":4346,
+			"id":13615,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -381,19 +381,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":1411,
+			"id":1837,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":-0.070812024176121,
+			"orientation":-0.073446713387966,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":3099,
+			"id":4263,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
@@ -405,7 +405,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":7422,
+			"id":13773,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -417,7 +417,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":4417,
+			"id":4139,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -429,7 +429,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":7098,
+			"id":15326,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
@@ -441,7 +441,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":11052,
+			"id":1345,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
@@ -453,31 +453,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":6269,
+			"id":9248,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.034651935100555,
+			"orientation":-0.025450171902776,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":10745,
+			"id":12965,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2439048290253,
+			"orientation":-1.2162803411484,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":3159,
+			"id":16105,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -489,16 +489,52 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":1672,
+			"id":6133,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.5515937805176,
+			"orientation":-2.4909291267395,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
+		},{
+			"type":"bit",
+			"id":3217,
+			"position":{
+				"y":103.84648895264,
+				"x":3946.8798828125,
+				"z":1234.1726074219
+			},
+			"orientation":0.056869551539421,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":15329,
+			"position":{
+				"y":113.4453125,
+				"x":3730,
+				"z":1280
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
+		},{
+			"type":"bit",
+			"id":4518,
+			"position":{
+				"y":96.1484375,
+				"x":3798,
+				"z":1379
+			},
+			"orientation":0,
+			"autoHeal":"global",
+			"hp":100,
+			"team":2
 		}],
 	"allyteams":{
 		"1":[0,2],
@@ -647,7 +683,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":1672,
+							"value":6133,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -659,7 +695,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":6269,
+							"value":9248,
 							"type":"unit"
 						},
 						"position":{
@@ -674,7 +710,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":10745,
+							"value":12965,
 							"type":"unit"
 						},
 						"position":{
@@ -689,7 +725,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":3159,
+							"value":16105,
 							"type":"unit"
 						},
 						"position":{
@@ -704,7 +740,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":13577,
+							"value":15216,
 							"type":"unit"
 						},
 						"position":{
@@ -741,7 +777,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":9
@@ -761,7 +797,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":1672,
+							"value":6133,
 							"type":"unit"
 						}
 					}

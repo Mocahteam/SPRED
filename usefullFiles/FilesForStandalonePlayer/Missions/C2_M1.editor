@@ -258,19 +258,19 @@
 	},
 	"units":[{
 			"type":"pointer",
-			"id":4343,
+			"id":5289,
 			"position":{
 				"y":208.0426940918,
 				"x":22.679006576538,
 				"z":1015.7485351563
 			},
-			"orientation":2.2893676757813,
+			"orientation":2.2923231124878,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":2250,
+			"id":13258,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -282,31 +282,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":3442,
+			"id":2366,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2607889175415,
+			"orientation":-1.2531139850616,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":7635,
+			"id":319,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.040786571800709,
+			"orientation":-0.037719238549471,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":12812,
+			"id":9227,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
@@ -318,7 +318,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":5171,
+			"id":5029,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
@@ -330,7 +330,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":546,
+			"id":4565,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -342,7 +342,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":13301,
+			"id":1351,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -354,7 +354,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":15412,
+			"id":5297,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
@@ -366,19 +366,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":15238,
+			"id":14028,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":-0.065542496740818,
+			"orientation":-0.068177297711372,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":13118,
+			"id":2839,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -390,7 +390,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2143,
+			"id":7147,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
@@ -402,19 +402,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":10319,
+			"id":15677,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3904439210892,
+			"orientation":1.3932740688324,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":13490,
+			"id":7236,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
@@ -426,7 +426,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":11743,
+			"id":5452,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -438,7 +438,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":5698,
+			"id":13265,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -450,7 +450,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":7772,
+			"id":7559,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -462,31 +462,31 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":12859,
+			"id":5010,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.8100973367691,
+			"orientation":-1.8162332773209,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2002,
+			"id":13025,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6813983917236,
+			"orientation":-2.6721947193146,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":12920,
+			"id":4570,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -498,19 +498,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":10354,
+			"id":2757,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2072429656982,
+			"orientation":-1.2011070251465,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":972,
+			"id":13954,
 			"position":{
 				"y":166.15704345703,
 				"x":3338,
@@ -522,13 +522,13 @@
 			"team":1
 		},{
 			"type":"assembler",
-			"id":5805,
+			"id":13228,
 			"position":{
 				"y":119.02044677734,
 				"x":3641,
 				"z":1225
 			},
-			"orientation":-0.04062981531024,
+			"orientation":-0.043694399297237,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
@@ -685,7 +685,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":7635,
+							"value":319,
 							"type":"unit"
 						},
 						"position":{
@@ -700,7 +700,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":972,
+							"value":13954,
 							"type":"unit"
 						},
 						"position":{
@@ -715,7 +715,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":2250,
+							"value":13258,
 							"type":"unit"
 						},
 						"position":{
@@ -730,7 +730,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":3442,
+							"value":2366,
 							"type":"unit"
 						},
 						"position":{
@@ -743,7 +743,7 @@
 					"type":"script",
 					"name":"SetBriefing",
 					"params":{
-						"script":"messages[\"briefing\"] = \"Mission 1\\n \\nAidez votre POINTER à rejoindre les défenses alliées à la position (3476, 1212).\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer\""
+						"script":"messages[\"briefing\"] = \"[en]Mission 1\\n \\nHelp your POINTER to join allies defences at position (3476, 1212).\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 1\\n \\nAidez votre POINTER à rejoindre les défenses alliées à la position (3476, 1212).\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
 					}
 				},{
 					"id":21,
@@ -752,7 +752,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"position":1
@@ -769,9 +769,9 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["Vite..."],
+						"message":["[en]Faster...[en][fr]Vite...[fr]"],
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"time":"3"
@@ -783,7 +783,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -806,7 +806,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":1
@@ -819,7 +819,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"position":2
@@ -836,9 +836,9 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["Viiiiiiite..."],
+						"message":["[en]Faaaaaster...[en][fr]Viiiiiiite...[fr]"],
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"time":"3"
@@ -861,7 +861,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":2
@@ -874,7 +874,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"position":3
@@ -884,10 +884,10 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["Je dois me dépêcher... ils me rattrapent..."],
+						"message":["[en]I have to go... They catching me...[en][fr]Je dois me dépêcher... ils me rattrapent...[fr]"],
 						"time":"5",
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						}
 					}
@@ -909,7 +909,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":3
@@ -922,7 +922,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"position":4
@@ -932,9 +932,9 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["Je dois atteindre les défenses alliées avant qu'il ne soit trop tard..."],
+						"message":["[en]I have to join allies defences before it is too late...[en][fr]Je dois atteindre les défenses alliées avant qu'il ne soit trop tard...[fr]"],
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"time":"8"
@@ -957,7 +957,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":4
@@ -968,10 +968,10 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["C'est juste devant moi à la position (3476, 1212)"],
+						"message":["[en]It's just in front of me at position (3476, 1212)[en][fr]C'est juste devant moi à la position (3476, 1212)[fr]"],
 						"time":"10",
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						}
 					}
@@ -1013,10 +1013,10 @@
 					"type":"bubbleUnit",
 					"name":"Blabla",
 					"params":{
-						"message":["Je dois me dépêcher !!!","Le camp allié n'est pas loin (3476, 1212)","Je dois bouger...","Ils arrivent...","La position (3476, 1212) n'est pas loin.","Je dois prendre une décision.","Il faut vite que j'aille me réfugier."],
+						"message":["[en]I have to hurry!!![en][fr]Je dois me dépêcher !!![fr]","[en]The allied camp is close (3476, 1212)[en][fr]Le camp allié n'est pas loin (3476, 1212)[fr]","[en]I have to move...[en][fr]Je dois bouger...[fr]","[en]They are coming[en][fr]Ils arrivent...[fr]","[en]The position (3476, 1212) is not so far[en][fr]La position (3476, 1212) n'est pas loin[fr]","[en]I have to take a decision[en][fr]Je dois prendre une décision[fr]"],
 						"time":"4",
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						}
 					}
@@ -1038,7 +1038,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":7
@@ -1099,9 +1099,9 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["J'y suis presque... plus qu'un dernier effort."],
+						"message":["[en]A last effort[en][fr]J'y suis presque... plus qu'un dernier effort[fr]"],
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"time":"5"
@@ -1124,7 +1124,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						},
 						"zone":6
@@ -1136,7 +1136,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":9
@@ -1156,7 +1156,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4343,
+							"value":5289,
 							"type":"unit"
 						}
 					}

@@ -7,12 +7,12 @@
 			"z2":960,
 			"x1":3384,
 			"showInGame":false,
-			"id":1,
+			"marker":false,
 			"name":"BuildingArea1",
 			"green":0.14038741588593,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":1,
 			"red":0.8685417175293
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":1112,
 			"x1":3688,
 			"showInGame":false,
-			"id":2,
+			"marker":false,
 			"name":"BuildingArea2",
 			"green":0.48907387256622,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":2,
 			"red":0.19527971744537
 		},{
 			"type":"Rectangle",
@@ -37,12 +37,12 @@
 			"z2":1360,
 			"x1":3136,
 			"showInGame":false,
-			"id":3,
+			"marker":false,
 			"name":"ForbidArea1",
 			"green":0.53347647190094,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":3,
 			"red":0.9041393995285
 		},{
 			"type":"Rectangle",
@@ -52,18 +52,18 @@
 			"z2":1984,
 			"x1":3824,
 			"showInGame":false,
-			"id":4,
+			"marker":false,
 			"name":"ForbidArea2",
 			"green":0.42724168300629,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":4,
 			"red":0.99234926700592
 		}],
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 6\\n \\nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"[en]Mission 6\\n \\nYou contained attacks of scattered units but the future is darken if scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas to him.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 6\\n \\nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -209,11 +209,11 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 6\n \nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 6\n \nYou contained attacks of scattered units but the future is darken if scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas to him.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":3847,
+			"id":6230,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -222,10 +222,10 @@
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":15304,
+			"id":8812,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -234,10 +234,10 @@
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":9515,
+			"id":6311,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -246,46 +246,46 @@
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
 			"type":"pointer",
-			"id":15826,
+			"id":8598,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4745416641235,
+			"orientation":-1.4699417352676,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":3939,
+			"id":6160,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.2252366542816,
+			"orientation":1.200568318367,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13890,
+			"id":6618,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4376022815704,
+			"orientation":1.4286382198334,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":10178,
+			"id":12715,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -297,7 +297,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":12333,
+			"id":8847,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -309,7 +309,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":4631,
+			"id":4976,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -321,31 +321,31 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":10289,
+			"id":11641,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.9819031953812,
+			"orientation":-1.9957090616226,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":11089,
+			"id":13534,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4436314105988,
+			"orientation":-2.4344274997711,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":10780,
+			"id":13334,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -357,31 +357,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2468,
+			"id":3865,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.0200972557068,
+			"orientation":-1.0016894340515,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"assembler",
-			"id":9443,
+			"id":188,
 			"position":{
 				"y":121.7388381958,
 				"x":3563.4130859375,
 				"z":1034.9774169922
 			},
-			"orientation":-0.14378473162651,
+			"orientation":-0.17433215677738,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":1648,
+			"id":16451,
 			"position":{
 				"y":144.47802734375,
 				"x":3986,
@@ -393,7 +393,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":11759,
+			"id":7383,
 			"position":{
 				"y":174.59600830078,
 				"x":1944,
@@ -405,7 +405,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":5970,
+			"id":5644,
 			"position":{
 				"y":163,
 				"x":1428,
@@ -417,7 +417,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":10271,
+			"id":12261,
 			"position":{
 				"y":203.35562133789,
 				"x":399,
@@ -429,7 +429,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":10339,
+			"id":13177,
 			"position":{
 				"y":189.34906005859,
 				"x":418,
@@ -441,7 +441,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11812,
+			"id":7374,
 			"position":{
 				"y":166.296875,
 				"x":372,
@@ -453,19 +453,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6171,
+			"id":6963,
 			"position":{
 				"y":167.02696228027,
 				"x":326,
 				"z":1663
 			},
-			"orientation":-0.047529511153698,
+			"orientation":-0.060000225901604,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":156,
+			"id":7215,
 			"position":{
 				"y":166.1767578125,
 				"x":283,
@@ -477,9 +477,9 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4114,
+			"id":14474,
 			"position":{
-				"y":130.7421875,
+				"y":133.09197998047,
 				"x":952,
 				"z":867
 			},
@@ -489,31 +489,31 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4248,
+			"id":1024,
 			"position":{
 				"y":130.57092285156,
 				"x":1035,
 				"z":811
 			},
-			"orientation":0.023371856659651,
+			"orientation":0.028032869100571,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":12933,
+			"id":13945,
 			"position":{
-				"y":101.76766967773,
+				"y":94.636650085449,
 				"x":1679,
 				"z":1763
 			},
-			"orientation":-0.00029454650939442,
+			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":119,
+			"id":15572,
 			"position":{
 				"y":101.90937042236,
 				"x":1710,
@@ -525,7 +525,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5205,
+			"id":11767,
 			"position":{
 				"y":101.9140625,
 				"x":1596,
@@ -537,7 +537,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4240,
+			"id":15097,
 			"position":{
 				"y":101.07887268066,
 				"x":1626,
@@ -549,7 +549,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13510,
+			"id":12124,
 			"position":{
 				"y":247.22601318359,
 				"x":2198.4206542969,
@@ -561,19 +561,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2044,
+			"id":1499,
 			"position":{
 				"y":236.67875671387,
 				"x":2197.4482421875,
 				"z":1019.8780517578
 			},
-			"orientation":-1.0252434015274,
+			"orientation":-1.0412564277649,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":10739,
+			"id":14917,
 			"position":{
 				"y":160.62461853027,
 				"x":2009,
@@ -585,7 +585,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15150,
+			"id":6861,
 			"position":{
 				"y":130.7421875,
 				"x":3896,
@@ -597,7 +597,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":16333,
+			"id":3342,
 			"position":{
 				"y":142.3147277832,
 				"x":2480,
@@ -609,31 +609,31 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6487,
+			"id":15688,
 			"position":{
 				"y":143.73313903809,
 				"x":2518,
 				"z":177
 			},
-			"orientation":-0.038069318979979,
+			"orientation":-0.042525410652161,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":8577,
+			"id":13027,
 			"position":{
 				"y":153.03518676758,
 				"x":2445,
 				"z":246
 			},
-			"orientation":-0.94245934486389,
+			"orientation":-1.0157250165939,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":15682,
+			"id":1946,
 			"position":{
 				"y":142.16928100586,
 				"x":2382,
@@ -814,7 +814,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":9443,
+							"value":188,
 							"type":"unit"
 						}
 					}
@@ -963,7 +963,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":13

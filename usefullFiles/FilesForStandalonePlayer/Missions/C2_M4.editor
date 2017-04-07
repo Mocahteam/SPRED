@@ -4,36 +4,38 @@
 			"type":"Disk",
 			"blue":0.85166883468628,
 			"b":264,
-			"marker":true,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":true,
 			"x":3264,
-			"name":"Entrée Nord\\n (3264, 664)",
+			"name":"North entrance",
+			"inGameText":"[en]North entrance\\n (3264, 664)[en][fr]Entrée Nord\\n (3264, 664)[fr]",
 			"green":0.018119335174561,
-			"z":664,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":664,
 			"red":0.53519535064697
 		},{
 			"a":184,
 			"type":"Disk",
 			"blue":0.9276956319809,
-			"b":232,
-			"marker":true,
-			"showInGame":false,
+			"b":312,
 			"id":2,
+			"showInGame":false,
+			"marker":true,
 			"x":3904,
-			"name":"Entrée Est\\n(3904, 752)",
+			"name":"Est entrance",
+			"inGameText":"[en]Est entrance\\n(3904, 752)[en][fr]Entrée Est\\n(3904, 752)[fr]",
 			"green":0.054250597953796,
-			"z":752,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":752,
 			"red":0.17196381092072
 		}],
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 4\\n \\nDes informations sont parvenues au camps sur des regroupements ennemis dans les environs. La communauté a dessidé d'envoyer deux groupes d'éclaireurs observer ces mouvements\\n \\nAidez les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (3264, 664) et le second à l'entrée Est (3904, 752).\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"[en]Mission 4\\n \\nSome information has been received indicating enemy grouping near from the outpost. The community decides to send two groups to scout and observe ennemy maneuvers.\\n \\nHelp them to prepare the mission by dividing units in two groups each composed of two BYTES and three BITS. The rendezvous point for the first group is on North entrance (3264, 664) and the second group has to gather on the Est entrance (3904, 752).\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 4\\n \\nDes informations sont parvenues au camps sur des regroupements ennemis dans les environs. La communauté a dessidé d'envoyer deux groupes d'éclaireurs observer ces mouvements.\\n \\nAidez les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (3264, 664) et le second à l'entrée Est (3904, 752).\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -179,47 +181,47 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 4\n \nDes informations sont parvenues au camps sur des regroupements ennemis dans les environs. La communauté a dessidé d'envoyer deux groupes d'éclaireurs observer ces mouvements\n \nAidez les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (3264, 664) et le second à l'entrée Est (3904, 752).\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 4\n \nSome information has been received indicating enemy grouping near from the outpost. The community decides to send two groups to scout and observe ennemy maneuvers.\n \nHelp them to prepare the mission by dividing units in two groups each composed of two BYTES and three BITS. The rendezvous point for the first group is on North entrance (3264, 664) and the second group has to gather on the Est entrance (3904, 752).\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 4\n \nDes informations sont parvenues au camps sur des regroupements ennemis dans les environs. La communauté a dessidé d'envoyer deux groupes d'éclaireurs observer ces mouvements.\n \nAidez les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (3264, 664) et le second à l'entrée Est (3904, 752).\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",
-			"id":10191,
+			"id":1850,
 			"position":{
 				"y":135.04858398438,
 				"x":3381,
 				"z":1649
 			},
-			"orientation":-0.05911848321557,
+			"orientation":-0.068155720829964,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":2357,
+			"id":14923,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
 				"z":1715.33984375
 			},
-			"orientation":0.14121697843075,
+			"orientation":0.13350312411785,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":11407,
+			"id":5260,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.1612235307693,
+			"orientation":-1.1520196199417,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":10985,
+			"id":11432,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -231,31 +233,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":782,
+			"id":3071,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6123692989349,
+			"orientation":-2.5970294475555,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":5119,
+			"id":8657,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.8562722206116,
+			"orientation":2.8470683097839,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":799,
+			"id":7367,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -267,7 +269,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13593,
+			"id":9931,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -279,7 +281,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13233,
+			"id":13033,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -291,91 +293,91 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":3511,
+			"id":14926,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":2.2737848758698,
+			"orientation":2.2819499969482,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":8846,
+			"id":911,
 			"position":{
 				"y":212.51889038086,
 				"x":3038.3857421875,
 				"z":1005.5906982422
 			},
-			"orientation":1.4665443897247,
+			"orientation":1.4612460136414,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":2021,
+			"id":1058,
 			"position":{
 				"y":162.16098022461,
 				"x":3578.796875,
 				"z":810.36614990234
 			},
-			"orientation":0.81466448307037,
+			"orientation":0.80236274003983,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":14538,
+			"id":1492,
 			"position":{
 				"y":142.2734375,
 				"x":3537.1577148438,
 				"z":884.31518554688
 			},
-			"orientation":0.87590312957764,
+			"orientation":0.86669903993607,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":8885,
+			"id":6632,
 			"position":{
 				"y":199.18748474121,
 				"x":3608.716796875,
 				"z":718.70324707031
 			},
-			"orientation":1.5819244384766,
+			"orientation":1.5830578804016,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4187,
+			"id":6960,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.8881024122238,
+			"orientation":1.8782702684402,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15371,
+			"id":9792,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":2.5797734260559,
+			"orientation":2.5350301265717,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15249,
+			"id":1557,
 			"position":{
 				"y":101.99140930176,
 				"x":3708.9736328125,
@@ -387,19 +389,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":6069,
+			"id":16108,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.1932638883591,
+			"orientation":-1.1794557571411,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":8589,
+			"id":16194,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -411,19 +413,19 @@
 			"team":0
 		},{
 			"type":"pointer",
-			"id":14105,
+			"id":11200,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.4270839691162,
+			"orientation":-2.3846082687378,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":1190,
+			"id":14337,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -435,7 +437,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":4410,
+			"id":10288,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -447,7 +449,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":5982,
+			"id":14452,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -459,13 +461,13 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":2420,
+			"id":8885,
 			"position":{
 				"y":178.93992614746,
 				"x":3079,
 				"z":1369
 			},
-			"orientation":0.064951233565807,
+			"orientation":0.078815333545208,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -485,11 +487,11 @@
 	"groups":[{
 			"id":1,
 			"name":"Bytes",
-			"units":[2021,2420,3511,8846]
+			"units":[911,1058,8885,14926]
 		},{
 			"id":2,
 			"name":"Bits",
-			"units":[4187,6069,8589,8885,10191,14538,15249,15371]
+			"units":[1492,1557,1850,6632,6960,9792,16108,16194]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
@@ -679,7 +681,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":9

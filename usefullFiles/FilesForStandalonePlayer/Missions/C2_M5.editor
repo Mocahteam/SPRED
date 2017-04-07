@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.29923045635223,
 			"b":88,
-			"marker":false,
-			"showInGame":false,
 			"id":4,
+			"showInGame":false,
+			"marker":false,
 			"x":2344,
 			"name":"PopWest",
 			"green":0.98885846138,
-			"z":1008,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":1008,
 			"red":0.15312898159027
 		},{
 			"type":"Rectangle",
@@ -22,48 +22,50 @@
 			"z2":1088,
 			"x1":3960,
 			"showInGame":false,
-			"marker":false,
+			"id":5,
 			"name":"PopEst",
 			"green":0.33155679702759,
-			"alwaysInView":false,
 			"shown":true,
-			"id":5,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.8535088300705
 		},{
 			"a":48,
 			"type":"Disk",
 			"blue":0.13627111911774,
 			"b":32,
-			"id":6,
-			"showInGame":false,
 			"marker":true,
+			"showInGame":false,
+			"id":6,
 			"x":2904,
-			"name":"Entrée Ouest",
+			"name":"WestEntrance",
+			"inGameText":"[en]West entrance[en][fr]Entrée Ouest[fr]",
 			"green":0.67630434036255,
-			"alwaysInView":false,
-			"shown":true,
 			"z":1120,
+			"shown":true,
+			"alwaysInView":false,
 			"red":0.86622679233551
 		},{
 			"a":32,
 			"type":"Disk",
 			"blue":0.53519535064697,
 			"b":40,
-			"id":7,
-			"showInGame":false,
 			"marker":true,
+			"showInGame":false,
+			"id":7,
 			"x":4032,
-			"name":"Entrée Est",
+			"name":"EstEntrance",
+			"inGameText":"[en]Est entrance[en][fr]Entrée Est[fr]",
 			"green":0.7034924030304,
-			"alwaysInView":false,
-			"shown":true,
 			"z":1016,
+			"shown":true,
+			"alwaysInView":false,
 			"red":0.93421399593353
 		}],
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\nLes éclaireurs sont partis en partouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\\n \\nParticipez à la défence du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"[en]Mission 5\\n \\nScouts left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER followed the necessary training and is now able to compensate the lack of units.\\n \\nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the Est entrance.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 5\\n \\nLes éclaireurs sont partis en partouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\\n \\nParticipez à la défence du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -209,11 +211,11 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 5\n \nLes éclaireurs sont partis en partouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\n \nParticipez à la défence du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 5\n \nScouts left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER followed the necessary training and is now able to compensate the lack of units.\n \nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the Est entrance.\n \n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 5\n \nLes éclaireurs sont partis en partouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\n \nParticipez à la défence du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"assembler",
-			"id":6522,
+			"id":8228,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
@@ -225,19 +227,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1275,
+			"id":13980,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.0599807500839,
+			"orientation":-0.84368944168091,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":14013,
+			"id":1394,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -249,31 +251,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13687,
+			"id":12375,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4773790836334,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":9647,
+			"id":5180,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.7657673358917,
+			"orientation":2.4773790836334,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":15104,
+			"id":12145,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -285,7 +287,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":7554,
+			"id":15648,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -297,7 +299,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":12671,
+			"id":6388,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -309,55 +311,55 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":568,
+			"id":3471,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4719734191895,
+			"orientation":1.3479900360107,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":1039,
+			"id":12443,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.3095438480377,
+			"orientation":1.0556026697159,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":12004,
+			"id":12351,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4868083000183,
+			"orientation":-1.4147511720657,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":518,
+			"id":3688,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
 				"z":1208
 			},
-			"orientation":0,
+			"orientation":2.3976120948792,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":9233,
+			"id":9150,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -366,10 +368,10 @@
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":11988,
+			"id":15705,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -378,7 +380,7 @@
 			"orientation":0,
 			"autoHeal":"global",
 			"hp":100,
-			"team":0
+			"team":1
 		}],
 	"allyteams":{
 		"1":[0],
@@ -392,7 +394,11 @@
 		"9":[],
 		"0":[1]
 	},
-	"groups":[],
+	"groups":[{
+			"id":1,
+			"name":"UnitsPoped",
+			"units":[]
+		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[{
 			"id":0,
@@ -544,7 +550,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":12004,
+							"value":12351,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -558,7 +564,7 @@
 			"actionTotal":5,
 			"name":"PopBits",
 			"repetition":true,
-			"repetitionTime":"8",
+			"repetitionTime":"5",
 			"conditions":[{
 					"id":12,
 					"type":"elapsedTime",
@@ -606,8 +612,8 @@
 							"type":"team"
 						},
 						"position":{
-							"x":3304,
-							"z":1046
+							"z":1046,
+							"x":3304
 						}
 					}
 				},{
@@ -636,7 +642,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":12004,
+							"value":12351,
 							"type":"unit"
 						}
 					}
@@ -679,8 +685,8 @@
 							"type":"team"
 						},
 						"position":{
-							"z":187,
-							"x":2581
+							"x":2581,
+							"z":187
 						}
 					}
 				},{
@@ -689,10 +695,72 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":13
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"FirstAttack",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":19,
+					"type":"numberVariable",
+					"name":"AttackStarted",
+					"params":{
+						"number":"1",
+						"variable":"counter",
+						"comparison":"=="
+					}
+				}],
+			"actions":[{
+					"id":56,
+					"type":"bubbleUnit",
+					"name":"Say...",
+					"params":{
+						"message":["[en]We are under attack... Focus on West front[en][fr]On nous attaque... Occupez-vous de front Ouest[fr]"],
+						"unitset":{
+							"value":3471,
+							"type":"unit"
+						},
+						"time":"4"
+					}
+				}],
+			"id":18
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"MiddleAttack",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":20,
+					"type":"numberVariable",
+					"name":"MiddleReached",
+					"params":{
+						"number":"5",
+						"variable":"counter",
+						"comparison":"=="
+					}
+				}],
+			"actions":[{
+					"id":57,
+					"type":"bubbleUnit",
+					"name":"Say...",
+					"params":{
+						"message":["[en]They are wearing out, hold your position still a short time...[en][fr]Ils vont bientôt s'éppuiser, tenons encore un peu...[fr]"],
+						"unitset":{
+							"value":12443,
+							"type":"unit"
+						},
+						"time":"5"
+					}
+				}],
+			"id":19
 		}],
 	"listOfCommands":{
 		"0":"Stop",

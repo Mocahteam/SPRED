@@ -534,9 +534,9 @@ end
 local function unitSetParamsToUnitsExternal(param)
   local index = param.type..'_'..tostring(param.value)
   local units = ctx.getAvailableLocalUnitIdsFromLocalGroupId[index]
-  if(ctx.getAvailableLocalUnitIdsFromLocalGroupId[index] == nil)then
-    --EchoDebug("warning. This index gave nothing : "..index,7)
-  end
+  --if(ctx.getAvailableLocalUnitIdsFromLocalGroupId[index] == nil)then
+  --  EchoDebug("warning. This index gave nothing : "..index,7)
+  --end
   return units
 end
 
@@ -596,9 +596,9 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck)
       --EchoDebug(json.encode({actOrCond_Params,groupToReturn}),2)
      else
        local index=actOrCond_Params.unitset.type..'_'..tostring(actOrCond_Params.unitset.value)
-       if(groupToCheck[index]==nil)then
-         EchoDebug("warning. This index gave nothing : "..index, 2)
-       end
+       --if(groupToCheck[index]==nil)then
+       --  EchoDebug("warning. This index gave nothing : "..index, 2)
+       --end
        groupToReturn=groupToCheck[index]
      end
   end
@@ -1451,7 +1451,7 @@ local function StartAfterJson ()
       table.insert(specialPositionTables,{center_xz.x,center_xz.z})
     end 
     if(cZ.marker)then
-      local zName = string.gsub(cZ.name, "\\n", "\n")
+      local zName = string.gsub(extractLang(cZ.inGameText, lang), "\\n", "\n")
       Spring.MarkerAddPoint(center_xz.x,Spring.GetGroundHeight(center_xz.x,center_xz.z),center_xz.z, zName)
     end 
     --displayZone

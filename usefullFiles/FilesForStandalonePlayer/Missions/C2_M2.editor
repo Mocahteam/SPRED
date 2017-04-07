@@ -2,13 +2,14 @@
 	"zones":[{
 			"type":"Rectangle",
 			"blue":0.60814476013184,
-			"x2":2976,
 			"z1":1160,
+			"x2":2976,
+			"showInGame":false,
 			"z2":1256,
 			"x1":2872,
-			"showInGame":false,
 			"marker":true,
-			"name":"   Entrée 1\\n(2924, 1208)",
+			"inGameText":"[en] Entrance 1\\n(2924, 1208)[en][fr]   Entrée 1\\n(2924, 1208)[fr]",
+			"name":"Entrée 1",
 			"green":0.54002010822296,
 			"alwaysInView":true,
 			"shown":true,
@@ -17,13 +18,14 @@
 		},{
 			"type":"Rectangle",
 			"blue":0.088949203491211,
-			"x2":3328,
 			"z1":600,
+			"x2":3328,
+			"showInGame":false,
 			"z2":720,
 			"x1":3176,
-			"showInGame":false,
 			"marker":true,
-			"name":"  Entrée 2\\n(3252, 660)",
+			"inGameText":"[en]Entrance 2\\n(3252, 660)[en][fr]  Entrée 2\\n(3252, 660)[fr]",
+			"name":"Entrée 2",
 			"green":0.53627705574036,
 			"alwaysInView":true,
 			"shown":true,
@@ -32,13 +34,14 @@
 		},{
 			"type":"Rectangle",
 			"blue":0.71166574954987,
-			"x2":3952,
 			"z1":696,
+			"x2":3952,
+			"showInGame":false,
 			"z2":848,
 			"x1":3792,
-			"showInGame":false,
 			"marker":true,
-			"name":"  Entrée 3\\n(3872, 772)",
+			"inGameText":"[en]Entrance 3\\n(3872, 772)[en][fr]  Entrée 3\\n(3872, 772)[fr]",
+			"name":"Entrée 3",
 			"green":0.16118931770325,
 			"alwaysInView":true,
 			"shown":true,
@@ -48,7 +51,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 2\\n \\nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\\n \\nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\\n \\n/#565656#Appuyez sur Echap pour continuer/",
+		"briefingRaw":"[en]Mission 2\\n \\nYour POINTER fled an enemy raid that devastated Sili area and luckily he succeeded to reach the Cium outpost. He is now safe and will be able to heal.\\n \\nMeanwhile, you have to help defend the outpost. Your allies give you an ASSEMBLER to perform this task. Begin by build a LOGIC BOMB at following positions (2924, 1208), (3252, 660) and (3872, 772) in order to protect the three entrances of the camp.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 2\\n \\nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\\n \\nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -93,10 +96,6 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
@@ -107,6 +106,10 @@
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
 				"name":"Show PP Video",
+				"active":false
+			},{
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Indicator for the CommEnds state (at game start)",
@@ -194,23 +197,23 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"Mission 2\n \nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\n \nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 2\n \nYour POINTER fled an enemy raid that devastated Sili area and luckily he succeeded to reach the Cium outpost. He is now safe and will be able to heal.\n \nMeanwhile, you have to help defend the outpost. Your allies give you an ASSEMBLER to perform this task. Begin by build a LOGIC BOMB at following positions (2924, 1208), (3252, 660) and (3872, 772) in order to protect the three entrances of the camp.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 2\n \nVotre POINTEUR fuillait un raid ennemi ayant ravagé la région de Sili et a réussi à rejoindre le poste avancé de Cium. Il est maintenant en sécurité et va pouvoir se ressourcer.\n \nVous devez maintenant aider à la défense du camp. Vos alliés vous confient un ASSEMBLEUR pour assurer ce travail. Commencez par construire une LOGIC BOMB aux positions suivantes (2924, 1208), (3252, 660) et (3872, 772) pour protéger les trois entrées du camp.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"assembler",
-			"id":4940,
+			"id":10285,
 			"position":{
 				"y":119.02044677734,
 				"x":3641,
 				"z":1225
 			},
-			"orientation":-0.016110034659505,
+			"orientation":-0.028370613232255,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":10060,
+			"id":4376,
 			"position":{
 				"y":166.15704345703,
 				"x":3338,
@@ -222,19 +225,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":8675,
+			"id":7099,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2517284154892,
+			"orientation":-1.231786608696,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":11305,
+			"id":8142,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -246,31 +249,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":8617,
+			"id":13685,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.7412238121033,
+			"orientation":-2.7166800498962,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":14897,
+			"id":14012,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.9513790607452,
+			"orientation":2.9268355369568,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":10194,
+			"id":15492,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -282,7 +285,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8780,
+			"id":15436,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -294,7 +297,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":3816,
+			"id":6910,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -306,43 +309,43 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":10774,
+			"id":11232,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":-0.84467393159866,
+			"orientation":-0.84195220470428,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":6631,
+			"id":7427,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3578908443451,
+			"orientation":1.3791228532791,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":13980,
+			"id":15419,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
 				"z":768.9326171875
 			},
-			"orientation":0.33287048339844,
+			"orientation":0.31904122233391,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11195,
+			"id":7854,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -354,31 +357,31 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":7219,
+			"id":9829,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":0.066569834947586,
+			"orientation":-0.036551542580128,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11867,
+			"id":11478,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
 				"z":1587.8966064453
 			},
-			"orientation":1.9448118209839,
+			"orientation":1.9689078330994,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":6902,
+			"id":10864,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -390,7 +393,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":7558,
+			"id":6643,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -402,55 +405,55 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":16359,
+			"id":7533,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.8192977905273,
+			"orientation":1.8291258811951,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":15122,
+			"id":10268,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":1.1334631443024,
+			"orientation":1.1217217445374,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":4904,
+			"id":13360,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.065326049923897,
+			"orientation":-0.053056117147207,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":1472,
+			"id":2456,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.3099173307419,
+			"orientation":-1.2853512763977,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":2907,
+			"id":8084,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -462,13 +465,13 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":9998,
+			"id":11295,
 			"position":{
 				"y":128.99685668945,
 				"x":3475.8403320313,
 				"z":1212.1966552734
 			},
-			"orientation":2.302659034729,
+			"orientation":2.3493995666504,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
@@ -620,7 +623,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":4904,
+							"value":13360,
 							"type":"unit"
 						},
 						"position":{
@@ -635,7 +638,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":1472,
+							"value":2456,
 							"type":"unit"
 						},
 						"position":{
@@ -650,7 +653,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":2907,
+							"value":8084,
 							"type":"unit"
 						},
 						"position":{
@@ -665,7 +668,7 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":10060,
+							"value":4376,
 							"type":"unit"
 						},
 						"position":{
@@ -680,7 +683,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":9998,
+							"value":11295,
 							"type":"unit"
 						},
 						"position":{
@@ -794,7 +797,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":9
@@ -814,7 +817,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":4940,
+							"value":10285,
 							"type":"unit"
 						}
 					}
