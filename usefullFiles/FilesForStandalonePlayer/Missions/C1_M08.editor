@@ -3,7 +3,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 8\\n \\nYour army is now grouped together and you control the latest available ASSEMBLER.\\n \\nUse it to repair your weakened units.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 8\\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
+		"briefingRaw":"[en]Mission 8\\n \\nYour army is now gathered and you control the last working ASSEMBLER available in the area.\\n \\nUse it to repair your weakened units.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 8\\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute vos unités endommagées.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"enabled",
@@ -149,7 +149,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"[en]Mission 8\n \nYour army is now grouped together and you control the latest available ASSEMBLER.\n \nUse it to repair your weakened units.\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 8\n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 8\n \nYour army is now gathered and you control the last working ASSEMBLER available in the area.\n \nUse it to repair your weakened units.\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 8\n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\n \nOrdonnez lui de réparer toute vos unités endommagées.\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",

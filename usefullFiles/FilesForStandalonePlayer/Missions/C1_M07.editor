@@ -19,7 +19,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 7\\n \\nThe ASSEMBLER has just entered on the map. Your army is too weak to continue moving, more effort may be the last. So help your ASSEMBLER and just it to join your army at (256, 811).\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 7\\n \\nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 7\\n \\nThe ASSEMBLER has just entered on the map. But your army is too weak to keep on moving, another move order might be the last order they ever follow. So help the ASSEMBLER (and no other unit) to move to reach the rest of your army at (256, 811).\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 7\\n \\nL'ASSEMBLEUR vient d'apparaître sur la carte. Mais votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"enabled",
@@ -165,7 +165,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"[en]Mission 7\n \nThe ASSEMBLER has just entered on the map. Your army is too weak to continue moving, more effort may be the last. So help your ASSEMBLER and just it to join your army at (256, 811).\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 7\n \nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 7\n \nThe ASSEMBLER has just entered on the map. But your army is too weak to keep on moving, another move order might be the last order they ever follow. So help the ASSEMBLER (and no other unit) to move to reach the rest of your army at (256, 811).\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 7\n \nL'ASSEMBLEUR vient d'apparaître sur la carte. Mais votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",

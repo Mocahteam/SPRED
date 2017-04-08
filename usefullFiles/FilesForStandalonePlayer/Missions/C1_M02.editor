@@ -51,7 +51,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 2\\n \\nThe report you received was true, but the BYTE was moving. You detect some tracks on positions (1972, 1364), (1724, 1468) and (1812, 1692).\\n \\nMove on this positions in order to inspect hints. We will deduce the real position of this ally.\\n \\n/#898989#Press Escape to continue./[en][fr]Mission 2\\n \\nLe rapport que vous aviez reçu était correct mais le BYTE ne se troue plus au point de ralliement prévu. Vous percevez des traces de passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\\n \\nDéplacez-vous sur ces trois positions pour mieux inspecter ces indices. Nous pourrons peut être en déduire où se trouve cet allié.\\n \\n/#898989#Appuyez sur Echap pour continuer./[fr]",
+		"briefingRaw":"[en]Mission 2\\n \\nThe report you received was right, but the BYTE has been moving and is no longer at the rallying point. You detect some tracks at positions (1972, 1364), (1724, 1468) and (1812, 1692).\\n \\nMove to these positions in order to look for hints. We may be able to figure out the current position of this potential ally.\\n \\n/#898989#Press Escape to continue./[en][fr]Mission 2\\n \\nLe rapport que vous aviez reçu était correct, mais le BYTE ne se trouve plus au point de ralliement prévu. Vous percevez des traces de son passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\\n \\nDéplacez-vous sur ces trois positions dans cet ordre pour mieux inspecter ces indices. Nous pourrons peut-être en déduire où se trouve désormais cet allié potentiel.\\n \\n/#898989#Appuyez sur Echap pour continuer./[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"enabled",
@@ -197,7 +197,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"[en]Mission 2\n \nThe report you received was true, but the BYTE was moving. You detect some tracks on positions (1972, 1364), (1724, 1468) and (1812, 1692).\n \nMove on this positions in order to inspect hints. We will deduce the real position of this ally.\n \nÿ‰‰‰Press Escape to continue. ÿÿÿÿ[en][fr]Mission 2\n \nLe rapport que vous aviez reçu était correct mais le BYTE ne se troue plus au point de ralliement prévu. Vous percevez des traces de passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\n \nDéplacez-vous sur ces trois positions pour mieux inspecter ces indices. Nous pourrons peut être en déduire où se trouve cet allié.\n \nÿ‰‰‰Appuyez sur Echap pour continuer. ÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 2\n \nThe report you received was right, but the BYTE has been moving and is no longer at the rallying point. You detect some tracks at positions (1972, 1364), (1724, 1468) and (1812, 1692).\n \nMove to these positions in order to look for hints. We may be able to figure out the current position of this potential ally.\n \nÿ‰‰‰Press Escape to continue. ÿÿÿÿ[en][fr]Mission 2\n \nLe rapport que vous aviez reçu était correct, mais le BYTE ne se trouve plus au point de ralliement prévu. Vous percevez des traces de son passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\n \nDéplacez-vous sur ces trois positions dans cet ordre pour mieux inspecter ces indices. Nous pourrons peut-être en déduire où se trouve désormais cet allié potentiel.\n \nÿ‰‰‰Appuyez sur Echap pour continuer. ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",

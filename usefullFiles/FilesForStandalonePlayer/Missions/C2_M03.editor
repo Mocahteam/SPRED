@@ -3,7 +3,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 3\\n \\nYour POINTER is operational and need to be trained in advanced combat techniques. Your allies catched and desabled enemy BITS. It's an opportinuty to train your POINTER.\\n \\nDestroy all catched BITS with your POINTER.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 3\\n \\nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\\n \\nDétruisez les BITS capturés à l'aide de votre POINTER.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 3\\n \\nYour POINTER is back in action and needs to be taught advanced combat techniques. Your allies have caught and disabled enemy BITS. It's an opportunity to train your POINTER.\\n \\nDestroy all the caught BITS with your POINTER.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 3\\n \\nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\\n \\nDétruisez les BITS capturés à l'aide de votre POINTER.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -149,7 +149,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 3\n \nYour POINTER is operational and need to be trained in advanced combat techniques. Your allies catched and desabled enemy BITS. It's an opportinuty to train your POINTER.\n \nDestroy all catched BITS with your POINTER.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 3\n \nYour POINTER is back in action and needs to be taught advanced combat techniques. Your allies have caught and disabled enemy BITS. It's an opportunity to train your POINTER.\n \nDestroy all the caught BITS with your POINTER.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 3\n \nVotre POINTEUR est de nouveau opérationnel et doit se former aux techniques de combat. Vos alliés ont capturé et désactivé des BITS ennemis. C'est une bonne occasion de l'entraîner aux techniques de combat.\n \nDétruisez les BITS capturés à l'aide de votre POINTER.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"logic_bomb",

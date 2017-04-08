@@ -99,7 +99,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 7\\n \\nScouts came back... The Cium outpost is safe but the Sili area has to be cleaned in order to restore the Sili-Cium alliance.\\n \\nExplore Sili area with your army and conquer each special hold by enemies.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 7\\n \\nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\\n \\nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 7\\n \\nScouts have returned... The Cium outpost is safe but the Sili area has to be cleaned in order to restore the Sili-Cium alliance.\\n \\nExplore the Sili area with your army and conquer each special are held by the enemies, but be careful and move forward methodically.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 7\\n \\nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\\n \\nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -245,7 +245,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 7\n \nScouts came back... The Cium outpost is safe but the Sili area has to be cleaned in order to restore the Sili-Cium alliance.\n \nExplore Sili area with your army and conquer each special hold by enemies.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 7\n \nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\n \nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 7\n \nScouts have returned... The Cium outpost is safe but the Sili area has to be cleaned in order to restore the Sili-Cium alliance.\n \nExplore the Sili area with your army and conquer each special are held by the enemies, but be careful and move forward methodically.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 7\n \nLes éclaireurs ont fini par revenir de leur patrouille. Le camp de Cium est à nouveau en sécurité et vos alliés vous missionnent de reprendre la région de Sili afin de reconstituer l'alliance de Sili-Cium.\n \nExplorez la région de Sili avec votre armée pour reprendre chaque zone spéciale occupée mais attention avancez méthodiquement et prudemment.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",
@@ -1564,7 +1564,7 @@
 					"name":"Conclusion",
 					"params":{
 						"boolean":"true",
-						"message":["[en]Congratulation!!!\\n \\nYou get back Sili area. Even though it was devasted due to enemy raids, hope finally reborn.\\n \\nLot of works remains to be done to build your contry again but your competencies on programming is an advantage for the community.\\n \\nBut this is another story...\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Félicitation !!!\\n \\nVous avez réussi à reprendre la région de Sili. Bien qu'elle soit dévastée suite aux raids de vos ennemis, l'espoir renaît enfin.\\n \\nBeaucoup de travail reste à fournir pour reconstruire votre foyer et vos compétences en programmation seront un atout certain pour la communauté.\\n \\nMais ceci est une autre histoire...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]"]
+						"message":["[en]Congratulations!!!\\n \\nYou've reconquered the Sili area. Even though it has been devasted by the enemy raids, hope has reborn at last.\\n \\nLot of work remains to be done to rebuild your country but your programming skills will be an asset to the community.\\n \\nBut this is another story...\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Félicitations !!!\\n \\nVous avez réussi à reprendre la région de Sili. Bien qu'elle soit dévastée suite aux raids de vos ennemis, l'espoir renaît enfin.\\n \\nBeaucoup de travail reste à fournir pour reconstruire votre foyer et vos compétences en programmation seront un atout certain pour la communauté.\\n \\nMais ceci est une autre histoire...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]"]
 					}
 				},{
 					"id":55,

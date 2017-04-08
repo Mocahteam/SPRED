@@ -33,7 +33,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 4\\n \\nWARNING!!! This BYTE attempted to escape an enemy scout that is not far. Destroy the enemy scout before it's too late.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 4\\n \\nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
+		"briefingRaw":"[en]Mission 4\\n \\nWARNING!!! This BYTE was trying to escape from an enemy scout. Destroy the enemy unit before it's too late.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 4\\n \\nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"enabled",
@@ -179,7 +179,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"[en]Mission 4\n \nWARNING!!! This BYTE attempted to escape an enemy scout that is not far. Destroy the enemy scout before it's too late.\n \nÿ„z„Press Escape to continue.  ÿÿÿÿ[en][fr]Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 4\n \nWARNING!!! This BYTE was trying to escape from an enemy scout. Destroy the enemy unit before it's too late.\n \nÿ„z„Press Escape to continue.  ÿÿÿÿ[en][fr]Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",

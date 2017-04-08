@@ -18,7 +18,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 9\\n \\nWARNING!!! Your army just be detected by enemy scouts. We can't lose units for in coming operation (retreat BITS would be a good idea). Support BYTES with your ASSEMBLER in order to contain the newt three next enemy waves.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 9\\n \\nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -164,7 +164,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 9\n \nWARNING!!! Your army just be detected by enemy scouts. We can't lose units for in coming operation (retreat BITS would be a good idea). Support BYTES with your ASSEMBLER in order to contain the newt three next enemy waves.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 9\n \nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",

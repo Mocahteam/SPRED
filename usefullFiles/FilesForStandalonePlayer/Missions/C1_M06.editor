@@ -19,7 +19,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 6\\n \\nAll units you control are weakened. You must repair them before starting a counter attack.\\n \\nThe latest ASSEMBLER available to repair your units is moving to the rallying point (256, 1024).\\n \\nMove all units to this position.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 6\\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\n \\nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 6\\n \\nAll units you control have been weakened by previous fights. You must repair them before starting a counterattack.\\n \\nThe last ASSEMBLER still available to repair your units is moving to the rallying point (256, 1024).\\n \\nMove all your units to this position.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 6\\n \\nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\n \\nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"enabled",
@@ -165,7 +165,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"[en]Mission 6\n \nAll units you control are weakened. You must repair them before starting a counter attack.\n \nThe latest ASSEMBLER available to repair your units is moving to the rallying point (256, 1024).\n \nMove all units to this position.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\n \nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 6\n \nAll units you control have been weakened by previous fights. You must repair them before starting a counterattack.\n \nThe last ASSEMBLER still available to repair your units is moving to the rallying point (256, 1024).\n \nMove all your units to this position.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\n \nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",

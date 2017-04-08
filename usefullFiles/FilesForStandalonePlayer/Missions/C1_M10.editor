@@ -19,7 +19,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 10\\n \\nAll units are repaired. Now it is time to fight back. The ennemy headquarters is near from your position. Launch your assault on position (1792, 256).\\n \\nDon't forget that the ASSEMBLER can provide a precious help...\\n \\nGood luck.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 10\\n \\nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\\n \\nBonne chance.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 10\\n \\nAll units are repaired. It is now time to fight back. The enemy headquarters is close from your position. Launch your assault on position (1792, 256).\\n \\nDon't forget that the ASSEMBLER can provide a precious help...\\n \\nGood luck!\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 10\\n \\nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\\n \\nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\\n \\nBonne chance !\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -165,7 +165,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 10\n \nAll units are repaired. Now it is time to fight back. The ennemy headquarters is near from your position. Launch your assault on position (1792, 256).\n \nDon't forget that the ASSEMBLER can provide a precious help...\n \nGood luck.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 10\n \nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\n \nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\n \nBonne chance.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 10\n \nAll units are repaired. It is now time to fight back. The enemy headquarters is close from your position. Launch your assault on position (1792, 256).\n \nDon't forget that the ASSEMBLER can provide a precious help...\n \nGood luck!\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 10\n \nVotre groupe d'intervention est fin prêt à retourner au combat. Le poste de commandement ennemi est proche de votre position. Lancez l'attaque sur la position (1792, 256).\n \nN'oubliez pas que l'ASSEMBLEUR peut vous être d'une aide précieuse...\n \nBonne chance !\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",
@@ -721,7 +721,7 @@
 					"type":"messageGlobal",
 					"name":"EndMessage",
 					"params":{
-						"message":["[en]Thanks to your rapid deployment force and your programming skills, you won a great victory.\\n \\nThis headquarters will give us advantages for next conflicts. Several systems could be implemented again.\\n \\nTill then, your skills are interresting for us, continue to study and get ready...\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Grâce à votre groupe d'intervention et à vos compétences de programmeur, vous avez pu remporter une grande victoire.\\n \\nCe poste de commandement va nous apporter un avantage certain pour la suite du conflit. De nombreux systèmes vont pouvoir être reprogrammés.\\n \\nEn attendant vos compétences peuvent nous être à nouveau utiles, travaillez et tenez vous prêt...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]"],
+						"message":["[en]Thanks to your rapid deployment forces and your programming skills, you've earned a great victory.\\n \\nThese headquarters will give us advantages for next conflicts. Several systems may be implemented again.\\n \\nTill then, your skills may be useful to us once again, keep on studying and stay ready...\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Grâce à votre groupe d'intervention et à vos compétences de programmeur, vous avez pu remporter une grande victoire.\\n \\nCe poste de commandement va nous apporter un avantage certain pour la suite du conflit. De nombreux systèmes vont pouvoir être reprogrammés.\\n \\nEn attendant, vos compétences peuvent nous être à nouveau utiles, travaillez et tenez vous prêt...\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]"],
 						"boolean":"true"
 					}
 				},{

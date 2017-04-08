@@ -743,7 +743,7 @@
 					"type":"script",
 					"name":"SetBriefing",
 					"params":{
-						"script":"messages[\"briefing\"] = \"[en]Mission 1\\n \\nHelp your POINTER to join allies defences at position (3476, 1212).\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 1\\n \\nAidez votre POINTER à rejoindre les défenses alliées à la position (3476, 1212).\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
+						"script":"messages[\"briefing\"] = \"[en]Mission 1\\n \\nHelp your POINTER to join allied defences at position (3476, 1212).\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 1\\n \\nAidez votre POINTER à rejoindre les défenses alliées à la position (3476, 1212).\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
 					}
 				},{
 					"id":21,

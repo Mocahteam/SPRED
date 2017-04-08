@@ -63,7 +63,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 6\\n \\nYou contained attacks of scattered units but the future is darken if scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas to him.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 6\\n \\nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
+		"briefingRaw":"[en]Mission 6\\n \\nYou have successfully resisted to the attacks from scattered units but the future looks bleak as the scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas (green smokes).\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 6\\n \\nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit alors que les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales (fumées vertes) les plus proches de lui.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -209,7 +209,7 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 6\n \nYou contained attacks of scattered units but the future is darken if scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas to him.\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit et les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales les plus proches de lui.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
+		"briefing":"[en]Mission 6\n \nYou have successfully resisted to the attacks from scattered units but the future looks bleak as the scouts are slow to come back. You have to build an army in order to defend the outpost. Use the ASSEMBLER to build SOCKETS on the two closest special areas (green smokes).\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nVous avez contenu les attaques d'entités isolées mais l'avenir s'assombrit alors que les patrouilleurs tardent à revenir. Vous devez reconstruire une armée pour défendre le camp. Utilisez l'ASSEMBLEUR pour construire des SOCKETS sur les deux zones spéciales (fumées vertes) les plus proches de lui.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"logic_bomb",
