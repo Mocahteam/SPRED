@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd">
+<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-03-12T09:58:29+01:00">
+<title>SPRED</title>
+<description>Game made with SPRED for Kernel Panic 4.1</description>
+<activities>
+<activity id_activity="C1_M01">
+<name>C1_M01</name>
+<input_states>
+<input_state id_input="C1_M01||1"/>
+<input_state id_input="C1_M01||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M01||won"/>
+<output_state id_output="C1_M01||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M02">
+<name>C1_M02</name>
+<input_states>
+<input_state id_input="C1_M02||1"/>
+<input_state id_input="C1_M02||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M02||won"/>
+<output_state id_output="C1_M02||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M03">
+<name>C1_M03</name>
+<input_states>
+<input_state id_input="C1_M03||1"/>
+<input_state id_input="C1_M03||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M03||won"/>
+<output_state id_output="C1_M03||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M04">
+<name>C1_M04</name>
+<input_states>
+<input_state id_input="C1_M04||1"/>
+<input_state id_input="C1_M04||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M04||won"/>
+<output_state id_output="C1_M04||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M05">
+<name>C1_M05</name>
+<input_states>
+<input_state id_input="C1_M05||1"/>
+<input_state id_input="C1_M05||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M05||won"/>
+<output_state id_output="C1_M05||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M06">
+<name>C1_M06</name>
+<input_states>
+<input_state id_input="C1_M06||1"/>
+<input_state id_input="C1_M06||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M06||won"/>
+<output_state id_output="C1_M06||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M07">
+<name>C1_M07</name>
+<input_states>
+<input_state id_input="C1_M07||1"/>
+<input_state id_input="C1_M07||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M07||won"/>
+<output_state id_output="C1_M07||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M08">
+<name>C1_M08</name>
+<input_states>
+<input_state id_input="C1_M08||1"/>
+<input_state id_input="C1_M08||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M08||won"/>
+<output_state id_output="C1_M08||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M09">
+<name>C1_M09</name>
+<input_states>
+<input_state id_input="C1_M09||1"/>
+<input_state id_input="C1_M09||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M09||won"/>
+<output_state id_output="C1_M09||lost"/>
+</output_states>
+</activity>
+<activity id_activity="C1_M10">
+<name>C1_M10</name>
+<input_states>
+<input_state id_input="C1_M10||1"/>
+<input_state id_input="C1_M10||2"/>
+</input_states>
+<output_states>
+<output_state id_output="C1_M10||won"/>
+<output_state id_output="C1_M10||lost"/>
+</output_states>
+</activity>
+<activity id_activity="Tutoriel">
+<name>Tutoriel</name>
+<input_states>
+<input_state id_input="Tutoriel||1"/>
+<input_state id_input="Tutoriel||2"/>
+</input_states>
+<output_states>
+<output_state id_output="Tutoriel||won"/>
+<output_state id_output="Tutoriel||lost"/>
+</output_states>
+</activity>
+</activities>
+<link_sets>
+<link_set publication_date="2017-03-12T09:58:29+01:00" status="prepa" default="oui" id_link_set="302">
+<title>KP Campaign: Digital War 3</title>
+<description>Scenario for this game</description>
+<links>
+<output_input_link id_output="C1_M02||lost" id_input="C1_M02||1"/>
+<output_input_link id_output="C1_M02||won" id_input="C1_M03||1"/>
+<output_input_link id_output="C1_M01||lost" id_input="C1_M01||1"/>
+<output_input_link id_output="C1_M01||won" id_input="C1_M02||2"/>
+<output_input_link id_output="C1_M05||lost" id_input="C1_M05||1"/>
+<output_input_link id_output="C1_M05||won" id_input="C1_M06||1"/>
+<output_input_link id_output="C1_M10||lost" id_input="C1_M10||1"/>
+<output_input_link id_output="C1_M10||won" id_input="end"/>
+<output_input_link id_output="Tutoriel||lost" id_input="Tutoriel||1"/>
+<output_input_link id_output="Tutoriel||won" id_input="C1_M01||2"/>
+<output_input_link id_output="C1_M07||lost" id_input="C1_M07||1"/>
+<output_input_link id_output="C1_M07||won" id_input="C1_M08||1"/>
+<output_input_link id_output="C1_M09||lost" id_input="C1_M09||1"/>
+<output_input_link id_output="C1_M09||won" id_input="C1_M10||2"/>
+<output_input_link id_output="C1_M04||lost" id_input="C1_M04||1"/>
+<output_input_link id_output="C1_M04||won" id_input="C1_M05||2"/>
+<output_input_link id_output="C1_M08||lost" id_input="C1_M08||2"/>
+<output_input_link id_output="C1_M08||won" id_input="C1_M09||2"/>
+<output_input_link id_output="C1_M06||lost" id_input="C1_M06||2"/>
+<output_input_link id_output="C1_M06||won" id_input="C1_M07||2"/>
+<output_input_link id_output="start" id_input="Tutoriel||2"/>
+<output_input_link id_output="C1_M03||lost" id_input="C1_M03||2"/>
+<output_input_link id_output="C1_M03||won" id_input="C1_M04||2"/>
+</links>
+</link_set>
+</link_sets>
+</game>
+</games>

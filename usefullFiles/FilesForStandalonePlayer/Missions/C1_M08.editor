@@ -1,27 +1,12 @@
 {
-	"zones":[{
-			"type":"Rectangle",
-			"blue":0.51401484012604,
-			"x2":472,
-			"z1":1848,
-			"z2":2032,
-			"x1":64,
-			"showInGame":false,
-			"id":1,
-			"name":"PopZone",
-			"green":0.47318255901337,
-			"shown":true,
-			"alwaysInView":false,
-			"marker":false,
-			"red":0.011841654777527
-		}],
+	"zones":[],
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir. Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
+		"briefingRaw":"[en]Mission 8\\n \\nYour army is now grouped together and you control the latest available ASSEMBLER.\\n \\nUse it to repair your weakened units.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 8\\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -159,124 +144,16 @@
 				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"Mission_9",
-		"name":"Mission 9",
+		"saveName":"Mission_8",
+		"name":"Mission 8",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":[],
-		"briefing":"Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir. Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
+		"traces":["1","2"],
+		"briefing":"[en]Mission 8\n \nYour army is now grouped together and you control the latest available ASSEMBLER.\n \nUse it to repair your weakened units.\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 8\n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
 	},
 	"units":[{
-			"type":"byte",
-			"id":13198,
-			"position":{
-				"y":130,
-				"x":165,
-				"z":1063
-			},
-			"orientation":2.8025829792023,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":8438,
-			"position":{
-				"y":130,
-				"x":282,
-				"z":1011
-			},
-			"orientation":-2.9191656112671,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
 			"type":"bit",
-			"id":8884,
-			"position":{
-				"y":116,
-				"x":95,
-				"z":883
-			},
-			"orientation":2.288699388504,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":4515,
-			"position":{
-				"y":116,
-				"x":65,
-				"z":974
-			},
-			"orientation":2.3807382583618,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":963,
-			"position":{
-				"y":116,
-				"x":343,
-				"z":969
-			},
-			"orientation":-2.4160199165344,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":10555,
-			"position":{
-				"y":116,
-				"x":425,
-				"z":1021
-			},
-			"orientation":-2.3976120948792,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":3667,
-			"position":{
-				"y":116,
-				"x":193,
-				"z":922
-			},
-			"orientation":2.4727771282196,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":3319,
-			"position":{
-				"y":116,
-				"x":228,
-				"z":1019
-			},
-			"orientation":2.9621169567108,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"byte",
-			"id":14403,
-			"position":{
-				"y":130,
-				"x":349,
-				"z":1060
-			},
-			"orientation":-2.5832238197327,
-			"autoHeal":"global",
-			"hp":100,
-			"team":0
-		},{
-			"type":"bit",
-			"id":3355,
+			"id":4560,
 			"position":{
 				"y":116,
 				"x":368,
@@ -284,11 +161,95 @@
 			},
 			"orientation":-2.3040392398834,
 			"autoHeal":"global",
-			"hp":100,
+			"hp":25,
+			"team":0
+		},{
+			"type":"byte",
+			"id":12550,
+			"position":{
+				"y":130,
+				"x":349,
+				"z":1060
+			},
+			"orientation":-2.5218644142151,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":12750,
+			"position":{
+				"y":116,
+				"x":228,
+				"z":1019
+			},
+			"orientation":2.9467771053314,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":1532,
+			"position":{
+				"y":116,
+				"x":193,
+				"z":922
+			},
+			"orientation":2.4344274997711,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":7815,
+			"position":{
+				"y":116,
+				"x":425,
+				"z":1021
+			},
+			"orientation":-2.3976120948792,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":13306,
+			"position":{
+				"y":116,
+				"x":343,
+				"z":969
+			},
+			"orientation":-2.400680065155,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":14964,
+			"position":{
+				"y":116,
+				"x":65,
+				"z":974
+			},
+			"orientation":2.3807382583618,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":15465,
+			"position":{
+				"y":116,
+				"x":95,
+				"z":883
+			},
+			"orientation":2.2933013439178,
+			"autoHeal":"global",
+			"hp":25,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":10659,
+			"id":2035,
 			"position":{
 				"y":116,
 				"x":256,
@@ -297,6 +258,30 @@
 			"orientation":0.033747583627701,
 			"autoHeal":"global",
 			"hp":100,
+			"team":0
+		},{
+			"type":"byte",
+			"id":8220,
+			"position":{
+				"y":130,
+				"x":282,
+				"z":1011
+			},
+			"orientation":-2.9038257598877,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"byte",
+			"id":11296,
+			"position":{
+				"y":130,
+				"x":170,
+				"z":1105
+			},
+			"orientation":2.7719032764435,
+			"autoHeal":"global",
+			"hp":25,
 			"team":0
 		}],
 	"allyteams":{
@@ -313,22 +298,7 @@
 	},
 	"groups":[],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
-	"variables":[{
-			"id":0,
-			"type":"boolean",
-			"name":"Wave3Launched",
-			"initValue":"false"
-		},{
-			"id":1,
-			"type":"boolean",
-			"name":"Wave1Launched",
-			"initValue":"false"
-		},{
-			"id":2,
-			"type":"boolean",
-			"name":"Wave2Launched",
-			"initValue":"false"
-		}],
+	"variables":[],
 	"teams":{
 		"1":{
 			"ai":"",
@@ -350,7 +320,7 @@
 				"blue":0,
 				"red":1
 			},
-			"enabled":true
+			"enabled":false
 		},
 		"3":{
 			"ai":"",
@@ -444,38 +414,40 @@
 	"events":[{
 			"comment":"",
 			"trigger":"",
-			"conditionTotal":2,
+			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
-					"id":14,
-					"type":"booleanVariable",
-					"name":"Wave3Launched",
-					"params":{
-						"variable":"Wave3Launched"
-					}
-				},{
-					"id":19,
-					"type":"dead",
-					"name":"WaveManaged",
+					"id":12,
+					"type":"hp",
+					"name":"FullHP",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
+						"comparison":">=",
 						"unitset":{
-							"value":2,
+							"value":0,
 							"type":"team"
-						}
+						},
+						"hp":"100"
 					}
 				}],
 			"actions":[{
+					"id":9,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"1"
+					}
+				},{
 					"id":4,
 					"type":"win",
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":4
@@ -513,188 +485,14 @@
 			"id":5
 		},{
 			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"FirstWave",
-			"repetition":false,
-			"actionTotal":3,
-			"conditions":[{
-					"id":13,
-					"type":"start",
-					"name":"GameStart",
-					"params":[]
-				}],
-			"actions":[{
-					"id":6,
-					"type":"createUnits",
-					"name":"PopUnits",
-					"params":{
-						"team":2,
-						"number":"20",
-						"unitType":"bit",
-						"zone":1
-					}
-				},{
-					"id":7,
-					"type":"orderPosition",
-					"name":"LaunchFight",
-					"params":{
-						"command":16,
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"position":{
-							"x":254,
-							"z":1080
-						}
-					}
-				},{
-					"id":8,
-					"type":"setBooleanVariable",
-					"name":"Wave1Launched",
-					"params":{
-						"boolean":"true",
-						"variable":"Wave1Launched"
-					}
-				}],
-			"id":6
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":2,
-			"name":"SecondWave",
-			"repetition":false,
-			"actionTotal":3,
-			"conditions":[{
-					"id":15,
-					"type":"dead",
-					"name":"Wave1Managed",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						}
-					}
-				},{
-					"id":16,
-					"type":"booleanVariable",
-					"name":"WaveLaunched",
-					"params":{
-						"variable":"Wave1Launched"
-					}
-				}],
-			"actions":[{
-					"id":9,
-					"type":"createUnits",
-					"name":"PopUnits",
-					"params":{
-						"number":"40",
-						"team":2,
-						"unitType":"bit",
-						"zone":1
-					}
-				},{
-					"id":10,
-					"type":"orderPosition",
-					"name":"LaunchFight",
-					"params":{
-						"command":16,
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"position":{
-							"x":264,
-							"z":1060
-						}
-					}
-				},{
-					"id":11,
-					"type":"setBooleanVariable",
-					"name":"Wave2Launched",
-					"params":{
-						"boolean":"true",
-						"variable":"Wave2Launched"
-					}
-				}],
-			"id":7
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":2,
-			"name":"ThirdWave",
-			"repetition":false,
-			"actionTotal":3,
-			"conditions":[{
-					"id":17,
-					"type":"booleanVariable",
-					"name":"Wave2Launched",
-					"params":{
-						"variable":"Wave2Launched"
-					}
-				},{
-					"id":18,
-					"type":"dead",
-					"name":"WaveManaged",
-					"params":{
-						"number":{
-							"comparison":"all"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						}
-					}
-				}],
-			"actions":[{
-					"id":12,
-					"type":"createUnits",
-					"name":"PopUnits",
-					"params":{
-						"team":2,
-						"number":"80",
-						"unitType":"bit",
-						"zone":1
-					}
-				},{
-					"id":13,
-					"type":"orderPosition",
-					"name":"LaunchFight",
-					"params":{
-						"command":16,
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"position":{
-							"z":1060,
-							"x":264
-						}
-					}
-				},{
-					"id":14,
-					"type":"setBooleanVariable",
-					"name":"Wave3Launched",
-					"params":{
-						"boolean":"true",
-						"variable":"Wave3Launched"
-					}
-				}],
-			"id":8
-		},{
-			"comment":"",
-			"id":9,
+			"id":6,
 			"conditionTotal":1,
 			"actionTotal":1,
 			"name":"ForbidFightAsm",
 			"repetition":true,
 			"repetitionTime":"0",
 			"conditions":[{
-					"id":20,
+					"id":13,
 					"type":"script",
 					"name":"CheckFight",
 					"params":{
@@ -702,13 +500,13 @@
 					}
 				}],
 			"actions":[{
-					"id":19,
+					"id":8,
 					"type":"order",
 					"name":"Stop",
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":10659,
+							"value":2035,
 							"type":"unit"
 						}
 					}

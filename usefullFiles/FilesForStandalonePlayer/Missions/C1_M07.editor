@@ -1,12 +1,28 @@
 {
-	"zones":[],
+	"zones":[{
+			"a":72,
+			"type":"Disk",
+			"blue":0.83343100547791,
+			"b":80,
+			"marker":true,
+			"showInGame":false,
+			"id":1,
+			"x":256,
+			"name":"RallyingPoint",
+			"inGameText":"[en]Assembler rallying point\\n          (256, 811)[en][fr]      Point de ralliement\\nde l'assembleur (256, 811)[fr]",
+			"green":0.87811172008514,
+			"z":808,
+			"shown":true,
+			"alwaysInView":true,
+			"red":0.51766788959503
+		}],
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 8\\n \\nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\\n \\nOrdonnez lui de réparer toute votre armée.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
+		"briefingRaw":"[en]Mission 7\\n \\nThe ASSEMBLER has just entered on the map. Your army is too weak to continue moving, more effort may be the last. So help your ASSEMBLER and just it to join your army at (256, 811).\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 7\\n \\nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\\n \\nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -144,64 +160,76 @@
 				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"Mission_8",
-		"name":"Mission 8",
+		"saveName":"Mission_7",
+		"name":"Mission 7",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"Mission 8\n \nVotre armée est maintenant regroupée et vous disposez du dernier ASSEMBLEUR du secteur encore en marche.\n \nOrdonnez lui de réparer toute votre armée.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
+		"briefing":"[en]Mission 7\n \nThe ASSEMBLER has just entered on the map. Your army is too weak to continue moving, more effort may be the last. So help your ASSEMBLER and just it to join your army at (256, 811).\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 7\n \nL'ASSEMBLEUR vient d'apparaître sur la carte. Votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
 	},
 	"units":[{
-			"type":"bit",
-			"id":6885,
+			"type":"byte",
+			"id":361,
 			"position":{
-				"y":116,
-				"x":368,
-				"z":894
+				"y":130,
+				"x":170,
+				"z":1105
 			},
-			"orientation":-2.3040392398834,
+			"orientation":2.8378646373749,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":13729,
+			"id":6373,
 			"position":{
 				"y":130,
-				"x":349,
-				"z":1060
+				"x":282,
+				"z":1011
 			},
-			"orientation":-2.5280003547668,
+			"orientation":-2.9467771053314,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4909,
+			"id":10053,
 			"position":{
 				"y":116,
-				"x":228,
-				"z":1019
+				"x":95,
+				"z":883
 			},
-			"orientation":2.9483110904694,
+			"orientation":2.2580196857452,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4168,
+			"id":13685,
 			"position":{
 				"y":116,
-				"x":193,
-				"z":922
+				"x":65,
+				"z":974
 			},
-			"orientation":2.437495470047,
+			"orientation":2.3807382583618,
+			"autoHeal":"global",
+			"hp":100,
+			"team":0
+		},{
+			"type":"bit",
+			"id":10356,
+			"position":{
+				"y":116,
+				"x":343,
+				"z":969
+			},
+			"orientation":-2.4789130687714,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":9806,
+			"id":11148,
 			"position":{
 				"y":116,
 				"x":425,
@@ -213,73 +241,61 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":4616,
+			"id":9243,
 			"position":{
 				"y":116,
-				"x":343,
-				"z":969
+				"x":193,
+				"z":922
 			},
-			"orientation":-2.402214050293,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
-			"type":"bit",
-			"id":13964,
-			"position":{
-				"y":116,
-				"x":65,
-				"z":974
-			},
-			"orientation":2.3807382583618,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
-			"type":"bit",
-			"id":9989,
-			"position":{
-				"y":116,
-				"x":95,
-				"z":883
-			},
-			"orientation":2.2933013439178,
+			"orientation":2.5724859237671,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":160,
+			"id":718,
 			"position":{
 				"y":116,
-				"x":256,
-				"z":811
+				"x":51,
+				"z":48
 			},
 			"orientation":0.033747583627701,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
-			"type":"byte",
-			"id":6335,
+			"type":"bit",
+			"id":10978,
 			"position":{
-				"y":130,
-				"x":282,
-				"z":1011
+				"y":116,
+				"x":228,
+				"z":1019
 			},
-			"orientation":-2.9053597450256,
+			"orientation":2.9897286891937,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":10977,
+			"id":11854,
 			"position":{
 				"y":130,
-				"x":170,
-				"z":1105
+				"x":349,
+				"z":1060
 			},
-			"orientation":2.7749712467194,
+			"orientation":-2.6706607341766,
+			"autoHeal":"global",
+			"hp":25,
+			"team":0
+		},{
+			"type":"bit",
+			"id":1038,
+			"position":{
+				"y":116,
+				"x":368,
+				"z":894
+			},
+			"orientation":-2.3040392398834,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
@@ -296,7 +312,11 @@
 		"9":[],
 		"0":[]
 	},
-	"groups":[],
+	"groups":[{
+			"id":1,
+			"name":"Army",
+			"units":[361,1038,6373,9243,10053,10356,10978,11148,11854,13685]
+		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
 	"teams":{
@@ -417,37 +437,29 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":1,
 			"conditions":[{
-					"id":12,
-					"type":"hp",
-					"name":"FullHP",
+					"id":10,
+					"type":"zone",
+					"name":"InZone",
 					"params":{
 						"number":{
 							"comparison":"all"
 						},
-						"comparison":">=",
 						"unitset":{
-							"value":0,
-							"type":"team"
+							"value":718,
+							"type":"unit"
 						},
-						"hp":"100"
+						"zone":1
 					}
 				}],
 			"actions":[{
-					"id":9,
-					"type":"wait",
-					"name":"Tempo",
-					"params":{
-						"time":"1"
-					}
-				},{
 					"id":4,
 					"type":"win",
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":4
@@ -485,33 +497,46 @@
 			"id":5
 		},{
 			"comment":"",
-			"id":6,
+			"trigger":"",
 			"conditionTotal":1,
-			"actionTotal":1,
-			"name":"ForbidFightAsm",
-			"repetition":true,
-			"repetitionTime":"0",
+			"name":"ForbidMoving",
+			"repetition":false,
+			"actionTotal":2,
 			"conditions":[{
-					"id":13,
-					"type":"script",
-					"name":"CheckFight",
-					"params":{
-						"script":"local function isAsmFight () local units = Spring.GetAllUnits() for i = 1, #units do local u = units[i] if UnitDefs[Spring.GetUnitDefID(u)][\"name\"]==\"assembler\" then local queue=Spring.GetCommandQueue(u,4) for k = 1, #queue do if queue[k].id == 16 then return true end end end end return false end return isAsmFight ()"
-					}
-				}],
-			"actions":[{
-					"id":8,
+					"id":9,
 					"type":"order",
-					"name":"Stop",
+					"name":"DetectMove",
 					"params":{
-						"command":0,
+						"command":10,
 						"unitset":{
-							"value":160,
-							"type":"unit"
+							"value":1,
+							"type":"group"
+						},
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
 						}
 					}
 				}],
-			"trigger":""
+			"actions":[{
+					"id":7,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"1"
+					}
+				},{
+					"id":6,
+					"type":"kill",
+					"name":"KillUnit",
+					"params":{
+						"unitset":{
+							"value":9,
+							"type":"condition"
+						}
+					}
+				}],
+			"id":6
 		}],
 	"listOfCommands":{
 		"0":"Stop",

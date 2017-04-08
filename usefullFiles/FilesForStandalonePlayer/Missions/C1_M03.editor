@@ -1,42 +1,27 @@
 {
 	"zones":[{
-			"a":64,
+			"a":96,
 			"type":"Disk",
-			"blue":0.80158841609955,
-			"b":72,
-			"id":5,
+			"blue":0.83343100547791,
+			"b":88,
+			"marker":false,
 			"showInGame":false,
-			"marker":true,
-			"x":480,
-			"name":"  Point de ralliement\\ndes bytes (479, 1825)",
-			"green":0.99604952335358,
-			"alwaysInView":true,
+			"id":1,
+			"x":1056,
+			"name":"ByteZone",
+			"green":0.87811172008514,
+			"z":1792,
 			"shown":true,
-			"z":1824,
-			"red":0.75692272186279
-		},{
-			"a":72,
-			"type":"Disk",
-			"blue":0.64954459667206,
-			"b":80,
-			"id":6,
-			"showInGame":false,
-			"marker":true,
-			"x":1400,
-			"name":" Point de ralliement\\ndes bits (1400, 1371)",
-			"green":0.35358023643494,
-			"alwaysInView":true,
-			"shown":true,
-			"z":1368,
-			"red":0.31035709381104
+			"alwaysInView":false,
+			"red":0.51766788959503
 		}],
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 5\\n \\nPour vous remercier de votre aide, le BYTE se rallie à votre cause et vous informe que d'autres entités alliées se sont regroupées non loin de là. Il vous communique les coordonnées de la formation de BYTES qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonées (1400, 1371).\\n \\nAfin de récupérer ces nouvelles forces, ordonnez à vos deux entités de rejoindre leurs semblables.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
+		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -174,130 +159,34 @@
 				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"Mission_5",
-		"name":"Mission 5",
+		"saveName":"Mission_3",
+		"name":"Mission 3",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["3","2","1"],
-		"briefing":"Mission 5\n \nPour vous remercier de votre aide, le BYTE se rallie à votre cause et vous informe que d'autres entités alliées se sont regroupées non loin de là. Il vous communique les coordonnées de la formation de BYTES qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonées (1400, 1371).\n \nAfin de récupérer ces nouvelles forces, ordonnez à vos deux entités de rejoindre leurs semblables.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
+		"traces":["1","2"],
+		"briefing":""
 	},
 	"units":[{
-			"type":"byte",
-			"id":4008,
-			"position":{
-				"y":130,
-				"x":1056,
-				"z":1792
-			},
-			"orientation":-1.5661944150925,
-			"autoHeal":"global",
-			"hp":25,
-			"team":0
-		},{
 			"type":"bit",
-			"id":5863,
+			"id":10165,
 			"position":{
 				"y":116,
-				"x":1120,
-				"z":1760
+				"x":1812,
+				"z":1692
 			},
-			"orientation":-2.9299032688141,
+			"orientation":-1.2701361179352,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
-			"type":"bit",
-			"id":7135,
-			"position":{
-				"y":270.39453125,
-				"x":1488,
-				"z":1318
-			},
-			"orientation":-1.3437671661377,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"bit",
-			"id":7909,
-			"position":{
-				"y":270.39453125,
-				"x":1432,
-				"z":1320
-			},
-			"orientation":-1.2072429656982,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"bit",
-			"id":5754,
-			"position":{
-				"y":270.39453125,
-				"x":1477,
-				"z":1383
-			},
-			"orientation":-1.8837283849716,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"bit",
-			"id":7719,
-			"position":{
-				"y":270.39453125,
-				"x":1390,
-				"z":1467
-			},
-			"orientation":-2.8532042503357,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"bit",
-			"id":13035,
-			"position":{
-				"y":270.39453125,
-				"x":1463,
-				"z":1459
-			},
-			"orientation":-2.3960781097412,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"bit",
-			"id":14438,
-			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1430
-			},
-			"orientation":2.8117868900299,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
 			"type":"byte",
-			"id":10674,
+			"id":1703,
 			"position":{
 				"y":130,
-				"x":481,
-				"z":1741
+				"x":978,
+				"z":1792
 			},
-			"orientation":1.7625439167023,
-			"autoHeal":"global",
-			"hp":25,
-			"team":1
-		},{
-			"type":"byte",
-			"id":12684,
-			"position":{
-				"y":130,
-				"x":429,
-				"z":1899
-			},
-			"orientation":1.8929322957993,
+			"orientation":0,
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
@@ -310,21 +199,22 @@
 		"5":[],
 		"6":[],
 		"7":[],
-		"8":[1],
+		"8":[],
 		"9":[],
 		"0":[1]
 	},
 	"groups":[{
 			"id":1,
-			"name":"GroupBits",
-			"units":[]
-		},{
-			"id":2,
-			"name":"GroupBytes",
+			"name":"MyBit",
 			"units":[]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
-	"variables":[],
+	"variables":[{
+			"id":0,
+			"type":"boolean",
+			"name":"compasShown",
+			"initValue":"true"
+		}],
 	"teams":{
 		"1":{
 			"ai":"",
@@ -439,85 +329,93 @@
 	},
 	"events":[{
 			"comment":"",
-			"trigger":"BitInZone and ByteInZone",
-			"conditionTotal":2,
-			"name":"Victory",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Initialisation",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":2,
 			"conditions":[{
-					"id":8,
-					"type":"zone",
-					"name":"BitInZone",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"all"
-						},
-						"unitset":{
-							"value":5863,
-							"type":"unit"
-						},
-						"zone":6
-					}
-				},{
-					"id":11,
-					"type":"zone",
-					"name":"ByteInZone",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"all"
-						},
-						"unitset":{
-							"value":4008,
-							"type":"unit"
-						},
-						"zone":5
-					}
+					"id":6,
+					"type":"start",
+					"name":"GameStart",
+					"params":[]
 				}],
 			"actions":[{
-					"id":8,
-					"type":"transfer",
-					"name":"Rallying",
+					"id":9,
+					"type":"orderPosition",
+					"name":"Move",
 					"params":{
-						"team":0,
+						"command":10,
 						"unitset":{
-							"value":1,
-							"type":"team"
+							"value":10165,
+							"type":"unit"
+						},
+						"position":{
+							"x":1865,
+							"z":1356
 						}
 					}
 				},{
-					"id":9,
-					"type":"wait",
-					"name":"Tempo",
+					"id":10,
+					"type":"bubbleUnit",
+					"name":"Say...",
 					"params":{
-						"time":"0.5"
-					}
-				},{
-					"id":4,
-					"type":"win",
-					"name":"WinGame",
-					"params":{
-						"team":0,
-						"outputState":"win"
+						"message":["[en]I have to use this hints to find where is my ally.[en][fr]Je dois maintenant exploiter ces indices et trouver où se trouve mon allié.[fr]"],
+						"unitset":{
+							"value":10165,
+							"type":"unit"
+						},
+						"time":"6"
 					}
 				}],
 			"id":4
 		},{
 			"comment":"",
-			"trigger":"BlueDie",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Victory",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":0,
+					"type":"zone",
+					"name":"InByteZone",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":10165,
+							"type":"unit"
+						},
+						"zone":1
+					}
+				}],
+			"actions":[{
+					"id":0,
+					"type":"win",
+					"name":"WinMission",
+					"params":{
+						"team":0,
+						"outputState":"won"
+					}
+				}],
+			"id":0
+		},{
+			"comment":"",
+			"trigger":"",
 			"conditionTotal":1,
 			"name":"Defeat",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
-					"id":6,
+					"id":1,
 					"type":"dead",
 					"name":"BlueDie",
 					"params":{
 						"number":{
-							"number":"1",
-							"comparison":"atleast"
+							"comparison":"all"
 						},
 						"unitset":{
 							"value":0,
@@ -526,15 +424,135 @@
 					}
 				}],
 			"actions":[{
-					"id":5,
+					"id":1,
 					"type":"lose",
-					"name":"LoseGame",
+					"name":"LoseMission",
 					"params":{
 						"team":0,
 						"outputState":"lost"
 					}
 				}],
-			"id":5
+			"id":1
+		},{
+			"comment":"",
+			"id":2,
+			"conditionTotal":2,
+			"actionTotal":5,
+			"name":"ShowCompas",
+			"repetition":true,
+			"repetitionTime":"1",
+			"conditions":[{
+					"id":2,
+					"type":"order",
+					"name":"Moving",
+					"params":{
+						"command":10,
+						"unitset":{
+							"value":10165,
+							"type":"unit"
+						},
+						"number":{
+							"comparison":"all"
+						}
+					}
+				},{
+					"id":3,
+					"type":"booleanVariable",
+					"name":"CompasShown",
+					"params":{
+						"variable":"compasShown"
+					}
+				}],
+			"actions":[{
+					"id":3,
+					"type":"setBooleanVariable",
+					"name":"CompasShown",
+					"params":{
+						"boolean":"true",
+						"variable":"compasShown"
+					}
+				},{
+					"id":6,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"2"
+					}
+				},{
+					"id":2,
+					"type":"script",
+					"name":"ShowCompas",
+					"params":{
+						"script":"function writeLetter(x, y, z, letter) if letter == \"O\" then Spring.MarkerAddLine(x-5, y, z-8, x+5, y, z-8) Spring.MarkerAddLine(x+5, y, z-8, x+5, y, z+8) Spring.MarkerAddLine(x+5, y, z+8, x-5, y, z+8) Spring.MarkerAddLine(x-5, y, z+8, x-5, y, z-8) elseif letter == \"W\" then Spring.MarkerAddLine(x-5, y, z-8, x-2.5, y, z+8) Spring.MarkerAddLine(x-2.5, y, z+8, x, y, z) Spring.MarkerAddLine(x, y, z, x+2.5, y, z+8) Spring.MarkerAddLine(x+2.5, y, z+8, x+5, y, z-8) elseif letter == \"N\" then Spring.MarkerAddLine(x-5, y, z+8, x-5, y, z-8) Spring.MarkerAddLine(x-5, y, z-8, x+5, y, z+8) Spring.MarkerAddLine(x+5, y, z+8, x+5, y, z-8) elseif letter == \"S\" then Spring.MarkerAddLine(x+5, y, z-8, x-5, y, z-8) Spring.MarkerAddLine(x-5, y, z-8, x-5, y, z) Spring.MarkerAddLine(x-5, y, z, x+5, y, z) Spring.MarkerAddLine(x+5, y, z, x+5, y, z+8) Spring.MarkerAddLine(x+5, y, z+8, x-5, y, z+8) elseif letter == \"E\" then Spring.MarkerAddLine(x+5, y, z-8, x-5, y, z-8) Spring.MarkerAddLine(x-5, y, z-8, x-5, y, z+8) Spring.MarkerAddLine(x-5, y, z+8, x+5, y, z+8) Spring.MarkerAddLine(x-5, y, z, x, y, z) end end function writeSign(x, y, z, sign) if sign == \"+\" then Spring.MarkerAddLine(x-5, y, z, x+5, y, z) Spring.MarkerAddLine(x, y, z-5, x, y, z+5) elseif sign == \"-\" then Spring.MarkerAddLine(x-5, y, z, x+5, y, z) end end local unitId = extractListOfUnitsInvolved ({unitset = {type = \"team\", value = 0}})[1] if unitId then local x,y,z=Spring.GetUnitPosition(getSpringIdFromLocalUnitId[unitId]) Spring.MarkerAddLine(x-65, y, z, x-25, y, z) Spring.MarkerAddLine(x-65, y, z, x-55, y, z+10) Spring.MarkerAddLine(x-65, y, z, x-55, y, z-10) Spring.MarkerAddLine(x+65, y, z, x+25, y, z) Spring.MarkerAddLine(x+65, y, z, x+55, y, z+10) Spring.MarkerAddLine(x+65, y, z, x+55, y, z-10) Spring.MarkerAddLine(x, y, z-65, x, y, z-25) Spring.MarkerAddLine(x, y, z-65, x+10, y, z-55) Spring.MarkerAddLine(x, y, z-65, x-10, y, z-55) Spring.MarkerAddLine(x, y, z+65, x, y, z+25) Spring.MarkerAddLine(x, y, z+65, x+10, y, z+55) Spring.MarkerAddLine(x, y, z+65, x-10, y, z+55)writeLetter(x-60, y, z-25, \"W\") writeLetter(x+60, y, z-25, \"E\") writeLetter(x-25, y, z-60, \"N\") writeLetter(x-25, y, z+60, \"S\") writeSign(x-48, y, z+18, \"-\") writeSign(x+48, y, z+18, \"+\") writeSign(x+18, y, z-48, \"-\") writeSign(x+18, y, z+48, \"+\") end"
+					}
+				},{
+					"id":7,
+					"type":"script",
+					"name":"UpdateBriefing",
+					"params":{
+						"script":"local playerUnitId = extractListOfUnitsInvolved ({unitset = {type = \"team\", value = 0}})[1] if playerUnitId then local x,y,z=Spring.GetUnitPosition(getSpringIdFromLocalUnitId[playerUnitId]) local x2, z2 local zone = mission.zones[1] if zone.type == \"Rectangle\" then x2 = (zone.x1+zone.x2)/2 z2 = (zone.z1+zone.z2)/2 elseif zone.type == \"Disk\" then x2 = zone.x z2 = zone.z end local dX = x2 - x local dY = z2 - z local dirX, dirY if dX < 0 then dirX = \"l'Ouest\" else dirX = \"l'Est\" end if dY < 0 then dirX = \"le Nord\" else dirY = \"le Sud\" end local dX = math.ceil(math.abs(dX)) local dY = math.ceil(math.abs(dY)) messages[\"briefing\"] = \"[en]Mission 3\\n \\nYour BIT moved and has not found the BYTE. Depending on its position and its valuation, the BYTE is in \"..dX..\" units from \"..dirX..\" and \"..dY..\" units from \"..dirY..\".\\n \\nMove your BIT in this direction.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 3\\n \\nVotre BIT s'est déplacé et n'a pas encore retrouvé le BYTE. D'après sa nouvelle position et son estimation, le BYTE se trouve à une distance de \"..dX..\" unités vers \"..dirX..\" et \"..dY..\" unités vers \"..dirY..\".\\n \\nDéplacez votre BIT dans cette direction.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\" end"
+					}
+				},{
+					"id":11,
+					"type":"showBriefing",
+					"name":"ShowBriefing",
+					"params":[]
+				}],
+			"trigger":"not Moving and not CompasShown"
+		},{
+			"comment":"",
+			"id":3,
+			"conditionTotal":2,
+			"actionTotal":3,
+			"name":"HideCompas",
+			"repetition":true,
+			"repetitionTime":"1",
+			"conditions":[{
+					"id":4,
+					"type":"order",
+					"name":"Moving",
+					"params":{
+						"command":10,
+						"unitset":{
+							"value":10165,
+							"type":"unit"
+						},
+						"number":{
+							"comparison":"all"
+						}
+					}
+				},{
+					"id":5,
+					"type":"booleanVariable",
+					"name":"CompasShown",
+					"params":{
+						"variable":"compasShown"
+					}
+				}],
+			"actions":[{
+					"id":5,
+					"type":"script",
+					"name":"HideCompas",
+					"params":{
+						"script":"local unitId = extractListOfUnitsInvolved ({unitset = {type = \"team\", value = 0}})[1] if unitId then local x,y,z=Spring.GetUnitPosition(getSpringIdFromLocalUnitId[unitId]) Spring.MarkerErasePosition(x, Spring.GetGroundHeight(x, z), z) end"
+					}
+				},{
+					"id":4,
+					"type":"setBooleanVariable",
+					"name":"CompasHidden",
+					"params":{
+						"boolean":"false",
+						"variable":"compasShown"
+					}
+				},{
+					"id":8,
+					"type":"script",
+					"name":"BriefingComputing",
+					"params":{
+						"script":"messages[\"briefing\"] = \"[en]Mission 3\\n \\nUnavailable informations...\\n \\nConsult briefing again when your BIT will be stopped.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 3\\n \\nInformations indisponibles...\\n \\nReconsultez le briefing lorsque votre BIT sera à l'arrêt.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
+					}
+				}],
+			"trigger":""
 		}],
 	"listOfCommands":{
 		"0":"Stop",

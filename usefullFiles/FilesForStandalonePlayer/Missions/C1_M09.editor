@@ -1,24 +1,24 @@
 {
 	"zones":[{
-			"a":248,
-			"type":"Disk",
-			"blue":0.83343100547791,
-			"b":264,
-			"marker":true,
+			"type":"Rectangle",
+			"blue":0.51401484012604,
+			"x2":472,
+			"z1":1848,
+			"z2":2032,
+			"x1":64,
 			"showInGame":false,
 			"id":1,
-			"x":256,
-			"name":"Point de ralliement\\n       (256, 1024)",
-			"green":0.87811172008514,
-			"z":1024,
+			"name":"PopZone",
+			"green":0.47318255901337,
 			"shown":true,
-			"alwaysInView":true,
-			"red":0.51766788959503
+			"alwaysInView":false,
+			"marker":false,
+			"red":0.011841654777527
 		}],
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 6\\n \\nToutes les entités que vous possédez ont subi de lourds dommanges lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\\n \\nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\\n \\nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/",
+		"briefingRaw":"[en]Mission 9\\n \\nWARNING!!! Your army just be detected by enemy scouts. We can't lose units for in coming operation (retreat BITS would be a good idea). Support BYTES with your ASSEMBLER in order to contain the newt three next enemy waves.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -159,132 +159,144 @@
 				"name":"Map edge extension",
 				"active":false
 			}],
-		"saveName":"Mission_6",
-		"name":"Mission 6",
+		"saveName":"Mission_9",
+		"name":"Mission 9",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["1","2"],
-		"briefing":"Mission 6\n \nToutes les entités que vous possédez ont subi de lourds dommanges lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\n \nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ"
+		"traces":[],
+		"briefing":"[en]Mission 9\n \nWARNING!!! Your army just be detected by enemy scouts. We can't lose units for in coming operation (retreat BITS would be a good idea). Support BYTES with your ASSEMBLER in order to contain the newt three next enemy waves.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne devons perdre aucune unité en vue de l'opération à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
-			"type":"bit",
-			"id":5072,
+			"type":"byte",
+			"id":10344,
 			"position":{
-				"y":270.39453125,
-				"x":1400,
-				"z":1384
+				"y":130,
+				"x":165,
+				"z":1063
 			},
-			"orientation":-2.2933013439178,
+			"orientation":2.7964470386505,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":10160,
+			"id":6312,
 			"position":{
 				"y":130,
-				"x":510,
-				"z":1842
+				"x":282,
+				"z":1011
 			},
-			"orientation":-2.463573217392,
+			"orientation":-2.9160976409912,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":14548,
+			"id":308,
 			"position":{
-				"y":270.39453125,
-				"x":1488,
-				"z":1318
+				"y":116,
+				"x":95,
+				"z":883
 			},
-			"orientation":-2.2933013439178,
+			"orientation":2.2917673587799,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15852,
+			"id":11266,
 			"position":{
-				"y":270.39453125,
-				"x":1432,
-				"z":1320
+				"y":116,
+				"x":65,
+				"z":974
 			},
-			"orientation":-2.2933013439178,
+			"orientation":2.3807382583618,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":10458,
+			"id":4289,
 			"position":{
-				"y":270.39453125,
-				"x":1477,
-				"z":1383
+				"y":116,
+				"x":343,
+				"z":969
 			},
-			"orientation":-2.2933013439178,
+			"orientation":-2.4129519462585,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":13928,
+			"id":701,
 			"position":{
-				"y":270.39453125,
-				"x":1390,
-				"z":1467
+				"y":116,
+				"x":425,
+				"z":1021
 			},
-			"orientation":-2.2933013439178,
+			"orientation":-2.3976120948792,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15385,
+			"id":1919,
 			"position":{
-				"y":270.39453125,
-				"x":1463,
-				"z":1459
+				"y":116,
+				"x":193,
+				"z":922
 			},
-			"orientation":-2.2933013439178,
+			"orientation":2.463573217392,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":12482,
+			"id":12595,
 			"position":{
-				"y":270.39453125,
-				"x":1331,
-				"z":1430
+				"y":116,
+				"x":228,
+				"z":1019
 			},
-			"orientation":-2.2933013439178,
+			"orientation":2.9590489864349,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":3032,
+			"id":1692,
 			"position":{
 				"y":130,
-				"x":481,
-				"z":1741
+				"x":349,
+				"z":1060
 			},
-			"orientation":-2.2871654033661,
+			"orientation":-2.5709519386292,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
 			"team":0
 		},{
-			"type":"byte",
-			"id":15019,
+			"type":"bit",
+			"id":1043,
 			"position":{
-				"y":130,
-				"x":429,
-				"z":1899
+				"y":116,
+				"x":368,
+				"z":894
 			},
-			"orientation":3.1354568004608,
+			"orientation":-2.3040392398834,
 			"autoHeal":"global",
-			"hp":25,
+			"hp":100,
+			"team":0
+		},{
+			"type":"assembler",
+			"id":11907,
+			"position":{
+				"y":116,
+				"x":256,
+				"z":811
+			},
+			"orientation":0.033747583627701,
+			"autoHeal":"global",
+			"hp":100,
 			"team":0
 		}],
 	"allyteams":{
@@ -301,7 +313,22 @@
 	},
 	"groups":[],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
-	"variables":[],
+	"variables":[{
+			"id":0,
+			"type":"boolean",
+			"name":"Wave3Launched",
+			"initValue":"false"
+		},{
+			"id":1,
+			"type":"boolean",
+			"name":"Wave1Launched",
+			"initValue":"false"
+		},{
+			"id":2,
+			"type":"boolean",
+			"name":"Wave2Launched",
+			"initValue":"false"
+		}],
 	"teams":{
 		"1":{
 			"ai":"",
@@ -323,7 +350,7 @@
 				"blue":0,
 				"red":1
 			},
-			"enabled":false
+			"enabled":true
 		},
 		"3":{
 			"ai":"",
@@ -416,55 +443,53 @@
 	},
 	"events":[{
 			"comment":"",
-			"trigger":"InZone",
-			"conditionTotal":1,
+			"trigger":"",
+			"conditionTotal":2,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":1,
 			"conditions":[{
-					"id":8,
-					"type":"zone",
-					"name":"InZone",
+					"id":14,
+					"type":"booleanVariable",
+					"name":"Wave3Launched",
+					"params":{
+						"variable":"Wave3Launched"
+					}
+				},{
+					"id":19,
+					"type":"dead",
+					"name":"WaveManaged",
 					"params":{
 						"number":{
-							"number":"1",
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":0,
+							"value":2,
 							"type":"team"
-						},
-						"zone":1
+						}
 					}
 				}],
 			"actions":[{
-					"id":6,
-					"type":"wait",
-					"name":"Tempo",
-					"params":{
-						"time":"4"
-					}
-				},{
 					"id":4,
 					"type":"win",
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":4
 		},{
 			"comment":"",
-			"trigger":"BlueDie",
+			"trigger":"",
 			"conditionTotal":1,
 			"name":"Defeat",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
-					"id":6,
+					"id":11,
 					"type":"dead",
-					"name":"BlueDie",
+					"name":"AtLeastOneDies",
 					"params":{
 						"number":{
 							"number":"1",
@@ -486,6 +511,209 @@
 					}
 				}],
 			"id":5
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"FirstWave",
+			"repetition":false,
+			"actionTotal":3,
+			"conditions":[{
+					"id":13,
+					"type":"start",
+					"name":"GameStart",
+					"params":[]
+				}],
+			"actions":[{
+					"id":6,
+					"type":"createUnits",
+					"name":"PopUnits",
+					"params":{
+						"team":2,
+						"number":"20",
+						"unitType":"bit",
+						"zone":1
+					}
+				},{
+					"id":7,
+					"type":"orderPosition",
+					"name":"LaunchFight",
+					"params":{
+						"command":16,
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"position":{
+							"x":254,
+							"z":1080
+						}
+					}
+				},{
+					"id":8,
+					"type":"setBooleanVariable",
+					"name":"Wave1Launched",
+					"params":{
+						"boolean":"true",
+						"variable":"Wave1Launched"
+					}
+				}],
+			"id":6
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":2,
+			"name":"SecondWave",
+			"repetition":false,
+			"actionTotal":3,
+			"conditions":[{
+					"id":15,
+					"type":"dead",
+					"name":"Wave1Managed",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":2,
+							"type":"team"
+						}
+					}
+				},{
+					"id":16,
+					"type":"booleanVariable",
+					"name":"WaveLaunched",
+					"params":{
+						"variable":"Wave1Launched"
+					}
+				}],
+			"actions":[{
+					"id":9,
+					"type":"createUnits",
+					"name":"PopUnits",
+					"params":{
+						"number":"40",
+						"team":2,
+						"unitType":"bit",
+						"zone":1
+					}
+				},{
+					"id":10,
+					"type":"orderPosition",
+					"name":"LaunchFight",
+					"params":{
+						"command":16,
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"position":{
+							"x":264,
+							"z":1060
+						}
+					}
+				},{
+					"id":11,
+					"type":"setBooleanVariable",
+					"name":"Wave2Launched",
+					"params":{
+						"boolean":"true",
+						"variable":"Wave2Launched"
+					}
+				}],
+			"id":7
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":2,
+			"name":"ThirdWave",
+			"repetition":false,
+			"actionTotal":3,
+			"conditions":[{
+					"id":17,
+					"type":"booleanVariable",
+					"name":"Wave2Launched",
+					"params":{
+						"variable":"Wave2Launched"
+					}
+				},{
+					"id":18,
+					"type":"dead",
+					"name":"WaveManaged",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":2,
+							"type":"team"
+						}
+					}
+				}],
+			"actions":[{
+					"id":12,
+					"type":"createUnits",
+					"name":"PopUnits",
+					"params":{
+						"team":2,
+						"number":"80",
+						"unitType":"bit",
+						"zone":1
+					}
+				},{
+					"id":13,
+					"type":"orderPosition",
+					"name":"LaunchFight",
+					"params":{
+						"command":16,
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"position":{
+							"z":1060,
+							"x":264
+						}
+					}
+				},{
+					"id":14,
+					"type":"setBooleanVariable",
+					"name":"Wave3Launched",
+					"params":{
+						"boolean":"true",
+						"variable":"Wave3Launched"
+					}
+				}],
+			"id":8
+		},{
+			"comment":"",
+			"id":9,
+			"conditionTotal":1,
+			"actionTotal":1,
+			"name":"ForbidFightAsm",
+			"repetition":true,
+			"repetitionTime":"0",
+			"conditions":[{
+					"id":20,
+					"type":"script",
+					"name":"CheckFight",
+					"params":{
+						"script":"local function isAsmFight () local units = Spring.GetAllUnits() for i = 1, #units do local u = units[i] if UnitDefs[Spring.GetUnitDefID(u)][\"name\"]==\"assembler\" then local queue=Spring.GetCommandQueue(u,4) for k = 1, #queue do if queue[k].id == 16 then return true end end end end return false end return isAsmFight ()"
+					}
+				}],
+			"actions":[{
+					"id":19,
+					"type":"order",
+					"name":"Stop",
+					"params":{
+						"command":0,
+						"unitset":{
+							"value":11907,
+							"type":"unit"
+						}
+					}
+				}],
+			"trigger":""
 		}],
 	"listOfCommands":{
 		"0":"Stop",

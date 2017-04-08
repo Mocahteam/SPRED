@@ -21,7 +21,7 @@
 			"z1":1152,
 			"z2":1288,
 			"x1":728,
-			"showInGame":true,
+			"showInGame":false,
 			"id":4,
 			"name":"PopZone",
 			"green":0.24019658565521,
@@ -33,10 +33,10 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"Mission 4\\n \\nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Protégez-le avant qu'il ne soit trop tard.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer.  /",
+		"briefingRaw":"[en]Mission 4\\n \\nWARNING!!! This BYTE attempted to escape an enemy scout that is not far. Destroy the enemy scout before it's too late.\\n \\n/#847A84#Press Escape to continue./[en][fr]Mission 4\\n \\nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer./[fr]",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -78,10 +78,6 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
@@ -92,6 +88,10 @@
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
 				"name":"Show PP Video",
+				"active":false
+			},{
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Indicator for the CommEnds state (at game start)",
@@ -179,11 +179,11 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":["1","2"],
-		"briefing":"Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Protégez-le avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ"
+		"briefing":"[en]Mission 4\n \nWARNING!!! This BYTE attempted to escape an enemy scout that is not far. Destroy the enemy scout before it's too late.\n \nÿ„z„Press Escape to continue.  ÿÿÿÿ[en][fr]Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",
-			"id":5806,
+			"id":16056,
 			"position":{
 				"y":130,
 				"x":956,
@@ -195,7 +195,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":10880,
+			"id":12689,
 			"position":{
 				"y":116,
 				"x":1003,
@@ -381,7 +381,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":10880,
+							"value":12689,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -463,7 +463,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						}
 					}
@@ -474,7 +474,7 @@
 					"params":{
 						"team":0,
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						}
 					}
@@ -491,7 +491,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":4
@@ -555,7 +555,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						},
 						"attacker":{
@@ -589,7 +589,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						},
 						"number":{
@@ -611,7 +611,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						},
 						"position":3
@@ -633,7 +633,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						},
 						"number":{
@@ -653,9 +653,9 @@
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
-						"message":["Aidez moi !!!","S'il vous plait...","AAaarghh !!!","J'ai besoin d'aide...","Que faites-vous ???","Je ne tiendrais pas longtemps...","Mon energie diminue...","Il m'en met plein la gueule !!!","Nooooon !!!"],
+						"message":["[en]Help me!!![en][fr]Aidez moi !!![fr]","[en]Please...[en][fr]S'il vous plait...[fr]","AAaarghh","[en]I need help...[en][fr]J'ai besoin d'aide...[fr]","[en]What do you do?[en][fr]Que faites-vous ???[fr]","[en]I won't resist a long time...[en][fr]Je ne tiendrais pas longtemps...[fr]","[en]My energy weakens...[en][fr]Mon energie diminue...[fr]","[en]He beats me up!!![en][fr]Il m'en met plein la gueule !!![fr]","[en]Noooooo!!![en][fr]Nooooon !!![fr]"],
 						"unitset":{
-							"value":5806,
+							"value":16056,
 							"type":"unit"
 						},
 						"time":"4"

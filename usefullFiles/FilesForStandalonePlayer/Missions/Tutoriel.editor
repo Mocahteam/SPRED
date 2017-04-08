@@ -4,15 +4,15 @@
 			"type":"Disk",
 			"blue":0.80158841609955,
 			"b":48,
-			"marker":true,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":true,
 			"x":1248,
 			"name":"Point de ralliement\\n      (1250, 1048)",
 			"green":0.99604952335358,
-			"z":1048,
-			"shown":true,
 			"alwaysInView":true,
+			"shown":true,
+			"z":1048,
 			"red":0.75692272186279
 		}],
 	"description":{
@@ -21,7 +21,7 @@
 		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
-		"feedback":"disabled",
+		"feedback":"enabled",
 		"widgets":[{
 				"desc":"Teach you to play the game, one tip at a time",
 				"name":"Kernel Panic Automatic Tip Dispenser",
@@ -168,7 +168,7 @@
 	},
 	"units":[{
 			"type":"bit",
-			"id":13452,
+			"id":11464,
 			"position":{
 				"y":270.39453125,
 				"x":850,
@@ -323,7 +323,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":13452,
+							"value":11464,
 							"type":"unit"
 						},
 						"zone":1
@@ -335,7 +335,7 @@
 					"name":"WinGame",
 					"params":{
 						"team":0,
-						"outputState":"win"
+						"outputState":"won"
 					}
 				}],
 			"id":0
@@ -355,7 +355,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":13452,
+							"value":11464,
 							"type":"unit"
 						}
 					}
