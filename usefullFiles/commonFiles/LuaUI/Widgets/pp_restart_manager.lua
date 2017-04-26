@@ -58,7 +58,6 @@ local MultiplayerWindow = nil
 local FilterBackground = nil
 
 local function runMission(ScriptFileName, options, playerName)
-Spring.Echo ("runMission")
   if Spring.Restart then  
       genericRestart(ScriptFileName, options, false, playerName)
   else
@@ -456,7 +455,6 @@ end
 -- table options: used to define modOptions
 -- boolean isEditorContext: true if this function is called from the editor
 function LoadMission (ScriptFileName, options, isEditorContext)
-Spring.Echo ("LoadMission")
 	if isEditorContext == nil then
 		isEditorContext = false
 	end
@@ -471,7 +469,6 @@ Spring.Echo ("LoadMission")
 	
 	updateLanguage()
 	
-Spring.Echo ("LoadMission "..#playerTeams)
 	-- display appropriate UI depending on players number
 	if(#playerTeams > 1)then
 		ask_to_host_or_join(ScriptFileName, options, playerTeams, isEditorContext)

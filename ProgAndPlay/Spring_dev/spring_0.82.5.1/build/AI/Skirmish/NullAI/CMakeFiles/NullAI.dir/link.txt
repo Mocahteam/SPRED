@@ -1,1 +1,0 @@
-C:\MinGW-gcc4.4\bin\gcc.exe    -Wl,--kill-at -Wl,--add-stdcall-alias -shared -o SkirmishAI.dll -Wl,--major-image-version,0,--minor-image-version,0 CMakeFiles\NullAI.dir\src\AIExport.c.obj 

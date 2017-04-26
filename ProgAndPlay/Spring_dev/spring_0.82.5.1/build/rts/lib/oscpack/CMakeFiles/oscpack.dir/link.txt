@@ -1,2 +1,0 @@
-C:\MinGW-gcc4.4\bin\ar.exe cr liboscpack.a  CMakeFiles\oscpack.dir\OscOutboundPacketStream.cpp.obj CMakeFiles\oscpack.dir\OscTypes.cpp.obj
-C:\MinGW-gcc4.4\bin\ranlib.exe liboscpack.a

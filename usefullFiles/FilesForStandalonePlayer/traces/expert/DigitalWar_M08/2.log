@@ -1,0 +1,70 @@
+start DigitalWar_M08
+mission_start_time 1489404365
+execution_start_time 1489404365
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 0 - 1236
+PP_Unit_GetType 1236_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 1 - 1698
+PP_Unit_GetType 1698_7 - 7
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 2 - 618
+PP_Unit_GetType 618_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 3 - 4
+PP_Unit_GetType 4_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 4 - 546
+PP_Unit_GetType 546_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 5 - 2992
+PP_Unit_GetType 2992_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 6 - 575
+PP_Unit_GetType 575_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 7 - 1003
+PP_Unit_GetType 1003_4 - 4
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 8 - 1370
+PP_Unit_GetType 1370_2 - 2
+PP_GetNumUnits 0 - 11
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 0 - 1236
+PP_Unit_ActionOnUnit 1370_2 40 1236_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 1 - 1698
+PP_Unit_ActionOnUnit 1370_2 40 1698_7 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 2 - 618
+PP_Unit_ActionOnUnit 1370_2 40 618_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 3 - 4
+PP_Unit_ActionOnUnit 1370_2 40 4_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 4 - 546
+PP_Unit_ActionOnUnit 1370_2 40 546_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 5 - 2992
+PP_Unit_ActionOnUnit 1370_2 40 2992_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 6 - 575
+PP_Unit_ActionOnUnit 1370_2 40 575_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 7 - 1003
+PP_Unit_ActionOnUnit 1370_2 40 1003_4 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 8 - 1370
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 9 - 1866
+PP_Unit_ActionOnUnit 1370_2 40 1866_7 1
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 10 - 2288
+PP_Unit_ActionOnUnit 1370_2 40 2288_7 1
+PP_GetNumUnits 0 - 11
+PP_Close
+execution_end_time 1489404365
+mission_end_time 1489404365
+end won DigitalWar_M08

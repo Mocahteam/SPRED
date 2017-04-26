@@ -1,0 +1,16 @@
+start DigitalWar_M05
+mission_start_time 1489263868
+execution_start_time 1489263868
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 2
+PP_GetUnitAt 0 0 - 2521
+PP_Unit_GetType 2521_7 - 7
+PP_Unit_ActionOnPosition 2521_7 10 479 1825 0
+PP_GetUnitAt 0 1 - 1031
+PP_Unit_GetType 1031_4 - 4
+PP_Unit_ActionOnPosition 1031_4 10 1400 1371 0
+PP_Close
+execution_end_time 1489263868
+mission_end_time 1489263868
+end won DigitalWar_M05

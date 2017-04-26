@@ -1,0 +1,12 @@
+start DigitalWar_M04
+mission_start_time 1489263487
+execution_start_time 1489263487
+programming_language_used Python
+PP_Open
+PP_GetUnitAt 0 0 - 1914
+PP_GetUnitAt 2 0 - 4831
+PP_Unit_ActionOnUnit 1914_4 20 4831_4 0
+PP_Close
+execution_end_time 1489263487
+mission_end_time 1489263487
+end won DigitalWar_M04

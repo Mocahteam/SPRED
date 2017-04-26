@@ -1,0 +1,49 @@
+start DigitalWar_M08
+mission_start_time 1489264915
+execution_start_time 1489264915
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 0 - 1938
+PP_Unit_GetType 1938_4 - 4
+PP_GetUnitAt 0 1 - 1024
+PP_Unit_GetType 1024_7 - 7
+PP_GetUnitAt 0 2 - 771
+PP_Unit_GetType 771_4 - 4
+PP_GetUnitAt 0 3 - 1021
+PP_Unit_GetType 1021_4 - 4
+PP_GetUnitAt 0 4 - 637
+PP_Unit_GetType 637_4 - 4
+PP_GetUnitAt 0 5 - 2119
+PP_Unit_GetType 2119_4 - 4
+PP_GetUnitAt 0 6 - 2162
+PP_Unit_GetType 2162_4 - 4
+PP_GetUnitAt 0 7 - 2286
+PP_Unit_GetType 2286_4 - 4
+PP_GetUnitAt 0 8 - 292
+PP_Unit_GetType 292_2 - 2
+PP_GetUnitAt 0 0 - 1938
+PP_Unit_ActionOnUnit 292_2 40 1938_4 1
+PP_GetUnitAt 0 1 - 1024
+PP_Unit_ActionOnUnit 292_2 40 1024_7 1
+PP_GetUnitAt 0 2 - 771
+PP_Unit_ActionOnUnit 292_2 40 771_4 1
+PP_GetUnitAt 0 3 - 1021
+PP_Unit_ActionOnUnit 292_2 40 1021_4 1
+PP_GetUnitAt 0 4 - 637
+PP_Unit_ActionOnUnit 292_2 40 637_4 1
+PP_GetUnitAt 0 5 - 2119
+PP_Unit_ActionOnUnit 292_2 40 2119_4 1
+PP_GetUnitAt 0 6 - 2162
+PP_Unit_ActionOnUnit 292_2 40 2162_4 1
+PP_GetUnitAt 0 7 - 2286
+PP_Unit_ActionOnUnit 292_2 40 2286_4 1
+PP_GetUnitAt 0 8 - 292
+PP_GetUnitAt 0 9 - 1929
+PP_Unit_ActionOnUnit 292_2 40 1929_7 1
+PP_GetUnitAt 0 10 - 55
+PP_Unit_ActionOnUnit 292_2 40 55_7 1
+mission_end_time 1489264915
+end won DigitalWar_M08
+delayed PP_Close
+delayed execution_end_time 1489264915

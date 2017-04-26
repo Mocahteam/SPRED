@@ -1,0 +1,78 @@
+start DigitalWar_M06
+mission_start_time 1489401736
+execution_start_time 1489401736
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 0 - 1353
+PP_Unit_ActionOnPosition 1353_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 1 - 2020
+PP_Unit_ActionOnPosition 2020_7 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 2 - 1865
+PP_Unit_ActionOnPosition 1865_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 3 - 1418
+PP_Unit_ActionOnPosition 1418_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 4 - 820
+PP_Unit_ActionOnPosition 820_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 5 - 1341
+PP_Unit_ActionOnPosition 1341_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 6 - 2294
+PP_Unit_ActionOnPosition 2294_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 7 - 1586
+PP_Unit_ActionOnPosition 1586_4 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 8 - 208
+PP_Unit_ActionOnPosition 208_7 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 9 - 159
+PP_Unit_ActionOnPosition 159_7 10 100 100 0
+PP_GetNumUnits 0 - 10
+PP_Close
+execution_end_time 1489401736
+start DigitalWar_M06
+mission_start_time 1489404233
+execution_start_time 1489404233
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 0 - 2003
+PP_Unit_ActionOnPosition 2003_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 1 - 1395
+PP_Unit_ActionOnPosition 1395_7 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 2 - 1529
+PP_Unit_ActionOnPosition 1529_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 3 - 2729
+PP_Unit_ActionOnPosition 2729_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 4 - 826
+PP_Unit_ActionOnPosition 826_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 5 - 1792
+PP_Unit_ActionOnPosition 1792_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 6 - 1701
+PP_Unit_ActionOnPosition 1701_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 7 - 9
+PP_Unit_ActionOnPosition 9_4 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 8 - 2996
+PP_Unit_ActionOnPosition 2996_7 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_GetUnitAt 0 9 - 776
+PP_Unit_ActionOnPosition 776_7 10 256 1024 0
+PP_GetNumUnits 0 - 10
+PP_Close
+execution_end_time 1489404233
+mission_end_time 1489404233
+end won DigitalWar_M06

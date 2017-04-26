@@ -1,2 +1,0 @@
-C:\MinGW-gcc4.4\bin\ar.exe cr libmd5.a  CMakeFiles\md5.dir\md5.c.obj CMakeFiles\md5.dir\base64.cpp.obj
-C:\MinGW-gcc4.4\bin\ranlib.exe libmd5.a

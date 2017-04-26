@@ -7,6 +7,7 @@ function widget:GetInfo()
     license   = "GPL v2 or later",
     layer     = 210,
     enabled   = true, --  loaded by default?
+    handler = true
   }
 end
 
@@ -43,9 +44,8 @@ end
 function widget:Initialize()
 	if editorRef then -- An editor reference is defined => we display the button and enable console
 		Spring.SendCommands("console 1")
-		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
-			Spring.Echo("PP Mission Tester: Chili is not defined, remove himself")
-			return
+		if (not WG.Chili) then -- If the chili widget is not found, we enable it
+			widgetHandler:EnableWidget("Chili Framework")
 		end
 
 		local back, replay

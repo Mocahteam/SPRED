@@ -1,0 +1,12 @@
+start DigitalWar_M03
+mission_start_time 1489263268
+execution_start_time 1489263268
+programming_language_used Python
+PP_Open
+PP_GetUnitAt 0 0 - 1223
+PP_Unit_GetPosition 1223_4 - 1857.24 1362.06
+PP_Unit_ActionOnPosition 1223_4 10 1055.24 1793.06 0
+PP_Close
+execution_end_time 1489263268
+mission_end_time 1489263268
+end won DigitalWar_M03

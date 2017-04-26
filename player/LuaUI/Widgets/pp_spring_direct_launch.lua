@@ -453,6 +453,7 @@ WG.switchOnMenu = initGui
 
 function widget:Initialize()
   widgetHandler:EnableWidget("Chili Framework")
+  widgetHandler:EnableWidget("PP Restart Manager")
   if not Spring.GetModOptions().hidemenu then
     if (not WG.Chili) then
       -- don't run if we can't find Chili

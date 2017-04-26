@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trace>
+	<mission name="DigitalWar_M05" start_time="1489263868" end_time="1489263868" status="won">
+		<execution start_time="1489263868" programming_language_used="Python" end_time="1489263868">
+			<call label="PP_Open" info=""/>
+			<call label="PP_GetNumUnits" params="0" return="2" info=""/>
+			<sequence num_map="2:1" info="" nb_iteration_fixed="false">
+				<call label="PP_GetUnitAt" params="0 ?" return="?" info=""/>
+				<call label="PP_Unit_GetType" params="?_?" return="?" info=""/>
+				<call label="PP_Unit_ActionOnPosition" params="?_? 10 ? ? 0" info=""/>
+			</sequence>
+			<call label="PP_Close" info=""/>
+		</execution>
+	</mission>
+</trace>
+

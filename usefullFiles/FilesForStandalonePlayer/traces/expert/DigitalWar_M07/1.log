@@ -1,0 +1,27 @@
+start DigitalWar_M07
+mission_start_time 1489264558
+execution_start_time 1489264558
+programming_language_used Python
+PP_Open
+PP_GetNumUnits 0 - 11
+PP_GetUnitAt 0 0 - 1601
+PP_Unit_GetType 1601_7 - 7
+PP_GetUnitAt 0 1 - 1521
+PP_Unit_GetType 1521_7 - 7
+PP_GetUnitAt 0 2 - 2187
+PP_Unit_GetType 2187_4 - 4
+PP_GetUnitAt 0 3 - 2099
+PP_Unit_GetType 2099_4 - 4
+PP_GetUnitAt 0 4 - 1002
+PP_Unit_GetType 1002_4 - 4
+PP_GetUnitAt 0 5 - 2468
+PP_Unit_GetType 2468_4 - 4
+PP_GetUnitAt 0 6 - 464
+PP_Unit_GetType 464_4 - 4
+PP_GetUnitAt 0 7 - 1797
+PP_Unit_GetType 1797_2 - 2
+PP_Unit_ActionOnPosition 1797_2 10 256 811 0
+PP_Close
+execution_end_time 1489264558
+mission_end_time 1489264558
+end won DigitalWar_M07

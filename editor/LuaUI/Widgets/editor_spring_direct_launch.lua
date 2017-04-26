@@ -68,6 +68,7 @@ function InitializeEditor() -- Enable editor widgets
 	widgetHandler:EnableWidget("Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")
 	widgetHandler:EnableWidget("Editor User Interface")
+	widgetHandler:EnableWidget("PP Restart Manager")
 end
 
 function InitializeLauncher() -- Initialize UI elements for the launcher
@@ -1991,7 +1992,7 @@ function RemoveOtherWidgets() -- Disable other widgets
   local RemovedWidgetList = {}
   local RemovedWidgetListName = {}
   for name,kw in pairs(widgetHandler.knownWidgets) do
-    if kw.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" and name ~= "PP Restart Manager" then
+    if kw.active and name ~= "Spring Direct Launch 2 for SPRED" and name ~= "Chili Framework" then
       table.insert(RemovedWidgetListName,name)
     end
   end

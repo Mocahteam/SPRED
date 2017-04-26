@@ -1,0 +1,366 @@
+{
+	"PP_Open": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_Open",
+		"Python_public_label": "PP_Open",
+		"Ada_public_label": "Open",
+		"OCaml_public_label": "openConnexion",
+		"Scratch_public_label": "open Prog&Play",
+		"Java_public_label": "PP::open"
+	},
+	"PP_Close": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_Close",
+		"Python_public_label": "PP_Close",
+		"Ada_public_label": "Close",
+		"OCaml_public_label": "closeConnexion",
+		"Scratch_public_label": "close Prog&Play",
+		"Java_public_label": "PP::close"
+	},
+	"PP_IsGameOver": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_IsGameOver",
+		"Python_public_label": "PP_IsGameOver",
+		"Ada_public_label": "IsGameOver",
+		"OCaml_public_label": "isGameOver",
+		"Scratch_public_label": "is game over?",
+		"Java_public_label": "PP::isGameOver",
+		"return": false
+	},
+	"PP_IsGamePaused": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_IsGamePaused",
+		"Python_public_label": "PP_IsGamePaused",
+		"Ada_public_label": "IsGamePaused",
+		"OCaml_public_label": "isGamePaused",
+		"Scratch_public_label": "is game paused?",
+		"Java_public_label": "PP::isGamePaused",
+		"return": false
+	},
+	"PP_GetMapSize": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_GetMapSize",
+		"Python_public_label": "PP_GetMapSize",
+		"Ada_public_label": "GetMapSize",
+		"OCaml_public_label": "getMapSize",
+		"Java_public_label": "PP::getMapSize",
+		"return": false
+	},
+	"PP_GetMapWidth": {
+		"call_type": "CallWithNoParam",
+		"Scratch_public_label": "map width",
+		"return": false
+	},
+	"PP_GetMapHeight": {
+		"call_type": "CallWithNoParam",
+		"Scratch_public_label": "map height",
+		"return": false
+	},
+	"PP_GetStartPosition": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_GetStartPosition",
+		"Python_public_label": "PP_GetStartPosition",
+		"Ada_public_label": "GetStartPosition",
+		"OCaml_public_label": "getStartPosition",
+		"Java_public_label": "PP::getStartPosition",
+		"return": false
+	},
+	"PP_GetStartXPosition": {
+		"call_type": "CallWithNoParam",
+		"Scratch_public_label": "start x position",
+		"return": false
+	},
+	"PP_GetStartYPosition": {
+		"call_type": "CallWithNoParam",
+		"Scratch_public_label": "start y position",
+		"return": false
+	},
+	"PP_GetNumSpecialAreas": {
+		"call_type": "CallWithNoParam",
+		"C_public_label": "PP_GetNumSpecialAreas",
+		"Python_public_label": "PP_GetNumSpecialAreas",
+		"Ada_public_label": "GetNumSpecialAreas",
+		"Scratch_public_label": "number of special areas",
+		"Java_public_label": "PP::getNumSpecialAreas",
+		"return": false
+	},
+	"PP_GetSpecialAreaPosition": {
+		"call_type": "CallWithIntParam",
+		"C_public_label": "PP_GetSpecialAreaPosition",
+		"Python_public_label": "PP_GetSpecialAreaPosition",
+		"Ada_public_label": "GetSpecialAreaPosition",
+		"Java_public_label": "PP::getSpecialAreasPosition",
+		"return": false,
+		"specialAreaId": true
+	},
+	"PP_GetSpecialAreaXPosition": {
+		"call_type": "CallWithIntParam",
+		"Scratch_public_label": "x position of special area _ ",
+		"return": false,
+		"specialAreaId": true
+	},
+	"PP_GetSpecialAreaYPosition": {
+		"call_type": "CallWithIntParam",
+		"Scratch_public_label": "y position of special area _ ",
+		"return": false,
+		"specialAreaId": true
+	},
+	"PP_GetSpecialAreas": {
+		"call_type": "CallWithNoParam",
+		"OCaml_public_label": "getSpecialAreas"
+	},
+	"PP_GetResource": {
+		"call_type": "CallWithIntParam",
+		"C_public_label": "PP_GetResource",
+		"Python_public_label": "PP_GetResource",
+		"Ada_public_label": "GetResource",
+		"OCaml_public_label": "getResource",
+		"Scratch_public_label": "amount of _ resource ",
+		"Java_public_label": "PP::getResource",
+		"return": false,
+		"resourceId": true
+	},
+	"PP_GetNumUnits": {
+		"call_type": "CallWithIntParam",
+		"C_public_label": "PP_GetNumUnits",
+		"Python_public_label": "PP_GetNumUnits",
+		"Ada_public_label": "GetNumUnits",
+		"Scratch_public_label": "number of unit in _ coalition ",
+		"Java_public_label": "PP::getNumUnits",
+		"return": false,
+		"coalition": true
+	},
+	"PP_GetUnitAt": {
+		"call_type": "CallWithIntIntParams",
+		"C_public_label": "PP_GetUnitAt",
+		"Python_public_label": "PP_GetUnitAt",
+		"Ada_public_label": "GetUnitAt",
+		"Java_public_label": "PP::getUnitAt",
+		"return": false,
+		"coalitionFirst": true,
+		"indexSecond": false
+	},
+	"PP_GetUnitAtIndexFirst": {
+		"call_type": "CallWithIntIntParams",
+		"Scratch_public_label": "unit _ of _ coalition ",
+		"return": false,
+		"indexFirst": false,
+		"coalitionSecond": true
+	},
+	"PP_GetUnits": {
+		"call_type": "CallWithIntParam",
+		"OCaml_public_label": "getEntities",
+		"coalition": true
+	},
+ 	"PP_Unit_GetCoalition": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetCoalition",
+		"Python_public_label": "PP_Unit_GetCoalition",
+		"Ada_public_label": "GetCoalition",
+		"OCaml_public_label": "getCoalition",
+		"Java_public_label": "Unit::getCoalition",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_BelongTo": {
+		"call_type": "CallWithUnitIntParams",
+		"Scratch_public_label": "does unit id _ belong to _? ",
+		"return": false,
+		"unitId": false,
+		"unitType": false,
+		"coalition": true
+	},
+	"PP_Unit_GetType": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetType",
+		"Python_public_label": "PP_Unit_GetType",
+		"Ada_public_label": "GetType",
+		"OCaml_public_label": "getType",
+		"Java_public_label": "Unit::getType",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_IsType": {
+		"call_type": "CallWithUnitIntParams",
+		"Scratch_public_label": "is unit id _ a _? ",
+		"return": false,
+		"unitId": false,
+		"unitType": false,
+		"typeToCheck": true
+	},
+	"PP_Unit_GetPosition": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetPosition",
+		"Python_public_label": "PP_Unit_GetPosition",
+		"Ada_public_label": "GetPosition",
+		"OCaml_public_label": "getPosition",
+		"Java_public_label": "Unit::getPosition",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetXPosition": {
+		"call_type": "CallWithUnitParam",
+		"Scratch_public_label": "x position of unit id _ ",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetYPosition": {
+		"call_type": "CallWithUnitParam",
+		"Scratch_public_label": "y position of unit id _ ",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetHealth": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetHealth",
+		"Python_public_label": "PP_Unit_GetHealth",
+		"Ada_public_label": "GetHealth",
+		"OCaml_public_label": "getHealth",
+		"Scratch_public_label": "health of unit id _ ",
+		"Java_public_label": "Unit::getHealth",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetMaxHealth": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetMaxHealth",
+		"Python_public_label": "PP_Unit_GetMaxHealth",
+		"Ada_public_label": "GetMaxHealth",
+		"OCaml_public_label": "getMaxHealth",
+		"Scratch_public_label": "max health of unit id _ ",
+		"Java_public_label": "Unit::getMaxHealth",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetPendingCommands": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetPendingCommands",
+		"Python_public_label": "PP_Unit_GetPendingCommands",
+		"Ada_public_label": "GetPendingCommands",
+		"OCaml_public_label": "getPendingCommands",
+		"Java_public_label": "Unit::getPendingCommands",
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetNumPdgCmds": {
+		"call_type": "CallWithUnitParam",
+		"Scratch_public_label": "number of pending cmds of unit id _ ",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_PdgCmd_IsEqualTo": {
+		"call_type": "CallWithIntUnitIntParams",
+		"Scratch_public_label": "is pending cmd _ of unit id _ a _ action? ",
+		"return": false,
+		"index" : false,
+		"unitId": false,
+		"unitType": false,
+		"action" : false
+	},
+	"PP_Unit_PdgCmd_GetNumParams": {
+		"call_type": "CallWithIntUnitParams",
+		"Scratch_public_label": "number of params of pending cmd _ of unit id _ ",
+		"return": false,
+		"index" : false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_PdgCmd_GetParam": {
+		"call_type": "CallWithIntIntUnitParams",
+		"Scratch_public_label": "param _ of pending cmd _ of unit id _ ",
+		"return": false,
+		"paramIndex" : false,
+		"cmdIndex" : false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_GetGroup": {
+		"call_type": "CallWithUnitParam",
+		"C_public_label": "PP_Unit_GetGroup",
+		"Python_public_label": "PP_Unit_GetGroup",
+		"Ada_public_label": "GetGroup",
+		"OCaml_public_label": "getGroup",
+		"Scratch_public_label": "group of unit id _ ",
+		"Java_public_label": "Unit::getGroup",
+		"return": false,
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_SetGroup": {
+		"call_type": "CallWithUnitIntParams",
+		"C_public_label": "PP_Unit_SetGroup",
+		"Python_public_label": "PP_Unit_SetGroup",
+		"Ada_public_label": "SetGroup",
+		"OCaml_public_label": "setGroup",
+		"Scratch_public_label": "affect unit id _ to group _ ",
+		"Java_public_label": "Unit::setGroup",
+		"unitId": false,
+		"unitType": false,
+		"groupId": false
+	},
+	"PP_Unit_RemoveFromGroup": {
+		"call_type": "CallWithUnitParam",
+		"Java_public_label": "Unit::removeFromGroup",
+		"unitId": false,
+		"unitType": false
+	},
+	"PP_Unit_ActionOnUnit": {
+		"call_type": "CallWithUnitIntUnitIntParams",
+		"C_public_label": "PP_Unit_ActionOnUnit",
+		"Python_public_label": "PP_Unit_ActionOnUnit",
+		"Ada_public_label": "CarryOutCommand",
+		"OCaml_public_label": "actionOnEntity",
+		"Scratch_public_label": "command unit id _ to _ on unit id _ and _",
+		"Java_public_label": "Unit::command",
+		"unitId": false,
+		"unitType": false,
+		"action": true,
+		"targetId": false,
+		"targetType": false,
+		"synchronized": true
+	},
+	"PP_Unit_ActionOnPosition": {
+		"call_type": "CallWithUnitIntPosIntParams",
+		"C_public_label": "PP_Unit_ActionOnPosition",
+		"Python_public_label": "PP_Unit_ActionOnPosition",
+		"Ada_public_label": "CarryOutCommand",
+		"OCaml_public_label": "actionOnPosition",
+		"Scratch_public_label": "command unit id _ to _ to x: _ y: _ and _",
+		"Java_public_label": "Unit::command",
+		"unitId": false,
+		"unitType": false,
+		"action": true,
+		"position": true,
+		"synchronized": true
+	},
+	"PP_Unit_UntargetedAction": {
+		"call_type": "CallWithUnitIntFloatIntParams",
+		"C_public_label": "PP_Unit_UntargetedAction",
+		"Python_public_label": "PP_Unit_UntargetedAction",
+		"Ada_public_label": "CarryOutCommand",
+		"OCaml_public_label": "untargetedAction",
+		"Scratch_public_label": "command unit id _ to set _ to _ and _",
+		"Java_public_label": "Unit::command",
+		"unitId": false,
+		"unitType": false,
+		"action": true,
+		"param": false,
+		"synchronized": true
+	},
+	"PP_Unit_UntargetedActionWithoutParam": {
+		"call_type": "CallWithUnitIntIntParams",
+		"Scratch_public_label": "command unit id _ to _ and _",
+		"unitId": false,
+		"unitType": false,
+		"action": true,
+		"synchronized": true
+	}
+}

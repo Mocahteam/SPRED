@@ -1,0 +1,11 @@
+start Tutoriel
+mission_start_time 1489262046
+execution_start_time 1489262046
+programming_language_used Python
+PP_Open
+PP_GetUnitAt 0 0 - 823
+PP_Unit_ActionOnPosition 823_4 10 1250 1048 1
+mission_end_time 1489262046
+end won Tutoriel
+delayed PP_Close
+delayed execution_end_time 1489262046
