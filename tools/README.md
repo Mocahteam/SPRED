@@ -1,3 +1,0 @@
-Run make_pp.bat on windows to make the SPRED archive. You will need our Spring Engine v82.5.1 available at https://github.com/Mocahteam/SpringPP to make it work as is.
-
-If you want to use SPRED with Spring Engine v98+, you need to unzip game_files.sdz to <Spring>/SPRED/game_files and editor_files.sdz to <Spring>/SPRED/editor_files. The game_files.sdz and editor_files.sdz archives are located inside SPRED.sdz.
