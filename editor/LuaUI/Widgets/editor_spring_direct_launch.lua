@@ -31,7 +31,6 @@ local ScenarioListNames = {} -- Names of the aforementioned scenarios
 local OutputStates = {} -- List of the output states of the levels
 local Links = {} -- Links betwenn output and input states
 local scenarioInEdition = false -- true if editing scenario frame is shown
-local needUpdateScenarioFrame = false -- true due to screen resize to ask to update scenario editing panel
 local ScenarioName = "" -- Name of the current scenario
 local ScenarioDesc = "" -- Description of the current scenario
 local selectedInput -- Currently selected input state
@@ -693,28 +692,25 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 	for i, level in ipairs(LevelList) do
 		-- Search for output states
 		local outputStates = OutputStates[LevelListNames[i]]
-		if i % nbLines == 1 then
-			column = column + 1
-			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
-				parent = UI.Scenario.ScenarioScrollPanel,
-				x = 10 + column * (defaultWidth+10),
-				y = 95,
-				width = defaultWidth,
-				height = math.max(150, (#outputStates + 2) * 30),
-				draggable = true,
-				resizable = true
-			}
+		if nbColumns == 1 or i%nbColumns == 1 then
+			column = 0
 		else
-			UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
-				parent = UI.Scenario.ScenarioScrollPanel,
-				x = 10 + column * (defaultWidth+10),
-				y = UI.Scenario.Levels[LevelListNames[i-1]].y + UI.Scenario.Levels[LevelListNames[i-1]].height + 10,
-				width = defaultWidth,
-				height = math.max(150, (#outputStates + 2) * 30),
-				draggable = true,
-				resizable = true
-			}
+			column = column + 1
 		end
+		Spring.Echo (column)
+		local nextY = 95
+		if i > nbColumns then
+			nextY = UI.Scenario.Levels[LevelListNames[i-nbColumns]].y + UI.Scenario.Levels[LevelListNames[i-nbColumns]].height + 10
+		end
+		UI.Scenario.Levels[LevelListNames[i]] = Chili.Window:New{
+			parent = UI.Scenario.ScenarioScrollPanel,
+			x = 10 + column * (defaultWidth+10),
+			y = nextY,
+			width = defaultWidth,
+			height = math.max(150, (#outputStates + 2) * 30),
+			draggable = true,
+			resizable = false
+		}
 		maxY  = math.max(maxY, UI.Scenario.Levels[LevelListNames[i]].y+UI.Scenario.Levels[LevelListNames[i]].height)
 		Chili.Label:New{
 			parent = UI.Scenario.Levels[LevelListNames[i]],
@@ -851,7 +847,7 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		parent = UI.Scenario.ScenarioScrollPanel,
 		x = 0,
 		y = 0,
-		width = 10 + (column+1) * (defaultWidth+10),
+		width = 10 + nbColumns * (defaultWidth+10),
 		height = maxY,
 		DrawControl = drawLinks,
 		drawcontrolv2 = true
@@ -2074,12 +2070,6 @@ function widget:DrawScreen()
 	end
 end
 
-function widget:ViewResize(viewSizeX, viewSizeY)
-	if scenarioInEdition then
-		needUpdateScenarioFrame = true
-	end
-end
-
 function CreateMissingDirectories()
 	if not VFS.FileExists("SPRED") then
 		Spring.CreateDir("SPRED")
@@ -2107,33 +2097,15 @@ function widget:Update(delta)
 	if HideView then
 		MakeLink()
 	end
-	if scenarioInEdition and needUpdateScenarioFrame then
-		needUpdateScenarioFrame = false
-		-- compute new positions
-		Spring.Echo ("repositionne UI")
-		local column = -1
-		local defaultWidth = 300
-		local nbColumns = math.max(math.floor(UI.Scenario.ScenarioScrollPanel.width / (defaultWidth+10)), 1)
-		local nbLines = math.ceil(#LevelList / nbColumns)
+	if scenarioInEdition then
+		-- update link area
+		local maxX = 0
 		local maxY = 0
 		for i, level in ipairs(LevelList) do
-			-- Search for output states
-			local outputStates = OutputStates[LevelListNames[i]]
-			if i % nbLines == 1 then
-				column = column + 1
-				UI.Scenario.Levels[LevelListNames[i]].x = 10 + column * (defaultWidth+10)
-				UI.Scenario.Levels[LevelListNames[i]].y = 95
-				UI.Scenario.Levels[LevelListNames[i]].width = defaultWidth
-				UI.Scenario.Levels[LevelListNames[i]].height = math.max(150, (#outputStates + 2) * 30)
-			else
-				UI.Scenario.Levels[LevelListNames[i]].x = 10 + column * (defaultWidth+10)
-				UI.Scenario.Levels[LevelListNames[i]].y = UI.Scenario.Levels[LevelListNames[i-1]].y + UI.Scenario.Levels[LevelListNames[i-1]].height + 10
-				UI.Scenario.Levels[LevelListNames[i]].width = defaultWidth
-				UI.Scenario.Levels[LevelListNames[i]].height = math.max(150, (#outputStates + 2) * 30)
-			end
+			maxX  = math.max(maxX, UI.Scenario.Levels[LevelListNames[i]].x+UI.Scenario.Levels[LevelListNames[i]].width)
 			maxY  = math.max(maxY, UI.Scenario.Levels[LevelListNames[i]].y+UI.Scenario.Levels[LevelListNames[i]].height)
 		end
-		UI.Scenario.Links.width = 10 + (column+1) * (defaultWidth+10)
+		UI.Scenario.Links.width = maxX
 		UI.Scenario.Links.height = maxY
 	end
 end
