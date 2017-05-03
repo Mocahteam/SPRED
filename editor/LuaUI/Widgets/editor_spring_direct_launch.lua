@@ -697,7 +697,6 @@ function InitializeScenarioFrame() -- Create a window for each level, and in eac
 		else
 			column = column + 1
 		end
-		Spring.Echo (column)
 		local nextY = 95
 		if i > nbColumns then
 			nextY = UI.Scenario.Levels[LevelListNames[i-nbColumns]].y + UI.Scenario.Levels[LevelListNames[i-nbColumns]].height + 10

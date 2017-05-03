@@ -35,7 +35,7 @@ local logicalWidgetDeactivation = false -- used to deactivate widget when main m
 
 -- File Variables
 local fileButtons = {}
-local loadedTable = {}
+local loadedTable = nil
 
 -- Unit Variables
 local factionUnits = getFactionUnits() -- List of units sorted by faction
@@ -561,7 +561,7 @@ function fileFrame()
 	else
 		clearUI()
 		globalStateMachine:setCurrentState(globalStateMachine.states.FILE)
-		Screen0:AddChild(windows["fileWindow"])
+		Screen0:AddChild(windows['fileWindow'])
 	end
 end
 
@@ -1608,7 +1608,6 @@ function initMapSettingsWindow()
 	mapSettingsButtons.cameraAutoButton = addCheckbox(windows['mapSettingsWindow'], "2%", "72%", "60%", "5%", cameraAutoState, EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED, "left")
 	mapSettingsButtons.cameraAutoButton.OnFocusUpdate = {
 		function()
-			Spring.Echo("cameraAutoFocus Update")
 			if cameraAutoState ~= mapSettingsButtons.cameraAutoButton.checked then
 				cameraAutoState = mapSettingsButtons.cameraAutoButton.checked
 				saveState()
@@ -3200,7 +3199,6 @@ end
 
 function createNewCondition()
 	if currentEvent then
-		Spring.Echo ("createNewCondition")
 		local e = events[currentEvent]
 		local condition = {}
 		condition.id = conditionNumber
@@ -3224,7 +3222,6 @@ function createNewCondition()
 end
 
 function editCondition(i)
-	Spring.Echo ("editCondition "..i)
 	removeThirdWindows()
 	currentAction = nil
 	if currentCondition ~= i then
@@ -5382,6 +5379,7 @@ function refreshGUI() -- Open the window of the state you were in before load/ne
 end
 
 function loadMap(name) -- Load a map given a file name or if loadedTable is not nil
+
 	if loadingMap then return end -- Don't load if already loading
 	
 	loadingMap = true
@@ -6015,7 +6013,6 @@ function saveState() -- Save the state and put it in the stack
 		table.insert(saveStates, 1, savedTable)
 		
 		loadIndex = 1
-		Spring.Echo ("Push new state: "..loadIndex.." / "..#saveStates)
 	end
 end
 
@@ -6035,11 +6032,6 @@ function loadState(direction) -- Load a state from the stack depending on the di
 		Spring.SetWMCaption("Spring "..Game.version.." "..loadedTable.description.name..".editor *")
 		NeedToBeSaved = true
 		
-		if direction > 0 then
-			Spring.Echo ("Load older state: "..loadIndex.." / "..#saveStates)
-		else
-			Spring.Echo ("Load newer state: "..loadIndex.." / "..#saveStates)
-		end
 		loadMap()
 	end
 end
