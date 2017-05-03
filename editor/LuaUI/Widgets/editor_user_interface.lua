@@ -1601,6 +1601,8 @@ function initMapSettingsWindow()
 		txt = string.sub(txt, 1, selEnd - 1) .. "/" .. string.sub(txt, selEnd, #txt)
 		txt = string.sub(txt, 1, selStart - 1) .. hexColor .. string.sub(txt, selStart, #txt)
 		mapBriefingEditBox:SetText(txt)
+		-- take in account modifications (emulate focus update)
+		mapBriefingEditBox.OnFocusUpdate[1]()
 	end
 	colorUI.button.OnClick = {applyColor}
 
