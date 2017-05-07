@@ -50,6 +50,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -66,8 +70,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -86,24 +90,28 @@
 				"name":"Kernel Panic A.I. Debug",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play video at the beginning of the mission",
-				"name":"Show PP Video",
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
+				"desc":"Show the Prog&Play video at the beginning of the mission",
+				"name":"Show PP Video",
 				"active":false
 			},{
 				"desc":"Indicator for the CommEnds state (at game start)",
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -112,10 +120,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -134,16 +138,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -158,32 +158,28 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M04",
 		"name":"DigitalWar M04",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["1","2"],
+		"traces":[],
 		"briefing":"[en]Mission 4\n \nWARNING!!! This BYTE was trying to escape from an enemy scout. Destroy the enemy unit before it's too late.\n \nÿ„z„Press Escape to continue.  ÿÿÿÿ[en][fr]Mission 4\n \nATTENTION !!! Ce BYTE tentait de semer un éclaireur ennemi. Détruisez l'ennemi avant qu'il ne soit trop tard.\n \nÿ„z„Appuyez sur ECHAP pour continuer.  ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",
-			"id":16056,
+			"id":2345,
 			"position":{
 				"y":130,
 				"x":956,
@@ -195,7 +191,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":12689,
+			"id":9545,
 			"position":{
 				"y":116,
 				"x":1003,
@@ -381,7 +377,7 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":12689,
+							"value":9545,
 							"type":"unit"
 						},
 						"parameters":["0"]
@@ -434,7 +430,7 @@
 			"conditionTotal":2,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":4,
+			"actionTotal":5,
 			"conditions":[{
 					"id":4,
 					"type":"dead",
@@ -463,7 +459,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						}
 					}
@@ -474,9 +470,17 @@
 					"params":{
 						"team":0,
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						}
+					}
+				},{
+					"id":16,
+					"type":"setBooleanVariable",
+					"name":"StopAskingHelp",
+					"params":{
+						"boolean":"false",
+						"variable":"askHelp"
 					}
 				},{
 					"id":15,
@@ -555,7 +559,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						},
 						"attacker":{
@@ -589,7 +593,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						},
 						"number":{
@@ -611,7 +615,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						},
 						"position":3
@@ -633,7 +637,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						},
 						"number":{
@@ -655,7 +659,7 @@
 					"params":{
 						"message":["[en]Help me!!![en][fr]Aidez moi !!![fr]","[en]Please...[en][fr]S'il vous plait...[fr]","AAaarghh","[en]I need help...[en][fr]J'ai besoin d'aide...[fr]","[en]What do you do?[en][fr]Que faites-vous ???[fr]","[en]I won't resist a long time...[en][fr]Je ne tiendrais pas longtemps...[fr]","[en]My energy weakens...[en][fr]Mon energie diminue...[fr]","[en]He beats me up!!![en][fr]Il m'en met plein la gueule !!![fr]","[en]Noooooo!!![en][fr]Nooooon !!![fr]"],
 						"unitset":{
-							"value":16056,
+							"value":2345,
 							"type":"unit"
 						},
 						"time":"4"

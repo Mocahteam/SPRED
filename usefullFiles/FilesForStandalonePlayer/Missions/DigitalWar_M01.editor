@@ -2,18 +2,18 @@
 	"zones":[{
 			"type":"Rectangle",
 			"blue":0.29410469532013,
-			"z1":1648,
-			"x2":2000,
 			"showInGame":false,
+			"x2":2000,
+			"z1":1648,
 			"z2":1696,
 			"x1":1960,
-			"id":1,
-			"inGameText":"[en]Rallying point\\n  (1980, 1676)[en][fr]Point de ralliement\\n     (1980, 1676)[fr]",
+			"marker":true,
+			"alwaysInView":true,
 			"name":"RallyingPoint",
 			"green":0.46917986869812,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":true,
+			"inGameText":"[en]Rallying point\\n  (1980, 1676)[en][fr]Point de ralliement\\n     (1980, 1676)[fr]",
+			"id":1,
 			"red":0.51401484012604
 		}],
 	"description":{
@@ -165,13 +165,13 @@
 	},
 	"units":[{
 			"type":"bit",
-			"id":7143,
+			"id":397,
 			"position":{
 				"y":116,
 				"x":2021,
 				"z":2020
 			},
-			"orientation":-2.8930878639221,
+			"orientation":-2.8915538787842,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
@@ -302,7 +302,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":7143,
+							"value":397,
 							"type":"unit"
 						},
 						"zone":1
