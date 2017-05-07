@@ -50,14 +50,14 @@ local text = {
 	fr = {
 		{"Depuis l'invention de l'informatique, une \"guerre numérique\" fait rage au sein même des ordinateurs"},
 		{"Deux alliances s'affrontent pour le contrôle de l'ensemble des systèmes informatiques"},
-		{"Les combats s'enlisent depuis des cycles et des cycles dans un bataille ouverte où aucun des deux camps ne prend l'avantage"},
+		{"Les combats s'enlisent depuis des cycles et des cycles dans une bataille ouverte où aucun des deux camps ne prend l'avantage"},
 		{"Une initiative doit être tentée... ", "VOUS en êtes le protagoniste. ", "Appuyez sur Echap pour continuer"}
 	},
 	en = {
 		{"From the beginning of computer science, a \"digital war\" has been rife inside computers"},
 		{"Two alliances fight to control all systems"},
 		{"For cycles and cycles, fighting are embroiled in an open battle where no alliance get advantage"},
-		{"An initiative must be attempt... ", "This is YOUR responsability. ", "Press Escape to continue"}
+		{"An initiative must be attempt... ", "This is YOUR responsibility. ", "Press Escape to continue"}
 	}
 }
 
