@@ -2,7 +2,7 @@
 
 SPRED is a mod designed for [Spring engine with Prog&Play](https://github.com/Mocahteam/SpringPP). SPRED enables to create missions and export them as new mods compatible with Spring engine.
 
-SPRED is distributed with the game engine at <https://www.irit.fr/ProgAndPlay/download.php?LANG=en>.
+SPRED is distributed with the game engine at <http://progandplay.lip6.fr/download.php?LANG=en>.
 
 ## Repository structure
 
