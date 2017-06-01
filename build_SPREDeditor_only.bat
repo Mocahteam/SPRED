@@ -1,5 +1,3 @@
-taskkill /im spring.exe
-
 rem Build player archive
 rem ==================
 rem remove existing player archive
