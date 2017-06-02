@@ -19,7 +19,7 @@ SPRED is distributed with the game engine at <http://progandplay.lip6.fr/downloa
 
 ## How to build SPRED
 
-Simply launch "build_SPREDlauncher.bat", it will package all source codes into "SPRED_Launcher.sdz" file. Then copy paste this file into your Spring directory ("mods" folder), and enjoy...
+Simply launch "build_SPREDlauncher.bat" or "build_SPREDlauncher.sh", it will package all source codes into "SPRED_Launcher.sdz" file. Then copy paste this file into your Spring directory ("mods" folder), and enjoy...
 
 ## SPRED architecture
 
