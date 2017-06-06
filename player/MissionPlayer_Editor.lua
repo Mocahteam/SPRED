@@ -1491,6 +1491,8 @@ end
   --EchoDebug(ctx.messages["briefing"], 7)
    if(ctx.mission.description.mouse=="disabled") then
     SendToUnsynced("mouseDisabled", true)
+   else
+	SendToUnsynced("mouseEnabled", true)
    end
   
   if(ctx.mission.description.cameraAuto=="enabled") then
