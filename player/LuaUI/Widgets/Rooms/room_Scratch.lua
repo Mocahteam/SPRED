@@ -85,7 +85,7 @@ local function getText ()
 		if lang == "fr" then
 			return "Etape 1 : Vous devez placer en tout premier la brique d'évènement drapeau vert qui vous permettra de gérer l'exécution de votre programme. "
 		else
-			return "Step 1: You have to drag and the green flag drop event block in order to manage your program execution."
+			return "Step 1: You have to drag and drop the green flag event block in order to manage your program execution."
 		end
 	elseif currentPage == 2 then
 		if lang == "fr" then
@@ -103,7 +103,7 @@ local function getText ()
 		if lang == "fr" then
 			return "Etape 4 : Après avoir récupéré votre unité, vous pouvez lui donner l'ordre de se déplacer. Ceci peut être fait à l'aide de la brique \"command unit id [num] to [action] to x: [int] y: [int] and [constant]\" qui prend comme paramètre l'unité à commander (\"u\"), l'ordre à réaliser (\"MOVE\"), la position où effectuer l'action sous la forme de coordonnées x et y et une constante indiquant si l'appel est bloquant ou pas. A noter que l'origine de la carte de jeu se trouve en haut à gauche. "
 		else
-			return "Step 4: When you have got the unit, you can order it to move to a position. You can do it with the \"command unit id [num] to [action] to x: [int] y: [int]\" block that takes as parameter the unit to command (\"u\"), the order (\"MOVE\"), the position where to carry out action and a constant that defines if the call is blocking or not. Note: the map origin is on the top left corner. "
+			return "Step 4: When you have got the unit, you can order it to move to a position. You can do it with the \"command unit id [num] to [action] to x: [int] y: [int] and [constant]\" block that takes as parameter the unit to command (\"u\"), the order (\"MOVE\"), the position where to carry out action and a constant that defines if the call is blocking or not. Note: the map origin is on the top left corner. "
 		end
 	elseif currentPage == 5 then
 		if lang == "fr" then

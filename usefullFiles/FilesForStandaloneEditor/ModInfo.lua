@@ -11,6 +11,8 @@ return
 	modtype=1,
 	depend= {
 		"Kernel Panic 4.1",
-		--"Balanced Annihilation V7.50"
+		--"Balanced Annihilation V7.50",
+		--"Example Mod",
+		--"Spring Tutorial Game 0.1",
 	},
 }
