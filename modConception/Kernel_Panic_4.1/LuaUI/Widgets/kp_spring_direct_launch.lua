@@ -3,7 +3,7 @@ function widget:GetInfo()
 	return {
 		name = "Spring Direct Launch 2",
 		desc = "Show some KP menu when Spring.exe is run directly",
-		author = "zwzsg",
+		author = "zwzsg, muratet",
 		version = "2.7",
 		date = "1st March, 2009",
 		license = "Public Domain",
@@ -319,7 +319,7 @@ local function PrintReadMe(ReadmeLines,StartAt)
 			ScrollDown={FunctionsList.PrintReadMe,ReadmeLines,StartAt+1}
 		end
 	end
-	AddFrame("Back",{x=vsx*0.5,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.5,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.MainMenuFull)
 end
 
 local function Credits()
@@ -338,7 +338,7 @@ local function Credits()
 	AddFrame(txt,{x=vsx*0.5,y=vsy*0.8},vsy/30,{0.3,1,0.5,0.5},"ct","l",nil)
 	AddFrame("Spring Engine by: ",{x=vsx*0.5,y=vsy*0.3},vsy/24,{0.9,0.3,0,0.5},"cb","l",nil)
 	AddFrame("Swedish Yankspankers",{x=vsx*0.5,y=vsy*0.3},vsy/30,{0.9,0.6,0,0.5},"ct","l",nil)
-	AddFrame("Back",{x=vsx*0.5,y=vsy*0.1},vsy/30,{0,0,1,0.5},"cc","l",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.5,y=vsy*0.1},vsy/30,{0,0,1,0.5},"cc","l",FunctionsList.MainMenuFull)
 end
 
 local function RecopyDll()
@@ -470,7 +470,7 @@ local function RunGame()
 		AddFrame("Quit, then drag'n'drop\n"..ModSpecific.ScriptFileName.."\nover "..ModSpecific.ExecutableFileName.." manually.",
 			{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.8,0.8,0,0.5},"cc","c",nil)
 		AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-		AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+		AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 	end
 end
 
@@ -485,7 +485,7 @@ local function RunScript(ScriptFileName)
 		AddFrame("You have to manually pass the file\n"..ScriptFileName.."\n as an argument to "..ModSpecific.ExecutableFileName,
 			{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.8,0.8,0,0.5},"cc","c",nil)
 		AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-		AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+		AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 	end
 end
 
@@ -507,7 +507,7 @@ local function RestartSameGame()
 	AddFrame("Try to quit and drag and drop \n"..ModSpecific.ScriptFileName.."\n over "..ModSpecific.ExecutableFileName,
 		{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.8,0.8,0,0.5},"cc","c",nil)
 	AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-	AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 end
 
 local function PseudoSave()
@@ -530,7 +530,7 @@ local function PseudoSave()
 		{x=vsx*0.5,y=vsy*0.38},vsy/32,{0.8,0.8,0;0.5},"cc","l",nil)
 	AddFrame("Quit",{x=vsx*0.3,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
 	AddFrame("Resume",{x=vsx*0.5,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.SwitchOff)
-	AddFrame("Back",{x=vsx*0.7,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.7,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 	-- Bah, skip showing that, let's go directly back to game
 	FunctionsList.SwitchOff()
 end
@@ -548,7 +548,7 @@ local function MultiPlayer()
 			AddFrame("Quit, then manually launch "..ModSpecific.ClientExecutableFileName,
 				{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.8,0.8,0,0.5},"cc","c",nil)
 			AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-			AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+			AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 		end
 	else
 		RemoveAllFrames()
@@ -572,7 +572,7 @@ local function Settings()
 			AddFrame("Quit, then run "..ModSpecific.SettingsExecutableFileName.." manually.",
 				{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.8,0.8,0,0.5},"cc","c",nil)
 			AddFrame("Quit",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.Quit)
-			AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+			AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 		end
 	else
 		RemoveAllFrames()
@@ -706,7 +706,7 @@ local function SinglePlayer()
 	AddFrame("Extreme",{x=vsx*0.85,y=vsy*0.30},vsy/24,{0.88,0.40,0,0.5},"rc","c",ChangeDifficulty,4)
 
 	AddFrame("Run!",{x=vsx*0.4,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",RunGame)
-	AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.6,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 
 	AddFrame(SDLG.description,{x=vsx*0.5,y=vsy*0.05},vsy/24,{0.2,0.5,0.9,0.5},"cc","c")
 
@@ -719,7 +719,7 @@ local function SimplerSinglePlayer()
 	AddFrame("Medium",{x=vsx*0.5,y=vsy*0.5},vsy/24,{0.88,0.79,0,0.5},"cc","c",RunRandomGame,2)
 	AddFrame("Hard",{x=vsx*0.5,y=vsy*0.4},vsy/24,{0.88,0.40,0,0.5},"cc","c",RunRandomGame,3)
 	AddFrame("Very Hard",{x=vsx*0.5,y=vsy*0.3},vsy/24,{0.88,0.02,0,0.5},"cc","c",RunRandomGame,4)
-	AddFrame("Back",{x=vsx*0.5,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.5,y=vsy*0.2},vsy/24,{0,0,1,0.5},"cc","c",FunctionsList.MainMenuFull)
 	local nbr_map_missing = CountMissingMaps()
 	if nbr_map_missing>0 then
 	AddFrame("Warning! "..nbr_map_missing.." map"..(nbr_map_missing==1 and "" or "s").." missing!",
@@ -759,7 +759,7 @@ local function PseudoLoad(StartAt)
 	if StartAt>1 then
 		AddFrame("<-",{x=vsx*0.4,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.PseudoLoad,math.max(1,StartAt-SavePerPage))
 	end
-	AddFrame("Back",{x=vsx*0.5,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.5,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.MainMenuFull)
 	if StartAt+SavePerPage-1<#Savegames then
 		AddFrame("->",{x=vsx*0.6,y=0},vsy/24,{0,0,1,0.5},"cb","c",FunctionsList.PseudoLoad,StartAt+SavePerPage)
 	end
@@ -778,7 +778,7 @@ local function MissionsMenu()
 		until not NewBeginIndex
 		AddFrame(Capitalize(string.sub(MissionFileName,BeginIndex,EndIndex)),{x=vsx*0.1,y=vsy-2*MissionIndex*ItemSize},ItemSize,{0,1,0.5,0.5},"lt","c",RunScript,MissionFileName)
 	end
-	AddFrame("Back",{x=vsx*0.5,y=0},ItemSize*0.8,{0,0,1,0.5},"cb","c",FunctionsList.MainMenu)
+	AddFrame("Back",{x=vsx*0.5,y=0},ItemSize*0.8,{0,0,1,0.5},"cb","c",FunctionsList.MainMenuFull)
 end
 
 local function GameOverMenu()
@@ -803,7 +803,36 @@ local function SaveLoadMenu()
 	AddFrame("Restart",{x=vsx*0.55,y=vsy*0.5},vsy/14,{0,1,0,0.5},"lt","c",FunctionsList.RestartSameGame)
 end
 
+local function LaunchSimpleGame()
+	local marbleMadnessMap = {
+		ClearName="Marble Madness",
+		ShortName="MM",
+		ExternalFileName="Marble_Madness_Map.sd7",
+		InternalFileName="Marble_Madness_Map.smf",
+		MaxPlayers=4,
+		Weight=7,
+		TimeFactor=2,
+		MiniMapPic=":nc:bitmaps/minimaps/Marble_Madness.png"
+	}
+	local systemFaction = {
+		ClearName="System",
+		InternalName="System",
+		Description="Easiest faction to handle"
+	}
+	SDLG=GenerateSkirmish(marbleMadnessMap,1,1,systemFaction,systemFaction)
+	RunGame()
+end
+
 local function MainMenu()
+	RemoveAllFrames()
+	AddFrame("Kernel Panic!",{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
+	AddFrame("Play a simple game!",{x=vsx*0.5,y=vsy*0.6},vsy/18,{0,1,0,0.5},"ct","c",LaunchSimpleGame)
+	AddFrame("More choices...",{x=vsx*0.5,y=vsy*0.4},vsy/18,{0,1,0,0.5},"ct","c",FunctionsList.MainMenuFull)
+
+	AddFrame("Quit",{x=vsx*0.5,y=vsy*0.0},vsy/18,{1,0,0,0.5},"cb","c",FunctionsList.Quit)
+end
+
+local function MainMenuFull()
 	RemoveAllFrames()
 	AddFrame("Kernel Panic!",{x=vsx*0.5,y=vsy*0.98},vsy/14,{0,1,1,0.5},"ct","c")
 	--AddFrame("MultiPlayer",{x=vsx*0.46,y=vsy*0.83},vsy/18,{0,1,0,0.5},"rb","c",FunctionsList.MultiPlayer)
@@ -820,7 +849,7 @@ local function MainMenu()
 	end
 	AddFrame("Credits",{x=vsx*0.54,y=vsy*0.2},vsy/18,{0,1,0,0.5},"lb","c",FunctionsList.Credits)
 	AddFrame("Readme",{x=vsx*0.46,y=vsy*0.1},vsy/18,{0,1,0,0.5},"rb","c",FunctionsList.PrintReadMe)
-	AddFrame("Quit",{x=vsx*0.54,y=vsy*0.0},vsy/18,{0,1,0,0.5},"lb","c",FunctionsList.Quit)
+	AddFrame("Back",{x=vsx*0.54,y=vsy*0.0},vsy/18,{0,0,1,0.5},"lb","c",FunctionsList.MainMenu)
 end
 
 local function MainMenuOld()
@@ -1339,7 +1368,7 @@ end
 function widget:Initialize()
 	BetterizeRandom()
 	IsActive = false
-	FunctionsList={Credits=Credits,MainMenu=MainMenu,Foreword=Foreword,Quit=Quit,GameOverMenu=GameOverMenu,
+	FunctionsList={Credits=Credits,MainMenu=MainMenu,MainMenuFull=MainMenuFull,Foreword=Foreword,Quit=Quit,GameOverMenu=GameOverMenu,
 		SimplerSinglePlayer=SimplerSinglePlayer,MultiPlayer=MultiPlayer,Settings=Settings,PrintReadMe=PrintReadMe,
 		SinglePlayer=SinglePlayer,RandomSinglePlayer=RandomSinglePlayer,GoToPage=GoToPage,SaveLoadMenu=SaveLoadMenu,
 		MissionsMenu=MissionsMenu,SwitchOn=SwitchOn,SwitchOff=SwitchOff,PreloadMiniMapPics=PreloadMiniMapPics,
