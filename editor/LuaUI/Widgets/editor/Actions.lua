@@ -108,6 +108,20 @@ actions_list = {
 		}
 	},
 	{
+		type = "enableLOS",
+		filter = "Game",
+		typeText = "Enable Line of Sight",
+		text = "[en]Enable line-of-sight (default), only units close to units' player will be visible.[en][fr]Activer les lignes de vues, seules les unités proches des unités du joueur seront visibles.[fr]",
+		attributes = {}
+	},
+	{
+		type = "disableLOS",
+		filter = "Game",
+		typeText = "Disable Line of Sight",
+		text = "[en]Disable line-of-sight which makes the whole map permanently visible to everyone.[en][fr]Désactiver les lignes de vues qui rend visible toute la carte à tous les joueurs.[fr]",
+		attributes = {}
+	},
+	{
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",

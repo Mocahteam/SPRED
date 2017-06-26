@@ -89,31 +89,32 @@ end
 function widget:DrawScreen()
 	for i, mes in ipairs(UnitMessages) do
 		local u, m = mes.unit, mes.message
-		if(not Spring.ValidUnitID(u))then return end
-		local x, y, z = Spring.GetUnitPosition(u)
-		x, y = Spring.WorldToScreenCoords(x, y+50, z)
-		-- avoid quake
-		x = math.floor(x)
-		y = math.floor(y)
-		if mes.prevX == nil then
-			mes.prevX = x
-		else
-			if math.abs(x-mes.prevX) < 4 then
-				x = mes.prevX
-			else
+		if(Spring.ValidUnitID(u))then
+			local x, y, z = Spring.GetUnitPosition(u)
+			x, y = Spring.WorldToScreenCoords(x, y+50, z)
+			-- avoid quake
+			x = math.floor(x)
+			y = math.floor(y)
+			if mes.prevX == nil then
 				mes.prevX = x
-			end
-		end
-		if mes.prevY == nil then
-			mes.prevY = y
-		else
-			if math.abs(y-mes.prevY) < 4 then
-				y = mes.prevY
 			else
-				mes.prevY = y
+				if math.abs(x-mes.prevX) < 4 then
+					x = mes.prevX
+				else
+					mes.prevX = x
+				end
 			end
+			if mes.prevY == nil then
+				mes.prevY = y
+			else
+				if math.abs(y-mes.prevY) < 4 then
+					y = mes.prevY
+				else
+					mes.prevY = y
+				end
+			end
+			DisplayTextAtScreenPosition(x, y, m)
 		end
-		DisplayTextAtScreenPosition(x, y, m)
 	end
 	for i, mes in ipairs(PositionMessages) do
 		local x, y, z, m = mes.x, mes.y, mes.z, mes.message
@@ -122,31 +123,32 @@ function widget:DrawScreen()
 	end
 	for i, mes in ipairs(BubbleMessages) do
 		local u, m = mes.unit, mes.message
-		if(not Spring.ValidUnitID(u))then return end
-		local x, y, z = Spring.GetUnitPosition(u)
-		x, y = Spring.WorldToScreenCoords(x, y+50, z)
-		-- avoid quake
-		x = math.floor(x)
-		y = math.floor(y)
-		if mes.prevX == nil then
-			mes.prevX = x
-		else
-			if math.abs(x-mes.prevX) < 4 then
-				x = mes.prevX
-			else
+		if(Spring.ValidUnitID(u))then
+			local x, y, z = Spring.GetUnitPosition(u)
+			x, y = Spring.WorldToScreenCoords(x, y+50, z)
+			-- avoid quake
+			x = math.floor(x)
+			y = math.floor(y)
+			if mes.prevX == nil then
 				mes.prevX = x
-			end
-		end
-		if mes.prevY == nil then
-			mes.prevY = y
-		else
-			if math.abs(y-mes.prevY) < 4 then
-				y = mes.prevY
 			else
-				mes.prevY = y
+				if math.abs(x-mes.prevX) < 4 then
+					x = mes.prevX
+				else
+					mes.prevX = x
+				end
 			end
+			if mes.prevY == nil then
+				mes.prevY = y
+			else
+				if math.abs(y-mes.prevY) < 4 then
+					y = mes.prevY
+				else
+					mes.prevY = y
+				end
+			end
+			DisplayBubbleAtScreenPosition(x, y, m, u)
 		end
-		DisplayBubbleAtScreenPosition(x, y, m, u)
 	end
 end
 
@@ -164,7 +166,7 @@ function widget:Update(delta)
   		if m.timer < 0 then
   			table.insert(toBeRemoved, i)
   		end
-    end
+     end
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(UnitMessages, i)
@@ -172,12 +174,12 @@ function widget:Update(delta)
 	
 	toBeRemoved = {}
 	for i, m in ipairs(PositionMessages) do
-   if (not m.infinite)then
+     if (not m.infinite)then
       m.timer = m.timer - delta
       if m.timer < 0 then
         table.insert(toBeRemoved, i)
       end
-    end
+     end
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(PositionMessages, i)
@@ -185,12 +187,12 @@ function widget:Update(delta)
 	
 	toBeRemoved = {}
 	for i, m in ipairs(BubbleMessages) do
-   if (not m.infinite)then
+     if (not m.infinite)then
       m.timer = m.timer - delta
       if m.timer < 0 then
         table.insert(toBeRemoved, i)
       end
-    end
+     end
 	end
 	for _, i in ipairs(toBeRemoved) do
 		table.remove(BubbleMessages, i)

@@ -811,11 +811,25 @@ local function ApplyNonGroupableAction(act)
 	if not success and result ~= nil then
 		Spring.Echo ("Warning!!! script \""..act.params.script.."\" failed: "..result)
 	end
+	
+  -- WIDGETS
  
   elseif(act.type=="enableWidget")or(act.type=="disableWidget") then
     local widgetName=act.params.widget
     local activation=(act.type=="enableWidget")
     SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+	
+  -- LOS
+  
+  elseif(act.type=="enableLOS") then
+		Spring.SendCommands("cheat 1")
+		Spring.SendCommands("GlobalLOS 0")
+		Spring.SendCommands("cheat 0")
+  elseif(act.type=="disableLOS") then
+		Spring.SendCommands("cheat 1")
+		Spring.SendCommands("GlobalLOS 1")
+		Spring.SendCommands("cheat 0")
+    
   
   elseif (act.type == "intersection") or (act.type == "union") then
     local g1=unitSetParamsToUnitsExternal(act.params.unitset1)

@@ -6,8 +6,8 @@ copy Sili-CiumMap.smt Sili-CiumMap.sdd\maps\
 copy Sili-CiumMap.smf Sili-CiumMap.sdd\maps\
 
 cd Sili-CiumMap.sdd
-SET zip=..\..\..\tools\7za.exe
+SET zip=..\..\..\7za.exe
 %zip% a -r -tzip -y -xr!.svn Sili-CiumMap.sdz .
-cp Sili-CiumMap.sdz ..
+mv Sili-CiumMap.sdz ..
 
 PAUSE

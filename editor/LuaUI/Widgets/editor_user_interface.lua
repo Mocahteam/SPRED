@@ -208,7 +208,7 @@ local mapSettingsButtons = {} -- Buttons in the mapsettings frame
 local cameraAutoState = true -- Current state of camera auto
 local autoHealState = false -- Current state of auto heal
 local minimapState = false -- Current minimap state
-local mouseState = false -- Current state of the mouse
+local mouseState = true -- Current state of the mouse
 local feedbackState = false -- Current state of the feedback (traces)
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 local MainGame = Spring.GetModOptions().maingame or getMasterGame()
@@ -5304,7 +5304,7 @@ function newMap() -- Set each parameter to its default value
 	mapDescription.mapBriefingRaw = EDITOR_MAPSETTINGS_MAP_BRIEFING_DEFAULT_NAME
 	cameraAutoState = true
 	autoHealState = false
-	mouseState = false
+	mouseState = true
 	minimapState = false
 	feedbackState = false
 	initWidgetList()
