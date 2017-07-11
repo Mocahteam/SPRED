@@ -16,7 +16,7 @@ local ppTraces = nil -- File handler to store traces
 
 function TraceAction(msg)
 	if ppTraces ~= nil then
-		ppTraces:write("TIME_STAMP "..os.time().." "..msg.."\n")
+		ppTraces:write("TIME_STAMP "..os.date().." "..msg.."\n")
 		ppTraces:flush()
 	end
 end

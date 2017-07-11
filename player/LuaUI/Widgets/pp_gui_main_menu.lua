@@ -105,6 +105,7 @@ local LANG_PROGRAM_REFERENCE = "Reference execution time: "
 local LANG_AVERAGE_TIME = "Average wait time between two attempts: "
 local LANG_MISSION_TIME = "Mission resolution time: "
 local LANG_REFERENCE_TIME = "Reference resolution time: "
+local LANG_WARNING_STATE = "Warning!!! State unknown"
 if lang == "fr" then
 	LANG_CONTINUE= "Continuer"
 	LANG_REPLAY_MISSION = "Rejouer mission"
@@ -139,6 +140,7 @@ if lang == "fr" then
 	LANG_AVERAGE_TIME = "Temps d'attente moyen entre deux tentatives : "
 	LANG_MISSION_TIME = "Temps de résolution de la mission : "
 	LANG_REFERENCE_TIME = "Temps de résolution référence : "
+	LANG_WARNING_STATE = "Attention!!! Etat non connu"
 end
 
 local activateSave=false
@@ -888,7 +890,7 @@ function MissionEvent(e)
   
   if e.logicType == "ShowMissionMenu" then
 	if e.team == nil or e.team == Spring.GetMyTeamID() then
-		if e.state then
+		if e.state and (e.state == "won" or e.state == "lost") then
 			if Script.LuaUI.MissionEnded then
 				Script.LuaUI.MissionEnded(e.state) -- function defined and registered in Meta Traces Manager widget
 			end
@@ -910,8 +912,10 @@ function MissionEvent(e)
 			local message = ""
 			if e.state == "won" then
 				message = LANG_VICTORY
+			elseif e.state == "lost" then
+				message = LANG_LOSS
 			else
-				message = LANG_LOSS     
+				message = LANG_WARNING_STATE
 			end
 			MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
 		else
