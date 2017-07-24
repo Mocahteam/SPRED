@@ -1,22 +1,73 @@
+-- Color used
+
+-- 255255255 => (empty)
+-- 255255128 => unitset
+-- 255255000 => team
+-- 255128255 => player
+-- 255128000 => toggle
+-- 255000255 => textSplit
+-- 255000128 => comparison
+-- 255000000 => position
+
+-- 128255255 => widget
+-- 128255128 => condition
+-- 128255000 => numberVariable 
+-- 128128255 => booleanVariable
+-- 128128128 => (empty)
+-- 128128000 => zone
+-- 128000255 => text
+-- 128000128 => numberComparison
+-- 128000000 => (empty)
+
+-- 000255255 => boolean
+-- 000255128 => (empty)
+-- 000255000 => (empty)
+-- 000128255 => command
+-- 000128128 => group
+-- 000128000 => (empty)
+-- 000000255 => unitType
+-- 000000128 => (empty)
+-- 000000000 => (empty)
+
 textColors = {
-	unitset = {keywords = {"<UnitSet>", "<Ensemble>", "<Target>", "<Cible>", "<UnitSet1>", "<Ensemble1>", "<UnitSet2>", "<Ensemble2>", "<Attacker>", "<Attaquant>"}, color = "\255\255\255\128"},
-	unitType = {keywords = {"<UnitType>", "<Type>"}, color = "\255\0\0\255"},
-	team = {keywords = {"<Team>", "<Equipe>"}, color = "\255\255\255\0"},
-	player = {keywords = {"<Player>", "<Joueur>"}, color = "\255\255\255\0"},
-	position = {keywords = {"<Position>"}, color = "\255\255\0\0"},
-	zone = {keywords = {"<Zone>"}, color = "\255\128\128\0"},
-	group = {keywords = {"<Group>", "<Groupe>"}, color = "\255\0\128\128"},
-	numberComparison = {keywords = {"<Number>", "<Nombre>"}, color = "\255\128\0\128"},
-	numberVariable = {keywords = {"<Variable>"}, color = "\255\128\255\0"},
-	booleanVariable = {keywords = {"<Variable>"}, color = "\255\128\255\0"},
-	comparison = {keywords = {"<Comparison>", "<Comparaison>"}, color = "\255\255\0\128"},
-	condition = {keywords = {"<Condition>"}, color = "\255\128\255\128"},
-	toggle = {keywords = {"<State>", "<Etat>"}, color = "\255\255\128\0"},
-	command = {keywords = {"<Command>", "<Commande>"}, color = "\255\0\128\255"},
-	text = {keywords = {"<State>", "<Etat>", "<Time>", "<Temps>", "<Trigger>", "<Déclencheur>", "<Number>", "<Nombre>", "<Percentage>", "<Pourcentage>", "<Min>", "<Max>", "<Script>"}, color = "\255\128\0\255"},
-	textSplit = {keywords = {"<Parameters>", "<Paramètres>", "<Message>"}, color = "\255\128\0\255"},
-	boolean = {keywords = {"<Pause>", "<Boolean>", "<Booléen>"}, color = "\255\0\255\255"},
-	widget = {keywords = {"<Widget>"}, color = "\255\128\255\255"}
+	unitset = {keywords = {"<UnitSet>", "<Ensemble>", "<Target>", "<Cible>", "<UnitSet1>", "<Ensemble1>", "<UnitSet2>", "<Ensemble2>", "<Attacker>", "<Attaquant>"},
+		color = "\255\255\255\128"},
+	team = {keywords = {"<Team>", "<Equipe>"},
+		color = "\255\255\255\0"},
+	player = {keywords = {"<Player>", "<Joueur>"},
+		color = "\255\255\128\255"},
+	toggle = {keywords = {"<State>", "<Etat>"},
+		color = "\255\255\128\0"},
+	textSplit = {keywords = {"<Parameters>", "<Paramètres>", "<Message>"},
+		color = "\255\255\0\255"},
+	comparison = {keywords = {"<Comparison>", "<Comparaison>"},
+		color = "\255\255\0\128"},
+	position = {keywords = {"<Position>"},
+		color = "\255\255\0\0"},
+		
+	widget = {keywords = {"<Widget>"},
+		color = "\255\128\255\255"},
+	condition = {keywords = {"<Condition>"},
+		color = "\255\128\255\128"},
+	numberVariable = {keywords = {"<Variable>"},
+		color = "\255\128\255\0"},
+	booleanVariable = {keywords = {"<Variable>"},
+		color = "\255\128\128\255"},
+	zone = {keywords = {"<Zone>"},
+		color = "\255\128\128\0"},
+	text = {keywords = {"<State>", "<Etat>", "<Time>", "<Temps>", "<Trigger>", "<Déclencheur>", "<Number>", "<Nombre>", "<Percentage>", "<Pourcentage>", "<Min>", "<Max>", "<Script>", "<Id>"},
+		color = "\255\128\0\255"},
+	numberComparison = {keywords = {"<Number>", "<Nombre>"},
+		color = "\255\128\0\128"},
+		
+	boolean = {keywords = {"<Pause>", "<Boolean>", "<Booléen>"},
+		color = "\255\0\255\255"},
+	command = {keywords = {"<Command>", "<Commande>"},
+		color = "\255\0\128\255"},
+	group = {keywords = {"<Group>", "<Groupe>"},
+		color = "\255\0\128\128"},
+	unitType = {keywords = {"<UnitType>", "<Type>"},
+		color = "\255\0\0\255"},
 }
 
 colorTable = { -- associative table between a number and its character

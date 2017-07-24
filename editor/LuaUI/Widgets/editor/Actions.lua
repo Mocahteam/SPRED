@@ -368,6 +368,12 @@ actions_list = {
 				type = "text",
 				id = "time",
 				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
+			},
+			{
+				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
+				type = "text",
+				id = "id",
+				hint = "[en]You can set an id for this message, useful for forcing message to close before the entire time has elapsed (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message avant que le temps ne soit terminé (voir l'action \"Force message to close\").[fr]"
 			}
 		}
 	},
@@ -393,6 +399,12 @@ actions_list = {
 				type = "text",
 				id = "time",
 				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
+			},
+			{
+				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
+				type = "text",
+				id = "id",
+				hint = "[en]You can set an id for this message, useful for forcing message to close before the entire time has elapsed (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message avant que le temps ne soit terminé (voir l'action \"Force message to close\").[fr]"
 			}
 		}
 	},
@@ -418,6 +430,25 @@ actions_list = {
 				type = "text",
 				id = "time",
 				hint = "[en]You can put 0 in this field for an infinite duration. You can also use variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez indiquer 0 pour une durée infinie. Vous pouvez également utiliser des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
+			},
+			{
+				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
+				type = "text",
+				id = "id",
+				hint = "[en]You can set an id for this message, useful for forcing message to close before the entire time has elapsed (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message avant que le temps ne soit terminé (voir l'action \"Force message to close\").[fr]"
+			}
+		}
+	},
+	{
+		type = "removeMessage",
+		filter = "Message",
+		typeText = "Force message to close",
+		text = "[en]Force <Id> message to close.[en][fr]Forcer la fermeture du message <Id>.[fr]",
+		attributes = {
+			{
+				text = "<Id>",
+				type = "text",
+				id = "id"
 			}
 		}
 	},

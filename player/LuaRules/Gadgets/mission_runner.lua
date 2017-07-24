@@ -184,14 +184,18 @@ function gadget:RecvFromSynced(...)
   elseif arg1 == "DisplayMessageAboveUnit" then
     local p=json.decode(arg2)
     if(not p.bubble)then
-      Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time)
+      Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time, p.id)
     else
-      Script.LuaUI.DisplayMessageInBubble(p.message, p.unit, p.time)
+      Script.LuaUI.DisplayMessageInBubble(p.message, p.unit, p.time, p.id)
     end
 	
   elseif arg1 == "displayMessageOnPosition" then
     local p=json.decode(arg2)
-    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time)
+    Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time, p.id)
+	
+  elseif arg1 == "removeMessage" then
+    local p=json.decode(arg2)
+    Script.LuaUI.RemoveMessageById(p.id)
     
   elseif arg1 == "showZone" then
     local zone=json.decode(arg2)

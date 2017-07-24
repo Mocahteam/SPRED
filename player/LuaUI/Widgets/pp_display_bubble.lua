@@ -14,16 +14,16 @@ local UnitMessages = {}
 local PositionMessages = {}
 local BubbleMessages = {}
 
-function DisplayMessageAboveUnit(message, unit, timer)
-	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil})
+function DisplayMessageAboveUnit(message, unit, timer, id)
+	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil, id = id})
 end
 
-function DisplayMessageAtPosition(message, x, y, z, timer)
-	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer,infinite=(timer==0)})
+function DisplayMessageAtPosition(message, x, y, z, timer, id)
+	table.insert(PositionMessages, {message = message, x = x, y = y, z = z, timer = timer,infinite=(timer==0), id = id})
 end
 
-function DisplayMessageInBubble(message, unit, timer)
-	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil})
+function DisplayMessageInBubble(message, unit, timer, id)
+	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil, id = id})
 end
 
 function TurnTextIntoLines(texte)
@@ -152,17 +152,35 @@ function widget:DrawScreen()
 	end
 end
 
+local function forceMessagesToClose (listOfMessages, id)
+	local i = 1
+	while i <= #listOfMessages do
+	 local m = listOfMessages[i]
+	 if (m.id ~= nil and id ~= nil and m.id == id)then
+  		table.remove(listOfMessages, i)
+		i = i - 1
+     end
+	 i = i + 1
+	end
+end
+
+function RemoveMessageById(id)
+	forceMessagesToClose(UnitMessages, id)
+	forceMessagesToClose(PositionMessages, id)
+	forceMessagesToClose(BubbleMessages, id)
+end
+
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("DisplayMessageAboveUnit", DisplayMessageAboveUnit)
 	widgetHandler:RegisterGlobal("DisplayMessageAtPosition", DisplayMessageAtPosition)
 	widgetHandler:RegisterGlobal("DisplayMessageInBubble", DisplayMessageInBubble)
+	widgetHandler:RegisterGlobal("RemoveMessageById", RemoveMessageById)
 end
 
-local function removeMessages (listOfMessages, delta)
-	local m
+local function removeMessagesIfTimeOver (listOfMessages, delta)
 	local i = 1
-	while i < #listOfMessages do
-	 m = listOfMessages[i]
+	while i <= #listOfMessages do
+	 local m = listOfMessages[i]
 	 if (not m.infinite)then
   		m.timer = m.timer - delta
   		if m.timer < 0 then
@@ -175,13 +193,14 @@ local function removeMessages (listOfMessages, delta)
 end
 
 function widget:Update(delta)
-	removeMessages(UnitMessages, delta)
-	removeMessages(PositionMessages, delta)
-	removeMessages(BubbleMessages, delta)
+	removeMessagesIfTimeOver(UnitMessages, delta)
+	removeMessagesIfTimeOver(PositionMessages, delta)
+	removeMessagesIfTimeOver(BubbleMessages, delta)
 end
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("DisplayMessageAboveUnit")
 	widgetHandler:DeregisterGlobal("DisplayMessageAtPosition")
-  widgetHandler:DeregisterGlobal("DisplayMessageInBubble")
+	widgetHandler:DeregisterGlobal("DisplayMessageInBubble")
+	widgetHandler:DeregisterGlobal("RemoveMessageById")
 end

@@ -676,7 +676,7 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
       if Spring.ValidUnitID(unit) then
         --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(getAMessage(act.params.message), lang),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit")}))
+        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(getAMessage(act.params.message), lang),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit"),id=act.params.id}))
         --[[
         local x,y,z=Spring.GetUnitePosition(springUnitId)
         Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
@@ -760,7 +760,10 @@ local function ApplyNonGroupableAction(act)
     local x=posFound.x
     local y=Spring.GetGroundHeight(posFound.x,posFound.z)
     local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(computeReference(act.params.time) or 0)/ctx.speedFactor}))
+    SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,id=act.params.id}))
+
+  elseif(act.type=="removeMessage") then
+    SendToUnsynced("removeMessage", json.encode({id=act.params.id}))
      
   -- ZONES
   
