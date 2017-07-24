@@ -158,45 +158,26 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("DisplayMessageInBubble", DisplayMessageInBubble)
 end
 
-function widget:Update(delta)
-	local toBeRemoved = {}
-	for i, m in ipairs(UnitMessages) do
+local function removeMessages (listOfMessages, delta)
+	local m
+	local i = 1
+	while i < #listOfMessages do
+	 m = listOfMessages[i]
 	 if (not m.infinite)then
   		m.timer = m.timer - delta
   		if m.timer < 0 then
-  			table.insert(toBeRemoved, i)
+  			table.remove(listOfMessages, i)
+			i = i - 1
   		end
      end
+	 i = i + 1
 	end
-	for _, i in ipairs(toBeRemoved) do
-		table.remove(UnitMessages, i)
-	end
-	
-	toBeRemoved = {}
-	for i, m in ipairs(PositionMessages) do
-     if (not m.infinite)then
-      m.timer = m.timer - delta
-      if m.timer < 0 then
-        table.insert(toBeRemoved, i)
-      end
-     end
-	end
-	for _, i in ipairs(toBeRemoved) do
-		table.remove(PositionMessages, i)
-	end
-	
-	toBeRemoved = {}
-	for i, m in ipairs(BubbleMessages) do
-     if (not m.infinite)then
-      m.timer = m.timer - delta
-      if m.timer < 0 then
-        table.insert(toBeRemoved, i)
-      end
-     end
-	end
-	for _, i in ipairs(toBeRemoved) do
-		table.remove(BubbleMessages, i)
-	end
+end
+
+function widget:Update(delta)
+	removeMessages(UnitMessages, delta)
+	removeMessages(PositionMessages, delta)
+	removeMessages(BubbleMessages, delta)
 end
 
 function widget:Shutdown()
