@@ -3750,6 +3750,56 @@ drawFeatureFunctions["team"] = function(attr, yref, ac, panel, feature)
 end
 
 -- see below for params documentation
+drawFeatureFunctions["teamWithAll"] = function(attr, yref, ac, panel, feature)
+	local y = yref[1]
+
+	-- Items generation
+	local comboBoxItems = {} -- store list of teams to display into combobox
+	local itemIdToTeamId = {} -- for each item save the team id associated
+	table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TEAM_ALL)
+	itemIdToTeamId[#comboBoxItems] = -1
+	for _, teamNo in pairs(teamStateMachine.states) do
+		if enabledTeams[teamNo] then
+			table.insert(comboBoxItems, teamName[teamNo])
+			itemIdToTeamId[#comboBoxItems] = teamNo -- now we know that the nth combobox item is associated to the team with number teamNo
+		end
+	end
+
+	-- ComboBox select
+	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	comboBox.prevSelection = nil
+	comboBox.OnSelect = {
+		function()
+			if comboBox.selected ~= comboBox.prevSelection then
+				comboBox.prevSelection = comboBox.selected
+				ac.params[attr.id] = itemIdToTeamId[comboBox.selected]
+				saveState()
+			end
+		end
+	}
+
+	-- Parameters check
+	local init = false
+	if ac.params[attr.id] then
+		for i, item in ipairs(comboBox.items) do
+			-- check if the team id associated to this item is the same of the one saved into param
+			if itemIdToTeamId[i] == ac.params[attr.id] then
+				comboBox:Select(i)
+				comboBox.prevSelection = i
+				init = true
+				break
+			end
+		end
+	end
+	if not init then
+		comboBox:Select(1)
+		comboBox.prevSelection = 1
+	end
+
+	table.insert(feature, comboBox)
+end
+
+-- see below for params documentation
 drawFeatureFunctions["player"] = function(attr, yref, ac, panel, feature)
 	local y = yref[1]
 
@@ -5040,11 +5090,11 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 			elseif currentCondition then
 				ca = events[currentEvent].conditions[currentCondition]
 			end
-			triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 			ca.params[changedParam] = {}
 			ca.params[changedParam].type = t
 			ca.params[changedParam].value = v
 		end
+		triggerStateMachine:setCurrentState(triggerStateMachine.states.DEFAULT)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.actcond)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.groupteam)
 		Screen0:RemoveChild(selectSetOfUnitsWindows.cancelbut)
@@ -5086,39 +5136,42 @@ function showPickUnitWindow() -- Allow the user to pick a specific set of units
 
 	selectSetOfUnitsWindows.cancelbut = addButton(Screen0, "75%", "10%", "10%", "5%", EDITOR_CANCEL, function () pickFunction(nil, nil) end)
 
-	selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "10%", "15%", "80%")
+	-- Pick an action and a condition only for actions
+	if currentAction then
+		selectSetOfUnitsWindows.actcond = addWindow(Screen0, "85%", "10%", "15%", "80%")
 
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION)
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '4%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED)
-	local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '7%', '100%', '43%')
-	local count = 0
-	for i, e in ipairs(events) do
-		for ii, a in ipairs(e.actions) do
-			if a.type == "createUnits" then
-				addButton(asp, "0%", (count * 15).."%", "100%", "15%", a.name, function() pickFunction("action", a.id) end)
-				count = count + 1
+		addLabel(selectSetOfUnitsWindows.actcond, '0%', '0%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_ACTION)
+		addLabel(selectSetOfUnitsWindows.actcond, '0%', '4%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CREATED)
+		local asp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '7%', '100%', '43%')
+		local count = 0
+		for i, e in ipairs(events) do
+			for ii, a in ipairs(e.actions) do
+				if a.type == "createUnits" then
+					addButton(asp, "0%", (count * 15).."%", "100%", "15%", a.name, function() pickFunction("action", a.id) end)
+					count = count + 1
+				end
 			end
 		end
-	end
 
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION)
-	addLabel(selectSetOfUnitsWindows.actcond, '0%', '54%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING)
-	local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '57%', '100%', '43%')
-	local counter = 0
-	for i, c in ipairs(events[currentEvent].conditions) do
-		-- filter only condition that include one attribute with unitset id
-		-- first we look for the condition pattern associated to the current condition
-		for i, condition_pattern in ipairs(conditions_list) do
-			if condition_pattern.type == c.type then
-				-- second we check in attributes if this condition pattern works on unitset
-				for k, attr in pairs(condition_pattern.attributes) do
-					if attr.id == "unitset" then
-						addButton(csp, "0%", (counter * 15).."%", "100%", "15%", c.name, function() pickFunction("condition", c.id) end)
-						counter = counter + 1
-						break
+		addLabel(selectSetOfUnitsWindows.actcond, '0%', '50%', '100%', '4%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_CONDITION)
+		addLabel(selectSetOfUnitsWindows.actcond, '0%', '54%', '100%', '3%', EDITOR_TRIGGERS_EVENTS_PICK_UNIT_TRIGGERING)
+		local csp = addScrollPanel(selectSetOfUnitsWindows.actcond, '0%', '57%', '100%', '43%')
+		local counter = 0
+		for i, c in ipairs(events[currentEvent].conditions) do
+			-- filter only condition that include one attribute with unitset id
+			-- first we look for the condition pattern associated to the current condition
+			for i, condition_pattern in ipairs(conditions_list) do
+				if condition_pattern.type == c.type then
+					-- second we check in attributes if this condition pattern works on unitset
+					for k, attr in pairs(condition_pattern.attributes) do
+						if attr.id == "unitset" then
+							addButton(csp, "0%", (counter * 15).."%", "100%", "15%", c.name, function() pickFunction("condition", c.id) end)
+							counter = counter + 1
+							break
+						end
 					end
+					break
 				end
-				break
 			end
 		end
 	end

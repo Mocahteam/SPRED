@@ -2,7 +2,7 @@
 
 -- 255255255 => (empty)
 -- 255255128 => unitset
--- 255255000 => team
+-- 255255000 => team and teamWithAll
 -- 255128255 => player
 -- 255128000 => toggle
 -- 255000255 => textSplit
@@ -33,6 +33,8 @@ textColors = {
 	unitset = {keywords = {"<UnitSet>", "<Ensemble>", "<Target>", "<Cible>", "<UnitSet1>", "<Ensemble1>", "<UnitSet2>", "<Ensemble2>", "<Attacker>", "<Attaquant>"},
 		color = "\255\255\255\128"},
 	team = {keywords = {"<Team>", "<Equipe>"},
+		color = "\255\255\255\0"},
+	teamWithAll = {keywords = {"<Team>", "<Equipe>"},
 		color = "\255\255\255\0"},
 	player = {keywords = {"<Player>", "<Joueur>"},
 		color = "\255\255\128\255"},

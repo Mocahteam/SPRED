@@ -85,12 +85,17 @@ actions_list = {
 		type = "enableWidget",
 		filter = "Game",
 		typeText = "Enable Widget",
-		text = "[en]Enable <Widget>.[en][fr]Activer <Widget>.[fr]",
+		text = "[en]Enable <Widget> for <Team>.[en][fr]Activer <Widget> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "<Widget>",
 				type = "widget",
 				id = "widget"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},
@@ -98,12 +103,17 @@ actions_list = {
 		type = "disableWidget",
 		filter = "Game",
 		typeText = "Disable Widget",
-		text = "[en]Disable <Widget>.[en][fr]Désactiver <Widget>.[fr]",
+		text = "[en]Disable <Widget> for <Team>.[en][fr]Désactiver <Widget> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "<Widget>",
 				type = "widget",
 				id = "widget"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},
@@ -125,12 +135,17 @@ actions_list = {
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
-		text = "[en]Center camera to <Position>.[en][fr]Centrer la caméra sur <Position>.[fr]",
+		text = "[en]Center camera to <Position> for <Team>.[en][fr]Centrer la caméra sur <Position> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "<Position>",
 				type = "position",
 				id = "position"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},
@@ -138,12 +153,17 @@ actions_list = {
 		type = "cameraAuto",
 		filter = "Control",
 		typeText = "Change camera auto state",
-		text = "[en]Camera auto is now <State>.[en][fr]La caméra automatique est maintenant <Etat>.[fr]",
+		text = "[en]Camera auto is now <State> for <Team>.[en][fr]La caméra automatique est maintenant <Etat> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "toggle",
 				id = "toggle"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},
@@ -151,12 +171,17 @@ actions_list = {
 		type = "mouse",
 		filter = "Control",
 		typeText = "Change mouse state",
-		text = "[en]Mouse is now <State>.[en][fr]La souris est maintenant <Etat>.[fr]",
+		text = "[en]Mouse is now <State> for <Team>.[en][fr]La souris est maintenant <Etat> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "[en]<State>[en][fr]<Etat>[fr]",
 				type = "toggle",
 				id = "toggle"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},
