@@ -139,30 +139,42 @@ local mouseDisabled = false
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
   if arg1 == "mouseDisabled" then
-	if not mouseDisabled then
-		mouseDisabled = true
-		Spring.SendCommands("luaui enablewidget Hide commands")
+	local target = arg2
+	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
+		if not mouseDisabled then
+			mouseDisabled = true
+			Spring.SendCommands("luaui enablewidget Hide commands")
+		end
 	end
 	
   elseif arg1 == "mouseEnabled" then
-	if mouseDisabled then
-		mouseDisabled = false
-		Spring.SendCommands("luaui disablewidget Hide commands")
+	local target = arg2
+	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
+		if mouseDisabled then
+			mouseDisabled = false
+			Spring.SendCommands("luaui disablewidget Hide commands")
+		end
 	end
 	
   elseif arg1 == "enableCameraAuto" then
-    if Script.LuaUI("CameraAuto") then
-      local specialPositions = {}
-      for k, v in spairs(SYNCED.cameraAuto["specialPositions"]) do
-        specialPositions[k] = {v[1], v[2]}
-      end
-      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
-    end
+	local target = SYNCED.cameraAuto["target"]
+	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
+		if Script.LuaUI("CameraAuto") then
+		  local specialPositions = {}
+		  for k, v in spairs(SYNCED.cameraAuto["specialPositions"]) do
+			specialPositions[k] = {v[1], v[2]}
+		  end
+		  Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], specialPositions) -- function defined and registered in cameraAuto widget
+		end
+	end
 
   elseif arg1 == "disableCameraAuto" then
-    if Script.LuaUI("CameraAuto") then
-      Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
-    end
+	local target = SYNCED.cameraAuto["target"]
+	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
+		if Script.LuaUI("CameraAuto") then
+		  Script.LuaUI.CameraAuto(SYNCED.cameraAuto["enable"], {}) -- absolutely not sure of the "disable" thing
+		end
+	end
 	
   elseif arg1 == "MissionEvent" then
     if Script.LuaUI("MissionEvent") then
@@ -174,12 +186,14 @@ function gadget:RecvFromSynced(...)
     end
 	
   elseif arg1=="centerCamera" then
-    local state = Spring.GetCameraState()
-    local pos=json.decode(arg2)
-    state.px=pos.x
-    state.pz=pos.z
-    state.height = 800
-    Spring.SetCameraState(state, 2) 
+    local p=json.decode(arg2)
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		local state = Spring.GetCameraState()
+		state.px=p.pos.x
+		state.pz=p.pos.z
+		state.height = 800
+		Spring.SetCameraState(state, 2)
+	end
 	
   elseif arg1 == "DisplayMessageAboveUnit" then
     local p=json.decode(arg2)
@@ -207,8 +221,10 @@ function gadget:RecvFromSynced(...)
     
   elseif arg1 == "changeWidgetState" then
     local p=json.decode(arg2)
-    if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
-    if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
+		if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
+	end
 	
   elseif arg1 == "requestUnsyncVals" then
     local valsToSend={}

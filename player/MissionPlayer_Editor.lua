@@ -335,6 +335,10 @@ local function getAMessage(messageTable)
   for i = 255, 0, -1 do
 	msg = string.gsub(msg, "\\"..i, colorTable[i+1])
   end
+  -- replace variables by its value
+  for v,value in pairs(ctx.variables)do
+    msg=string.gsub(msg, "##"..v.."##", tostring(value))
+  end
   return msg
 end
 
@@ -575,7 +579,7 @@ end
 -- has already been compiled from previous condition checking process
 -- in this case, units_extracted is an index for this list
 -------------------------------------
-local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck)
+local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck,frameNumber)
   local groupToCheck = groupToCheck or ctx.getAvailableLocalUnitIdsFromLocalGroupId
   --EchoDebug("debug : "..tostring(id), 1)
   --EchoDebug("extract process", 1)
@@ -596,6 +600,10 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck)
       --EchoDebug(json.encode({actOrCond_Params,groupToReturn}),2)
      else
        local index=actOrCond_Params.unitset.type..'_'..tostring(actOrCond_Params.unitset.value)
+	   -- in case of "condition type" we find the group associated to the frameNumber
+	   if actOrCond_Params.unitset.type == "condition" and frameNumber ~= nil then
+		index = index.."_"..frameNumber
+	   end
        --if(groupToCheck[index]==nil)then
        --  EchoDebug("warning. This index gave nothing : "..index, 2)
        --end
@@ -677,11 +685,6 @@ local function ApplyGroupableAction_onSpUnit(unit,act)
       if Spring.ValidUnitID(unit) then
         --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
         SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(getAMessage(act.params.message), lang),unit=unit,time=(computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit"),id=act.params.id}))
-        --[[
-        local x,y,z=Spring.GetUnitePosition(springUnitId)
-        Spring.MarkerAddPoint(x,y,z, getAMessage(act.params.message))
-        local deletePositionAction={id=99,type="erasemarker",params={x=x,y=y,z=z},name="deleteMessageAfterTimeOut"} --to erase message after timeout
-        AddActionInStack(deletePositionAction, secondesToFrames(act.params.time or 0))--]]
       end
     end
 
@@ -716,6 +719,7 @@ local function ApplyNonGroupableAction(act)
   if(act.type=="cameraAuto") then
     if(act.params.toggle=="enabled")then
       _G.cameraAuto = {
+		target = act.params.team,
         enable = true,
         specialPositions = {} --TODO: minimap and special position géree dans les zones
       }
@@ -723,6 +727,7 @@ local function ApplyNonGroupableAction(act)
       _G.cameraAuto = nil
     else
       _G.cameraAuto = {
+		target = act.params.team,
         enable = false,
         specialPositions = {} 
       }
@@ -731,15 +736,17 @@ local function ApplyNonGroupableAction(act)
     end
 
   elseif(act.type=="mouse") then
+	local target=act.params.team
     if(act.params.toggle=="enabled")then
-      SendToUnsynced("mouseEnabled", true)
+      SendToUnsynced("mouseEnabled", target)
     else
-      SendToUnsynced("mouseDisabled", true) 
+      SendToUnsynced("mouseDisabled", target) 
     end
     
   elseif(act.type=="centerCamera") then
     local posFound=extractPosition(act.params.position)
-    SendToUnsynced("centerCamera", json.encode(posFound))
+	local target=act.params.team
+    SendToUnsynced("centerCamera", json.encode({pos=posFound,target=target}))
    
   -- MESSAGES
   
@@ -819,8 +826,9 @@ local function ApplyNonGroupableAction(act)
  
   elseif(act.type=="enableWidget")or(act.type=="disableWidget") then
     local widgetName=act.params.widget
+	local target=act.params.team
     local activation=(act.type=="enableWidget")
-    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,activation=activation}))
+    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,target=target,activation=activation}))
 	
   -- LOS
   
@@ -868,21 +876,17 @@ function ApplyAction (a)
     --extract units
     if(a.params.unit~=nil)then
       local u=ctx.getSpringIdFromLocalUnitId[a.params.unit]
-      ApplyGroupableAction_onSpUnit(u,a)
+      ApplyGroupableAction_onSpUnit(u, a)
     else   
-      --local tl={[1]={"currentTeam","team"},[2]={"team","team"},[3]={"unitType","type"},[4]={"group","group"}}
+      -- Get units concerned by this action
       local listOfUnits=extractListOfUnitsInvolved(a.params)
       --EchoDebug("we try to apply the groupable action to this group", 7)
       --EchoDebug("Units selected : "..json.encode(listOfUnits),7)
-      if(a.type=="transfer")then
-        --EchoDebug("about to transfer", 7)
-        --EchoDebug(json.encode(listOfUnits), 7)
-      end
       
       if(listOfUnits~=nil)then
         for i, externalUnitId in ipairs(listOfUnits) do
           local unit=ctx.getSpringIdFromLocalUnitId[externalUnitId]
-          ApplyGroupableAction_onSpUnit(unit,a)
+          ApplyGroupableAction_onSpUnit(unit, a)
           --
         end
       else
@@ -899,9 +903,11 @@ end
 -- For debugging purpose
 -------------------------------------
 local function printMyStack()
+  EchoDebug("START STACK", 7)
   for i,el in pairs(ctx.actionStack) do
-    --EchoDebug("action "..el.actId.." is planned with delay : "..el.delay, 7)
+    EchoDebug("action "..el.action.name.." is planned with delay : "..el.delay, 7)
   end
+  EchoDebug("END STACK", 7)
 end 
 
 -------------------------------------
@@ -909,7 +915,7 @@ end
 -------------------------------------
 local function alreadyInStack(actId)
   for index,el in pairs(ctx.actionStack) do
-    if(el.actId==actId)then
+    if(el.action.id==actId)then
       return true
     end
   end
@@ -917,32 +923,25 @@ local function alreadyInStack(actId)
 end 
 
 -------------------------------------
--- actions refer to unitsets which are subject to change over time 
--- conditions, actions, and groups 
--------------------------------------
-function replaceDynamicUnitSet(action)
-  local action2=deepcopy(action)
-  if(action.params.unitset~=nil)and(action.params.type~="action")then
-    -- we exclude action from this early extraction because the group do not exist when event is executed
-    action2.params["units_extracted"]=extractListOfUnitsInvolved(action.params)
-  end
-  return action2
-end
-
--------------------------------------
 -- Add an action to the stack, in a sorted manner
 -- The action is insert according its delay
 -- At the beginning of table if the quickest action to be applied
 -- At the end if the action with the biggest delay
 -------------------------------------
-function AddActionInStack(action, delayFrame)
+function AddActionInStack(action, delayFrame, currentFrameNumber)
   local element={}
   element["delay"]=delayFrame
-  element["action"]=replaceDynamicUnitSet(action)
+  -- We make a copy of this action in order to stack this copy and not the original action (useful for
+  -- recursive events that will trigger again its actions)
+  local action2 = deepcopy(action)
+  -- We store in this copy units that satisfied the event (we can't process action depending on an other action because the group does not exist when event is executed)
+  if(action.params.unitset~=nil)and(action.params.type~="action")then
+	-- We store units that are concerned by this action. In case of concerned units depend on a condition, we pass the frameNumber in order to get only units that verified the condition at this time 
+    action2.params["units_extracted"]=extractListOfUnitsInvolved(action.params, nil, currentFrameNumber)
+  end
+  element["action"]=action2
   for index,el in pairs(ctx.actionStack) do
-    local del=el.delay
-    local act=el.actId
-    if(del>delayFrame) then
+    if(el.delay>delayFrame) then
       table.insert(ctx.actionStack,index,element)
       return
     end
@@ -968,11 +967,15 @@ end
 -- and removed from the stack
 -------------------------------------
 local function applyCurrentActions()
-  for index,el in pairs(ctx.actionStack) do
+  local i = 1
+  while i <= table.getn(ctx.actionStack) do
+	local el = ctx.actionStack[i]
     if(el.delay<0)then
-      ApplyAction(el.action, nil)
-      table.remove(ctx.actionStack,index)
+      ApplyAction(el.action)
+      table.remove(ctx.actionStack,i)
+	  i = i - 1
     end
+	i = i + 1
   end
 end 
 
@@ -1068,7 +1071,6 @@ local function processEvents(frameNumber)
         --EchoDebug("try to apply the event with the following actions: "..json.encode(event.actions, { indent = true }),7)
 		local creationOfNewEvent=false
         for j=1,table.getn(event.actions) do
-          frameDelay=frameDelay+1
           local a=event.actions[j]
           if(a.type=="wait")then
             frameDelay=frameDelay+secondesToFrames(computeReference(a.params.time)) 
@@ -1102,7 +1104,7 @@ local function processEvents(frameNumber)
           else
 			-- if no creation of new event we can stack on the action, if creation of new event (means a previous action of the current event was waitCondition or waitTrigger) we add this action to the new event that will be evaluate again later and we don't stack on this action now
             if creationOfNewEvent==false then
-              AddActionInStack(a,frameDelay)
+              AddActionInStack(a,frameDelay,frameNumber)
             else
               table.insert(newevent["actions"],a)
             end
@@ -1119,6 +1121,15 @@ local function processEvents(frameNumber)
 			table.insert(toBeRemoved, idEvent)
 		end
       end
+	else
+		-- Clean condition groups that will be never used due to trigger fail
+		-- Condition groups are set into "UpdateConditionsTruthfulness" function
+		for c,condName in pairs(event.listOfInvolvedConditions) do
+			local cond=ctx.conditions[condName.."_"..tostring(event.id)]
+			local groupCondName = "condition_"..cond.id.."_"..frameNumber
+			ctx.getAvailableLocalUnitIdsFromLocalGroupId[groupCondName]=nil
+			ctx.getAllLocalUnitIdsFromLocalGroupId[groupCondName]=nil
+		end
     end
   end
   -- remove events
@@ -1170,15 +1181,6 @@ local function UpdateGroups()
 end
 
 -------------------------------------
--- wrapper for two main functions related to
--- the main operations on the game
--------------------------------------
-local function  UpdateGameState(frameNumber)
-  watchHeal(frameNumber)
-  processEvents(frameNumber) 
-end
-
--------------------------------------
 -- Get the action of the unit
 -- Actions are in a queue list available by GetCommandQueue
 -------------------------------------
@@ -1200,10 +1202,10 @@ end
 
 -------------------------------------
 -- Determine if an unit satisfies a condition
--- Two modes are possible depending on the mode of comparison (at least, at most ...)
+-- Two modes are possible depending on the mode of comparison (atleast, atmost ...)
 -- Return boolean
 -------------------------------------
-local function UpdateConditionOnUnit (externalUnitId,c)--for the moment only single unit
+local function CheckConditionOnUnit (externalUnitId,c)--for the moment only single unit
   local internalUnitId=ctx.getSpringIdFromLocalUnitId[externalUnitId]
   if(c.type=="dead") then --untested yet
     --EchoDebug("is it dead ?", 7)
@@ -1264,8 +1266,8 @@ local function UpdateConditionsTruthfulness (frameNumber)
   for idCond,c in pairs(ctx.conditions) do
     local object=c["object"]
 	
-    if(object=="group")then  
-      --local tl={[1]={"team","team"},[2]={"unitType","type"},[3]={"group","group"}}
+    if(object=="group")then
+	  -- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
       local externalUnitList=extractListOfUnitsInvolved(c.params)
       --EchoDebug(json.encode(externalUnitList),6)
       local count=0
@@ -1274,8 +1276,10 @@ local function UpdateConditionsTruthfulness (frameNumber)
         total=table.getn(externalUnitList)
         --EchoDebug(json.encode(externalUnitList), 7)
         for u,unit in ipairs(externalUnitList) do
-          if(UpdateConditionOnUnit(unit,c)) then
-            addUnitToGroups(unit,{"condition_"..c.id}) 
+          if(CheckConditionOnUnit(unit,c)) then
+			-- We make a group to store units satisfying this condition at the current frame
+			-- This group will be used if the event triggers and an action of this event use this condition in its unitset (see frameNumber parameter from "extractListOfUnitsInvolved" call in "AddActionInStack" function)
+            addUnitToGroups(unit,{"condition_"..c.id.."_"..frameNumber}) 
             count=count+1
           end 
         end
@@ -1287,6 +1291,7 @@ local function UpdateConditionsTruthfulness (frameNumber)
       --EchoDebug("Condkills->"..json.encode(c.params),2)
       --EchoDebug("kills->"..json.encode(ctx.kills),2)
       local count=0
+	  -- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
 	  local unitsImpliedByCondition = extractListOfUnitsInvolved(c.params,ctx.getAllLocalUnitIdsFromLocalGroupId)
 	  --EchoDebug("unitsImpliedByCondition: "..json.encode(unitsImpliedByCondition),2)
 	  local total=0
@@ -1401,7 +1406,8 @@ local function parseJson(jsonString)
     ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
 	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true,["PP Restart Manager"]=true
-  } -- remove <<["Hide commands"]=true>> managed by mouse activation
+	,["Hide commands"]=false
+  }
   
   for i=1, table.getn(ctx.mission.description.widgets) do
     local widgetName=ctx.mission.description.widgets[i].name
@@ -1507,15 +1513,15 @@ end
   ctx.messages["briefing"]=ctx.mission.description.briefing
   --EchoDebug(ctx.messages["briefing"], 7)
    if(ctx.mission.description.mouse=="disabled") then
-    SendToUnsynced("mouseDisabled", true)
+    SendToUnsynced("mouseDisabled")
    else
-	SendToUnsynced("mouseEnabled", true)
+	SendToUnsynced("mouseEnabled")
    end
   
   if(ctx.mission.description.cameraAuto=="enabled") then
     _G.cameraAuto = {
       enable = true,
-      specialPositions = specialPositionTables --TODO: minimap and special position géree dans les zones
+      specialPositions = specialPositionTables
     }
     SendToUnsynced("enableCameraAuto")
     _G.cameraAuto = nil
@@ -1615,8 +1621,9 @@ local function Update (frameNumber)
   ctx.gameOver = {}
   -- loop all conditions and evaluate them
   UpdateConditionsTruthfulness(frameNumber) 
-  -- loop all events and add actions in stack if the trigger return true (use validity of condition updated in previous "UpdateConditionsTruthfulness" call
-  UpdateGameState(frameNumber)
+  watchHeal(frameNumber)
+  -- loop all events and add actions in stack if the trigger return true (use validity of condition updated in previous "UpdateConditionsTruthfulness" calls)
+  processEvents(frameNumber)
   ctx.actionStack=updateStack(1)--update the stack with one frame (all the delays are decremented)
   applyCurrentActions() 
   if(frameNumber>32)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
@@ -1711,7 +1718,7 @@ missionScript.Stop = Stop
 missionScript.ApplyAction = ApplyAction
 missionScript.RecvLuaMsg = RecvLuaMsg
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.UpdateConditionOnUnit=UpdateConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.parseJson=parseJson ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.makeOperation=makeOperation ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.getFactionCode=getFactionCode ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyCurrentActions=applyCurrentActions ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionsTruthfulness=UpdateConditionsTruthfulness ; ctx.parseJson=parseJson ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
 ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math
 
 return missionScript
