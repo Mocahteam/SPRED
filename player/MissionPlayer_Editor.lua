@@ -802,7 +802,11 @@ local function isTriggerable(event, frameNumber)
   local executableStatement="return("..trigger..")"
    -- step 5: loadstring is used to create the function.
   local f = loadstring(executableStatement)
-  return(f())
+  if f == nil then
+	return false
+  else
+	return(f())
+  end
 end
 
 -------------------------------------
