@@ -21,7 +21,6 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local lang = Spring.GetModOptions()["language"] -- get the language
 local hideMenu = Spring.GetModOptions()["hidemenu"] -- know if menu is hidden
 local createUnit = false
 local unitType, team = "bit", 0

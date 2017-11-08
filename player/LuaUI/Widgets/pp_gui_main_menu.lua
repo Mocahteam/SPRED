@@ -26,7 +26,7 @@ end
 
 VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil) 
 
-local lang = Spring.GetModOptions()["language"] -- get the language
+local lang = Spring.GetModOptions()["language"] or "en" -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
