@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <games xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd">
-<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-03-12T09:58:29+01:00">
+<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-10-31T15:56:14+01:00">
 <title>SPRED</title>
 <description>Game made with SPRED for Kernel Panic 4.1</description>
 <activities>
 <activity id_activity="DigitalWar_M01">
-<name>DigitalWar_M01</name>
+<name>DigitalWar M01</name>
 <input_states>
 <input_state id_input="DigitalWar_M01||1"/>
 <input_state id_input="DigitalWar_M01||2"/>
@@ -16,7 +16,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M02">
-<name>DigitalWar_M02</name>
+<name>DigitalWar M02</name>
 <input_states>
 <input_state id_input="DigitalWar_M02||1"/>
 <input_state id_input="DigitalWar_M02||2"/>
@@ -27,7 +27,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M03">
-<name>DigitalWar_M03</name>
+<name>DigitalWar M03</name>
 <input_states>
 <input_state id_input="DigitalWar_M03||1"/>
 <input_state id_input="DigitalWar_M03||2"/>
@@ -38,7 +38,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M04">
-<name>DigitalWar_M04</name>
+<name>DigitalWar M04</name>
 <input_states>
 <input_state id_input="DigitalWar_M04||1"/>
 <input_state id_input="DigitalWar_M04||2"/>
@@ -49,7 +49,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M05">
-<name>DigitalWar_M05</name>
+<name>DigitalWar M05</name>
 <input_states>
 <input_state id_input="DigitalWar_M05||1"/>
 <input_state id_input="DigitalWar_M05||2"/>
@@ -60,7 +60,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M06">
-<name>DigitalWar_M06</name>
+<name>DigitalWar M06</name>
 <input_states>
 <input_state id_input="DigitalWar_M06||1"/>
 <input_state id_input="DigitalWar_M06||2"/>
@@ -71,7 +71,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M07">
-<name>DigitalWar_M07</name>
+<name>DigitalWar M07</name>
 <input_states>
 <input_state id_input="DigitalWar_M07||1"/>
 <input_state id_input="DigitalWar_M07||2"/>
@@ -82,7 +82,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M08">
-<name>DigitalWar_M08</name>
+<name>DigitalWar M08</name>
 <input_states>
 <input_state id_input="DigitalWar_M08||1"/>
 <input_state id_input="DigitalWar_M08||2"/>
@@ -93,7 +93,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M09">
-<name>DigitalWar_M09</name>
+<name>DigitalWar M09</name>
 <input_states>
 <input_state id_input="DigitalWar_M09||1"/>
 <input_state id_input="DigitalWar_M09||2"/>
@@ -104,7 +104,7 @@
 </output_states>
 </activity>
 <activity id_activity="DigitalWar_M10">
-<name>DigitalWar_M10</name>
+<name>DigitalWar M10</name>
 <input_states>
 <input_state id_input="DigitalWar_M10||1"/>
 <input_state id_input="DigitalWar_M10||2"/>
@@ -114,46 +114,33 @@
 <output_state id_output="DigitalWar_M10||lost"/>
 </output_states>
 </activity>
-<activity id_activity="Tutoriel">
-<name>Tutoriel</name>
-<input_states>
-<input_state id_input="Tutoriel||1"/>
-<input_state id_input="Tutoriel||2"/>
-</input_states>
-<output_states>
-<output_state id_output="Tutoriel||won"/>
-<output_state id_output="Tutoriel||lost"/>
-</output_states>
-</activity>
 </activities>
 <link_sets>
-<link_set publication_date="2017-03-12T09:58:29+01:00" status="prepa" default="oui" id_link_set="302">
+<link_set publication_date="2017-10-31T15:56:14+01:00" status="prepa" default="oui" id_link_set="302">
 <title>KP Campaign: Digital War 3</title>
 <description>Scenario for this game</description>
 <links>
-<output_input_link id_output="DigitalWar_M02||lost" id_input="DigitalWar_M02||1"/>
-<output_input_link id_output="DigitalWar_M02||won" id_input="DigitalWar_M03||1"/>
 <output_input_link id_output="DigitalWar_M01||lost" id_input="DigitalWar_M01||1"/>
-<output_input_link id_output="DigitalWar_M01||won" id_input="DigitalWar_M02||2"/>
+<output_input_link id_output="DigitalWar_M01||won" id_input="DigitalWar_M02||1"/>
 <output_input_link id_output="DigitalWar_M05||lost" id_input="DigitalWar_M05||1"/>
 <output_input_link id_output="DigitalWar_M05||won" id_input="DigitalWar_M06||1"/>
+<output_input_link id_output="DigitalWar_M03||lost" id_input="DigitalWar_M03||1"/>
+<output_input_link id_output="DigitalWar_M03||won" id_input="DigitalWar_M04||1"/>
 <output_input_link id_output="DigitalWar_M10||lost" id_input="DigitalWar_M10||1"/>
 <output_input_link id_output="DigitalWar_M10||won" id_input="end"/>
-<output_input_link id_output="Tutoriel||lost" id_input="Tutoriel||1"/>
-<output_input_link id_output="Tutoriel||won" id_input="DigitalWar_M01||2"/>
-<output_input_link id_output="DigitalWar_M07||lost" id_input="DigitalWar_M07||1"/>
-<output_input_link id_output="DigitalWar_M07||won" id_input="DigitalWar_M08||1"/>
+<output_input_link id_output="DigitalWar_M06||lost" id_input="DigitalWar_M06||2"/>
+<output_input_link id_output="DigitalWar_M06||won" id_input="DigitalWar_M07||1"/>
 <output_input_link id_output="DigitalWar_M09||lost" id_input="DigitalWar_M09||1"/>
 <output_input_link id_output="DigitalWar_M09||won" id_input="DigitalWar_M10||2"/>
-<output_input_link id_output="DigitalWar_M04||lost" id_input="DigitalWar_M04||1"/>
-<output_input_link id_output="DigitalWar_M04||won" id_input="DigitalWar_M05||2"/>
-<output_input_link id_output="DigitalWar_M08||lost" id_input="DigitalWar_M08||2"/>
+<output_input_link id_output="DigitalWar_M08||lost" id_input="DigitalWar_M08||1"/>
 <output_input_link id_output="DigitalWar_M08||won" id_input="DigitalWar_M09||2"/>
-<output_input_link id_output="DigitalWar_M06||lost" id_input="DigitalWar_M06||2"/>
-<output_input_link id_output="DigitalWar_M06||won" id_input="DigitalWar_M07||2"/>
-<output_input_link id_output="start" id_input="Tutoriel||2"/>
-<output_input_link id_output="DigitalWar_M03||lost" id_input="DigitalWar_M03||2"/>
-<output_input_link id_output="DigitalWar_M03||won" id_input="DigitalWar_M04||2"/>
+<output_input_link id_output="start" id_input="DigitalWar_M01||2"/>
+<output_input_link id_output="DigitalWar_M04||lost" id_input="DigitalWar_M04||2"/>
+<output_input_link id_output="DigitalWar_M04||won" id_input="DigitalWar_M05||2"/>
+<output_input_link id_output="DigitalWar_M07||lost" id_input="DigitalWar_M07||2"/>
+<output_input_link id_output="DigitalWar_M07||won" id_input="DigitalWar_M08||2"/>
+<output_input_link id_output="DigitalWar_M02||lost" id_input="DigitalWar_M02||2"/>
+<output_input_link id_output="DigitalWar_M02||won" id_input="DigitalWar_M03||2"/>
 </links>
 </link_set>
 </link_sets>

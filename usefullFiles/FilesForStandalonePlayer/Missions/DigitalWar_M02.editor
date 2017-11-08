@@ -1,51 +1,51 @@
 {
 	"zones":[{
 			"a":48,
-			"type":"Disk",
+			"alwaysInView":true,
 			"blue":0.49571073055267,
 			"b":56,
-			"marker":false,
-			"showInGame":true,
 			"id":1,
+			"showInGame":true,
+			"inGameText":"[en]    Hint 1\\n(1972, 1364)[en][fr]   Indice 1\\n(1972, 1364)[fr]",
+			"type":"Disk",
 			"x":1976,
 			"name":"Hint 1",
-			"inGameText":"[en]    Hint 1\\n(1972, 1364)[en][fr]   Indice 1\\n(1972, 1364)[fr]",
 			"green":0.36359941959381,
-			"z":1360,
 			"shown":true,
-			"alwaysInView":true,
+			"z":1360,
+			"marker":false,
 			"red":0.21988868713379
 		},{
 			"a":56,
-			"type":"Disk",
+			"alwaysInView":true,
 			"blue":0.11101806163788,
 			"b":48,
-			"marker":false,
-			"showInGame":true,
 			"id":2,
+			"showInGame":true,
+			"inGameText":"[en]    Hint 2\\n(1724, 1468)[en][fr]   Indice 2\\n(1724, 1468)[fr]",
+			"type":"Disk",
 			"x":1728,
 			"name":"Hint 2",
-			"inGameText":"[en]    Hint 2\\n(1724, 1468)[en][fr]   Indice 2\\n(1724, 1468)[fr]",
 			"green":0.42086434364319,
-			"z":1464,
 			"shown":true,
-			"alwaysInView":true,
+			"z":1464,
+			"marker":false,
 			"red":0.58732402324677
 		},{
 			"a":48,
-			"type":"Disk",
+			"alwaysInView":true,
 			"blue":0.20089828968048,
 			"b":40,
-			"marker":false,
-			"showInGame":true,
 			"id":3,
+			"showInGame":true,
+			"inGameText":"[en]    Hint 3\\n(1812, 1692)[en][fr]   Indice 3\\n(1812, 1692)[fr]",
+			"type":"Disk",
 			"x":1816,
 			"name":"Hint 3",
-			"inGameText":"[en]    Hint 3\\n(1812, 1692)[en][fr]   Indice 3\\n(1812, 1692)[fr]",
 			"green":0.25012469291687,
-			"z":1696,
 			"shown":true,
-			"alwaysInView":true,
+			"z":1696,
+			"marker":false,
 			"red":0.32148456573486
 		}],
 	"description":{
@@ -68,6 +68,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -84,8 +88,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -96,16 +100,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -116,12 +120,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -130,10 +138,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -152,16 +156,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -176,32 +176,28 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M02",
 		"name":"DigitalWar M02",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["1","2"],
+		"traces":[],
 		"briefing":"[en]Mission 2\n \nThe report you received was right, but the BYTE has been moving and is no longer at the rallying point. You detect some tracks at positions (1972, 1364), (1724, 1468) and (1812, 1692).\n \nMove to these positions in order to look for hints. We may be able to figure out the current position of this potential ally.\n \nÿ‰‰‰Press Escape to continue. ÿÿÿÿ[en][fr]Mission 2\n \nLe rapport que vous aviez reçu était correct, mais le BYTE ne se trouve plus au point de ralliement prévu. Vous percevez des traces de son passage aux positions (1972, 1364), (1724, 1468) et (1812, 1692).\n \nDéplacez-vous sur ces trois positions dans cet ordre pour mieux inspecter ces indices. Nous pourrons peut-être en déduire où se trouve désormais cet allié potentiel.\n \nÿ‰‰‰Appuyez sur Echap pour continuer. ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",
-			"id":15994,
+			"id":2768,
 			"position":{
 				"y":116,
 				"x":1980,
@@ -371,7 +367,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"zone":1
@@ -399,7 +395,7 @@
 					"params":{
 						"message":["Ok..."],
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"time":"3"
@@ -422,7 +418,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"zone":2
@@ -457,7 +453,7 @@
 					"params":{
 						"message":["[en]He went through there.[en][fr]Il est bien passé par là.[fr]"],
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"time":"3"
@@ -481,7 +477,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"zone":3
@@ -515,7 +511,7 @@
 					"params":{
 						"message":["[en]I am on the right track.[en][fr]Je suis sur la bonne piste.[fr]"],
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"time":"3"
@@ -585,7 +581,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"zone":2
@@ -600,7 +596,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						},
 						"zone":3
@@ -621,7 +617,7 @@
 						"message":["[en]Mmmmh... It does not make sens, I should oberve hints in order...[en][fr]Mmmmh... celà n'a pas de sens, peut être devrais-je observer les indices dans l'ordre...[fr]"],
 						"time":"6",
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						}
 					}
@@ -643,7 +639,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":15994,
+							"value":2768,
 							"type":"unit"
 						}
 					}

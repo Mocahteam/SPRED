@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <games xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://seriousgames.lip6.fr/appliq/MoPPLiq_XML_v0.3.xsd">
-<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-03-12T09:59:09+01:00">
+<game status="prepa" id_game="76" activity_prefix="true" publication_date="2017-10-31T15:57:26+01:00">
 <title>SPRED</title>
 <description>Game made with SPRED for Kernel Panic 4.1</description>
 <activities>
 <activity id_activity="SiliCiumAlliance_M01">
-<name>SiliCiumAlliance_M01</name>
+<name>SiliCiumAlliance M01</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M01||1"/>
 <input_state id_input="SiliCiumAlliance_M01||2"/>
@@ -16,7 +16,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M02">
-<name>SiliCiumAlliance_M02</name>
+<name>SiliCiumAlliance M02</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M02||1"/>
 <input_state id_input="SiliCiumAlliance_M02||2"/>
@@ -27,7 +27,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M03">
-<name>SiliCiumAlliance_M03</name>
+<name>SiliCiumAlliance M03</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M03||1"/>
 <input_state id_input="SiliCiumAlliance_M03||2"/>
@@ -38,7 +38,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M04">
-<name>SiliCiumAlliance_M04</name>
+<name>SiliCiumAlliance M04</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M04||1"/>
 <input_state id_input="SiliCiumAlliance_M04||2"/>
@@ -49,7 +49,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M05">
-<name>SiliCiumAlliance_M05</name>
+<name>SiliCiumAlliance M05</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M05||1"/>
 <input_state id_input="SiliCiumAlliance_M05||2"/>
@@ -60,7 +60,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M06">
-<name>SiliCiumAlliance_M06</name>
+<name>SiliCiumAlliance M06</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M06||1"/>
 <input_state id_input="SiliCiumAlliance_M06||2"/>
@@ -71,7 +71,7 @@
 </output_states>
 </activity>
 <activity id_activity="SiliCiumAlliance_M07">
-<name>SiliCiumAlliance_M07</name>
+<name>SiliCiumAlliance M07</name>
 <input_states>
 <input_state id_input="SiliCiumAlliance_M07||1"/>
 <input_state id_input="SiliCiumAlliance_M07||2"/>
@@ -83,25 +83,25 @@
 </activity>
 </activities>
 <link_sets>
-<link_set publication_date="2017-03-12T09:59:09+01:00" status="prepa" default="oui" id_link_set="302">
+<link_set publication_date="2017-10-31T15:57:26+01:00" status="prepa" default="oui" id_link_set="302">
 <title>KP Campaign: Sili-Cium Alliance</title>
 <description>Scenario for this game</description>
 <links>
-<output_input_link id_output="SiliCiumAlliance_M05||lost" id_input="SiliCiumAlliance_M05||1"/>
-<output_input_link id_output="SiliCiumAlliance_M05||won" id_input="SiliCiumAlliance_M06||1"/>
 <output_input_link id_output="SiliCiumAlliance_M07||lost" id_input="SiliCiumAlliance_M07||1"/>
 <output_input_link id_output="SiliCiumAlliance_M07||won" id_input="end"/>
-<output_input_link id_output="SiliCiumAlliance_M03||lost" id_input="SiliCiumAlliance_M03||1"/>
-<output_input_link id_output="SiliCiumAlliance_M03||won" id_input="SiliCiumAlliance_M04||1"/>
-<output_input_link id_output="SiliCiumAlliance_M06||lost" id_input="SiliCiumAlliance_M06||2"/>
-<output_input_link id_output="SiliCiumAlliance_M06||won" id_input="SiliCiumAlliance_M07||2"/>
-<output_input_link id_output="SiliCiumAlliance_M04||won" id_input="SiliCiumAlliance_M05||2"/>
-<output_input_link id_output="SiliCiumAlliance_M04||lost" id_input="SiliCiumAlliance_M04||2"/>
-<output_input_link id_output="start" id_input="SiliCiumAlliance_M01||1"/>
 <output_input_link id_output="SiliCiumAlliance_M02||lost" id_input="SiliCiumAlliance_M02||1"/>
-<output_input_link id_output="SiliCiumAlliance_M02||won" id_input="SiliCiumAlliance_M03||2"/>
-<output_input_link id_output="SiliCiumAlliance_M01||lost" id_input="SiliCiumAlliance_M01||2"/>
+<output_input_link id_output="SiliCiumAlliance_M02||won" id_input="SiliCiumAlliance_M03||1"/>
+<output_input_link id_output="SiliCiumAlliance_M03||lost" id_input="SiliCiumAlliance_M03||2"/>
+<output_input_link id_output="SiliCiumAlliance_M03||won" id_input="SiliCiumAlliance_M04||1"/>
+<output_input_link id_output="SiliCiumAlliance_M01||lost" id_input="SiliCiumAlliance_M01||1"/>
 <output_input_link id_output="SiliCiumAlliance_M01||won" id_input="SiliCiumAlliance_M02||2"/>
+<output_input_link id_output="start" id_input="SiliCiumAlliance_M01||2"/>
+<output_input_link id_output="SiliCiumAlliance_M06||lost" id_input="SiliCiumAlliance_M06||1"/>
+<output_input_link id_output="SiliCiumAlliance_M06||won" id_input="SiliCiumAlliance_M07||2"/>
+<output_input_link id_output="SiliCiumAlliance_M05||lost" id_input="SiliCiumAlliance_M05||1"/>
+<output_input_link id_output="SiliCiumAlliance_M05||won" id_input="SiliCiumAlliance_M06||2"/>
+<output_input_link id_output="SiliCiumAlliance_M04||lost" id_input="SiliCiumAlliance_M04||2"/>
+<output_input_link id_output="SiliCiumAlliance_M04||won" id_input="SiliCiumAlliance_M05||2"/>
 </links>
 </link_set>
 </link_sets>

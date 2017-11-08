@@ -2,98 +2,98 @@
 	"zones":[{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":2024,
 			"z1":368,
 			"z2":536,
 			"x1":1848,
-			"showInGame":true,
-			"id":1,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 1",
-			"inGameText":"[en]Occupied zone 1[en][fr]Zone occupée 1[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 1[en][fr]Zone occupée 1[fr]",
+			"id":1,
 			"red":0
 		},{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":1432,
 			"z1":1224,
 			"z2":1360,
 			"x1":1296,
-			"showInGame":true,
-			"id":2,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 2",
-			"inGameText":"[en]Occupied zone 2[en][fr]Zone occupée 2[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 2[en][fr]Zone occupée 2[fr]",
+			"id":2,
 			"red":0
 		},{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":1728,
 			"z1":1736,
 			"z2":1888,
 			"x1":1568,
-			"showInGame":true,
-			"id":3,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 3",
-			"inGameText":"[en]Occupied zone 3[en][fr]Zone occupée 3[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 3[en][fr]Zone occupée 3[fr]",
+			"id":3,
 			"red":0
 		},{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":424,
 			"z1":1648,
 			"z2":1832,
 			"x1":232,
-			"showInGame":true,
-			"id":4,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 4",
-			"inGameText":"[en]Occupied zone 4[en][fr]Zone occupée 4[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 4[en][fr]Zone occupée 4[fr]",
+			"id":4,
 			"red":0
 		},{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":472,
 			"z1":672,
 			"z2":856,
 			"x1":280,
-			"showInGame":true,
-			"id":5,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 5",
-			"inGameText":"[en]Occupied zone 5[en][fr]Zone occupée 5[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 5[en][fr]Zone occupée 5[fr]",
+			"id":5,
 			"red":0
 		},{
 			"type":"Rectangle",
 			"blue":1,
+			"showInGame":true,
 			"x2":1032,
 			"z1":728,
 			"z2":904,
 			"x1":856,
-			"showInGame":true,
-			"id":6,
+			"marker":false,
+			"alwaysInView":true,
 			"name":"Zone 6",
-			"inGameText":"[en]Occupied zone 6[en][fr]Zone occupée 6[fr]",
 			"green":0,
 			"shown":true,
-			"alwaysInView":true,
-			"marker":false,
+			"inGameText":"[en]Occupied zone 6[en][fr]Zone occupée 6[fr]",
+			"id":6,
 			"red":0
 		}],
 	"description":{
@@ -116,6 +116,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -132,8 +136,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -144,16 +148,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -164,12 +168,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -178,10 +186,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -200,16 +204,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -224,20 +224,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"SiliCiumAlliance_M07",
@@ -249,7 +245,7 @@
 	},
 	"units":[{
 			"type":"bit",
-			"id":14032,
+			"id":9011,
 			"position":{
 				"y":150.30099487305,
 				"x":2812.3537597656,
@@ -261,7 +257,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":124,
+			"id":8532,
 			"position":{
 				"y":160.68121337891,
 				"x":2862.9270019531,
@@ -273,55 +269,55 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":11461,
+			"id":15353,
 			"position":{
 				"y":170.74104309082,
 				"x":2925.7583007813,
 				"z":1416.1798095703
 			},
-			"orientation":-0.39767184853554,
+			"orientation":-0.39912405610085,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15340,
+			"id":1758,
 			"position":{
 				"y":175.11929321289,
 				"x":2926.5290527344,
 				"z":1460.3687744141
 			},
-			"orientation":-0.58660233020782,
+			"orientation":-0.59099942445755,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":7784,
+			"id":4332,
 			"position":{
 				"y":168.06340026855,
 				"x":2998.4523925781,
 				"z":1400.4364013672
 			},
-			"orientation":0.073862202465534,
+			"orientation":0.07538852840662,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11437,
+			"id":14322,
 			"position":{
 				"y":163.44189453125,
 				"x":2921.9187011719,
 				"z":1335.7946777344
 			},
-			"orientation":0.74097806215286,
+			"orientation":0.74392426013947,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3849,
+			"id":12589,
 			"position":{
 				"y":155.78471374512,
 				"x":2882.6662597656,
@@ -333,31 +329,31 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":4021,
+			"id":354,
 			"position":{
 				"y":149.31391906738,
 				"x":2838.5788574219,
 				"z":1359.6585693359
 			},
-			"orientation":0.59859001636505,
+			"orientation":0.60000890493393,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":3238,
+			"id":3183,
 			"position":{
 				"y":197.60328674316,
 				"x":2892.5454101563,
 				"z":1152.7113037109
 			},
-			"orientation":0.28525957465172,
+			"orientation":0.29613763093948,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1778,
+			"id":13151,
 			"position":{
 				"y":196.26533508301,
 				"x":2951.7026367188,
@@ -369,7 +365,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":10492,
+			"id":10417,
 			"position":{
 				"y":205.68885803223,
 				"x":2874.1315917969,
@@ -381,67 +377,67 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":15883,
+			"id":3925,
 			"position":{
 				"y":209.4893951416,
 				"x":2809.6594238281,
 				"z":1117.6871337891
 			},
-			"orientation":0.10281435400248,
+			"orientation":0.10127203911543,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":14483,
+			"id":1667,
 			"position":{
 				"y":212.27005004883,
 				"x":2819.0341796875,
 				"z":1065.1147460938
 			},
-			"orientation":-0.1426265835762,
+			"orientation":-0.14414618909359,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15849,
+			"id":4745,
 			"position":{
 				"y":206.7281036377,
 				"x":2868.8356933594,
 				"z":1022.8203125
 			},
-			"orientation":-0.49478515982628,
+			"orientation":-0.50999820232391,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":4176,
+			"id":3063,
 			"position":{
 				"y":98.585502624512,
 				"x":3820,
 				"z":1198
 			},
-			"orientation":0.73818504810333,
+			"orientation":0.73966062068939,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":7578,
+			"id":16394,
 			"position":{
 				"y":100.30937194824,
 				"x":3834,
 				"z":1124
 			},
-			"orientation":0.6520369052887,
+			"orientation":0.66109299659729,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13755,
+			"id":12251,
 			"position":{
 				"y":101.8558807373,
 				"x":3779,
@@ -453,7 +449,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":9099,
+			"id":12763,
 			"position":{
 				"y":142.52961730957,
 				"x":3435,
@@ -465,7 +461,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":10534,
+			"id":14903,
 			"position":{
 				"y":147.23577880859,
 				"x":3392,
@@ -477,31 +473,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":16439,
+			"id":11978,
 			"position":{
 				"y":146.10781860352,
 				"x":3414,
 				"z":942
 			},
-			"orientation":0.37942150235176,
+			"orientation":0.38089165091515,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":5913,
+			"id":12341,
 			"position":{
 				"y":137.77795410156,
 				"x":3471,
 				"z":951
 			},
-			"orientation":-0.93479466438293,
+			"orientation":-0.93774861097336,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":6176,
+			"id":15,
 			"position":{
 				"y":204.05380249023,
 				"x":3211,
@@ -513,7 +509,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":11760,
+			"id":299,
 			"position":{
 				"y":198.62272644043,
 				"x":3043,
@@ -525,7 +521,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":15335,
+			"id":8929,
 			"position":{
 				"y":237.75605773926,
 				"x":3052,
@@ -537,7 +533,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":1759,
+			"id":3828,
 			"position":{
 				"y":232.42492675781,
 				"x":2959,
@@ -549,19 +545,19 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":293,
+			"id":1980,
 			"position":{
 				"y":232.2191619873,
 				"x":3007,
 				"z":888
 			},
-			"orientation":-0.39829263091087,
+			"orientation":-0.40278375148773,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":3476,
+			"id":11593,
 			"position":{
 				"y":230.24145507813,
 				"x":3123,
@@ -573,19 +569,19 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":15940,
+			"id":16302,
 			"position":{
 				"y":172.15776062012,
 				"x":3095,
 				"z":1481
 			},
-			"orientation":0.38801270723343,
+			"orientation":0.39722907543182,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":966,
+			"id":4450,
 			"position":{
 				"y":210.81436157227,
 				"x":3556,
@@ -597,7 +593,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":13870,
+			"id":16179,
 			"position":{
 				"y":233.23593139648,
 				"x":3538,
@@ -609,7 +605,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":8511,
+			"id":6037,
 			"position":{
 				"y":238.2780456543,
 				"x":3633,
@@ -621,7 +617,7 @@
 			"team":1
 		},{
 			"type":"socket",
-			"id":15764,
+			"id":4480,
 			"position":{
 				"y":102.05388641357,
 				"x":3784,
@@ -633,7 +629,7 @@
 			"team":1
 		},{
 			"type":"socket",
-			"id":8163,
+			"id":6518,
 			"position":{
 				"y":142.2734375,
 				"x":3493,
@@ -645,7 +641,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":14411,
+			"id":1207,
 			"position":{
 				"y":160.53125,
 				"x":1970.0150146484,
@@ -657,7 +653,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11226,
+			"id":1932,
 			"position":{
 				"y":101.9140625,
 				"x":1630,
@@ -669,7 +665,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":7813,
+			"id":448,
 			"position":{
 				"y":101.9140625,
 				"x":1633,
@@ -681,7 +677,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6980,
+			"id":14080,
 			"position":{
 				"y":101.9140625,
 				"x":1688,
@@ -693,7 +689,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":342,
+			"id":13958,
 			"position":{
 				"y":130.7421875,
 				"x":981,
@@ -705,7 +701,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11590,
+			"id":10144,
 			"position":{
 				"y":133.09197998047,
 				"x":925,
@@ -717,7 +713,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12909,
+			"id":11172,
 			"position":{
 				"y":166.296875,
 				"x":328,
@@ -729,7 +725,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":10848,
+			"id":3533,
 			"position":{
 				"y":166.296875,
 				"x":330,
@@ -741,7 +737,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5683,
+			"id":11989,
 			"position":{
 				"y":166.296875,
 				"x":330,
@@ -753,7 +749,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1080,
+			"id":7579,
 			"position":{
 				"y":189.35562133789,
 				"x":404,
@@ -765,19 +761,19 @@
 			"team":2
 		},{
 			"type":"assembler",
-			"id":4965,
+			"id":11883,
 			"position":{
 				"y":121.7388381958,
 				"x":3563.4130859375,
 				"z":1034.9774169922
 			},
-			"orientation":-0.35558182001114,
+			"orientation":-0.35703015327454,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4459,
+			"id":2837,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
@@ -789,7 +785,7 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13762,
+			"id":2104,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -801,7 +797,7 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":10786,
+			"id":10890,
 			"position":{
 				"y":253.5625,
 				"x":3617,
@@ -813,19 +809,19 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":2661,
+			"id":2937,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-2.3086411952972,
+			"orientation":-2.3117091655731,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8354,
+			"id":3236,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -837,7 +833,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":7932,
+			"id":7367,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -849,7 +845,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":15810,
+			"id":11677,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -861,31 +857,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1401,
+			"id":7369,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.3255920410156,
+			"orientation":1.324098944664,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13515,
+			"id":8996,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.0338512659073,
+			"orientation":1.0324008464813,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":9576,
+			"id":6871,
 			"position":{
 				"y":166.51045227051,
 				"x":3034.5678710938,
@@ -897,7 +893,7 @@
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":582,
+			"id":1598,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -909,7 +905,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":14056,
+			"id":4749,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -921,7 +917,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":7349,
+			"id":6287,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -933,7 +929,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":11993,
+			"id":11970,
 			"position":{
 				"y":160.53125,
 				"x":1935.0150146484,
@@ -945,7 +941,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2808,
+			"id":1831,
 			"position":{
 				"y":160.53125,
 				"x":1904.0150146484,
@@ -957,7 +953,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12613,
+			"id":7712,
 			"position":{
 				"y":160.53125,
 				"x":1939.0150146484,
@@ -969,7 +965,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":8446,
+			"id":2417,
 			"position":{
 				"y":160.53125,
 				"x":1907.0150146484,
@@ -981,7 +977,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5990,
+			"id":5778,
 			"position":{
 				"y":160.53125,
 				"x":1944.9737548828,
@@ -993,7 +989,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13469,
+			"id":4632,
 			"position":{
 				"y":160.53125,
 				"x":1974,
@@ -1005,7 +1001,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2349,
+			"id":6198,
 			"position":{
 				"y":101.9140625,
 				"x":1650,
@@ -1017,7 +1013,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15888,
+			"id":9167,
 			"position":{
 				"y":101.9140625,
 				"x":1670,
@@ -1029,7 +1025,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9745,
+			"id":5476,
 			"position":{
 				"y":101.9140625,
 				"x":1613,
@@ -1041,7 +1037,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4984,
+			"id":12556,
 			"position":{
 				"y":101.9140625,
 				"x":1670,
@@ -1053,7 +1049,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9768,
+			"id":882,
 			"position":{
 				"y":149,
 				"x":1366,
@@ -1065,7 +1061,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":396,
+			"id":16190,
 			"position":{
 				"y":149,
 				"x":1402,
@@ -1077,7 +1073,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3296,
+			"id":15307,
 			"position":{
 				"y":149,
 				"x":1389,
@@ -1089,7 +1085,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12163,
+			"id":10403,
 			"position":{
 				"y":149,
 				"x":1348,
@@ -1101,7 +1097,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2566,
+			"id":16068,
 			"position":{
 				"y":149,
 				"x":1327,
@@ -1113,7 +1109,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":7238,
+			"id":8037,
 			"position":{
 				"y":130.7421875,
 				"x":908,
@@ -1125,7 +1121,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12591,
+			"id":4263,
 			"position":{
 				"y":130.7421875,
 				"x":945,
@@ -1137,7 +1133,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5323,
+			"id":15367,
 			"position":{
 				"y":130.7421875,
 				"x":941,
@@ -1149,7 +1145,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":14700,
+			"id":439,
 			"position":{
 				"y":131.76754760742,
 				"x":966,
@@ -1161,7 +1157,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9482,
+			"id":10337,
 			"position":{
 				"y":130.7421875,
 				"x":897,
@@ -1173,7 +1169,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13624,
+			"id":11944,
 			"position":{
 				"y":189.34790039063,
 				"x":409.09759521484,
@@ -1185,7 +1181,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5555,
+			"id":15317,
 			"position":{
 				"y":189.35562133789,
 				"x":372,
@@ -1197,7 +1193,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":2473,
+			"id":15819,
 			"position":{
 				"y":189.35562133789,
 				"x":375,
@@ -1209,7 +1205,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13986,
+			"id":9470,
 			"position":{
 				"y":189.35562133789,
 				"x":338,
@@ -1221,7 +1217,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6060,
+			"id":3245,
 			"position":{
 				"y":189.35562133789,
 				"x":335,
@@ -1233,7 +1229,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":8392,
+			"id":11854,
 			"position":{
 				"y":189.35562133789,
 				"x":371,
@@ -1245,7 +1241,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":14009,
+			"id":15661,
 			"position":{
 				"y":149,
 				"x":1347,
@@ -1257,7 +1253,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":10881,
+			"id":9197,
 			"position":{
 				"y":149,
 				"x":1385,
@@ -1269,7 +1265,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3604,
+			"id":15910,
 			"position":{
 				"y":166.3175201416,
 				"x":364,
@@ -1281,7 +1277,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9670,
+			"id":369,
 			"position":{
 				"y":166.296875,
 				"x":367,
@@ -1293,7 +1289,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9951,
+			"id":3770,
 			"position":{
 				"y":166.296875,
 				"x":296,
@@ -1305,7 +1301,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15819,
+			"id":14485,
 			"position":{
 				"y":166.296875,
 				"x":295,
@@ -1331,27 +1327,27 @@
 	"groups":[{
 			"id":1,
 			"name":"UnitsInZone1",
-			"units":[2808,5990,8446,11993,12613,13469,14411]
+			"units":[1207,1831,2417,4632,5778,7712,11970]
 		},{
 			"id":2,
 			"name":"UnitsInZone2",
-			"units":[396,2566,3296,9768,10881,12163,14009]
+			"units":[882,9197,10403,15307,15661,16068,16190]
 		},{
 			"id":3,
 			"name":"UnitsInZone3",
-			"units":[2349,4984,6980,7813,9745,11226,15888]
+			"units":[448,1932,5476,6198,9167,12556,14080]
 		},{
 			"id":4,
 			"name":"UnitsInZone4",
-			"units":[3604,5683,9670,9951,10848,12909,15819]
+			"units":[369,3533,3770,11172,11989,14485,15910]
 		},{
 			"id":5,
 			"name":"UnitsInZone5",
-			"units":[1080,2473,5555,6060,8392,13624,13986]
+			"units":[3245,7579,9470,11854,11944,15317,15819]
 		},{
 			"id":6,
 			"name":"UnitsInZone6",
-			"units":[342,5323,7238,9482,11590,12591,14700]
+			"units":[439,4263,8037,10144,10337,13958,15367]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
@@ -1796,7 +1792,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1812,7 +1808,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1839,7 +1835,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1855,7 +1851,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1882,7 +1878,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1898,7 +1894,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1925,7 +1921,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1941,7 +1937,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1968,7 +1964,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -1984,7 +1980,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -2011,7 +2007,7 @@
 							"type":"group"
 						},
 						"attacker":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}
@@ -2027,7 +2023,7 @@
 							"type":"group"
 						},
 						"target":{
-							"value":9576,
+							"value":6871,
 							"type":"unit"
 						}
 					}

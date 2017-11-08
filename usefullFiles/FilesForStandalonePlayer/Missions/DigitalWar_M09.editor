@@ -18,7 +18,7 @@
 	"description":{
 		"map":"Marble_Madness_Map",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 9\\n \\nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\\n \\n/#847A84#Press Escape to continue/[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n/#847A84#Appuyez sur ECHAP pour continuer/[fr]",
+		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -33,6 +33,10 @@
 			},{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
+				"active":false
+			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
 				"active":false
 			},{
 				"desc":"Show the mission title and briefing",
@@ -51,8 +55,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -63,16 +67,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -83,12 +87,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -97,10 +105,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -119,16 +123,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -143,20 +143,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M09",
@@ -164,47 +160,47 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 9\n \nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 9\n \nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
+		"briefing":""
 	},
 	"units":[{
 			"type":"byte",
-			"id":10344,
+			"id":11586,
 			"position":{
 				"y":130,
 				"x":165,
 				"z":1063
 			},
-			"orientation":2.7964470386505,
+			"orientation":2.7719032764435,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":6312,
+			"id":11154,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":-2.9160976409912,
+			"orientation":-2.9038257598877,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":308,
+			"id":12249,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.2917673587799,
+			"orientation":2.2933013439178,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11266,
+			"id":3177,
 			"position":{
 				"y":116,
 				"x":65,
@@ -216,19 +212,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":4289,
+			"id":9343,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":-2.4129519462585,
+			"orientation":-2.400680065155,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":701,
+			"id":3081,
 			"position":{
 				"y":116,
 				"x":425,
@@ -240,43 +236,43 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":1919,
+			"id":7333,
 			"position":{
 				"y":116,
 				"x":193,
 				"z":922
 			},
-			"orientation":2.463573217392,
+			"orientation":2.4344274997711,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":12595,
+			"id":11054,
 			"position":{
 				"y":116,
 				"x":228,
 				"z":1019
 			},
-			"orientation":2.9590489864349,
+			"orientation":2.9467771053314,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":1692,
+			"id":2760,
 			"position":{
 				"y":130,
 				"x":349,
 				"z":1060
 			},
-			"orientation":-2.5709519386292,
+			"orientation":-2.5218644142151,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1043,
+			"id":5599,
 			"position":{
 				"y":116,
 				"x":368,
@@ -288,7 +284,7 @@
 			"team":0
 		},{
 			"type":"assembler",
-			"id":11907,
+			"id":3086,
 			"position":{
 				"y":116,
 				"x":256,
@@ -485,7 +481,7 @@
 			"conditionTotal":1,
 			"name":"Defeat",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
 					"id":11,
 					"type":"dead",
@@ -502,6 +498,13 @@
 					}
 				}],
 			"actions":[{
+					"id":27,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"1"
+					}
+				},{
 					"id":5,
 					"type":"lose",
 					"name":"LoseGame",
@@ -517,7 +520,7 @@
 			"conditionTotal":1,
 			"name":"FirstWave",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":4,
 			"conditions":[{
 					"id":13,
 					"type":"start",
@@ -557,8 +560,51 @@
 						"boolean":"true",
 						"variable":"Wave1Launched"
 					}
+				},{
+					"id":23,
+					"type":"script",
+					"name":"UpdateBreifing",
+					"params":{
+						"script":"messages[\"briefing\"] = \"[en]Mission 9\\n \\nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n\\255\\100\\100\\100Appuyez sur ECHAP pour continuer[fr]\""
+					}
 				}],
 			"id":6
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"FirstFight",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":21,
+					"type":"underAttack",
+					"name":"AttackBegin",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"attacker":{
+							"value":0,
+							"type":"team"
+						}
+					}
+				}],
+			"actions":[{
+					"id":26,
+					"type":"messageGlobal",
+					"name":"ExplainAndPause",
+					"params":{
+						"boolean":"true",
+						"message":["[en]Mission 9\\n \\nWARNING!!! Your army has just been spotted by enemy scouts. We can't afford losing any unit if we want to prevail in the upcoming battle (asking BITS to retreat would be a good idea). Support BYTES with your ASSEMBLER in order to survive to the next three enemy waves.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 9\\n \\nATTENTION !!! Notre armée vient d'être repérée par des éclaireurs ennemis. Nous ne pouvons pas nous permettre de perdre la moindre unité en vue de la bataille à venir (faire battre les BIT en retraite serait une sage idée). Soutenez vos BYTES avec votre ASSEMBLEUR pour encaisser les trois vagues d'attaques.\\n \\n\\255\\100\\100\\100Appuyez sur ECHAP pour continuer[fr]"]
+					}
+				}],
+			"id":10
 		},{
 			"comment":"",
 			"trigger":"",
@@ -708,7 +754,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":11907,
+							"value":3086,
 							"type":"unit"
 						}
 					}

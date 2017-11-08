@@ -34,12 +34,12 @@
 			"type":"Disk",
 			"blue":0.13627111911774,
 			"b":32,
-			"marker":true,
+			"inGameText":"[en]West entrance[en][fr]Entrée Ouest[fr]",
 			"showInGame":false,
 			"id":6,
+			"marker":true,
 			"x":2904,
 			"name":"WestEntrance",
-			"inGameText":"[en]West entrance[en][fr]Entrée Ouest[fr]",
 			"green":0.67630434036255,
 			"z":1120,
 			"shown":true,
@@ -50,12 +50,12 @@
 			"type":"Disk",
 			"blue":0.53519535064697,
 			"b":40,
-			"marker":true,
+			"inGameText":"[en]Est entrance[en][fr]Entrée Est[fr]",
 			"showInGame":false,
 			"id":7,
+			"marker":true,
 			"x":4032,
 			"name":"EstEntrance",
-			"inGameText":"[en]Est entrance[en][fr]Entrée Est[fr]",
 			"green":0.7034924030304,
 			"z":1016,
 			"shown":true,
@@ -65,7 +65,7 @@
 	"description":{
 		"map":"Sili-CiumMap v1",
 		"cameraAuto":"enabled",
-		"briefingRaw":"[en]Mission 5\\n \\nScouts have left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER has followed the necessary training and is now able to compensate for the lack of units.\\n \\nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the East entrance.\\n \\n/#565656#Press Escape to continue/[en][fr]Mission 5\\n \\nLes éclaireurs sont partis en patrouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\\n \\nParticipez à la défense du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\\n \\n/#565656#Appuyez sur Echap pour continuer/[fr]",
+		"briefingRaw":"",
 		"autoHeal":"disabled",
 		"minimap":"disabled",
 		"feedback":"disabled",
@@ -80,6 +80,10 @@
 			},{
 				"desc":"Control the rest of your army while in Hero mode",
 				"name":"Heroes Right Click",
+				"active":false
+			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
 				"active":false
 			},{
 				"desc":"Show the mission title and briefing",
@@ -98,8 +102,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -110,16 +114,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -130,12 +134,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -144,10 +152,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -166,16 +170,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -190,20 +190,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"SiliCiumAlliance_M05",
@@ -211,11 +207,11 @@
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
 		"traces":[],
-		"briefing":"[en]Mission 5\n \nScouts have left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER has followed the necessary training and is now able to compensate for the lack of units.\n \nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the East entrance.\n \n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 5\n \nLes éclaireurs sont partis en patrouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\n \nParticipez à la défense du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
+		"briefing":""
 	},
 	"units":[{
 			"type":"assembler",
-			"id":8228,
+			"id":8615,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
@@ -227,19 +223,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13980,
+			"id":7876,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-0.84368944168091,
+			"orientation":-0.8375535607338,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":1394,
+			"id":1634,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -251,7 +247,7 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":12375,
+			"id":1244,
 			"position":{
 				"y":253.5625,
 				"x":3617,
@@ -263,19 +259,19 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":5180,
+			"id":6497,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.4773790836334,
+			"orientation":2.4528353214264,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":12145,
+			"id":4455,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -287,7 +283,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":15648,
+			"id":11347,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -299,7 +295,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":6388,
+			"id":2046,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -311,43 +307,43 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":3471,
+			"id":11046,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.3479900360107,
+			"orientation":1.3420171737671,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":12443,
+			"id":2932,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.0556026697159,
+			"orientation":1.0498030185699,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"pointer",
-			"id":12351,
+			"id":1308,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4147511720657,
+			"orientation":-1.4086196422577,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"logic_bomb",
-			"id":3688,
+			"id":14111,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -359,7 +355,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":9150,
+			"id":8807,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -371,7 +367,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":15705,
+			"id":12450,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -524,7 +520,7 @@
 			"conditionTotal":1,
 			"name":"Initialisation",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":3,
 			"conditions":[{
 					"id":13,
 					"type":"start",
@@ -550,18 +546,61 @@
 					"params":{
 						"command":45,
 						"unitset":{
-							"value":12351,
+							"value":1308,
 							"type":"unit"
 						},
 						"parameters":["0"]
+					}
+				},{
+					"id":58,
+					"type":"script",
+					"name":"SetBriefing",
+					"params":{
+						"script":"messages[\"briefing\"] = \"[en]Mission 5\\n \\nScouts have left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER has followed the necessary training and is now able to compensate for the lack of units.\\n \\nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the East entrance.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 5\\n \\nLes éclaireurs sont partis en patrouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\\n \\nParticipez à la défense du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
 					}
 				}],
 			"id":12
 		},{
 			"comment":"",
-			"id":11,
+			"trigger":"",
 			"conditionTotal":1,
-			"actionTotal":5,
+			"name":"FirstKill",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":22,
+					"type":"underAttack",
+					"name":"CheckAttack",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":2,
+							"type":"team"
+						},
+						"attacker":{
+							"value":1,
+							"type":"team"
+						}
+					}
+				}],
+			"actions":[{
+					"id":59,
+					"type":"messageGlobal",
+					"name":"ExplainAndPause",
+					"params":{
+						"boolean":"true",
+						"message":["[en]Mission 5\\n \\nScouts have left the outpost to patrol outside the camp and the community is now in a delicate situation. Fortunately your POINTER has followed the necessary training and is now able to compensate for the lack of units.\\n \\nAssist with outpost defence by destroying all enemies trying to enter by the West entrance. Your allies will take care of the East entrance.\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 5\\n \\nLes éclaireurs sont partis en patrouille de surveillance ce qui met la communauté dans une situation délicate. Heureusement votre POINTER a suivi la formation nécessaire et va pouvoir compenser le manque d'effectif.\\n \\nParticipez à la défense du camp en détruisant tous les ennemis s'approchant du périmètre par l'entrée Ouest. Vos alliés se chargent de l'entrée Est.\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]"]
+					}
+				}],
+			"id":20
+		},{
+			"comment":"",
+			"id":11,
+			"conditionTotal":2,
+			"actionTotal":4,
 			"name":"PopBits",
 			"repetition":true,
 			"repetitionTime":"5",
@@ -572,6 +611,15 @@
 					"params":{
 						"number":"0",
 						"comparison":">"
+					}
+				},{
+					"id":21,
+					"type":"numberVariable",
+					"name":"CheckLimit",
+					"params":{
+						"number":"10",
+						"variable":"counter",
+						"comparison":"<"
 					}
 				}],
 			"actions":[{
@@ -593,13 +641,6 @@
 						"team":2,
 						"unitType":"bit",
 						"zone":4
-					}
-				},{
-					"id":44,
-					"type":"wait",
-					"name":"Tempo",
-					"params":{
-						"time":"1"
 					}
 				},{
 					"id":38,
@@ -642,7 +683,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":12351,
+							"value":1308,
 							"type":"unit"
 						}
 					}
@@ -663,7 +704,7 @@
 			"conditionTotal":1,
 			"name":"Victory",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":3,
 			"conditions":[{
 					"id":14,
 					"type":"numberVariable",
@@ -688,6 +729,13 @@
 							"x":2581,
 							"z":187
 						}
+					}
+				},{
+					"id":60,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"2"
 					}
 				},{
 					"id":43,
@@ -723,7 +771,7 @@
 					"params":{
 						"message":["[en]We are under attack... Focus on West front[en][fr]On nous attaque... Occupez-vous de front Ouest[fr]"],
 						"unitset":{
-							"value":3471,
+							"value":11046,
 							"type":"unit"
 						},
 						"time":"4"
@@ -754,7 +802,7 @@
 					"params":{
 						"message":["[en]They are wearing out, hold your position still a short time...[en][fr]Ils vont bientôt s'éppuiser, tenons encore un peu...[fr]"],
 						"unitset":{
-							"value":12443,
+							"value":2932,
 							"type":"unit"
 						},
 						"time":"5"

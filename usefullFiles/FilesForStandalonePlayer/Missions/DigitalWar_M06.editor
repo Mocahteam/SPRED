@@ -4,16 +4,16 @@
 			"type":"Disk",
 			"blue":0.83343100547791,
 			"b":264,
-			"id":1,
-			"showInGame":false,
 			"marker":true,
-			"x":256,
-			"name":"RallyingPoint",
+			"showInGame":false,
 			"inGameText":"[en]Rallying point\\n  (256, 1024)[en][fr]Point de ralliement\\n       (256, 1024)[fr]",
 			"green":0.87811172008514,
-			"alwaysInView":true,
-			"shown":true,
+			"x":256,
+			"name":"RallyingPoint",
 			"z":1024,
+			"shown":true,
+			"alwaysInView":true,
+			"id":1,
 			"red":0.51766788959503
 		}],
 	"description":{
@@ -36,6 +36,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -52,8 +56,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -64,16 +68,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -84,12 +88,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -98,10 +106,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -120,16 +124,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -144,32 +144,28 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M06",
 		"name":"DigitalWar M06",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["1","2"],
+		"traces":[],
 		"briefing":"[en]Mission 6\n \nAll units you control have been weakened by previous fights. You must repair them before starting a counterattack.\n \nThe last ASSEMBLER still available to repair your units is moving to the rallying point (256, 1024).\n \nMove all your units to this position.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 6\n \nToutes les entités que vous possédez ont subi de lourds dommages lors de précédentes attaques. Vous devez les réparer avant de lancer la contre-attaque.\n \nLe dernier ASSEMBLEUR encore en marche et capable d'effectuer les réparations est en route vers le point de ralliement aux coordonnées (256, 1024).\n \nDéplacez toute votre armée à la rencontre de cet ASSEMBLEUR.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",
-			"id":13124,
+			"id":9373,
 			"position":{
 				"y":270.39453125,
 				"x":1400,
@@ -181,19 +177,19 @@
 			"team":0
 		},{
 			"type":"byte",
-			"id":12119,
+			"id":10863,
 			"position":{
 				"y":130,
 				"x":510,
 				"z":1842
 			},
-			"orientation":-2.4589712619781,
+			"orientation":-2.4543693065643,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":8987,
+			"id":15140,
 			"position":{
 				"y":270.39453125,
 				"x":1488,
@@ -205,7 +201,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":15148,
+			"id":8237,
 			"position":{
 				"y":270.39453125,
 				"x":1432,
@@ -217,7 +213,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":7166,
+			"id":9820,
 			"position":{
 				"y":270.39453125,
 				"x":1477,
@@ -229,7 +225,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":4345,
+			"id":14963,
 			"position":{
 				"y":270.39453125,
 				"x":1390,
@@ -241,7 +237,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":9050,
+			"id":16042,
 			"position":{
 				"y":270.39453125,
 				"x":1463,
@@ -253,7 +249,7 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":10286,
+			"id":7096,
 			"position":{
 				"y":270.39453125,
 				"x":1331,
@@ -265,19 +261,19 @@
 			"team":0
 		},{
 			"type":"byte",
-			"id":8971,
+			"id":10801,
 			"position":{
 				"y":130,
 				"x":481,
 				"z":1741
 			},
-			"orientation":-2.288699388504,
+			"orientation":-2.290233373642,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":4275,
+			"id":4933,
 			"position":{
 				"y":130,
 				"x":429,

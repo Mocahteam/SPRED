@@ -80,6 +80,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -96,8 +100,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -108,10 +112,6 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
@@ -119,6 +119,10 @@
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
 				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
+				"active":true
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
 				"name":"Show PP Video",
@@ -128,12 +132,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -143,10 +151,6 @@
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
 				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
-				"active":true
 			},{
 				"desc":"Shows a team color platter above all visible units",
 				"name":"TeamPlatter",
@@ -164,16 +168,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -188,20 +188,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"SiliCiumAlliance_M06",
@@ -213,7 +209,7 @@
 	},
 	"units":[{
 			"type":"logic_bomb",
-			"id":6230,
+			"id":15032,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -225,7 +221,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":8812,
+			"id":3529,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -237,7 +233,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":6311,
+			"id":8830,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -249,43 +245,43 @@
 			"team":1
 		},{
 			"type":"pointer",
-			"id":8598,
+			"id":2373,
 			"position":{
 				"y":177.90264892578,
 				"x":3252.546875,
 				"z":1060.5467529297
 			},
-			"orientation":-1.4699417352676,
+			"orientation":-1.4515433311462,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":6160,
+			"id":16328,
 			"position":{
 				"y":99.265739440918,
 				"x":3674.5754394531,
 				"z":1144.2698974609
 			},
-			"orientation":1.200568318367,
+			"orientation":1.1266260147095,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":6618,
+			"id":13035,
 			"position":{
 				"y":136.12475585938,
 				"x":3673.955078125,
 				"z":891.16052246094
 			},
-			"orientation":1.4286382198334,
+			"orientation":1.3927896022797,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":12715,
+			"id":12309,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -297,7 +293,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":8847,
+			"id":15149,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -309,7 +305,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":4976,
+			"id":9320,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -321,31 +317,31 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":11641,
+			"id":8543,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.9957090616226,
+			"orientation":-2.0678062438965,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13534,
+			"id":1804,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.4344274997711,
+			"orientation":-2.4083499908447,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13334,
+			"id":5769,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -357,31 +353,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":3865,
+			"id":5419,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.0016894340515,
+			"orientation":-0.92959231138229,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"assembler",
-			"id":188,
+			"id":9561,
 			"position":{
 				"y":121.7388381958,
 				"x":3563.4130859375,
 				"z":1034.9774169922
 			},
-			"orientation":-0.17433215677738,
+			"orientation":-0.25996822118759,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":16451,
+			"id":5239,
 			"position":{
 				"y":144.47802734375,
 				"x":3986,
@@ -393,7 +389,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":7383,
+			"id":2558,
 			"position":{
 				"y":174.59600830078,
 				"x":1944,
@@ -405,7 +401,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":5644,
+			"id":8126,
 			"position":{
 				"y":163,
 				"x":1428,
@@ -417,7 +413,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":12261,
+			"id":4408,
 			"position":{
 				"y":203.35562133789,
 				"x":399,
@@ -429,7 +425,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13177,
+			"id":5626,
 			"position":{
 				"y":189.34906005859,
 				"x":418,
@@ -441,7 +437,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":7374,
+			"id":4907,
 			"position":{
 				"y":166.296875,
 				"x":372,
@@ -453,19 +449,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6963,
+			"id":9674,
 			"position":{
 				"y":167.02696228027,
 				"x":326,
 				"z":1663
 			},
-			"orientation":-0.060000225901604,
+			"orientation":-0.11608025431633,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":7215,
+			"id":16076,
 			"position":{
 				"y":166.1767578125,
 				"x":283,
@@ -477,9 +473,9 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":14474,
+			"id":9053,
 			"position":{
-				"y":133.09197998047,
+				"y":130.7421875,
 				"x":952,
 				"z":867
 			},
@@ -489,31 +485,31 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1024,
+			"id":15967,
 			"position":{
 				"y":130.57092285156,
 				"x":1035,
 				"z":811
 			},
-			"orientation":0.028032869100571,
+			"orientation":0.04667516797781,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":13945,
+			"id":6487,
 			"position":{
-				"y":94.636650085449,
+				"y":101.76766967773,
 				"x":1679,
 				"z":1763
 			},
-			"orientation":0,
+			"orientation":-0.00029454650939442,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":15572,
+			"id":10579,
 			"position":{
 				"y":101.90937042236,
 				"x":1710,
@@ -525,7 +521,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11767,
+			"id":13176,
 			"position":{
 				"y":101.9140625,
 				"x":1596,
@@ -537,7 +533,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15097,
+			"id":6842,
 			"position":{
 				"y":101.07887268066,
 				"x":1626,
@@ -549,7 +545,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12124,
+			"id":4594,
 			"position":{
 				"y":247.22601318359,
 				"x":2198.4206542969,
@@ -561,19 +557,19 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1499,
+			"id":1821,
 			"position":{
 				"y":236.67875671387,
 				"x":2197.4482421875,
 				"z":1019.8780517578
 			},
-			"orientation":-1.0412564277649,
+			"orientation":-1.0487246513367,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":14917,
+			"id":3141,
 			"position":{
 				"y":160.62461853027,
 				"x":2009,
@@ -585,7 +581,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6861,
+			"id":9070,
 			"position":{
 				"y":130.7421875,
 				"x":3896,
@@ -597,7 +593,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3342,
+			"id":15071,
 			"position":{
 				"y":142.3147277832,
 				"x":2480,
@@ -609,31 +605,31 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15688,
+			"id":3600,
 			"position":{
 				"y":143.73313903809,
 				"x":2518,
 				"z":177
 			},
-			"orientation":-0.042525410652161,
+			"orientation":-0.060347724705935,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":13027,
+			"id":16269,
 			"position":{
 				"y":153.03518676758,
 				"x":2445,
 				"z":246
 			},
-			"orientation":-1.0157250165939,
+			"orientation":-1.1278644800186,
 			"autoHeal":"global",
 			"hp":100,
 			"team":2
 		},{
 			"type":"bit",
-			"id":1946,
+			"id":4602,
 			"position":{
 				"y":142.16928100586,
 				"x":2382,
@@ -656,7 +652,23 @@
 		"9":[],
 		"0":[1]
 	},
-	"groups":[],
+	"groups":[{
+			"id":1,
+			"name":"BA1",
+			"units":[]
+		},{
+			"id":2,
+			"name":"BA2",
+			"units":[]
+		},{
+			"id":3,
+			"name":"FA1",
+			"units":[]
+		},{
+			"id":4,
+			"name":"FA2",
+			"units":[]
+		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
 	"teams":{
@@ -800,28 +812,88 @@
 			"id":12
 		},{
 			"comment":"",
-			"trigger":"AsmDies or BadSocketPos1 or BadSocketPos2",
-			"conditionTotal":5,
-			"name":"Defeat",
+			"id":14,
+			"conditionTotal":1,
+			"actionTotal":1,
+			"name":"BA1Content",
+			"repetition":true,
+			"repetitionTime":"0.5",
+			"conditions":[{
+					"id":25,
+					"type":"zone",
+					"name":"CheckPresence",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"unitset":{
+							"value":0,
+							"type":"team"
+						},
+						"zone":1
+					}
+				}],
+			"actions":[{
+					"id":44,
+					"type":"addToGroup",
+					"name":"AddToGroup",
+					"params":{
+						"group":1,
+						"unitset":{
+							"value":25,
+							"type":"condition"
+						}
+					}
+				}],
+			"trigger":""
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"BA2Content",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
-					"id":11,
-					"type":"dead",
-					"name":"AsmDies",
+					"id":26,
+					"type":"zone",
+					"name":"CheckPresence",
 					"params":{
 						"number":{
-							"comparison":"all"
+							"number":"1",
+							"comparison":"atleast"
 						},
 						"unitset":{
-							"value":188,
-							"type":"unit"
+							"value":0,
+							"type":"team"
+						},
+						"zone":2
+					}
+				}],
+			"actions":[{
+					"id":45,
+					"type":"addToGroup",
+					"name":"AddToGroup",
+					"params":{
+						"group":2,
+						"unitset":{
+							"value":26,
+							"type":"condition"
 						}
 					}
-				},{
-					"id":20,
+				}],
+			"id":15
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"FA1Content",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":27,
 					"type":"zone",
-					"name":"ForbidArea1Content",
+					"name":"CheckPresence",
 					"params":{
 						"number":{
 							"number":"1",
@@ -833,10 +905,31 @@
 						},
 						"zone":3
 					}
-				},{
-					"id":21,
+				}],
+			"actions":[{
+					"id":46,
+					"type":"addToGroup",
+					"name":"AddToGroup",
+					"params":{
+						"group":3,
+						"unitset":{
+							"value":27,
+							"type":"condition"
+						}
+					}
+				}],
+			"id":16
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"FA2Content",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":28,
 					"type":"zone",
-					"name":"ForbidArea2Content",
+					"name":"CheckPresence",
 					"params":{
 						"number":{
 							"number":"1",
@@ -848,34 +941,38 @@
 						},
 						"zone":4
 					}
-				},{
-					"id":23,
-					"type":"type",
-					"name":"BadSocketPos1",
+				}],
+			"actions":[{
+					"id":48,
+					"type":"addToGroup",
+					"name":"AddToGroup",
 					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"type":"socket",
+						"group":4,
 						"unitset":{
-							"value":20,
+							"value":28,
 							"type":"condition"
 						}
 					}
-				},{
-					"id":24,
-					"type":"type",
-					"name":"BadSocketPos2",
+				}],
+			"id":17
+		},{
+			"comment":"",
+			"trigger":"",
+			"conditionTotal":1,
+			"name":"Defeat1",
+			"repetition":false,
+			"actionTotal":1,
+			"conditions":[{
+					"id":11,
+					"type":"dead",
+					"name":"AsmDies",
 					"params":{
 						"number":{
-							"number":"1",
-							"comparison":"atleast"
+							"comparison":"all"
 						},
-						"type":"socket",
 						"unitset":{
-							"value":21,
-							"type":"condition"
+							"value":9561,
+							"type":"unit"
 						}
 					}
 				}],
@@ -891,42 +988,75 @@
 			"id":10
 		},{
 			"comment":"",
+			"trigger":"BadSocketPos1 or BadSocketPos2",
+			"conditionTotal":2,
+			"name":"Defeat2",
+			"repetition":false,
+			"actionTotal":2,
+			"conditions":[{
+					"id":29,
+					"type":"type",
+					"name":"BadSocketPos1",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"type":"socket",
+						"unitset":{
+							"value":3,
+							"type":"group"
+						}
+					}
+				},{
+					"id":30,
+					"type":"type",
+					"name":"BadSocketPos2",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"atleast"
+						},
+						"type":"socket",
+						"unitset":{
+							"value":4,
+							"type":"group"
+						}
+					}
+				}],
+			"actions":[{
+					"id":50,
+					"type":"messageGlobal",
+					"name":"Explain",
+					"params":{
+						"boolean":"true",
+						"message":["[en]Allies allowed you to build SOCKETS only on the two closest special areas from your ASSEMBLER. The one that you built on is reserved to your allies...\\n \\nNow, they are hangry.[en][fr]Vos alliés vous avez permis de construire des SOCKETS seulement sur les deux zones spéciales les plus proches de votre ASSEMBLEUR. La zone sur laquelle vous venez de construire était réservée à vos alliés...\\n \\nIls sont maintenant en colère.[fr]"]
+					}
+				},{
+					"id":51,
+					"type":"orderTarget",
+					"name":"DestroyAsm",
+					"params":{
+						"command":20,
+						"unitset":{
+							"value":1,
+							"type":"team"
+						},
+						"target":{
+							"value":9561,
+							"type":"unit"
+						}
+					}
+				}],
+			"id":18
+		},{
+			"comment":"",
 			"trigger":"Socket1Built and Socket2Built",
-			"conditionTotal":4,
+			"conditionTotal":2,
 			"name":"Victory",
 			"repetition":false,
 			"actionTotal":1,
 			"conditions":[{
-					"id":15,
-					"type":"zone",
-					"name":"BuildingArea1Content",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"unitset":{
-							"value":0,
-							"type":"team"
-						},
-						"zone":1
-					}
-				},{
-					"id":17,
-					"type":"zone",
-					"name":"BuildingArea2Content",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"unitset":{
-							"value":0,
-							"type":"team"
-						},
-						"zone":2
-					}
-				},{
 					"id":18,
 					"type":"type",
 					"name":"Socket1Built",
@@ -937,8 +1067,8 @@
 						},
 						"type":"socket",
 						"unitset":{
-							"value":15,
-							"type":"condition"
+							"value":1,
+							"type":"group"
 						}
 					}
 				},{
@@ -952,8 +1082,8 @@
 						},
 						"type":"socket",
 						"unitset":{
-							"value":17,
-							"type":"condition"
+							"value":2,
+							"type":"group"
 						}
 					}
 				}],

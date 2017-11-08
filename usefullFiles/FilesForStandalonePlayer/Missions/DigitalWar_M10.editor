@@ -2,14 +2,14 @@
 	"zones":[{
 			"type":"Rectangle",
 			"blue":0.17912256717682,
-			"x2":1856,
 			"z1":192,
+			"x2":1856,
+			"showInGame":false,
 			"z2":312,
 			"x1":1728,
-			"showInGame":false,
 			"marker":true,
-			"name":"Headquarters",
 			"inGameText":"[en]Headquarters position\\n       (1792, 256)[en][fr]           Position du poste\\nde commandement (1792, 256)[fr]",
+			"name":"Headquarters",
 			"green":0.34097564220428,
 			"alwaysInView":true,
 			"shown":true,
@@ -36,6 +36,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -52,8 +56,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -64,16 +68,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -84,12 +88,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -98,10 +106,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -120,16 +124,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -144,20 +144,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M10",
@@ -169,7 +165,7 @@
 	},
 	"units":[{
 			"type":"byte",
-			"id":15502,
+			"id":15149,
 			"position":{
 				"y":130,
 				"x":1600,
@@ -181,7 +177,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":9236,
+			"id":5299,
 			"position":{
 				"y":130,
 				"x":1600,
@@ -193,7 +189,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":8683,
+			"id":4517,
 			"position":{
 				"y":130,
 				"x":1728,
@@ -205,7 +201,7 @@
 			"team":2
 		},{
 			"type":"byte",
-			"id":14595,
+			"id":12328,
 			"position":{
 				"y":130,
 				"x":1856,
@@ -217,7 +213,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9451,
+			"id":10902,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -229,7 +225,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11851,
+			"id":12182,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -241,7 +237,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":5557,
+			"id":8459,
 			"position":{
 				"y":116,
 				"x":1696,
@@ -253,7 +249,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":1818,
+			"id":4755,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -265,7 +261,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":11086,
+			"id":7091,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -277,7 +273,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":504,
+			"id":10928,
 			"position":{
 				"y":116,
 				"x":1648,
@@ -289,7 +285,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4942,
+			"id":2758,
 			"position":{
 				"y":116,
 				"x":1600,
@@ -301,7 +297,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12148,
+			"id":4412,
 			"position":{
 				"y":116,
 				"x":1728,
@@ -313,7 +309,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4407,
+			"id":2325,
 			"position":{
 				"y":116,
 				"x":1856,
@@ -325,7 +321,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":9761,
+			"id":16276,
 			"position":{
 				"y":116,
 				"x":1728,
@@ -337,7 +333,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":4184,
+			"id":2718,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -349,7 +345,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":3455,
+			"id":9432,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -361,7 +357,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":6272,
+			"id":8662,
 			"position":{
 				"y":116,
 				"x":1856,
@@ -373,7 +369,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":13863,
+			"id":3996,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -385,7 +381,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":15964,
+			"id":4580,
 			"position":{
 				"y":116,
 				"x":1640,
@@ -397,7 +393,7 @@
 			"team":2
 		},{
 			"type":"bit",
-			"id":12376,
+			"id":12327,
 			"position":{
 				"y":116,
 				"x":1687,
@@ -409,7 +405,7 @@
 			"team":2
 		},{
 			"type":"socket",
-			"id":4982,
+			"id":1335,
 			"position":{
 				"y":116,
 				"x":1792,
@@ -421,145 +417,145 @@
 			"team":1
 		},{
 			"type":"kernel",
-			"id":6263,
+			"id":10114,
 			"position":{
 				"y":101,
 				"x":1792,
 				"z":257
 			},
-			"orientation":-1.6797089576721,
+			"orientation":-1.6919808387756,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":15705,
+			"id":8877,
 			"position":{
 				"y":130,
 				"x":165,
 				"z":1063
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":4638,
+			"id":12411,
 			"position":{
 				"y":130,
 				"x":282,
 				"z":1011
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":15713,
+			"id":3526,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":8111,
+			"id":11624,
 			"position":{
 				"y":116,
 				"x":65,
 				"z":974
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":12981,
+			"id":4527,
 			"position":{
 				"y":116,
 				"x":343,
 				"z":969
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11181,
+			"id":9660,
 			"position":{
 				"y":116,
 				"x":425,
 				"z":1021
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":12065,
+			"id":12755,
 			"position":{
 				"y":116,
 				"x":256,
 				"z":811
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":6094,
+			"id":10391,
 			"position":{
 				"y":116,
 				"x":193,
 				"z":922
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":9542,
+			"id":3347,
 			"position":{
 				"y":116,
 				"x":228,
 				"z":1019
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":10220,
+			"id":10237,
 			"position":{
 				"y":130,
 				"x":349,
 				"z":1060
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":14155,
+			"id":15232,
 			"position":{
 				"y":116,
 				"x":368,
 				"z":894
 			},
-			"orientation":2.8946218490601,
+			"orientation":2.8884859085083,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -579,7 +575,7 @@
 	"groups":[{
 			"id":1,
 			"name":"Soldiers",
-			"units":[4638,6094,8111,9542,10220,11181,12981,14155,15705,15713]
+			"units":[3347,3526,4527,8877,9660,10237,10391,11624,12411,15232]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
@@ -796,7 +792,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":12065,
+							"value":12755,
 							"type":"unit"
 						}
 					}

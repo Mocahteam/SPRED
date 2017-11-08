@@ -4,16 +4,16 @@
 			"type":"Disk",
 			"blue":0.83343100547791,
 			"b":80,
-			"marker":true,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":true,
+			"alwaysInView":true,
 			"x":256,
 			"name":"RallyingPoint",
-			"inGameText":"[en]Assembler rallying point\\n          (256, 811)[en][fr]      Point de ralliement\\nde l'assembleur (256, 811)[fr]",
 			"green":0.87811172008514,
-			"z":808,
 			"shown":true,
-			"alwaysInView":true,
+			"z":808,
+			"inGameText":"[en]Assembler rallying point\\n          (256, 811)[en][fr]      Point de ralliement\\nde l'assembleur (256, 811)[fr]",
 			"red":0.51766788959503
 		}],
 	"description":{
@@ -36,6 +36,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -52,8 +56,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -64,16 +68,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -84,12 +88,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -98,10 +106,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -120,16 +124,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -144,68 +144,64 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M07",
 		"name":"DigitalWar M07",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["1","2"],
+		"traces":[],
 		"briefing":"[en]Mission 7\n \nThe ASSEMBLER has just entered on the map. But your army is too weak to keep on moving, another move order might be the last order they ever follow. So help the ASSEMBLER (and no other unit) to move to reach the rest of your army at (256, 811).\n \nÿ„z„Press Escape to continue.ÿÿÿÿ[en][fr]Mission 7\n \nL'ASSEMBLEUR vient d'apparaître sur la carte. Mais votre armée est trop épuisée pour le rejoindre et des déplacements supplémentaires lui serait fatal. Aidez donc l'ASSEMBLEUR à rejoindre le reste de votre armée.\n \nDéplacez l'ASSEMBLEUR et uniquement lui aux coordonnées (256, 811).\n \nÿ„z„Appuyez sur ECHAP pour continuer.ÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",
-			"id":361,
+			"id":9808,
 			"position":{
-				"y":130,
-				"x":170,
-				"z":1105
+				"y":129.99987792969,
+				"x":163.19395446777,
+				"z":806.33062744141
 			},
-			"orientation":2.8378646373749,
+			"orientation":-1.4680196046829,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":6373,
+			"id":4265,
 			"position":{
-				"y":130,
-				"x":282,
-				"z":1011
+				"y":129.99987792969,
+				"x":247.60389709473,
+				"z":689.50177001953
 			},
-			"orientation":-2.9467771053314,
+			"orientation":3.1247189044952,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":10053,
+			"id":6174,
 			"position":{
 				"y":116,
 				"x":95,
 				"z":883
 			},
-			"orientation":2.2580196857452,
+			"orientation":2.2840974330902,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":13685,
+			"id":10881,
 			"position":{
 				"y":116,
 				"x":65,
@@ -217,19 +213,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":10356,
+			"id":4578,
 			"position":{
-				"y":116,
-				"x":343,
-				"z":969
+				"y":115.99993133545,
+				"x":459.47229003906,
+				"z":855.62994384766
 			},
-			"orientation":-2.4789130687714,
+			"orientation":2.3853402137756,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11148,
+			"id":3009,
 			"position":{
 				"y":116,
 				"x":425,
@@ -241,19 +237,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":9243,
+			"id":12246,
 			"position":{
-				"y":116,
-				"x":193,
-				"z":922
+				"y":115.99993133545,
+				"x":200.91143798828,
+				"z":920.22277832031
 			},
-			"orientation":2.5724859237671,
+			"orientation":2.4865829944611,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":718,
+			"id":6792,
 			"position":{
 				"y":116,
 				"x":51,
@@ -265,31 +261,31 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":10978,
+			"id":10553,
 			"position":{
 				"y":116,
 				"x":228,
 				"z":1019
 			},
-			"orientation":2.9897286891937,
+			"orientation":2.9667189121246,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"byte",
-			"id":11854,
+			"id":11184,
 			"position":{
-				"y":130,
-				"x":349,
-				"z":1060
+				"y":129.99987792969,
+				"x":339.26644897461,
+				"z":848.64398193359
 			},
-			"orientation":-2.6706607341766,
+			"orientation":1.5723303556442,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1038,
+			"id":5313,
 			"position":{
 				"y":116,
 				"x":368,
@@ -315,7 +311,7 @@
 	"groups":[{
 			"id":1,
 			"name":"Army",
-			"units":[361,1038,6373,9243,10053,10356,10978,11148,11854,13685]
+			"units":[3009,4265,4578,5313,6174,9808,10553,10881,11184,12246]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],
@@ -447,7 +443,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":718,
+							"value":6792,
 							"type":"unit"
 						},
 						"zone":1
@@ -469,7 +465,7 @@
 			"conditionTotal":1,
 			"name":"Defeat",
 			"repetition":false,
-			"actionTotal":1,
+			"actionTotal":2,
 			"conditions":[{
 					"id":11,
 					"type":"dead",
@@ -486,6 +482,13 @@
 					}
 				}],
 			"actions":[{
+					"id":10,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"1"
+					}
+				},{
 					"id":5,
 					"type":"lose",
 					"name":"LoseGame",
@@ -501,7 +504,7 @@
 			"conditionTotal":1,
 			"name":"ForbidMoving",
 			"repetition":false,
-			"actionTotal":2,
+			"actionTotal":3,
 			"conditions":[{
 					"id":9,
 					"type":"order",
@@ -534,6 +537,14 @@
 							"value":9,
 							"type":"condition"
 						}
+					}
+				},{
+					"id":8,
+					"type":"messageGlobal",
+					"name":"Explain",
+					"params":{
+						"boolean":"true",
+						"message":["[en]Your units are too weak to move again. This action was the last.[en][fr]Vos unités sont trop faibles pour se déplacer. Cette action sera la dernière.[fr]"]
 					}
 				}],
 			"id":6

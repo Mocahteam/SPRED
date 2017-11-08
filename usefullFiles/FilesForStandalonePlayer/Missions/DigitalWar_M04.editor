@@ -7,12 +7,12 @@
 			"z2":1816,
 			"x1":632,
 			"showInGame":false,
-			"id":3,
+			"marker":false,
 			"name":"MovingZone",
 			"green":0.58732402324677,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":3,
 			"red":0.82959282398224
 		},{
 			"type":"Rectangle",
@@ -22,12 +22,12 @@
 			"z2":1288,
 			"x1":728,
 			"showInGame":false,
-			"id":4,
+			"marker":false,
 			"name":"PopZone",
 			"green":0.24019658565521,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":4,
 			"red":0.20089828968048
 		}],
 	"description":{
@@ -179,7 +179,7 @@
 	},
 	"units":[{
 			"type":"byte",
-			"id":2345,
+			"id":9779,
 			"position":{
 				"y":130,
 				"x":956,
@@ -191,7 +191,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":9545,
+			"id":14271,
 			"position":{
 				"y":116,
 				"x":1003,
@@ -345,7 +345,7 @@
 			"conditionTotal":1,
 			"name":"Initialisation",
 			"repetition":false,
-			"actionTotal":3,
+			"actionTotal":4,
 			"conditions":[{
 					"id":2,
 					"type":"start",
@@ -353,6 +353,18 @@
 					"params":[]
 				}],
 			"actions":[{
+					"id":7,
+					"type":"order",
+					"name":"SetFireState",
+					"params":{
+						"command":45,
+						"unitset":{
+							"value":14271,
+							"type":"unit"
+						},
+						"parameters":["0"]
+					}
+				},{
 					"id":2,
 					"type":"createUnits",
 					"name":"CreateEnemy",
@@ -371,51 +383,14 @@
 						"variable":"ennemiCreated"
 					}
 				},{
-					"id":7,
-					"type":"order",
-					"name":"SetFireState",
-					"params":{
-						"command":45,
-						"unitset":{
-							"value":9545,
-							"type":"unit"
-						},
-						"parameters":["0"]
-					}
-				}],
-			"id":2
-		},{
-			"comment":"",
-			"trigger":"",
-			"conditionTotal":1,
-			"name":"Fighting",
-			"repetition":false,
-			"actionTotal":1,
-			"conditions":[{
-					"id":3,
-					"type":"zone",
-					"name":"EnemyCreated",
-					"params":{
-						"number":{
-							"number":"1",
-							"comparison":"atleast"
-						},
-						"unitset":{
-							"value":2,
-							"type":"team"
-						},
-						"zone":4
-					}
-				}],
-			"actions":[{
-					"id":3,
+					"id":17,
 					"type":"orderPosition",
 					"name":"Fight",
 					"params":{
 						"command":16,
 						"unitset":{
-							"value":3,
-							"type":"condition"
+							"value":2,
+							"type":"action"
 						},
 						"position":{
 							"z":1685,
@@ -423,7 +398,7 @@
 						}
 					}
 				}],
-			"id":3
+			"id":2
 		},{
 			"comment":"",
 			"trigger":"EnemyDead and EnemyCreated",
@@ -459,7 +434,7 @@
 					"params":{
 						"command":0,
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						}
 					}
@@ -470,7 +445,7 @@
 					"params":{
 						"team":0,
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						}
 					}
@@ -559,7 +534,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						},
 						"attacker":{
@@ -593,7 +568,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						},
 						"number":{
@@ -615,7 +590,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						},
 						"position":3
@@ -637,7 +612,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						},
 						"number":{
@@ -659,7 +634,7 @@
 					"params":{
 						"message":["[en]Help me!!![en][fr]Aidez moi !!![fr]","[en]Please...[en][fr]S'il vous plait...[fr]","AAaarghh","[en]I need help...[en][fr]J'ai besoin d'aide...[fr]","[en]What do you do?[en][fr]Que faites-vous ???[fr]","[en]I won't resist a long time...[en][fr]Je ne tiendrais pas longtemps...[fr]","[en]My energy weakens...[en][fr]Mon energie diminue...[fr]","[en]He beats me up!!![en][fr]Il m'en met plein la gueule !!![fr]","[en]Noooooo!!![en][fr]Nooooon !!![fr]"],
 						"unitset":{
-							"value":2345,
+							"value":9779,
 							"type":"unit"
 						},
 						"time":"4"

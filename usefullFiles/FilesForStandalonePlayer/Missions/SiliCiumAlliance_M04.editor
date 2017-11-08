@@ -7,13 +7,13 @@
 			"id":1,
 			"showInGame":false,
 			"marker":true,
+			"inGameText":"[en]North entrance\\n  (3264, 664)[en][fr]Entrée Nord\\n(3264, 664)[fr]",
 			"x":3264,
 			"name":"North entrance",
-			"inGameText":"[en]North entrance\\n  (3264, 664)[en][fr]Entrée Nord\\n(3264, 664)[fr]",
-			"green":0.018119335174561,
+			"z":664,
 			"alwaysInView":true,
 			"shown":true,
-			"z":664,
+			"green":0.018119335174561,
 			"red":0.53519535064697
 		},{
 			"a":184,
@@ -23,13 +23,13 @@
 			"id":2,
 			"showInGame":false,
 			"marker":true,
+			"inGameText":"[en]Est entrance\\n (3904, 752)[en][fr]Entrée Est\\n(3904, 752)[fr]",
 			"x":3904,
 			"name":"Est entrance",
-			"inGameText":"[en]Est entrance\\n (3904, 752)[en][fr]Entrée Est\\n(3904, 752)[fr]",
-			"green":0.054250597953796,
+			"z":752,
 			"alwaysInView":true,
 			"shown":true,
-			"z":752,
+			"green":0.054250597953796,
 			"red":0.17196381092072
 		}],
 	"description":{
@@ -52,6 +52,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -68,8 +72,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -80,16 +84,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -100,12 +104,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -114,10 +122,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -136,16 +140,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -160,68 +160,64 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"SiliCiumAlliance_M04",
 		"name":"SiliCiumAlliance M04",
 		"mainGame":"Kernel Panic 4.1",
-		"mouse":"disabled",
+		"mouse":"enabled",
 		"traces":[],
 		"briefing":"[en]Mission 4\n \nSome information has been received indicating enemy grouping near from the outpost. The community has decided to send two groups of scouts to observe enemy maneuvers.\n \nHelp them prepare for the mission by dividing units into two groups each made of two BYTES and three BITS. The rendezvous point for the first group is at the North entrance (3264, 664) and the second group has to gather on the East entrance (3904, 752).\n \nÿVVVPress Escape to continueÿÿÿÿ[en][fr]Mission 4\n \nDes informations sont parvenues au camp sur des regroupements ennemis dans les environs. La communauté a décidé d'envoyer deux groupes d'éclaireurs observer ces mouvements.\n \nAidez-les à s'organiser en constituant deux groupes composés chacun de deux BYTES et de trois BITS. Un premier groupe à l'entrée Nord du camps (3264, 664) et le second à l'entrée Est (3904, 752).\n \nÿVVVAppuyez sur Echap pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"bit",
-			"id":1850,
+			"id":12400,
 			"position":{
 				"y":135.04858398438,
 				"x":3381,
 				"z":1649
 			},
-			"orientation":-0.068155720829964,
+			"orientation":-0.074179850518703,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"assembler",
-			"id":14923,
+			"id":13928,
 			"position":{
 				"y":92.058166503906,
 				"x":3595.4990234375,
 				"z":1715.33984375
 			},
-			"orientation":0.13350312411785,
+			"orientation":0.13093194365501,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":5260,
+			"id":4756,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.1520196199417,
+			"orientation":-1.14588367939,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":11432,
+			"id":654,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -233,31 +229,31 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":3071,
+			"id":15904,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.5970294475555,
+			"orientation":-2.5847578048706,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"hole",
-			"id":8657,
+			"id":16045,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":2.8470683097839,
+			"orientation":2.8409326076508,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":7367,
+			"id":15025,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -269,7 +265,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":9931,
+			"id":3778,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -281,7 +277,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13033,
+			"id":5761,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -293,55 +289,55 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":14926,
+			"id":4687,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
 				"z":940.1181640625
 			},
-			"orientation":2.2819499969482,
+			"orientation":2.2846715450287,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":911,
+			"id":3493,
 			"position":{
 				"y":212.51889038086,
 				"x":3038.3857421875,
 				"z":1005.5906982422
 			},
-			"orientation":1.4612460136414,
+			"orientation":1.458596944809,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"byte",
-			"id":1058,
+			"id":12986,
 			"position":{
 				"y":162.16098022461,
 				"x":3578.796875,
 				"z":810.36614990234
 			},
-			"orientation":0.80236274003983,
+			"orientation":0.79689610004425,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1492,
+			"id":8262,
 			"position":{
 				"y":142.2734375,
 				"x":3537.1577148438,
 				"z":884.31518554688
 			},
-			"orientation":0.86669903993607,
+			"orientation":0.86056327819824,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":6632,
+			"id":7198,
 			"position":{
 				"y":199.18748474121,
 				"x":3608.716796875,
@@ -353,31 +349,31 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":6960,
+			"id":5363,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
 				"z":975.60589599609
 			},
-			"orientation":1.8782702684402,
+			"orientation":1.8726526498795,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":9792,
+			"id":892,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
 				"z":1400.9140625
 			},
-			"orientation":2.5350301265717,
+			"orientation":2.5031170845032,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":1557,
+			"id":4587,
 			"position":{
 				"y":101.99140930176,
 				"x":3708.9736328125,
@@ -389,19 +385,19 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":16108,
+			"id":12752,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.1794557571411,
+			"orientation":-1.1702510118484,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":16194,
+			"id":13933,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -413,19 +409,19 @@
 			"team":0
 		},{
 			"type":"pointer",
-			"id":11200,
+			"id":13155,
 			"position":{
 				"y":65.611457824707,
 				"x":3808,
 				"z":1741
 			},
-			"orientation":-2.3846082687378,
+			"orientation":-2.3585133552551,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":14337,
+			"id":12658,
 			"position":{
 				"y":167.05850219727,
 				"x":2924,
@@ -437,7 +433,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":10288,
+			"id":13143,
 			"position":{
 				"y":145.83905029297,
 				"x":3252,
@@ -449,7 +445,7 @@
 			"team":1
 		},{
 			"type":"logic_bomb",
-			"id":14452,
+			"id":3741,
 			"position":{
 				"y":125.62557983398,
 				"x":3872,
@@ -461,13 +457,13 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":8885,
+			"id":7941,
 			"position":{
 				"y":178.93992614746,
 				"x":3079,
 				"z":1369
 			},
-			"orientation":0.078815333545208,
+			"orientation":0.088055863976479,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
@@ -487,11 +483,11 @@
 	"groups":[{
 			"id":1,
 			"name":"Bytes",
-			"units":[911,1058,8885,14926]
+			"units":[3493,4687,7941,12986]
 		},{
 			"id":2,
 			"name":"Bits",
-			"units":[1492,1557,1850,6632,6960,9792,16108,16194]
+			"units":[892,4587,5363,7198,8262,12400,12752,13933]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
 	"variables":[],

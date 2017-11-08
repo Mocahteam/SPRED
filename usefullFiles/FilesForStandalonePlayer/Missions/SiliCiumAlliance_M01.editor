@@ -4,60 +4,60 @@
 			"type":"Disk",
 			"blue":0.85116708278656,
 			"b":72,
-			"marker":false,
-			"showInGame":false,
 			"id":1,
+			"showInGame":false,
+			"marker":false,
 			"x":320,
 			"name":"Step1",
 			"green":0.76358687877655,
-			"z":808,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":808,
 			"red":0.00088560581207275
 		},{
 			"a":64,
 			"type":"Disk",
 			"blue":0.98885846138,
 			"b":48,
-			"marker":false,
-			"showInGame":false,
 			"id":2,
+			"showInGame":false,
+			"marker":false,
 			"x":600,
 			"name":"Step2",
 			"green":0.15312898159027,
-			"z":1208,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":1208,
 			"red":0.25091028213501
 		},{
 			"a":56,
 			"type":"Disk",
 			"blue":0.29673206806183,
 			"b":56,
-			"marker":false,
-			"showInGame":false,
 			"id":3,
+			"showInGame":false,
+			"marker":false,
 			"x":936,
 			"name":"Step3",
 			"green":0.83914542198181,
-			"z":632,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":632,
 			"red":0.91556084156036
 		},{
 			"a":56,
 			"type":"Disk",
 			"blue":0.15385806560516,
 			"b":40,
-			"marker":false,
-			"showInGame":false,
 			"id":4,
+			"showInGame":false,
+			"marker":false,
 			"x":1424,
 			"name":"Step4",
 			"green":0.60814476013184,
-			"z":1032,
-			"shown":true,
 			"alwaysInView":false,
+			"shown":true,
+			"z":1032,
 			"red":0.54002010822296
 		},{
 			"type":"Rectangle",
@@ -67,12 +67,12 @@
 			"z2":1296,
 			"x1":3368,
 			"showInGame":false,
-			"marker":false,
+			"id":6,
 			"name":"Finish",
 			"green":0.13627111911774,
-			"alwaysInView":false,
 			"shown":true,
-			"id":6,
+			"alwaysInView":false,
+			"marker":false,
 			"red":0.67630434036255
 		},{
 			"type":"Rectangle",
@@ -82,12 +82,12 @@
 			"z2":2040,
 			"x1":2672,
 			"showInGame":false,
-			"id":7,
+			"marker":false,
 			"name":"FinishNear",
 			"green":0.37940680980682,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":7,
 			"red":0.45158708095551
 		},{
 			"type":"Rectangle",
@@ -97,12 +97,12 @@
 			"z2":1592,
 			"x1":1864,
 			"showInGame":false,
-			"id":8,
+			"marker":false,
 			"name":"PopZone",
 			"green":0.9041393995285,
-			"shown":true,
 			"alwaysInView":false,
-			"marker":false,
+			"shown":true,
+			"id":8,
 			"red":0.35799121856689
 		}],
 	"description":{
@@ -125,6 +125,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -141,8 +145,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -153,16 +157,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -173,12 +177,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -187,10 +195,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -209,16 +213,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -233,20 +233,16 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"SiliCiumAlliance_M01",
@@ -258,19 +254,19 @@
 	},
 	"units":[{
 			"type":"pointer",
-			"id":5289,
+			"id":542,
 			"position":{
 				"y":208.0426940918,
 				"x":22.679006576538,
 				"z":1015.7485351563
 			},
-			"orientation":2.2923231124878,
+			"orientation":2.2938008308411,
 			"autoHeal":"global",
 			"hp":100,
 			"team":0
 		},{
 			"type":"bit",
-			"id":13258,
+			"id":8047,
 			"position":{
 				"y":171.99165344238,
 				"x":3230,
@@ -282,31 +278,31 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":2366,
+			"id":11638,
 			"position":{
 				"y":79.134963989258,
 				"x":3978,
 				"z":1502
 			},
-			"orientation":-1.2531139850616,
+			"orientation":-1.2485094070435,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":319,
+			"id":1904,
 			"position":{
 				"y":130.47662353516,
 				"x":3981,
 				"z":140
 			},
-			"orientation":-0.037719238549471,
+			"orientation":-0.036185588687658,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":9227,
+			"id":9080,
 			"position":{
 				"y":157.17481994629,
 				"x":3152.6748046875,
@@ -318,7 +314,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":5029,
+			"id":13933,
 			"position":{
 				"y":202.53300476074,
 				"x":2950.4516601563,
@@ -330,7 +326,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":4565,
+			"id":1083,
 			"position":{
 				"y":223.73870849609,
 				"x":3509,
@@ -342,7 +338,7 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":1351,
+			"id":2487,
 			"position":{
 				"y":169.61465454102,
 				"x":3435,
@@ -354,7 +350,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":5297,
+			"id":13889,
 			"position":{
 				"y":237.25904846191,
 				"x":3067.4150390625,
@@ -366,19 +362,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":14028,
+			"id":8631,
 			"position":{
 				"y":226.36219787598,
 				"x":3081.9855957031,
 				"z":829.06475830078
 			},
-			"orientation":-0.068177297711372,
+			"orientation":-0.069494664669037,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":2839,
+			"id":10077,
 			"position":{
 				"y":208.33813476563,
 				"x":3478,
@@ -390,7 +386,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":7147,
+			"id":2687,
 			"position":{
 				"y":240.25434875488,
 				"x":3037.9208984375,
@@ -402,19 +398,19 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":15677,
+			"id":3678,
 			"position":{
 				"y":186.67340087891,
 				"x":3124,
 				"z":1491
 			},
-			"orientation":1.3932740688324,
+			"orientation":1.3946890830994,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"byte",
-			"id":7236,
+			"id":2699,
 			"position":{
 				"y":244.46913146973,
 				"x":2896.7016601563,
@@ -426,7 +422,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":5452,
+			"id":7953,
 			"position":{
 				"y":103.38246154785,
 				"x":3716,
@@ -438,7 +434,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":13265,
+			"id":5371,
 			"position":{
 				"y":75.89720916748,
 				"x":3961,
@@ -450,7 +446,7 @@
 			"team":1
 		},{
 			"type":"obelisk",
-			"id":7559,
+			"id":7697,
 			"position":{
 				"y":104.07032012939,
 				"x":3673,
@@ -462,31 +458,31 @@
 			"team":1
 		},{
 			"type":"hole",
-			"id":5010,
+			"id":11018,
 			"position":{
 				"y":136.1784362793,
 				"x":3478,
 				"z":1456
 			},
-			"orientation":-1.8162332773209,
+			"orientation":-1.8193012475967,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":13025,
+			"id":13016,
 			"position":{
 				"y":253.5625,
 				"x":3617,
 				"z":519
 			},
-			"orientation":-2.6721947193146,
+			"orientation":-2.6675927639008,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"terminal",
-			"id":4570,
+			"id":11083,
 			"position":{
 				"y":253.5625,
 				"x":3080,
@@ -498,19 +494,19 @@
 			"team":1
 		},{
 			"type":"terminal",
-			"id":2757,
+			"id":10022,
 			"position":{
 				"y":253.62161254883,
 				"x":2898,
 				"z":819
 			},
-			"orientation":-1.2011070251465,
+			"orientation":-1.1980390548706,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13954,
+			"id":15211,
 			"position":{
 				"y":166.15704345703,
 				"x":3338,
@@ -522,13 +518,13 @@
 			"team":1
 		},{
 			"type":"assembler",
-			"id":13228,
+			"id":14585,
 			"position":{
 				"y":119.02044677734,
 				"x":3641,
 				"z":1225
 			},
-			"orientation":-0.043694399297237,
+			"orientation":-0.045226659625769,
 			"autoHeal":"global",
 			"hp":100,
 			"team":1
@@ -685,12 +681,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":319,
+							"value":1904,
 							"type":"unit"
 						},
 						"position":{
-							"x":3546,
-							"z":1067
+							"z":1067,
+							"x":3546
 						}
 					}
 				},{
@@ -700,12 +696,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":13954,
+							"value":15211,
 							"type":"unit"
 						},
 						"position":{
-							"x":3507,
-							"z":1906
+							"z":1906,
+							"x":3507
 						}
 					}
 				},{
@@ -715,12 +711,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":13258,
+							"value":8047,
 							"type":"unit"
 						},
 						"position":{
-							"x":3340,
-							"z":1342
+							"z":1342,
+							"x":3340
 						}
 					}
 				},{
@@ -730,12 +726,12 @@
 					"params":{
 						"command":15,
 						"unitset":{
-							"value":2366,
+							"value":11638,
 							"type":"unit"
 						},
 						"position":{
-							"z":1359,
-							"x":3327
+							"x":3327,
+							"z":1359
 						}
 					}
 				},{
@@ -746,13 +742,25 @@
 						"script":"messages[\"briefing\"] = \"[en]Mission 1\\n \\nHelp your POINTER to join allied defences at position (3476, 1212).\\n \\n\\255\\100\\100\\100Press Escape to continue[en][fr]Mission 1\\n \\nAidez votre POINTER à rejoindre les défenses alliées à la position (3476, 1212).\\n \\n\\255\\100\\100\\100Appuyez sur Echap pour continuer[fr]\""
 					}
 				},{
+					"id":35,
+					"type":"order",
+					"name":"ParamPointer",
+					"params":{
+						"command":45,
+						"unitset":{
+							"value":542,
+							"type":"unit"
+						},
+						"parameters":["0"]
+					}
+				},{
 					"id":21,
 					"type":"orderPosition",
 					"name":"Move",
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"position":1
@@ -771,22 +779,10 @@
 					"params":{
 						"message":["[en]Faster...[en][fr]Vite...[fr]"],
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"time":"3"
-					}
-				},{
-					"id":35,
-					"type":"order",
-					"name":"ParamPointer",
-					"params":{
-						"command":45,
-						"unitset":{
-							"value":5289,
-							"type":"unit"
-						},
-						"parameters":["0"]
 					}
 				}],
 			"id":0
@@ -806,7 +802,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":1
@@ -819,7 +815,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"position":2
@@ -838,7 +834,7 @@
 					"params":{
 						"message":["[en]Faaaaaster...[en][fr]Viiiiiiite...[fr]"],
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"time":"3"
@@ -861,7 +857,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":2
@@ -874,7 +870,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"position":3
@@ -887,7 +883,7 @@
 						"message":["[en]I have to go... They catching me...[en][fr]Je dois me dépêcher... ils me rattrapent...[fr]"],
 						"time":"5",
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						}
 					}
@@ -909,7 +905,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":3
@@ -922,7 +918,7 @@
 					"params":{
 						"command":10,
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"position":4
@@ -934,7 +930,7 @@
 					"params":{
 						"message":["[en]I have to join allies defences before it is too late...[en][fr]Je dois atteindre les défenses alliées avant qu'il ne soit trop tard...[fr]"],
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"time":"8"
@@ -957,7 +953,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":4
@@ -971,7 +967,7 @@
 						"message":["[en]It's just in front of me at position (3476, 1212)[en][fr]C'est juste devant moi à la position (3476, 1212)[fr]"],
 						"time":"10",
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						}
 					}
@@ -1016,7 +1012,7 @@
 						"message":["[en]I have to hurry!!![en][fr]Je dois me dépêcher !!![fr]","[en]The allied camp is close (3476, 1212)[en][fr]Le camp allié n'est pas loin (3476, 1212)[fr]","[en]I have to move...[en][fr]Je dois bouger...[fr]","[en]They are coming[en][fr]Ils arrivent...[fr]","[en]The position (3476, 1212) is not so far[en][fr]La position (3476, 1212) n'est pas loin[fr]","[en]I have to take a decision[en][fr]Je dois prendre une décision[fr]"],
 						"time":"4",
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						}
 					}
@@ -1038,7 +1034,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":7
@@ -1075,16 +1071,9 @@
 							"type":"team"
 						},
 						"position":{
-							"z":1168,
-							"x":3647
+							"x":3647,
+							"z":1168
 						}
-					}
-				},{
-					"id":30,
-					"type":"wait",
-					"name":"Tempo",
-					"params":{
-						"time":"4"
 					}
 				},{
 					"id":34,
@@ -1095,13 +1084,20 @@
 						"variable":"SyncroAide"
 					}
 				},{
+					"id":30,
+					"type":"wait",
+					"name":"Tempo",
+					"params":{
+						"time":"4"
+					}
+				},{
 					"id":31,
 					"type":"bubbleUnit",
 					"name":"Say...",
 					"params":{
 						"message":["[en]A last effort[en][fr]J'y suis presque... plus qu'un dernier effort[fr]"],
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"time":"5"
@@ -1124,7 +1120,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						},
 						"zone":6
@@ -1156,7 +1152,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":5289,
+							"value":542,
 							"type":"unit"
 						}
 					}

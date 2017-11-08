@@ -4,32 +4,32 @@
 			"type":"Disk",
 			"blue":0.80158841609955,
 			"b":72,
-			"marker":true,
-			"showInGame":false,
 			"id":5,
+			"showInGame":false,
+			"marker":true,
+			"alwaysInView":true,
 			"x":480,
 			"name":"BytesPos",
-			"inGameText":"[en]Bytes rallying point\\n      (479, 1825)[en][fr]  Point de ralliement\\ndes bytes (479, 1825)[fr]",
 			"green":0.99604952335358,
-			"z":1824,
 			"shown":true,
-			"alwaysInView":true,
+			"z":1824,
+			"inGameText":"[en]Bytes rallying point\\n      (479, 1825)[en][fr]  Point de ralliement\\ndes bytes (479, 1825)[fr]",
 			"red":0.75692272186279
 		},{
 			"a":72,
 			"type":"Disk",
 			"blue":0.64954459667206,
 			"b":80,
-			"marker":true,
-			"showInGame":false,
 			"id":6,
+			"showInGame":false,
+			"marker":true,
+			"alwaysInView":true,
 			"x":1400,
 			"name":"BitsPos",
-			"inGameText":"[en]Bits rallying point\\n   (1400, 1371)[en][fr] Point de ralliement\\ndes bits (1400, 1371)[fr]",
 			"green":0.35358023643494,
-			"z":1368,
 			"shown":true,
-			"alwaysInView":true,
+			"z":1368,
+			"inGameText":"[en]Bits rallying point\\n   (1400, 1371)[en][fr] Point de ralliement\\ndes bits (1400, 1371)[fr]",
 			"red":0.31035709381104
 		}],
 	"description":{
@@ -52,6 +52,10 @@
 				"name":"Heroes Right Click",
 				"active":false
 			},{
+				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
+				"name":"Mouse Buildspacing",
+				"active":false
+			},{
 				"desc":"Show the mission title and briefing",
 				"name":"Kernel Panic Mission Briefing",
 				"active":false
@@ -68,8 +72,8 @@
 				"name":"ImmobileBuilder",
 				"active":false
 			},{
-				"desc":"XrayShader",
-				"name":"XrayShader",
+				"desc":"Necessary for Lua gadgets to write startscripts.",
+				"name":"Write GameState",
 				"active":false
 			},{
 				"desc":"Reset settings and widgets to fit Kernel Panic",
@@ -80,16 +84,16 @@
 				"name":"Spring Direct Launch 2",
 				"active":false
 			},{
-				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
-				"name":"Show PP Tuto",
-				"active":false
-			},{
 				"desc":"Allows using the rightclick for some commands",
 				"name":"Kernel Panic Default Commands",
 				"active":false
 			},{
 				"desc":"Display the debug information of K.P.A.I.",
 				"name":"Kernel Panic A.I. Debug",
+				"active":false
+			},{
+				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
+				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Show the Prog&Play video at the beginning of the mission",
@@ -100,12 +104,16 @@
 				"name":"CommanderEnds",
 				"active":false
 			},{
-				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
-				"name":"noResBar NoMoveWarnings",
+				"desc":"Show the Prog&Play tutorial based on KernelPanic mod and MarbleMasdness map",
+				"name":"Show PP Tuto",
 				"active":false
 			},{
 				"desc":"Automatically adds 100 stockpile builds to new units",
 				"name":"Stockpiler",
+				"active":false
+			},{
+				"desc":"Removes the res bar and the \"Can't reach destintation!\" spam",
+				"name":"noResBar NoMoveWarnings",
 				"active":false
 			},{
 				"desc":"Display info tips related to O.N.S. shields",
@@ -114,10 +122,6 @@
 			},{
 				"desc":"Buttons for the current selection (incomplete)",
 				"name":"SelectionButtons",
-				"active":false
-			},{
-				"desc":"Makes sockets or window automatically spam bits or bugs, and sets kernels or holes to repeat on default.",
-				"name":"Kernel Panic autospam",
 				"active":false
 			},{
 				"desc":"Shows a team color platter above all visible units",
@@ -136,16 +140,12 @@
 				"name":"HighlightUnit",
 				"active":false
 			},{
-				"desc":"To always keep an eye on your homebase and specials",
-				"name":"Kernel Panic Build Bar",
-				"active":false
-			},{
 				"desc":"Alternate view movement for the middle mouse button",
 				"name":"SmoothScroll",
 				"active":false
 			},{
-				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
-				"name":"Kernel Panic Hotkeys",
+				"desc":"To always keep an eye on your homebase and specials",
+				"name":"Kernel Panic Build Bar",
 				"active":false
 			},{
 				"desc":"Highlight the Geovents when placing Buildings, or when in metal view",
@@ -160,32 +160,28 @@
 				"name":"RelativeMinimap",
 				"active":false
 			},{
-				"desc":"Necessary for Lua gadgets to write startscripts.",
-				"name":"Write GameState",
-				"active":false
-			},{
-				"desc":"Use mosuebuttons 4 and 5 for buildspacing",
-				"name":"Mouse Buildspacing",
+				"desc":"Hotkeys placing sockets/windows to double pression on keypad 2,4,6,8",
+				"name":"Kernel Panic Hotkeys",
 				"active":false
 			},{
 				"desc":"Remove the need to add /luarules in front of some gadgets command",
 				"name":"Kernel Panic Console Commands",
 				"active":false
 			},{
-				"desc":"Draws a mirrored map next to the edges of the real map",
-				"name":"Map edge extension",
+				"desc":"XrayShader",
+				"name":"XrayShader",
 				"active":false
 			}],
 		"saveName":"DigitalWar_M05",
 		"name":"DigitalWar M05",
 		"mainGame":"Kernel Panic 4.1",
 		"mouse":"disabled",
-		"traces":["3","2","1"],
+		"traces":[],
 		"briefing":"[en]Mission 5\n \nIn order to thank you for your help, the BYTE is won over and tells you about other partisan units that have been gathering not far from there. He gives you the position (479, 1825) of a BYTE group that he was trying to join. Moreover, he warns you that a group of BITS has gathered at position (1400, 1371).\n \nTo retrieve these units, give orders to your two units to meet up with their respective groups.\n \nÿ„z„Press Escape to continueÿÿÿÿ[en][fr]Mission 5\n \nPour vous remercier de votre aide, le BYTE se rallie à votre cause et vous informe que d'autres entités alliées se sont regroupées non loin de là. Il vous communique les coordonnées de la formation de BYTES qu'il tentait de rejoindre avant votre arrivée (479, 1825). Il vous indique également qu'un ensemble de BITS s'est rassemblé aux coordonnées (1400, 1371).\n \nAfin de récupérer ces nouvelles forces, ordonnez à vos deux unités de rejoindre leurs semblables.\n \nÿ„z„Appuyez sur ECHAP pour continuerÿÿÿÿ[fr]"
 	},
 	"units":[{
 			"type":"byte",
-			"id":9947,
+			"id":1152,
 			"position":{
 				"y":130,
 				"x":1056,
@@ -197,43 +193,43 @@
 			"team":0
 		},{
 			"type":"bit",
-			"id":8471,
+			"id":14337,
 			"position":{
 				"y":116,
 				"x":1120,
 				"z":1760
 			},
-			"orientation":-2.9283695220947,
+			"orientation":-2.9176316261292,
 			"autoHeal":"global",
 			"hp":25,
 			"team":0
 		},{
 			"type":"bit",
-			"id":11971,
+			"id":3251,
 			"position":{
 				"y":270.39453125,
 				"x":1488,
 				"z":1318
 			},
-			"orientation":-1.3422331809998,
+			"orientation":-1.3314954042435,
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
 		},{
 			"type":"bit",
-			"id":12706,
+			"id":538,
 			"position":{
 				"y":270.39453125,
 				"x":1432,
 				"z":1320
 			},
-			"orientation":-1.2041749954224,
+			"orientation":-1.1826992034912,
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
 		},{
 			"type":"bit",
-			"id":13629,
+			"id":14809,
 			"position":{
 				"y":270.39453125,
 				"x":1477,
@@ -245,19 +241,19 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":2978,
+			"id":7149,
 			"position":{
 				"y":270.39453125,
 				"x":1390,
 				"z":1467
 			},
-			"orientation":-2.8516702651978,
+			"orientation":-2.8409326076508,
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
 		},{
 			"type":"bit",
-			"id":8398,
+			"id":10046,
 			"position":{
 				"y":270.39453125,
 				"x":1463,
@@ -269,19 +265,19 @@
 			"team":1
 		},{
 			"type":"bit",
-			"id":6877,
+			"id":8545,
 			"position":{
 				"y":270.39453125,
 				"x":1331,
 				"z":1430
 			},
-			"orientation":2.808718919754,
+			"orientation":2.7872431278229,
 			"autoHeal":"global",
 			"hp":25,
 			"team":1
 		},{
 			"type":"byte",
-			"id":11933,
+			"id":10596,
 			"position":{
 				"y":130,
 				"x":481,
@@ -293,7 +289,7 @@
 			"team":1
 		},{
 			"type":"byte",
-			"id":4469,
+			"id":11364,
 			"position":{
 				"y":130,
 				"x":429,
@@ -326,7 +322,17 @@
 			"units":[]
 		}],
 	"listOfUnitTypes":["Alice","assembler","Corruption","Bit","Bug","Bug","byte","Carrier","Connection","Logic Bomb","Denial of Service","Artillery","Experiment Base","Constructor","Exploit","mobile arty","Scout","Fairy","Firewall","Flow","Gateway","Hand","Security Hole","Security Hole","kernel","Logic Bomb","Marisa","MegaBit","MegaBug","MegaBug","MegaExploit","Cirno","MegaPacket","Super Virus","Debug","obelisk","Packet","Paper","pointer","Port","Reimu","Rock","Scissors","SIGTERM","socket","terminal","Magical Circle","Small Circle","Trojan","Trojan","Virus","Window","Window","Worm","Worm"],
-	"variables":[],
+	"variables":[{
+			"id":0,
+			"type":"boolean",
+			"name":"BitSay",
+			"initValue":"false"
+		},{
+			"id":1,
+			"type":"boolean",
+			"name":"ByteSaying",
+			"initValue":"false"
+		}],
 	"teams":{
 		"1":{
 			"ai":"",
@@ -456,7 +462,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":8471,
+							"value":14337,
 							"type":"unit"
 						},
 						"zone":6
@@ -471,7 +477,7 @@
 							"comparison":"all"
 						},
 						"unitset":{
-							"value":9947,
+							"value":1152,
 							"type":"unit"
 						},
 						"zone":5
@@ -537,6 +543,208 @@
 					}
 				}],
 			"id":5
+		},{
+			"comment":"",
+			"id":6,
+			"conditionTotal":2,
+			"actionTotal":2,
+			"name":"BitWrongPosition",
+			"repetition":true,
+			"repetitionTime":"0.25",
+			"conditions":[{
+					"id":12,
+					"type":"zone",
+					"name":"InByteZone",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":14337,
+							"type":"unit"
+						},
+						"zone":5
+					}
+				},{
+					"id":13,
+					"type":"booleanVariable",
+					"name":"BitSaying",
+					"params":{
+						"variable":"BitSay"
+					}
+				}],
+			"actions":[{
+					"id":10,
+					"type":"bubbleUnit",
+					"name":"Say...",
+					"params":{
+						"message":["[en]Wow!!! I'm not on the right place.[en][fr]Houlà !!! Je ne suis pas au bon endroit.[fr]"],
+						"id":"bitSaying",
+						"unitset":{
+							"value":14337,
+							"type":"unit"
+						},
+						"time":"0"
+					}
+				},{
+					"id":11,
+					"type":"setBooleanVariable",
+					"name":"Saying",
+					"params":{
+						"boolean":"true",
+						"variable":"BitSay"
+					}
+				}],
+			"trigger":"InByteZone and not BitSaying"
+		},{
+			"comment":"",
+			"id":8,
+			"conditionTotal":2,
+			"actionTotal":2,
+			"name":"BitOutsideWrongPosition",
+			"repetition":true,
+			"repetitionTime":"0.25",
+			"conditions":[{
+					"id":15,
+					"type":"zone",
+					"name":"InByteZone",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":14337,
+							"type":"unit"
+						},
+						"zone":5
+					}
+				},{
+					"id":16,
+					"type":"booleanVariable",
+					"name":"BitSaying",
+					"params":{
+						"variable":"BitSay"
+					}
+				}],
+			"actions":[{
+					"id":12,
+					"type":"setBooleanVariable",
+					"name":"Saying",
+					"params":{
+						"boolean":"false",
+						"variable":"BitSay"
+					}
+				},{
+					"id":13,
+					"type":"removeMessage",
+					"name":"DeleteBubble",
+					"params":{
+						"id":"bitSaying"
+					}
+				}],
+			"trigger":"not InByteZone and BitSaying"
+		},{
+			"comment":"",
+			"id":9,
+			"conditionTotal":2,
+			"actionTotal":2,
+			"name":"ByteWrongPosition",
+			"repetition":true,
+			"repetitionTime":"0.25",
+			"conditions":[{
+					"id":17,
+					"type":"zone",
+					"name":"InBitZone",
+					"params":{
+						"number":{
+							"number":"1",
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":1152,
+							"type":"unit"
+						},
+						"zone":6
+					}
+				},{
+					"id":18,
+					"type":"booleanVariable",
+					"name":"ByteSaying",
+					"params":{
+						"variable":"ByteSaying"
+					}
+				}],
+			"actions":[{
+					"id":14,
+					"type":"bubbleUnit",
+					"name":"Say...",
+					"params":{
+						"id":"byteSaying",
+						"time":"0",
+						"unitset":{
+							"value":1152,
+							"type":"unit"
+						},
+						"message":["[en]Where are others BYTES?[en][fr]Où sont les autres BYTES ?[fr]"]
+					}
+				},{
+					"id":15,
+					"type":"setBooleanVariable",
+					"name":"Saying",
+					"params":{
+						"boolean":"true",
+						"variable":"ByteSaying"
+					}
+				}],
+			"trigger":"InBitZone and not ByteSaying"
+		},{
+			"comment":"",
+			"id":10,
+			"conditionTotal":2,
+			"actionTotal":2,
+			"name":"ByteOutsideWrongPosition",
+			"repetition":true,
+			"repetitionTime":"0.25",
+			"conditions":[{
+					"id":19,
+					"type":"zone",
+					"name":"InBitZone",
+					"params":{
+						"number":{
+							"comparison":"all"
+						},
+						"unitset":{
+							"value":1152,
+							"type":"unit"
+						},
+						"zone":6
+					}
+				},{
+					"id":20,
+					"type":"booleanVariable",
+					"name":"ByteSaying",
+					"params":{
+						"variable":"ByteSaying"
+					}
+				}],
+			"actions":[{
+					"id":16,
+					"type":"setBooleanVariable",
+					"name":"Saying",
+					"params":{
+						"boolean":"false",
+						"variable":"ByteSaying"
+					}
+				},{
+					"id":17,
+					"type":"removeMessage",
+					"name":"DeleteBubble",
+					"params":{
+						"id":"byteSaying"
+					}
+				}],
+			"trigger":"not InBitZone and ByteSaying"
 		}],
 	"listOfCommands":{
 		"0":"Stop",
