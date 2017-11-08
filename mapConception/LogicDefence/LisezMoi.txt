@@ -1,0 +1,1 @@
+Pour créer cette carte, lancer sur Windows le script "makemap.bat" puis copier/coller le fichier "LogicDefence.sdz" dans le dossier map de Spring
