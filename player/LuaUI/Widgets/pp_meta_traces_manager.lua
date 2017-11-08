@@ -16,7 +16,11 @@ local ppTraces = nil -- File handler to store traces
 
 function TraceAction(msg)
 	if ppTraces ~= nil then
-		ppTraces:write("TIME_STAMP "..os.date().." "..msg.."\n")
+		local actor = WG.StudentId -- defined in ask_studentID Widget
+		if actor == nil then
+			actor = "Anonymous"
+		end
+		ppTraces:write("TIME_STAMP "..os.date().." USER_ID "..actor.." TRACE_CONTENT "..msg.."\n")
 		ppTraces:flush()
 	end
 end
