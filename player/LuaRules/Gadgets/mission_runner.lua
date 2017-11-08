@@ -32,14 +32,17 @@ local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..mi
 
 -- message sent by pp_gui_main_menu (Widget)
 function gadget:RecvLuaMsg(msg, player)
-  if missionScript then missionScript.RecvLuaMsg(msg, player) end
-  if msg == "Show briefing" then
-    showBriefing=true  
-  end
-  if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="mission")) then
-    local jsonfile=string.sub(msg,8,-1)
-    if missionScript then missionScript.parseJson(jsonfile) end
-  end
+	if missionScript then
+		missionScript.RecvLuaMsg(msg, player)
+	end
+	if msg == "Show briefing" then
+		showBriefing=true  
+	end
+	if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="CHATMSG")) then -- received from Chat widget (chat_interface.lua)
+        _G.event = {msg = string.sub(msg,9), teamId = string.sub(msg, 8, 8)}
+		SendToUnsynced("NewChatMsg")
+        _G.event = nil
+	end
 end
 
 function gadget:GamePreload()
@@ -225,11 +228,24 @@ function gadget:RecvFromSynced(...)
 		if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
 		if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
 	end
+    
+  elseif arg1 == "traceAction" then
+    local p=json.decode(arg2)
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction(p.traceContent) -- registered by pp_meta_trace_manager.lua
+		end
+	end
 	
   elseif arg1 == "requestUnsyncVals" then
     local valsToSend={}
     valsToSend["speedFactor"]=Spring.GetGameSpeed()
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
+  
+  elseif arg1 == "NewChatMsg" then
+    if Script.LuaUI("NewChatMsg") then -- function defined and registered in chat widget
+      Script.LuaUI.NewChatMsg(SYNCED.event.msg, tonumber(SYNCED.event.teamId)) 
+    end
   end
 end
 

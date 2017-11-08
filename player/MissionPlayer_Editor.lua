@@ -1023,7 +1023,10 @@ local function ApplyNonGroupableAction(act)
 		Spring.SendCommands("cheat 1")
 		Spring.SendCommands("GlobalLOS 1")
 		Spring.SendCommands("cheat 0")
-    
+		
+  -- Trace
+  elseif (act.type=="traceAction") then
+		SendToUnsynced("traceAction", json.encode({traceContent=extractLang(ctx.getAMessage(act.params.trace), lang),target=act.params.team}))
   
   elseif (act.type == "intersection") or (act.type == "union") then
     local g1=ctx.unitSetParamsToUnitsExternal(act.params.unitset1)
@@ -1679,12 +1682,17 @@ local function RecvLuaMsg(msg, player)
       ctx.addUnitToGroups(realId,{teamIndex},false)
       -- </ Register> 
     end 
+	
   elseif ctx.isMessage(msg,"returnUnsyncVals") then
     local jsonString=string.sub(msg,17,-1)
     local values=json.decode(jsonString)
     for ind,val in pairs(values)do
       ctx[ind]=val
     end
+	
+  elseif ctx.isMessage(msg,"mission") then
+	local jsonfile=string.sub(msg,8,-1)
+	ctx.parseJson(jsonfile)
   end
 end
 
@@ -1701,7 +1709,6 @@ missionScript.Stop = Stop
 missionScript.ApplyAction = ApplyAction
 missionScript.RecvLuaMsg = RecvLuaMsg
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToUnitsExternal=unitSetParamsToUnitsExternal ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.UpdateGroups=UpdateGroups ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced
-ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToUnitsExternal=unitSetParamsToUnitsExternal ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.UpdateGroups=UpdateGroups ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced ; ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage
 
 return missionScript

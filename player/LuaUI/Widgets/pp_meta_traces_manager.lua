@@ -2,7 +2,7 @@ function widget:GetInfo()
   return {
     name      = "PP Meta Traces Manager",
     desc      = "Used to deal with traces",
-    author    = "meresse, mocahteam",
+    author    = "meresse, muratet, mocahteam",
     date      = "Feb 25, 2016",
     license   = "GPL v2 or later",
     layer     = 211,
@@ -43,8 +43,11 @@ function widget:Initialize()
 			Spring.CreateDir(tracesDirname)
 		end
 		ppTraces = io.open(tracesDirname..'\\'.."meta.log", "a+")
-		TraceAction("start_mission "..missionName)
 	end
+end
+
+function widget:GameStart()
+	TraceAction("start_mission "..missionName.." with team "..Spring.GetMyTeamID())
 end
 
 function widget:Shutdown()

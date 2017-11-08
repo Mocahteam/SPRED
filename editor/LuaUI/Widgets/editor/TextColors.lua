@@ -57,7 +57,7 @@ textColors = {
 		color = "\255\128\128\255"},
 	zone = {keywords = {"<Zone>"},
 		color = "\255\128\128\0"},
-	text = {keywords = {"<State>", "<Etat>", "<Time>", "<Temps>", "<Trigger>", "<Déclencheur>", "<Number>", "<Nombre>", "<Percentage>", "<Pourcentage>", "<Min>", "<Max>", "<Script>", "<Id>"},
+	text = {keywords = {"<State>", "<Etat>", "<Time>", "<Temps>", "<Trigger>", "<Déclencheur>", "<Number>", "<Nombre>", "<Percentage>", "<Pourcentage>", "<Min>", "<Max>", "<Script>", "<Id>", "<Trace>"},
 		color = "\255\128\0\255"},
 	numberComparison = {keywords = {"<Number>", "<Nombre>"},
 		color = "\255\128\0\128"},
