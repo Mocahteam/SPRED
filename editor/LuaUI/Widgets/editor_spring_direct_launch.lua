@@ -1886,7 +1886,9 @@ function BeginExportGame()
 	-- Choose levels
 	local levelList = {}
 	if IncludeAllMissions then
-		levelList = LevelListNames
+		for i, level in ipairs(LevelListNames) do
+			table.insert(levelList, level)
+		end
 	else
 		for k, link in pairs(Links) do
 			for kk, input in pairs(link) do
