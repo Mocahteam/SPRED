@@ -210,6 +210,12 @@ function gadget:RecvFromSynced(...)
     local p=json.decode(arg2)
     Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time, p.id)
 	
+  elseif arg1 == "displayUIMessage" then
+    local p=json.decode(arg2)
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		Script.LuaUI.DisplayUIMessage(p.message, p.x, p.y, p.width, p.height, p.id)
+	end
+	
   elseif arg1 == "removeMessage" then
     local p=json.decode(arg2)
     Script.LuaUI.RemoveMessageById(p.id)

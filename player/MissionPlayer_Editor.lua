@@ -952,6 +952,14 @@ local function ApplyNonGroupableAction(act)
     local z=posFound.z
     SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(ctx.getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(ctx.computeReference(act.params.time) or 0)/ctx.speedFactor,id=act.params.id}))
 
+  elseif(act.type=="messageUI") then
+    local message = extractLang(ctx.getAMessage(act.params.message), lang)
+	local x = ctx.computeReference(act.params.x)
+	local y = ctx.computeReference(act.params.y)
+	local width = ctx.computeReference(act.params.width)
+	local height = ctx.computeReference(act.params.height)
+	SendToUnsynced("displayUIMessage", json.encode({message=message,x=x.."%",y=y.."%",width=width.."%",height=height.."%",id=act.params.id,target=act.params.team}))
+
   elseif(act.type=="removeMessage") then
     SendToUnsynced("removeMessage", json.encode({id=act.params.id}))
      

@@ -484,6 +484,52 @@ actions_list = {
 		}
 	},
 	{
+		type = "messageUI",
+		filter = "Message",
+		typeText = "Display UI message",
+		text = "[en]Display UI message <Message> at X: <Percentage> %, Y: <Percentage> %, width: <Percentage> % and height: <Percentage> % of screen size for <Team>.[en][fr]Afficher <Message> dans l'interface utilisateur à X : <Pourcentage> %, Y : <Pourcentage> %, largeur : <Pourcentage> % et hauteur : <Pourcentage> % de l'espace d'écran pour <Equipe>.[fr]",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "textSplit",
+				id = "message",
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.\nYou can integrate variables into message by decorating its name with double \"#\" (exemple: \"This is the value of var1: ##var1##\").[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.\nVous pouvez intégrer des variables dans le message en décorant son nom avec des doubles \"#\" (example : \"Voici le contenu de la variable var1 : ##var1##\").[fr]"
+			},
+			{
+				text = "[en]X: <Percentage>[en][fr]X : <Pourcentage>[fr]",
+				type = "text",
+				id = "x",
+				hint = "[en]You can put numbers, variables and operators in these fields (example: \"(var1 + 3) / 2\").[en][fr]Vous pouvez utiliser des nombres, des variables et des opérateurs dans ces champs (exemple : \"(var1 + 3) / 2\").[fr]"
+			},
+			{
+				text = "[en]Y: <Percentage>[en][fr]Y : <Pourcentage>[fr]",
+				type = "text",
+				id = "y"
+			},
+			{
+				text = "[en]Width: <Percentage>[en][fr]Largeur : <Pourcentage>[fr]",
+				type = "text",
+				id = "width"
+			},
+			{
+				text = "[en]Height: <Percentage>[en][fr]Hauteur : <Pourcentage>[fr]",
+				type = "text",
+				id = "height"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
+			},
+			{
+				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
+				type = "text",
+				id = "id",
+				hint = "[en]You can set an id for this message, useful for forcing message to close before the entire time has elapsed (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message avant que le temps ne soit terminé (voir l'action \"Force message to close\").[fr]"
+			}
+		}
+	},
+	{
 		type = "removeMessage",
 		filter = "Message",
 		typeText = "Force message to close",

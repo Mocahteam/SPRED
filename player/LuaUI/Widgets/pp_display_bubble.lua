@@ -13,6 +13,7 @@ end
 local UnitMessages = {}
 local PositionMessages = {}
 local BubbleMessages = {}
+local UIMessages = {}
 
 function DisplayMessageAboveUnit(message, unit, timer, id)
 	table.insert(UnitMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil, id = id})
@@ -24,6 +25,46 @@ end
 
 function DisplayMessageInBubble(message, unit, timer, id)
 	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil, id = id})
+end
+
+function DisplayUIMessage(message, x, y, width, height, id)
+	if (WG.Chili) then
+		local messageUI = WG.Chili.Window:New{
+			parent = WG.Chili.Screen0,
+			x = x,
+			y = y,
+			width  = width,
+			height = height,
+			minWidth = 0,
+			minHeight = 0,
+			draggable = false,
+			resizable = false
+		}
+		WG.Chili.Label:New{
+			parent = messageUI,
+			x = '5%',
+			y = '5%',
+			width = '90%',
+			height = '90%',
+			minWidth = 0,
+			minHeight = 0,
+			align = "left",
+			valign = "linecenter",
+			caption = message,
+			fontsize = 30,
+			padding = {8, 2, 8, 2},
+			font = {
+				font = "LuaUI/Fonts/TruenoRg.otf",
+				size = 30,
+				autoAdjust = true,
+				maxSize = 30,
+				shadow = false
+			}
+		}
+		if (id) then
+			UIMessages[id] = messageUI
+		end
+	end
 end
 
 function TurnTextIntoLines(texte)
@@ -164,16 +205,28 @@ local function forceMessagesToClose (listOfMessages, id)
 	end
 end
 
+local function forceUIMessageToClose (id)
+	if (WG.Chili and UIMessages[id]) then
+		UIMessages[id]:Dispose()
+		UIMessages[id] = nil
+	end
+end
+
 function RemoveMessageById(id)
 	forceMessagesToClose(UnitMessages, id)
 	forceMessagesToClose(PositionMessages, id)
 	forceMessagesToClose(BubbleMessages, id)
+	forceUIMessageToClose(id)
 end
 
 function widget:Initialize()
+	if (not WG.Chili) then -- If chili widget is not loaded, we try to enable it
+		widgetHandler:EnableWidget("Chili Framework")
+	end
 	widgetHandler:RegisterGlobal("DisplayMessageAboveUnit", DisplayMessageAboveUnit)
 	widgetHandler:RegisterGlobal("DisplayMessageAtPosition", DisplayMessageAtPosition)
 	widgetHandler:RegisterGlobal("DisplayMessageInBubble", DisplayMessageInBubble)
+	widgetHandler:RegisterGlobal("DisplayUIMessage", DisplayUIMessage)
 	widgetHandler:RegisterGlobal("RemoveMessageById", RemoveMessageById)
 end
 
@@ -202,5 +255,6 @@ function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("DisplayMessageAboveUnit")
 	widgetHandler:DeregisterGlobal("DisplayMessageAtPosition")
 	widgetHandler:DeregisterGlobal("DisplayMessageInBubble")
+	widgetHandler:DeregisterGlobal("DisplayUIMessage")
 	widgetHandler:DeregisterGlobal("RemoveMessageById")
 end
