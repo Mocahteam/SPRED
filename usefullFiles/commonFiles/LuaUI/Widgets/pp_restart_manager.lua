@@ -25,7 +25,7 @@ local PLAY_LABEL = ""
 local TEAM_CHOSEN_LABEL = ""
 local ENTER_IP_LABEL = ""
 local NO_PLAYER_LABEL = ""
-local function updateLanguage ()
+local function updateLanguage (lang)
 	HOST_LABEL = "Host game"
 	MULTIPLAYER_LABEL = "Multiplayer game"
 	SET_IP_LABEL = "Host IP Address"
@@ -38,7 +38,7 @@ local function updateLanguage ()
 	TEAM_CHOSEN_LABEL = "You choose to play \""
 	ENTER_IP_LABEL = "Enter IP Address of the hosting player:"
 	NO_PLAYER_LABEL = "You can't test this game because no team is controlled by a player."
-	if WG.Language == "fr" then
+	if lang == "fr" then
 		HOST_LABEL = "Héberger la partie"
 		MULTIPLAYER_LABEL = "Partie multijoueurs"
 		SET_IP_LABEL = "Adresse IP de l'hôte"
@@ -196,6 +196,13 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 			shadow = false
 		}
 	}
+	-- Look for a previous IP address
+	local file = io.open("lastIpJoined.ini", "r")
+	local ipAddress = ""
+	if file ~= nil then
+		ipAddress = file:read("*all")
+		file:close()
+	end
 	-- The EditBox
 	local editBox = WG.Chili.EditBox:New {
 		parent = MultiplayerWindow,
@@ -204,6 +211,7 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 		width = "70%",
 		height = "10%",
 		align = "left",
+		text = ipAddress,
 		hint = SET_IP_LABEL,
 		font = {
 			font = "LuaUI/Fonts/TruenoRg.otf",
@@ -243,6 +251,11 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 		focusColor = { 0, 0.6, 1, 1 },
 		OnClick = {
 			function()
+				local file = io.open("lastIpJoined.ini", "w")
+				if file ~= nil then
+					file:write(editBox.text)
+					file:close()
+				end
 				restartAndJoinTheGame(playerName,editBox.text)
 			end
 		},	
@@ -467,7 +480,7 @@ function LoadMission (ScriptFileName, options, isEditorContext)
 		end
 	end
 	
-	updateLanguage()
+	updateLanguage(options["MODOPTIONS"]["language"])
 	
 	-- display appropriate UI depending on players number
 	if(#playerTeams > 1)then
