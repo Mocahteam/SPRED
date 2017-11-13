@@ -525,7 +525,7 @@ actions_list = {
 				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
 				type = "text",
 				id = "id",
-				hint = "[en]You can set an id for this message, useful for forcing message to close before the entire time has elapsed (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message avant que le temps ne soit terminé (voir l'action \"Force message to close\").[fr]"
+				hint = "[en]You can set an id for this message, useful for forcing message to close (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message (voir l'action \"Force message to close\").[fr]"
 			}
 		}
 	},
