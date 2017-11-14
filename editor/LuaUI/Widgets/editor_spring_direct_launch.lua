@@ -358,7 +358,7 @@ function InitializeOutputStates() -- Initialization of the list that contains ev
 		Links[LevelListNames[i]] = {}
 		for ii, e in ipairs(level.events) do
 			for iii, a in ipairs(e.actions) do
-				if a.type == "win" or a.type == "lose" then -- Read the output states within the win and lose actions of events
+				if a.type == "win" or a.type == "lose" or a.type == "gameover" then -- Read the output states within the win, lose and gameover actions of events
 					-- Avoid outputstates duplication
 					if not findInTable(OutputStates[LevelListNames[i]], a.params.outputState) then
 						table.insert(OutputStates[LevelListNames[i]], a.params.outputState)

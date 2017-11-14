@@ -399,10 +399,10 @@ end
 -- Show Briefing, this function can be called from outside
 -- For this reason all the json files must have a message with id BRIEFING
 -------------------------------------
-local function ShowBriefing ()
+local function ShowBriefing (playerID)
   local briefingTxt = ctx.messages["briefing"] -- convention all json files have briefing attribute
   if briefingTxt and briefingTxt ~= "" then
-	Script.LuaRules.showMessage(extractLang(briefingTxt, lang), false, 500)
+	Script.LuaRules.showMessage(extractLang(briefingTxt, lang), false, 500, playerID)
   end
 end
 
@@ -991,6 +991,8 @@ local function ApplyNonGroupableAction(act)
     ctx.gameOver[act.params.team]={victoryState="won", outputstate=act.params.outputState}
   elseif (act.type=="lose") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
     ctx.gameOver[act.params.team]={victoryState="lost", outputstate=act.params.outputState}
+  elseif (act.type=="gameover") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
+    ctx.gameOver[act.params.team]={victoryState="gameover", outputstate=act.params.outputState}
    
    -- VARIABLES
     

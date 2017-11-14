@@ -78,6 +78,7 @@ local LANG_SHOW_BRIEFING = "Show briefing"
 local LANG_VICTORY = "You won the mission"
 local LANG_VICTORY_CAMPAIGN = "Congratulations!!! You complete the campaign"
 local LANG_LOSS = "You lost the mission"
+local LANG_GAMEOVER = "Game Over"
 local LANG_CONTINUE = "Continue"
 local LANG_SAVE_PROGRESSION="Save progression"
 local LANG_SAVE_MESSAGE="Your progression has been saved under the name: "
@@ -115,6 +116,7 @@ if lang == "fr" then
 	LANG_VICTORY = "Vous avez gagné la mission"
 	LANG_VICTORY_CAMPAIGN = "Félicitations !!! Vous avez terminé la campagne"
 	LANG_LOSS = "Vous avez perdu la mission"
+	LANG_GAMEOVER = "Jeu terminé"
 	LANG_SAVE_PROGRESSION="Sauvegarder"
 	LANG_SAVE_MESSAGE="Votre progression a été sauvegardée sous le nom : "
 	LANG_SAVE_ERROR="Fichier de base manquant pour réaliser la sauvegarde, opération annulée !!!"
@@ -700,6 +702,8 @@ local function showMainMenu (missionEnd)
 		title = LANG_VICTORY
 	elseif missionEnd.state == "lost" then
 		title = LANG_LOSS
+	elseif missionEnd.state == "gameover" then
+		title = LANG_GAMEOVER
 	else
 		title = "Menu"
 	end
@@ -809,8 +813,10 @@ local function showMainMenu (missionEnd)
 		else
 			-- is the last mission ?
 			if(nextMiss=="end") then
-				-- change menu label
-				windowLabel:SetCaption(LANG_VICTORY_CAMPAIGN)
+				if missionEnd.state == "won" then
+					-- change menu label
+					windowLabel:SetCaption(LANG_VICTORY_CAMPAIGN)
+				end
 			else
 				-- add continue button
 				local currentInput=AppliqManager:getCurrentInputName()          
@@ -890,7 +896,7 @@ function MissionEvent(e)
   
   if e.logicType == "ShowMissionMenu" then
 	if e.team == nil or e.team == Spring.GetMyTeamID() then
-		if e.state and (e.state == "won" or e.state == "lost") then
+		if e.state and (e.state == "won" or e.state == "lost" or e.state == "gameover") then
 			if Script.LuaUI.MissionEnded then
 				Script.LuaUI.MissionEnded(e.state) -- function defined and registered in Meta Traces Manager widget
 			end
@@ -914,6 +920,8 @@ function MissionEvent(e)
 				message = LANG_VICTORY
 			elseif e.state == "lost" then
 				message = LANG_LOSS
+			elseif e.state == "gameover" then
+				message = LANG_GAMEOVER
 			else
 				message = LANG_WARNING_STATE
 			end

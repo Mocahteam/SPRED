@@ -40,6 +40,25 @@ actions_list = {
 		}
 	},
 	{
+		type = "gameover",
+		filter = "Game",
+		typeText = "Game Over",
+		text = "[en]The game is over with state <State> for <Player>.[en][fr]La partie est terminée avec l'état <Etat> pour <Joueur>.[fr]",
+		attributes = {
+			{
+				text = "[en]<State>[en][fr]<Etat>[fr]",
+				type = "text",
+				id = "outputState",
+				hint = "[en]This string will be used as output state for the scenario editor[en][fr]Cette information sera utilisée comme un état de sortie pour l'éditeur de scénario[fr]"
+			},
+			{
+				text = "[en]<Player>[en][fr]<Joueur>[fr]",
+				type = "player",
+				id = "team"
+			}
+		}
+	},
+	{
 		type = "wait",
 		filter = "Game",
 		typeText = "Wait",
@@ -546,7 +565,7 @@ actions_list = {
 		type = "showBriefing",
 		filter = "Message",
 		typeText = "Show briefing",
-		text = "[en]Show the briefing (The briefing is automatically shown on start, use this action only to show the briefing again in game).[en][fr]Afficher le briefing (Le briefing est automatiquement afficher au démarrage d'une partie, n'utilisez cette action seulement pour afficher à nouveau de briefing en cours de partie).[fr]",
+		text = "[en]Show the briefing (The briefing is automatically shown on start, use this action only to show the briefing again in game).[en][fr]Afficher le briefing (Le briefing est automatiquement afficher au démarrage d'une partie, utilisez cette action seulement pour afficher à nouveau de briefing en cours de partie).[fr]",
 		attributes = {}
 	},
 	{
