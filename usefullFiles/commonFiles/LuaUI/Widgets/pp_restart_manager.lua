@@ -476,7 +476,12 @@ function LoadMission (ScriptFileName, options, isEditorContext)
 	local tableEditor = json.decode(VFS.LoadFile(ScriptFileName))
 	for teamNumber,teamInformations in pairs(tableEditor.teams) do
 		if (teamInformations.control=="player" and teamInformations.enabled==true) then 
-			table.insert(playerTeams, {name=teamInformations.name, color=teamInformations.color})
+			if (teamNumber+1 > #playerTeams) then
+				table.insert(playerTeams, {name=teamInformations.name, color=teamInformations.color})
+			else
+				table.insert(playerTeams, teamNumber+1, {name=teamInformations.name, color=teamInformations.color})
+			end
+			
 		end
 	end
 	
