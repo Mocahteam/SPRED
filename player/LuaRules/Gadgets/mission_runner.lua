@@ -25,7 +25,8 @@ local missionScript = nil
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 
 -- used to show briefing
-local showBriefing = false
+local showBriefing = {}
+
 local initializeUnits = true
 
 local solutions = missionName and (table.getn(VFS.DirList("traces\\expert\\"..missionName,"*.xml")) > 0)
@@ -36,10 +37,10 @@ function gadget:RecvLuaMsg(msg, player)
 		missionScript.RecvLuaMsg(msg, player)
 	end
 	if msg == "Show briefing" then
-		showBriefing=true  
+		showBriefing[player]=true
 	end
 	if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="CHATMSG")) then -- received from Chat widget (chat_interface.lua)
-        _G.event = {msg = string.sub(msg,9), teamId = string.sub(msg, 8, 8)}
+        _G.event = {msg = string.sub(msg,10), teamId = string.sub(msg, 8, 9)}
 		SendToUnsynced("NewChatMsg")
         _G.event = nil
 	end
@@ -70,8 +71,9 @@ function gadget:GameFrame( frameNumber )
       gameOverStates = missionScript.Update(Spring.GetGameFrame())
 	  for teamId, gameOverState in pairs(gameOverStates) do
 		-- build event for unsynchronized section
+		outputState = gameOverState.outputstate or ""
         _G.event = {logicType = "ShowMissionMenu", team = teamId,
-          state = gameOverState.victoryState, outputstate=missionName.."||"..gameOverState.outputstate}
+          state = gameOverState.victoryState, outputstate=missionName.."||"..outputState}
         SendToUnsynced("MissionEvent")
         _G.event = nil
       end
@@ -79,18 +81,19 @@ function gadget:GameFrame( frameNumber )
   end
   
   -- if required, show briefing
-  if showBriefing then
-    missionScript.ShowBriefing()
-    showBriefing = false
+  for playerID, _ in pairs(showBriefing) do
+    missionScript.ShowBriefing(playerID)
   end
+  showBriefing = {}
 end
 
 -- used to show briefings (called by missionScript i.e. MissionPlayer_Editor.lua)
-function showMessage (msg, p, w)
+function showMessage (msg, p, w, playerID)
   _G.event = {logicType = "ShowMessage",
     message = msg,
     width = w,
-    pause = p}
+    pause = p,
+	playerID = playerID}
   SendToUnsynced("MissionEvent")
   _G.event = nil
 end
@@ -185,7 +188,9 @@ function gadget:RecvFromSynced(...)
       for k, v in spairs(SYNCED.event) do
         e[k] = v
       end
-      Script.LuaUI.MissionEvent(e) -- function defined and registered in pp_gui_main_menu widget
+	  if e.playerID == nil or e.playerID == Spring.GetMyPlayerID() then
+		Script.LuaUI.MissionEvent(e) -- function defined and registered in pp_gui_main_menu widget
+	  end
     end
 	
   elseif arg1=="centerCamera" then
@@ -250,7 +255,10 @@ function gadget:RecvFromSynced(...)
   
   elseif arg1 == "NewChatMsg" then
     if Script.LuaUI("NewChatMsg") then -- function defined and registered in chat widget
-      Script.LuaUI.NewChatMsg(SYNCED.event.msg, tonumber(SYNCED.event.teamId)) 
+	  local srcTeamId = tonumber(SYNCED.event.teamId)
+	  if Spring.AreTeamsAllied(Spring.GetMyTeamID(), srcTeamId) then
+		Script.LuaUI.NewChatMsg(SYNCED.event.msg, srcTeamId) 
+	  end
     end
   end
 end

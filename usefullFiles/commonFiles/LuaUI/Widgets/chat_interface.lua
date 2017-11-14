@@ -13,7 +13,7 @@ end
 local Chili, Screen0
 local textBox, editBox
 local history = {}
-local position = 0
+local position = 1
 local window = nil
 
 local colorTable = { -- associative table between a number and its character
@@ -294,18 +294,33 @@ end
 function sendText()
 	if editBox.text and editBox.text ~= "" then
 		table.insert(history, editBox.text)
-		position = #history
-		Spring.SendLuaRulesMsg ("CHATMSG"..Spring.GetMyTeamID().."Player "..Spring.GetMyPlayerID().." : "..editBox.text)
-		editBox:SetText("")		
+		position = #history+1
+		teamOnTwoDigit = ""
+		if Spring.GetMyTeamID() < 10 then
+			teamOnTwoDigit = "0"..Spring.GetMyTeamID()
+		else
+			teamOnTwoDigit = Spring.GetMyTeamID()
+		end
+		local playersInfo = Spring.GetPlayerRoster()
+		for id,playerInfo in ipairs(playersInfo) do
+			-- playerInfo[1] => name
+			-- playerInfo[2] => playerID
+			-- playerInfo[3] => teamID
+			-- playerInfo[4] => ... (see Spring documentation)
+			if (type(playerInfo) == "table" and playerInfo[2] == Spring.GetMyPlayerID()) then
+				Spring.SendLuaRulesMsg ("CHATMSG"..teamOnTwoDigit..playerInfo[1]..": "..editBox.text)
+				editBox:SetText("")		
+			end
+		end
 	end
 end
 
 
 function NewChatMsg(newMsg, teamID)
 	-- get team color
-	r, g, b, a = Spring.GetTeamColor(teamID) 
+	r, g, b, a = Spring.GetTeamColor(teamID)
 	-- add message to UI
-	textBox:SetText(textBox.text.."\255"..colorTable[254*r+1]..colorTable[254*g+1]..colorTable[254*b+1]..newMsg.."\255\255\255\255\n")
+	textBox:SetText(textBox.text.."\255"..colorTable[math.floor(254*r)+1]..colorTable[math.floor(254*g)+1]..colorTable[math.floor(254*b)+1]..newMsg.."\255\255\255\255\n")
 	scrollPanel.scrollPosY = scrollPanel.contentArea[4]
 	scrollPanel:InvalidateSelf()
 	-- trace this message
@@ -317,17 +332,16 @@ end
 
 function widget:Initialize()
 	initChili()
-
+	
 	if Chili ~= nil then
-		window = Chili.Window:New{parent = Screen0,   x='0%', y='70%', width='30%', height='30%'}
+		window = Chili.Window:New{parent = Screen0, x='0%', y='70%', width='30%', height='30%'}
 		
-		scrollPanel = Chili.ScrollPanel:New{parent = window,   x='0%', y='0%', width='100%', height='82%'}
-		
-		textBox = Chili.TextBox:New{parent = scrollPanel,  x='0%', y='0%', width='100%', height='100%', text=""}
+		scrollPanel = Chili.ScrollPanel:New{parent = window, x='0%', y='0%', width='100%', height='82%'}
+    
+		textBox = Chili.TextBox:New{parent = scrollPanel, x='0%', y='0%', width='100%', height='100%', text=""}
 		textBox.font.shadow = false
-		editBox = Chili.EditBox:New{parent = window,  x='0%', y='85%', width='100%', height='15%'}
 		
-		 
+		editBox = Chili.EditBox:New{parent = window, x='0%', y='85%', width='100%', height='15%'}
 		editBox.OnKeyPress = {
 			function (self, key)	
 			
@@ -335,11 +349,31 @@ function widget:Initialize()
 					sendText()
 				end
 				if key == Spring.GetKeyCode("up") then
-					editBox:SetText(history[position])
-					position = position -1
+					if position > 1 then
+						position = position - 1
+						editBox:SetText(history[position])
+					end
+				end
+				if key == Spring.GetKeyCode("down") then
+					if position < #history then
+						position = position + 1
+						editBox:SetText(history[position])
+					end
 				end
 				
 			end
+		}
+		
+		-- Add black filter
+		Chili.Image:New {
+			parent = window,
+			x = "0%",
+			y = "0%",
+			width = "100%",
+			height = "82%",
+			file = "bitmaps/editor/blank.png",
+			keepAspect = false,
+			color = {0, 0, 0, 0.8}
 		}
 	end
 	
