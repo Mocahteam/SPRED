@@ -1,8 +1,8 @@
 function widget:GetInfo()
   return {
     name      = "PP Widget Informer",
-    desc      = "Used to inform about states of widgets by setting a ConfigString (see Spring.SetConfigString())",
-    author    = "meresse, mocahteam",
+    desc      = "Used to inform about states of widgets",
+    author    = "meresse, muratet, mocahteam",
     date      = "Jun 20, 2016",
     license   = "GPL v2 or later",
     layer     = 211,
@@ -11,27 +11,20 @@ function widget:GetInfo()
   }
 end
 
-local savedActiveStates = {}
+local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
-function widget:Update()
-	for name,data in pairs(widgetHandler.knownWidgets) do
-		if savedActiveStates[name] ~= nil and savedActiveStates[name] ~= data.active then
-			if savedActiveStates[name] then 
-				Spring.Echo(name.." was enabled and is now disabled")
-			else
-				Spring.Echo(name.." was disabled and is now enabled")
-			end
-			savedActiveStates[name] = data.active
-		end
-	end
+function AskWidgetState (widgetName)
+	local valsToSend={}
+	valsToSend["widgetName"] = widgetName
+	valsToSend["state"] = widgetHandler.knownWidgets and widgetHandler.knownWidgets[widgetName] and widgetHandler.knownWidgets[widgetName].active
+	valsToSend["teamId"] = Spring.GetMyTeamID()
+	Spring.SendLuaRulesMsg("WidgetStateResult"..json.encode(valsToSend)) -- processed in MissionPlayer_Editor.lua
 end
 
 function widget:Initialize()
-	for name,data in pairs(widgetHandler.knownWidgets) do
-		savedActiveStates[name] = data.active
-	end
+	widgetHandler:RegisterGlobal(widget, "AskWidgetState", AskWidgetState) -- first parameters due to handler = true in GetInfo()
 end
 
 function widget:Shutdown()
-
+	widgetHandler:DeregisterGlobal(widget, "AskWidgetState") -- first parameters due to handler = true in GetInfo()
 end

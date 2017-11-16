@@ -144,7 +144,7 @@ local mouseDisabled = false
 
 function gadget:RecvFromSynced(...)
   local arg1, arg2 = ...
-  if arg1 == "mouseDisabled" then
+  if arg1 == "mouseDisabled" then -- sent by MissionPlayer_Editor.lua
 	local target = arg2
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if not mouseDisabled then
@@ -153,7 +153,7 @@ function gadget:RecvFromSynced(...)
 		end
 	end
 	
-  elseif arg1 == "mouseEnabled" then
+  elseif arg1 == "mouseEnabled" then -- sent by MissionPlayer_Editor.lua
 	local target = arg2
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if mouseDisabled then
@@ -162,7 +162,7 @@ function gadget:RecvFromSynced(...)
 		end
 	end
 	
-  elseif arg1 == "enableCameraAuto" then
+  elseif arg1 == "enableCameraAuto" then -- sent by MissionPlayer_Editor.lua
 	local target = SYNCED.cameraAuto["target"]
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if Script.LuaUI("CameraAuto") then
@@ -174,7 +174,7 @@ function gadget:RecvFromSynced(...)
 		end
 	end
 
-  elseif arg1 == "disableCameraAuto" then
+  elseif arg1 == "disableCameraAuto" then -- sent by MissionPlayer_Editor.lua
 	local target = SYNCED.cameraAuto["target"]
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if Script.LuaUI("CameraAuto") then
@@ -182,7 +182,7 @@ function gadget:RecvFromSynced(...)
 		end
 	end
 	
-  elseif arg1 == "MissionEvent" then
+  elseif arg1 == "MissionEvent" then -- sent by this script (see synced part)
     if Script.LuaUI("MissionEvent") then
       local e = {}
       for k, v in spairs(SYNCED.event) do
@@ -193,7 +193,7 @@ function gadget:RecvFromSynced(...)
 	  end
     end
 	
-  elseif arg1=="centerCamera" then
+  elseif arg1=="centerCamera" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
 	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
 		local state = Spring.GetCameraState()
@@ -203,7 +203,7 @@ function gadget:RecvFromSynced(...)
 		Spring.SetCameraState(state, 2)
 	end
 	
-  elseif arg1 == "DisplayMessageAboveUnit" then
+  elseif arg1 == "DisplayMessageAboveUnit" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
     if(not p.bubble)then
       Script.LuaUI.DisplayMessageAboveUnit(p.message, p.unit, p.time, p.id)
@@ -211,36 +211,36 @@ function gadget:RecvFromSynced(...)
       Script.LuaUI.DisplayMessageInBubble(p.message, p.unit, p.time, p.id)
     end
 	
-  elseif arg1 == "displayMessageOnPosition" then
+  elseif arg1 == "displayMessageOnPosition" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
     Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, p.y, p.z, p.time, p.id)
 	
-  elseif arg1 == "displayUIMessage" then
+  elseif arg1 == "displayUIMessage" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
 	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
 		Script.LuaUI.DisplayUIMessage(p.message, p.x, p.y, p.width, p.height, p.id)
 	end
 	
-  elseif arg1 == "removeMessage" then
+  elseif arg1 == "removeMessage" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
     Script.LuaUI.RemoveMessageById(p.id)
     
-  elseif arg1 == "showZone" then
+  elseif arg1 == "showZone" then -- sent by MissionPlayer_Editor.lua
     local zone=json.decode(arg2)
     Script.LuaUI.AddZoneToDisplayList(zone) -- function defined and registered in pp_display_zone widget
     
-  elseif arg1 == "hideZone" then
+  elseif arg1 == "hideZone" then -- sent by MissionPlayer_Editor.lua
     local zone=json.decode(arg2)
     Script.LuaUI.RemoveZoneFromDisplayList(zone) -- function defined and registered in pp_display_zone widget
     
-  elseif arg1 == "changeWidgetState" then
+  elseif arg1 == "changeWidgetState" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
 	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
 		if(not p.activation) then Spring.SendCommands("luaui disablewidget "..p.widgetName) end
 		if(p.activation) then Spring.SendCommands("luaui enablewidget "..p.widgetName) end
 	end
     
-  elseif arg1 == "traceAction" then
+  elseif arg1 == "traceAction" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
 	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
 		if Script.LuaUI.TraceAction then
@@ -248,10 +248,18 @@ function gadget:RecvFromSynced(...)
 		end
 	end
 	
-  elseif arg1 == "requestUnsyncVals" then
+  elseif arg1 == "requestUnsyncVals" then -- sent by MissionPlayer_Editor.lua
     local valsToSend={}
     valsToSend["speedFactor"]=Spring.GetGameSpeed()
     Spring.SendLuaRulesMsg("returnUnsyncVals"..json.encode(valsToSend))
+	
+  elseif arg1 == "askWidgetState" then -- sent by MissionPlayer_Editor.lua
+    local p=json.decode(arg2)
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		if Script.LuaUI.AskWidgetState then
+			Script.LuaUI.AskWidgetState(p.widgetName) -- registered by pp_widget_informer.lua
+		end
+	end
   
   elseif arg1 == "NewChatMsg" then
     if Script.LuaUI("NewChatMsg") then -- function defined and registered in chat widget

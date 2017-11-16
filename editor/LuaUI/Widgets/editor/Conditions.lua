@@ -42,6 +42,24 @@ conditions_list = {
 		}
 	},
 	{
+		type = "widgetEnabled",
+		filter = "Game",
+		typeText = "Widget is enabled",
+		text = "[en]True if <Widget> is enabled for <Team>.[en][fr]Vrai si <Widget> est activé pour <Equipe>.[fr]",
+		attributes = {
+			{
+				text = "<Widget>",
+				type = "widget",
+				id = "widget"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
+			}
+		}
+	},
+	{
 		type = "zone",
 		filter = "Unit",
 		typeText = "Units are in a zone",

@@ -51,6 +51,9 @@ ctx.variables={}-- -> { string variableName = number|boolean, ... }
 --associative array idZone->zone
 ctx.zones={}-- -> { number id = {"type" = "Disk", "center_xz" = {"x" = number, "z" = number}, "a" = number, "b" = number} | {"type" = "Rectangle", "center_xz" = {"x" = number, "z" = number}, "demiLargeur" = number, "demiLongueur" = number}, ... }
 
+--associative array widgetName -> monitoring states. We know the state of a widget if we asked its state to unsynced code and we received the answer.
+ctx.widgetsState={} -- -> {string widgetName = {number teamId = {boolean asked, boolean answer, boolean state}, ..., -1 (means all teams) = {boolean asked, boolean answer, boolean state, table teamsAnswers = {number teamId, boolean state | "undef"}}}, ...}
+
 --store the last unit killed by a killer. "killer" and "unitKilled" are local unit Id and not Spring unitd id.
 ctx.kills={}-- -> { string|number killer = string|number unitKilled, ... }
 
@@ -720,6 +723,52 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
       elseif(c.type=="repeat") then
         local framePeriod=ctx.secondesToFrames(ctx.computeReference(c.params.number))
         ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
+      elseif(c.type=="widgetEnabled") then
+		local widgetName=c.params.widget
+		local target=c.params.team or -1
+		-- check if this widget is known in mission player
+		if ctx.widgetsState[widgetName] == nil then
+			ctx.widgetsState[widgetName] = {}
+		end
+		-- check if this target is monitoring for this widget in mission player
+		if ctx.widgetsState[widgetName][target] == nil then
+			-- we init monitoring data
+			ctx.widgetsState[widgetName][target] = {asked=false, answer=false, state = false}
+			-- in case of "all teams" we add special field to store data for each team
+			if target == -1 then
+				-- we filter enabled player teams
+				local playerTeams = {}
+				for teamId, data in pairs(ctx.mission.teams) do
+					if data["control"]=="player" and data["enabled"]==true then
+						playerTeams[tonumber(teamId)] = "undef"
+					end
+				end
+				ctx.widgetsState[widgetName][target].teamsAnswers = playerTeams
+			end
+		end
+		-- check if the state of this widget for this target was asked
+		if ctx.widgetsState[widgetName][target].asked then
+			-- check if we received the answer
+			if ctx.widgetsState[widgetName][target].answer then
+				-- we can set truthfullness of this condition and reset monitoring states
+				ctx.conditions[idCond]["currentlyValid"]=ctx.widgetsState[widgetName][target].state
+				ctx.widgetsState[widgetName][target].asked = false
+				ctx.widgetsState[widgetName][target].answer = false
+				ctx.widgetsState[widgetName][target].state = false
+				if target == -1 then
+					-- reset teams answers
+					for teamId,_ in pairs(ctx.widgetsState[widgetName][target].teamsAnswers) do
+						ctx.widgetsState[widgetName][target].teamsAnswers[teamId] = "undef"
+					end
+				end
+				return true
+			end
+		else
+			ctx.widgetsState[widgetName][target].asked = true
+			SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,target=target}))
+		end
+		return false -- truthfullness is not checkable this frame we need to report the evaluation of this condition 
+		
       elseif(c.type=="start") then
         ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
       -- Time related conditions [END]
@@ -757,6 +806,8 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
     --EchoDebug(json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId),2)
     --EchoDebug("current group of undeleted units",2)
     --EchoDebug(json.encode(ctx.getAllLocalUnitIdsFromLocalGroupId),2)
+	
+	return true
 end
 
 -------------------------------------
@@ -775,7 +826,10 @@ local function isTriggerable(event, frameNumber)
   end
   -- step 2: Update conditions truthfulness
   for c,cond in pairs(event.listOfInvolvedConditions) do
-    ctx.UpdateConditionTruthfulness(cond.."_"..tostring(event.id), frameNumber)
+    if ctx.UpdateConditionTruthfulness(cond.."_"..tostring(event.id), frameNumber) == false then
+		-- this condition is not accessable (due to unsynced data request for instance) then we can't evaluate this trigger for now
+		return false
+	end
   end
   --EchoDebug("isTriggerable (before replacement) => "..trigger, 7)
   -- step 3: conditions are replaced to their boolean values.
@@ -1703,6 +1757,36 @@ local function RecvLuaMsg(msg, player)
   elseif ctx.isMessage(msg,"mission") then
 	local jsonfile=string.sub(msg,8,-1)
 	ctx.parseJson(jsonfile)
+	
+  elseif ctx.isMessage(msg,"WidgetStateResult") then -- sent from pp_widget_informer.lua
+	local jsonString=string.sub(msg,18,-1)
+	local values=json.decode(jsonString)
+	-- check if this widgetName is monitored (theorically yes, if not its a problem...) - see UpdateConditionTruthfulness => "widgetEnabled" condition
+	if ctx.widgetsState[values.widgetName] then
+		-- store this data for the team if we ask it
+		if ctx.widgetsState[values.widgetName][values.teamId] ~= nil and ctx.widgetsState[values.widgetName][values.teamId].asked then
+			ctx.widgetsState[values.widgetName][values.teamId].answer = true
+			ctx.widgetsState[values.widgetName][values.teamId].state = values.state
+		end
+		-- store this data for all teams if we ask it
+		if ctx.widgetsState[values.widgetName][-1] ~= nil and ctx.widgetsState[values.widgetName][-1].asked then
+			ctx.widgetsState[values.widgetName][-1].teamsAnswers[values.teamId] = values.state
+			-- check if all teams answer
+			local result = true
+			local allAnswer = true
+			for teamId, r in pairs(ctx.widgetsState[values.widgetName][-1].teamsAnswers) do
+				if r == "undef" then
+					allAnswer = false
+				else
+					result = result and r
+				end
+			end
+			if allAnswer then
+				ctx.widgetsState[values.widgetName][-1].answer = true
+				ctx.widgetsState[values.widgetName][-1].state = result
+			end
+		end
+	end
   end
 end
 
