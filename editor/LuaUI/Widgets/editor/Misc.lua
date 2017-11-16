@@ -149,6 +149,15 @@ function generateSaveName(name)
 end
 
 -----------------------
+-- Prevent magic characters ^$()%.[]*+-?
+-----------------------
+function preventMagicCharacters (name)
+	local newName = name
+	newName = string.gsub(newName, "[%^%$%(%)%%%.%[%]%*%+%-%?]", "")
+	return newName
+end
+
+-----------------------
 -- Copy an array
 -----------------------
 function deepcopy(orig)

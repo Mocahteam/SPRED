@@ -1308,6 +1308,9 @@ function initTriggerWindow()
 		function ()
 			-- prevent space in name
 			conditionNameEditBox:SetText(string.gsub(conditionNameEditBox.text, "%s+", ""))
+			-- prevent magic characters
+			conditionNameEditBox:SetText(preventMagicCharacters(conditionNameEditBox.text))
+			
 			if currentEvent and currentCondition and events[currentEvent].conditions[currentCondition].name ~= conditionNameEditBox.text and conditionNameEditBox.text ~= "" then
 				-- check if the condition is included into the trigger
 				if triggerContainsCondition(events[currentEvent].trigger, events[currentEvent].conditions[currentCondition].name) then
@@ -4801,15 +4804,15 @@ function importCondition() -- Import a condition to the current event, renaming 
 	newCondition.id = conditionNumber
 	local count = 0
 	for i, c in ipairs(ce.conditions) do
-		local substring = string.gsub(c.name, "%(%d+%)", "")
-		if substring == importedCondition.name then
+		local substring = string.gsub(c.name, "_%d+$", "")
+		if substring == string.gsub(importedCondition.name, "_%d+$", "") then
 			count = count + 1
 		end
 	end
 	if count == 0 then
-		newCondition.name = importedCondition.name
+		newCondition.name = string.gsub(importedCondition.name, "_%d+$", "")
 	else
-		newCondition.name = importedCondition.name.."("..count..")"
+		newCondition.name = string.gsub(importedCondition.name, "_%d+$", "").."_"..count
 	end
 	newCondition.type = importedCondition.type
 	newCondition.params = deepcopy(importedCondition.params)
@@ -4830,15 +4833,15 @@ function importAction() -- Import an action to the current event, renaming it if
 	newAction.id = actionNumber
 	local count = 0
 	for i, a in ipairs(ce.actions) do
-		local substring = string.gsub(a.name, "%(%d+%)", "")
-		if substring == importedAction.name then
+		local substring = string.gsub(a.name, "_%d+$", "")
+		if substring == string.gsub(importedAction.name, "_%d+$", "") then
 			count = count + 1
 		end
 	end
 	if count == 0 then
-		newAction.name = importedAction.name
+		newAction.name = string.gsub(importedAction.name, "_%d+$", "")
 	else
-		newAction.name = importedAction.name.."("..count..")"
+		newAction.name = string.gsub(importedAction.name, "_%d+$", "").."_"..count
 	end
 	newAction.type = importedAction.type
 	newAction.params = deepcopy(importedAction.params)
@@ -4918,6 +4921,8 @@ function drawVariableFeature(var, y) -- Draw the UI elements to edit a variable
 		function ()
 			-- prevent space in name
 			nameEditBox:SetText(string.gsub(nameEditBox.text, "%s+", ""))
+			-- prevent magic characters
+			nameEditBox:SetText(preventMagicCharacters(nameEditBox.text))
 			if var.name ~= nameEditBox.text and nameEditBox.text ~= "" then
 				var.name = nameEditBox.text -- Update variables value
 				saveState()
