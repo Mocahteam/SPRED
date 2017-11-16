@@ -308,7 +308,8 @@ function sendText()
 			-- playerInfo[3] => teamID
 			-- playerInfo[4] => ... (see Spring documentation)
 			if (type(playerInfo) == "table" and playerInfo[2] == Spring.GetMyPlayerID()) then
-				Spring.SendLuaRulesMsg ("CHATMSG"..teamOnTwoDigit..playerInfo[1]..": "..editBox.text)
+				-- Send message only to allies
+				Spring.SendLuaUIMsg ("CHATMSG"..teamOnTwoDigit..playerInfo[1]..": "..editBox.text, "allies")
 				editBox:SetText("")		
 			end
 		end
@@ -316,16 +317,23 @@ function sendText()
 end
 
 
-function NewChatMsg(newMsg, teamID)
-	-- get team color
-	r, g, b, a = Spring.GetTeamColor(teamID)
-	-- add message to UI
-	textBox:SetText(textBox.text.."\255"..colorTable[math.floor(254*r)+1]..colorTable[math.floor(254*g)+1]..colorTable[math.floor(254*b)+1]..newMsg.."\255\255\255\255\n")
-	scrollPanel.scrollPosY = scrollPanel.contentArea[4]
-	scrollPanel:InvalidateSelf()
-	-- trace this message
-	if Script.LuaUI.TraceAction then
-		Script.LuaUI.TraceAction("chat_msg "..newMsg) -- registered by pp_meta_trace_manager.lua
+
+function widget:RecvLuaMsg(msg, playerID)
+	-- Check if it is a chat message
+	if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="CHATMSG")) then -- send by this widget (see sendText function)
+		-- parse message content
+		local teamID = string.sub(msg, 8, 9)
+		local msgBody = string.sub(msg,10)
+		-- get team color
+		r, g, b, a = Spring.GetTeamColor(teamID)
+		-- add message to UI
+		textBox:SetText(textBox.text.."\255"..colorTable[math.floor(254*r)+1]..colorTable[math.floor(254*g)+1]..colorTable[math.floor(254*b)+1]..msgBody.."\255\255\255\255\n")
+		scrollPanel.scrollPosY = scrollPanel.contentArea[4]
+		scrollPanel:InvalidateSelf()
+		-- trace this message
+		if Script.LuaUI.TraceAction then
+			Script.LuaUI.TraceAction("chat_msg "..msgBody) -- registered by pp_meta_trace_manager.lua
+		end
 	end
 end
 
@@ -376,12 +384,9 @@ function widget:Initialize()
 			color = {0, 0, 0, 0.8}
 		}
 	end
-	
-	widgetHandler:RegisterGlobal("NewChatMsg", NewChatMsg)
 end
 
 function widget:Shutdown()
-	widgetHandler:DeregisterGlobal("NewChatMsg")
 	if window ~= nil then
 		window:Dispose()
 		window = nil

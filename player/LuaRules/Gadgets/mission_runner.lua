@@ -39,11 +39,6 @@ function gadget:RecvLuaMsg(msg, player)
 	if msg == "Show briefing" then
 		showBriefing[player]=true
 	end
-	if((msg~=nil)and(string.len(msg)>7)and(string.sub(msg,1,7)=="CHATMSG")) then -- received from Chat widget (chat_interface.lua)
-        _G.event = {msg = string.sub(msg,10), teamId = string.sub(msg, 8, 9)}
-		SendToUnsynced("NewChatMsg")
-        _G.event = nil
-	end
 end
 
 function gadget:GamePreload()
@@ -260,14 +255,6 @@ function gadget:RecvFromSynced(...)
 			Script.LuaUI.AskWidgetState(p.widgetName) -- registered by pp_widget_informer.lua
 		end
 	end
-  
-  elseif arg1 == "NewChatMsg" then
-    if Script.LuaUI("NewChatMsg") then -- function defined and registered in chat widget
-	  local srcTeamId = tonumber(SYNCED.event.teamId)
-	  if Spring.AreTeamsAllied(Spring.GetMyTeamID(), srcTeamId) then
-		Script.LuaUI.NewChatMsg(SYNCED.event.msg, srcTeamId) 
-	  end
-    end
   end
 end
 
