@@ -23,7 +23,7 @@ local vsx = 0
 -- Screen height in pixels
 local vsy = 0
 -- Selected language
-local language = "en"
+local language = Spring.GetConfigString("Language", "en") -- Get language from springrc / springsettings.cfg file.
 
 if Game.version == "0.82.5.1" then gameFolder = "mods" end
 
@@ -37,12 +37,8 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	UI.Help:SetText (LAUNCHER_HELP)
 	UI.QuitButton:SetCaption (LAUNCHER_QUIT)
 	language = lang
-	-- store this default language
-	local file = io.open("language.ini", "w")
-	if file ~= nil then
-		file:write(language)
-		file:close()
-	end
+	-- store this default language in config file
+	Spring.SetConfigString("Language", lang)
 end
 
 function InitializeChili()
@@ -301,12 +297,7 @@ end
 function widget:Initialize()
 	widgetHandler:EnableWidget("Chili Framework")
 	InitializeChili()
-	-- Look for previous language selected
-	local file = io.open("language.ini", "r")
-	if file ~= nil then
-		language = file:read("*all")
-		file:close()
-	end
+
 	InitializeMenu()
 	if language == "en" then
 		UI.LanguageComboBox:Select(1)

@@ -196,13 +196,9 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 			shadow = false
 		}
 	}
-	-- Look for a previous IP address
-	local file = io.open("lastIpJoined.ini", "r")
-	local ipAddress = ""
-	if file ~= nil then
-		ipAddress = file:read("*all")
-		file:close()
-	end
+	
+	local ipAddress = Spring.GetConfigString("PreviousIP", "") -- Get previousIPAddress from springrc / springsettings.cfg file.
+	
 	-- The EditBox
 	local editBox = WG.Chili.EditBox:New {
 		parent = MultiplayerWindow,
@@ -251,11 +247,8 @@ function ask_to_input_ip(missionName, options, playerTeams, isHost, isEditorCont
 		focusColor = { 0, 0.6, 1, 1 },
 		OnClick = {
 			function()
-				local file = io.open("lastIpJoined.ini", "w")
-				if file ~= nil then
-					file:write(editBox.text)
-					file:close()
-				end
+				-- store this default IP in config file
+				Spring.SetConfigString("PreviousIP", editBox.text)
 				restartAndJoinTheGame(playerName,editBox.text)
 			end
 		},	

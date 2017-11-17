@@ -12,7 +12,7 @@ function widget:GetInfo()
 end
 local reloadAvailable=(tonumber(Game.version)~=nil and tonumber(Game.version)>=99)
 local hideView=true
-local lang="en" -- set default language (see widget:Initialize for more details)
+local lang=Spring.GetConfigString("Language", "en") -- Get language from springrc / springsettings.cfg file. Possibly overrided in widget:Initialize.
 
 local gameName=Game.gameShortName or Game.modShortName
 
@@ -113,12 +113,8 @@ local function ChangeLanguage(lg)
 		local elToChange=bloc["el"]
 		UpdateCaption(UI[elToChange], newCaption)
 	end
-	-- store this default language
-	local file = io.open("language.ini", "w")
-	if file ~= nil then
-		file:write(lg)
-		file:close()
-	end
+	-- store this default language in config file
+	Spring.SetConfigString("Language", lang)
 end
 
 local function Capitalize(str)
@@ -466,17 +462,13 @@ function widget:Initialize()
       widgetHandler:RemoveWidget()
       return
     end
-	-- Look for previous language selected
-	local file = io.open("language.ini", "r")
-	if file ~= nil then
-		lang = file:read("*all")
-		file:close()
-	end
-	-- override it with ModOption if exists
+	
+	-- override Language with ModOption if exists
 	if Spring.GetModOptions().language then
 		lang = Spring.GetModOptions().language
 	end
     initGui()
+	
   else
     hideView=false
   end

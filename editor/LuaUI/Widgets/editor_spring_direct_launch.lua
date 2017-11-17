@@ -48,7 +48,7 @@ local LoadIndex = 1 -- Current load index
 local NeedToBeSaved = false -- Know when the scenario has to be changed or not
 
 local editorRunning = false
-WG.Language = "en" -- Set default language (see widget:Initialize for more details)
+WG.Language = Spring.GetConfigString("Language", "en") -- Get language from springrc / springsettings.cfg file. Possibly overrided in widget:Initialize.
 
 function InitializeChili() -- Initialize Chili variables
 	if not WG.Chili then
@@ -1536,12 +1536,8 @@ function ChangeLanguage(lang) -- Load strings corresponding to lang and update c
 	ClearTemporaryUI()
 
 	WG.Language = lang
-	-- store this default language
-	local file = io.open("language.ini", "w")
-	if file ~= nil then
-		file:write(lang)
-		file:close()
-	end
+	-- store this default language in config file
+	Spring.SetConfigString("Language", lang)
 	
 	GetLauncherStrings(lang)
 
@@ -2094,16 +2090,12 @@ function widget:Initialize()
 	widgetHandler:EnableWidget("Chili Framework")
 	CreateMissingDirectories()
 	InitializeChili()
-	-- Look for previous language selected
-	local file = io.open("language.ini", "r")
-	if file ~= nil then
-		WG.Language = file:read("*all")
-		file:close()
-	end
-	-- override it with ModOption if exists
+	
+	-- override Language with ModOption if exists
 	if Spring.GetModOptions().language then
 		WG.Language = Spring.GetModOptions().language
 	end
+	
 	if not Spring.GetModOptions().hidemenu then
 		SwitchOn()
 	else

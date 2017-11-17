@@ -47,11 +47,9 @@ local function storePlayerId()
 	if secondEditBox and secondEditBox.text and secondEditBox.text~="" then
 		WG.StudentId = WG.StudentId..secondEditBox.text
 	end
-	local file = io.open("studentId.ini", "w")
-	if file ~= nil then
-		file:write(WG.StudentId)
-		file:close()
-	end
+	-- store this default students id in config file
+	Spring.SetConfigString("StudentsId", WG.StudentId)
+	
 	widgetHandler:RemoveWidget() -- remove self
 end
 
@@ -202,19 +200,15 @@ function displayUI()
 	}
 	
 	-- Look for an existing student ID
-	local file = io.open("studentId.ini", "r")
 	local studentId1 = ""
 	local studentId2 = ""
-	if file ~= nil then
-		local content = file:read("*all")
-		file:close()
-		local studentsId = splitString(content, "###")
-		if studentsId[1] then
-			studentId1 = studentsId[1]
-		end
-		if studentsId[2] then
-			studentId2 = studentsId[2]
-		end
+	local content = Spring.GetConfigString("StudentsId", "") -- Get students id from springrc / springsettings.cfg file.
+	local studentsId = splitString(content, "###")
+	if studentsId[1] then
+		studentId1 = studentsId[1]
+	end
+	if studentsId[2] then
+		studentId2 = studentsId[2]
 	end
 	-- The EditBox
 	firstEditBox = WG.Chili.EditBox:New {
