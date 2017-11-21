@@ -3,7 +3,7 @@
 -- 255255255 => (empty)
 -- 255255128 => unitset
 -- 255255000 => team and teamWithAll
--- 255128255 => player
+-- 255128255 => (empty)
 -- 255128000 => toggle
 -- 255000255 => textSplit
 -- 255000128 => comparison
@@ -36,8 +36,6 @@ textColors = {
 		color = "\255\255\255\0"},
 	teamWithAll = {keywords = {"<Team>", "<Equipe>"},
 		color = "\255\255\255\0"},
-	player = {keywords = {"<Player>", "<Joueur>"},
-		color = "\255\255\128\255"},
 	toggle = {keywords = {"<State>", "<Etat>"},
 		color = "\255\255\128\0"},
 	textSplit = {keywords = {"<Parameters>", "<Paramètres>", "<Message>"},

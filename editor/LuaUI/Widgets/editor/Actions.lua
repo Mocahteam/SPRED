@@ -5,11 +5,11 @@ actions_list = {
 		type = "win",
 		filter = "Game",
 		typeText = "Player wins",
-		text = "[en]<Player> wins with state <State>.[en][fr]<Joueur> gagne avec l'état <Etat>.[fr]",
+		text = "[en]<Team> wins with state <State>.[en][fr]<Equipe> gagne avec l'état <Etat>.[fr]",
 		attributes = {
 			{
-				text = "[en]<Player>[en][fr]<Joueur>[fr]",
-				type = "player",
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "team",
 				id = "team"
 			},
 			{
@@ -24,11 +24,11 @@ actions_list = {
 		type = "lose",
 		filter = "Game",
 		typeText = "Player loses",
-		text = "[en]<Player> loses with state <State>.[en][fr]<Joueur> perd avec l'état <Etat>.[fr]",
+		text = "[en]<Team> loses with state <State>.[en][fr]<Equipe> perd avec l'état <Etat>.[fr]",
 		attributes = {
 			{
-				text = "[en]<Player>[en][fr]<Joueur>[fr]",
-				type = "player",
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "team",
 				id = "team"
 			},
 			{
@@ -43,7 +43,7 @@ actions_list = {
 		type = "gameover",
 		filter = "Game",
 		typeText = "Game Over",
-		text = "[en]The game is over with state <State> for <Player>.[en][fr]La partie est terminée avec l'état <Etat> pour <Joueur>.[fr]",
+		text = "[en]The game is over with state <State> for <Team>.[en][fr]La partie est terminée avec l'état <Etat> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "[en]<State>[en][fr]<Etat>[fr]",
@@ -52,10 +52,29 @@ actions_list = {
 				hint = "[en]This string will be used as output state for the scenario editor[en][fr]Cette information sera utilisée comme un état de sortie pour l'éditeur de scénario[fr]"
 			},
 			{
-				text = "[en]<Player>[en][fr]<Joueur>[fr]",
-				type = "player",
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "team",
 				id = "team"
 			}
+		}
+	},
+	{
+		type = "setFinalFeedback",
+		filter = "Game",
+		typeText = "Set Final Feedback",
+		text = "[en]Set <Message> as final feedback when game is over for <Team>.[en][fr]Définit <Message> comme feedback de fin lorsque la partie est terminée pour <Equipe>.[fr]",
+		attributes = {
+			{
+				text = '<Message>',
+				type = "textSplit",
+				id = "message",
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.\nYou can integrate variables into message by decorating its name with double \"#\" (exemple: \"This is the value of var1: ##var1##\").[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.\nVous pouvez intégrer des variables dans le message en décorant son nom avec des doubles \"#\" (example : \"Voici le contenu de la variable var1 : ##var1##\").[fr]"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
+			},
 		}
 	},
 	{

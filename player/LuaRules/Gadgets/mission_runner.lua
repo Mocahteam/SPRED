@@ -68,7 +68,8 @@ function gadget:GameFrame( frameNumber )
 		-- build event for unsynchronized section
 		outputState = gameOverState.outputstate or ""
         _G.event = {logicType = "ShowMissionMenu", team = teamId,
-          state = gameOverState.victoryState, outputstate=missionName.."||"..outputState}
+          state = gameOverState.victoryState, outputstate=missionName.."||"..outputState,
+		  finalFeedback = missionScript.GetFinalFeedback(teamId)}
         SendToUnsynced("MissionEvent")
         _G.event = nil
       end

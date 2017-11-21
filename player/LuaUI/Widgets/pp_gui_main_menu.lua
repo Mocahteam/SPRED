@@ -512,10 +512,12 @@ local function updateFeedbackFields ()
 			end
 		end
 	end
-	-- show comboboxes depending on feedbacks number (need at least one)
+	-- show comboboxes depending on feedback data
 	if feedbackCanvas and clearComboBox and usefulComboBox then
-		if #feedbacks <= 0 then
-			feedbackCanvas:SetText("")
+		if #feedbacks <= 0 or feedbacks[currentFeedback].clearness == nil or feedbacks[currentFeedback].utility == nil then
+			if #feedbacks <= 0 then
+				feedbackCanvas:SetText("")
+			end
 			if clearComboBox.visible then
 				clearComboBox:Hide()
 			end
@@ -569,7 +571,9 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 	
 	feedbackPanel = addPanel(mainWindow, _x, _y, _width, _height)
 	
-	addLabel(feedbackPanel, "2%", "0%", "96%", "17%", LANG_ADVICE, "center", "linecenter")
+	if traceOn then
+		addLabel(feedbackPanel, "2%", "0%", "96%", "17%", LANG_ADVICE, "center", "linecenter")
+	end
 	
 	-- add scroll panel for long feedbacks
 	local scrollPanel = addScrollPanel(feedbackPanel, "16%", "17%", "68%", "49%")
@@ -712,7 +716,7 @@ local function showMainMenu (missionEnd)
 	windowLabel.font.size = 40
 	windowLabel.font.maxSize = 40
 	
-	if missionEnd.state ~= "menu" then -- means won or lost
+	if missionEnd.state ~= "menu" then -- means won or lost or gameover
 		if traceOn then
 			-- add score
 			scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
@@ -725,6 +729,13 @@ local function showMainMenu (missionEnd)
 			if feedbackPanel.visible then
 				feedbackPanel:Hide() -- by default, we hide the panel
 			end
+		elseif missionEnd.finalFeedback and missionEnd.finalFeedback ~= "" then
+			table.insert (feedbacks,
+					{
+						feedback=missionEnd.finalFeedback
+					}
+				)
+			displayFeedbackPanel(mainMenuWindow, "40%", "20%", "60%", "80%")
 		end
 	else
 		-- The close button
@@ -924,6 +935,9 @@ function MissionEvent(e)
 				message = LANG_GAMEOVER
 			else
 				message = LANG_WARNING_STATE
+			end
+			if e.finalFeedback and e.finalFeedback ~= "" then
+				message = message.."\n"..e.finalFeedback
 			end
 			MissionEvent({logicType = "ShowMessage",message = message, width = 500,pause = false})
 		else

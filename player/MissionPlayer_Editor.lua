@@ -73,6 +73,9 @@ ctx.actionStack={}-- -> { [1] = {"action" = table, "delay" = number}, ... }
 --when this global variable change (with event of type "end"), the game ends (= victory or defeat) for a given team
 ctx.gameOver={} -- {number teamId = {"victoryState" = string "won"|"lost", "outputstate"=number}, ...}
 
+--associative array team -> end feedback. If teamId == -1 means all teams.
+ctx.finalFeedback={} -- -> {number teamId = string, ...}
+
 --the full json describing the mission
 ctx.mission=nil-- -> { "desciption" = table, "zones" = table, "units" = table, "allyteams" = table, "groups" = table, "listOfUnitTypes" = table, "variables" = table, "teams" = table, "events" = table, "listOfCommands" = table }
 
@@ -1047,6 +1050,10 @@ local function ApplyNonGroupableAction(act)
     ctx.gameOver[act.params.team]={victoryState="lost", outputstate=act.params.outputState}
   elseif (act.type=="gameover") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
     ctx.gameOver[act.params.team]={victoryState="gameover", outputstate=act.params.outputState}
+	
+  -- FINAL FEEDBACK
+  elseif (act.type=="setFinalFeedback") then
+	ctx.finalFeedback[act.params.team] = extractLang(ctx.getAMessage(act.params.message), lang)
    
    -- VARIABLES
     
@@ -1700,6 +1707,18 @@ local function isMessage(msg,target_msg)
   return ((msg~=nil)and(string.len(msg)>lengthTarget)and(string.sub(msg,1,lengthTarget)==target_msg))
 end
 
+-----------------------------------
+-- Get the final feedback message sets for this teamId
+local function GetFinalFeedback (teamId)
+	local feedback = ""
+	if ctx.finalFeedback[teamId] ~= nil and ctx.finalFeedback[teamId] ~= "" then
+		feedback = ctx.finalFeedback[teamId]
+	elseif ctx.finalFeedback[-1] ~= nil and ctx.finalFeedback[-1] ~= "" then
+		feedback = ctx.finalFeedback[-1]
+	end
+	return feedback
+end
+
 -------------------------------------
 -- Information received from Unsynced Code 
 -- Executed in mission_runner.lua
@@ -1802,7 +1821,8 @@ missionScript.Update = Update
 missionScript.Stop = Stop
 missionScript.ApplyAction = ApplyAction
 missionScript.RecvLuaMsg = RecvLuaMsg
+missionScript.GetFinalFeedback = GetFinalFeedback
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToUnitsExternal=unitSetParamsToUnitsExternal ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.UpdateGroups=UpdateGroups ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced ; ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToUnitsExternal=unitSetParamsToUnitsExternal ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.UpdateGroups=UpdateGroups ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced ; ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage ; ctx.GetFinalFeedback=GetFinalFeedback
 
 return missionScript
