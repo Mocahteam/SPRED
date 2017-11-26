@@ -2208,11 +2208,11 @@ local function RecvLuaMsg(msg, player)
     local spKillerId=killTable.attackerID
     local spKilledId=killTable.unitID
     local missionPlayerKillerId=ctx.getLocalUnitIdFromSpringId[spKillerId]
-	if missionPlayerKillerId ~= nil then
-		ctx.kills[missionPlayerKillerId]=missionPlayerKilledId
-	end
     local missionPlayerKilledId=ctx.getLocalUnitIdFromSpringId[spKilledId]
 	if missionPlayerKilledId ~= nil then
+		if missionPlayerKillerId ~= nil then
+			ctx.kills[missionPlayerKillerId]=missionPlayerKilledId
+		end
 		--Update Groups
 		local groupsName = {}
 		for groupName, _ in pairs(ctx.getAvailableLocalUnitIdsFromLocalGroupId) do
