@@ -192,12 +192,24 @@ actions_list = {
 		type = "centerCamera",
 		filter = "Control",
 		typeText = "Center camera to position",
-		text = "[en]Center camera to <Position> for <Team>.[en][fr]Centrer la caméra sur <Position> pour <Equipe>.[fr]",
+		text = "[en]Center camera to <Position> at distance <Percentage> and with inclination <Percentage> for <Team>.[en][fr]Centrer la caméra sur <Position> à une hauteur de <Pourcentage> et avec une inclinaison de <Pourcentage> pour <Equipe>.[fr]",
 		attributes = {
 			{
 				text = "<Position>",
 				type = "position",
 				id = "position"
+			},
+			{
+				text = "[en]Dist. <Percentage>[en][fr]Dist. <Pourcentage>[fr]",
+				type = "text",
+				id = "distance",
+				hint = "[en]0 means close to the floor (if empty the default value will be used: 12). You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]0 signifie proche du sol (si vide la valeur par défaut est utilisée : 12). Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
+			},
+			{
+				text = "[en]Incl. <Percentage>[en][fr]Incl. <Pourcentage>[fr]",
+				type = "text",
+				id = "rotation",
+				hint = "[en]0 means vertical view (if empty the default value will be used: 20). You can put numbers, variables and operators in this field (example: \"(var1 + 3) / 2\").[en][fr]0 signifie une vue verticale (si vide la valeur par défaut est utilisée : 20). Vous pouvez utiliser des nombres, des variables et des opérateurs dans ce champs (exemple : \"(var1 + 3) / 2\").[fr]"
 			},
 			{
 				text = "[en]<Team>[en][fr]<Equipe>[fr]",

@@ -104,15 +104,13 @@ function gadget:Shutdown()
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerDefID, attackerTeam) 
-  if(attackerTeam~=nil)and(attackerID~=nil)then
-    local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}   
-    Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
-  end
+  local killTable={unitID=unitID, unitDefID=unitDefID, unitTeam=unitTeam, attackerID=attackerID, attackerDefID=attackerDefID, attackerTeam=attackerTeam}   
+  Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
 end
 --weaponDefID, projectileID, attackerID,
 function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
   if(unitID~=nil)then
-    local damageTable={attackedUnit=unitID,damage=damage, attackerID=attackerID,frame=-1}--frame -1 indicates that we don't know when the event occured, it will be computed in the update loop mission player 
+    local damageTable={attackedUnit=unitID,damage=damage, attackerID=attackerID} 
     Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
   end
 end
@@ -195,7 +193,32 @@ function gadget:RecvFromSynced(...)
 		local state = Spring.GetCameraState()
 		state.px=p.pos.x
 		state.pz=p.pos.z
-		state.height = 800
+		state.height = ((p.distance/100)*3588)+60 -- we keep height between 60 and 3648 (min and max values for Spring)
+		-- set rotation
+		-- Two magic constants : 0.0529831736655 and 2.99573227355
+		-- If we decompose rotation with a linear function the camera seams to follow a logarithmic movement (quick on start (0, 1, 2...) and slow at the end (... 98, 99, 100)
+		-- So we compute zscale with an exponential to compensate for this behavior
+		-- At vertical position p.rotation == 0 and zscale must be set to 0.05
+		-- At horizontal position p.rotation == 100 and zscale must be set to 10
+		-- so we have : 0.05 = e(a*0+b)
+		--              10   = e(a*100+b)
+		--
+		--              ln(0.05) = b
+		--              ln(10)   = a*100+b
+		--
+		--              ln(0.05) = b
+		--              ln(10)   = a*100+ln(0.05)
+		--
+		--              ln(0.05)              = b
+		--              (ln(10)-ln(0.05))/100 = a
+		--
+		--              b = -2.99573227355
+		--              a = 0.0529831736655
+		-- With these parameters we inverse the behavior too slow on start but better at the end so we speed up start with a linear function
+		-- To see this function trace it: f(x) = e((ln(10)-ln(0.05))/100*x-ln(0.05))*x/100+4*x/100*(1-x/100)
+		local zscale1 = math.exp(0.0529831736655*p.rotation-2.99573227355)
+		local zscale2 = 4*p.rotation/100
+		state.zscale = zscale1*p.rotation/100+zscale2*(1-p.rotation/100)
 		Spring.SetCameraState(state, 2)
 	end
 	

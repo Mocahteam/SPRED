@@ -3677,13 +3677,20 @@ drawFeatureFunctions["unitType"] = function(attr, yref, ac, panel, feature)
 			table.insert(comboBoxItems, u)
 		end
 	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_TEAM_NOT_FOUND)
+	end
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '40%', y.."%", '58%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_UNITTYPE_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = comboBox.items[comboBox.selected]
+				end
 				saveState()
 			end
 		end
@@ -3716,6 +3723,9 @@ drawFeatureFunctions["team"] = function(attr, yref, ac, panel, feature)
 			table.insert(comboBoxItems, teamName[teamNo])
 			itemIdToTeamId[#comboBoxItems] = teamNo -- now we know that the nth combobox item is associated to the team with number teamNo
 		end
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_TEAM_NOT_FOUND)
 	end
 
 	-- ComboBox select
@@ -3814,6 +3824,9 @@ drawFeatureFunctions["player"] = function(attr, yref, ac, panel, feature)
 			table.insert(comboBoxItems, teamName[teamNo])
 			itemIdToTeamId[#comboBoxItems] = teamNo -- now we know that the nth combobox item is associated to the team with number teamNo
 		end
+	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_TEAM_NOT_FOUND)
 	end
 
 	-- ComboBox select
@@ -3968,7 +3981,11 @@ drawFeatureFunctions["numberVariable"] = function(attr, yref, ac, panel, feature
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_VARNUM_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = comboBox.items[comboBox.selected]
+				end
 				saveState()
 			end
 		end
@@ -4012,7 +4029,11 @@ drawFeatureFunctions["booleanVariable"] = function(attr, yref, ac, panel, featur
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_VARBOOL_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = comboBox.items[comboBox.selected]
+				end
 				saveState()
 			end
 		end
@@ -4100,7 +4121,11 @@ drawFeatureFunctions["condition"] = function(attr, yref, ac, panel, feature)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_CONDITION_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = comboBox.items[comboBox.selected]
+				end
 				saveState()
 			end
 		end
@@ -4190,7 +4215,11 @@ drawFeatureFunctions["command"] = function(attr, yref, ac, panel, feature)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= commandsToID[comboBox.items[comboBox.selected]] then
-				ac.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_COMMANDS_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = commandsToID[comboBox.items[comboBox.selected]]
+				end
 				saveState()
 			end
 		end
@@ -4259,13 +4288,20 @@ drawFeatureFunctions["widget"] = function(attr, yref, ac, panel, feature)
 	for i, w in ipairs(customWidgets) do
 		table.insert(comboBoxItems, w.name)
 	end
+	if #comboBoxItems == 0 then
+		table.insert(comboBoxItems, EDITOR_TRIGGERS_EVENTS_WIDGET_NOT_FOUND)
+	end
 
 	-- ComboBox select
 	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
 	comboBox.OnSelect = {
 		function()
 			if ac.params[attr.id] ~= comboBox.items[comboBox.selected] then
-				ac.params[attr.id] = comboBox.items[comboBox.selected]
+				if comboBox.items[comboBox.selected] == EDITOR_TRIGGERS_EVENTS_WIDGET_NOT_FOUND then
+					ac.params[attr.id] = nil
+				else
+					ac.params[attr.id] = comboBox.items[comboBox.selected]
+				end
 				saveState()
 			end
 		end

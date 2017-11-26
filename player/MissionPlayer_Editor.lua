@@ -21,7 +21,7 @@ ctx.getSpringIdFromLocalUnitId={} -- -> {string|number localUnitId = number Spri
 --Table to associate unit Spring Id (number) with local unit id (number or string) used in this file
 ctx.getLocalUnitIdFromSpringId={} -- -> {number SpringId = string|number localUnitId, ...}
 
---Table to store group of available units. A localIdGroup could be for exemple "team_0", "group_3", "action_12"... and an localUnitId is a number or a string used to find unit Spring Id through ctx.getSpringIdFromLocalUnitId
+--Table to store group of available units. A localIdGroup could be for exemple "team_0", "group_3", "action_12"... and a localUnitId is a number or a string used to find unit Spring Id through ctx.getSpringIdFromLocalUnitId
 ctx.getAvailableLocalUnitIdsFromLocalGroupId={} -- -> {string localIdGroup = [string|number localUnitId, ...], ...}
 
 --Same as ctx.getAvailableLocalUnitIdsFromLocalGroupId except that we keep units destroyed (usefull to count kills)
@@ -57,13 +57,13 @@ ctx.widgetsState={} -- -> {string widgetName = {number teamId = {boolean asked, 
 --store the last unit killed by a killer. "killer" and "unitKilled" are local unit Id and not Spring unitd id.
 ctx.kills={}-- -> { string|number killer = string|number unitKilled, ... }
 
-ctx.timeUntilPeace=5 -- how much time in seconds of inactivity to declare that an attack is no more
+ctx.timeUntilPeace=2 -- how much time in seconds of inactivity to declare that an attack is no more
 
---list of units under attack and data associated. "attackedUnit" and "attackerID" refer to Spring unit ids. Note: springId == ctx.attackedUnits[springId].attackedUnit
-ctx.attackedUnits={}-- -> { number SpringUnitId = { "attackedUnit" = number, "damage" = number, "attackerID" = number, "frame" = number }, ... }
+--list of units under attack and data associated. "attackedUnit" and "attackerID" refer to Spring unit ids.
+ctx.attackedUnits={}-- -> { number SpringUnitId = [{ "attackedUnit" = number, "damage" = number, "attackerID" = number, "frame" = number }, ...], ... }
 
---list of units attacking another unit and data associated. "attackedUnit" and "attackerID" refer to Spring unit ids. Note: springId == ctx.attackingUnits[springId].attackerID
-ctx.attackingUnits={}-- -> { number SpringUnitId = { "attackedUnit" = number, "damage" = number, "attackerID" = number, "frame" = number }, ... }
+--list of units attacking another unit and data associated. "attackedUnit" and "attackerID" refer to Spring unit ids.
+ctx.attackingUnits={}-- -> { number SpringUnitId = [{ "attackedUnit" = number, "damage" = number, "attackerID" = number, "frame" = number }, ...], ... }
 
 ctx.recordCreatedUnits=false --flag to know when mission is initialized (all initial units have been created)
 
@@ -166,8 +166,8 @@ end
 
 local function intersection(list1,list2)
   local inters={}
-  if list1==nil then return nil end
-  if list2==nil then return nil end
+  if list1==nil then return {} end
+  if list2==nil then return {} end
   for i,el in pairs(list1)do
     for i2,el2 in pairs(list2)do
       if(el==el2)then
@@ -179,17 +179,20 @@ local function intersection(list1,list2)
   return inters
 end
 
--- warning, if intersection is non void, duplicates will occur.
 local function union(list1,list2)
   local union={}
   if (list1~=nil) then
     for i,el in pairs(list1)do
-      table.insert(union,el)
+		table.insert(union,el)
     end
   end  
   if (list2~=nil) then
     for i,el in pairs(list2)do
-      table.insert(union,el)
+		-- Check if this element is not already included into union list
+		local inter = ctx.intersection({el}, union)
+		if inter ~= nil and #inter == 0 then
+			table.insert(union,el)
+		end
     end
   end
   return union
@@ -279,6 +282,14 @@ local function secondesToFrames(delaySec)
 end
 
 -------------------------------------
+-- Convert delay in number of frames into delay in seconds
+-- @return delay in seconds
+-------------------------------------
+local function framesToSecondes(delayFrame)
+  return delayFrame/30 -- As game simulation frame is updated 30 times by seconds
+end
+
+-------------------------------------
 -- Return string litteral representation of a boolean 
 -------------------------------------
 local function boolAsString(booleanValue)
@@ -297,6 +308,9 @@ colorTable = { -- associative table between a number and its character
 -- If the message is not unique (a list), taking one by random
 -------------------------------------
 local function getAMessage(messageTable) 
+  if messageTable == nil then
+	return ""
+  end
   local msg
   if(messageTable[1]==nil) then
     msg = messageTable
@@ -325,6 +339,7 @@ local function isXZInsideZone(x,z,zoneId, borderException)
   local zone=ctx.zones[zoneId]
   if(zone==nil)then
     --EchoDebug(string.format("%s not found. ZoneLists : %s",zoneId,json.encode(ctx.zones)),5)
+	return false
   end
   if(zone.type=="Rectangle") then
     local center_x=zone.center_xz.x
@@ -385,8 +400,9 @@ local function getARandomPositionInZone(idZone)
       posit["x"]=x
       posit["z"]=z
       return posit
-    end 
-  end   
+    end
+  end  
+  return nil  
 end
 
 -------------------------------------
@@ -434,9 +450,18 @@ local function registerUnit(springId,localUnitId,reduction,autoHeal)
     ctx.armyInformations[localUnitId].isAttacking=false
 end
 
+local function unregisterUnit(springId,localUnitId)
+	if springId ~= nil then
+		ctx.getLocalUnitIdFromSpringId[springId]=nil
+	end
+	if localUnitId ~= nil then
+		ctx.getSpringIdFromLocalUnitId[localUnitId]=nil
+		ctx.armyInformations[localUnitId]=nil
+	end
+end
+
 local function isInGroup(localUnitId,gp,testOnLocalIds)
   --EchoDebug("is in group ->"..json.encode(gp),0)
-  local isAlreadyStored=false
   if(gp==nil)then
     --EchoDebug("group is nil in function isInGroup, this should not occur",1)
     return false, nil
@@ -473,7 +498,9 @@ local function removeUnitFromGroups(localUnitId,groups,testOnLocalIds)
   for g,group in pairs(groups) do
     if(ctx.getAvailableLocalUnitIdsFromLocalGroupId[group]~=nil) then 
       local _,i=ctx.isInGroup(localUnitId,ctx.getAvailableLocalUnitIdsFromLocalGroupId[group],testOnLocalIds)
-      if(i~=nil)then table.remove(ctx.getAvailableLocalUnitIdsFromLocalGroupId[group],i) end
+      if(i~=nil)then
+		table.remove(ctx.getAvailableLocalUnitIdsFromLocalGroupId[group],i)
+	  end
     end
   end
 end
@@ -481,7 +508,7 @@ end
 local function addUnitToGroups_groupToStoreSpecified(localUnitId,groups,testOnLocalIds,groupToStore)
   local testOnLocalIds=testOnLocalIds or true 
   -- usefull to check redundancy at a deeper level because, when it comes about unit creation
-  -- units can have a different external id (e.g "Action1_0","createdUnit_1") for the same spring id  
+  -- units can have a different mission player id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
       -- create group if not existing
     if(groupToStore[group]==nil) then
@@ -509,13 +536,17 @@ local function addUnitsToGroups(units,groups,testOnLocalIds)
   end
 end
 
-local function unitSetParamsToUnitsExternal(param)
-  local index = param.type..'_'..tostring(param.value)
-  local units = ctx.getAvailableLocalUnitIdsFromLocalGroupId[index]
-  --if(ctx.getAvailableLocalUnitIdsFromLocalGroupId[index] == nil)then
-  --  EchoDebug("warning. This index gave nothing : "..index,7)
-  --end
-  return units
+local function unitSetParamsToMissionPlayerUnitsId(param)
+	if param.type == "unit" then
+		return {param.value}
+	else
+		local index = param.type..'_'..tostring(param.value)
+		local units = ctx.getAvailableLocalUnitIdsFromLocalGroupId[index]
+		--if(ctx.getAvailableLocalUnitIdsFromLocalGroupId[index] == nil)then
+		--  EchoDebug("warning. This index gave nothing : "..index,7)
+		--end
+		return units
+	end
 end
 
 -------------------------------------
@@ -549,10 +580,10 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck,frameNum
   --EchoDebug("extract process", 1)
   --EchoDebug(json.encode(actOrCond_Params), 1)
   --EchoDebug(json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId), 1)
-  
+    
   if(actOrCond_Params["units_extracted"]~=nil)then 
-  -- when units_extracted exists, this means we are in the context of action.
-  -- and that uniset has been set at the moment of the execution of the event
+	-- when units_extracted exists, this means we are in the context of action.
+	-- and that uniset has been set at the moment of the execution of the event
     return actOrCond_Params["units_extracted"]
   end
   
@@ -560,8 +591,8 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck,frameNum
   if(actOrCond_Params.unitset~=nil)then
      -- gives something like action_1, condition_3, groupe_2, team_0*
      if (actOrCond_Params.unitset.type=="unit") then
-      groupToReturn={actOrCond_Params.unitset.value}
-      --EchoDebug(json.encode({actOrCond_Params,groupToReturn}),2)
+		groupToReturn={actOrCond_Params.unitset.value}
+		--EchoDebug(json.encode({actOrCond_Params,groupToReturn}),2)
      else
        local index=actOrCond_Params.unitset.type..'_'..tostring(actOrCond_Params.unitset.value)
 	   -- in case of "condition type" we find the group associated to the frameNumber
@@ -578,24 +609,23 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck,frameNum
 end
 
 -------------------------------------
--- Determine if an unit satisfies a condition
+-- Determine if a unit satisfies a condition
 -- Two modes are possible depending on the mode of comparison (atleast, atmost ...)
 -- Return boolean
 -------------------------------------
-local function CheckConditionOnUnit (externalUnitId,c)--for the moment only single unit
-  local internalUnitId=ctx.getSpringIdFromLocalUnitId[externalUnitId]
-  if(c.type=="dead") then --untested yet
-    --EchoDebug("is it dead ?", 7)
-    --EchoDebug(externalUnitId, 7)
-    local alive=Spring.ValidUnitID(internalUnitId)
-    --EchoDebug(alive, 7)
-    return not(alive)
-  elseif(Spring.ValidUnitID(internalUnitId)) then  -- 
+local function CheckConditionOnUnit (missionPlayerUnitId,c)--for the moment only single unit
+  local spUnitId=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
+  if(Spring.ValidUnitID(spUnitId)) then  -- 
   -- recquire that the unit is alive (unless the condition type is death, cf at the end of the function
     if(c.type=="zone") then
-      local i=ctx.isUnitInZone(internalUnitId,c.params.zone)
+	  if c.params.zone == nil or c.params.zone == "" then
+		Spring.Echo("Warning on condition \""..c.name.."\" (Units are in a zone): No zone selected")
+	  elseif ctx.zones[c.params.zone] == nil then
+		Spring.Echo("Warning on condition \""..c.name.."\" (Units are in a zone): Zone unknown")
+	  end
+      local i=ctx.isUnitInZone(spUnitId,c.params.zone)
      --[[--EchoDebug("we check an unit in a zone", 7)
-      --EchoDebug(internalUnitId, 7)
+      --EchoDebug(spUnitId, 7)
       --EchoDebug(c.params.zone, 7)
       if(i)then
         --EchoDebug("IN DA ZONE :", 7)
@@ -604,36 +634,104 @@ local function CheckConditionOnUnit (externalUnitId,c)--for the moment only sing
       if(i and c.name=="enterda")then
         --EchoDebug("condition validated", 7)
       end--]]
-      return i  
-    elseif(c.type=="underAttack")then --untested yet
+      return i
+	  
+    elseif(c.type=="underAttack")then
       --EchoDebug("is it working", 7)
-      --EchoDebug(ctx.armyInformations[externalUnitId].isUnderAttack, 7)
-      if(not ctx.armyInformations[externalUnitId].isUnderAttack)then return false
+      --EchoDebug(json.encode(ctx.armyInformations[missionPlayerUnitId].isUnderAttack), 7)
+      if(not ctx.armyInformations[missionPlayerUnitId].isUnderAttack)then return false
       else
         --EchoDebug(json.encode(c),2)
-        local spUnit=ctx.getSpringIdFromLocalUnitId[externalUnitId]
-        local spAttacker=ctx.attackedUnits[spUnit].attackerID 
-        local externalAttacker=ctx.getLocalUnitIdFromSpringId[spAttacker]
-        local group=ctx.getAvailableLocalUnitIdsFromLocalGroupId[c.params.attacker.type.."_"..tostring(c.params.attacker.value)]
-        --EchoDebug("group of attackers ->"..json.encode(group),1)
-        local is,i=ctx.isInGroup(externalAttacker,group,false)
-        --EchoDebug(is,2)
-        return is
+        local spUnit=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
+		for i, attacked in ipairs(ctx.attackedUnits[spUnit]) do
+			local spAttacker=attacked.attackerID
+			if spAttacker == nil then
+				Spring.Echo("Warning on condition \""..c.name.."\" (Units are under attack): Attacker unknown")
+				return false
+			end
+			local missionPlayerAttackerId=ctx.getLocalUnitIdFromSpringId[spAttacker]
+			if c.params.attacker == nil then
+				Spring.Echo("Warning on condition \""..c.name.."\" (Units are under attack): Attacker not defined")
+				return false
+			else
+				if c.params.attacker.type == "unit" and missionPlayerAttackerId == c.params.attacker.value then
+					return true
+				else
+					local group=ctx.getAvailableLocalUnitIdsFromLocalGroupId[c.params.attacker.type.."_"..tostring(c.params.attacker.value)]
+					--EchoDebug("group of attackers ->"..json.encode(group),1)
+					local is,i=ctx.isInGroup(missionPlayerAttackerId,group,false)
+					--EchoDebug(is,2)
+					if is then
+						return true
+					end
+				end
+			end
+		end
+		return false
       end
-    elseif(c.type=="attacking")then --untested yet
-      return ctx.armyInformations[externalUnitId].isAttacking
-    elseif(c.type=="order") then
-      local action=ctx.GetCurrentUnitAction(internalUnitId)     
-      return (action==c.params.command) 
+	  
+    elseif(c.type=="attacking")then
+	  --Spring.Echo ("armyInfo-->("..missionPlayerUnitId.."/"..spUnitId..") "..json.encode(ctx.armyInformations[missionPlayerUnitId]))
+      if(not ctx.armyInformations[missionPlayerUnitId].isAttacking)then return false
+      else
+        --EchoDebug(json.encode(c),2)
+        local spUnit=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
+		for i, attacker in ipairs(ctx.attackingUnits[spUnit]) do
+			local spAttacked=attacker.attackedUnit
+			if spAttacked == nil then
+				Spring.Echo("Warning on condition \""..c.name.."\" (Units are attacking): Target unknown")
+				return false
+			end
+			local missionPlayerAttackedId=ctx.getLocalUnitIdFromSpringId[spAttacked]
+			if c.params.target == nil then
+				Spring.Echo("Warning on condition \""..c.name.."\" (Units are attacking): Target not defined")
+				return false
+			else
+				if c.params.target.type == "unit" and missionPlayerAttackedId == c.params.target.value then
+					return true
+				else
+					local group=ctx.getAvailableLocalUnitIdsFromLocalGroupId[c.params.target.type.."_"..tostring(c.params.target.value)]
+					--EchoDebug("group of attackers ->"..json.encode(group),1)
+					local is,i=ctx.isInGroup(missionPlayerAttackedId,group,false)
+					--EchoDebug(is,2)
+					if is then
+						return true
+					end
+				end
+			end
+		end
+		return false
+      end
+	  
     elseif(c.type=="hp") then
+	  if c.params.hp == nil or c.params.hp == "" then
+		Spring.Echo("Warning on condition \""..c.name.."\" (HP of units): Percentage not defined")
+		return false
+	  elseif c.params.comparison == nil or c.params.comparison == "" then
+		Spring.Echo("Warning on condition \""..c.name.."\" (HP of units): No operator selected")
+		return false
+	  end
 	  local hpInPercent = ctx.computeReference(c.params.hp)/100
-	  local health,maxhealth=Spring.GetUnitHealth(internalUnitId)
+	  local health,maxhealth=Spring.GetUnitHealth(spUnitId)
 	  return ctx.compareValue_Numerical(health/maxhealth, hpInPercent, c.params.comparison)
-      --return ctx.compareValue_Verbal(tresholdRatio*maxhealth,maxhealth,health,c.params.hp.comparison)      
+	  
+    elseif(c.type=="order") then
+	  if c.params.command == nil or c.params.command == "" then
+		Spring.Echo("Warning on condition \""..c.name.."\" (Units are doing command): No command selected")
+		return false
+	  end
+      local action=ctx.GetCurrentUnitAction(spUnitId)     
+      return (action==c.params.command) 
+	  
     elseif(c.type=="type") then
-      return(c.params.type==UnitDefs[Spring.GetUnitDefID(internalUnitId)]["name"])
+      if c.params.type == nil or c.params.type == "" then
+		Spring.Echo("Warning on condition \""..c.name.."\" (Units are of specific type): No type selected")
+		return false
+	  end
+      return(c.params.type==UnitDefs[Spring.GetUnitDefID(spUnitId)]["name"])
     end
   end
+  return false
 end
 
 -------------------------------------
@@ -641,165 +739,254 @@ end
 -------------------------------------
 local function UpdateConditionTruthfulness (idCond, frameNumber)
 	local c = ctx.conditions[idCond]
+	--EchoDebug(json.encode(c),6)
     local object=c["object"]
 	
-    if(object=="group")then
-	  -- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
-      local externalUnitList=ctx.extractListOfUnitsInvolved(c.params)
-      --EchoDebug(json.encode(externalUnitList),6)
-      local count=0
-      local total=0
-      if(externalUnitList~=nil)then
-        total=table.getn(externalUnitList)
-        --EchoDebug(json.encode(externalUnitList), 7)
-        for u,unit in ipairs(externalUnitList) do
-          if(ctx.CheckConditionOnUnit(unit,c)) then
-			-- We make a group to store units satisfying this condition at the current frame
-			-- This group will be used if the event triggers and an action of this event use this condition in its unitset (see frameNumber parameter from "extractListOfUnitsInvolved" call in "AddActionInStack" function)
-            ctx.addUnitToGroups(unit,{"condition_"..c.id.."_"..frameNumber}) 
-            count=count+1
-          end 
-        end
-      end      
-      --EchoDebug(json.encode({idCond,c.params.number.number,total,count,c.params.number.comparison}), 7)
-      ctx.conditions[idCond]["currentlyValid"] = ctx.compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
-	  
-    elseif(object=="kill")or(object=="killed")then  
-      --EchoDebug("Condkills->"..json.encode(c.params),2)
-      --EchoDebug("kills->"..json.encode(ctx.kills),2)
-      local count=0
-	  -- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
-	  local unitsImpliedByCondition = ctx.extractListOfUnitsInvolved(c.params,ctx.getAllLocalUnitIdsFromLocalGroupId)
-	  --EchoDebug("unitsImpliedByCondition: "..json.encode(unitsImpliedByCondition),2)
-	  local total=0
-	  if unitsImpliedByCondition ~= nil then
-		total = table.getn(unitsImpliedByCondition)
-	  end
-      local killerGroupTofind
-      local targetGroupTofind
-      if(object=="kill")then   
-		--EchoDebug("object->kill",2)
-        killerGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)
-        targetGroupTofind=c.params.target.type.."_"..tostring(c.params.target.value)
-      elseif (object=="killed") then
-		--EchoDebug("object->killed",2)
-        killerGroupTofind=c.params.attacker.type.."_"..tostring(c.params.attacker.value)
-        targetGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)     
-      end 
-      --EchoDebug('killerGroupTofind,targetGroupTofind,ctx.kills -> '..json.encode({killerGroupTofind,targetGroupTofind,ctx.kills}), 2)
-      for killerUnit,killedUnit in pairs(ctx.kills) do
-        local killerUnit_groups = ctx.getGroupsOfUnit(killerUnit, false, ctx.getAllLocalUnitIdsFromLocalGroupId)--, ctx.getAllLocalUnitIdsFromLocalGroupId
-        --EchoDebug('killerUnit_groups -> '..json.encode(killerUnit_groups), 2)--
-        local killedUnit_groups = ctx.getGroupsOfUnit(killedUnit, false, ctx.getAllLocalUnitIdsFromLocalGroupId)--
-        --EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups), 2)
-        for g,gpname_killer in pairs(killerUnit_groups) do
-		  --EchoDebug("Check killer : "..g.." "..gpname_killer.." == "..killerGroupTofind, 2)
-          if(gpname_killer == killerGroupTofind) then
-            for g,gpname_killed in pairs(killedUnit_groups) do
-			  --EchoDebug("Check killed : "..g.." "..gpname_killed.." == "..targetGroupTofind, 2)
-              if(gpname_killed == targetGroupTofind) then
-                count = count + 1     
-                --EchoDebug("finally !", 2)
-                local unitToStore
-                if(object=="killed") then
-                  unitToStore=killedUnit
-                else
-                  unitToStore=killerUnit
-                end
-                ctx.addUnitToGroups(unitToStore,{"condition_"..c.id})        
-              end
-            end
-          end   
-        end
-      end
-      --EchoDebug("final count : "..tostring(count).."/"..tostring(total),0)    
-      ctx.conditions[idCond]["currentlyValid"]= ctx.compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
-	  if ctx.conditions[idCond]["currentlyValid"] then
-		--EchoDebug("Condition validated",0)
-	  end
+    if(object=="group" or object=="groupWithDead")then
+		local count=0
+		local total=0
+		local alreadySet = false
+		if object=="group" then
+			-- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
+			local playerUnitList=ctx.extractListOfUnitsInvolved(c.params)
+			--EchoDebug(json.encode(playerUnitList),6)
+			if(playerUnitList==nil)then
+				Spring.Echo ("Warning on condition \""..c.name.."\": no units found")
+				return false
+			end
+			total=table.getn(playerUnitList)
+			if total == 0 then
+				-- If the set is empty we can't check condition parameters on units. We set the validity of this condition to false 
+				ctx.conditions[idCond]["currentlyValid"] = false
+				alreadySet = true
+			else
+				--EchoDebug(json.encode(playerUnitList), 7)
+				for u,missionPlayerUnitId in ipairs(playerUnitList) do
+					if(ctx.CheckConditionOnUnit(missionPlayerUnitId,c)) then
+						-- We make a group to store units satisfying this condition at the current frame
+						-- This group will be used if the event triggers and an action of this event use this condition in its unitset (see frameNumber parameter from "extractListOfUnitsInvolved" call in "AddActionInStack" function)
+						ctx.addUnitToGroups(missionPlayerUnitId,{"condition_"..c.id.."_"..frameNumber}) 
+						count=count+1
+					end 
+				end
+			end
+		  
+		else -- <=> object=="groupWithDead"
+			-- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
+			local unitsImpliedByCondition = ctx.extractListOfUnitsInvolved(c.params,ctx.getAllLocalUnitIdsFromLocalGroupId)
+			if unitsImpliedByCondition ~= nil then
+				total = table.getn(unitsImpliedByCondition)
+			end
+			  
+			if(c.type=="dead") then	
+				for u,missionPlayerUnitId in ipairs(unitsImpliedByCondition) do
+					-- check if mission player know this unit
+					if ctx.armyInformations[missionPlayerUnitId] == nil then
+						-- We make a group to store units satisfying this condition at the current frame
+						-- This group will be used if the event triggers and an action of this event use this condition in its unitset (see frameNumber parameter from "extractListOfUnitsInvolved" call in "AddActionInStack" function)
+						ctx.addUnitToGroups(missionPlayerUnitId,{"condition_"..c.id.."_"..frameNumber}) 
+						count=count+1
+					end 
+				end
+				
+			elseif c.type=="kill" or c.type=="killed" then
+				--EchoDebug("Condkills->"..json.encode(c.params),2)
+				--EchoDebug("kills->"..json.encode(ctx.kills),2)
+				local killerGroupTofind
+				local targetGroupTofind
+				if(c.type=="kill")then   
+					if c.params.unitset == nil or c.params.unitset == "" then
+						Spring.Echo ("Warning on condition \""..c.name.."\" (Units killed specific units): No killer selected")
+						return false
+					elseif c.params.target  == nil or c.params.target == "" then
+						Spring.Echo ("Warning on condition \""..c.name.."\" (Units killed specific units): No target selected")
+						return false
+					else
+						killerGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)
+						targetGroupTofind=c.params.target.type.."_"..tostring(c.params.target.value)
+					end
+				else -- <=> c.type=="killed"
+					if c.params.unitset  == nil or c.params.unitset == "" then
+						Spring.Echo ("Warning on condition \""..c.name.."\" (Units have been killed by other units): No target selected")
+						return false
+					elseif c.params.attacker == nil or c.params.attacker == "" then
+						Spring.Echo ("Warning on condition \""..c.name.."\" (Units have been killed by other units): No killer selected")
+						return false
+					else
+						killerGroupTofind=c.params.attacker.type.."_"..tostring(c.params.attacker.value)
+						targetGroupTofind=c.params.unitset.type.."_"..tostring(c.params.unitset.value)     
+					end
+				end 
+				--EchoDebug('killerGroupTofind,targetGroupTofind,ctx.kills -> '..json.encode({killerGroupTofind,targetGroupTofind,ctx.kills}), 2)
+				for killerUnit,killedUnit in pairs(ctx.kills) do
+					local killerUnit_groups = ctx.getGroupsOfUnit(killerUnit, false, ctx.getAllLocalUnitIdsFromLocalGroupId)--, ctx.getAllLocalUnitIdsFromLocalGroupId
+					--EchoDebug('killerUnit_groups -> '..json.encode(killerUnit_groups), 2)--
+					local killedUnit_groups = ctx.getGroupsOfUnit(killedUnit, false, ctx.getAllLocalUnitIdsFromLocalGroupId)--
+					--EchoDebug('killedUnit_groups -> '..json.encode(killedUnit_groups), 2)
+					for g,gpname_killer in pairs(killerUnit_groups) do
+					  --EchoDebug("Check killer : "..g.." "..gpname_killer.." == "..killerGroupTofind, 2)
+					  if(gpname_killer == killerGroupTofind) then
+						for g,gpname_killed in pairs(killedUnit_groups) do
+						  --EchoDebug("Check killed : "..g.." "..gpname_killed.." == "..targetGroupTofind, 2)
+						  if(gpname_killed == targetGroupTofind) then
+							count = count + 1     
+							--EchoDebug("finally !", 2)
+							local unitToStore
+							if(c.type=="kill") then
+							  unitToStore=killerUnit
+							else -- <=> c.type=="killed"
+							  unitToStore=killedUnit
+							end
+							-- We make a group to store units satisfying this condition at the current frame
+							-- This group will be used if the event triggers and an action of this event use this condition in its unitset (see frameNumber parameter from "extractListOfUnitsInvolved" call in "AddActionInStack" function)
+							ctx.addUnitToGroups(unitToStore,{"condition_"..c.id.."_"..frameNumber})        
+						  end
+						end
+					  end   
+					end
+				end
+			else
+				Spring.Echo("Warning on condition \""..c.name.."\": unknown condition type on dead units or bad parameters")
+			end
+		end
+		--EchoDebug(json.encode({idCond,c.params.number.number,total,count,c.params.number.comparison}), 7)
+		if c.params.number == nil or c.params.number == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\": missing quantitative parameter (atleast, atmost...)")
+			return false
+		elseif c.params.number.comparison == nil or c.params.number.comparison == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\": no quantitative parameter selecred (atleast, atmost...)")
+			return false
+		elseif c.params.number.comparison ~= "all" and (c.params.number.number == nil or c.params.number.number == "") then
+			Spring.Echo ("Warning on condition \""..c.name.."\": missing numeric value for the \""..c.params.number.comparison.."\" parameter")
+			return false
+		elseif not alreadySet then
+			ctx.conditions[idCond]["currentlyValid"] = ctx.compareValue_Verbal(c.params.number.number,total,count,c.params.number.comparison)
+		end
 	  
 	elseif(object=="other")then  
-      -- Time related conditions [START]
-      if(c.type=="elapsedTime") then
-        local elapsedAsFrame=math.floor(ctx.secondesToFrames(ctx.computeReference(c.params.number)))
-        ctx.conditions[idCond]["currentlyValid"]=ctx.compareValue_Numerical(frameNumber, elapsedAsFrame,c.params.comparison) 
+      if(c.type=="start") then
+        ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
+		
+      elseif(c.type=="elapsedTime") then
+		if c.params.number == nil or c.params.number == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Time elapsed): No value defined")
+			return false
+		elseif c.params.comparison == nil or c.params.comparison == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Time elapsed): No operator selected")
+			return false
+		else
+			local elapsedAsFrame=math.floor(ctx.secondesToFrames(ctx.computeReference(c.params.number)))
+			ctx.conditions[idCond]["currentlyValid"]=ctx.compareValue_Numerical(frameNumber, elapsedAsFrame,c.params.comparison) 
+		end
+		
       elseif(c.type=="repeat") then
-        local framePeriod=ctx.secondesToFrames(ctx.computeReference(c.params.number))
-        ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
+        if c.params.number == nil or c.params.number == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Periodically true): No value defined")
+			return false
+		else
+			local framePeriod=ctx.secondesToFrames(ctx.computeReference(c.params.number))
+			ctx.conditions[idCond]["currentlyValid"]=((frameNumber-ctx.startingFrame) % framePeriod==0)
+		end
+		
       elseif(c.type=="widgetEnabled") then
 		local widgetName=c.params.widget
 		local target=c.params.team or -1
-		-- check if this widget is known in mission player
-		if ctx.widgetsState[widgetName] == nil then
-			ctx.widgetsState[widgetName] = {}
+		if c.params.team == nil or c.params.team == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Widget is enabled): No team selected")
+		elseif c.params.team ~= -1 and ctx.mission.teams[tostring(c.params.team)] == nil then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Widget is enabled): Team unknown")
 		end
-		-- check if this target is monitoring for this widget in mission player
-		if ctx.widgetsState[widgetName][target] == nil then
-			-- we init monitoring data
-			ctx.widgetsState[widgetName][target] = {asked=false, answer=false, state = false}
-			-- in case of "all teams" we add special field to store data for each team
-			if target == -1 then
-				-- we filter enabled player teams
-				local playerTeams = {}
-				for teamId, data in pairs(ctx.mission.teams) do
-					if data["control"]=="player" and data["enabled"]==true then
-						playerTeams[tonumber(teamId)] = "undef"
-					end
-				end
-				ctx.widgetsState[widgetName][target].teamsAnswers = playerTeams
+		if widgetName == nil or widgetName == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Widget is enabled): Widget name not defined")
+		else
+			-- check if this widget is known in mission player
+			if ctx.widgetsState[widgetName] == nil then
+				ctx.widgetsState[widgetName] = {}
 			end
-		end
-		-- check if the state of this widget for this target was asked
-		if ctx.widgetsState[widgetName][target].asked then
-			-- check if we received the answer
-			if ctx.widgetsState[widgetName][target].answer then
-				-- we can set truthfullness of this condition and reset monitoring states
-				ctx.conditions[idCond]["currentlyValid"]=ctx.widgetsState[widgetName][target].state
-				ctx.widgetsState[widgetName][target].asked = false
-				ctx.widgetsState[widgetName][target].answer = false
-				ctx.widgetsState[widgetName][target].state = false
+			-- check if this target is monitoring for this widget in mission player
+			if ctx.widgetsState[widgetName][target] == nil then
+				-- we init monitoring data
+				ctx.widgetsState[widgetName][target] = {asked=false, answer=false, state = false}
+				-- in case of "all teams" we add special field to store data for each team
 				if target == -1 then
-					-- reset teams answers
-					for teamId,_ in pairs(ctx.widgetsState[widgetName][target].teamsAnswers) do
-						ctx.widgetsState[widgetName][target].teamsAnswers[teamId] = "undef"
+					-- we filter enabled player teams
+					local playerTeams = {}
+					for teamId, data in pairs(ctx.mission.teams) do
+						if data["control"]=="player" and data["enabled"]==true then
+							playerTeams[tonumber(teamId)] = "undef"
+						end
 					end
+					ctx.widgetsState[widgetName][target].teamsAnswers = playerTeams
 				end
-				return true
 			end
-		else
-			ctx.widgetsState[widgetName][target].asked = true
-			SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,target=target}))
+			-- check if the state of this widget for this target was asked
+			if ctx.widgetsState[widgetName][target].asked then
+				-- check if we received the answer
+				if ctx.widgetsState[widgetName][target].answer then
+					-- we can set truthfullness of this condition and reset monitoring states
+					ctx.conditions[idCond]["currentlyValid"]=ctx.widgetsState[widgetName][target].state
+					ctx.widgetsState[widgetName][target].asked = false
+					ctx.widgetsState[widgetName][target].answer = false
+					ctx.widgetsState[widgetName][target].state = false
+					if target == -1 then
+						-- reset teams answers
+						for teamId,_ in pairs(ctx.widgetsState[widgetName][target].teamsAnswers) do
+							ctx.widgetsState[widgetName][target].teamsAnswers[teamId] = "undef"
+						end
+					end
+					return true
+				end
+			else
+				ctx.widgetsState[widgetName][target].asked = true
+				SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,target=target}))
+			end
 		end
-		return false -- truthfullness is not checkable this frame we need to report the evaluation of this condition 
+		return false -- truthfullness is not checkable this frame we need to report the evaluation of this condition
 		
-      elseif(c.type=="start") then
-        ctx.conditions[idCond]["currentlyValid"]=(frameNumber==ctx.startingFrame)--frame 5 is the new frame 0
-      -- Time related conditions [END]
-      -- Variable related conditions [START]
       elseif(c.type=="numberVariable") then 
-        local v1=ctx.variables[c.params.variable]
-        local v2=ctx.computeReference(c.params.number)
-        --{"type":"numberVariable","name":"Condition1","id":1,"object":"other","currentlyValid":false,"params":{"number":"6","variable":"unitscreated","comparison":"<"}}
-        ctx.conditions[idCond]["currentlyValid"]=ctx.compareValue_Numerical(v1,v2,c.params.comparison)   
-      elseif(c.type=="variableVSvariable") then
-        local v1=ctx.variables[c.params.variable1]
-        local v2=ctx.variables[c.params.variable2]
-        ctx.conditions[idCond]["currentlyValid"]=ctx.compareValue_Numerical(v1,v2,c.params.comparison)   
-      elseif(c.type=="booleanVariable") then
-        ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
-      elseif(c.type=="script") then	  
-		local sucess, result = pcall(ctx.load_code(c.params.script))
-		if success or result == true or result == false then
-			if result == nil then
-				result=false
-			end
-			ctx.conditions[idCond]["currentlyValid"]=result
+	    if c.params.variable == nil or c.params.variable == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Compare the value of a variable): No variable selected")
+			return false
+		elseif c.params.comparison == nil or c.params.comparison == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Compare the value of a variable): No operator selected")
+			return false
+		elseif c.params.number == nil or c.params.number == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Compare the value of a variable): No number defined")
+			return false
 		else
-			Spring.Echo ("Warning!!! script \""..c.params.script.."\" failed: "..result)
-			ctx.conditions[idCond]["currentlyValid"]=false
+			local v1=ctx.variables[c.params.variable]
+			local v2=ctx.computeReference(c.params.number) --{"type":"numberVariable","name":"Condition1","id":1,"object":"other","currentlyValid":false,"params":{"number":"6","variable":"unitscreated","comparison":"<"}}
+			ctx.conditions[idCond]["currentlyValid"]=ctx.compareValue_Numerical(v1,v2,c.params.comparison)  
 		end
-        
-        --EchoDebug(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])), 7)
+		
+      elseif(c.type=="booleanVariable") then
+        if c.params.variable == nil or c.params.variable == "" then
+			Spring.Echo ("Warning on condition \""..c.name.."\" (Variable is true): No variable selected")
+			return false
+		else
+			ctx.conditions[idCond]["currentlyValid"]=ctx.variables[c.params.variable] -- very simple indeed 
+		end
+		
+      elseif(c.type=="script") then
+		if c.params.script == nil or c.params.script == "" then
+			Spring.Echo("Warning on condition \""..c.name.."\" (Evaluate custom boolean): No script defined")
+			return false
+		else
+			local sucess, result = pcall(ctx.load_code(c.params.script))
+			if success or result == true or result == false then
+				if result == nil then
+					result=false
+				end
+				ctx.conditions[idCond]["currentlyValid"]=result
+			else
+				Spring.Echo ("Warning on condition \""..c.name.."\" (Evaluate custom boolean): script \""..c.params.script.."\" failed: "..result)
+				ctx.conditions[idCond]["currentlyValid"]=false
+			end
+			
+			--EchoDebug(string.format("script condition : %s",tostring(ctx.conditions[idCond]["currentlyValid"])), 7)
+		end
+	  else
+		Spring.Echo("Warning on condition \""..c.name.."\": unknown condition type or bad parameters")
       end
     end
     --EchoDebug("state of condition :",2)
@@ -818,7 +1005,7 @@ end
 -- are related to conditions in the json files.
 -------------------------------------
 local function isTriggerable(event, frameNumber)
-  --EchoDebug(json.encode(ctx.conditions), 7)
+  --EchoDebug(json.encode(event), 7)
   -- step 1: get the trigger
   local trigger=event.trigger
   if(trigger=="")then   -- empty string => create trigger by cunjunction (ands) of all conditions
@@ -830,7 +1017,7 @@ local function isTriggerable(event, frameNumber)
   -- step 2: Update conditions truthfulness
   for c,cond in pairs(event.listOfInvolvedConditions) do
     if ctx.UpdateConditionTruthfulness(cond.."_"..tostring(event.id), frameNumber) == false then
-		-- this condition is not accessable (due to unsynced data request for instance) then we can't evaluate this trigger for now
+		-- this condition is not accessable (due to unsynced data request for instance or inconsistent parameters) then we can't evaluate this trigger for now
 		return false
 	end
   end
@@ -881,54 +1068,118 @@ local function isAGroupableTypeOfAction(a)
 end
 
 -------------------------------------
--- Apply a groupable action on a single unit
+-- Apply a groupable action on a single spring unit
 -------------------------------------
-local function ApplyGroupableAction_onSpUnit(unit,act)
-  if(Spring.ValidUnitID(unit))then -- check if the unit is still on board
+local function ApplyGroupableAction_onSpUnit(spUnitId,act)
+  if(Spring.ValidUnitID(spUnitId))then -- check if the unit is still on board
     --EchoDebug("valid", 7)
     if(act.type=="transfer") then
       --EchoDebug("try to apply transfert", 7)
-      Spring.TransferUnit(unit,act.params.team)
-      ctx.addUnitToGroups(ctx.getLocalUnitIdFromSpringId[unit],{"team_"..tostring(act.params.team)}) 
-    elseif(act.type=="kill")then
-      Spring.DestroyUnit(unit)
-    elseif(act.type=="hp")then
-      local health,maxhealth=Spring.GetUnitHealth(unit)
-      Spring.SetUnitHealth(unit,maxhealth*ctx.computeReference(act.params.percentage)/100)
-    elseif(act.type=="teleport")then
-      local posFound=ctx.extractPosition(act.params.position)
-      Spring.SetUnitPosition(unit,posFound.x,posFound.z)
-      Spring.GiveOrderToUnit(unit,CMD.STOP, {unit}, {}) -- avoid the unit getting back at its original position 
-    elseif(act.type=="addToGroup")then
-      ctx.addUnitToGroups(ctx.getLocalUnitIdFromSpringId[unit],{"group_"..act.params.group},false) 
-	  --EchoDebug("Size of group_"..act.params.group..": "..table.getn(ctx.getAllLocalUnitIdsFromLocalGroupId["group_"..act.params.group]))
-    elseif(act.type=="removeFromGroup")then
-      ctx.removeUnitFromGroups(ctx.getLocalUnitIdFromSpringId[unit],{"group_"..act.params.group},false) 
-    elseif(act.type=="order")then
-      Spring.GiveOrderToUnit(unit, act.params.command, act.params.parameters or {}, {})
-    elseif(act.type=="orderPosition")then
-      local posFound=ctx.extractPosition(act.params.position)
-      --EchoDebug("orderPosition (posFound,unit,command) : "..json.encode({posFound,unit,act.params.command}),5)
-      Spring.GiveOrderToUnit(unit, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
-    elseif(act.type=="orderTarget")then
-	  targetUnits = {}
-	  if act.params.target.type == "unit" then
-		targetUnits = {act.params.target.value}
-	  else
-		targetUnits = ctx.getAvailableLocalUnitIdsFromLocalGroupId[act.params.target.type.."_"..tostring(act.params.target.value)]
+	  if act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Transfer units): No team selected")
+	  elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Transfer units): Team unknown")
 	  end
-	  --EchoDebug("orderTarget (unit,command,targets) : "..json.encode({unit,act.params.command,targetUnits}),5)
-	  for k, v in pairs(targetUnits) do
-		Spring.GiveOrderToUnit(unit,act.params.command, {ctx.getSpringIdFromLocalUnitId[v]}, {"shift"})   
+      Spring.TransferUnit(spUnitId,act.params.team)
+      ctx.addUnitToGroups(ctx.getLocalUnitIdFromSpringId[spUnitId],{"team_"..tostring(act.params.team)}) 
+    elseif(act.type=="kill")then
+      Spring.DestroyUnit(spUnitId)
+    elseif(act.type=="hp")then
+      local health,maxhealth=Spring.GetUnitHealth(spUnitId)
+	  if act.params.percentage == nil or act.params.percentage == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Set HP of units): percentage not defined")
+	  end
+      Spring.SetUnitHealth(spUnitId,maxhealth*ctx.computeReference(act.params.percentage)/100)
+    elseif(act.type=="teleport")then
+	  if act.params.position == nil or act.params.position == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Teleport units): No position defined")
+	  else
+		  local posFound=ctx.extractPosition(act.params.position)
+		  if posFound == nil or posFound == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Teleport units): Position error")
+		  else
+			Spring.SetUnitPosition(spUnitId,posFound.x,posFound.z)
+			Spring.GiveOrderToUnit(spUnitId,CMD.STOP, {spUnitId}, {}) -- avoid the unit getting back at its original position
+		  end
+	  end
+    elseif(act.type=="addToGroup")then
+	  if act.params.group == nil or act.params.group == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Add units to group): No group selected")
+	  else
+		ctx.addUnitToGroups(ctx.getLocalUnitIdFromSpringId[spUnitId],{"group_"..act.params.group},false) 
+		--EchoDebug("Size of group_"..act.params.group..": "..table.getn(ctx.getAllLocalUnitIdsFromLocalGroupId["group_"..act.params.group]))
+	  end
+    elseif(act.type=="removeFromGroup")then
+      if act.params.group == nil or act.params.group == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Remove units from group): No group selected")
+	  else
+		ctx.removeUnitFromGroups(ctx.getLocalUnitIdFromSpringId[spUnitId],{"group_"..act.params.group},false) 
+	  end
+    elseif(act.type=="order")then
+	  if act.params.command == nil or act.params.command == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Order units (untargeted order)): No command defined")
+	  else
+		Spring.GiveOrderToUnit(spUnitId, act.params.command, act.params.parameters or {}, {})
+	  end
+    elseif(act.type=="orderPosition")then
+	  if act.params.command == nil or act.params.command == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Order units to position): No command defined")
+	  elseif act.params.position == nil or act.params.position == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Order units to position): No position defined")
+	  else
+		local posFound=ctx.extractPosition(act.params.position)
+		if posFound == nil or posFound == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Order units to position): Position error")
+		else
+			--EchoDebug("orderPosition (posFound,spUnitId,command) : "..json.encode({posFound,spUnitId,act.params.command}),5)
+			Spring.GiveOrderToUnit(spUnitId, act.params.command,{posFound.x,Spring.GetGroundHeight(posFound.x, posFound.z),posFound.z}, {})
+		end
+	  end
+    elseif(act.type=="orderTarget")then
+	  if act.params.command == nil or act.params.command == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Order units to target): No command defined")
+	  else
+		targetUnits = {}
+		if act.params.target == nil then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Order units to target): No target defined")
+			return
+		else
+			if act.params.target.type == "unit" then
+				if act.params.target.value == nil or act.params.target.value == "" then
+					Spring.Echo ("Warning on action \""..act.name.."\" (Order units to target): Target unknown")
+					return
+				end
+				targetUnits = {act.params.target.value}
+			else
+				targetUnits = ctx.getAvailableLocalUnitIdsFromLocalGroupId[act.params.target.type.."_"..tostring(act.params.target.value)]
+			end
+			--EchoDebug("orderTarget (spUnitId,command,targets) : "..json.encode({spUnitId,act.params.command,targetUnits}),5)
+			for k, v in pairs(targetUnits) do
+				if ctx.getSpringIdFromLocalUnitId[v] ~= nil then
+					Spring.GiveOrderToUnit(spUnitId,act.params.command, {ctx.getSpringIdFromLocalUnitId[v]}, {"shift"})   
+				end
+			end
+		end
 	  end
    elseif (act.type=="messageUnit")or(act.type=="bubbleUnit") then
-      if Spring.ValidUnitID(unit) then
-        --EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(unit), 5)
-        SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(ctx.getAMessage(act.params.message), lang),unit=unit,time=(ctx.computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit"),id=act.params.id}))
-      end
+		local actType = "Display message above units"
+		if act.type=="bubbleUnit" then
+			actType = "Display message in a bubble above units"
+		end
+		if act.params.message == nil or act.params.message == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" ("..actType.."): No message defined")
+		else
+			if act.params.time == nil or act.params.time == "" then
+				Spring.Echo ("Warning on action \""..act.name.."\" ("..actType.."): No time defined")
+			end
+			--EchoDebug("try to send : DisplayMessageAboveUnit on "..tostring(spUnitId), 5)
+			SendToUnsynced("DisplayMessageAboveUnit", json.encode({message=extractLang(ctx.getAMessage(act.params.message), lang),unit=spUnitId,time=(ctx.computeReference(act.params.time) or 0)/ctx.speedFactor,bubble=(act.type=="bubbleUnit"),id=act.params.id}))
+		end
     end
 
-    --Spring.GiveOrderToUnit(unit, CMD.ATTACK, {attacked}, {}) 
+    --Spring.GiveOrderToUnit(spUnitId, CMD.ATTACK, {attacked}, {}) 
+  else
+	Spring.Echo ("Warning on action \""..act.name.."\": unit not valid (springId: "..(spUnitId or "nil")..")")
   end
 end
 
@@ -957,6 +1208,14 @@ end
 -------------------------------------
 local function ApplyNonGroupableAction(act)
   if(act.type=="cameraAuto") then
+	if(act.params.toggle==nil or act.params.toggle=="")then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change camera auto state): No boolean value selected")
+	end
+	if(act.params.team==nil or act.params.team=="")then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change camera auto state): No team selected")
+	elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change camera auto state): Team unknown")
+	end
     if(act.params.toggle=="enabled")then
       _G.cameraAuto = {
 		target = act.params.team,
@@ -976,7 +1235,15 @@ local function ApplyNonGroupableAction(act)
     end
 
   elseif(act.type=="mouse") then
+	if(act.params.toggle==nil or act.params.toggle=="")then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change mouse state): No boolean value selected")
+	end
 	local target=act.params.team
+	if(target==nil or target=="")then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change mouse state): No team selected")
+	elseif target ~= -1 and ctx.mission.teams[tostring(target)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Change mouse state): Team unknown")
+	end
     if(act.params.toggle=="enabled")then
       SendToUnsynced("mouseEnabled", target)
     else
@@ -984,9 +1251,38 @@ local function ApplyNonGroupableAction(act)
     end
     
   elseif(act.type=="centerCamera") then
-    local posFound=ctx.extractPosition(act.params.position)
-	local target=act.params.team
-    SendToUnsynced("centerCamera", json.encode({pos=posFound,target=target}))
+	if act.params.position == nil or act.params.position == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Center camera to position): No position defined")
+	else
+		if act.params.team == nil or act.params.team == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Center camera to position): No team selected")
+		elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Center camera to position): Team unknown")
+		end
+		local posFound=ctx.extractPosition(act.params.position)
+		if posFound == nil or posFound == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Center camera to position): Position error")
+		else
+			local dist
+			if act.params.distance == nil or act.params.distance == "" then
+				dist = 12 -- default value
+			else
+				dist = ctx.computeReference(act.params.distance)
+			end
+			-- keep dist between 0 and 99
+			dist = math.max(0, math.min(dist, 99))
+			local rotation
+			if act.params.rotation == nil or act.params.rotation == "" then
+				rotation = 20 -- default value
+			else
+				rotation = ctx.computeReference(act.params.rotation)
+			end
+			-- keep rotation between 0 and 100
+			rotation = math.max(0, math.min(rotation, 100))
+			local target=act.params.team
+			SendToUnsynced("centerCamera", json.encode({pos=posFound,target=target,distance=dist,rotation=rotation}))
+		end
+	end
    
   -- MESSAGES
   
@@ -995,85 +1291,205 @@ local function ApplyNonGroupableAction(act)
 	if act.params.boolean then
 		pause = act.params.boolean == "true"
 	end
-    Script.LuaRules.showMessage(extractLang(ctx.getAMessage(act.params.message), lang), pause, 500)
+	if act.params.message == nil or act.params.message == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display message): No message defined")
+	else
+		Script.LuaRules.showMessage(extractLang(ctx.getAMessage(act.params.message), lang), pause, 500)
+	end
   
   elseif(act.type=="showBriefing") then
     ctx.ShowBriefing()
 
   elseif(act.type=="messagePosition") then
-    --EchoDebug("try to send : DisplayMessagePosition", 7)
-  --Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
-    local posFound=ctx.extractPosition(act.params.position)   
-    local x=posFound.x
-    local y=Spring.GetGroundHeight(posFound.x,posFound.z)
-    local z=posFound.z
-    SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(ctx.getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(ctx.computeReference(act.params.time) or 0)/ctx.speedFactor,id=act.params.id}))
+	if act.params.message == nil or act.params.message == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display message at position): No message defined")
+	elseif act.params.position == nil or act.params.position == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display message at position): No position defined")
+	else
+		--EchoDebug("try to send : DisplayMessagePosition", 7)
+		--Script.LuaUI.DisplayMessageAtPosition(p.message, p.x, Spring.GetGroundHeight( p.x, p.z), p.z, p.time) 
+		local posFound=ctx.extractPosition(act.params.position)
+		if posFound == nil or posFound == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Display message at position): Position error")
+		else
+			if act.params.time == nil or act.params.time == "" then
+				Spring.Echo ("Warning on action \""..act.name.."\" (Display message at position): No time defined")
+			end
+			local x=posFound.x
+			local y=Spring.GetGroundHeight(posFound.x,posFound.z)
+			local z=posFound.z
+			SendToUnsynced("displayMessageOnPosition", json.encode({message=extractLang(ctx.getAMessage(act.params.message), lang),x=x,y=y,z=z,time=(ctx.computeReference(act.params.time) or 0)/ctx.speedFactor,id=act.params.id}))
+		end
+	end
 
   elseif(act.type=="messageUI") then
-    local message = extractLang(ctx.getAMessage(act.params.message), lang)
-	local x = ctx.computeReference(act.params.x)
-	local y = ctx.computeReference(act.params.y)
-	local width = ctx.computeReference(act.params.width)
-	local height = ctx.computeReference(act.params.height)
-	SendToUnsynced("displayUIMessage", json.encode({message=message,x=x.."%",y=y.."%",width=width.."%",height=height.."%",id=act.params.id,target=act.params.team}))
+    if act.params.message == nil or act.params.message == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No message defined")
+	elseif act.params.x == nil or act.params.x == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No x defined")
+	elseif act.params.y == nil or act.params.y == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No y defined")
+	elseif act.params.width == nil or act.params.width == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No width defined")
+	elseif act.params.height == nil or act.params.height == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No height defined")
+	else
+		if act.params.team == nil or act.params.team == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): No team selected")
+		elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Display UI message): Team unknown")
+		end
+		local message = extractLang(ctx.getAMessage(act.params.message), lang)
+		local x = ctx.computeReference(act.params.x)
+		local y = ctx.computeReference(act.params.y)
+		local width = ctx.computeReference(act.params.width)
+		local height = ctx.computeReference(act.params.height)
+		SendToUnsynced("displayUIMessage", json.encode({message=message,x=x.."%",y=y.."%",width=width.."%",height=height.."%",id=act.params.id,target=act.params.team}))
+	end
 
   elseif(act.type=="removeMessage") then
-    SendToUnsynced("removeMessage", json.encode({id=act.params.id}))
+	if act.params.id == nil or act.params.id == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Force message to close): No id defined")
+	else
+		SendToUnsynced("removeMessage", json.encode({id=act.params.id}))
+	end
      
   -- ZONES
   
   elseif(act.type=="hideZone") then 
 	-- look for corresponding zone
-	for i=1, table.getn(ctx.mission.zones) do
-		local cZ=ctx.mission.zones[i]
-		if cZ.id == act.params.zone then
-			SendToUnsynced("hideZone", json.encode(cZ))
-			break
+	if act.params.zone == nil or act.params.zone == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Hide zone in game): No zone selected")
+	else
+		for i=1, table.getn(ctx.mission.zones) do
+			local cZ=ctx.mission.zones[i]
+			if cZ.id == act.params.zone then
+				SendToUnsynced("hideZone", json.encode(cZ))
+				break
+			end
 		end
 	end
   
   elseif(act.type=="showZone") then 
 	-- look for corresponding zone
-	for i=1, table.getn(ctx.mission.zones) do
-		local cZ=ctx.mission.zones[i]
-		if cZ.id == act.params.zone then
-			SendToUnsynced("showZone", json.encode(cZ))
-			break
+	if act.params.zone == nil or act.params.zone == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Show zone in game): No zone selected")
+	else
+		for i=1, table.getn(ctx.mission.zones) do
+			local cZ=ctx.mission.zones[i]
+			if cZ.id == act.params.zone then
+				SendToUnsynced("showZone", json.encode(cZ))
+				break
+			end
 		end
 	end
   
    -- WIN/LOSE
    
-  elseif (act.type=="win") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
-    ctx.gameOver[act.params.team]={victoryState="won", outputstate=act.params.outputState}
-  elseif (act.type=="lose") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
-    ctx.gameOver[act.params.team]={victoryState="lost", outputstate=act.params.outputState}
-  elseif (act.type=="gameover") and (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
-    ctx.gameOver[act.params.team]={victoryState="gameover", outputstate=act.params.outputState}
+  elseif (act.type=="win") then
+	if act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player wins): No team selected")
+	elseif ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player wins): Team unknown")
+	elseif ctx.mission.teams[tostring(act.params.team)]["control"]=="player" then
+		if act.params.outputState == nil or act.params.outputState == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Player wins): No output state defined")
+		end
+		ctx.gameOver[act.params.team]={victoryState="won", outputstate=act.params.outputState}
+	end
+  elseif (act.type=="lose") then
+	if act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player loses): No team selected")
+	elseif ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player loses): Team unknown")
+	elseif (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
+		if act.params.outputState == nil or act.params.outputState == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Player loses): No output state defined")
+		end
+		ctx.gameOver[act.params.team]={victoryState="lost", outputstate=act.params.outputState}
+	end
+  elseif (act.type=="gameover") then
+	if act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player Over): No team selected")
+	elseif ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Player Over): Team unknown")
+	elseif (ctx.mission.teams[tostring(act.params.team)]["control"]=="player") then
+		if act.params.outputState == nil or act.params.outputState == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Game Over): No output state defined")
+		end
+		ctx.gameOver[act.params.team]={victoryState="gameover", outputstate=act.params.outputState}
+	end
 	
   -- FINAL FEEDBACK
   elseif (act.type=="setFinalFeedback") then
+	if act.params.message == nil or act.params.message == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Set Final Feedback): No message defined")
+	end
+	if act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Set Final Feedback): No team selected")
+	elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Set Final Feedback): Team unknown")
+	end
 	ctx.finalFeedback[act.params.team] = extractLang(ctx.getAMessage(act.params.message), lang)
    
    -- VARIABLES
     
   elseif(act.type=="changeVariable")then
-    ctx.variables[act.params.variable]=ctx.computeReference(act.params.number)   
+	if act.params.variable == nil or act.params.variable == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Set number variable): No variable defined")
+	elseif act.params.number == nil or act.params.number == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Set number variable): No value defined")
+	else
+		ctx.variables[act.params.variable]=ctx.computeReference(act.params.number)
+	end		
   elseif(act.type=="setBooleanVariable")then
-    ctx.variables[act.params.variable]=(act.params.boolean=="true")
+    if act.params.variable == nil or act.params.variable == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Set boolean variable): No variable defined")
+	elseif act.params.boolean == nil or act.params.boolean == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Set boolean variable): No boolean value defined")
+	else
+		ctx.variables[act.params.variable]=(act.params.boolean=="true")
+	end
   elseif(act.type=="createUnits") then
+	if act.params.number == nil or act.params.number == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Create Units in Zone): No number defined")
+	elseif act.params.unitType == nil or act.params.unitType == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Create Units in Zone): No unitType selected")
+	elseif act.params.team == nil or act.params.team == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Create Units in Zone): No team selected")
+	elseif ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Create Units in Zone): Team unknown")
+	elseif act.params.zone == nil or act.params.zone == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Create Units in Zone): No zone selected")
+	elseif ctx.zones[act.params.zone] == nil then
+		Spring.Echo("Warning on action \""..act.name.."\" (Create Units in Zone): Zone unknown")
+	end
 	ctx.getAvailableLocalUnitIdsFromLocalGroupId["action_"..act.id]={} -- Implementation choice : we reset the action-group associated to the action-created to store only units created by the last call of this action.
     for var=1,ctx.computeReference(act.params.number) do
       local position=ctx.getARandomPositionInZone(act.params.zone)
-      ctx.createUnitAtPosition(act,position)
+	  if position ~= nil then
+		ctx.createUnitAtPosition(act,position)
+	  end
     end 
   elseif(act.type=="changeVariableRandom") then
-    local v=math.random(ctx.computeReference(act.params.min),ctx.computeReference(act.params.max))
-    ctx.variables[act.params.variable]=v   
+    if act.params.variable == nil or act.params.variable == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Change the value of a variable randomly): No variable defined")
+	elseif act.params.min == nil or act.params.min == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Change the value of a variable randomly): No min value defined")
+	elseif act.params.max == nil or act.params.max == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Change the value of a variable randomly): No max value defined")
+	else
+		local v=math.random(ctx.computeReference(act.params.min),ctx.computeReference(act.params.max))
+		ctx.variables[act.params.variable]=v
+	end
   elseif(act.type=="script") then
-    local sucess, result = pcall(ctx.load_code(act.params.script))
-	if not success and result ~= nil then
-		Spring.Echo ("Warning!!! script \""..act.params.script.."\" failed: "..result)
+    if act.params.script == nil or act.params.script == "" then
+		Spring.Echo("Warning on action \""..act.name.."\" (Execute custom script): No script defined")
+	else
+		local sucess, result = pcall(ctx.load_code(act.params.script))
+		if not success and result ~= nil then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Execute custom script): Script \""..act.params.script.."\" failed: "..json.encode(result))
+		end
 	end
 	
   -- WIDGETS
@@ -1081,8 +1497,29 @@ local function ApplyNonGroupableAction(act)
   elseif(act.type=="enableWidget")or(act.type=="disableWidget") then
     local widgetName=act.params.widget
 	local target=act.params.team
-    local activation=(act.type=="enableWidget")
-    SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,target=target,activation=activation}))
+	if widgetName == nil or widgetName == "" then
+		if(act.type=="enableWidget") then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Enable Widget): No widget selected")
+		else
+			Spring.Echo ("Warning on action \""..act.name.."\" (Disable Widget): No widget selected")
+		end
+	else
+		if target == nil or target == "" then
+			if(act.type=="enableWidget") then
+				Spring.Echo ("Warning on action \""..act.name.."\" (Enable Widget): No team selected")
+			else
+				Spring.Echo ("Warning on action \""..act.name.."\" (Disable Widget: No team selected")
+			end
+		elseif target ~= -1 and ctx.mission.teams[tostring(target)] == nil then
+			if(act.type=="enableWidget") then
+				Spring.Echo ("Warning on action \""..act.name.."\" (Enable Widget): Team unknown")
+			else
+				Spring.Echo ("Warning on action \""..act.name.."\" (Disable Widget): Team unknown")
+			end
+		end
+		local activation=(act.type=="enableWidget")
+		SendToUnsynced("changeWidgetState", json.encode({widgetName=widgetName,target=target,activation=activation}))
+	end
 	
   -- LOS
   
@@ -1097,24 +1534,47 @@ local function ApplyNonGroupableAction(act)
 		
   -- Trace
   elseif (act.type=="traceAction") then
-		SendToUnsynced("traceAction", json.encode({traceContent=extractLang(ctx.getAMessage(act.params.trace), lang),target=act.params.team}))
+	if act.params.trace == nil or act.params.trace == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Trace Action): No trace defined")
+	elseif act.params.team == nil or act.params.team == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Trace Action: No team selected")
+	elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Trace Action): Team unknown")
+	end
+	SendToUnsynced("traceAction", json.encode({traceContent=extractLang(ctx.getAMessage(act.params.trace), lang),target=act.params.team}))
   
-  elseif (act.type == "intersection") or (act.type == "union") then
-    local g1=ctx.unitSetParamsToUnitsExternal(act.params.unitset1)
-    local g2=ctx.unitSetParamsToUnitsExternal(act.params.unitset2)
-    local g3
-    --EchoDebug("act.params intersec/union -> "..json.encode(act.params),3 )
-    if(act.type == "intersection")then
-      g3=ctx.intersection(g1,g2)
-    elseif(act.type == "union")then
-      g3=ctx.union(g1,g2) -- at this point, duplicates will occur, but addUnitsToGroups for duplicates
-    end
-    --EchoDebug("g3 -> "..json.encode(g3),3 )
-    --EchoDebug("before -> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId) ,3 )
-    ctx.addUnitsToGroups(g3,{"group_"..tostring(act.params.group)},false)
-    --EchoDebug("after -> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId) ,3 )
+  elseif (act.type == "union") or (act.type == "intersection")then
+    local actType = "Union between 2 Unitsets"
+	if act.type == "intersection" then
+		actType = "Intersection between 2 Unitsets"
+	end
+	if act.params.unitset1 == nil or act.params.unitset1 == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" ("..actType.."): No unitset1 selected for action "..act.id)
+	elseif act.params.unitset2 == nil or act.params.unitset2 == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" ("..actType.."): No unitset2 selected for action "..act.id)
+	elseif act.params.group == nil or act.params.group == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" ("..actType.."): No group selected for action "..act.id)
+	else
+		--EchoDebug("act.params intersec/union -> "..json.encode(act.params),3 )
+		local g1=ctx.unitSetParamsToMissionPlayerUnitsId(act.params.unitset1)
+		--Spring.Echo ("g1-->"..json.encode(g1))
+		local g2=ctx.unitSetParamsToMissionPlayerUnitsId(act.params.unitset2)
+		--Spring.Echo ("g2-->"..json.encode(g2))
+		local g3
+		if(act.type == "intersection")then
+		  g3=ctx.intersection(g1,g2)
+		elseif(act.type == "union")then
+		  g3=ctx.union(g1,g2)
+		end
+		--Spring.Echo ("g3-->"..json.encode(g3))
+		--EchoDebug("before -> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId) ,3 )
+		local groupName = "group_"..tostring(act.params.group)
+		ctx.getAvailableLocalUnitIdsFromLocalGroupId[groupName] = nil
+		ctx.addUnitsToGroups(g3,{groupName},false)
+		--EchoDebug("after -> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId) ,3 )
+	end
   else
-    --EchoDebug("this action is not recognized : "..act.type,8)  
+    Spring.Echo ("Warning on action \""..act.name.."\": unknown action type or bad parameters") 
   end
 end
 
@@ -1141,12 +1601,12 @@ function ApplyAction (a)
       --EchoDebug("Units selected : "..json.encode(listOfUnits),7)
       
       if(listOfUnits~=nil)then
-        for i, externalUnitId in ipairs(listOfUnits) do
-          local unit=ctx.getSpringIdFromLocalUnitId[externalUnitId]
+        for i, missionPlayerUnitId in ipairs(listOfUnits) do
+          local unit=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
           ctx.ApplyGroupableAction_onSpUnit(unit, a)
         end
       else
-        --EchoDebug("no units available for this action", 7)
+        Spring.Echo("Warning on action \""..a.name.."\": No units available")
       end
     end
   else
@@ -1250,39 +1710,38 @@ local function watchHeal(frameNumber)
   -- for attacked TODO: for loop here and stuff
   --EchoDebug("attacking-->"..json.encode(ctx.attackingUnits),1)
   --EchoDebug("attacked-->"..json.encode(ctx.attackedUnits),1)
-  for attacked,tableInfo in pairs(ctx.attackedUnits) do
+  for attacked,listOfAttaquers in pairs(ctx.attackedUnits) do
     local idAttacked=ctx.getLocalUnitIdFromSpringId[attacked]
     if(idAttacked~=nil)and (ctx.armyInformations[idAttacked]~=nil)then
-      --EchoDebug(json.encode(tableInfo), 1)
-      if(tableInfo.frame==-1)then
-        ctx.attackedUnits[attacked].frame=frameNumber
-        ctx.armyInformations[idAttacked].isUnderAttack=true
-        --EchoDebug("under attack", 1)
-      elseif(frameNumber-tonumber(tableInfo.frame)<ctx.secondesToFrames(ctx.timeUntilPeace))then
-        ctx.armyInformations[idAttacked].isUnderAttack=true
-        --EchoDebug("still under attack", 1)
-      else
-       --EchoDebug("no more under attack", 1)
-        ctx.armyInformations[idAttacked].isUnderAttack=false
-      end
+		ctx.armyInformations[idAttacked].isUnderAttack=false
+		for _, fightTable in ipairs(listOfAttaquers) do
+			if(fightTable.frame==-1 or fightTable.frame==nil)then
+				fightTable.frame=frameNumber
+				ctx.armyInformations[idAttacked].isUnderAttack=true
+			elseif(frameNumber-tonumber(fightTable.frame)<ctx.secondesToFrames(ctx.timeUntilPeace))then
+				ctx.armyInformations[idAttacked].isUnderAttack=true
+			end
+		end
+		if not ctx.armyInformations[idAttacked].isUnderAttack then
+			ctx.attackedUnits[attacked] = nil
+		end
     end
   end
-  for attacking,tableInfo in pairs(ctx.attackingUnits) do
+  for attacking,listOfTargets in pairs(ctx.attackingUnits) do
     local idAttacking=ctx.getLocalUnitIdFromSpringId[attacking]
     if(idAttacking~=nil)and (ctx.armyInformations[idAttacking]~=nil)then
-      --EchoDebug(json.encode(tableInfo), 1)
-      if(tableInfo.frame==-1 or tableInfo.frame==nil)then
-        --EchoDebug(json.encode(ctx.attackingUnits[attacking]),2)
-        ctx.attackingUnits[attacking]["frame"]=frameNumber
-        ctx.armyInformations[idAttacking].isAttacking=true
-        --EchoDebug("under attack", 1)
-      elseif(frameNumber-tonumber(tableInfo.frame)<ctx.secondesToFrames(ctx.timeUntilPeace))then
-        ctx.armyInformations[idAttacking].isAttacking=true
-        --EchoDebug("still under attack", 1)
-      else
-       --EchoDebug("no more under attack", 1)
-        ctx.armyInformations[idAttacking].isAttacking=false
-      end
+		ctx.armyInformations[idAttacking].isAttacking=false
+		for _, fightTable in ipairs(listOfTargets) do
+			if(fightTable.frame==-1 or fightTable.frame==nil)then
+				fightTable.frame=frameNumber
+				ctx.armyInformations[idAttacking].isAttacking=true
+			elseif(frameNumber-tonumber(fightTable.frame)<ctx.secondesToFrames(ctx.timeUntilPeace))then
+				ctx.armyInformations[idAttacking].isAttacking=true
+			end
+		end
+		if not ctx.armyInformations[idAttacking].isAttacking then
+		  ctx.attackingUnits[attacking] = nil
+		end
     end
   end
   for idUnit,infos in pairs(ctx.armyInformations) do
@@ -1333,6 +1792,9 @@ local function processEvents(frameNumber)
         for j=1,table.getn(event.actions) do
           local a=event.actions[j]
           if(a.type=="wait")then
+			if a.params.time == nil or a.params.time == "" then
+				Spring.Echo ("Warning on action \""..a.name.."\" (Wait): No time defined")
+			end
             frameDelay=frameDelay+ctx.secondesToFrames(ctx.computeReference(a.params.time)) 
           elseif (a.type=="waitCondition" or a.type=="waitTrigger") and not creationOfNewEvent then -- if creationOfNewEvent is already set this means a previous action ask to wait. So we don't have to process this new wait now but only to insert in the new event in order to be process when the new event will be trigger
             creationOfNewEvent=true
@@ -1342,9 +1804,15 @@ local function processEvents(frameNumber)
             newevent.id=tostring(ctx.nextUniqueIdEvent)
 			ctx.nextUniqueIdEvent = ctx.nextUniqueIdEvent + 1
             if(a.type=="waitCondition") then
-              newevent.trigger=a.params.condition
+			  if a.params.condition == nil or a.params.condition == "" then
+				Spring.Echo ("Warning on action \""..a.name.."\" (Wait for condition): No condition selected")
+			  end
+              newevent.trigger=a.params.condition or ""
             elseif(a.type=="waitTrigger")then 
-              newevent.trigger=a.params.trigger
+			  if a.params.trigger == nil or a.params.trigger == "" then
+				Spring.Echo ("Warning on action \""..a.name.."\" (Wait for trigger): No trigger defined")
+			  end
+              newevent.trigger=a.params.trigger or ""
 			else
 			  newevent.trigger=""
             end  
@@ -1357,6 +1825,29 @@ local function processEvents(frameNumber)
 				ctx.nextUniqueIdCondition = ctx.nextUniqueIdCondition + 1
 				ctx.conditions[newConditionId].currentlyValid = false
 				newevent.conditions[newConditionId]=ctx.conditions[newConditionId]
+			end
+			-- if frame delay is greater than 0 we have to add a condition to wait else we lose this information for futur actions
+			if frameDelay > 0 then
+				local baseName = "WaitActionAsCondition"
+				local newConditionId = baseName.."_"..tostring(newevent.id)
+				ctx.conditions[newConditionId] = {
+					type="elapsedTime",
+					name=baseName,
+					id=ctx.nextUniqueIdCondition,
+					object="other",
+					currentlyValid = false,
+					params={
+						number=ctx.framesToSecondes(frameNumber+frameDelay),
+						comparison=">"
+					}
+				}
+				ctx.nextUniqueIdCondition = ctx.nextUniqueIdCondition + 1
+				newevent.conditions[newConditionId]=ctx.conditions[newConditionId]
+				if newevent.trigger ~= "" then
+					newevent.trigger = newevent.trigger.." and "..baseName
+				end
+				table.insert(newevent.listOfInvolvedConditions, baseName)
+				frameDelay = 0
 			end
 			--EchoDebug("New event created: "..json.encode(newevent, { indent = true }),7)
 			--EchoDebug("Conditions list: "..json.encode(ctx.conditions, { indent = true }),7)
@@ -1433,19 +1924,6 @@ end
 local function  UpdateUnsyncValues(frameNumber)
   if(frameNumber%10~=0)then return end
   SendToUnsynced("requestUnsyncVals")
-end
-
-local function UpdateGroups()
-  --EchoDebug("before update-> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId),0)
-  for g,group in pairs(ctx.getAvailableLocalUnitIdsFromLocalGroupId) do
-    for u,unit in pairs(group) do
-      if(not Spring.ValidUnitID(ctx.getSpringIdFromLocalUnitId[unit]))then
-        table.remove(group,u)
-        --EchoDebug("remove ! -> "..json.encode(u),0)
-      end
-    end
-  end
-  --EchoDebug("after update-> "..json.encode(ctx.getAvailableLocalUnitIdsFromLocalGroupId),0)
 end
 
 -------------------------------------
@@ -1647,8 +2125,8 @@ end
          ctx.conditions[id.."_"..tostring(ctx.events[idEvent].id)]["currentlyValid"]=false
          local type=currentCond.type
          local cond_object="other"
-         if(currentCond.type=="killed")or(currentCond.type=="kill")then
-          cond_object=currentCond.type -- special case as related units are no more
+         if currentCond.type=="killed" or currentCond.type=="kill" or currentCond.type=="dead" then
+          cond_object="groupWithDead"
          elseif(currentCond.params.unitset~=nil)then
           cond_object="group"
          end
@@ -1685,7 +2163,6 @@ local function Update (frameNumber)
   ctx.applyDelayedActionsReached() 
   if(frameNumber>32)then ctx.recordCreatedUnits=true end   -- in order to avoid to record units that are created at the start of the game
   ctx.UpdateUnsyncValues(frameNumber)
-  ctx.UpdateGroups()
   return ctx.gameOver
   -- Trigger Events
 end  
@@ -1728,10 +2205,22 @@ local function RecvLuaMsg(msg, player)
     local jsonString=string.sub(msg,5,-1)
     --EchoDebug("killTable-->"..jsonString,3)
     local killTable=json.decode(jsonString)
-    local killer=killTable.attackerID
-    local killerExternal=ctx.getLocalUnitIdFromSpringId[killer]
-    local killedExternal=ctx.getLocalUnitIdFromSpringId[killTable.unitID]
-    ctx.kills[killerExternal]=killedExternal
+    local spKillerId=killTable.attackerID
+    local spKilledId=killTable.unitID
+    local missionPlayerKillerId=ctx.getLocalUnitIdFromSpringId[spKillerId]
+	if missionPlayerKillerId ~= nil then
+		ctx.kills[missionPlayerKillerId]=missionPlayerKilledId
+	end
+    local missionPlayerKilledId=ctx.getLocalUnitIdFromSpringId[spKilledId]
+	if missionPlayerKilledId ~= nil then
+		--Update Groups
+		local groupsName = {}
+		for groupName, _ in pairs(ctx.getAvailableLocalUnitIdsFromLocalGroupId) do
+			table.insert (groupsName, groupName)
+		end
+		ctx.removeUnitFromGroups(missionPlayerKilledId, groupsName)
+		ctx.unregisterUnit(spKilledId,missionPlayerKilledId)
+	end
     
   elseif ctx.isMessage(msg,"damage") then
     local jsonString=string.sub(msg,7,-1)
@@ -1739,17 +2228,43 @@ local function RecvLuaMsg(msg, player)
     --EchoDebug("damageTable-->"..json.encode(damageTable),1)
     local attackedUnit=damageTable.attackedUnit
     local attackingUnit=damageTable.attackerID
-    damageTable.frame=tonumber(damageTable.frame)    
-    if ctx.attackedUnits[attackedUnit]==nil then
-      ctx.attackedUnits[attackedUnit]={} 
-    end
-    ctx.attackedUnits[attackedUnit]=damageTable
+    damageTable.frame=-1
+	if attackedUnit ~= nil then
+		if ctx.attackedUnits[attackedUnit]==nil then
+		  ctx.attackedUnits[attackedUnit]={} 
+		end
+		-- check if this fight is already known
+		local found = false
+		for k,v in ipairs(ctx.attackedUnits[attackedUnit]) do
+			if v.attackerID == attackingUnit then
+				found = true
+				v.frame=-1
+				break
+			end
+		end
+		if not found then
+			table.insert (ctx.attackedUnits[attackedUnit], damageTable)
+		end
+	end
     if(attackingUnit~=nil)then
-      if ctx.attackingUnits[attackingUnit]==nil then
-        ctx.attackingUnits[attackingUnit]={} 
-      end
-      ctx.attackingUnits[attackingUnit]=damageTable
+		if ctx.attackingUnits[attackingUnit]==nil then
+			ctx.attackingUnits[attackingUnit]={} 
+		end
+		-- check if this fight is already known
+		local found = false
+		for k,v in ipairs(ctx.attackingUnits[attackingUnit]) do
+			if v.attackedUnit == attackedUnit then
+				found = true
+				v.frame=-1
+				break
+			end
+		end
+		if not found then
+			table.insert (ctx.attackingUnits[attackingUnit], damageTable)
+		end
     end
+	--EchoDebug("attackedUnits-->"..json.encode(ctx.attackedUnits),1)
+	--EchoDebug("attackingUnits-->"..json.encode(ctx.attackingUnits),1)
     
   elseif ctx.isMessage(msg,"unitCreation") then
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
@@ -1823,6 +2338,6 @@ missionScript.ApplyAction = ApplyAction
 missionScript.RecvLuaMsg = RecvLuaMsg
 missionScript.GetFinalFeedback = GetFinalFeedback
 
-ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToUnitsExternal=unitSetParamsToUnitsExternal ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.UpdateGroups=UpdateGroups ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced ; ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage ; ctx.GetFinalFeedback=GetFinalFeedback
+ctx.load_code=load_code ; ctx.intersection=intersection ; ctx.union=union ; ctx.computeReference=computeReference ; ctx.compareValue_Verbal=compareValue_Verbal ; ctx.compareValue_Numerical=compareValue_Numerical ; ctx.deepcopy=deepcopy ; ctx.secondesToFrames=secondesToFrames ; ctx.framesToSecondes=framesToSecondes ; ctx.boolAsString=boolAsString ; ctx.getAMessage=getAMessage ; ctx.isXZInsideZone=isXZInsideZone ; ctx.isUnitInZone=isUnitInZone ; ctx.getARandomPositionInZone=getARandomPositionInZone ; ctx.extractPosition=extractPosition ; ctx.ShowBriefing=ShowBriefing ;ctx.registerUnit=registerUnit ; ctx.unregisterUnit=unregisterUnit ; ctx.isInGroup=isInGroup ; ctx.getGroupsOfUnit=getGroupsOfUnit ; ctx.removeUnitFromGroups=removeUnitFromGroups ; ctx.addUnitToGroups_groupToStoreSpecified=addUnitToGroups_groupToStoreSpecified ; ctx.addUnitToGroups=addUnitToGroups ; ctx.addUnitsToGroups=addUnitsToGroups ; ctx.unitSetParamsToMissionPlayerUnitsId=unitSetParamsToMissionPlayerUnitsId ; ctx.isTriggerable=isTriggerable ; ctx.extractListOfUnitsInvolved=extractListOfUnitsInvolved ; ctx.createUnit=createUnit ; ctx.isAGroupableTypeOfAction=isAGroupableTypeOfAction ; ctx.ApplyGroupableAction_onSpUnit=ApplyGroupableAction_onSpUnit ; ctx.createUnitAtPosition=createUnitAtPosition ; ctx.ApplyNonGroupableAction=ApplyNonGroupableAction ; ctx.ApplyAction=ApplyAction ; ctx.printMyStack=printMyStack ; ctx.alreadyInStack=alreadyInStack ; ctx.PrepareActionForExecution=PrepareActionForExecution ; ctx.AddActionInStack=AddActionInStack ; ctx.updateStack=updateStack ; ctx.applyDelayedActionsReached=applyDelayedActionsReached ; ctx.watchHeal=watchHeal ; ctx.processEvents=processEvents ; ctx.GetCurrentUnitAction=GetCurrentUnitAction ; ctx.CheckConditionOnUnit=CheckConditionOnUnit ; ctx.UpdateConditionTruthfulness=UpdateConditionTruthfulness ; ctx.parseJson=parseJson ; ctx.UpdateUnsyncValues=UpdateUnsyncValues ; ctx.returnTestsToPlay=returnTestsToPlay ; ctx.StartAfterJson=StartAfterJson ; ctx.Start=Start ; ctx.Update=Update ; ctx.Stop=Stop ; ctx.SendToUnsynced=SendToUnsynced ; ctx.Spring=Spring ; ctx.UnitDefs=UnitDefs ; ctx.math=math ; ctx.isMessage=isMessage ; ctx.GetFinalFeedback=GetFinalFeedback
 
 return missionScript
