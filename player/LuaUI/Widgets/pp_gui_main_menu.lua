@@ -552,7 +552,7 @@ local function loadPreviousFeedback ()
 	end
 	updateFeedbackFields()
 	if Script.LuaUI.TraceAction and #feedbacks > 0 then
-		Script.LuaUI.TraceAction("see_previous_feedback "..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+		Script.LuaUI.TraceAction("see_previous_feedback\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 	end
 end
 
@@ -562,7 +562,7 @@ local function loadNextFeedback ()
 	end
 	updateFeedbackFields()
 	if Script.LuaUI.TraceAction and #feedbacks > 0 then
-		Script.LuaUI.TraceAction("see_next_feedback "..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+		Script.LuaUI.TraceAction("see_next_feedback\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 	end
 end
 
@@ -607,7 +607,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].clearness ~= clearComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_clearness "..clearComboBox.caption.." feedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_clearness\t"..clearComboBox.caption.."\tfeedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].clearness = clearComboBox.selected
@@ -620,7 +620,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].utility ~= usefulComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_utility "..usefulComboBox.caption.." feedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_utility\t"..usefulComboBox.caption.."\tfeedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].utility = usefulComboBox.selected
@@ -796,7 +796,7 @@ local function showMainMenu (missionEnd)
 		function ()
 			closeMainMenu () -- close Main menu if the window is visible
 			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("replay_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+				Script.LuaUI.TraceAction("replay_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
 			end
 			-- in case of appliq we don't use "_script.txt" because it doesn't work in case of multiplayer missions
 			if Script.LuaUI.LoadMission then
@@ -844,7 +844,7 @@ local function showMainMenu (missionEnd)
 					function ()
 						closeMainMenu () -- close Main menu if the window is visible
 						if Script.LuaUI.TraceAction then
-							Script.LuaUI.TraceAction("continue_scenario "..missionName) -- registered by pp_meta_trace_manager.lua
+							Script.LuaUI.TraceAction("continue_scenario\t"..missionName) -- registered by pp_meta_trace_manager.lua
 						end
 						if Script.LuaUI.LoadMission then
 							Script.LuaUI.LoadMission("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- registered by pp_restart_manager.lua
@@ -883,7 +883,7 @@ local function showMainMenu (missionEnd)
 	quitMissionBut.OnClick = {
 		function ()
 			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("quit_mission "..missionName) -- registered by pp_meta_trace_manager.lua
+				Script.LuaUI.TraceAction("quit_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
 			end
 			WG.switchOnMenu()
 		end

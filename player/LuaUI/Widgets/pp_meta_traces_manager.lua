@@ -20,13 +20,13 @@ function TraceAction(msg)
 		if actor == nil then
 			actor = "Anonymous"
 		end
-		ppTraces:write("TIME_STAMP "..os.date().." USER_ID "..actor.." TRACE_CONTENT "..msg.."\n")
+		ppTraces:write("TIME_STAMP\t"..os.date().."\tUSER_ID\t"..actor.."\tTRACE_CONTENT\t"..msg.."\n")
 		ppTraces:flush()
 	end
 end
 
 function MissionEnded(victoryState)
-	TraceAction("end_mission "..victoryState.." "..missionName)
+	TraceAction("end_mission\t"..victoryState.."\t"..missionName)
 end
 
 function widget:RecvLuaMsg(msg, player)
@@ -51,7 +51,7 @@ function widget:Initialize()
 end
 
 function widget:GameStart()
-	TraceAction("start_mission "..missionName.." with team "..Spring.GetMyTeamID())
+	TraceAction("start_mission\t"..missionName.."\twithTeam\t"..Spring.GetMyTeamID())
 end
 
 function widget:Shutdown()
