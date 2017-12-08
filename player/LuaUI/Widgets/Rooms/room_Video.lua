@@ -219,7 +219,6 @@ local function CreateFullScreenVideo ()
 		winSizeX, winSizeY = widgetHandler:GetViewSizes()
 		winCenterX = winSizeX/2
 		winCenterY = winSizeY/2
-		Spring.Echo (winSizeX, winSizeY)
 	end
 	template_VideoBackground.son = Window:Create(template_Text)
 	return Window:Create(template_VideoBackground)
