@@ -12,9 +12,15 @@ end
 
 local Chili, Screen0
 local textBox, editBox
+local backgroundTop
+local backgroundBottom
 local history = {}
 local position = 1
 local window = nil
+local newMessage = false
+local currentColor = 0
+local stepColor = 0.01
+
 
 local colorTable = { -- associative table between a number and its character
 	"\0",
@@ -316,7 +322,14 @@ function sendText()
 	end
 end
 
+function focused()
+	return window.state.focused or scrollPanel.state.focused or textBox.state.focused or editBox.state.focused or backgroundTop.state.focused or backgroundBottom.state.focused
+end
 
+function resetNotif(...)
+	newMessage = false
+	backgroundTop.color = {0, 0, 0, 0.8}
+end
 
 function widget:RecvLuaMsg(msg, playerID)
 	-- Check if it is a chat message
@@ -330,9 +343,12 @@ function widget:RecvLuaMsg(msg, playerID)
 		textBox:SetText(textBox.text.."\255"..colorTable[math.floor(254*r)+1]..colorTable[math.floor(254*g)+1]..colorTable[math.floor(254*b)+1]..msgBody.."\255\255\255\255\n")
 		scrollPanel.scrollPosY = scrollPanel.contentArea[4]
 		scrollPanel:InvalidateSelf()
+		if playerID ~= Spring.GetMyPlayerID() and not focused() then
+			newMessage = true
+		end
 		-- trace this message
 		if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("chat_msg "..msgBody) -- registered by pp_meta_trace_manager.lua
+			Script.LuaUI.TraceAction("chat_msg\t"..msgBody) -- registered by pp_meta_trace_manager.lua
 		end
 	end
 end
@@ -342,17 +358,19 @@ function widget:Initialize()
 	initChili()
 	
 	if Chili ~= nil then
-		window = Chili.Window:New{parent = Screen0, x='0%', y='70%', width='30%', height='30%'}
+		window = Chili.Window:New{parent = Screen0, x='0%', y='0%', width='15%', height='100%'}
+		window.OnFocusUpdate = {resetNotif}
 		
-		scrollPanel = Chili.ScrollPanel:New{parent = window, x='0%', y='0%', width='100%', height='82%'}
+		scrollPanel = Chili.ScrollPanel:New{parent = window, x='0%', y='0%', width='100%', height='94%'}
+		scrollPanel.OnFocusUpdate = {resetNotif}
     
 		textBox = Chili.TextBox:New{parent = scrollPanel, x='0%', y='0%', width='100%', height='100%', text=""}
 		textBox.font.shadow = false
+		textBox.OnFocusUpdate = {resetNotif}
 		
-		editBox = Chili.EditBox:New{parent = window, x='0%', y='85%', width='100%', height='15%'}
+		editBox = Chili.EditBox:New{parent = window, x='0%', y='95%', width='100%', height='5%'}
 		editBox.OnKeyPress = {
-			function (self, key)	
-			
+			function (self, key)
 				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
 					sendText()
 				end
@@ -371,18 +389,35 @@ function widget:Initialize()
 				
 			end
 		}
+		editBox.OnFocusUpdate = {resetNotif}
 		
-		-- Add black filter
-		Chili.Image:New {
+		-- Add top black background
+		backgroundTop = Chili.Image:New {
 			parent = window,
 			x = "0%",
 			y = "0%",
 			width = "100%",
-			height = "82%",
+			height = "94%",
 			file = "bitmaps/editor/blank.png",
 			keepAspect = false,
 			color = {0, 0, 0, 0.8}
 		}
+		backgroundTop.OnFocusUpdate = {resetNotif}
+		
+		-- Add bottom black background
+		backgroundBottom = Chili.Image:New {
+			parent = window,
+			x = "0%",
+			y = "95%",
+			width = "100%",
+			height = "5%",
+			file = "bitmaps/editor/blank.png",
+			keepAspect = false,
+			color = {0, 0, 0, 0.8}
+		}
+		backgroundBottom.OnFocusUpdate = {resetNotif}
+		
+		
 	end
 end
 
@@ -392,7 +427,21 @@ function widget:Shutdown()
 		window = nil
 	end
 end
-	
+
+function widget:DrawScreen()
+	currentColor = currentColor + stepColor
+	if currentColor <= 0 then
+		currentColor = 0
+		stepColor = -1*stepColor
+	end
+	if currentColor >= 0.5 then
+		currentColor = 0.5
+		stepColor = -1*stepColor
+	end
+	if newMessage and backgroundTop ~= nil then
+		backgroundTop.color = {currentColor, 0, 0, 0.8}
+	end
+end
 	
 function widget:KeyPress(key, mods)
 	if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
