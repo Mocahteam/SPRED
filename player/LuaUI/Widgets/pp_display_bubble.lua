@@ -40,27 +40,45 @@ function DisplayUIMessage(message, x, y, width, height, id)
 			draggable = false,
 			resizable = false
 		}
-		WG.Chili.Label:New{
-			parent = messageUI,
-			x = '5%',
-			y = '5%',
-			width = '90%',
-			height = '90%',
-			minWidth = 0,
-			minHeight = 0,
-			align = "left",
-			valign = "linecenter",
-			caption = message,
-			fontsize = 30,
-			padding = {8, 2, 8, 2},
-			font = {
-				font = "LuaUI/Fonts/TruenoRg.otf",
-				size = 30,
-				autoAdjust = true,
-				maxSize = 30,
-				shadow = false
+		if string.find(message, "img:") ~= nil then
+			-- extract image path
+			local imagePath = string.gsub(message, "(.*)(img:)(.*)", "%3")
+			WG.Chili.Image:New {
+				parent = messageUI,
+				x = '5%',
+				y = '5%',
+				width = '90%',
+				height = '90%',
+				minWidth = 0,
+				minHeight = 0,
+				file = imagePath,
+				keepAspect = true,
+				color = {1, 1, 1, 1}
 			}
-		}
+		else
+			WG.Chili.Label:New{
+				parent = messageUI,
+				x = '5%',
+				y = '5%',
+				width = '90%',
+				height = '90%',
+				minWidth = 0,
+				minHeight = 0,
+				align = "left",
+				valign = "linecenter",
+				caption = message,
+				fontsize = 30,
+				padding = {8, 2, 8, 2},
+				font = {
+					font = "LuaUI/Fonts/TruenoRg.otf",
+					size = 30,
+					autoAdjust = true,
+					maxSize = 30,
+					shadow = false
+				}
+			}
+		end
+		
 		if (id) then
 			UIMessages[id] = messageUI
 		end

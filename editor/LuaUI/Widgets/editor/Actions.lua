@@ -543,7 +543,7 @@ actions_list = {
 				text = '<Message>',
 				type = "textSplit",
 				id = "message",
-				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.\nYou can integrate variables into message by decorating its name with double \"#\" (exemple: \"This is the value of var1: ##var1##\").[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.\nVous pouvez intégrer des variables dans le message en décorant son nom avec des doubles \"#\" (example : \"Voici le contenu de la variable var1 : ##var1##\").[fr]"
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.\nYou can display an image if your message follow this syntax: \"img:path\". Both for image and text, you can integrate variables into message by decorating its name with double \"#\" (exemple: \"This is the value of var1: ##var1##\").[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.\nVous pouvez afficher une image si votre message respecte la syntaxe suivante : \"img:chemin\". A la fois pour une image ou du texte, vous pouvez intégrer des variables dans le message en décorant son nom avec des doubles \"#\" (example : \"Voici le contenu de la variable var1 : ##var1##\").[fr]"
 			},
 			{
 				text = "[en]X: <Percentage>[en][fr]X : <Pourcentage>[fr]",
