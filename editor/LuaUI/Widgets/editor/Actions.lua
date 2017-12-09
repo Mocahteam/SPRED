@@ -575,7 +575,31 @@ actions_list = {
 				text = "[en]<Id> (optional)[en][fr]<Id> (Optionnel)[fr]",
 				type = "text",
 				id = "id",
-				hint = "[en]You can set an id for this message, useful for forcing message to close (see \"Force message to close\" action).[en][fr]Vous pouvez définir un id pour ce message, utile pour forcer la fermeture du message (voir l'action \"Force message to close\").[fr]"
+				hint = "[en]You can set an id for this message, useful to update or forcing message to close (see \"Update UI message\" or \"Force message to close\" actions).[en][fr]Vous pouvez définir un id pour ce message, utile pour mettre à jour ou forcer la fermeture du message (voir les actions \"Update UI message\" ou \"Force message to close\").[fr]"
+			}
+		}
+	},
+	{
+		type = "updateMessageUI",
+		filter = "Message",
+		typeText = "Update UI message",
+		text = "[en]Update <Id> message with <Message> for <Team>.[en][fr]Mettre à jour le message <Id> avec <Message> pour <Equipe>.[fr]",
+		attributes = {
+			{
+				text = "<Id>",
+				type = "text",
+				id = "id"
+			},
+			{
+				text = '<Message>',
+				type = "textSplit",
+				id = "message",
+				hint = "[en]Multiple messages can be defined using || to split them. A random one will be picked each time this action is called.\nYou can display an image if your message follow this syntax: \"img:path\". Both for image and text, you can integrate variables into message by decorating its name with double \"#\" (exemple: \"This is the value of var1: ##var1##\").[en][fr]Plusieurs messages peuvent être définis en les séparant avec des ||. L'un de ces messages sera choisi aléatoirement à chaque fois que cette action sera traitée.\nVous pouvez afficher une image si votre message respecte la syntaxe suivante : \"img:chemin\". A la fois pour une image ou du texte, vous pouvez intégrer des variables dans le message en décorant son nom avec des doubles \"#\" (example : \"Voici le contenu de la variable var1 : ##var1##\").[fr]"
+			},
+			{
+				text = "[en]<Team>[en][fr]<Equipe>[fr]",
+				type = "teamWithAll",
+				id = "team"
 			}
 		}
 	},

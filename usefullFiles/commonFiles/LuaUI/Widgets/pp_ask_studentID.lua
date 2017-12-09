@@ -246,7 +246,7 @@ function displayUI()
 			y = "50%",
 			width = "15%",
 			height = "15%",
-			caption = "Duo",
+			caption = "+",
 			minWidth = 0,
 			minHeight = 0,
 			padding = {8, 0, 8, 0},

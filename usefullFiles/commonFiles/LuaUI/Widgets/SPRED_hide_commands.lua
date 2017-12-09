@@ -1,7 +1,7 @@
 function widget:GetInfo()
    return {
    version   = "1",
-   name      = "Hide commands",
+   name      = "SPRED Hide commands",
    desc      = "Hides all commands",
    author    = "mocahteam",
    date      = "June 24, 2016",

@@ -13,11 +13,12 @@ end
 
 local json=VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
-function AskWidgetState (widgetName)
+function AskWidgetState (widgetName, idCond)
 	local valsToSend={}
 	valsToSend["widgetName"] = widgetName
 	valsToSend["state"] = widgetHandler.knownWidgets and widgetHandler.knownWidgets[widgetName] and widgetHandler.knownWidgets[widgetName].active
 	valsToSend["teamId"] = Spring.GetMyTeamID()
+	valsToSend["idCond"] = idCond -- pingpong the value
 	Spring.SendLuaRulesMsg("WidgetStateResult"..json.encode(valsToSend)) -- processed in MissionPlayer_Editor.lua
 end
 

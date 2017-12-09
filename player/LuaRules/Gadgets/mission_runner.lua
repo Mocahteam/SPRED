@@ -143,7 +143,7 @@ function gadget:RecvFromSynced(...)
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if not mouseDisabled then
 			mouseDisabled = true
-			Spring.SendCommands("luaui enablewidget Hide commands")
+			Spring.SendCommands("luaui enablewidget SPRED Hide commands")
 		end
 	end
 	
@@ -152,7 +152,7 @@ function gadget:RecvFromSynced(...)
 	if (target == nil or target == -1 or target == Spring.GetMyTeamID()) then
 		if mouseDisabled then
 			mouseDisabled = false
-			Spring.SendCommands("luaui disablewidget Hide commands")
+			Spring.SendCommands("luaui disablewidget SPRED Hide commands")
 		end
 	end
 	
@@ -240,6 +240,12 @@ function gadget:RecvFromSynced(...)
 		Script.LuaUI.DisplayUIMessage(p.message, p.x, p.y, p.width, p.height, p.id)
 	end
 	
+  elseif arg1 == "updateMessageUI" then -- sent by MissionPlayer_Editor.lua
+    local p=json.decode(arg2)
+	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
+		Script.LuaUI.UpdateUIMessage(p.id, p.message)
+	end
+	
   elseif arg1 == "removeMessage" then -- sent by MissionPlayer_Editor.lua
     local p=json.decode(arg2)
     Script.LuaUI.RemoveMessageById(p.id)
@@ -276,7 +282,7 @@ function gadget:RecvFromSynced(...)
     local p=json.decode(arg2)
 	if (p.target == nil or p.target == -1 or p.target == Spring.GetMyTeamID()) then
 		if Script.LuaUI.AskWidgetState then
-			Script.LuaUI.AskWidgetState(p.widgetName) -- registered by pp_widget_informer.lua
+			Script.LuaUI.AskWidgetState(p.widgetName, p.idCond) -- registered by pp_widget_informer.lua
 		end
 	end
   end

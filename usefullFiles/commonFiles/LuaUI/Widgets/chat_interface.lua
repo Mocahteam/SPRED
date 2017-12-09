@@ -19,7 +19,7 @@ local position = 1
 local window = nil
 local newMessage = false
 local currentColor = 0
-local stepColor = 0.01
+local stepColor = 0.007
 
 
 local colorTable = { -- associative table between a number and its character
@@ -329,6 +329,7 @@ end
 function resetNotif(...)
 	newMessage = false
 	backgroundTop.color = {0, 0, 0, 0.8}
+	backgroundTop:InvalidateSelf()
 end
 
 function widget:RecvLuaMsg(msg, playerID)
@@ -358,17 +359,27 @@ function widget:Initialize()
 	initChili()
 	
 	if Chili ~= nil then
-		window = Chili.Window:New{parent = Screen0, x='0%', y='0%', width='15%', height='100%'}
+		window = Chili.Window:New{parent = Screen0, x='0%', y='0%', width='20%', height='32%'}
 		window.OnFocusUpdate = {resetNotif}
 		
-		scrollPanel = Chili.ScrollPanel:New{parent = window, x='0%', y='0%', width='100%', height='94%'}
+		scrollPanel = Chili.ScrollPanel:New{parent = window, x='0%', y='0%', width='100%', height='84%'}
 		scrollPanel.OnFocusUpdate = {resetNotif}
     
-		textBox = Chili.TextBox:New{parent = scrollPanel, x='0%', y='0%', width='100%', height='100%', text=""}
-		textBox.font.shadow = false
+		textBox = Chili.TextBox:New{
+			parent = scrollPanel,
+			x='0%',
+			y='0%',
+			width='100%',
+			height='100%',
+			text="",
+			font = {
+				shadow = false,
+				size = 18
+			}
+		}
 		textBox.OnFocusUpdate = {resetNotif}
 		
-		editBox = Chili.EditBox:New{parent = window, x='0%', y='95%', width='100%', height='5%'}
+		editBox = Chili.EditBox:New{parent = window, x='0%', y='85%', width='100%', height='15%'}
 		editBox.OnKeyPress = {
 			function (self, key)
 				if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
@@ -397,7 +408,7 @@ function widget:Initialize()
 			x = "0%",
 			y = "0%",
 			width = "100%",
-			height = "94%",
+			height = "84%",
 			file = "bitmaps/editor/blank.png",
 			keepAspect = false,
 			color = {0, 0, 0, 0.8}
@@ -408,9 +419,9 @@ function widget:Initialize()
 		backgroundBottom = Chili.Image:New {
 			parent = window,
 			x = "0%",
-			y = "95%",
+			y = "85%",
 			width = "100%",
-			height = "5%",
+			height = "15%",
 			file = "bitmaps/editor/blank.png",
 			keepAspect = false,
 			color = {0, 0, 0, 0.8}
@@ -440,6 +451,7 @@ function widget:DrawScreen()
 	end
 	if newMessage and backgroundTop ~= nil then
 		backgroundTop.color = {currentColor, 0, 0, 0.8}
+		backgroundTop:InvalidateSelf()
 	end
 end
 	

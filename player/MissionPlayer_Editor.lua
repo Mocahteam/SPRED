@@ -319,13 +319,13 @@ local function getAMessage(messageTable)
   end
   msg = string.gsub(msg, "\\n", "\n")
   msg = string.gsub(msg, "\\t", "\t")
-  -- manage colors
-  for i = 255, 0, -1 do
-	msg = string.gsub(msg, "\\"..i, colorTable[i+1])
-  end
   -- replace variables by its value
   for v,value in pairs(ctx.variables)do
     msg=string.gsub(msg, "##"..v.."##", tostring(value))
+  end
+  -- manage colors
+  for i = 255, 0, -1 do
+	msg = string.gsub(msg, "\\"..i, colorTable[i+1])
   end
   return msg
 end
@@ -750,11 +750,9 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
 			-- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
 			local playerUnitList=ctx.extractListOfUnitsInvolved(c.params)
 			--EchoDebug(json.encode(playerUnitList),6)
-			if(playerUnitList==nil)then
-				Spring.Echo ("Warning on condition \""..c.name.."\": no units found")
-				return false
+			if(playerUnitList~=nil)then
+				total=table.getn(playerUnitList)
 			end
-			total=table.getn(playerUnitList)
 			if total == 0 then
 				-- If the set is empty we can't check condition parameters on units. We set the validity of this condition to false 
 				ctx.conditions[idCond]["currentlyValid"] = false
@@ -899,46 +897,90 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
 		if widgetName == nil or widgetName == "" then
 			Spring.Echo ("Warning on condition \""..c.name.."\" (Widget is enabled): Widget name not defined")
 		else
+			local players  = Spring.GetPlayerList(-1, true) -- Get all alive players
 			-- check if this widget is known in mission player
 			if ctx.widgetsState[widgetName] == nil then
 				ctx.widgetsState[widgetName] = {}
 			end
+			-- check if this widget is known for this condition in mission player
+			if ctx.widgetsState[widgetName][idCond] == nil then
+				ctx.widgetsState[widgetName][idCond] = {}
+			end
 			-- check if this target is monitoring for this widget in mission player
-			if ctx.widgetsState[widgetName][target] == nil then
+			if ctx.widgetsState[widgetName][idCond][target] == nil then
 				-- we init monitoring data
-				ctx.widgetsState[widgetName][target] = {asked=false, answer=false, state = false}
+				ctx.widgetsState[widgetName][idCond][target] = {asked=false, answer=false, state = false}
 				-- in case of "all teams" we add special field to store data for each team
 				if target == -1 then
 					-- we filter enabled player teams
 					local playerTeams = {}
 					for teamId, data in pairs(ctx.mission.teams) do
 						if data["control"]=="player" and data["enabled"]==true then
-							playerTeams[tonumber(teamId)] = "undef"
+							-- check if at least one player plays current team and can answer
+							for _, playerId in ipairs(players) do
+								_, _, _, playerTeamId = Spring.GetPlayerInfo(playerId)
+								if playerTeamId == teamId then
+									playerTeams[tonumber(teamId)] = "undef"
+									break
+								end
+							end
 						end
 					end
-					ctx.widgetsState[widgetName][target].teamsAnswers = playerTeams
+					ctx.widgetsState[widgetName][idCond][target].teamsAnswers = playerTeams
 				end
 			end
 			-- check if the state of this widget for this target was asked
-			if ctx.widgetsState[widgetName][target].asked then
-				-- check if we received the answer
-				if ctx.widgetsState[widgetName][target].answer then
-					-- we can set truthfullness of this condition and reset monitoring states
-					ctx.conditions[idCond]["currentlyValid"]=ctx.widgetsState[widgetName][target].state
-					ctx.widgetsState[widgetName][target].asked = false
-					ctx.widgetsState[widgetName][target].answer = false
-					ctx.widgetsState[widgetName][target].state = false
+			if ctx.widgetsState[widgetName][idCond][target].asked then
+				local foundControler = true
+				if target ~= -1 then
+					-- check if at least one player plays target team and can answer
+					foundControler = false
+					for _, playerId in ipairs(players) do
+						_, _, _, teamId = Spring.GetPlayerInfo(playerId)
+						if teamId == target then
+							foundControler = true
+							break
+						end
+					end
+				end
+				-- check if we received the answer or team not controled by a player
+				if ctx.widgetsState[widgetName][idCond][target].answer or not foundControler then
+					if not foundControler then
+						-- No player control this team, then the widget is not enabled
+						ctx.conditions[idCond]["currentlyValid"]=false
+					else
+						-- we can set truthfullness of this condition
+						ctx.conditions[idCond]["currentlyValid"]=ctx.widgetsState[widgetName][idCond][target].state
+					end
+					-- now we reset monitoring states
+					ctx.widgetsState[widgetName][idCond][target].asked = false
+					ctx.widgetsState[widgetName][idCond][target].answer = false
+					ctx.widgetsState[widgetName][idCond][target].state = false
 					if target == -1 then
 						-- reset teams answers
-						for teamId,_ in pairs(ctx.widgetsState[widgetName][target].teamsAnswers) do
-							ctx.widgetsState[widgetName][target].teamsAnswers[teamId] = "undef"
+						for teamId,_ in pairs(ctx.widgetsState[widgetName][idCond][target].teamsAnswers) do
+							-- check if at least one player still plays current team and can answer
+							local foundControler2 = false
+							for _, playerId in ipairs(players) do
+								_, _, _, playerTeamId = Spring.GetPlayerInfo(playerId)
+								if playerTeamId == teamId then
+									foundControler2 = true
+									break
+								end
+							end
+							if foundControler2 then
+								ctx.widgetsState[widgetName][idCond][target].teamsAnswers[teamId] = "undef"
+							else
+								-- we reset this team
+								ctx.widgetsState[widgetName][idCond][target].teamsAnswers[teamId] = nil
+							end
 						end
 					end
 					return true
 				end
 			else
-				ctx.widgetsState[widgetName][target].asked = true
-				SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,target=target}))
+				ctx.widgetsState[widgetName][idCond][target].asked = true
+				SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,idCond=idCond,target=target}))
 			end
 		end
 		return false -- truthfullness is not checkable this frame we need to report the evaluation of this condition
@@ -1345,6 +1387,21 @@ local function ApplyNonGroupableAction(act)
 		local width = ctx.computeReference(act.params.width)
 		local height = ctx.computeReference(act.params.height)
 		SendToUnsynced("displayUIMessage", json.encode({message=message,x=x.."%",y=y.."%",width=width.."%",height=height.."%",id=act.params.id,target=act.params.team}))
+	end
+
+  elseif(act.type=="updateMessageUI") then
+	if act.params.id == nil or act.params.id == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Update UI message): No id defined")
+	elseif act.params.message == nil or act.params.message == "" then
+		Spring.Echo ("Warning on action \""..act.name.."\" (Update UI message): No message defined")
+	else
+		if act.params.team == nil or act.params.team == "" then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Update UI message): No team selected")
+		elseif act.params.team ~= -1 and ctx.mission.teams[tostring(act.params.team)] == nil then
+			Spring.Echo ("Warning on action \""..act.name.."\" (Update UI message): Team unknown")
+		end
+		local message = extractLang(ctx.getAMessage(act.params.message), lang)
+		SendToUnsynced("updateMessageUI", json.encode({id=act.params.id, message=message, target=act.params.team}))
 	end
 
   elseif(act.type=="removeMessage") then
@@ -1943,7 +2000,7 @@ local function parseJson(jsonString)
     ,["PP GUI Main Menu"]=true,["Spring Direct Launch for mission player"]=true
 	,["PP Display Zones"]=true,["PP Meta Traces Manager"]=true
 	,["PP Show Feedbacks"]=true,["PP Widget Informer"]=true,["PP Restart Manager"]=true
-	,["Hide commands"]=false
+	,["SPRED Hide commands"]=false
   }
   
   for i=1, table.getn(ctx.mission.description.widgets) do
@@ -2297,27 +2354,42 @@ local function RecvLuaMsg(msg, player)
 	local values=json.decode(jsonString)
 	-- check if this widgetName is monitored (theorically yes, if not its a problem...) - see UpdateConditionTruthfulness => "widgetEnabled" condition
 	if ctx.widgetsState[values.widgetName] then
-		-- store this data for the team if we ask it
-		if ctx.widgetsState[values.widgetName][values.teamId] ~= nil and ctx.widgetsState[values.widgetName][values.teamId].asked then
-			ctx.widgetsState[values.widgetName][values.teamId].answer = true
-			ctx.widgetsState[values.widgetName][values.teamId].state = values.state
-		end
-		-- store this data for all teams if we ask it
-		if ctx.widgetsState[values.widgetName][-1] ~= nil and ctx.widgetsState[values.widgetName][-1].asked then
-			ctx.widgetsState[values.widgetName][-1].teamsAnswers[values.teamId] = values.state
-			-- check if all teams answer
-			local result = true
-			local allAnswer = true
-			for teamId, r in pairs(ctx.widgetsState[values.widgetName][-1].teamsAnswers) do
-				if r == "undef" then
-					allAnswer = false
-				else
-					result = result and r
-				end
+		-- check if this widgetName is monitored for the specified condition Id (theorically yes, if not its a problem...) - see UpdateConditionTruthfulness => "widgetEnabled" condition
+		if ctx.widgetsState[values.widgetName][values.idCond] then
+			-- store this data for the team if we ask it
+			if ctx.widgetsState[values.widgetName][values.idCond][values.teamId] ~= nil and ctx.widgetsState[values.widgetName][values.idCond][values.teamId].asked then
+				ctx.widgetsState[values.widgetName][values.idCond][values.teamId].answer = true
+				ctx.widgetsState[values.widgetName][values.idCond][values.teamId].state = values.state
 			end
-			if allAnswer then
-				ctx.widgetsState[values.widgetName][-1].answer = true
-				ctx.widgetsState[values.widgetName][-1].state = result
+			-- store this data for all teams if we ask it
+			if ctx.widgetsState[values.widgetName][values.idCond][-1] ~= nil and ctx.widgetsState[values.widgetName][values.idCond][-1].asked then
+				ctx.widgetsState[values.widgetName][values.idCond][-1].teamsAnswers[values.teamId] = values.state
+				-- check if all teams answer
+				local result = true
+				local allAnswer = true
+				for teamId, r in pairs(ctx.widgetsState[values.widgetName][values.idCond][-1].teamsAnswers) do
+					-- check if current team is still controled by a player
+					local foundControler = false
+					local players  = Spring.GetPlayerList(-1, true) -- Get all alive players
+					for _, playerId in ipairs(players) do
+						_, _, _, playerTeamId = Spring.GetPlayerInfo(playerId)
+						if playerTeamId == teamId then
+							foundControler = true
+							break
+						end
+					end
+					if foundControler then
+						if r == "undef" then
+							allAnswer = false
+						else
+							result = result and r
+						end
+					end
+				end
+				if allAnswer then
+					ctx.widgetsState[values.widgetName][values.idCond][-1].answer = true
+					ctx.widgetsState[values.widgetName][values.idCond][-1].state = result
+				end
 			end
 		end
 	end

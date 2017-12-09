@@ -27,6 +27,45 @@ function DisplayMessageInBubble(message, unit, timer, id)
 	table.insert(BubbleMessages, {message = message, unit = unit, timer = timer,infinite=(timer==0), prevX = nil, prevY = nil, id = id})
 end
 
+function addImage(parent, imagePath)
+	return WG.Chili.Image:New {
+		parent = parent,
+		x = '5%',
+		y = '5%',
+		width = '90%',
+		height = '90%',
+		minWidth = 0,
+		minHeight = 0,
+		file = imagePath,
+		keepAspect = true,
+		color = {1, 1, 1, 1}
+	}
+end
+
+function addLabel(parent, message)
+	return WG.Chili.Label:New{
+		parent = parent,
+		x = '5%',
+		y = '5%',
+		width = '90%',
+		height = '90%',
+		minWidth = 0,
+		minHeight = 0,
+		align = "left",
+		valign = "linecenter",
+		caption = message,
+		fontsize = 20,
+		padding = {1, 1, 1, 1},
+		font = {
+			font = "LuaUI/Fonts/TruenoRg.otf",
+			size = 20,
+			autoAdjust = true,
+			maxSize = 20,
+			shadow = false
+		}
+	}
+end
+
 function DisplayUIMessage(message, x, y, width, height, id)
 	if (WG.Chili) then
 		local messageUI = WG.Chili.Window:New{
@@ -40,47 +79,54 @@ function DisplayUIMessage(message, x, y, width, height, id)
 			draggable = false,
 			resizable = false
 		}
+		local childImg = nil
+		local childLabel = nil
 		if string.find(message, "img:") ~= nil then
 			-- extract image path
 			local imagePath = string.gsub(message, "(.*)(img:)(.*)", "%3")
-			WG.Chili.Image:New {
-				parent = messageUI,
-				x = '5%',
-				y = '5%',
-				width = '90%',
-				height = '90%',
-				minWidth = 0,
-				minHeight = 0,
-				file = imagePath,
-				keepAspect = true,
-				color = {1, 1, 1, 1}
-			}
+			childImg = addImage (messageUI, imagePath)
 		else
-			WG.Chili.Label:New{
-				parent = messageUI,
-				x = '5%',
-				y = '5%',
-				width = '90%',
-				height = '90%',
-				minWidth = 0,
-				minHeight = 0,
-				align = "left",
-				valign = "linecenter",
-				caption = message,
-				fontsize = 30,
-				padding = {8, 2, 8, 2},
-				font = {
-					font = "LuaUI/Fonts/TruenoRg.otf",
-					size = 30,
-					autoAdjust = true,
-					maxSize = 30,
-					shadow = false
-				}
-			}
+			childLabel = addLabel(messageUI, message)
 		end
+		messageUI.childImg = childImg
+		messageUI.childLabel = childLabel
 		
 		if (id) then
 			UIMessages[id] = messageUI
+		end
+	end
+end
+
+function UpdateUIMessage(id, message)
+	if id and UIMessages[id] then
+		local UIMessage = UIMessages[id]
+		if string.find(message, "img:") ~= nil then
+			if UIMessage.childImg then
+				-- extract image path
+				local imagePath = string.gsub(message, "(.*)(img:)(.*)", "%3")
+				-- Update image
+				UIMessage.childImg.file = imagePath
+				UIMessage.childImg:InvalidateSelf()
+			else
+				-- remove label child
+				if UIMessage.childLabel then
+					UIMessage.childLabel:Dispose()
+					UIMessage.childLabel = nil
+				end
+				UIMessage.childImg = addImage (UIMessage, imagePath)
+			end
+		else
+			if UIMessage.childLabel then
+				-- Update caption
+				UIMessage.childLabel:SetCaption(message)
+			else
+				-- remove image child
+				if UIMessage.childImg then
+					UIMessage.childImg:Dispose()
+					UIMessage.childImg = nil
+				end
+				UIMessage.childLabel = addLabel (UIMessage, message)
+			end
 		end
 	end
 end
@@ -245,6 +291,7 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("DisplayMessageAtPosition", DisplayMessageAtPosition)
 	widgetHandler:RegisterGlobal("DisplayMessageInBubble", DisplayMessageInBubble)
 	widgetHandler:RegisterGlobal("DisplayUIMessage", DisplayUIMessage)
+	widgetHandler:RegisterGlobal("UpdateUIMessage", UpdateUIMessage)
 	widgetHandler:RegisterGlobal("RemoveMessageById", RemoveMessageById)
 end
 
@@ -274,5 +321,6 @@ function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("DisplayMessageAtPosition")
 	widgetHandler:DeregisterGlobal("DisplayMessageInBubble")
 	widgetHandler:DeregisterGlobal("DisplayUIMessage")
+	widgetHandler:DeregisterGlobal("UpdateUIMessage")
 	widgetHandler:DeregisterGlobal("RemoveMessageById")
 end

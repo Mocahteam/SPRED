@@ -64,7 +64,7 @@ function InitializeEditor() -- Enable editor widgets
 		widgetHandler:EnableWidget("Editor Loading Screen")
 	end
 	widgetHandler:EnableWidget("Chili Framework")
-	widgetHandler:EnableWidget("Hide commands")
+	widgetHandler:EnableWidget("SPRED Hide commands")
 	widgetHandler:EnableWidget("Editor Widget List")
 	widgetHandler:EnableWidget("Editor User Interface")
 	widgetHandler:EnableWidget("PP Restart Manager")
