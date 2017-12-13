@@ -1495,7 +1495,7 @@ function initTriggerWindow()
 	-- Import Actions/Conditions window
 	windows["importWindow"] = addWindow(Screen0, "25%", "85%", "40%", "15%")
 	addLabel(windows["importWindow"], '0%', '0%', '100%', '30%', EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT)
-	importEventComboBox = addComboBox(windows["importWindow"], '0%', '30%', tostring(100/3).."%", "70%", {}, nil)
+	importEventComboBox = addComboBox(windows["importWindow"], '0%', '47%', tostring(100/3).."%", "35%", {}, nil)
 	importConditionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '30%', tostring(100/3).."%", "35%", {}, nil)
 	addButton(windows["importWindow"], tostring(200/3).."%", '30%', tostring(100/3).."%", "35%", EDITOR_TRIGGERS_EVENTS_CONFIGURE_IMPORT_CONDITION, importCondition)
 	importActionComboBox = addComboBox(windows["importWindow"], tostring(100/3).."%", '65%', tostring(100/3).."%", "35%", {}, nil)
@@ -3928,7 +3928,7 @@ drawFeatureFunctions["zone"] = function(attr, yref, ac, panel, feature)
 	end
 
 	-- ComboBox select
-	local comboBox = addComboBox(panel, '30%', y.."%", '68%', "5%", comboBoxItems)
+	local comboBox = addComboBox(panel, '30%', y.."%", '60%', "5%", comboBoxItems)
 	comboBox.prevSelection = nil
 	comboBox.OnSelect = {
 		function()
@@ -3957,7 +3957,38 @@ drawFeatureFunctions["zone"] = function(attr, yref, ac, panel, feature)
 		comboBox:Select(1)
 		comboBox.prevSelection = 1
 	end
+		
+	-- Eye button to focus a specific zone
+	local function viewZone()
+		local zone = nil
+		-- look for the zone
+		for k, currentZone in pairs(zoneList) do
+			if currentZone.id == ac.params[attr.id] then
+				zone = currentZone
+				break
+			end
+		end
+		if zone ~= nil then
+			local state = Spring.GetCameraState()
+			local x, z
+			if zone.type == "Rectangle" then
+				x = (zone.x1 + zone.x2)/2
+				z = (zone.z1 + zone.z2)/2
+			elseif zone.type == "Disk" then
+				x = zone.x
+				z = zone.z
+			end
+			state.px, state.py, state.pz = x, Spring.GetGroundHeight(x, z), z
+			state.height = 500
+			Spring.SetCameraState(state, 2)
+		end
+	end
+	local eyeBut = addImage(panel, "90%", (y+1).."%", "8%", "3%", "bitmaps/editor/eye.png", true, {0, 1, 1, 1})
+	eyeBut.OnClick = { viewZone }
+	eyeBut.OnMouseOver = { function() eyeBut.color = {1, 1, 1, 1} end }
+	eyeBut.OnMouseOut = { function() eyeBut.color = {0, 1, 1, 1} end }
 
+	table.insert(feature, eyeBut)
 	table.insert(feature, comboBox)
 end
 
