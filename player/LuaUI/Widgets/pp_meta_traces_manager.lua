@@ -32,8 +32,8 @@ end
 function widget:RecvLuaMsg(msg, player)
   if player == Spring.GetMyPlayerID() then
 	if((msg~=nil)and(string.len(msg)>16)and(string.sub(msg,1,16)=="CompressedTraces")) then -- received from game engine (ProgAndPlay.cpp)
-		local jsonfile=string.sub(msg,18,-1) -- we start at 18 due to an underscore used as a separator
-		TraceAction("compressed_trace_begin\n"..jsonfile.."compressed_trace_end")
+		local content=string.sub(msg,18,-1) -- we start at 18 due to an underscore used as a separator
+		TraceAction("compressed_trace_begin\t"..content)
 	end
   end
 end

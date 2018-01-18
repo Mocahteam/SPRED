@@ -607,7 +607,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].clearness ~= clearComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_clearness\t"..clearComboBox.caption.."\tfeedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_clearness\t"..clearComboBox.caption.."\tfeedback_begin\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].clearness = clearComboBox.selected
@@ -620,7 +620,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].utility ~= usefulComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_utility\t"..usefulComboBox.caption.."\tfeedback_begin\n"..feedbacks[currentFeedback].feedback.."\nfeedback_end") -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_utility\t"..usefulComboBox.caption.."\tfeedback_begin\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].utility = usefulComboBox.selected
@@ -957,9 +957,6 @@ function MissionEvent(e)
       else
         briefingPopup = WG.Message:Show{text = e.message, width = e.width, pause = e.pause}
       end
-	  if rooms.Video and not rooms.Video.closed then
-		briefingPopup.delayDrawing = true
-      end
   elseif e.logicType == "PauseAction" then
     Spring.SendCommands"pause"
   elseif e.logicType == "MarkerPointAction" then
@@ -972,55 +969,46 @@ function MissionEvent(e)
 end
 
 function TutorialEvent()
-  if rooms.Video and not rooms.Video.closed then
-    rooms.Video:Close()
-  end
   if not tutoPopup then 
     tutoPopup = true
     rooms.TutoView:Open()
   end
 end
 
-function PlayVideo()
-  if rooms.Video and rooms.Video.closed then
-    rooms.Video:Open()
-  end
-end
-
 function getFeedbackToString(json_obj, export_score)
 	local s = ""
 	if json_obj.score ~= nil and export_score then
-		s = s..LANG_SCORE..json_obj.score.." / 100\n"
+		s = s..LANG_SCORE..json_obj.score.." / 100\t"
 	end
 	if json_obj.num_attempts ~= nil and export_score then
-		s = s..LANG_NUM_ATTEMPTS..json_obj.num_attempts.."\n"
+		s = s..LANG_NUM_ATTEMPTS..json_obj.num_attempts.."\t"
 	end
 	-- if json_obj.execution_time ~= nil and export_score then
-		-- s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\n"
-		-- s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\n"
+		-- s = s..LANG_PROGRAM_EXECUTION..json_obj.execution_time.." s\t"
+		-- s = s..LANG_PROGRAM_REFERENCE..json_obj.ref_execution_time.." s\t"
 	-- end
 	-- if json_obj.exec_mean_wait_time ~= nil and export_score then
-		-- s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\n"
+		-- s = s..LANG_AVERAGE_TIME..json_obj.exec_mean_wait_time.." s\t"
 	-- end
 	-- if json_obj.resolution_time ~= nil and export_score then
-		-- s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\n"
-		-- s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\n"
+		-- s = s..LANG_MISSION_TIME..json_obj.resolution_time.." s\t"
+		-- s = s..LANG_REFERENCE_TIME..json_obj.ref_resolution_time.." s\t"
 	-- end
 	if json_obj.warnings ~= nil and #json_obj.warnings > 0 then
 		for i = 1,#json_obj.warnings do
-			s = s..json_obj.warnings[i].."\n"
+			s = s..json_obj.warnings[i].."\t"
 		end
 	end
 	if json_obj.feedbacks ~= nil and #json_obj.feedbacks > 0 then
 		for i = 1,#json_obj.feedbacks do
-			s = s..json_obj.feedbacks[i].."\n"
+			s = s..json_obj.feedbacks[i].."\t"
 		end
 	end
 	return s
 end
 
--- if main menu is openned => update feedback canvas to display feedbacks
--- if main menu is not openned => show feedback in a popup
+-- if main menu is opened => update feedback canvas to display feedbacks
+-- if main menu is not opened => show feedback in a pop-up
 function handleFeedback(str)
 	-- check if the feedback is consistent
 	if str == "" or str == "{}" then 
@@ -1058,48 +1046,48 @@ function handleFeedback(str)
 		end
 		feedbacks = newFeedbacks
 		currentFeedback = 1
-		local feedbackToLog
-		if json_obj.won ~= nil then -- the mission is over
-			feedbackToLog = getFeedbackToString(json_obj, true)
-			Spring.SetConfigString("score", json_obj.score, 1) -- save the score for the engine
-			-- display score
-			if scoreLabel then
-				scoreLabel:SetCaption(LANG_SCORE.."\255"..colorTable[101-json_obj.score]..colorTable[json_obj.score+1].."\0"..json_obj.score.." / 100")
-			end
-			-- display number of attempts
-			if numAttemptLabel then
-				numAttemptLabel:SetCaption(LANG_NUM_ATTEMPTS..json_obj.num_attempts)
-			end
-			-- update feedback panel
-			if #feedbacks > 0 then
-				if feedbackPanel.hidden then
-					feedbackPanel:Show()
-				end
-				updateFeedbackFields ()
-			end
-		else -- the mission is not over yet
-			feedbackToLog = getFeedbackToString(json_obj, false)
-			
-			-- close Main menu if the window is visible
-			if mainMenuWindow then
-				closeMainMenu() 
-				-- WARNING!!!  closing main menu erase feedbacks so we restore them
-				-- before showing them again
-				feedbacks = newFeedbacks
-			end
-			
-			-- close tuto if it is openned
-			if tutoPopup then
-				if rooms.TutoView and not rooms.TutoView.closed then
-					rooms.TutoView:Close()
-				end
-			end
-			
-			-- show feedbacks popup
-			showFeedback ()
-		end
+		local feedbackToLog = getFeedbackToString(json_obj, (json_obj.won ~= nil))
 		if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("feedbacks_begin\n"..feedbackToLog.."feedbacks_end") -- registered by pp_meta_trace_manager.lua
+			Script.LuaUI.TraceAction("feedbacks_begin\t"..feedbackToLog) -- registered by pp_meta_trace_manager.lua
+		end
+		
+		if traceOn then -- check if we have to display feedbacks
+			if json_obj.won ~= nil then -- the mission is over
+				Spring.SetConfigString("score", json_obj.score, 1) -- save the score for the engine for facebook purpose
+				-- display score
+				if scoreLabel then
+					scoreLabel:SetCaption(LANG_SCORE.."\255"..colorTable[101-json_obj.score]..colorTable[json_obj.score+1].."\0"..json_obj.score.." / 100")
+				end
+				-- display number of attempts
+				if numAttemptLabel then
+					numAttemptLabel:SetCaption(LANG_NUM_ATTEMPTS..json_obj.num_attempts)
+				end
+				-- update feedback panel
+				if #feedbacks > 0 then
+					if feedbackPanel.hidden then
+						feedbackPanel:Show()
+					end
+					updateFeedbackFields ()
+				end
+			else -- the mission is not over yet
+				-- close Main menu if the window is visible
+				if mainMenuWindow then
+					closeMainMenu() 
+					-- WARNING!!!  closing main menu erase feedbacks so we restore them
+					-- before showing them again
+					feedbacks = newFeedbacks
+				end
+				
+				-- close tuto if it is opened
+				if tutoPopup then
+					if rooms.TutoView and not rooms.TutoView.closed then
+						rooms.TutoView:Close()
+					end
+				end
+				
+				-- show feedbacks pop-up
+				showFeedback ()
+			end
 		end
 	end
 end
@@ -1107,33 +1095,23 @@ end
 function widget:KeyPress(key, mods, isRepeat, label, unicode)
 	-- intercept ESCAPE pressure
 	if key == KEYSYMS.ESCAPE then
-		if rooms.Video and not rooms.Video.closed then
-			rooms.Video:Close()
-			if briefingPopup ~= nil then
-				briefingPopup.delayDrawing = false
-			end
-			if Script.LuaUI.ToggleHelpButton then
-				Script.LuaUI.ToggleHelpButton() -- registered by pp_show_feedback.lua
-			end
+		if rooms.TutoView and not rooms.TutoView.closed then
+			rooms.TutoView:Close()
+		end
+		if Spring.GetModOptions()["testmap"]~=nil then
+			Spring.SendLuaRulesMsg("Show briefing")
 		else
-			if rooms.TutoView and not rooms.TutoView.closed then
-				rooms.TutoView:Close()
-			end
-			if Spring.GetModOptions()["testmap"]~=nil then
-				Spring.SendLuaRulesMsg("Show briefing")
+			if mainMenuWindow == nil then
+				MissionEvent ({logicType = "ShowMissionMenu",
+				state = "menu"})
 			else
-				if mainMenuWindow == nil then
-					MissionEvent ({logicType = "ShowMissionMenu",
-					state = "menu"})
-				else
-					-- close Main menu if the close button is Shown
-					if mainMenuCloseButton and mainMenuCloseButton.visible then
-						closeMainMenu () -- close Main menu if the window is visible
-						-- reopen tuto if required
-						if tutoPopup then
-							if rooms.TutoView.closed then
-								rooms.TutoView:Open()
-							end
+				-- close Main menu if the close button is Shown
+				if mainMenuCloseButton and mainMenuCloseButton.visible then
+					closeMainMenu () -- close Main menu if the window is visible
+					-- reopen tuto if required
+					if tutoPopup then
+						if rooms.TutoView.closed then
+							rooms.TutoView:Open()
 						end
 					end
 				end
@@ -1160,7 +1138,6 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal("EmulateEscapeKey", EmulateEscapeKey)
   widgetHandler:RegisterGlobal("MissionEvent", MissionEvent)
   widgetHandler:RegisterGlobal("TutorialEvent", TutorialEvent)
-  widgetHandler:RegisterGlobal("PlayVideo", PlayVideo)
   
   rooms = WG.rooms -- WG is available in all widgets (defined in pp_gui_rooms.lua)
 end
@@ -1170,5 +1147,4 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal("EmulateEscapeKey")
   widgetHandler:DeregisterGlobal("MissionEvent")
   widgetHandler:DeregisterGlobal("TutorialEvent")
-  widgetHandler:DeregisterGlobal("PlayVideo")
 end

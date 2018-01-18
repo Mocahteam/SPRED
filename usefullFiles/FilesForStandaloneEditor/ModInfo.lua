@@ -10,9 +10,9 @@ return
 	url='http://www.irit.fr/ProgAndPlay/index_en.php',
 	modtype=1,
 	depend= {
-		--"Kernel Panic 4.1",
+		"Kernel Panic 4.1",
 		--"Balanced Annihilation V7.50",
-		"Example Mod",
+		--"Example Mod",
 		--"Spring Tutorial Game 0.1",
 	},
 }
