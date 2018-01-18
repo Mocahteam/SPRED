@@ -607,7 +607,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].clearness ~= clearComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_clearness\t"..clearComboBox.caption.."\tfeedback_begin\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_clearness\t"..clearComboBox.caption.."\tfeedback\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].clearness = clearComboBox.selected
@@ -620,7 +620,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 		function()
 			if logComboEvent and feedbacks[currentFeedback].utility ~= usefulComboBox.selected then
 				if Script.LuaUI.TraceAction then
-					Script.LuaUI.TraceAction("assess_feedback_utility\t"..usefulComboBox.caption.."\tfeedback_begin\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
+					Script.LuaUI.TraceAction("assess_feedback_utility\t"..usefulComboBox.caption.."\tfeedback\t"..feedbacks[currentFeedback].feedback) -- registered by pp_meta_trace_manager.lua
 				end
 			end
 			feedbacks[currentFeedback].utility = usefulComboBox.selected
@@ -1048,7 +1048,7 @@ function handleFeedback(str)
 		currentFeedback = 1
 		local feedbackToLog = getFeedbackToString(json_obj, (json_obj.won ~= nil))
 		if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("feedbacks_begin\t"..feedbackToLog) -- registered by pp_meta_trace_manager.lua
+			Script.LuaUI.TraceAction("feedbacks\t"..feedbackToLog) -- registered by pp_meta_trace_manager.lua
 		end
 		
 		if traceOn then -- check if we have to display feedbacks

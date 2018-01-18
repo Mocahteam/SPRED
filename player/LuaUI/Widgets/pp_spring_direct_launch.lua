@@ -27,6 +27,7 @@ end
 local RemovedWidgetList = {}
 local Chili, Screen0 -- Chili framework, main screen
 local tableCaptions={
+  {el="Tutorial",fr="Tutoriel",en="Tutorial"},
   {el="NewPartyButton",fr="Nouvelle partie",en="New Game"},
   {el="ListMissionButtons",fr="Missions",en="Missions"},
   {el="Title",fr="Campagne",en="Campaign"},
@@ -213,6 +214,44 @@ end
 local function InitializeMainMenu() -- Initialize the main window and buttons of the main menu
 	clearUI()
 	commonElements()
+	-- look for a mission with name Tutorial
+	local MissionsList=VFS.DirList("Missions")
+	for i,MissionFileName in ipairs(MissionsList) do 
+		local userMissionName=string.match(MissionFileName, '/([^/]*)%.')--match string between the last "\" and the "." of .editor 
+		if userMissionName == "tutorial" then
+			UI.Tutorial = Chili.Button:New{
+				parent = UI.MainWindow,
+				x = "30%",
+				y = "20%",
+				width = "40%",
+				height = "10%",
+				caption = "Tutoriel",
+				OnClick = {
+					function()
+						if Script.LuaUI.LoadMission then
+							local options={
+								["MODOPTIONS"]={
+									["language"]=lang,
+									["hidemenu"]="true"
+								}
+							}
+							Script.LuaUI.LoadMission(MissionFileName, options) -- registered by pp_restart_manager.lua
+						else
+							Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \""..MissionFileName.."\" aborted.")
+						end
+					end
+				},
+				font = {
+					font = "LuaUI/Fonts/Asimov.otf",
+					size = 30,
+					autoAdjust = true,
+					maxSize = 30,
+					color = { 0.2, 1, 0.8, 1 },
+					shadow = false
+				}
+			}
+		end
+	end
 	UI.NewPartyButton = Chili.Button:New{
 		parent = UI.MainWindow,
 		x = "30%",
@@ -414,7 +453,6 @@ function missionMenu()
 				local options={
 					["MODOPTIONS"]={
 						["language"]=lang,
-						["scenario"]=scenario,
 						["hidemenu"]="true"
 					}
 				}
