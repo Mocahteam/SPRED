@@ -507,7 +507,7 @@ end
 
 local function addUnitToGroups_groupToStoreSpecified(localUnitId,groups,testOnLocalIds,groupToStore)
   local testOnLocalIds=testOnLocalIds or true 
-  -- usefull to check redundancy at a deeper level because, when it comes about unit creation
+  -- useful to check redundancy at a deeper level because, when it comes about unit creation
   -- units can have a different mission player id (e.g "Action1_0","createdUnit_1") for the same spring id  
   for g,group in pairs(groups) do
       -- create group if not existing
@@ -599,10 +599,9 @@ local function extractListOfUnitsInvolved(actOrCond_Params,groupToCheck,frameNum
 	   if actOrCond_Params.unitset.type == "condition" and frameNumber ~= nil then
 		index = index.."_"..frameNumber
 	   end
-       --if(groupToCheck[index]==nil)then
-       --  EchoDebug("warning. This index gave nothing : "..index, 2)
-       --end
-       groupToReturn=groupToCheck[index]
+       if(groupToCheck[index]~=nil)then
+		groupToReturn=groupToCheck[index]
+       end
      end
   end
   return groupToReturn
@@ -736,6 +735,8 @@ end
 
 -------------------------------------
 -- Update the truthfulness of a condition
+-- return true if condition has been checked
+-- return false if condition is not checkable this frame
 -------------------------------------
 local function UpdateConditionTruthfulness (idCond, frameNumber)
 	local c = ctx.conditions[idCond]
@@ -750,9 +751,7 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
 			-- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
 			local playerUnitList=ctx.extractListOfUnitsInvolved(c.params)
 			--EchoDebug(json.encode(playerUnitList),6)
-			if(playerUnitList~=nil)then
-				total=table.getn(playerUnitList)
-			end
+			total=table.getn(playerUnitList)
 			if total == 0 then
 				-- If the set is empty we can't check condition parameters on units. We set the validity of this condition to false 
 				ctx.conditions[idCond]["currentlyValid"] = false
@@ -772,9 +771,7 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
 		else -- <=> object=="groupWithDead"
 			-- Units extracted from "team", "group" or single unit (picked). Units involved to a condition can't be extracted from another "condition" or "action".
 			local unitsImpliedByCondition = ctx.extractListOfUnitsInvolved(c.params,ctx.getAllLocalUnitIdsFromLocalGroupId)
-			if unitsImpliedByCondition ~= nil then
-				total = table.getn(unitsImpliedByCondition)
-			end
+			total = table.getn(unitsImpliedByCondition)
 			  
 			if(c.type=="dead") then	
 				for u,missionPlayerUnitId in ipairs(unitsImpliedByCondition) do
@@ -983,7 +980,7 @@ local function UpdateConditionTruthfulness (idCond, frameNumber)
 				SendToUnsynced("askWidgetState", json.encode({widgetName=widgetName,idCond=idCond,target=target}))
 			end
 		end
-		return false -- truthfullness is not checkable this frame we need to report the evaluation of this condition
+		return false -- truthfulness is not checkable this frame we need to report the evaluation of this condition
 		
       elseif(c.type=="numberVariable") then 
 	    if c.params.variable == nil or c.params.variable == "" then
@@ -1050,7 +1047,7 @@ local function isTriggerable(event, frameNumber)
   --EchoDebug(json.encode(event), 7)
   -- step 1: get the trigger
   local trigger=event.trigger
-  if(trigger=="")then   -- empty string => create trigger by cunjunction (ands) of all conditions
+  if(trigger=="")then   -- empty string => create trigger by conjunction (ands) of all conditions
     for c,cond in pairs(event.listOfInvolvedConditions) do
       trigger=trigger..cond.." and "
     end
@@ -1059,7 +1056,7 @@ local function isTriggerable(event, frameNumber)
   -- step 2: Update conditions truthfulness
   for c,cond in pairs(event.listOfInvolvedConditions) do
     if ctx.UpdateConditionTruthfulness(cond.."_"..tostring(event.id), frameNumber) == false then
-		-- this condition is not accessable (due to unsynced data request for instance or inconsistent parameters) then we can't evaluate this trigger for now
+		-- this condition is not accessible (due to unsynced data request for instance or inconsistent parameters) then we can't evaluate this trigger for now
 		return false
 	end
   end
@@ -1657,14 +1654,10 @@ function ApplyAction (a)
       --EchoDebug("we try to apply the groupable action to this group", 7)
       --EchoDebug("Units selected : "..json.encode(listOfUnits),7)
       
-      if(listOfUnits~=nil)then
-        for i, missionPlayerUnitId in ipairs(listOfUnits) do
-          local unit=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
-          ctx.ApplyGroupableAction_onSpUnit(unit, a)
-        end
-      else
-        Spring.Echo("Warning on action \""..a.name.."\": No units available")
-      end
+	  for i, missionPlayerUnitId in ipairs(listOfUnits) do
+	    local unit=ctx.getSpringIdFromLocalUnitId[missionPlayerUnitId]
+	    ctx.ApplyGroupableAction_onSpUnit(unit, a)
+	  end
     end
   else
     ctx.ApplyNonGroupableAction(a)
@@ -2327,15 +2320,18 @@ local function RecvLuaMsg(msg, player)
     if(ctx.recordCreatedUnits)then -- this avoid to store starting bases in the tables
       local jsonString=string.sub(msg,13,-1)
       local creationTable=json.decode(jsonString)
-      local realId="createdUnit_"..tostring(ctx.globalIndexOfCreatedUnits)
-      ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
       local springId=creationTable.unitID 
-      
-      -- < Register>
-      local teamIndex="team_"..tostring(creationTable.unitTeam)
-      ctx.registerUnit(springId,realId)
-      ctx.addUnitToGroups(realId,{teamIndex},false)
-      -- </ Register> 
+	  -- check if this unit is already registered
+	  local realId = ctx.getLocalUnitIdFromSpringId[springId]
+	  if realId == nil then
+		realId="createdUnit_"..tostring(ctx.globalIndexOfCreatedUnits)
+		ctx.globalIndexOfCreatedUnits=ctx.globalIndexOfCreatedUnits+1
+		-- < Register>
+		local teamIndex="team_"..tostring(creationTable.unitTeam)
+		ctx.registerUnit(springId,realId)
+		ctx.addUnitToGroups(realId,{teamIndex},false)
+		-- </ Register> 
+	  end
     end 
 	
   elseif ctx.isMessage(msg,"returnUnsyncVals") then
