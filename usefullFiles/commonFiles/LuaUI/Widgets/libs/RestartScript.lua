@@ -134,9 +134,13 @@ local function createTxtFileContentFromScratch(editorTables, toEditor, playerNam
   local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName=playerName, HostIP="localhost", HostPort="8451", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
-  -- activate feedbacks if required
-  if editorTables.description.feedback == "enabled" then
+  -- activate traces if required (if true game engine will process traces: compression, alignment and produce feedbacks)
+  if editorTables.description.trace == "enabled" then
 	table2["activetraces"] = 1
+  end
+  -- activate feedbacks if required (needs traces enabled, this mod option is used in Lua side to display or not feedbacks to the player - for experiment purpose we want in some missions to process traces and compute feedback but not showing them to the player)
+  if editorTables.description.feedback == "enabled" then
+	table2["activefeedbacks"] = 1
   end
   file=writeAttributesAndSection(file,"MODOPTIONS", 1, table2)
   local indexPlayer=0

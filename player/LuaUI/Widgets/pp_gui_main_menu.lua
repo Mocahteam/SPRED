@@ -29,7 +29,7 @@ VFS.Include("LuaUI/Widgets/libs/Pickle.lua",nil)
 local lang = Spring.GetModOptions()["language"] or "en" -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
-local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
+local feedbackOn = Spring.GetModOptions()["activefeedbacks"] ~= nil and Spring.GetModOptions()["activefeedbacks"] == "1"
 
 local feedbacks = {}
 -- Exemple of data structure
@@ -571,7 +571,7 @@ local function displayFeedbackPanel(mainWindow, _x, _y, _width, _height)
 	
 	feedbackPanel = addPanel(mainWindow, _x, _y, _width, _height)
 	
-	if traceOn then
+	if feedbackOn then
 		addLabel(feedbackPanel, "2%", "0%", "96%", "17%", LANG_ADVICE, "center", "linecenter")
 	end
 	
@@ -717,7 +717,7 @@ local function showMainMenu (missionEnd)
 	windowLabel.font.maxSize = 40
 	
 	if missionEnd.state ~= "menu" then -- means won or lost or gameover
-		if traceOn then
+		if feedbackOn then
 			-- add score
 			scoreLabel = addLabel(mainMenuWindow, "40%", "20%", "60%", "10%", LANG_SCORE..LANG_SCORE_COMPUTING, "left", "linecenter")
 			
@@ -835,7 +835,8 @@ local function showMainMenu (missionEnd)
 				currentoptions["missionname"]=mission
 				currentoptions["currentinput"]=currentInput
 				currentoptions["progression"]=pickle(AppliqManager.progressionOutputs)
-				-- Reset activetraces property in case it changes between missions
+				-- Reset activetraces and activefeedbacks property in case it changes between missions
+				currentoptions["activefeedbacks"]=nil
 				currentoptions["activetraces"]=nil
 				local continueBut = addButton(mainMenuWindow, "0%", "30%", "30%", "10%", LANG_CONTINUE)
 				continueBut.backgroundColor = { 0, 0.2, 0.6, 1 }
@@ -1051,7 +1052,7 @@ function handleFeedback(str)
 			Script.LuaUI.TraceAction("feedbacks\t"..feedbackToLog) -- registered by pp_meta_trace_manager.lua
 		end
 		
-		if traceOn then -- check if we have to display feedbacks
+		if feedbackOn then -- check if we have to display feedbacks
 			if json_obj.won ~= nil then -- the mission is over
 				Spring.SetConfigString("score", json_obj.score, 1) -- save the score for the engine for facebook purpose
 				-- display score

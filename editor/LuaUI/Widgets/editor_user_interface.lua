@@ -209,7 +209,8 @@ local cameraAutoState = true -- Current state of camera auto
 local autoHealState = false -- Current state of auto heal
 local minimapState = false -- Current minimap state
 local mouseState = true -- Current state of the mouse
-local feedbackState = false -- Current state of the feedback (traces)
+local traceState = false -- Current state of the traces
+local feedbackState = false -- Current state of the feedback
 local customWidgets = {} -- List of widgets with status (enabled/disabled)
 local MainGame = Spring.GetModOptions().maingame or getMasterGame()
 
@@ -660,9 +661,6 @@ function mapSettingsFrame()
 		if mapSettingsButtons.minimapButton.checked ~= minimapState then
 			mapSettingsButtons.minimapButton:Toggle()
 		end
-		if mapSettingsButtons.feedbackButton.checked ~= feedbackState then
-			mapSettingsButtons.feedbackButton:Toggle()
-		end
 		if not loadingMap and not loadingState and not waitingNewMap and initialized then
 			Screen0:FocusControl(mapNameEditBox)
 		end
@@ -684,6 +682,35 @@ function tracesFrame()
 		local missionName = generateSaveName(mapDescription.mapName)
 		local tracesList = VFS.DirList("traces/data/expert/"..missionName.."/", "*.xml", VFS.RAW) -- FIXME
 		tracesUI.textbox:SetText("")
+	
+		-- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mechanism temporarily
+		local localLock = false
+		if not loadingState then
+			loadingState = true -- turn off save state mechanism
+			localLock = true
+		end
+		-- process feedback check box first because trace check box can override it
+		if tracesUI.feedbackButton.checked ~= feedbackState then
+					Spring.Echo ("Init feedbackState")
+			tracesUI.feedbackButton:Toggle()
+		end
+		if tracesUI.traceButton.checked ~= traceState then
+					Spring.Echo ("Init traceState")
+			tracesUI.traceButton:Toggle()
+		else
+			-- update feedback visible state if trace checkbox is not updated
+			if tracesUI.traceButton.checked then
+					Spring.Echo ("Init Show feedbackState")
+				tracesUI.feedbackButton:Show()
+			else
+					Spring.Echo ("Init Hide feedbackState")
+				tracesUI.feedbackButton:Hide()
+			end
+		end
+		if localLock then
+			loadingState = false -- turn on save state mechanism
+		end
+		
 		if #tracesList == 0 then
 			tracesUI.message = addTextBox(tracesUI.scrollPanel, '10%', '20%', '80%', '70%', EDITOR_TRACES_NOT_FOUND, 16, {1, 0, 0, 1})
 		else
@@ -766,8 +793,7 @@ function testLevel()
 						["language"] = WG.Language, -- WG.Language is defined in editor_spring_direct_launch.lua
 						["scenario"] = "noScenario",
 						["testmap"] = Game.modName,
-						["hidemenu"] = "true",
-						["activetraces"] = "1" -- turn on traces in order to build expert solution if a program is executed during testing
+						["hidemenu"] = "true"
 					},
 					["GAME"] = {
 						["Mapname"] = levelFile.description.map,
@@ -1582,7 +1608,7 @@ function initMapSettingsWindow()
 	colorUI.previewImage = addImage(windows['mapSettingsWindow'], '64%', '33%', '6%', '5%', "bitmaps/editor/blank.png", false, {1, 0, 0, 1})
 	colorUI.button = addButton(windows['mapSettingsWindow'], '72%', '33%', '26%', '5%', EDITOR_MAPSETTINGS_MAP_BRIEFING_COLOR)
 	
-	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '39%', '96%', '32%')
+	local panel = addScrollPanel(windows['mapSettingsWindow'], '2%', '39%', '96%', '41%')
 	mapBriefingTextBox = addTextBox(panel, '0%', '0%', '100%', '100%', "Lorem ipsum blabla", 18)
 
 	local function updateImage()
@@ -1610,59 +1636,39 @@ function initMapSettingsWindow()
 	colorUI.button.OnClick = {applyColor}
 
 	
-	mapSettingsButtons.cameraAutoButton = addCheckbox(windows['mapSettingsWindow'], "2%", "72%", "60%", "5%", cameraAutoState, EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED, "left")
-	mapSettingsButtons.cameraAutoButton.OnFocusUpdate = {
-		function()
-			if cameraAutoState ~= mapSettingsButtons.cameraAutoButton.checked then
-				cameraAutoState = mapSettingsButtons.cameraAutoButton.checked
-				saveState()
-			end
+	mapSettingsButtons.cameraAutoButton = addCheckbox(windows['mapSettingsWindow'], "2%", "80%", "60%", "5%", cameraAutoState, EDITOR_MAPSETTINGS_CAMERA_AUTO_ENABLED, "left")
+	mapSettingsButtons.cameraAutoButton.OnChange = {
+		function(_, newState)
+			cameraAutoState = newState
+			saveState()
 		end
 	}
 	
-	mapSettingsButtons.mouseStateButton = addCheckbox(windows['mapSettingsWindow'], "2%", "77%", "60%", "5%", mouseState, EDITOR_MAPSETTINGS_MOUSE_ENABLED, "left")
-	mapSettingsButtons.mouseStateButton.OnFocusUpdate = {
-		function()
-			if mouseState ~= mapSettingsButtons.mouseStateButton.checked then
-				mouseState = mapSettingsButtons.mouseStateButton.checked
-				saveState()
-			end
+	mapSettingsButtons.mouseStateButton = addCheckbox(windows['mapSettingsWindow'], "2%", "85%", "60%", "5%", mouseState, EDITOR_MAPSETTINGS_MOUSE_ENABLED, "left")
+	mapSettingsButtons.mouseStateButton.OnChange = {
+		function(_, newState)
+			mouseState = newState
+			saveState()
 		end
 	}
 	
-	mapSettingsButtons.autoHealButton = addCheckbox(windows['mapSettingsWindow'], "2%", "82%", "60%", "5%", autoHealState, EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED, "left")
-	mapSettingsButtons.autoHealButton.OnFocusUpdate = {
-		function()
-			if autoHealState ~= mapSettingsButtons.autoHealButton.checked then
-				autoHealState = mapSettingsButtons.autoHealButton.checked
-				saveState()
-			end
+	mapSettingsButtons.autoHealButton = addCheckbox(windows['mapSettingsWindow'], "2%", "90%", "60%", "5%", autoHealState, EDITOR_MAPSETTINGS_HEAL_AUTO_ENABLED, "left")
+	mapSettingsButtons.autoHealButton.OnChange = {
+		function(_, newState)
+			autoHealState = newState
+			saveState()
 		end
 	}
 	
-	mapSettingsButtons.minimapButton = addCheckbox(windows['mapSettingsWindow'], "2%", "87%", "60%", "5%", minimapState, EDITOR_MAPSETTINGS_MINIMAP_ENABLED, "left")
-	mapSettingsButtons.minimapButton.OnFocusUpdate = {
-		function()
-			if minimapState ~= mapSettingsButtons.minimapButton.checked then	
-				minimapState = mapSettingsButtons.minimapButton.checked
-				saveState()
-			end
+	mapSettingsButtons.minimapButton = addCheckbox(windows['mapSettingsWindow'], "2%", "95%", "60%", "5%", minimapState, EDITOR_MAPSETTINGS_MINIMAP_ENABLED, "left")
+	mapSettingsButtons.minimapButton.OnChange = {
+		function(_, newState)
+			minimapState = newState
+			saveState()
 		end
 	}
-	
-	if Game.isPPEnabled then
-		mapSettingsButtons.feedbackButton = addCheckbox(windows['mapSettingsWindow'], "2%", "92%", "60%", "5%", feedbackState, EDITOR_MAPSETTINGS_FEEDBACK_ENABLED, "left")
-		mapSettingsButtons.feedbackButton.OnFocusUpdate = {
-			function()
-				if feedbackState ~= mapSettingsButtons.feedbackButton.checked then
-					feedbackState = mapSettingsButtons.feedbackButton.checked
-					saveState()
-				end
-			end
-		}
-	end
 
-	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '76%', '30%', '20%',  EDITOR_MAPSETTINGS_WIDGETS, toggleWidgetsWindow)
+	mapSettingsButtons.widgetsButton = addButton(windows['mapSettingsWindow'], '68%', '80%', '30%', '20%',  EDITOR_MAPSETTINGS_WIDGETS, toggleWidgetsWindow)
 end
 
 function initTracesWindow()
@@ -1672,8 +1678,40 @@ function initTracesWindow()
 	closeButton.OnClick = { tracesFrame }
 	closeButton.OnMouseOver = { function() closeButton.color = { 1, 0.5, 0, 1 } end }
 	closeButton.OnMouseOut = { function() closeButton.color = { 1, 0, 0, 1 } end }
-	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '17%', '30%', '83%')
-	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '17%', '70%', '83%')
+	-- Add check boxes
+	tracesUI.feedbackButton = addCheckbox(windows['tracesWindow'], "2%", "21%", "46%", "4%", feedbackState, EDITOR_MAPSETTINGS_FEEDBACK_ENABLED, "left")
+	tracesUI.feedbackButton.OnChange = {
+		function (_, newState)
+			feedbackState = newState
+			saveState()
+		end
+	}
+	tracesUI.traceButton = addCheckbox(windows['tracesWindow'], "2%", "17%", "46%", "4%", traceState, EDITOR_MAPSETTINGS_TRACE_ENABLED, "left")
+	tracesUI.traceButton.OnChange = {
+		function(_, newState)
+			traceState = newState
+			if not traceState then
+				if feedbackState then
+					-- we want to save only one game state, but each time we toggle the checkbox this store a new game state. This is why we switch off the savestate mecanism temporarily
+					local localLock = false
+					if not loadingState then
+						loadingState = true -- turn off save state mecanism
+						localLock = true
+					end
+					tracesUI.feedbackButton:Toggle()
+					if localLock then
+						loadingState = false -- turn on save state mecanism
+					end
+				end
+				tracesUI.feedbackButton:Hide()
+			else
+				tracesUI.feedbackButton:Show()
+			end
+			saveState()
+		end
+	}
+	tracesUI.scrollPanel = addScrollPanel(windows['tracesWindow'], '0%', '25%', '30%', '75%')
+	local viewSP = addScrollPanel(windows["tracesWindow"], '30%', '25%', '70%', '75%')
 	tracesUI.textbox = addTextBox(viewSP, '2%', '2%', '96%', '96%', "", 15)
 end
 
@@ -2828,12 +2866,10 @@ function updateZonePanel() -- Add/remove an editbox and a checkbox to/from the z
 				end
 			}
 			local checkbox = addCheckbox(zoneScrollPanel, "85%", (6+(i-1)*(size+1)).."%", "15%", size.."%", zone.shown)
-			checkbox.OnFocusUpdate = {
-				function ()
-					if zone.shown ~= checkbox.checked then
-						zone.shown = checkbox.checked
-						saveState()
-					end
+			checkbox.OnChange = {
+				function (_, newState)
+					zone.shown = newState
+					saveState()
 				end
 			}
 			zoneBoxes[zone.id] = { editBox = editBox, eyeBut = eyeBut, checkbox = checkbox }
@@ -5431,6 +5467,7 @@ function newMap() -- Set each parameter to its default value
 	autoHealState = false
 	mouseState = true
 	minimapState = false
+	traceState = false
 	feedbackState = false
 	initWidgetList()
 	-- Traces
@@ -5692,6 +5729,7 @@ function GetNewUnitIDsAndContinueLoadMap(unitIDs) -- Continue the loading once t
 	autoHealState = loadedTable.description.autoHeal == "enabled"
 	mouseState = loadedTable.description.mouse == "enabled"
 	minimapState = loadedTable.description.minimap == "enabled"
+	traceState = loadedTable.description.trace == "enabled"
 	feedbackState = loadedTable.description.feedback == "enabled"
 	for i, w in ipairs(loadedTable.description.widgets) do
 		for ii, wid in ipairs(customWidgets) do
@@ -6033,6 +6071,7 @@ function encodeSaveTable() -- Transforms parameters to a table containing all th
 	savedTable.description.autoHeal = autoHealState and "enabled" or "disabled"
 	savedTable.description.mouse = mouseState and "enabled" or "disabled"
 	savedTable.description.minimap = minimapState and "enabled" or "disabled"
+	savedTable.description.trace = traceState and "enabled" or "disabled"
 	savedTable.description.feedback = feedbackState and "enabled" or "disabled"
 	savedTable.description.widgets = {}
 	for i, w in ipairs(customWidgets) do

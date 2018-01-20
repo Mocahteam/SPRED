@@ -17,7 +17,7 @@ if lang == "fr" then
 	HELP_LABEL = "Aide"
 end
 
-local traceOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
+local feedbackOn = Spring.GetModOptions()["activefeedbacks"] ~= nil and Spring.GetModOptions()["activefeedbacks"] == "1"
 local testMap = Spring.GetModOptions()["testmap"] ~= nil
 
 local HelpButton = nil -- the button to ask an help notification
@@ -36,7 +36,7 @@ function toggleHelpButton ()
 end
 
 function widget:GameStart()
-	if traceOn and not testMap then -- Traces are on => we display the button
+	if feedbackOn and not testMap then -- Traces are on => we display the button
 		if (not WG.Chili) then -- If the chili widget is not found, remove this widget
 			Spring.Echo("PP Show Feedbacks: Chili is not defined, remove himself")
 			return
