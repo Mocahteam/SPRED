@@ -1,0 +1,64 @@
+piece base, center, piece0, piece1, piece2, piece3;
+#include "springdefs.h"
+
+#define SIG_BUILD 1
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	set ARMORED to 1;
+	while (get BUILD_PERCENT_LEFT) {
+		//set ALPHA_THRESHOLD to 20 + (23*get BUILD_PERCENT_LEFT) /10;
+		call-script lua_SetAlphaThreshold(20 + (23*get BUILD_PERCENT_LEFT) /10);
+		sleep 30;
+	}
+	spin center around z-axis speed <-120>;
+	//set ALPHA_THRESHOLD to 0;
+	call-script lua_SetAlphaThreshold(1);
+	set ACTIVATION to 1;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	explode piece0 type FALL;
+	explode piece1 type FALL;
+	explode piece2 type FALL;
+	explode piece3 type FALL;
+	hide piece0;
+	hide piece1;
+	hide piece2;
+	hide piece3;
+}
+
+#define TURNRATE 720
+
+StartBuilding(h,p) {
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	turn center to x-axis 0-p speed <120>;
+	while (TURNRATE > h) {
+		set HEADING to 0-TURNRATE + get HEADING;
+		h = h + TURNRATE;
+		sleep 30;
+	}
+	while (h > TURNRATE) {
+		set HEADING to TURNRATE + get HEADING;
+		h = h - TURNRATE;
+		sleep 30;
+	}
+	set INBUILDSTANCE to 1;
+}
+
+StopBuilding() {
+	signal SIG_BUILD;
+	set INBUILDSTANCE to 0;
+	turn center to x-axis 0 speed <120>;
+}
+
+QueryNanoPiece(p) {
+	p=center;
+	emit-sfx 1024 from center;
+}

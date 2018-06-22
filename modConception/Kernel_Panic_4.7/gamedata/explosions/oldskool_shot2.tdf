@@ -1,0 +1,40 @@
+[oldskool_shot2]
+{
+	[circle]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0.1;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			Texture=arrowflare;
+			colorMap=1 1 0.1 .1   1 1 1 .5   0 0 0 0;
+			airdrag=1;
+			particleLife=12;
+			particleLifeSpread=2;
+			numParticles=1;
+			particleSpeed=.3;
+			particleSpeedSpread=.2;
+			particleSize=8;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[groundflash]
+	{
+		flashSize = 16; // flash size
+		flashAlpha = 0; // initial alpha of the flash
+		circleGrowth = 6.4; // size increase/frame
+		circleAlpha = 0; // initial alpha of the ring
+		ttl = 0; // number of frames
+		color = 1,0.6,0.6; // color RGB
+	}
+}

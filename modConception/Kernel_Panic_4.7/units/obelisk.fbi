@@ -1,0 +1,74 @@
+[UNITINFO]
+{
+	Name=obelisk;
+	Unitname=obelisk;
+	Description=launches infector gas;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=150;
+	BuildTime=8000;
+	ShowNanoFrame=0;
+	icontype=obelisk;
+	Category=EDIBLE FACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxSlope=10;
+	MaxDamage=15000;
+	ObjectName=obelisk.s3o;
+	buildpic=obelisk.png;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	IdleTime=900;
+	IdleAutoHeal=50;
+
+	// Movement
+	BrakeRate=0;
+	Acceleration=0;
+	CanMove=0;
+	MaxVelocity=0;
+	TurnRate=0;
+
+	// Airplane Moventment
+
+	// Buildings
+	yardmap=gggg gggg gggg gggg;
+
+	// Construction
+	UseBuildingGroundDecal=1;
+	BuildingGroundDecalType=socket_base.tga;
+	BuildingGroundDecalSizeX=8;
+	BuildingGroundDecalSizeY=8;
+	BuildingGroundDecalDecaySpeed=1;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=30;
+
+
+	// Abilities
+	DamageModifier=4;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=512;
+
+	// Weapons
+	ExplodeAs=RetroDeathVBig;
+	SelfDestructAs=RetroDeathVBig;
+	OnlyTargetCategory1=TARGET;
+	Weapon1=Infection;
+	highTrajectory=1;
+	Weapon2=minifacshieldgood;
+	Weapon3=minifacshieldbad;
+
+	// Tracks/Flares
+
+	// Watersettings
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:corruption_charge;
+	}
+}

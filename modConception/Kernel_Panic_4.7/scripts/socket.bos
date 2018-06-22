@@ -1,0 +1,127 @@
+piece base, body, blaser0, blaser1, claser0, claser1;
+
+static-var building;
+
+#include "springdefs.h"
+#define SIG_COMPLETE 16
+#define SIG_BUILD 8
+
+EmitBuildLasers()
+{
+	set-signal-mask SIG_COMPLETE;
+	while(1) {
+		emit-sfx 2048 from blaser0;
+		emit-sfx 2048 from blaser1;
+		sleep 60;
+	}
+}
+
+BuildLasers()
+{
+	set-signal-mask SIG_COMPLETE;
+	start-script EmitBuildLasers();
+	while(1) {
+		move blaser0 to x-axis [-24] speed [32];
+		move blaser1 to x-axis [24] speed [32];
+		wait-for-move blaser0 along x-axis;
+		move blaser0 to z-axis [24] speed [32];
+		move blaser1 to z-axis [-24] speed [32];
+		wait-for-move blaser0 along z-axis;
+		move blaser0 to x-axis 0 now;
+		move blaser1 to x-axis 0 now;
+		move blaser0 to z-axis 0 now;
+		move blaser1 to z-axis 0 now;
+	}
+}
+
+EmitConLasers()
+{
+	while(1) {
+		if(building) {
+			emit-sfx 2051 from claser0;
+			emit-sfx 2051 from claser1;
+		}
+		sleep 60;
+	}
+}
+
+ConLasers()
+{
+	start-script EmitConLasers();
+	while(1) {
+		move claser0 to z-axis [14] speed [16];
+		move claser1 to z-axis [14] speed [16];
+		wait-for-move claser0 along z-axis;
+		move claser0 to z-axis 0 speed [16];
+		move claser1 to z-axis 0 speed [16];
+		wait-for-move claser0 along z-axis;
+	}
+}
+
+#include "ons.h"
+
+Create()
+{
+	start-script ManageONS();
+	turn blaser0 to x-axis <90> now;
+	turn blaser1 to x-axis <90> now;
+	turn claser0 to x-axis <90> now;
+	turn claser1 to x-axis <90> now;
+	
+	move body to y-axis [-16] now;
+	set ARMORED to 1;
+
+	while((get BUILD_PERCENT_LEFT)>=99) {
+		sleep 60;
+	}
+	
+	start-script BuildLasers();
+	
+	while(get BUILD_PERCENT_LEFT) {
+		move body to y-axis ([-16]*(get BUILD_PERCENT_LEFT)/100) now;
+		sleep 60;
+	}
+	move body to y-axis 0 now;
+	set ARMORED to 0;
+	
+	sleep 120;
+	signal SIG_COMPLETE;
+	
+	start-script ConLasers();
+}
+
+Activate()
+{
+	signal SIG_BUILD;
+	building=1;
+	set YARD_OPEN to 1;
+	set INBUILDSTANCE to 1;
+}
+
+Deactivate()
+{
+	set-signal-mask SIG_BUILD;
+	set INBUILDSTANCE to 0;
+	while(get YARD_OPEN) {
+		set YARD_OPEN to 0;
+		sleep 300;
+	}
+	building=0;
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon1(p) {
+	p=base;
+}
+
+AimFromWeapon4(p) {
+	p=base;
+}
+
+QueryWeapon4(p) {
+	p=base;
+}
+

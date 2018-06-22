@@ -1,0 +1,79 @@
+[UNITINFO]
+{
+	Name=Small Circle;
+	Unitname=thminifac;
+	Description=summons fairies;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=100;
+	BuildTime=3840;
+	ShowNanoFrame=0;
+	icontype=thminifac;
+	Category=EDIBLE FACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxSlope=10;
+	MaxDamage=20000;
+	ObjectName=thminifac.s3o;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=PLANT;
+	IdleTime=900;
+	IdleAutoHeal=50;
+	Commander=1;
+
+	// Movement
+	BrakeRate=0;
+	Acceleration=0;
+	CanMove=1;
+	MaxVelocity=0;
+	TurnRate=0;
+
+	// Airplane Moventment
+
+	// Buildings
+	yardmap=gccg cccc cccc gccg;
+
+	// Construction
+	Builder=1;
+	WorkerTime=64;
+	ShowNanoSpray=0;
+	/*UseBuildingGroundDecal=1;
+	BuildingGroundDecalType=socket_base.tga;
+	BuildingGroundDecalSizeX=8;
+	BuildingGroundDecalSizeY=8;
+	BuildingGroundDecalDecaySpeed=1;*/
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=100;
+	MetalStorage=100;
+	MetalMake=30;
+
+
+	// Abilities
+	CanStop=1;
+	DamageModifier=4;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=512;
+
+	// Weapons
+	Weapon1=BuildLaser;//Unused
+	Weapon2=minifacshieldgood;
+	Weapon3=minifacshieldbad;
+	ExplodeAs=RetroDeathVBig;
+	SelfDestructAs=RetroDeathVBig;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:touhou_buildFX;
+	}
+}

@@ -1,0 +1,73 @@
+[corruption_infection]
+{
+	[smoke]
+	{
+		class=CExpGenSpawner;
+		[properties]
+		{
+			delay=10 i10;
+			dir=0,1,0;
+			damage=0 i1;
+			explosionGenerator=custom:corruption_infection_smoke;
+			speed=0,0,0;
+			pos=0,0,0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=40;
+	}
+	[shockwave]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = 0,1,0.00001;
+			pos = 0, 10, 0;
+			colorMap=.75 .1 .3 .1   .4 .1 .2 .1   0 0 0 0;
+			size=3;
+			length=1;
+			sizeGrowth=140;
+			ttl=6;
+			frontOffset=0;
+			sideTexture=none;
+			frontTexture=shockwave;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
+
+[corruption_infection_smoke]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=2;
+			sizemod=.98;
+			pos=-300 r600, 1.0, -300 r600;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=0 0 0 0   1 .5 .5 .3   1 0 0 .2   0 0 0 0;
+			airdrag=0.95;
+			particleLife=50;
+			particleLifeSpread=20;
+			numParticles=4;
+			particleSpeed=1;
+			particleSpeedSpread=3;
+			particleSize=20;
+			particleSizeSpread=10;
+			emitRot=85;
+			emitRotSpread=10;
+			directional=0;
+			alwaysVisible=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=6;
+	}
+}

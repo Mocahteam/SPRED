@@ -1,0 +1,85 @@
+[UNITINFO]
+{
+	Name=Worm;
+	Unitname=wormOLD;
+	Description=heavy ambusher;
+
+	// Required Tags
+	icontype=worm;
+	mass = 100000;
+	BuildCostEnergy=0;
+	BuildCostMetal=100;
+	BuildTime=5800;
+	Category=UNIT NOTFACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=18000;
+	ObjectName=wormOLD.s3o;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=0;
+	IdleTime=400;
+	buildpic=wormOLD.png;
+
+	// Movement
+	MovementClass=HEAVY;
+	BrakeRate=9;
+	Acceleration=6;
+	CanMove=1;
+	MaxVelocity=1.8;
+	TurnRate=280;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	//onoffable=1;
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=256;
+	SightDistance=256;
+	SeismicDistance=512;
+	SeismicSignature=4;
+
+	// Weapons
+	Weapon1=Swallow_DISINTEGRATOR;
+	OnlyTargetCategory1=EDIBLE;
+	Weapon2=SwallowDamage;
+	OnlyTargetCategory2=VOID;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+//	Corpse=badblock;
+	NoChaseCategory=VTOL;
+//	HighTrajectory=2;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:corruption_build;
+		explosiongenerator1=custom:corruption_burst;
+		explosiongenerator2=custom:corruption_worm_trail;
+	}
+}

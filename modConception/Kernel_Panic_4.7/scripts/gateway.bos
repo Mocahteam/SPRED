@@ -1,0 +1,81 @@
+piece base, body, center;
+
+#include "springdefs.h"
+
+#define SIG_BUILDFX 8
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	set ARMORED to 1;
+	//set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	while (get BUILD_PERCENT_LEFT) sleep 30;
+	//set ALPHA_THRESHOLD to 0;
+	call-script lua_SetAlphaThreshold(0);
+	set ACTIVATION to 1;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	explode body type SHATTER;
+	hide body;
+}
+
+AimFromWeapon1(p) {
+	p=center;
+}
+
+QueryWeapon1(p) {
+	p=center;
+}
+
+AimWeapon1(h,p) {
+	return 1;
+}
+
+static-var building, doing;
+
+lua_BuildArc(part) {
+	return 0;
+}
+
+
+BuildFX() {
+	signal SIG_BUILDFX;
+	set-signal-mask SIG_BUILDFX;
+	while(building) {
+		turn center to y-axis <0> now;
+		emit-sfx 1024 from center;
+		turn center to y-axis <90> now;
+		emit-sfx 1024 from center;
+		turn center to y-axis <180> now;
+		emit-sfx 1024 from center;
+		turn center to y-axis <270> now;
+		emit-sfx 1024 from center;
+		emit-sfx 1025 from center;
+		sleep 250;
+		if (doing) call-script lua_BuildArc(center);
+		doing= !doing;
+	}
+}
+
+QueryNanoPiece(p) {
+	p=center;
+}
+
+StartBuilding(h,p) {
+	building=1;
+	doing=1;
+	start-script BuildFX();
+	set INBUILDSTANCE to 1;
+}
+
+StopBuilding() {
+	building=0;
+	doing=0;
+	set INBUILDSTANCE to 0;
+}

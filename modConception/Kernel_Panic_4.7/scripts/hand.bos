@@ -1,0 +1,150 @@
+piece base, outter, inner, touch;
+
+static-var shape;
+
+#include "springdefs.h"
+#define SIG_BUILD 8
+#define SIG_ACTDEACT 16
+#define SIG_SHAPESHIFTING 32
+
+#include "ons.h"
+
+
+
+lua_GetNextShape() {
+	return 0;
+}
+
+ShapeShift(s)
+{
+	signal SIG_SHAPESHIFTING;
+	set-signal-mask SIG_SHAPESHIFTING;
+	if(s==0)// Resting position
+	{
+		sleep 2000;
+		shape=0;
+	}
+	if(s==1)// Fist
+	{
+		sleep 10000;
+		shape=1;
+	}
+	if(s==2)// Flat hand
+	{
+		sleep 10000;
+		shape=2;
+	}
+	if(s==3)// Twix
+	{
+		sleep 10000;
+		shape=3;
+	}
+	set INBUILDSTANCE to TRUE;
+	return;
+}
+
+
+MonitorShape()
+{
+	var wanted_shape;
+	wanted_shape=0;
+	while(1)
+	{
+		sleep 10;
+		call-script lua_GetNextShape();
+		if(shape==get LUA1)
+		{
+			set INBUILDSTANCE to TRUE;
+		}
+		if(wanted_shape!=get LUA1)
+		{
+			wanted_shape=get LUA1;
+			start-script ShapeShift(wanted_shape);
+		}
+	}
+}
+
+
+Create()
+{
+	shape=0;
+	start-script ManageONS();
+	start-script MonitorShape();
+	set ARMORED to 1;
+	set INBUILDSTANCE to FALSE;
+	while(get BUILD_PERCENT_LEFT) {
+		move outter to y-axis (-92*65536*(get BUILD_PERCENT_LEFT)/100) now; // inner is about 93 tall, outter about 95
+		sleep 60;
+	}
+	move outter to y-axis 0 now;
+	set ARMORED to 0;
+}
+
+Activate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	while(!get YARD_OPEN)
+	{
+		set YARD_OPEN to TRUE;
+		sleep 300;
+	}
+}
+
+Deactivate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	set YARD_OPEN to FALSE;
+	while(get YARD_OPEN)
+	{
+		set YARD_OPEN to FALSE;
+		sleep 300;
+	}
+}
+
+
+StartBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+}
+
+StopBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	set INBUILDSTANCE to FALSE;
+}
+
+QueryBuildInfo(p)
+{
+	p=base;
+}
+
+Killed(severity,corpsetype)
+{
+	hide inner;
+	explode inner type SHATTER;
+	hide outter;
+	explode outter type SHATTER;
+	return 0;
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon1(p) {
+	p=base;
+}
+
+AimFromWeapon4(p) {
+	p=base;
+}
+
+QueryWeapon4(p) {
+	p=base;
+}
+
+

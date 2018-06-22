@@ -1,0 +1,31 @@
+[corruption_trojan_rainbow]
+{
+	[SomethingOrOther]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=0.95;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=heart;
+			colorMap=1 1 1 1   1 1 1 1   1 1 1 1;
+			airdrag=.98;
+			particleLife=24;
+			particleLifeSpread=8;
+			numParticles=3;
+			particleSpeed=.8;
+			particleSpeedSpread=1.9;
+			particleSize=4;
+			particleSizeSpread=3;
+			emitRot=0;
+			emitRotSpread=60;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

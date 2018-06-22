@@ -1,0 +1,176 @@
+[FairyBullet]
+	{
+	name=Bullet;
+	WeaponType=LaserCannon;
+	duration=0.06;
+	RGBcolor=.1 .9 .1;
+	intensity=1;
+	thickness=6;
+	corethickness=1;
+	texture1=bullet;
+	texture2=none;
+
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=300;
+	weaponvelocity=512;
+	burnblow=0;
+
+	reloadtime=1;
+	burst=3;
+	burstrate=.1;
+	sprayangle=800;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+	collidefeature=0;
+	avoidfeature=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:touhou_bullet;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=40;
+		}
+	}
+
+[ScatterBullet]
+	{
+	name=Bullet;
+	WeaponType=LaserCannon;
+	duration=0.06;
+	RGBcolor=1 .2 .2;
+	intensity=1;
+	thickness=10;
+	corethickness=0;
+	texture1=bullet;//square;
+	texture2=none;
+
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=300;
+	weaponvelocity=512;
+	burnblow=0;
+
+	reloadtime=.5;
+	burst=5;
+	burstrate=.1;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+	collidefeature=0;
+	avoidfeature=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:touhou_bullet;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=20;
+		building=10; //meh, hacky but can't think of a better way.
+		}
+	}
+
+[Spark]
+	{
+	name=Laser is easy!;
+	model=marisa_shot.s3o;
+	texture1=black;
+	Texture2=black;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+	WeaponType=MissileLauncher;
+
+	turret=1;
+	range=600;
+	weaponvelocity=1200;
+	startvelocity=0;
+	weaponacceleration=2000;
+ 	smoketrail=0;
+	tracks=1;
+	//guided=1;// Unrecognized by Spring
+	turnrate=20000;
+	weapontimer=3;
+	dance=16;
+	burnblow=0;
+
+	reloadtime=3;
+
+	areaofeffect=16;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	cegTag=touhou_bubbletrail;
+	explosiongenerator=custom:touhou_spark;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=4500;
+		}
+	}
+
+[Orb]
+	{
+	name=Hakurei Yin-Yang Orb;
+	texture1=circle;
+	Texture2=black;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+	WeaponType=Cannon;
+
+	turret=1;
+	range=400;
+	weaponvelocity=400;
+	myGravity=.4;
+	size=8;
+	RGBColor=1 1 1;
+	highTrajectory=0;
+	leadLimit=150;
+
+	reloadtime=1.5;
+
+	areaofeffect=220;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:touhou_spark;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=260;
+		}
+	}
+

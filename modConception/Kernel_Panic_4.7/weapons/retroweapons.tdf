@@ -1,0 +1,691 @@
+[Line]
+	{
+	name=Lines;
+	rendertype=1;
+	lineofsight=1;
+	//beamlaser=1;
+	//beamtime=0.5;
+	beamweapon=1;
+	duration=0.2;
+	RGBcolor=255 128 128;
+	intensity=1;
+	thickness=4;
+	corethickness=1;
+	texture1=arrow;
+	texture2=none;
+
+	//ballistic=1;
+	//model=octashot.s3o;
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=256;
+	weaponvelocity=512;
+
+	reloadtime=.5;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+	//explosiongenerator=custom:sawfunc;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=80;
+		}
+	}
+
+[MegaBeam]
+	{
+	name=DOOM!!!;
+	rendertype=1;
+	lineofsight=1;
+	//smoketrail=1;
+	//beamlaser=1;
+	//largebeamlaser=1;
+	//laserflaresize=3;
+	//beamtime=0.25;
+	RGBcolor=127 255 127;
+	//color=1;
+	thickness=16;
+	corethickness=0.5;
+	beamweapon=1;
+	duration=0.05;
+	intensity=1;
+	texture1=bytelasermid;
+	texture2=bytelaser;
+	soundstart=bytefire;
+	soundhit=bytehit;
+
+	//ballistic=1;
+	//model=octashot.s3o;
+	size=5;
+
+	turret=1;
+	range=512;
+	weaponvelocity=1024;
+	startvelocity=1024;
+	sprayangle=1024;
+
+	reloadtime=2;
+	burst=4;
+	burstrate=0.25;
+
+	areaofeffect=128;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=200;
+		}
+	}
+
+
+[Geometric]
+	{
+	name=3d Geometric shapes!!;
+	rendertype=1;
+	lineofsight=1;
+	//ballistic=1;
+	model=octashot.s3o;
+	texture1=black;
+	Texture2=pointertrail;
+	size=5;// What's that for? Doesn't seem to change anything.
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+
+	turret=1;
+	range=1400;
+	//weaponvelocity=1024;
+	//startvelocity=1024;
+	weaponvelocity=400;
+	startvelocity=400;
+	//sprayangle=2048;
+ 	smoketrail=1;
+	//smokedelay=0.01;// Unrecognized by Spring
+	trajectoryheight=1;
+	tracks=1;
+	//guided=1;// Unrecognized by Spring
+	turnrate=20000;
+	weapontimer=5;
+	//noexplode=1;
+
+	reloadtime=4;
+
+	areaofeffect=32;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_impact;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=4000;
+		//flyer=300;
+		}
+	}
+
+[logic_bomb]
+	{
+	name=Logic Bomb;
+	rendertype=1;
+	lineofsight=1;
+	turret=1;
+	model=;
+	range=5;
+	reloadtime=7;
+	weapontimer=5;
+	weaponvelocity=1500;
+	startvelocity=1000;
+	weaponacceleration=150;
+	areaofeffect=512;
+	edgeeffectiveness=0.8;
+	metalpershot=0;
+	soundhit=Explosion5;
+	firestarter=70;
+	tolerance=8000;
+	impulsefactor=0;
+	impulseBoost=0;
+	CollideFriendly=0;
+	AvoidFriendly=0;
+	NoSelfDamage=1;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:mine;
+	soundstart=bytedeath;
+	explosionspeed=65535;
+	[DAMAGE]
+		{
+		default=900;
+		subterranean=3000;
+		mine=1;
+		}
+	}
+
+
+[end_game_logic_bomb]
+	{
+	name=Logic Bomb;
+	rendertype=1;
+	lineofsight=1;
+	turret=1;
+	model=;
+	range=64;
+	reloadtime=7;
+	weapontimer=5;
+	weaponvelocity=1500;
+	startvelocity=1000;
+	weaponacceleration=150;
+	areaofeffect=512;
+	edgeeffectiveness=0.1;
+	metalpershot=0;
+	soundhit=Explosion5;
+	firestarter=70;
+	tolerance=8000;
+	impulsefactor=0;
+	impulseBoost=0;
+	CollideFriendly=0;
+	AvoidFriendly=0;
+	NoSelfDamage=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:mineclearer;
+	soundstart=bytedeath;
+	explosionspeed=65535;
+	[DAMAGE]
+		{
+		default=1;
+		mine=2000;
+		}
+	}
+
+[Minekiller]
+	{
+	name=cleaner;
+	rendertype=2;
+	lineofsight=1;
+	smoketrail=1;
+	model=nullobject.s3o;
+	soundstart=bitdeath;
+	soundhit=bitdeath;
+
+	turret=1;
+	range=256;
+	weapontimer=8;
+	startvelocity=512;
+	weaponvelocity=512;
+
+	reloadtime=0.11;
+	sprayangle=0;
+
+	areaofeffect=512;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:mineclearer;
+	explosionspeed=65535;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=5000;
+		//spam=250;
+		//heavy=400;
+		//subterranean=400;
+		//arty=300;
+		//constructor=250;
+		//building=500;
+		//Sadly, 0 damage is impossible
+		// that gets defaulted to 1
+		spam=20;
+		heavy=60;
+		subterranean=210;
+		arty=20;
+		constructor=20;
+		building=20;
+		rocky=20;
+		papery=20;
+		irony=20;
+		}
+	}
+
+[RetroDeath]
+	{
+	name=funky lines;
+	rendertype=2;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.02;
+	color=40;
+	intensity=0.5;
+	thickness=0.5;
+	soundstart=bitdeath;
+	soundhit=bitdeath;
+
+	turret=1;
+	range=768;
+	weaponvelocity=420;
+
+	reloadtime=0.11;
+	sprayangle=1536;
+
+	areaofeffect=16;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_death;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[RetroDeath_pointer]
+	{
+	name=funky lines;
+	rendertype=2;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.02;
+	color=40;
+	intensity=0.5;
+	thickness=0.5;
+	soundstart=pointerdeath;
+	soundhit=pointerdeath;
+
+	turret=1;
+	range=768;
+	weaponvelocity=420;
+
+	reloadtime=0.11;
+	sprayangle=1536;
+
+	areaofeffect=16;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_death;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[RetroDeathBig]
+	{
+	name=funky lines;
+	rendertype=2;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.02;
+	color=40;
+	intensity=0.5;
+	thickness=0.5;
+	soundstart=bytedeath;
+	soundhit=bytedeath;
+
+	turret=1;
+	range=768;
+	weaponvelocity=420;
+
+	reloadtime=0.11;
+	sprayangle=1536;
+
+	areaofeffect=16;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_big;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[RetroDeathVBig]
+	{
+	name=funky lines;
+	rendertype=2;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.02;
+	color=40;
+	intensity=0.5;
+	thickness=0.5;
+	soundstart=bytedeath;
+	soundhit=bytedeath;
+
+	turret=1;
+	range=768;
+	weaponvelocity=420;
+
+	reloadtime=0.11;
+	sprayangle=1536;
+
+	areaofeffect=384;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_vbig;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=5000;
+		}
+	}
+
+[RetroDeathBig_assembler]
+	{
+	name=funky lines;
+	rendertype=2;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.02;
+	color=40;
+	intensity=0.5;
+	thickness=0.5;
+
+	turret=1;
+	range=768;
+	weaponvelocity=420;
+
+	reloadtime=0.11;
+	sprayangle=1536;
+	soundstart=assemblerdeath;
+	soundhit=assemblerdeath;
+
+	areaofeffect=16;
+	edgeeffectiveness=1;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_big;
+
+	interceptedbyshieldtype=1; //Doesn't care about armor plates
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[BuildLaser]
+	{
+	name=MG;
+	rendertype=1;
+	lineofsight=1;
+	beamlaser=1;
+	beamtime=0.06;
+	beamTTL=2;
+	RGBcolor=255 255 255;
+	intensity=5;
+	thickness=5;
+	size=1;
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=2;
+	Burst=30;
+	Burstrate=0.01;
+	//sprayangle=1000;
+
+	areaofeffect=1;
+	collidefriendly=1;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_build;
+
+	interceptedbyshieldtype=2;
+	[DAMAGE]
+		{
+		default=0.0000000001;
+		}
+	}
+
+
+[BuildLaserNoEffect]
+	{
+	name=MG;
+	rendertype=1;
+	lineofsight=1;
+	beamlaser=1;
+	beamtime=0.06;
+	beamTTL=2;
+	RGBcolor=255 255 255;
+	intensity=5;
+	thickness=5;
+	size=1;
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=2;
+	Burst=30;
+	Burstrate=0.01;
+	//sprayangle=1000;
+
+	areaofeffect=1;
+	collidefriendly=1;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:none;
+
+	interceptedbyshieldtype=2;
+	[DAMAGE]
+		{
+		default=0.0000000001;
+		}
+	}
+
+[SigTerm]
+	{
+	name=SIGTERM;
+	id=247;
+
+	model=sigterm.s3o;
+
+	soundhit=SIGTERMhit;
+
+	WeaponType=AircraftBomb;
+	manualBombSettings=1;
+	burst=1;
+	burstrate=.6;
+	reloadtime=4;
+	projectiles=1;
+	myGravity=.3;
+	explosionSpeed=65535;
+	id=168;
+
+	areaofeffect=900;
+	collidefriendly=0;
+	avoidfriendly=0;
+	range=512;
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:system_sigterm;
+	edgeeffectiveness=.8;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=10000;
+		}
+	}
+
+[nx]
+	{
+	name=NX Flag;
+	rendertype=1;
+	lineofsight=1;
+	//ballistic=1;
+	model=octashot.s3o;
+	texture1=black;
+	Texture2=firetrail;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+	id=538;
+
+	turret=1;
+	range=1400;
+	weaponvelocity=400;
+	startvelocity=400;
+ 	smoketrail=1;
+	trajectoryheight=1;
+	//tracking=1;// Unrecognized by Spring
+	//guided=1;// Unrecognized by Spring
+	turnrate=20480;
+
+	reloadtime=30;
+	commandfire=1;
+
+	areaofeffect=240;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0; //Thanks, Argh.
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:system_nx;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=200;
+		}
+	}
+
+[MineLauncher]
+	{
+	name=mines;
+	rendertype=1;
+	ballistic=1;
+	texture1=black;
+	soundstart=pointerfire;
+	soundhit=pointerhit;
+	WeaponType=LaserCannon;
+	burnblow=0;
+
+	turret=1;
+	range=1100;
+	weaponvelocity=200;
+	myGravity=.4;
+	sprayangle=1000;
+
+	reloadtime=2.2;
+
+	areaofeffect=30;
+	collidefriendly=0;
+	avoidfriendly=0;
+	edgeeffectiveness=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:corruption_shot1;
+	cegTag=minelauncher;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=3;
+		}
+	}

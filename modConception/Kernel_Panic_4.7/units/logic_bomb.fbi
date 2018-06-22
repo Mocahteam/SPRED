@@ -1,0 +1,60 @@
+[UNITINFO]
+{
+	Name=Logic Bomb;
+	UnitName=logic_bomb;
+	levelground=0;
+	
+	// Required Tags
+	icontype=logic_bomb;
+	BuildCostEnergy=0;
+	BuildCostMetal=2;
+	BuildTime=120;
+	Category=MINE TARGET;
+	Description=a mine;
+	FootprintX=1;
+	FootprintZ=1;
+	shownanoframe=0;
+	MaxDamage=300;
+	ObjectName=logic_bomb.s3o;
+	BuildPic=logic_bomb.pcx;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=SPECIAL;
+	UnitRestricted=64;
+	
+	// Movement
+	CanMove=0;
+	MaxSlope=20;
+	
+	// Buildings
+	YardMap=y;
+	
+	// Construction
+	
+	// Resources
+	
+	// Abilities
+	Kamikaze=1;
+	KamikazeDistance=64;
+//	Stealth=1;
+
+	// Sight/Radar
+	SightDistance=10;
+
+	[SFXTypes]
+		{
+		explosiongenerator0=custom:oldskool_build;
+	}
+	// Misc
+	Weapon1=end_game_logic_bomb;
+	OnlyTargetCategory1=VOID;
+	ExplodeAs=logic_bomb;
+	Init_Cloaked=1;
+	CloakCost=0;
+	MaxWaterDepth=25000;
+	MinCloakDistance=1;
+	SelfDestructAs=logic_bomb;
+	SelfDestructCountdown=1;
+	SmoothAnim=0;
+	shootme=0;
+}

@@ -1,0 +1,79 @@
+[UNITINFO]
+{
+	Name=Reimu;
+	Unitname=reimu;
+	Description=Antiswarm fighter;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	BuildCostMetal=60;
+	BuildTime=1500;
+	icontype=byte;
+	Category=EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=2;
+	FootprintZ=2;
+	MaxDamage=5000;
+	IdleAutoHeal=60;
+	IdleTime=400;
+	ObjectName=reimu.s3o;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+
+	// Movement
+	MovementClass=LIGHT;
+	BrakeRate=1.2;
+	Acceleration=1.2;
+	CanMove=1;
+	MaxVelocity=2.2;
+	TurnRate=1801;
+	upright=1;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=750;
+	SeismicSignature=1;
+
+	// Weapons
+	Weapon1=ScatterBullet; //Orb;
+	highTrajectory=1;
+	BadTargetCategory1=FAST;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=RetroDeath;
+	SelfDestructAs=RetroDeath;
+	NoChaseCategory=VTOL;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+		explosiongenerator1=custom:oldskool_shot2;
+	}
+}

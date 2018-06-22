@@ -1,0 +1,302 @@
+
+
+
+// Changelog:
+// - Made kernel turn to barycenter
+//   of all units two ticks after
+//   its creation. That should fix
+//   the unfairness of kernels
+//   facing the map edge for
+//   southern players
+// - Made the kernel keep its pillars slightly extended,
+//   but not curved, when not busy.
+// - Fixed the bug with kernel showing its
+//   busy laser when unit is completed,
+//   but has not left kernel yard.
+//   Cuz otherwise kernel isn't visible
+//   for people with no decals.
+
+// For this script, Scriptor linear constant
+// must be changed 163840
+
+piece root, whole, base0, pillar0, head0, tip0, base1, pillar1, head1, tip1, base2, pillar2, head2, tip2, base3, pillar3, head3, tip3, pad, shoulder, arm, hand, finger;
+
+static-var canbuild;
+
+#include "springdefs.h"
+
+#define SIG_BUILD 32
+#define SIG_ACTDEACT 64
+
+GetPillar0Ready()
+{
+	turn pillar0 to x-axis <30> speed <15>;
+	turn head0 to x-axis <35> speed <15>;
+	move head0 to y-axis 0 speed [6];
+	move pillar0 to y-axis 0 speed [16];
+	wait-for-move pillar0 along y-axis;
+	move head0 to y-axis 0 speed [16];
+	wait-for-move pillar0 along y-axis;
+	turn pillar0 to x-axis <30> speed <35>;
+	wait-for-turn pillar0 around x-axis;
+	turn head0 to x-axis <35> speed <35>;
+	wait-for-turn head0 around x-axis;
+}
+
+GetPillar1Ready()
+{
+	turn pillar1 to x-axis <30> speed <15>;
+	turn head1 to x-axis <35> speed <15>;
+	move head1 to y-axis 0 speed [6];
+	move pillar1 to y-axis 0 speed [16];
+	wait-for-move pillar1 along y-axis;
+	move head1 to y-axis 0 speed [16];
+	wait-for-move pillar1 along y-axis;
+	turn pillar1 to x-axis <30> speed <35>;
+	wait-for-turn pillar1 around x-axis;
+	turn head1 to x-axis <35> speed <35>;
+	wait-for-turn head1 around x-axis;
+}
+
+GetPillar2Ready()
+{
+	turn pillar2 to x-axis <30> speed <15>;
+	turn head2 to x-axis <35> speed <15>;
+	move head2 to y-axis 0 speed [8];
+	move pillar2 to y-axis 0 speed [16];
+	wait-for-move pillar2 along y-axis;
+	move head2 to y-axis 0 speed [16];
+	wait-for-move pillar2 along y-axis;
+	turn pillar2 to x-axis <30> speed <35>;
+	wait-for-turn pillar2 around x-axis;
+	turn head2 to x-axis <35> speed <35>;
+	wait-for-turn head2 around x-axis;
+}
+
+GetPillar3Ready()
+{
+	turn pillar3 to x-axis <30> speed <15>;
+	turn head3 to x-axis <35> speed <15>;
+	move head3 to y-axis 0 speed [8];
+	move pillar3 to y-axis 0 speed [16];
+	wait-for-move pillar3 along y-axis;
+	move head3 to y-axis 0 speed [16];
+	wait-for-move pillar3 along y-axis;
+	turn pillar3 to x-axis <30> speed <35>;
+	wait-for-turn pillar3 around x-axis;
+	turn head3 to x-axis <35> speed <35>;
+	wait-for-turn head3 around x-axis;
+	set INBUILDSTANCE to TRUE;
+}
+
+GetPillar0Rest()
+{
+	set INBUILDSTANCE to FALSE;
+	move pillar0 to y-axis [-6] speed [1];
+	move head0 to y-axis [-5] speed [1];
+	turn pillar0 to x-axis <0> speed <5>;
+	turn head0 to x-axis <5> speed <20>;
+	wait-for-turn head0 around x-axis;
+	turn pillar0 to x-axis <0> speed <20>;
+	wait-for-turn pillar0 around x-axis;;
+	move pillar0 to y-axis [-6] speed [8];
+	move head0 to y-axis [-5] speed [6];
+}
+
+GetPillar1Rest()
+{
+	move pillar1 to y-axis [-6] speed [1];
+	move head1 to y-axis [-5] speed [1];
+	turn pillar1 to x-axis <0> speed <5>;
+	turn head1 to x-axis <5> speed <20>;
+	wait-for-turn head1 around x-axis;
+	turn pillar1 to x-axis <0> speed <20>;
+	wait-for-turn pillar1 around x-axis;;
+	move pillar1 to y-axis [-6] speed [8];
+	move head1 to y-axis [-5] speed [6];
+}
+
+GetPillar2Rest()
+{
+	move pillar2 to y-axis [-6] speed [1];
+	move head2 to y-axis [-5] speed [1];
+	turn pillar2 to x-axis <0> speed <5>;
+	turn head2 to x-axis <5> speed <20>;
+	wait-for-turn head2 around x-axis;
+	turn pillar2 to x-axis <0> speed <20>;
+	wait-for-turn pillar2 around x-axis;;
+	move pillar2 to y-axis [-6] speed [8];
+	move head2 to y-axis [-5] speed [6];
+}
+
+GetPillar3Rest()
+{
+	move pillar3 to y-axis [-6] speed [1];
+	move head3 to y-axis [-5] speed [1];
+	turn pillar3 to x-axis <0> speed <5>;
+	turn head3 to x-axis <5> speed <20>;
+	wait-for-turn head3 around x-axis;
+	turn pillar3 to x-axis <0> speed <20>;
+	wait-for-turn pillar3 around x-axis;;
+	move pillar3 to y-axis [-6] speed [8];
+	move head3 to y-axis [-5] speed [6];
+}
+
+// Highest valid unit ID number
+#ifndef MAX_ID
+#define MAX_ID 70
+#endif
+// Direction the unit is facing
+#ifndef HEADING
+#define HEADING 82
+#endif
+
+
+TurnTowardBarycenter()
+{
+	var u,xz,x,z,n,sx,sz;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	n=0;sx=0;sz=0;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(0!=get UNIT_HEIGHT(u))//If unit u exists
+		{
+			xz=get UNIT_XZ(u);
+			x=xz/65536;
+			z=xz - x*65536;
+			//call-script lua_FoundUnitMsg(u,xz,x,z,n,sx,sz);
+			// Now x and z are the coord of unit u
+			++n;//Number of units found
+			sx=sx+x;//Sum of X coordinate of found units
+			sz=sz+z;//Sum of Z coordinate of found units
+		}
+	}
+	// I somewhat assumed that map won't be epic ( x and z lower than 65536 )
+	// And that number of units at beginning won't be over 65536
+	x=sx/n;
+	z=sz/n;
+	// Now x and z are the mean of coord of all units
+	xz=x*65536+z;//Reconstruct a packed xz
+	
+	// For reasons that I totally do not understand, with the exact values, it doesn't work.
+	// But with the < > values, it works.
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+}
+
+#include "ons.h"
+
+Create()
+{
+	start-script ManageONS();
+	start-script TurnTowardBarycenter();
+	
+	canbuild=FALSE;
+	turn pillar0 to y-axis <45> now;
+	turn pillar1 to y-axis <135> now;
+	turn pillar2 to y-axis <-45> now;
+	turn pillar3 to y-axis <-135> now;
+
+	move base0 to y-axis [-8] now;
+	move base1 to y-axis [-8] now;
+	move base2 to y-axis [-8] now;
+	move base3 to y-axis [-8] now;
+	move pillar0 to y-axis [-32] now;
+	move pillar1 to y-axis [-32] now;
+	move pillar2 to y-axis [-32] now;
+	move pillar3 to y-axis [-32] now;
+	move head0 to y-axis [-32] now;
+	move head1 to y-axis [-32] now;
+	move head2 to y-axis [-32] now;
+	move head3 to y-axis [-32] now;
+	
+	move base0 to y-axis [0] speed [12];
+	move base1 to y-axis [0] speed [12];
+	move base2 to y-axis [0] speed [12];
+	move base3 to y-axis [0] speed [12];
+	sleep 400;
+	move pillar0 to y-axis [-16] speed [24];
+	move pillar1 to y-axis [-16] speed [24];
+	move pillar2 to y-axis [-16] speed [24];
+	move pillar3 to y-axis [-16] speed [24];
+	move head0 to y-axis [-12] speed [16];
+	move head1 to y-axis [-12] speed [16];
+	move head2 to y-axis [-12] speed [16];
+	move head3 to y-axis [-12] speed [16];
+	wait-for-move pillar0 along y-axis;
+	canbuild=TRUE;
+}
+
+StartBuilding()
+{
+	signal SIG_BUILD;
+	set-signal-mask SIG_BUILD;
+	while(TRUE)
+	{
+		emit-sfx 2048 from tip0;
+		emit-sfx 2048 from tip1;
+		emit-sfx 2048 from tip2;
+		emit-sfx 2048 from tip3;
+		sleep 60;
+	}
+}
+
+StopBuilding()
+{
+	signal SIG_BUILD;
+}
+
+QueryBuildInfo(p)
+{
+	p=pad;
+}
+
+Activate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	while(!canbuild) sleep 100;
+	set YARD_OPEN to TRUE;
+	start-script GetPillar0Ready();
+	sleep 200;
+	start-script GetPillar1Ready();
+	sleep 200;
+	start-script GetPillar2Ready();
+	sleep 200;
+	start-script GetPillar3Ready();
+}
+
+Deactivate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	while(get YARD_OPEN)
+	{
+		set YARD_OPEN to FALSE;
+		sleep 300;
+	}
+	start-script GetPillar0Rest();
+	sleep 1800;
+	start-script GetPillar1Rest();
+	sleep 1800;
+	start-script GetPillar2Rest();
+	sleep 1800;
+	start-script GetPillar3Rest();
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (id==168) return 10;
+	return 100;
+}
+
+AimFromWeapon1(p) {
+	p=whole;
+}
+
+QueryWeapon1(p) {
+	p=whole;
+}

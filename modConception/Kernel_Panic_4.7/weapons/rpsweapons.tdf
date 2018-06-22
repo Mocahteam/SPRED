@@ -1,0 +1,131 @@
+[Rock]
+	{
+	name=Rock's Weapon;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.1;
+	RGBcolor=255 255 255;
+	intensity=1;
+	thickness=8;
+	corethickness=1;
+	texture1=rockshot;
+	texture2=none;
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=0.5;
+
+	areaofeffect=8;
+	collidefriendly=1;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=50;
+		irony=600;
+		papery=5;
+		rocky=20;
+		}
+	}
+
+[Paper]
+	{
+	name=Paper's Weapon;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.1;
+	RGBcolor=255 255 255;
+	intensity=1;
+	thickness=8;
+	corethickness=1;
+	texture1=papershot;
+	texture2=none;
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=0.5;
+
+	areaofeffect=8;
+	collidefriendly=1;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=50;
+		rocky=600;
+		irony=5;
+		papery=20;
+		}
+	}
+
+[Scissors]
+	{
+	name=Scissors' Weapon;
+	rendertype=1;
+	lineofsight=1;
+	beamweapon=1;
+	duration=0.1;
+	RGBcolor=255 255 255;
+	intensity=1;
+	thickness=8;
+	corethickness=1;
+	texture1=scissorsshot;
+	texture2=none;
+	size=5;
+	soundstart=bitfire;
+
+	turret=1;
+	range=256;
+	weaponvelocity=256;
+
+	reloadtime=0.5;
+
+	areaofeffect=8;
+	collidefriendly=1;
+	avoidfriendly=1;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=50;
+		papery=600;
+		rocky=5;
+		irony=20;
+		}
+	}

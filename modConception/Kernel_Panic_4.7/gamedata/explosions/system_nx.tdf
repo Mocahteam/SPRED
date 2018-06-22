@@ -1,0 +1,119 @@
+[system_nx]
+{
+	[fire]
+	{
+		class=CExpGenSpawner;
+		[properties]
+		{
+			delay=8 i8;
+			dir=0,1,0;
+			damage=0 i1;
+			explosionGenerator=custom:system_nx_fire;
+			speed=0,0,0;
+			pos=0,0,0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=240;
+	}
+	[explosion]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=.2;
+			sizemod=.99;
+			pos=0, 30, 0;
+			emitVector=0, 1, 0;
+			gravity=0, .05, 0;
+			Texture=square;
+			colorMap=1 1 0 .3   1 0 0 .2   .4 0 0 .8   .2 0 0 .8   0 0 0 .8   0 0 0 0;
+			airdrag=0.9;
+			particleLife=90;
+			particleLifeSpread=70;
+			numParticles=30;
+			particleSpeed=3;
+			particleSpeedSpread=10;
+			particleSize=12;
+			particleSizeSpread=8;
+			emitRot=0;
+			emitRotSpread=90;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[shockwave]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = 0,1,0.00001;
+			pos = 0, 10, 0;
+			colorMap=.75 .5 .3 .1   .4 .3 .1 .1   0 0 0 0;
+			size=1;
+			length=1;
+			sizeGrowth=120;
+			ttl=6;
+			frontOffset=0;
+			sideTexture=none;
+			frontTexture=shockwave;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
+
+[system_nx_fire]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0;
+			sizemod=.98;
+			pos=-30 r60, 1.0, -30 r60;
+			emitVector=0, 1, 0;
+			gravity=0, 0.1, 0;
+			Texture=square;
+			colorMap=1 1 0 .3   1 0 0 .2   0 0 0 .8   0 0 0 0;
+			airdrag=0.95;
+			particleLife=50;
+			particleLifeSpread=20;
+			numParticles=4;
+			particleSpeed=3;
+			particleSpeedSpread=5;
+			particleSize=7;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=20;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=2;
+	}
+	[shockwave]
+	{
+		class = CBitmapMuzzleFlame;
+		[properties]
+		{
+			dir = 0,1,0.00001;
+			pos = 0, 30, 0;
+			colorMap=.3 .2 0 .1   .1 .1 0 .1   0 0 0 0;
+			size=1;
+			length=1;
+			sizeGrowth=120;
+			ttl=24;
+			frontOffset=-.1;
+			sideTexture=none;
+			frontTexture=circle;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}

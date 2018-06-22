@@ -1,0 +1,75 @@
+piece base, segf, segb, segl, segr, tip;
+#include "springdefs.h"
+static-var reloading;
+#define SIG_AIM 1
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+ChargeFX() {
+	while(!reloading) {
+		emit-sfx 1024 from tip;
+		sleep 50;
+	}
+}
+
+#include "ons.h"
+
+Create(){
+	start-script ManageONS();
+	move segf to z-axis [16] now;
+	move segb to z-axis [-16] now;
+	move segr to x-axis [16] now;
+	move segl to x-axis [-16] now;
+	set ARMORED to 1;
+	while(get BUILD_PERCENT_LEFT) {
+		//set ALPHA_THRESHOLD to 5+(25*get BUILD_PERCENT_LEFT)/10;
+		call-script lua_SetAlphaThreshold((get BUILD_PERCENT_LEFT)*13/10);
+		sleep 30;
+	}
+	//set ALPHA_THRESHOLD to 5;
+	call-script lua_SetAlphaThreshold(5);
+	set ARMORED to 0;
+	move segf to z-axis 0 speed [8];
+	move segb to z-axis 0 speed [8];
+	move segr to x-axis 0 speed [8];
+	move segl to x-axis 0 speed [8];
+	start-script ChargeFX();
+}
+
+ResetAim() {
+	sleep 2000;
+	move segf to z-axis 0 speed [8];
+	move segb to z-axis 0 speed [8];
+	move segr to x-axis 0 speed [8];
+	move segl to x-axis 0 speed [8];
+}
+
+QueryWeapon1(p) {
+	p=tip;
+}
+
+AimWeapon1(h,p) {
+	if(reloading) return 0;
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	start-script ResetAim();
+	move segf to z-axis [8] speed [8];
+	move segb to z-axis [-8] speed [8];
+	move segr to x-axis [8] speed [8];
+	move segl to x-axis [-8] speed [8];
+	wait-for-move segf along z-axis;
+	return 1;
+}
+
+FireWeapon1() {
+	reloading=1;
+	sleep 40000;
+	reloading=0;
+	start-script ChargeFX();
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}

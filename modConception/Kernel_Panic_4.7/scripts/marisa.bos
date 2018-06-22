@@ -1,0 +1,139 @@
+piece base, lower, upper, head, legl, legr, arml, armr, gp;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+static-var moving, charge;
+
+#define WALK_LEG_FORWARD <-30>
+#define WALK_LEG_BACK <30>
+#define WALK_BOB_LOW [-1.2]
+#define WALK_BOB_HIGH [0]
+#define WALK_ARM_FORWARD <-30>
+#define WALK_ARM_BACK <30>
+
+
+lua_GetWeaponLoadState(weap)
+{
+	return;
+}
+
+Walk()
+{
+	while(1)
+	{
+		while(moving)
+		{
+			turn legl to x-axis WALK_LEG_FORWARD now;
+			turn legr to x-axis WALK_LEG_BACK now;
+			turn arml to x-axis WALK_ARM_BACK now;
+			turn armr to x-axis WALK_ARM_FORWARD now;
+			move lower to y-axis WALK_BOB_LOW now;
+			sleep 250;
+			turn legl to x-axis 0 now;
+			turn legr to x-axis 0 now;
+			turn arml to x-axis 0 now;
+			turn armr to x-axis 0 now;
+			move lower to y-axis WALK_BOB_HIGH now;
+			sleep 250;
+			turn legl to x-axis WALK_LEG_BACK now;
+			turn legr to x-axis WALK_LEG_FORWARD now;
+			turn arml to x-axis WALK_ARM_FORWARD now;
+			turn armr to x-axis WALK_ARM_BACK now;
+			move lower to y-axis WALK_BOB_LOW now;
+			sleep 250;
+			turn legl to x-axis 0 now;
+			turn legr to x-axis 0 now;
+			turn arml to x-axis 0 now;
+			turn armr to x-axis 0 now;
+			move lower to y-axis WALK_BOB_HIGH now;
+			sleep 250;
+		}
+		sleep 250;
+	}
+}
+
+StartMoving()
+{
+	moving=1;
+	charge=0;
+}
+
+StopMoving()
+{
+	moving=0;
+}
+
+Create()
+{
+	hide upper;
+	hide lower;
+	hide head;
+	hide arml;
+	hide armr;
+	hide legl;
+	hide legr;
+	moving=0;
+	charge=0;
+	sleep 1;
+	set ARMORED to 1;
+	set STANDINGMOVEORDERS to 0;
+	start-script Walk();
+	while(get BUILD_PERCENT_LEFT)
+		sleep 30;
+	show upper;
+	show lower;
+	show head;
+	show arml;
+	show armr;
+	show legl;
+	show legr;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+
+CancelAim()
+{
+	sleep 500;
+	charge=0;
+}
+
+AimFromWeapon1(p)
+{
+	p=head;
+}
+
+QueryWeapon1(p)
+{
+	p=gp;
+}
+
+AimWeapon1(h,p)
+{
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	start-script CancelAim();
+	var loaded;
+	call-script lua_GetWeaponLoadState(1);
+	loaded = get LUA1;
+	if(loaded && !moving)
+	{
+		++charge;
+		emit-sfx 1026 from base;
+	}
+	if(charge<=6 || !loaded)
+	{
+		while(1)
+		{
+			sleep 123456789;
+		}
+	}
+	return 1;
+}
+
+FireWeapon1()
+{
+	charge=0;
+}

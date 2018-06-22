@@ -1,0 +1,126 @@
+
+/* Detecting two cancels : */
+/* Up to Kernel Panic 4.4 - Spring 84 I detect two cancel orders by having Activate and Deactivate be called in short succession */
+/* Starting from Spring 85 this method doesn't work anymore, */
+/* As there is large engine enforced delay (around 6s) before Deactivate is called */
+/* From Kernel Panic 4.5 I used another method, counting how long it has been building via QueryBuildInfo */
+/* And counting how many cancels by starting a function with pause and signal in QueryBuildInfo */
+
+piece root, mover, pad, shoulder, arm, hand, finger;
+
+static-var unbuilt, nanoing, cancelling;
+
+#include "springdefs.h"
+
+#define SIG_ActDeact 2
+#define SIG_BuildPad 4
+#define SIG_CancelDetect 8
+
+TurnTowardBarycenter()
+{
+	var u,xz,x,z,n,sx,sz;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	n=0;sx=0;sz=0;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(0!=get UNIT_HEIGHT(u))//If unit u exists
+		{
+			xz=get UNIT_XZ(u);
+			x=xz/65536;
+			z=xz - x*65536;
+			//call-script lua_FoundUnitMsg(u,xz,x,z,n,sx,sz);
+			// Now x and z are the coord of unit u
+			++n;//Number of units found
+			sx=sx+x;//Sum of X coordinate of found units
+			sz=sz+z;//Sum of Z coordinate of found units
+		}
+	}
+	// I somewhat assumed that map won't be epic ( x and z lower than 65536 )
+	// And that number of units at beginning won't be over 65536
+	x=sx/n;
+	z=sz/n;
+	// Now x and z are the mean of coord of all units
+	xz=x*65536+z;//Reconstruct a packed xz
+	
+	// For reasons that I totally do not understand, with the exact values, it doesn't work.
+	// But with the < > values, it works.
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(<405>))/(<90>))*(<90>);
+}
+
+#include "ons.h"
+
+Create()
+{
+	start-script ManageONS();
+	unbuilt=1;
+	nanoing=0;
+	cancelling=0;
+	start-script TurnTowardBarycenter();
+}
+
+lua_GoToGensokyo() {
+	return(0);
+}
+
+NewCancelDetect()
+{
+	signal SIG_CancelDetect;
+	set-signal-mask SIG_CancelDetect;
+	sleep 50;
+	++cancelling;
+	if(cancelling==2)
+		call-script lua_GoToGensokyo();
+}
+
+QueryBuildInfo(p)
+{
+	signal SIG_BuildPad;
+	set-signal-mask SIG_BuildPad;
+	p=pad;
+	if(nanoing<25)/* a packet take about 61 frames to build */
+	{
+		++nanoing;
+		start-script NewCancelDetect();
+	}
+}
+
+Activate() {
+	signal SIG_ActDeact;
+	set-signal-mask SIG_ActDeact;
+	if ((unBuilt==1) || (unBuilt==3))
+		++unBuilt;
+	move mover to y-axis [16] speed [8];
+	wait-for-move mover along y-axis;
+	set INBUILDSTANCE to 1;
+	sleep 1000;
+	unBuilt=0;
+}
+
+Deactivate() {
+	signal SIG_ActDeact;
+	if (unBuilt==2)
+		++unBuilt;
+	if (unBuilt==4)
+		call-script lua_GoToGensokyo();
+	move mover to y-axis 0 speed [12];
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (id==168) return 10;
+	return 100;
+}
+
+AimFromWeapon1(p) {
+	p=root;
+}
+
+QueryWeapon1(p) {
+	p=root;
+}
+
+

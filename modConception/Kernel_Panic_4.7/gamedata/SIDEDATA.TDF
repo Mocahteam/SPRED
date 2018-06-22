@@ -1,0 +1,160 @@
+[SIDE0]
+	{
+	name=System;
+	commander=kernel;
+	}
+[SIDE1]
+	{
+	name=Hacker;
+	commander=hole;
+	}
+[SIDE2]
+	{
+	name=Network;
+	commander=carrier;
+	}
+/*[SIDE3]
+	{
+	name=Touhou;
+	commander=thbase;
+	}*/
+/*[SIDE4]
+	{
+	name=Old Hacker;
+	commander=holeold;
+	}*/
+/*[SIDE0]
+	{
+	name=One Hand;
+	commander=hand;
+	}
+[SIDE1]
+	{
+	name=Other Hand;
+	commander=hand;
+	}*/
+[CANBUILD]
+	{
+	// CPU
+	[kernel]
+		{
+		canbuild1=bit;
+		canbuild2=pointer;
+		canbuild3=byte;
+		canbuild4=assembler;
+		}
+	[assembler]
+		{
+		canbuild1=socket;
+		canbuild2=badblock;
+		canbuild3=logic_bomb;
+		canbuild4=mineblaster;
+		canbuild5=terminal;
+		}
+	[socket]
+		{
+		canbuild1=bit;
+		}
+
+	// Corruption
+	[holeOLD]
+		{
+		canbuild1=bugOLD;
+		canbuild2=dos;
+		canbuild3=wormOLD;
+		canbuild4=trojanOLD;
+		}
+	[windowOLD]
+		{
+		canbuild1=bugOLD;
+		}
+	[trojanOLD]
+		{
+		canbuild1=windowOLD;
+		canbuild2=badblock;
+		canbuild3=mineblaster;
+		canbuild4=obelisk;
+		}
+
+	// Division Zero
+	[hole]
+		{
+		canbuild1=bug;
+		canbuild2=dos;
+		canbuild3=worm;
+		canbuild4=trojan;
+		}
+	[window]
+		{
+		canbuild1=bug;
+		}
+	[trojan]
+		{
+		canbuild1=window;
+		canbuild2=badblock;
+		canbuild3=logic_bomb;
+		canbuild4=mineblaster;
+		canbuild5=obelisk;
+		}
+
+	//Experiment
+	[expbase]
+		{
+		canbuild1=expscout;
+		canbuild3=expcon;
+		canbuild2=expmobile;
+		}
+	[expcon]
+		{
+		canbuild1=exparty;
+		canbuild2=badblock;
+		canbuild3=mineblaster;
+		canbuild4=logic_bomb;
+		}
+
+	// Network
+	[carrier]
+		{
+		canbuild1=packet;
+		canbuild2=connection;
+		canbuild3=flow;
+		canbuild4=gateway;
+		}
+	[gateway]
+		{
+		canbuild1=port;
+		canbuild2=firewall;
+		canbuild3=badblock;
+		canbuild4=mineblaster;
+		canbuild5=logic_bomb;
+		}
+
+	// Touhou
+	[thbase]
+		{
+		canbuild1=fairy;
+		canbuild2=reimu;
+		canbuild3=marisa;
+		canbuild4=alice;
+		}
+	[thminifac]
+		{
+		canbuild1=fairy;
+		}
+	[alice]
+		{
+		canbuild1=thminifac;
+		//canbuild2=th_super;
+		canbuild3=badblock;
+		canbuild4=mineblaster;
+		canbuild5=logic_bomb;
+		}
+
+	// RPS
+	[hand]
+		{
+		canbuild1=rock;
+		canbuild2=paper;
+		canbuild3=scissors;
+		}
+	}

@@ -1,0 +1,56 @@
+piece base, body, bl0, bl1;
+
+#include "springdefs.h"
+#define SIG_BUILD 1
+
+EmitLaser() {
+	while(get BUILD_PERCENT_LEFT) {
+		emit-sfx 2048 from bl0;
+		emit-sfx 2048 from bl1;
+		sleep 30;
+	}
+}
+
+#define LASER_SPEED [64]
+
+MoveLaser() {
+	set-signal-mask SIG_BUILD;
+	turn bl0 to x-axis <90> now;
+	turn bl1 to x-axis <90> now;
+	start-script EmitLaser();
+	while(get BUILD_PERCENT_LEFT) {
+		move bl0 to x-axis [32] speed LASER_SPEED;
+		move bl1 to x-axis [-32] speed LASER_SPEED;
+		wait-for-move bl0 along x-axis;
+		move bl0 to z-axis [-64] speed LASER_SPEED;
+		move bl1 to z-axis [-64] speed LASER_SPEED;
+		wait-for-move bl0 along z-axis;
+		move bl0 to x-axis 0 speed LASER_SPEED;
+		move bl1 to x-axis 0 speed LASER_SPEED;
+		wait-for-move bl0 along x-axis;
+		move bl0 to z-axis 0 now;
+		move bl1 to z-axis 0 now;
+	}
+}
+
+#include "ons.h"
+
+Create() {
+	start-script ManageONS();
+	set ARMORED to 1;
+	start-script MoveLaser();
+	while(get BUILD_PERCENT_LEFT) {
+		move body to y-axis [-.75]*get BUILD_PERCENT_LEFT now;
+		sleep 30;
+	}
+	move body to y-axis 0 now;
+	set ARMORED to 0;
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon1(p) {
+	p=base;
+}

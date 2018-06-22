@@ -1,0 +1,86 @@
+[UNITINFO]
+{
+	Name=assembler;
+	Unitname=assembler;
+	Description=construction unit;
+
+	// Required Tags
+	BuildCostEnergy=0;
+	icontype=assembler;
+	//mass = 100000;
+	BuildCostMetal=20;
+	BuildTime=1600;
+	Category=EDIBLE UNIT BUILDER NOTFACTORY TARGET;
+	FootprintX=4;
+	FootprintZ=4;
+	MaxDamage=2000;
+	ObjectName=assembler.s3o;
+	buildpic=assembler.pcx;
+	Side=CPU;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+	IdleAutoHeal=50;
+	IdleTime=450;
+
+	// Movement
+	MovementClass=MEDIUM;
+	BrakeRate=4;
+	Acceleration=4;
+	CanMove=1;
+	MaxVelocity=2;
+	TurnRate=720;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=30;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=0;
+	CanStop=1;
+	CanBuild=1;
+	CanAssist=0;
+	Builder=1;
+	WorkerTime=128;
+	BuildDistance=384;
+	ShowNanoSpray=0;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=500;
+	SightDistance=384;
+	SeismicSignature=3;
+
+	// Weapons
+	OnlyTargetCategory1=VOID;
+	Weapon1=BuildLaser;
+	ExplodeAs=RetroDeathBig;
+	SelfDestructAs=RetroDeathBig;
+//	Corpse=badblock;
+	NoChaseCategory=VTOL;
+//	HighTrajectory=2;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+ [SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+ 	}
+
+}

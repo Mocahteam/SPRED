@@ -1,0 +1,51 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// Spring Control Panel Configuration
+//
+
+newAttackMode     1  enable attack by area selection
+attackRect        0  use a rectangular selection
+invColorSelect    0  use color inversion instead of tinting
+frontByEnds       0  use endpoints to create movement fronts
+
+outlinefont       1
+dropShadows       0
+useOptionLEDs     1 // For the state buttons
+textureAlpha      1
+frameAlpha        0   // Alpha of the grey background around the buttons // use the GUI alpha if < 0.0
+selectGaps        0   // ??
+selectThrough     1   // ??
+
+
+
+// Position of the units command panel
+xPos           0
+yPos           0.147
+
+// Number of buttons in the units command panel
+xIcons         3
+yIcons         9
+
+// Size of the buttons in the units command panel
+xIconSize      0.06
+yIconSize      0.06
+
+textBorder     0.0035 // Border between the text of text button and the background of the button
+//????????     0.003 // There should be one for the border between the image of image button and the background of the button
+iconBorder     0 // Border around each button
+frameBorder    0 // Border around the group of all the buttons
+
+prevPageSlot   auto
+nextPageSlot   auto
+deadIconSlot   auto
+
+// fillOrder  b3 b2 b1 b0  a3 c3 a2 c2 a1 c1 a0 c0  a4 b4 c4   e3 e2 e1 e0  d3 f3 d2 f2 d1 f1 d0 f0  d4 e4 f4
+
+noSelectGaps   0 // ??
+
+// Position of the "Selected Units 36" display
+xSelectionPos  -0.5 // Out of screen
+ySelectionPos  -0.5 // Out of screen
+
+
+

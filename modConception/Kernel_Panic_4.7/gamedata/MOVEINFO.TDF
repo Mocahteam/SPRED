@@ -1,0 +1,47 @@
+[CLASS0]
+	{
+	Name=LIGHT;
+	MaxWaterDepth=25000;
+	MaxSlope=36;
+	CrushStrength=40;
+	FootprintX=2;
+	FootprintZ=2;
+	HeatMapping=1;
+	HeatProduced=10;
+	HeatMod=0.10;
+	}
+[CLASS1]
+	{
+	Name=MEDIUM;
+	MaxWaterDepth=25000;
+	MaxSlope=36;
+	CrushStrength=60;
+	FootprintX=4;
+	FootprintZ=4;
+	HeatMapping=1;
+	HeatProduced=300;
+	HeatMod=0.005;
+	}
+[CLASS2]
+	{
+	Name=HEAVY;
+	MaxWaterDepth=25000;
+	MaxSlope=36;
+	CrushStrength=300;
+	FootprintX=4;
+	FootprintZ=4;
+	HeatMapping=1;
+	HeatProduced=500;
+	HeatMod=0.002;
+	}
+// Footprints are read from the FBI
+// And yes, different sized units
+// can share the same MovementClass
+//
+// More testing indicate that movementclass
+// are used for pathing, and FBI for
+// collision, so with no footprint in their
+// movement class, large units attempt to
+// pass into narrows they can't fit it in.
+
+

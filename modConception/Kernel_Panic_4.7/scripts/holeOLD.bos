@@ -1,0 +1,132 @@
+piece root, whole, shutterbase0, shutterbase1, hand0, hand1, pad, shoulder, arm, hand, finger;
+
+#include "springdefs.h"
+
+#define SIG_ACTDEACT 32
+
+// Highest valid unit ID number
+#ifndef MAX_ID
+#define MAX_ID 70
+#endif
+// Direction the unit is facing
+#ifndef HEADING
+#define HEADING 82
+#endif
+
+// For this script, Scriptor linear constant must be changed
+// from 163840 to 65536
+
+TurnTowardBarycenter()
+{
+	var u,xz,x,z,n,sx,sz;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	n=0;sx=0;sz=0;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(0!=get UNIT_HEIGHT(u))//If unit u exists
+		{
+			xz=get UNIT_XZ(u);
+			x=xz/65536;
+			z=xz - x*65536;
+			//call-script lua_FoundUnitMsg(u,xz,x,z,n,sx,sz);
+			// Now x and z are the coord of unit u
+			++n;//Number of units found
+			sx=sx+x;//Sum of X coordinate of found units
+			sz=sz+z;//Sum of Z coordinate of found units
+		}
+	}
+	// I somewhat assumed that map won't be epic ( x and z lower than 65536 )
+	// And that number of units at beginning won't be over 65536
+	x=sx/n;
+	z=sz/n;
+	// Now x and z are the mean of coord of all units
+	xz=x*65536+z;//Reconstruct a packed xz
+	
+	// For reasons that I totally do not understand, with the exact values, it doesn't work.
+	// But with the < > values, it works.
+	// turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<450>))/(<180>))*(<180>) now;
+	// Until Spring 0.75 with LUA support is officially release, I can't turn the yardmap
+	// So turn only south/north and not west/east since hole has walls on the sides
+	// Now 0.75 is released! woot!
+	// However, even set HEADING doesn't turn yardmap apparently
+	// and for some odd reason, I also have to turn the pad
+	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<450>))/(<180>))*(<180>) now;
+	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(<450>))/(<180>))*(<180>);
+}
+
+#include "ons.h"
+
+Create()
+{
+	start-script ManageONS();
+	start-script TurnTowardBarycenter();
+	turn hand0 to z-axis <-90> now;
+	turn hand1 to z-axis <90> now;
+}
+
+Activate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	turn hand0 to z-axis <45> speed <90>;
+	turn hand1 to z-axis <-45> speed <90>;
+	move hand0 to x-axis [20] speed [14];
+	move hand1 to x-axis [-20] speed [14];
+	wait-for-turn hand0 around z-axis;
+	turn hand0 to z-axis <130> speed <120>;
+	turn hand1 to z-axis <-130> speed <120>;
+	move hand0 to x-axis [48] speed [48];
+	move hand1 to x-axis [-48] speed [48];
+	turn shutterbase0 to z-axis <-60> speed <40>;
+	turn shutterbase1 to z-axis <60> speed <40>;
+	wait-for-move hand0 along x-axis;
+	move shutterbase0 to x-axis [16] speed [32];
+	move shutterbase1 to x-axis [-16] speed [32];
+	move hand0 to x-axis [80] speed [48];
+	move hand1 to x-axis [-80] speed [48];
+	set INBUILDSTANCE to TRUE;
+}
+
+Deactivate()
+{
+	signal SIG_ACTDEACT;
+	set-signal-mask SIG_ACTDEACT;
+	sleep 5000;
+	set INBUILDSTANCE to FALSE;
+	move hand0 to x-axis [48] speed [48];
+	move hand1 to x-axis [-48] speed [48];
+	move shutterbase0 to x-axis [0] speed [32];
+	move shutterbase1 to x-axis [0] speed [32];
+	wait-for-move hand0 along x-axis;
+	turn shutterbase0 to z-axis <00> speed <40>;
+	turn shutterbase1 to z-axis <0> speed <40>;
+	turn hand0 to z-axis <45> speed <120>;
+	turn hand1 to z-axis <-45> speed <120>;
+	move hand0 to x-axis [20] speed [48];
+	move hand1 to x-axis [-20] speed [48];
+	wait-for-turn hand0 around z-axis;
+	turn hand0 to z-axis <-90> speed <90>;
+	turn hand1 to z-axis <90> speed <90>;
+	move hand0 to x-axis [0] speed [14];
+	move hand1 to x-axis [0] speed [14];
+}
+
+QueryBuildInfo(p)
+{
+	p=pad;
+}
+
+HitByWeaponId(z,x,id,d) {
+	if (id==168) return 10;
+	return 100;
+}
+
+AimFromWeapon1(p) {
+	p=whole;
+}
+
+QueryWeapon1(p) {
+	p=whole;
+}

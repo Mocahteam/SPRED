@@ -1,0 +1,31 @@
+[minelauncher]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=0;
+			sizemod=0.9;
+			pos=0,0,0;
+			emitVector=0,8,0;
+			gravity=0, 0, 0;
+			Texture=minelauncher;
+			colorMap=0.075 0.4 1 .1   0.75 0.075 0 .1   0.59 0 0.05 .1;
+			airdrag=1;
+			particleLife=20;
+			particleLifeSpread=0;
+			numParticles=1;
+			particleSpeed=0;
+			particleSpeedSpread=0;
+			particleSize=15;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=1;
+	}
+}

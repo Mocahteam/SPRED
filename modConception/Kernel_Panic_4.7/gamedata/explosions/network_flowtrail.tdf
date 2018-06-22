@@ -1,0 +1,48 @@
+[network_flowtrail]
+{
+	[Circle]
+	{
+		class=CSimpleParticleSystem;
+		[properties] {
+			sizegrowth=.05;
+			sizemod=1;
+			pos=0,0,0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			Texture=circle;
+			colorMap=1 1 1 1   0 0 0 0;
+			airdrag=.9;
+			particleLife=48;
+			particleLifeSpread=0;
+			numParticles=1;//.5 y0 d1 m3 k2 x0;
+			particleSpeed=1;
+			particleSpeedSpread=0;
+			particleSize=2;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+		count=0;
+	}
+	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-1 r2, -1 r2, -1 r2;
+			width=4;
+			length=10 r7;
+			alpha=0.9;
+			alphadecay=0.3;
+			color=1,1,1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=6;
+	}
+}

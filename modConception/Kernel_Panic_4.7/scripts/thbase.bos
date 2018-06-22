@@ -1,0 +1,85 @@
+piece base, star, pad;
+
+#include "springdefs.h"
+
+#define SIG_BuildFX 1
+
+BuildFX() {
+	signal SIG_BuildFX;
+	set-signal-mask SIG_BuildFX;
+	while(1) {
+		emit-sfx 1024 from base;
+		sleep 30;
+	}
+}
+
+Activate() {
+	start-script BuildFX();
+	var i;
+	for (i=0;i<64;++i) {
+		set CEG_DAMAGE to i/2;
+		sleep 60;
+	}
+	set INBUILDSTANCE to 1;
+}
+
+Deactivate() {
+	set INBUILDSTANCE to 0;
+	signal SIG_BuildFX;
+}
+
+QueryBuildInfo(p) {
+	p=pad;
+}
+
+TurnTowardBarycenter()
+{
+	var u,xz,x,z,n,sx,sz;
+	// Wait two ticks for things to fall into place
+	sleep 1;
+	sleep 1;
+	n=0;sx=0;sz=0;
+	for(u=(get MAX_ID);u>=1;--u;)//For all units
+	{
+		if(0!=get UNIT_HEIGHT(u))//If unit u exists
+		{
+			xz=get UNIT_XZ(u);
+			x=xz/65536;
+			z=xz - x*65536;
+			//call-script lua_FoundUnitMsg(u,xz,x,z,n,sx,sz);
+			// Now x and z are the coord of unit u
+			++n;//Number of units found
+			sx=sx+x;//Sum of X coordinate of found units
+			sz=sz+z;//Sum of Z coordinate of found units
+		}
+	}
+	// I somewhat assumed that map won't be epic ( x and z lower than 65536 )
+	// And that number of units at beginning won't be over 65536
+	x=sx/n;
+	z=sz/n;
+	// Now x and z are the mean of coord of all units
+	xz=x*65536+z;//Reconstruct a packed xz
+	
+	// For reasons that I totally do not understand, with the exact values, it doesn't work.
+	// But with the < > values, it works.
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
+	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
+	set HEADING to (get HEADING)+(get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+}
+
+#include "ons.h"
+
+Create() {
+	start-script ManageONS();
+	start-script TurnTowardBarycenter();
+	set CEG_DAMAGE to 32;
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon1(p) {
+	p=base;
+}

@@ -1,0 +1,156 @@
+piece base, center, body, nose, feet0, feet1, feet2, clamps, turret, muzzle;
+#include "springdefs.h"
+
+
+
+#define SIG_AIM1 2
+#define SIG_AIM3 8
+#define SIG_DEPLOY 16
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+static-var deployed, wasMorphed, morphable;
+
+lua_SwitchToExploit() {
+	return 0;
+}
+
+Deploy() {
+	if (deployed) return 0; //mutex
+	signal SIG_DEPLOY;
+	set-signal-mask SIG_DEPLOY;
+	while(!morphable){
+		sleep 500;
+	}
+	deployed=1;
+	hide feet0;
+	hide feet1;
+	hide feet2;
+	set MAX_SPEED to 1;
+	turn body to y-axis 0 speed <720>;
+	move body to y-axis [8] speed [32];
+	turn body to x-axis <180> speed <360>;
+	wait-for-move body along y-axis;
+	move body to y-axis [-12] speed [64];
+	wait-for-move body along y-axis;
+	show clamps;
+	show turret;
+	var i;
+	for (i = 72; i > 5 ; --i) {
+		//set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 30;
+	}
+	call-script lua_SwitchToExploit();
+}
+
+DeployNoTarget() {
+	call-script Deploy();
+}
+
+DeployTarget(a,b,c,d) {
+	//call-script Deploy();
+	return;
+}
+
+Create() {
+	morphable=0;
+	hide turret;
+	hide clamps;
+	//set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	sleep 30; //during first frame the percent left is always 100
+	if (get BUILD_PERCENT_LEFT) {
+		set ARMORED to 1;
+		while(get BUILD_PERCENT_LEFT) {
+			//set ALPHA_THRESHOLD to 72 + (18 * get BUILD_PERCENT_LEFT)/10;
+			call-script lua_SetAlphaThreshold(72 + (18 * get BUILD_PERCENT_LEFT)/10);
+			if (wasMorphed>0) --wasMorphed;
+			sleep 30;
+		}
+		//set ALPHA_THRESHOLD to 72;
+		call-script lua_SetAlphaThreshold(72);
+		sleep 3000;
+		set ARMORED to 0;
+	}
+	else {
+		//set ALPHA_THRESHOLD to 72;
+		call-script lua_SetAlphaThreshold(72);
+	}
+	// Allow morphing only seconds after, so it doesn't morph inside factory
+	sleep 2000;
+	morphable=1;
+	return;
+}
+
+ResetAim() {
+	sleep 3000;
+	turn body to x-axis 0 speed <360>;
+	turn body to y-axis 0 speed <360>;
+}
+
+AimFromPrimary(p) {
+	p=body;
+}
+
+AimPrimary(h,p) {
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	if(deployed)
+		return 0;
+	start-script ResetAim();
+	turn body to y-axis h speed <720>;
+	turn body to x-axis 0-p speed <360>;
+	wait-for-turn body around y-axis;
+	return (!deployed);
+}
+
+QueryPrimary(p) {
+	p=nose;
+}
+
+FirePrimary() {
+	return;
+}
+
+
+AimFromSecondary(p) {
+	p=body;
+}
+
+QuerySecondary(p) {
+	p=nose;
+}
+
+FireSecondary()
+{
+	return;
+}
+
+AimSecondary(h,p)
+{
+	return 0;
+}
+
+
+AimFromTertiary(p) {
+	p=body;
+}
+
+AimTertiary(h,p)
+{
+	if(!deployed)
+		start-script Deploy();
+	return 0;
+}
+
+QueryTertiary(p) {
+	p=nose;
+}
+
+FireTertiary()
+{
+	return;
+}

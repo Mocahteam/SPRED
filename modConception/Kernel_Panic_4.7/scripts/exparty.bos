@@ -1,0 +1,133 @@
+piece base, center, body, nose, feet0, feet1, feet2, clamps, turret, muzzle;
+
+#include "springdefs.h"
+
+#ifndef UNIT_VAR
+#define UNIT_VAR 1024	//8 vars
+#endif
+#ifndef TEAM_VAR
+#define TEAM_VAR 048	//64 vars
+#endif
+#ifndef ALLY_VAR
+#define ALLY_VAR 3072	//64 vars
+#endif
+#ifndef GLOBAL_VAR
+#define GLOBAL_VAR 4096	//1024 vars
+#endif
+
+#define SIG_AIM 1
+#define SIG_DEPLOY 2
+#define SIG_FIRE 4
+
+static-var idle, deployed;
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+lua_SwitchToBug() {
+	return 0;
+}
+
+Undeploy() {
+	signal SIG_DEPLOY;
+	set-signal-mask SIG_DEPLOY;
+	deployed=1;
+	while(!idle) sleep 30;
+	
+	var i;
+	for (i = 5; i < 72 ; ++i) {
+		//set ALPHA_THRESHOLD to i;
+		call-script lua_SetAlphaThreshold(i);
+		sleep 30;
+	}
+	hide clamps;
+	hide turret;
+
+	move body to y-axis [8] speed [64];
+	turn body to x-axis 0 speed <360>;
+	wait-for-move body along y-axis;
+
+	move body to y-axis 0 speed [32];
+	wait-for-move body along y-axis;
+
+	show feet0;
+	show feet1;
+	show feet2;
+	call-script lua_SwitchToBug();
+}
+
+SpecialAttack() {
+	call-script Undeploy();
+}
+
+Create() {
+	//set ALPHA_THRESHOLD to 1;
+	call-script lua_SetAlphaThreshold(1);
+	hide feet0;
+	hide feet1;
+	hide feet2;
+	turn body to x-axis <180> now;
+	move body to y-axis [-12] now;
+	idle=1;
+}
+
+ResetAim() {
+	sleep 3000;
+	turn turret to y-axis 0 speed <180>;
+	turn turret to x-axis 0 speed <180>;
+}
+
+AimFromWeapon1(p) {
+	p=turret;
+}
+
+QueryWeapon1(p) {
+	p=muzzle;
+}
+
+AimWeapon1(h,p) {
+	if(deployed) return 0;
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM | SIG_DEPLOY;
+	start-script ResetAim();
+	turn turret to y-axis h speed <180>;
+	turn turret to x-axis 0-p speed <180>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn turret around x-axis;
+	return 1;
+}
+
+lua_GetHealth(a) {
+	return 0;
+}
+
+#define DAMAGE 220
+
+FireWeapon1() {
+//	signal SIG_FIRE;
+//	set-signal-mask SIG_FIRE;
+	var target;
+	target = get TARGET_ID(1);
+	if (target > 0) {
+		get UNIT_VAR+6 (0 - target,  DAMAGE + get UNIT_VAR+6 (target));
+		sleep 10 * get XZ_HYPOT(get UNIT_XZ(target) - get PIECE_XZ(base)) /[4];
+		if (get UNIT_VAR+6(target) > 0)
+			get UNIT_VAR+6 (0 - target, 0- DAMAGE + get UNIT_VAR+6 (target));
+	}
+}
+
+BlockShot1(in_unitid, out_block, in_usertarget) {
+	if (in_usertarget) {
+		call-script lua_GetHealth(in_usertarget);
+		out_block = ((get LUA1) < get UNIT_VAR+6(in_usertarget));
+		if (out_block) {
+			set CHANGE_TARGET to 1;
+		}
+	}
+}
+
+TargetWeight1(target, weight) {
+	call-script lua_GetHealth(target);
+	weight = [1] + [50]*((get LUA1) < get UNIT_VAR+6(target));
+}

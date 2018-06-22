@@ -1,0 +1,98 @@
+piece base, lower, upper, head, legl, legr, arml, armr, book;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+static-var moving, walking, building;
+
+#define WALK_LEG_FORWARD <-30>
+#define WALK_LEG_BACK <30>
+#define WALK_BOB_LOW [-1.2]
+#define WALK_BOB_HIGH [0]
+#define WALK_ARM_FORWARD <-30>
+#define WALK_ARM_BACK <30>
+
+#define MOVE_SPEED [2.4]
+#define MOVE_SPEED_ATTACKING [1.6]
+
+Walk() {
+	set-signal-mask 0;
+	if (walking) return 0;
+	walking=1;
+	while(moving) {
+		turn legl to x-axis WALK_LEG_FORWARD now;
+		turn legr to x-axis WALK_LEG_BACK now;
+		turn arml to x-axis WALK_ARM_BACK now;
+		turn armr to x-axis WALK_ARM_FORWARD now;
+		move lower to y-axis WALK_BOB_LOW now;
+		sleep 250;
+		turn legl to x-axis 0 now;
+		turn legr to x-axis 0 now;
+		turn arml to x-axis 0 now;
+		turn armr to x-axis 0 now;
+		move lower to y-axis WALK_BOB_HIGH now;
+		sleep 250;
+		turn legl to x-axis WALK_LEG_BACK now;
+		turn legr to x-axis WALK_LEG_FORWARD now;
+		turn arml to x-axis WALK_ARM_FORWARD now;
+		turn armr to x-axis WALK_ARM_BACK now;
+		move lower to y-axis WALK_BOB_LOW now;
+		sleep 250;
+		turn legl to x-axis 0 now;
+		turn legr to x-axis 0 now;
+		turn arml to x-axis 0 now;
+		turn armr to x-axis 0 now;
+		move lower to y-axis WALK_BOB_HIGH now;
+		sleep 250;
+	}
+	walking=0;
+}
+
+StartMoving() {
+	moving=1;
+	start-script Walk();
+}
+
+StopMoving() {
+	moving=0;
+}
+
+QueryNanoPiece(p) {
+	p=book;
+	emit-sfx 1024 from base;
+}
+
+StartBuilding(h,p) {
+	set HEADING to h + get HEADING;
+	set INBUILDSTANCE to 1;
+}
+
+StopBuilding() {
+	set INBUILDSTANCE to 0;
+}
+
+Create() {
+	set CEG_DAMAGE to 12;
+	set ARMORED to 1;
+	hide upper;
+	hide lower;
+	hide head;
+	hide arml;
+	hide armr;
+	hide book;
+	hide legl;
+	hide legr;
+	while(get BUILD_PERCENT_LEFT) sleep 30;
+	show upper;
+	show lower;
+	show head;
+	show arml;
+	show armr;
+	show book;
+	show legl;
+	show legr;
+	set ACTIVATION to 1;
+	sleep 5000;
+	set ARMORED to 0;
+}

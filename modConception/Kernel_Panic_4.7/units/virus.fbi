@@ -1,0 +1,80 @@
+[UNITINFO]
+{
+	Name=Virus;
+	Unitname=virus;
+	Description=infected swarm unit;
+
+	// Required Tags
+	icontype=bit;
+	//mass = 100000;
+	BuildCostEnergy=0;
+	BuildCostMetal=3;
+	BuildTime=240;
+	icontype=bit;
+	Category=FAST EDIBLE UNIT NOTFACTORY TARGET;
+	FootprintX=1;
+	FootprintZ=1;
+	MaxDamage=300;
+	IdleAutoHeal=60;
+	IdleTime=400;
+	ObjectName=virus.s3o;
+	buildpic=virus.png;
+	Side=ERROR;
+	SoundCategory=COMPUTER;
+	TEDClass=TANK;
+
+	// Movement
+	MovementClass=LIGHT;
+	BrakeRate=1.0;
+	Acceleration=0.7;
+	CanMove=1;
+	MaxVelocity=3.5;
+	TurnRate=600;
+
+	// Airplane Moventment
+
+	// Buildings
+
+	// Construction
+	ShowNanoFrame=0;
+	LevelGround=0;
+
+	// Resources
+	EnergyMake=0;
+	EnergyStorage=0;
+	MetalStorage=0;
+	MetalMake=0;
+	Reclaimable=0;
+
+	// Abilities
+	CanAttack=1;
+	CanStop=1;
+	SelfDestructCountdown=1;
+	DamageModifier=0.000001;
+
+	// Sight/Radar
+	RadarDistance=0;
+	SightDistance=400;
+	SeismicSignature=.5;
+
+	// Weapons
+	Weapon1=VirusBeam;
+	BadTargetCategory1=FACTORY;
+	OnlyTargetCategory1=TARGET;
+	ExplodeAs=VirusDeath;
+	SelfDestructAs=VirusDeath;
+	NoChaseCategory=VTOL;
+
+	// Tracks/Flares
+
+	// Watersettings
+
+	// Misc
+	SmoothAnim=0;
+
+	[SFXTypes]
+	{
+		explosiongenerator0=custom:oldskool_shot1;
+		explosiongenerator1=custom:oldskool_shot2;
+	}
+}

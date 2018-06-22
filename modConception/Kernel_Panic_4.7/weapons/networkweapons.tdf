@@ -1,0 +1,178 @@
+[PacketBeam]
+	{
+	name=Beam;
+	WeaponType=BeamLaser;
+	RGBcolor=0 1 0;
+	thickness=2;
+	intensity=1;
+	noselfdamage=1;
+	beamburst=1;
+	beamttl=8;
+	beamdecay=.8;
+	projectiles=1;
+	sprayangle=700;
+	minIntensity=1;
+
+	soundstart=packetfire;
+
+	turret=1;
+	range=250;
+
+	reloadtime=.75;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:network_shot;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=130;
+		}
+	}
+
+[GatewayBeam]
+	{
+	name=Beam;
+	WeaponType=BeamLaser;
+	RGBcolor=.8 1 .8;
+	thickness=3;
+	intensity=1;
+	noselfdamage=1;
+	beamburst=1;
+	beamttl=8;
+	beamdecay=.8;
+	minIntensity=1;
+
+	soundstart=packetfire;
+
+	turret=1;
+	range=350;
+
+	reloadtime=.65;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:oldskool_shot1;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=100;
+		}
+	}
+
+[GaussCannon]
+	{
+	name=Particle Whip;
+	WeaponType=BeamLaser;
+	RGBcolor=.2 1 .2;
+	thickness=6;
+	intensity=0;
+	noselfdamage=1;
+	beamtime=.4;
+	//beamburst=1;
+	//burst=5;
+	//burstrate=.1;
+	//beamttl=8;
+	beamdecay=.8;
+	minIntensity=1;
+	sprayangle=0;
+	soundtrigger=0;
+
+	soundstart=netelectricarc;
+	//soundhit=bytehit;
+
+	turret=1;
+	range=450;
+
+	reloadtime=4;
+
+	areaofeffect=8;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=60000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:none;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=4500;
+		}
+	}
+
+[FlowMissile]
+	{
+	name=3d Geometric shapes!!;
+	rendertype=1;
+	lineofsight=1;
+	//ballistic=1;
+	model=network_medium_missile.s3o;
+	//Texture1=none;
+	Texture2=flowtrail;
+	//Texture3=none;
+	soundstart=flowfire;
+	soundhit=flowhit;
+	weapontype=StarburstLauncher;
+
+	turret=1;
+	range=350;
+	weaponvelocity=2000;
+	startvelocity=400;
+	weaponacceleration=600;
+	fixedLauncher=1;
+ 	smoketrail=1;
+	tracks=1;
+	//guided=1;// Unrecognized by Spring
+	weapontimer=.1;
+	turnrate=60000;
+	flighttime=5;
+
+	burst=2;
+	burstrate=.3;
+	projectiles=2;
+
+	reloadtime=1.5;
+
+	areaofeffect=128;
+	collidefriendly=0;
+	avoidfriendly=0;
+
+	tolerance=3000;
+
+	impulsefactor=0;
+	impulseBoost=0;
+	craterMult=0;
+	craterBoost=0;
+	explosiongenerator=custom:network_flowmissile;
+	cegTag=network_flowtrail;
+
+	interceptedbyshieldtype=1;
+	[DAMAGE]
+		{
+		default=160;
+		}
+	}
+

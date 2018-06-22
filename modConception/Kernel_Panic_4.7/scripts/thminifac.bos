@@ -1,0 +1,47 @@
+piece base, star;
+
+#include "springdefs.h"
+
+#define SIG_Build 1
+
+BuildFX() {
+	set-signal-mask SIG_Build;
+	while(1) {
+		emit-sfx 1024 from base;
+		sleep 30;
+	}
+}
+
+Activate() {
+	set INBUILDSTANCE to 1;
+	start-script BuildFX();
+}
+
+Deactivate() {
+	set INBUILDSTANCE to 0;
+	signal SIG_Build;
+}
+
+#include "ons.h"
+
+Create() {
+	start-script ManageONS();
+	set ARMORED to 1;
+	hide star;
+	while (get BUILD_PERCENT_LEFT) {
+		set CEG_DAMAGE to 58 - (get BUILD_PERCENT_LEFT)/2;
+		emit-sfx 1024 from base;
+		sleep 30;
+	}
+	show star;
+	set CEG_DAMAGE to 16;
+	set ARMORED to 0;
+}
+
+AimFromWeapon1(p) {
+	p=base;
+}
+
+QueryWeapon1(p) {
+	p=base;
+}

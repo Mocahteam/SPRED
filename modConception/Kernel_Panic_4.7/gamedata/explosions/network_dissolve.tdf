@@ -1,0 +1,81 @@
+[network_dissolve]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=.9;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=.9;
+			particleLife=16;
+			particleLifeSpread=16;
+			numParticles=15;
+			particleSpeed=2;
+			particleSpeedSpread=20;
+			particleSize=6;
+			particleSizeSpread=6;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[groundflash]
+	{
+		flashSize = 24; // flash size
+		flashAlpha = 1; // initial alpha of the flash
+		circleGrowth = 0; // size increase/frame
+		circleAlpha = 0; // initial alpha of the ring
+		ttl = 16; // number of frames
+		color = 1,1,1; // color RGB
+	}
+}
+
+[network_spawn]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=.9;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=square;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=.9;
+			particleLife=16;
+			particleLifeSpread=16;
+			numParticles=3;
+			particleSpeed=1;
+			particleSpeedSpread=2;
+			particleSize=6;
+			particleSizeSpread=6;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[groundflash]
+	{
+		flashSize = 24; // flash size
+		flashAlpha = 1; // initial alpha of the flash
+		circleGrowth = 0; // size increase/frame
+		circleAlpha = 0; // initial alpha of the ring
+		ttl = 16; // number of frames
+		color = 1,1,1; // color RGB
+	}
+}

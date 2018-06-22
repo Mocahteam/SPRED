@@ -1,0 +1,115 @@
+[homebaseshieldgood]
+	{
+	name=ONS gametype homebase shield good;
+	weaponType=Shield;
+	IsShield=1;// if 1 mean the weapon is a shield and now a weapon
+	shieldrepulser=1;// 0=destroy projectile,1=repulse (bounce) projectile
+	smartshield=1;// 1=shield doesnt affect allies weapons
+	exteriorshield=0;// 1=shield doesnt affect weapons fired from within shield
+	visibleshield=1;// 1=see a visible shell representing the shield
+	visibleshieldrepulse=1;// 1=see a beam showing when shield repulses something
+	//visibleShieldHitFrames=10;
+	shieldenergyuse=0;// how much energy the shield use when repulsing/destroying something
+	shieldforce=1200; // how hard shield can accelerate some sort of projectiles away
+	shieldradius=128;// size of shield effect
+	shieldmaxspeed=800;// maximum speed the shield can push some sort of projectiles away
+	shieldpower=0;// how much power the shield can store, power is drained by the affected weapons damage, 0=infinite
+	shieldpowerregen=200;// how fast the shield regenerates power
+	shieldpowerregenenergy=0;// how much energy the shield uses when regenerating power
+	shieldintercepttype=255;// which types of weapon the shield can affect (bitfield)
+	shieldgoodcolor=0 0.5 0 1;// color of shield when power is full
+	shieldbadcolor=0.5 0 0 1;// color of shield when power is empty
+	shieldalpha=1;// how visible the shield shell is with visibleshield=1
+	texture1=hexgrid;
+	[DAMAGE]
+		{
+		default=10;
+		}
+	}
+
+[homebaseshieldbad]
+	{
+	name=ONS gametype homebase shield bad;
+	weaponType=Shield;
+	IsShield=1;// if 1 mean the weapon is a shield and now a weapon
+	shieldrepulser=1;// 0=destroy projectile,1=repulse (bounce) projectile
+	smartshield=1;// 1=shield doesnt affect allies weapons
+	exteriorshield=0;// 1=shield doesnt affect weapons fired from within shield
+	visibleshield=1;// 1=see a visible shell representing the shield
+	visibleshieldrepulse=1;// 1=see a beam showing when shield repulses something
+	shieldenergyuse=50000;// how much energy the shield use when repulsing/destroying something
+	shieldforce=0; // how hard shield can accelerate some sort of projectiles away
+	shieldradius=128;// size of shield effect
+	shieldmaxspeed=300;// maximum speed the shield can push some sort of projectiles away
+	shieldpower=10;// how much power the shield can store, power is drained by the affected weapons damage, 0=infinite
+	shieldpowerregen=0;// how fast the shield regenerates power
+	shieldpowerregenenergy=0;// how much energy the shield uses when regenerating power
+	shieldintercepttype=0;// which types of weapon the shield can affect (bitfield)
+	shieldgoodcolor=1 0 0 1;// color of shield when power is full
+	shieldbadcolor=1 0 0 1;// color of shield when power is empty
+	shieldalpha=1;// how visible the shield shell is with visibleshield=1
+	texture1=hexgridhole;
+	[DAMAGE]
+		{
+		default=10;
+		}
+	}
+
+
+[minifacshieldgood]
+	{
+	name=ONS gametype homebase shield good;
+	weaponType=Shield;
+	IsShield=1;// if 1 mean the weapon is a shield and now a weapon
+	shieldrepulser=1;// 0=destroy projectile,1=repulse (bounce) projectile
+	smartshield=1;// 1=shield doesnt affect allies weapons
+	exteriorshield=0;// 1=shield doesnt affect weapons fired from within shield
+	visibleshield=1;// 1=see a visible shell representing the shield
+	visibleshieldrepulse=1;// 1=see a beam showing when shield repulses something
+	//visibleShieldHitFrames=10;
+	shieldenergyuse=0;// how much energy the shield use when repulsing/destroying something
+	shieldforce=1200; // how hard shield can accelerate some sort of projectiles away
+	shieldradius=64;// size of shield effect
+	shieldmaxspeed=800;// maximum speed the shield can push some sort of projectiles away
+	shieldpower=0;// how much power the shield can store, power is drained by the affected weapons damage, 0=infinite
+	shieldpowerregen=200;// how fast the shield regenerates power
+	shieldpowerregenenergy=0;// how much energy the shield uses when regenerating power
+	shieldintercepttype=255;// which types of weapon the shield can affect (bitfield)
+	shieldgoodcolor=0 0.5 0 1;// color of shield when power is full
+	shieldbadcolor=0.5 0 0 1;// color of shield when power is empty
+	shieldalpha=1;// how visible the shield shell is with visibleshield=1
+	texture1=hexgrid;
+	[DAMAGE]
+		{
+		default=10;
+		}
+	}
+
+
+[minifacshieldbad]
+	{
+	name=ONS gametype homebase shield bad;
+	weaponType=Shield;
+	IsShield=1;// if 1 mean the weapon is a shield and now a weapon
+	shieldrepulser=1;// 0=destroy projectile,1=repulse (bounce) projectile
+	smartshield=1;// 1=shield doesnt affect allies weapons
+	exteriorshield=0;// 1=shield doesnt affect weapons fired from within shield
+	visibleshield=1;// 1=see a visible shell representing the shield
+	visibleshieldrepulse=1;// 1=see a beam showing when shield repulses something
+	shieldenergyuse=50000;// how much energy the shield use when repulsing/destroying something
+	shieldforce=0; // how hard shield can accelerate some sort of projectiles away
+	shieldradius=64;// size of shield effect
+	shieldmaxspeed=300;// maximum speed the shield can push some sort of projectiles away
+	shieldpower=10;// how much power the shield can store, power is drained by the affected weapons damage, 0=infinite
+	shieldpowerregen=0;// how fast the shield regenerates power
+	shieldpowerregenenergy=0;// how much energy the shield uses when regenerating power
+	shieldintercepttype=0;// which types of weapon the shield can affect (bitfield)
+	shieldgoodcolor=1 0 0 1;// color of shield when power is full
+	shieldbadcolor=1 0 0 1;// color of shield when power is empty
+	shieldalpha=1;// how visible the shield shell is with visibleshield=1
+	texture1=hexgridhole;
+	[DAMAGE]
+		{
+		default=10;
+		}
+	}

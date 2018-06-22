@@ -1,0 +1,69 @@
+piece base, monolith, wing1, wing2, gp0, gp1, gp2, gp3;
+
+#include "springdefs.h"
+
+#define SIG_Aim 1
+
+static-var gp;
+
+lua_SetAlphaThreshold() {
+	return(0);
+}
+
+Create() {
+	turn gp2 to y-axis <-60> now;
+	turn gp3 to y-axis <60> now;
+	gp= -1;
+	set ARMORED to 1;
+	//set ALPHA_THRESHOLD to 255;
+	call-script lua_SetAlphaThreshold(255);
+	while(get BUILD_PERCENT_LEFT) sleep 30;
+	//set ALPHA_THRESHOLD to 0;
+	call-script lua_SetAlphaThreshold(0);
+	spin wing1 around z-axis speed <180>;
+	spin wing2 around z-axis speed <-180>;
+	sleep 5000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	explode monolith type FALL;
+	explode wing1 type SHATTER;
+	explode wing2 type SHATTER;
+	hide monolith;
+	hide wing1;
+	hide wing2;
+}
+
+AimFromWeapon1(p) {
+	p=monolith;
+}
+
+QueryWeapon1(p) {
+	p=gp0 + gp;
+}
+
+ResetAim() {
+	sleep 1000;
+	turn base to x-axis 0 speed <360>;
+	turn base to y-axis 0 speed <480>;
+}
+
+AimWeapon1(h,p) {
+	signal SIG_Aim;
+	set-signal-mask SIG_Aim;
+	start-script ResetAim();
+	turn base to x-axis 0 - p speed <360>;
+	turn base to y-axis h speed <480>;
+	wait-for-turn base around y-axis;
+	wait-for-turn base around x-axis;
+	return 1;
+}
+
+Shot1(zero) {
+	gp = gp + 1;
+}
+
+EndBurst1() {
+	gp= -1;
+}

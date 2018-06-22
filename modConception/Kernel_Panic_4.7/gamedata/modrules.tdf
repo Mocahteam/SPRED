@@ -1,0 +1,58 @@
+[CONSTRUCTION]
+{
+	constructionDecay=1;// Should constructions decay if noone is working on them?
+	constructionDecayTime=0.1;// How long until the decay starts?
+	constructionDecaySpeed=0.001;// Multiplied by buildTime to get decay time (higher value -> slower decay)
+}
+[EXPERIENCE]
+{
+	experienceMult=0;
+}
+[FEATURELOS]
+{
+	featureVisibility=2;
+	// 0 - no default LOS for features
+	// 1 - Gaia features always visible
+	// 2 - allyteam & Gaia features always visible
+	// 3 - all features always visible. 
+}
+[FLANKINGBONUS]
+{
+	defaultMode=0;
+}
+[MOVEMENT]
+{
+	allowAirPlanesToLeaveMap=1;// Let airborne units leave the map when manoeuvring
+	allowAircraftToHitGround=0;// Let airborne hit ground when manoeuvring
+	allowPushingEnemyUnits=1;// Let enemy push each others
+	allowCrushingAlliedUnits=0;// Let allied units crush each others
+	allowUnitCollisionDamage=0;// Let unit damage each others
+	allowUnitCollisionOverlap=1;// Ignore collision volume in movement code. Should help movement.
+	allowGroundUnitGravity=0;// Let fast units take off: 0 for disabled
+	allowHoverUnitStrafing=0;// Let hovers strafe without turning: 0 for disabled.
+	useClassicGroundMoveType=0;// Use the old movement code: 0 for disabled.
+}
+[REPAIR]
+{
+	energyCostFactor=0;
+}
+[RESURRECT]
+{
+	energyCostFactor=0;
+}
+[SENSORS]
+{
+	requireSonarUnderWater=0;// 0: Sight is enough to see underwater, 1: Sonars are needed.
+}
+[SYSTEM]
+{
+	pathFinderSystem=1;// 0 for legacy pathfinder, 1 for QTPFS pathfinder
+}
+[TRANSPORTABILITY]
+{
+	transportAir=0;
+	transportShip=0;
+	transportHover=0;
+	transportGround=0;
+	targetableTransportedUnits=0;
+}

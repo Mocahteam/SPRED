@@ -1,0 +1,40 @@
+[oldskool_build]
+{
+	[squarecloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizegrowth=0;
+			sizemod=1;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			Texture=squarehollow;
+			colorMap=1 1 1 1   1 1 1 1   0 0 0 0;
+			airdrag=1;
+			particleLife=16;
+			particleLifeSpread=8;
+			numParticles=1;
+			particleSpeed=2;
+			particleSpeedSpread=.1;
+			particleSize=3;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=0;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+	[groundflash]
+	{
+		flashSize = 16; // flash size
+		flashAlpha = 0; // initial alpha of the flash
+		circleGrowth = 6.4; // size increase/frame
+		circleAlpha = 0; // initial alpha of the ring
+		ttl = 0; // number of frames
+		color = 1,0.6,0.6; // color RGB
+	}
+}

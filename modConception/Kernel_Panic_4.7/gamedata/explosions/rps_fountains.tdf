@@ -1,0 +1,98 @@
+[rock_fountain]
+{
+	[rock_drops]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			size=2;
+			sizegrowth=0.05;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, -0.02, 0;
+			Texture=minirock;
+			colorMap=1 1 1 1   0 1 0 1   0 1 0 0;
+			airdrag=1;
+			particleLife=96;
+			particleLifeSpread=24;
+			numParticles=24;
+			particleSpeed=0.4;
+			particleSpeedSpread=0.3;
+			particleSize=5;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
+
+[paper_fountain]
+{
+	[paper_drops]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			size=2;
+			sizegrowth=0.05;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, -0.02, 0;
+			Texture=minipaper;
+			colorMap=1 1 1 1   0 1 0 1   0 1 0 0;
+			airdrag=1;
+			particleLife=96;
+			particleLifeSpread=24;
+			numParticles=24;
+			particleSpeed=0.4;
+			particleSpeedSpread=0.3;
+			particleSize=5;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
+
+[scissors_fountain]
+{
+	[scissors_drops]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			size=2;
+			sizegrowth=0.05;
+			sizemod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, -0.02, 0;
+			Texture=miniscissors;
+			colorMap=1 1 1 1   0 1 0 1   0 1 0 0;
+			airdrag=1;
+			particleLife=96;
+			particleLifeSpread=24;
+			numParticles=24;
+			particleSpeed=0.4;
+			particleSpeedSpread=0.3;
+			particleSize=5;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=1;
+		}
+		air=1;
+		ground=1;
+		water=1;
+	}
+}
