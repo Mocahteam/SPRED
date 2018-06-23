@@ -1,0 +1,177 @@
+piece base, body, left, right, gun, gunbase, gunpoint;
+
+
+// To be compiled with a linear constant of 65536
+
+#define SIG_STOPMOVING 8
+#define SIG_CHANGE 4
+#define SIG_AIM 1
+
+static-var isOpen, normalSpeed, aimingSpecial;
+
+#include "springdefs.h"
+
+SpecialAttack(a,b,c,d) {
+	aimingSpecial=1;
+}
+
+#define WAITTIME 500
+#define TURNSPEED <360>
+
+
+QueryWeapon1(piecenum)
+{
+	piecenum=gunpoint;
+}
+
+AimFromWeapon1(piecenum)
+{
+	piecenum=base;
+}
+
+Close() {
+//	signal SIG_CHANGE;
+	set-signal-mask SIG_CHANGE;
+	isOpen=0;
+	turn gunbase to x-axis <90> speed <50>;
+	turn gunbase to y-axis <0> speed <50>;
+	wait-for-turn gunbase around y-axis;
+	move gun to y-axis [0] speed [20];
+	wait-for-move gun along y-axis;
+	move left to x-axis [0] speed [20];
+	move right to x-axis [0] speed [20];
+	wait-for-move left along x-axis;
+	hide gun;
+	set MAX_SPEED to normalSpeed;
+}
+
+Open() {
+//	signal SIG_CHANGE;
+	set-signal-mask SIG_CHANGE;
+	//set MAX_SPEED to 1;
+	show gun;
+	move left to x-axis [10] speed [20];
+	move right to x-axis [-10] speed [20];
+	wait-for-move left along x-axis;
+	move gun to y-axis [20] speed [20];
+	wait-for-move gun along y-axis;
+	isOpen=1;
+}
+
+#define TURNRATE 270
+
+AimWeapon1(h,p)
+{
+	if(aimingSpecial) return 0;
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	if (isOpen) {
+		turn gunbase to x-axis (<90>-p) speed <50>;
+		while (TURNRATE > h) {
+			set HEADING to 0-TURNRATE + get HEADING;
+			h = h + TURNRATE;
+			sleep 30;
+		}
+		while (h > TURNRATE) {
+			set HEADING to TURNRATE + get HEADING;
+			h = h - TURNRATE;
+			sleep 30;
+		}
+		wait-for-turn gunbase around x-axis;
+		return 1;
+	}
+	return 0;
+}
+
+FireWeapon1()
+{
+	emit-sfx 1024 from gunpoint;
+}
+
+StartMoving()
+{
+	signal SIG_CHANGE;
+	set-signal-mask SIG_CHANGE;
+	sleep 50;
+	call-script Close();
+	spin body around x-axis speed <180> accelerate <3600>;
+}
+
+StopMoving()
+{
+//	sleep 30;
+	signal SIG_CHANGE;
+	set-signal-mask SIG_CHANGE;
+	turn body to x-axis 0 now;
+	stop-spin body around x-axis;
+	sleep 200;
+	start-script Open();
+}
+
+AimFromWeapon2(p) {
+	p=gunbase;
+}
+
+QueryWeapon2(p) {
+	p=gunpoint;
+}
+
+AimWeapon2(h,p) {
+	if(!aimingSpecial) return 0;
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	if (isOpen) {
+		turn gunbase to x-axis (<90>-p) speed <50>;
+		while (TURNRATE > h) {
+			set HEADING to 0-TURNRATE + get HEADING;
+			h = h + TURNRATE;
+			sleep 30;
+		}
+		while (h > TURNRATE) {
+			set HEADING to TURNRATE + get HEADING;
+			h = h - TURNRATE;
+			sleep 30;
+		}
+		wait-for-turn gunbase around x-axis;
+		return 1;
+	}
+	sleep 2000;
+	aimingSpecial=0;
+	return 0;
+}
+
+FireWeapon2() {
+	emit-sfx 1024 from gunpoint;
+	sleep 2000;
+	aimingSpecial=0;
+}
+
+Create()
+{
+	aimingSpecial=0;
+	hide gun;
+	turn gunpoint to x-axis <-90> now;
+	turn gunbase to x-axis <90> now;
+	normalSpeed=get MAX_SPEED;
+	sleep 1;
+	set ARMORED to 1;
+	set STANDINGMOVEORDERS to 0;
+	if(!get BUILD_PERCENT_LEFT) start-script Open();
+	while(get BUILD_PERCENT_LEFT) {
+		move base to y-axis ([-32]*(get BUILD_PERCENT_LEFT)/100) now;
+		sleep 60;
+	}
+	move base to y-axis 0 now;
+	sleep 4000;
+	set ARMORED to 0;
+}
+
+Killed(severity,corpsetype) {
+	hide left;
+	hide right;
+	hide gun;
+	
+	explode gun type FALL;
+	explode left type SHATTER;
+	explode right type SHATTER;
+}

@@ -34,7 +34,10 @@
 	// Airplane Moventment
 
 	// Buildings
-	yardmap=ooccccoo ooccccoo cccccccc cccccccc cccccccc cccccccc ooccccoo ooccccoo;
+	// Muratet -- 
+	//yardmap=ooccccoo ooccccoo cccccccc cccccccc cccccccc cccccccc ooccccoo ooccccoo;
+	yardmap=occcccco cccccccc cccccccc cccccccc cccccccc cccccccc cccccccc occcccco;
+	// ---
 
 	// Construction
 	Builder=1;

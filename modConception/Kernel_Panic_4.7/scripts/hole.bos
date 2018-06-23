@@ -68,7 +68,9 @@ TurnTowardBarycenter()
 	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
 	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
 	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
-	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+	// Muratet (comment next line causes sending new units outside the map if rallypoint is defined) ---
+	//set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+	// ---
 }
 
 #include "ons.h"
@@ -119,13 +121,19 @@ Activate() {
 	set INBUILDSTANCE to 1;
 	start-script EmitFX();
 	while(1) {
-		for (i = 16; i <= 64; i = i + 16) {
+		// Muratet ---
+		//for (i = 16; i <= 64; i = i + 16) {
+		for (i = 0; i <= 32; i = i + 8) {
+		// ---
 			move nanoarm to x-axis [-1]*i speed [64];
 			move nanomover to z-axis [0] speed [256];
 			wait-for-move nanomover along z-axis;
 			wait-for-move nanoarm along x-axis;
 			doEmit=1;
-			move nanomover to z-axis [-55] speed [128];
+			// Muratet ---
+			//move nanomover to z-axis [-55] speed [128];
+			move nanomover to z-axis [-25] speed [128];
+			// ---
 			wait-for-move nanomover along z-axis;
 			doEmit=0;
 		}

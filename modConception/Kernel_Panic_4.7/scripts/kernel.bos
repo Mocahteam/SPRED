@@ -185,7 +185,9 @@ TurnTowardBarycenter()
 	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(root)) - xz))+(73728))/(16384))*(16384) now;
 	//turn whole to y-axis (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
 	turn pad to y-axis 0 - (((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>) now;
-	set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+	// Muratet (comment next line causes sending new units outside the map if rallypoint is defined) ---
+	//set HEADING to (get HEADING)+(((get XZ_ATAN((get PIECE_XZ(pad)) - xz))+(<405>))/(<90>))*(<90>);
+	// ---
 }
 
 #include "ons.h"

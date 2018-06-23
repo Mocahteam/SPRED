@@ -16,6 +16,10 @@ if (gadgetHandler:IsSyncedCode()) then
 
 VFS.Include("LuaRules/Gadgets/new_cmd_id.lua",nil)
 
+-- Muratet (An action parameter to keep action in the queue without executing it by the engine)
+local GHOST_PARAM = -12563
+--
+
 local special={}
 local cooldown={}
 local replacelist={}
@@ -147,7 +151,20 @@ end
 
 function gadget:CommandFallback(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
 	if(special[unitDefID] and special[unitDefID][cmdID - CMD_SPECIAL]) then
-		table.insert(replacelist, {unitID = unitID, cmd = cmdID - CMD_SPECIAL, unitDefID = unitDefID, cmdParams = cmdParams})
+		-- Muratet (check if we found the "ghost" parameter
+		doReplacement = true
+		if type(cmdParams) == "table" then
+			for k, v in pairs(cmdParams) do
+				if v == GHOST_PARAM then
+					doReplacement = false
+				end
+			end
+		end
+		if doReplacement then
+			table.insert(replacelist, {unitID = unitID, cmd = cmdID - CMD_SPECIAL, unitDefID = unitDefID, cmdParams = cmdParams})
+		end
+		-- table.insert(replacelist, {unitID = unitID, cmd = cmdID - CMD_SPECIAL, unitDefID = unitDefID, cmdParams = cmdParams})
+		--
 		return true, true
 	end
 	return false, false
@@ -178,6 +195,9 @@ function gadget:GameFrame(f)
 				or Queue[1].params[2]~=c.cmdParams[2]
 				or Queue[1].params[3]~=c.cmdParams[3] then
 				Spring.GiveOrderToUnit(c.unitID, CMD.INSERT, {0, special[c.unitDefID][c.cmd].replaceWith, 0, c.cmdParams[1], c.cmdParams[2], c.cmdParams[3]}, {"alt"})
+				-- Muratet (requeue a ghost of the original order => The engine will not be able to execute this order (gadget:CommandFallback will be recall) but we need it in queue for Prog&Play calls, see PP_Unit_ActionOnPosition in case of sycnrhonized call)
+				Spring.GiveOrderToUnit(c.unitID, CMD.INSERT, {1, CMD_NX, 0, c.cmdParams[1], c.cmdParams[2], c.cmdParams[3], GHOST_PARAM}, {"alt"})
+				--
 			end
 		end -- CMD_NX
 		replacelist[i]=nil
