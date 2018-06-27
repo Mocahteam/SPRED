@@ -28,9 +28,9 @@ function DoTheRestart(startscript, tableOperation, notAFile, isClient)
 		Spring.Echo(widget:GetInfo().name..": Wanting to load \""..startscript.."\"")
 		if VFS.FileExists(startscript) then
 			trimmed=VFS.LoadFile(startscript)
-			Spring.Echo("\n\n<<BEGIN DUMPING FULL \""..startscript.."\">>\n\n")
-			Spring.Echo(trimmed)
-			Spring.Echo("\n\n<<END DUMPING FULL \""..startscript.."\">>\n\n")
+			--Spring.Echo("\n\n<<BEGIN DUMPING FULL \""..startscript.."\">>\n\n")
+			--Spring.Echo(trimmed)
+			--Spring.Echo("\n\n<<END DUMPING FULL \""..startscript.."\">>\n\n")
 		else
 			Spring.Echo(widget:GetInfo().name..": that file is not valid... Restart aborted")
 			return
@@ -44,14 +44,14 @@ function DoTheRestart(startscript, tableOperation, notAFile, isClient)
 	-- Remove empty lines
 	trimmed,_=string.gsub(trimmed,"\n%s*\n","\n")
 	-- Dump result
-	Spring.Echo("\n\n<<BEGIN DUMPING TRIMMED>>\n\n")
-	Spring.Echo(trimmed)
-	Spring.Echo("\n\n<<END DUMPING TRIMMED>>\n\n")
+	--Spring.Echo("\n\n<<BEGIN DUMPING TRIMMED>>\n\n")
+	--Spring.Echo(trimmed)
+	--Spring.Echo("\n\n<<END DUMPING TRIMMED>>\n\n")
 	-- update values
 	trimmed=updateValues(trimmed, tableOperation)
-	Spring.Echo("\n\n<<BEGIN DUMPING UPDATED>>\n\n")
-	Spring.Echo(trimmed)
-	Spring.Echo("\n\n<<END DUMPING UPDATED>>\n\n")
+	--Spring.Echo("\n\n<<BEGIN DUMPING UPDATED>>\n\n")
+	--Spring.Echo(trimmed)
+	--Spring.Echo("\n\n<<END DUMPING UPDATED>>\n\n")
 	-- def options
 	local params = "-s"
 	if isClient then
@@ -186,10 +186,9 @@ local function createTxtFileContentFromScratch(editorTables, toEditor, playerNam
       end  
       -- Write Second section : information about the team (player/IA)
       local teamSectionName="TEAM"..tostring(teamNumber)
-      local arbitraryPosition=tostring(teamNumber*200+100)
       local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.green).." "..tostring(teamInformations.color.blue)
       --local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.blue).." "..tostring(teamInformations.color.green)
-      local tableController={TeamLeader="0" ,AllyTeam=tostring(teamNumber),RGBColor=rGBColor,Side="System",StartPosX=arbitraryPosition,StartPosZ=arbitraryPosition} 
+      local tableController={TeamLeader="0" ,AllyTeam=tostring(teamNumber),RGBColor=rGBColor,Side="System",StartPosX=0,StartPosZ=0} 
       file=writeAttributesAndSection(file,teamSectionName, 1, tableController)
       
       -- Write Third section : information about the allyteam (1 allyteam by team)
@@ -225,7 +224,7 @@ function genericRestart(missionName, options, toEditor, playerName)
 			local tableEditor=json.decode(sf)
 			Spring.Echo(widget:GetInfo().name..": decoded with success => build restart script")
 			local txtFileContent=createTxtFileContentFromScratch(tableEditor, toEditor, playerName)
-			Spring.Echo(widget:GetInfo().name..": Restart file built from \""..missionName.."\": "..txtFileContent)
+			--Spring.Echo(widget:GetInfo().name..": Restart file built from \""..missionName.."\": "..txtFileContent)
 			DoTheRestart(txtFileContent, options, true)
 		else
 			Spring.Echo(widget:GetInfo().name..": that file is not valid... Restart aborted")

@@ -15,6 +15,9 @@ include('keysym.h.lua')
 
 local json = VFS.Include("LuaUI/Widgets/libs/LuaJSON/dkjson.lua")
 
+-- constant to quickly disable final questionnaire
+local enableFinalQuestionnaire = true 
+
 VFS.Include("LuaUI/Widgets/libs/AppliqManager.lua")
 
 local xmlFiles = VFS.DirList("scenario/", "*.xml")
@@ -30,6 +33,10 @@ local lang = Spring.GetModOptions()["language"] or "en" -- get the language
 local scenarioType = Spring.GetModOptions()["scenario"] -- get the type of scenario default or index of scenario in appliq file
 local missionName = Spring.GetModOptions()["missionname"] -- get the name of the current mission
 local feedbackOn = Spring.GetModOptions()["activefeedbacks"] ~= nil and Spring.GetModOptions()["activefeedbacks"] == "1"
+local tracesOn = Spring.GetModOptions()["activetraces"] ~= nil and Spring.GetModOptions()["activetraces"] == "1"
+
+local feedbackDisplayed = false -- flag to know if a feedback has been displayed during this session
+local notBetterScore = false -- flag to know if a score lesser than 100/100 was obtain
 
 local feedbacks = {}
 -- Exemple of data structure
@@ -107,6 +114,12 @@ local LANG_AVERAGE_TIME = "Average wait time between two attempts: "
 local LANG_MISSION_TIME = "Mission resolution time: "
 local LANG_REFERENCE_TIME = "Reference resolution time: "
 local LANG_WARNING_STATE = "Warning!!! State unknown"
+local LANG_GLOBAL_SURV_TITLE = "Give your point of view:"
+local LANG_GLOBAL_SURV_CLEAR = "On the whole, you find automatic advices:"
+local LANG_GLOBAL_SURV_AWAITED_PART1 = "Would you liked to have automatic generated"
+local LANG_GLOBAL_SURV_AWAITED_PART2 = "advice to help you to find or increase"
+local LANG_GLOBAL_SURV_AWAITED_PART3 = "your solution for this missions?"
+local LANG_FREE_COMMENT = "Free comment:"
 if lang == "fr" then
 	LANG_CONTINUE= "Continuer"
 	LANG_REPLAY_MISSION = "Rejouer mission"
@@ -143,6 +156,12 @@ if lang == "fr" then
 	LANG_MISSION_TIME = "Temps de résolution de la mission : "
 	LANG_REFERENCE_TIME = "Temps de résolution référence : "
 	LANG_WARNING_STATE = "Attention!!! Etat non connu"
+	LANG_GLOBAL_SURV_TITLE = "Donnez votre avis :"
+	LANG_GLOBAL_SURV_CLEAR = "Globalement vous avez trouvé les conseils automatiques :"
+	LANG_GLOBAL_SURV_AWAITED_PART1 = "Auriez-vous souhaité des conseils (générés"
+	LANG_GLOBAL_SURV_AWAITED_PART2 = "automatiquement) pour vous aider à trouver ou "
+	LANG_GLOBAL_SURV_AWAITED_PART3 = "améliorer votre solution pour cette mission ?"
+	LANG_FREE_COMMENT = "Commentaire libre :"
 end
 
 local activateSave=false
@@ -186,7 +205,7 @@ local function addWindow(_parent, _x, _y, _width, _height)
 	}
 end
 
-local function addLabel(_parent, _x, _y, _width, _height, _caption, _align, _valign)
+local function addLabel(_parent, _x, _y, _width, _height, _caption, _align, _valign, _fontsize)
 	return WG.Chili.Label:New {
 		parent = _parent,
 		x = _x,
@@ -196,15 +215,15 @@ local function addLabel(_parent, _x, _y, _width, _height, _caption, _align, _val
 		minWidth = 0,
 		minHeight = 0,
 		caption = _caption,
-		fontsize = 20,
+		fontsize = _fontsize or 20,
 		align = _align,
 		valign = _valign,
 		padding = {8, 2, 8, 2},
 		font = {
 			font = "LuaUI/Fonts/TruenoRg.otf",
-			size = 20,
+			size = _fontsize or 20,
 			autoAdjust = true,
-			maxSize = 20,
+			maxSize = _fontsize or 20,
 			shadow = false
 		}
 	}
@@ -244,7 +263,7 @@ local function addImage(_parent, _x, _y, _width, _height, _file, _keepAspect)
 end
 
 local function addEditBox(_parent, _x, _y, _width, _height, _align, _text)
-	return WG.Chili.EditBox:New {
+	local editBox = WG.Chili.EditBox:New {
 		parent = _parent,
 		x = _x,
 		y = _y,
@@ -260,6 +279,17 @@ local function addEditBox(_parent, _x, _y, _width, _height, _align, _text)
 			shadow = false
 		}
 	}
+	editBox.font.color = {1, 1, 1, 1}
+	editBox.font.size = 16
+	editBox.font.maxsize = 16
+	editBox.OnKeyPress = {
+		function (self, key)
+			if key == Spring.GetKeyCode("enter") or key == Spring.GetKeyCode("numpad_enter") then
+				Screen0:FocusControl(nil)
+			end
+		end
+	}
+	return editBox
 end
 
 local function addPanel(_parent, _x, _y, _width, _height)
@@ -544,6 +574,7 @@ local function updateFeedbackFields ()
 			logComboEvent = true
 		end
 	end
+	feedbackDisplayed = true
 end
 
 local function loadPreviousFeedback ()
@@ -683,6 +714,84 @@ local function showFeedback ()
 	mainMenuCloseButton.OnClick = { closeMainMenu } -- close Main menu if the window is visible
 end
 
+local function showFinalQuestionnaire(callBackFunction)
+	if enableFinalQuestionnaire then
+		local surveyWindow
+		if (feedbackOn and feedbackDisplayed and notBetterScore) or (not feedbackOn and tracesOn and notBetterScore) then
+			-- add filter background
+			local filterBackground2 = addImage(WG.Chili.Screen0, "0%", "0%", "100%", "100%", "bitmaps/editor/blank.png", false)
+			filterBackground2.color = {0, 0, 0, 0.9}
+			filterBackground2.OnClick = {
+				function()
+					return true -- Stop Clic event
+				end
+			}
+
+			surveyWindow = addWindow(WG.Chili.Screen0, '15%', '25%', '70%', '50%')
+			
+			filterBackground2:BringToFront()
+			surveyWindow:BringToFront()
+			
+			addLabel(surveyWindow, "2%", "0%", "96%", "15%", LANG_GLOBAL_SURV_TITLE, "center", "linecenter", 30)
+		end
+		if feedbackOn then
+			-- if at least one feedback was displayed with a score lesser than 100/100, we ask global opinion on feedbacks
+			if feedbackDisplayed and notBetterScore then
+				addLabel(surveyWindow, "2%", "27%", "98%", "10%", LANG_GLOBAL_SURV_CLEAR, "center", "linecenter")
+				
+				local comboClear = addComboBox(surveyWindow, "13%", "39%", "24%", "10%", { LANG_VOTE, "1 "..LANG_NOT_CLEAR, "2", "3", "4", "5 "..LANG_CLEAR })
+				
+				local comboUseful = addComboBox(surveyWindow, "63%", "39%", "24%", "10%", { LANG_VOTE, "1 "..LANG_NOT_USEFUL, "2", "3", "4", "5 "..LANG_USEFUL })
+				
+				addLabel(surveyWindow, "2%", "73%", "26%", "10%", LANG_FREE_COMMENT, "left", "linecenter")
+				local editBox = addEditBox(surveyWindow, "30%", "73%", "68%", "10%")
+				
+				local okBut = addButton(surveyWindow, "40%", "90%", "20%", "10%", "OK")
+				okBut.OnClick = {
+					function()
+						-- trace tracks values
+						if Script.LuaUI.TraceAction then
+							Script.LuaUI.TraceAction("GlobalSurvey\tClearness\t"..(comboClear.selected - 1).."\tUtility\t"..(comboUseful.selected - 1).."\tComment\t"..editBox.text) -- registered by pp_meta_trace_manager.lua
+						end
+						-- Function to call after filling questionnaire
+						callBackFunction()
+					end
+				}
+			else
+				callBackFunction()
+			end
+		else
+			-- if trace is on we can ask if feedback would be awaited
+			if tracesOn  and notBetterScore then
+				addLabel(surveyWindow, "2%", "27%", "76%", "10%", LANG_GLOBAL_SURV_AWAITED_PART1, "left", "linecenter")
+				addLabel(surveyWindow, "2%", "38%", "76%", "10%", LANG_GLOBAL_SURV_AWAITED_PART2, "left", "linecenter")
+				addLabel(surveyWindow, "2%", "49%", "76%", "10%", LANG_GLOBAL_SURV_AWAITED_PART3, "left", "linecenter")
+				
+				local comboAwait = addComboBox(surveyWindow, "80%", "38%", "20%", "12%", { LANG_VOTE, LANG_YES, LANG_NO })
+				
+				addLabel(surveyWindow, "2%", "73%", "26%", "10%", LANG_FREE_COMMENT, "left", "linecenter")
+				local editBox = addEditBox(surveyWindow, "30%", "73%", "68%", "10%")
+				
+				local okBut = addButton(surveyWindow, "40%", "90%", "20%", "10%", "OK")
+				okBut.OnClick = {
+					function()
+						-- trace tracks values
+						if Script.LuaUI.TraceAction then
+							Script.LuaUI.TraceAction("GlobalSurvey\tAwaitFeeback\t"..(comboAwait.selected - 1).."\tComment\t"..editBox.text) -- registered by pp_meta_trace_manager.lua
+						end
+						-- Function to call after filling questionnaire
+						callBackFunction()
+					end
+				}
+			else
+				callBackFunction()
+			end
+		end
+	else
+		callBackFunction()
+	end
+end
+
 local function showMainMenu (missionEnd)
 	closeMainMenu () -- close Main menu if the window is visible
 	
@@ -794,16 +903,20 @@ local function showMainMenu (missionEnd)
 	replayBut.focusColor = { 0, 0.6, 1, 1 }
 	replayBut.OnClick = {
 		function ()
-			closeMainMenu () -- close Main menu if the window is visible
-			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("replay_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
-			end
-			-- in case of appliq we don't use "_script.txt" because it doesn't work in case of multiplayer missions
-			if Script.LuaUI.LoadMission then
-				Script.LuaUI.LoadMission("Missions/"..missionName..".editor", {["MODOPTIONS"]=Spring.GetModOptions()}) -- registered by pp_restart_manager.lua
-			else
-				Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..missionName..".editor\" aborted.")
-			end
+			showFinalQuestionnaire(
+				function ()
+					closeMainMenu () -- close Main menu if the window is visible
+					if Script.LuaUI.TraceAction then
+						Script.LuaUI.TraceAction("replay_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
+					end
+					-- in case of appliq we don't use "_script.txt" because it doesn't work in case of multiplayer missions
+					if Script.LuaUI.LoadMission then
+						Script.LuaUI.LoadMission("Missions/"..missionName..".editor", {["MODOPTIONS"]=Spring.GetModOptions()}) -- registered by pp_restart_manager.lua
+					else
+						Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..missionName..".editor\" aborted.")
+					end
+				end
+			)
 		end
 	}
 	
@@ -843,15 +956,19 @@ local function showMainMenu (missionEnd)
 				continueBut.focusColor = { 0, 0.6, 1, 1 }
 				continueBut.OnClick = {
 					function ()
-						closeMainMenu () -- close Main menu if the window is visible
-						if Script.LuaUI.TraceAction then
-							Script.LuaUI.TraceAction("continue_scenario\t"..missionName) -- registered by pp_meta_trace_manager.lua
-						end
-						if Script.LuaUI.LoadMission then
-							Script.LuaUI.LoadMission("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- registered by pp_restart_manager.lua
-						else
-							Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..mission..".editor\" aborted.")
-						end
+						showFinalQuestionnaire(
+							function ()
+								closeMainMenu () -- close Main menu if the window is visible
+								if Script.LuaUI.TraceAction then
+									Script.LuaUI.TraceAction("continue_scenario\t"..missionName) -- registered by pp_meta_trace_manager.lua
+								end
+								if Script.LuaUI.LoadMission then
+									Script.LuaUI.LoadMission("Missions/"..mission..".editor", {["MODOPTIONS"]=currentoptions}) -- registered by pp_restart_manager.lua
+								else
+									Spring.Echo("WARNING!!! Script.LuaUI.LoadMission == nil, probably a problem with \"PP Restart Manager\" Widget... => loading \"Missions/"..mission..".editor\" aborted.")
+								end
+							end
+						)
 					end
 				}
 			end
@@ -883,10 +1000,14 @@ local function showMainMenu (missionEnd)
 	quitMissionBut.focusColor = { 0, 0.6, 1, 1 }
 	quitMissionBut.OnClick = {
 		function ()
-			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("quit_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
-			end
-			WG.switchOnMenu()
+			showFinalQuestionnaire(
+				function ()
+					if Script.LuaUI.TraceAction then
+						Script.LuaUI.TraceAction("quit_mission\t"..missionName) -- registered by pp_meta_trace_manager.lua
+					end
+					WG.switchOnMenu()
+				end
+			)
 		end
 	}
 	
@@ -896,10 +1017,14 @@ local function showMainMenu (missionEnd)
 	quitGameBut.focusColor = { 0, 0.6, 1, 1 }
 	quitGameBut.OnClick = {
 		function ()
-			if Script.LuaUI.TraceAction then
-				Script.LuaUI.TraceAction("quit_game") -- registered by pp_meta_trace_manager.lua
-			end
-			Spring.SendCommands("quitforce")
+			showFinalQuestionnaire(
+				function ()
+					if Script.LuaUI.TraceAction then
+						Script.LuaUI.TraceAction("quit_game") -- registered by pp_meta_trace_manager.lua
+					end
+					Spring.SendCommands("quitforce")
+				end
+			)
 		end
 	}
 end
@@ -912,7 +1037,7 @@ function MissionEvent(e)
 			if Script.LuaUI.MissionEnded then
 				Script.LuaUI.MissionEnded(e.state) -- function defined and registered in Meta Traces Manager widget
 			end
-			Spring.SetConfigString("victoryState", e.state, 1) -- inform the game engine that the mission is ended
+			Spring.SetConfigString("victoryState", e.state, true) -- inform the game engine that the mission is ended
 		end
 		
 		-- close tuto window if it oppened
@@ -1046,15 +1171,24 @@ function handleFeedback(str)
 			end
 		end
 		feedbacks = newFeedbacks
+		
+		if #feedbacks > 0 then
+			notBetterScore = true -- if we have at least one feedback, this means it is not the optimal solution
+		end
+		
 		currentFeedback = 1
 		local feedbackToLog = getFeedbackToString(json_obj, (json_obj.won ~= nil))
 		if Script.LuaUI.TraceAction then
-			Script.LuaUI.TraceAction("feedbacks\t"..feedbackToLog) -- registered by pp_meta_trace_manager.lua
+			local visibility = "shown\t"
+			if not feedbackOn then -- check if feedback will be shown
+				visibility = "hidden\t"
+			end
+			Script.LuaUI.TraceAction("feedbacks\t"..visibility..feedbackToLog) -- registered by pp_meta_trace_manager.lua
 		end
-		
+				
 		if feedbackOn then -- check if we have to display feedbacks
 			if json_obj.won ~= nil then -- the mission is over
-				Spring.SetConfigString("score", json_obj.score, 1) -- save the score for the engine for facebook purpose
+				Spring.SetConfigString("score", json_obj.score, true) -- save the score for the engine for facebook purpose
 				-- display score
 				if scoreLabel then
 					scoreLabel:SetCaption(LANG_SCORE.."\255"..colorTable[101-json_obj.score]..colorTable[json_obj.score+1].."\0"..json_obj.score.." / 100")

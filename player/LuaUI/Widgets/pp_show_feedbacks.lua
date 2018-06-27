@@ -23,7 +23,7 @@ local testMap = Spring.GetModOptions()["testmap"] ~= nil
 local HelpButton = nil -- the button to ask an help notification
 
 function askHelp()
-	Spring.SetConfigString("helpPlease", "enabled", 1) -- inform the game engine that we want a feedback
+	Spring.SetConfigString("helpPlease", "enabled", true) -- inform the game engine that we want a feedback
 	if Script.LuaUI.TraceAction then
 		Script.LuaUI.TraceAction("ask_help") -- registered by pp_meta_trace_manager.lua
 	end

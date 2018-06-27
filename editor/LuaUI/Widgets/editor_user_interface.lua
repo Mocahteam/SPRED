@@ -843,6 +843,8 @@ function showTeamConfig() -- Show the team config panel
 			teamNameEditBoxes[team] = addEditBox(teamConfigPanels[team], '2%', '30%', '12%', '40%', "left", teamName[team], {teamColor[team].red, teamColor[team].green, teamColor[team].blue, 1})
 			teamNameEditBoxes[team].OnFocusUpdate = {
 				function ()
+					-- prevent space in name
+					teamNameEditBoxes[team]:SetText(string.gsub(teamNameEditBoxes[team].text, "%s+", ""))
 					if teamName[team] ~= teamNameEditBoxes[team].text and teamNameEditBoxes[team].text ~= "" then
 						teamName[team] = teamNameEditBoxes[team].text
 						updateAllyTeam = true
@@ -1223,7 +1225,7 @@ function initForcesWindow()
 			teamColor[t].green = tonumber(defaultTeamsColor[t].green)
 			teamColor[t].blue = tonumber(defaultTeamsColor[t].blue)
 			-- team name
-			teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
+			teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME..tostring(t)
 		end
 	end
 end
@@ -5439,7 +5441,7 @@ function newMap() -- Set each parameter to its default value
 		teamColor[t].green = tonumber(defaultTeamsColor[t].green)
 		teamColor[t].blue = tonumber(defaultTeamsColor[t].blue)
 		-- team name
-		teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME.." "..tostring(t)
+		teamName[t] = EDITOR_FORCES_TEAM_DEFAULT_NAME..tostring(t)
 		-- team AI
 		teamAIElements.teamAI[t] = ""
 		-- ally team
