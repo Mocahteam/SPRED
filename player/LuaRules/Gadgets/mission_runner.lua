@@ -108,7 +108,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, attackerID, attackerD
   Spring.SendLuaRulesMsg("kill"..json.encode(killTable))
 end
 --weaponDefID, projectileID, attackerID,
-function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
+function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, projectileID, attackerID, attackerDefID, attackerTeam)
   if(unitID~=nil)then
     local damageTable={attackedUnit=unitID,damage=damage, attackerID=attackerID} 
     Spring.SendLuaRulesMsg("damage"..json.encode(damageTable))
