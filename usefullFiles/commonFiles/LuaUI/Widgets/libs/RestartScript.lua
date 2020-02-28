@@ -131,7 +131,7 @@ local function createTxtFileContentFromScratch(editorTables, toEditor, playerNam
   local mapName=editorTables.description.map or "Marble_Madness_Map" 
   local name=editorTables.description.saveName 
   local lang=editorTables.description.lang or "en" 
-  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName=playerName, HostIP="localhost", HostPort="8451", IsHost="1",StartPosType="3"}
+  local table1 = {Mapname=mapName, Gametype=Game.modName, MyPlayerName=playerName, HostIP="0.0.0.0", HostPort="8452", IsHost="1",StartPosType="3"}
   file=writeAttributes(file, 0, table1)
   local table2={gamemode="3",fixedallies="0",hidemenu="1",language=lang,missionname=name,scenario="default"}
   -- activate traces if required (if true game engine will process traces: compression, alignment and produce feedbacks)
@@ -188,7 +188,7 @@ local function createTxtFileContentFromScratch(editorTables, toEditor, playerNam
       local teamSectionName="TEAM"..tostring(teamNumber)
       local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.green).." "..tostring(teamInformations.color.blue)
       --local rGBColor=tostring(teamInformations.color.red).." "..tostring(teamInformations.color.blue).." "..tostring(teamInformations.color.green)
-      local tableController={TeamLeader="0" ,AllyTeam=tostring(teamNumber),RGBColor=rGBColor,Side="System",StartPosX=0,StartPosZ=0} 
+      local tableController={TeamLeader="0" ,AllyTeam=tostring(teamNumber),RGBColor=rGBColor,Side="System"} 
       file=writeAttributesAndSection(file,teamSectionName, 1, tableController)
       
       -- Write Third section : information about the allyteam (1 allyteam by team)
@@ -236,7 +236,7 @@ end
 
 
 function restartAndJoinTheGame(playerName,IP)
-  local table2={HostIP=IP, Hostport="8451", IsHost="0", MyPlayerName=playerName}
+  local table2={HostIP=IP, Hostport="8452", IsHost="0", MyPlayerName=playerName}
   local file=writeAttributesAndSection("","GAME", 0, table2)
   Spring.Echo(widget:GetInfo().name..": Join the game with: "..file)
   DoTheRestart(file, {}, true, true)--Spring.Restart("-s",file)--(this line, yes)
@@ -244,7 +244,7 @@ function restartAndJoinTheGame(playerName,IP)
 [GAME]
 {
   HostIP=132.227.207.137;
-  Hostport=8451;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
+  Hostport=8452;      // Use Hostport and not HostPort otherwaise it is overwritten by KP directLaunch
   IsHost=0;           // 0: no server will be started in this instance
                       // 1: start a server
   

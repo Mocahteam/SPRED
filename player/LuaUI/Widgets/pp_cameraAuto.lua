@@ -22,6 +22,10 @@ function abs(num)
 	end
 end
 
+function ToggleCamera()
+	cameraAutoEnabled = not cameraAutoEnabled
+end
+
 function CameraAuto (enable, specialPos)
 	cameraAutoEnabled = enable
 	specialPositions = specialPos
@@ -107,9 +111,13 @@ end
 
 function widget:Initialize()
 	widgetHandler:RegisterGlobal("CameraAuto", CameraAuto)
+	widgetHandler:RegisterGlobal("ToggleCamera", ToggleCamera)
+	WG.ToggleCamera = ToggleCamera -- available for all widgets
 end
 
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal("CameraAuto")
+	widgetHandler:DeregisterGlobal("ToggleCamera", ToggleCamera)
+	WG.ToggleCamera = nil
 end

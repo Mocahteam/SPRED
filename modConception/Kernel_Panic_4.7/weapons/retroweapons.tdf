@@ -28,6 +28,7 @@
 	areaofeffect=8;
 	collidefriendly=0;
 	avoidfriendly=0;
+	noSelfDamage=true;
 
 	tolerance=3000;
 
